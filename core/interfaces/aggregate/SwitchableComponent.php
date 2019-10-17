@@ -11,5 +11,9 @@ use DarlingCms\interfaces\primary\Switchable;
  */
 interface SwitchableComponent extends StorableComponent, Switchable
 {
-
+    /**
+     * Switches the state, i.e., true to false, or false to true.
+     * @return bool True if state was switched successfully, false otherwise.
+     */
+    public function switchState():bool;
 }
