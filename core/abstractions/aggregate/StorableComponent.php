@@ -6,8 +6,9 @@ use DarlingCms\interfaces\aggregate\StorableComponent as StorableComponentInterf
 
 /**
  * Class StorableComponent. Defines an abstract implementation
- * of the StorableComponent interface that can be implemented
- * to define niche storable components.
+ * of the StorableComponent interface that also extends the
+ * Component abstract aggregate class. This class can be
+ * implemented to define niche storable components.
  * @package DarlingCms\abstractions\aggregate
  * @see StorableComponent
  * @see StorableComponent::getName()
