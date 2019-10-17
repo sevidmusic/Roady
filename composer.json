@@ -1,0 +1,20 @@
+{
+    "name": "darling/cms",
+    "description": "Experimental re-design of the Darling Cms",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sevi Donnelly Foreman",
+            "email": "sdmwebsdm@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "DarlingCms\\": "core/",
+            "Apps\\": "apps/"
+        }
+    }
+}
