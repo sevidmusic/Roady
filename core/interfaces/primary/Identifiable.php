@@ -1,8 +1,6 @@
 <?php
 
-
 namespace DarlingCms\interfaces\primary;
-
 
 /**
  * Interface Identifiable. Describes the basic contract of something
