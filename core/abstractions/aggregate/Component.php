@@ -33,7 +33,7 @@ abstract class Component implements ComponentInterface
 
     /**
      * Component constructor. Assigns the specified name and
-     * type, and generates a unique id.
+     * type, and assigns an internally generated unique id.
      * @param string $name The name to assign.
      * @param string $type The type to assign.
      */
