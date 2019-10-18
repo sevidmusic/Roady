@@ -16,5 +16,8 @@
             "DarlingCms\\": "core/",
             "Apps\\": "apps/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
     }
 }
