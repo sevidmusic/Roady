@@ -2,3 +2,4 @@
 vendor/
 .idea/
 .vagrant/
+*.phpunit.result.cache
