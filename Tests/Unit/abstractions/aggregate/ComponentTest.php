@@ -49,7 +49,7 @@ class ComponentTest extends PHPUnit\Framework\TestCase
         $this->isNonEmptyString($this->component->getType());
     }
 
-    private function isNonEmptyString(string $value) {
+    protected function isNonEmptyString(string $value) {
         $this->assertIsString($value);
         $this->assertNotEmpty($value);
     }
