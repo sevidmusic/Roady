@@ -12,7 +12,7 @@ use DarlingCms\interfaces\aggregate\StorableComponent as StorableComponentInterf
  * @package DarlingCms\abstractions\aggregate
  * @see StorableComponent
  * @see StorableComponent::getName()
- * @see StorableComponent::getUid()
+ * @see StorableComponent::getUniqueId()
  * @see StorableComponent::getType()
  * @see StorableComponent::getLocation()
  * @see StorableComponent::getContainer()

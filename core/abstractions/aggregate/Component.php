@@ -12,7 +12,7 @@ use DarlingCms\interfaces\aggregate\Component as ComponentInterface;
  * @see Component
  * @see Component::getType()
  * @see Component::getName()
- * @see Component::getUid()
+ * @see Component::getUniqueId()
  */
 abstract class Component implements ComponentInterface
 {
@@ -57,7 +57,7 @@ abstract class Component implements ComponentInterface
      * Returns the assigned unique id.
      * @return string The assigned unique id.
      */
-    public function getUid(): string
+    public function getUniqueId(): string
     {
         return $this->uid;
     }

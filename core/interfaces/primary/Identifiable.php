@@ -8,7 +8,7 @@ namespace DarlingCms\interfaces\primary;
  * id.
  *
  * @see Identifiable::getName()
- * @see Identifiable::getUid()
+ * @see Identifiable::getUniqueId()
  */
 interface Identifiable
 {
@@ -22,5 +22,5 @@ interface Identifiable
      * Returns the assigned unique id.
      * @return string The assigned unique id.
      */
-    public function getUid(): string;
+    public function getUniqueId(): string;
 }

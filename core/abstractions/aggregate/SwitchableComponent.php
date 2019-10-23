@@ -13,7 +13,7 @@ use DarlingCms\interfaces\aggregate\SwitchableComponent as SwitchableComponentIn
  * @package DarlingCms\abstractions\aggregate
  * @see SwitchableComponent
  * @see SwitchableComponent::getName()
- * @see SwitchableComponent::getUid()
+ * @see SwitchableComponent::getUniqueId()
  * @see SwitchableComponent::getType()
  * @see SwitchableComponent::getLocation()
  * @see SwitchableComponent::getContainer()
