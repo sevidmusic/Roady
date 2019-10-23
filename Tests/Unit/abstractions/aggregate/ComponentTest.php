@@ -28,7 +28,7 @@ class ComponentTest extends PHPUnit\Framework\TestCase
     /**
      * Test that the getName() method returns a non empty string.
      */
-    public function testGetName()
+    public function testGetNameReturnsNonEmptyString()
     {
         $this->assertIsString($this->component->getName());
         $this->assertNotEmpty($this->component->getName());
@@ -37,7 +37,7 @@ class ComponentTest extends PHPUnit\Framework\TestCase
     /**
      * Test that the getUniqueId() method returns a non empty string.
      */
-    public function testGetUniqueId()
+    public function testGetUniqueIdReturnsNonEmptyString()
     {
         $this->assertIsString($this->component->getUniqueId());
         $this->assertNotEmpty($this->component->getUniqueId());
@@ -46,7 +46,7 @@ class ComponentTest extends PHPUnit\Framework\TestCase
     /**
      * Test that the getType() method returns a non empty string.
      */
-    public function testGetType()
+    public function testGetTypeReturnsNonEmptyString()
     {
         $this->assertIsString($this->component->getType());
         $this->assertNotEmpty($this->component->getType());
