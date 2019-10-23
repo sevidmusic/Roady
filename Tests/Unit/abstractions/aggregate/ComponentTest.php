@@ -30,8 +30,7 @@ class ComponentTest extends PHPUnit\Framework\TestCase
      */
     public function testGetNameReturnsNonEmptyString()
     {
-        $this->assertIsString($this->component->getName());
-        $this->assertNotEmpty($this->component->getName());
+        $this->isNonEmptyString($this->component->getName());
     }
 
     /**
@@ -39,8 +38,7 @@ class ComponentTest extends PHPUnit\Framework\TestCase
      */
     public function testGetUniqueIdReturnsNonEmptyString()
     {
-        $this->assertIsString($this->component->getUniqueId());
-        $this->assertNotEmpty($this->component->getUniqueId());
+        $this->isNonEmptyString($this->component->getUniqueId());
     }
 
     /**
@@ -48,7 +46,11 @@ class ComponentTest extends PHPUnit\Framework\TestCase
      */
     public function testGetTypeReturnsNonEmptyString()
     {
-        $this->assertIsString($this->component->getType());
-        $this->assertNotEmpty($this->component->getType());
+        $this->isNonEmptyString($this->component->getType());
+    }
+
+    private function isNonEmptyString(string $value) {
+        $this->assertIsString($value);
+        $this->assertNotEmpty($value);
     }
 }
