@@ -16,4 +16,14 @@ interface Switchable
      *              true for on, false for off.
      */
     public function getState():bool;
+
+    /**
+     * Switches the state, either from true to false, or false to
+     * true. This method will return true if state was switched,
+     * false otherwise.
+     *
+     * @return bool True if state was switched, false otherwise.
+     */
+    public function switchState():bool;
+
 }

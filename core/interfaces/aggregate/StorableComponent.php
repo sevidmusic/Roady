@@ -5,9 +5,15 @@ namespace DarlingCms\interfaces\aggregate;
 use DarlingCms\interfaces\primary\Storable;
 
 /**
- * Interface StorableComponent. Defines the basic contract of a
- * a component that can be stored in a "container" at a "location".
+ * Interface StorableComponent. Defines the basic contract of component
+ * that is storable, i.e., a component that can be stored in a "container"
+ * at a specified "location".
  * @package DarlingCms\interfaces\aggregate
+ * @see StorableComponent::getName()
+ * @see StorableComponent::getUniqueId()
+ * @see StorableComponent::getType()
+ * @see StorableComponent::getLocation()
+ * @see StorableComponent::getContainer()
  */
 interface StorableComponent extends Component, Storable
 {
