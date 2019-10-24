@@ -14,7 +14,8 @@
     "autoload": {
         "psr-4": {
             "DarlingCms\\": "core/",
-            "Apps\\": "apps/"
+            "Apps\\": "apps/",
+            "UnitTests\\": "Tests/Unit/"
         }
     },
     "require-dev": {

@@ -1,12 +1,15 @@
 <?php
 
+namespace UnitTests\abstractions\aggregate;
+
 use DarlingCms\abstractions\aggregate\Component;
+use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class ComponentTest. Defines tests for the DarlingCms\abstractions\aggregate\Component abstract class.
  */
-class ComponentTest extends PHPUnit\Framework\TestCase
+class ComponentTest extends TestCase
 {
     /**
      * @var Component|MockObject PhpUnit mock object instance that represents

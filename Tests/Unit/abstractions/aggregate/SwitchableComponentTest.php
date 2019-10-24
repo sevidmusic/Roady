@@ -1,5 +1,7 @@
 <?php
 
+namespace UnitTests\abstractions\aggregate;
+
 use DarlingCms\abstractions\aggregate\SwitchableComponent;
 use PHPUnit\Framework\MockObject\MockObject;
 
