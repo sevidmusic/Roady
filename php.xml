@@ -10,9 +10,11 @@
 >
 
     <testsuites>
-        <testsuite name="Darling Cms Redesign Test Suite">
-            <directory>Tests</directory>
+
+        <testsuite name="Darling Cms Redesign | Abstract Aggregate Component Unit Tests">
+            <directory>Tests/Unit/abstractions/aggregate</directory>
         </testsuite>
+
     </testsuites>
 
 </phpunit>
