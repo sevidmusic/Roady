@@ -76,9 +76,15 @@ class StorableComponentConfigurationTest extends StorableComponentTest
         }
     }
 
+    /**
+     * Test that the getConfiguration() method returns a non empty array.
+     */
+    public function testGetConfigurationReturnsNonEmptyArray(){
+        $this->assertNotEmpty($this->component->getConfiguration());
+    }
+
     /*
      * @todo Implement the following tests:
-    public function testGetConfigurationReturnsNonEmptyArray(){}
     public function testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys(){}
     public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys(){}
     public function testCanSetValidConfigurationKeyValuePair(){}
