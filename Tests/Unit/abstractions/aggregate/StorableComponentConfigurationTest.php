@@ -78,7 +78,8 @@ class StorableComponentConfigurationTest extends StorableComponentTest
     /**
      * Test that the getConfiguration() method returns a non empty array.
      */
-    public function testGetConfigurationReturnsNonEmptyArray(){
+    public function testGetConfigurationReturnsNonEmptyArray()
+    {
         $this->assertNotEmpty($this->component->getConfiguration());
     }
 
@@ -88,7 +89,8 @@ class StorableComponentConfigurationTest extends StorableComponentTest
      * keys as defined in the array returned by the
      * getExpectedConfigurationKeys() method.
      */
-    public function testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys(){
+    public function testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys()
+    {
         $configuration = $this->component->getConfiguration();
         foreach ($this->component->getExpectedConfigurationKeys() as $key) {
             $this->assertArrayHasKey($key, $configuration);
@@ -101,17 +103,29 @@ class StorableComponentConfigurationTest extends StorableComponentTest
      * only has keys that correspond to the keys defined in the array
      * returned by the getConfigurationKeys() method.
      */
-    public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys(){
+    public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys()
+    {
         $expectedConfigurationKeys = $this->component->getExpectedConfigurationKeys();
         foreach (array_keys($this->component->getConfiguration()) as $key) {
             $this->assertTrue(in_array($key, $expectedConfigurationKeys, true));
         }
     }
 
+    /**
+     * Test that valid key value pairs can be set using the setConfigurationValue() method.
+     */
+    public function testCanSetValidConfigurationKeyValuePair()
+    {
+        $initialConfiguration = $this->component->getConfiguration();
+        // Pick a random key from the initial configuration to assign a new value to.
+        $key = array_keys($initialConfiguration)[rand(0, (count($initialConfiguration) - 1))];
+        $this->component->setConfigurationValue($key, 'NewValue');
+        $this->assertNotEquals($initialConfiguration, $this->component->getConfiguration());
+    }
+
 
     /*
      * @todo Implement the following tests:
-    public function testCanSetValidConfigurationKeyValuePair(){}
     public function testCannotSetInvalidConfigurationKeyValuePair(){}
     */
 }
