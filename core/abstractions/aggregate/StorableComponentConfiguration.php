@@ -62,9 +62,7 @@ abstract class StorableComponentConfiguration extends StorableComponent implemen
     {
         parent::__construct($name, $type, $location, $container);
         $this->expectedConfigurationKeys = array_keys(get_object_vars($storableComponent));
-        // @todo: Populate the configuration array using the
-        // setConfigurationValue() method to insure values
-        // are only set for expected keys.
+        $this->configuration = get_object_vars($storableComponent);
     }
 
     /**
