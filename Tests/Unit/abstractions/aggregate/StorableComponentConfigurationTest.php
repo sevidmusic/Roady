@@ -69,10 +69,9 @@ class StorableComponentConfigurationTest extends StorableComponentTest
      */
     public function testGetExpectedConfigurationKeysReturnsArrayOfKeysThatAtLeastReflectsAStorableComponentsProperties()
     {
-        $methodResult = $this->component->getExpectedConfigurationKeys();
-        $requiredKeys = array('name', 'uniqueId', 'type', 'location', 'container');
-        foreach ($requiredKeys as $key) {
-            $this->assertTrue(in_array($key, $methodResult));
+        $expectedConfigurationKeys = $this->component->getExpectedConfigurationKeys();
+        foreach (['name', 'uniqueId', 'type', 'location', 'container'] as $key) {
+            $this->assertTrue(in_array($key, $expectedConfigurationKeys));
         }
     }
 
@@ -83,9 +82,22 @@ class StorableComponentConfigurationTest extends StorableComponentTest
         $this->assertNotEmpty($this->component->getConfiguration());
     }
 
+    /**
+     * Test that the getConfiguration() method returns an array
+     * that has values set for each of the expected configuration
+     * keys as defined in the array returned by the
+     * getExpectedConfigurationKeys() method.
+     */
+    public function testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys(){
+        $configuration = $this->component->getConfiguration();
+        foreach ($this->component->getExpectedConfigurationKeys() as $key) {
+            $this->assertArrayHasKey($key, $configuration);
+            $this->assertNotEmpty($configuration[$key]);
+        }
+    }
+
     /*
      * @todo Implement the following tests:
-    public function testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys(){}
     public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys(){}
     public function testCanSetValidConfigurationKeyValuePair(){}
     public function testCannotSetInvalidConfigurationKeyValuePair(){}
