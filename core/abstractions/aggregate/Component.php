@@ -24,7 +24,7 @@ abstract class Component implements ComponentInterface
     /**
      * @var string The assigned unique id.
      */
-    protected $uid;
+    protected $uniqueId;
 
     /**
      * @var string The assigned type.
@@ -40,7 +40,7 @@ abstract class Component implements ComponentInterface
     public function __construct(string $name, string $type)
     {
         $this->name = trim($name);
-        $this->uid = $this->generateUniqueId();
+        $this->uniqueId = $this->generateUniqueId();
         $this->type = trim($type);
     }
 
@@ -59,7 +59,7 @@ abstract class Component implements ComponentInterface
      */
     public function getUniqueId(): string
     {
-        return $this->uid;
+        return $this->uniqueId;
     }
 
     /**

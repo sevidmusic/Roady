@@ -49,19 +49,39 @@ class StorableComponentConfigurationTest extends StorableComponentTest
         $this->component = $this->getMockForAbstractClass('\DarlingCms\abstractions\aggregate\StorableComponentConfiguration', $constructorArgs);
     }
 
-    public function testGetExpectedConfigurationKeysReturnsNonEmptyArray(){
+    /**
+     * Test that the getExpectedConfigurationKeys() method returns a non-empty array.
+     */
+    public function testGetExpectedConfigurationKeysReturnsNonEmptyArray()
+    {
         $this->assertNotEmpty($this->component->getExpectedConfigurationKeys());
     }
 
     /**
-     * @todo Implement the following tests:
-     *
-     * testGetExpectedConfigurationKeysReturnsNonEmptyArray
-     * testGetExpectedConfigurationKeysReturnsArrayOfKeysThatAtLeastReflectsAStorableComponentsProperties
-     * testGetConfigurationReturnsNonEmptyArray
-     * testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys
-     * testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys
-     * testCanSetValidConfigurationKeyValuePair
-     * testCannotSetInvalidConfigurationKeyValuePair
+     * Test that the getExpectedConfigurationKeys() method returns
+     * an array that has keys defined that correspond to each of
+     * the expected properties of all DarlingCms\abstractions\
+     * aggregate\StorableComponent implementation instances.
+     * This test will check that the getExpectedConfiurationKeys()
+     * method returns an array with at least the following keys
+     * defined:
+     *     array('name', 'uniqueId', 'type', 'location', 'container')
      */
+    public function testGetExpectedConfigurationKeysReturnsArrayOfKeysThatAtLeastReflectsAStorableComponentsProperties()
+    {
+        $methodResult = $this->component->getExpectedConfigurationKeys();
+        $requiredKeys = array('name', 'uniqueId', 'type', 'location', 'container');
+        foreach ($requiredKeys as $key) {
+            $this->assertTrue(in_array($key, $methodResult));
+        }
+    }
+
+    /*
+     * @todo Implement the following tests:
+    public function testGetConfigurationReturnsNonEmptyArray(){}
+    public function testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys(){}
+    public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys(){}
+    public function testCanSetValidConfigurationKeyValuePair(){}
+    public function testCannotSetInvalidConfigurationKeyValuePair(){}
+    */
 }
