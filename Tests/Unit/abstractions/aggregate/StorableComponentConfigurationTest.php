@@ -96,9 +96,21 @@ class StorableComponentConfigurationTest extends StorableComponentTest
         }
     }
 
+    /**
+     * Test that the getConfiguration() method returns an array that
+     * only has keys that correspond to the keys defined in the array
+     * returned by the getConfigurationKeys() method.
+     */
+    public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys(){
+        $expectedConfigurationKeys = $this->component->getExpectedConfigurationKeys();
+        foreach (array_keys($this->component->getConfiguration()) as $key) {
+            $this->assertTrue(in_array($key, $expectedConfigurationKeys, true));
+        }
+    }
+
+
     /*
      * @todo Implement the following tests:
-    public function testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys(){}
     public function testCanSetValidConfigurationKeyValuePair(){}
     public function testCannotSetInvalidConfigurationKeyValuePair(){}
     */
