@@ -112,7 +112,8 @@ class StorableComponentConfigurationTest extends StorableComponentTest
     }
 
     /**
-     * Test that valid key value pairs can be set using the setConfigurationValue() method.
+     * Test that valid key value pairs can be set using the
+     * setConfigurationValue() method.
      */
     public function testCanSetValidConfigurationKeyValuePair()
     {
@@ -123,9 +124,15 @@ class StorableComponentConfigurationTest extends StorableComponentTest
         $this->assertNotEquals($initialConfiguration, $this->component->getConfiguration());
     }
 
+    /**
+     * Test that invalid key value pairs cannot be set by the
+     * setConfigurationValue() method.
+     */
+    public function testCannotSetInvalidConfigurationKeyValuePair()
+    {
+        $initialConfiguration = $this->component->getConfiguration();
+        $this->component->setConfigurationValue('InvalidKeyForBarBaz', 'NewValue');
+        $this->assertEquals($initialConfiguration, $this->component->getConfiguration());
+    }
 
-    /*
-     * @todo Implement the following tests:
-    public function testCannotSetInvalidConfigurationKeyValuePair(){}
-    */
 }
