@@ -52,6 +52,7 @@ class StorableComponentConfigurationTest extends StorableComponentTest
     public function testGetExpectedConfigurationKeysReturnsNonEmptyArray(){
         $this->assertNotEmpty($this->component->getExpectedConfigurationKeys());
     }
+
     /**
      * @todo Implement the following tests:
      *
