@@ -16,10 +16,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  * @see StorableComponentConfigurationTest::testGetTypeReturnsNonEmptyString()
  * @see StorableComponentConfigurationTest::testGetLocationReturnsNonEmptyString()
  * @see StorableComponentConfigurationTest::testGetContainerReturnsNonEmptyString()
- * @see StorableComponentConfigurationTest::
- * @see StorableComponentConfigurationTest::
- * @see StorableComponentConfigurationTest::
- * @see StorableComponentConfigurationTest::
+ * @see StorableComponentConfigurationTest::testGetExpectedConfigurationKeysReturnsNonEmptyArray()
  */
 class StorableComponentConfigurationTest extends StorableComponentTest
 {
@@ -51,4 +48,19 @@ class StorableComponentConfigurationTest extends StorableComponentTest
         $constructorArgs = ['ComponentName', 'ComponentType', 'ComponentLocation', 'ComponentContainer', $testStorableComponent];
         $this->component = $this->getMockForAbstractClass('\DarlingCms\abstractions\aggregate\StorableComponentConfiguration', $constructorArgs);
     }
+
+    public function testGetExpectedConfigurationKeysReturnsNonEmptyArray(){
+        $this->assertNotEmpty($this->component->getExpectedConfigurationKeys());
+    }
+    /**
+     * @todo Implement the following tests:
+     *
+     * testGetExpectedConfigurationKeysReturnsNonEmptyArray
+     * testGetExpectedConfigurationKeysReturnsArrayOfKeysThatAtLeastReflectsAStorableComponentsProperties
+     * testGetConfigurationReturnsNonEmptyArray
+     * testGetConfigurationReturnsArrayWithValuesSetForExpectedKeys
+     * testGetConfigurationReturnsArrayThatOnlyHasKeysThatCorrespondToTheExpectedConfigurationKeys
+     * testCanSetValidConfigurationKeyValuePair
+     * testCannotSetInvalidConfigurationKeyValuePair
+     */
 }
