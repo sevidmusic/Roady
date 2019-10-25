@@ -98,17 +98,28 @@ abstract class StorableComponentConfiguration extends StorableComponent implemen
 
     /**
      * Set a configuration key value pair.
+     *
+     * Note: Values cannot be set for keys that are not\
+     *       defined in the array returned by the
+     *       getExpectedConfigurationKeys() method.
+     *
      * @param string $key The name of the key, this name should
      *                    correspond to the name of the property
      *                    this configuration setting represents.
      * @param mixed $value The value to assign to the key.
      * @return bool True if value was assigned to the key, false
      *              otherwise.
+     *              Note: This method will return false if an attempt
+     *              to assign a value to an unexpected key is made.
      */
     public function setConfigurationValue(string $key, $value): bool
     {
-        // @todo: Implement this method.
-        return false;
+        // If specified key is not expected, return false.
+        if(!in_array($key, $this->getExpectedConfigurationKeys())){
+            return false;
+        }
+        $this->configuration[$key] = $value;
+        return ($this->configuration[$key] === $value);
     }
 
 }
