@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingCms\interfaces\component;
+namespace DarlingCms\interfaces\component\database;
 
 use DarlingCms\interfaces\aggregate\Component;
 use DateTime;
