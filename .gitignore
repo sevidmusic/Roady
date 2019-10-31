@@ -4,3 +4,4 @@ vendor/
 .vagrant/
 *.phpunit.result.cache
 pdoDevPlayAndProofs.php
+.vimrc
