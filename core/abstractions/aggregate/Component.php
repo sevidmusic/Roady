@@ -72,7 +72,9 @@ abstract class Component implements ComponentInterface
     }
 
     public static function getExpectedConstructorArguments(): array {
-        return array();
+        $argumentNames = self::getExpectedConstructorArgumentNames();
+        $argumentDefaults = self::getExpectedConstructorArgumentNames();
+        return array_combine($argumentNames, $argumentDefaults);
     }
 
     /**
@@ -85,5 +87,17 @@ abstract class Component implements ComponentInterface
          * @todo Refactor to use more reliable unique id generation logic.
          */
         return str_shuffle('sdh65za4hj45h454jgf76hfdhgsea74ioased5782asdwsdfa789suois98asuliah8yh3gibjh4vbuytd87sduihgb4y3tg78gdfgs89dfg89dfg8iu3wpsdjsdfjgjfj3jf8si');
+    }
+
+    /**
+     * Returns an array of the names of the expected arguments, in order.
+     */
+    private function getExpectedConstructorArgumentNames() {
+        $reflection = new \ReflectionMethod(get_called_class(), '__construct');
+        $expectedArgumentNames = array();
+        foreach($reflection->getParameters() as $reflectionParameter) {
+            array_push($expectedArgumentNames, $reflectionParameter->name);
+        }
+        return $expectedArgumentNames;
     }
 }
