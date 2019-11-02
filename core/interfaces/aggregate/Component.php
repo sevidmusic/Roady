@@ -2,9 +2,10 @@
 
 namespace DarlingCms\interfaces\aggregate;
 
-use DarlingCms\interfaces\primary\Classifiable;
 use DarlingCms\interfaces\primary\Identifiable;
-
+use DarlingCms\interfaces\primary\Classifiable;
+use DarlingCms\interfaces\primary\Constructable;
+/**
 /**
  * Interface Component. Defines the basic contract of a
  * component, i.e., something with a name, a unique id,
@@ -14,7 +15,7 @@ use DarlingCms\interfaces\primary\Identifiable;
  * @see Component::getUniqueId()
  * @see Component::getType()
  */
-interface Component extends Identifiable, Classifiable
+interface Component extends Identifiable, Classifiable, Constructable
 {
 
 }
