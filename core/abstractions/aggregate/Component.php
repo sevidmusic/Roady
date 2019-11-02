@@ -71,6 +71,10 @@ abstract class Component implements ComponentInterface
         return $this->type;
     }
 
+    public static function getExpectedConstructorArguments(): array {
+        return array();
+    }
+
     /**
      * Generates a unique id.
      * @return string A unique id.

@@ -66,7 +66,7 @@ class ComponentTest extends TestCase
      * method returns a non empty array.
      */
     public function testGetExpectedConstructorArgumentsReturnsNonEmptyArray() {
-        $this->assertNotEmpty($this->getExpectedConstructorArguments());
+        $this->assertNotEmpty($this->component->getExpectedConstructorArguments());
     }
 
     /**
@@ -81,7 +81,6 @@ class ComponentTest extends TestCase
             array_push($expectedArgumentNames, $reflectionParameter->name);
         }
         $this->assertEquals(array_keys($this->component->getExpectedConstructorArguments()), $expectedArgumentNames);
-
     }
 
     /**

@@ -20,6 +20,6 @@ interface Constructable
      *               argument names and values are
      *               appropriate default values.
      */
-    public function getExpectedConstructorArguments();
+    public static function getExpectedConstructorArguments();
 }
 
