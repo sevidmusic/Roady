@@ -5,3 +5,5 @@ vendor/
 *.phpunit.result.cache
 pdoDevPlayAndProofs.php
 .vimrc
+php.tags
+xaa
