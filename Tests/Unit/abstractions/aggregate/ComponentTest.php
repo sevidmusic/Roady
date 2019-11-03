@@ -92,8 +92,9 @@ class ComponentTest extends TestCase
         $reflection = new ReflectionMethod(get_class($this->component), '__construct');
         $expectedArgumentTypes = array();
         foreach($reflection->getParameters() as $reflectionParameter) {
-            array_push($expectedArgumentTypes, $reflectionParameter->getType());
+            array_push($expectedArgumentTypes, $reflectionParameter->getType()->__toString());
         }
+        var_dump(get_class($this->component),$expectedArgumentTypes);
         $argumentTypes = array();
         foreach($this->component->getExpectedConstructorArguments() as $argument) {
             array_push($argumentTypes, getType($argument));
