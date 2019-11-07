@@ -63,7 +63,7 @@ class ComponentTest extends TestCase
     /**
      * Assert that an array's values are valid default constructor arguments.
      */
-     public function valuesAreValidDefualtExpectedConstructorArgumentTypes(array$array) {
+     private function valuesAreValidDefualtExpectedConstructorArgumentTypes(array$array) {
         $argumentTypes = array();
         foreach($array as $argument) {
             array_push($argumentTypes, getType($argument));
