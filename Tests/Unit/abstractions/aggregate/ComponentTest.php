@@ -17,7 +17,7 @@ class ComponentTest extends TestCase
      * @var Component|MockObject PhpUnit mock object
      *                           instance that represents
      *                           the DarlingCms\abstractions\aggregate\Component
-     *                           abstract class that will
+     *                           abstract class implementation that will
      *                           be used for testing.
      */
     protected $component;
@@ -148,8 +148,7 @@ class ComponentTest extends TestCase
      */
     public function testDummy() {
         $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
-        // @todo Following test is failing!
-        // $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments())
+        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
         $this->elementCountMatchesNumberOfExpectedConstructorArguments($this->component->getExpectedConstructorArguments());
     }
 }
