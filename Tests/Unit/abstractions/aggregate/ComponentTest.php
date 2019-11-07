@@ -151,14 +151,4 @@ class ComponentTest extends TestCase
         return $parameterInfo;
     }
 
-    /**
-     * Delete this test
-     */
-    public function testDummy() {
-        $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
-        $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArguments());
-        $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArguments());
-        $this->valuesMatchExpectedConstructorArgumentNames(array_keys($this->component->getExpectedConstructorArguments()));
-//        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
-    }
 }
