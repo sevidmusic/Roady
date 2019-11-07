@@ -92,7 +92,7 @@ class ComponentTest extends TestCase
      * Assert that an array's element count matchese the number of
      * expected constructor arguments.
      */
-    protected function elementCountMatchesNumberOfExpectedConstructorArguments(array $array) {
+    protected function elementCountMatchesExpectedConstructorArgumentCount(array $array) {
         $this->assertEquals(count($array), count($this->getComponentConstructorParamerterInfo('n')));
     }
 
@@ -149,6 +149,6 @@ class ComponentTest extends TestCase
     public function testDummy() {
         $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
         $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
-        $this->elementCountMatchesNumberOfExpectedConstructorArguments($this->component->getExpectedConstructorArguments());
+        $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArguments());
     }
 }
