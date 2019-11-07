@@ -9,8 +9,7 @@ use ReflectionMethod;
 
 /**
  * Class ComponentTest. Defines tests for the
- * DarlingCms\abstractions\aggregate\Component
- * abstract class.
+ * DarlingCms\abstractions\aggregate\Component abstract class.
  */
 class ComponentTest extends TestCase
 {
@@ -62,44 +61,15 @@ class ComponentTest extends TestCase
     }
 
     /**
-     * Test the the getExpectedConstructorArguments()
-     * method returns a non empty array.
+     * Assert that an array's values are valid default constructor arguments.
      */
-    public function testGetExpectedConstructorArgumentsReturnsNonEmptyArray() {
-        $this->assertNotEmpty($this->component->getExpectedConstructorArguments());
-    }
-
-    /**
-     * Test that the getExpectedConstructorArguments()
-     * method returns an array whose keys match the
-     * expected constructor argument names.
-     */
-    public function testGetExpectedConstructorArgumentsReturnsArrayWhoseKeysAreExpectedArgumentNames() {
-        $reflection = new ReflectionMethod(get_class($this->component), '__construct');
-        $expectedArgumentNames = array();
-        foreach($reflection->getParameters() as $reflectionParameter) {
-            array_push($expectedArgumentNames, $reflectionParameter->name);
-        }
-        $this->assertEquals(array_keys($this->component->getExpectedConstructorArguments()), $expectedArgumentNames);
-    }
-
-    /**
-     * Test the the getExpectedConstrutorArguments()
-     * method returns a array whose values are valid
-     * default constructor arguments.
-     */
-    public function testGetExpectedConstructorArgumentsReturnsArrayWhoseValuesAreValidDefaultConstructorArgumentValues() {
-        $reflection = new ReflectionMethod(get_class($this->component), '__construct');
-        $expectedArgumentTypes = array();
-        foreach($reflection->getParameters() as $reflectionParameter) {
-            array_push($expectedArgumentTypes, $reflectionParameter->getType()->__toString());
-        }
-        var_dump(get_class($this->component),$expectedArgumentTypes);
+     public function valuesAreValidDefualtExpectedConstructorArgumentTypes(array$array) {
         $argumentTypes = array();
-        foreach($this->component->getExpectedConstructorArguments() as $argument) {
+        foreach($array as $argument) {
             array_push($argumentTypes, getType($argument));
         }
-        $this->assertEquals($expectedArgumentTypes, $argumentTypes);
+        var_dump(['Expected'=> $this->getComponentConstructorParamerterInfo('t'), 'Actual' => $argumentTypes]);
+        $this->assertEquals($this->getComponentConstructorParamerterInfo('t'), $argumentTypes);
     }
 
     /**
@@ -108,5 +78,69 @@ class ComponentTest extends TestCase
     protected function isNonEmptyString(string $value) {
         $this->assertIsString($value);
         $this->assertNotEmpty($value);
+    }
+
+    /**
+     * Assert that a value us a non empty array.
+     */
+    protected function isNonEmptyArray(array $array) {
+        $this->assertIsArray($array);
+        $this->assertNotEmpty($array);
+    }
+
+    /**
+     * Assert that an array's element count matchese the number of
+     * expected constructor arguments.
+     */
+    protected function elementCountMatchesNumberOfExpectedConstructorArguments() {
+        // @todo implement this method
+    }
+
+    /**
+     * Assert that an array's elements are ordered
+     * according to the order of the expected constructor
+     * arguments.
+     */
+    protected function elementsOrderedAccordingToExpectedConstructorArgumentOrder() {
+        // @todo implement this method
+    }
+
+
+    /**
+     * Assert that the keys of an array match the expected constructor argument
+     * names.
+     */
+    protected function keysMatchExpectedConstructorArgumentNames(array $array) {
+        $this->assertEquals(array_keys($array), $this->getComponentConstructorParamerterInfo('name'));
+    }
+
+    /**
+     * Request information about the Component's constructor parameters.
+     * @var string $request A single character that determines what info
+     *                      is returned:
+     *                      n = Return array of the names of the constructor
+     *                          paramters.
+     *                      t = Return array of strings indicating the
+     *                          constructor's parameter types.
+     */
+    protected function getComponentConstructorParamerterInfo(string $request): array {
+        $reflection = new ReflectionMethod(get_class($this->component), '__construct');
+        $parameterInfo = array();
+        foreach($reflection->getParameters() as $reflectionParameter) {
+            if($request[0] === 't') {
+                array_push($parameterInfo, $reflectionParameter->getType()->__toString());
+                continue;
+            }
+            array_push($parameterInfo, $reflectionParameter->name);
+        }
+        return $parameterInfo;
+    }
+
+    /**
+     * Delete this test
+     */
+    public function testDummy() {
+        $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
+        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
     }
 }
