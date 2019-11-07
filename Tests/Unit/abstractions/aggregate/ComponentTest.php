@@ -122,6 +122,14 @@ class ComponentTest extends TestCase
     }
 
     /**
+     * Assert that the values of an array match the expected constructor argument
+     * names.
+     */
+    protected function valuesMatchExpectedConstructorArgumentNames(array $array) {
+        $this->assertEquals($array, $this->getComponentConstructorParamerterInfo('name'));
+    }
+
+    /**
      * Request information about the Component's constructor parameters.
      * @var string $request A single character that determines what info
      *                      is returned:
@@ -150,7 +158,7 @@ class ComponentTest extends TestCase
         $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
         $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArguments());
         $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArguments());
-        // @todo $this->valuesMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
-        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
+        $this->valuesMatchExpectedConstructorArgumentNames(array_keys($this->component->getExpectedConstructorArguments()));
+//        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
     }
 }
