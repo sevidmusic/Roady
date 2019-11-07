@@ -92,7 +92,7 @@ class ComponentTest extends TestCase
      * Assert that an array's element count matchese the number of
      * expected constructor arguments.
      */
-    protected function elementCountMatchesExpectedConstructorArgumentCount(array $array) {
+    private function elementCountMatchesExpectedConstructorArgumentCount(array $array) {
         $this->assertEquals(count($array), count($this->getComponentConstructorParamerterInfo('n')));
     }
 
@@ -101,7 +101,7 @@ class ComponentTest extends TestCase
      * according to the order of the expected constructor
      * arguments.
      */
-    protected function elementOrderMatchesExpectedConstructorArgumentOrder(array $array) {
+    private function elementOrderMatchesExpectedConstructorArgumentOrder(array $array) {
         /**
          * This test is an alias as the logic it would define is already defined
          * by the keysMatchExpectedConstructorArgumentNames().
@@ -117,7 +117,7 @@ class ComponentTest extends TestCase
      * Assert that the keys of an array match the expected constructor argument
      * names.
      */
-    protected function keysMatchExpectedConstructorArgumentNames(array $array) {
+    private function keysMatchExpectedConstructorArgumentNames(array $array) {
         $this->assertEquals(array_keys($array), $this->getComponentConstructorParamerterInfo('name'));
     }
 
@@ -125,7 +125,7 @@ class ComponentTest extends TestCase
      * Assert that the values of an array match the expected constructor argument
      * names.
      */
-    protected function valuesMatchExpectedConstructorArgumentNames(array $array) {
+    private function valuesMatchExpectedConstructorArgumentNames(array $array) {
         $this->assertEquals($array, $this->getComponentConstructorParamerterInfo('name'));
     }
 
