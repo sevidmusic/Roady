@@ -83,6 +83,14 @@ class ComponentTest extends TestCase
         $this->isNonEmptyArray($this->component->getExpectedConstructorArgumentDefaults());
     }
 
+    /**
+     * Assert that the getExpectedConstructorArgumentNames() method
+     * returns an array whose values match the expected constructor
+     * argument names.
+     */
+    public function testGetExpectedConstructorArgumentNamesReturnsArrayWhoseValuesMatchExpectedConstructorArgumentNames() {
+       $this->valuesMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArgumentNames());
+    }
     /********* Private & Protected Methods *********/
 
     /**
