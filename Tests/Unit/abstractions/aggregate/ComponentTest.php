@@ -61,6 +61,31 @@ class ComponentTest extends TestCase
     }
 
     /**
+     * Assert that the getExpectedConstructorArgumentNames() method
+     * returns a non empty array.
+     */
+    public function testGetExpectedConstructorArgumentNamesReturnsNonEmptyArray() {
+        $this->isNonEmptyArray($this->component->getExpectedConstructorArgumentNames());
+    }
+
+    /**
+     * Assert that the getExpectedConstructorArgumentTypes() method
+     * returns a non empty array.
+     */
+    public function testGetExpectedConstructorArgumentTypesReturnsNonEmptyArray() {
+        $this->isNonEmptyArray($this->component->getExpectedConstructorArgumentTypes());
+    }
+
+    /** Assert that the getExpectedConstructorArgumentDefaults() method
+     * returns a non empty array.
+     */
+    public function testGetExpectedConstructorArgumentDefaultsReturnsNonEmptyArray() {
+        $this->isNonEmptyArray($this->component->getExpectedConstructorArgumentDefaults());
+    }
+
+    /********* Private & Protected Methods *********/
+
+    /**
      * Assert that an array's values are valid default constructor arguments.
      */
      private function valuesAreValidDefualtExpectedConstructorArgumentTypes(array$array) {
