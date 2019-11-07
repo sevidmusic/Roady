@@ -101,8 +101,15 @@ class ComponentTest extends TestCase
      * according to the order of the expected constructor
      * arguments.
      */
-    protected function elementsOrderedAccordingToExpectedConstructorArgumentOrder() {
-        // @todo implement this method
+    protected function elementsOrderedAccordingToExpectedConstructorArgumentOrder(array $array) {
+        /**
+         * This test is an alias as the logic it would define is already defined
+         * by the keysMatchExpectedConstructorArgumentNames().
+         * It is defined because there may be a need to be explicit about the
+         * distinction between this method and the
+         * keysMatchExpectedConstructorArgumentNames() method in the future.
+         */
+        $this->keysMatchExpectedConstructorArgumentNames($array);
     }
 
 
@@ -141,7 +148,8 @@ class ComponentTest extends TestCase
      */
     public function testDummy() {
         $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
-//        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments())
+        // @todo Following test is failing!
+        // $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments())
         $this->elementCountMatchesNumberOfExpectedConstructorArguments($this->component->getExpectedConstructorArguments());
     }
 }
