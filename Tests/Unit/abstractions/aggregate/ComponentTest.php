@@ -68,7 +68,7 @@ class ComponentTest extends TestCase
         foreach($array as $argument) {
             array_push($argumentTypes, getType($argument));
         }
-        var_dump(['Expected'=> $this->getComponentConstructorParamerterInfo('t'), 'Actual' => $argumentTypes]);
+        //var_dump(['Expected'=> $this->getComponentConstructorParamerterInfo('t'), 'Actual' => $argumentTypes]);
         $this->assertEquals($this->getComponentConstructorParamerterInfo('t'), $argumentTypes);
     }
 
@@ -101,7 +101,7 @@ class ComponentTest extends TestCase
      * according to the order of the expected constructor
      * arguments.
      */
-    protected function elementsOrderedAccordingToExpectedConstructorArgumentOrder(array $array) {
+    protected function elementOrderMatchesExpectedConstructorArgumentOrder(array $array) {
         /**
          * This test is an alias as the logic it would define is already defined
          * by the keysMatchExpectedConstructorArgumentNames().
@@ -148,7 +148,9 @@ class ComponentTest extends TestCase
      */
     public function testDummy() {
         $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
-        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
         $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArguments());
+        $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArguments());
+        // @todo $this->valuesMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArguments());
+        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArguments());
     }
 }
