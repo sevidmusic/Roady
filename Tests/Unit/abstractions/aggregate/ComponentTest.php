@@ -110,6 +110,14 @@ class ComponentTest extends TestCase
         $this->keysMatchExpectedConstructorArgumentNames($this->component->getExpectedConstructorArgumentDefaults());
     }
 
+    /**
+     * Assert that the getExpectedConstructorArgumentNames() method
+     * returns an array whose element count matches the expected
+     * constructor argument count.
+     */
+    public function testGetExpectedConstructorArgumentNamesReturnsArrayWhoseElementCountMatchesExpectedConstructorArgumentCount() {
+        $this->elementCountMatchesExpectedConstructorArgumentCount($this->getExpectedConstructorArgumentNames());
+    }
 
     /********* Private & Protected Methods *********/
 
