@@ -173,6 +173,15 @@ class ComponentTest extends TestCase
         $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArgumentDefaults());
     }
 
+    /**
+     * Assert that the getType() method returns the Component implementations
+     * fully qualified classname, i.e., the implementation's class name including
+     * the implementation's namespace, e.g., Foo\Bar\Baz
+     */
+    public function testGetTypeReturnsComponentImplementationsFullyQualifiedClasssname() {
+        var_dump(get_class($this->component), $this->component->getType());
+        $this->assertEquals(get_class($this->component), $this->component->getType());
+    }
 
     /********* Private & Protected Methods *********/
 
