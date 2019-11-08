@@ -29,7 +29,7 @@ class ComponentTest extends TestCase
      */
     public function setUp(): void
     {
-        $constructorArgs = ['ComponentName', 'ComponentType'];
+        $constructorArgs = ['ComponentName'];
         $this->component = $this->getMockForAbstractClass('\DarlingCms\abstractions\aggregate\Component', $constructorArgs);
     }
 
@@ -143,7 +143,7 @@ class ComponentTest extends TestCase
      * constructor argument order.
      */
     public function testGetExpectedConstructorArgumentNamesReturnsArrayWhoseElementOrderMatchesExpectedConstructorArgumentOrder() {
-        $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArgumentNames());
+        $this->elementOrderMatchesExpectedConstructorArgumentOrder(array_flip($this->component->getExpectedConstructorArgumentNames()));
     }
 
     /**
@@ -184,7 +184,6 @@ class ComponentTest extends TestCase
         foreach($array as $argument) {
             array_push($argumentTypes, getType($argument));
         }
-        //var_dump(['Expected'=> $this->getComponentConstructorParamerterInfo('t'), 'Actual' => $argumentTypes]);
         $this->assertEquals($this->getComponentConstructorParamerterInfo('t'), $argumentTypes);
     }
 

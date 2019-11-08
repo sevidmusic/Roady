@@ -3,7 +3,7 @@
 namespace DarlingCms\abstractions\aggregate;
 
 use DarlingCms\interfaces\aggregate\Component as ComponentInterface;
-
+use \ReflectionMethod;
 /**
  * Class Component. Defines an abstract implementation of the
  * Component interface that can be implemented to define
@@ -87,25 +87,43 @@ abstract class Component implements ComponentInterface
      * Returns an array of the names of the expected arguments, in order.
      */
     public function getExpectedConstructorArgumentNames() {
-        $reflection = new \ReflectionMethod(get_called_class(), '__construct');
-        $expectedArgumentNames = array();
-        foreach($reflection->getParameters() as $reflectionParameter) {
-            array_push($expectedArgumentNames, $reflectionParameter->name);
-        }
-        return $expectedArgumentNames;
+        return $this->getComponentConstructorParamerterInfo('n');
     }
 
     public function getExpectedConstructorArgumentTypes(): array {
-        return array();
+        return array_combine($this->getComponentConstructorParamerterInfo('n'), $this->getComponentConstructorParamerterInfo('t'));
     }
 
     public function getExpectedConstructorArgumentDefaults(): array {
-        return array();
+        return array_combine($this->getComponentConstructorParamerterInfo('n'), $this->getComponentConstructorParamerterInfo('t'));
     }
 
     public static function getExpectedConstructorArguments(): array {
     // @todo remove this, it is here unitl the Constructable interface is refacotored to define new getExpected*() methods
     return array();
     }
+
+    /**
+     * Request information about the Component's constructor parameters.
+     * @var string $request A single character that determines what info
+     *                      is returned:
+     *                      n = Return array of the names of the constructor
+     *                          paramters.
+     *                      t = Return array of strings indicating the
+     *                          constructor's parameter types.
+     */
+    protected function getComponentConstructorParamerterInfo(string $request): array {
+        $reflection = new ReflectionMethod(get_class($this), '__construct');
+        $parameterInfo = array();
+        foreach($reflection->getParameters() as $reflectionParameter) {
+            if($request[0] === 't') {
+                array_push($parameterInfo, $reflectionParameter->getType()->__toString());
+                continue;
+            }
+            array_push($parameterInfo, $reflectionParameter->name);
+        }
+        return $parameterInfo;
+    }
+
 
 }
