@@ -164,6 +164,15 @@ class ComponentTest extends TestCase
         $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArgumentDefaults());
     }
 
+    /**
+     * Assert that the getExpectedConstructorArgumentDefaults() method
+     * returns an array whose values are valid default expected constructor
+     * argument types.
+     */
+    public function testGetExpectedConstructorArgumentDefaultsReturnsArrayWhoseValuesAreValidExpectedConstructorArgumentTypes() {
+        $this->valuesAreValidDefualtExpectedConstructorArgumentTypes($this->component->getExpectedConstructorArgumentDefaults());
+    }
+
 
     /********* Private & Protected Methods *********/
 
