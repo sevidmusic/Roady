@@ -146,6 +146,15 @@ class ComponentTest extends TestCase
         $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArgumentNames());
     }
 
+    /**
+     * Assert that the getExpectedConstructorArgumentTypes() method
+     * returns an array whose element order matches the expected
+     * constructor argument order.
+     */
+    public function testGetExpectedConstructorArgumentTypesReturnsArrayWhoseElementOrderMatchesExpectedConstructorArgumentOrder() {
+        $this->elementOrderMatchesExpectedConstructorArgumentOrder($this->component->getExpectedConstructorArgumentTypes());
+    }
+
 
     /********* Private & Protected Methods *********/
 
