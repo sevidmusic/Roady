@@ -116,7 +116,7 @@ class ComponentTest extends TestCase
      * constructor argument count.
      */
     public function testGetExpectedConstructorArgumentNamesReturnsArrayWhoseElementCountMatchesExpectedConstructorArgumentCount() {
-        $this->elementCountMatchesExpectedConstructorArgumentCount($this->getExpectedConstructorArgumentNames());
+        $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArgumentNames());
     }
 
     /**
@@ -125,7 +125,7 @@ class ComponentTest extends TestCase
      * constructor argument count.
      */
     public function testGetExpectedConstructorArgumentTypesReturnsArrayWhoseElementCountMatchesExpectedConstructorArgumentCount() {
-        $this->elementCountMatchesExpectedConstructorArgumentCount($this->getExpectedConstructorArgumentTypes());
+        $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArgumentTypes());
     }
 
     /**
@@ -134,7 +134,7 @@ class ComponentTest extends TestCase
      * constructor argument count.
      */
     public function testGetExpectedConstructorArgumentDefaultsReturnsArrayWhoseElementCountMatchesExpectedConstructorArgumentCount() {
-        $this->elementCountMatchesExpectedConstructorArgumentCount($this->getExpectedConstructorArgumentDefaults());
+        $this->elementCountMatchesExpectedConstructorArgumentCount($this->component->getExpectedConstructorArgumentDefaults());
     }
 
     /**

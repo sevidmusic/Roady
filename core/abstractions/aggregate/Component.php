@@ -37,11 +37,11 @@ abstract class Component implements ComponentInterface
      * @param string $name The name to assign.
      * @param string $type The type to assign.
      */
-    public function __construct(string $name, string $type)
+    public function __construct(string $name)
     {
         $this->name = trim($name);
         $this->uniqueId = $this->generateUniqueId();
-        $this->type = trim($type);
+        $this->type = get_class($this);
     }
 
     /**
@@ -71,12 +71,6 @@ abstract class Component implements ComponentInterface
         return $this->type;
     }
 
-    public static function getExpectedConstructorArguments(): array {
-        $argumentNames = self::getExpectedConstructorArgumentNames();
-        $argumentDefaults = self::getExpectedConstructorArgumentNames();
-        return array_combine($argumentNames, $argumentDefaults);
-    }
-
     /**
      * Generates a unique id.
      * @return string A unique id.
@@ -92,7 +86,7 @@ abstract class Component implements ComponentInterface
     /**
      * Returns an array of the names of the expected arguments, in order.
      */
-    private function getExpectedConstructorArgumentNames() {
+    public function getExpectedConstructorArgumentNames() {
         $reflection = new \ReflectionMethod(get_called_class(), '__construct');
         $expectedArgumentNames = array();
         foreach($reflection->getParameters() as $reflectionParameter) {
@@ -100,4 +94,18 @@ abstract class Component implements ComponentInterface
         }
         return $expectedArgumentNames;
     }
+
+    public function getExpectedConstructorArgumentTypes(): array {
+        return array();
+    }
+
+    public function getExpectedConstructorArgumentDefaults(): array {
+        return array();
+    }
+
+    public static function getExpectedConstructorArguments(): array {
+    // @todo remove this, it is here unitl the Constructable interface is refacotored to define new getExpected*() methods
+    return array();
+    }
+
 }
