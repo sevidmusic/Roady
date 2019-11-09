@@ -11,7 +11,7 @@ use ReflectionMethod;
  * Class StorableComponentTest. Defines tests for the
  * DarlingCms\abstractions\aggregate\StorableComponent abstract class.
  */
-class StorableComponentTest extends TestCase
+class StorableComponentTest extends ComponentTest
 {
     /**
      * @var StorableComponent|MockObject PhpUnit mock object
