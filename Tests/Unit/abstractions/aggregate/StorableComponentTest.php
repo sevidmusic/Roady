@@ -32,4 +32,12 @@ class StorableComponentTest extends ComponentTest
         $constructorArgs = ['ComponentName', 'ComponentLocation', 'ComponentContainer'];
         $this->component = $this->getMockForAbstractClass('\DarlingCms\abstractions\aggregate\StorableComponent', $constructorArgs);
     }
+
+    /**
+     * Assert that a string is made up of only alphanumeric characters.
+     */
+    private function stringIsAlphaNum(string $string) {
+        $this->assertTrue(ctype_alnum($string));
+    }
+
 }
