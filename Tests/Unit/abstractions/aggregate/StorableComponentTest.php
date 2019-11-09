@@ -47,11 +47,19 @@ class StorableComponentTest extends ComponentTest
         $this->isNonEmptyString($this->component->getContainer());
     }
 
+    /**
+     * Assert that the getLocation() method returns a string that contains
+     * only alpha numerica characters.
+     */
+    public function testGetLocationReturnsAlphaNumericString() {
+        $this->isAlphaNumericString($this->component->getLocation());
+    }
+
 
     /**
      * Assert that a string is made up of only alphanumeric characters.
      */
-    private function stringIsAlphaNum(string $string) {
+    private function isAlphaNumericString(string $string) {
         $this->assertTrue(ctype_alnum($string));
     }
 
