@@ -34,6 +34,13 @@ class StorableComponentTest extends ComponentTest
     }
 
     /**
+     * Assert that the getLocation() method returns a non empty string.
+     */
+    public function testGetLocationReturnsNonEmptyString() {
+        $this->isNonEmptyString($this->component->getLocation());
+    }
+
+    /**
      * Assert that a string is made up of only alphanumeric characters.
      */
     private function stringIsAlphaNum(string $string) {
