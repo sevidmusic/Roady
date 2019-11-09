@@ -41,6 +41,14 @@ class StorableComponentTest extends ComponentTest
     }
 
     /**
+     * Assert that the getContainer() method returns a non empty string.
+     */
+    public function testGetContainerReturnsNonEmptyString() {
+        $this->isNonEmptyString($this->component->getContainer());
+    }
+
+
+    /**
      * Assert that a string is made up of only alphanumeric characters.
      */
     private function stringIsAlphaNum(string $string) {
