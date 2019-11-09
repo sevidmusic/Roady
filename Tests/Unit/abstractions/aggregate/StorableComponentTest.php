@@ -59,7 +59,7 @@ class StorableComponentTest extends ComponentTest
      * Assert that the getContainer() method returns a string that contains
      * only alpha numeric characters.
      */
-    public function testGetLocationReturnsAlphaNumericString() {
+    public function testGetContainerReturnsAlphaNumericString() {
         $this->isAlphaNumericString($this->component->getContainer());
     }
 
