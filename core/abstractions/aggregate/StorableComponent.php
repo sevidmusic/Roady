@@ -48,4 +48,7 @@ abstract class StorableComponent extends Component implements StorableComponentI
         return $this->container;
     }
 
+    public function getExpectedConstructorArgumentDefaults() : array {
+        return array_combine($this->getComponentConstructorParamerterInfo('n'), array('DefaultName', 'DefaultLocation', 'DefaultContainer'));
+    }
 }

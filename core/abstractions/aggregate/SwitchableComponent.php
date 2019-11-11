@@ -14,11 +14,10 @@ use \ReflectionMethod;
  * @see SwitchableComponent::getName()
  * @see SwitchableComponent::getUniqueId()
  */
-abstract class SwitchableComponent extends Component implements SwitchableComponentInterface
+abstract class SwitchableComponent extends StorableComponent implements SwitchableComponentInterface
 {
-    private $location;
 
-    private $container;
+    private $state;
 
     /**
      * SwitchableComponent constructor. Assigns the name,
@@ -27,25 +26,23 @@ abstract class SwitchableComponent extends Component implements SwitchableCompon
      * @param string $location The location to assign.
      * @param string $container The container to assign.
      */
-    public function __construct(string $name, string $location, string $container)
+    public function __construct(string $name, string $location, string $container, bool $initialState)
     {
-        parent::__construct($name);
-        $this->location = $location;
-        $this->container = $container;
+        parent::__construct($name, $location, $container);
+        $this->state = $initialState;
     }
 
-    /**
-     * Return's the assigned location string.
-     */
-    public function getLocation():string {
-        return $this->location;
+    public function getState(): bool {
+        return $this->state;
     }
 
-    /**
-     * Returns the assigned container string.
-     */
-    public function getContainer():string {
-        return $this->container;
+    public function switchState():bool {
+        $initialState = $this->getState();
+        $this->state = ($initialState === true ? false : true);
+        return ($this->getState() !== $initialState);
     }
 
+    public function getExpectedConstructorArgumentDefaults():array {
+        return array_combine($this->getComponentConstructorParamerterInfo('n'), array('DefaultName', 'DefaultLocation', 'DefaultContainer', true));
+    }
 }

@@ -37,7 +37,7 @@ class SwitchableComponentTest extends StorableComponentTest
      * Assert that the getState() method returns a boolean value.
      */
     public function testGetStateReturnsBooleanValue() {
-        $this->assertIsBool($this->getState());
+        $this->assertIsBool($this->component->getState());
     }
 
     /**

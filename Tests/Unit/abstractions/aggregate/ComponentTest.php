@@ -267,7 +267,15 @@ class ComponentTest extends TestCase
         $parameterInfo = array();
         foreach($reflection->getParameters() as $reflectionParameter) {
             if($request[0] === 't') {
-                array_push($parameterInfo, $reflectionParameter->getType()->__toString());
+                /**
+                 * @devNote: PHP's ReflectionNamedType()::getName() returns "bool" for boolean
+                 * types, whereas PHP's getType() function returns "boolean" for boolean
+                 * types, to insure consistincy enforce "boolean" is used to indicate
+                 * boolean types.
+                 * @see https://www.php.net/manual/en/reflectionnamedtype.getname.php
+                 * @see https://www.php.net/manual/en/function.gettype.php
+                 */
+                array_push($parameterInfo, str_replace('bool', 'boolean', $reflectionParameter->getType()->getName()));
                 continue;
             }
             array_push($parameterInfo, $reflectionParameter->name);
