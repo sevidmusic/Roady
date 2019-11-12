@@ -31,11 +31,13 @@ class DatabaseTableFieldTest extends StorableComponentTest
     {
         $constructorArgs = [
             'PrimaryKeyFieldFoo',
+            'Components',
+            'DatabaseComponents',
             'int',
             false,
             false,
             true,
-            true,
+            false,
             true
         ];
         $this->component = $this->getMockForAbstractClass('\DarlingCms\abstractions\database\DatabaseTableField', $constructorArgs);
@@ -43,10 +45,10 @@ class DatabaseTableFieldTest extends StorableComponentTest
 
     /**
      * Assert that the getFieldDataType() method returns
-     * a boolean.
+     * anon empty string..
      */
-    public function testGetFieldDataTypeReturnsBoolean() {
-        $this->assertIsBool($this->component->getFieldDataType());
+    public function testGetFieldDataTypeReturnsNonEmptyString() {
+        $this->isNonEmptyString($this->component->getFieldDataType());
     }
 
     /**
