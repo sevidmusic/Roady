@@ -8,6 +8,9 @@ namespace DarlingCms\interfaces\primary;
  * at a specified "location".
  *
  * @package DarlingCms\interfaces\primary
+ * @see Storable
+ * @see Stroable::getLocation()
+ * @see Storable::getContainer()
  */
 interface Storable
 {

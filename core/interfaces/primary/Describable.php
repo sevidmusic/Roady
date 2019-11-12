@@ -8,6 +8,9 @@ namespace DarlingCms\interfaces\primary;
  * and a long description.
  *
  * @package DarlingCms\interfaces\primary
+ * @see Describable
+ * @see Describable::getShortDescription()
+ * @see Describable::getLongDescription()
  */
 interface Describable
 {

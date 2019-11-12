@@ -6,6 +6,9 @@ namespace DarlingCms\interfaces\primary;
  * Interface Switchable. Describes the basic contract of something
  * that is switchable, i.e., something that can be turned on or off.
  * @package DarlingCms\interfaces\primary
+ * @see Switchable
+ * @see Switchable::getState()
+ * @see Switchable::switchState()
  */
 interface Switchable
 {
