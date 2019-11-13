@@ -68,6 +68,9 @@ abstract class Component implements ComponentInterface
 
     /**
      * Returns the assigned type.
+     * Specifically, this implementation of the Component interface
+     * returns this implementation's fully qualified namespace and
+     * class name as the type.
      * @return string The assigned type.
      */
     public function getType(): string
@@ -84,17 +87,38 @@ abstract class Component implements ComponentInterface
         return random_bytes(64);
     }
 
-    /**
-     * Returns an array of the names of the expected arguments, in order.
+    /*
+     * Returns a numercially indexed array of the names
+     * of the arguments expected by this implementation's
+     * __construct() method.
+     * @return array  A numercially indexed array of the names
+     *                of the arguments expected by this
+     *                implementation' __construct() method.
      */
     public function getExpectedConstructorArgumentNames() : array {
         return $this->getComponentConstructorParamerterInfo('n');
     }
 
+    /**
+     * Returns an associative array of the types of the arguments
+     * expected by this implementation's __construct method, indexed
+     * by argument name.
+     * @return  An associative array of the types of the arguments
+     *          expected by this implementation's __construct method,
+     *          indexed by argument name.
+     */
     public function getExpectedConstructorArgumentTypes(): array {
         return array_combine($this->getComponentConstructorParamerterInfo('n'), $this->getComponentConstructorParamerterInfo('t'));
     }
 
+    /**
+     * Returns an associatvie array of values that can be passed
+     * to the implementation's __construct method as default values,
+     * indexed by argument name.
+     * @return  An associatvie array of values that can be passed
+     *          to the implementation's __construct method as
+     *          default values, indexed by argument name.
+     */
     public function getExpectedConstructorArgumentDefaults(): array {
         return array_combine($this->getComponentConstructorParamerterInfo('n'), array('DefaultName'));
     }
