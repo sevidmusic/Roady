@@ -13,6 +13,9 @@ use \ReflectionMethod;
  * @see Component::getType()
  * @see Component::getName()
  * @see Component::getUniqueId()
+ * @see Component::getExpectedConstructorArgumentNames()
+ * @see Component::getExpectedConstructorArgumentTypes()
+ * @see Component::getExpectedConstructorArgumentDefaults()
  */
 abstract class Component implements ComponentInterface
 {
@@ -32,10 +35,11 @@ abstract class Component implements ComponentInterface
     protected $type;
 
     /**
-     * Component constructor. Assigns the specified name and
-     * type, and assigns an internally generated unique id.
+     * Component constructor. Assigns the specified name,
+     * assigns the implementation's fully qualified namespace
+     * and class name as the type, and assigns an internally
+     * generated unique id.
      * @param string $name The name to assign.
-     * @param string $type The type to assign.
      */
     public function __construct(string $name)
     {
@@ -80,7 +84,7 @@ abstract class Component implements ComponentInterface
         /**
          * @todo Refactor to use more reliable unique id generation logic.
          */
-        return str_shuffle('sdh65za4hj45h454jgf76hfdhgsea74ioased5782asdwsdfa789suois98asuliah8yh3gibjh4vbuytd87sduihgb4y3tg78gdfgs89dfg89dfg8iu3wpsdjsdfjgjfj3jf8si');
+        return random_bytes(64);
     }
 
     /**
