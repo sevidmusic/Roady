@@ -13,11 +13,22 @@ use \ReflectionMethod;
  * @see StorableComponent::getType()
  * @see StorableComponent::getName()
  * @see StorableComponent::getUniqueId()
+ * @see StorableComponent::getExpectedConstructorArgumenNames()
+ * @see StorableComponent::getExpectedConstructorArgumentTypes()
+ * @see StorableComponent::getExpectedConstructorArgumentDefaults()
+ * @see StorableComponent::getLocation()
+ * @see StorableComponent::getContainer()
  */
 abstract class StorableComponent extends Component implements StorableComponentInterface
 {
+    /**
+     * @var string $location The assigned location.
+     */
     private $location;
 
+    /**
+     * @var string $components The assinged container.
+     */
     private $container;
 
     /**
@@ -34,15 +45,17 @@ abstract class StorableComponent extends Component implements StorableComponentI
         $this->container = $container;
     }
 
-    /**
-     * Return's the assigned location string.
+     /**
+     * Returns the assigned storage location.
+     * @return string The assigned storage location.
      */
     public function getLocation():string {
         return $this->location;
     }
 
-    /**
-     * Returns the assigned container string.
+     /**
+     * Returns the assigned storage container.
+     * @return string The assigned storage container.
      */
     public function getContainer():string {
         return $this->container;
