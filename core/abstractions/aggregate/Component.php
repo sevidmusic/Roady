@@ -86,7 +86,7 @@ abstract class Component implements ComponentInterface
     /**
      * Returns an array of the names of the expected arguments, in order.
      */
-    public function getExpectedConstructorArgumentNames() {
+    public function getExpectedConstructorArgumentNames() : array {
         return $this->getComponentConstructorParamerterInfo('n');
     }
 
