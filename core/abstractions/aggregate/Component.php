@@ -81,9 +81,6 @@ abstract class Component implements ComponentInterface
      */
     private function generateUniqueId(): string
     {
-        /**
-         * @todo Refactor to use more reliable unique id generation logic.
-         */
         return random_bytes(64);
     }
 
