@@ -70,7 +70,7 @@ abstract class DatabaseTableField extends StorableComponent /* @todo: Defineinte
      *        Component.php.
      */
     public function getExpectedConstructorArgumentDefaults() : array {
-        return array_combine($this->getComponentConstructorParamerterInfo('n'), array('TableFieldPrototype','Components','Databas','int',false,false,true,false,true));
+        return array_combine($this->getComponentConstructorParamerterInfo('n'), array('TableFieldPrototype','Components','Database','int',false,false,true,false,true));
     }
 
     /**
