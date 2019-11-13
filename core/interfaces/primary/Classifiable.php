@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DarlingCms\interfaces\primary;
 
 /**
