@@ -60,7 +60,21 @@ abstract class SwitchableComponent extends StorableComponent implements Switchab
         return ($this->getState() !== $initialState);
     }
 
-    public function getExpectedConstructorArgumentDefaults():array {
-        return array_combine($this->getComponentConstructorParamerterInfo('n'), array('DefaultName', 'DefaultLocation', 'DefaultContainer', true));
+    /**
+     * Returns an array of valid default constructor argument
+     * values for implementations of this class that do
+     * not implement their own __construct() method.
+     * Note: Implementations that implement their own __construct()
+     *       method MUST implement their own
+     *       getDefaultConstructorArgumentValues()
+     *       method and explicitly define appropriate
+     *       default values in the array returned by
+     *       the implementation's
+     *       getDefaultConstructorArgumentValues()
+     *       method.
+     */
+    protected function getDefaultConstructorArgumentValues() : array {
+        return array('DefaultName', 'DefaultLocation', 'DefaultContainer', false);
     }
+
 }
