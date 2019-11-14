@@ -55,23 +55,22 @@ abstract class DatabaseTableField extends StorableComponent /* @todo: Defineinte
     }
 
     /**
-     * @todo: Define abstract protected method, getDefaultConstructorArgumentValues(),
-     *        in Component.php that is required to be defined and use that new method
-     *        to get the default values, so insetad of:
-     *            return array_combine($this->getComponentConstructorParamerterInfo('n'), array('DefaultName', 'DefaultLocation', 'DefaultContainer'));
-     *        It would be:
-     *            return array_combine($this->getComponentConstructorParamerterInfo('n'), $this->getDeaultConstructorArgumentVaules());
-     *        This would allow this method to be defined once in Component.php, and all child
-     *        implementations would implement protected function getDefaultConstructorArgumentValues());
-     *        instead of implementing getExpectedConstructorArgumentDefaults(), this also makes
-     *        definition of default values easier because child implementations do not have to
-     *        worry about remebering to assgin the argument names as keys since that will always
-     *        be handled by the getExpectedConstructorArgumentDefaults() method defined in
-     *        Component.php.
+     * Returns an array of valid default constructor argument
+     * values for implementations of this class that do
+     * not implement their own __construct() method.
+     * Note: Implementations that implement their own __construct()
+     *       method MUST implement their own
+     *       getDefaultConstructorArgumentValues()
+     *       method and explicitly define appropriate
+     *       default values in the array returned by
+     *       the implementation's
+     *       getDefaultConstructorArgumentValues()
+     *       method.
      */
-    public function getExpectedConstructorArgumentDefaults() : array {
-        return array_combine($this->getComponentConstructorParamerterInfo('n'), array('TableFieldPrototype','Components','Database','int',false,false,true,false,true));
+    protected function getDefaultConstructorArgumentValues() : array {
+        return array('TableFieldPrototype','Components','Database','int',false,false,true,false,true);
     }
+
 
     /**
      * Returns the field's data type.
