@@ -11,14 +11,9 @@
 
     <testsuites>
 
-        <testsuite name="Darling Cms Redesign | Abstract Aggregate Component Unit Tests">
-            <directory>Tests/Unit/abstractions/aggregate</directory>
+        <testsuite name="Darling Cms Redesign | Abstract Unit Tests">
+            <directory>Tests/Unit/abstractions</directory>
         </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Abstract Database Component Unit Tests">
-            <directory>Tests/Unit/abstractions/database</directory>
-        </testsuite>
-
 
     </testsuites>
 
