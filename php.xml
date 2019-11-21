@@ -11,8 +11,8 @@
 
     <testsuites>
 
-        <testsuite name="Darling Cms Redesign | Abstract Unit Tests">
-            <directory>Tests/Unit/abstractions</directory>
+        <testsuite name="Darling Cms Redesign | Test Utilitiy Tests">
+            <directory>Tests/Unit/TestUtilityTests</directory>
         </testsuite>
 
     </testsuites>
