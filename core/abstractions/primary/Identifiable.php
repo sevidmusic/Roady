@@ -2,7 +2,9 @@
 
 namespace DarlingCms\abstractions\primary;
 
-abstract class Identifiable {
+use DarlingCms\interfaces\primary\Identifiable as IdentifiableInterface;
+
+abstract class Identifiable implements IdentifiableInterface  {
 
     private $name;
 
