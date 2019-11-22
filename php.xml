@@ -15,6 +15,10 @@
             <directory>Tests/Unit/TestUtilityTests</directory>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | Abstract Primary Tests">
+            <directory>Tests/Unit/abstractions/primary</directory>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>
