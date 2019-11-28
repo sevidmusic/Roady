@@ -12,8 +12,7 @@ class IdentifiableTest extends TestCase {
    protected $identifiable;
 
     public function setUp():void {
-        $constructorArguments = ['MockName'];
-        $this->identifiable = $this->getMockForAbstractClass('\DarlingCms\classes\primary\Identifiable', $constructorArguments);
+        $this->identifiable = new \DarlingCms\classes\primary\Identifiable('MockName');
     }
 
 }
