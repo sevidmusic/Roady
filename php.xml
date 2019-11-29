@@ -19,6 +19,11 @@
             <directory>Tests/Unit/abstractions/primary</directory>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | Abstract Utility Tests">
+            <directory>Tests/Unit/abstractions/utility</directory>
+        </testsuite>
+
+
         <testsuite name="Darling Cms Redesign | Class  Primary Tests">
             <directory>Tests/Unit/classes/primary</directory>
         </testsuite>
