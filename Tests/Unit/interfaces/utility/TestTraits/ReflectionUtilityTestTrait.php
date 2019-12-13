@@ -50,12 +50,12 @@ trait ReflectionUtilityTestTrait {
 
     public function testGetClassInstanceReturnsInstanceOfSpecifiedClass() {
         $this->assertEquals(
-            '\\' . get_class($this->reflectionUtility->getClassInstance($this->classToReflect)),
-            $this->classToReflect
+            $this->classToReflect,
+            '\\' . get_class($this->reflectionUtility->getClassInstance($this->classToReflect))
         );
         $this->assertEquals(
-            get_class($this->reflectionUtility->getClassInstance($this->classToReflect)),
-            get_class($this->getClassInstance($this->classToReflect))
+            get_class($this->getClassInstance($this->classToReflect)),
+            get_class($this->reflectionUtility->getClassInstance($this->classToReflect))
         );
     }
 
@@ -70,11 +70,19 @@ trait ReflectionUtilityTestTrait {
             array_push($generatedTypes, $argumentType);
         }
         $this->arrayTestUtility->arraysAreEqual(
-            $generatedTypes,
-            $this->getClassMethodParameterTypes($this->classToReflect, '__construct')
+            $this->getClassMethodParameterTypes($this->classToReflect, '__construct'),
+            $generatedTypes
        );
     }
 
+    public function testGetClassMethodParameterNamesReturnsArrayWhoseValuesAreSpecifiedClassMethodsParameterNames() {
+        $this->arrayTestUtility->arraysAreEqual(
+            $this->getClassMethodParameterNames($this->classToReflect, '__construct'),
+            $this->reflectionUtility->getClassMethodParameterNames($this->classToReflect, '__construct')
+        );
+    }
+
+    // testGetClassMethodParameterTypesReturns...
     private function getClassPropertyNames($class) {
         $propertyNames = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
