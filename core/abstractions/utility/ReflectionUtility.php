@@ -80,7 +80,7 @@ abstract class ReflectionUtility implements ReflectionUtilityInterface  {
         return $parameterNames;
     }
 
-    private function getClassMethodParameterTypes($class, string $method): array {
+    public function getClassMethodParameterTypes($class, string $method): array {
         $parameterTypes = array();
         foreach($this->getClassMethodReflection($class, $method)->getParameters() as $reflectionParameter) {
             array_push($parameterTypes, $this->getParameterType($reflectionParameter));

@@ -82,7 +82,13 @@ trait ReflectionUtilityTestTrait {
         );
     }
 
-    // testGetClassMethodParameterTypesReturns...
+    public function testGetClassMethodParameterTypesReturnsArrayWhoseValuesAreSpecifiedClassMethodsExpectedParameterTypes() {
+        $this->arrayTestUtility->arraysAreEqual(
+            $this->getClassMethodParameterTypes($this->classToReflect, '__construct'),
+            $this->reflectionUtility->getClassMethodParameterTypes($this->classToReflect, '__construct')
+        );
+    }
+
     private function getClassPropertyNames($class) {
         $propertyNames = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
