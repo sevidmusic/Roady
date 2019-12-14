@@ -100,7 +100,7 @@ trait ReflectionUtilityTestTrait {
         );
     }
 
-    private function getClassPropertyNames($class) {
+    public function getClassPropertyNames($class): array {
         $propertyNames = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
             array_push($propertyNames, $reflectionProperty->getName());
@@ -108,7 +108,7 @@ trait ReflectionUtilityTestTrait {
         return array_unique($propertyNames);
     }
 
-    private function getClassPropertyTypes($class):array {
+    public function getClassPropertyTypes($class):array {
         $propertyTypes = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
             $reflectionProperty->setAccessible(true);
@@ -119,7 +119,7 @@ trait ReflectionUtilityTestTrait {
         return $propertyTypes;
     }
 
-    private function getClassPropertyValues($class):array {
+    public function getClassPropertyValues($class):array {
        $propertyValues = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
             $reflectionProperty->setAccessible(true);
@@ -132,7 +132,7 @@ trait ReflectionUtilityTestTrait {
         return $propertyValues;
     }
 
-    private function getClassInstance($class, array $constructorArguments = array()) {
+    public function getClassInstance($class, array $constructorArguments = array()) {
        if($this->classParameterIsValidClassNameOrClassInstance($class, 'getClassInstance()') === false) {
            return (object) [];
        }
@@ -144,7 +144,7 @@ trait ReflectionUtilityTestTrait {
        return $reflection->newInstanceArgs($constructorArguments);
     }
 
-    private function getClassMethodParameterNames($class, string $method): array {
+    public function getClassMethodParameterNames($class, string $method): array {
         $parameterNames = array();
         $methodReflection = $this->getClassMethodReflection($class, $method);
         if(is_null($methodReflection) === true) {
@@ -156,7 +156,7 @@ trait ReflectionUtilityTestTrait {
         return $parameterNames;
     }
 
-    private function getClassMethodParameterTypes($class, string $method): array {
+    public function getClassMethodParameterTypes($class, string $method): array {
         $parameterTypes = array();
         $methodReflection = $this->getClassMethodReflection($class, $method);
         if(is_null($methodReflection) === true) {
@@ -168,7 +168,7 @@ trait ReflectionUtilityTestTrait {
         return $parameterTypes;
     }
 
-    private function generateMockClassMethodArguments($class, string $method) : array {
+    public function generateMockClassMethodArguments($class, string $method) : array {
         $defaults = array();
         foreach($this->getClassMethodParameterTypes($class, $method) as $type) {
             if($type === 'boolean') {array_push($defaults, false); continue;}

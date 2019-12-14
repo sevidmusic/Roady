@@ -10,7 +10,7 @@ use \ReflectionParameter;
 use \Exception;
 
 abstract class ReflectionUtility implements ReflectionUtilityInterface  {
-    public function getClassPropertyNames($class) {
+    public function getClassPropertyNames($class): array {
         $propertyNames = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
             array_push($propertyNames, $reflectionProperty->getName());
