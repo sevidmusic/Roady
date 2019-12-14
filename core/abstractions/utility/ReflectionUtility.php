@@ -7,9 +7,9 @@ use \ReflectionClass;
 use \ReflectionProperty;
 use \ReflectionMethod;
 use \ReflectionParameter;
+use \Exception;
 
 abstract class ReflectionUtility implements ReflectionUtilityInterface  {
-
     public function getClassPropertyNames($class) {
         $propertyNames = array();
         foreach($this->getClassPropertyReflections($class) as $reflectionProperty) {
@@ -54,6 +54,30 @@ abstract class ReflectionUtility implements ReflectionUtilityInterface  {
        return $reflection->newInstanceArgs($constructorArguments);
     }
 
+    public function getClassMethodParameterNames($class, string $method): array {
+        $parameterNames = array();
+        $methodReflection = $this->getClassMethodReflection($class, $method);
+        if(is_null($methodReflection) === true) {
+            return array();
+        }
+        foreach($methodReflection->getParameters() as $reflectionParameter) {
+            array_push($parameterNames, $reflectionParameter->name);
+        }
+        return $parameterNames;
+    }
+
+    public function getClassMethodParameterTypes($class, string $method): array {
+        $parameterTypes = array();
+        $methodReflection = $this->getClassMethodReflection($class, $method);
+        if(is_null($methodReflection) === true) {
+            return array();
+        }
+        foreach($methodReflection->getParameters() as $reflectionParameter) {
+            array_push($parameterTypes, $this->getParameterType($reflectionParameter));
+        }
+        return $parameterTypes;
+    }
+
     public function generateMockClassMethodArguments($class, string $method) : array {
         $defaults = array();
         foreach($this->getClassMethodParameterTypes($class, $method) as $type) {
@@ -72,21 +96,6 @@ abstract class ReflectionUtility implements ReflectionUtilityInterface  {
         return $defaults;
     }
 
-    public function getClassMethodParameterNames($class, string $method): array {
-        $parameterNames = array();
-        foreach($this->getClassMethodReflection($class, $method)->getParameters() as $reflectionParameter) {
-            array_push($parameterNames, $reflectionParameter->name);
-        }
-        return $parameterNames;
-    }
-
-    public function getClassMethodParameterTypes($class, string $method): array {
-        $parameterTypes = array();
-        foreach($this->getClassMethodReflection($class, $method)->getParameters() as $reflectionParameter) {
-            array_push($parameterTypes, $this->getParameterType($reflectionParameter));
-        }
-        return $parameterTypes;
-    }
 
     private function classParameterIsValidClassNameOrClassInstance($class, string $caller):bool {
          if(is_string($class) === false && is_object($class) === false) {
@@ -138,14 +147,21 @@ abstract class ReflectionUtility implements ReflectionUtilityInterface  {
             return null;
         }
         if(method_exists($class, $methodName) === false) {
-            throw new Exception('ReflectionUtiltiy Error: The specified method ' .
-                                 $methodName . ' is not defined.');
+           // throw new Exception('ReflectionUtiltiy Error: The specified method ' .
+           //                      $methodName . ' is not defined.');
             return null;
         }
         return (gettype($class) === 'string'
             ? new ReflectionMethod($class, $methodName)
             : new ReflectionMethod(get_class($class), $methodName)
         );
+    }
+
+    private function getFullyQualifiedClassname($class) {
+        if($this->classParameterIsValidClassNameOrClassInstance($class, 'getFullyQualifiedClassname') === false) {
+            return '\\' . get_class((object) []);
+        }
+        return (is_string($class) ? $class : '\\' . get_class($class));
     }
 
 }

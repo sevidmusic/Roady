@@ -14,16 +14,27 @@ trait ReflectionUtilityTestTrait {
     protected $arrayTestUtility;
 
 
-    //private $classToReflect = '\UnitTests\interfaces\utility\TestTraits\Baz';
-    //private $classToReflect = '\UnitTests\interfaces\utility\TestTraits\Bazzer';
-     private $classToReflect = '\UnitTests\interfaces\utility\TestTraits\Foo';
-    //private $classToReflect = '\UnitTests\interfaces\utility\TestTraits\Bar';
+    private $testClasses = array(
+        '\UnitTests\interfaces\utility\TestTraits\Baz',
+        '\UnitTests\interfaces\utility\TestTraits\Bazzer',
+        '\UnitTests\interfaces\utility\TestTraits\Foo',
+        '\UnitTests\interfaces\utility\TestTraits\Bar'
+    );
 
+    private $classToReflect;
     /**
      * @before
      */
     public function initializeArraryTestUtility() {
+        $testInstances = array(
+            new Baz(),
+            new Bazzer(),
+            new Foo(true, 234987, 420.234, 'Some string', array([],[1,2,3], true), null, new Bar('Bar string')),
+            new Bar('Some bar string')
+        );
+        $this->testClasses = array_merge($this->testClasses, $testInstances);
         $this->arrayTestUtility = new ArrayTestUtility();
+        $this->classToReflect = $this->testClasses[array_rand($this->testClasses)];
     }
 
     public function testGetClassPropertyNamesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyNames() {
@@ -50,7 +61,7 @@ trait ReflectionUtilityTestTrait {
 
     public function testGetClassInstanceReturnsInstanceOfSpecifiedClass() {
         $this->assertEquals(
-            $this->classToReflect,
+            $this->getFullyQualifiedClassname($this->classToReflect),
             '\\' . get_class($this->reflectionUtility->getClassInstance($this->classToReflect))
         );
         $this->assertEquals(
@@ -133,6 +144,30 @@ trait ReflectionUtilityTestTrait {
        return $reflection->newInstanceArgs($constructorArguments);
     }
 
+    private function getClassMethodParameterNames($class, string $method): array {
+        $parameterNames = array();
+        $methodReflection = $this->getClassMethodReflection($class, $method);
+        if(is_null($methodReflection) === true) {
+            return array();
+        }
+        foreach($methodReflection->getParameters() as $reflectionParameter) {
+            array_push($parameterNames, $reflectionParameter->name);
+        }
+        return $parameterNames;
+    }
+
+    private function getClassMethodParameterTypes($class, string $method): array {
+        $parameterTypes = array();
+        $methodReflection = $this->getClassMethodReflection($class, $method);
+        if(is_null($methodReflection) === true) {
+            return array();
+        }
+        foreach($methodReflection->getParameters() as $reflectionParameter) {
+            array_push($parameterTypes, $this->getParameterType($reflectionParameter));
+        }
+        return $parameterTypes;
+    }
+
     private function generateMockClassMethodArguments($class, string $method) : array {
         $defaults = array();
         foreach($this->getClassMethodParameterTypes($class, $method) as $type) {
@@ -151,21 +186,6 @@ trait ReflectionUtilityTestTrait {
         return $defaults;
     }
 
-    private function getClassMethodParameterNames($class, string $method): array {
-        $parameterNames = array();
-        foreach($this->getClassMethodReflection($class, $method)->getParameters() as $reflectionParameter) {
-            array_push($parameterNames, $reflectionParameter->name);
-        }
-        return $parameterNames;
-    }
-
-    private function getClassMethodParameterTypes($class, string $method): array {
-        $parameterTypes = array();
-        foreach($this->getClassMethodReflection($class, $method)->getParameters() as $reflectionParameter) {
-            array_push($parameterTypes, $this->getParameterType($reflectionParameter));
-        }
-        return $parameterTypes;
-    }
 
     private function classParameterIsValidClassNameOrClassInstance($class, string $caller):bool {
          if(is_string($class) === false && is_object($class) === false) {
@@ -217,8 +237,8 @@ trait ReflectionUtilityTestTrait {
             return null;
         }
         if(method_exists($class, $methodName) === false) {
-            throw new Exception('ReflectionUtiltiy Error: The specified method ' .
-                                 $methodName . ' is not defined.');
+           // throw new Exception('ReflectionUtiltiy Error: The specified method ' .
+           //                      $methodName . ' is not defined.');
             return null;
         }
         return (gettype($class) === 'string'
@@ -227,7 +247,20 @@ trait ReflectionUtilityTestTrait {
         );
     }
 
+    private function getFullyQualifiedClassname($class) {
+        if($this->classParameterIsValidClassNameOrClassInstance($class, 'getFullyQualifiedClassname') === false) {
+            return '\\' . get_class((object) []);
+        }
+        return (is_string($class) ? $class : '\\' . get_class($class));
+    }
+
+
 }
+
+/**
+ * The following classes are used by the ReflectionUtilityTestTrait to test the \DarlingCms\abstractions\utility\ReflectionUtility
+ * class's methods.
+ */
 
 class Baz {
     public $fooBarBaz = array();
