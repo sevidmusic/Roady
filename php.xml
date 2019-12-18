@@ -28,6 +28,11 @@
             <directory>Tests/Unit/classes/primary</directory>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | Class  Utility  Tests">
+            <directory>Tests/Unit/classes/utility</directory>
+        </testsuite>
+
+
 
     </testsuites>
 
