@@ -12,8 +12,8 @@ class ExportableTest extends TestCase {
    protected $exportable;
 
     public function setUp():void {
-        $constructorArguments = ['MockName'];
-        // $this->exportable = $this->getMockForAbstractClass('\DarlingCms\abstractions\primary\Exportable', $constructorArguments);
+        $constructorArguments = [];
+        $this->exportable = $this->getMockForAbstractClass('\DarlingCms\abstractions\primary\Exportable', $constructorArguments);
     }
 
 }

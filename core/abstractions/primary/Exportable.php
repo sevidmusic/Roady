@@ -6,7 +6,8 @@ use DarlingCms\interfaces\primary\Exportable as ExportableInterface;
 
 abstract class Exportable implements ExportableInterface  {
     public function export():array {
-        return array();
+        $r = new \DarlingCms\classes\utility\ReflectionUtility();
+        return $r->getClassPropertyValues($this);
     }
 
     public function import(array $export):bool {
