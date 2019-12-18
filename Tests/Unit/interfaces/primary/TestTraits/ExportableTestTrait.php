@@ -28,4 +28,18 @@ trait ExportableTestTrait {
         );
     }
 
+    public function testPropertiesMatchImportedPropertiesPostImport() {
+        $preImport = $this->reflectionUtility->getClassPropertyValues(
+            $this->exportable
+        );
+        $this->exportable->import($this->exportable->export());
+        $postImport = $this->reflectionUtility->getClassPropertyValues(
+            $this->exportable
+        );
+        $this->arrayTestUtility->arraysAreEqual(
+            $preImport,
+            $postImport
+        );
+    }
+
 }
