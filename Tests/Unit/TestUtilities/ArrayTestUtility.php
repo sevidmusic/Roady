@@ -46,24 +46,23 @@ class ArrayTestUtility extends TestCase {
         $this->assertEquals($array1, $array2);
     }
 
-    // @todo Define arraysAreEqual(array ...$array) method to test equality.
     private function getArrayOfArrayElementTypes(array $array):array {
         $results = array();
         foreach($array as $k => $v) {
             $results[] = gettype($v);
             if(is_array($v)) {
-                $results = array_merge($results, getArrayOfArrayElementTypes($v));
+                $results = array_merge($results, $this->getArrayOfArrayElementTypes($v));
             }
         }
         return $results;
     }
 
-    private function flattenExpectedElementTypesArray(array $expectedElmentTypes):array {
+    private function flattenExpectedElementTypesArray(array $expectedElementTypes):array {
         $results = array();
-        foreach($expectedElmentTypes as $k => $v) {
+        foreach($expectedElementTypes as $k => $v) {
             if(is_array($v)) {
                 $results[] = gettype($v);
-                $results = array_merge($results, flattenExpectedElementTypesArray($v));
+                $results = array_merge($results, $this->flattenExpectedElementTypesArray($v));
                 continue;
             }
             $results[] = strval($v);
