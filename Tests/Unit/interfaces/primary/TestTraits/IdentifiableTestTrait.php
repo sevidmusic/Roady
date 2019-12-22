@@ -2,32 +2,53 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
+use DarlingCms\abstractions\primary\Identifiable as AbstractIdentifiable;
+use DarlingCms\classes\primary\Identifiable as Identifiable;
 use UnitTests\TestUtilities\StringTestUtility;
 
-trait IdentifiableTestTrait {
+trait IdentifiableTestTrait
+{
 
+    /**
+     * @var StringTestUtility
+     */
     protected static $stringTestUtility;
 
     /**
-     * @beforeClass
+     * @var AbstractIdentifiable|Identifiable
      */
-    public static function initializeStringTestUtility() {
+    protected $identifiable;
+
+    /**
+     * @beforeClass
+     * @noinspection PhpUnused
+     */
+    public static function initializeStringTestUtility(): void
+    {
         self::$stringTestUtility = new StringTestUtility();
     }
 
-    public function testGetNameReturnsNonEmptyString() {
+    /** @noinspection PhpUnused */
+    public function testGetNameReturnsNonEmptyString(): void
+    {
         self::$stringTestUtility->stringIsNotEmpty($this->identifiable->getName());
     }
 
-    public function testGetNameReturnsAlphaNumericString() {
+    /** @noinspection PhpUnused */
+    public function testGetNameReturnsAlphaNumericString(): void
+    {
         self::$stringTestUtility->stringIsAlphaNumeric($this->identifiable->getName());
     }
 
-    public function testGetUniqueIdReturnsNonEmptyString() {
+    /** @noinspection PhpUnused */
+    public function testGetUniqueIdReturnsNonEmptyString(): void
+    {
         self::$stringTestUtility->stringIsNotEmpty($this->identifiable->getUniqueId());
     }
 
-    public function testGetUniqueIdReturnsAlphaNumericString() {
+    /** @noinspection PhpUnused */
+    public function testGetUniqueIdReturnsAlphaNumericString(): void
+    {
         self::$stringTestUtility->stringIsAlphaNumeric($this->identifiable->getUniqueId());
     }
 
