@@ -2,24 +2,41 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
+use DarlingCms\abstractions\primary\Storable as AbstractStorable;
+use DarlingCms\abstractions\primary\Storable as Storable;
 use UnitTests\TestUtilities\StringTestUtility;
 
-trait StorableTestTrait {
+trait StorableTestTrait
+{
+    /**
+     * @var StringTestUtility
+     */
     protected static $stringTestUtility;
 
     /**
-     * @beforeClass
+     * @var AbstractStorable|Storable
      */
-    public static function initializeStringTestUtility() {
+    protected $storable;
+
+    /**
+     * @beforeClass
+     * @noinspection PhpUnused
+     */
+    public static function initializeStringTestUtility(): void
+    {
         self::$stringTestUtility = new StringTestUtility();
     }
 
-    public function testGetLocationReturnsNonEmptyAlphaNumericString() {
+    /** @noinspection PhpUnused */
+    public function testGetLocationReturnsNonEmptyAlphaNumericString(): void
+    {
         self::$stringTestUtility->stringIsNotEmpty($this->storable->getLocation());
         self::$stringTestUtility->stringIsAlphaNumeric($this->storable->getLocation());
     }
 
-    public function testGetContainerReturnsNonEmptyAlphaNumericString() {
+    /** @noinspection PhpUnused */
+    public function testGetContainerReturnsNonEmptyAlphaNumericString(): void
+    {
         self::$stringTestUtility->stringIsNotEmpty($this->storable->getContainer());
         self::$stringTestUtility->stringIsAlphaNumeric($this->storable->getContainer());
     }
