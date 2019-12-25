@@ -4,29 +4,17 @@ namespace UnitTests\interfaces\primary\TestTraits;
 
 use DarlingCms\abstractions\primary\Identifiable as AbstractIdentifiable;
 use DarlingCms\classes\primary\Identifiable as Identifiable;
-use UnitTests\TestUtilities\StringTestUtility;
+use UnitTests\TestTraits\StringTester;
 
 trait IdentifiableTestTrait
 {
 
-    /**
-     * @var StringTestUtility
-     */
-    protected static $stringTestUtility;
+    use StringTester;
 
     /**
      * @var AbstractIdentifiable|Identifiable
      */
     protected $identifiable;
-
-    /**
-     * @beforeClass
-     * @noinspection PhpUnused
-     */
-    public static function initializeStringTestUtility(): void
-    {
-        self::$stringTestUtility = new StringTestUtility();
-    }
 
     /** @noinspection PhpUnused */
     public function testGetNameReturnsNonEmptyString(): void
