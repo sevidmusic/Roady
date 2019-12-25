@@ -8,59 +8,71 @@ use PHPUnit\Framework\TestCase;
  * Class ArrayTestUtility. Defines methods that can be used to perform
  * common assertions on arrays, such as asserting that a array is not empty.
  */
-class ArrayTestUtility extends TestCase {
+class ArrayTestUtility extends TestCase
+{
 
-    public function arrayIsNotEmpty(array $array) {
+    public function arrayIsNotEmpty(array $array): void
+    {
         $this->assertNotEmpty($array);
     }
 
-    public function arrayIsEmpty(array $array) {
+    public function arrayIsEmpty(array $array): void
+    {
         $this->assertEmpty($array);
     }
 
-    public function arrayHasExpectedNumberOfElements(array $array, int $expectedNumberOfElements) {
+    public function arrayHasExpectedNumberOfElements(array $array, int $expectedNumberOfElements): void
+    {
         $this->assertTrue(count($array) === $expectedNumberOfElements);
     }
 
-    public function arrayValuesAreExpectedValues(array $array, array $expectedValues) {
+    public function arrayValuesAreExpectedValues(array $array, array $expectedValues): void
+    {
         $this->assertEquals(count(array_diff($array, $expectedValues)), 0);
     }
 
-    public function arrayKeysAreExpectedKeys(array $array, array $expectedKeys) {
+    public function arrayKeysAreExpectedKeys(array $array, array $expectedKeys): void
+    {
         $this->arrayValuesAreExpectedValues(array_keys($array), $expectedKeys);
     }
 
-    public function arrayValuesAreExpectedTypes(array $array, array $expectedTypes) {
+    public function arrayValuesAreExpectedTypes(array $array, array $expectedTypes): void
+    {
         $this->arrayValuesAreExpectedValues($this->getArrayOfArrayElementTypes($array), $this->flattenExpectedElementTypesArray($expectedTypes));
     }
 
-    public function arrayKeysAreCorrectlyOrdered(array $array, array $correctOrder) {
+    public function arrayKeysAreCorrectlyOrdered(array $array, array $correctOrder): void
+    {
         $this->arrayKeysAreExpectedKeys($array, $correctOrder);
     }
 
-    public function arrayValuesAreCorrectlyOrdered(array $array, array $correctOrder) {
+    public function arrayValuesAreCorrectlyOrdered(array $array, array $correctOrder): void
+    {
         $this->arrayValuesAreExpectedValues($array, $correctOrder);
     }
 
-    public function arraysAreEqual(array $array1, array $array2) {
+    public function arraysAreEqual(array $array1, array $array2): void
+    {
         $this->assertEquals($array1, $array2);
     }
 
-    private function getArrayOfArrayElementTypes(array $array):array {
+    private function getArrayOfArrayElementTypes(array $array): array
+    {
         $results = array();
-        foreach($array as $k => $v) {
+        foreach ($array as $k => $v) {
             $results[] = gettype($v);
-            if(is_array($v)) {
+            if (is_array($v)) {
                 $results = array_merge($results, $this->getArrayOfArrayElementTypes($v));
             }
         }
         return $results;
     }
 
-    private function flattenExpectedElementTypesArray(array $expectedElementTypes):array {
+    private function flattenExpectedElementTypesArray(array $expectedElementTypes): array
+    {
         $results = array();
-        foreach($expectedElementTypes as $k => $v) {
-            if(is_array($v)) {
+        foreach ($expectedElementTypes as $k => $v) {
+            if (is_array($v)) {
                 $results[] = gettype($v);
                 $results = array_merge($results, $this->flattenExpectedElementTypesArray($v));
                 continue;
