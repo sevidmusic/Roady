@@ -2,21 +2,29 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use UnitTests\TestUtilities\StringTestUtility;
+use DarlingCms\interfaces\primary\Switchable;
 
-trait SwitchableTestTrait {
+trait SwitchableTestTrait
+{
+    /**
+     * @var Switchable
+     */
+    protected $switchable;
 
-    public function testTestIsRunning() {
-        $this->assertTrue(true);
-    }
-
-    public function testCanSwitchState() {
+    /** @noinspection PhpUnused */
+    public function testCanSwitchState()
+    {
         $initialState = $this->switchable->getState();
         $this->switchable->switchState();
         return $this->assertNotEquals(
             $initialState,
             $this->switchable->getState()
         );
+    }
+
+    public function setSwitchable(Switchable $switchable): void
+    {
+        $this->switchable = $switchable;
     }
 
 }
