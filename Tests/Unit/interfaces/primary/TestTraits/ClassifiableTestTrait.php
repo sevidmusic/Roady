@@ -5,28 +5,16 @@
 namespace UnitTests\interfaces\primary\TestTraits;
 
 use DarlingCms\abstractions\primary\Classifiable;
-use UnitTests\TestUtilities\StringTestUtility;
+use UnitTests\TestTraits\StringTester;
 
 trait ClassifiableTestTrait
 {
-
-    /**
-     * @var StringTestUtility
-     */
-    protected static $stringTestUtility;
+    use StringTester;
 
     /**
      * @var Classifiable
      */
     protected $classifiable;
-
-    /**
-     * @beforeClass
-     */
-    public static function initializeStringTestUtility()
-    {
-        self::$stringTestUtility = new StringTestUtility();
-    }
 
     public function testGetTypeReturnsNonEmptyString()
     {
