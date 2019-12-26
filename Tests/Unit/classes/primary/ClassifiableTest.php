@@ -10,7 +10,7 @@ class ClassifiableTest extends AbstractClassifiableTest
 
     public function setUp(): void
     {
-        $this->classifiable = new Classifiable();
+        $this->setClassifiable(new Classifiable());
     }
 
 }
