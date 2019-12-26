@@ -4,7 +4,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\abstractions\primary\Classifiable;
+use DarlingCms\interfaces\primary\Classifiable;
 use UnitTests\TestTraits\StringTester;
 
 trait ClassifiableTestTrait
@@ -14,10 +14,22 @@ trait ClassifiableTestTrait
     /**
      * @var Classifiable
      */
-    protected $classifiable;
+    private $classifiable;
+
+
+    public function getClassifiable(): Classifiable
+    {
+        return $this->classifiable;
+    }
+
+    public function setClassifiable(Classifiable $classifiable): void
+    {
+        $this->classifiable = $classifiable;
+    }
 
     public function testGetTypeReturnsNonEmptyString()
     {
-        self::$stringTestUtility->stringIsNotEmpty($this->classifiable->getType());
+        $this->getStringTestUtility()->stringIsNotEmpty($this->getClassifiable()->getType());
     }
+
 }
