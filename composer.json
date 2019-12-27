@@ -11,9 +11,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-      "ext-json": "*",
-      "ext-pdo": "*",
-      "ext-bcmath": "*"
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-bcmath": "*",
+        "ext-mbstring": "*"
     },
     "autoload": {
         "psr-4": {

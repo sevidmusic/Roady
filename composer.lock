@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "5f31bb26d20e89104d9401cb10e14c8f",
-    "packages": [],
-    "packages-dev": [
-        {
-            "name": "doctrine/instantiator",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "ae466f726242e637cebdd526a7d991b9433bacf1"
-            },
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "fd046ac1664589a6a1f534a5f42909c1",
+  "packages": [],
+  "packages-dev": [
+    {
+      "name": "doctrine/instantiator",
+      "version": "1.3.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/doctrine/instantiator.git",
+        "reference": "ae466f726242e637cebdd526a7d991b9433bacf1"
+      },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/instantiator/zipball/ae466f726242e637cebdd526a7d991b9433bacf1",
@@ -63,20 +63,20 @@
             ],
             "time": "2019-10-21T16:45:58+00:00"
         },
-        {
-            "name": "myclabs/deep-copy",
-            "version": "1.9.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/007c053ae6f31bba39dfa19a7726f56e9763bbea",
-                "reference": "007c053ae6f31bba39dfa19a7726f56e9763bbea",
-                "shasum": ""
-            },
+    {
+      "name": "myclabs/deep-copy",
+      "version": "1.9.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/myclabs/DeepCopy.git",
+        "reference": "579bb7356d91f9456ccd505f24ca8b667966a0a7"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/579bb7356d91f9456ccd505f24ca8b667966a0a7",
+        "reference": "579bb7356d91f9456ccd505f24ca8b667966a0a7",
+        "shasum": ""
+      },
             "require": {
                 "php": "^7.1"
             },
@@ -109,7 +109,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2019-08-09T12:45:53+00:00"
+      "time": "2019-12-15T19:12:40+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -265,20 +265,20 @@
             ],
             "time": "2018-08-07T13:53:10+00:00"
         },
-        {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "4.3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "b83ff7cfcfee7827e1e78b637a5904fe6a96698e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/b83ff7cfcfee7827e1e78b637a5904fe6a96698e",
-                "reference": "b83ff7cfcfee7827e1e78b637a5904fe6a96698e",
-                "shasum": ""
-            },
+    {
+      "name": "phpdocumentor/reflection-docblock",
+      "version": "4.3.3",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+        "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
+        "reference": "2ecaa9fef01634c83bfa8dc1fe35fb5cef223a62",
+        "shasum": ""
+      },
             "require": {
                 "php": "^7.0",
                 "phpdocumentor/reflection-common": "^1.0.0 || ^2.0.0",
@@ -314,7 +314,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2019-09-12T14:27:41+00:00"
+      "time": "2019-12-20T13:40:23+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -363,35 +363,35 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "time": "2019-08-22T18:11:29+00:00"
         },
-        {
-            "name": "phpspec/prophecy",
-            "version": "1.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/f6811d96d97bdf400077a0cc100ae56aa32b9203",
-                "reference": "f6811d96d97bdf400077a0cc100ae56aa32b9203",
-                "shasum": ""
-            },
+    {
+      "name": "phpspec/prophecy",
+      "version": "1.10.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/phpspec/prophecy.git",
+        "reference": "cbe1df668b3fe136bcc909126a0f529a78d4cbbc"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/phpspec/prophecy/zipball/cbe1df668b3fe136bcc909126a0f529a78d4cbbc",
+        "reference": "cbe1df668b3fe136bcc909126a0f529a78d4cbbc",
+        "shasum": ""
+      },
             "require": {
-                "doctrine/instantiator": "^1.0.2",
-                "php": "^5.3|^7.0",
-                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
-                "sebastian/comparator": "^1.1|^2.0|^3.0",
-                "sebastian/recursion-context": "^1.0|^2.0|^3.0"
+              "doctrine/instantiator": "^1.0.2",
+              "php": "^5.3|^7.0",
+              "phpdocumentor/reflection-docblock": "^2.0|^3.0.2|^4.0|^5.0",
+              "sebastian/comparator": "^1.2.3|^2.0|^3.0",
+              "sebastian/recursion-context": "^1.0|^2.0|^3.0"
             },
             "require-dev": {
-                "phpspec/phpspec": "^2.5|^3.2",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
+              "phpspec/phpspec": "^2.5 || ^3.2",
+              "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5 || ^7.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8.x-dev"
+                  "dev-master": "1.10.x-dev"
                 }
             },
             "autoload": {
@@ -424,7 +424,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2019-10-03T11:07:50+00:00"
+      "time": "2019-12-22T21:05:45+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -678,20 +678,20 @@
             ],
             "time": "2019-09-17T06:23:10+00:00"
         },
-        {
-            "name": "phpunit/phpunit",
-            "version": "8.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3ee1c1fd6fc264480c25b6fb8285edefe1702dab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3ee1c1fd6fc264480c25b6fb8285edefe1702dab",
-                "reference": "3ee1c1fd6fc264480c25b6fb8285edefe1702dab",
-                "shasum": ""
-            },
+    {
+      "name": "phpunit/phpunit",
+      "version": "8.5.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/sebastianbergmann/phpunit.git",
+        "reference": "7870c78da3c5e4883eaef36ae47853ebb3cb86f2"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7870c78da3c5e4883eaef36ae47853ebb3cb86f2",
+        "reference": "7870c78da3c5e4883eaef36ae47853ebb3cb86f2",
+        "shasum": ""
+      },
             "require": {
                 "doctrine/instantiator": "^1.2.0",
                 "ext-dom": "*",
@@ -759,7 +759,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-12-06T05:41:38+00:00"
+      "time": "2019-12-25T14:49:39+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1529,9 +1529,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-json": "*",
-        "ext-pdo": "*",
-        "ext-bcmath": "*"
+      "ext-json": "*",
+      "ext-pdo": "*",
+      "ext-bcmath": "*",
+      "ext-mbstring": "*"
     },
     "platform-dev": []
 }
