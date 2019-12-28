@@ -2,54 +2,51 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\abstractions\primary\Exportable;
-use DarlingCms\abstractions\primary\Exportable as AbstractExportable;
-use DarlingCms\classes\utility\ReflectionUtility;
-use UnitTests\TestUtilities\ArrayTestUtility;
+use DarlingCms\interfaces\primary\Exportable;
+use UnitTests\TestTraits\ArrayTester;
+use UnitTests\TestTraits\ReflectionUtility;
 
 trait ExportableTestTrait
 {
 
-    /**
-     * @var ReflectionUtility
-     */
-    protected static $reflectionUtility;
-    /**
-     * @var ArrayTestUtility
-     */
-    protected static $arrayTestUtility;
+    use ArrayTester;
+    use ReflectionUtility;
 
     /**
-     * @var AbstractExportable|Exportable
+     * @var Exportable
      */
-    protected $exportable;
+    private $exportable;
 
-    /**
-     * @before
-     */
-    public function initializeUtilities()
+    public function setExportable(Exportable $exportable)
     {
-        self::$arrayTestUtility = new ArrayTestUtility();
-        self::$reflectionUtility = new ReflectionUtility();
+        $this->exportable = $exportable;
     }
 
+    public function getExportable(): Exportable
+    {
+        return $this->exportable;
+    }
+
+    /** @noinspection PhpUnused */
     public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
     {
-        self::$arrayTestUtility->arraysAreEqual(
-            self::$reflectionUtility->getClassPropertyValues($this->exportable),
-            $this->exportable->export()
+        $this->getArrayTestUtility()->arraysAreEqual(
+            $this->getReflectionUtility()->getClassPropertyValues($this->getExportable()),
+            $this->getExportable()->export()
         );
     }
 
-    public function testPropertiesMatchImportedPropertiesPostImport() {
-        $preImport = self::$reflectionUtility->getClassPropertyValues(
-            $this->exportable
+    /** @noinspection PhpUnused */
+    public function testPropertiesMatchImportedPropertiesPostImport()
+    {
+        $preImport = $this->getReflectionUtility()->getClassPropertyValues(
+            $this->getExportable()
         );
-        $this->exportable->import($this->exportable->export());
-        $postImport = self::$reflectionUtility->getClassPropertyValues(
-            $this->exportable
+        $this->getExportable()->import($this->getExportable()->export());
+        $postImport = $this->getReflectionUtility()->getClassPropertyValues(
+            $this->getExportable()
         );
-        self::$arrayTestUtility->arraysAreEqual(
+        $this->getArrayTestUtility()->arraysAreEqual(
             $preImport,
             $postImport
         );
