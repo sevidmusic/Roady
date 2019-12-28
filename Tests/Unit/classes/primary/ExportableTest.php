@@ -3,16 +3,16 @@
 namespace UnitTests\classes\primary;
 
 use DarlingCms\classes\primary\Exportable;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
 use UnitTests\interfaces\primary\TestTraits\ExportableTestTrait;
 
-class ExportableTest extends TestCase {
-   use ExportableTestTrait;
-   protected $exportable;
+class ExportableTest extends ClassifiableTest
+{
+    use ExportableTestTrait;
 
-    public function setUp():void {
-        $this->exportable = new \DarlingCms\classes\primary\Exportable('MockName');
+    public function setUp(): void
+    {
+        $this->setExportable(new Exportable());
+        $this->setClassifiable($this->getExportable());
     }
 
 }
