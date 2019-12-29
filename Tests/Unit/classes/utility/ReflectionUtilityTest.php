@@ -3,16 +3,14 @@
 namespace UnitTests\classes\utility;
 
 use DarlingCms\classes\utility\ReflectionUtility;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\MockObject\MockObject;
-use UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait;
+use DarlingCms\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use UnitTests\abstractions\utility\ReflectionUtilityTest as AbstractReflectionUtilityTest;
 
-class ReflectionUtilityTest extends TestCase {
-    use ReflectionUtilityTestTrait;
-   protected $reflectionUtility;
-
-    public function setUp():void {
-        $this->reflectionUtility = new \DarlingCms\classes\utility\ReflectionUtility();
+class ReflectionUtilityTest extends AbstractReflectionUtilityTest implements ReflectionUtilityInterface
+{
+    public function setUp(): void
+    {
+        $this->setReflectionUtility(new ReflectionUtility());
     }
 
 }
