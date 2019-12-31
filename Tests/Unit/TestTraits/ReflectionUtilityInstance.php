@@ -4,7 +4,7 @@ namespace UnitTests\TestTraits;
 
 use DarlingCms\classes\utility\ReflectionUtility as RealReflectionUtility;
 
-trait ReflectionUtility
+trait ReflectionUtilityInstance
 {
     /**
      * @var RealReflectionUtility

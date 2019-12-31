@@ -4,13 +4,13 @@ namespace UnitTests\interfaces\primary\TestTraits;
 
 use DarlingCms\interfaces\primary\Exportable;
 use UnitTests\TestTraits\ArrayTester;
-use UnitTests\TestTraits\ReflectionUtility;
+use UnitTests\TestTraits\ReflectionUtilityInstance;
 
 trait ExportableTestTrait
 {
 
     use ArrayTester;
-    use ReflectionUtility;
+    use ReflectionUtilityInstance;
 
     /**
      * @var Exportable
