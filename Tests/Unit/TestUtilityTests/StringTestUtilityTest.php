@@ -13,35 +13,43 @@ class StringTestUtilityTest extends TestCase
 
     private $stringTestUtility;
 
-    public function setup(): void
+    public function setUp(): void
     {
-        $this->stringTestUtility = new StringTestUtility();
+        $this->setStringTestUtilityInstance(new StringTestUtility());
     }
 
-    public function testCanTestStringIsNotEmpty()
+    private function setStringTestUtilityInstance(StringTestUtility $stringTestUtility): void
     {
-        $this->stringTestUtility->stringIsNotEmpty('Non Empty String');
+        $this->stringTestUtility = $stringTestUtility;
     }
 
-    public function testCanTestStringIsEmpty()
+    private function getStringTestUtility(): StringTestUtility
     {
-        $this->stringTestUtility->stringIsEmpty('');
+        return $this->stringTestUtility;
     }
 
-    public function testCanTestStringsMatch()
+    public function testCanTestStringIsNotEmpty(): void
     {
-        $this->stringTestUtility->stringsMatch('Foo', 'Foo');
+        $this->getStringTestUtility()->stringIsNotEmpty('Non Empty String');
     }
 
-    public function testCanTestStringLengthIsExpectedStringLength()
+    public function testCanTestStringIsEmpty(): void
     {
-        $this->stringTestUtility->stringLengthIsExpectedStringLength('Bar', 3);
+        $this->getStringTestUtility()->stringIsEmpty('');
     }
 
-    public function testCanTestStringIsAlphaNumeric()
+    public function testCanTestStringsMatch(): void
     {
-        /** @noinspection SpellCheckingInspection */
-        /** @noinspection SpellCheckingInspection */
-        $this->stringTestUtility->stringIsAlphaNumeric('abcdefghijklmnopqrstuvwxyz0123456789ABCD');
+        $this->getStringTestUtility()->stringsMatch('Foo', 'Foo');
+    }
+
+    public function testCanTestStringLengthIsExpectedStringLength(): void
+    {
+        $this->getStringTestUtility()->stringLengthIsExpectedStringLength('Bar', 3);
+    }
+
+    public function testCanTestStringIsAlphaNumeric(): void
+    {
+        $this->getStringTestUtility()->stringIsAlphaNumeric('abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
     }
 }
