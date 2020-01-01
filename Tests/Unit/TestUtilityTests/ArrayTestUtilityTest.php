@@ -16,51 +16,61 @@ class ArrayTestUtilityTest extends TestCase
 
     public function setUp(): void
     {
-        $this->arrayTestUtility = new ArrayTestUtility();
+        $this->setArrayTestUtilityInstance(new ArrayTestUtility());
     }
 
-    public function testCanTestArrayIsNotEmpty()
+    private function setArrayTestUtilityInstance(ArrayTestUtility $arrayTestUtility): void
     {
-        $this->arrayTestUtility->arrayIsNotEmpty([0, 1, 2]);
+        $this->arrayTestUtility = $arrayTestUtility;
     }
 
-    public function testCanTestArrayIsEmpty()
+    private function getArrayTestUtility(): ArrayTestUtility
     {
-        $this->arrayTestUtility->arrayIsEmpty([]);
+        return $this->arrayTestUtility;
     }
 
-    public function testCanTestArrayHasExpectedNumberOfElements()
+    public function testCanTestArrayIsNotEmpty(): void
     {
-        $this->arrayTestUtility->arrayHasExpectedNumberOfElements([1], 1);
+        $this->getArrayTestUtility()->arrayIsNotEmpty([0, 1, 2]);
     }
 
-    public function testCanTestArrayValuesAreExpectedValues()
+    public function testCanTestArrayIsEmpty(): void
     {
-        $this->arrayTestUtility->arrayValuesAreExpectedValues(['foo'], ['foo']);
+        $this->getArrayTestUtility()->arrayIsEmpty([]);
     }
 
-    public function testCanTestArrayKeysAreExpectedKeys()
+    public function testCanTestArrayHasExpectedNumberOfElements(): void
     {
-        $this->arrayTestUtility->arrayKeysAreExpectedKeys([1, 2], [0, 1]);
+        $this->getArrayTestUtility()->arrayHasExpectedNumberOfElements([1], 1);
     }
 
-    public function testCanTestArrayValuesAreExpectedTypes()
+    public function testCanTestArrayValuesAreExpectedValues(): void
     {
-        $this->arrayTestUtility->arrayValuesAreExpectedValues(['foo'], ['foo']);
+        $this->getArrayTestUtility()->arrayValuesAreExpectedValues(['foo'], ['foo']);
     }
 
-    public function testCanTestArrayKeysAreCorrectlyOrdered()
+    public function testCanTestArrayKeysAreExpectedKeys(): void
     {
-        $this->arrayTestUtility->arrayKeysAreCorrectlyOrdered([1, 2], [0, 1]);
+        $this->getArrayTestUtility()->arrayKeysAreExpectedKeys([1, 2], [0, 1]);
     }
 
-    public function testCanTestArrayValuesAreCorrectlyOrdered()
+    public function testCanTestArrayValuesAreExpectedTypes(): void
     {
-        $this->arrayTestUtility->arrayValuesAreCorrectlyOrdered([0, 1, 2], [0, 1, 2]);
+        $this->getArrayTestUtility()->arrayValuesAreExpectedValues(['foo'], ['foo']);
     }
 
-    public function testCanTestArraysAreEqual()
+    public function testCanTestArrayKeysAreCorrectlyOrdered(): void
     {
-        $this->arrayTestUtility->arraysAreEqual([], []);
+        $this->getArrayTestUtility()->arrayKeysAreCorrectlyOrdered([1, 2], [0, 1]);
+    }
+
+    public function testCanTestArrayValuesAreCorrectlyOrdered(): void
+    {
+        $this->getArrayTestUtility()->arrayValuesAreCorrectlyOrdered([0, 1, 2], [0, 1, 2]);
+    }
+
+    public function testCanTestArraysAreEqual(): void
+    {
+        $this->getArrayTestUtility()->arraysAreEqual([], []);
     }
 }
