@@ -10,20 +10,27 @@ trait StringTester
     /**
      * @var StringTestUtility
      */
-    private static $stringTestUtility;
+    private $stringTestUtility;
 
     /**
-     * @beforeClass
+     * @before
      * @noinspection PhpUnused
      */
-    public static function initializeStringTestUtility(): void
+    public function initializeStringTestUtility(): void
     {
-        self::$stringTestUtility = new StringTestUtility();
+        $this->setStringTestUtility(new StringTestUtility());
+    }
+
+    private function setStringTestUtility(StringTestUtility $stringTestUtility): void
+    {
+        if (!isset($this->stringTestUtility)) {
+            $this->stringTestUtility = $stringTestUtility;
+        }
     }
 
     public function getStringTestUtility(): StringTestUtility
     {
-        return self::$stringTestUtility;
+        return $this->stringTestUtility;
     }
 
 }
