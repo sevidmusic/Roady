@@ -22,7 +22,9 @@ trait ReflectionUtilityInstance
 
     private function setReflectionUtility(RealReflectionUtility $reflectionUtility)
     {
-        $this->reflectionUtility = $reflectionUtility;
+        if (!isset($this->reflectionUtility)) {
+            $this->reflectionUtility = $reflectionUtility;
+        }
     }
 
     public function getReflectionUtility(): RealReflectionUtility
