@@ -63,7 +63,7 @@ trait ReflectionUtilityTestTrait
         return $testClasses[array_rand($testClasses)];
     }
 
-    public function testGetClassPropertyNamesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyNames()
+    public function testGetClassPropertyNamesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyNames(): void
     {
         $this->getArrayTestUtility()->arraysAreEqual(
             $this->getClassPropertyNames($this->getClassToReflect()),
@@ -71,7 +71,7 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGetClassPropertyTypesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyTypes()
+    public function testGetClassPropertyTypesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyTypes(): void
     {
         $this->getArrayTestUtility()->arraysAreEqual(
             $this->getClassPropertyTypes($this->getClassToReflect()),
@@ -79,7 +79,7 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGetClassPropertyValuesReturnsInstancesValues()
+    public function testGetClassPropertyValuesReturnsInstancesValues(): void
     {
         $instance = $this->getClassInstance($this->getClassToReflect());
         $this->getArrayTestUtility()->arraysAreEqual(
@@ -88,7 +88,7 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGetClassInstanceReturnsInstanceOfSpecifiedClass()
+    public function testGetClassInstanceReturnsInstanceOfSpecifiedClass(): void
     {
         $this->assertEquals(
             $this->getFullyQualifiedClassname($this->getClassToReflect()),
@@ -100,16 +100,11 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGenerateMockClassMethodArgumentsReturnsArrayWhoseValuesTypesAreMethodsExpectedArgumentTypes()
+    public function testGenerateMockClassMethodArgumentsReturnsArrayWhoseValuesTypesAreMethodsExpectedArgumentTypes(): void
     {
         $generatedTypes = array();
         foreach ($this->getReflectionUtility()->generateMockClassMethodArguments($this->getClassToReflect(), '__construct') as $argumentValue) {
-            $argumentType = gettype($argumentValue);
-            if ($argumentType === 'object') {
-                array_push($generatedTypes, get_class($argumentValue));
-                continue;
-            }
-            array_push($generatedTypes, $argumentType);
+            array_push($generatedTypes, $this->getRealType($argumentValue));
         }
         $this->getArrayTestUtility()->arraysAreEqual(
             $this->getClassMethodParameterTypes($this->getClassToReflect(), '__construct'),
@@ -117,7 +112,7 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGetClassMethodParameterNamesReturnsArrayWhoseValuesAreSpecifiedClassMethodsParameterNames()
+    public function testGetClassMethodParameterNamesReturnsArrayWhoseValuesAreSpecifiedClassMethodsParameterNames(): void
     {
         $this->getArrayTestUtility()->arraysAreEqual(
             $this->getClassMethodParameterNames($this->getClassToReflect(), '__construct'),
@@ -125,7 +120,7 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGetClassMethodParameterTypesReturnsArrayWhoseValuesAreSpecifiedClassMethodsExpectedParameterTypes()
+    public function testGetClassMethodParameterTypesReturnsArrayWhoseValuesAreSpecifiedClassMethodsExpectedParameterTypes(): void
     {
         $this->getArrayTestUtility()->arraysAreEqual(
             $this->getClassMethodParameterTypes($this->getClassToReflect(), '__construct'),
@@ -180,6 +175,14 @@ trait ReflectionUtilityTestTrait
             return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, '__construct'));
         }
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
+    }
+
+    private function getRealType($var): string
+    {
+        if (gettype($var) === 'object') {
+            return get_class($var);
+        }
+        return gettype($var);
     }
 
     private function getClass($class): string
@@ -406,7 +409,6 @@ EOD
     {
         $msgArr = [$sprintFormattedMessage];
         $args = array_merge($msgArr, $sprints);
-        /** @noinspection SpellCheckingInspection */
         error_log(PHP_EOL . call_user_func_array('sprintf', $args));
     }
 
