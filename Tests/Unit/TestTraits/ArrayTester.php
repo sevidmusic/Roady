@@ -11,20 +11,27 @@ trait ArrayTester
     /**
      * @var ArrayTestUtility
      */
-    private static $arrayTestUtility;
+    private $arrayTestUtility;
 
     /**
-     * @beforeClass
+     * @before
      * @noinspection PhpUnused
      */
-    public static function initializeArrayTestUtility(): void
+    public function initializeArrayTestUtility(): void
     {
-        self::$arrayTestUtility = new ArrayTestUtility();
+        $this->setArrayTestUtility(new ArrayTestUtility());
+    }
+
+    private function setArrayTestUtility(ArrayTestUtility $arrayTestUtility): void
+    {
+        if (!isset($this->arrayTestUtility)) {
+            $this->arrayTestUtility = $arrayTestUtility;
+        }
     }
 
     public function getArrayTestUtility(): ArrayTestUtility
     {
-        return self::$arrayTestUtility;
+        return $this->arrayTestUtility;
     }
 
 }
