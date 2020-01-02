@@ -3,7 +3,7 @@
 require(__DIR__ . '/vendor/autoload.php');
 ?>
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <title>Darling Cms Redesign Welcome Page</title>
     <style>
@@ -1587,13 +1587,14 @@ echo $html;
             "#000000",
         ];
         shuffle(colors);
+
         function frame() {
             if (pos === (colors.length + 1)) {
-                pos = 0
+                pos = 0;
                 shuffle(colors);
                 //clearInterval(id);
             } else {
-                elem.style.backgroundColor = colors[pos]
+                elem.style.backgroundColor = colors[pos];
                 console.log(elem.style.backgroundColor);
                 pos++;
             }
@@ -1604,7 +1605,7 @@ echo $html;
          * @param {Array} a items An array containing the items.
          */
         function shuffle(a) {
-            var j, x, i;
+            let j, x, i;
             for (i = a.length - 1; i > 0; i--) {
                 j = Math.floor(Math.random() * (i + 1));
                 x = a[i];
