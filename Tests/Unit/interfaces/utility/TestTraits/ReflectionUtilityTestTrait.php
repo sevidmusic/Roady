@@ -79,7 +79,7 @@ trait ReflectionUtilityTestTrait
         );
     }
 
-    public function testGetClassPropertyValuesReturnsInstancesValues(): void
+    public function testGetClassPropertyValuesReturnsInstancesPropertyValues(): void
     {
         $instance = $this->getClassInstance($this->getClassToReflect());
         $this->getArrayTestUtility()->arraysAreEqual(
