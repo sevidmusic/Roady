@@ -6,25 +6,31 @@ use DarlingCms\interfaces\primary\Switchable;
 
 trait SwitchableTestTrait
 {
-    /**
-     * @var Switchable
-     */
-    protected $switchable;
+    private $switchable;
 
-    /** @noinspection PhpUnused */
-    public function testCanSwitchState()
+    protected function setSwitchable(Switchable $switchable): void
     {
-        $initialState = $this->switchable->getState();
-        $this->switchable->switchState();
-        return $this->assertNotEquals(
+        $this->switchable = $switchable;
+    }
+
+    protected function getSwitchable(): Switchable
+    {
+        return $this->switchable;
+    }
+
+    public function testCanSwitchState(): void
+    {
+        $initialState = $this->getSwitchable()->getState();
+        $this->getSwitchable()->switchState();
+        $this->assertNotEquals(
             $initialState,
-            $this->switchable->getState()
+            $this->getSwitchable()->getState()
         );
     }
 
-    public function setSwitchable(Switchable $switchable): void
+    public function testGetStateReturnsBoolean(): void
     {
-        $this->switchable = $switchable;
+        $this->assertTrue(is_bool($this->getSwitchable()->getState()));
     }
 
 }

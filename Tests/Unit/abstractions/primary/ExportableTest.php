@@ -10,8 +10,11 @@ class ExportableTest extends ClassifiableTest
 
     public function setUp(): void
     {
-        $constructorArguments = [];
-        $this->setExportable($this->getMockForAbstractClass('\DarlingCms\abstractions\primary\Exportable', $constructorArguments));
+        $this->setExportable(
+            $this->getMockForAbstractClass(
+                '\DarlingCms\abstractions\primary\Exportable'
+            )
+        );
         $this->setClassifiable($this->getExportable());
     }
 

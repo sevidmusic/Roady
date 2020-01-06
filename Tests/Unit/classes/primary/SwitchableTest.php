@@ -3,12 +3,10 @@
 namespace UnitTests\classes\primary;
 
 use DarlingCms\classes\primary\Switchable;
-use PHPUnit\Framework\TestCase;
-use UnitTests\interfaces\primary\TestTraits\SwitchableTestTrait;
+use UnitTests\abstractions\primary\SwitchableTest as AbstractSwitchableTest;
 
-class SwitchableTest extends TestCase
+class SwitchableTest extends AbstractSwitchableTest
 {
-    use SwitchableTestTrait;
 
     public function setUp(): void
     {

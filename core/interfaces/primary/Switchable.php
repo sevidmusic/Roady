@@ -2,10 +2,11 @@
 
 namespace DarlingCms\interfaces\primary;
 
-interface Switchable {
+interface Switchable
+{
 
-    public function getState():bool;
+    public function getState(): bool;
 
-    public function switchState():bool;
+    public function switchState(): bool;
 
 }

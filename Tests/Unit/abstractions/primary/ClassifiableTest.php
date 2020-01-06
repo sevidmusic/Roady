@@ -11,8 +11,11 @@ class ClassifiableTest extends TestCase
 
     public function setUp(): void
     {
-        $constructorArguments = [];
-        $this->setClassifiable($this->getMockForAbstractClass('\DarlingCms\abstractions\primary\Classifiable', $constructorArguments));
+        $this->setClassifiable(
+            $this->getMockForAbstractClass(
+                '\DarlingCms\abstractions\primary\Classifiable'
+            )
+        );
     }
 
 }

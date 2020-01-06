@@ -10,8 +10,12 @@ class StorableTest extends IdentifiableTest
 
     public function setUp(): void
     {
-        $constructorArguments = ['MockName', 'MockLocation', 'MockContainer'];
-        $this->setStorable($this->getMockForAbstractClass('\DarlingCms\abstractions\primary\Storable', $constructorArguments));
+        $this->setStorable(
+            $this->getMockForAbstractClass(
+                '\DarlingCms\abstractions\primary\Storable',
+                ['MockName', 'MockLocation', 'MockContainer']
+            )
+        );
         $this->setIdentifiable($this->getStorable());
     }
 

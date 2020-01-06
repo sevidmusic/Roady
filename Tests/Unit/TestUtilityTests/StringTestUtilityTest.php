@@ -5,9 +5,6 @@ namespace UnitTests\TestUtilityTests;
 use PHPUnit\Framework\TestCase;
 use UnitTests\TestUtilities\StringTestUtility;
 
-/**
- * Class StringTestUtilityTest. Defines tests for the StringTestUtility class.
- */
 class StringTestUtilityTest extends TestCase
 {
 

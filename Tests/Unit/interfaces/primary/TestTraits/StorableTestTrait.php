@@ -10,29 +10,24 @@ trait StorableTestTrait
 
     use StringTester;
 
-    /**
-     * @var Storable
-     */
     private $storable;
 
-    public function setStorable(Storable $storable)
+    protected function setStorable(Storable $storable)
     {
         $this->storable = $storable;
     }
 
-    public function getStorable(): Storable
+    protected function getStorable(): Storable
     {
         return $this->storable;
     }
 
-    /** @noinspection PhpUnused */
     public function testGetLocationReturnsNonEmptyAlphaNumericString(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getStorable()->getLocation());
         $this->getStringTestUtility()->stringIsAlphaNumeric($this->getStorable()->getLocation());
     }
 
-    /** @noinspection PhpUnused */
     public function testGetContainerReturnsNonEmptyAlphaNumericString(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getStorable()->getContainer());

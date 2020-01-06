@@ -8,14 +8,10 @@ use UnitTests\TestUtilities\ArrayTestUtility;
 trait ArrayTester
 {
 
-    /**
-     * @var ArrayTestUtility
-     */
     private $arrayTestUtility;
 
     /**
      * @before
-     * @noinspection PhpUnused
      */
     public function initializeArrayTestUtility(): void
     {

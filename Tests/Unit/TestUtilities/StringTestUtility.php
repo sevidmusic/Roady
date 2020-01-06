@@ -4,10 +4,6 @@ namespace UnitTests\TestUtilities;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class StringTestUtility. Defines methods that can be used to perform
- * common assertions on strings, such as asserting that a string is not empty.
- */
 class StringTestUtility extends TestCase
 {
 

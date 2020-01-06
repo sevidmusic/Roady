@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUnused */
+<?php
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
@@ -15,9 +15,6 @@ trait ReflectionUtilityTestTrait
 
     use ArrayTester;
 
-    /**
-     * @var ReflectionUtility
-     */
     private $reflectionUtility;
 
     /**
@@ -241,7 +238,6 @@ EOD
         return $parameterTypes;
     }
 
-    /** @noinspection DuplicatedCode */
     public function generateMockClassMethodArguments($class, string $method): array
     {
         $defaults = array();
@@ -307,9 +303,6 @@ EOD
         );
     }
 
-    /**
-     * @noinspection SpellCheckingInspection
-     */
     private function generateRandomAlphaNumString(): string
     {
         try {
@@ -322,11 +315,10 @@ str_shuffle(). You can safely ignore this warning if the generated string
 does not need to be cryptographically secure.
 EOD
             );
-            return str_shuffle('A1BCD2EFGH3IJKL4MNOPQ5RSTUVW6XYZabcd7efghijkl8mnop9qrs0tuvwxyz');
+            return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
         }
     }
 
-    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
     private function getParameterType(ReflectionParameter $reflectionParameter): string
     {
         if (is_null($reflectionParameter->getType()) === true) {

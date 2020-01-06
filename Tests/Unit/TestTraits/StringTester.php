@@ -7,14 +7,10 @@ use UnitTests\TestUtilities\StringTestUtility;
 trait StringTester
 {
 
-    /**
-     * @var StringTestUtility
-     */
     private $stringTestUtility;
 
     /**
      * @before
-     * @noinspection PhpUnused
      */
     public function initializeStringTestUtility(): void
     {

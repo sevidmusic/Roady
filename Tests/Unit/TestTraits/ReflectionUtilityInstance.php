@@ -6,14 +6,11 @@ use DarlingCms\classes\utility\ReflectionUtility as RealReflectionUtility;
 
 trait ReflectionUtilityInstance
 {
-    /**
-     * @var RealReflectionUtility
-     */
+
     private $reflectionUtility;
 
     /**
      * @before
-     * @noinspection PhpUnused
      */
     public function initializeReflectionUtility(): void
     {

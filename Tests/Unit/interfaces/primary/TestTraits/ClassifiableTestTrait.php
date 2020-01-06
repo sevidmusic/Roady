@@ -11,18 +11,15 @@ trait ClassifiableTestTrait
 {
     use StringTester;
 
-    /**
-     * @var Classifiable
-     */
     private $classifiable;
 
 
-    public function getClassifiable(): Classifiable
+    protected function getClassifiable(): Classifiable
     {
         return $this->classifiable;
     }
 
-    public function setClassifiable(Classifiable $classifiable): void
+    protected function setClassifiable(Classifiable $classifiable): void
     {
         $this->classifiable = $classifiable;
     }
@@ -30,6 +27,14 @@ trait ClassifiableTestTrait
     public function testGetTypeReturnsNonEmptyString()
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getClassifiable()->getType());
+    }
+
+    public function testGetTypeReturnsInstancesFullyQualifiedClassName()
+    {
+        $this->getStringTestUtility()->stringsMatch(
+            $this->getClassifiable()->getType(),
+            get_class($this->getClassifiable())
+        );
     }
 
 }

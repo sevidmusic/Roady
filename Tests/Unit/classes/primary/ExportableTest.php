@@ -4,8 +4,9 @@ namespace UnitTests\classes\primary;
 
 use DarlingCms\classes\primary\Exportable;
 use UnitTests\interfaces\primary\TestTraits\ExportableTestTrait;
+use UnitTests\abstractions\primary\ExportableTest as AbstractExportableTest;
 
-class ExportableTest extends ClassifiableTest
+class ExportableTest extends AbstractExportableTest
 {
     use ExportableTestTrait;
 

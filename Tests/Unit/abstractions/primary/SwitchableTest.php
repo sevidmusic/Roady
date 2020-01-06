@@ -11,8 +11,11 @@ class SwitchableTest extends TestCase
 
     public function setUp(): void
     {
-        $constructorArguments = [];
-        $this->setSwitchable($this->getMockForAbstractClass('\DarlingCms\abstractions\primary\Switchable', $constructorArguments));
+        $this->setSwitchable(
+            $this->getMockForAbstractClass(
+                '\DarlingCms\abstractions\primary\Switchable'
+            )
+        );
     }
 
 }

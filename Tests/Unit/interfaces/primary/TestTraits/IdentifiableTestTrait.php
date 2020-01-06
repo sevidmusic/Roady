@@ -10,40 +10,33 @@ trait IdentifiableTestTrait
 
     use StringTester;
 
-    /**
-     * @var Identifiable
-     */
     private $identifiable;
 
-    public function getIdentifiable()
+    protected function getIdentifiable()
     {
         return $this->identifiable;
     }
 
-    public function setIdentifiable(Identifiable $identifiable)
+    protected function setIdentifiable(Identifiable $identifiable)
     {
         $this->identifiable = $identifiable;
     }
 
-    /** @noinspection PhpUnused */
     public function testGetNameReturnsNonEmptyString(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getIdentifiable()->getName());
     }
 
-    /** @noinspection PhpUnused */
     public function testGetNameReturnsAlphaNumericString(): void
     {
         $this->getStringTestUtility()->stringIsAlphaNumeric($this->getIdentifiable()->getName());
     }
 
-    /** @noinspection PhpUnused */
     public function testGetUniqueIdReturnsNonEmptyString(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getIdentifiable()->getUniqueId());
     }
 
-    /** @noinspection PhpUnused */
     public function testGetUniqueIdReturnsAlphaNumericString(): void
     {
         $this->getStringTestUtility()->stringIsAlphaNumeric($this->getIdentifiable()->getUniqueId());

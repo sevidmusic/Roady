@@ -12,22 +12,18 @@ trait ExportableTestTrait
     use ArrayTester;
     use ReflectionUtilityInstance;
 
-    /**
-     * @var Exportable
-     */
     private $exportable;
 
-    public function setExportable(Exportable $exportable)
+    protected function setExportable(Exportable $exportable)
     {
         $this->exportable = $exportable;
     }
 
-    public function getExportable(): Exportable
+    protected function getExportable(): Exportable
     {
         return $this->exportable;
     }
 
-    /** @noinspection PhpUnused */
     public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
     {
         $this->getArrayTestUtility()->arraysAreEqual(
@@ -36,7 +32,6 @@ trait ExportableTestTrait
         );
     }
 
-    /** @noinspection PhpUnused */
     public function testPropertiesMatchImportedPropertiesPostImport()
     {
         $preImport = $this->getReflectionUtility()->getClassPropertyValues(

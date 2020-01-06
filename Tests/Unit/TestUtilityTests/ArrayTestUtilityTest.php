@@ -5,10 +5,6 @@ namespace UnitTests\TestUtilityTests;
 use PHPUnit\Framework\TestCase;
 use UnitTests\TestUtilities\ArrayTestUtility;
 
-/**
- * Class ArrayTestUtilityTest. Defines unit tests for the UnitTests\Test
- * Utilities\ArrayTestUtility class.
- */
 class ArrayTestUtilityTest extends TestCase
 {
 

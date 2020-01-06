@@ -2,7 +2,8 @@
 
 namespace DarlingCms\interfaces\primary;
 
-interface Classifiable {
+interface Classifiable
+{
 
     public function getType(): string;
 

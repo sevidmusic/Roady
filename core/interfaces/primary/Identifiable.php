@@ -2,7 +2,8 @@
 
 namespace DarlingCms\interfaces\primary;
 
-interface Identifiable {
+interface Identifiable
+{
 
     public function getName(): string;
 

@@ -4,10 +4,6 @@ namespace UnitTests\TestUtilities;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ArrayTestUtility. Defines methods that can be used to perform
- * common assertions on arrays, such as asserting that a array is not empty.
- */
 class ArrayTestUtility extends TestCase
 {
 
