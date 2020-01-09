@@ -3,7 +3,6 @@
 namespace DarlingCms\abstractions\primary;
 
 use DarlingCms\interfaces\primary\Storable as StorableInterface;
-use DarlingCms\abstractions\primary\Identifiable;
 
 abstract class Storable extends Identifiable implements StorableInterface  {
 
