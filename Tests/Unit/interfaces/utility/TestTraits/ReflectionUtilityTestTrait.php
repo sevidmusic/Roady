@@ -2,6 +2,13 @@
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
+use DarlingCms\classes\primary\Classifiable;
+use DarlingCms\classes\primary\Exportable;
+use DarlingCms\classes\primary\Identifiable;
+use DarlingCms\classes\primary\Storable;
+use DarlingCms\classes\primary\Switchable;
+use DarlingCms\classes\utility\ReflectionUtility as ReflectionUtilityImplementation;
+use DarlingCms\dev\traits\Logger;
 use DarlingCms\interfaces\utility\ReflectionUtility;
 use Exception;
 use ReflectionClass;
@@ -9,11 +16,52 @@ use ReflectionException;
 use ReflectionMethod;
 use ReflectionParameter;
 use UnitTests\TestTraits\ArrayTester;
+use UnitTests\TestTraits\StringTester;
 
 trait ReflectionUtilityTestTrait
 {
 
     use ArrayTester;
+    use StringTester;
+    use Logger;
+
+    private $errFailedToReflectClass = <<<EOD
+ReflectionUtilityTestTrait Error: Failed to reflect class %s.
+Defaulting to reflect empty stdClass() instance.
+EOD;
+
+    private $errFailedToReflectMockStd = <<<EOD
+ReflectionUtilityTestTrait Fatal Error: Failed to reflect class %s,
+and also failed to reflect empty stdClass() by default.
+EOD;
+
+    private $errRandomBytesFailed = <<<EOD
+ReflectionUtilityTestTrait Warning:
+Failed to generate alpha-numeric string using random_bytes(), defaulting to
+str_shuffle(). You can safely ignore this warning if the generated string
+does not need to be cryptographically secure.
+EOD;
+    private $errMethodNotDefined = <<<EOD
+ReflectionUtilityTestTrait Warning:
+The specified method %s() is not defined in class %s.
+You may safely ignore this warning if this is expected.
+EOD;
+
+    private $errSpecifiedMethodCouldNotBeReflected = <<<EOD
+ReflectionUtilityTestTrait Error:
+The specified method %s() could not be reflected for class %s.
+Defaulting to stdClass().
+EOD;
+
+    private $errFailedToReflectStdMethod = <<<EOD
+ReflectionUtilityTestTrait Fatal Error:
+The specified method %s() could not be reflected for class %s,
+and also failed to default to an empty instance of stdClass().
+EOD;
+
+    private $errInvalidClassParameter = <<<EOD
+ReflectionUtilityTestTrait Error: Invalid type %s passed to %s
+EOD;
 
     private $reflectionUtility;
 
@@ -21,6 +69,14 @@ trait ReflectionUtilityTestTrait
      * @var Baz|Bazzer|Foo|Bar
      */
     private $classToReflect;
+    private $booleanType = 'boolean';
+    private $integerType = 'integer';
+    private $doubleType = 'double';
+    private $stringType = 'string';
+    private $arrayType = 'array';
+    private $nullType = 'NULL';
+    private $objectType = 'object';
+    private $constructMethod = '__construct';
 
     /**
      * @before
@@ -55,7 +111,19 @@ trait ReflectionUtilityTestTrait
             '\UnitTests\interfaces\utility\TestTraits\Baz',
             '\UnitTests\interfaces\utility\TestTraits\Bazzer',
             '\UnitTests\interfaces\utility\TestTraits\Foo',
-            '\UnitTests\interfaces\utility\TestTraits\Bar'
+            '\UnitTests\interfaces\utility\TestTraits\Bar',
+            new Identifiable('Dorian'),
+            new Classifiable(),
+            new Switchable(),
+            new Storable('Roady', 'Spruceton', '1833'),
+            new Exportable(),
+            new ReflectionUtilityImplementation(),
+            '\DarlingCms\classes\primary\Identifiable',
+            '\DarlingCms\classes\primary\Classifiable',
+            '\DarlingCms\classes\primary\Switchable',
+            '\DarlingCms\classes\primary\Storable',
+            '\DarlingCms\classes\primary\Exportable',
+            '\DarlingCms\classes\utility\ReflectionUtility'
         );
         return $testClasses[array_rand($testClasses)];
     }
@@ -100,11 +168,11 @@ trait ReflectionUtilityTestTrait
     public function testGenerateMockClassMethodArgumentsReturnsArrayWhoseValuesTypesAreMethodsExpectedArgumentTypes(): void
     {
         $generatedTypes = array();
-        foreach ($this->getReflectionUtility()->generateMockClassMethodArguments($this->getClassToReflect(), '__construct') as $argumentValue) {
+        foreach ($this->getReflectionUtility()->generateMockClassMethodArguments($this->getClassToReflect(), $this->constructMethod) as $argumentValue) {
             array_push($generatedTypes, $this->getRealType($argumentValue));
         }
         $this->getArrayTestUtility()->arraysAreEqual(
-            $this->getClassMethodParameterTypes($this->getClassToReflect(), '__construct'),
+            $this->getClassMethodParameterTypes($this->getClassToReflect(), $this->constructMethod),
             $generatedTypes
         );
     }
@@ -112,16 +180,24 @@ trait ReflectionUtilityTestTrait
     public function testGetClassMethodParameterNamesReturnsArrayWhoseValuesAreSpecifiedClassMethodsParameterNames(): void
     {
         $this->getArrayTestUtility()->arraysAreEqual(
-            $this->getClassMethodParameterNames($this->getClassToReflect(), '__construct'),
-            $this->getReflectionUtility()->getClassMethodParameterNames($this->getClassToReflect(), '__construct')
+            $this->getClassMethodParameterNames($this->getClassToReflect(), $this->constructMethod),
+            $this->getReflectionUtility()->getClassMethodParameterNames($this->getClassToReflect(), $this->constructMethod)
         );
     }
 
     public function testGetClassMethodParameterTypesReturnsArrayWhoseValuesAreSpecifiedClassMethodsExpectedParameterTypes(): void
     {
         $this->getArrayTestUtility()->arraysAreEqual(
-            $this->getClassMethodParameterTypes($this->getClassToReflect(), '__construct'),
-            $this->getReflectionUtility()->getClassMethodParameterTypes($this->getClassToReflect(), '__construct')
+            $this->getClassMethodParameterTypes($this->getClassToReflect(), $this->constructMethod),
+            $this->getReflectionUtility()->getClassMethodParameterTypes($this->getClassToReflect(), $this->constructMethod)
+        );
+    }
+
+    public function testGetClassReflectionReturnsReflectionOfSpecifiedClass(): void
+    {
+        $this->getStringTestUtility()->stringsMatch(
+            $this->getReflectionUtility()->getClassReflection($this)->getName(),
+            get_class($this)
         );
     }
 
@@ -162,21 +238,21 @@ trait ReflectionUtilityTestTrait
 
     public function getClassInstance($class, array $constructorArguments = array())
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, 'getClassInstance()') === false) {
+        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return (object)[];
         }
-        if (method_exists($class, '__construct') === false) {
+        if (method_exists($class, $this->constructMethod) === false) {
             return $this->getClassReflection($class)->newInstanceArgs([]);
         }
         if (empty($constructorArguments) === true) {
-            return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, '__construct'));
+            return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, $this->constructMethod));
         }
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
     }
 
     private function getRealType($var): string
     {
-        if (gettype($var) === 'object') {
+        if (gettype($var) === $this->objectType) {
             return get_class($var);
         }
         return gettype($var);
@@ -187,25 +263,18 @@ trait ReflectionUtilityTestTrait
         return (is_string($class) ? $class : get_class($class));
     }
 
-    private function getClassReflection($class): ReflectionClass
+    public function getClassReflection($class): ReflectionClass
     {
         try {
             return new ReflectionClass($class);
         } catch (ReflectionException $e) {
-            $this->logError(<<<EOD
-ReflectionUtilityTestTrait Error: Failed to reflect class %s.
-Defaulting to reflect empty stdClass() instance.
-EOD
-                , $this->getClass($class)
-            );
+            $this->log($this->errFailedToReflectClass, $this->getClass($class));
             try {
                 return new ReflectionClass((object)[]);
             } catch (ReflectionException $e) {
-                $this->logError(<<<EOD
-ReflectionUtilityTestTrait Fatal Error: Failed to reflect class %s,
-and also failed to reflect empty stdClass() by default.
-EOD
-                    , $this->getClass($class)
+                $this->log(
+                    $this->errFailedToReflectMockStd,
+                    $this->getClass($class)
                 );
                 exit(0);
             }
@@ -242,27 +311,27 @@ EOD
     {
         $defaults = array();
         foreach ($this->getClassMethodParameterTypes($class, $method) as $type) {
-            if ($type === 'boolean') {
+            if ($type === $this->booleanType) {
                 array_push($defaults, false);
                 continue;
             }
-            if ($type === 'integer') {
+            if ($type === $this->integerType) {
                 array_push($defaults, 1);
                 continue;
             }
-            if ($type === 'double') {
+            if ($type === $this->doubleType) {
                 array_push($defaults, 1.2345);
                 continue;
             }
-            if ($type === 'string') {
+            if ($type === $this->stringType) {
                 array_push($defaults, $this->generateRandomAlphaNumString());
                 continue;
             }
-            if ($type === 'array') {
+            if ($type === $this->arrayType) {
                 array_push($defaults, array());
                 continue;
             }
-            if ($type === 'NULL') {
+            if ($type === $this->nullType) {
                 array_push($defaults, null);
                 continue;
             }
@@ -276,12 +345,10 @@ EOD
     private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool
     {
         if (is_string($class) === false && is_object($class) === false) {
-            error_log(
-                sprintf(
-                    'ReflectionUtilityTestTrait Error: Invalid type %s passed to %s',
-                    gettype($class),
-                    $caller
-                )
+            $this->log(
+                $this->errInvalidClassParameter,
+                gettype($class),
+                $caller
             );
             return false;
         }
@@ -290,7 +357,7 @@ EOD
 
     private function getClassPropertyReflections($class): array
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, 'getClassPropertyReflections()') === false) {
+        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return array();
         }
         $selfReflection = $this->getClassReflection($class);
@@ -308,13 +375,7 @@ EOD
         try {
             return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
         } catch (Exception $e) {
-            $this->logError(<<<EOD
-ReflectionUtilityTestTrait Warning: 
-Failed to generate alpha-numeric string using random_bytes(), defaulting to 
-str_shuffle(). You can safely ignore this warning if the generated string 
-does not need to be cryptographically secure.
-EOD
-            );
+            $this->log($this->errRandomBytesFailed);
             return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
         }
     }
@@ -322,7 +383,7 @@ EOD
     private function getParameterType(ReflectionParameter $reflectionParameter): string
     {
         if (is_null($reflectionParameter->getType()) === true) {
-            return 'NULL';
+            return $this->nullType;
         }
         return $this->convertReflectionTypeStringToGettypeString($reflectionParameter->getType()->getName());
     }
@@ -330,31 +391,24 @@ EOD
     private function convertReflectionTypeStringToGettypeString(string $type)
     {
         if ($type === 'bool') {
-            return 'boolean';
+            return $this->booleanType;
         }
         if ($type === 'float') {
-            return 'double';
+            return $this->doubleType;
         }
         if ($type === 'int') {
-            return 'integer';
+            return $this->integerType;
         }
         return $type;
     }
 
     private function getClassMethodReflection($class, string $methodName)
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, 'getClassMethodReflection()') === false) {
+        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return null;
         }
         if (method_exists($class, $methodName) === false) {
-            $this->logError(<<<EOD
-ReflectionUtilityTestTrait Warning: 
-The specified method %s() is not defined in class %s. 
-You may safely ignore this warning if this is expected.
-EOD
-                , $methodName,
-                $this->getClass($class)
-            );
+            $this->log($this->errMethodNotDefined, $methodName, $this->getClass($class));
             return null;
         }
         return $this->getMethodReflection($class, $methodName);
@@ -365,23 +419,17 @@ EOD
         try {
             return new ReflectionMethod($this->getClass($class), $methodName);
         } catch (ReflectionException $e) {
-            $this->logError(<<<EOD
-ReflectionUtilityTestTrait Error: 
-The specified method %s() could not be reflected for class %s. 
-Defaulting to stdClass().
-EOD
-                , $methodName,
+            $this->log(
+                $this->errSpecifiedMethodCouldNotBeReflected,
+                $methodName,
                 $this->getClass($class)
             );
             try {
                 return new ReflectionMethod((object)[], $methodName);
             } catch (ReflectionException $e) {
-                $this->logError(<<<EOD
-ReflectionUtilityTestTrait Fatal Error: 
-The specified method %s() could not be reflected for class %s, 
-and also failed to default to an empty instance of stdClass().
-EOD
-                    , $methodName,
+                $this->log(
+                    $this->errFailedToReflectStdMethod,
+                    $methodName,
                     $this->getClass($class)
                 );
                 exit();
@@ -391,17 +439,10 @@ EOD
 
     private function getFullyQualifiedClassname($class)
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, 'getFullyQualifiedClassname') === false) {
+        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return '\\' . get_class((object)[]);
         }
         return (is_string($class) ? $class : '\\' . get_class($class));
-    }
-
-    private function logError($sprintFormattedMessage, string ...$sprints)
-    {
-        $msgArr = [$sprintFormattedMessage];
-        $args = array_merge($msgArr, $sprints);
-        error_log(PHP_EOL . call_user_func_array('sprintf', $args));
     }
 
 }
