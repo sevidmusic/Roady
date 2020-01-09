@@ -2,11 +2,21 @@
 
 namespace DarlingCms\abstractions\primary;
 
+use DarlingCms\dev\traits\Logger;
 use DarlingCms\interfaces\primary\Identifiable as IdentifiableInterface;
-use \Exception;
+use Exception;
 
 abstract class Identifiable implements IdentifiableInterface
 {
+
+    use Logger;
+
+    const RANDOM_BYTES_FAILED = <<<EOD
+Identifiable Implementation Warning: 
+Failed to generate unique id using random_bytes(), defaulting to 
+str_shuffle(). You can safely ignore this warning if the generated
+id does not need to be cryptographically secure.
+EOD;
 
     private $name;
 
@@ -33,21 +43,10 @@ abstract class Identifiable implements IdentifiableInterface
         try {
             return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(512));
         } catch (Exception $e) {
-            $this->logError(<<<EOD
-Identifiable Implementation Warning: 
-Failed to generate unique id using random_bytes(), defaulting to 
-str_shuffle(). You can safely ignore this warning if the generated
-id does not need to be cryptographically secure.
-EOD
+            $this->log(self::RANDOM_BYTES_FAILED
             );
         }
         return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
     }
 
-    private function logError($sprintFormattedMessage, string ...$sprints)
-    {
-        $msgArr = [$sprintFormattedMessage];
-        $args = array_merge($msgArr, $sprints);
-        error_log(PHP_EOL . call_user_func_array('sprintf', $args));
-    }
 }
