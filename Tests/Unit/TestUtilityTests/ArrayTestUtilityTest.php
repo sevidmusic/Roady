@@ -20,14 +20,14 @@ class ArrayTestUtilityTest extends TestCase
         $this->arrayTestUtility = $arrayTestUtility;
     }
 
-    private function getArrayTestUtility(): ArrayTestUtility
-    {
-        return $this->arrayTestUtility;
-    }
-
     public function testCanTestArrayIsNotEmpty(): void
     {
         $this->getArrayTestUtility()->arrayIsNotEmpty([0, 1, 2]);
+    }
+
+    private function getArrayTestUtility(): ArrayTestUtility
+    {
+        return $this->arrayTestUtility;
     }
 
     public function testCanTestArrayIsEmpty(): void

@@ -12,6 +12,11 @@ trait IdentifiableTestTrait
 
     private $identifiable;
 
+    public function testGetNameReturnsNonEmptyString(): void
+    {
+        $this->getStringTestUtility()->stringIsNotEmpty($this->getIdentifiable()->getName());
+    }
+
     protected function getIdentifiable()
     {
         return $this->identifiable;
@@ -20,11 +25,6 @@ trait IdentifiableTestTrait
     protected function setIdentifiable(Identifiable $identifiable)
     {
         $this->identifiable = $identifiable;
-    }
-
-    public function testGetNameReturnsNonEmptyString(): void
-    {
-        $this->getStringTestUtility()->stringIsNotEmpty($this->getIdentifiable()->getName());
     }
 
     public function testGetNameReturnsAlphaNumericString(): void

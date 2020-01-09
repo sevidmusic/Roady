@@ -12,9 +12,10 @@ trait StorableTestTrait
 
     private $storable;
 
-    protected function setStorable(Storable $storable)
+    public function testGetLocationReturnsNonEmptyAlphaNumericString(): void
     {
-        $this->storable = $storable;
+        $this->getStringTestUtility()->stringIsNotEmpty($this->getStorable()->getLocation());
+        $this->getStringTestUtility()->stringIsAlphaNumeric($this->getStorable()->getLocation());
     }
 
     protected function getStorable(): Storable
@@ -22,10 +23,9 @@ trait StorableTestTrait
         return $this->storable;
     }
 
-    public function testGetLocationReturnsNonEmptyAlphaNumericString(): void
+    protected function setStorable(Storable $storable)
     {
-        $this->getStringTestUtility()->stringIsNotEmpty($this->getStorable()->getLocation());
-        $this->getStringTestUtility()->stringIsAlphaNumeric($this->getStorable()->getLocation());
+        $this->storable = $storable;
     }
 
     public function testGetContainerReturnsNonEmptyAlphaNumericString(): void

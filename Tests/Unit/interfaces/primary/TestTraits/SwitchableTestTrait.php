@@ -8,16 +8,6 @@ trait SwitchableTestTrait
 {
     private $switchable;
 
-    protected function setSwitchable(Switchable $switchable): void
-    {
-        $this->switchable = $switchable;
-    }
-
-    protected function getSwitchable(): Switchable
-    {
-        return $this->switchable;
-    }
-
     public function testCanSwitchState(): void
     {
         $initialState = $this->getSwitchable()->getState();
@@ -26,6 +16,16 @@ trait SwitchableTestTrait
             $initialState,
             $this->getSwitchable()->getState()
         );
+    }
+
+    protected function getSwitchable(): Switchable
+    {
+        return $this->switchable;
+    }
+
+    protected function setSwitchable(Switchable $switchable): void
+    {
+        $this->switchable = $switchable;
     }
 
     public function testGetStateReturnsBoolean(): void

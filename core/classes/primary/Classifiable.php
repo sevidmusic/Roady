@@ -2,8 +2,8 @@
 
 namespace DarlingCms\classes\primary;
 
-use DarlingCms\interfaces\primary\Classifiable as ClassifiableInterface;
 use DarlingCms\abstractions\primary\Classifiable as ClassifiableBase;
+use DarlingCms\interfaces\primary\Classifiable as ClassifiableInterface;
 
 class Classifiable extends ClassifiableBase implements ClassifiableInterface
 {

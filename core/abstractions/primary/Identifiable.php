@@ -28,16 +28,6 @@ EOD;
         $this->uniqueId = $this->generateUniqueId();
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getUniqueId(): string
-    {
-        return $this->uniqueId;
-    }
-
     private function generateUniqueId(): string
     {
         try {
@@ -47,6 +37,16 @@ EOD;
             );
         }
         return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->uniqueId;
     }
 
 }

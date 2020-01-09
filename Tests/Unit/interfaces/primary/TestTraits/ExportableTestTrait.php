@@ -14,9 +14,12 @@ trait ExportableTestTrait
 
     private $exportable;
 
-    protected function setExportable(Exportable $exportable)
+    public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
     {
-        $this->exportable = $exportable;
+        $this->getArrayTestUtility()->arraysAreEqual(
+            $this->getReflectionUtility()->getClassPropertyValues($this->getExportable()),
+            $this->getExportable()->export()
+        );
     }
 
     protected function getExportable(): Exportable
@@ -24,12 +27,9 @@ trait ExportableTestTrait
         return $this->exportable;
     }
 
-    public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
+    protected function setExportable(Exportable $exportable)
     {
-        $this->getArrayTestUtility()->arraysAreEqual(
-            $this->getReflectionUtility()->getClassPropertyValues($this->getExportable()),
-            $this->getExportable()->export()
-        );
+        $this->exportable = $exportable;
     }
 
     public function testPropertiesMatchImportedPropertiesPostImport()

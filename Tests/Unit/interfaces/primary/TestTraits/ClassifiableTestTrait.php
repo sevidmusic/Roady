@@ -13,6 +13,10 @@ trait ClassifiableTestTrait
 
     private $classifiable;
 
+    public function testGetTypeReturnsNonEmptyString()
+    {
+        $this->getStringTestUtility()->stringIsNotEmpty($this->getClassifiable()->getType());
+    }
 
     protected function getClassifiable(): Classifiable
     {
@@ -22,11 +26,6 @@ trait ClassifiableTestTrait
     protected function setClassifiable(Classifiable $classifiable): void
     {
         $this->classifiable = $classifiable;
-    }
-
-    public function testGetTypeReturnsNonEmptyString()
-    {
-        $this->getStringTestUtility()->stringIsNotEmpty($this->getClassifiable()->getType());
     }
 
     public function testGetTypeReturnsInstancesFullyQualifiedClassName()

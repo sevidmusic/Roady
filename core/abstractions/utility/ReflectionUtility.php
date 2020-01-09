@@ -73,50 +73,32 @@ EOD;
         return array_unique($propertyNames);
     }
 
-    public function getClassPropertyTypes($class): array
-    {
-        $propertyTypes = array();
-        foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
-            $reflectionProperty->setAccessible(true);
-            $propertyTypes[$reflectionProperty->getName()] = gettype(
-                $reflectionProperty->getValue($this->getClassInstance($class))
-            );
-        }
-        return $propertyTypes;
-    }
-
-    public function getClassPropertyValues($class): array
-    {
-        $propertyValues = array();
-        foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
-            $reflectionProperty->setAccessible(true);
-            $propertyValues[$reflectionProperty->getName()] = (
-            is_string($class) === true
-                ? $reflectionProperty->getValue($this->getClassInstance($class))
-                : $reflectionProperty->getValue($class)
-            );
-        }
-        return $propertyValues;
-    }
-
-
-    public function getClassInstance($class, array $constructorArguments = array())
+    private function getClassPropertyReflections($class): array
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
-            return (object)[];
+            return array();
         }
-        if (method_exists($class, self::CONSTRUCT) === false) {
-            return $this->getClassReflection($class)->newInstanceArgs([]);
+        $selfReflection = $this->getClassReflection($class);
+        if ($selfReflection->getParentClass() === false) {
+            return $selfReflection->getProperties();
         }
-        if (empty($constructorArguments) === true) {
-            return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, self::CONSTRUCT));
-        }
-        return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
+        return array_merge(
+            $selfReflection->getParentClass()->getProperties(),
+            $selfReflection->getProperties()
+        );
     }
 
-    private function getClass($class): string
+    private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool
     {
-        return (is_string($class) ? $class : get_class($class));
+        if (is_string($class) === false && is_object($class) === false) {
+            $this->log(
+                self::INVALID_CLASS_PARAMETER,
+                gettype($class),
+                $caller
+            );
+            return false;
+        }
+        return true;
     }
 
     public function getClassReflection($class): ReflectionClass
@@ -140,32 +122,36 @@ EOD;
         }
     }
 
-    public function getClassMethodParameterNames($class, string $method): array
+    private function getClass($class): string
     {
-        $parameterNames = array();
-        $methodReflection = $this->getClassMethodReflection($class, $method);
-        if (is_null($methodReflection) === true) {
-            return array();
-        }
-        foreach ($methodReflection->getParameters() as $reflectionParameter) {
-            array_push($parameterNames, $reflectionParameter->name);
-        }
-        return $parameterNames;
+        return (is_string($class) ? $class : get_class($class));
     }
 
-    public function getClassMethodParameterTypes($class, string $method): array
+    public function getClassPropertyTypes($class): array
     {
-        $parameterTypes = array();
-        $methodReflection = $this->getClassMethodReflection($class, $method);
-        if (is_null($methodReflection) === true) {
-            return array();
+        $propertyTypes = array();
+        foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
+            $reflectionProperty->setAccessible(true);
+            $propertyTypes[$reflectionProperty->getName()] = gettype(
+                $reflectionProperty->getValue($this->getClassInstance($class))
+            );
         }
-        foreach ($methodReflection->getParameters() as $reflectionParameter) {
-            array_push($parameterTypes, $this->getParameterType($reflectionParameter));
-        }
-        return $parameterTypes;
+        return $propertyTypes;
     }
 
+    public function getClassInstance($class, array $constructorArguments = array())
+    {
+        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
+            return (object)[];
+        }
+        if (method_exists($class, self::CONSTRUCT) === false) {
+            return $this->getClassReflection($class)->newInstanceArgs([]);
+        }
+        if (empty($constructorArguments) === true) {
+            return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, self::CONSTRUCT));
+        }
+        return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
+    }
 
     public function generateMockClassMethodArguments($class, string $method): array
     {
@@ -201,66 +187,17 @@ EOD;
         return $defaults;
     }
 
-
-    private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool
+    public function getClassMethodParameterTypes($class, string $method): array
     {
-        if (is_string($class) === false && is_object($class) === false) {
-            $this->log(
-                self::INVALID_CLASS_PARAMETER,
-                gettype($class),
-                $caller
-            );
-            return false;
-        }
-        return true;
-    }
-
-    private function getClassPropertyReflections($class): array
-    {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
+        $parameterTypes = array();
+        $methodReflection = $this->getClassMethodReflection($class, $method);
+        if (is_null($methodReflection) === true) {
             return array();
         }
-        $selfReflection = $this->getClassReflection($class);
-        if ($selfReflection->getParentClass() === false) {
-            return $selfReflection->getProperties();
+        foreach ($methodReflection->getParameters() as $reflectionParameter) {
+            array_push($parameterTypes, $this->getParameterType($reflectionParameter));
         }
-        return array_merge(
-            $selfReflection->getParentClass()->getProperties(),
-            $selfReflection->getProperties()
-        );
-    }
-
-    private function generateRandomAlphaNumString(): string
-    {
-        try {
-            return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
-        } catch (Exception $e) {
-            $this->log(self::RANDOM_BYTES_FAILED
-            );
-            return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
-        }
-    }
-
-    private function getParameterType(ReflectionParameter $reflectionParameter): string
-    {
-        if (is_null($reflectionParameter->getType()) === true) {
-            return self::NULL;
-        }
-        return $this->convertReflectionTypeStringToGettypeString($reflectionParameter->getType()->getName());
-    }
-
-    private function convertReflectionTypeStringToGettypeString(string $type)
-    {
-        if ($type === 'bool') {
-            return self::BOOLEAN;
-        }
-        if ($type === 'float') {
-            return self::DOUBLE;
-        }
-        if ($type === 'int') {
-            return self::INTEGER;
-        }
-        return $type;
+        return $parameterTypes;
     }
 
     private function getClassMethodReflection($class, string $methodName)
@@ -298,6 +235,66 @@ EOD;
                 exit();
             }
         }
+    }
+
+    private function getParameterType(ReflectionParameter $reflectionParameter): string
+    {
+        if (is_null($reflectionParameter->getType()) === true) {
+            return self::NULL;
+        }
+        return $this->convertReflectionTypeStringToGettypeString($reflectionParameter->getType()->getName());
+    }
+
+    private function convertReflectionTypeStringToGettypeString(string $type)
+    {
+        if ($type === 'bool') {
+            return self::BOOLEAN;
+        }
+        if ($type === 'float') {
+            return self::DOUBLE;
+        }
+        if ($type === 'int') {
+            return self::INTEGER;
+        }
+        return $type;
+    }
+
+    private function generateRandomAlphaNumString(): string
+    {
+        try {
+            return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
+        } catch (Exception $e) {
+            $this->log(self::RANDOM_BYTES_FAILED
+            );
+            return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
+        }
+    }
+
+    public function getClassPropertyValues($class): array
+    {
+        $propertyValues = array();
+        foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
+            $reflectionProperty->setAccessible(true);
+            $propertyValues[$reflectionProperty->getName()] = (
+            is_string($class) === true
+                ? $reflectionProperty->getValue($this->getClassInstance($class))
+                : $reflectionProperty->getValue($class)
+            );
+        }
+        return $propertyValues;
+    }
+
+    public function getClassMethodParameterNames($class, string $method): array
+    {
+        $parameterNames = array();
+        $methodReflection = $this->getClassMethodReflection($class, $method);
+        if (is_null($methodReflection) === true) {
+            return array();
+        }
+        foreach ($methodReflection->getParameters() as $reflectionParameter) {
+            array_push($parameterNames, $reflectionParameter->name);
+        }
+        return $parameterNames;
     }
 
 }

@@ -2,8 +2,8 @@
 
 namespace DarlingCms\classes\primary;
 
-use DarlingCms\interfaces\primary\Switchable as SwitchableInterface;
 use DarlingCms\abstractions\primary\Switchable as SwitchableBase;
+use DarlingCms\interfaces\primary\Switchable as SwitchableInterface;
 
 class Switchable extends SwitchableBase implements SwitchableInterface
 {

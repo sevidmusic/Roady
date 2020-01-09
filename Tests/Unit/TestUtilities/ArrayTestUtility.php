@@ -22,34 +22,14 @@ class ArrayTestUtility extends TestCase
         $this->assertTrue(count($array) === $expectedNumberOfElements);
     }
 
-    public function arrayValuesAreExpectedValues(array $array, array $expectedValues): void
-    {
-        $this->assertEquals(count(array_diff($array, $expectedValues)), 0);
-    }
-
-    public function arrayKeysAreExpectedKeys(array $array, array $expectedKeys): void
-    {
-        $this->arrayValuesAreExpectedValues(array_keys($array), $expectedKeys);
-    }
-
     public function arrayValuesAreExpectedTypes(array $array, array $expectedTypes): void
     {
         $this->arrayValuesAreExpectedValues($this->getArrayOfArrayElementTypes($array), $this->flattenExpectedElementTypesArray($expectedTypes));
     }
 
-    public function arrayKeysAreCorrectlyOrdered(array $array, array $correctOrder): void
+    public function arrayValuesAreExpectedValues(array $array, array $expectedValues): void
     {
-        $this->arrayKeysAreExpectedKeys($array, $correctOrder);
-    }
-
-    public function arrayValuesAreCorrectlyOrdered(array $array, array $correctOrder): void
-    {
-        $this->arrayValuesAreExpectedValues($array, $correctOrder);
-    }
-
-    public function arraysAreEqual(array $array1, array $array2): void
-    {
-        $this->assertEquals($array1, $array2);
+        $this->assertEquals(count(array_diff($array, $expectedValues)), 0);
     }
 
     private function getArrayOfArrayElementTypes(array $array): array
@@ -76,6 +56,26 @@ class ArrayTestUtility extends TestCase
             $results[] = strval($v);
         }
         return $results;
+    }
+
+    public function arrayKeysAreCorrectlyOrdered(array $array, array $correctOrder): void
+    {
+        $this->arrayKeysAreExpectedKeys($array, $correctOrder);
+    }
+
+    public function arrayKeysAreExpectedKeys(array $array, array $expectedKeys): void
+    {
+        $this->arrayValuesAreExpectedValues(array_keys($array), $expectedKeys);
+    }
+
+    public function arrayValuesAreCorrectlyOrdered(array $array, array $correctOrder): void
+    {
+        $this->arrayValuesAreExpectedValues($array, $correctOrder);
+    }
+
+    public function arraysAreEqual(array $array1, array $array2): void
+    {
+        $this->assertEquals($array1, $array2);
     }
 
 }

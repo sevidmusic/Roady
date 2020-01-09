@@ -20,14 +20,14 @@ class StringTestUtilityTest extends TestCase
         $this->stringTestUtility = $stringTestUtility;
     }
 
-    private function getStringTestUtility(): StringTestUtility
-    {
-        return $this->stringTestUtility;
-    }
-
     public function testCanTestStringIsNotEmpty(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty('Non Empty String');
+    }
+
+    private function getStringTestUtility(): StringTestUtility
+    {
+        return $this->stringTestUtility;
     }
 
     public function testCanTestStringIsEmpty(): void

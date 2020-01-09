@@ -2,10 +2,11 @@
 
 namespace DarlingCms\classes\primary;
 
-use DarlingCms\interfaces\primary\Storable as StorableInterface;
 use DarlingCms\abstractions\primary\Storable as StorableBase;
+use DarlingCms\interfaces\primary\Storable as StorableInterface;
 
-class Storable extends StorableBase implements StorableInterface {
+class Storable extends StorableBase implements StorableInterface
+{
 
     /**
      * This is a generic implementation, it does not require
