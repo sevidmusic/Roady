@@ -1,7 +1,5 @@
 <?php
 
-/** @noinspection PhpUnused */
-
 namespace UnitTests\interfaces\primary\TestTraits;
 
 use DarlingCms\interfaces\primary\Classifiable;
