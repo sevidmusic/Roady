@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>PHP</ID>
+  <OriginalElement>\DarlingCms\abstractions\primary\Classifiable</OriginalElement>
+  <nodes>
+    <node x="148.09814814814854" y="174.0">\DarlingCms\abstractions\primary\Identifiable</node>
+    <node x="2258.9555555555557" y="82.0">\UnitTests\interfaces\primary\TestTraits\IdentifiableTestTrait</node>
+    <node x="1667.25" y="415.0">\UnitTests\interfaces\utility\TestTraits\Bar</node>
+    <node x="1896.2055555555557" y="256.0">\UnitTests\classes\primary\ClassifiableTest</node>
+    <node x="102.09814814814854" y="256.0">\DarlingCms\abstractions\primary\Storable</node>
+    <node x="1489.7055555555557" y="82.0">\UnitTests\TestTraits\ReflectionUtilityInstance</node>
+    <node x="607.2888888888892" y="0.0">\DarlingCms\interfaces\primary\Classifiable</node>
+    <node x="1791.7055555555557" y="82.0">\UnitTests\interfaces\primary\TestTraits\ClassifiableTestTrait</node>
+    <node x="2283.9555555555557" y="174.0">\UnitTests\abstractions\primary\IdentifiableTest</node>
+    <node x="497.25" y="415.0">\UnitTests\interfaces\utility\TestTraits\Baz</node>
+    <node x="1183.25" y="415.0">\UnitTests\TestUtilities\StringTestUtility</node>
+    <node x="1661.7055555555557" y="256.0">\UnitTests\abstractions\primary\ExportableTest</node>
+    <node x="906.25" y="415.0">\UnitTests\TestUtilityTests\ArrayTestUtilityTest</node>
+    <node x="29.0" y="338.0">\DarlingCms\classes\primary\Storable</node>
+    <node x="0.0" y="415.0">\UnitTests\interfaces\primary\TestTraits\SwitchableTestTrait</node>
+    <node x="87.28888888888923" y="82.0">\DarlingCms\interfaces\primary\Identifiable</node>
+    <node x="343.28888888888923" y="82.0">\DarlingCms\interfaces\primary\Exportable</node>
+    <node x="1098.0092592592596" y="174.0">\UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait</node>
+    <node x="958.7592592592596" y="338.0">\UnitTests\classes\utility\ReflectionUtilityTest</node>
+    <node x="619.25" y="415.0">\UnitTests\TestUtilityTests\StringTestUtilityTest</node>
+    <node x="499.53888888888923" y="174.0">\DarlingCms\abstractions\primary\Exportable</node>
+    <node x="445.5981481481484" y="256.0">\DarlingCms\classes\primary\Exportable</node>
+    <node x="2098.2055555555557" y="338.0">\UnitTests\classes\primary\StorableTest</node>
+    <node x="1062.5092592592596" y="256.0">\UnitTests\abstractions\utility\ReflectionUtilityTest</node>
+    <node x="1430.25" y="415.0">\UnitTests\TestUtilities\ArrayTestUtility</node>
+    <node x="2360.9555555555557" y="256.0">\UnitTests\classes\primary\IdentifiableTest</node>
+    <node x="2054.2055555555557" y="174.0">\UnitTests\interfaces\primary\TestTraits\StorableTestTrait</node>
+    <node x="1327.7055555555557" y="82.0">\UnitTests\TestTraits\ArrayTester</node>
+    <node x="1945.2055555555557" y="0.0">\UnitTests\TestTraits\StringTester</node>
+    <node x="0.0" y="174.0">\DarlingCms\interfaces\primary\Storable</node>
+    <node x="605.0388888888892" y="256.0">\DarlingCms\abstractions\utility\ReflectionUtility</node>
+    <node x="1461.8333333333335" y="338.0">\UnitTests\classes\primary\ExportableTest</node>
+    <node x="482.25" y="497.0">\UnitTests\interfaces\utility\TestTraits\Bazzer</node>
+    <node x="736.7592592592596" y="338.0">\DarlingCms\classes\utility\ReflectionUtility</node>
+    <node x="25.0" y="579.0">\UnitTests\classes\primary\SwitchableTest</node>
+    <node x="1415.3333333333335" y="174.0">\UnitTests\interfaces\primary\TestTraits\ExportableTestTrait</node>
+    <node x="305.25" y="579.0">\DarlingCms\classes\primary\Switchable</node>
+    <node x="876.0092592592596" y="174.0">\DarlingCms\interfaces\utility\ReflectionUtility</node>
+    <node x="495.28888888888923" y="82.0">\DarlingCms\dev\traits\Logger</node>
+    <node x="25.0" y="497.0">\UnitTests\abstractions\primary\SwitchableTest</node>
+    <node x="267.0" y="497.0">\DarlingCms\abstractions\primary\Switchable</node>
+    <node x="1816.7055555555557" y="174.0">\UnitTests\abstractions\primary\ClassifiableTest</node>
+    <node x="234.09814814814854" y="256.0">\DarlingCms\classes\primary\Identifiable</node>
+    <node x="305.25" y="415.0">\DarlingCms\interfaces\primary\Switchable</node>
+    <node x="497.25" y="579.0">\UnitTests\interfaces\utility\TestTraits\Foo</node>
+    <node x="704.0092592592596" y="174.0">\DarlingCms\classes\primary\Classifiable</node>
+    <node x="627.7740740740742" y="82.0">\DarlingCms\abstractions\primary\Classifiable</node>
+    <node x="2188.9555555555557" y="256.0">\UnitTests\abstractions\primary\StorableTest</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="\UnitTests\classes\utility\ReflectionUtilityTest" target="\UnitTests\abstractions\utility\ReflectionUtilityTest">
+      <point x="60.5" y="-16.0" />
+      <point x="1140.2592592592596" y="313.0" />
+      <point x="1183.5092592592596" y="313.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Identifiable" target="\DarlingCms\interfaces\primary\Identifiable">
+      <point x="-38.0" y="-16.0" />
+      <point x="186.09814814814854" y="154.0" />
+      <point x="163.28888888888923" y="154.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\utility\ReflectionUtility" target="\DarlingCms\dev\traits\Logger">
+      <point x="-50.5" y="-16.0" />
+      <point x="655.5388888888892" y="144.0" />
+      <point x="552.7888888888892" y="144.0" />
+      <point x="11.5" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\utility\ReflectionUtility" target="\DarlingCms\abstractions\utility\ReflectionUtility">
+      <point x="-50.5" y="-16.0" />
+      <point x="787.2592592592596" y="313.0" />
+      <point x="706.0388888888892" y="313.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\interfaces\primary\Exportable" target="\DarlingCms\interfaces\primary\Classifiable">
+      <point x="0.0" y="-16.0" />
+      <point x="409.28888888888923" y="62.0" />
+      <point x="632.6222222222227" y="62.0" />
+      <point x="-50.666666666666515" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\StorableTest" target="\UnitTests\interfaces\primary\TestTraits\StorableTestTrait">
+      <point x="-38.0" y="-16.0" />
+      <point x="2226.9555555555557" y="231.0" />
+      <point x="2205.7055555555557" y="231.0" />
+      <point x="50.5" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\ExportableTest" target="\UnitTests\interfaces\primary\TestTraits\ExportableTestTrait">
+      <point x="-43.0" y="-16.0" />
+      <point x="1704.7055555555557" y="231.0" />
+      <point x="1581.8333333333335" y="231.0" />
+      <point x="55.5" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\primary\TestTraits\ExportableTestTrait" target="\UnitTests\TestTraits\ReflectionUtilityInstance">
+      <point x="55.5" y="-16.0" />
+      <point x="1581.8333333333335" y="154.0" />
+      <point x="1630.7055555555557" y="154.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Exportable" target="\DarlingCms\interfaces\primary\Exportable">
+      <point x="-44.0" y="-16.0" />
+      <point x="521.5388888888892" y="144.0" />
+      <point x="442.28888888888923" y="144.0" />
+      <point x="33.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\StorableTest" target="\UnitTests\interfaces\primary\TestTraits\StorableTestTrait">
+      <point x="-38.0" y="-16.0" />
+      <point x="2136.2055555555557" y="313.0" />
+      <point x="2130.9555555555557" y="313.0" />
+      <point x="2130.9555555555557" y="231.0" />
+      <point x="2104.7055555555557" y="231.0" />
+      <point x="-50.5" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\primary\TestTraits\StorableTestTrait" target="\UnitTests\TestTraits\StringTester">
+      <point x="0.0" y="-16.0" />
+      <point x="2155.2055555555557" y="62.0" />
+      <point x="2040.2055555555557" y="62.0" />
+      <point x="19.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Classifiable" target="\DarlingCms\interfaces\primary\Classifiable">
+      <point x="38.0" y="-16.0" />
+      <point x="818.0092592592596" y="154.0" />
+      <point x="804.2592592592596" y="154.0" />
+      <point x="804.2592592592596" y="62.0" />
+      <point x="733.9555555555557" y="62.0" />
+      <point x="50.666666666666515" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Exportable" target="\DarlingCms\abstractions\primary\Exportable">
+      <point x="33.0" y="-16.0" />
+      <point x="544.5981481481484" y="231.0" />
+      <point x="565.5388888888892" y="231.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\utility\TestTraits\Bazzer" target="\UnitTests\interfaces\utility\TestTraits\Baz">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\utility\ReflectionUtility" target="\DarlingCms\interfaces\utility\ReflectionUtility">
+      <point x="50.5" y="-16.0" />
+      <point x="888.2592592592596" y="313.0" />
+      <point x="942.237962962963" y="313.0" />
+      <point x="942.237962962963" y="231.0" />
+      <point x="951.7592592592596" y="231.0" />
+      <point x="-25.25" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait" target="\DarlingCms\dev\traits\Logger">
+      <point x="-97.33333333333326" y="-16.0" />
+      <point x="1146.6759259259263" y="134.0" />
+      <point x="575.7888888888892" y="134.0" />
+      <point x="34.5" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\StorableTest" target="\UnitTests\abstractions\primary\IdentifiableTest">
+      <point x="38.0" y="-16.0" />
+      <point x="2302.9555555555557" y="231.0" />
+      <point x="2331.9555555555557" y="231.0" />
+      <point x="-48.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\utility\ReflectionUtilityTest" target="\DarlingCms\interfaces\utility\ReflectionUtility">
+      <point x="-60.5" y="-16.0" />
+      <point x="1019.2592592592596" y="313.0" />
+      <point x="989.1342592592596" y="313.0" />
+      <point x="989.1342592592596" y="231.0" />
+      <point x="1002.2592592592596" y="231.0" />
+      <point x="25.25" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Exportable" target="\DarlingCms\abstractions\primary\Classifiable">
+      <point x="44.0" y="-16.0" />
+      <point x="609.5388888888892" y="154.0" />
+      <point x="665.7740740740742" y="154.0" />
+      <point x="-38.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\ClassifiableTest" target="\UnitTests\interfaces\primary\TestTraits\ClassifiableTestTrait">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\IdentifiableTest" target="\UnitTests\interfaces\primary\TestTraits\IdentifiableTestTrait">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Exportable" target="\DarlingCms\dev\traits\Logger">
+      <point x="0.0" y="-16.0" />
+      <point x="565.5388888888892" y="154.0" />
+      <point x="529.7888888888892" y="154.0" />
+      <point x="-11.5" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Classifiable" target="\DarlingCms\interfaces\primary\Classifiable">
+      <point x="0.0" y="-16.0" />
+      <point x="703.7740740740742" y="62.0" />
+      <point x="683.2888888888892" y="62.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\primary\TestTraits\ExportableTestTrait" target="\UnitTests\TestTraits\ArrayTester">
+      <point x="-55.5" y="-16.0" />
+      <point x="1470.8333333333335" y="154.0" />
+      <point x="1434.2055555555557" y="154.0" />
+      <point x="35.5" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\SwitchableTest" target="\UnitTests\abstractions\primary\SwitchableTest">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Identifiable" target="\DarlingCms\interfaces\primary\Identifiable">
+      <point x="38.0" y="-16.0" />
+      <point x="348.09814814814854" y="144.0" />
+      <point x="213.95555555555575" y="144.0" />
+      <point x="50.666666666666515" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\utility\ReflectionUtilityTest" target="\UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait">
+      <point x="60.5" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\primary\TestTraits\ClassifiableTestTrait" target="\UnitTests\TestTraits\StringTester">
+      <point x="0.0" y="-16.0" />
+      <point x="1912.7055555555557" y="62.0" />
+      <point x="2002.2055555555557" y="62.0" />
+      <point x="-19.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\interfaces\primary\Storable" target="\DarlingCms\interfaces\primary\Identifiable">
+      <point x="0.0" y="-16.0" />
+      <point x="56.0" y="154.0" />
+      <point x="112.62222222222272" y="154.0" />
+      <point x="-50.666666666666515" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\ExportableTest" target="\UnitTests\interfaces\primary\TestTraits\ExportableTestTrait">
+      <point x="-43.0" y="-16.0" />
+      <point x="1504.8333333333335" y="313.0" />
+      <point x="1499.5833333333335" y="313.0" />
+      <point x="1499.5833333333335" y="231.0" />
+      <point x="1470.8333333333335" y="231.0" />
+      <point x="-55.5" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\ClassifiableTest" target="\UnitTests\abstractions\primary\ClassifiableTest">
+      <point x="0.0" y="-16.0" />
+      <point x="1992.2055555555557" y="231.0" />
+      <point x="1960.7055555555557" y="231.0" />
+      <point x="48.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\StorableTest" target="\UnitTests\abstractions\primary\StorableTest">
+      <point x="38.0" y="-16.0" />
+      <point x="2212.2055555555557" y="313.0" />
+      <point x="2264.9555555555557" y="313.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\utility\ReflectionUtilityTest" target="\DarlingCms\interfaces\utility\ReflectionUtility">
+      <point x="-60.5" y="-16.0" />
+      <point x="1123.0092592592596" y="231.0" />
+      <point x="1052.7592592592596" y="231.0" />
+      <point x="75.75" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Exportable" target="\DarlingCms\interfaces\primary\Exportable">
+      <point x="-33.0" y="-16.0" />
+      <point x="478.5981481481484" y="231.0" />
+      <point x="409.612962962963" y="231.0" />
+      <point x="409.612962962963" y="144.0" />
+      <point x="376.28888888888923" y="144.0" />
+      <point x="-33.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait" target="\UnitTests\TestTraits\StringTester">
+      <point x="0.0" y="-16.0" />
+      <point x="1244.0092592592596" y="154.0" />
+      <point x="1249.3333333333335" y="154.0" />
+      <point x="1249.3333333333335" y="52.0" />
+      <point x="1964.2055555555557" y="52.0" />
+      <point x="-57.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Identifiable" target="\DarlingCms\dev\traits\Logger">
+      <point x="38.0" y="-16.0" />
+      <point x="262.09814814814854" y="154.0" />
+      <point x="506.78888888888923" y="154.0" />
+      <point x="-34.5" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Identifiable" target="\DarlingCms\abstractions\primary\Identifiable">
+      <point x="-38.0" y="-16.0" />
+      <point x="272.09814814814854" y="231.0" />
+      <point x="262.09814814814854" y="231.0" />
+      <point x="38.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\ExportableTest" target="\UnitTests\abstractions\primary\ExportableTest">
+      <point x="43.0" y="-16.0" />
+      <point x="1590.8333333333335" y="313.0" />
+      <point x="1747.7055555555557" y="313.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\utility\ReflectionUtility" target="\DarlingCms\interfaces\utility\ReflectionUtility">
+      <point x="50.5" y="-16.0" />
+      <point x="756.5388888888892" y="231.0" />
+      <point x="901.2592592592596" y="231.0" />
+      <point x="-75.75" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\primary\TestTraits\IdentifiableTestTrait" target="\UnitTests\TestTraits\StringTester">
+      <point x="0.0" y="-16.0" />
+      <point x="2379.9555555555557" y="52.0" />
+      <point x="2078.2055555555557" y="52.0" />
+      <point x="57.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Storable" target="\DarlingCms\interfaces\primary\Storable">
+      <point x="-28.0" y="-16.0" />
+      <point x="130.09814814814854" y="231.0" />
+      <point x="84.0" y="231.0" />
+      <point x="28.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Switchable" target="\DarlingCms\abstractions\primary\Switchable">
+      <point x="-33.0" y="-16.0" />
+      <point x="338.25" y="554.0" />
+      <point x="333.0" y="554.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\utility\TestTraits\Foo" target="\UnitTests\interfaces\utility\TestTraits\Bazzer">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Storable" target="\DarlingCms\abstractions\primary\Storable">
+      <point x="28.0" y="-16.0" />
+      <point x="113.0" y="313.0" />
+      <point x="158.09814814814854" y="313.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait" target="\UnitTests\TestTraits\ArrayTester">
+      <point x="97.33333333333326" y="-16.0" />
+      <point x="1341.3425925925928" y="154.0" />
+      <point x="1363.2055555555557" y="154.0" />
+      <point x="-35.5" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Storable" target="\DarlingCms\interfaces\primary\Storable">
+      <point x="-28.0" y="-16.0" />
+      <point x="57.0" y="313.0" />
+      <point x="28.0" y="313.0" />
+      <point x="-28.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Switchable" target="\DarlingCms\interfaces\primary\Switchable">
+      <point x="0.0" y="-16.0" />
+      <point x="333.0" y="472.0" />
+      <point x="338.25" y="472.0" />
+      <point x="-33.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\SwitchableTest" target="\UnitTests\interfaces\primary\TestTraits\SwitchableTestTrait">
+      <point x="0.0" y="-16.0" />
+      <point x="0.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\abstractions\primary\ExportableTest" target="\UnitTests\abstractions\primary\ClassifiableTest">
+      <point x="43.0" y="-16.0" />
+      <point x="1790.7055555555557" y="231.0" />
+      <point x="1864.7055555555557" y="231.0" />
+      <point x="-48.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Classifiable" target="\DarlingCms\abstractions\primary\Classifiable">
+      <point x="-38.0" y="-16.0" />
+      <point x="38.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\abstractions\primary\Storable" target="\DarlingCms\abstractions\primary\Identifiable">
+      <point x="28.0" y="-16.0" />
+      <point x="-38.0" y="16.0" />
+    </edge>
+    <edge source="\DarlingCms\classes\primary\Switchable" target="\DarlingCms\interfaces\primary\Switchable">
+      <point x="33.0" y="-16.0" />
+      <point x="404.25" y="554.0" />
+      <point x="409.5" y="554.0" />
+      <point x="409.5" y="472.0" />
+      <point x="404.25" y="472.0" />
+      <point x="33.0" y="16.0" />
+    </edge>
+    <edge source="\UnitTests\classes\primary\IdentifiableTest" target="\UnitTests\abstractions\primary\IdentifiableTest">
+      <point x="0.0" y="-16.0" />
+      <point x="2456.9555555555557" y="231.0" />
+      <point x="2427.9555555555557" y="231.0" />
+      <point x="48.0" y="16.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4764865915273999" x="1276.5" y="305.5" />
+  <SelectedNodes>
+    <node>\DarlingCms\abstractions\primary\Classifiable</node>
+  </SelectedNodes>
+  <Categories />
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
