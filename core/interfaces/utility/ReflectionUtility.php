@@ -2,6 +2,8 @@
 
 namespace DarlingCms\interfaces\utility;
 
+use ReflectionClass;
+
 interface ReflectionUtility
 {
     public function getClassPropertyNames($class): array;
@@ -17,4 +19,6 @@ interface ReflectionUtility
     public function getClassMethodParameterTypes($class, string $method): array;
 
     public function generateMockClassMethodArguments($class, string $method): array;
+
+    public function getClassReflection($class): ReflectionClass;
 }
