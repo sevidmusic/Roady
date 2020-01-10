@@ -3,12 +3,11 @@
 namespace UnitTests\interfaces\primary\TestTraits;
 
 use DarlingCms\interfaces\primary\Storable;
-use UnitTests\TestTraits\StringTester;
 
 trait StorableTestTrait
 {
 
-    use StringTester;
+    use IdentifiableTestTrait;
 
     private $storable;
 
