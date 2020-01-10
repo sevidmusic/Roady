@@ -4,11 +4,9 @@ namespace UnitTests\classes\primary;
 
 use DarlingCms\classes\primary\Storable;
 use UnitTests\abstractions\primary\StorableTest as AbstractStorableTest;
-use UnitTests\interfaces\primary\TestTraits\StorableTestTrait;
 
 class StorableTest extends AbstractStorableTest
 {
-    use StorableTestTrait;
 
     public function setUp(): void
     {
