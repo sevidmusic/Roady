@@ -17,12 +17,12 @@ trait IdentifiableTestTrait
         $this->getStringTestUtility()->stringIsNotEmpty($this->getIdentifiable()->getName());
     }
 
-    protected function getIdentifiable()
+    protected function getIdentifiable(): Identifiable
     {
         return $this->identifiable;
     }
 
-    protected function setIdentifiable(Identifiable $identifiable)
+    protected function setIdentifiable(Identifiable $identifiable): void
     {
         $this->identifiable = $identifiable;
     }
