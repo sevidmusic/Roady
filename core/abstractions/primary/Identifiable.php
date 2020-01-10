@@ -12,8 +12,8 @@ abstract class Identifiable implements IdentifiableInterface
     use Logger;
 
     const RANDOM_BYTES_FAILED = <<<EOD
-Identifiable Implementation Warning: 
-Failed to generate unique id using random_bytes(), defaulting to 
+Identifiable Implementation Warning:
+Failed to generate unique id using random_bytes(), defaulting to
 str_shuffle(). You can safely ignore this warning if the generated
 id does not need to be cryptographically secure.
 EOD;
@@ -33,8 +33,7 @@ EOD;
         try {
             return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(512));
         } catch (Exception $e) {
-            $this->log(self::RANDOM_BYTES_FAILED
-            );
+            $this->log(self::RANDOM_BYTES_FAILED);
         }
         return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
     }
