@@ -4,6 +4,7 @@ namespace UnitTests\abstractions\component\DS_COMPONENT_SUBTYPE;
 
 use DarlingCms\classes\primary\Storable;
 use UnitTests\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits\DS_COMPONENT_NAMETestTrait;
+use UnitTests\abstractions\component\ComponentTest;
 
 class DS_COMPONENT_NAMETest extends ComponentTest
 {
