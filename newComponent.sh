@@ -32,18 +32,19 @@ sleepWriteWordSleep() {
 showLoadingBar() {
     sleepWriteWordSleep "${1}" .3;
     INC=0;
-    while [ $INC -le 23 ]
+    while [ $INC -le 42 ]
     do
-        sleepWriteWordSleep ":" .03;
+        sleepWriteWordSleep ":" .009;
         INC=$(($INC + 1));
     done;
+    echo "[100%]";
+    sleep 0.42;
     clear;
 }
 
 notifyUser() {
     MSG=$(printf "\n${1}\n");
     printf "\n${1}\n";
-#    notify-send "${MSG}";
 }
 
 promptUser() {
@@ -107,15 +108,13 @@ generatePHPCodeFromTemplate() {
         GENERATED_FILE_PATH=$(echo "${GENERATED_FILE_ROOT_DIR_PATH}/${USER_DEFINED_COMPONENT_SUBTYPE}/TestTraits/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php" | sed -E "s,\\\,/,g; s,//,/,g;");
     fi;
     PHP_CODE=$(sed -E "s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/\\\\\\\/\\\/g; s/\\\;/;/g;" "${1}");
+    GENERATED_FILE_SUB_DIR_PATH=$(echo "${GENERATED_FILE_PATH}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php//g");
     printf "The following code was generated using the ${TEMPLATE} template, please review it to make sure there are not any errors:\n\n";
     echo "${PHP_CODE}";
     promptUser "\n\nIf everything looks ok press <enter>";
-    showLoadingBar "Writing file";
-    GENERATED_FILE_SUB_DIR_PATH=$(echo "${GENERATED_FILE_PATH}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php//g");
-    notify-send "${GENERATED_FILE_SUB_DIR_PATH}";
+    showLoadingBar "Writing file ${GENERATED_FILE_PATH} ";
     mkdir -p "${GENERATED_FILE_SUB_DIR_PATH}";
     echo "${PHP_CODE}" > "${GENERATED_FILE_PATH}";
-    notify-send "Created file: ${GENERATED_FILE_PATH}";
 }
 
 askUserForComponentName() {
