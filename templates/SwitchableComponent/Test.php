@@ -2,8 +2,9 @@
 
 namespace UnitTests\classes\component\DS_COMPONENT_SUBTYPE;
 
-use DarlingCms\classes\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME;
 use DarlingCms\classes\primary\Storable;
+use DarlingCms\classes\primary\Switchable;
+use DarlingCms\classes\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME;
 use UnitTests\abstractions\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAMETest as AbstractDS_COMPONENT_NAMETest;
 
 class DS_COMPONENT_NAMETest extends AbstractDS_COMPONENT_NAMETest
@@ -17,6 +18,7 @@ class DS_COMPONENT_NAMETest extends AbstractDS_COMPONENT_NAMETest
                     'DS_COMPONENT_NAMELocation',
                     'DS_COMPONENT_NAMEContainer'
                 ),
+                new Switchable()
             )
         );
         $this->setDS_COMPONENT_NAMEParentTestInstances();
