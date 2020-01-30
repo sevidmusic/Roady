@@ -20,7 +20,7 @@ trait DS_COMPONENT_NAMETestTrait
         return $this->DS_COMPONENT_NAME;
     }
 
-    public function setDS_COMPONENT_NAME(DS_COMPONENT_NAME $DS_COMPONENT_NAME)
+    public function setDS_COMPONENT_NAME(DS_COMPONENT_NAME $DS_COMPONENT_NAME): void
     {
         $this->DS_COMPONENT_NAME = $DS_COMPONENT_NAME;
     }
