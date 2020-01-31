@@ -40,18 +40,18 @@ if the generated string does not need to be cryptographically secure.
 EOD;
 
     const INVALID_CLASS_PARAMETER = <<<EOD
-'ReflectionUtilityTestTrait Error: 
+'ReflectionUtilityTestTrait Error:
 Invalid type %s passed to %s'
 EOD;
 
     const FAILED_TO_REFLECT_CLASS = <<<EOD
-ReflectionUtilityTestTrait Error: 
+ReflectionUtilityTestTrait Error:
 Failed to reflect class %s. Defaulting to reflect empty
 stdClass() instance.
 EOD;
 
     const FAILED_TO_REFLECT_MOCK_STD = <<<EOD
-ReflectionUtilityTestTrait Fatal Error: 
+ReflectionUtilityTestTrait Fatal Error:
 Failed to reflect class %s, and also failed to reflect empty
 stdClass() by default.
 EOD;
@@ -82,10 +82,12 @@ EOD;
         if ($selfReflection->getParentClass() === false) {
             return $selfReflection->getProperties();
         }
-        return array_merge(
-            $selfReflection->getParentClass()->getProperties(),
-            $selfReflection->getProperties()
-        );
+        $propertyReflections = $selfReflection->getProperties();
+        while($parent = $selfReflection->getParentClass()) {
+            $propertyReflections = array_merge($propertyReflections, $parent->getProperties());
+            $selfReflection = $parent;
+        }
+        return $propertyReflections;
     }
 
     private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool

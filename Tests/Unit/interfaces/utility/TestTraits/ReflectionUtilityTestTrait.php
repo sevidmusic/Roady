@@ -139,10 +139,12 @@ EOD;
         if ($selfReflection->getParentClass() === false) {
             return $selfReflection->getProperties();
         }
-        return array_merge(
-            $selfReflection->getParentClass()->getProperties(),
-            $selfReflection->getProperties()
-        );
+        $propertyReflections = $selfReflection->getProperties();
+        while($parent = $selfReflection->getParentClass()) {
+            $propertyReflections = array_merge($propertyReflections, $parent->getProperties());
+            $selfReflection = $parent;
+        }
+        return $propertyReflections;
     }
 
     private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool
