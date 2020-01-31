@@ -75,8 +75,7 @@ EOD;
             );
         }
         try {
-            $reflection = $this->getReflectionUtility()->getClassReflection((object)[$propertyName => null]);
-            return $reflection->getParentClass()->getProperty($propertyName);
+            return new \ReflectionProperty((object)[$propertyName => null], $propertyName);
         } catch (ReflectionException $e) {
             $this->log(
                 $this::MOCK_STD_FAILED,
