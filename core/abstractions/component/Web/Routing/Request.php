@@ -2,29 +2,33 @@
 
 namespace DarlingCms\abstractions\component\Web\Routing;
 
+use DarlingCms\abstractions\component\SwitchableComponent;
+use DarlingCms\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Switchable;
-use DarlingCms\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingCms\abstractions\component\SwitchableComponent;
 
 abstract class Request extends SwitchableComponent implements RequestInterface
 {
     private $url = '';
+    private $get = [];
+    private $post = [];
 
     public function __construct(Storable $storable, Switchable $switchable)
     {
         parent::__construct($storable, $switchable);
         $this->setUrl();
+        $this->get = $_GET;
+        $this->post = $_POST;
     }
 
     public function getGet(): array
     {
-        return $_GET;
+        return $this->get;
     }
 
     public function getPost(): array
     {
-        return $_POST;
+        return $this->post;
     }
 
     public function getUrl(): string
