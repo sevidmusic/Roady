@@ -65,28 +65,27 @@ EOD;
                 $propertyName
             );
         }
-        try {
-            return $reflection->getParentClass()->getProperty($propertyName);
-        } catch (ReflectionException $e) {
+        if ($reflection->getParentClass() === false) {
             $this->log(
                 $this::PROP_NOT_DEFINED_IN_PARENT,
                 $this->getType(),
                 $propertyName
             );
+            try {
+                return new ReflectionProperty((object)[$propertyName => null], $propertyName);
+            } catch (ReflectionException $e) {
+                $this->log(
+                    $this::MOCK_STD_FAILED,
+                    $this->getType(),
+                    $propertyName
+                );
+                die();
+            }
         }
-        try {
-            return new \ReflectionProperty((object)[$propertyName => null], $propertyName);
-        } catch (ReflectionException $e) {
-            $this->log(
-                $this::MOCK_STD_FAILED,
-                $this->getType(),
-                $propertyName
-            );
-            die();
-        }
+        return $this->getReflectedProperty($reflection->getParentClass(), $propertyName);
     }
 
-    private function getReflectionUtility(): ReflectionUtility
+    private function getReflectionUtility(): ReflectionUtilityInterface
     {
         return $this->reflectionUtility;
     }
