@@ -9,6 +9,21 @@ trait RequestTestTrait
 
     private $request;
 
+    public function testGetGetReturnsGetArray(): void
+    {
+        $this->getArrayTestUtility()->arraysAreEqual($_GET, $this->getRequest()->getGet());
+    }
+
+    public function testGetPostReturnsPostArray(): void
+    {
+        $this->getArrayTestUtility()->arraysAreEqual($_POST, $this->getRequest()->getPost());
+    }
+
+    public function testCanGetUrl(): void
+    {
+        $this->getStringTestUtility()->stringIsNotEmpty($this->getRequest()->getUrl());
+    }
+
     protected function setRequestParentTestInstances(): void
     {
         $this->setSwitchableComponent($this->getRequest());
@@ -23,22 +38,6 @@ trait RequestTestTrait
     public function setRequest(Request $request): void
     {
         $this->request = $request;
-    }
-
-    public function testGetGetReturnsGetArray(): void
-    {
-        $this->getArrayTestUtility()->arraysAreEqual($_GET, $this->getRequest()->getGet());
-    }
-
-    public function testGetPostReturnsPostArray(): void
-    {
-        $this->getArrayTestUtility()->arraysAreEqual($_POST, $this->getRequest()->getPost());
-    }
-
-    public function testCanGetUrl(): void
-    {
-        $this->getStringTestUtility()->stringIsNotEmpty($this->getRequest()->getUrl());
-        var_dump($this->getRequest()->getUrl());
     }
 
 }
