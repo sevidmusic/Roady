@@ -21,6 +21,11 @@ abstract class Request extends SwitchableComponent implements RequestInterface
         $this->post = $_POST;
     }
 
+    private function setUrl(): void
+    {
+        $this->url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '');
+    }
+
     public function getGet(): array
     {
         return $this->get;
@@ -34,10 +39,5 @@ abstract class Request extends SwitchableComponent implements RequestInterface
     public function getUrl(): string
     {
         return ($this->url === 'http://' ? './' : $this->url);
-    }
-
-    private function setUrl(): void
-    {
-        $this->url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '');
     }
 }
