@@ -83,7 +83,7 @@ EOD;
             return $selfReflection->getProperties();
         }
         $propertyReflections = $selfReflection->getProperties();
-        while($parent = $selfReflection->getParentClass()) {
+        while ($parent = $selfReflection->getParentClass()) {
             $propertyReflections = array_merge($propertyReflections, $parent->getProperties());
             $selfReflection = $parent;
         }
@@ -184,6 +184,7 @@ EOD;
                 continue;
             }
             /** For unknown types assume class instance. */
+            $type = str_replace(['DarlingCms\interfaces'], ['DarlingCms\classes'], $type);
             array_push($defaults, $this->getClassInstance('\\' . $type));
         }
         return $defaults;
