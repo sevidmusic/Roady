@@ -17,6 +17,13 @@ abstract class Json extends SwitchableComponent implements JsonInterface
     {
         parent::__construct($storable, $switchable);
         $this->mkdir($this->getStorageDirectoryPath());
+        if (file_exists($this->getStorageIndexFilePath()) === false) {
+            file_put_contents(
+                $this->getStorageIndexFilePath(),
+                json_encode([]),
+                LOCK_SH
+            );
+        }
     }
 
     private function mkdir(string $path): bool
@@ -39,16 +46,27 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         return str_replace($namespacePath, '', __DIR__) . '.dcmsJsonData';
     }
 
+    private function getStorageIndexFilePath(): string
+    {
+        return $this->getStorageDirectoryPath() . DIRECTORY_SEPARATOR . 'storageIndex.json';
+    }
+
     public function write(Component $component): bool
     {
+        $status = array();
         $this->mkdir($this->getStorageRootPath($component));
-        return (
-            file_put_contents(
+        array_push(
+            $status,
+            (file_put_contents(
                 $this->getStoragePath($component),
                 $this->pack($component),
                 LOCK_SH
-            )
-            ) > 0;
+            )) > 0
+        );
+        if (!in_array(false, $status)) {
+            array_push($status, $this->addToStorageIndex($component));
+        }
+        return !in_array(false, $status);
     }
 
     private function getStorageRootPath(Storable $storable): string
@@ -80,6 +98,70 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         return json_encode($data);
     }
 
+    private function addToStorageIndex(Component $component): bool
+    {
+        $storageIndex = $this->getStorageIndex();
+        $storageIndex[$component->getLocation()][$component->getContainer()][$component->getUniqueId()] = base64_encode(serialize($component->export()['storable']));
+        return (
+            file_put_contents(
+                $this->getStorageIndexFilePath(),
+                json_encode($storageIndex),
+                LOCK_SH
+            ) > 0);
+    }
+
+    private function getStorageIndex(): array
+    {
+        $storageIndex = json_decode(
+            file_get_contents($this->getStorageIndexFilePath()),
+            true
+        );
+        return ((is_array($storageIndex) === true) ? $storageIndex : []);
+    }
+
+    public function delete(Storable $storable): bool
+    {
+        if ($this->notStored($storable)) {
+            return false;
+        }
+        if (unlink($this->getStoragePath($storable)) === true) {
+            $this->removeFromStorageIndex($storable);
+        }
+        return $this->notStored($storable);
+    }
+
+    private function notStored(Storable $storable): bool
+    {
+        return (file_exists($this->getStoragePath($storable)) === false);
+    }
+
+    private function removeFromStorageIndex(Storable $storable): bool
+    {
+        $storageIndex = $this->getStorageIndex();
+        unset(
+            $storageIndex[$storable->getLocation()][$storable->getContainer()][$storable->getUniqueId()]
+        );
+        return (
+            file_put_contents(
+                $this->getStorageIndexFilePath(),
+                json_encode($storageIndex),
+                LOCK_SH
+            ) > 0);
+    }
+
+    public function readAll(string $location, string $container): array
+    {
+        $components = [];
+        $storageIndex = $this->getStorageIndex();
+        if (isset($storageIndex[$location][$container]) === true && is_array($storageIndex[$location][$container])) {
+            foreach ($storageIndex[$location][$container] as $packedStorable) {
+                $storable = unserialize(base64_decode($packedStorable));
+                array_push($components, $this->read($storable));
+            }
+        }
+        return $components;
+    }
+
     public function read(Storable $storable): Component
     {
         if ($this->notStored($storable)) {
@@ -92,11 +174,6 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         $clone = $this->getClone($data['type']);
         $clone->import($this->unpack($data));
         return $clone;
-    }
-
-    private function notStored(Storable $storable): bool
-    {
-        return (file_exists($this->getStoragePath($storable)) === false);
     }
 
     private function getStandardComponent(): Component
@@ -152,3 +229,4 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         return $data;
     }
 }
+
