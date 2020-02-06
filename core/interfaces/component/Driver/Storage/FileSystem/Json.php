@@ -3,7 +3,7 @@
 namespace DarlingCms\interfaces\component\Driver\Storage\FileSystem;
 
 
-use DarlingCms\interfaces\component\Driver\Storage\Base as StorageDriverInterface;
+use DarlingCms\interfaces\component\Driver\Storage\Standard as StorageDriverInterface;
 use DarlingCms\interfaces\primary\Storable;
 
 interface Json extends StorageDriverInterface
