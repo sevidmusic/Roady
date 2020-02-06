@@ -3,12 +3,9 @@
 namespace DarlingCms\abstractions\component\Crud;
 
 use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\classes\component\Driver\Storage\FileSystem\Json;
-use DarlingCms\classes\primary\Storable as StandardStorable;
-use DarlingCms\classes\primary\Switchable as StandardSwitchable;
 use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingCms\interfaces\component\Driver\Storage\Base as StorageDriver;
+use DarlingCms\interfaces\component\Driver\Storage\Standard as StorageDriver;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Switchable;
 
@@ -17,17 +14,10 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
 
     private $storageDriver;
 
-    public function __construct(Storable $storable, Switchable $switchable)
+    public function __construct(Storable $storable, Switchable $switchable, StorageDriver $storageDriver)
     {
         parent::__construct($storable, $switchable);
-        $this->storageDriver = new Json(
-            new StandardStorable(
-                'JsonStorageDriver',
-                'StorageDrivers',
-                'FileSystem'
-            ),
-            new StandardSwitchable()
-        );
+        $this->storageDriver = $storageDriver;
     }
 
     public function read(Storable $storable): Component

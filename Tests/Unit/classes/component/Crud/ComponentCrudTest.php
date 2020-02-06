@@ -2,9 +2,10 @@
 
 namespace UnitTests\classes\component\Crud;
 
+use DarlingCms\classes\component\Crud\ComponentCrud;
+use DarlingCms\classes\component\Driver\Storage\FileSystem\Json as StorageDriver;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\component\Crud\ComponentCrud;
 use UnitTests\abstractions\component\Crud\ComponentCrudTest as AbstractComponentCrudTest;
 
 class ComponentCrudTest extends AbstractComponentCrudTest
@@ -18,7 +19,15 @@ class ComponentCrudTest extends AbstractComponentCrudTest
                     'ComponentCrudLocation',
                     'ComponentCrudContainer'
                 ),
-                new Switchable()
+                new Switchable(),
+                new StorageDriver(
+                    new Storable(
+                        'StorageDriverName',
+                        'StorageDriverLocation',
+                        'StorageDriverContainer'
+                    ),
+                    new Switchable()
+                )
             )
         );
         $this->setComponentCrudParentTestInstances();

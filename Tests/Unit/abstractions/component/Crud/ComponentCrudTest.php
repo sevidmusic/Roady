@@ -2,10 +2,11 @@
 
 namespace UnitTests\abstractions\component\Crud;
 
+use DarlingCms\classes\component\Driver\Storage\FileSystem\Json as StorageDriver;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use UnitTests\interfaces\component\Crud\TestTraits\ComponentCrudTestTrait;
 use UnitTests\abstractions\component\SwitchableComponentTest;
+use UnitTests\interfaces\component\Crud\TestTraits\ComponentCrudTestTrait;
 
 class ComponentCrudTest extends SwitchableComponentTest
 {
@@ -22,7 +23,15 @@ class ComponentCrudTest extends SwitchableComponentTest
                         'MockComponentCrudLocation',
                         'MockComponentCrudContainer'
                     ),
-                    new Switchable()
+                    new Switchable(),
+                    new StorageDriver(
+                        new Storable(
+                            'MockStorageDriverName',
+                            'MockStorageDriverLocation',
+                            'MockStorageDriverContainer'
+                        ),
+                        new Switchable()
+                    )
                 ]
             )
         );

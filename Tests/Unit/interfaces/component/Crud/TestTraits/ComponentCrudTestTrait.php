@@ -3,7 +3,7 @@
 namespace UnitTests\interfaces\component\Crud\TestTraits;
 
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Driver\Storage\Base as StorageDriver;
+use DarlingCms\interfaces\component\Driver\Storage\Standard as StorageDriver;
 use DarlingCms\interfaces\primary\Storable;
 
 trait ComponentCrudTestTrait
@@ -15,7 +15,7 @@ trait ComponentCrudTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\component\Driver\Storage\Base',
+                'DarlingCms\interfaces\component\Driver\Storage\Standard',
                 class_implements($this->getComponentCrudStorageDriver())
             )
         );
