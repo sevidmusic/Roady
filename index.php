@@ -23,6 +23,31 @@ require(__DIR__ . '/vendor/autoload.php');
             color: #b8a47b;
             font-size: 24px;
         }
+
+        .tanLight1 {
+            color: #b8a47b;
+        }
+
+        .tanDark1 {
+            color: #756354;
+        }
+
+        .blueLight1 {
+            color: #a9f2ff
+        }
+
+        .blueDark1 {
+            color: #5a8087;
+        }
+
+        .redDark1 {
+            color: #873238;
+        }
+
+        .redLight1 {
+            color: #ff798e;
+        }
+
     </style>
 </head>
 <body Id="animate">
@@ -32,17 +57,18 @@ $request = new Request(
     new Switchable()
 );
 $request->switchState();
-echo '<p>Request url: ' . $request->getUrl() . '</p>';
-echo '<p>Request Id: ' . $request->getUniqueId() . '</p>';
-
+echo '<p class="blueDark1">Request url: <span class="blueLight1">' . $request->getUrl() . '</span></p>';
+echo '<p class="blueDark1">Request Id: <span class="blueLight1">' . $request->getUniqueId() . '</span></p>';
+echo '<p class="blueDark1">$_GET vars:</p>';
 echo '<ul>';
 foreach ($request->getGet() as $key => $value) {
-    echo "<li>$key : $value</li>";
+    echo "<li class='blueDark1'><span class='tanDark1'>$key</span> : $value</li>";
 }
 echo '</ul>';
+echo '<p class="blueDark1">$_POST vars:</p>';
 echo '<ul>';
 foreach ($request->getPost() as $key => $value) {
-    echo "<li>$key : $value</li>";
+    echo "<li class='blueDark1'><span class='tanDark1'>$key</span> : $value</li>";
 }
 echo '</ul>';
 
@@ -54,7 +80,8 @@ $outputComponent = new OutputComponent(
 );
 $outputComponent->switchState();
 $outputComponent->import(['output' => 'Hello World!' . strval(rand(100, 999))]);
-echo '<p>OutputComponent Id: ' . $outputComponent->getUniqueId() . ':</p><p>Output: ' . $outputComponent->getOutput() . '</p>';
+echo '<p class="tanDark1">OutputComponent Id: <span class="tanLight1">' . $outputComponent->getUniqueId() . ':</span></p>';
+echo '<p class="tanDark1">Output: <span class="tanLight1">' . $outputComponent->getOutput() . '</span></p>';
 ?>
 <?php
 $response = new Response(
@@ -64,7 +91,21 @@ $response = new Response(
 $response->switchState();
 $response->addRequest($request);
 $response->addOutputComponentStorageInfo($outputComponent);
-echo '<p>Response with Id ' . $response->getUniqueId() . ' responds to request with Id "' . $request->getUniqueId() . '"<br>: ' . ($response->respondsToRequest($request) === true ? 'True' : 'False') . '</p>';
+echo(
+$response->respondsToRequest($request) === true
+    ?
+    '<p class="blueDark1">Response with Id <span class="blueLight1">' .
+    $response->getUniqueId() .
+    '</span> responds to request with Id <span class="blueLight1>" ' .
+    $request->getUniqueId() .
+    '</span></p>'
+    :
+    '<p class="redDark1">Response with Id <span class="redLight1">' .
+    $response->getUniqueId() .
+    '</span> does NOT respond to request with Id <span class="redLight1>" ' .
+    $request->getUniqueId() .
+    '</span></p>'
+);
 ?>
 <?php
 $crud = new ComponentCrud(
@@ -76,11 +117,11 @@ $crud = new ComponentCrud(
     )
 );
 $crud->switchState();
-echo '<p>Using Crud with Id: ' . $crud->getUniqueId() . '</p>';
+echo '<p class="tanDark1">Using Crud with Id: <span class="tanLight1">' . $crud->getUniqueId() . '</p>';
 ?>
 <?php
-echo($crud->create($response) ? '<p>Saved OutputComponent with Id ' . $response->getUniqueId() . '</p>' : '<p>Failed to save OutputComponent with Id ' . $response->getUniqueId() . '</p>');
-echo($crud->create($outputComponent) ? '<p>Saved OutputComponent with Id ' . $outputComponent->getUniqueId() . '</p>' : '<p>Failed to save OutputComponent with Id ' . $outputComponent->getUniqueId() . '</p>');
+echo($crud->create($response) ? '<p class="tanDark1">Saved OutputComponent with Id <span class="tanLight1">' . $response->getUniqueId() . '</span></p>' : '<p class="tanDark1">Failed to save OutputComponent with Id ' . $response->getUniqueId() . '</p>');
+echo($crud->create($outputComponent) ? '<p class="tanDark1">Saved OutputComponent with Id <span class="tanLight1">' . $outputComponent->getUniqueId() . '</span></p>' : '<p class="tanDark1">Failed to save OutputComponent with Id ' . $outputComponent->getUniqueId() . '</p>');
 ?>
 <?php
 $router = new Router(
@@ -91,7 +132,7 @@ $router = new Router(
 );
 $router->switchState();
 ?>
-<h1>Output retrieved using Router:</h1>
+<h1 class="blueLight1">Output retrieved using Router:</h1>
 <?php
 foreach ($router->getResponses($response->getLocation(), $response->getContainer()) as $storedResponse) {
     /**
@@ -99,8 +140,8 @@ foreach ($router->getResponses($response->getLocation(), $response->getContainer
      * @var \DarlingCms\interfaces\primary\Storable $outputComponentStorable
      */
     foreach ($storedResponse->getOutputComponentStorageInfo() as $outputComponentStorable) {
-        echo '<p>Loaded storage info for ' . $storedResponse->getName() . $storedResponse->getUniqueId(). '</p>';
-        echo '<p>Output: ' . $crud->read($outputComponentStorable)->getOutput();
+        echo '<p class="blueDark1">Loaded storage info for <span class="blueLight1">' . $storedResponse->getName() . $storedResponse->getUniqueId() . '</span></p>';
+        echo '<p class="blueDark1">Output: <span class="blueLight1">' . $crud->read($outputComponentStorable)->getOutput() . '</span>';
     }
 }
 ?>
