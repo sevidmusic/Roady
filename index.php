@@ -48,6 +48,11 @@ require(__DIR__ . '/vendor/autoload.php');
             color: #ff798e;
         }
 
+        .bg1 {
+            background: #5a8087;
+            padding: 1em;
+        }
+
     </style>
 </head>
 <body Id="animate">
@@ -96,13 +101,13 @@ $response->respondsToRequest($request) === true
     ?
     '<p class="blueDark1">Response with Id <span class="blueLight1">' .
     $response->getUniqueId() .
-    '</span> responds to request with Id <span class="blueLight1>" ' .
+    '</span> responds to request with Id <span class="blueLight1"> ' .
     $request->getUniqueId() .
     '</span></p>'
     :
-    '<p class="redDark1">Response with Id <span class="redLight1">' .
+    '<p class="redDark1">Using Response with Id <span class="redLight1">' .
     $response->getUniqueId() .
-    '</span> does NOT respond to request with Id <span class="redLight1>" ' .
+    '</span> does NOT respond to request with Id <span class="redLight1"> ' .
     $request->getUniqueId() .
     '</span></p>'
 );
@@ -117,11 +122,11 @@ $crud = new ComponentCrud(
     )
 );
 $crud->switchState();
-echo '<p class="tanDark1">Using Crud with Id: <span class="tanLight1">' . $crud->getUniqueId() . '</p>';
+echo '<p class="tanDark1">Using Crud with Id: <span class="tanLight1">' . $crud->getUniqueId() . '</span></p>';
 ?>
 <?php
-echo($crud->create($response) ? '<p class="tanDark1">Saved OutputComponent with Id <span class="tanLight1">' . $response->getUniqueId() . '</span></p>' : '<p class="tanDark1">Failed to save OutputComponent with Id ' . $response->getUniqueId() . '</p>');
-echo($crud->create($outputComponent) ? '<p class="tanDark1">Saved OutputComponent with Id <span class="tanLight1">' . $outputComponent->getUniqueId() . '</span></p>' : '<p class="tanDark1">Failed to save OutputComponent with Id ' . $outputComponent->getUniqueId() . '</p>');
+echo($crud->create($response) ? '<p class="tanDark1">Saved OutputComponent with Id <span class="tanLight1">' . $response->getUniqueId() . '</span></p>' : '<p class="redDark1">Failed to save OutputComponent with Id <span class="redLight1">' . $response->getUniqueId() . '</span></p>');
+echo($crud->create($outputComponent) ? '<p class="tanDark1">Saved OutputComponent with Id <span class="tanLight1">' . $outputComponent->getUniqueId() . '</span></p>' : '<p class="redDark1">Failed to save OutputComponent with Id <span class="redLight1">' . $outputComponent->getUniqueId() . '</span></p>');
 ?>
 <?php
 $router = new Router(
@@ -141,7 +146,7 @@ foreach ($router->getResponses($response->getLocation(), $response->getContainer
      */
     foreach ($storedResponse->getOutputComponentStorageInfo() as $outputComponentStorable) {
         echo '<p class="blueDark1">Loaded storage info for <span class="blueLight1">' . $storedResponse->getName() . $storedResponse->getUniqueId() . '</span></p>';
-        echo '<p class="blueDark1">Output: <span class="blueLight1">' . $crud->read($outputComponentStorable)->getOutput() . '</span>';
+        echo '<div class="bg1"><p class="blueDark1">Output: <span class="blueLight1">' . $crud->read($outputComponentStorable)->getOutput() . '</span></div>';
     }
 }
 ?>
