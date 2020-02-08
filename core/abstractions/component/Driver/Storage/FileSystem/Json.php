@@ -90,12 +90,21 @@ abstract class Json extends SwitchableComponent implements JsonInterface
     private function pack(Component $component): string
     {
         $data = $component->export();
-        foreach ($data as $key => $datum) {
-            if (is_object($datum) === true) {
-                $data[$key] = base64_encode(serialize($datum));
+        return json_encode($this->packObjectsInArray($data));
+    }
+
+    private function packObjectsInArray(array $array): array
+    {
+        foreach ($array as $key => $value) {
+            if (is_object($value) === true) {
+                $array[$key] = base64_encode(serialize($value));
+            }
+            if (is_array($value) === true) {
+                $array[$key] = $this->packObjectsInArray($value);
             }
         }
-        return json_encode($data);
+        return $array;
+
     }
 
     private function addToStorageIndex(Component $component): bool
@@ -212,11 +221,21 @@ abstract class Json extends SwitchableComponent implements JsonInterface
 
     private function unpack(array $data): array
     {
-        foreach ($data as $key => $datum) {
-            if (is_string($datum) === false) {
+        return $this->unPackObjectsInArray($data);
+    }
+
+    private function unPackObjectsInArray(array $array): array
+    {
+        foreach ($array as $key => $value) {
+            if (is_array($value) === true) {
+                $array[$key] = $this->unPackObjectsInArray($value);
                 continue;
             }
-            $base64DecodedData = base64_decode($datum);
+
+            if (is_string($value) === false) {
+                continue;
+            }
+            $base64DecodedData = base64_decode($value);
             if ((substr($base64DecodedData, 0, 1)) !== 'O') {
                 continue;
             }
@@ -224,9 +243,11 @@ abstract class Json extends SwitchableComponent implements JsonInterface
             if (is_object($unserializedData) === false) {
                 continue;
             }
-            $data[$key] = $unserializedData;
+            $array[$key] = $unserializedData;
+
         }
-        return $data;
+        return $array;
     }
+
 }
 
