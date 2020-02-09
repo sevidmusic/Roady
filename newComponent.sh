@@ -7,6 +7,17 @@ initVars() {
     COMPONENT_INTERFACE_TARGET_ROOT_DIR="./core/interfaces/component";
     COMPONENT_ABSTRACTION_TARGET_ROOT_DIR="./core/abstractions/component";
     COMPONENT_CLASS_TARGET_ROOT_DIR="./core/classes/component";
+    CLEARCOLOR=$(setColor 0);
+    NOTIFYCOLOR=$(setColor 33);
+    DSHCOLOR=$(setColor 36);
+    USRPRMPTCOLOR=$(setColor 44);
+    INPUTCOLOR=$(setColor 34);
+    PHPCODECOLOR=$(setColor 35);
+}
+
+setColor() {
+    COLOR="\e[${1}m";
+    printf "${COLOR}";
 }
 
 writeWordSleep() {
@@ -27,6 +38,7 @@ sleepWriteWordSleep() {
 
 showLoadingBar() {
     sleepWriteWordSleep "${1}" .3;
+    setColor 44;
     INC=0;
     while [ $INC -le 42 ]
     do
@@ -34,65 +46,54 @@ showLoadingBar() {
         INC=$(($INC + 1));
     done;
     echo "[100%]";
+    setColor 0;
     sleep 0.42;
     clear;
 }
 
 notifyUser() {
-    MSG=$(printf "\n${1}\n");
-    printf "\n${1}\n";
+    printf "\n${NOTIFYCOLOR}${1}${CLEARCOLOR}\n";
 }
 
 promptUser() {
     notifyUser "${1}";
-    PROMPT_MSG=$(printf "\n\$dsh: ");
+    PROMPT_MSG=$(printf "\n${DSHCOLOR}\$dsh: ${USRPRMPTCOLOR}");
     PREVIOUS_USER_INPUT="${USER_INPUT}";
     read -p "${PROMPT_MSG}" USER_INPUT;
+    setColor 0;
 }
 
 promptUserAndVerifyInput() {
     while :
     do
         clear;
-
         promptUser "${1}";
-
         clear;
-
-        notifyUser  "You entered \"${USER_INPUT}\"\n\nIs this correct?";
-
+        notifyUser  "You entered \"${INPUTCOLOR}${USER_INPUT}${NOTIFYCOLOR}\"\n\nIs this correct?";
         if [ "${USER_INPUT}" = "Y" ]; then
             clear;
             break;
         fi
-
-        promptUser "If so, type \"Y\" and press <enter> to continue,\npress <enter> repeat last step.";
-
+        promptUser "If so, type ${INPUTCOLOR}\"Y\"${NOTIFYCOLOR} and press ${INPUTCOLOR}<enter>${NOTIFYCOLOR} to continue to next step,\nor just press ${INPUTCOLOR}<enter>${NOTIFYCOLOR} to repeat the last step.";
         if [ "${USER_INPUT}" = "Y" ]; then
             clear;
             break;
         fi
     done;
-
 }
 
 promptUserAndNotify() {
     while :
     do
         clear;
-
         promptUser "${1}";
-
         clear;
-
         if [ "${USER_INPUT}" = "Y" ]; then
             showLoadingBar "${2}";
             clear;
             break;
         fi
-
     done;
-
 }
 
 generatePHPCodeFromTemplate() {
@@ -105,8 +106,8 @@ generatePHPCodeFromTemplate() {
     fi;
     PHP_CODE=$(sed -E "s/DS_PARENT_COMPONENT_SUBTYPE/${USER_DEFINED_PARENT_COMPONENT_SUBTYPE}/g; s/DS_PARENT_COMPONENT_NAME/${USER_DEFINED_PARENT_COMPONENT_NAME}/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/\\\\\\\/\\\/g; s/\\\;/;/g;" "${1}");
     GENERATED_FILE_SUB_DIR_PATH=$(echo "${GENERATED_FILE_PATH}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php//g");
-    printf "The following code was generated using the ${TEMPLATE} template, please review it to make sure there are not any errors:\n\n";
-    echo "${PHP_CODE}";
+    printf "${NOTIFYCOLOR}The following code was generated using the ${INPUTCOLOR}${TEMPLATE}${NOTIFYCOLOR} template, please review it to make sure there are not any errors:${CLEARCOLOR}\n\n";
+    echo "${PHPCODECOLOR}${PHP_CODE}";
     promptUser "\n\nIf everything looks ok press <enter>";
     showLoadingBar "Writing file ${GENERATED_FILE_PATH} ";
     mkdir -p "${GENERATED_FILE_SUB_DIR_PATH}";
@@ -135,31 +136,57 @@ askUserForParentComponentSubtype() {
 
 showWelcomeMessage() {
     clear;
+    setColor 32;
     sleepWriteWordSleep "\nW" .03;
+    setColor 34;
     sleepWriteWordSleep "e" .03;
+    setColor 36;
     sleepWriteWordSleep "l" .03;
+    setColor 32;
     sleepWriteWordSleep "c" .03;
+    setColor 34;
     sleepWriteWordSleep "o" .03;
+    setColor 36;
     sleepWriteWordSleep "m" .03;
+    setColor 32;
     sleepWriteWordSleep "e" .03;
+    setColor 34;
     sleepWriteWordSleep " " .03;
+    setColor 36;
     sleepWriteWordSleep "t" .03;
+    setColor 32;
     sleepWriteWordSleep "h" .03;
+    setColor 34;
     sleepWriteWordSleep "e" .03;
+    setColor 36;
     sleepWriteWordSleep " " .03;
+    setColor 32;
     sleepWriteWordSleep "D" .03;
+    setColor 34;
     sleepWriteWordSleep "a" .03;
+    setColor 36;
     sleepWriteWordSleep "r" .03;
+    setColor 32;
     sleepWriteWordSleep "l" .03;
+    setColor 34;
     sleepWriteWordSleep "i" .03;
+    setColor 36;
     sleepWriteWordSleep "n" .03;
+    setColor 32;
     sleepWriteWordSleep "g" .03;
+    setColor 34;
     sleepWriteWordSleep " " .03;
+    setColor 36;
     sleepWriteWordSleep "S" .03;
+    setColor 32;
     sleepWriteWordSleep "h" .03;
+    setColor 34;
     sleepWriteWordSleep "e" .03;
+    setColor 36;
     sleepWriteWordSleep "l" .03;
+    setColor 32;
     sleepWriteWordSleep "l\n" .03;
+    setColor 36;
     showLoadingBar "Loading New Component Module";
 }
 
@@ -195,6 +222,7 @@ do
     generatePHPCodeFromTemplate "${INTERFACE_TEMPLATE_FILE_PATH}" "${COMPONENT_INTERFACE_TARGET_ROOT_DIR}" "";
     generatePHPCodeFromTemplate "${ABSTRACTION_TEMPLATE_FILE_PATH}" "${COMPONENT_ABSTRACTION_TARGET_ROOT_DIR}" "";
     generatePHPCodeFromTemplate "${CLASS_TEMPLATE_FILE_PATH}" "${COMPONENT_CLASS_TARGET_ROOT_DIR}" "";
+    setColor 0;
     break;
 
 done;
