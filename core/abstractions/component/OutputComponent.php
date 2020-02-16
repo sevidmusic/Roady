@@ -18,6 +18,9 @@ abstract class OutputComponent extends SwitchableComponent implements OutputComp
 
     public function increasePosition(): bool
     {
+        if ($this->getState() === false) {
+            return false;
+        }
         $initialPosition = $this->getPosition();
         $this->position++;
         return $initialPosition < $this->getPosition();
@@ -30,6 +33,9 @@ abstract class OutputComponent extends SwitchableComponent implements OutputComp
 
     public function decreasePosition(): bool
     {
+        if ($this->getState() === false) {
+            return false;
+        }
         $initialPosition = $this->getPosition();
         $this->position--;
         return $initialPosition > $this->getPosition();
