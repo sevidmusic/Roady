@@ -21,6 +21,9 @@ abstract class Router extends SwitchableComponent implements RouterInterface
         parent::__construct($storable, $switchable);
         $this->request = $request;
         $this->crud = $crud;
+        if ($this->crud->getState() === false) {
+            $this->crud->switchState();
+        }
     }
 
     public function getResponses(string $location, string $container): array
