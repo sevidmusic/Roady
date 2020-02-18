@@ -18,6 +18,9 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
     {
         parent::__construct($storable, $switchable);
         $this->storageDriver = $storageDriver;
+        if ($this->storageDriver->getState() === false) {
+            $this->storageDriver->switchState();
+        }
     }
 
     public function read(Storable $storable): Component
