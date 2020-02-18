@@ -22,6 +22,15 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
 
     public function read(Storable $storable): Component
     {
+        if ($this->getState() === false) {
+            return new \DarlingCms\classes\component\Component(
+                new \DarlingCms\classes\primary\Storable(
+                    '__MOCK_COMPONENT__',
+                    '__MOCK_COMPONENT__',
+                    '__MOCK_COMPONENT__'
+                )
+            );
+        }
         return $this->getStorageDriver()->read($storable);
     }
 
@@ -32,7 +41,7 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
 
     public function update(Storable $storable, Component $component): bool
     {
-        if ($this->delete($storable) === true) {
+        if ($this->getState() !== false && $this->delete($storable) === true) {
             return $this->create($component);
         }
         return false;
@@ -40,16 +49,25 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
 
     public function delete(Storable $storable): bool
     {
-        return $this->getStorageDriver()->delete($storable);
+        return ($this->getState() === false
+            ? false
+            : $this->getStorageDriver()->delete($storable)
+        );
     }
 
     public function create(Component $component): bool
     {
-        return $this->getStorageDriver()->write($component);
+        return ($this->getState() === false
+            ? false
+            : $this->getStorageDriver()->write($component)
+        );
     }
 
     public function readAll(string $location, string $container): array
     {
-        return $this->getStorageDriver()->readAll($location, $container);
+        return ($this->getState() === false
+            ? []
+            : $this->getStorageDriver()->readAll($location, $container)
+        );
     }
 }
