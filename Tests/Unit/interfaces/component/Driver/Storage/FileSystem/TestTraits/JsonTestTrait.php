@@ -54,6 +54,7 @@ trait JsonTestTrait
 
     public function testWriteAddsComponentsStorableToStorageIndex(): void
     {
+        $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
         $storageIndex = json_decode(file_get_contents($this->getExpectedStorageIndexPath()), true);
         $this->assertTrue(
@@ -71,6 +72,7 @@ trait JsonTestTrait
 
     public function testDeleteRemovesSpecifiedComponent(): void
     {
+        $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
         $this->getJson()->delete($this->getJson()->export()['storable']);
         $this->assertFalse(file_exists($this->getExpectedStoragePath($this->getJson())), 'delete() failed to remove the data stored at ' . $this->getExpectedStoragePath($this->getJson()));
@@ -90,6 +92,7 @@ trait JsonTestTrait
 
     public function testDeleteRemovesComponentsStorableFromStorageIndex(): void
     {
+        $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
         $this->getJson()->delete($this->getJson()->export()['storable']);
         $storageIndex = json_decode(file_get_contents($this->getExpectedStorageIndexPath()), true);
@@ -113,6 +116,7 @@ trait JsonTestTrait
 
     public function testWriteSavesComponentDataToJsonFileNamedUsingComponentIdUnderSubPathDefinedUsingComponentLocationAndContainer(): void
     {
+        $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
         $this->assertTrue(
             file_exists(self::getExpectedStoragePath($this->getJson())),
@@ -130,6 +134,7 @@ trait JsonTestTrait
 
     public function testReadReturnsComponentSpecifiedByStorable(): void
     {
+        $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
         $storable = $this->getJson()->export()['storable'];
         $storedComponent = $this->getJson()->read($storable);
@@ -139,6 +144,7 @@ trait JsonTestTrait
 
     public function testReadAllReturnsArrayOfAllComponentsStoredInSpecifiedContainerAtSpecifiedLocation(): void
     {
+        $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
         $this->assertTrue(
             in_array(
@@ -157,5 +163,34 @@ trait JsonTestTrait
         $this->setSwitchableComponent($this->getJson());
         $this->setSwitchableComponentParentTestInstances();
     }
+
+    public function testWriteDoesNotWriteAndReturnsFalseIfStateIsFalse(): void
+    {
+        $this->turnJsonOff();
+        $this->assertFalse(
+            $this->getJson()->write($this->getJson()),
+            'write() must return false if state is false.'
+        );
+        $this->assertNotEquals(
+            $this->getJson()->getUniqueId(),
+            $this->getJson()->read($this->getJson()->export()['storable'])->getUniqueId(),
+            'write() must not write if state is false.'
+        );
+    }
+
+    private function turnJsonOff(): void
+    {
+        if ($this->getJson()->getState() === true) {
+            $this->getJson()->switchState();
+        }
+    }
+
+    private function turnJsonOn(): void
+    {
+        if ($this->getJson()->getState() === false) {
+            $this->getJson()->switchState();
+        }
+    }
+
 }
 

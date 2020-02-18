@@ -53,6 +53,9 @@ abstract class Json extends SwitchableComponent implements JsonInterface
 
     public function write(Component $component): bool
     {
+        if ($this->getState() === false) {
+            return false;
+        }
         $status = array();
         $this->mkdir($this->getStorageRootPath($component));
         array_push(
