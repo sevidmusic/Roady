@@ -2,6 +2,7 @@
 
 namespace UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits;
 
+use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\Driver\Storage\FileSystem\Json;
 use DarlingCms\interfaces\primary\Storable;
 
@@ -63,6 +64,13 @@ trait JsonTestTrait
             ),
             'Component\'s storable was not saved to storage index on write.'
         );
+    }
+
+    private function turnJsonOn(): void
+    {
+        if ($this->getJson()->getState() === false) {
+            $this->getJson()->switchState();
+        }
     }
 
     private function getExpectedStorageIndexPath(): string
@@ -158,12 +166,6 @@ trait JsonTestTrait
         );
     }
 
-    protected function setJsonParentTestInstances(): void
-    {
-        $this->setSwitchableComponent($this->getJson());
-        $this->setSwitchableComponentParentTestInstances();
-    }
-
     public function testWriteDoesNotWriteAndReturnsFalseIfStateIsFalse(): void
     {
         $this->turnJsonOff();
@@ -173,9 +175,14 @@ trait JsonTestTrait
         );
         $this->assertNotEquals(
             $this->getJson()->getUniqueId(),
-            $this->getJson()->read($this->getJson()->export()['storable'])->getUniqueId(),
+            $this->getStoredComponent()->getUniqueId(),
             'write() must not write if state is false.'
         );
+    }
+
+    private function getStoredComponent(): Component
+    {
+        return $this->getJson()->read($this->getJson()->export()['storable']);
     }
 
     private function turnJsonOff(): void
@@ -185,11 +192,53 @@ trait JsonTestTrait
         }
     }
 
-    private function turnJsonOn(): void
+    public function testReadReturnsMockComponentIfStateIsFalse(): void
     {
-        if ($this->getJson()->getState() === false) {
-            $this->getJson()->switchState();
-        }
+        $this->turnJsonOn();
+        $this->getJson()->write($this->getJson());
+        $this->turnJsonOff();
+        $this->assertNotEquals(
+            $this->getJson()->getUniqueId(),
+            $this->getStoredComponent()->getUniqueId(),
+            'read() must return a __MOCK__COMPONENT__ if state is false.'
+        );
+        $this->assertEquals(
+            '__MOCK_COMPONENT__',
+            $this->getStoredComponent()->getName(),
+            'read() must return a __MOCK_COMPONENT__ whose name is __MOCK_COMPONENT__ if state is false.'
+        );
+        $this->assertEquals(
+            '__MOCK_COMPONENT__',
+            $this->getStoredComponent()->getLocation(),
+            'read() must return a __MOCK_COMPONENT__ whose location is __MOCK_COMPONENT__ if state is false.'
+        );
+        $this->assertEquals(
+            '__MOCK_COMPONENT__',
+            $this->getStoredComponent()->getContainer(),
+            'read() must return a __MOCK_COMPONENT__ whose container is __MOCK_COMPONENT__ if state is false.'
+        );
+    }
+
+    public function testDeleteReturnsFalseAndDoesNotDeleteIfStateIsFalse(): void
+    {
+        $this->turnJsonOn();
+        $this->getJson()->write($this->getJson());
+        $this->turnJsonOff();
+        $this->assertFalse(
+            $this->getJson()->delete($this->getJson()->export()['storable'])
+        );
+        $this->turnJsonOn();
+        $this->assertEquals(
+            $this->getJson()->getUniqueId(),
+            $this->getStoredComponent()->getUniqueId(),
+            'read() must return a __MOCK__COMPONENT__ if state is false.'
+        );
+    }
+
+    protected function setJsonParentTestInstances(): void
+    {
+        $this->setSwitchableComponent($this->getJson());
+        $this->setSwitchableComponentParentTestInstances();
     }
 
 }

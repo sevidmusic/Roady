@@ -133,7 +133,7 @@ abstract class Json extends SwitchableComponent implements JsonInterface
 
     public function delete(Storable $storable): bool
     {
-        if ($this->notStored($storable)) {
+        if ($this->getState() === false || $this->notStored($storable) === true) {
             return false;
         }
         if (unlink($this->getStoragePath($storable)) === true) {
@@ -176,6 +176,15 @@ abstract class Json extends SwitchableComponent implements JsonInterface
 
     public function read(Storable $storable): Component
     {
+        if ($this->getState() === false) {
+            return new StandardComponent(
+                new StandardStorable(
+                    '__MOCK_COMPONENT__',
+                    '__MOCK_COMPONENT__',
+                    '__MOCK_COMPONENT__'
+                )
+            );
+        }
         if ($this->notStored($storable)) {
             return $this->getStandardComponent();
         }
