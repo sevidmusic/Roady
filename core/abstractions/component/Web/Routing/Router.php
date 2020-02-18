@@ -28,6 +28,9 @@ abstract class Router extends SwitchableComponent implements RouterInterface
 
     public function getResponses(string $location, string $container): array
     {
+        if ($this->getState() === false) {
+            return [];
+        }
         $responses = [];
         foreach ($this->getCrud()->readAll($location, $container) as $response) {
             if ($this->isValidResponse($response) === false || $response->getState() === false) {

@@ -95,6 +95,7 @@ trait RouterTestTrait
 
     public function testGetResponsesReturnsArrayOfResponsesThatAreNotCorrupted(): void
     {
+        $this->turnRouterOn();
         $response = $this->getStandardResponse();
         $response->switchState();
         $response->addRequest($this->getRouter()->getRequest());
@@ -116,6 +117,13 @@ trait RouterTestTrait
         }
     }
 
+    private function turnRouterOn(): void
+    {
+        if ($this->getRouter()->getState() === false) {
+            $this->getRouter()->switchState();
+        }
+    }
+
     private function getStandardResponse(): StandardResponse
     {
         return new StandardResponse(
@@ -130,6 +138,7 @@ trait RouterTestTrait
 
     public function testGetResponsesReturnsArrayOfResponsesThatRespondToAssignedRequest(): void
     {
+        $this->turnRouterOn();
         $response = $this->getStandardResponse();
         $response->switchState();
         // Create response that is assigned the Routers request
@@ -147,6 +156,7 @@ trait RouterTestTrait
 
     public function testGetResponsesReturnsArrayOfResponsesWhoseStateIsTrue(): void
     {
+        $this->turnRouterOn();
         $response = $this->getStandardResponse();
         $response->addRequest($this->getRouter()->getRequest());
         $response->switchState();
@@ -160,6 +170,24 @@ trait RouterTestTrait
                 $response->getState(),
                 'getResponse() returned array containing responses whose state is false.'
             );
+        }
+    }
+
+    public function testGetResponsesReturnsEmptyArrayIfStateIsFalse(): void
+    {
+        $this->turnRouterOff();
+        $this->assertEmpty(
+            $this->getRouter()->getResponses(
+                $this->getStandardResponse()->getLocation(),
+                $this->getStandardResponse()->getContainer()
+            )
+        );
+    }
+
+    private function turnRouterOff(): void
+    {
+        if ($this->getRouter()->getState() === true) {
+            $this->getRouter()->switchState();
         }
     }
 
