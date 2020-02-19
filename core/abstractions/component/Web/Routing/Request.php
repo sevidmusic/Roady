@@ -28,16 +28,19 @@ abstract class Request extends SwitchableComponent implements RequestInterface
 
     public function getGet(): array
     {
-        return $this->get;
+        return ($this->getState() === false ? [] : $this->get);
     }
 
     public function getPost(): array
     {
-        return $this->post;
+        return ($this->getState() === false ? [] : $this->post);
     }
 
     public function getUrl(): string
     {
-        return ($this->url === 'http://' ? './' : $this->url);
+        return ($this->getState() === false
+            ? '__DISABLED__'
+            : ($this->url === 'http://' ? './' : $this->url)
+        );
     }
 }
