@@ -77,7 +77,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
 
     public function getOutputComponentStorageInfo(): array
     {
-        return $this->outputComponentStorageInfo;
+        return ($this->getState() === false ? [] : $this->outputComponentStorageInfo);
     }
 
 }

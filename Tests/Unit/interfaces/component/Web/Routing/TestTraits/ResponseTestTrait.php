@@ -17,7 +17,20 @@ trait ResponseTestTrait
     {
         $initialRequestCount = count($this->getResponse()->export()['requests']);
         $this->getResponse()->addRequest($this->getMockRequest());
-        $this->assertTrue((count($this->getResponse()->export()['requests']) > $initialRequestCount));
+        $this->assertTrue(
+            (count($this->getResponse()->export()['requests']) > $initialRequestCount),
+            'addRequest() failed to add request.'
+        );
+    }
+
+    public function getResponse(): Response
+    {
+        return $this->response;
+    }
+
+    public function setResponse(Response $response): void
+    {
+        $this->response = $response;
     }
 
     private function getMockRequest(): Request
@@ -54,11 +67,17 @@ trait ResponseTestTrait
         $this->getResponse()->addRequest($request);
         $requestCount = count($this->getResponse()->export()['requests']);
         $this->getResponse()->removeRequest($request->getName());
-        $this->assertTrue((count($this->getResponse()->export()['requests']) < $requestCount), 'Failed removing request by name');
+        $this->assertTrue(
+            (count($this->getResponse()->export()['requests']) < $requestCount),
+            'Failed removing request by name'
+        );
         $this->getResponse()->addRequest($request);
         $requestCount = count($this->getResponse()->export()['requests']);
         $this->getResponse()->removeRequest($request->getUniqueId());
-        $this->assertTrue((count($this->getResponse()->export()['requests']) < $requestCount), 'Failed removing request by id.');
+        $this->assertTrue(
+            (count($this->getResponse()->export()['requests']) < $requestCount),
+            'Failed removing request by id.'
+        );
 
     }
 
@@ -66,19 +85,28 @@ trait ResponseTestTrait
     {
         $request = $this->getMockRequest();
         $this->getResponse()->addRequest($request);
-        $this->assertTrue($this->getResponse()->respondsToRequest($request));
+        $this->assertTrue(
+            $this->getResponse()->respondsToRequest($request),
+            'respondsToRequest() must return true for assigned request.'
+        );
     }
 
     public function testRespondsToRequestReturnsFalseForUnknownRequest(): void
     {
-        $this->assertFalse($this->getResponse()->respondsToRequest($this->getMockRequest()));
+        $this->assertFalse(
+            $this->getResponse()->respondsToRequest($this->getMockRequest()),
+            'respondsToRequest() must return false for unknown request.'
+        );
     }
 
     public function testAddOutputComponentStorageInfoAddsSpecifiedOutputComponentsStorableInstance(): void
     {
         $initialCount = count($this->getResponse()->export()['outputComponentStorageInfo']);
         $this->getResponse()->addOutputComponentStorageInfo($this->getMockOutputComponent());
-        $this->assertTrue((count($this->getResponse()->export()['outputComponentStorageInfo']) > $initialCount));
+        $this->assertTrue(
+            (count($this->getResponse()->export()['outputComponentStorageInfo']) > $initialCount),
+            'addOutput() failed to add output component\'s storable instance.'
+        );
     }
 
     private function getMockOutputComponent(): OutputComponent
@@ -92,18 +120,48 @@ trait ResponseTestTrait
         $this->getResponse()->addOutputComponentStorageInfo($outputComponent);
         $count = count($this->getResponse()->export()['outputComponentStorageInfo']);
         $this->getResponse()->removeOutputComponentStorageInfo($outputComponent->getName());
-        $this->assertTrue((count($this->getResponse()->export()['outputComponentStorageInfo']) < $count), 'Failed removing output component storage info by name');
+        $this->assertTrue(
+            (count($this->getResponse()->export()['outputComponentStorageInfo']) < $count),
+            'Failed removing output component storage info by name'
+        );
         $this->getResponse()->addOutputComponentStorageInfo($outputComponent);
         $count = count($this->getResponse()->export()['outputComponentStorageInfo']);
         $this->getResponse()->removeOutputComponentStorageInfo($outputComponent->getUniqueId());
-        $this->assertTrue((count($this->getResponse()->export()['outputComponentStorageInfo']) < $count), 'Failed removing output component storage info by unique id');
+        $this->assertTrue(
+            (count($this->getResponse()->export()['outputComponentStorageInfo']) < $count),
+            'Failed removing output component storage info by unique id'
+        );
     }
 
     public function testGetOutputComponentStorageInfoReturnsArrayOfStorableInstancesForAssignedOutputComponents()
     {
+        $this->turnResponseOn();
         $outputComponent = $this->getMockOutputComponent();
         $this->getResponse()->addOutputComponentStorageInfo($outputComponent);
-        $this->assertEquals([$outputComponent->export()['storable']], $this->getResponse()->getOutputComponentStorageInfo());
+        $this->assertEquals(
+            [$outputComponent->export()['storable']],
+            $this->getResponse()->getOutputComponentStorageInfo(),
+            'getOutputComponentStorageInfo() did not return array of storable instances for assigned output components.'
+        );
+    }
+
+    private function turnResponseOn(): void
+    {
+        if ($this->getResponse()->getState() === false) {
+            $this->getResponse()->switchState();
+        }
+    }
+
+    public function testGetOutputComponentStorageInfoReturnsEmptyArrayIfStateIsFalse(): void
+    {
+        $this->turnResponseOff();
+        $this->getResponse()->addOutputComponentStorageInfo(
+            $this->getMockOutputComponent()
+        );
+        $this->assertEmpty(
+            $this->getResponse()->getOutputComponentStorageInfo(),
+            'getOutputComponentStorageInfo() must return an empty array if state is false.'
+        );
     }
 
     protected function setResponseParentTestInstances(): void
@@ -112,13 +170,10 @@ trait ResponseTestTrait
         $this->setSwitchableComponentParentTestInstances();
     }
 
-    public function getResponse(): Response
+    private function turnResponseOff(): void
     {
-        return $this->response;
-    }
-
-    public function setResponse(Response $response): void
-    {
-        $this->response = $response;
+        if ($this->getResponse()->getState() === true) {
+            $this->getResponse()->switchState();
+        }
     }
 }
