@@ -4,6 +4,7 @@ namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
 use DarlingCms\classes\component\OutputComponent;
 use DarlingCms\classes\component\Web\Routing\Request;
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\Web\Routing\Response;
@@ -111,7 +112,7 @@ trait ResponseTestTrait
 
     private function getMockOutputComponent(): OutputComponent
     {
-        return new OutputComponent($this->getMockStorable(), $this->getMockSwitchable());
+        return new OutputComponent($this->getMockStorable(), $this->getMockSwitchable(), new Positionable());
     }
 
     public function testRemoveOutputComponentStorageInfoRemovesSpecifiedOutputComponentsStorableInstance(): void
