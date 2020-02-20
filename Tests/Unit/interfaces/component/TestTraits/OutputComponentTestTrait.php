@@ -9,6 +9,14 @@ trait OutputComponentTestTrait
 
     private $outputComponent;
 
+    public function testPositionableInstanceIsSetOnInstantiation(): void
+    {
+        $this->assertTrue(
+            isset($this->getOutputComponent()->export()['positionable']),
+            'The \DarlingCms\interfaces\primary\Positionable implementation instance must be asssigned to the $positionable property on instantiation.'
+        );
+    }
+
     public function testGetOutputReturnsEmptyStringIfStateIsFalse(): void
     {
         $this->forceFalseState();

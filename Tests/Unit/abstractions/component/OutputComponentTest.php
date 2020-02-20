@@ -2,6 +2,7 @@
 
 namespace UnitTests\abstractions\component;
 
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use UnitTests\interfaces\component\TestTraits\OutputComponentTestTrait;
@@ -27,7 +28,8 @@ class OutputComponentTest extends SwitchableComponentTest
                         'MockOutputComponentLocation',
                         'MockOutputComponentContainer'
                     ),
-                    new Switchable()
+                    new Switchable(),
+                    new Positionable()
                 ]
             )
         );

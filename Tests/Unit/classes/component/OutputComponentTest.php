@@ -3,6 +3,7 @@
 namespace UnitTests\classes\component;
 
 use DarlingCms\classes\component\OutputComponent;
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use UnitTests\abstractions\component\OutputComponentTest as AbstractOutputComponentTest;
@@ -18,7 +19,8 @@ class OutputComponentTest extends AbstractOutputComponentTest
                     'OutputComponentLocation',
                     'OutputComponentContainer'
                 ),
-                new Switchable()
+                new Switchable(),
+                new Positionable()
             )
         );
         $this->setOutputComponentParentTestInstances();

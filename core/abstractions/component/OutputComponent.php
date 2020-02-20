@@ -3,13 +3,22 @@
 namespace DarlingCms\abstractions\component;
 
 use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingCms\interfaces\primary\Positionable;
+use DarlingCms\interfaces\primary\Storable;
+use DarlingCms\interfaces\primary\Switchable;
 
 abstract class OutputComponent extends SwitchableComponent implements OutputComponentInterface
 {
 
     private $output = '';
-    private $position = 0;
+    private $positionable;
 
+
+    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable)
+    {
+        parent::__construct($storable, $switchable);
+        $this->positionable = $positionable;
+    }
 
     public function getOutput(): string
     {
@@ -21,14 +30,12 @@ abstract class OutputComponent extends SwitchableComponent implements OutputComp
         if ($this->getState() === false) {
             return false;
         }
-        $initialPosition = $this->getPosition();
-        $this->position++;
-        return $initialPosition < $this->getPosition();
+        return $this->positionable->increasePosition();
     }
 
     public function getPosition(): float
     {
-        return ($this->position === 0) ? 0.0 : $this->position / 100;
+        return $this->positionable->getPosition();
     }
 
     public function decreasePosition(): bool
@@ -36,9 +43,7 @@ abstract class OutputComponent extends SwitchableComponent implements OutputComp
         if ($this->getState() === false) {
             return false;
         }
-        $initialPosition = $this->getPosition();
-        $this->position--;
-        return $initialPosition > $this->getPosition();
+        return $this->positionable->decreasePosition();
     }
 
 }
