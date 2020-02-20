@@ -2,7 +2,9 @@
 
 namespace DarlingCms\interfaces\component;
 
-interface OutputComponent extends SwitchableComponent
+use DarlingCms\interfaces\primary\Positionable;
+
+interface OutputComponent extends SwitchableComponent, Positionable
 {
 
     public function getOutput(): string;
