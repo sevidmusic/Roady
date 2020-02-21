@@ -8,4 +8,5 @@ interface Positionable
 
     public function decreasePosition(): bool;
 
+    public function getPosition(): float;
 }
