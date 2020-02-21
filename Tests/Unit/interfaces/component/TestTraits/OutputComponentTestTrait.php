@@ -106,6 +106,7 @@ trait OutputComponentTestTrait
 
     protected function setOutputComponentParentTestInstances(): void
     {
+        $this->setPositionable($this->getOutputComponent());
         $this->setSwitchableComponent($this->getOutputComponent());
         $this->setSwitchableComponentParentTestInstances();
     }

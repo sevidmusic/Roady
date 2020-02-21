@@ -33,7 +33,6 @@ class OutputComponentTest extends SwitchableComponentTest
                 ]
             )
         );
-        $this->setPositionable($this->getOutputComponent());
         $this->setOutputComponentParentTestInstances();
     }
 }
