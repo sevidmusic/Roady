@@ -2,11 +2,11 @@
 
 namespace UnitTests\abstractions\component\DS_COMPONENT_SUBTYPE;
 
-use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use UnitTests\abstractions\component\DS_PARENT_COMPONENT_SUBTYPE\DS_PARENT_COMPONENT_NAMETest;
+use DarlingCms\classes\primary\Positionable;
 use UnitTests\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits\DS_COMPONENT_NAMETestTrait;
+use UnitTests\abstractions\component\DS_PARENT_COMPONENT_SUBTYPE\DS_PARENT_COMPONENT_NAMETest;
 
 class DS_COMPONENT_NAMETest extends DS_PARENT_COMPONENT_NAMETest
 {
