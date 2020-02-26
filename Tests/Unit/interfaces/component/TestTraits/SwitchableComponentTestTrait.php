@@ -12,6 +12,8 @@ trait SwitchableComponentTestTrait
 
     private $switchableComponent;
 
+    // @todo implement testStateIsTruePostInstantiation()
+
     protected function setSwitchableComponentParentTestInstances(): void
     {
         $this->setComponent($this->getSwitchableComponent());
