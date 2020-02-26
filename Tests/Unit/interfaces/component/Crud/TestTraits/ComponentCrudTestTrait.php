@@ -82,6 +82,10 @@ trait ComponentCrudTestTrait
         );
     }
 
+    /**
+     * @todo Implement folloeing tests:
+     * testUpdatePreservesUniqueId()
+     */
     public function testUpdateUpdatesSpecifiedComponent(): void
     {
         $standardComponent = $this->getStoredComponent();
