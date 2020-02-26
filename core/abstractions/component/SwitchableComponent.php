@@ -15,6 +15,9 @@ abstract class SwitchableComponent extends Component implements SwitchableCompon
     {
         parent::__construct($storable);
         $this->setSwitchable($switchable);
+        if ($this->getState() === false) {
+            $this->switchState();
+        }
     }
 
     private function setSwitchable(Switchable $switchable)
