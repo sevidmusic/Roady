@@ -16,24 +16,24 @@ class RouterTest extends AbstractRouterTest
     {
         $request = new Request(
             new Storable(
-                'Request',
-                'RequestLocation',
-                'RequestContainer'
+                'RouterTestRequest',
+                'RouterTestRequestLocation',
+                'RouterTestRequestContainer'
             ),
             new Switchable()
         );
         $crud = new Crud(
             new Storable(
-                'CrudName',
-                'CrudLocation',
-                'CrudContainer'
+                'RouterTestCrudName',
+                'RouterTestCrudLocation',
+                'RouterTestCrudContainer'
             ),
             new Switchable(),
             new StorageDriver(
                 new Storable(
-                    'StorageDriverName',
-                    'StorageDriverLocation',
-                    'StorageDriverContainer'
+                    'RouterTestStorageDriverName',
+                    'RouterTestStorageDriverLocation',
+                    'RouterTestStorageDriverContainer'
                 ),
                 new Switchable()
             )
@@ -41,9 +41,9 @@ class RouterTest extends AbstractRouterTest
         $this->setRouter(
             new Router(
                 new Storable(
-                    'RouterName',
-                    'RouterLocation',
-                    'RouterContainer'
+                    'RouterTestRouterName',
+                    'RouterTestRouterLocation',
+                    'RouterTestRouterContainer'
                 ),
                 new Switchable(),
                 $request,
