@@ -68,7 +68,7 @@ trait ResponseTestTrait
 
     private function getMockCrud(): ComponentCrud
     {
-        $crud = new \DarlingCms\classes\component\Crud\ComponentCrud(
+        return new \DarlingCms\classes\component\Crud\ComponentCrud(
             new Storable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
             new Switchable(),
             new Standard(
@@ -80,7 +80,6 @@ trait ResponseTestTrait
                 new Switchable()
             )
         );
-        return $crud;
     }
 
     public function getResponse(): Response
