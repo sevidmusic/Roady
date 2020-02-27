@@ -2,11 +2,14 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
+use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;
+use DarlingCms\classes\component\Template\UserInterface\GenericUITemplate as Template;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Web\Routing\Response;
 
 trait ResponseTestTrait
@@ -14,29 +17,26 @@ trait ResponseTestTrait
 
     private $response;
 
-    public function testAddRequestAddsSpecifiedRequest()
+    public function testRespondsToRequestReturnsTrueForAssignedRequest(): void
     {
-        $initialRequestCount = count($this->getResponse()->export()['requests']);
-        $this->getResponse()->addRequest($this->getMockRequest());
+        $request = $this->getMockRequest();
+        $this->getMockCrud()->create($request);
+        $this->getResponse()->addRequestStorageInfo($request);
         $this->assertTrue(
-            (count($this->getResponse()->export()['requests']) > $initialRequestCount),
-            'addRequest() failed to add request.'
+            $this->getResponse()->respondsToRequest(
+                $request,
+                $this->getMockCrud()
+            ),
+            'respondsToRequest() must return true for assigned request.'
         );
-    }
-
-    public function getResponse(): Response
-    {
-        return $this->response;
-    }
-
-    public function setResponse(Response $response): void
-    {
-        $this->response = $response;
     }
 
     private function getMockRequest(): Request
     {
-        $request = new Request($this->getMockStorable(), $this->getMockSwitchable());
+        $request = new Request(
+            $this->getMockStorable(),
+            $this->getMockSwitchable()
+        );
         $request->import(
             [
                 'url' => 'http://www.example.com/admin.php?foo=bar&baz=bazzer',
@@ -54,7 +54,11 @@ trait ResponseTestTrait
 
     private function getMockStorable(): Storable
     {
-        return new Storable('MockName', 'MockLocation', 'MockContainer');
+        return new Storable(
+            'MockName',
+            'MockLocation',
+            'MockContainer'
+        );
     }
 
     private function getMockSwitchable(): Switchable
@@ -62,81 +66,121 @@ trait ResponseTestTrait
         return new Switchable();
     }
 
-    public function testRemoveRequestRemovesSpecifiedRequest(): void
+    private function getMockCrud(): ComponentCrud
     {
-        $request = $this->getMockRequest();
-        $this->getResponse()->addRequest($request);
-        $requestCount = count($this->getResponse()->export()['requests']);
-        $this->getResponse()->removeRequest($request->getName());
-        $this->assertTrue(
-            (count($this->getResponse()->export()['requests']) < $requestCount),
-            'Failed removing request by name'
+        $crud = new \DarlingCms\classes\component\Crud\ComponentCrud(
+            new Storable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
+            new Switchable(),
+            new Standard(
+                new Storable(
+                    'MockStandardStorageDriver',
+                    'MockStandardStorageDriverLocation',
+                    'MockStandardStorageDriverContainer'
+                ),
+                new Switchable()
+            )
         );
-        $this->getResponse()->addRequest($request);
-        $requestCount = count($this->getResponse()->export()['requests']);
-        $this->getResponse()->removeRequest($request->getUniqueId());
-        $this->assertTrue(
-            (count($this->getResponse()->export()['requests']) < $requestCount),
-            'Failed removing request by id.'
-        );
-
+        return $crud;
     }
 
-    public function testRespondsToRequestReturnsTrueForAssignedRequest(): void
+    public function getResponse(): Response
     {
-        $request = $this->getMockRequest();
-        $this->getResponse()->addRequest($request);
-        $this->assertTrue(
-            $this->getResponse()->respondsToRequest($request),
-            'respondsToRequest() must return true for assigned request.'
-        );
+        return $this->response;
+    }
+
+    public function setResponse(Response $response): void
+    {
+        $this->response = $response;
     }
 
     public function testRespondsToRequestReturnsFalseForUnknownRequest(): void
     {
         $this->assertFalse(
-            $this->getResponse()->respondsToRequest($this->getMockRequest()),
+            $this->getResponse()->respondsToRequest(
+                $this->getMockRequest(),
+                $this->getMockCrud()
+            ),
             'respondsToRequest() must return false for unknown request.'
         );
     }
 
     public function testAddOutputComponentStorageInfoAddsSpecifiedOutputComponentsStorableInstance(): void
     {
-        $initialCount = count($this->getResponse()->export()['outputComponentStorageInfo']);
-        $this->getResponse()->addOutputComponentStorageInfo($this->getMockOutputComponent());
+        $initialCount = count(
+            $this->getResponse()->export()['outputComponentStorageInfo']
+        );
+        $this->getResponse()->addOutputComponentStorageInfo(
+            $this->getMockOutputComponent()
+        );
         $this->assertTrue(
-            (count($this->getResponse()->export()['outputComponentStorageInfo']) > $initialCount),
+            (
+                count($this->getResponse()->export()['outputComponentStorageInfo'])
+                >
+                $initialCount
+            ),
             'addOutput() failed to add output component\'s storable instance.'
         );
     }
 
     private function getMockOutputComponent(): OutputComponent
     {
-        return new OutputComponent($this->getMockStorable(), $this->getMockSwitchable(), new Positionable());
+        return new OutputComponent(
+            $this->getMockStorable(),
+            $this->getMockSwitchable(),
+            new Positionable()
+        );
     }
 
     public function testRemoveOutputComponentStorageInfoRemovesSpecifiedOutputComponentsStorableInstance(): void
     {
         $outputComponent = $this->getMockOutputComponent();
         $this->getResponse()->addOutputComponentStorageInfo($outputComponent);
-        $count = count($this->getResponse()->export()['outputComponentStorageInfo']);
-        $this->getResponse()->removeOutputComponentStorageInfo($outputComponent->getName());
+        $count = count(
+            $this->getResponse()->export()['outputComponentStorageInfo']
+        );
+        $this->getResponse()->removeOutputComponentStorageInfo(
+            $outputComponent->getName()
+        );
         $this->assertTrue(
-            (count($this->getResponse()->export()['outputComponentStorageInfo']) < $count),
+            (
+                count($this->getResponse()->export()['outputComponentStorageInfo'])
+                <
+                $count
+            ),
             'Failed removing output component storage info by name'
         );
         $this->getResponse()->addOutputComponentStorageInfo($outputComponent);
-        $count = count($this->getResponse()->export()['outputComponentStorageInfo']);
-        $this->getResponse()->removeOutputComponentStorageInfo($outputComponent->getUniqueId());
+        $count = count(
+            $this->getResponse()->export()['outputComponentStorageInfo']
+        );
+        $this->getResponse()->removeOutputComponentStorageInfo(
+            $outputComponent->getUniqueId()
+        );
         $this->assertTrue(
-            (count($this->getResponse()->export()['outputComponentStorageInfo']) < $count),
+            (
+                count($this->getResponse()->export()['outputComponentStorageInfo'])
+                <
+                $count
+            ),
             'Failed removing output component storage info by unique id'
+        );
+    }
+
+    public function testGetRequestStorageInfoReturnsArrayOfStorableInstancesForAssignedRequests()
+    {
+        $this->turnSwitchableComponentOn($this->getResponse());
+        $request = $this->getMockRequest();
+        $this->getResponse()->addRequestStorageInfo($request);
+        $this->assertEquals(
+            [$request->export()['storable']],
+            $this->getResponse()->getRequestStorageInfo(),
+            'getRequestStorageInfo() did not return array of storable instances for assigned output components.'
         );
     }
 
     public function testGetOutputComponentStorageInfoReturnsArrayOfStorableInstancesForAssignedOutputComponents()
     {
-        $this->turnResponseOn();
+        $this->turnSwitchableComponentOn($this->getResponse());
         $outputComponent = $this->getMockOutputComponent();
         $this->getResponse()->addOutputComponentStorageInfo($outputComponent);
         $this->assertEquals(
@@ -146,16 +190,9 @@ trait ResponseTestTrait
         );
     }
 
-    private function turnResponseOn(): void
-    {
-        if ($this->getResponse()->getState() === false) {
-            $this->getResponse()->switchState();
-        }
-    }
-
     public function testGetOutputComponentStorageInfoReturnsEmptyArrayIfStateIsFalse(): void
     {
-        $this->turnResponseOff();
+        $this->turnSwitchableComponentOff($this->getResponse());
         $this->getResponse()->addOutputComponentStorageInfo(
             $this->getMockOutputComponent()
         );
@@ -165,16 +202,132 @@ trait ResponseTestTrait
         );
     }
 
+    public function testAddTemplateStorageInfoAddsSpecifiedTemplateStorableInstance(): void
+    {
+        $initialCount = count(
+            $this->getResponse()->export()['templateStorageInfo']
+        );
+        $this->getResponse()->addTemplateStorageInfo($this->getMockTemplate());
+        $this->assertTrue(
+            (
+                count($this->getResponse()->export()['templateStorageInfo'])
+                >
+                $initialCount
+            ),
+            'addOutput() failed to add output component\'s storable instance.'
+        );
+    }
+
+    private function getMockTemplate(): Template
+    {
+        return new Template(
+            $this->getMockStorable(),
+            $this->getMockSwitchable(),
+            new Positionable()
+        );
+    }
+
+    public function testRemoveTemplateStorageInfoRemovesSpecifiedTemplatesStorableInstance(): void
+    {
+        $template = $this->getMockTemplate();
+        $this->getResponse()->addTemplateStorageInfo($template);
+        $count = count($this->getResponse()->export()['templateStorageInfo']);
+        $this->getResponse()->removeTemplateStorageInfo($template->getName());
+        $this->assertTrue(
+            (
+                count($this->getResponse()->export()['templateStorageInfo'])
+                <
+                $count
+            ),
+            'Failed removing template storage info by name.'
+        );
+        $this->getResponse()->addTemplateStorageInfo($template);
+        $count = count($this->getResponse()->export()['templateStorageInfo']);
+        $this->getResponse()->removeTemplateStorageInfo(
+            $template->getUniqueId()
+        );
+        $this->assertTrue(
+            (
+                count($this->getResponse()->export()['templateStorageInfo'])
+                <
+                $count
+            ),
+            'Failed removing template storage info by id.'
+        );
+    }
+
+    public function testGetTemplateStorageInfoReturnsArrayOfStorableInstancesForAssignedTemplates()
+    {
+        $this->turnSwitchableComponentOn($this->getResponse());
+        $template = $this->getMockTemplate();
+        $this->getResponse()->addTemplateStorageInfo($template);
+        $this->assertEquals(
+            [$template->export()['storable']],
+            $this->getResponse()->getTemplateStorageInfo(),
+            'getTemplateStorageInfo() did not return array of storable instances for assigned output components.'
+        );
+    }
+
+    public function testGetTemplateStorageInfoReturnsEmptyArrayIfStateIsFalse(): void
+    {
+        $this->turnSwitchableComponentOff($this->getResponse());
+        $this->getResponse()->addTemplateStorageInfo(
+            $this->getMockTemplate()
+        );
+        $this->assertEmpty(
+            $this->getResponse()->getTemplateStorageInfo(),
+            'getTemplateStorageInfo() must return an empty array if state is false.'
+        );
+    }
+
+    public function testAddORequestStorageInfoAddsSpecifiedORequestsStorableInstance(): void
+    {
+        $initialCount = count(
+            $this->getResponse()->export()['requestStorageInfo']
+        );
+        $this->getResponse()->addRequestStorageInfo($this->getMockRequest());
+        $this->assertTrue(
+            (
+                count($this->getResponse()->export()['requestStorageInfo'])
+                >
+                $initialCount
+            ),
+            'addOutput() failed to add output component\'s storable instance.'
+        );
+    }
+
+    public function testRemoveRequestStorageInfoRemovesSpecifiedRequestsStorableInstance(): void
+    {
+        $request = $this->getMockRequest();
+        $this->getResponse()->addRequestStorageInfo($request);
+        $count = count($this->getResponse()->export()['requestStorageInfo']);
+        $this->getResponse()->removeRequestStorageInfo($request->getName());
+        $this->assertTrue(
+            (
+                count($this->getResponse()->export()['requestStorageInfo'])
+                <
+                $count
+            ),
+            'Failed removing request storage info by name.'
+        );
+        $this->getResponse()->addRequestStorageInfo($request);
+        $count = count($this->getResponse()->export()['requestStorageInfo']);
+        $this->getResponse()->removeRequestStorageInfo(
+            $request->getUniqueId()
+        );
+        $this->assertTrue(
+            (
+                count($this->getResponse()->export()['requestStorageInfo'])
+                <
+                $count
+            ),
+            'Failed removing request storage info by id.'
+        );
+    }
+
     protected function setResponseParentTestInstances(): void
     {
         $this->setSwitchableComponent($this->getResponse());
         $this->setSwitchableComponentParentTestInstances();
-    }
-
-    private function turnResponseOff(): void
-    {
-        if ($this->getResponse()->getState() === true) {
-            $this->getResponse()->switchState();
-        }
     }
 }
