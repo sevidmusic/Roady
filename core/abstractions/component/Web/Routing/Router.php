@@ -36,7 +36,7 @@ abstract class Router extends SwitchableComponent implements RouterInterface
             if ($this->isValidResponse($response) === false || $response->getState() === false) {
                 continue;
             }
-            if ($response->respondsToRequest($this->getRequest()) === true) {
+            if ($response->respondsToRequest($this->getRequest(), $this->getCrud()) === true) {
                 array_push($responses, $response);
             }
         }
