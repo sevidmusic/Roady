@@ -13,7 +13,7 @@ trait OutputComponentTestTrait
     {
         $this->assertTrue(
             isset($this->getOutputComponent()->export()['positionable']),
-            'The \DarlingCms\interfaces\primary\Positionable implementation instance must be asssigned to the $positionable property on instantiation.'
+            'The \DarlingCms\interfaces\primary\Positionable implementation instance must be assigned to the $positionable property on instantiation.'
         );
     }
 
