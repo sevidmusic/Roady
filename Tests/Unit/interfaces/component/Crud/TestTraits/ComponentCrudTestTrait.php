@@ -83,7 +83,7 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * @todo Implement folloeing tests:
+     * @todo Implement following tests:
      * testUpdatePreservesUniqueId()
      */
     public function testUpdateUpdatesSpecifiedComponent(): void
