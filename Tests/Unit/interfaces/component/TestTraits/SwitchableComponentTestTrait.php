@@ -12,6 +12,20 @@ trait SwitchableComponentTestTrait
 
     private $switchableComponent;
 
+    protected function turnSwitchableComponentOn(SwitchableComponent $switchableComponent): void
+    {
+        if ($switchableComponent->getState() === false) {
+            $switchableComponent->switchState();
+        }
+    }
+
+    protected function turnSwitchableComponentOff(SwitchableComponent $switchableComponent): void
+    {
+        if ($switchableComponent->getState() === true) {
+            $switchableComponent->switchState();
+        }
+    }
+
     // @todo implement testStateIsTruePostInstantiation()
 
     protected function setSwitchableComponentParentTestInstances(): void
