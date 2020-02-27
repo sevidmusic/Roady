@@ -95,10 +95,9 @@ trait RouterTestTrait
 
     public function testGetResponsesReturnsArrayOfResponsesThatAreNotCorrupted(): void
     {
-        $this->turnRouterOn();
         $response = $this->getStandardResponse();
-        $response->switchState();
-        $response->addRequest($this->getRouter()->getRequest());
+        $response->addRequestStorageInfo($this->getRouter()->getRequest());
+        $this->getRouter()->getCrud()->create($this->getRouter()->getRequest());
         $this->getRouter()->getCrud()->create($response);
         $this->assertFalse(
             empty(
@@ -117,38 +116,29 @@ trait RouterTestTrait
         }
     }
 
-    private function turnRouterOn(): void
+    private function getStandardResponse(string $name = '', string $location = '', string $container = ''): StandardResponse
     {
-        if ($this->getRouter()->getState() === false) {
-            $this->getRouter()->switchState();
-        }
-    }
-
-    private function getStandardResponse(): StandardResponse
-    {
-        return new StandardResponse(
+        $response = new StandardResponse(
             new StandardStorable(
-                'ResponseName',
-                'ResponseLocation',
-                'ResponseContainer'
+                (empty($name) === true ? 'RouterTestTraitStandardResponseName' : $name),
+                (empty($location) === true ? 'RouterTestTraitStandardResponseLocation' : $location),
+                (empty($container) === true ? 'RouterTestTraitStandardResponseContainer' : $container)
             ),
             new StandardSwitchable()
         );
+        return $response;
     }
 
     public function testGetResponsesReturnsArrayOfResponsesThatRespondToAssignedRequest(): void
     {
-        $this->turnRouterOn();
         $response = $this->getStandardResponse();
-        $response->switchState();
-        // Create response that is assigned the Routers request
-        $response->addRequest($this->getRouter()->getRequest());
+        $this->getRouter()->getCrud()->create($this->getRouter()->getRequest());
+        $response->addRequestStorageInfo($this->getRouter()->getRequest());
         $this->getRouter()->getCrud()->create($response);
-        // Create response that is NOT assigned the Routers request
         $this->getRouter()->getCrud()->create($this->getStandardResponse());
         foreach ($this->getRouter()->getResponses($response->getLocation(), $response->getContainer()) as $response) {
             $this->assertTrue(
-                $response->respondsToRequest($this->getRouter()->getRequest()),
+                $response->respondsToRequest($this->getRouter()->getRequest(), $this->getRouter()->getCrud()),
                 'getResponses() returned an array containing responses that are NOT assigned the Router\'s assigned request.'
             );
         }
@@ -156,39 +146,30 @@ trait RouterTestTrait
 
     public function testGetResponsesReturnsArrayOfResponsesWhoseStateIsTrue(): void
     {
-        $this->turnRouterOn();
-        $response = $this->getStandardResponse();
-        $response->addRequest($this->getRouter()->getRequest());
-        $response->switchState();
-        $this->getRouter()->getCrud()->create($response);
-        // Create response that is assigned the Routers request and whose state is false
-        $disabledResponse = $this->getStandardResponse();
-        $disabledResponse->addRequest($this->getRouter()->getRequest());
+        $enabledResponse = $this->getStandardResponse('EnabledResponse');
+        $enabledResponse->addRequestStorageInfo($this->getRouter()->getRequest());
+        $disabledResponse = $this->getStandardResponse('DisabledResponse');
+        $disabledResponse->addRequestStorageInfo($this->getRouter()->getRequest());
+        $this->getRouter()->getCrud()->create($enabledResponse);
         $this->getRouter()->getCrud()->create($disabledResponse);
-        foreach ($this->getRouter()->getResponses($response->getLocation(), $response->getContainer()) as $response) {
+        $this->getRouter()->getCrud()->create($this->getRouter()->getRequest());
+        foreach ($this->getRouter()->getResponses($enabledResponse->getLocation(), $enabledResponse->getContainer()) as $enabledResponse) {
             $this->assertTrue(
-                $response->getState(),
-                'getResponse() returned array containing responses whose state is false.'
+                $enabledResponse->getState(),
+                'getResponses() returned an array containing responses that are NOT assigned the Router\'s assigned request.'
             );
         }
     }
 
     public function testGetResponsesReturnsEmptyArrayIfStateIsFalse(): void
     {
-        $this->turnRouterOff();
+        $this->turnSwitchableComponentOff($this->getRouter());
         $this->assertEmpty(
             $this->getRouter()->getResponses(
                 $this->getStandardResponse()->getLocation(),
                 $this->getStandardResponse()->getContainer()
             )
         );
-    }
-
-    private function turnRouterOff(): void
-    {
-        if ($this->getRouter()->getState() === true) {
-            $this->getRouter()->switchState();
-        }
     }
 
     protected function setRouterParentTestInstances(): void
