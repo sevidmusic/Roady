@@ -118,7 +118,7 @@ trait RouterTestTrait
 
     private function getStandardResponse(string $name = '', string $location = '', string $container = ''): StandardResponse
     {
-        $response = new StandardResponse(
+        return new StandardResponse(
             new StandardStorable(
                 (empty($name) === true ? 'RouterTestTraitStandardResponseName' : $name),
                 (empty($location) === true ? 'RouterTestTraitStandardResponseLocation' : $location),
@@ -126,7 +126,6 @@ trait RouterTestTrait
             ),
             new StandardSwitchable()
         );
-        return $response;
     }
 
     public function testGetResponsesReturnsArrayOfResponsesThatRespondToAssignedRequest(): void
