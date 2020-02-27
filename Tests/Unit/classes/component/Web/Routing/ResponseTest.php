@@ -2,9 +2,9 @@
 
 namespace UnitTests\classes\component\Web\Routing;
 
+use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\component\Web\Routing\Response;
 use UnitTests\abstractions\component\Web\Routing\ResponseTest as AbstractResponseTest;
 
 class ResponseTest extends AbstractResponseTest
@@ -14,9 +14,9 @@ class ResponseTest extends AbstractResponseTest
         $this->setResponse(
             new Response(
                 new Storable(
-                    'ResponseName',
-                    'ResponseLocation',
-                    'ResponseContainer'
+                    'ResponseTestResponseName',
+                    'ResponseTestResponseLocation',
+                    'ResponseTestResponseContainer'
                 ),
                 new Switchable()
             )

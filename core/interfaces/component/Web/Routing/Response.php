@@ -2,17 +2,20 @@
 
 namespace DarlingCms\interfaces\component\Web\Routing;
 
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\SwitchableComponent;
+use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate as Template;
 
 interface Response extends SwitchableComponent
 {
+    public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
 
-    public function addRequest(Request $request): bool;
+    public function addRequestStorageInfo(Request $request): bool;
 
-    public function removeRequest(string $nameOrId): bool;
+    public function getRequestStorageInfo(): array;
 
-    public function respondsToRequest(Request $request): bool;
+    public function removeRequestStorageInfo(string $nameOrId): bool;
 
     public function addOutputComponentStorageInfo(OutputComponent $outputComponent): bool;
 
@@ -20,4 +23,9 @@ interface Response extends SwitchableComponent
 
     public function getOutputComponentStorageInfo(): array;
 
+    public function addTemplateStorageInfo(Template $template): bool;
+
+    public function removeTemplateStorageInfo(string $nameOrId): bool;
+
+    public function getTemplateStorageInfo(): array;
 }
