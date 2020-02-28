@@ -1,265 +1,274 @@
 <?php
-/** Require Composer's auto-loader. **/
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
+require(__DIR__ . '/vendor/autoload.php');
+
+ini_set('display_errors', true);
+
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-
-require(__DIR__ . '/vendor/autoload.php');
-
-function getCrudStateFromPost(): bool
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate;
+use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
+use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
+const REQUEST_LOCATION = 'Web';
+const REQUEST_CONTAINER = 'Request';
+const RESPONSE_LOCATION = 'Web';
+const RESPONSE_CONTAINER = 'Response';
+const TEMPLATE_LOCATION = 'UserInterface';
+const TEMPLATE_CONTAINER = 'Template';
+const OUTPUT_COMPONENT_LOCATION = 'Output';
+const OUTPUT_COMPONENT_CONTAINER = 'Mock';
+function getDoctype(): string
 {
-    if (isset($_POST['CRUD_STATE']) === true && $_POST['CRUD_STATE'] === 'On') {
-        return true;
+    return '<!DOCTYPE html>';
+}
+
+function getStyles(): string
+{
+    return <<<'HTML'
+    <style>
+    
+    html {
+        font-size: 18px;
     }
-    return false;
-}
-
-function removeDevVarsFromRequestPostData(Request $request): bool
-{
-    if (isset($_POST['EXCLUDE_POST']) === true && $_POST['EXCLUDE_POST'] === 'Exclude') {
-        $request->import(['post' => []]);
-        return empty($request->export()['post']);
+    
+    body {
+        font-size: 1em;
     }
-    $modifiedRequestPostData = $request->export()['post'];
-    unset($modifiedRequestPostData['CRUD_STATE']);
-    $request->import(['post' => $modifiedRequestPostData]);
-    return (isset($request->export()['post']['CRUD_STATE']) === false ? true : false);
+       .gradientBg {
+           background: rgb(0,0,0);
+           background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(9,98,121,1) 55%, rgba(6,3,24,1) 100%);
+       }
+       
+       .genericContainer{
+           background: #000000;
+           padding: 20px;
+           border: 2px solid #cddeff;
+           border-radius: 7px 1px;
+           opacity: 0.67;
+           margin-bottom: 20px;
+       }
+       .genericText {
+           color: #ff9368;
+       }
+       
+       .noticeText {
+           color: #ff9368;
+       }
+       
+       .warningText {
+           color: #ff9368;
+       }
+       
+       .errorText {
+           color: #ff9368;
+       }
+       
+       .successText {
+           color: #ff9368;
+       }
+       
+       .failureText {
+           color: #ff9368;
+       }
+       
+       .formLabelText {
+           color: #cddeff;
+       }
+       .highlightText {
+           color: #cddeff;
+       }
+       
+       .smallLongText {
+           font-size: .6em;
+       }
+    </style>
+HTML;
 }
 
-function getMockRequest(): Request
+function getScripts(): string
 {
-    $request = new Request(
-        new Storable('Request', 'Web', 'Requests'),
-        new Switchable()
+    return <<<'HTML'
+    <script>
+    </script>
+HTML;
+}
+
+function getHead(): string
+{
+    return sprintf(
+        "%s<head>%s<title>%s</title>%s%s%s</head>",
+        PHP_EOL,
+        PHP_EOL . '    ',
+        'Darling Cms Redesign | Dev Request -> Router <- Response Interactions',
+        PHP_EOL,
+        (str_replace(' ', '', getStyles()) === '<style></style>' ? '' : getStyles() . PHP_EOL),
+        (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL)
     );
-    $request->switchState();
-    return $request;
 }
 
-function showRequestInfo(Request $request): void
+function getWelcomeMessage(): string
 {
-    echo '<p class="blueDark1">Request url: <span class="blueLight1">' . $request->getUrl() . '</span></p>';
-    echo '<p class="blueDark1">$_GET vars:</p>';
-    echo '<ul>';
-    foreach ($request->getGet() as $key => $value) {
-        echo "<li class='blueDark1'><span class='tanDark1'>$key</span> : $value</li>";
-    }
-    echo '</ul>';
-    echo '<p class="blueDark1">$_POST vars:' . (isset($_POST['EXCLUDE_POST']) && $_POST['EXCLUDE_POST'] === 'Exclude' ? '<br><span style="color: indianred; font-size: .7em;">Notice: Post Vars are set to be excluded.</span>' : '') . '</p>';
-    echo '<ul>';
-    foreach ($request->getPost() as $key => $value) {
-        if ($key === 'CRUD_STATE' || $key === 'EXCLUDE_POST') {
-            continue;
-        }
-        echo "<li class='blueDark1'><span class='tanDark1'>$key</span> : $value</li>";
-    }
-    echo '</ul>';
+    return '<p class="genericText">This page demonstrates the interaction of Requests, Routers, Templates, ComponentCruds, and OutputComponents</p>';
 }
 
-function getMockOutputComponent(): OutputComponent
+function getBody(): string
 {
-    $outputComponent = new OutputComponent(
-        new Storable('OutputComponent', 'Output', 'PlainText'),
-        new Switchable(),
-        new Positionable()
-    );
-    $outputComponent->switchState();
-    $outputComponent->import(['output' => 'Hello World!' . strval(rand(100, 999))]);
-    return $outputComponent;
+    return '
+        <body class="gradientBg">
+            <div class="genericContainer">' . getWelcomeMessage() . '' . getCurrentRequestInfo() . '</div>
+            ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
+            <div class="genericContainer">' . getForm() . '</div>
+        </body>';
 }
 
-function showOutputComponentInfo(OutputComponent $outputComponent): void
+function getHtml(): string
 {
-    echo '<p class="tanDark1">OutputComponent Id: <span class="tanLight1">' . substr($outputComponent->getUniqueId(), 0, 8) . '...</span></p>';
-    echo '<p class="tanDark1">Output: <span class="tanLight1">' . $outputComponent->getOutput() . '</span></p>';
-}
-
-function getMockResponse(Request $request, OutputComponent $outputComponent): Response
-{
-    $response = new Response(
-        new Storable('Response', 'Web', 'Responses'),
-        new Switchable()
-    );
-    $response->switchState();
-    removeDevVarsFromRequestPostData($request);
-    $response->addRequest($request);
-    $response->addOutputComponentStorageInfo($outputComponent);
-    return $response;
-}
-
-function showResponseInfo(Response $response, Request $request): void
-{
-    echo(
-    $response->respondsToRequest($request) === true
-        ?
-        '<p class="blueDark1">Response with Id <span class="blueLight1">' .
-        substr($response->getUniqueId(), 0, 8) .
-        '...</span> responds to request with Id <span class="blueLight1"> ' .
-        substr($request->getUniqueId(), 0, 9) .
-        '...</span></p>'
-        :
-        '<p class="redDark1">Using Response with Id <span class="redLight1">' .
-        $response->getUniqueId() .
-        '</span> does NOT respond to request with Id <span class="redLight1"> ' .
-        $request->getUniqueId() .
-        '</span></p>'
-    );
+    return getDoctype() . PHP_EOL . '<html lang="en">' . PHP_EOL . getHead() . PHP_EOL . getBody() . PHP_EOL . '</html>';
 }
 
 function getMockCrud(): ComponentCrud
 {
-    $crud = new ComponentCrud(
-        new Storable('ComponentCrud', 'DataManagement', 'Crud'),
+    return new \DarlingCms\classes\component\Crud\ComponentCrud(
+        new Storable('MockComponentCrud', 'DataManagement', 'FilesystemCrud'),
         new Switchable(),
         new Standard(
-            new Storable('JsonStorageDriver', 'DataManagement', 'StorageDriver'),
+            new Storable('MockStorageDriver', 'DataManagement', 'StorageDriver'),
             new Switchable()
         )
     );
-    if (getCrudStateFromPost() === true && $crud->getState() === false) {
-        $crud->switchState();
-    }
-    return $crud;
 }
 
-function showCrudInfo(ComponentCrud $crud): void
+function generateAndStoreRequest(ComponentCrud $crud, string $url, string $name, string $location, string $container): WebRequestComponent
 {
-    if ($crud->getState() === false) {
-        echo "<h3 style='color: red'>Warning: The CRUD is turned off, it will not be possible to save any data!</h3>";
-    }
-}
-
-function createIfCrudIsOn(Response $response, ComponentCrud $crud, OutputComponent $outputComponent): void
-{
-    echo($crud->create($response) === true ? "<p>Saved Response</p>" : "<p style='color: red;'>Failed to save Response.</p>");
-    echo($crud->create($outputComponent) === true ? "<p>Saved Response</p>" : "<p style='color: red;'>Failed to save Output Component.</p>");
-}
-
-function getMockRouter(Request $request, ComponentCrud $crud): Router
-{
-    $router = new Router(
-        new Storable('Router', 'Web', 'Routers'),
-        new Switchable(),
-        $request,
-        $crud
+    $request = new Request(
+        new Storable($name . strval(rand(1000, 9999)), $location, $container),
+        new Switchable()
     );
-    $router->switchState();
-    return $router;
+    $request->import(['url' => $url]);
+    $crud->create($request);
+    return $request;
 }
 
-function showRouterInfo(Router $router, Response $response, ComponentCrud $crud): void
+function getForm(): string
 {
-    echo(empty($router->getResponses($response->getLocation(), $response->getContainer())) === false ? "<h1 class=\"blueLight1\">Output retrieved using Router:</h1>" : "");
-    foreach ($router->getResponses($response->getLocation(), $response->getContainer()) as $storedResponse) {
-        /**
-         * @var \DarlingCms\interfaces\component\Web\Routing\Response $storedResponse
-         * @var \DarlingCms\interfaces\primary\Storable $outputComponentStorable
-         */
-        foreach ($storedResponse->getOutputComponentStorageInfo() as $outputComponentStorable) {
-            echo '<p class="blueDark1">Loaded storage info for <span class="blueLight1">' . $storedResponse->getName() . $storedResponse->getUniqueId() . '</span></p>';
-            echo '<div class="bg1"><p class="blueDark1">Output: <span class="blueLight1">' . $crud->read($outputComponentStorable)->getOutput() . '</span></div>';
-        }
-    }
+    return '<form class="genericContainer" action="/index.php" method="post">
+          <input type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/"><br>
+          <input type="text" id="requestName" name="requestName" value="Mock Request"><br><br>
+          <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
+          <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
+          <input type="submit" value="Submit">
+        </form> ';
 }
 
-?>
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Darling Cms Redesign Welcome Page</title>
-    <style>
-        body {
-            background: #000000;
-            font-family: monospace;
-            color: #b8a47b;
-            font-size: 24px;
-        }
+function getCurrentRequest(): Request
+{
+    return new Request(
+        new Storable(
+            'CurrentRequest',
+            REQUEST_LOCATION,
+            REQUEST_CONTAINER),
+        new Switchable()
+    );
+}
 
-        .tanLight1 {
-            color: #b8a47b;
-        }
+function getStoredRequestMenu(ComponentCrud $crud): string
+{
+    $menu = '<ul>';
+    $requests = $crud->readAll(REQUEST_LOCATION, REQUEST_CONTAINER);
+    if (empty($requests) === true) {
+        return '';
+    }
+    foreach ($requests as $request) {
+        $menu .= '<li><a href="' . $request->getUrl() . '">' . $request->getUrl() . '</a></li>';
+    }
+    $menu .= '</ul>';
+    return '<div class="genericText">' . $menu . '</div>';
+}
 
-        .tanDark1 {
-            color: #756354;
-        }
+function getCurrentRequestInfo(): string
+{
+    $request = getCurrentRequest();
+    return "<p class='genericText'>Current Request: {$request->getUrl()}</p>";
+}
 
-        .blueLight1 {
-            color: #a9f2ff
-        }
+function processFormIfSubmitted(ComponentCrud $crud): bool
+{
+    if (empty(getCurrentRequest()->getPost()) === false) {
+        $generatedRequest = generateAndStoreRequest(
+            $crud,
+            getCurrentRequest()->getPost()['requestUrl'],
+            getCurrentRequest()->getPost()['requestName'],
+            getCurrentRequest()->getPost()['requestLocation'],
+            getCurrentRequest()->getPost()['requestContainer']
+        );
+        generateAndStoreResponse($crud, $generatedRequest);
+    }
+    return true;
+}
 
-        .blueDark1 {
-            color: #5a8087;
-        }
+function generateAndStoreResponse(ComponentCrud $crud, WebRequestComponent $requestToAssign): WebResponseComponent
+{
+    $response = new Response(
+        new Storable(
+            'MockResponse',
+            RESPONSE_LOCATION,
+            RESPONSE_CONTAINER
+        ),
+        new Switchable()
+    );
+    $response->addRequestStorageInfo($requestToAssign);
+    $outputComponent = getMockOutputComponent();
+    $template = getMockTemplate();
+    $response->addOutputComponentStorageInfo($outputComponent);
+    $response->addTemplateStorageInfo($template);
+    $crud->create($response);
+    $crud->create($outputComponent);
+    $crud->create($template);
+    return $response;
+}
 
-        .redDark1 {
-            color: #873238;
-        }
+function getMockTemplate(): GenericUITemplate
+{
+    $template = new \DarlingCms\classes\component\Template\UserInterface\GenericUITemplate(
+        new Storable('MockTemplate', TEMPLATE_LOCATION, TEMPLATE_CONTAINER),
+        new Switchable(),
+        new Positionable()
+    );
+    $template->addType(getMockOutputComponent());
+    return $template;
+}
 
-        .redLight1 {
-            color: #ff798e;
-        }
+function getMockOutputComponent(): \DarlingCms\interfaces\component\OutputComponent
+{
+    $outputComponent = new OutputComponent(
+        new Storable(
+            'MockOutputComponent',
+            OUTPUT_COMPONENT_LOCATION,
+            OUTPUT_COMPONENT_CONTAINER
+        ),
+        new Switchable(),
+        new Positionable()
+    );
+    $outputComponent->import(
+        [
+            'output' =>
+                sprintf(
+                    "Some mock output from output component with id: <span class=\"highlightText smallLongText\">%s</span>",
+                    $outputComponent->getUniqueId()
+                )
+        ]
+    );
+    return $outputComponent;
+}
 
-        .bg1 {
-            background: #5a8087;
-            padding: 1em;
-        }
-
-    </style>
-</head>
-<body Id="animate">
-<form method='post'>
-    <label>
-        <br><span>Please select a post value to send with the next request:</span><br>
-        <select name="USER_SUBMITTED_POST_VAR">
-            <option>Foo</option>
-            <option>Bar</option>
-            <option>Baz</option>
-        </select>
-    </label>
-    <label>
-        <br><span>Select whether CRUD should be on or off for next request:</span>
-        <br><span>(Note: If CRUD is off it will not be possible to demonstrate reading and writing data to storage!):</span><br>
-        <br><span>The CRUD is currently <?php echo(getCrudStateFromPost() === true ? '<span style="color: limegreen">On</span>' : '<span style="color: red">Off</span>'); ?></span><br>
-        <select name="CRUD_STATE">
-            <?php
-            echo(getCrudStateFromPost() === true
-                ? "<option selected>On</option><option>Off</option>"
-                : "<option>On</option><option selected>Off</option>");
-            ?>
-        </select>
-    </label>
-    <label>
-        <br><span>Please select if post values should be excluded from the Request before it is assigned to the Response:</span><br>
-        <select name="EXCLUDE_POST">
-            <option>Exclude</option>
-            <option>Include</option>
-        </select>
-    </label>
-    <input type="submit"/>
-</form>
-<?php
-$request = getMockRequest();
-showRequestInfo($request);
-
-$outputComponent = getMockOutputComponent();
-showOutputComponentInfo($outputComponent);
-
-$response = getMockResponse($request, $outputComponent);
-showResponseInfo($response, $request);
-
-$crud = getMockCrud();
-showCrudInfo($crud);
-createIfCrudIsOn($response, $crud, $outputComponent);
-
-$router = getMockRouter($request, $crud);
-showRouterInfo($router, $response, $crud);
-?>
-</body>
-</html>
+processFormIfSubmitted(getMockCrud());
+echo getHtml();
+foreach (getMockCrud()->readAll(OUTPUT_COMPONENT_LOCATION, OUTPUT_COMPONENT_CONTAINER) as $oc) {
+    echo '<p class="successText">' . $oc->getOutput() . '</p>';
+}
