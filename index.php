@@ -12,6 +12,7 @@ use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
@@ -50,7 +51,7 @@ function getStyles(): string
            padding: 20px;
            border: 2px solid #cddeff;
            border-radius: 7px 1px;
-           opacity: 0.67;
+           opacity: 0.72;
            margin-bottom: 20px;
        }
        .genericText {
@@ -58,15 +59,15 @@ function getStyles(): string
        }
        
        .noticeText {
-           color: #ff9368;
+           color: #ff1858;
        }
        
        .warningText {
-           color: #ff9368;
+           color: #ffc16f;
        }
        
        .errorText {
-           color: #ff9368;
+           color: #ff1600;
        }
        
        .successText {
@@ -74,18 +75,36 @@ function getStyles(): string
        }
        
        .failureText {
-           color: #ff9368;
+           color: #63ff99;
        }
        
        .formLabelText {
            color: #cddeff;
        }
        .highlightText {
-           color: #cddeff;
+           color: #008fff;
        }
        
        .smallLongText {
            font-size: .6em;
+       }
+       
+       .input {
+           width: 95%;
+           background: #0e1620;
+           color: #c8ffc8;
+           padding: 7px;
+           margin-bottom: 20px;
+           border-radius: 7px 1px;
+       }
+       
+       .textareaInput {
+           resize: none;
+           color: #f57fff;
+       }
+       
+       .textInput {
+       
        }
     </style>
 HTML;
@@ -158,8 +177,12 @@ function generateAndStoreRequest(ComponentCrud $crud, string $url, string $name,
 function getForm(): string
 {
     return '<form class="genericContainer" action="/index.php" method="post">
-          <input type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/"><br>
-          <input type="text" id="requestName" name="requestName" value="Mock Request"><br><br>
+          <label class="formLabelText" for="requestUrl">Request Url:</label>
+          <input class="input textInput" type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/index.php"><br>
+          <label class="formLabelText" for="requestName">Request Name:</label>
+          <input class="input textInput" type="text" id="requestName" name="requestName" value="Mock Request"><br><br>
+          <label class="formLabelText" for="output">Output:</label>
+          <textarea class="input textareaInput" id="output" name="output"><p class="genericContainer successText">Output...</p></textarea><br><br>
           <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
           <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
           <input type="submit" value="Submit">
@@ -179,12 +202,20 @@ function getCurrentRequest(): Request
 
 function getStoredRequestMenu(ComponentCrud $crud): string
 {
+    $added = [];
     $menu = '<ul>';
     $requests = $crud->readAll(REQUEST_LOCATION, REQUEST_CONTAINER);
     if (empty($requests) === true) {
         return '';
     }
+    /**
+     * @var WebRequestComponent $request
+     */
     foreach ($requests as $request) {
+        if (in_array($request->getUrl(), $added, true)) {
+            continue;
+        }
+        array_push($added, $request->getUrl());
         $menu .= '<li><a href="' . $request->getUrl() . '">' . $request->getUrl() . '</a></li>';
     }
     $menu .= '</ul>';
@@ -244,7 +275,7 @@ function getMockTemplate(): GenericUITemplate
     return $template;
 }
 
-function getMockOutputComponent(): \DarlingCms\interfaces\component\OutputComponent
+function getMockOutputComponent(): OutputComponentInterface
 {
     $outputComponent = new OutputComponent(
         new Storable(
@@ -257,18 +288,62 @@ function getMockOutputComponent(): \DarlingCms\interfaces\component\OutputCompon
     );
     $outputComponent->import(
         [
-            'output' =>
-                sprintf(
-                    "Some mock output from output component with id: <span class=\"highlightText smallLongText\">%s</span>",
-                    $outputComponent->getUniqueId()
-                )
+            'output' => generateOutput($outputComponent)
         ]
     );
     return $outputComponent;
 }
 
+function generateOutput(OutputComponentInterface $outputComponent): string
+{
+    return (empty(getCurrentRequest()->getPost() === false) ? getCurrentRequest()->getPost()['output'] : sprintf(
+        "Some mock output from output component with id: <span class=\"highlightText smallLongText\">%s</span>",
+        $outputComponent->getUniqueId()
+    ));
+}
+
 processFormIfSubmitted(getMockCrud());
 echo getHtml();
-foreach (getMockCrud()->readAll(OUTPUT_COMPONENT_LOCATION, OUTPUT_COMPONENT_CONTAINER) as $oc) {
-    echo '<p class="successText">' . $oc->getOutput() . '</p>';
+
+/// dev area ///
+var_dump(getContent(getMockCrud()));
+
+function getContent(ComponentCrud $crud): array
+{
+    $content = [];
+    /**
+     * @var WebResponseComponent $response
+     */
+    foreach (getResponses($crud) as $response) {
+        foreach ($response->getOutputComponentStorageInfo() as $storable) {
+            /**
+             * @var OutputComponentInterface $oc
+             */
+            $oc = $crud->read($storable);
+            while (isset($content[$oc->getType()][strval($oc->getPosition())]) === true) {
+                $oc->increasePosition();
+            }
+            $content[$oc->getType()][strval($oc->getPosition())] = $oc;
+        }
+    }
+    return $content;
 }
+
+function getResponses(ComponentCrud $crud): array
+{
+    $responses = [];
+    $storedResponses = $crud->readAll(RESPONSE_LOCATION, RESPONSE_CONTAINER);
+    foreach ($storedResponses as $response) {
+        if ($response->respondsToRequest(getCurrentRequest(), getMockCrud()) === true) {
+            array_push($responses, $response);
+        }
+    }
+    return $responses;
+}
+// build content array
+// build theme array
+// for each get responses
+// for each response get templates
+// for each templates get type
+// for each
+
