@@ -302,12 +302,6 @@ function generateOutput(OutputComponentInterface $outputComponent): string
     ));
 }
 
-processFormIfSubmitted(getMockCrud());
-echo getHtml();
-
-/// dev area ///
-var_dump(getContent(getMockCrud()));
-
 function getContent(ComponentCrud $crud): array
 {
     $content = [];
@@ -340,8 +334,35 @@ function getResponses(ComponentCrud $crud): array
     }
     return $responses;
 }
-// build content array
-// build theme array
+
+processFormIfSubmitted(getMockCrud());
+echo getHtml();
+
+function getTemplates(ComponentCrud $crud):array
+{
+    $templates = [];
+    /**
+     * @var WebResponseComponent $response
+     */
+    foreach (getResponses($crud) as $response){
+        foreach ($response->getTemplateStorageInfo() as $storable) {
+            /**
+             * @var GenericUITemplate $template
+             */
+            $template = $crud->read($storable);
+            while(isset($templates[strval($template->getPosition())])) {
+                $template->increasePosition();
+            }
+            $templates[strval($template->getPosition())] = $template;
+        }
+    }
+    var_dump(count($templates));
+    return $templates;
+}
+/// dev area ///
+getTemplates(getMockCrud());
+
+// build template array
 // for each get responses
 // for each response get templates
 // for each templates get type
