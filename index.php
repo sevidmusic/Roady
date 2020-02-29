@@ -16,6 +16,7 @@ use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
+
 const REQUEST_LOCATION = 'Web';
 const REQUEST_CONTAINER = 'Request';
 const RESPONSE_LOCATION = 'Web';
@@ -24,6 +25,10 @@ const TEMPLATE_LOCATION = 'UserInterface';
 const TEMPLATE_CONTAINER = 'Template';
 const OUTPUT_COMPONENT_LOCATION = 'Output';
 const OUTPUT_COMPONENT_CONTAINER = 'Mock';
+
+processFormIfSubmitted(getMockCrud());
+echo getHtml();
+
 function getDoctype(): string
 {
     return '<!DOCTYPE html>';
@@ -336,9 +341,6 @@ function getResponses(ComponentCrud $crud): array
     return $responses;
 }
 
-processFormIfSubmitted(getMockCrud());
-echo getHtml();
-
 function getTemplates(ComponentCrud $crud): array
 {
     $templates = [];
@@ -360,7 +362,6 @@ function getTemplates(ComponentCrud $crud): array
     return $templates;
 }
 
-/// dev area ///
 function getCollectiveOutput(): string
 {
     $output = '';
