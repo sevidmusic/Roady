@@ -143,6 +143,7 @@ function getBody(): string
             <div class="genericContainer">' . getWelcomeMessage() . '' . getCurrentRequestInfo() . '</div>
             ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
             <div class="genericContainer">' . getForm() . '</div>
+            ' . getCollectiveOutput() . '
         </body>';
 }
 
@@ -338,33 +339,45 @@ function getResponses(ComponentCrud $crud): array
 processFormIfSubmitted(getMockCrud());
 echo getHtml();
 
-function getTemplates(ComponentCrud $crud):array
+function getTemplates(ComponentCrud $crud): array
 {
     $templates = [];
     /**
      * @var WebResponseComponent $response
      */
-    foreach (getResponses($crud) as $response){
+    foreach (getResponses($crud) as $response) {
         foreach ($response->getTemplateStorageInfo() as $storable) {
             /**
              * @var GenericUITemplate $template
              */
             $template = $crud->read($storable);
-            while(isset($templates[strval($template->getPosition())])) {
+            while (isset($templates[strval($template->getPosition())])) {
                 $template->increasePosition();
             }
             $templates[strval($template->getPosition())] = $template;
         }
     }
-    var_dump(count($templates));
     return $templates;
 }
+
 /// dev area ///
-getTemplates(getMockCrud());
-
-// build template array
-// for each get responses
-// for each response get templates
-// for each templates get type
-// for each
-
+function getCollectiveOutput(): string
+{
+    $output = '';
+    $templates = getTemplates(getMockCrud());
+    $content = getContent(getMockCrud());
+    foreach ($templates as $template) {
+        /**
+         * @var GenericUITemplate $template
+         */
+        foreach ($template->getTypes() as $type) {
+            /**
+             * @var OutputComponentInterface $outputComponent
+             */
+            foreach ($content[$type] as $outputComponent) {
+                $output .= ($outputComponent->getOutput());
+            }
+        }
+    }
+    return $output;
+}
