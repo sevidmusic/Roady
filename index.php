@@ -138,7 +138,17 @@ function getHead(): string
 
 function getWelcomeMessage(): string
 {
-    return '<p class="genericText">This page demonstrates the interaction of Requests, Routers, Templates, ComponentCruds, and OutputComponents</p>';
+    return <<<'HTML'
+    <h1 class="noticeText">Welcome</h1>
+    <p class="genericContainer successText">
+        Demonstrates the relationships/interactions of a Request, Router, 
+        Response, Crud, Template, and OutputComponent. It currently 
+        demonstrates one approach to how they might be used together to 
+        generate a User Interface based on what Responses the Router returns 
+        for the current Request. Use the form below to create output for a 
+        request.
+    </p>
+HTML;
 }
 
 function getBody(): string
