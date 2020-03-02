@@ -150,11 +150,11 @@ function getStyles(): string
     }
 
     .collapsibleButton:hover {
-        border-radius: 0px 0px 7px 7px;
+        border-radius: 0 0 7px 7px;
     }
     
     .active {
-        border-radius: 0px !important; 
+        border-radius: 0 !important; 
         border-bottom: none;
         margin-bottom: 0;
     }
@@ -166,7 +166,7 @@ function getStyles(): string
     
     .outputComponentInfo {
         border-top: none;
-        border-radius: 0px 0px 7px 7px;
+        border-radius: 0 0 7px 7px;
     }
     </style>
 HTML;
@@ -279,7 +279,9 @@ function getForm(): string
             <label class="formLabelText" for="requestName">Request Name:</label>
             <input class="input textInput" type="text" id="requestName" name="requestName" value="Mock Request"><br><br>
             <label class="formLabelText" for="output">Output:</label>
-            <textarea class="input textareaInput" id="output" name="output"><p class="genericContainer successText">Output...</p></textarea><br><br>
+            <textarea class="input textareaInput" id="output" name="output">
+                <p class="genericContainer successText">Output...</p>
+            </textarea><br><br>
             <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
             <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
             <input type="submit" value="Submit">
@@ -488,7 +490,7 @@ function getTemplatesFromResponsesToCurrentRequest(ComponentCrud $crud): array
     }
     //return $templates;
     // for now just return first template since all output components are the same type at the moment, this
-    // will prevent output componnts from showing multiple times if there are multiple templates
+    // will prevent output components from showing multiple times if there are multiple templates
     // Note: This is done this way for demonstration purposes only, in general the code in index.php
     // is simply currently meant to demo some of the finished DCMS components...
     return (isset($templates[0]) ? [$templates[0]] : $templates);
