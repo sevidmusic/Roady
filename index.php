@@ -118,7 +118,8 @@ function getStyles(): string
            color: #008fff;
        }
        
-       .smallLongText {
+       .miniText {
+           color: #46ff32;
            font-size: .6em;
        }
        
@@ -147,12 +148,18 @@ function getStyles(): string
         text-align: left;
         outline: none;
         font-size: 1em;
+        user-select: none;
     }
 
     .collapsibleButton:hover {
         border-radius: 0 0 7px 7px;
+        background: #00ffb1;
+        box-shadow: 0 3px 7px 0 rgba(220,247,255,0.24), 0 9px 25px 0 rgba(0,255,177,0.33);
     }
     
+    .collapsibleButton:focus {
+        background: #00ffb1;
+    }
     .active {
         border-radius: 0 !important; 
         border-bottom: none;
@@ -259,7 +266,7 @@ function getStoredRequestMenu(ComponentCrud $crud): string
             continue;
         }
         array_push($added, $request->getUrl());
-        $menu .= '<li><a href="' . $request->getUrl() . '">' . $request->getUrl() . '</a></li>';
+        $menu .= '<li><a href="' . $request->getUrl() . '">' . $request->getName() . '</a></li>';
     }
     $menu .= '</ul>';
     return '<div class="genericText">' . $menu . '</div>';
@@ -299,24 +306,19 @@ function getForm(): string
 <p class="successText">Quos omnis omnis aut fugit mollitia debitis iusto. Non harum eos eligendi aut aut expedita. Consequatur qui dolorem consequatur incidunt temporibus nam quasi et.</p>
 <table class="genericContainer">
   <tr>
-    <th class="genericContainer noticeText">Foo</th>
-    <th class="genericContainer noticeText">Bar</th> 
-    <th class="genericContainer noticeText">Baz</th>
+    <td class="genericContainer genericText">Generic Text Color</td>
+    <td class="genericContainer noticeText">Notice Text Color</td>
+    <td class="genericContainer warningText">Warning Text Color</td>
   </tr>
   <tr>
-    <td class="genericContainer noticeText">Bazzer</td>
-    <td class="genericContainer noticeText">BarBaz</td>
-    <td class="genericContainer noticeText">FooBaz</td>
+    <td class="genericContainer errorText">Error Text Color</td>
+    <td class="genericContainer successText">Success Text Color</td>
+    <td class="genericContainer failureText">Failure Text Color</td>
   </tr>
   <tr>
-    <td class="genericContainer noticeText">FooBar</td>
-    <td class="genericContainer noticeText">BarFoo</td>
-    <td class="genericContainer noticeText">FooBarBaz</td>
-  </tr>
-  <tr>
-    <td class="genericContainer noticeText">Bin</td>
-    <td class="genericContainer noticeText">BazFoo</td>
-    <td class="genericContainer noticeText">BinBaz</td>
+    <td class="genericContainer formLabelText">Form Label Text Color</td>
+    <td class="genericContainer highlightText">Highlight Text Color</td>
+    <td class="genericContainer miniText">Mini Text Color</td>
   </tr>
 </table>
             </textarea><br><br>
@@ -386,7 +388,7 @@ function getMockOutputComponent(): OutputComponentInterface
 function generateAndStoreRequest(ComponentCrud $crud, string $url, string $name, string $location, string $container): WebRequestComponent
 {
     $request = new Request(
-        new Storable($name . strval(rand(1000, 9999)), $location, $container),
+        new Storable($name, $location, $container),
         new Switchable()
     );
     $request->import(['url' => $url]);
@@ -460,7 +462,7 @@ function generateOutputFromPostIfSet(OutputComponentInterface $outputComponent):
     empty(getCurrentRequest()->getPost() === false)
         ? getCurrentRequest()->getPost()['output']
         : sprintf(
-        "Some mock output from output component with id: <span class=\"highlightText smallLongText\">%s</span>",
+        "Some mock output from output component with id: <span class=\"highlightText miniText\">%s</span>",
         $outputComponent->getUniqueId()
     )
     );
