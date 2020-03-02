@@ -42,15 +42,15 @@ function getHtml(): string
 function getHead(): string
 {
     return sprintf(
-        "%s<head>%s<title>%s</title>%s%s%s%s%s</head>",
+        "%s<head>%s<title>%s</title><meta name='viewport' content='width=device-width, initial-scale=1.0'/>%s%s%s%s</head>",
         PHP_EOL,
         PHP_EOL . '    ',
         'Darling Cms Redesign | Dev Request -> Router <- Response Interactions',
         PHP_EOL . '    ',
         '<meta charset="UTF-8">',
         PHP_EOL,
-        (str_replace(' ', '', getStyles()) === '<style></style>' ? '' : getStyles() . PHP_EOL),
-        (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL)
+        (str_replace(' ', '', getStyles()) === '<style></style>' ? '' : getStyles() . PHP_EOL)
+    //(str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL)
     );
 }
 
@@ -59,13 +59,20 @@ function getStyles(): string
     return <<<'HTML'
     <style>
     
-    html {
-        font-size: 18px;
-    }
+       * {
+           box-sizing: border-box;
+           -webkit-box-decoration-break: clone;
+           -o-box-decoration-break: clone;
+           box-decoration-break: clone;
+       }
+
+       html {
+           font-size: 18px;
+       }
     
-    body {
-        font-size: 1em;
-    }
+       body {
+           font-size: 1em;
+       }
        .gradientBg {
            background: rgb(0,0,0);
            background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(9,98,121,1) 55%, rgba(6,3,24,1) 100%);
@@ -132,6 +139,35 @@ function getStyles(): string
        .textInput {
        
        }
+       
+    .collapsibleButton {
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        outline: none;
+        font-size: 1em;
+    }
+
+    .collapsibleButton:hover {
+        border-radius: 0px 0px 7px 7px;
+    }
+    
+    .active {
+        border-radius: 0px !important; 
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .collapsibleContent {
+        display: none;
+        overflow: hidden;
+    }
+    
+    .outputComponentInfo {
+        border-top: none;
+        border-radius: 0px 0px 7px 7px;
+    }
     </style>
 HTML;
 }
@@ -140,6 +176,20 @@ function getScripts(): string
 {
     return <<<'HTML'
     <script>
+        let coll = document.getElementsByClassName("collapsibleButton");
+        let i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                let content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
     </script>
 HTML;
 }
@@ -152,6 +202,7 @@ function getBody(): string
             ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
             ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
             <div class="genericContainer">' . getForm() . '</div>
+        ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
         </body>';
 }
 
@@ -212,7 +263,7 @@ function getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest(): str
              * @var OutputComponentInterface $outputComponent
              */
             foreach ($content[$type] as $outputComponent) {
-                $output .= getOutputComponentInfo($outputComponent) . $outputComponent->getOutput();
+                $output .= getOutputComponentInfo($outputComponent);
             }
         }
     }
@@ -338,7 +389,8 @@ function getCurrentRequest(): Request
 function getOutputComponentInfo(OutputComponentInterface $outputComponent): string
 {
     return sprintf(
-        "<div class='genericContainer'>
+        "<button type='button' class='genericContainer collapsibleButton'>Show / Hide Output Component Info</button>
+                 <div class='genericContainer collapsibleContent outputComponentInfo'>
                      <h3 class='noticeText'>Output Component Info</h3>
                      <ul>
                          <li class='noticeText'>Name: <span class='highlightText'>%s</span></li>
@@ -348,35 +400,38 @@ function getOutputComponentInfo(OutputComponentInterface $outputComponent): stri
                          <li class='noticeText'>Container: <span class='highlightText'>%s</span></li>
                          <li class='noticeText'>Type: <span class='highlightText'>%s</span></li>
                      </ul>
-                 </div>",
+                 <h4>Output:</h4>
+                 %s
+                 </div>
+                 ",
         $outputComponent->getName(),
         $outputComponent->getType(),
         $outputComponent->getUniqueId(),
         $outputComponent->getLocation(),
         $outputComponent->getContainer(),
-        ($outputComponent->getState() === true ? 'True (On)' : 'False (Off)')
+        ($outputComponent->getState() === true ? 'True (On)' : 'False (Off)'),
+        $outputComponent->getOutput()
     );
 }
 
 function generateOutputFromPostIfSet(OutputComponentInterface $outputComponent): string
 {
     return (
-        empty(getCurrentRequest()->getPost() === false)
-            ? getCurrentRequest()->getPost()['output']
-            : sprintf(
-                "Some mock output from output component with id: <span class=\"highlightText smallLongText\">%s</span>",
-                $outputComponent->getUniqueId()
-            )
+    empty(getCurrentRequest()->getPost() === false)
+        ? getCurrentRequest()->getPost()['output']
+        : sprintf(
+        "Some mock output from output component with id: <span class=\"highlightText smallLongText\">%s</span>",
+        $outputComponent->getUniqueId()
+    )
     );
 }
 
 function generateOutputNameFromPostIfSet(): string
 {
-    var_dump(getCurrentRequest()->getPost()['requestName']);
     return (
     empty(getCurrentRequest()->getPost()) === false && getCurrentRequest()->getPost()['requestName'] !== 'Mock Request'
         ? getCurrentRequest()->getPost()['requestName']
-        : "MockOutputComponent" . strval(rand(100,999))
+        : "MockOutputComponent" . strval(rand(100, 999))
     );
 }
 
