@@ -400,7 +400,7 @@ function getOutputComponentInfo(OutputComponentInterface $outputComponent): stri
                          <li class='noticeText'>Container: <span class='highlightText'>%s</span></li>
                          <li class='noticeText'>Type: <span class='highlightText'>%s</span></li>
                      </ul>
-                 <h4>Output:</h4>
+                 <h4 class='highlightText'>Output:</h4>
                  %s
                  </div>
                  ",
