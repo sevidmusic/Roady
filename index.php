@@ -486,6 +486,11 @@ function getTemplatesFromResponsesToCurrentRequest(ComponentCrud $crud): array
             $templates[strval($template->getPosition())] = $template;
         }
     }
-    return $templates;
+    //return $templates;
+    // for now just return first template since all output components are the same type at the moment, this
+    // will prevent output componnts from showing multiple times if there are multiple templates
+    // Note: This is done this way for demonstration purposes only, in general the code in index.php
+    // is simply currently meant to demo some of the finished DCMS components...
+    return (isset($templates[0]) ? [$templates[0]] : $templates);
 }
 
