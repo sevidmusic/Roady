@@ -168,6 +168,20 @@ function getStyles(): string
         border-top: none;
         border-radius: 0 0 7px 7px;
     }
+    
+    table, th, td {
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+    }
+    th {
+        text-align: left;
+    }
+    
+    textarea {
+        height: 360px;
+    }
     </style>
 HTML;
 }
@@ -280,7 +294,29 @@ function getForm(): string
             <input class="input textInput" type="text" id="requestName" name="requestName" value="Mock Request"><br><br>
             <label class="formLabelText" for="output">Output:</label>
             <textarea class="input textareaInput" id="output" name="output">
-                <p class="genericContainer successText">Output...</p>
+<p class="successText">Quos omnis omnis aut fugit mollitia debitis iusto. Non harum eos eligendi aut aut expedita. Consequatur qui dolorem consequatur incidunt temporibus nam quasi et.</p>
+<table class="genericContainer">
+  <tr>
+    <th class="genericContainer noticeText">Foo</th>
+    <th class="genericContainer noticeText">Bar</th> 
+    <th class="genericContainer noticeText">Baz</th>
+  </tr>
+  <tr>
+    <td class="genericContainer noticeText">Bazzer</td>
+    <td class="genericContainer noticeText">BarBaz</td>
+    <td class="genericContainer noticeText">FooBaz</td>
+  </tr>
+  <tr>
+    <td class="genericContainer noticeText">FooBar</td>
+    <td class="genericContainer noticeText">BarFoo</td>
+    <td class="genericContainer noticeText">FooBarBaz</td>
+  </tr>
+  <tr>
+    <td class="genericContainer noticeText">Bin</td>
+    <td class="genericContainer noticeText">BazFoo</td>
+    <td class="genericContainer noticeText">BinBaz</td>
+  </tr>
+</table>
             </textarea><br><br>
             <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
             <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
