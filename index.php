@@ -67,7 +67,7 @@ function getStyles(): string
        }
 
        html {
-           font-size: 18px;
+           font-size: 11px;
        }
     
        body {
@@ -232,6 +232,8 @@ function getWelcomeMessage(): string
         for the current Request. Use the form below to create output for a 
         request.
     </p>
+    <p class="noticeText">Use the form below to create output for a request. After submitting
+       the form a link will appear for the new request.</p>
 HTML;
 }
 
