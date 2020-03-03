@@ -187,7 +187,7 @@ function getStyles(): string
     }
     
     textarea {
-        height: 360px;
+        height: 287px;
     }
     </style>
 HTML;
