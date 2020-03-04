@@ -16,7 +16,6 @@ use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
-
 const REQUEST_LOCATION = 'Web';
 const REQUEST_CONTAINER = 'Request';
 const RESPONSE_LOCATION = 'Web';
@@ -297,12 +296,46 @@ function getForm(): string
 {
     return '
         <form class="genericContainer" action="/index.php" method="post">
-            <label class="formLabelText" for="requestUrl">Request Url:</label>
-            <input class="input textInput" type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/index.php"><br>
-            <label class="formLabelText" for="requestName">Request Name:</label>
-            <input class="input textInput" type="text" id="requestName" name="requestName" value="Mock Request"><br><br>
-            <label class="formLabelText" for="output">Output:</label>
-            <textarea class="input textareaInput" id="output" name="output">
+            <div class="textInputContainer">
+                <label class="formLabelText" for="requestUrl">Request Url:</label>
+                <input class="input textInput" type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/index.php">
+            </div>
+            
+            <div class="textInputContainer">
+                <label class="formLabelText" for="requestName">Request Name:</label>
+                <input class="input textInput" type="text" id="requestName" name="requestName" value="Mock Request">
+            </div>
+            
+            <div class="selectMenuContainer">
+                <label class="formLabelText" for="position">Position:</label>
+                <select name="position">
+                    <option>0</option>
+                    <option>0.1</option>
+                    <option>0.2</option>
+                    <option>0.3</option>
+                    <option>0.4</option>
+                    <option>0.5</option>
+                    <option>0.6</option>
+                    <option>0.7</option>
+                    <option>0.8</option>
+                    <option>0.9</option>
+                    <option>1.0</option>
+                    <option>1.2</option>
+                    <option>1.3</option>
+                    <option>1.4</option>
+                    <option>1.5</option>
+                    <option>1.6</option>
+                    <option>1.7</option>
+                    <option>1.8</option>
+                    <option>1.9</option>
+                    <option>2.0</option>
+                </select>
+            </div>
+            
+            <div class="textAreaContainer">
+                <label class="formLabelText" for="output">Output:</label>
+                <textarea class="input textareaInput" id="output" name="output">
+<h2 class="highlightText">Title</h2>
 <p class="successText">Quos omnis omnis aut fugit mollitia debitis iusto. Non harum eos eligendi aut aut expedita. Consequatur qui dolorem consequatur incidunt temporibus nam quasi et.</p>
 <table class="genericContainer">
   <tr>
@@ -321,11 +354,14 @@ function getForm(): string
     <td class="genericContainer miniText">Mini Text Color</td>
   </tr>
 </table>
-            </textarea><br><br>
+                </textarea>
+            </div>
+            
             <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
             <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
             <input type="submit" value="Submit">
-        </form> ';
+        </form>
+    ';
 }
 
 function processFormIfSubmitted(ComponentCrud $crud): bool
@@ -375,11 +411,11 @@ function getMockOutputComponent(): OutputComponentInterface
             OUTPUT_COMPONENT_CONTAINER
         ),
         new Switchable(),
-        new Positionable()
+        new Positionable(generatePositionFromPostIfSet())
     );
     $outputComponent->import(
         [
-            'output' => generateOutputFromPostIfSet($outputComponent)
+            'output' => generateOutputFromPostIfSet($outputComponent),
         ]
     );
     return $outputComponent;
@@ -441,6 +477,7 @@ function getOutputComponentInfo(OutputComponentInterface $outputComponent): stri
                          <li class='noticeText'>Location: <span class='highlightText'>%s</span></li>
                          <li class='noticeText'>Container: <span class='highlightText'>%s</span></li>
                          <li class='noticeText'>Type: <span class='highlightText'>%s</span></li>
+                         <li class='noticeText'>Position: <span class='highlightText'>%s</span></li>
                      </ul>
                  <h4 class='highlightText'>Output:</h4>
                  %s
@@ -452,6 +489,7 @@ function getOutputComponentInfo(OutputComponentInterface $outputComponent): stri
         $outputComponent->getLocation(),
         $outputComponent->getContainer(),
         ($outputComponent->getState() === true ? 'True (On)' : 'False (Off)'),
+        strval($outputComponent->getPosition()),
         $outputComponent->getOutput()
     );
 }
@@ -465,6 +503,14 @@ function generateOutputFromPostIfSet(OutputComponentInterface $outputComponent):
         "Some mock output from output component with id: <span class=\"highlightText miniText\">%s</span>",
         $outputComponent->getUniqueId()
     )
+    );
+}
+
+function generatePositionFromPostIfSet(): float
+{
+    return (empty(getCurrentRequest()->getPost() === false)
+        ? floatval(getCurrentRequest()->getPost()['position'])
+        : 0
     );
 }
 
@@ -505,6 +551,7 @@ function getOutputComponentsFromResponsesToCurrentRequest(ComponentCrud $crud): 
                 $oc->increasePosition();
             }
             $content[$oc->getType()][strval($oc->getPosition())] = $oc;
+            ksort($content[$oc->getType()]);
         }
     }
     return $content;
