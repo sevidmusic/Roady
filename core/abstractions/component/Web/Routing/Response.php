@@ -34,20 +34,6 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
             if ($request->getUrl() === $storedRequest->getUrl()) {
                 return true;
             }
-            /**
-             * @todo Remove this note on next commit, it is here for future reference, but should
-             *       be referenced from the commit history, not preserved upstream.
-             * @devNote:
-             * The following checks were removed:
-             * $request->getPost() === $storedRequest->getPost() was removed
-             * because of the post data may be dynamically generated making
-             * it impossible to define a request or response that reflects
-             * the post data.
-             *
-             * $request->getGet() === $storedRequest->getGet() was removed because the url
-             * will always contain the data, i.e. http://www.getRequest.com?foo=bar&baz=bazzer
-             * so checking the get array is redundant.
-             */
         }
         return false;
     }
