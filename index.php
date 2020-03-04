@@ -308,34 +308,24 @@ function getForm(): string
             
             <div class="selectMenuContainer">
                 <label class="formLabelText" for="position">Position:</label>
-                <select name="position">
-                    <option>0</option>
-                    <option>0.1</option>
-                    <option>0.2</option>
-                    <option>0.3</option>
-                    <option>0.4</option>
-                    <option>0.5</option>
-                    <option>0.6</option>
-                    <option>0.7</option>
-                    <option>0.8</option>
-                    <option>0.9</option>
-                    <option>1.0</option>
-                    <option>1.2</option>
-                    <option>1.3</option>
-                    <option>1.4</option>
-                    <option>1.5</option>
-                    <option>1.6</option>
-                    <option>1.7</option>
-                    <option>1.8</option>
-                    <option>1.9</option>
-                    <option>2.0</option>
-                </select>
+                ' . getPositionSelector() . '
             </div>
             
             <div class="textAreaContainer">
                 <label class="formLabelText" for="output">Output:</label>
-                <textarea class="input textareaInput" id="output" name="output">
-<h2 class="highlightText">Title</h2>
+                <textarea class="input textareaInput" id="output" name="output">' . getDefaultTextAreaContent() . '</textarea>
+            </div>
+            
+            <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
+            <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
+            <input type="submit" value="Submit">
+        </form>
+    ';
+}
+
+function getDefaultTextAreaContent()
+{
+    return '<h2 class="highlightText">Title</h2>
 <p class="successText">Quos omnis omnis aut fugit mollitia debitis iusto. Non harum eos eligendi aut aut expedita. Consequatur qui dolorem consequatur incidunt temporibus nam quasi et.</p>
 <table class="genericContainer">
   <tr>
@@ -353,15 +343,16 @@ function getForm(): string
     <td class="genericContainer highlightText">Highlight Text Color</td>
     <td class="genericContainer miniText">Mini Text Color</td>
   </tr>
-</table>
-                </textarea>
-            </div>
-            
-            <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
-            <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
-            <input type="submit" value="Submit">
-        </form>
-    ';
+</table>';
+}
+
+function getPositionSelector(): string
+{
+    $options = [];
+    for ($i = 0; $i <= 500; $i++) {
+        array_push($options, sprintf('<option>%s</option>', strval(($i / 100))));
+    }
+    return sprintf('<select name="position">%s</select>', implode(PHP_EOL . '    ', $options));
 }
 
 function processFormIfSubmitted(ComponentCrud $crud): bool
