@@ -289,7 +289,6 @@ function getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest(): str
              * @var OutputComponentInterface $outputComponent
              */
             foreach ($content[$type] as $outputComponent) {
-                var_dump(substr(getCurrentRequest()->getUrl(), 0, 30));
                 $output .= (formatOutput() === true ? getOutputComponentInfo($outputComponent) : $outputComponent->getOutput());
             }
         }
