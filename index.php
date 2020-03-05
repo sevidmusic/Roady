@@ -66,25 +66,32 @@ function getStyles(): string
        }
 
        html {
-           font-size: 11px;
+           font-size: 15px;
        }
     
        body {
            font-size: 1em;
        }
+       
        .gradientBg {
            background: rgb(0,0,0);
            background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(9,98,121,1) 55%, rgba(6,3,24,1) 100%);
        }
        
-       .genericContainer{
+       .genericContainerLimitedHeight {
+           max-height: 13.5em;
+           overflow: auto;
+       }
+       
+       .genericContainer {
            background: #000000;
            padding: 20px;
            border: 2px solid #cddeff;
            border-radius: 7px 1px;
-           opacity: 0.72;
+           opacity: 0.77;
            margin-bottom: 20px;
-           overflow: auto;
+           line-height: 2em;
+           resize: vertical;
        }
        .genericText {
            color: #ff9368;
@@ -118,8 +125,7 @@ function getStyles(): string
        }
        
        .miniText {
-           color: #46ff32;
-           font-size: .6em;
+           font-size: .72em;
        }
        
        .input {
@@ -175,9 +181,29 @@ function getStyles(): string
         border-radius: 0 0 7px 7px;
     }
     
+    .textAreaContainer {
+        margin-top: 1em;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    a:visited {
+        color: #decaff;
+    }
+    
+    a:active, a:hover {
+        background: #008fff;
+        border: 1px solid #ffffff;
+        border-radius: 10px;
+        padding: .1em .5em;
+        color: #732b3f;
+    }
     table, th, td {
         border-collapse: collapse;
     }
+    
     th, td {
         padding: 5px;
     }
@@ -218,10 +244,11 @@ function getBody(): string
 {
     return '
         <body class="gradientBg">
-            <div class="genericContainer">' . getWelcomeMessage() . '' . getCurrentRequestInfo() . '</div>
+            <div id="welcome" class="genericContainer genericContainerLimitedHeight">' . getWelcomeMessage() . '</div>
+            <div id="formContainer" class="genericContainer genericContainerLimitedHeight">' . getForm() . '</div>
+            <div id="requestMenu" class="genericContainer genericContainerLimitedHeight">' . getCurrentRequestInfo() . '</div>
             ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
-            ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
-            <div class="genericContainer">' . getForm() . '</div>
+                ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
         ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
         </body>';
 }
@@ -230,23 +257,36 @@ function getWelcomeMessage(): string
 {
     return <<<'HTML'
     <h1 class="noticeText">Welcome</h1>
-    <p class="genericContainer successText">
-        Demonstrates the relationships/interactions of a Request, Router, 
-        Response, Crud, Template, and OutputComponent. It currently 
-        demonstrates one approach to how they might be used together to 
-        generate a User Interface based on what Responses the Router returns 
-        for the current Request. Use the form below to create output for a 
-        request.
+    <p class="successText">
+        This is a demonstration the possible relationships/interactions of a<span class="highlightText"> Request</span>,  
+        <span class="highlightText"> Router</span>, <span class="highlightText"> Response</span>,   
+        <span class="highlightText"> Crud</span>,<span class="highlightText"> Template</span>, and 
+        <span class="highlightText"> OutputComponent</span>.
     </p>
-    <p class="noticeText">Use the form below to create output for a request. After submitting
-       the form a link will appear for the new request.</p>
+    <p class="successText">
+        It currently demonstrates how a stored <span class="highlightText"> Response</span> that responds
+        to the current <span class="highlightText"> Request</span> can be used to determine what
+        <span class="highlightText"> OutputComponent(s)</span>
+        is/are used to generate output for the <span class="highlightText"> Request</span>, and which <span class="highlightText"> Template(s)</span> is/are used to 
+        organize that output.
+    </p>
 HTML;
 }
 
 function getCurrentRequestInfo(): string
 {
     $request = getCurrentRequest();
-    return "<p class='genericText'>Current Request: {$request->getUrl()}</p>";
+    return sprintf("
+        <h3 class='highlightText'>Current Request Info</h3>
+        <p class='genericText'>Name: <span class='highlightText'>%s</span></p>
+        <p class='genericText'>Url: <a href='%s' class='highlightText'>%s</a></p>
+        <p class='genericText'>Unique Id:<span class='highlightText'>%s</span></p>
+        ",
+        $request->getName(),
+        $request->getUrl(),
+        $request->getUrl(),
+        $request->getUniqueId()
+    );
 }
 
 function getStoredRequestMenu(ComponentCrud $crud): string
@@ -295,7 +335,20 @@ function getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest(): str
 function getForm(): string
 {
     return '
-        <form class="genericContainer" action="/index.php" method="post">
+        <p class="genericText">
+            The <a href="#form">form</a> below can be used to generate a <span class="highlightText">Response</span> to a
+            <span class="highlightText"> Request</span>. The form allows you to specify the<span class="highlightText"> Request\'s</span>
+            Url, the <span class="highlightText">Request\'s</span> Name, and the Output that should be
+            shown in <span class="highlightText">Response</span> to the <span class="highlightText">Request</span>.<br>
+            <span class="noticeText miniText">Note: The form provides default values so if your in a hurry you can 
+            just click the <span class="highlightText">"Generate Stored Components For Mock Request"</span> button.</span>
+        </p>
+        <form id="form" class="genericContainer" action="/index.php" method="post">
+        
+            <div class="submitButtonContainer">
+                <input type="submit" value="Generate Stored Components For Mock Request">
+            </div>
+            
             <div class="textInputContainer">
                 <label class="formLabelText" for="requestUrl">Request Url:</label>
                 <input class="input textInput" type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/index.php">
@@ -303,22 +356,27 @@ function getForm(): string
             
             <div class="textInputContainer">
                 <label class="formLabelText" for="requestName">Request Name:</label>
-                <input class="input textInput" type="text" id="requestName" name="requestName" value="Mock Request">
+                <input class="input textInput" type="text" id="requestName" name="requestName" value="Home">
             </div>
             
-            <div class="selectMenuContainer">
-                <label class="formLabelText" for="position">Position:</label>
+            <div class="selectMenuContainer" style="margin-top: 1em; margin-right:5em; float: right;">
+                <span class="formLabelText">Output Position <span class="highlightText">( Relative to other existing output )</span> :</span>
                 ' . getPositionSelector() . '
             </div>
-            
+
             <div class="textAreaContainer">
-                <label class="formLabelText" for="output">Output:</label>
+                <label class="formLabelText" for="output">Output to show in Response to this Request:</label><br>
                 <textarea class="input textareaInput" id="output" name="output">' . getDefaultTextAreaContent() . '</textarea>
             </div>
             
+            <div style="clear: both"></div>
+
             <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
             <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
-            <input type="submit" value="Submit">
+            
+            <div class="submitButtonContainer">
+                <input type="submit" value="Generate Stored Components For Mock Request">
+            </div>
         </form>
     ';
 }
@@ -341,7 +399,7 @@ function getDefaultTextAreaContent()
   <tr>
     <td class="genericContainer formLabelText">Form Label Text Color</td>
     <td class="genericContainer highlightText">Highlight Text Color</td>
-    <td class="genericContainer miniText">Mini Text Color</td>
+    <td class="genericContainer genericText miniText">Mini Text Size</td>
   </tr>
 </table>';
 }
@@ -446,13 +504,24 @@ function generateAndStoreResponse(ComponentCrud $crud, WebRequestComponent $requ
 
 function getCurrentRequest(): Request
 {
-    return new Request(
-        new Storable(
-            'CurrentRequest',
-            REQUEST_LOCATION,
-            REQUEST_CONTAINER),
-        new Switchable()
-    );
+    try {
+        return new Request(
+            new Storable(
+                'Current Request ' . strrev(base64_encode(random_bytes(9))),
+                REQUEST_LOCATION,
+                REQUEST_CONTAINER),
+            new Switchable()
+        );
+    } catch (Exception $e) {
+        error_log('Failed to generate random name for current request using random_bytes(). This is NOT important.', E_NOTICE);
+        return new Request(
+            new Storable(
+                'Current Request (Name Not Unique!)',
+                REQUEST_LOCATION,
+                REQUEST_CONTAINER),
+            new Switchable()
+        );
+    }
 }
 
 function getOutputComponentInfo(OutputComponentInterface $outputComponent): string
