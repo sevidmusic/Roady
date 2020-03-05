@@ -35,7 +35,10 @@ function getDoctype(): string
 
 function getHtml(): string
 {
-    return getDoctype() . PHP_EOL . '<html lang="en">' . PHP_EOL . getHead() . PHP_EOL . getBody() . PHP_EOL . '</html>';
+    return (empty(getCurrentRequest()->getGet())
+        ? getDoctype() . PHP_EOL . '<html lang="en">' . PHP_EOL . getHead() . PHP_EOL . getBody() . PHP_EOL . '</html>'
+        : getBody()
+    );
 }
 
 function getHead(): string
@@ -79,7 +82,7 @@ function getStyles(): string
        }
        
        .genericContainerLimitedHeight {
-           max-height: 13.5em;
+           height: 13.5em;
            overflow: auto;
        }
        
@@ -242,15 +245,19 @@ HTML;
 
 function getBody(): string
 {
-    return '
-        <body class="gradientBg">
-            <div id="welcome" class="genericContainer genericContainerLimitedHeight">' . getWelcomeMessage() . '</div>
-            <div id="formContainer" class="genericContainer genericContainerLimitedHeight">' . getForm() . '</div>
-            <div id="requestMenu" class="genericContainer genericContainerLimitedHeight">' . getCurrentRequestInfo() . '</div>
-            ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
-                ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
-        ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
-        </body>';
+    return (
+    empty(getCurrentRequest()->getGet()) === true
+        ? '
+                <body class="gradientBg">
+                    <div id="welcome" class="genericContainer genericContainerLimitedHeight">' . getWelcomeMessage() . '</div>
+                    <div id="formContainer" class="genericContainer genericContainerLimitedHeight">' . getForm() . '</div>
+                    <div id="requestMenu" class="genericContainer genericContainerLimitedHeight">' . getCurrentRequestInfo() . '</div>
+                    ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
+                        ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
+                ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
+                </body>'
+        : getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest()
+    );
 }
 
 function getWelcomeMessage(): string
@@ -325,7 +332,7 @@ function getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest(): str
              * @var OutputComponentInterface $outputComponent
              */
             foreach ($content[$type] as $outputComponent) {
-                $output .= getOutputComponentInfo($outputComponent);
+                $output .= (empty(getCurrentRequest()->getGet()) === true ? getOutputComponentInfo($outputComponent) : $outputComponent->getOutput());
             }
         }
     }
