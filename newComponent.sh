@@ -131,7 +131,7 @@ askUserForParentComponentName() {
 
 askUserForParentComponentSubtype() {
     promptUserAndVerifyInput "Please enter the subtype of the component this component extends:";
-    USER_DEFINED_PARENT_COMPONENT_SUBTYPE="${PREVIOUS_USER_INPUT}";
+    USER_DEFINED_PARENT_COMPONENT_SUBTYPE=$(echo "${PREVIOUS_USER_INPUT}" | sed 's,\\,\\\\,g');
 }
 
 showWelcomeMessage() {
