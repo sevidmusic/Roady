@@ -20,7 +20,8 @@
         "psr-4": {
             "DarlingCms\\": "core/",
             "Apps\\": "apps/",
-            "UnitTests\\": "Tests/Unit/"
+            "UnitTests\\": "Tests/Unit/",
+            "Extensions\\": "Extensions/"
         }
     },
     "require-dev": {

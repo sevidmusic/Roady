@@ -39,6 +39,10 @@
             <directory>Tests/Unit/classes/component</directory>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | Extension Tests">
+            <directory>Extensions</directory>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>
