@@ -1,230 +1,294 @@
 #!/bin/bash
 
+# OPTIONS=("Foo" "Bar" "Baz");
+# RESPONSES=('Bar-Bazzer-Foo' 'Foo-Bazzer-Bar' 'Bazzer-Bar-Foo');
+# askUserForSelection $OPTIONS $RESPONSES;
+
+askUserForSelection() {
+  local -n _aufs_options=$2
+  local -n _aufs_responses=$3
+  local _aufs_responseIndex
+  local _aufs_response
+  printf "\n"
+  PS3=$(printf "\n%s\n\n%s" "${1}" "${DSHCOLOR}\$dsh: ${USRPRMPTCOLOR}")
+  select opt in "${_aufs_options[@]}"; do
+    case $opt in
+    ${_aufs_options[$(("${REPLY}" - 1))]})
+      if [[ -n "${opt}" ]]; then
+        _aufs_responseIndex=$(("${REPLY}" - 1))
+        _aufs_response=$(echo -e "${_aufs_responses[${_aufs_responseIndex}]}" | sed -E "s,-, ,g;")
+        promptUserAndNotify "${_aufs_response}" "One moment please"
+        PREVIOUS_USER_INPUT="${opt}"
+        break
+      fi
+      printf "\n%s%s%s%s%s%s is not a valid option.\n\nPlease enter the %s%snumber%s%s that corresponds to your selection.%s\n" "${CLEARCOLOR}" "${HIGHLIGHTCOLOR2}" "${DARKTEXTCOLOR}" "${REPLY}" "${CLEARCOLOR}" "${WARNINGCOLOR}" "${CLEARCOLOR}" "${HIGHLIGHTCOLOR}" "${CLEARCOLOR}" "${WARNINGCOLOR}" "${CLEARCOLOR}"
+      ;;
+    esac
+  done
+}
+
 initVars() {
-    COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR="./Tests/Unit/interfaces/component";
-    COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR="./Tests/Unit/abstractions/component";
-    COMPONENT_TEST_TARGET_ROOT_DIR="./Tests/Unit/classes/component";
-    COMPONENT_INTERFACE_TARGET_ROOT_DIR="./core/interfaces/component";
-    COMPONENT_ABSTRACTION_TARGET_ROOT_DIR="./core/abstractions/component";
-    COMPONENT_CLASS_TARGET_ROOT_DIR="./core/classes/component";
-    CLEARCOLOR=$(setColor 0);
-    NOTIFYCOLOR=$(setColor 33);
-    DSHCOLOR=$(setColor 36);
-    USRPRMPTCOLOR=$(setColor 44);
-    INPUTCOLOR=$(setColor 34);
-    PHPCODECOLOR=$(setColor 35);
+  WARNINGCOLOR=$(setColor 35)
+  CLEARCOLOR=$(setColor 0)
+  NOTIFYCOLOR=$(setColor 33)
+  DSHCOLOR=$(setColor 41)
+  USRPRMPTCOLOR=$(setColor 41)
+  PHPCODECOLOR=$(setColor 42)
+  HIGHLIGHTCOLOR=$(setColor 41)
+  HIGHLIGHTCOLOR2=$(setColor 45)
+  ATTENTIONEFFECT=$(setColor 5)
+  ATTENTIONEFFECTCOLOR=$(setColor 36)
+  DARKTEXTCOLOR=$(setColor 30)
+}
+
+askUserIfComponentForCoreOrExtension() {
+  local _auicfcoe_componentExtends
+  local _auicfcoe_options
+  local _auicfcoe_responses
+  _auicfcoe_options=("Core" "Extension")
+  _auicfcoe_responses=("${CLEARCOLOR}${ATTENTIONEFFECT}${ATTENTIONEFFECTCOLOR}WARNING${CLEARCOLOR}${WARNINGCOLOR}: Defining new Components for core should only be done if absolutely necessary, and you should only do so if you are sure you know what you are doing and understand the consequences! ${CLEARCOLOR}${DARKTEXTCOLOR}${HIGHLIGHTCOLOR2}It is recommended that you define new Components as part of an Extension. Modifying Core can break Core!${CLEARCOLOR}${WARNINGCOLOR} Are you sure you want to proceed? (Type \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${WARNINGCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${WARNINGCOLOR}\" to continue, press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${WARNINGCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You have chosen to ${CLEARCOLOR}${HIGHLIGHTCOLOR}create a new Component for an Extension${CLEARCOLOR}${NOTIFYCOLOR}, if this is not correct press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit, otherwise type \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\".${CLEARCOLOR}")
+  askUserForSelection "${CLEARCOLOR}${NOTIFYCOLOR}Is this Component being defined as part of ${CLEARCOLOR}${HIGHLIGHTCOLOR}Core${CLEARCOLOR}${NOTIFYCOLOR} or as part of an ${CLEARCOLOR}${HIGHLIGHTCOLOR}Extension${CLEARCOLOR}${NOTIFYCOLOR}?${CLEARCOLOR}" _auicfcoe_options _auicfcoe_responses
+  _auicfcoe_componentExtends="${PREVIOUS_USER_INPUT}"
+  if [[ "${_auicfcoe_componentExtends}" == "Core" ]]; then
+    EXTENSION_NAME=""
+    COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR="./Tests/Unit/interfaces/component"
+    COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR="./Tests/Unit/abstractions/component"
+    COMPONENT_TEST_TARGET_ROOT_DIR="./Tests/Unit/classes/component"
+    COMPONENT_INTERFACE_TARGET_ROOT_DIR="./core/interfaces/component"
+    COMPONENT_ABSTRACTION_TARGET_ROOT_DIR="./core/abstractions/component"
+    COMPONENT_CLASS_TARGET_ROOT_DIR="./core/classes/component"
+  fi
+
+  if [[ "${_auicfcoe_componentExtends}" == "Extension" ]]; then
+    promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}What is the ${CLEARCOLOR}${HIGHLIGHTCOLOR}name of the Extension${CLEARCOLOR}${NOTIFYCOLOR} this Component will belong to?${CLEARCOLOR}"
+    EXTENSION_NAME="${PREVIOUS_USER_INPUT}"
+    COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/Tests/Unit/interfaces/component"
+    COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/Tests/Unit/abstractions/component"
+    COMPONENT_TEST_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/Tests/Unit/classes/component"
+    COMPONENT_INTERFACE_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/core/interfaces/component"
+    COMPONENT_ABSTRACTION_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/core/abstractions/component"
+    COMPONENT_CLASS_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/core/classes/component"
+  fi
 }
 
 setColor() {
-    COLOR="\e[${1}m";
-    printf "${COLOR}";
+  printf "\e[%sm" "${1}"
 }
 
 writeWordSleep() {
-    printf "${1}";
-    sleep "${2}";
+  printf "%s" "${1}"
+  sleep "${2}"
 }
 
 sleepWriteWord() {
-    sleep "${2}";
-    printf "${1}";
+  sleep "${2}"
+  printf "%s" "${1}"
 }
 
 sleepWriteWordSleep() {
-    sleep "${2}";
-    printf "${1}";
-    sleep "${2}";
+  sleep "${2}"
+  printf "%s" "${1}"
+  sleep "${2}"
 }
 
 showLoadingBar() {
-    sleepWriteWordSleep "${1}" .3;
-    setColor 44;
-    INC=0;
-    while [ $INC -le 42 ]
-    do
-        sleepWriteWordSleep ":" .009;
-        INC=$(($INC + 1));
-    done;
-    echo "[100%]";
-    setColor 0;
-    sleep 0.42;
-    clear;
+  local _slb_inc
+  printf "\n"
+  sleepWriteWordSleep "${CLEARCOLOR}${ATTENTIONEFFECT}${ATTENTIONEFFECTCOLOR}${1}${CLEARCOLOR}" .3
+  setColor 43
+  _slb_inc=0
+  while [[ ${_slb_inc} -le 27 ]]; do
+    sleepWriteWordSleep ":" .009
+    _slb_inc=$((_slb_inc + 1))
+  done
+  echo "${ATTENTIONEFFECTCOLOR}[100%]${CLEARCOLOR}"
+  setColor 0
+  sleep 1
+  clear
 }
 
 notifyUser() {
-    printf "\n${NOTIFYCOLOR}${1}${CLEARCOLOR}\n";
+  printf "\n%s%s%s\n" "${NOTIFYCOLOR}" "${1}" "${CLEARCOLOR}"
 }
 
 promptUser() {
-    notifyUser "${1}";
-    PROMPT_MSG=$(printf "\n${DSHCOLOR}\$dsh: ${USRPRMPTCOLOR}");
-    PREVIOUS_USER_INPUT="${USER_INPUT}";
-    read -p "${PROMPT_MSG}" USER_INPUT;
-    setColor 0;
+  local _pu_promptMessage
+  notifyUser "${1}"
+  _pu_promptMessage=$(printf "%s\n%s\$dsh: %s" "${CLEARCOLOR}" "${DSHCOLOR}" "${USRPRMPTCOLOR}")
+  PREVIOUS_USER_INPUT="${CURRENT_USER_INPUT}"
+  read -p "${_pu_promptMessage}" CURRENT_USER_INPUT
+  setColor 0
 }
 
 promptUserAndVerifyInput() {
-    while :
-    do
-        clear;
-        promptUser "${1}";
-        clear;
-        notifyUser  "You entered \"${INPUTCOLOR}${USER_INPUT}${NOTIFYCOLOR}\"\n\nIs this correct?";
-        if [ "${USER_INPUT}" = "Y" ]; then
-            clear;
-            break;
-        fi
-        promptUser "If so, type ${INPUTCOLOR}\"Y\"${NOTIFYCOLOR} and press ${INPUTCOLOR}<enter>${NOTIFYCOLOR} to continue to next step,\nor just press ${INPUTCOLOR}<enter>${NOTIFYCOLOR} to repeat the last step.";
-        if [ "${USER_INPUT}" = "Y" ]; then
-            clear;
-            break;
-        fi
-    done;
+  while :; do
+    clear
+    promptUser "${1}"
+    clear
+    notifyUser "You entered \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${CURRENT_USER_INPUT}${CLEARCOLOR}${NOTIFYCOLOR}\"Is this correct?${CLEARCOLOR}"
+    if [[ "${CURRENT_USER_INPUT}" == "Y" ]]; then
+      clear
+      break
+    fi
+    promptUser "If so, type ${CLEARCOLOR}${HIGHLIGHTCOLOR}\"Y\"${CLEARCOLOR}${NOTIFYCOLOR} and press ${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR} to continue to next step, or just press ${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR} to repeat the last step.${CLEARCOLOR}"
+    if [[ "${CURRENT_USER_INPUT}" == "Y" ]]; then
+      clear
+      break
+    fi
+  done
 }
 
 promptUserAndNotify() {
-    while :
-    do
-        clear;
-        promptUser "${1}";
-        clear;
-        if [ "${USER_INPUT}" = "Y" ]; then
-            showLoadingBar "${2}";
-            clear;
-            break;
-        fi
-    done;
+  setColor 0
+  while :; do
+    clear
+    promptUser "${1}"
+    clear
+    if [[ "${CURRENT_USER_INPUT}" == "Y" ]]; then
+      showLoadingBar "${2}"
+      clear
+      break
+    fi
+  done
 }
 
 generatePHPCodeFromTemplate() {
-    TEMPLATE="${1}";
-    GENERATED_FILE_ROOT_DIR_PATH="${2}";
-    FILE_NAME_SUFFIX="${3}";
-    GENERATED_FILE_PATH=$(echo "${GENERATED_FILE_ROOT_DIR_PATH}/${USER_DEFINED_COMPONENT_SUBTYPE}/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php" | sed -E "s,\\\,/,g; s,//,/,g;");
-    if [ "${FILE_NAME_SUFFIX}" = "TestTrait" ]; then
-        GENERATED_FILE_PATH=$(echo "${GENERATED_FILE_ROOT_DIR_PATH}/${USER_DEFINED_COMPONENT_SUBTYPE}/TestTraits/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php" | sed -E "s,\\\,/,g; s,//,/,g;");
-    fi;
-    PHP_CODE=$(sed -E "s/DS_PARENT_COMPONENT_SUBTYPE/${USER_DEFINED_PARENT_COMPONENT_SUBTYPE}/g; s/DS_PARENT_COMPONENT_NAME/${USER_DEFINED_PARENT_COMPONENT_NAME}/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/\\\\\\\/\\\/g; s/\\\;/;/g;" "${1}");
-    GENERATED_FILE_SUB_DIR_PATH=$(echo "${GENERATED_FILE_PATH}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${FILE_NAME_SUFFIX}.php//g");
-    printf "${NOTIFYCOLOR}The following code was generated using the ${INPUTCOLOR}${TEMPLATE}${NOTIFYCOLOR} template, please review it to make sure there are not any errors:${CLEARCOLOR}\n\n";
-    echo "${PHPCODECOLOR}${PHP_CODE}";
-    promptUser "\n\nIf everything looks ok press <enter>";
-    showLoadingBar "Writing file ${GENERATED_FILE_PATH} ";
-    mkdir -p "${GENERATED_FILE_SUB_DIR_PATH}";
-    echo "${PHP_CODE}" > "${GENERATED_FILE_PATH}";
+  local _gpcft_template
+  local _gpcft_fileRootDirectoryPath
+  local _gpcft_fileName
+  local _gpcft_filePath
+  local _gpcft_phpCode
+  local _gpcft_fileSubDirectoryPath
+  _gpcft_template="${1}"
+  _gpcft_fileRootDirectoryPath="${2}"
+  _gpcft_fileName="${3}"
+  _gpcft_filePath=$(echo "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g;")
+  if [[ "${_gpcft_fileName}" == "TestTrait" ]]; then
+    _gpcft_filePath=$(echo "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/TestTraits/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g;")
+  fi
+  _gpcft_phpCode=$(sed -E "s/DS_EXTENSION_NAME/${EXTENSION_NAME}/g; s/DS_PARENT_COMPONENT_SUBTYPE/${USER_DEFINED_PARENT_COMPONENT_SUBTYPE}/g; s/DS_PARENT_COMPONENT_NAME/${USER_DEFINED_PARENT_COMPONENT_NAME}/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/\\\\\\\/\\\/g; s/\\\;/;/g;" "${1}")
+  _gpcft_fileSubDirectoryPath=$(echo "${_gpcft_filePath}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php//g")
+  printf "%s\n\n%sThe following code was generated using the %s%s%s%s%s template, please review it to make sure there are not any errors:%s\n\n" "${CLEARCOLOR}" "${NOTIFYCOLOR}" "${CLEARCOLOR}" "${HIGHLIGHTCOLOR}" "${_gpcft_template}" "${CLEARCOLOR}" "${NOTIFYCOLOR}" "${CLEARCOLOR}"
+  echo "${PHPCODECOLOR}${_gpcft_phpCode}"
+  promptUser "If everything looks ok press <enter>"
+  showLoadingBar "Writing file ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${_gpcft_filePath}${CLEARCOLOR} "
+  mkdir -p "${_gpcft_fileSubDirectoryPath}"
+  echo "${_gpcft_phpCode}" >"${_gpcft_filePath}"
 }
 
 askUserForComponentName() {
-    promptUserAndVerifyInput "Please enter a name for the component";
-    USER_DEFINED_COMPONENT_NAME="${PREVIOUS_USER_INPUT}";
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter a ${CLEARCOLOR}${HIGHLIGHTCOLOR}name for the new component:${CLEARCOLOR}"
+  USER_DEFINED_COMPONENT_NAME="${PREVIOUS_USER_INPUT}"
 }
 
 askUserForComponentSubtype() {
-    promptUserAndVerifyInput "Please enter the component's sub-type, the sub-type\ndetermines the namespace pattern used to define the namespaces\nof the interface, implementations, test trait, and test classes\nrelated to the component.\n\nExample namespace pattern:\n\\DarlingCms\\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}\n\nNote: You must escape backslash characters.\n\nNote: Do not inlcude a preceding backslash in the sub-type.\nWrong: \\\\Foo\\\\Bar\nRight: Foo\\\\Bar\n";
-    USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${PREVIOUS_USER_INPUT}" | sed 's,\\,\\\\,g');
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the component's ${CLEARCOLOR}${HIGHLIGHTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR}, the ${CLEARCOLOR}${HIGHLIGHTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR} is used to construct namespaces for the Component. Example: ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}\\DarlingCms\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}${NOTIFYCOLOR} Note: You must escape backslash characters. Note: Do not include a preceding backslash in the sub-type. ${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}Wrong: \\\\Foo\\\\Bar ${CLEARCOLOR}${HIGHLIGHTCOLOR}Right: Foo\\\\Bar${CLEARCOLOR}"
+  #USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${PREVIOUS_USER_INPUT}" | sed 's,\\,\\\\,g')
+  USER_DEFINED_COMPONENT_SUBTYPE=${PREVIOUS_USER_INPUT/\\/\\\\}
 }
 
 askUserForParentComponentName() {
-    promptUserAndVerifyInput "Please enter the name of the component this component extends:";
-    USER_DEFINED_PARENT_COMPONENT_NAME="${PREVIOUS_USER_INPUT}";
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the ${CLEARCOLOR}${HIGHLIGHTCOLOR}name of the component this component extends${CLEARCOLOR}${NOTIFYCOLOR}:${CLEARCOLOR}"
+  USER_DEFINED_PARENT_COMPONENT_NAME="${PREVIOUS_USER_INPUT}"
 }
 
 askUserForParentComponentSubtype() {
-    promptUserAndVerifyInput "Please enter the subtype of the component this component extends:";
-    USER_DEFINED_PARENT_COMPONENT_SUBTYPE=$(echo "${PREVIOUS_USER_INPUT}" | sed 's,\\,\\\\,g');
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the ${CLEARCOLOR}${HIGHLIGHTCOLOR}subtype of the component this component extends:${CLEARCOLOR}"
+  USER_DEFINED_PARENT_COMPONENT_SUBTYPE=${PREVIOUS_USER_INPUT/\\/\\\\}
 }
 
 showWelcomeMessage() {
-    clear;
-    setColor 32;
-    sleepWriteWordSleep "\nW" .03;
-    setColor 34;
-    sleepWriteWordSleep "e" .03;
-    setColor 36;
-    sleepWriteWordSleep "l" .03;
-    setColor 32;
-    sleepWriteWordSleep "c" .03;
-    setColor 34;
-    sleepWriteWordSleep "o" .03;
-    setColor 36;
-    sleepWriteWordSleep "m" .03;
-    setColor 32;
-    sleepWriteWordSleep "e" .03;
-    setColor 34;
-    sleepWriteWordSleep " " .03;
-    setColor 36;
-    sleepWriteWordSleep "t" .03;
-    setColor 32;
-    sleepWriteWordSleep "h" .03;
-    setColor 34;
-    sleepWriteWordSleep "e" .03;
-    setColor 36;
-    sleepWriteWordSleep " " .03;
-    setColor 32;
-    sleepWriteWordSleep "D" .03;
-    setColor 34;
-    sleepWriteWordSleep "a" .03;
-    setColor 36;
-    sleepWriteWordSleep "r" .03;
-    setColor 32;
-    sleepWriteWordSleep "l" .03;
-    setColor 34;
-    sleepWriteWordSleep "i" .03;
-    setColor 36;
-    sleepWriteWordSleep "n" .03;
-    setColor 32;
-    sleepWriteWordSleep "g" .03;
-    setColor 34;
-    sleepWriteWordSleep " " .03;
-    setColor 36;
-    sleepWriteWordSleep "S" .03;
-    setColor 32;
-    sleepWriteWordSleep "h" .03;
-    setColor 34;
-    sleepWriteWordSleep "e" .03;
-    setColor 36;
-    sleepWriteWordSleep "l" .03;
-    setColor 32;
-    sleepWriteWordSleep "l\n" .03;
-    setColor 36;
-    showLoadingBar "Loading New Component Module";
+  clear
+  printf "\n"
+  setColor 32
+  sleepWriteWordSleep "W" .03
+  setColor 34
+  sleepWriteWordSleep "e" .03
+  setColor 36
+  sleepWriteWordSleep "l" .03
+  setColor 32
+  sleepWriteWordSleep "c" .03
+  setColor 34
+  sleepWriteWordSleep "o" .03
+  setColor 36
+  sleepWriteWordSleep "m" .03
+  setColor 32
+  sleepWriteWordSleep "e" .03
+  setColor 34
+  sleepWriteWordSleep " " .03
+  setColor 36
+  sleepWriteWordSleep "t" .03
+  setColor 32
+  sleepWriteWordSleep "o" .03
+  setColor 34
+  sleepWriteWordSleep " " .03
+  setColor 36
+  sleepWriteWordSleep "t" .03
+  setColor 32
+  sleepWriteWordSleep "h" .03
+  setColor 34
+  sleepWriteWordSleep "e" .03
+  setColor 36
+  sleepWriteWordSleep " " .03
+  setColor 32
+  sleepWriteWordSleep "D" .03
+  setColor 34
+  sleepWriteWordSleep "a" .03
+  setColor 36
+  sleepWriteWordSleep "r" .03
+  setColor 32
+  sleepWriteWordSleep "l" .03
+  setColor 34
+  sleepWriteWordSleep "i" .03
+  setColor 36
+  sleepWriteWordSleep "n" .03
+  setColor 32
+  sleepWriteWordSleep "g" .03
+  setColor 34
+  sleepWriteWordSleep " " .03
+  setColor 36
+  sleepWriteWordSleep "S" .03
+  setColor 32
+  sleepWriteWordSleep "h" .03
+  setColor 34
+  sleepWriteWordSleep "e" .03
+  setColor 36
+  sleepWriteWordSleep "l" .03
+  setColor 32
+  sleepWriteWordSleep "l" .03
+  setColor 36
+  printf "\n"
+  printf "\n"
+  showLoadingBar "Loading new component module"
 }
 
 askUserForTemplateDirectoryName() {
-    promptUserAndVerifyInput "Please enter the name of the directory where the appropriate php code templates are located:";
-    TEMPLATE="${PREVIOUS_USER_INPUT}";
-
-    while [ ! -d "./templates/${TEMPLATE}" ]
-    do
-        promptUserAndVerifyInput "The specified template directory does not exist, please enter an existing template directory's name";
-        TEMPLATE="${PREVIOUS_USER_INPUT}";
-    done;
-
-    TEST_TRAIT_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/TestTrait.php";
-    ABSTRACT_TEST_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/AbstractTest.php";
-    TEST_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Test.php";
-    INTERFACE_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Interface.php";
-    ABSTRACTION_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Abstraction.php";
-    CLASS_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Class.php";
+  local _auftdn_options
+  local _auftdn_responses
+  _auftdn_options=("Component" "OutputComponent" "SwitchableComponent")
+  _auftdn_responses=("${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}Component${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You selected the \"${CLEARCOLOR}${HIGHLIGHTCOLOR}OutputComponent${CLEARCOLOR}${NOTIFYCOLOR}\" template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}SwitchableComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}")
+  askUserForSelection "${CLEARCOLOR}${NOTIFYCOLOR}Please select the template that should be used to generate the php files.${CLEARCOLOR}" _auftdn_options _auftdn_responses
+  TEMPLATE="${PREVIOUS_USER_INPUT}"
+  TEST_TRAIT_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/TestTrait.php"
+  ABSTRACT_TEST_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/AbstractTest.php"
+  TEST_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Test.php"
+  INTERFACE_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Interface.php"
+  ABSTRACTION_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Abstraction.php"
+  CLASS_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Class.php"
 }
-while :
-do
-    initVars;
-    showWelcomeMessage;
-    askUserForTemplateDirectoryName;
-    askUserForParentComponentName;
-    askUserForParentComponentSubtype;
-    askUserForComponentName;
-    askUserForComponentSubtype;
-    generatePHPCodeFromTemplate "${TEST_TRAIT_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR}" "TestTrait";
-    generatePHPCodeFromTemplate "${ABSTRACT_TEST_TEMPLATE_FILE_PATH}" "${COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR}" "Test";
-    generatePHPCodeFromTemplate "${TEST_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TARGET_ROOT_DIR}" "Test";
-    generatePHPCodeFromTemplate "${INTERFACE_TEMPLATE_FILE_PATH}" "${COMPONENT_INTERFACE_TARGET_ROOT_DIR}" "";
-    generatePHPCodeFromTemplate "${ABSTRACTION_TEMPLATE_FILE_PATH}" "${COMPONENT_ABSTRACTION_TARGET_ROOT_DIR}" "";
-    generatePHPCodeFromTemplate "${CLASS_TEMPLATE_FILE_PATH}" "${COMPONENT_CLASS_TARGET_ROOT_DIR}" "";
-    setColor 0;
-    break;
 
-done;
-
-
+initVars
+showWelcomeMessage
+askUserIfComponentForCoreOrExtension
+askUserForTemplateDirectoryName
+askUserForParentComponentName
+askUserForParentComponentSubtype
+askUserForComponentName
+askUserForComponentSubtype
+generatePHPCodeFromTemplate "${TEST_TRAIT_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR}" "TestTrait"
+generatePHPCodeFromTemplate "${ABSTRACT_TEST_TEMPLATE_FILE_PATH}" "${COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR}" "Test"
+generatePHPCodeFromTemplate "${TEST_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TARGET_ROOT_DIR}" "Test"
+generatePHPCodeFromTemplate "${INTERFACE_TEMPLATE_FILE_PATH}" "${COMPONENT_INTERFACE_TARGET_ROOT_DIR}" ""
+generatePHPCodeFromTemplate "${ABSTRACTION_TEMPLATE_FILE_PATH}" "${COMPONENT_ABSTRACTION_TARGET_ROOT_DIR}" ""
+generatePHPCodeFromTemplate "${CLASS_TEMPLATE_FILE_PATH}" "${COMPONENT_CLASS_TARGET_ROOT_DIR}" ""
+setColor 0
