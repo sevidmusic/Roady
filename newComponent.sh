@@ -41,6 +41,18 @@ initVars() {
   DARKTEXTCOLOR=$(setColor 30)
 }
 
+showInfoPanel() {
+    printf "\n\n${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}----- Info Panel -----${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Extending: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${EXTENDING}${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Template: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${TEMPLATE}${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Extension Name: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${EXTENSION_NAME}${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Parent Component Name: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${USER_DEFINED_PARENT_COMPONENT_NAME}${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Parent Component Sub-type: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${USER_DEFINED_PARENT_COMPONENT_SUBTYPE}${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Component Name: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}"
+    printf "\n  ${CLEARCOLOR}${NOTIFYCOLOR}Component Sub-type: ${CLEARCOLOR}${HIGHLIGHTCOLOR}${USER_DEFINED_COMPONENT_SUBTYPE}${CLEARCOLOR}"
+    printf "\n${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}----------------------${CLEARCOLOR}\n\n"
+}
+
 askUserIfComponentForCoreOrExtension() {
   local _auicfcoe_componentExtends
   local _auicfcoe_options
@@ -49,6 +61,7 @@ askUserIfComponentForCoreOrExtension() {
   _auicfcoe_responses=("${CLEARCOLOR}${ATTENTIONEFFECT}${ATTENTIONEFFECTCOLOR}WARNING${CLEARCOLOR}${WARNINGCOLOR}: Defining new Components for core should only be done if absolutely necessary, and you should only do so if you are sure you know what you are doing and understand the consequences! ${CLEARCOLOR}${DARKTEXTCOLOR}${HIGHLIGHTCOLOR2}It is recommended that you define new Components as part of an Extension. Modifying Core can break Core!${CLEARCOLOR}${WARNINGCOLOR} Are you sure you want to proceed? (Type \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${WARNINGCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${WARNINGCOLOR}\" to continue, press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${WARNINGCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You have chosen to ${CLEARCOLOR}${HIGHLIGHTCOLOR}create a new Component for an Extension${CLEARCOLOR}${NOTIFYCOLOR}, if this is not correct press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit, otherwise type \"${CLEARCOLOR}${HIGHLIGHTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\".${CLEARCOLOR}")
   askUserForSelection "${CLEARCOLOR}${NOTIFYCOLOR}Is this Component being defined as part of ${CLEARCOLOR}${HIGHLIGHTCOLOR}Core${CLEARCOLOR}${NOTIFYCOLOR} or as part of an ${CLEARCOLOR}${HIGHLIGHTCOLOR}Extension${CLEARCOLOR}${NOTIFYCOLOR}?${CLEARCOLOR}" _auicfcoe_options _auicfcoe_responses
   _auicfcoe_componentExtends="${PREVIOUS_USER_INPUT}"
+  EXTENDING="${PREVIOUS_USER_INPUT}"
   if [[ "${_auicfcoe_componentExtends}" == "Core" ]]; then
     EXTENSION_NAME=""
     COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR="./Tests/Unit/interfaces/component"
@@ -108,12 +121,15 @@ showLoadingBar() {
 }
 
 notifyUser() {
+  if [[ "${2}" == "showInfo" ]]; then
+      showInfoPanel
+  fi
   printf "\n%s%s%s\n" "${NOTIFYCOLOR}" "${1}" "${CLEARCOLOR}"
 }
 
 promptUser() {
   local _pu_promptMessage
-  notifyUser "${1}"
+  notifyUser "${1}" "${2}"
   _pu_promptMessage=$(printf "%s\n%s\$dsh: %s" "${CLEARCOLOR}" "${DSHCOLOR}" "${USRPRMPTCOLOR}")
   PREVIOUS_USER_INPUT="${CURRENT_USER_INPUT}"
   read -p "${_pu_promptMessage}" CURRENT_USER_INPUT
@@ -123,9 +139,9 @@ promptUser() {
 promptUserAndVerifyInput() {
   while :; do
     clear
-    promptUser "${1}"
+    promptUser "${1}" "${2}"
     clear
-    notifyUser "You entered \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${CURRENT_USER_INPUT}${CLEARCOLOR}${NOTIFYCOLOR}\"Is this correct?${CLEARCOLOR}"
+    notifyUser "You entered \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${CURRENT_USER_INPUT}${CLEARCOLOR}${NOTIFYCOLOR}\"Is this correct?${CLEARCOLOR}" ""
     if [[ "${CURRENT_USER_INPUT}" == "Y" ]]; then
       clear
       break
@@ -170,6 +186,7 @@ generatePHPCodeFromTemplate() {
   _gpcft_fileSubDirectoryPath=$(echo "${_gpcft_filePath}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php//g")
   printf "%s\n\n%sThe following code was generated using the %s%s%s%s%s template, please review it to make sure there are not any errors:%s\n\n" "${CLEARCOLOR}" "${NOTIFYCOLOR}" "${CLEARCOLOR}" "${HIGHLIGHTCOLOR}" "${_gpcft_template}" "${CLEARCOLOR}" "${NOTIFYCOLOR}" "${CLEARCOLOR}"
   echo "${PHPCODECOLOR}${_gpcft_phpCode}"
+  showInfoPanel
   promptUser "If everything looks ok press <enter>"
   showLoadingBar "Writing file ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${_gpcft_filePath}${CLEARCOLOR} "
   mkdir -p "${_gpcft_fileSubDirectoryPath}"
@@ -177,23 +194,23 @@ generatePHPCodeFromTemplate() {
 }
 
 askUserForComponentName() {
-  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter a ${CLEARCOLOR}${HIGHLIGHTCOLOR}name for the new component:${CLEARCOLOR}"
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter a ${CLEARCOLOR}${HIGHLIGHTCOLOR}name for the new component:${CLEARCOLOR}" "showInfo"
   USER_DEFINED_COMPONENT_NAME="${PREVIOUS_USER_INPUT}"
 }
 
 askUserForComponentSubtype() {
-  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the component's ${CLEARCOLOR}${HIGHLIGHTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR}, the ${CLEARCOLOR}${HIGHLIGHTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR} is used to construct namespaces for the Component. Example: ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}\\DarlingCms\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}${NOTIFYCOLOR} Note: You must escape backslash characters. Note: Do not include a preceding backslash in the sub-type. ${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}Wrong: \\\\Foo\\\\Bar ${CLEARCOLOR}${HIGHLIGHTCOLOR}Right: Foo\\\\Bar${CLEARCOLOR}"
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the component's ${CLEARCOLOR}${HIGHLIGHTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR}, the ${CLEARCOLOR}${HIGHLIGHTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR} is used to construct namespaces for the Component. Example: ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}\\DarlingCms\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}${NOTIFYCOLOR} Note: You must escape backslash characters. Note: Do not include a preceding backslash in the sub-type. ${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}Wrong: \\\\Foo\\\\Bar ${CLEARCOLOR}${HIGHLIGHTCOLOR}Right: Foo\\\\Bar${CLEARCOLOR}" "showInfo"
   #USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${PREVIOUS_USER_INPUT}" | sed 's,\\,\\\\,g')
   USER_DEFINED_COMPONENT_SUBTYPE=${PREVIOUS_USER_INPUT/\\/\\\\}
 }
 
 askUserForParentComponentName() {
-  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the ${CLEARCOLOR}${HIGHLIGHTCOLOR}name of the component this component extends${CLEARCOLOR}${NOTIFYCOLOR}:${CLEARCOLOR}"
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the ${CLEARCOLOR}${HIGHLIGHTCOLOR}name of the component this component extends${CLEARCOLOR}${NOTIFYCOLOR}:${CLEARCOLOR}" "showInfo"
   USER_DEFINED_PARENT_COMPONENT_NAME="${PREVIOUS_USER_INPUT}"
 }
 
 askUserForParentComponentSubtype() {
-  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the ${CLEARCOLOR}${HIGHLIGHTCOLOR}subtype of the component this component extends:${CLEARCOLOR}"
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the ${CLEARCOLOR}${HIGHLIGHTCOLOR}subtype of the component this component extends:${CLEARCOLOR}" "showInfo"
   USER_DEFINED_PARENT_COMPONENT_SUBTYPE=${PREVIOUS_USER_INPUT/\\/\\\\}
 }
 
