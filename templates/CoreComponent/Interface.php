@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingCms\interfaces\component\DS_COMPONENT_SUBTYPE;
+namespace DS_CORE_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE;
 
 use DarlingCms\interfaces\component\Component;
 

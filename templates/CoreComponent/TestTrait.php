@@ -1,8 +1,8 @@
 <?php
 
-namespace UnitTests\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits;
+namespace DS_TESTS_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits;
 
-use DarlingCms\interfaces\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME;
+use DS_CORE_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME;
 
 trait DS_COMPONENT_NAMETestTrait
 {

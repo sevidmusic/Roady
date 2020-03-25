@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\DS_COMPONENT_SUBTYPE;
+namespace DS_CORE_NAMESPACE_PREFIX\classes\component\DS_COMPONENT_SUBTYPE;
 
-use DarlingCms\abstractions\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME as DS_COMPONENT_NAMEBase;
-use DarlingCms\interfaces\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME as DS_COMPONENT_NAMEInterface;
+use DS_CORE_NAMESPACE_PREFIX\abstractions\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME as DS_COMPONENT_NAMEBase;
+use DS_CORE_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME as DS_COMPONENT_NAMEInterface;
 
 class DS_COMPONENT_NAME extends DS_COMPONENT_NAMEBase implements DS_COMPONENT_NAMEInterface
 {

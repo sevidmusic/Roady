@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\abstractions\component\DS_COMPONENT_SUBTYPE;
+namespace DS_CORE_NAMESPACE_PREFIX\abstractions\component\DS_COMPONENT_SUBTYPE;
 
-use DarlingCms\interfaces\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME as DS_COMPONENT_NAMEInterface;
+use DS_CORE_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME as DS_COMPONENT_NAMEInterface;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\abstractions\component\Component;
 
