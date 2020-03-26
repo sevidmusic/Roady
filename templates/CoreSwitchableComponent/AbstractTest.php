@@ -3,10 +3,11 @@
 namespace DS_TESTS_NAMESPACE_PREFIX\abstractions\component\DS_COMPONENT_SUBTYPE;
 
 use DarlingCms\classes\primary\Storable;
-use UnitTests\abstractions\component\ComponentTest;
+use DarlingCms\classes\primary\Switchable;
+use UnitTests\abstractions\component\SwitchableComponentTest as CoreSwitchableComponentTest;
 use DS_TESTS_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits\DS_COMPONENT_NAMETestTrait;
 
-class DS_COMPONENT_NAMETest extends ComponentTest
+class DS_COMPONENT_NAMETest extends CoreSwitchableComponentTest
 {
     use DS_COMPONENT_NAMETestTrait;
 
@@ -21,10 +22,10 @@ class DS_COMPONENT_NAMETest extends ComponentTest
                         'MockDS_COMPONENT_NAMELocation',
                         'MockDS_COMPONENT_NAMEContainer'
                     ),
+                    new Switchable(),
                 ]
             )
         );
         $this->setDS_COMPONENT_NAMEParentTestInstances();
     }
-
 }
