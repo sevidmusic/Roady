@@ -52,15 +52,16 @@ showInfoPanel() {
 }
 
 askUserIfComponentForCoreOrExtension() {
-  local _auicfcoe_componentExtends
   local _auicfcoe_options
   local _auicfcoe_responses
   _auicfcoe_options=("Core" "Extension")
   _auicfcoe_responses=("${CLEARCOLOR}${ATTENTIONEFFECT}${ATTENTIONEFFECTCOLOR}WARNING${CLEARCOLOR}${WARNINGCOLOR}: Defining new Components for core should only be done if absolutely necessary, and you should only do so if you are sure you know what you are doing and understand the consequences! ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}It is recommended that you define new Components as part of an Extension. Modifying Core can break Core!${CLEARCOLOR}${WARNINGCOLOR} Are you sure you want to proceed? (Type \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${WARNINGCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${WARNINGCOLOR}\" to continue, press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${WARNINGCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You have chosen to ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}create a new Component for an Extension${CLEARCOLOR}${NOTIFYCOLOR}, if this is not correct press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit, otherwise type \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\".${CLEARCOLOR}")
   askUserForSelection "${CLEARCOLOR}${NOTIFYCOLOR}Is this Component being defined as part of ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Core${CLEARCOLOR}${NOTIFYCOLOR} or as part of an ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Extension${CLEARCOLOR}${NOTIFYCOLOR}?${CLEARCOLOR}" _auicfcoe_options _auicfcoe_responses
-  _auicfcoe_componentExtends="${PREVIOUS_USER_INPUT}"
   EXTENDING="${PREVIOUS_USER_INPUT}"
-  if [[ "${_auicfcoe_componentExtends}" == "Core" ]]; then
+}
+
+setDirecotryPaths () {
+    if [[ "${EXTENDING}" == "Core" ]]; then
     EXTENSION_NAME=""
     COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR="./Tests/Unit/interfaces/component"
     COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR="./Tests/Unit/abstractions/component"
@@ -70,9 +71,7 @@ askUserIfComponentForCoreOrExtension() {
     COMPONENT_CLASS_TARGET_ROOT_DIR="./core/classes/component"
   fi
 
-  if [[ "${_auicfcoe_componentExtends}" == "Extension" ]]; then
-    promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}What is the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}name of the Extension${CLEARCOLOR}${NOTIFYCOLOR} this Component will belong to?${CLEARCOLOR}" "showInfo"
-    EXTENSION_NAME="${PREVIOUS_USER_INPUT}"
+  if [[ "${EXTENDING}" == "Extension" ]]; then
     COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/Tests/Unit/interfaces/component"
     COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/Tests/Unit/abstractions/component"
     COMPONENT_TEST_TARGET_ROOT_DIR="./Extensions/${EXTENSION_NAME}/Tests/Unit/classes/component"
@@ -173,7 +172,6 @@ generatePHPCodeFromTemplate() {
   fi
   if [[ "${EXTENDING}" == "Core" ]]; then
     _gpcft_phpCode=$(sed -E "s/DS_CORE_NAMESPACE_PREFIX/DarlingCms/g; s/DS_TESTS_NAMESPACE_PREFIX/UnitTests/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/DS_NAMESPACE_SEPERATOR/\\\/g; s/\\\;/;/g; s,[\][\],\\\,g;" "${1}")
-    printf "\n%s\n" "${_gpcft_phpCode}"
   fi
   if [[ "${EXTENDING}" == "Extension" ]]; then
     _namespace_seperator='\\'
@@ -272,6 +270,9 @@ askUserForTemplateDirectoryName() {
   _auftdn_responses=("${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreSwitchableComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}") # "${CLEARCOLOR}${NOTIFYCOLOR}You selected the \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreOutputComponent${CLEARCOLOR}${NOTIFYCOLOR}\" template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" )
   askUserForSelection "${CLEARCOLOR}${NOTIFYCOLOR}Please select the template that should be used to generate the php files.${CLEARCOLOR}" _auftdn_options _auftdn_responses
   TEMPLATE="${PREVIOUS_USER_INPUT}"
+}
+
+setTemplatePaths() {
   TEST_TRAIT_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/TestTrait.php"
   ABSTRACT_TEST_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/AbstractTest.php"
   TEST_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Test.php"
@@ -280,13 +281,46 @@ askUserForTemplateDirectoryName() {
   CLASS_TEMPLATE_FILE_PATH="./templates/${TEMPLATE}/Class.php"
 }
 
+askUserForExtensionName() {
+    promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}What is the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}name of the Extension${CLEARCOLOR}${NOTIFYCOLOR} this Component will belong to?${CLEARCOLOR}" "showInfo"
+    EXTENSION_NAME="${PREVIOUS_USER_INPUT}"
+}
+
 clear
+
 initVars
+while getopts "x:t:e:c:s:" OPTION
+do
+    case "${OPTION}" in
+        x)
+            EXTENDING="${OPTARG}"
+            ;;
+        t)
+            TEMPLATE="${OPTARG}"
+            ;;
+        e)
+            EXTENSION_NAME="${OPTARG}"
+            ;;
+        c)
+            USER_DEFINED_COMPONENT_NAME="${OPTARG}"
+            ;;
+#        s)
+#            USER_DEFINED_COMPONENT_SUBTYPE="${OPTARG}"
+#            ;;
+        *)
+            printf "\n%s%s%sWARNING:%s%s You must porvide a value for any flags you set, and you can't set invalid flags.\nThe following flags are possible:\n    -x <arg> (Set <arg> to \"Core\" if extending \"core\", set to \"Extension\" if extending an Extension)%s\n\n" "${CLEARCOLOR}" "${ATTENTIONEFFECTCOLOR}" "${ATTENTIONEFFECT}" "${CLEARCOLOR}" "${WARNINGCOLOR}" "${CLEARCOLOR}"
+            exit
+    esac
+done
+
 showWelcomeMessage
-askUserIfComponentForCoreOrExtension
-askUserForTemplateDirectoryName
-askUserForComponentName
-askUserForComponentSubtype
+[[ -z $EXTENDING ]] && askUserIfComponentForCoreOrExtension
+[[ -z $EXTENSION_NAME ]] && [[ "${EXTENDING}" != "Core" ]] && askUserForExtensionName
+[[ -z $TEMPLATE ]] && askUserForTemplateDirectoryName
+[[ -z $USER_DEFINED_COMPONENT_NAME ]] && askUserForComponentName
+[[ -z $USER_DEFINED_COMPONENT_SUBTYPE ]] && askUserForComponentSubtype
+setTemplatePaths
+setDirecotryPaths
 generatePHPCodeFromTemplate "${TEST_TRAIT_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR}" "TestTrait"
 generatePHPCodeFromTemplate "${ABSTRACT_TEST_TEMPLATE_FILE_PATH}" "${COMPONENT_ABSTRACT_TEST_TARGET_ROOT_DIR}" "Test"
 generatePHPCodeFromTemplate "${TEST_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TARGET_ROOT_DIR}" "Test"
