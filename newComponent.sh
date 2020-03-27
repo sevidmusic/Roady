@@ -305,7 +305,7 @@ do
             USER_DEFINED_COMPONENT_NAME="${OPTARG}"
             ;;
         s)
-            USER_DEFINED_COMPONENT_SUBTYPE="${OPTARG}"
+            USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${OPTARG}" | sed -E "s,[\],DS_NAMESPACE_SEPERATOR,g")
             ;;
         *)
             printf "\n%s%s%sWARNING:%s%s You must porvide a value for any flags you set, and you can't set invalid flags.\nThe following flags are possible:\n    -x <arg> (Set <arg> to \"Core\" if extending \"core\", set to \"Extension\" if extending an Extension)%s\n\n" "${CLEARCOLOR}" "${ATTENTIONEFFECTCOLOR}" "${ATTENTIONEFFECT}" "${CLEARCOLOR}" "${WARNINGCOLOR}" "${CLEARCOLOR}"
