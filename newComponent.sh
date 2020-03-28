@@ -42,12 +42,14 @@ initVars() {
 }
 
 showInfoPanel() {
+    local _sip_userDefinedComponentSubType
+    _sip_userDefinedComponentSubType=$(echo "${USER_DEFINED_COMPONENT_SUBTYPE}" | sed "s,DS_NAMESPACE_SEPERATOR,\\\,g")
   printf "\n\n%s----- Info Panel -----%s" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}" "${CLEARCOLOR}"
   printf "\n  %sExtending: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${EXTENDING}${CLEARCOLOR}"
   printf "\n  %sExtension Name: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${EXTENSION_NAME}${CLEARCOLOR}"
   printf "\n  %sTemplate: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${TEMPLATE}${CLEARCOLOR}"
   printf "\n  %sComponent Name: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}"
-  printf "\n  %sComponent Sub-type: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${USER_DEFINED_COMPONENT_SUBTYPE}${CLEARCOLOR}"
+  printf "\n  %sComponent Sub-type: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${_sip_userDefinedComponentSubType}${CLEARCOLOR}"
   printf "\n%s----------------------%s\n\n" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}" "${CLEARCOLOR}"
 }
 
