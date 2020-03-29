@@ -180,11 +180,11 @@ generatePHPCodeFromTemplate() {
     _gpcft_phpCode=$(sed -E "s/DS_CORE_NAMESPACE_PREFIX/Extensions${_namespace_seperator}${EXTENSION_NAME}${_namespace_seperator}core/g; s/DS_TESTS_NAMESPACE_PREFIX/Extensions${_namespace_seperator}${EXTENSION_NAME}${_namespace_seperator}Tests${_namespace_seperator}Unit/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/DS_NAMESPACE_SEPERATOR/\\\/g; s/\\\;/;/g; s,[\][\],\\\,g;" "${1}")
   fi
   _gpcft_fileSubDirectoryPath=$(echo "${_gpcft_filePath}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php//g")
-  if [[ "${CURRENT_USER_INPUT}" != "make" ]]; then
+  if [[ "${CURRENT_USER_INPUT}" != "make" ]] && [[ $FORCE_MAKE -ne 1 ]]; then
     promptUser "${CLEARCOLOR}${NOTIFYCOLOR}Please review the ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}Info Panel${CLEARCOLOR}${NOTIFYCOLOR} to make sure you entered everything correctly, if everything looks ok type ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}make${CLEARCOLOR}${NOTIFYCOLOR} and press ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR} to generaate your new Component's Php files, otherwise press ${CLEARCOLOR}${NOTIFYCOLOR}<Ctrl> c${CLEARCOLOR}${NOTIFYCOLOR} to quit and start over." "showInfo"
     showLoadingBar "Preparing to write php files to appropriate directories"
   fi
-  if [[ "${CURRENT_USER_INPUT}" == "make" ]]; then
+  if [[ "${CURRENT_USER_INPUT}" == "make" ]] || [[ $FORCE_MAKE -eq 1 ]]; then
     showLoadingBar "Writing file ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}${_gpcft_filePath}${CLEARCOLOR} " "dontClear"
     mkdir -p "${_gpcft_fileSubDirectoryPath}"
     echo "${_gpcft_phpCode}" >"${_gpcft_filePath}"
@@ -268,8 +268,8 @@ showWelcomeMessage() {
 askUserForTemplateDirectoryName() {
   local _auftdn_options
   local _auftdn_responses
-  _auftdn_options=("CoreComponent" "CoreSwitchableComponent")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       # "CoreOutputComponent" )
-  _auftdn_responses=("${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreSwitchableComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}") # "${CLEARCOLOR}${NOTIFYCOLOR}You selected the \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreOutputComponent${CLEARCOLOR}${NOTIFYCOLOR}\" template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" )
+  _auftdn_options=("CoreComponent" "CoreSwitchableComponent" "CoreOutputComponent")
+  _auftdn_responses=("${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You selected the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreSwitchableComponent${CLEARCOLOR}${NOTIFYCOLOR} template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}" "${CLEARCOLOR}${NOTIFYCOLOR}You selected the \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}CoreOutputComponent${CLEARCOLOR}${NOTIFYCOLOR}\" template, if this is correct enter \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Y${CLEARCOLOR}${NOTIFYCOLOR}\" and press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR}\", otherwise press \"${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}<ctrl> c${CLEARCOLOR}${NOTIFYCOLOR}\" to quit and start over.${CLEARCOLOR}")
   askUserForSelection "${CLEARCOLOR}${NOTIFYCOLOR}Please select the template that should be used to generate the php files.${CLEARCOLOR}" _auftdn_options _auftdn_responses
   TEMPLATE="${PREVIOUS_USER_INPUT}"
 }
@@ -291,7 +291,7 @@ askUserForExtensionName() {
 clear
 
 initVars
-while getopts "x:t:e:c:s:" OPTION
+while getopts "x:t:e:c:s:f" OPTION
 do
     case "${OPTION}" in
         x)
@@ -308,6 +308,12 @@ do
             ;;
         s)
             USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${OPTARG}" | sed -E "s,[\],DS_NAMESPACE_SEPERATOR,g")
+            # To allow an empty string be passed to the -s , use var to determine if this flag is set instead of [[ -z "${USER_DEFINED_COMPONENT_SUBTYPE}" ]]
+            USER_SUBTYPE_SET_WITH_FLAG=1
+            ;;
+        f)
+            [[ "${EXTENDING}" != "Core" ]] && [[ -n "${EXTENDING}" ]] && [[ -n "${TEMPLATE}" ]] && [[ -n "${EXTENSION_NAME}" ]] &&  [[ -n "${USER_DEFINED_COMPONENT_NAME}" ]] &&  [[ $USER_SUBTYPE_SET_WITH_FLAG -eq 1  ]] && FORCE_MAKE=1 || USER_ERROR=1
+            [[ $USER_ERROR -eq 1 ]] && printf "\n%sWarning:%s You must set all flags (-x -e -t -c -s) to use the -f flag, the -f flag MUST be the LAST flag, and you cannot use the -f flag to extend Core!\n\n%s" "${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}${ATTENTIONEFFECT}" "${CLEARCOLOR}${WARNINGCOLOR}" "${CLEARCOLOR}" && exit
             ;;
         *)
             printf "\n%s%s%sWARNING:%s%s You must porvide a value for any flags you set, and you can't set invalid flags.\nThe following flags are possible:\n    -x <arg> (Set <arg> to \"Core\" if extending \"core\", set to \"Extension\" if extending an Extension)%s\n\n" "${CLEARCOLOR}" "${ATTENTIONEFFECTCOLOR}" "${ATTENTIONEFFECT}" "${CLEARCOLOR}" "${WARNINGCOLOR}" "${CLEARCOLOR}"
@@ -315,13 +321,13 @@ do
     esac
 done
 
-showWelcomeMessage
+[[ $FORCE_MAKE -ne 1 ]] && showWelcomeMessage
 [[ -z $EXTENDING ]] && askUserIfComponentForCoreOrExtension
 [[ -z $EXTENSION_NAME ]] && [[ "${EXTENDING}" != "Core" ]] && askUserForExtensionName
 [[ -z $TEMPLATE ]] && askUserForTemplateDirectoryName
 [[ -z $USER_DEFINED_COMPONENT_NAME ]] && askUserForComponentName
-# @devNote: The use of "" is intentional here, we want to allow an empty string to be passed to the -s flag and only ask user for subtype if the $USER_DEFINED_SUBTYPE var is truly not set at this point in the script, i.e. -s was not passed, as opppsed to -s "" which should be valid and not require user to be asked for subtype. @see the following stackoverflow post on the difference between using [ -z $VAR ] and [ -z "$VAR" ] : https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
-[[ -z "$USER_DEFINED_COMPONENT_SUBTYPE" ]] && askUserForComponentSubtype
+# To allow an empty string be passed to the -s , use var to determine if this flag is set instead of [[ -z "${USER_DEFINED_COMPONENT_SUBTYPE}" ]]
+[[ $USER_SUBTYPE_SET_WITH_FLAG -eq 1 ]] || askUserForComponentSubtype
 setTemplatePaths
 setDirecotryPaths
 generatePHPCodeFromTemplate "${TEST_TRAIT_TEMPLATE_FILE_PATH}" "${COMPONENT_TEST_TRAIT_TARGET_ROOT_DIR}" "TestTrait"
