@@ -116,7 +116,7 @@ showLoadingBar() {
   echo "${ATTENTIONEFFECTCOLOR}[100%]${CLEARCOLOR}"
   setColor 0
   sleep 1
-  if [[ "${2}" != "dontClear" ]]; then
+  if [[ $FORCE_MAKE -ne 1 ]] || [[ "${2}" != "dontClear" ]]; then
     clear
   fi
 }
@@ -288,7 +288,7 @@ askUserForExtensionName() {
     EXTENSION_NAME="${PREVIOUS_USER_INPUT}"
 }
 
-clear
+[[ $FORCE_MAKE -eq 1 ]] && clear
 
 initVars
 while getopts "x:t:e:c:s:f" OPTION
