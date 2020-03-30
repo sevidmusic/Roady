@@ -14,6 +14,14 @@
 Experimental re-design of the Darling Cms.
 
 
+Check out the YouTube channel for updates, news, guides, and tutorials.
+
+https://www.youtube.com/channel/UCfR-CPqfSIvCFnYT1m4s66w
+
+Newest videos:
+
+- Creating New Components for the DDMS/Darling Cms Re-design via newComponent.sh: https://youtu.be/FCxDqxLHPhs
+
 #############################################
 
  _____
