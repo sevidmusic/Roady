@@ -19,7 +19,9 @@ function getBody(): string
 {
     return (
     empty(getCurrentRequest()->getGet()) === true
-        ? '
+        ?
+        (getCurrentRequest()->getUrl() === 'http://192.168.33.10/WorkingDemo.php'
+            ? '
                 <body class="gradientBg">
                     <div id="welcome" class="genericContainer genericContainerLimitedHeight">' . getWelcomeMessage() . '</div>
                     <div id="formContainer" class="genericContainer genericContainerLimitedHeight">' . getForm() . '</div>
@@ -27,14 +29,34 @@ function getBody(): string
                     ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
                         ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
                 ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
-                </body>'
+                </body>
+            '
+            : '
+                 <body class="gradientBg">
+                    <div id="welcome" class="genericContainer genericContainerLimitedHeight">' . getWelcomeMessage() . '</div>
+                    <div id="requestMenu" class="genericContainer genericContainerLimitedHeight">' . getCurrentRequestInfo() . '</div>
+                    ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
+                        ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
+                ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
+                </body>                
+             '
+        )
         : getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest()
     );
 }
 
 function getWelcomeMessage(): string
 {
-    return <<<'HTML'
+    switch (getCurrentRequest()->getUrl() === 'http://192.168.33.10/index.php') {
+        case true;
+            return <<<'HTML'
+    <h1 class="noticeText">Welcome</h1>
+    <p class="successText">
+        To see a working demo of some of the Darling Cms's core components go <a href="WorkingDemo.php">here</a>.
+    </p>
+HTML;
+        default:
+            return <<<'HTML'
     <h1 class="noticeText">Welcome</h1>
     <p class="successText">
         This is a demonstration the possible relationships/interactions of a<span class="highlightText"> Request</span>,  
@@ -50,6 +72,7 @@ function getWelcomeMessage(): string
         organize that output.
     </p>
 HTML;
+    }
 }
 
 function formatOutput(): bool
@@ -333,6 +356,9 @@ function getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest(): str
             }
         }
     }
+    if (getCurrentRequest()->getUrl() !== 'http://192.168.33.10/WorkingDemo.php' && (count(getCurrentRequest()->getGet()) > 0) === true) {
+        $output .= getScripts();
+    }
     return $output;
 }
 
@@ -360,7 +386,7 @@ function getForm(): string
             
             <div class="textInputContainer">
                 <label class="formLabelText" for="requestName">Request Name:</label>
-                <input class="input textInput" type="text" id="requestName" name="requestName" value="Home">
+                <input class="input textInput" type="text" id="requestName" name="requestName" value="Working Demo">
             </div>
             
             <div class="selectMenuContainer" style="margin-top: 1em; margin-right:5em; float: right;">
