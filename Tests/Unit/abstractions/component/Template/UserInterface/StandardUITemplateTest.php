@@ -6,19 +6,19 @@ use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest;
-use UnitTests\interfaces\component\Template\UserInterface\TestTraits\GenericUITemplateTestTrait;
+use UnitTests\interfaces\component\Template\UserInterface\TestTraits\StandardUITemplateTestTrait;
 use UnitTests\interfaces\primary\TestTraits\PositionableTestTrait;
 
-class GenericUITemplateTest extends SwitchableComponentTest
+class StandardUITemplateTest extends SwitchableComponentTest
 {
-    use GenericUITemplateTestTrait;
+    use StandardUITemplateTestTrait;
     use PositionableTestTrait;
 
     public function setUp(): void
     {
         $this->setGenericUITemplate(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Template\UserInterface\GenericUITemplate',
+                '\DarlingCms\abstractions\component\Template\UserInterface\StandardUITemplate',
                 [
                     new Storable(
                         'MockGenericUITemplateName',

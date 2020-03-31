@@ -6,7 +6,7 @@ use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\SwitchableComponent;
 use DarlingCms\interfaces\primary\Positionable;
 
-interface GenericUITemplate extends SwitchableComponent, Positionable
+interface StandardUITemplate extends SwitchableComponent, Positionable
 {
     public function addType(OutputComponent $outputComponent): void;
 

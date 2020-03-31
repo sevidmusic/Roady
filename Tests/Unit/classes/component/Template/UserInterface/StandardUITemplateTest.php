@@ -2,18 +2,18 @@
 
 namespace UnitTests\classes\component\Template\UserInterface;
 
-use DarlingCms\classes\component\Template\UserInterface\GenericUITemplate;
+use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use UnitTests\abstractions\component\Template\UserInterface\GenericUITemplateTest as AbstractGenericUITemplateTest;
+use UnitTests\abstractions\component\Template\UserInterface\StandardUITemplateTest as AbstractGenericUITemplateTest;
 
-class GenericUITemplateTest extends AbstractGenericUITemplateTest
+class StandardUITemplateTest extends AbstractGenericUITemplateTest
 {
     public function setUp(): void
     {
         $this->setGenericUITemplate(
-            new GenericUITemplate(
+            new StandardUITemplate(
                 new Storable(
                     'GenericUITemplateName',
                     'GenericUITemplateLocation',

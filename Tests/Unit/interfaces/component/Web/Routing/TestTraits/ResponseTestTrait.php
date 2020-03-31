@@ -4,7 +4,7 @@ namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Template\UserInterface\GenericUITemplate as Template;
+use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as Template;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;

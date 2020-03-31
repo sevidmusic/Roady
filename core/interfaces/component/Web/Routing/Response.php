@@ -5,7 +5,7 @@ namespace DarlingCms\interfaces\component\Web\Routing;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate as Template;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
 
 interface Response extends SwitchableComponent
 {

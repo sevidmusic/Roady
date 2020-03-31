@@ -4,12 +4,12 @@ namespace DarlingCms\abstractions\component\Template\UserInterface;
 
 use DarlingCms\abstractions\component\SwitchableComponent;
 use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate as GenericUITemplateInterface;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as GenericUITemplateInterface;
 use DarlingCms\interfaces\primary\Positionable;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Switchable;
 
-abstract class GenericUITemplate extends SwitchableComponent implements GenericUITemplateInterface
+abstract class StandardUITemplate extends SwitchableComponent implements GenericUITemplateInterface
 {
 
     private $types = [];

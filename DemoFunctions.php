@@ -10,7 +10,7 @@ use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
 
@@ -282,7 +282,7 @@ function getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest(): str
     $content = getOutputComponentsFromResponsesToCurrentRequest(getMockCrud());
     foreach ($templates as $template) {
         /**
-         * @var GenericUITemplate $template
+         * @var StandardUITemplate $template
          */
         foreach ($template->getTypes() as $type) {
             /**
@@ -404,9 +404,9 @@ function getMockCrud(): ComponentCrud
     );
 }
 
-function getMockTemplate(): GenericUITemplate
+function getMockTemplate(): StandardUITemplate
 {
-    $template = new \DarlingCms\classes\component\Template\UserInterface\GenericUITemplate(
+    $template = new \DarlingCms\classes\component\Template\UserInterface\StandardUITemplate(
         new Storable('MockTemplate', TEMPLATE_LOCATION, TEMPLATE_CONTAINER),
         new Switchable(),
         new Positionable()
@@ -590,7 +590,7 @@ function getTemplatesFromResponsesToCurrentRequest(ComponentCrud $crud): array
     foreach (getResponsesToCurrentRequest($crud) as $response) {
         foreach ($response->getTemplateStorageInfo() as $storable) {
             /**
-             * @var GenericUITemplate $template
+             * @var StandardUITemplate $template
              */
             $template = $crud->read($storable);
             while (isset($templates[strval($template->getPosition())])) {

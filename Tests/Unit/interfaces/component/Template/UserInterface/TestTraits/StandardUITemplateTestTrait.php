@@ -6,9 +6,9 @@ use DarlingCms\classes\component\OutputComponent;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 
-trait GenericUITemplateTestTrait
+trait StandardUITemplateTestTrait
 {
 
     private $genericUITemplate;
@@ -50,12 +50,12 @@ trait GenericUITemplateTestTrait
         return $this->standardOutputComponent;
     }
 
-    public function getGenericUITemplate(): GenericUITemplate
+    public function getGenericUITemplate(): StandardUITemplate
     {
         return $this->genericUITemplate;
     }
 
-    public function setGenericUITemplate(GenericUITemplate $genericUITemplate): void
+    public function setGenericUITemplate(StandardUITemplate $genericUITemplate): void
     {
         $this->genericUITemplate = $genericUITemplate;
     }

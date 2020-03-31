@@ -6,7 +6,7 @@ use DarlingCms\abstractions\component\SwitchableComponent;
 use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\GenericUITemplate as Template;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingCms\interfaces\primary\Storable;
