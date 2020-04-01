@@ -44,7 +44,8 @@ class StandardUITest extends CoreOutputComponentTest
             self::$crud
         );
         // Create Responses
-        var_dump(self::getRandomResponse());
+        self::getRandomRequest();
+        var_dump(self::$crud->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
         // Store Responses, Templates, and Output Components
     }
 
