@@ -45,7 +45,7 @@ class StandardUITest extends CoreOutputComponentTest
         );
         // Create Responses
         self::getRandomResponse();
-        var_dump(self::$crud->readAll('StandardUI_TestComponents', 'StandardUI_TestOutputComponents'));
+        var_dump(self::$crud->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
         // Store Responses, Templates, and Output Components
     }
 
@@ -60,7 +60,9 @@ class StandardUITest extends CoreOutputComponentTest
         {
             $response->addOutputComponentStorageInfo(self::getRandomOutputComponent());
         }
-        $response->addTemplateStorageInfo(self::getRandomTemplate());
+        for($x=0;$x<30;$x++) {
+            $response->addTemplateStorageInfo(self::getRandomTemplate());
+        }
         self::$crud->create($response);
         return $response;
     }
@@ -124,6 +126,7 @@ class StandardUITest extends CoreOutputComponentTest
             new Switchable(),
             new Positionable(self::getRandomPosition())
         );
+        $template->addType(self::getRandomOutputComponent());
         self::$crud->create($template);
         return $template;
     }
