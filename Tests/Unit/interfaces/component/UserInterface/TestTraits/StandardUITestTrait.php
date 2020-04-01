@@ -71,6 +71,11 @@ trait StandardUITestTrait
         return $request;
     }
 
+    private static function staticGetCrud(): ComponentCrud
+    {
+        return self::$crud;
+    }
+
     private static function getRandomResponse(): Response
     {
         $response = new Response(
@@ -130,11 +135,6 @@ trait StandardUITestTrait
     public function getCurrentRequest(): Request
     {
         return self::$currentRequest;
-    }
-
-    private static function staticGetCrud(): ComponentCrud
-    {
-        return self::$crud;
     }
 
     public function getCrud(): ComponentCrud
