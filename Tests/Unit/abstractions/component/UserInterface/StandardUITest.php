@@ -60,6 +60,7 @@ class StandardUITest extends CoreOutputComponentTest
         {
             $response->addOutputComponentStorageInfo(self::getRandomOutputComponent());
         }
+        $response->addTemplateStorageInfo(self::getRandomTemplate());
         self::$crud->create($response);
         return $response;
     }
