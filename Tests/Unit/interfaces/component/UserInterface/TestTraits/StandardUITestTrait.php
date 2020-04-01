@@ -38,11 +38,11 @@ trait StandardUITestTrait
             new Storable('StandardUI_TestRouter', 'StandardUI_TestComponents', 'StandardUI_TestRouters'),
             new Switchable(),
             self::$currentRequest,
-            self::$crud
+            self::staticGetCrud()
         );
         // Create Responses
         self::getRandomResponse();
-        //var_dump(self::$crud->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
+        //var_dump(self::getCrudForTestTraitMethod()->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
         // Store Responses, Templates, and Output Components
     }
 
@@ -67,7 +67,7 @@ trait StandardUITestTrait
                 $request->import(['url' => 'https://foo.bar/baz.php?' . strval(rand(1000, 9999))]);
                 break;
         }
-        self::$crud->create($request);
+        self::staticGetCrud()->create($request);
         return $request;
     }
 
@@ -84,7 +84,7 @@ trait StandardUITestTrait
         for ($x = 0; $x < 30; $x++) {
             $response->addTemplateStorageInfo(self::getRandomTemplate());
         }
-        self::$crud->create($response);
+        self::staticGetCrud()->create($response);
         return $response;
     }
 
@@ -97,7 +97,7 @@ trait StandardUITestTrait
             new Positionable(self::getRandomPosition())
         );
         $outputComponent->import(['output' => 'Output ' . strval(rand(1000, 9999))]);
-        self::$crud->create($outputComponent);
+        self::staticGetCrud()->create($outputComponent);
         return $outputComponent;
     }
 
@@ -123,13 +123,18 @@ trait StandardUITestTrait
             new Positionable(self::getRandomPosition())
         );
         $template->addType(self::getRandomOutputComponent());
-        self::$crud->create($template);
+        self::staticGetCrud()->create($template);
         return $template;
     }
 
     public function getCurrentRequest(): Request
     {
         return self::$currentRequest;
+    }
+
+    private static function staticGetCrud(): ComponentCrud
+    {
+        return self::$crud;
     }
 
     public function getCrud(): ComponentCrud
@@ -143,14 +148,8 @@ trait StandardUITestTrait
             var_dump($template->getType());
         }
         $this->assertTrue(true);
-        // i.e. implemnts StandardUITemplate interface
+        // i.e. implements StandardUITemplate interface
         //
-    }
-
-    protected function setStandardUIParentTestInstances(): void
-    {
-        $this->setOutputComponent($this->getStandardUI());
-        $this->setOutputComponentParentTestInstances();
     }
 
     public function getStandardUI(): StandardUI
@@ -162,7 +161,13 @@ trait StandardUITestTrait
     {
         $this->standardUI = $standardUI;
     }
-    // public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplatesFromEachResponseToCurrentRequest() // i.e. is assinged to at least one of the Responses to the current request
+
+    protected function setStandardUIParentTestInstances(): void
+    {
+        $this->setOutputComponent($this->getStandardUI());
+        $this->setOutputComponentParentTestInstances();
+    }
+    // public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplatesFromEachResponseToCurrentRequest() // i.e. is assigned to at least one of the Responses to the current request
 
     // public function testGetTemplatesForCurrentRequestsReturnsArrayIndexedByStringsTheEvaluateToNumbers() |  since indexes will be strings, use PHPs is_numeric() function to test each index @see https://www.php.net/manual/en/function.is-numeric.php
 
