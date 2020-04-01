@@ -42,7 +42,7 @@ trait StandardUITestTrait
         );
         // Create Responses
         self::getRandomResponse();
-        var_dump(self::$crud->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
+        //var_dump(self::$crud->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
         // Store Responses, Templates, and Output Components
     }
 
@@ -127,6 +127,26 @@ trait StandardUITestTrait
         return $template;
     }
 
+    public function getCurrentRequest(): Request
+    {
+        return self::$currentRequest;
+    }
+
+    public function getCrud(): ComponentCrud
+    {
+        return self::$crud;
+    }
+
+    public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplates(): void
+    {
+        foreach ($this->getStandardUI()->getTemplatesForCurrentRequest() as $template) {
+            var_dump($template->getType());
+        }
+        $this->assertTrue(true);
+        // i.e. implemnts StandardUITemplate interface
+        //
+    }
+
     protected function setStandardUIParentTestInstances(): void
     {
         $this->setOutputComponent($this->getStandardUI());
@@ -142,6 +162,8 @@ trait StandardUITestTrait
     {
         $this->standardUI = $standardUI;
     }
-    // public function testGetTemplatesForCurrentRequestsReturnsArrayOfTemplatesFromEachResponseToCurrentRequest()
+    // public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplatesFromEachResponseToCurrentRequest() // i.e. is assinged to at least one of the Responses to the current request
+
+    // public function testGetTemplatesForCurrentRequestsReturnsArrayIndexedByStringsTheEvaluateToNumbers() |  since indexes will be strings, use PHPs is_numeric() function to test each index @see https://www.php.net/manual/en/function.is-numeric.php
 
 }
