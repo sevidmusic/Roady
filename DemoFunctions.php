@@ -38,7 +38,7 @@ function getBody(): string
                     ' . (empty(getStoredRequestMenu(getMockCrud())) ? "" : '<div class="genericContainer">' . getStoredRequestMenu(getMockCrud()) . '</div>') . '
                         ' . getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest() . '
                 ' . (str_replace([' ', PHP_EOL], '', getScripts()) === '<script></script>' ? '' : getScripts() . PHP_EOL) . '
-                </body>                
+                </body>
              '
         )
         : getCollectiveOutputFromOutputAssignedToResponsesToCurrentRequest()
@@ -59,16 +59,16 @@ HTML;
             return <<<'HTML'
     <h1 class="noticeText">Welcome</h1>
     <p class="successText">
-        This is a demonstration the possible relationships/interactions of a<span class="highlightText"> Request</span>,  
-        <span class="highlightText"> Router</span>, <span class="highlightText"> Response</span>,   
-        <span class="highlightText"> Crud</span>,<span class="highlightText"> Template</span>, and 
+        This is a demonstration the possible relationships/interactions of a<span class="highlightText"> Request</span>,
+        <span class="highlightText"> Router</span>, <span class="highlightText"> Response</span>,
+        <span class="highlightText"> Crud</span>,<span class="highlightText"> Template</span>, and
         <span class="highlightText"> OutputComponent</span>.
     </p>
     <p class="successText">
         It currently demonstrates how a stored <span class="highlightText"> Response</span> that responds
         to the current <span class="highlightText"> Request</span> can be used to determine what
         <span class="highlightText"> OutputComponent(s)</span>
-        is/are used to generate output for the <span class="highlightText"> Request</span>, and which <span class="highlightText"> Template(s)</span> is/are used to 
+        is/are used to generate output for the <span class="highlightText"> Request</span>, and which <span class="highlightText"> Template(s)</span> is/are used to
         organize that output.
     </p>
 HTML;
@@ -117,7 +117,7 @@ function getStyles(): string
 {
     return <<<'HTML'
     <style>
-    
+
        * {
            box-sizing: border-box;
            -webkit-box-decoration-break: clone;
@@ -128,21 +128,21 @@ function getStyles(): string
        html {
            font-size: 15px;
        }
-    
+
        body {
            font-size: 1em;
        }
-       
+
        .gradientBg {
            background: rgb(0,0,0);
            background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(9,98,121,1) 55%, rgba(6,3,24,1) 100%);
        }
-       
+
        .genericContainerLimitedHeight {
            height: 13.5em;
            overflow: auto;
        }
-       
+
        .genericContainer {
            background: #000000;
            padding: 20px;
@@ -156,38 +156,38 @@ function getStyles(): string
        .genericText {
            color: #ff9368;
        }
-       
+
        .noticeText {
            color: #ff1858;
        }
-       
+
        .warningText {
            color: #ffc16f;
        }
-       
+
        .errorText {
            color: #ff0043;
        }
-       
+
        .successText {
            color: #63ff99;
        }
-       
+
        .failureText {
            color: #ff2c2a;
        }
-       
+
        .formLabelText {
            color: #cddeff;
        }
        .highlightText {
            color: #008fff;
        }
-       
+
        .miniText {
            font-size: .72em;
        }
-       
+
        .input {
            width: 95%;
            background: #0e1620;
@@ -196,16 +196,16 @@ function getStyles(): string
            margin-bottom: 20px;
            border-radius: 7px 1px;
        }
-       
+
        .textareaInput {
            resize: vertical;
            color: #f57fff;
        }
-       
+
        .textInput {
-       
+
        }
-       
+
     .collapsibleButton {
         cursor: pointer;
         padding: 18px;
@@ -221,12 +221,12 @@ function getStyles(): string
         background: #00ffb1;
         box-shadow: 0 3px 7px 0 rgba(220,247,255,0.24), 0 9px 25px 0 rgba(0,255,177,0.33);
     }
-    
+
     .collapsibleButton:focus {
         background: #00ffb1;
     }
     .active {
-        border-radius: 0 !important; 
+        border-radius: 0 !important;
         border-bottom: none;
         margin-bottom: 0;
     }
@@ -235,24 +235,24 @@ function getStyles(): string
         display: none;
         overflow: hidden;
     }
-    
+
     .outputComponentInfo {
         border-top: none;
         border-radius: 0 0 7px 7px;
     }
-    
+
     .textAreaContainer {
         margin-top: 1em;
     }
-    
+
     a {
         text-decoration: none;
     }
-    
+
     a:visited {
         color: #decaff;
     }
-    
+
     a:active, a:hover {
         background: #008fff;
         border: 1px solid #ffffff;
@@ -263,14 +263,14 @@ function getStyles(): string
     table, th, td {
         border-collapse: collapse;
     }
-    
+
     th, td {
         padding: 5px;
     }
     th {
         text-align: left;
     }
-    
+
     textarea {
         height: 287px;
     }
@@ -370,25 +370,25 @@ function getForm(): string
             <span class="highlightText"> Request</span>. The form allows you to specify the<span class="highlightText"> Request\'s</span>
             Url, the <span class="highlightText">Request\'s</span> Name, and the Output that should be
             shown in <span class="highlightText">Response</span> to the <span class="highlightText">Request</span>.<br>
-            <span class="noticeText miniText">Note: The form provides default values so if your in a hurry you can 
+            <span class="noticeText miniText">Note: The form provides default values so if your in a hurry you can
             just click the <span class="highlightText">"Generate Stored Components For Mock Request"</span> button.</span>
         </p>
         <form id="form" class="genericContainer" action="/WorkingDemo.php" method="post">
-        
+
             <div class="submitButtonContainer">
                 <input type="submit" value="Generate Stored Components For Mock Request">
             </div>
-            
+
             <div class="textInputContainer">
                 <label class="formLabelText" for="requestUrl">Request Url:</label>
                 <input class="input textInput" type="text" id="requestUrl" name="requestUrl" value="http://192.168.33.10/WorkingDemo.php">
             </div>
-            
+
             <div class="textInputContainer">
                 <label class="formLabelText" for="requestName">Request Name:</label>
                 <input class="input textInput" type="text" id="requestName" name="requestName" value="Working Demo">
             </div>
-            
+
             <div class="selectMenuContainer" style="margin-top: 1em; margin-right:5em; float: right;">
                 <span class="formLabelText">Output Position <span class="highlightText">( Relative to other existing output )</span> :</span>
                 ' . getPositionSelector() . '
@@ -398,12 +398,12 @@ function getForm(): string
                 <label class="formLabelText" for="output">Output to show in Response to this Request:</label><br>
                 <textarea class="input textareaInput" id="output" name="output">' . getDefaultTextAreaContent() . '</textarea>
             </div>
-            
+
             <div style="clear: both"></div>
 
             <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
             <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
-            
+
             <div class="submitButtonContainer">
                 <input type="submit" value="Generate Stored Components For Mock Request">
             </div>
@@ -653,6 +653,7 @@ function getTemplatesFromResponsesToCurrentRequest(ComponentCrud $crud): array
     /**
      * @var WebResponseComponent $response
      */
+    // @todo Use Router::getResponses() | Demo is not using a Router at all right now, it should!
     foreach (getResponsesToCurrentRequest($crud) as $response) {
         foreach ($response->getTemplateStorageInfo() as $storable) {
             /**
