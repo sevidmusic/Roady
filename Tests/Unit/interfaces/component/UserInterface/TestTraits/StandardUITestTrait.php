@@ -168,7 +168,7 @@ trait StandardUITestTrait
     public function testGetTemplatesForCurrentRequestReturnsArrayOfAllTemplatesAssignedToAllResponsesToCurrentRequest(){
         $this->assertEquals(1,1);
         var_dump('ct_culprit_1_tgta_callToGetStoredTemplatesForCurrentRequestViaCrud',count($this->getStoredTemplatesForCurrentRequestViaCrud()));
-//        var_dump('ct_culprit_tgtb',count($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses')));
+//        var_dump('ct_culprit_tgtb',count($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), self::$suiTestTemplateContainer)));
 //        $this->assertEquals(
 //            $this->getStoredTemplatesForCurrentRequestViaCrud(),
 //            $this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses')
@@ -178,7 +178,7 @@ trait StandardUITestTrait
     private function getStoredResponsesThatRespondToCurrentRequestViaCrud(): array
     {
 
-        $storedResponses = $this->getCrud()->readAll($this->getStandardUITestComponentLocation(), 'StandardUITestResponses');
+        $storedResponses = $this->getCrud()->readAll($this->getStandardUITestComponentLocation(), self::$suiTestResponseContainer);
         foreach($storedResponses as $storedResponse) {
             if($storedResponse->respondsToRequest($this->getCurrentRequest(), $this->getCrud()) === true) {
                 array_push($storedResponses, $storedResponse);
