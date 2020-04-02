@@ -15,6 +15,7 @@ trait StandardUITestTrait
 
     private $standardUI;
     private $router;
+    private $currentRequest;
 /*
     public static function setUpBeforeClass(): void
     {
@@ -23,7 +24,7 @@ trait StandardUITestTrait
 */
     public function getStandardUITestStandardUIContainer()
     {
-        return 'StandardUITestUIContainer';
+        return 'StandardUITestStandardUIContainer';
     }
 
     public function getStandardUITestRouterContainer()
@@ -33,7 +34,11 @@ trait StandardUITestTrait
 
     public function getStandardUITestCurrentRequest(): Request
     {
-        return new Request(
+        if(isset($this->currentRequest) === true)
+        {
+            return  $this->currentRequest;
+        }
+        $this->currentRequest = new Request(
             new Storable(
                 'StandardUICurrentRequest',
                 $this->getStandardUITestComponentLocation(),
@@ -41,11 +46,12 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
+        return $this->currentRequest;
     }
 
     public function getStandardUITestComponentLocation()
     {
-        return 'StandardUITestComponents';
+        return 'StandardUITestComponentsContainer';
     }
 
     public function getStandardUITestRequestContainer()
@@ -53,18 +59,21 @@ trait StandardUITestTrait
         return "StandardUITestRequestContainer";
     }
 
-    public function getStandardUITestComponentCrudForTestRouter()
+    private function getStandardUITestComponentCrudForTestRouter()
     {
+        if(isset($this->router) === true) {
+            return $this->getStandardUITestRouter()->getCrud();
+        }
         return new ComponentCrud(
             new Storable(
-                'StandardUIComponentCrud',
+                'StandardUITestComponentCrudForStandardUITestRouter',
                 $this->getStandardUITestComponentLocation(),
                 $this->getStandardUITestComponentCrudContainer()
             ),
             new Switchable(),
             new StorageDriver(
                 new Storable(
-                    'StandardUIStorageDriver',
+                    'StandardUITestStorageDriver',
                     $this->getStandardUITestComponentLocation(),
                     $this->getStandardUITestStorageDriverContainer()
                 ),
