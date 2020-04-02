@@ -24,15 +24,18 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     public function getTemplatesForCurrentRequest(string $location, string $container): array
     {
         $templates = [];
-        // here
         foreach($this->router->getResponses($location, $container) as $response)
         {
             foreach($response->getTemplateStorageInfo() as $templateStorable)
             {
                 $template = $this->router->getCrud()->read($templateStorable);
+                if(isset($templates[$template->getPosition()]) === true) {
+                    $template->increasePosition();
+                }
                 $templates[strval($template->getPosition())] = $template;
             }
         }
+//        var_dump('ct_culprit_imp',count($templates));
         return $templates;
     }
 

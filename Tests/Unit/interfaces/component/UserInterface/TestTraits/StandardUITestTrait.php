@@ -22,7 +22,14 @@ trait StandardUITestTrait
     private static $outputComponents = [];
     private static $currentRequest;
     private $standardUI;
-    private static $suiTestComponentsLocation = 'StandardUITestComponents';
+    private static $suiTestComponentsLocation = 'StandardUITestComponentLocation';
+    private static $suiTestStorageDriverContainer = 'StandardUITestStorageDriverContainer';
+    private static $suiTestCrudContainer = 'StandardUITestCrudContainer';
+    private static $suiTestRequestContainer = 'StandardUITestRequestContainer';
+    private static $suiTestResponseContainer = 'StandardUITestResponseContainer';
+    private static $suiTestOutputComponentContainer = 'StandardUITestOutputComponentContainer';
+    private static $suiTestTemplateContainer = 'StandardUITestTemplateContainer';
+    private static $suiTestRouterContainer = 'StandardUITestRouterContainer';
 
     protected static function staticGetStandardUITestComponentLocation(): string
     {
@@ -37,31 +44,29 @@ trait StandardUITestTrait
     public static function setUpBeforeClass(): void
     {
         self::$crud = new ComponentCrud(
-            new Storable('StandardUI_TestCrud', self::staticGetStandardUITestComponentLocation(), 'StandardUI_TestCruds'),
+            new Storable('StandardUI_TestCrud', self::staticGetStandardUITestComponentLocation(), self::$suiTestCrudContainer),
             new Switchable(),
             new StorageDriver(
-                new Storable('StandardUITestStorageDriver', self::staticGetStandardUITestComponentLocation(), 'StandardUITestStorageDrivers'),
+                new Storable('StandardUITestStorageDriver', self::staticGetStandardUITestComponentLocation(), self::$suiTestStorageDriverContainer),
                 new Switchable()
             )
         );
         self::$currentRequest = self::getRandomRequest();
         self::$router = new Router(
-            new Storable('StandardUITestRouter', self::staticGetStandardUITestComponentLocation(), 'StandardUITestRouters'),
+            new Storable('StandardUITestRouter', self::staticGetStandardUITestComponentLocation(), self::$suiTestRouterContainer),
             new Switchable(),
             self::$currentRequest,
             self::staticGetCrud()
         );
         // Create Responses
         self::getRandomResponse();
-        //var_dump(self::getCrudForTestTraitMethod()->readAll(self::staticGetStandardUITestComponentLocation(), 'StandardUI_TestRequests'));
-        // Store Responses, Templates, and Output Components
     }
 
     private static function getRandomRequest(): Request
     {
         // Create Requests
         $request = new Request(
-            new Storable('StandardUITestRequest' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), 'StandardUITestRequests'),
+            new Storable('StandardUITestRequest' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), self::$suiTestRequestContainer),
             new Switchable()
         );
         switch (rand(0, 3)) {
@@ -90,7 +95,7 @@ trait StandardUITestTrait
     private static function getRandomResponse(): Response
     {
         $response = new Response(
-            new Storable('StandardUITestResponse' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), 'StandardUITestResponses'),
+            new Storable('StandardUITestResponse' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), self::$suiTestResponseContainer),
             new Switchable()
         );
         $response->addRequestStorageInfo(self::$currentRequest);
@@ -108,7 +113,7 @@ trait StandardUITestTrait
     {
         // Create Create Output Components
         $outputComponent = new OutputComponent(
-            new Storable('StandardUITestOutputComponent' . strval((rand(1000, 9999))), self::staticGetStandardUITestComponentLocation(), 'StandardUITestOutputComponents'),
+            new Storable('StandardUITestOutputComponent' . strval((rand(1000, 9999))), self::staticGetStandardUITestComponentLocation(), self::$suiTestOutputComponentContainer),
             new Switchable(),
             new Positionable(self::getRandomPosition())
         );
@@ -134,7 +139,7 @@ trait StandardUITestTrait
     private static function getRandomTemplate(): StandardUITemplate
     {
         $template = new StandardUITemplate(
-            new Storable('StandardUITestTemplate' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), 'StandardUITestTemplates'),
+            new Storable('StandardUITestTemplate' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), self::$suiTestTemplateContainer),
             new Switchable(),
             new Positionable(self::getRandomPosition())
         );
@@ -158,6 +163,48 @@ trait StandardUITestTrait
         foreach ($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses') as $template) {
             $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
+    }
+
+    public function testGetTemplatesForCurrentRequestReturnsArrayOfAllTemplatesAssignedToAllResponsesToCurrentRequest(){
+        $this->assertEquals(1,1);
+        var_dump('ct_culprit_1_tgta_callToGetStoredTemplatesForCurrentRequestViaCrud',count($this->getStoredTemplatesForCurrentRequestViaCrud()));
+//        var_dump('ct_culprit_tgtb',count($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses')));
+//        $this->assertEquals(
+//            $this->getStoredTemplatesForCurrentRequestViaCrud(),
+//            $this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses')
+//        );
+    }
+
+    private function getStoredResponsesThatRespondToCurrentRequestViaCrud(): array
+    {
+
+        $storedResponses = $this->getCrud()->readAll($this->getStandardUITestComponentLocation(), 'StandardUITestResponses');
+        foreach($storedResponses as $storedResponse) {
+            if($storedResponse->respondsToRequest($this->getCurrentRequest(), $this->getCrud()) === true) {
+                array_push($storedResponses, $storedResponse);
+            }
+        }
+        var_dump('ct_culprit_2_gsrtrtcrvc_FromGetStoredResponsesThatRespondToCurrentRequestViaCrud',count($storedResponses));
+        return $storedResponses;
+    }
+
+    public function getStoredTemplatesForCurrentRequestViaCrud(): array
+    {
+        $storedTemplates = [];
+        foreach($this->getStoredResponsesThatRespondToCurrentRequestViaCrud() as $response) {
+            foreach($response->getTemplateStorageInfo() as $templateStorable)
+                {
+                    $storedTemplate = $this->getCrud()->read($templateStorable);
+                    if(isset($storedTemplates[$storedTemplate->getPosition()]))
+                    {
+                        $storedTemplate->increasePosition();
+                    }
+                    $storedTemplates[$storedTemplate->getPosition()] = $storedTemplate;
+
+                }
+        }
+        var_dump('ct_culprit_1_gstfcrvc_callFromWithinGetStiredTemplatesForCurrentRequestViaCrud_MethodUsesGetStoredResponsesThatRespondToCurrentRequestViaCrud',count($storedTemplates));
+        return $storedTemplates;
     }
 
     public function getStandardUI(): StandardUI
