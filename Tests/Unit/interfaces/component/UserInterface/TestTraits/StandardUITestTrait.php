@@ -7,6 +7,7 @@ use DarlingCms\classes\component\Driver\Storage\Standard as StorageDriver;
 use DarlingCms\classes\component\OutputComponent;
 use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\component\Web\Routing\Request;
+use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
@@ -23,11 +24,6 @@ trait StandardUITestTrait
     public function getStandardUITestStandardUIContainer()
     {
         return 'StandardUITestStandardUIContainer';
-    }
-
-    protected function getStandardUITestStandardUITemplateContainer(): string
-    {
-        return 'StandardUITestStandardUITemplateContainer';
     }
 
     protected function generateStoredTestComponents()
@@ -56,6 +52,11 @@ trait StandardUITestTrait
         $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
         $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
         return $outputComponent;
+    }
+
+    public function getStandardUITestComponentLocation()
+    {
+        return 'StandardUITestComponentsLocation';
     }
 
     public function getStandardUITestOutputComponentContainer(): string
@@ -156,6 +157,24 @@ trait StandardUITestTrait
         $this->standardUI = $standardUI;
     }
 
+    protected function getStandardUITestResponseContainer():string {
+        return 'StandardUITestResponseContainer';
+    }
+    protected function generateStoredResponse(): Response
+    {
+        $response = new Response(
+            new Storable('StandardUITestResponse',
+                $this->getStandardUITestComponentLocation(),
+            $this->getStandardUITestResponseContainer()
+            ),
+            new Switchable()
+        );
+        $response->addTemplateStorageInfo($this->generateStandardUITemplate());
+        $response->addOutputComponentStorageInfo($this->generateOutputComponent());
+        $response->addRequestStorageInfo($this->getStandardUITestCurrentRequest());
+        return $response;
+    }
+
     private function generateStandardUITemplate(): StandardUITemplate
     {
         $standardUITemplate = new StandardUITemplate(
@@ -165,15 +184,15 @@ trait StandardUITestTrait
                 $this->getStandardUITestStandardUITemplateContainer()
             ),
             new Switchable(),
-            new Positionable((rand(0,100) / 100))
+            new Positionable((rand(0, 100) / 100))
         );
         $standardUITemplate->addType($this->generateOutputComponent());
         $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
         return $standardUITemplate;
     }
 
-    public function getStandardUITestComponentLocation()
+    protected function getStandardUITestStandardUITemplateContainer(): string
     {
-        return 'StandardUITestComponentsLocation';
+        return 'StandardUITestStandardUITemplateContainer';
     }
 }
