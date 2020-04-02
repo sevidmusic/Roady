@@ -24,13 +24,6 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     public function getTemplatesForCurrentRequest(string $location, string $container): array
     {
         // here
-        // @todo get templates from storage...
-        // Router->getResponses() needs location and container...
-        // it is reasonable to assume locations is same as StandardUI,
-        // or  rather it is safest to require StandardUIs to only use
-        // a location they belong to, in the big picture each "Site"
-        // will have its own loacation, so a StandardUI for one "Site"
-        // should onlr read from that "Site's" location...
         var_dump($this->getLocation());
         return $this->router->getResponses($location, $container);
     }
