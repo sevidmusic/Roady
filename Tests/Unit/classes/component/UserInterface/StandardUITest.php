@@ -3,7 +3,6 @@
 namespace UnitTests\classes\component\UserInterface;
 
 use DarlingCms\classes\component\UserInterface\StandardUI;
-use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
@@ -22,16 +21,7 @@ class StandardUITest extends AbstractStandardUITest
                 ),
                 new Switchable(),
                 new Positionable(),
-                new Router(
-                    new Storable(
-                        'StandardUI_AbstractTestRouter',
-                        $this->getStandardUITestComponentLocation(),
-                        $this->getStandardUITestRouterContainer()
-                    ),
-                    new Switchable(),
-                    $this->getStandardUITestCurrentRequest(),
-                    $this->getStandardUITestComponentCrud()
-                )
+                $this->getStandardUITestRouter()
             )
         );
         $this->setStandardUIParentTestInstances();

@@ -4,12 +4,8 @@ namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard as StorageDriver;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\component\Web\Routing\Router;
-use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\UserInterface\StandardUI;
@@ -18,6 +14,7 @@ trait StandardUITestTrait
 {
 
     private $standardUI;
+    private $router;
 /*
     public static function setUpBeforeClass(): void
     {
@@ -56,7 +53,7 @@ trait StandardUITestTrait
         return "StandardUITestRequestContainer";
     }
 
-    public function getStandardUITestComponentCrud()
+    public function getStandardUITestComponentCrudForTestRouter()
     {
         return new ComponentCrud(
             new Storable(
@@ -74,6 +71,24 @@ trait StandardUITestTrait
                 new Switchable()
             )
         );
+    }
+
+    public function getStandardUITestRouter(): Router
+    {
+        if (isset($this->router)) {
+            return $this->router;
+        }
+        $this->router = new Router(
+            new Storable(
+                'StandardUI_AbstractTestRouter',
+                $this->getStandardUITestComponentLocation(),
+                $this->getStandardUITestRouterContainer()
+            ),
+            new Switchable(),
+            $this->getStandardUITestCurrentRequest(),
+            $this->getStandardUITestComponentCrudForTestRouter()
+        );
+        return $this->router;
     }
 
     public function getStandardUITestComponentCrudContainer()
