@@ -156,20 +156,8 @@ trait StandardUITestTrait
     public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplates(): void
     {
         foreach ($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses') as $template) {
-            // @todo classImplements
+            $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
-        $this->assertTrue(true);
-        // i.e. implements StandardUITemplate interface
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
     }
 
     public function getStandardUI(): StandardUI
