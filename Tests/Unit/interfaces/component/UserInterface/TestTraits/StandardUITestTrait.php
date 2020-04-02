@@ -160,7 +160,7 @@ trait StandardUITestTrait
 
     public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplates(): void
     {
-        foreach ($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses') as $template) {
+        foreach ($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), self::$suiTestTemplateContainer) as $template) {
             $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
     }
