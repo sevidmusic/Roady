@@ -172,6 +172,7 @@ trait StandardUITestTrait
         $response->addTemplateStorageInfo($this->generateStandardUITemplate());
         $response->addOutputComponentStorageInfo($this->generateOutputComponent());
         $response->addRequestStorageInfo($this->getStandardUITestCurrentRequest());
+        $this->getStandardUITestRouter()->getCrud()->create($response);
         return $response;
     }
 
