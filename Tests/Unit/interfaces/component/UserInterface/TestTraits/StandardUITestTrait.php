@@ -156,7 +156,7 @@ trait StandardUITestTrait
     public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplates(): void
     {
         foreach ($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses') as $template) {
-            var_dump($template->getType());
+            // @todo classImplements
         }
         $this->assertTrue(true);
         // i.e. implements StandardUITemplate interface
