@@ -22,15 +22,19 @@ class StandardUITest extends CoreOutputComponentTest
                     new Storable(
                         'MockStandardUIName',
                         $this->getStandardUITestComponentLocation(),
-                        'MockStandardUIContainer'
+                        $this->getStandardUITestStandardUIContainer()
                     ),
                     new Switchable(),
                     new Positionable(),
                     new Router(
-                        new Storable('StandardUI_AbstractTestRouter', $this->getStandardUITestComponentLocation(), 'StandardUI_TestRouters'),
+                        new Storable(
+                            'StandardUI_AbstractTestRouter',
+                            $this->getStandardUITestComponentLocation(),
+                            $this->getStandardUITestRouterContainer()
+                        ),
                         new Switchable(),
-                        $this->getCurrentRequest(),
-                        $this->getCrud()
+                        $this->getStandardUITestCurrentRequest(),
+                        $this->getStandardUITestComponentCrud()
                     )
                 ]
             )
