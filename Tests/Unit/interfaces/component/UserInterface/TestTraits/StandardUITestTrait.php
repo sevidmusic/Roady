@@ -51,7 +51,7 @@ trait StandardUITestTrait
 
     public function getStandardUITestComponentLocation()
     {
-        return 'StandardUITestComponentsContainer';
+        return 'StandardUITestComponentsLocation';
     }
 
     public function getStandardUITestRequestContainer()
@@ -89,7 +89,7 @@ trait StandardUITestTrait
         }
         $this->router = new Router(
             new Storable(
-                'StandardUI_AbstractTestRouter',
+                'StandardUITestRouter',
                 $this->getStandardUITestComponentLocation(),
                 $this->getStandardUITestRouterContainer()
             ),
