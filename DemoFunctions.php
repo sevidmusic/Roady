@@ -14,7 +14,6 @@ use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
 
-
 function getBody(): string
 {
     return (
@@ -320,7 +319,7 @@ function getStoredRequestMenu(ComponentCrud $crud): string
 {
     $added = [];
     $menu = '<ul>';
-    $requests = $crud->readAll(REQUEST_LOCATION, REQUEST_CONTAINER);
+    $requests = $crud->readAll(DEMO_SITE_NAME, DEMO_SITE_REQUEST_CONTAINER);
     if (empty($requests) === true) {
         return '';
     }
@@ -401,8 +400,8 @@ function getForm(): string
 
             <div style="clear: both"></div>
 
-            <input type="hidden" name="requestLocation" value="' . REQUEST_LOCATION . '">
-            <input type="hidden" name="requestContainer" value="' . REQUEST_CONTAINER . '">
+            <input type="hidden" name="requestLocation" value="' . DEMO_SITE_NAME . '">
+            <input type="hidden" name="requestContainer" value="' . DEMO_SITE_REQUEST_CONTAINER . '">
 
             <div class="submitButtonContainer">
                 <input type="submit" value="Generate Stored Components For Mock Request">
@@ -461,10 +460,10 @@ function processFormIfSubmitted(ComponentCrud $crud): bool
 function getMockCrud(): ComponentCrud
 {
     return new \DarlingCms\classes\component\Crud\ComponentCrud(
-        new Storable('MockComponentCrud', 'DataManagement', 'FilesystemCrud'),
+        new Storable('MockComponentCrud', DEMO_SITE_NAME, DEMO_SITE_CRUD_CONTAINER),
         new Switchable(),
         new Standard(
-            new Storable('MockStorageDriver', 'DataManagement', 'StorageDriver'),
+            new Storable('MockStorageDriver', DEMO_SITE_NAME, DEMO_SITE_STORAGE_DRIVER_CONTAINER),
             new Switchable()
         )
     );
@@ -473,7 +472,7 @@ function getMockCrud(): ComponentCrud
 function getMockTemplate(): StandardUITemplate
 {
     $template = new \DarlingCms\classes\component\Template\UserInterface\StandardUITemplate(
-        new Storable('MockTemplate', TEMPLATE_LOCATION, TEMPLATE_CONTAINER),
+        new Storable('MockTemplate', DEMO_SITE_NAME, DEMO_SITE_TEMPLATE_CONTAINER),
         new Switchable(),
         new Positionable()
     );
@@ -486,8 +485,8 @@ function getMockOutputComponent(): OutputComponentInterface
     $outputComponent = new OutputComponent(
         new Storable(
             generateOutputNameFromPostIfSet(),
-            OUTPUT_COMPONENT_LOCATION,
-            OUTPUT_COMPONENT_CONTAINER
+            DEMO_SITE_NAME,
+            DEMO_SITE_OUTPUT_COMPONENT_CONTAINER
         ),
         new Switchable(),
         new Positionable(generatePositionFromPostIfSet())
@@ -516,8 +515,8 @@ function generateAndStoreResponse(ComponentCrud $crud, WebRequestComponent $requ
     $response = new Response(
         new Storable(
             'MockResponse',
-            RESPONSE_LOCATION,
-            RESPONSE_CONTAINER
+            DEMO_SITE_NAME,
+            DEMO_SITE_RESPONSE_CONTAINER
         ),
         new Switchable()
     );
@@ -538,8 +537,8 @@ function getCurrentRequest(): Request
         return new Request(
             new Storable(
                 'Current Request ' . strrev(base64_encode(random_bytes(9))),
-                REQUEST_LOCATION,
-                REQUEST_CONTAINER),
+                DEMO_SITE_NAME,
+                DEMO_SITE_REQUEST_CONTAINER),
             new Switchable()
         );
     } catch (Exception $e) {
@@ -547,8 +546,8 @@ function getCurrentRequest(): Request
         return new Request(
             new Storable(
                 'Current Request (Name Not Unique!)',
-                REQUEST_LOCATION,
-                REQUEST_CONTAINER),
+                DEMO_SITE_NAME,
+                DEMO_SITE_REQUEST_CONTAINER),
             new Switchable()
         );
     }
@@ -616,7 +615,7 @@ function generateOutputNameFromPostIfSet(): string
 function getResponsesToCurrentRequest(ComponentCrud $crud): array
 {
     $responses = [];
-    $storedResponses = $crud->readAll(RESPONSE_LOCATION, RESPONSE_CONTAINER);
+    $storedResponses = $crud->readAll(DEMO_SITE_NAME, DEMO_SITE_RESPONSE_CONTAINER);
     foreach ($storedResponses as $response) {
         if ($response->respondsToRequest(getCurrentRequest(), getMockCrud()) === true) {
             array_push($responses, $response);

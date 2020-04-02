@@ -1,10 +1,9 @@
 <?php
 
-const REQUEST_LOCATION = 'Web';
-const REQUEST_CONTAINER = 'Request';
-const RESPONSE_LOCATION = 'Web';
-const RESPONSE_CONTAINER = 'Response';
-const TEMPLATE_LOCATION = 'UserInterface';
-const TEMPLATE_CONTAINER = 'Template';
-const OUTPUT_COMPONENT_LOCATION = 'Output';
-const OUTPUT_COMPONENT_CONTAINER = 'Mock';
+const DEMO_SITE_NAME = 'Demo';
+const DEMO_SITE_CRUD_CONTAINER = 'Cruds';
+const DEMO_SITE_STORAGE_DRIVER_CONTAINER = 'StorageDrivers';
+const DEMO_SITE_TEMPLATE_CONTAINER = 'Template';
+const DEMO_SITE_REQUEST_CONTAINER = 'Request';
+const DEMO_SITE_RESPONSE_CONTAINER = 'Response';
+const DEMO_SITE_OUTPUT_COMPONENT_CONTAINER = 'OutputComponents';
