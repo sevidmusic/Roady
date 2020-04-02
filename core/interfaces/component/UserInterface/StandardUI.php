@@ -8,7 +8,7 @@ interface StandardUI extends CoreOutputComponent
 {
 
     // getTemplatesForCurrentRequest(): array | index by position
-    public function getTemplatesForCurrentRequest(): array;
+    public function getTemplatesForCurrentRequest(string $location, string $container): array;
     //
     // getOutputComponentsForCurrentRequest():array | index by type, then position
     //

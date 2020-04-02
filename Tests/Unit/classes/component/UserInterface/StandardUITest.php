@@ -17,13 +17,13 @@ class StandardUITest extends AbstractStandardUITest
             new StandardUI(
                 new Storable(
                     'StandardUIName',
-                    'StandardUILocation',
+                    $this->getStandardUITestComponentLocation(),
                     'StandardUIContainer'
                 ),
                 new Switchable(),
                 new Positionable(),
                 new Router(
-                    new Storable('StandardUI_AbstractTestRouter', 'StandardUI_TestComponents', 'StandardUI_TestRouters'),
+                    new Storable('StandardUI_AbstractTestRouter', $this->getStandardUITestComponentLocation(), 'StandardUI_TestRouters'),
                     new Switchable(),
                     $this->getCurrentRequest(),
                     $this->getCrud()

@@ -22,27 +22,38 @@ trait StandardUITestTrait
     private static $outputComponents = [];
     private static $currentRequest;
     private $standardUI;
+    private static $suiTestComponentsLocation = 'StandardUITestComponents';
+
+    protected static function staticGetStandardUITestComponentLocation(): string
+    {
+        return self::$suiTestComponentsLocation;
+    }
+
+    protected function getStandardUITestComponentLocation(): string
+    {
+        return self::$suiTestComponentsLocation;
+    }
 
     public static function setUpBeforeClass(): void
     {
         self::$crud = new ComponentCrud(
-            new Storable('StandardUI_TestCrud', 'StandardUI_TestComponents', 'StandardUI_TestCruds'),
+            new Storable('StandardUI_TestCrud', self::staticGetStandardUITestComponentLocation(), 'StandardUI_TestCruds'),
             new Switchable(),
             new StorageDriver(
-                new Storable('StandardUI_TestStorageDriver', 'StandardUI_TestComponents', 'StandardUI_TestStorageDrivers'),
+                new Storable('StandardUITestStorageDriver', self::staticGetStandardUITestComponentLocation(), 'StandardUITestStorageDrivers'),
                 new Switchable()
             )
         );
         self::$currentRequest = self::getRandomRequest();
         self::$router = new Router(
-            new Storable('StandardUI_TestRouter', 'StandardUI_TestComponents', 'StandardUI_TestRouters'),
+            new Storable('StandardUITestRouter', self::staticGetStandardUITestComponentLocation(), 'StandardUITestRouters'),
             new Switchable(),
             self::$currentRequest,
             self::staticGetCrud()
         );
         // Create Responses
         self::getRandomResponse();
-        //var_dump(self::getCrudForTestTraitMethod()->readAll('StandardUI_TestComponents', 'StandardUI_TestRequests'));
+        //var_dump(self::getCrudForTestTraitMethod()->readAll(self::staticGetStandardUITestComponentLocation(), 'StandardUI_TestRequests'));
         // Store Responses, Templates, and Output Components
     }
 
@@ -50,7 +61,7 @@ trait StandardUITestTrait
     {
         // Create Requests
         $request = new Request(
-            new Storable('StandardUI_TestRequest' . strval(rand(1000, 9999)), 'StandardUI_TestComponents', 'StandardUI_TestRequests'),
+            new Storable('StandardUITestRequest' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), 'StandardUITestRequests'),
             new Switchable()
         );
         switch (rand(0, 3)) {
@@ -79,7 +90,7 @@ trait StandardUITestTrait
     private static function getRandomResponse(): Response
     {
         $response = new Response(
-            new Storable('StandardUI_TestResponse' . strval(rand(1000, 9999)), 'StandardUI_TestComponents', 'StandardUI_TestResponses'),
+            new Storable('StandardUITestResponse' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), 'StandardUITestResponses'),
             new Switchable()
         );
         $response->addRequestStorageInfo(self::$currentRequest);
@@ -97,7 +108,7 @@ trait StandardUITestTrait
     {
         // Create Create Output Components
         $outputComponent = new OutputComponent(
-            new Storable('StandardUI_TestOutputComponent' . strval((rand(1000, 9999))), 'StandardUI_TestComponents', 'StandardUI_TestOutputComponents'),
+            new Storable('StandardUITestOutputComponent' . strval((rand(1000, 9999))), self::staticGetStandardUITestComponentLocation(), 'StandardUITestOutputComponents'),
             new Switchable(),
             new Positionable(self::getRandomPosition())
         );
@@ -123,7 +134,7 @@ trait StandardUITestTrait
     private static function getRandomTemplate(): StandardUITemplate
     {
         $template = new StandardUITemplate(
-            new Storable('StandardUI_TestTemplate' . strval(rand(1000, 9999)), 'StandardUI_TestComponents', 'StandardUI_TestTemplates'),
+            new Storable('StandardUITestTemplate' . strval(rand(1000, 9999)), self::staticGetStandardUITestComponentLocation(), 'StandardUITestTemplates'),
             new Switchable(),
             new Positionable(self::getRandomPosition())
         );
@@ -144,11 +155,20 @@ trait StandardUITestTrait
 
     public function testGetTemplatesForCurrentRequestReturnsArrayOfStandardUITemplates(): void
     {
-        foreach ($this->getStandardUI()->getTemplatesForCurrentRequest() as $template) {
+        foreach ($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses') as $template) {
             var_dump($template->getType());
         }
         $this->assertTrue(true);
         // i.e. implements StandardUITemplate interface
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
         //
     }
 
