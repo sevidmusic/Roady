@@ -25,5 +25,6 @@ class StandardUITest extends AbstractStandardUITest
             )
         );
         $this->setStandardUIParentTestInstances();
+        $this->generateStoredTestComponents();
     }
 }

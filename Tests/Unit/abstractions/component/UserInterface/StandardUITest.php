@@ -30,6 +30,7 @@ class StandardUITest extends CoreOutputComponentTest
             )
         );
         $this->setStandardUIParentTestInstances();
+        $this->generateStoredTestComponents();
     }
 
 }
