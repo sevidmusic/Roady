@@ -171,7 +171,7 @@ trait StandardUITestTrait
 //        var_dump('ct_culprit_tgtb',count($this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), self::$suiTestTemplateContainer)));
 //        $this->assertEquals(
 //            $this->getStoredTemplatesForCurrentRequestViaCrud(),
-//            $this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), 'StandardUITestResponses')
+//            $this->getStandardUI()->getTemplatesForCurrentRequest($this->getStandardUITestComponentLocation(), self::$suiTestTemplateContainer)
 //        );
     }
 
