@@ -83,6 +83,7 @@ trait StandardUITestTrait
 
     }
     public function tearDown(): void {
+       // $this->devStoredComponentInfo();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
