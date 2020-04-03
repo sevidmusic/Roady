@@ -27,10 +27,42 @@ trait StandardUITestTrait
         return 'StandardUITestStandardUIContainer';
     }
 
+    private function devCountStoredComponents(): void {
+        var_dump(
+            [
+                '# Stored Requests' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getRequestContainer()
+                    )
+                ),
+                '# Stored OC' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getOutputComponentContainer()
+                    )
+                ),
+                '# Stored Templates' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getStandardUITemplateContainer()
+                    )
+                ),
+                '# Stored Responses' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getResponseContainer()
+                    )
+                )
+            ]
+        );
+    }
     protected function generateStoredTestComponents()
     {
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateStoredResponse();
+        $this->devCountStoredComponents();
+
     }
 
     protected function generateStoredResponse(): Response
@@ -176,6 +208,14 @@ trait StandardUITestTrait
     public function getStorageDriverContainer(): string
     {
         return "StandardUITestStorageDrivers";
+    }
+
+    protected function getStoredComponents(string $location, string $container): array
+    {
+        return $this->getStandardUITestRouter()->getCrud()->readAll(
+            $location,
+            $container
+        );
     }
 
     protected function setStandardUIParentTestInstances(): void
