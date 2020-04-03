@@ -286,7 +286,7 @@ trait StandardUITestTrait
                 $this->getResponseContainer()
             ) as $template)
         {
-            var_dump(class_implements($template));
+            $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
         $this->assertTrue(true);
     }
