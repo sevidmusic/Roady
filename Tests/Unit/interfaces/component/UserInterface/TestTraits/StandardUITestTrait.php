@@ -69,6 +69,7 @@ trait StandardUITestTrait
 
     private function devStoredComponentInfo(): void
     {
+        $this->devCountStoredComponents();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
             var_dump(
@@ -82,14 +83,12 @@ trait StandardUITestTrait
 
     }
     public function tearDown(): void {
-        //$this->devStoredComponentInfo();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getStandardUITemplateContainer()) as $storedComponent)
         {
-            var_dump($storedComponent->getType(), $storedComponent->getName());
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
 
@@ -102,7 +101,6 @@ trait StandardUITestTrait
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateComponentCalls++;
         $this->generateStoredResponse();
-        //$this->devCountStoredComponents();
 
     }
 
