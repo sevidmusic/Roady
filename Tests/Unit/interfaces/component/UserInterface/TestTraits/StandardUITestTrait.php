@@ -21,6 +21,7 @@ trait StandardUITestTrait
     private $standardUI;
     private $router;
     private $currentRequest;
+    private $generateComponentCalls = 0;
 
     public function getStandardUIContainer(): string
     {
@@ -60,13 +61,15 @@ trait StandardUITestTrait
                             $this->getComponentLocation(),
                             $this->getResponseContainer()
                     )
-                )
+                ),
+                '# Component Calls' => $this->generateComponentCalls
             ]
         );
     }
     protected function generateStoredTestComponents()
     {
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
+        $this->generateComponentCalls++;
         $this->devCountStoredComponents();
         $this->generateStoredResponse();
         $this->devCountStoredComponents();
