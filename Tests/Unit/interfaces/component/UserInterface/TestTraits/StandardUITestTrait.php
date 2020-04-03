@@ -280,6 +280,12 @@ trait StandardUITestTrait
     // getTemplatesAssignedToResponses(): array
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void {
         $this->devStoredComponentInfo();
+        var_dump(
+            $this->getStandardUI()->getTemplatesAssignedToResponses(
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            )
+        );
         $this->assertTrue(true);
     }
 
