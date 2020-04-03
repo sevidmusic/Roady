@@ -3,7 +3,6 @@
 namespace DarlingCms\abstractions\component\Web\Routing;
 
 use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\classes\component\Crud\ComponentCrud as Crud;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\interfaces\component\Web\Routing\Router as RouterInterface;
@@ -16,7 +15,7 @@ abstract class Router extends SwitchableComponent implements RouterInterface
     private $request;
     private $crud;
 
-    public function __construct(Storable $storable, Switchable $switchable, Request $request, Crud $crud)
+    public function __construct(Storable $storable, Switchable $switchable, Request $request, ComponentCrud $crud)
     {
         parent::__construct($storable, $switchable);
         $this->request = $request;
