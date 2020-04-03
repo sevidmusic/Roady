@@ -20,8 +20,8 @@ class StandardUITest extends CoreOutputComponentTest
                 [
                     new Storable(
                         'MockStandardUIName',
-                        $this->getStandardUITestComponentLocation(),
-                        $this->getStandardUITestStandardUIContainer()
+                        $this->getComponentLocation(),
+                        $this->getStandardUIContainer()
                     ),
                     new Switchable(),
                     new Positionable(),

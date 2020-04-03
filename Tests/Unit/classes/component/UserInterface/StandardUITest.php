@@ -16,8 +16,8 @@ class StandardUITest extends AbstractStandardUITest
             new StandardUI(
                 new Storable(
                     'StandardUIName',
-                    $this->getStandardUITestComponentLocation(),
-                    $this->getStandardUITestStandardUIContainer()
+                    $this->getComponentLocation(),
+                    $this->getStandardUIContainer()
                 ),
                 new Switchable(),
                 new Positionable(),

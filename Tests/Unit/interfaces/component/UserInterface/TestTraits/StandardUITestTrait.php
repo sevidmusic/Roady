@@ -12,6 +12,7 @@ use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
+use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingCms\interfaces\component\UserInterface\StandardUI;
 
 trait StandardUITestTrait
@@ -21,7 +22,7 @@ trait StandardUITestTrait
     private $router;
     private $currentRequest;
 
-    public function getStandardUITestStandardUIContainer()
+    public function getStandardUIContainer()
     {
         return 'StandardUITestStandardUIContainer';
     }
@@ -36,56 +37,56 @@ trait StandardUITestTrait
     {
         $response = new Response(
             new Storable('StandardUITestResponse',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestResponseContainer()
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
             ),
             new Switchable()
         );
-        $response->addTemplateStorageInfo($this->generateStandardUITemplate());
-        $response->addOutputComponentStorageInfo($this->generateOutputComponent());
-        $response->addRequestStorageInfo($this->getStandardUITestCurrentRequest());
+        $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
+        $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
+        $response->addRequestStorageInfo($this->getCurrentRequest());
         $this->getStandardUITestRouter()->getCrud()->create($response);
         return $response;
     }
 
-    public function getStandardUITestComponentLocation()
+    public function getComponentLocation()
     {
         return 'StandardUITestComponentsLocation';
     }
 
-    protected function getStandardUITestResponseContainer(): string
+    protected function getResponseContainer(): string
     {
         return 'StandardUITestResponseContainer';
     }
 
-    private function generateStandardUITemplate(): StandardUITemplate
+    private function generateStoredStandardUITemplate(): StandardUITemplate
     {
         $standardUITemplate = new StandardUITemplate(
             new Storable(
                 'StandardUITestTemplate',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestStandardUITemplateContainer()
+                $this->getComponentLocation(),
+                $this->getStandardUITemplateContainer()
             ),
             new Switchable(),
             new Positionable((rand(0, 100) / 100))
         );
-        $standardUITemplate->addType($this->generateOutputComponent());
+        $standardUITemplate->addType($this->generateStoredOutputComponent());
         $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
         return $standardUITemplate;
     }
 
-    protected function getStandardUITestStandardUITemplateContainer(): string
+    protected function getStandardUITemplateContainer(): string
     {
         return 'StandardUITestStandardUITemplateContainer';
     }
 
-    private function generateOutputComponent(): OutputComponent
+    private function generateStoredOutputComponent(): OutputComponent
     {
         $outputComponent = new OutputComponent(
             new Storable(
                 '',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestOutputComponentContainer()
+                $this->getComponentLocation(),
+                $this->getOutputComponentContainer()
             ),
             new Switchable(),
             new Positionable((rand(0, 100) / 100))
@@ -95,7 +96,7 @@ trait StandardUITestTrait
         return $outputComponent;
     }
 
-    public function getStandardUITestOutputComponentContainer(): string
+    public function getOutputComponentContainer(): string
     {
         return "StandardUITestOutputComponentContainer";
     }
@@ -108,22 +109,22 @@ trait StandardUITestTrait
         $this->router = new Router(
             new Storable(
                 'StandardUITestRouter',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestRouterContainer()
+                $this->getComponentLocation(),
+                $this->getRouterContainer()
             ),
             new Switchable(),
-            $this->getStandardUITestCurrentRequest(),
-            $this->getStandardUITestComponentCrudForTestRouter()
+            $this->getCurrentRequest(),
+            $this->getComponentCrudForRouter()
         );
         return $this->router;
     }
 
-    public function getStandardUITestRouterContainer()
+    public function getRouterContainer()
     {
         return "StandardUITestRouterContainer";
     }
 
-    public function getStandardUITestCurrentRequest(): Request
+    public function getCurrentRequest(): Request
     {
         if (isset($this->currentRequest) === true) {
             return $this->currentRequest;
@@ -131,20 +132,20 @@ trait StandardUITestTrait
         $this->currentRequest = new Request(
             new Storable(
                 'StandardUICurrentRequest',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestRequestContainer()
+                $this->getComponentLocation(),
+                $this->getRequestContainer()
             ),
             new Switchable()
         );
         return $this->currentRequest;
     }
 
-    public function getStandardUITestRequestContainer()
+    public function getRequestContainer()
     {
         return "StandardUITestRequestContainer";
     }
 
-    private function getStandardUITestComponentCrudForTestRouter()
+    private function getComponentCrudForRouter(): ComponentCrudInterface
     {
         if (isset($this->router) === true) {
             return $this->getStandardUITestRouter()->getCrud();
@@ -152,27 +153,27 @@ trait StandardUITestTrait
         return new ComponentCrud(
             new Storable(
                 'StandardUITestComponentCrudForStandardUITestRouter',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestComponentCrudContainer()
+                $this->getComponentLocation(),
+                $this->getComponentCrudContainer()
             ),
             new Switchable(),
             new StorageDriver(
                 new Storable(
                     'StandardUITestStorageDriver',
-                    $this->getStandardUITestComponentLocation(),
-                    $this->getStandardUITestStorageDriverContainer()
+                    $this->getComponentLocation(),
+                    $this->getStorageDriverContainer()
                 ),
                 new Switchable()
             )
         );
     }
 
-    public function getStandardUITestComponentCrudContainer()
+    public function getComponentCrudContainer()
     {
         return "StandardUITestComponentCruds";
     }
 
-    public function getStandardUITestStorageDriverContainer()
+    public function getStorageDriverContainer()
     {
         return "StandardUITestStorageDrivers";
     }
