@@ -85,6 +85,7 @@ trait StandardUITestTrait
         $this->devStoredComponentInfo();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
+            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
 
         // @todo: need to clean up components after each test...since we are not using setUpBeforeClass
