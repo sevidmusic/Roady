@@ -28,14 +28,7 @@ trait StandardUITestTrait
 
     protected function generateStoredTestComponents()
     {
-        // Output Components
-        $this->generateOutputComponent();
-
-        // Templates
-
-        // Responses
-
-        // ??? Store current request to emulate more realistic use, typically requests will exists as stored Components
+        $this->generateStoredResponse();
     }
 
     private function generateOutputComponent(): OutputComponent
