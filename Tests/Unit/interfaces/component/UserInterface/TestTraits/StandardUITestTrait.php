@@ -28,6 +28,7 @@ trait StandardUITestTrait
 
     protected function generateStoredTestComponents()
     {
+        // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateStoredResponse();
     }
 
