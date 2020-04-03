@@ -32,6 +32,53 @@ trait StandardUITestTrait
         $this->generateStoredResponse();
     }
 
+    protected function generateStoredResponse(): Response
+    {
+        $response = new Response(
+            new Storable('StandardUITestResponse',
+                $this->getStandardUITestComponentLocation(),
+                $this->getStandardUITestResponseContainer()
+            ),
+            new Switchable()
+        );
+        $response->addTemplateStorageInfo($this->generateStandardUITemplate());
+        $response->addOutputComponentStorageInfo($this->generateOutputComponent());
+        $response->addRequestStorageInfo($this->getStandardUITestCurrentRequest());
+        $this->getStandardUITestRouter()->getCrud()->create($response);
+        return $response;
+    }
+
+    public function getStandardUITestComponentLocation()
+    {
+        return 'StandardUITestComponentsLocation';
+    }
+
+    protected function getStandardUITestResponseContainer(): string
+    {
+        return 'StandardUITestResponseContainer';
+    }
+
+    private function generateStandardUITemplate(): StandardUITemplate
+    {
+        $standardUITemplate = new StandardUITemplate(
+            new Storable(
+                'StandardUITestTemplate',
+                $this->getStandardUITestComponentLocation(),
+                $this->getStandardUITestStandardUITemplateContainer()
+            ),
+            new Switchable(),
+            new Positionable((rand(0, 100) / 100))
+        );
+        $standardUITemplate->addType($this->generateOutputComponent());
+        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
+        return $standardUITemplate;
+    }
+
+    protected function getStandardUITestStandardUITemplateContainer(): string
+    {
+        return 'StandardUITestStandardUITemplateContainer';
+    }
+
     private function generateOutputComponent(): OutputComponent
     {
         $outputComponent = new OutputComponent(
@@ -46,11 +93,6 @@ trait StandardUITestTrait
         $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
         $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
         return $outputComponent;
-    }
-
-    public function getStandardUITestComponentLocation()
-    {
-        return 'StandardUITestComponentsLocation';
     }
 
     public function getStandardUITestOutputComponentContainer(): string
@@ -149,45 +191,5 @@ trait StandardUITestTrait
     public function setStandardUI(StandardUI $standardUI): void
     {
         $this->standardUI = $standardUI;
-    }
-
-    protected function getStandardUITestResponseContainer():string {
-        return 'StandardUITestResponseContainer';
-    }
-    protected function generateStoredResponse(): Response
-    {
-        $response = new Response(
-            new Storable('StandardUITestResponse',
-                $this->getStandardUITestComponentLocation(),
-            $this->getStandardUITestResponseContainer()
-            ),
-            new Switchable()
-        );
-        $response->addTemplateStorageInfo($this->generateStandardUITemplate());
-        $response->addOutputComponentStorageInfo($this->generateOutputComponent());
-        $response->addRequestStorageInfo($this->getStandardUITestCurrentRequest());
-        $this->getStandardUITestRouter()->getCrud()->create($response);
-        return $response;
-    }
-
-    private function generateStandardUITemplate(): StandardUITemplate
-    {
-        $standardUITemplate = new StandardUITemplate(
-            new Storable(
-                'StandardUITestTemplate',
-                $this->getStandardUITestComponentLocation(),
-                $this->getStandardUITestStandardUITemplateContainer()
-            ),
-            new Switchable(),
-            new Positionable((rand(0, 100) / 100))
-        );
-        $standardUITemplate->addType($this->generateOutputComponent());
-        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
-        return $standardUITemplate;
-    }
-
-    protected function getStandardUITestStandardUITemplateContainer(): string
-    {
-        return 'StandardUITestStandardUITemplateContainer';
     }
 }
