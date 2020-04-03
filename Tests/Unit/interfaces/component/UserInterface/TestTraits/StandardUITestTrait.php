@@ -169,6 +169,7 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
+        $this->getStandardUITestRouter()->getCrud()->create($this->currentRequest);
         return $this->currentRequest;
     }
 
