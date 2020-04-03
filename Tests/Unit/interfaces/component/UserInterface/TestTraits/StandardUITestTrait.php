@@ -33,25 +33,25 @@ trait StandardUITestTrait
         var_dump(
             [
                 'Current Request Url' => $this->getCurrentRequest()->getUrl(),
-                '# Sotred Requests' => count(
+                '# Sorted Requests' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
                         $this->getRequestContainer()
                     )
                 ),
-                '# Sotred Templates' => count(
+                '# Sorted Templates' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
                         $this->getStandardUITemplateContainer()
                     )
                 ),
-                '# Sotred Output Components' => count(
+                '# Sorted Output Components' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
                         $this->getOutputComponentContainer()
                     )
                 ),
-                '# Sotred Responses' => count(
+                '# Sorted Responses' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
                         $this->getResponseContainer()
