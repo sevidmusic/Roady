@@ -28,48 +28,21 @@ trait StandardUITestTrait
         return 'StandardUITestStandardUIContainer';
     }
 
-    private function devCountStoredComponents(): void {
+    private function devStoredComponentInfo(): void
+    {
         var_dump(
             [
                 'Current Request Url' => $this->getCurrentRequest()->getUrl(),
-                '# Sotred Reqiests' => count(
+                '# Sotred Requests' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
                         $this->getRequestContainer()
                     )
                 ),
-                '# Stored OC' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getOutputComponentContainer()
-                    )
-                ),
-                '# Stored Templates' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getStandardUITemplateContainer()
-                    )
-                ),
-                '# Stored Responses' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getResponseContainer()
-                    )
-                ),
-                '# Templates reutnred by getTemplatesAssignedToResponse()' => count(
-                        $this->getStandardUI()->getTemplatesAssignedToResponses(
-                            $this->getComponentLocation(),
-                            $this->getResponseContainer()
-                    )
-                ),
-                '# Component Calls' => $this->generateComponentCalls
+
             ]
         );
-    }
 
-    private function devStoredComponentInfo(): void
-    {
-        $this->devCountStoredComponents();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
             var_dump(
@@ -83,7 +56,8 @@ trait StandardUITestTrait
 
     }
     public function tearDown(): void {
-       // $this->devStoredComponentInfo();
+        // @todo : Working on fixing this...
+        $this->devStoredComponentInfo();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
