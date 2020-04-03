@@ -74,7 +74,6 @@ trait StandardUITestTrait
     }
     public function tearDown(): void {
         // @todo : Working on fixing this...
-        $this->devStoredComponentInfo();
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
@@ -280,6 +279,7 @@ trait StandardUITestTrait
 
     // getTemplatesAssignedToResponses(): array
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void {
+        $this->devStoredComponentInfo();
         $this->assertTrue(true);
     }
 
