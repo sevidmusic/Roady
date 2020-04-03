@@ -286,7 +286,7 @@ trait StandardUITestTrait
                 $this->getResponseContainer()
             ) as $template)
         {
-            var_dump($template);
+            var_dump(class_implements($template));
         }
         $this->assertTrue(true);
     }
