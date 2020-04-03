@@ -39,7 +39,24 @@ trait StandardUITestTrait
                         $this->getRequestContainer()
                     )
                 ),
-
+                '# Sotred Templates' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getStandardUITemplateContainer()
+                    )
+                ),
+                '# Sotred Output Components' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getOutputComponentContainer()
+                    )
+                ),
+                '# Sotred Responses' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getResponseContainer()
+                    )
+                ),
             ]
         );
 
@@ -63,6 +80,14 @@ trait StandardUITestTrait
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getStandardUITemplateContainer()) as $storedComponent)
+        {
+            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
+        }
+        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getResponseContainer()) as $storedComponent)
+        {
+            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
+        }
+        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getRequestContainer()) as $storedComponent)
         {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
