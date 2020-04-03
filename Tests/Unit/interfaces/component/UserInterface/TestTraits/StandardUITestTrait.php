@@ -70,7 +70,13 @@ trait StandardUITestTrait
     public function tearDown(): void {
         foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
         {
-            var_dump($storedComponent->getUniqueId(), $storedComponent->getType());
+            var_dump(
+                $storedComponent->getName(),
+                $storedComponent->getUniqueId(),
+                $storedComponent->getLocation(),
+                $storedComponent->getContainer(),
+                $storedComponent->getType()
+            );
         }
         // @todo: need to clean up components after each test...since we are not using setUpBeforeClass
     }
