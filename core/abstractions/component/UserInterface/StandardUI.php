@@ -21,23 +21,22 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         $this->router = $router;
     }
 
-    public function getTemplatesForCurrentRequest(string $location, string $container): array
+    public function getTemplatesAssignedToResponses(string $location, string $container): array
     {
-        /**
-         * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
-         * $templates = [];
-         * foreach ($this->router->getResponses($location, $container) as $response) {
-         * foreach ($response->getTemplateStorageInfo() as $templateStorable) {
-         * $template = $this->router->getCrud()->read($templateStorable);
-         * if (isset($templates[$template->getPosition()]) === true) {
-         * $template->increasePosition();
-         * }
-         * $templates[strval($template->getPosition())] = $template;
-         * }
-         * }
-         * return $templates;
-         */
-        return array();
+       /**
+        * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
+        */
+        $templates = [];
+        foreach ($this->router->getResponses($location, $container) as $response) {
+            foreach ($response->getTemplateStorageInfo() as $templateStorable) {
+            $template = $this->router->getCrud()->read($templateStorable);
+            if (isset($templates[$template->getPosition()]) === true) {
+                $template->increasePosition();
+            }
+            $templates[strval($template->getPosition())] = $template;
+            }
+        }
+        return $templates;
     }
 
 }

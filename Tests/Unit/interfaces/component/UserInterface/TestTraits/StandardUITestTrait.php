@@ -30,7 +30,8 @@ trait StandardUITestTrait
     private function devCountStoredComponents(): void {
         var_dump(
             [
-                '# Stored Requests' => count(
+                'Current Request Url' => $this->getCurrentRequest()->getUrl(),
+                '# Sotred Reqiests' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
                         $this->getRequestContainer()
@@ -53,6 +54,12 @@ trait StandardUITestTrait
                         $this->getComponentLocation(),
                         $this->getResponseContainer()
                     )
+                ),
+                '# Templates reutnred by getTemplatesAssignedToResponse()' => count(
+                        $this->getStandardUI()->getTemplatesAssignedToResponses(
+                            $this->getComponentLocation(),
+                            $this->getResponseContainer()
+                    )
                 )
             ]
         );
@@ -61,7 +68,6 @@ trait StandardUITestTrait
     {
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateStoredResponse();
-        $this->devCountStoredComponents();
 
     }
 
@@ -234,4 +240,14 @@ trait StandardUITestTrait
     {
         $this->standardUI = $standardUI;
     }
+
+
+
+    // getTemplatesAssignedToResponses(): array
+    public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void {
+        $this->devCountStoredComponents();
+        $this->assertTrue(true);
+    }
+
+
 }
