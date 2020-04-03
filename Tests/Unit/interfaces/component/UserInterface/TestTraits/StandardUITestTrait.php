@@ -22,7 +22,7 @@ trait StandardUITestTrait
     private $router;
     private $currentRequest;
 
-    public function getStandardUIContainer()
+    public function getStandardUIContainer(): string
     {
         return 'StandardUITestStandardUIContainer';
     }
@@ -49,7 +49,7 @@ trait StandardUITestTrait
         return $response;
     }
 
-    public function getComponentLocation()
+    public function getComponentLocation(): string
     {
         return 'StandardUITestComponentsLocation';
     }
@@ -119,7 +119,7 @@ trait StandardUITestTrait
         return $this->router;
     }
 
-    public function getRouterContainer()
+    public function getRouterContainer(): string
     {
         return "StandardUITestRouterContainer";
     }
@@ -140,7 +140,7 @@ trait StandardUITestTrait
         return $this->currentRequest;
     }
 
-    public function getRequestContainer()
+    public function getRequestContainer(): string
     {
         return "StandardUITestRequestContainer";
     }
@@ -168,12 +168,12 @@ trait StandardUITestTrait
         );
     }
 
-    public function getComponentCrudContainer()
+    public function getComponentCrudContainer(): string
     {
         return "StandardUITestComponentCruds";
     }
 
-    public function getStorageDriverContainer()
+    public function getStorageDriverContainer(): string
     {
         return "StandardUITestStorageDrivers";
     }
