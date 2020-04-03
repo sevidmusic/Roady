@@ -66,6 +66,11 @@ trait StandardUITestTrait
             ]
         );
     }
+
+    public function tearDown(): void {
+        var_dump('Cleaning up...');
+        // @todo: need to clean up components after each test...since we are not using setUpBeforeClass
+    }
     protected function generateStoredTestComponents()
     {
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
