@@ -141,7 +141,7 @@ trait StandardUITestTrait
             new Switchable(),
             new Positionable((rand(0, 100) / 100))
         );
-        $standardUITemplate->addType($this->generateStoredOutputComponent());
+        $standardUITemplate->addType($this->generateStoredOutputComponent(false));
         $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
         return $standardUITemplate;
     }
@@ -151,7 +151,7 @@ trait StandardUITestTrait
         return 'StandardUITestStandardUITemplateContainer';
     }
 
-    private function generateStoredOutputComponent(): OutputComponent
+    private function generateStoredOutputComponent(bool $saveToStorage = true): OutputComponent
     {
         $outputComponent = new OutputComponent(
             new Storable(
@@ -163,7 +163,9 @@ trait StandardUITestTrait
             new Positionable((rand(0, 100) / 100))
         );
         $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
-        $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
+        if($saveToStorage === true) {
+            $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
+        }
         return $outputComponent;
     }
 
