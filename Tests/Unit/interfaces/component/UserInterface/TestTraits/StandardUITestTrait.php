@@ -90,9 +90,6 @@ trait StandardUITestTrait
         {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
-
-
-        // @todo: need to clean up components after each test...since we are not using setUpBeforeClass
     }
 
     protected function generateStoredTestComponents()
@@ -275,9 +272,6 @@ trait StandardUITestTrait
         $this->standardUI = $standardUI;
     }
 
-
-
-    // getTemplatesAssignedToResponses(): array
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void {
         $this->devStoredComponentInfo();
         foreach (
