@@ -272,8 +272,17 @@ trait StandardUITestTrait
         $this->standardUI = $standardUI;
     }
 
+
+    public function testRouterIsSetPostInstantiation(): void
+    {
+        $this->assertEquals
+            ("DarlingCms\classes\component\Web\Routing\Router",
+            $this->getStandardUI()->export()['router']->getType()
+        );
+    }
+
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void {
-        $this->devStoredComponentInfo();
+        //$this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getTemplatesAssignedToResponses(
                 $this->getComponentLocation(),
@@ -282,7 +291,6 @@ trait StandardUITestTrait
         {
             $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
-        $this->assertTrue(true);
     }
 
 
