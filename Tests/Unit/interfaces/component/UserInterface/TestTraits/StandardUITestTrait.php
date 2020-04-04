@@ -193,9 +193,24 @@ trait StandardUITestTrait
         return "StandardUITestRouterContainer";
     }
 
+    private function randChars(int $limit):string
+    {
+        return bin2hex(random_bytes($limit));
+    }
+
+    private function getRandomUrl(): string
+    {
+        switch(rand(0,1)) {
+        case 0:
+            return 'http://' . $this->randChars(rand(3,4)) . '.' . $this->randChars(rand(3,4)) . '/' . $this->randChars(rand(3,9)) . '?' . $this->randChars(rand(4,5));
+        default:
+            return $this->currentRequest->getUrl();
+        }
+    }
     public function getCurrentRequest(): Request
     {
         if (isset($this->currentRequest) === true) {
+            var_dump($this->currentRequest->getUrl());
             return $this->currentRequest;
         }
         $this->currentRequest = new Request(
@@ -206,6 +221,7 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
+        $this->currentRequest->import(['url' => $this->getRandomUrl()]);
         $this->getStandardUITestRouter()->getCrud()->create($this->currentRequest);
         return $this->currentRequest;
     }
