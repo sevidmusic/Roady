@@ -325,6 +325,14 @@ trait StandardUITestTrait
                 foreach($response->getTemplateStorageInfo() as $storable)
                 {
                     $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                    while(
+                        isset(
+                            $templates[strval(
+                                $template->getPosition()
+                            )]) === true)
+                    {
+                        $template->increasePosition();
+                    }
                     var_dump(
                         [
                         'Template_Id: ' . $storable->getUniqueId(),
