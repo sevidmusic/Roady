@@ -317,9 +317,22 @@ trait StandardUITestTrait
             $this->getComponentLocation(),
             $this->getResponseContainer()
         ) as $response) {
-            foreach($response->getTemplateStorageInfo() as $storable)
-            {
-                var_dump($storable->getUniqueId());
+
+            if($response->respondsToRequest(
+                $this->getCurrentRequest(),
+                $this->getStandardUITestRouter()->getCrud()
+            ) === true) {
+                foreach($response->getTemplateStorageInfo() as $storable)
+                {
+                    var_dump(
+                        [
+                        'Template_Id: ' . $storable->getUniqueId(),
+                        'Template_Name: ' . $storable->getName(),
+                        'Template_Location: ' . $storable->getLocation(),
+                        'Template_Container: ' . $storable->getContainer(),
+                        ]
+                    );
+                }
             }
         }
     }
