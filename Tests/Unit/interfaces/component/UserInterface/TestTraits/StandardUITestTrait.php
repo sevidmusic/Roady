@@ -333,6 +333,7 @@ trait StandardUITestTrait
                     {
                         $template->increasePosition();
                     }
+                    $templates[strval($template->getPosition())] = $template;
                     var_dump(
                         [
                         'Template_Id: ' . $storable->getUniqueId(),
