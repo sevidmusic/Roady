@@ -324,6 +324,7 @@ trait StandardUITestTrait
             ) === true) {
                 foreach($response->getTemplateStorageInfo() as $storable)
                 {
+                    $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
                     var_dump(
                         [
                         'Template_Id: ' . $storable->getUniqueId(),
