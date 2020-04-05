@@ -312,7 +312,16 @@ trait StandardUITestTrait
     // @todo testGetTemplatesAssignedToResponsesReturnesArrayOfAllTemplatesAssignedToAllResponsesToCurrentRequest(): void
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
     {
-        $this->assertTrue(true);
+        $templates = [];
+        foreach($this->getStandardUITestRouter()->getCrud()->readAll(
+            $this->getComponentLocation(),
+            $this->getResponseContainer()
+        ) as $response) {
+            foreach($response->getTemplateStorageInfo() as $storable)
+            {
+                var_dump($storable->getUniqueId());
+            }
+        }
     }
 
 
