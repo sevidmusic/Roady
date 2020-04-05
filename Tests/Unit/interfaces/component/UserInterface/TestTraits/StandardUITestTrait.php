@@ -309,5 +309,11 @@ trait StandardUITestTrait
         }
     }
 
+    // @todo testGetTemplatesAssignedToResponsesReturnesArrayOfAllTemplatesAssignedToAllResponsesToCurrentRequest(): void
+    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
+    {
+        $this->assertTrue(true);
+    }
+
 
 }
