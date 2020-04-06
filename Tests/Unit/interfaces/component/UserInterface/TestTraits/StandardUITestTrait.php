@@ -387,4 +387,23 @@ trait StandardUITestTrait
         }
     }
 
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreNumericStrings()
+    {
+        $this->devStoredComponentInfo();
+        foreach (
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            ) as $outputComponentTypes)
+        {
+            foreach($outputComponentTypes as $index => $outputComponent)
+            {
+            $this->assertTrue(
+                is_numeric($index)
+            );
+
+            }
+        }
+    }
+
 }
