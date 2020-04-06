@@ -337,7 +337,7 @@ trait StandardUITestTrait
                 }
             }
         }
-        var_dump($templates);
+        $this->assertEquals($templates, $this->getStandardUI()->getTemplatesAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()));
     }
 
 }
