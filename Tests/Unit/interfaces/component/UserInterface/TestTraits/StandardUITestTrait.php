@@ -368,4 +368,23 @@ trait StandardUITestTrait
             }
         }
     }
+
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseToLevelIndexesAreValidOutputComponentTypes()
+    {
+        $this->devStoredComponentInfo();
+        foreach (
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            ) as $outputComponentType => $outputComponents)
+        {
+            $this->assertTrue(
+                in_array(
+                    'DarlingCms\interfaces\component\OutputComponent',
+                    class_implements($outputComponentType)
+                )
+            );
+        }
+    }
+
 }
