@@ -194,6 +194,11 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         }
         $clone = $this->getClone($data['type']);
         $clone->import($this->unpack($data));
+        /**
+         * !IMPORTANT: Clone's storable must match supplied storable.
+         * Also, this import must be the last thing done before returning!!!
+         */
+        $clone->import(['storable' => $storable]);
         return $clone;
     }
 
