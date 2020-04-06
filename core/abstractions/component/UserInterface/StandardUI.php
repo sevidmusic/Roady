@@ -32,10 +32,8 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         $output = '';
         foreach ($this->getTemplatesAssignedToResponses() as $template) {
             foreach ($template->getTypes() as $type) {
-                foreach ($this->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
-                    foreach ($outputComponentTypes as $outputComponent) {
-                        $output .= $outputComponent->getOutput();
-                    }
+                foreach ($this->getOutputComponentsAssignedToResponses()[$type] as $outputComponent) {
+                    $output .= $outputComponent->getOutput();
                 }
             }
         }
