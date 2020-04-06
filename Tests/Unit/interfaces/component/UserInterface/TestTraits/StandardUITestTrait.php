@@ -309,14 +309,22 @@ trait StandardUITestTrait
         }
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
+    private function getStoredResponses(): array
     {
-        $templates = [];
+        $responses = [];
         foreach($this->getStandardUITestRouter()->getCrud()->readAll(
             $this->getComponentLocation(),
             $this->getResponseContainer()
         ) as $response) {
+            array_push($responses, $response);
+        }
+        return $responses;
+    }
 
+    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
+    {
+        $templates = [];
+        foreach($this->getStoredResponses() as $response) {
             if($response->respondsToRequest(
                 $this->getCurrentRequest(),
                 $this->getStandardUITestRouter()->getCrud()
@@ -341,6 +349,15 @@ trait StandardUITestTrait
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
     {
+        $outputComponents = [];
+        foreach($this->getStoredResponses() as $response)
+        {
+            foreach($response->getOutputComponentStorageInfo() as $storable)
+            {
+                $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                var_dump($outputComponent->getUniqueId());
+            }
+        }
         $this->assertTrue(true);
     }
 }
