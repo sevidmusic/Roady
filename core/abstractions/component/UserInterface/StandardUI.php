@@ -41,7 +41,20 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
 
     public function getOutputComponentsAssignedToResponses(string $location, string $container): array
     {
-        return array();
+       /**
+        * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
+        */
+        $outputComponents = [];
+        foreach ($this->router->getResponses($location, $container) as $response) {
+            foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
+            $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
+            if (isset($outputComponents[strval($outputComponent->getPosition())]) === true) {
+                $outputComponent>increasePosition();
+            }
+            $outputComponents[strval($outputComponent->getPosition())] = $outputComponent;
+            }
+        }
+        return $outputComponents;
     }
 
 }

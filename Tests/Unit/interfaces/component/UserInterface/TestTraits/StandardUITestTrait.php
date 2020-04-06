@@ -210,7 +210,7 @@ trait StandardUITestTrait
     public function getCurrentRequest(): Request
     {
         if (isset($this->currentRequest) === true) {
-            var_dump($this->currentRequest->getUrl());
+            //var_dump($this->currentRequest->getUrl());
             return $this->currentRequest;
         }
         $this->currentRequest = new Request(
@@ -349,7 +349,14 @@ trait StandardUITestTrait
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
     {
-        $outputComponents = [];
-        $this->assertTrue(true);
+        $this->devStoredComponentInfo();
+        foreach (
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            ) as $outputComponent)
+        {
+            $this->assertTrue(in_array('DarlingCms\interfaces\component\OutputComponent', class_implements($outputComponent)));
+        }
     }
 }
