@@ -68,7 +68,7 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
                     if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                         /** @noinspection PhpUndefinedFunctionInspection */
                         /** @noinspection PhpExpressionResultUnusedInspection */
-                        $outputComponent > increasePosition();
+                        $outputComponent->increasePosition();
                     }
                     $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
                 }
