@@ -49,7 +49,9 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
             foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
             $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
             if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
-                $outputComponent>increasePosition();
+                /** @noinspection PhpUndefinedFunctionInspection */
+                /** @noinspection PhpExpressionResultUnusedInspection */
+                $outputComponent > increasePosition();
             }
             $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
             }
