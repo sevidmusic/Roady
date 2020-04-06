@@ -369,7 +369,7 @@ trait StandardUITestTrait
         }
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseToLevelIndexesAreValidOutputComponentTypes()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreValidOutputComponentTypes()
     {
         $this->devStoredComponentInfo();
         foreach (
