@@ -334,18 +334,10 @@ trait StandardUITestTrait
                         $template->increasePosition();
                     }
                     $templates[strval($template->getPosition())] = $template;
-                    var_dump(
-                        [
-                        'Template_Id: ' . $storable->getUniqueId(),
-                        'Template_Name: ' . $storable->getName(),
-                        'Template_Location: ' . $storable->getLocation(),
-                        'Template_Container: ' . $storable->getContainer(),
-                        ]
-                    );
                 }
             }
         }
+        var_dump($templates);
     }
-
 
 }
