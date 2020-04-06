@@ -436,4 +436,17 @@ trait StandardUITestTrait
         );
     }
 
+    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseIndexesAreNumericStrings()
+    {
+        $this->devStoredComponentInfo();
+        foreach (
+            $this->getStandardUI()->getTemplatesAssignedToResponses(
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            ) as $index => $templates)
+        {
+            $this->assertTrue(is_numeric($index));
+        }
+    }
+
 }
