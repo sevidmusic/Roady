@@ -406,4 +406,34 @@ trait StandardUITestTrait
         }
     }
 
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfAllOutputComponentsAssignedToAllResponsesToCurrentRequest(): void
+    {
+        $outputComponents = [];
+        foreach($this->getStoredResponses() as $response) {
+            if($response->respondsToRequest(
+                $this->getCurrentRequest(),
+                $this->getStandardUITestRouter()->getCrud()
+            ) === true) {
+                foreach(
+                    $response->getOutputComponentStorageInfo() as $storable
+                )
+                {
+                    $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                    if(isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true)
+                    {
+                        $outputComponent->increasePosition();
+                    }
+                    $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
+                }
+            }
+        }
+        $this->assertEquals(
+            $outputComponents,
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            )
+        );
+    }
+
 }
