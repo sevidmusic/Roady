@@ -442,4 +442,9 @@ trait StandardUITestTrait
         $this->standardUI = $standardUI;
     }
 
+    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByTemplateThenOutputComponentPosition()
+    {
+        // @todo implement this test | renive dev assertion
+        $this->assertTrue(true);
+    }
 }
