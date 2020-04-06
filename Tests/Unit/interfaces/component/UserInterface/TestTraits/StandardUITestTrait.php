@@ -354,9 +354,18 @@ trait StandardUITestTrait
             $this->getStandardUI()->getOutputComponentsAssignedToResponses(
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
-            ) as $outputComponent)
+            ) as $outputComponentTypes)
         {
-            $this->assertTrue(in_array('DarlingCms\interfaces\component\OutputComponent', class_implements($outputComponent)));
+            foreach($outputComponentTypes as $outputComponent)
+            {
+            $this->assertTrue(
+                in_array(
+                    'DarlingCms\interfaces\component\OutputComponent',
+                    class_implements($outputComponent)
+                )
+            );
+
+            }
         }
     }
 }
