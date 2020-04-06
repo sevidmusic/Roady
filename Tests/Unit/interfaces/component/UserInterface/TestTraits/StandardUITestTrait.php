@@ -355,7 +355,7 @@ trait StandardUITestTrait
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
                 $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                var_dump($outputComponent->getUniqueId());
+                var_dump('OC_ID' . $outputComponent->getUniqueId());
             }
         }
         $this->assertTrue(true);
