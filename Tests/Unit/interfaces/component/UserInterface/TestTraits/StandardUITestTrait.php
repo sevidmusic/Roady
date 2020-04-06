@@ -182,6 +182,16 @@ trait StandardUITestTrait
         );
     }
 
+    public function getStandardUI(): StandardUI
+    {
+        return $this->standardUI;
+    }
+
+    public function setStandardUI(StandardUI $standardUI): void
+    {
+        $this->standardUI = $standardUI;
+    }
+
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void
     {
         //$this->devStoredComponentInfo();
@@ -368,6 +378,22 @@ trait StandardUITestTrait
         }
     }
 
+    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByTemplateThenOutputComponentPosition()
+    {
+        // @todo implement this test | remove dev assertion
+        $expectedOutput = '';
+        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()) as $template) {
+            foreach ($template->getTypes() as $type) {
+                foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()) as $outputComponentType) {
+                    foreach ($outputComponentType as $outputComponent) {
+                        $expectedOutput .= $outputComponent->getOutput();
+                    }
+                }
+            }
+        }
+        $this->assertEquals($expectedOutput, $this->getStandardUI()->getOutput());
+    }
+
     protected function generateStoredTestComponents()
     {
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
@@ -430,21 +456,5 @@ trait StandardUITestTrait
     {
         $this->setOutputComponent($this->getStandardUI());
         $this->setOutputComponentParentTestInstances();
-    }
-
-    public function getStandardUI(): StandardUI
-    {
-        return $this->standardUI;
-    }
-
-    public function setStandardUI(StandardUI $standardUI): void
-    {
-        $this->standardUI = $standardUI;
-    }
-
-    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByTemplateThenOutputComponentPosition()
-    {
-        // @todo implement this test | renive dev assertion
-        $this->assertTrue(true);
     }
 }

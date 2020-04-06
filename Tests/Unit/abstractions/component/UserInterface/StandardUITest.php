@@ -25,7 +25,9 @@ class StandardUITest extends CoreOutputComponentTest
                     ),
                     new Switchable(),
                     new Positionable(),
-                    $this->getStandardUITestRouter()
+                    $this->getStandardUITestRouter(),
+                    $this->getComponentLocation(),
+                    $this->getResponseContainer()
                 ]
             )
         );

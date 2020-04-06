@@ -21,7 +21,9 @@ class StandardUITest extends AbstractStandardUITest
                 ),
                 new Switchable(),
                 new Positionable(),
-                $this->getStandardUITestRouter()
+                $this->getStandardUITestRouter(),
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
             )
         );
         $this->setStandardUIParentTestInstances();
