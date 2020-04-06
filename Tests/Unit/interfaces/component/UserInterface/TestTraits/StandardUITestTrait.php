@@ -342,9 +342,11 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
-        $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
         for ($i = 0; $i < 3; $i++) {
             $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
+        }
+        for ($i = 0; $i < 3; $i++) {
+            $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
         }
         $response->addRequestStorageInfo($this->getCurrentRequest());
         $this->getStandardUITestRouter()->getCrud()->create($response);
