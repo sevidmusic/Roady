@@ -194,7 +194,6 @@ trait StandardUITestTrait
 
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void
     {
-        //$this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
             $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
@@ -239,7 +238,6 @@ trait StandardUITestTrait
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
     {
-        $this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
             foreach ($outputComponentTypes as $outputComponent) {
@@ -300,7 +298,6 @@ trait StandardUITestTrait
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreValidOutputComponentTypes()
     {
-        $this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentType => $outputComponents) {
             $this->assertTrue(
@@ -314,7 +311,6 @@ trait StandardUITestTrait
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreNumericStrings()
     {
-        $this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
             foreach ($outputComponentTypes as $index => $outputComponent) {
@@ -356,7 +352,6 @@ trait StandardUITestTrait
 
     public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseIndexesAreNumericStrings()
     {
-        $this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $templates) {
             $this->assertTrue(is_numeric($index));
