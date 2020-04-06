@@ -252,50 +252,6 @@ trait StandardUITestTrait
         }
     }
 
-    private function devStoredComponentInfo(): void
-    {
-        var_dump(
-            [
-                'Current Request Url' => $this->getCurrentRequest()->getUrl(),
-                '# Sorted Requests' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getRequestContainer()
-                    )
-                ),
-                '# Sorted Templates' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getStandardUITemplateContainer()
-                    )
-                ),
-                '# Sorted Output Components' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getOutputComponentContainer()
-                    )
-                ),
-                '# Sorted Responses' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getResponseContainer()
-                    )
-                ),
-            ]
-        );
-
-        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent) {
-            var_dump(
-                $storedComponent->getName(),
-                $storedComponent->getUniqueId(),
-                $storedComponent->getLocation(),
-                $storedComponent->getContainer(),
-                $storedComponent->getType()
-            );
-        }
-
-    }
-
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreValidOutputComponentTypes()
     {
         foreach (
@@ -343,10 +299,7 @@ trait StandardUITestTrait
         }
         $this->assertEquals(
             $outputComponents,
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            )
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses()
         );
     }
 
@@ -364,10 +317,8 @@ trait StandardUITestTrait
         $expectedOutput = '';
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
             foreach ($template->getTypes() as $type) {
-                foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentType) {
-                    foreach ($outputComponentType as $outputComponent) {
-                        $expectedOutput .= $outputComponent->getOutput();
-                    }
+                foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses()[$type] as $outputComponent) {
+                    $expectedOutput .= $outputComponent->getOutput();
                 }
             }
         }
@@ -392,7 +343,9 @@ trait StandardUITestTrait
             new Switchable()
         );
         $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
-        $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
+        for ($i = 0; $i < 3; $i++) {
+            $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
+        }
         $response->addRequestStorageInfo($this->getCurrentRequest());
         $this->getStandardUITestRouter()->getCrud()->create($response);
         return $response;
@@ -418,7 +371,7 @@ trait StandardUITestTrait
     {
         $outputComponent = new OutputComponent(
             new Storable(
-                '',
+                'StandardUITestOutputComponent',
                 $this->getComponentLocation(),
                 $this->getOutputComponentContainer()
             ),
@@ -436,5 +389,49 @@ trait StandardUITestTrait
     {
         $this->setOutputComponent($this->getStandardUI());
         $this->setOutputComponentParentTestInstances();
+    }
+
+    private function devStoredComponentInfo(): void
+    {
+        var_dump(
+            [
+                'Current Request Url' => $this->getCurrentRequest()->getUrl(),
+                '# Sorted Requests' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getRequestContainer()
+                    )
+                ),
+                '# Sorted Templates' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getStandardUITemplateContainer()
+                    )
+                ),
+                '# Sorted Output Components' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getOutputComponentContainer()
+                    )
+                ),
+                '# Sorted Responses' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getResponseContainer()
+                    )
+                ),
+            ]
+        );
+
+        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent) {
+            var_dump(
+                $storedComponent->getName(),
+                $storedComponent->getUniqueId(),
+                $storedComponent->getLocation(),
+                $storedComponent->getContainer(),
+                $storedComponent->getType()
+            );
+        }
+
     }
 }

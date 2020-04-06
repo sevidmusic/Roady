@@ -21,7 +21,6 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Router $router, string $responseLocation, string $responseContainer)
     {
         parent::__construct($storable, $switchable, $positionable);
-        // @todo define testRouterIsSetOnInstantiation()
         $this->router = $router;
         $this->responseLocation = $responseLocation;
         $this->responseContainer = $responseContainer;
@@ -43,9 +42,6 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
 
     public function getTemplatesAssignedToResponses(): array
     {
-        /**
-         * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
-         */
         if (empty($this->templates) === true) {
             $templates = [];
             foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
@@ -64,9 +60,6 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
 
     public function getOutputComponentsAssignedToResponses(): array
     {
-        /**
-         * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
-         */
         if (empty($this->outputComponents) === true) {
             $outputComponents = [];
             foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
