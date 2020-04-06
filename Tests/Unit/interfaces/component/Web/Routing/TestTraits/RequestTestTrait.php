@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUndefinedMethodInspection */
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
@@ -12,6 +12,7 @@ trait RequestTestTrait
     public function testGetGetReturnsGetArray(): void
     {
         $this->turnRequestOn();
+        /** @noinspection PhpUndefinedMethodInspection */
         $this->getArrayTestUtility()->arraysAreEqual($_GET, $this->getRequest()->getGet());
     }
 
@@ -32,6 +33,7 @@ trait RequestTestTrait
         $this->request = $request;
     }
 
+    /** @noinspection PhpUndefinedMethodInspection */
     public function testGetPostReturnsPostArray(): void
     {
         $this->turnRequestOn();

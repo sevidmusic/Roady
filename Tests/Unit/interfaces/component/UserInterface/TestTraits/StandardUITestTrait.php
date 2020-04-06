@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
@@ -14,6 +14,7 @@ use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingCms\interfaces\component\UserInterface\StandardUI;
+use Exception;
 
 trait StandardUITestTrait
 {
@@ -195,7 +196,11 @@ trait StandardUITestTrait
 
     private function randChars(int $limit):string
     {
-        return bin2hex(random_bytes($limit));
+        try {
+            return bin2hex(random_bytes($limit));
+        } catch (Exception $e) {
+            return strval(rand(1000000, 9999999));
+        }
     }
 
     private function getRandomUrl(): string
@@ -204,6 +209,7 @@ trait StandardUITestTrait
         case 0:
             return 'http://' . $this->randChars(rand(3,4)) . '.' . $this->randChars(rand(3,4)) . '/' . $this->randChars(rand(3,9)) . '?' . $this->randChars(rand(4,5));
         default:
+            /** @noinspection PhpUndefinedMethodInspection */
             return $this->currentRequest->getUrl();
         }
     }

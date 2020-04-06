@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace UnitTests\abstractions\component;
 

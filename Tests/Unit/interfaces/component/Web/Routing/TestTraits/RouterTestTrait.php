@@ -54,6 +54,7 @@ trait RouterTestTrait
         );
     }
 
+    /** @noinspection PhpUndefinedMethodInspection */
     public function tearDown(): void
     {
         $this->removeDirectory(

@@ -130,6 +130,7 @@ EOD;
         return array_unique($propertyNames);
     }
 
+    /** @noinspection DuplicatedCode */
     private function getClassPropertyReflections($class): array
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
@@ -319,6 +320,7 @@ EOD;
         if (is_null($reflectionParameter->getType()) === true) {
             return $this->nullType;
         }
+        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         return $this->convertReflectionTypeStringToGettypeString($reflectionParameter->getType()->getName());
     }
 
