@@ -196,10 +196,7 @@ trait StandardUITestTrait
     {
         //$this->devStoredComponentInfo();
         foreach (
-            $this->getStandardUI()->getTemplatesAssignedToResponses(
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            ) as $template) {
+            $this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
             $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
     }
@@ -225,7 +222,7 @@ trait StandardUITestTrait
                 }
             }
         }
-        $this->assertEquals($templates, $this->getStandardUI()->getTemplatesAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()));
+        $this->assertEquals($templates, $this->getStandardUI()->getTemplatesAssignedToResponses());
     }
 
     private function getStoredResponses(): array
@@ -244,10 +241,7 @@ trait StandardUITestTrait
     {
         $this->devStoredComponentInfo();
         foreach (
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            ) as $outputComponentTypes) {
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
             foreach ($outputComponentTypes as $outputComponent) {
                 $this->assertTrue(
                     in_array(
@@ -308,10 +302,7 @@ trait StandardUITestTrait
     {
         $this->devStoredComponentInfo();
         foreach (
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            ) as $outputComponentType => $outputComponents) {
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentType => $outputComponents) {
             $this->assertTrue(
                 in_array(
                     'DarlingCms\interfaces\component\OutputComponent',
@@ -325,10 +316,7 @@ trait StandardUITestTrait
     {
         $this->devStoredComponentInfo();
         foreach (
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses(
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            ) as $outputComponentTypes) {
+            $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
             foreach ($outputComponentTypes as $index => $outputComponent) {
                 $this->assertTrue(
                     is_numeric($index)
@@ -370,10 +358,7 @@ trait StandardUITestTrait
     {
         $this->devStoredComponentInfo();
         foreach (
-            $this->getStandardUI()->getTemplatesAssignedToResponses(
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            ) as $index => $templates) {
+            $this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $templates) {
             $this->assertTrue(is_numeric($index));
         }
     }
@@ -382,9 +367,9 @@ trait StandardUITestTrait
     {
         // @todo implement this test | remove dev assertion
         $expectedOutput = '';
-        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()) as $template) {
+        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
             foreach ($template->getTypes() as $type) {
-                foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()) as $outputComponentType) {
+                foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentType) {
                     foreach ($outputComponentType as $outputComponent) {
                         $expectedOutput .= $outputComponent->getOutput();
                     }

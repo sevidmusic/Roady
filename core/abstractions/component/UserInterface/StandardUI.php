@@ -15,22 +15,26 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     private $router;
     private $templates = [];
     private $outputComponents = [];
+    private $responseLocation = '';
+    private $responseContainer = '';
 
     public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Router $router, string $responseLocation, string $responseContainer)
     {
         parent::__construct($storable, $switchable, $positionable);
         // @todo define testRouterIsSetOnInstantiation()
         $this->router = $router;
+        $this->responseLocation = $responseLocation;
+        $this->responseContainer = $responseContainer;
     }
 
-    public function getTemplatesAssignedToResponses(string $location, string $container): array
+    public function getTemplatesAssignedToResponses(): array
     {
         /**
          * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
          */
         if (empty($this->templates) === true) {
             $templates = [];
-            foreach ($this->router->getResponses($location, $container) as $response) {
+            foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
                 foreach ($response->getTemplateStorageInfo() as $templateStorable) {
                     $template = $this->router->getCrud()->read($templateStorable);
                     if (isset($templates[$template->getPosition()]) === true) {
@@ -44,14 +48,14 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         return $this->templates;
     }
 
-    public function getOutputComponentsAssignedToResponses(string $location, string $container): array
+    public function getOutputComponentsAssignedToResponses(): array
     {
         /**
          * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
          */
         if (empty($this->outputComponents) === true) {
             $outputComponents = [];
-            foreach ($this->router->getResponses($location, $container) as $response) {
+            foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
                 foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
                     $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
                     if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
