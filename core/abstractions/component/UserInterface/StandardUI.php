@@ -27,6 +27,22 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         $this->responseContainer = $responseContainer;
     }
 
+    public function getOutput(): string
+    {
+        $output = '';
+        foreach ($this->getTemplatesAssignedToResponses() as $template) {
+            foreach ($template->getTypes() as $type) {
+                foreach ($this->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
+                    foreach ($outputComponentTypes as $outputComponent) {
+                        $output .= $outputComponent->getOutput();
+                    }
+                }
+            }
+        }
+        $this->import(['output' => $output]);
+        return parent::getOutput();
+    }
+
     public function getTemplatesAssignedToResponses(): array
     {
         /**
@@ -69,25 +85,6 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
             $this->outputComponents = $outputComponents;
         }
         return $this->outputComponents;
-    }
-
-    public function getOutput(): string
-    {
-        $output = '';
-        foreach($this->getTemplatesAssignedToResponses() as $template)
-        {
-            foreach($template->getTypes() as $type) {
-                foreach($this->getOutputComponentsAssignedToResponses() as $outputComponentTypes)
-                {
-                    foreach($outputComponentTypes as $outputComponent)
-                    {
-                        $output .= $outputComponent->getOutput();
-                    }
-                }
-            }
-        }
-        $this->import(['output' => $output]);
-        return parent::getOutput();
     }
 
 }
