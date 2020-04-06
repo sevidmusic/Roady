@@ -215,17 +215,17 @@ trait ComponentCrudTestTrait
         );
     }
 
-    protected function setComponentCrudParentTestInstances(): void
-    {
-        $this->setSwitchableComponent($this->getComponentCrud());
-        $this->setSwitchableComponentParentTestInstances();
-    }
-
     public function testStorageDriverIsOnUponInstantiation(): void
     {
         $this->assertTrue(
             $this->getComponentCrud()->export()['storageDriver']->getState(),
             'The storage driver\'s state must be true or the ComponentCrud will not be able to operate on stored data.'
         );
+    }
+
+    protected function setComponentCrudParentTestInstances(): void
+    {
+        $this->setSwitchableComponent($this->getComponentCrud());
+        $this->setSwitchableComponentParentTestInstances();
     }
 }

@@ -141,7 +141,7 @@ EOD;
             return $selfReflection->getProperties();
         }
         $propertyReflections = $selfReflection->getProperties();
-        while($parent = $selfReflection->getParentClass()) {
+        while ($parent = $selfReflection->getParentClass()) {
             $propertyReflections = array_merge($propertyReflections, $parent->getProperties());
             $selfReflection = $parent;
         }

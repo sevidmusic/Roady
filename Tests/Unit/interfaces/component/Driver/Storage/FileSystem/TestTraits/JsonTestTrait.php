@@ -180,16 +180,16 @@ trait JsonTestTrait
         );
     }
 
-    private function getStoredComponent(): Component
-    {
-        return $this->getJson()->read($this->getJson()->export()['storable']);
-    }
-
     private function turnJsonOff(): void
     {
         if ($this->getJson()->getState() === true) {
             $this->getJson()->switchState();
         }
+    }
+
+    private function getStoredComponent(): Component
+    {
+        return $this->getJson()->read($this->getJson()->export()['storable']);
     }
 
     public function testReadReturnsMockComponentIfStateIsFalse(): void

@@ -23,17 +23,17 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
 
     public function getTemplatesAssignedToResponses(string $location, string $container): array
     {
-       /**
-        * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
-        */
+        /**
+         * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
+         */
         $templates = [];
         foreach ($this->router->getResponses($location, $container) as $response) {
             foreach ($response->getTemplateStorageInfo() as $templateStorable) {
-            $template = $this->router->getCrud()->read($templateStorable);
-            if (isset($templates[$template->getPosition()]) === true) {
-                $template->increasePosition();
-            }
-            $templates[strval($template->getPosition())] = $template;
+                $template = $this->router->getCrud()->read($templateStorable);
+                if (isset($templates[$template->getPosition()]) === true) {
+                    $template->increasePosition();
+                }
+                $templates[strval($template->getPosition())] = $template;
             }
         }
         return $templates;
@@ -41,19 +41,19 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
 
     public function getOutputComponentsAssignedToResponses(string $location, string $container): array
     {
-       /**
-        * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
-        */
+        /**
+         * //NOTE: Rename $location and $container to $responseLocation $responseContainer to be more clear
+         */
         $outputComponents = [];
         foreach ($this->router->getResponses($location, $container) as $response) {
             foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
-            $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
-            if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
-                /** @noinspection PhpUndefinedFunctionInspection */
-                /** @noinspection PhpExpressionResultUnusedInspection */
-                $outputComponent > increasePosition();
-            }
-            $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
+                $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
+                if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                    /** @noinspection PhpUndefinedFunctionInspection */
+                    /** @noinspection PhpExpressionResultUnusedInspection */
+                    $outputComponent > increasePosition();
+                }
+                $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
             }
         }
         return $outputComponents;

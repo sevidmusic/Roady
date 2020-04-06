@@ -17,6 +17,16 @@ trait OutputComponentTestTrait
         );
     }
 
+    protected function getOutputComponent(): OutputComponent
+    {
+        return $this->outputComponent;
+    }
+
+    protected function setOutputComponent(OutputComponent $outputComponent): void
+    {
+        $this->outputComponent = $outputComponent;
+    }
+
     public function testGetOutputReturnsEmptyStringIfStateIsFalse(): void
     {
         $this->forceFalseState();
@@ -29,16 +39,6 @@ trait OutputComponentTestTrait
         if ($this->getOutputComponent()->getState() === true) {
             $this->getOutputComponent()->switchState();
         }
-    }
-
-    protected function getOutputComponent(): OutputComponent
-    {
-        return $this->outputComponent;
-    }
-
-    protected function setOutputComponent(OutputComponent $outputComponent): void
-    {
-        $this->outputComponent = $outputComponent;
     }
 
     public function testGetPositionReturnsGreaterValueAfterCallToIncreasePosition(): void

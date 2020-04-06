@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
@@ -29,146 +29,29 @@ trait StandardUITestTrait
         return 'StandardUITestStandardUIContainer';
     }
 
-    private function devStoredComponentInfo(): void
+    public function tearDown(): void
     {
-        var_dump(
-            [
-                'Current Request Url' => $this->getCurrentRequest()->getUrl(),
-                '# Sorted Requests' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getRequestContainer()
-                    )
-                ),
-                '# Sorted Templates' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getStandardUITemplateContainer()
-                    )
-                ),
-                '# Sorted Output Components' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getOutputComponentContainer()
-                    )
-                ),
-                '# Sorted Responses' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getResponseContainer()
-                    )
-                ),
-            ]
-        );
-
-        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
-        {
-            var_dump(
-                $storedComponent->getName(),
-                $storedComponent->getUniqueId(),
-                $storedComponent->getLocation(),
-                $storedComponent->getContainer(),
-                $storedComponent->getType()
-            );
-        }
-
-    }
-    public function tearDown(): void {
         // @todo : Working on fixing this...
-        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent)
-        {
+        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent) {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
-        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getStandardUITemplateContainer()) as $storedComponent)
-        {
+        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getStandardUITemplateContainer()) as $storedComponent) {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
-        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getResponseContainer()) as $storedComponent)
-        {
+        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getResponseContainer()) as $storedComponent) {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
-        foreach($this->getStoredComponents($this->getComponentLocation(), $this->getRequestContainer()) as $storedComponent)
-        {
+        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getRequestContainer()) as $storedComponent) {
             $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
         }
     }
 
-    protected function generateStoredTestComponents()
+    protected function getStoredComponents(string $location, string $container): array
     {
-        // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
-        $this->generateComponentCalls++;
-        $this->generateStoredResponse();
-
-    }
-
-    protected function generateStoredResponse(): Response
-    {
-        $response = new Response(
-            new Storable('StandardUITestResponse',
-                $this->getComponentLocation(),
-                $this->getResponseContainer()
-            ),
-            new Switchable()
+        return $this->getStandardUITestRouter()->getCrud()->readAll(
+            $location,
+            $container
         );
-        $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
-        $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
-        $response->addRequestStorageInfo($this->getCurrentRequest());
-        $this->getStandardUITestRouter()->getCrud()->create($response);
-        return $response;
-    }
-
-    public function getComponentLocation(): string
-    {
-        return 'StandardUITestComponentsLocation';
-    }
-
-    protected function getResponseContainer(): string
-    {
-        return 'StandardUITestResponseContainer';
-    }
-
-    private function generateStoredStandardUITemplate(): StandardUITemplate
-    {
-        $standardUITemplate = new StandardUITemplate(
-            new Storable(
-                'StandardUITestTemplate',
-                $this->getComponentLocation(),
-                $this->getStandardUITemplateContainer()
-            ),
-            new Switchable(),
-            new Positionable((rand(0, 100) / 100))
-        );
-        $standardUITemplate->addType($this->generateStoredOutputComponent(false));
-        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
-        return $standardUITemplate;
-    }
-
-    protected function getStandardUITemplateContainer(): string
-    {
-        return 'StandardUITestStandardUITemplateContainer';
-    }
-
-    private function generateStoredOutputComponent(bool $saveToStorage = true): OutputComponent
-    {
-        $outputComponent = new OutputComponent(
-            new Storable(
-                '',
-                $this->getComponentLocation(),
-                $this->getOutputComponentContainer()
-            ),
-            new Switchable(),
-            new Positionable((rand(0, 100) / 100))
-        );
-        $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
-        if($saveToStorage === true) {
-            $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
-        }
-        return $outputComponent;
-    }
-
-    public function getOutputComponentContainer(): string
-    {
-        return "StandardUITestOutputComponentContainer";
     }
 
     public function getStandardUITestRouter(): Router
@@ -189,30 +72,16 @@ trait StandardUITestTrait
         return $this->router;
     }
 
+    public function getComponentLocation(): string
+    {
+        return 'StandardUITestComponentsLocation';
+    }
+
     public function getRouterContainer(): string
     {
         return "StandardUITestRouterContainer";
     }
 
-    private function randChars(int $limit):string
-    {
-        try {
-            return bin2hex(random_bytes($limit));
-        } catch (Exception $e) {
-            return strval(rand(1000000, 9999999));
-        }
-    }
-
-    private function getRandomUrl(): string
-    {
-        switch(rand(0,1)) {
-        case 0:
-            return 'http://' . $this->randChars(rand(3,4)) . '.' . $this->randChars(rand(3,4)) . '/' . $this->randChars(rand(3,9)) . '?' . $this->randChars(rand(4,5));
-        default:
-            /** @noinspection PhpUndefinedMethodInspection */
-            return $this->currentRequest->getUrl();
-        }
-    }
     public function getCurrentRequest(): Request
     {
         if (isset($this->currentRequest) === true) {
@@ -235,6 +104,26 @@ trait StandardUITestTrait
     public function getRequestContainer(): string
     {
         return "StandardUITestRequestContainer";
+    }
+
+    private function getRandomUrl(): string
+    {
+        switch (rand(0, 1)) {
+            case 0:
+                return 'http://' . $this->randChars(rand(3, 4)) . '.' . $this->randChars(rand(3, 4)) . '/' . $this->randChars(rand(3, 9)) . '?' . $this->randChars(rand(4, 5));
+            default:
+                /** @noinspection PhpUndefinedMethodInspection */
+                return $this->currentRequest->getUrl();
+        }
+    }
+
+    private function randChars(int $limit): string
+    {
+        try {
+            return bin2hex(random_bytes($limit));
+        } catch (Exception $e) {
+            return strval(rand(1000000, 9999999));
+        }
     }
 
     private function getComponentCrudForRouter(): ComponentCrudInterface
@@ -270,80 +159,56 @@ trait StandardUITestTrait
         return "StandardUITestStorageDrivers";
     }
 
-    protected function getStoredComponents(string $location, string $container): array
+    public function getOutputComponentContainer(): string
     {
-        return $this->getStandardUITestRouter()->getCrud()->readAll(
-            $location,
-            $container
-        );
+        return "StandardUITestOutputComponentContainer";
     }
 
-    protected function setStandardUIParentTestInstances(): void
+    protected function getStandardUITemplateContainer(): string
     {
-        $this->setOutputComponent($this->getStandardUI());
-        $this->setOutputComponentParentTestInstances();
+        return 'StandardUITestStandardUITemplateContainer';
     }
 
-    public function getStandardUI(): StandardUI
+    protected function getResponseContainer(): string
     {
-        return $this->standardUI;
+        return 'StandardUITestResponseContainer';
     }
-
-    public function setStandardUI(StandardUI $standardUI): void
-    {
-        $this->standardUI = $standardUI;
-    }
-
 
     public function testRouterIsSetPostInstantiation(): void
     {
         $this->assertEquals
-            ("DarlingCms\classes\component\Web\Routing\Router",
+        ("DarlingCms\classes\component\Web\Routing\Router",
             $this->getStandardUI()->export()['router']->getType()
         );
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void {
+    public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void
+    {
         //$this->devStoredComponentInfo();
         foreach (
             $this->getStandardUI()->getTemplatesAssignedToResponses(
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
-            ) as $template)
-        {
+            ) as $template) {
             $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
         }
-    }
-
-    private function getStoredResponses(): array
-    {
-        $responses = [];
-        foreach($this->getStandardUITestRouter()->getCrud()->readAll(
-            $this->getComponentLocation(),
-            $this->getResponseContainer()
-        ) as $response) {
-            array_push($responses, $response);
-        }
-        return $responses;
     }
 
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
     {
         $templates = [];
-        foreach($this->getStoredResponses() as $response) {
-            if($response->respondsToRequest(
-                $this->getCurrentRequest(),
-                $this->getStandardUITestRouter()->getCrud()
-            ) === true) {
-                foreach($response->getTemplateStorageInfo() as $storable)
-                {
+        foreach ($this->getStoredResponses() as $response) {
+            if ($response->respondsToRequest(
+                    $this->getCurrentRequest(),
+                    $this->getStandardUITestRouter()->getCrud()
+                ) === true) {
+                foreach ($response->getTemplateStorageInfo() as $storable) {
                     $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                    while(
+                    while (
                         isset(
                             $templates[strval(
                                 $template->getPosition()
-                            )]) === true)
-                    {
+                            )]) === true) {
                         $template->increasePosition();
                     }
                     $templates[strval($template->getPosition())] = $template;
@@ -353,6 +218,18 @@ trait StandardUITestTrait
         $this->assertEquals($templates, $this->getStandardUI()->getTemplatesAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()));
     }
 
+    private function getStoredResponses(): array
+    {
+        $responses = [];
+        foreach ($this->getStandardUITestRouter()->getCrud()->readAll(
+            $this->getComponentLocation(),
+            $this->getResponseContainer()
+        ) as $response) {
+            array_push($responses, $response);
+        }
+        return $responses;
+    }
+
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
     {
         $this->devStoredComponentInfo();
@@ -360,19 +237,61 @@ trait StandardUITestTrait
             $this->getStandardUI()->getOutputComponentsAssignedToResponses(
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
-            ) as $outputComponentTypes)
-        {
-            foreach($outputComponentTypes as $outputComponent)
-            {
-            $this->assertTrue(
-                in_array(
-                    'DarlingCms\interfaces\component\OutputComponent',
-                    class_implements($outputComponent)
-                )
-            );
+            ) as $outputComponentTypes) {
+            foreach ($outputComponentTypes as $outputComponent) {
+                $this->assertTrue(
+                    in_array(
+                        'DarlingCms\interfaces\component\OutputComponent',
+                        class_implements($outputComponent)
+                    )
+                );
 
             }
         }
+    }
+
+    private function devStoredComponentInfo(): void
+    {
+        var_dump(
+            [
+                'Current Request Url' => $this->getCurrentRequest()->getUrl(),
+                '# Sorted Requests' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getRequestContainer()
+                    )
+                ),
+                '# Sorted Templates' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getStandardUITemplateContainer()
+                    )
+                ),
+                '# Sorted Output Components' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getOutputComponentContainer()
+                    )
+                ),
+                '# Sorted Responses' => count(
+                    $this->getStoredComponents(
+                        $this->getComponentLocation(),
+                        $this->getResponseContainer()
+                    )
+                ),
+            ]
+        );
+
+        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent) {
+            var_dump(
+                $storedComponent->getName(),
+                $storedComponent->getUniqueId(),
+                $storedComponent->getLocation(),
+                $storedComponent->getContainer(),
+                $storedComponent->getType()
+            );
+        }
+
     }
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreValidOutputComponentTypes()
@@ -382,8 +301,7 @@ trait StandardUITestTrait
             $this->getStandardUI()->getOutputComponentsAssignedToResponses(
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
-            ) as $outputComponentType => $outputComponents)
-        {
+            ) as $outputComponentType => $outputComponents) {
             $this->assertTrue(
                 in_array(
                     'DarlingCms\interfaces\component\OutputComponent',
@@ -400,13 +318,11 @@ trait StandardUITestTrait
             $this->getStandardUI()->getOutputComponentsAssignedToResponses(
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
-            ) as $outputComponentTypes)
-        {
-            foreach($outputComponentTypes as $index => $outputComponent)
-            {
-            $this->assertTrue(
-                is_numeric($index)
-            );
+            ) as $outputComponentTypes) {
+            foreach ($outputComponentTypes as $index => $outputComponent) {
+                $this->assertTrue(
+                    is_numeric($index)
+                );
 
             }
         }
@@ -415,18 +331,16 @@ trait StandardUITestTrait
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfAllOutputComponentsAssignedToAllResponsesToCurrentRequest(): void
     {
         $outputComponents = [];
-        foreach($this->getStoredResponses() as $response) {
-            if($response->respondsToRequest(
-                $this->getCurrentRequest(),
-                $this->getStandardUITestRouter()->getCrud()
-            ) === true) {
-                foreach(
+        foreach ($this->getStoredResponses() as $response) {
+            if ($response->respondsToRequest(
+                    $this->getCurrentRequest(),
+                    $this->getStandardUITestRouter()->getCrud()
+                ) === true) {
+                foreach (
                     $response->getOutputComponentStorageInfo() as $storable
-                )
-                {
+                ) {
                     $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                    if(isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true)
-                    {
+                    if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                         $outputComponent->increasePosition();
                     }
                     $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
@@ -449,10 +363,83 @@ trait StandardUITestTrait
             $this->getStandardUI()->getTemplatesAssignedToResponses(
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
-            ) as $index => $templates)
-        {
+            ) as $index => $templates) {
             $this->assertTrue(is_numeric($index));
         }
+    }
+
+    protected function generateStoredTestComponents()
+    {
+        // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
+        $this->generateComponentCalls++;
+        $this->generateStoredResponse();
+
+    }
+
+    protected function generateStoredResponse(): Response
+    {
+        $response = new Response(
+            new Storable('StandardUITestResponse',
+                $this->getComponentLocation(),
+                $this->getResponseContainer()
+            ),
+            new Switchable()
+        );
+        $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
+        $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
+        $response->addRequestStorageInfo($this->getCurrentRequest());
+        $this->getStandardUITestRouter()->getCrud()->create($response);
+        return $response;
+    }
+
+    private function generateStoredStandardUITemplate(): StandardUITemplate
+    {
+        $standardUITemplate = new StandardUITemplate(
+            new Storable(
+                'StandardUITestTemplate',
+                $this->getComponentLocation(),
+                $this->getStandardUITemplateContainer()
+            ),
+            new Switchable(),
+            new Positionable((rand(0, 100) / 100))
+        );
+        $standardUITemplate->addType($this->generateStoredOutputComponent(false));
+        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
+        return $standardUITemplate;
+    }
+
+    private function generateStoredOutputComponent(bool $saveToStorage = true): OutputComponent
+    {
+        $outputComponent = new OutputComponent(
+            new Storable(
+                '',
+                $this->getComponentLocation(),
+                $this->getOutputComponentContainer()
+            ),
+            new Switchable(),
+            new Positionable((rand(0, 100) / 100))
+        );
+        $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
+        if ($saveToStorage === true) {
+            $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
+        }
+        return $outputComponent;
+    }
+
+    protected function setStandardUIParentTestInstances(): void
+    {
+        $this->setOutputComponent($this->getStandardUI());
+        $this->setOutputComponentParentTestInstances();
+    }
+
+    public function getStandardUI(): StandardUI
+    {
+        return $this->standardUI;
+    }
+
+    public function setStandardUI(StandardUI $standardUI): void
+    {
+        $this->standardUI = $standardUI;
     }
 
 }
