@@ -39,4 +39,9 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         return $templates;
     }
 
+    public function getOutputComponentsAssignedToResponses(string $location, string $container): array
+    {
+        return array();
+    }
+
 }

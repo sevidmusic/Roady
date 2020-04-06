@@ -309,7 +309,6 @@ trait StandardUITestTrait
         }
     }
 
-    // @todo testGetTemplatesAssignedToResponsesReturnesArrayOfAllTemplatesAssignedToAllResponsesToCurrentRequest(): void
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
     {
         $templates = [];
@@ -340,4 +339,8 @@ trait StandardUITestTrait
         $this->assertEquals($templates, $this->getStandardUI()->getTemplatesAssignedToResponses($this->getComponentLocation(), $this->getResponseContainer()));
     }
 
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
+    {
+        $this->assertTrue(true);
+    }
 }
