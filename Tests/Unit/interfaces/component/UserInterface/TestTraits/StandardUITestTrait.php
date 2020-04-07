@@ -200,15 +200,16 @@ trait StandardUITestTrait
         }
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
+    private function respondsToCurrentRequest(Response $response): bool
+    {
+        return $response->respondsToRequest($this->getCurrentRequest(), $this->getStandardUITestRouter()->getCrud());
+    }
+
+    private function getStoredTemplates(): array
     {
         $templates = [];
-        $this->devStoredComponentInfo();
-        foreach ($this->getStoredResponses() as $response) {
-            if ($response->respondsToRequest(
-                    $this->getCurrentRequest(),
-                    $this->getStandardUITestRouter()->getCrud()
-                ) === true) {
+        foreach ($this->getAllStoredResponses() as $response) {
+            if ($this->respondsToCurrentRequest($response)) {
                 foreach ($response->getTemplateStorageInfo() as $storable) {
                     $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
                     while (
@@ -222,17 +223,32 @@ trait StandardUITestTrait
                 }
             }
         }
-        // @todo This test is failing...
-        //$this->assertEquals($templates, $this->getStandardUI()->getTemplatesAssignedToResponses());
+        return $templates;
     }
 
-    private function getStoredResponses(): array
+    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
+    {
+        $storedTemplates = $this->getStoredTemplates();
+        foreach ($storedTemplates as $template) {
+            $this->devStoredComponentInfo($template->getType(), $this->getStandardUITemplateContainer());
+        }
+        // @todo This test is failing...
+        var_dump(
+            [
+                'TEST getStoredTemplates() count: ' . count($storedTemplates),
+                'StandardUI getTemplatesA...s() count: ' . count($this->getStandardUI()->getTemplatesAssignedToResponses())
+            ]
+        );
+    }
+
+    private function getAllStoredResponses(): array
     {
         $responses = [];
         foreach ($this->getStandardUITestRouter()->getCrud()->readAll(
             $this->getComponentLocation(),
             $this->getResponseContainer()
         ) as $response) {
+            var_dump('Response ' . $response->getName() . ' Request Count: ' . count($response->getRequestStorageInfo()));
             array_push($responses, $response);
         }
         return $responses;
@@ -283,11 +299,8 @@ trait StandardUITestTrait
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfAllOutputComponentsAssignedToAllResponsesToCurrentRequest(): void
     {
         $outputComponents = [];
-        foreach ($this->getStoredResponses() as $response) {
-            if ($response->respondsToRequest(
-                    $this->getCurrentRequest(),
-                    $this->getStandardUITestRouter()->getCrud()
-                ) === true) {
+        foreach ($this->getAllStoredResponses() as $response) {
+            if ($this->respondsToCurrentRequest($response)) {
                 foreach (
                     $response->getOutputComponentStorageInfo() as $storable
                 ) {
@@ -395,67 +408,31 @@ trait StandardUITestTrait
         $this->setOutputComponentParentTestInstances();
     }
 
-    private function devStoredComponentInfo(): void
+    private function devStoredComponentInfo(string $type, string $container): void
     {
         var_dump(
             [
-                'Current Request Url' => $this->getCurrentRequest()->getUrl(),
-                '# Stored Requests' => count(
+                '# Stored ' . $type . 's' => count(
                     $this->getStoredComponents(
                         $this->getComponentLocation(),
-                        $this->getRequestContainer()
-                    )
-                ),
-            ]
-        );
-        $this->getStoredComponentStorableInfo($this->getRequestContainer());
-        var_dump(
-            [
-                '# Stored Templates' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getStandardUITemplateContainer()
+                        $container
                     )
                 )
             ]
         );
-        $this->getStoredComponentStorableInfo($this->getStandardUITemplateContainer());
-        var_dump(
-            [
-                '# Stored Output Components' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getOutputComponentContainer()
-                    )
-                ),
-            ]
-        );
-        $this->getStoredComponentStorableInfo($this->getOutputComponentContainer());
-        var_dump(
-            [
-                '# Stored Responses' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $this->getResponseContainer()
-                    )
-                ),
-            ]
-        );
-        $this->getStoredComponentStorableInfo($this->getResponseContainer());
+        $this->getStoredComponentStorableInfo($container);
     }
 
     private function getStoredComponentStorableInfo(string $container): void
     {
         foreach ($this->getStoredComponents($this->getComponentLocation(), $container) as $storedComponent) {
             var_dump(
-                ['OutputComponents' =>
-                    [
-                        'name' => $storedComponent->getName(),
-                        'uniqueId' => $storedComponent->getUniqueId(),
-                        'location' => $storedComponent->getLocation(),
-                        'container' => $storedComponent->getContainer(),
-                        'type' => $storedComponent->getType()
-                    ]
+                [
+                    'name' => $storedComponent->getName(),
+                    'uniqueId' => $storedComponent->getUniqueId(),
+                    'location' => $storedComponent->getLocation(),
+                    'container' => $storedComponent->getContainer(),
+                    'type' => $storedComponent->getType()
                 ]
             );
         }
