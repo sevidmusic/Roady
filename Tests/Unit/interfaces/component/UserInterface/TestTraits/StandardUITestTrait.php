@@ -198,7 +198,7 @@ trait StandardUITestTrait
     private function getStoredTemplates(): array
     {
         $templates = [];
-        foreach ($this->getAllStoredResponses() as $response) {
+        foreach ($this->getResponsesToCurrentRequest() as $response) {
             if ($this->respondsToCurrentRequest($response)) {
                 foreach ($response->getTemplateStorageInfo() as $storable) {
                     $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
@@ -216,7 +216,7 @@ trait StandardUITestTrait
         return $templates;
     }
 
-    private function getAllStoredResponses(): array
+    private function getResponsesToCurrentRequest(): array
     {
         $responses = [];
         foreach ($this->getStandardUITestRouter()->getResponses($this->getComponentLocation(), $this->getResponseContainer()) as $response) {
@@ -276,7 +276,7 @@ trait StandardUITestTrait
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfAllOutputComponentsAssignedToAllResponsesToCurrentRequest(): void
     {
         $outputComponents = [];
-        foreach ($this->getAllStoredResponses() as $response) {
+        foreach ($this->getResponsesToCurrentRequest() as $response) {
             if ($this->respondsToCurrentRequest($response)) {
                 foreach (
                     $response->getOutputComponentStorageInfo() as $storable
