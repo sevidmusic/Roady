@@ -25,4 +25,17 @@ trait ActionTestTrait
         $this->action = $action;
     }
 
+
+    public function testIsDoneReturnsTrueAfterCallToDo(): void
+    {
+        $this->getAction()->do();
+        $this->assertTrue($this->getAction()->isDone());
+    }
+
+
+    public function testWasUndoneReturnsTrueAfterCallToUndo(): void
+    {
+        $this->getAction()->undo();
+        $this->assertTrue($this->getAction()->wasUndone());
+    }
 }
