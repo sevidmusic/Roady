@@ -16,4 +16,15 @@ trait Logger
             error_log(PHP_EOL . call_user_func_array('sprintf', $args));
         }
     }
+
+    protected function turnLoggingOn(): void
+    {
+        $this->logging = true;
+    }
+
+    protected function turnLoggingOff(): void
+    {
+        $this->logging = false;
+    }
+
 }
