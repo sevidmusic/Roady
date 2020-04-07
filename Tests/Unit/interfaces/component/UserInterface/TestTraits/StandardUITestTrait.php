@@ -96,7 +96,7 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
-        $this->currentRequest->import(['url' => $this->getRandomUrl()]);
+        //$this->currentRequest->import(['url' => $this->getRandomUrl()]);
         $this->getStandardUITestRouter()->getCrud()->create($this->currentRequest);
         return $this->currentRequest;
     }
@@ -104,26 +104,6 @@ trait StandardUITestTrait
     public function getRequestContainer(): string
     {
         return "StandardUITestRequestContainer";
-    }
-
-    private function getRandomUrl(): string
-    {
-        switch (rand(0, 1)) {
-            case 0:
-                return 'http://' . $this->randChars(rand(3, 4)) . '.' . $this->randChars(rand(3, 4)) . '/' . $this->randChars(rand(3, 9)) . '?' . $this->randChars(rand(4, 5));
-            default:
-                /** @noinspection PhpUndefinedMethodInspection */
-                return $this->currentRequest->getUrl();
-        }
-    }
-
-    private function randChars(int $limit): string
-    {
-        try {
-            return bin2hex(random_bytes($limit));
-        } catch (Exception $e) {
-            return strval(rand(1000000, 9999999));
-        }
     }
 
     private function getComponentCrudForRouter(): ComponentCrudInterface
@@ -207,12 +187,12 @@ trait StandardUITestTrait
          * $this->devStoredComponentInfo($template->getType(), $this->getStandardUITemplateContainer());
          * }**/
         // @todo This test is failing...
-        /*var_dump(
+        var_dump(
             [
-                'TEST getStoredTemplates() count: ' . count($storedTemplates),
-                'StandardUI getTemplatesA...s() count: ' . count($this->getStandardUI()->getTemplatesAssignedToResponses())
+                'DEV TEST getStoredTemplates() count: ' . count($storedTemplates),
+                'DEV StandardUI getTemplatesA...s() count: ' . count($this->getStandardUI()->getTemplatesAssignedToResponses())
             ]
-        );*/
+        );
     }
 
     private function getStoredTemplates(): array
@@ -396,7 +376,7 @@ trait StandardUITestTrait
                 $this->getStandardUITemplateContainer()
             ),
             new Switchable(),
-            new Positionable(0) // !IMPORTANT: We want all Positionable components to be assigned a 0 position to start so we know that positions are increased properly  | @todo need tests for this, i.e., testGet*AssignedToResponsesIncreasesComponententPositionIfPositionOccupied(): void
+            new Positionable(0) // !IMPORTANT: We want all Positionable components to be assigned a 0 position to start so we know that positions are increased properly  | @todo need tests for this, i.e., testGet*AssignedToResponsesIncreasesComponentPositionIfPositionOccupied(): void
         );
         $standardUITemplate->addType($this->generateStoredOutputComponent(false));
         $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
@@ -421,7 +401,7 @@ trait StandardUITestTrait
     private function devNumberOfGenerateCalls(): void
     {
         var_dump(
-            'Number of generate calls per test: ' . strval($this->generateComponentCalls),
+            'Number of generate calls per test: ' . strval($this->generateComponentCalls)
         );
     }
 
@@ -429,6 +409,26 @@ trait StandardUITestTrait
     {
         $this->setOutputComponent($this->getStandardUI());
         $this->setOutputComponentParentTestInstances();
+    }
+
+    private function getRandomUrl(): string
+    {
+        switch (rand(0, 1)) {
+            case 0:
+                return 'http://' . $this->randChars(rand(3, 4)) . '.' . $this->randChars(rand(3, 4)) . '/' . $this->randChars(rand(3, 9)) . '?' . $this->randChars(rand(4, 5));
+            default:
+                /** @noinspection PhpUndefinedMethodInspection */
+                return $this->currentRequest->getUrl();
+        }
+    }
+
+    private function randChars(int $limit): string
+    {
+        try {
+            return bin2hex(random_bytes($limit));
+        } catch (Exception $e) {
+            return strval(rand(1000000, 9999999));
+        }
     }
 
     private function devStoredComponentInfo(string $type, string $container): void
