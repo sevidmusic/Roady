@@ -1,5 +1,7 @@
 <?php
-require(__DIR__ . '/vendor/autoload.php');
+
+// @devNote: Folowing line for reference only, autoload should be done in file including this file
+//    require_once('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
 
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;

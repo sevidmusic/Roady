@@ -1,8 +1,9 @@
 <?php
 
 ini_set('display_errors', true);
-require(__DIR__ . '/DemoConstants.php');
-require(__DIR__ . '/DemoFunctions.php');
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require_once(__DIR__ . DIRECTORY_SEPARATOR . 'Apps' . DIRECTORY_SEPARATOR . 'WorkingDemo' . DIRECTORY_SEPARATOR . 'Settings.php');
+require_once(__DIR__ . DIRECTORY_SEPARATOR . 'Apps' . DIRECTORY_SEPARATOR . 'WorkingDemo' . DIRECTORY_SEPARATOR . 'DemoFunctions.php');
 
 processFormIfSubmitted(getMockCrud());
 echo getHtml();
