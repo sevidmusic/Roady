@@ -1,0 +1,9 @@
+<?php
+
+const DEMO_SITE_NAME = 'Demo';
+const DEMO_SITE_CRUD_CONTAINER = 'Cruds';
+const DEMO_SITE_STORAGE_DRIVER_CONTAINER = 'StorageDrivers';
+const DEMO_SITE_TEMPLATE_CONTAINER = 'Template';
+const DEMO_SITE_REQUEST_CONTAINER = 'Request';
+const DEMO_SITE_RESPONSE_CONTAINER = 'Response';
+const DEMO_SITE_OUTPUT_COMPONENT_CONTAINER = 'OutputComponents';
