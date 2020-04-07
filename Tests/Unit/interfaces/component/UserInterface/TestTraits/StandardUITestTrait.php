@@ -199,18 +199,12 @@ trait StandardUITestTrait
     {
         $templates = [];
         foreach ($this->getResponsesToCurrentRequest() as $response) {
-            if ($this->respondsToCurrentRequest($response)) {
-                foreach ($response->getTemplateStorageInfo() as $storable) {
-                    $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                    while (
-                        isset(
-                            $templates[strval(
-                                $template->getPosition()
-                            )]) === true) {
-                        $template->increasePosition();
-                    }
-                    $templates[strval($template->getPosition())] = $template;
+            foreach ($response->getTemplateStorageInfo() as $storable) {
+                $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                while (isset($templates[strval($template->getPosition())]) === true) {
+                    $template->increasePosition();
                 }
+                $templates[strval($template->getPosition())] = $template;
             }
         }
         return $templates;
@@ -224,11 +218,6 @@ trait StandardUITestTrait
             array_push($responses, $response);
         }
         return $responses;
-    }
-
-    private function respondsToCurrentRequest(Response $response): bool
-    {
-        return $response->respondsToRequest($this->getCurrentRequest(), $this->getStandardUITestRouter()->getCrud());
     }
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
@@ -277,16 +266,12 @@ trait StandardUITestTrait
     {
         $outputComponents = [];
         foreach ($this->getResponsesToCurrentRequest() as $response) {
-            if ($this->respondsToCurrentRequest($response)) {
-                foreach (
-                    $response->getOutputComponentStorageInfo() as $storable
-                ) {
-                    $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                    if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
-                        $outputComponent->increasePosition();
-                    }
-                    $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
+            foreach ($response->getOutputComponentStorageInfo() as $storable) {
+                $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                    $outputComponent->increasePosition();
                 }
+                $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
             }
         }
         $this->assertEquals(
@@ -406,6 +391,11 @@ trait StandardUITestTrait
     {
         $this->setOutputComponent($this->getStandardUI());
         $this->setOutputComponentParentTestInstances();
+    }
+
+    private function respondsToCurrentRequest(Response $response): bool
+    {
+        return $response->respondsToRequest($this->getCurrentRequest(), $this->getStandardUITestRouter()->getCrud());
     }
 
     private function getRandomUrl(): string
