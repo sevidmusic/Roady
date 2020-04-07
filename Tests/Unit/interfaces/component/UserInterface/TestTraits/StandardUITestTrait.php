@@ -200,9 +200,19 @@ trait StandardUITestTrait
         }
     }
 
-    private function respondsToCurrentRequest(Response $response): bool
+    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
     {
-        return $response->respondsToRequest($this->getCurrentRequest(), $this->getStandardUITestRouter()->getCrud());
+        $storedTemplates = $this->getStoredTemplates();
+        /**foreach ($storedTemplates as $template) {
+         * $this->devStoredComponentInfo($template->getType(), $this->getStandardUITemplateContainer());
+         * }**/
+        // @todo This test is failing...
+        /*var_dump(
+            [
+                'TEST getStoredTemplates() count: ' . count($storedTemplates),
+                'StandardUI getTemplatesA...s() count: ' . count($this->getStandardUI()->getTemplatesAssignedToResponses())
+            ]
+        );*/
     }
 
     private function getStoredTemplates(): array
@@ -226,21 +236,6 @@ trait StandardUITestTrait
         return $templates;
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
-    {
-        $storedTemplates = $this->getStoredTemplates();
-        foreach ($storedTemplates as $template) {
-            $this->devStoredComponentInfo($template->getType(), $this->getStandardUITemplateContainer());
-        }
-        // @todo This test is failing...
-        var_dump(
-            [
-                'TEST getStoredTemplates() count: ' . count($storedTemplates),
-                'StandardUI getTemplatesA...s() count: ' . count($this->getStandardUI()->getTemplatesAssignedToResponses())
-            ]
-        );
-    }
-
     private function getAllStoredResponses(): array
     {
         $responses = [];
@@ -248,10 +243,15 @@ trait StandardUITestTrait
             $this->getComponentLocation(),
             $this->getResponseContainer()
         ) as $response) {
-            var_dump('Response ' . $response->getName() . ' Request Count: ' . count($response->getRequestStorageInfo()));
+            var_dump($response->getName() . ' Request Count: ' . count($response->getRequestStorageInfo()));
             array_push($responses, $response);
         }
         return $responses;
+    }
+
+    private function respondsToCurrentRequest(Response $response): bool
+    {
+        return $response->respondsToRequest($this->getCurrentRequest(), $this->getStandardUITestRouter()->getCrud());
     }
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
@@ -345,7 +345,8 @@ trait StandardUITestTrait
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateComponentCalls++;
         $this->generateStoredResponse();
-
+        $this->devNumberOfStoredComponents();
+        $this->devNumberOfGenerateCalls();
     }
 
     protected function generateStoredResponse(): Response
@@ -368,22 +369,6 @@ trait StandardUITestTrait
         return $response;
     }
 
-    private function generateStoredStandardUITemplate(): StandardUITemplate
-    {
-        $standardUITemplate = new StandardUITemplate(
-            new Storable(
-                'StandardUITestTemplate' . strval(rand(10, 99)),
-                $this->getComponentLocation(),
-                $this->getStandardUITemplateContainer()
-            ),
-            new Switchable(),
-            new Positionable(0) // !IMPORTANT: We want all Positionable components to be assigned a 0 position to start so we know that positions are increased properly  | @todo need tests for this, i.e., testGet*AssignedToResponsesIncreasesComponententPositionIfPositionOccupied(): void
-        );
-        $standardUITemplate->addType($this->generateStoredOutputComponent(false));
-        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
-        return $standardUITemplate;
-    }
-
     private function generateStoredOutputComponent(bool $saveToStorage = true): OutputComponent
     {
         $outputComponent = new OutputComponent(
@@ -400,6 +385,44 @@ trait StandardUITestTrait
             $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
         }
         return $outputComponent;
+    }
+
+    private function generateStoredStandardUITemplate(): StandardUITemplate
+    {
+        $standardUITemplate = new StandardUITemplate(
+            new Storable(
+                'StandardUITestTemplate' . strval(rand(10, 99)),
+                $this->getComponentLocation(),
+                $this->getStandardUITemplateContainer()
+            ),
+            new Switchable(),
+            new Positionable(0) // !IMPORTANT: We want all Positionable components to be assigned a 0 position to start so we know that positions are increased properly  | @todo need tests for this, i.e., testGet*AssignedToResponsesIncreasesComponententPositionIfPositionOccupied(): void
+        );
+        $standardUITemplate->addType($this->generateStoredOutputComponent(false));
+        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
+        return $standardUITemplate;
+    }
+
+    private function devNumberOfStoredComponents(): void
+    {
+        var_dump(
+            'Number of Stored Responses: ' . strval($this->countNumberOfStoredComponentsInContainer($this->getResponseContainer())),
+            'Number of Stored Templates: ' . strval($this->countNumberOfStoredComponentsInContainer($this->getStandardUITemplateContainer())),
+            'Number of Stored OutputComponents: ' . strval($this->countNumberOfStoredComponentsInContainer($this->getOutputComponentContainer())),
+            'Number of Stored Requests: ' . strval($this->countNumberOfStoredComponentsInContainer($this->getRequestContainer()))
+        );
+    }
+
+    private function countNumberOfStoredComponentsInContainer(string $container): int
+    {
+        return count($this->getStandardUITestRouter()->getCrud()->readAll($this->getComponentLocation(), $container));
+    }
+
+    private function devNumberOfGenerateCalls(): void
+    {
+        var_dump(
+            'Number of generate calls per test: ' . strval($this->generateComponentCalls),
+        );
     }
 
     protected function setStandardUIParentTestInstances(): void
