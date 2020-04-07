@@ -219,10 +219,7 @@ trait StandardUITestTrait
     private function getAllStoredResponses(): array
     {
         $responses = [];
-        foreach ($this->getStandardUITestRouter()->getCrud()->readAll(
-            $this->getComponentLocation(),
-            $this->getResponseContainer()
-        ) as $response) {
+        foreach ($this->getStandardUITestRouter()->getResponses($this->getComponentLocation(), $this->getResponseContainer()) as $response) {
             var_dump($response->getName() . ' Request Count: ' . count($response->getRequestStorageInfo()));
             array_push($responses, $response);
         }
