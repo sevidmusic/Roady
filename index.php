@@ -6,6 +6,10 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
+use DarlingCms\classes\component\UserInterface\StandardUI;
+use DarlingCms\classes\component\Web\Routing\Request;
+use DarlingCms\classes\component\Web\Routing\Router;
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 
@@ -26,7 +30,7 @@ $crud = new ComponentCrud(
     )
 );
 
-$currentRequest = new \DarlingCms\classes\component\Web\Routing\Request(
+$currentRequest = new Request(
     new Storable(
         DEMO_SITE_NAME . 'CurrentRequest',
         DEMO_SITE_NAME,
@@ -35,7 +39,7 @@ $currentRequest = new \DarlingCms\classes\component\Web\Routing\Request(
     new Switchable()
 );
 
-$router = new \DarlingCms\classes\component\Web\Routing\Router(
+$router = new Router(
     new Storable(
         DEMO_SITE_NAME . 'Router',
         DEMO_SITE_NAME,
@@ -46,14 +50,14 @@ $router = new \DarlingCms\classes\component\Web\Routing\Router(
     $crud
 );
 
-$userInterface = new \DarlingCms\classes\component\UserInterface\StandardUI(
+$userInterface = new StandardUI(
     new Storable(
         DEMO_SITE_NAME . 'IndexUserInterface',
         DEMO_SITE_NAME,
         DEMO_SITE_OUTPUT_COMPONENT_CONTAINER
     ),
     new Switchable(),
-    new \DarlingCms\classes\primary\Positionable(),
+    new Positionable(),
     $router,
     DEMO_SITE_NAME,
     DEMO_SITE_RESPONSE_CONTAINER
