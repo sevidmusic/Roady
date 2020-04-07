@@ -182,20 +182,13 @@ trait StandardUITestTrait
 
     public function testGetTemplatesAssignedToResponsesReturnsArrayOfAllStandardUITemplatesAssignedToAllResponsesToCurrentRequest(): void
     {
-        $storedTemplates = $this->getStoredTemplates();
-        /**foreach ($storedTemplates as $template) {
-         * $this->devStoredComponentInfo($template->getType(), $this->getStandardUITemplateContainer());
-         * }**/
-        // @todo This test is failing...
-        var_dump(
-            [
-                'DEV TEST getStoredTemplates() count: ' . count($storedTemplates),
-                'DEV StandardUI getTemplatesA...s() count: ' . count($this->getStandardUI()->getTemplatesAssignedToResponses())
-            ]
+        $this->assertEquals(
+            $this->getTemplatesForCurrentRequest(),
+            $this->getStandardUI()->getTemplatesAssignedToResponses()
         );
     }
 
-    private function getStoredTemplates(): array
+    private function getTemplatesForCurrentRequest(): array
     {
         $templates = [];
         foreach ($this->getResponsesToCurrentRequest() as $response) {

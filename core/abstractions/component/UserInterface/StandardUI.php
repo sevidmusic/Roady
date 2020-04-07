@@ -47,7 +47,7 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
             foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
                 foreach ($response->getTemplateStorageInfo() as $templateStorable) {
                     $template = $this->router->getCrud()->read($templateStorable);
-                    if (isset($templates[$template->getPosition()]) === true) {
+                    while (isset($templates[strval($template->getPosition())]) === true) {
                         $template->increasePosition();
                     }
                     $templates[strval($template->getPosition())] = $template;
