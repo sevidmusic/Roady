@@ -14,7 +14,6 @@ use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingCms\interfaces\component\UserInterface\StandardUI;
-use Exception;
 
 trait StandardUITestTrait
 {
@@ -96,7 +95,6 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
-        //$this->currentRequest->import(['url' => $this->getRandomUrl()]);
         $this->getStandardUITestRouter()->getCrud()->create($this->currentRequest);
         return $this->currentRequest;
     }
@@ -207,7 +205,6 @@ trait StandardUITestTrait
     {
         $responses = [];
         foreach ($this->getStandardUITestRouter()->getResponses($this->getComponentLocation(), $this->getResponseContainer()) as $response) {
-            var_dump($response->getName() . ' Request Count: ' . count($response->getRequestStorageInfo()));
             array_push($responses, $response);
         }
         return $responses;
@@ -283,7 +280,6 @@ trait StandardUITestTrait
 
     public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByTemplateThenOutputComponentPosition()
     {
-        // @todo implement this test | remove dev assertion
         $expectedOutput = '';
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
             foreach ($template->getTypes() as $type) {
@@ -300,8 +296,8 @@ trait StandardUITestTrait
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateComponentCalls++;
         $this->generateStoredResponse();
-        $this->devNumberOfStoredComponents();
-        $this->devNumberOfGenerateCalls();
+        // this is helpful when debugging: $this->devNumberOfStoredComponents();
+        //  this is helpful when debugging: $this->devNumberOfGenerateCalls();
     }
 
     protected function generateStoredResponse(): Response
@@ -358,6 +354,16 @@ trait StandardUITestTrait
         return $standardUITemplate;
     }
 
+    protected function setStandardUIParentTestInstances(): void
+    {
+        $this->setOutputComponent($this->getStandardUI());
+        $this->setOutputComponentParentTestInstances();
+    }
+
+    /**
+     * DONT REMOVE THIS METHOD | IT IS USEFUL FOR DEBUGGING
+     * @noinspection PhpUnusedPrivateMethodInspection
+     */
     private function devNumberOfStoredComponents(): void
     {
         var_dump(
@@ -373,6 +379,10 @@ trait StandardUITestTrait
         return count($this->getStandardUITestRouter()->getCrud()->readAll($this->getComponentLocation(), $container));
     }
 
+    /**
+     * DONT REMOVE THIS METHOD | IT IS USEFUL FOR DEBUGGING
+     * @noinspection PhpUnusedPrivateMethodInspection
+     */
     private function devNumberOfGenerateCalls(): void
     {
         var_dump(
@@ -380,37 +390,12 @@ trait StandardUITestTrait
         );
     }
 
-    protected function setStandardUIParentTestInstances(): void
-    {
-        $this->setOutputComponent($this->getStandardUI());
-        $this->setOutputComponentParentTestInstances();
-    }
-
-    private function respondsToCurrentRequest(Response $response): bool
-    {
-        return $response->respondsToRequest($this->getCurrentRequest(), $this->getStandardUITestRouter()->getCrud());
-    }
-
-    private function getRandomUrl(): string
-    {
-        switch (rand(0, 1)) {
-            case 0:
-                return 'http://' . $this->randChars(rand(3, 4)) . '.' . $this->randChars(rand(3, 4)) . '/' . $this->randChars(rand(3, 9)) . '?' . $this->randChars(rand(4, 5));
-            default:
-                /** @noinspection PhpUndefinedMethodInspection */
-                return $this->currentRequest->getUrl();
-        }
-    }
-
-    private function randChars(int $limit): string
-    {
-        try {
-            return bin2hex(random_bytes($limit));
-        } catch (Exception $e) {
-            return strval(rand(1000000, 9999999));
-        }
-    }
-
+    /**
+     * DONT REMOVE THIS METHOD | IT IS USEFUL FOR DEBUGGING
+     * @noinspection PhpUnusedPrivateMethodInspection
+     * @param string $type Use  Component->getType()
+     * @param string $container use one of the $this->>get*Container() methods
+     */
     private function devStoredComponentInfo(string $type, string $container): void
     {
         var_dump(
