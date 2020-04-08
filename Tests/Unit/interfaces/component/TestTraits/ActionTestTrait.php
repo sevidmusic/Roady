@@ -19,28 +19,6 @@ trait ActionTestTrait
         $this->assertTrue($this->getAction()->isDone());
     }
 
-    public function testWasUndoneReturnsTrueAfterCallToUndo(): void
-    {
-        $this->getAction()->undo();
-        $this->assertTrue($this->getAction()->wasUndone());
-    }
-
-    public function testDoReturnsTrue(): void
-    {
-        $this->assertTrue($this->getAction()->do($this->getCurrentRequest()));
-    }
-
-    public function testUndoReturnsTrue(): void
-    {
-        $this->assertTrue($this->getAction()->undo());
-    }
-
-    protected function setActionParentTestInstances(): void
-    {
-        $this->setOutputComponent($this->getAction());
-        $this->setOutputComponentParentTestInstances();
-    }
-
     public function getAction(): Action
     {
         return $this->action;
@@ -53,8 +31,7 @@ trait ActionTestTrait
 
     private function getCurrentRequest(): Request
     {
-        if(isset($this->currentRequest) === false)
-        {
+        if (isset($this->currentRequest) === false) {
             $currentRequest = new \DarlingCms\classes\component\Web\Routing\Request(
                 new Storable(
                     "CurrentRequestForActionTests",
@@ -68,6 +45,24 @@ trait ActionTestTrait
         return $this->currentRequest;
     }
 
+    public function testWasUndoneReturnsTrueAfterCallToUndo(): void
+    {
+        $this->getAction()->do($this->getCurrentRequest());
+        $this->getAction()->undo();
+        $this->assertTrue($this->getAction()->wasUndone());
+    }
+
+    public function testDoReturnsTrue(): void
+    {
+        $this->assertTrue($this->getAction()->do($this->getCurrentRequest()));
+    }
+
+    public function testUndoReturnsTrue(): void
+    {
+        $this->getAction()->do($this->getCurrentRequest());
+        $this->assertTrue($this->getAction()->undo());
+    }
+
     public function testCurrentRequestPropertyIsSetToCurrentRequestAfterCallToDo(): void
     {
         $this->getAction()->do($this->getCurrentRequest());
@@ -78,8 +73,24 @@ trait ActionTestTrait
 
     }
 
-    // testUndoReturnsFalseIfCalledBeforeDo(): void
+    public function testUndoReturnsFalseIfCalledBeforeDo(): void
+    {
+        $this->assertFalse($this->getAction()->undo());
+    }
+
+    public function testCurrentRequestPropertyIsNotSetAfterCallToUndo(): void
+    {
+        $this->getAction()->do($this->getCurrentRequest());
+        $this->getAction()->undo();
+        $this->assertFalse(isset($this->getAction()->export()['currentRequest']));
+    }
+
     // testCurrentRequestPropertyIsNotSetAfterCallToUndo()
-    // testDoReturnsFalseIfCurrentRequestIsNotARequestImplementation()
+
+    protected function setActionParentTestInstances(): void
+    {
+        $this->setOutputComponent($this->getAction());
+        $this->setOutputComponentParentTestInstances();
+    }
 
 }
