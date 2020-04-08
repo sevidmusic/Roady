@@ -34,8 +34,9 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
 
     public function undo(): bool
     {
-        $this->log("\nWarning: Use of Action type %s detected.\nThis type of Action does not do anything meaningful, it is meant to be used as a base that other Actions extend from.\n\nIf this Action is being used in development than this warning can be ignored.\n\nIt is recommended that you do not use this Action type in production, just for testing and development.\n\nAction Instance Info:\n\n    Action Name: %s\n    Action ID: %s\n    Action Location: %s\n    Action Container: %s\n\n    (Time of Use: %s)\n\n    Method Call: Action()->undo()\n", $this->getType(), $this->getName(), $this->getUniqueId(), $this->getLocation(), $this->getContainer(), time());
         $this->wasUndone = true;
+        $this->turnLoggingOn();
+        $this->log("\nWarning: Use of Action type %s detected.\nThis type of Action does not do anything meaningful, it is meant to be used as a base that other Actions extend from.\n\nIf this Action is being used in development than this warning can be ignored.\n\nIt is recommended that you do not use this Action type in production, just for testing and development.\n\nAction Instance Info:\n\n    Action Name: %s\n    Action ID: %s\n    Action Location: %s\n    Action Container: %s\n\n    (Time of Use: %s)\n\n    Method Call: Action()->undo()\n", $this->getType(), $this->getName(), $this->getUniqueId(), $this->getLocation(), $this->getContainer(), time());
         return true;
     }
 
