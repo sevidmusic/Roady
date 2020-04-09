@@ -17,13 +17,6 @@ abstract class CreateOutputComponent extends CoreAction implements CreateOutputC
         parent::__construct($storable, $switchable, $positionable);
     }
 
-    private function setInPost(Request $request, string $name, $value): array
-    {
-        $post = $request->getPost();
-        $post[strval($name)] = $value;
-        return $post;
-    }
-
     public function do(Request $currentRequest): bool
     {
         if (isset($currentRequest->getPost()['componentName']) === false) {
@@ -39,6 +32,13 @@ abstract class CreateOutputComponent extends CoreAction implements CreateOutputC
         }
 
         return parent::do($currentRequest);
+    }
+
+    private function setInPost(Request $request, string $name, $value): array
+    {
+        $post = $request->getPost();
+        $post[strval($name)] = $value;
+        return $post;
     }
 
 }

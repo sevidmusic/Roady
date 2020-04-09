@@ -21,6 +21,16 @@ trait CreateOutputComponentTestTrait
         //
     }
 
+    public function getCreateOutputComponent(): CreateOutputComponent
+    {
+        return $this->createOutputComponent;
+    }
+
+    public function setCreateOutputComponent(CreateOutputComponent $createOutputComponent): void
+    {
+        $this->createOutputComponent = $createOutputComponent;
+    }
+
     public function testComponentNameSetInPostMatchesSuppliedComponentNameAfterDoIsCalled(): void
     {
         $currentRequest = $this->getCurrentRequest();
@@ -46,22 +56,6 @@ trait CreateOutputComponentTestTrait
         $this->assertEquals($currentRequest->getPost()['componentName'], $this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentName']);
     }
 
-    protected function setCreateOutputComponentParentTestInstances(): void
-    {
-        $this->setAction($this->getCreateOutputComponent());
-        $this->setActionParentTestInstances();
-    }
-
-    public function getCreateOutputComponent(): CreateOutputComponent
-    {
-        return $this->createOutputComponent;
-    }
-
-    public function setCreateOutputComponent(CreateOutputComponent $createOutputComponent): void
-    {
-        $this->createOutputComponent = $createOutputComponent;
-    }
-
     public function testComponentPositionIsSetInPostAfterCallToDo(): void
     {
         $this->getCreateOutputComponent()->do($this->getCurrentRequest());
@@ -77,6 +71,12 @@ trait CreateOutputComponentTestTrait
         $currentRequest->import(['post' => ['componentName' => 'TestComponentName']]);
         $this->getCreateOutputComponent()->do($currentRequest);
         $this->assertEquals($currentRequest->getPost()['componentName'], $this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentName']);
+    }
+
+    protected function setCreateOutputComponentParentTestInstances(): void
+    {
+        $this->setAction($this->getCreateOutputComponent());
+        $this->setActionParentTestInstances();
     }
 
 
