@@ -36,7 +36,6 @@ trait CreateOutputComponentTestTrait
             isset($this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentOutput']),
             'The "componentOutput" was not set in Post after ' . $this->getCreateOutputComponent()->getType() . '::do() was called which may indicate a corrupted or incorrect Request was passed to CreateOutputComponent::do(), The "componentOutput" MUST be set in the Post data of the Request passed to CreateOutputComponent->do(), it can be set to an empty string, but it MUST be set. CreateOutputComponent->do() MUST internally set the "componentOutput" explitly with Request->import() if the "componentOutput" is not set in Post, i.e., "componentOutput" MUST always be set after do() is called.'
         );
-        //
     }
 
     public function testComponentOutputSetInPostMatchesSuppliedComponentNameAfterDoIsCalled(): void
@@ -62,4 +61,23 @@ trait CreateOutputComponentTestTrait
     {
         $this->createOutputComponent = $createOutputComponent;
     }
+
+    public function testComponentPositionIsSetInPostAfterCallToDo(): void
+    {
+        $this->getCreateOutputComponent()->do($this->getCurrentRequest());
+        $this->assertTrue(
+            isset($this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentPosition']),
+            'The "componentPosition" was not set in Post after ' . $this->getCreateOutputComponent()->getType() . '::do() was called which may indicate a corrupted or incorrect Request was passed to CreateOutputComponent::do(), The "componentPosition" MUST be set in the Post data of the Request passed to CreateOutputComponent->do() in order to assign the OutputComponent a position. CreateOutputComponent->do() MUST internally set the "componentPosition" explitly with Request->import() if the "componentPosition" is not set in Post, i.e., "componentPosition" MUST always be set after do() is called.'
+        );
+    }
+
+    public function testComponentPositionSetInPostMatchesSuppliedComponentNameAfterDoIsCalled(): void
+    {
+        $currentRequest = $this->getCurrentRequest();
+        $currentRequest->import(['post' => ['componentName' => 'TestComponentName']]);
+        $this->getCreateOutputComponent()->do($currentRequest);
+        $this->assertEquals($currentRequest->getPost()['componentName'], $this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentName']);
+    }
+
+
 }

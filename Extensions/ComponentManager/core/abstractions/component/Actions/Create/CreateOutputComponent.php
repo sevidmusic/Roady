@@ -34,6 +34,10 @@ abstract class CreateOutputComponent extends CoreAction implements CreateOutputC
             $currentRequest->import(['post' => $this->setInPost($currentRequest, 'componentOutput', 'BAD_VALUE')]);
         }
 
+        if (isset($currentRequest->getPost()['componentPosition']) === false) {
+            $currentRequest->import(['post' => $this->setInPost($currentRequest, 'componentPosition', 'BAD_VALUE')]);
+        }
+
         return parent::do($currentRequest);
     }
 
