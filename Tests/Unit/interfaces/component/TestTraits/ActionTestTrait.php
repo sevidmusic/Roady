@@ -29,7 +29,7 @@ trait ActionTestTrait
         $this->action = $action;
     }
 
-    private function getCurrentRequest(): Request
+    protected function getCurrentRequest(): Request
     {
         if (isset($this->currentRequest) === false) {
             $currentRequest = new \DarlingCms\classes\component\Web\Routing\Request(

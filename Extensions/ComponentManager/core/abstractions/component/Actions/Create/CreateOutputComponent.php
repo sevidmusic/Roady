@@ -17,4 +17,13 @@ abstract class CreateOutputComponent extends CoreAction implements CreateOutputC
         parent::__construct($storable, $switchable, $positionable);
     }
 
+    public function do(Request $currentRequest): bool
+    {
+        if(isset($currentRequest->getPost()['componentName']) === false)
+        {
+            $currentRequest->import(['post' => ['componentName' => 'ERROR_COMPONENT_NAME_WAS_NOT_SPECIFIED']]);
+        }
+        return parent::do($currentRequest);
+    }
+
 }
