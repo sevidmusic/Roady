@@ -8,7 +8,7 @@ use DarlingCms\interfaces\component\OutputComponent as CoreOutputComponent;
 interface Action extends CoreOutputComponent
 {
 
-    public function do(Request $currentRequest): bool;
+    public function do(): bool;
 
     public function wasDone(): bool;
 
