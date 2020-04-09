@@ -32,7 +32,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
 
     public function undo(): bool
     {
-        if ($this->isDone() === false) {
+        if ($this->wasDone() === false) {
             return false;
         }
         $this->currentRequest = null; // @devNote: For some reason using unset($this->currentRequest) causes testCurrentRequestIsNotSetAfterCallToUndo() to fail. so for now just set to null.
@@ -42,7 +42,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
         return true;
     }
 
-    public function isDone(): bool
+    public function wasDone(): bool
     {
         return $this->isDone;
     }

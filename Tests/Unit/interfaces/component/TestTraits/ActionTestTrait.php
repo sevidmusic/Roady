@@ -16,7 +16,7 @@ trait ActionTestTrait
     public function testIsDoneReturnsTrueAfterCallToDo(): void
     {
         $this->getAction()->do($this->getCurrentRequest());
-        $this->assertTrue($this->getAction()->isDone());
+        $this->assertTrue($this->getAction()->wasDone());
     }
 
     public function getAction(): Action

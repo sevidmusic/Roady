@@ -10,7 +10,7 @@ interface Action extends CoreOutputComponent
 
     public function do(Request $currentRequest): bool;
 
-    public function isDone(): bool;
+    public function wasDone(): bool;
 
     public function undo(): bool;
 
