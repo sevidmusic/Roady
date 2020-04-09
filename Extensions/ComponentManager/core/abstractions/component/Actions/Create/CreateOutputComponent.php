@@ -17,11 +17,23 @@ abstract class CreateOutputComponent extends CoreAction implements CreateOutputC
         parent::__construct($storable, $switchable, $positionable);
     }
 
+    private function setInPost(Request $request, string $name, $value): array
+    {
+        $post = $request->getPost();
+        $post[strval($name)] = $value;
+        return $post;
+    }
+
     public function do(Request $currentRequest): bool
     {
         if (isset($currentRequest->getPost()['componentName']) === false) {
-            $currentRequest->import(['post' => ['componentName' => 'ERROR_COMPONENT_NAME_WAS_NOT_SPECIFIED']]);
+            $currentRequest->import(['post' => $this->setInPost($currentRequest, 'componentName', 'BAD_VALUE')]);
         }
+
+        if (isset($currentRequest->getPost()['componentOutput']) === false) {
+            $currentRequest->import(['post' => $this->setInPost($currentRequest, 'componentOutput', 'BAD_VALUE')]);
+        }
+
         return parent::do($currentRequest);
     }
 
