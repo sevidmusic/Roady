@@ -13,7 +13,7 @@ trait ActionTestTrait
     private $action;
     private $currentRequest;
 
-    public function testIsDoneReturnsTrueAfterCallToDo(): void
+    public function testWasDoneReturnsTrueAfterCallToDo(): void
     {
         $this->getAction()->do($this->getCurrentRequest());
         $this->assertTrue($this->getAction()->wasDone());
