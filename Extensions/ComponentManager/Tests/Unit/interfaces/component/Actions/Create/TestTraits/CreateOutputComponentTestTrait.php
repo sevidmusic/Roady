@@ -36,4 +36,12 @@ trait CreateOutputComponentTestTrait
         );
         //
     }
+
+    public function testComponentNameSetInPostMatchesSuppliedComponentNameAfterDoIsCalled(): void
+    {
+        $currentRequest = $this->getCurrentRequest();
+        $currentRequest->import(['post' => ['componentName' => 'TestComponentName']]);
+        $this->getCreateOutputComponent()->do($currentRequest);
+        $this->assertEquals($currentRequest->getPost()['componentName'], $this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentName']);
+    }
 }
