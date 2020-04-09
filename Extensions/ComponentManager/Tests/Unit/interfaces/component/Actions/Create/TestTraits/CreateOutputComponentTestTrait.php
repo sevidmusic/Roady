@@ -11,22 +11,6 @@ trait CreateOutputComponentTestTrait
 
     private $createOutputComponent;
 
-    public function getCreateOutputComponent(): CreateOutputComponent
-    {
-        return $this->createOutputComponent;
-    }
-
-    public function setCreateOutputComponent(CreateOutputComponent $createOutputComponent): void
-    {
-        $this->createOutputComponent = $createOutputComponent;
-    }
-
-    protected function setCreateOutputComponentParentTestInstances(): void
-    {
-        $this->setAction($this->getCreateOutputComponent());
-        $this->setActionParentTestInstances();
-    }
-
     public function testComponentNameIsSetInPostAfterCallToDo(): void
     {
         $this->getCreateOutputComponent()->do($this->getCurrentRequest());
@@ -43,5 +27,21 @@ trait CreateOutputComponentTestTrait
         $currentRequest->import(['post' => ['componentName' => 'TestComponentName']]);
         $this->getCreateOutputComponent()->do($currentRequest);
         $this->assertEquals($currentRequest->getPost()['componentName'], $this->getCreateOutputComponent()->export()['currentRequest']->getPost()['componentName']);
+    }
+
+    protected function setCreateOutputComponentParentTestInstances(): void
+    {
+        $this->setAction($this->getCreateOutputComponent());
+        $this->setActionParentTestInstances();
+    }
+
+    public function getCreateOutputComponent(): CreateOutputComponent
+    {
+        return $this->createOutputComponent;
+    }
+
+    public function setCreateOutputComponent(CreateOutputComponent $createOutputComponent): void
+    {
+        $this->createOutputComponent = $createOutputComponent;
     }
 }
