@@ -38,6 +38,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
 
     public function do(): bool
     {
+        $this->wasDone = true;
         return true;
     }
 
@@ -47,6 +48,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
         {
             return false;
         }
+        return true;
     }
 
 

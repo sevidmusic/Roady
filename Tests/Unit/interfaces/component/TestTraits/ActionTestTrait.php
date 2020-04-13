@@ -76,4 +76,25 @@ trait ActionTestTrait
     {
         $this->assertFalse($this->getAction()->wasDone());
     }
+
+    public function testUndoReturnsTrueWhenCalledAfterDo(): void
+    {
+        $this->getAction()->do();
+        $this->assertTrue($this->getAction()->undo());
+    }
+
+
+    // @todo implemt the following:
+    //
+    // testUndoReturnsTrueWhenCalledAfterDo(): void
+    //
+    // testWasDoneReturnsTrueWhenCalledAfterDo();
+    //
+    // testWasDoneReturnsTrueWhenCalledAfterGetOutput()
+    //
+    // testWasUndoneReturnsTrueWhenCalledAfterUndo()
+    //
+    // testWasUndoneReturnsFalseWhenCalledBeforeUndo()
+    //
+
 }
