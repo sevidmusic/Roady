@@ -83,12 +83,13 @@ trait ActionTestTrait
         $this->assertTrue($this->getAction()->undo());
     }
 
+    public function testWasDoneReturnsTrueWhenCalledAfterDo(): void
+    {
+        $this->getAction()->do();
+        $this->assertTrue($this->getAction()->wasDone());
+    }
 
     // @todo implemt the following:
-    //
-    // testUndoReturnsTrueWhenCalledAfterDo(): void
-    //
-    // testWasDoneReturnsTrueWhenCalledAfterDo();
     //
     // testWasDoneReturnsTrueWhenCalledAfterGetOutput()
     //
