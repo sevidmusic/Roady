@@ -15,6 +15,7 @@ use DarlingCms\interfaces\component\Action as ActionInterface;
 abstract class Action extends CoreOutputComponent implements ActionInterface
 {
     private $currentRequest;
+    private $wasDone = false;
 
     public function __construct(CoreStorableInterface $storable, Switchable $switchable, Positionable $positionable)
     {
@@ -33,5 +34,25 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
         }
         return $this->currentRequest;
     }
+
+
+    public function do(): bool
+    {
+        return true;
+    }
+
+    public function undo(): bool
+    {
+        if($this->wasDone() === false)
+        {
+            return false;
+        }
+    }
+
+
+    public function wasDone(): bool {
+        return $this->wasDone;
+    }
+
 
 }

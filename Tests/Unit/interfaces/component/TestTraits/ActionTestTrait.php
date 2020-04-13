@@ -60,8 +60,20 @@ trait ActionTestTrait
             $this->getCurrentRequest()->getPost(),
             $this->getAction()->getCurrentRequest()->getPost()
         );
-       // todo: check post and get
     }
 
+    public function testDoReturnsTrue(): void
+    {
+        $this->assertTrue($this->getAction()->do());
+    }
 
+    public function testUndoReturnsFalseWhenCalledBeforeDo(): void
+    {
+        $this->assertFalse($this->getAction()->undo());
+    }
+
+    public function testWasDoneReturnsFalseWhenCalledBeforeDo(): void
+    {
+        $this->assertFalse($this->getAction()->wasDone());
+    }
 }

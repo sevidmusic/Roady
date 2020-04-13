@@ -9,11 +9,11 @@ use DarlingCms\classes\component\Web\Routing\Request as Request;
 interface Action extends CoreOutputComponent
 {
 
-    //public function do(): bool;
+    public function do(): bool;
 
-    //public function wasDone(): bool;
+    public function wasDone(): bool;
 
-    //public function undo(): bool;
+    public function undo(): bool;
 
     //public function wasUndone();
 
