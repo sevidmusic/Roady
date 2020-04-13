@@ -43,6 +43,11 @@
             <directory>Extensions</directory>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | Action  Tests">
+            <file>Tests/Unit/abstractions/component/ActionTest.php</file>
+            <file>Tests/Unit/classes/component/ActionTest.php</file>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>
