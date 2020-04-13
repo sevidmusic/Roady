@@ -46,4 +46,14 @@ trait ActionTestTrait
         return $this->currentRequest;
     }
 
+    public function testGetRequestReturnsrequestImplenationInstanceThatReflectsCurrentRequest(): void
+    {
+        $this->assertEquals(
+            $this->getCurrentRequest()->getUrl(),
+            $this->getAction()->getCurrentRequest()->getUrl()
+        );
+        // todo: check post and get
+    }
+
+
 }
