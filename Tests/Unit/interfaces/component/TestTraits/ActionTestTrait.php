@@ -101,12 +101,11 @@ trait ActionTestTrait
         $this->getAction()->undo();
         $this->assertTrue($this->getAction()->wasUndone());
     }
-    // @todo implemt the following:
 
-    //
-    //
-    //
-    // testWasUndoneReturnsFalseWhenCalledBeforeUndo()
-    //
+    public function  testWasUndoneReturnsFalseWhenCalledBeforeUndo(): void
+    {
+        $this->getAction()->do();
+        $this->assertFalse($this->getAction()->wasUndone());
+    }
 
 }
