@@ -90,7 +90,6 @@ trait ActionTestTrait
     }
 
     // @todo implemt the following:
-    //
     // testWasDoneReturnsTrueWhenCalledAfterGetOutput()
     //
     // testWasUndoneReturnsTrueWhenCalledAfterUndo()
