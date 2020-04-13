@@ -57,4 +57,10 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
     }
 
 
+    public function getOutput(): string
+    {
+        $this->do();
+        return parent::getOutput();
+    }
+
 }
