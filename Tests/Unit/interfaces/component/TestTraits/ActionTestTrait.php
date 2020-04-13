@@ -108,4 +108,9 @@ trait ActionTestTrait
         $this->assertFalse($this->getAction()->wasUndone());
     }
 
+    public function wasUndoneReturnsFalseWhenCalledBeforeDo(): void
+    {
+        $this->assertFalse($this->getAction()->wasUndone());
+    }
+
 }
