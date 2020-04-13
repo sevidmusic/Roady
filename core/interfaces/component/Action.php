@@ -15,6 +15,6 @@ interface Action extends CoreOutputComponent
 
     public function undo(): bool;
 
-    //public function wasUndone();
+    public function wasUndone(): bool;
 
 }

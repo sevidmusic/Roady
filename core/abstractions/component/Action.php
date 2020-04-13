@@ -16,6 +16,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
 {
     private $currentRequest;
     private $wasDone = false;
+    private $wasUndone = false;
 
     public function __construct(CoreStorableInterface $storable, Switchable $switchable, Positionable $positionable)
     {
@@ -48,12 +49,18 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
         {
             return false;
         }
+        $this->wasUndone = true;
         return true;
     }
 
 
     public function wasDone(): bool {
         return $this->wasDone;
+    }
+
+    public function wasUndone(): bool
+    {
+        return $this->wasUndone;
     }
 
 

@@ -95,10 +95,16 @@ trait ActionTestTrait
         $this->assertTrue($this->getAction()->wasDone());
     }
 
+    public function testWasUndoneReturnsTrueWhenCalledAfterUndo():void
+    {
+        $this->getAction()->do();
+        $this->getAction()->undo();
+        $this->assertTrue($this->getAction()->wasUndone());
+    }
     // @todo implemt the following:
 
     //
-    // testWasUndoneReturnsTrueWhenCalledAfterUndo()
+    //
     //
     // testWasUndoneReturnsFalseWhenCalledBeforeUndo()
     //
