@@ -25,7 +25,7 @@ function getPositionSelector(): string
                 class="highlightText"> Template(s)</span> is/are used to
         organize that output.
     </p></div>
-<div id="formContainer" class="genericContainer genericContainerLimitedHeight">
+<div id="formContainer" class="genericContainer">
     <p class="genericText">
         The <a href="#form">form</a> below can be used to generate a <span class="highlightText">Response</span> to a
         <span class="highlightText"> Request</span>. The form allows you to specify the<span class="highlightText"> Request\'s</span>
