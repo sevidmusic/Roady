@@ -14,7 +14,7 @@ trait ActionTestTrait
     private $action;
     private $currentRequest;
 
-    public function testGetCurrentRequestReturnsRequestImplenationInstanceThatReflectsCurrentRequest(): void
+    public function testGetCurrentRequestReturnsRequestImplementationInstanceThatReflectsCurrentRequest(): void
     {
         $this->assertEquals(
             $this->getCurrentRequest()->getUrl(),

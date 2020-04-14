@@ -30,7 +30,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
                 new Storable(
                     'CurrentRequest',
                     'CurrentRequestLocation',
-                    'CureentRequestContainer'
+                    'CurrentRequestContainer'
                 ),
                 new Switchable()
             );
