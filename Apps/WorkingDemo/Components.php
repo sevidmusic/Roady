@@ -15,15 +15,6 @@ require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIR
 require_once __DIR__ . DIRECTORY_SEPARATOR . "Settings.php";
 
 
-function getPositionSelector(): string
-{
-    $options = [];
-    for ($i = 0; $i <= 500; $i++) {
-        array_push($options, sprintf('<option>%s</option>', strval(($i / 100))));
-    }
-    return sprintf('<select name="position">%s</select>', implode(PHP_EOL . '    ', $options));
-}
-
 /***** OUTPUT COMPONENTS *****/
 /**
  * Doctype
@@ -70,9 +61,12 @@ $workingDemoHtmlBody = new OutputComponent(
     new Positionable(2)
 );
 
+ob_start();
+require_once(__DIR__ . DIRECTORY_SEPARATOR . 'html/WorkingDemoHtmlBody.php');
+$workingDemoHtml = ob_get_clean();
 $workingDemoHtmlBody->import(
     [
-        'output' => file_get_contents(__DIR__ . '/html/WorkingDemoHtmlBody.html')
+        'output' => $workingDemoHtml
     ]
 );
 
@@ -233,18 +227,7 @@ foreach ($components as $component) {
     );
     printf(
         "%s",
-        ($componentCrud->create($component) === true ? "<p style=\"color: green;\">Saved successfully</p>" : "<p style=\"color: red;\">The componet could not be saved</p>")
+        ($componentCrud->create($component) === true ? "<p style=\"color: green;\">Saved successfully</p>" : "<p style=\"color: red;\">The component could not be saved</p>")
     );
 }
-
-/** Show preview of Output when this file is run *
- * printf(
- * "%s%s%s%s",
- * $doctype->getOutput(),
- * $htmlHead->getOutput(),
- * $workingDemoHtmlBody->getOutput(),
- * $finalOutput->getOutput()
- * );
- */
-
 

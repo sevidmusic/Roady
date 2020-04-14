@@ -1,3 +1,14 @@
+<?php
+function getPositionSelector(): string
+{
+    $options = [];
+    for ($i = 0; $i <= 500; $i++) {
+        array_push($options, sprintf('<option>%s</option>', strval(($i / 100))));
+    }
+    return sprintf('<select name="position">%s</select>', implode(PHP_EOL . '    ', $options));
+}
+
+?>
 <body class="gradientBg">
 <div id="welcome" class="genericContainer genericContainerLimitedHeight"><h1 class="noticeText">Welcome</h1>
     <p class="successText">
@@ -43,7 +54,7 @@
 
         <div class="selectMenuContainer" style="margin-top: 1em; margin-right:5em; float: right;">
             <span class="formLabelText">Output Position <span class="highlightText">( Relative to other existing output )</span> :</span>
-            ' . getPositionSelector() . '
+            <?php echo getPositionSelector(); ?>
         </div>
 
         <div class="textAreaContainer">
@@ -78,14 +89,6 @@
             <input type="submit" value="Generate Stored Components For Mock Request">
         </div>
     </form>
-</div>
-<div id="requestMenu" class="genericContainer genericContainerLimitedHeight">
-    <h3 class=\'highlightText\'>Current Request Info</h3>
-    <p class=\'genericText\'>Name: <span class=\'highlightText\'>Current Request WNuL6lOCq1xF</span></p>
-    <p class=\'genericText\'>Url: <a href=\'http://192.168.33.10/WorkingDemo.php\' class=\'highlightText\'>http://192.168.33.10/WorkingDemo.php</a>
-    </p>
-    <p class=\'genericText\'>Unique Id:<span class=\'highlightText\'>eEsQvafpEeR5WJfwUudTRwjia4pk3kFz2OjoTFpCrb3FvqGx1Q63FL4WdGMJjc2f6QXrjytmSFvV2LexelAFJo5PinfCOovsuEmtnzQGIdVfsLtuApCVORJmzPdvUxu2</span>
-    </p>
 </div>
 
 
