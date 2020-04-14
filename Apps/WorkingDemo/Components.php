@@ -57,7 +57,7 @@ $htmlHead->import(['output' => <<<'HTML'
     <title>Darling Cms Redesign | Dev Request -> Router <- Response Interactions</title>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
     <style>
- 
+
         * {
            box-sizing: border-box;
            -webkit-box-decoration-break: clone;
@@ -93,7 +93,7 @@ $htmlHead->import(['output' => <<<'HTML'
            line-height: 2em;
            resize: vertical;
        }
-       
+
         .genericText {
            color: #ff9368;
        }
@@ -121,7 +121,7 @@ $htmlHead->import(['output' => <<<'HTML'
         .formLabelText {
            color: #cddeff;
        }
-       
+
         .highlightText {
            color: #008fff;
        }
@@ -182,11 +182,11 @@ $htmlHead->import(['output' => <<<'HTML'
         .textAreaContainer {
             margin-top: 1em;
         }
-    
+
         a {
             text-decoration: none;
         }
-    
+
         a:visited {
             color: #decaff;
         }
@@ -201,14 +201,14 @@ $htmlHead->import(['output' => <<<'HTML'
         table, th, td {
             border-collapse: collapse;
         }
-    
+
         th, td {
             padding: 5px;
         }
         th {
             text-align: left;
         }
-    
+
         textarea {
             height: 287px;
         }
@@ -425,17 +425,23 @@ $components = [
 ];
 
 foreach ($components as $component) {
+    printf(
+        "<p>Saving component %s to location <span style='color: purple;'>%s</span> in container <span style='color: green;'>%s</span></p>",
+        $component->getName(),
+        $component->getLocation(),
+        $component->getContainer()
+    );
     $componentCrud->create($component);
 }
 
-/** Show preview of Output when this file is run */
-printf(
-    "%s%s%s%s",
-    $doctype->getOutput(),
-    $htmlHead->getOutput(),
-    $htmlBody->getOutput(),
-    $finalOutput->getOutput()
-);
-
+/** Show preview of Output when this file is run *
+ * printf(
+ * "%s%s%s%s",
+ * $doctype->getOutput(),
+ * $htmlHead->getOutput(),
+ * $htmlBody->getOutput(),
+ * $finalOutput->getOutput()
+ * );
+ */
 
 
