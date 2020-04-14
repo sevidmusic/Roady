@@ -354,7 +354,21 @@ $indexHtmlBody = new OutputComponent(
     new Switchable(),
     new Positionable(2)
 );
-$indexHtmlBody->import(['output' => '<body class="gradientBg"><p>Welcome</p>']);
+$indexHtmlBody->import(['output' => '
+    <body class="gradientBg">
+    <div class="genericContainer successText">
+        <p>Welcome</p>
+        <p>Use the menu below to navigate around</p>
+        <ul>
+            <li><a href="http://192.168.33.10/index.php">Home</a></li>
+            <li><a href="http://192.168.33.10/">Root</a></li>
+            <li><a href="http://192.168.33.10/WorkingDemo.php">Demo</a></li>
+            <li><a href="http://192.168.33.10/index.php?WorkingDemo">Installed WorkingDemo App</a></li>
+        </ul>
+    </div>
+    </body>
+'
+]);
 
 
 $finalOutput = new OutputComponent(
@@ -405,6 +419,16 @@ $indexRequest = new Request(
 );
 $indexRequest->import(['url' => 'http://192.168.33.10/index.php']);
 
+$rootRequest = new Request(
+    new Storable(
+        'RootRequest',
+        DEMO_SITE_NAME,
+        DEMO_SITE_REQUEST_CONTAINER
+    ),
+    new Switchable()
+);
+$rootRequest->import(['url' => 'http://192.168.33.10/']);
+
 
 // Responses
 $workingDemoDefaultResponse = new Response(
@@ -431,6 +455,7 @@ $indexResponse = new Response(
     new Switchable()
 );
 $indexResponse->addRequestStorageInfo($indexRequest);
+$indexResponse->addRequestStorageInfo($rootRequest);
 $indexResponse->addTemplateStorageInfo($standardUITemplate);
 $indexResponse->addOutputComponentStorageInfo($doctype);
 $indexResponse->addOutputComponentStorageInfo($htmlHead);
@@ -457,6 +482,7 @@ $componentCrud = new ComponentCrud(
 $components = [
     $workingDemoDefaultRequest,
     $indexRequest,
+    $rootRequest,
     $workingDemoDefaultResponse,
     $indexResponse,
     $standardUITemplate,
