@@ -19,7 +19,7 @@ askUserForSelection() {
     ${_aufs_options[$(("${REPLY}" - 1))]})
       if [[ -n "${opt}" ]]; then
         _aufs_responseIndex=$(("${REPLY}" - 1))
-        _aufs_response=$(echo -e "${_aufs_responses[${_aufs_responseIndex}]}" | sed -E "s,-, ,g;")
+        _aufs_response=$(printf "%s" "${_aufs_responses[${_aufs_responseIndex}]}" | sed -E "s,-, ,g;")
         promptUserAndNotify "${_aufs_response}" "One moment please"
         PREVIOUS_USER_INPUT="${opt}"
         break
@@ -45,7 +45,7 @@ initVars() {
 
 showInfoPanel() {
     local _sip_userDefinedComponentSubType
-    _sip_userDefinedComponentSubType=$(echo "${USER_DEFINED_COMPONENT_SUBTYPE}" | sed "s,DS_NAMESPACE_SEPERATOR,\\\,g")
+    _sip_userDefinedComponentSubType=$(printf "%s" "${USER_DEFINED_COMPONENT_SUBTYPE}" | sed "s,DS_NAMESPACE_SEPERATOR,\\\,g")
   printf "\n\n%s----- Info Panel -----%s" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}" "${CLEARCOLOR}"
   printf "\n  %sExtending: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${EXTENDING}${CLEARCOLOR}"
   printf "\n  %sExtension Name: %s" "${CLEARCOLOR}${NOTIFYCOLOR}" "${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${EXTENSION_NAME}${CLEARCOLOR}"
@@ -89,26 +89,11 @@ setColor() {
   printf "\e[%sm" "${1}"
 }
 
-writeWordSleep() {
-  printf "%s" "${1}"
-  sleep "${2}"
-}
-
-sleepWriteWord() {
-  sleep "${2}"
-  printf "%s" "${1}"
-}
-
-sleepWriteWordSleep() {
-  sleep "${2}"
-  printf "%s" "${1}"
-  sleep "${2}"
-}
 
 animatedPrint()
 {
   local _charsToAnimate _speed
-  _charsToAnimate=$( echo "${1}" | sed -E "s/ /_/g;")
+  _charsToAnimate=$( printf "%s" "${1}" | sed -E "s/ /_/g;")
   _speed="${2}"
   for (( i=0; i< ${#_charsToAnimate}; i++ )); do
       printf "%s" ${_charsToAnimate:$i:1}
@@ -117,16 +102,20 @@ animatedPrint()
 }
 
 showLoadingBar() {
-  local _slb_inc
+    local _slb_inc _slb_windowWidth _slb_numChars _slb_adjustedNumChars _slb_loadingBarLimit
   printf "\n"
   animatedPrint "${1}" .05
   setColor 43
   _slb_inc=0
-  while [[ ${_slb_inc} -le 27 ]]; do
+  _slb_windowWidth=$(tput cols)
+  _slb_numChars="${#1}"
+  _slb_adjustedNumChars=$((_slb_windowWidth - _slb_numChars))
+  _slb_loadingBarLimit=$((_slb_adjustedNumChars - 10))
+  while [[ ${_slb_inc} -le "${_slb_loadingBarLimit}" ]]; do
     animatedPrint ":" .009
     _slb_inc=$((_slb_inc + 1))
   done
-  echo "${ATTENTIONEFFECTCOLOR}[100%]${CLEARCOLOR}"
+  printf " %s\n" "${CLEARCOLOR}${ATTENTIONEFFECT}${ATTENTIONEFFECTCOLOR}[100%]${CLEARCOLOR}"
   setColor 0
   sleep 1
   if [[ $FORCE_MAKE -ne 1 ]] && [[ "${2}" != "dontClear" ]]; then
@@ -181,9 +170,9 @@ generatePHPCodeFromTemplate() {
   _gpcft_template="${1}"
   _gpcft_fileRootDirectoryPath="${2}"
   _gpcft_fileName="${3}"
-  _gpcft_filePath=$(echo "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g; s,DS_NAMESPACE_SEPERATOR,/,g;")
+  _gpcft_filePath=$(printf "%s" "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g; s,DS_NAMESPACE_SEPERATOR,/,g;")
   if [[ "${_gpcft_fileName}" == "TestTrait" ]]; then
-    _gpcft_filePath=$(echo "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/TestTraits/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g; s,DS_NAMESPACE_SEPERATOR,/,g;")
+    _gpcft_filePath=$(printf "%s" "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/TestTraits/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g; s,DS_NAMESPACE_SEPERATOR,/,g;")
   fi
   if [[ "${EXTENDING}" == "Core" ]]; then
     _gpcft_phpCode=$(sed -E "s/DS_CORE_NAMESPACE_PREFIX/DarlingCms/g; s/DS_TESTS_NAMESPACE_PREFIX/UnitTests/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/DS_NAMESPACE_SEPERATOR/\\\/g; s/\\\;/;/g; s,[\][\],\\\,g;" "${1}")
@@ -192,15 +181,15 @@ generatePHPCodeFromTemplate() {
     _namespace_seperator='\\'
     _gpcft_phpCode=$(sed -E "s/DS_CORE_NAMESPACE_PREFIX/Extensions${_namespace_seperator}${EXTENSION_NAME}${_namespace_seperator}core/g; s/DS_TESTS_NAMESPACE_PREFIX/Extensions${_namespace_seperator}${EXTENSION_NAME}${_namespace_seperator}Tests${_namespace_seperator}Unit/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/DS_NAMESPACE_SEPERATOR/\\\/g; s/\\\;/;/g; s,[\][\],\\\,g;" "${1}")
   fi
-  _gpcft_fileSubDirectoryPath=$(echo "${_gpcft_filePath}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php//g")
+  _gpcft_fileSubDirectoryPath=$(printf "%s" "${_gpcft_filePath}" | sed -E "s/\/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php//g")
   if [[ "${CURRENT_USER_INPUT}" != "make" ]] && [[ $FORCE_MAKE -ne 1 ]]; then
     promptUser "${CLEARCOLOR}${NOTIFYCOLOR}Please review the ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}Info Panel${CLEARCOLOR}${NOTIFYCOLOR} to make sure you entered everything correctly, if everything looks ok type ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}make${CLEARCOLOR}${NOTIFYCOLOR} and press ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}<enter>${CLEARCOLOR}${NOTIFYCOLOR} to generaate your new Component's Php files, otherwise press ${CLEARCOLOR}${NOTIFYCOLOR}<Ctrl> c${CLEARCOLOR}${NOTIFYCOLOR} to quit and start over." "showInfo"
     showLoadingBar "Preparing to write php files to appropriate directories"
   fi
   if [[ "${CURRENT_USER_INPUT}" == "make" ]] || [[ $FORCE_MAKE -eq 1 ]]; then
-    showLoadingBar "Writing file ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}${_gpcft_filePath}${CLEARCOLOR} " "dontClear"
+    showLoadingBar "${CLEARCOLOR}${ATTENTIONEFFECT}${NOTIFYCOLOR}Writing file ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}${_gpcft_filePath}${CLEARCOLOR} " "dontClear"
     mkdir -p "${_gpcft_fileSubDirectoryPath}"
-    echo "${_gpcft_phpCode}" >"${_gpcft_filePath}"
+    printf "%s" "${_gpcft_phpCode}" >"${_gpcft_filePath}"
   fi
 }
 
@@ -211,11 +200,13 @@ askUserForComponentName() {
 
 askUserForComponentSubtype() {
   promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the component's ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR}, the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR} is used to construct namespaces for the Component. Example: ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}\\DarlingCms\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}${NOTIFYCOLOR} Note: You must escape backslash characters. Note: Do not include a preceding backslash in the sub-type. ${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}Wrong: \\\\Foo\\\\Bar ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Right: Foo\\\\Bar${CLEARCOLOR}" "showInfo"
-  USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${PREVIOUS_USER_INPUT}" | sed -E "s,[\\],DS_NAMESPACE_SEPERATOR,g")
+  USER_DEFINED_COMPONENT_SUBTYPE=$(printf "%s" "${PREVIOUS_USER_INPUT}" | sed -E "s,[\\],DS_NAMESPACE_SEPERATOR,g")
 }
 
 showWelcomeMessage() {
+    printf "%s" "${CLEARCOLOR}${NOTIFYCOLOR}"
     animatedPrint "Welcome to the Darling Shell" .05
+    printf "%s" "${CLEARCOLOR}"
     showLoadingBar "One moment plaes"
 }
 
@@ -245,9 +236,13 @@ askUserForExtensionName() {
 [[ $FORCE_MAKE -ne 1 ]] && clear
 
 initVars
-while getopts "x:t:e:c:s:f" OPTION
+while getopts "hx:t:e:c:s:f" OPTION
 do
     case "${OPTION}" in
+        h)
+            printf "\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n" "${CLEARCOLOR}${NOTIFYCOLOR}extendComponent.sh can be used to generate the PHP files required to define a new compoonent for the DDMS that extends a component defined in Core, or in an Extension." "If you call this script without any flags you will be guided through the process of creating a new component from within a user interface." "You can also specify flags if you already know any of the values you wish to use. You can also specify a few flags, and then finish from within the user interface." "The following flags are available:" "    -x <arg> The -x flag determines whether the new component extends a Core component, or a component defined in an Extension." "    -t" "    -e"  "    -c" "    -s" "    -f"
+            exit
+            ;;
         x)
             EXTENDING="${OPTARG}"
             ;;
@@ -261,7 +256,7 @@ do
             USER_DEFINED_COMPONENT_NAME="${OPTARG}"
             ;;
         s)
-            USER_DEFINED_COMPONENT_SUBTYPE=$(echo "${OPTARG}" | sed -E "s,[\],DS_NAMESPACE_SEPERATOR,g")
+            USER_DEFINED_COMPONENT_SUBTYPE=$(printf "%s" "${OPTARG}" | sed -E "s,[\],DS_NAMESPACE_SEPERATOR,g")
             # To allow an empty string be passed to the -s , use var to determine if this flag is set instead of [[ -z "${USER_DEFINED_COMPONENT_SUBTYPE}" ]]
             USER_SUBTYPE_SET_WITH_FLAG=1
             ;;
