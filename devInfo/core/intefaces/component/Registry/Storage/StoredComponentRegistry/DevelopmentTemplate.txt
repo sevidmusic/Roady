@@ -1,9 +1,26 @@
 *************************************************************************
 ************************ StoredComponentRegistry ************************
 *************************************************************************
+
 Note: All code in this Component develeopment template is psuedo code,
 and is meant to serve as a guide, actual implementation will be
 different.
+
+*************************************************************************
+************************ Notes about this file **************************
+  Hint: Hints provide psuedo code that is meant to serve as an
+        implementation guide.
+
+        Note: Hint numbers correspond pseudo code steps, NOT line numbers.
+              They are used so the following command can be run to get a
+              summary of the DevelopmentTemplate:
+
+        grep -E 'tes[t]|[0-9][.]' /path/to/DevelopmentTemplate.txt
+
+        In general it is important that the formatting of this document
+        be consistent so tools like grep|awk|sed can be used to review
+        this file.
+*************************************************************************
 *************************************************************************
 *************************************************************************
 
@@ -33,14 +50,14 @@ testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplmena
 
    Hint:
        1. assertTrue(
-              StoredComponentRegistry->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
-              ||
-              in_array(
-                  'DarlingCms\interfaces\component\Component',
-                  class_implements(StoredComponentRegistry->export()['acceptedImplementation']),
-                  true
-              )
-          )
+       1.     StoredComponentRegistry->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
+       1.     ||
+       1.     in_array(
+       1.         'DarlingCms\interfaces\component\Component',
+       1.         class_implements(StoredComponentRegistry->export()['acceptedImplementation']),
+       1.         true
+       1.     )
+       1. )
 
 **********************
 private $componentCrud
@@ -53,12 +70,12 @@ testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostI
 
    Hint:
        1. assertTrue(
-              in_array(
-                  "DarlingCms\interfaces\component\Crud\ComponentCrud"
-                  class_implements(StoredComponentRegistry->export()['componentCrud']),
-                  true
-              )
-          )
+       1.     in_array(
+       1.         "DarlingCms\interfaces\component\Crud\ComponentCrud"
+       1.         class_implements(StoredComponentRegistry->export()['componentCrud']),
+       1.         true
+       1.     )
+       1. )
 
 *****************
 private $registry
@@ -153,12 +170,12 @@ testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentEx
        2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        4. assertTrue(
-              in_array(
-                  StoredComponentRegistry->export()['storable'],
-                  StoredComponentRegistry->export()['registry'],
-                  true
-              )
-          )
+       4.     in_array(
+       4.         StoredComponentRegistry->export()['storable'],
+       4.         StoredComponentRegistry->export()['registry'],
+       4.         true
+       4.     )
+       4. )
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
 testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
@@ -170,15 +187,15 @@ testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
        1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
        2. $status = StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        3. if(
-              in_array(
-                  StoredComponentRegistry->export()['storable'],
-                  StoredComponentRegistry->export()['registry'],
-                  true
-              )
-          === true)
-          {
-                  assertTrue($status)
-          }
+       3.     in_array(
+       3.         StoredComponentRegistry->export()['storable'],
+       3.         StoredComponentRegistry->export()['registry'],
+       3.         true
+       3.     )
+       3. === true)
+       3. {
+       3.         assertTrue($status)
+       3. }
        4. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
 testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
@@ -190,15 +207,15 @@ testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
        1. StoredComponentRegistry->import('acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud'])
        2. $status = StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        3. if(
-              in_array(
-                  StoredComponentRegistry->export()['storable'],
-                  StoredComponentRegistry->export()['registry'],
-                  true
-              )
-          === false)
-          {
-                  assertFalse($status)
-          }
+       3.     in_array(
+       3.         StoredComponentRegistry->export()['storable'],
+       3.         StoredComponentRegistry->export()['registry'],
+       3.         true
+       3.     )
+       3. === false)
+       3. {
+       3.         assertFalse($status)
+       3. }
 
 ***********************************
 unRegisterComponent(Storable): bool
@@ -214,13 +231,12 @@ testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): voi
        2. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        3. StoredComponentRegistry->unRegisterComponent(StoredComponentRegistry)
        4. assertFalse(
-              in_array(
-                  StoredComponentRegistry->export()['storable'],
-                  StoredComponentRegistry->export()['registry'],
-                  true
-              )
-          )
-
+       4.     in_array(
+       4.         StoredComponentRegistry->export()['storable'],
+       4.         StoredComponentRegistry->export()['registry'],
+       4.         true
+       4.     )
+       4. )
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
 testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
@@ -234,16 +250,16 @@ testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPrope
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        4. $status = StoredComponentRegistry->unRegisterComponent(StoredComponentRegistry)
        5. if(
-              in_array(
-                  StoredComponentRegistry->export()['storable'],
-                  StoredComponentRegistry->export()['registry'],
-                  true
-              )
-              === false
-          )
-          {
-              assertTrue($status)
-          }
+       5.     in_array(
+       5.         StoredComponentRegistry->export()['storable'],
+       5.         StoredComponentRegistry->export()['registry'],
+       5.         true
+       5.     )
+       5.     === false
+       5. )
+       5. {
+       5.     assertTrue($status)
+       5. }
        6. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
 ********************************
