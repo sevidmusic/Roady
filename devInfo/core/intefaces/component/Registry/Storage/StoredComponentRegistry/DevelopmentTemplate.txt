@@ -114,7 +114,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
        2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        4. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
-       5. assertTrue(1, count(StoredComponentRegistry->export['registry']))
+       5. assertTrue(1, count(StoredComponentRegistry->export()['registry']))
        6. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
 
@@ -126,7 +126,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
 
    Hint:
        1. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
-       2. assertTrue(0, count(StoredComponentRegistry->export['registry']))
+       2. assertTrue(0, count(StoredComponentRegistry->export()['registry']))
 
 testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
 
@@ -138,7 +138,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
        1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry->export()['componentCrud'])
        2. StoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry->export()['componentCrud'])
-       4. assertTrue(0, count(StoredComponentRegistry->export['registry']))
+       4. assertTrue(0, count(StoredComponentRegistry->export()['registry']))
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
 
 testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
@@ -154,7 +154,7 @@ testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentEx
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        4. assertTrue(
               in_array(
-                  StoredComponentRegistry->export['storable'],
+                  StoredComponentRegistry->export()['storable'],
                   StoredComponentRegistry->export()['registry'],
                   true
               )
@@ -183,8 +183,8 @@ testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
 
 testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
 
-   Tests that registerComponent() returns true if Component's storable was not added to registry
-   propertys array
+   Tests that registerComponent() returns false if Component's storable was not added to registry
+   propertys array.
 
    Hint:
        1. StoredComponentRegistry->import('acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud'])
