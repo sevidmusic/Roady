@@ -1,125 +1,264 @@
-################################################################################
-######################## StoredComponentRegistry ###############################
-################################################################################
-Note: All code in this Component develeopment template is sudo code, and is meant
-to serve as a guide, actual implementation will be different.
-################################################################################
+*************************************************************************
+************************ StoredComponentRegistry ************************
+*************************************************************************
+Note: All code in this Component develeopment template is psuedo code,
+and is meant to serve as a guide, actual implementation will be
+different.
+*************************************************************************
+*************************************************************************
 
-##########
-Properties
-##########
+********************************
+********** Properties **********
+********************************
 
-###############################
+*******************************
 private $acceptedImplementation
-###############################
+*******************************
 
 testAcceptedImplementationPropertyIsAssingedNamespaceOfADefinedInterfacePostInstantiation(): void
--- Tests that the interface namespace assigned to acceptedImplementation property on instantiation
-   is a defined interface.
 
-   Note: use php method interface_exists(), NOT class_exists(), need to insure namespace
+   Tests that the namespace assigned to acceptedImplementation property on instantiation
+   refers to a defined interface.
+
+   Note: Test uses php method interface_exists(), NOT class_exists(), in order to insure namespace
    specifically references an interface.
 
-   Hint: assertTrue(interface_exists($storedComponentRegistry->export()['acceptedImplementation']))
+   Hint:
+       1. assertTrue(interface_exists(StoredComponentRegistry->export()['acceptedImplementation']))
 
 testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplmenationPostInstantiation(): void
--- Tests that the interface namespace assigned to acceptedImplementation property on instantiation
+
+   Tests that the namespace assigned to the acceptedImplementation property on instantiation
    is literally DCMS\interfaces\component\Component. or implements DCMS\interfaces\component\Compponent
 
    Hint:
-     assertTrue(
-         $storedComponentRegistry->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
-         ||
-         in_array('DarlingCms\interfaces\component\Component', class_implements($storedComponentRegistry->export()['acceptedImplementation']))
-     );
+       1. assertTrue(
+              StoredComponentRegistry->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
+              ||
+              in_array(
+                  'DarlingCms\interfaces\component\Component',
+                  class_implements(StoredComponentRegistry->export()['acceptedImplementation']),
+                  true
+              )
+          )
 
-######################
+**********************
 private $componentCrud
-######################
+**********************
 
 testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostInstantiation(): void
--- Tests that the componentCrud property is assigned an instance of a DarlingCms\interfaces\component\Crud\ComponentCrud
+
+   Tests that the componentCrud property is assigned an instance of a DarlingCms\interfaces\component\Crud\ComponentCrud
    implementation on instnatiation.
 
-   Hint: assertTrue(
-             in_array(
-                 "DarlingCms\interfaces\component\Crud\ComponentCrud"
-                 class_implements($storedComponentRegistry->export()['componentCrud'])
-             )
-         )
+   Hint:
+       1. assertTrue(
+              in_array(
+                  "DarlingCms\interfaces\component\Crud\ComponentCrud"
+                  class_implements(StoredComponentRegistry->export()['componentCrud']),
+                  true
+              )
+          )
 
-#################
+*****************
 private $registry
-#################
+*****************
 
 testRegistryPropertyIsSetToAnEmptyArrayPostInstantiation(): void
--- As the tests name implies, assertEquals([], $storedComponentRegistry->export()['registry'])
 
-   Hint: Dont be fancy, just use: assertEquals([], $storedComponentRegistry->export()['registry'])
+   As the tests name implies, assertEquals([], StoredComponentRegistry->export()['registry'])
 
-------------------------------------------------------------------------------------------------------------------------------------------------
+   Hint:
+       1. assertEquals([], StoredComponentRegistry->export()['registry'])
 
-#######
+*******
 Methods
-#######
+*******
 
-##################################
+**********************************
 getAcceptedImplementation(): string
-##################################
+**********************************
 
 testGetAcceptedImplementationReturnsSameNamespaceAssignedToAcceptedImplementationPropertyOnInstantiation(): void
--- Tests that the namespace returned by getAcceptedImplementation() is identical to the namespace assigned to
-   the acceptedImplementation property on instantiation.
 
-   Hint: assert_equals($storedComponentRegistry->export()['acceptedImplementation'], $storedComponentRegistry->getAcceptedImplementation())
+   Tests that the namespace returned by getAcceptedImplementation() is identical to the namespace that was
+   assigned to the acceptedImplementation property on instantiation.
+
+   Hint:
+       1. assert_equals(StoredComponentRegistry->export()['acceptedImplementation'], StoredComponentRegistry->getAcceptedImplementation())
 
 
-#################################
+*********************************
 getComponentCrud(): ComponentCrud
-#################################
+*********************************
 
 testGetComponentCrudReturnsSameComponentCrudImplementationInstanceAssignedToComponentCrudPropertyOnInstantiation(): void
--- Tests that the ComponentCrud implementation returned by getComponentCrud() is identical to the ComponentCrud
-   implementation assigned to the componentCrud property on instantiation.
 
-   Hint: assertEquals($storedComponentRegistry->export()['componentCrud'], $storedComponentRegistry->getComponentCrud())
+   Tests that the ComponentCrud implementation returned by getComponentCrud() is identical to the ComponentCrud
+   implementation that was assigned to the componentCrud property on instantiation.
+
+   Hint:
+       1. assertEquals(StoredComponentRegistry->export()['componentCrud'], StoredComponentRegistry->getComponentCrud())
+
+********************************************
+registerComponent(Component component): bool
+********************************************
+
+testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsAlreadyRegistered(): void
+
+   Tests that registerComponent() does not add the specified Component's Storable to the registry property's
+   array if the Component's Storable already exists in the registry property's array.
+
+   Hint:
+       1. StoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
+       2. StoredComponentRegistry()->export()['componentCrud']->create(StoredComponentRegistry)
+       3. StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       4. StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       5. assertTrue(1, count(StoredComponentRegistry()->export['registry']))
+       6. StoredComponentRegistry()->export()['componentCrud']->delete(StoredComponentRegistry)
 
 
+testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
 
+   Tests that registerComponent() does not add the specified Component's Storable to the registry property's
+   array if the Component does not exist in storage. StoredComponentRegistrys, as the name implies, MUST
+   only reference stored Components.
 
+   Hint:
+       1. StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       2. assertTrue(0, count(StoredComponentRegistry()->export['registry']))
 
+testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
 
+   Tests that registerComponent() does not add the specified Component's Storable to the registry property's
+   array if the Component does not implement that interface indicated by the namespace assigned to the
+   acceptedImplementation property.
 
+   Hint:
+       1. StoredComponentRegistry()->export()['componentCrud']->create(StoredComponentRegistry->export()['componentCrud'])
+       2. StoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
+       3. StoredComponentRegistry()->registerComponent(StoredComponentRegistry()->export()['componentCrud'])
+       4. assertTrue(0, count(StoredComponentRegistry()->export['registry']))
+       5. StoredComponentRegistry()->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
 
+testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
 
-registerComponent(Component $component): bool
+   Tests that registerComponent adds the specified Component's Storable to the registry property array if ALL of the following statements are TRUE:
+   * The Component is not already registered.
+   * The Component exists in storage.
+   * The component implments the interface indicated by the namespcae assigned to the acceptedImplementation property.
 
+   Hint:
+       1. StoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
+       2. StoredComponentRegistry()->export()['componentCrud']->create(StoredComponentRegistry)
+       3. StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       4. assertTrue(
+              in_array(
+                  StoredComponentRegistry()->export['storable'],
+                  StoredComponentRegistry()->export()['registry'],
+                  true
+              )
+          )
+       5. StoredComponentRegistry()->export()['componentCrud']->delete(StoredComponentRegistry)
+
+testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
+
+   Tests that registerComponent() returns true if Component's storable was added to registry
+   propertys array
+
+   Hint:
+       1. StoredComponentRegistry()->export()['componentCrud']->create(StoredComponentRegistry)
+       2. $status = StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       3. if(
+              in_array(
+                  StoredComponentRegistry()->export()['storable'],
+                  StoredComponentRegistry()->export()['registry'],
+                  true
+              )
+          === true)
+          {
+                  assertTrue($status)
+          }
+       4. StoredComponentRegistry()->export()['componentCrud']->delete(StoredComponentRegistry)
+
+testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
+
+   Tests that registerComponent() returns true if Component's storable was not added to registry
+   propertys array
+
+   Hint:
+       1. StoredComponentRegistry()->import('acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud'])
+       2. $status = StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       3. if(
+              in_array(
+                  StoredComponentRegistry()->export()['storable'],
+                  StoredComponentRegistry()->export()['registry'],
+                  true
+              )
+          === false)
+          {
+                  assertFalse($status)
+          }
+
+***********************************
 unRegisterComponent(Storable): bool
+***********************************
 
+testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
+
+   Tests that unRegisterComponent() removes the specified Storable from the
+   registry propertys array.
+
+   Hint:
+       1. StoredComponentRegistry()->export()['componentCrud']->create(StoredComponentRegistry)
+       2. StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       3. StoredComponentRegistry()->unRegisterComponent(StoredComponentRegistry)
+       4. assertFalse(
+              in_array(
+                  StoredComponentRegistry()->export()['storable'],
+                  StoredComponentRegistry()->export()['registry'],
+                  true
+              )
+          )
+
+       5. StoredComponentRegistry()->export()['componentCrud']->delete(StoredComponentRegistry)
+
+testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
+
+   Tests that unRegisterComponent() returns true if specified Storable was removed from registry
+   propertys array
+
+   Hint:
+       1. StoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
+       2. StoredComponentRegistry()->export()['componentCrud']->create(StoredComponentRegistry)
+       3. StoredComponentRegistry()->registerComponent(StoredComponentRegistry)
+       4. $status = StoredComponentRegistry()->unRegisterComponent(StoredComponentRegistry)
+       5. if(
+              in_array(
+                  StoredComponentRegistry()->export()['storable'],
+                  StoredComponentRegistry()->export()['registry'],
+                  true
+              )
+              === false
+          )
+          {
+              assertTrue($status)
+          }
+       6. StoredComponentRegistry()->export()['componentCrud']->delete(StoredComponentRegistry)
+
+********************************
 getRegisteredComponents(): array
+********************************
 
+********************
 getRegistry(): array
+********************
 
+*********************
+purgeRegistry(): bool
+*********************
 
+*********************
+emptyRegistry(): bool
+*********************
 
-
-
-
-
-e.g.
-
-the ComponentInstaller will use a SCR to track what comps it insalls
-
-sudo code:
-
-install(); bool
-{
-    foreach(componentsToInstall as component)
-    {
-        if(Crud->create(component) === true)
-        {
-            $staus = $this->storedComponentRegistry()->registerComponent(component)
-        }
-    }
-    return ($status === true) && $this->componentCrud->registerComponent($this->storedComponentRegistry);
-}
