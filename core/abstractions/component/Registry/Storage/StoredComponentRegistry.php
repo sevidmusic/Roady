@@ -9,6 +9,8 @@ use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as 
 abstract class StoredComponentRegistry extends Component implements StoredComponentRegistryInterface
 {
 
+    private $acceptedImplementation = 'DarlingCms\interfaces\component\Component';
+
     public function __construct(Storable $storable)
     {
         parent::__construct($storable);

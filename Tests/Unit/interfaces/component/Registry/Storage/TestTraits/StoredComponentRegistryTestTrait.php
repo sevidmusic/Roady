@@ -25,4 +25,10 @@ trait StoredComponentRegistryTestTrait
         $this->storedComponentRegistry = $storedComponentRegistry;
     }
 
+    public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedInterfacePostInstantiation(): void
+    {
+        $this->assertTrue(
+            interface_exists($this->getStoredComponentRegistry()->export()['acceptedImplementation'])
+        );
+    }
 }
