@@ -8,6 +8,8 @@ different.
 
 *************************************************************************
 ************************ Notes about this file **************************
+*************************************************************************
+
   Hint: Hints provide psuedo code that is meant to serve as an
         implementation guide.
 
@@ -15,11 +17,12 @@ different.
               They are used so the following command can be run to get a
               summary of the DevelopmentTemplate:
 
-        grep -E 'tes[t]|[0-9][.]' /path/to/DevelopmentTemplate.txt
+        grep -E 'tes[t]|[0-9][.]' /path/to/DevelopmentTemplate.txt | sed -e 's/tes[t]/\ntest/g;'
 
         In general it is important that the formatting of this document
         be consistent so tools like grep|awk|sed can be used to review
         this file.
+
 *************************************************************************
 *************************************************************************
 *************************************************************************
@@ -83,7 +86,8 @@ private $registry
 
 testRegistryPropertyIsSetToAnEmptyArrayPostInstantiation(): void
 
-   As the tests name implies, assertEquals([], StoredComponentRegistry->export()['registry'])
+   Test thtat the registry property is assigned an empty array on
+   instantiation.
 
    Hint:
        1. assertEquals([], StoredComponentRegistry->export()['registry'])
@@ -265,16 +269,85 @@ testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPrope
 ********************************
 getRegisteredComponents(): array
 ********************************
+testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
+
+   Tests that getRegisteredComponents() reads all registered components from stroage into an array.
+
+   Hint:
+       1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
+       2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry->export()['componentCrud'])
+       3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
+       4. StoredComponentRegistry->registerComponent(StoredComponentRegistry->export()['componentCrud'])
+       5. assertTrue(
+       5.     in_array(
+       5.         StoredComponentRegistry,
+       5.         StoredComponentRegistry->getRegisteredComponents()
+       5.         true
+       5.     )
+       6.     in_array(
+       6.         StoredComponentRegistry->export()['componentCrud'],
+       6.         StoredComponentRegistry->getRegisteredComponents(),
+       6.         true
+       6.     )
+       7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
+       7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
 
 ********************
 getRegistry(): array
 ********************
 
-*********************
-purgeRegistry(): bool
-*********************
+testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
+
+   Tests that getRegistry() returns the array assigned to the registry property array.
+
+   Hint:
+       1. assertEquals(
+       1.     StoredComponentRegistry->export()['registry'],
+       1.     StoredComponentRegistry->getRegistry()
+       1. )
 
 *********************
 emptyRegistry(): bool
 *********************
+
+testEmptyRegistryAssignsAnEmptyArrayToTheRegistryProperty(): void
+
+   Test that emptyRegistry() assigns an empty array to the registry property.
+
+   Hint:
+       1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
+       2. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
+       3. StoredComponentRegistry->emptyRegistry()
+       4. assertEquals([], StoredComponentRegistry->export()['registry'])
+       5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
+
+*********************
+purgeRegistry(): bool
+*********************
+
+testPurgeRegistryRemovesAllStroablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
+
+   Test that purgeRegistry() revmoes all Storables in the registry property's array that reference Components that no
+   longer exists in storage.
+
+   Hint:
+       1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
+       2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry->export()['componentCrud'])
+       3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
+       4. StoredComponentRegistry->registerComponent(StoredComponentRegistry->export()['componentCrud'])
+       5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
+       6. assertTrue(
+       6.     !in_array(
+       6.         StoredComponentRegistry->export()['storable'],
+       6.         StoredComponentRegistry->export()['registry']
+       6.         true
+       6.     )
+       7.     in_array(
+       7.         StoredComponentRegistry->export()['componentCrud']->export()['storable'],
+       6.         StoredComponentRegistry->export()['registry']
+       7.         true
+       7.     )
+       8. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
+
+
 
