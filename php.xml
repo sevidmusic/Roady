@@ -48,6 +48,11 @@
             <file>Tests/Unit/classes/component/ActionTest.php</file>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | StoredComponentRegistry Tests">
+            <file>Tests/Unit/abstractions/component/Registry/Storage/StoredComponentRegistryTest.php</file>
+            <file>Tests/Unit/classes/component/Registry/Storage/StoredComponentRegistry.php</file>
+        </testsuite>
+
         <testsuite name="Darling Cms Redesign | StandardUI Tests">
             <file>Tests/Unit/abstractions/component/UserInterface/StandardUITest.php</file>
             <file>Tests/Unit/classes/component/UserInterface/StandardUITest.php</file>
