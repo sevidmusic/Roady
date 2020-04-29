@@ -122,7 +122,7 @@ testGetComponentCrudReturnsSameComponentCrudImplementationInstanceAssignedToComp
        1. assertEquals(StoredComponentRegistry->export()['componentCrud'], StoredComponentRegistry->getComponentCrud())
 
 ********************************************
-registerComponent(Component component): bool
+registerComponent(Component): bool
 ********************************************
 
 testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsAlreadyRegistered(): void
