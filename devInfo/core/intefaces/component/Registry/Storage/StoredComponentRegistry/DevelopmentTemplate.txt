@@ -134,7 +134,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
        1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
        2. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
-       4. assertTrue(1, count(StoredComponentRegistry->export()['registry']))
+       4. assertEquals(1, count(StoredComponentRegistry->export()['registry']))
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
 testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void

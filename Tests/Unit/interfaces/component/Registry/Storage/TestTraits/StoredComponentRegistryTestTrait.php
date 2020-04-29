@@ -75,4 +75,16 @@ trait StoredComponentRegistryTestTrait
             $this->getStoredComponentRegistry()->getComponentCrud()
         );
     }
+
+    public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsAlreadyRegistered(): void
+    {
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        $this->assertEquals(
+            1,
+            count($this->getStoredComponentRegistry()->export()['registry'])
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+    }
 }

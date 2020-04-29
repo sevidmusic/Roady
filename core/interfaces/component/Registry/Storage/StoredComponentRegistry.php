@@ -12,4 +12,6 @@ interface StoredComponentRegistry extends Component
 
     public function getComponentCrud(): ComponentCrud;
 
+    public function registerComponent(Component $component): bool;
+
 }
