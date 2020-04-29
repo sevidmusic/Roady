@@ -31,4 +31,17 @@ trait StoredComponentRegistryTestTrait
             interface_exists($this->getStoredComponentRegistry()->export()['acceptedImplementation'])
         );
     }
+
+    public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplementationPostInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->getStoredComponentRegistry()->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
+            ||
+            in_array(
+                'DarlingCms\interfaces\component\Component',
+                class_implements($this->getStoredComponentRegistry()->export()['acceptedImplementation']),
+                true
+            )
+        );
+    }
 }
