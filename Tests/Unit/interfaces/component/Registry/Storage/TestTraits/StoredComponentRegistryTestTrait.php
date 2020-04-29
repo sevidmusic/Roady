@@ -53,6 +53,10 @@ trait StoredComponentRegistryTestTrait
                 class_implements($this->getStoredComponentRegistry()->export()['componentCrud'])
             )
         );
+    }
 
+    public function testRegistryPropertyIsSetToAnEmptyArrayPostInstantiation(): void
+    {
+        $this->assertEquals([], $this->getStoredComponentRegistry()->export()['registry']);
     }
 }

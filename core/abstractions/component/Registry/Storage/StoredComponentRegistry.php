@@ -13,6 +13,7 @@ abstract class StoredComponentRegistry extends Component implements StoredCompon
 
     private $acceptedImplementation = 'DarlingCms\interfaces\component\Component';
     private $componentCrud;
+    private $registry = [];
 
     public function __construct(Storable $storable, ComponentCrud $componentCrud)
     {
