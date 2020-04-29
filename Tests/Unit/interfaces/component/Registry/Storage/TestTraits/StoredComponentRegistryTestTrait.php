@@ -44,4 +44,15 @@ trait StoredComponentRegistryTestTrait
             )
         );
     }
+
+    public function testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostInstantiation(): void
+    {
+        $this->assertTrue(
+            in_array(
+                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                class_implements($this->getStoredComponentRegistry()->export()['componentCrud'])
+            )
+        );
+
+    }
 }

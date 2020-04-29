@@ -6,6 +6,10 @@ use DarlingCms\classes\primary\Storable;
 use UnitTests\abstractions\component\ComponentTest;
 use UnitTests\interfaces\component\Registry\Storage\TestTraits\StoredComponentRegistryTestTrait;
 
+use DarlingCms\classes\primary\Switchable;
+use DarlingCms\classes\component\Crud\ComponentCrud;
+use DarlingCms\classes\component\Driver\Storage\Standard;
+
 class StoredComponentRegistryTest extends ComponentTest
 {
     use StoredComponentRegistryTestTrait;
@@ -21,6 +25,23 @@ class StoredComponentRegistryTest extends ComponentTest
                         'MockStoredComponentRegistryLocation',
                         'MockStoredComponentRegistryContainer'
                     ),
+                    new ComponentCrud(
+                        new Storable(
+                            'ComponentCrud',
+                            'Temp',
+                            'Temp'
+                        ),
+                        new Switchable(),
+                        new Standard(
+                            new Storable(
+                                'StandardStorageDriver',
+                                'Temp',
+                                'Temp'
+                            ),
+                            new Switchable()
+                        )
+
+                    )
                 ]
             )
         );
