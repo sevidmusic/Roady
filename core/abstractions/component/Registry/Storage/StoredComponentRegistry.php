@@ -25,4 +25,10 @@ abstract class StoredComponentRegistry extends Component implements StoredCompon
     {
         return $this->acceptedImplementation;
     }
+
+    public function getComponentCrud(): ComponentCrud
+    {
+        return $this->componentCrud;
+    }
+
 }

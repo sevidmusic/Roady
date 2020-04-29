@@ -67,4 +67,12 @@ trait StoredComponentRegistryTestTrait
             $this->getStoredComponentRegistry()->getAcceptedImplementation()
         );
     }
+
+    public function testGetComponentCrudReturnsSameComponentCrudImplementationInstanceAssignedToComponentCrudPropertyOnInstantiation(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentRegistry()->export()['componentCrud'],
+            $this->getStoredComponentRegistry()->getComponentCrud()
+        );
+    }
 }
