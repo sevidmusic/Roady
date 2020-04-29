@@ -7,4 +7,6 @@ use DarlingCms\interfaces\component\Component;
 interface StoredComponentRegistry extends Component
 {
 
+    public function getAcceptedImplementation(): string;
+
 }

@@ -21,4 +21,8 @@ abstract class StoredComponentRegistry extends Component implements StoredCompon
         $this->componentCrud = $componentCrud;
     }
 
+    public function getAcceptedImplementation(): string
+    {
+        return $this->acceptedImplementation;
+    }
 }

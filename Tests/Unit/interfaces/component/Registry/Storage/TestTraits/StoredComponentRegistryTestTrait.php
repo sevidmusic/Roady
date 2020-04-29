@@ -59,4 +59,12 @@ trait StoredComponentRegistryTestTrait
     {
         $this->assertEquals([], $this->getStoredComponentRegistry()->export()['registry']);
     }
+
+    public function testGetAcceptedImplementationReturnsSameNamesapaceAssignedToAcceptedImplementationPropertyOnInstantiation(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentRegistry()->export()['acceptedImplementation'],
+            $this->getStoredComponentRegistry()->getAcceptedImplementation()
+        );
+    }
 }
