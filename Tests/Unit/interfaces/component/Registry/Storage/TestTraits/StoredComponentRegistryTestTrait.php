@@ -87,4 +87,13 @@ trait StoredComponentRegistryTestTrait
         $this->setComponent($this->getStoredComponentRegistry());
         $this->setComponentParentTestInstances();
     }
+
+    public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
+    {
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        $this->assertEquals(
+            0,
+            count($this->getStoredComponentRegistry()->export()['registry'])
+        );
+    }
 }
