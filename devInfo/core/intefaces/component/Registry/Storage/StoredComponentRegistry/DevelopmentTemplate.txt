@@ -137,6 +137,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
        4. assertEquals(1, count(StoredComponentRegistry->export()['registry']))
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
+############ HERE ############
 testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
 
    Tests that registerComponent() does not add the specified Component's Storable to the registry property's
@@ -144,8 +145,14 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
    only reference stored Components.
 
    Hint:
-       1. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
-       2. assertTrue(0, count(StoredComponentRegistry->export()['registry']))
+       1. (TEST) StoredComponentRegistry->registerComponent(StoredComponentRegistry)
+       2. (TEST) assertEquals(0, count(StoredComponentRegistry->export()['registry']))
+   Hint:
+       1. (ABS) Note: When implementing abstraction, implement private isStored() method that verifies the
+       1. (ABS) component exists in storage by attempting to read it via the crud, and then comparing the
+       1. (ABS) unique ids of the component and the component returned by read.
+       2. (ABS) e.g.:
+       2. (ABS) (crud->read(component->export()['storable'])->getUniqueId() === component()->getUniqueId()) ? true : false)
 
 testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
 
