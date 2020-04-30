@@ -32,18 +32,17 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         return $this->componentCrud;
     }
 
-    private function isRegistered(Component $component): bool
+    public function registerComponent(Component $component): bool
     {
-        return in_array($component->export()['storable'], $this->registry, true);
-    }
-
-
-    public function registerComponent(Component $component): bool {
-        if($this->isRegistered($component) === true)
-        {
+        if ($this->isRegistered($component) === true) {
             return false;
         }
         array_push($this->registry, $component->export()['storable']);
         return true;
+    }
+
+    private function isRegistered(Component $component): bool
+    {
+        return in_array($component->export()['storable'], $this->registry, true);
     }
 }

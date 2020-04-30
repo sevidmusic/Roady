@@ -9,10 +9,11 @@ trait StoredComponentRegistryTestTrait
 
     private $storedComponentRegistry;
 
-    protected function setStoredComponentRegistryParentTestInstances(): void
+    public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedInterfacePostInstantiation(): void
     {
-        $this->setComponent($this->getStoredComponentRegistry());
-        $this->setComponentParentTestInstances();
+        $this->assertTrue(
+            interface_exists($this->getStoredComponentRegistry()->export()['acceptedImplementation'])
+        );
     }
 
     public function getStoredComponentRegistry(): StoredComponentRegistry
@@ -23,13 +24,6 @@ trait StoredComponentRegistryTestTrait
     public function setStoredComponentRegistry(StoredComponentRegistry $storedComponentRegistry)
     {
         $this->storedComponentRegistry = $storedComponentRegistry;
-    }
-
-    public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedInterfacePostInstantiation(): void
-    {
-        $this->assertTrue(
-            interface_exists($this->getStoredComponentRegistry()->export()['acceptedImplementation'])
-        );
     }
 
     public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplementationPostInstantiation(): void
@@ -60,7 +54,7 @@ trait StoredComponentRegistryTestTrait
         $this->assertEquals([], $this->getStoredComponentRegistry()->export()['registry']);
     }
 
-    public function testGetAcceptedImplementationReturnsSameNamesapaceAssignedToAcceptedImplementationPropertyOnInstantiation(): void
+    public function testGetAcceptedImplementationReturnsSameNamespaceAssignedToAcceptedImplementationPropertyOnInstantiation(): void
     {
         $this->assertEquals(
             $this->getStoredComponentRegistry()->export()['acceptedImplementation'],
@@ -86,5 +80,11 @@ trait StoredComponentRegistryTestTrait
             count($this->getStoredComponentRegistry()->export()['registry'])
         );
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+    }
+
+    protected function setStoredComponentRegistryParentTestInstances(): void
+    {
+        $this->setComponent($this->getStoredComponentRegistry());
+        $this->setComponentParentTestInstances();
     }
 }
