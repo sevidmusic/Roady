@@ -144,10 +144,8 @@ trait JsonTestTrait
     {
         $this->turnJsonOn();
         $this->getJson()->write($this->getJson());
-        $storable = $this->getJson()->export()['storable'];
-        $storedComponent = $this->getJson()->read($storable);
-        $storedStorable = $storedComponent->export()['storable'];
-        $this->assertEquals($storable, $storedStorable);
+        $storedComponent = $this->getJson()->read($this->getJson());
+        $this->assertEquals($this->getJson(), $storedComponent);
     }
 
     public function testReadAllReturnsArrayOfAllComponentsStoredInSpecifiedContainerAtSpecifiedLocation(): void

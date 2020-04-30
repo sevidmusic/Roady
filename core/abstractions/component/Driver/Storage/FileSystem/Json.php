@@ -196,9 +196,25 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         $clone->import($this->unpack($data));
         /**
          * !IMPORTANT: Clone's storable must match supplied storable.
-         * Also, this import must be the last thing done before returning!!!
+         * This MUST be the last thing done before returning!!!
+         * Note, since Components are Storables, export MUST
+         * be used when handling actual components or the
+         * Component passed to read as the Storable will
+         * be assigned in it's entirety to the returned
+         * Component's storable, which may not break the
+         * returned Component, but will corrupt it's data.
          */
-        $clone->import(['storable' => $storable]);
+        switch ($this->isAComponent($storable)) {
+            case true:
+                /**
+                 * @var Component $storable If isAComponent(), then use export to get actual storable.
+                 */
+                $clone->import(['storable' => $storable->export()['storable']]);
+                break;
+            default:
+                $clone->import(['storable' => $storable]);
+                break;
+        }
         return $clone;
     }
 
@@ -264,6 +280,11 @@ abstract class Json extends SwitchableComponent implements JsonInterface
 
         }
         return $array;
+    }
+
+    private function isAComponent(Storable $storable): bool
+    {
+        return in_array('DarlingCms\interfaces\component\Component', class_implements($storable));
     }
 
 }
