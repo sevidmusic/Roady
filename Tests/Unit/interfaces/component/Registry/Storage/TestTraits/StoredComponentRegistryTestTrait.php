@@ -123,4 +123,21 @@ trait StoredComponentRegistryTestTrait
         );
     }
 
+    public function testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
+    {
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
+        $status = $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        if(
+            in_array(
+                $this->getStoredComponentRegistry()->export()['storable'],
+                $this->getStoredComponentRegistry()->export()['registry'],
+                true
+            )
+        )
+        {
+            $this->assertTrue($status);
+        }
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+    }
+
 }
