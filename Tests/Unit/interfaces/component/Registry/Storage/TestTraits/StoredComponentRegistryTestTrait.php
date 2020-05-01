@@ -108,4 +108,19 @@ trait StoredComponentRegistryTestTrait
         );
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry()->export()['componentCrud']);
     }
+
+    public function testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
+    {
+        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry']);
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        $this->assertTrue(
+            in_array(
+                $this->getStoredComponentRegistry()->export()['storable'],
+                $this->getStoredComponentRegistry()->export()['registry'],
+                true
+            )
+        );
+    }
+
 }
