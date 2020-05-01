@@ -40,6 +40,10 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         if($this->isStored($component) === false) {
             return false;
         }
+        if($this->isAcceptedImplementation($component) === false)
+        {
+            return false;
+        }
         array_push($this->registry, $component->export()['storable']);
         return true;
     }
@@ -53,4 +57,13 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
     {
         return ($this->componentCrud->read($component) == $component);
     }
+
+    private function isAcceptedImplementation(Component $component): bool
+    {
+        return in_array(
+            $this->acceptedImplementation,
+            class_implements($component)
+        );
+    }
+
 }

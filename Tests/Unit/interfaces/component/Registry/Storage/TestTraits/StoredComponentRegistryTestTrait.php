@@ -96,4 +96,16 @@ trait StoredComponentRegistryTestTrait
             count($this->getStoredComponentRegistry()->export()['registry'])
         );
     }
+
+    public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
+    {
+        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry']);
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry()->export()['componentCrud']);
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry()->export()['componentCrud']);
+        $this->assertEquals(
+            0,
+            count($this->getStoredComponentRegistry()->export()['registry'])
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry()->export()['componentCrud']);
+    }
 }
