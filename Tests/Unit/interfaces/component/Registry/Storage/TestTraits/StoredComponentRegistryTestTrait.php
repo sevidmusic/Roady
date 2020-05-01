@@ -140,4 +140,21 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
+    public function testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
+    {
+        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud']);
+        $status = $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        if(
+            !in_array(
+                $this->getStoredComponentRegistry()->export()['storable'],
+                $this->getStoredComponentRegistry()->export()['registry'],
+                true
+            )
+        )
+        {
+            $this->assertFalse($status);
+        }
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+    }
+
 }
