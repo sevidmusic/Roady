@@ -137,7 +137,6 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
        4. assertEquals(1, count(StoredComponentRegistry->export()['registry']))
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
-############ HERE ############
 testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
 
    Tests that registerComponent() does not add the specified Component's Storable to the registry property's
@@ -168,6 +167,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
        4. assertTrue(0, count(StoredComponentRegistry->export()['registry']))
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
 
+############ HERE ############
 testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
 
    Tests that registerComponent adds the specified Component's Storable to the registry property array if ALL of the following statements are TRUE:
