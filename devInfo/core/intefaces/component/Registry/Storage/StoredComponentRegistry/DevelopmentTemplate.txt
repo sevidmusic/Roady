@@ -207,7 +207,6 @@ testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
        3. }
        4. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
-############ HERE ############
 testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
 
    Tests that registerComponent() returns false if Component's storable was not added to registry
@@ -231,6 +230,7 @@ testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
 unRegisterComponent(Storable): bool
 ***********************************
 
+############ HERE ############
 testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
 
    Tests that unRegisterComponent() removes the specified Storable from the
