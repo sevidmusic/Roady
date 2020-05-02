@@ -157,4 +157,19 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
+    public function testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
+    {
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->unRegisterComponent($this->getStoredComponentRegistry());
+        $this->assertFalse(
+            in_array(
+                $this->getStoredComponentRegistry()->export()['storable'],
+                $this->getStoredComponentRegistry()->export()['registry'],
+                true
+            )
+        );
+
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+    }
 }

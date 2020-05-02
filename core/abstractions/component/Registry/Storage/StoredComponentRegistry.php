@@ -66,4 +66,27 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         );
     }
 
+    private function storableIsAComponent(Storable $storable): bool
+    {
+        return in_array('DarlingCms\interfaces\component\Component', class_implements($storable));
+    }
+
+    private function getStorableFromComponent(Component $component): Storable
+    {
+        return $component->export()['storable'];
+    }
+
+    public function unRegisterComponent(Storable $storable): bool
+    {
+        $actualStorable = (
+            $this->storableIsAComponent($storable) === true
+            ? $this->getStorableFromComponent($storable)
+            : $storable
+        );
+        if(in_array($actualStorable, $this->registry) === true)
+        {
+            unset($this->registry[array_search($actualStorable, $this->registry)]);
+        }
+        return !in_array($actualStorable, $this->registry);
+    }
 }
