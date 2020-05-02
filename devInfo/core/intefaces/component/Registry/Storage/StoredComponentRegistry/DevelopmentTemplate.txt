@@ -248,6 +248,20 @@ testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): voi
        4.     )
        4. )
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
+   Hint:
+       0. (ABS) array_search() will need to check for Storable in registry, since
+       0. (ABS) Components are Storables, the following private method should be used by
+       0. (ABS) unRegisterComponent() to differentiate between Components and regular
+       0. (ABS) Storables:
+       0. (ABS)     storableIsAComponent(Storable):bool
+       0. (ABS)     getStorableFromComponent(Component): bool
+       1. (ABS) i.e.,
+       1. (ABS) unRegisterComponent(Storable): bool
+       1. (ABS) {
+       1. (ABS)    $storable = ($this->storableIsAComponent(Storable) ? $this->getStorableFromComponent(Storable) : Storable);
+       1. (ABS)    if(in_array($storable, $this->registry) { unset($this->registry[array_search($storable)]); }
+       1. (ABS)    return !in_array($storable, $this->registry)
+       1. (ABS) }
 
 testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
 
