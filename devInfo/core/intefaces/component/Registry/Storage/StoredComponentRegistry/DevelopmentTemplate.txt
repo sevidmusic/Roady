@@ -262,7 +262,6 @@ testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): voi
        1. (ABS)    return !in_array($storable, $this->registry)
        1. (ABS) }
 
-############ HERE ############
 testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
 
    Tests that unRegisterComponent() returns true if specified Storable was removed from registry
@@ -283,6 +282,19 @@ testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPrope
        4.     assertTrue($status)
        4. }
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
+
+############ HERE ############
+testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryPropertysArray(): void
+
+   Tests that unRegisterComponent() returns false if specified Storable was not removed from registry
+   propertys array. Note: unRegister() MUST return false if storable was not removed for ANY REASON,
+   including if it wasnt removed because it does not exist. To simulate a false return the test
+   will attempt to un-register a component that was never registered, and assert that unRegisterComponent()
+   returns false.
+
+   Hint:
+       1. $status = StoredComponentRegistry->unRegisterComponent(StoredComponentRegistry)
+       2. assertTrue($status)
 
 ********************************
 getRegisteredComponents(): array
