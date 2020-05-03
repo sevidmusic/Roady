@@ -83,6 +83,9 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
             ? $this->getStorableFromComponent($storable)
             : $storable
         );
+        if(!in_array($actualStorable, $this->registry)=== true) {
+            return false;
+        }
         if(in_array($actualStorable, $this->registry) === true)
         {
             unset($this->registry[array_search($actualStorable, $this->registry)]);

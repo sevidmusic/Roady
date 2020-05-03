@@ -193,6 +193,10 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
-
+    public function testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryPropertysArray(): void
+    {
+        $status = $this->getStoredComponentRegistry()->unRegisterComponent($this->getStoredComponentRegistry());
+        $this->assertFalse($status);
+    }
 
 }
