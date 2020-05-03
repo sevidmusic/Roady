@@ -315,6 +315,7 @@ testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThem
        5.         StoredComponentRegistry->getRegisteredComponents()
        5.         true
        5.     )
+       5.     &&
        6.     in_array(
        6.         StoredComponentRegistry->export()['componentCrud'],
        6.         StoredComponentRegistry->getRegisteredComponents(),
