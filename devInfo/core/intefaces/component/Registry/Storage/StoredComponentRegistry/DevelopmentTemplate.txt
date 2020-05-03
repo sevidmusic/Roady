@@ -230,7 +230,6 @@ testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
 unRegisterComponent(Storable): bool
 ***********************************
 
-############ HERE ############
 testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
 
    Tests that unRegisterComponent() removes the specified Storable from the
@@ -263,6 +262,7 @@ testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): voi
        1. (ABS)    return !in_array($storable, $this->registry)
        1. (ABS) }
 
+############ HERE ############
 testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
 
    Tests that unRegisterComponent() returns true if specified Storable was removed from registry
