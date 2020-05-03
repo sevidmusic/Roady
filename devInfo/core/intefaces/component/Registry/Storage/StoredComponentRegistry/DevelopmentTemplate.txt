@@ -299,6 +299,7 @@ testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryP
 ********************************
 getRegisteredComponents(): array
 ********************************
+############ HERE ############
 testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
 
    Tests that getRegisteredComponents() reads all registered components from stroage into an array.
@@ -321,6 +322,15 @@ testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThem
        6.     )
        7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
        7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
+   Hint:
+       1. (ABS) getRegisteredComponents(): array
+       1. (ABS) {
+       1. (ABS)     $components = [];
+       1. (ABS)     foreach($this->registry as $storable) {
+       1. (ABS)         array_push($components, $this->crud->read($storable);
+       1. (ABS)     }
+       1. (ABS)     return $components
+       1. (ABS) }
 
 ********************
 getRegistry(): array
