@@ -2,12 +2,11 @@
 
 namespace DarlingCms\abstractions\component\Registry\Storage;
 
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\component\Component;
 use DarlingCms\abstractions\component\Component as AbstractComponent;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-
+use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingCms\interfaces\primary\Storable;
 
 abstract class StoredComponentRegistry extends AbstractComponent implements StoredComponentRegistryInterface
 {
@@ -37,11 +36,10 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         if ($this->isRegistered($component) === true) {
             return false;
         }
-        if($this->isStored($component) === false) {
+        if ($this->isStored($component) === false) {
             return false;
         }
-        if($this->isAcceptedImplementation($component) === false)
-        {
+        if ($this->isAcceptedImplementation($component) === false) {
             return false;
         }
         array_push($this->registry, $component->export()['storable']);
@@ -67,6 +65,21 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         );
     }
 
+    public function unRegisterComponent(Storable $storable): bool
+    {
+        /** @noinspection PhpParamsInspection */
+        $actualStorable = (
+        $this->storableIsAComponent($storable) === true
+            ? $this->getStorableFromComponent($storable)
+            : $storable
+        );
+        if (!in_array($actualStorable, $this->registry) === true) {
+            return false;
+        }
+        unset($this->registry[array_search($actualStorable, $this->registry)]);
+        return !in_array($actualStorable, $this->registry);
+    }
+
     private function storableIsAComponent(Storable $storable): bool
     {
         return in_array('DarlingCms\interfaces\component\Component', class_implements($storable));
@@ -77,26 +90,10 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         return $component->export()['storable'];
     }
 
-    public function unRegisterComponent(Storable $storable): bool
-    {
-        /** @noinspection PhpParamsInspection */
-        $actualStorable = (
-            $this->storableIsAComponent($storable) === true
-            ? $this->getStorableFromComponent($storable)
-            : $storable
-        );
-        if(!in_array($actualStorable, $this->registry)=== true) {
-            return false;
-        }
-        unset($this->registry[array_search($actualStorable, $this->registry)]);
-        return !in_array($actualStorable, $this->registry);
-    }
-
     public function getRegisteredComponents(): array
     {
         $components = [];
-        foreach($this->registry as $storable)
-        {
+        foreach ($this->registry as $storable) {
             array_push($components, $this->componentCrud->read($storable));
         }
         return $components;
@@ -114,10 +111,8 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
 
     public function purgeRegistry(): void
     {
-        foreach($this->registry as $storable)
-        {
-            if($storable->getUniqueId() !== $this->componentCrud->read($storable)->getUniqueId())
-            {
+        foreach ($this->registry as $storable) {
+            if ($storable->getUniqueId() !== $this->componentCrud->read($storable)->getUniqueId()) {
                 unset($this->registry[array_search($storable, $this->registry)]);
             }
         }

@@ -13,6 +13,7 @@ use ReflectionProperty;
 abstract class Exportable extends Classifiable implements ExportableInterface
 {
     use Logger;
+
     const PROP_NOT_DEFINED_IN_CLASS = <<<EOD
 Exportable Notice:
 Exportable type "%s" was unable to get property "%s" in preparation

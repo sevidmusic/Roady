@@ -3,8 +3,8 @@
 
 namespace DarlingCms\classes\component\Registry\Storage;
 
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 use DarlingCms\abstractions\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryBase;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 class StoredComponentRegistry extends StoredComponentRegistryBase implements StoredComponentRegistryInterface
 {
