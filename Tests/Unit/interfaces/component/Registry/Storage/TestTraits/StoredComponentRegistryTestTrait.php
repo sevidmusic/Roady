@@ -234,4 +234,13 @@ trait StoredComponentRegistryTestTrait
             $this->getStoredComponentRegistry()->getRegistry()
         );
     }
+
+    public function testEmptyRegistryAssignsAnEmptyArrayToTheRegistryProperty(): void
+    {
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->emptyRegistry();
+        $this->assertEquals([], $this->getStoredComponentRegistry()->export()['registry']);
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+    }
 }

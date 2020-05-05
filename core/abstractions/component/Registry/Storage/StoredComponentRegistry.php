@@ -104,4 +104,9 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
     {
         return $this->registry;
     }
+
+    public function emptyRegistry(): void
+    {
+        $this->registry = [];
+    }
 }
