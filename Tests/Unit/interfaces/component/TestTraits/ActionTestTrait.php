@@ -48,6 +48,16 @@ trait ActionTestTrait
         return $this->currentRequest;
     }
 
+    public function getAction(): Action
+    {
+        return $this->action;
+    }
+
+    public function setAction(Action $action): void
+    {
+        $this->action = $action;
+    }
+
     public function testDoReturnsTrue(): void
     {
         $this->assertTrue($this->getAction()->do());
@@ -108,16 +118,6 @@ trait ActionTestTrait
     {
         $this->setOutputComponent($this->getAction());
         $this->setOutputComponentParentTestInstances();
-    }
-
-    public function getAction(): Action
-    {
-        return $this->action;
-    }
-
-    public function setAction(Action $action): void
-    {
-        $this->action = $action;
     }
 
 }

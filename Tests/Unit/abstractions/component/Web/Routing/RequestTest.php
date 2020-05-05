@@ -4,8 +4,8 @@ namespace UnitTests\abstractions\component\Web\Routing;
 
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use UnitTests\interfaces\component\Web\Routing\TestTraits\RequestTestTrait;
 use UnitTests\abstractions\component\SwitchableComponentTest;
+use UnitTests\interfaces\component\Web\Routing\TestTraits\RequestTestTrait;
 
 class RequestTest extends SwitchableComponentTest
 {

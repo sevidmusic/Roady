@@ -2,11 +2,10 @@
 
 namespace UnitTests\abstractions\component;
 
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\primary\Positionable;
 use UnitTests\abstractions\component\OutputComponentTest as CoreOutputComponentTest;
-use DarlingCms\abstractions\component\Action;
 use UnitTests\interfaces\component\TestTraits\ActionTestTrait;
 
 class ActionTest extends CoreOutputComponentTest

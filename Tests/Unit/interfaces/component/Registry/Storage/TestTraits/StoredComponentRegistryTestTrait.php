@@ -82,12 +82,6 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
-    protected function setStoredComponentRegistryParentTestInstances(): void
-    {
-        $this->setComponent($this->getStoredComponentRegistry());
-        $this->setComponentParentTestInstances();
-    }
-
     public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
     {
         $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
@@ -127,14 +121,13 @@ trait StoredComponentRegistryTestTrait
     {
         $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
         $status = $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
-        if(
-            in_array(
-                $this->getStoredComponentRegistry()->export()['storable'],
-                $this->getStoredComponentRegistry()->export()['registry'],
-                true
-            )
+        if (
+        in_array(
+            $this->getStoredComponentRegistry()->export()['storable'],
+            $this->getStoredComponentRegistry()->export()['registry'],
+            true
         )
-        {
+        ) {
             $this->assertTrue($status);
         }
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
@@ -144,14 +137,13 @@ trait StoredComponentRegistryTestTrait
     {
         $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud']);
         $status = $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
-        if(
-            !in_array(
-                $this->getStoredComponentRegistry()->export()['storable'],
-                $this->getStoredComponentRegistry()->export()['registry'],
-                true
-            )
+        if (
+        !in_array(
+            $this->getStoredComponentRegistry()->export()['storable'],
+            $this->getStoredComponentRegistry()->export()['registry'],
+            true
         )
-        {
+        ) {
             $this->assertFalse($status);
         }
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
@@ -173,21 +165,18 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
-
-
     public function testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray()
     {
         $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
         $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
         $status = $this->getStoredComponentRegistry()->unRegisterComponent($this->getStoredComponentRegistry());
-        if(
-            !in_array(
-                $this->getStoredComponentRegistry()->export()['storable'],
-                $this->getStoredComponentRegistry()->export()['registry'],
-                true
-            )
+        if (
+        !in_array(
+            $this->getStoredComponentRegistry()->export()['storable'],
+            $this->getStoredComponentRegistry()->export()['registry'],
+            true
         )
-        {
+        ) {
             $this->assertTrue($status);
         }
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
@@ -225,7 +214,7 @@ trait StoredComponentRegistryTestTrait
             $this->getStoredComponentRegistry()->export()['componentCrud'],
             $this->getStoredComponentRegistry()->getRegisteredComponents()[1]
         );
-   }
+    }
 
     public function testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
     {
@@ -274,5 +263,11 @@ trait StoredComponentRegistryTestTrait
             )
         );
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry()->export()['componentCrud']);
+    }
+
+    protected function setStoredComponentRegistryParentTestInstances(): void
+    {
+        $this->setComponent($this->getStoredComponentRegistry());
+        $this->setComponentParentTestInstances();
     }
 }

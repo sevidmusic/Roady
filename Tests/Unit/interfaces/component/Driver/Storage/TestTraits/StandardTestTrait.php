@@ -9,6 +9,7 @@ trait StandardTestTrait
 {
 
     use JsonTestTrait;
+
     private $standard;
 
     protected function setStandardParentTestInstances(): void

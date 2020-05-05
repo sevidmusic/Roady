@@ -2,13 +2,12 @@
 
 namespace UnitTests\abstractions\component\Registry\Storage;
 
-use DarlingCms\classes\primary\Storable;
-use UnitTests\abstractions\component\ComponentTest;
-use UnitTests\interfaces\component\Registry\Storage\TestTraits\StoredComponentRegistryTestTrait;
-
-use DarlingCms\classes\primary\Switchable;
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
+use DarlingCms\classes\primary\Storable;
+use DarlingCms\classes\primary\Switchable;
+use UnitTests\abstractions\component\ComponentTest;
+use UnitTests\interfaces\component\Registry\Storage\TestTraits\StoredComponentRegistryTestTrait;
 
 class StoredComponentRegistryTest extends ComponentTest
 {

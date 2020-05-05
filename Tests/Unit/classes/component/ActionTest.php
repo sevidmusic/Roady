@@ -2,10 +2,10 @@
 
 namespace UnitTests\classes\component;
 
+use DarlingCms\classes\component\Action;
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\component\Action;
 use UnitTests\abstractions\component\ActionTest as AbstractActionTest;
 
 class ActionTest extends AbstractActionTest
