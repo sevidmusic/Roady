@@ -197,7 +197,7 @@ abstract class Json extends SwitchableComponent implements JsonInterface
         /**
          * !IMPORTANT: Clone's storable must match supplied storable.
          * This MUST be the last thing done before returning!!!
-         * Note, since Components are Storables, export MUST
+         * Note, since Components are Storable, export MUST
          * be used when handling actual components or the
          * Component passed to read as the Storable will
          * be assigned in it's entirety to the returned

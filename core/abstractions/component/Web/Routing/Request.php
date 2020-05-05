@@ -10,8 +10,8 @@ use DarlingCms\interfaces\primary\Switchable;
 abstract class Request extends SwitchableComponent implements RequestInterface
 {
     private $url = '';
-    private $get = [];
-    private $post = [];
+    private $get;
+    private $post;
 
     public function __construct(Storable $storable, Switchable $switchable)
     {

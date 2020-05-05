@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 
 namespace DarlingCms\abstractions\component\UserInterface;
 
@@ -15,8 +15,8 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     private $router;
     private $templates = [];
     private $outputComponents = [];
-    private $responseLocation = '';
-    private $responseContainer = '';
+    private $responseLocation;
+    private $responseContainer;
 
     public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Router $router, string $responseLocation, string $responseContainer)
     {
