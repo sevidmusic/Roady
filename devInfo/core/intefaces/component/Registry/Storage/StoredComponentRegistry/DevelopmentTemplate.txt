@@ -328,7 +328,7 @@ testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThem
 ********************
 getRegistry(): array
 ********************
-############ HERE ############
+
 testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
 
    Tests that getRegistry() returns the array assigned to the registry property array.
@@ -342,7 +342,7 @@ testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
 *********************
 emptyRegistry(): bool
 *********************
-
+############ HERE ############
 testEmptyRegistryAssignsAnEmptyArrayToTheRegistryProperty(): void
 
    Test that emptyRegistry() assigns an empty array to the registry property.
