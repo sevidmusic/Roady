@@ -283,7 +283,6 @@ testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPrope
        4. }
        5. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
 
-############ HERE ############
 testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryPropertysArray(): void
 
    Tests that unRegisterComponent() returns false if specified Storable was not removed from registry
@@ -321,6 +320,7 @@ testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThem
        6.         StoredComponentRegistry->getRegisteredComponents(),
        6.         true
        6.     )
+       6. )
        7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
        7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
    Hint:
