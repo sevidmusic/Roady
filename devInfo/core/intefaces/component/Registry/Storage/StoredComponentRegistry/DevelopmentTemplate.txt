@@ -301,28 +301,21 @@ getRegisteredComponents(): array
 ############ HERE ############
 testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
 
-   Tests that getRegisteredComponents() reads all registered components from stroage into an array.
+   Tests that getRegisteredComponents() reads all registered components from storage into an array.
 
-   Hint:
-       1. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
-       2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry->export()['componentCrud'])
-       3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
-       4. StoredComponentRegistry->registerComponent(StoredComponentRegistry->export()['componentCrud'])
-       5. assertTrue(
-       5.     in_array(
-       5.         StoredComponentRegistry,
-       5.         StoredComponentRegistry->getRegisteredComponents()
-       5.         true
-       5.     )
-       5.     &&
-       6.     in_array(
-       6.         StoredComponentRegistry->export()['componentCrud'],
-       6.         StoredComponentRegistry->getRegisteredComponents(),
-       6.         true
-       6.     )
-       6. )
-       7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry)
-       7. StoredComponentRegistry->export()['componentCrud']->delete(StoredComponentRegistry->export()['componentCrud'])
+   Hint: (Note: Hint shows storage/registration of one component, should use at least 2 in actual test)
+       1. $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
+       2. $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
+       3. var_dump($this->getStoredComponentRegistry()->export()['componentCrud']->update(
+       3.      $this->getStoredComponentRegistry(),
+       3.      $this->getStoredComponentRegistry()
+       3. ));
+       4. $this->assertEquals(
+       4.     StoredComponentRegistry
+       4.     $this->getRegisteredComponents()[0],
+       4. );
+       5. $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+
    Hint:
        1. (ABS) getRegisteredComponents(): array
        1. (ABS) {
