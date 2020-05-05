@@ -17,4 +17,6 @@ interface StoredComponentRegistry extends Component
 
     public function unRegisterComponent(Storable $storable): bool;
 
+    public function getRegisteredComponents(): array;
+
 }

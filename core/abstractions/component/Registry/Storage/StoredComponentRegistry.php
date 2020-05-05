@@ -89,4 +89,14 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         unset($this->registry[array_search($actualStorable, $this->registry)]);
         return !in_array($actualStorable, $this->registry);
     }
+
+    public function getRegisteredComponents(): array
+    {
+        $components = [];
+        foreach($this->registry as $storable)
+        {
+            array_push($components, $this->componentCrud->read($storable));
+        }
+        return $components;
+    }
 }

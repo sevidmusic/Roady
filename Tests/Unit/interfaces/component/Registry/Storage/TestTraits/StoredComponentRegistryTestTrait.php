@@ -199,4 +199,31 @@ trait StoredComponentRegistryTestTrait
         $this->assertFalse($status);
     }
 
+    public function testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
+    {
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create(
+            $this->getStoredComponentRegistry()
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create(
+            $this->getStoredComponentRegistry()->export()['componentCrud']
+        );
+        $this->getStoredComponentRegistry()->registerComponent(
+            $this->getStoredComponentRegistry()
+        );
+        $this->getStoredComponentRegistry()->registerComponent(
+            $this->getStoredComponentRegistry()->export()['componentCrud']
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->update(
+            $this->getStoredComponentRegistry(),
+            $this->getStoredComponentRegistry()
+        );
+        $this->assertEquals(
+            $this->getStoredComponentRegistry(),
+            $this->getStoredComponentRegistry()->getRegisteredComponents()[0]
+        );
+        $this->assertEquals(
+            $this->getStoredComponentRegistry()->export()['componentCrud'],
+            $this->getStoredComponentRegistry()->getRegisteredComponents()[1]
+        );
+   }
 }
