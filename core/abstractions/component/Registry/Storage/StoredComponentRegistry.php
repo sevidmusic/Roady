@@ -109,4 +109,16 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
     {
         $this->registry = [];
     }
+
+    public function purgeRegistry(): void
+    {
+        foreach($this->registry as $storable)
+        {
+            if($storable->getUniqueId() !== $this->componentCrud->read($storable)->getUniqueId())
+            {
+                unset($this->registry[array_search($storable, $this->registry)]);
+            }
+        }
+    }
+
 }

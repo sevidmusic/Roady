@@ -243,4 +243,36 @@ trait StoredComponentRegistryTestTrait
         $this->assertEquals([], $this->getStoredComponentRegistry()->export()['registry']);
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
+
+    public function testPurgeRegistryRemovesAllStroablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
+    {
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create(
+            $this->getStoredComponentRegistry()
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->create(
+            $this->getStoredComponentRegistry()->export()['componentCrud']
+        );
+        $this->getStoredComponentRegistry()->registerComponent(
+            $this->getStoredComponentRegistry()
+        );
+        $this->getStoredComponentRegistry()->registerComponent(
+            $this->getStoredComponentRegistry()->export()['componentCrud']
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
+        $this->getStoredComponentRegistry()->purgeRegistry();
+        $this->assertTrue(
+            !in_array(
+                $this->getStoredComponentRegistry()->export()['storable'],
+                $this->getStoredComponentRegistry()->export()['registry'],
+                true
+            )
+            &&
+            in_array(
+                $this->getStoredComponentRegistry()->export()['componentCrud']->export()['storable'],
+                $this->getStoredComponentRegistry()->export()['registry'],
+                true
+            )
+        );
+        $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry()->export()['componentCrud']);
+    }
 }

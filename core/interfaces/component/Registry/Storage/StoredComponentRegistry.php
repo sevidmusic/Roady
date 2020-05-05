@@ -23,4 +23,6 @@ interface StoredComponentRegistry extends Component
 
     public function emptyRegistry(): void;
 
+    public function purgeRegistry(): void;
+
 }
