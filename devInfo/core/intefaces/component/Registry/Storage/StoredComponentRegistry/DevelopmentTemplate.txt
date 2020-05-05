@@ -298,7 +298,6 @@ testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryP
 ********************************
 getRegisteredComponents(): array
 ********************************
-############ HERE ############
 testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
 
    Tests that getRegisteredComponents() reads all registered components from storage into an array.
@@ -329,7 +328,7 @@ testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThem
 ********************
 getRegistry(): array
 ********************
-
+############ HERE ############
 testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
 
    Tests that getRegistry() returns the array assigned to the registry property array.
