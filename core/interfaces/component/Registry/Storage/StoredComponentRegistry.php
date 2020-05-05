@@ -19,4 +19,6 @@ interface StoredComponentRegistry extends Component
 
     public function getRegisteredComponents(): array;
 
+    public function getRegistry(): array;
+
 }

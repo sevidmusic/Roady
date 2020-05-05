@@ -226,4 +226,12 @@ trait StoredComponentRegistryTestTrait
             $this->getStoredComponentRegistry()->getRegisteredComponents()[1]
         );
    }
+
+    public function testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentRegistry()->export()['registry'],
+            $this->getStoredComponentRegistry()->getRegistry()
+        );
+    }
 }
