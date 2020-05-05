@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
@@ -130,7 +130,6 @@ EOD;
         return array_unique($propertyNames);
     }
 
-    /** @noinspection DuplicatedCode */
     private function getClassPropertyReflections($class): array
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {

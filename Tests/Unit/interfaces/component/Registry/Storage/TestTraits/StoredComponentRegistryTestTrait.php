@@ -233,7 +233,7 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
-    public function testPurgeRegistryRemovesAllStroablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
+    public function testPurgeRegistryRemovesAllStorablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
     {
         $this->getStoredComponentRegistry()->export()['componentCrud']->create(
             $this->getStoredComponentRegistry()

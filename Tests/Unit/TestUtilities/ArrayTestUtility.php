@@ -29,7 +29,7 @@ class ArrayTestUtility extends TestCase
 
     public function arrayValuesAreExpectedValues(array $array, array $expectedValues): void
     {
-        $this->assertEquals(count(array_diff($array, $expectedValues)), 0);
+        $this->assertCount(0, array_diff($array, $expectedValues));
     }
 
     private function getArrayOfArrayElementTypes(array $array): array
