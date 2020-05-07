@@ -356,7 +356,7 @@ testEmptyRegistryAssignsAnEmptyArrayToTheRegistryProperty(): void
 *********************
 purgeRegistry(): bool
 *********************
-############ HERE ############
+
 testPurgeRegistryRemovesAllStroablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
 
    Test that purgeRegistry() removes all Storables in the registry property's array that reference Components that no
