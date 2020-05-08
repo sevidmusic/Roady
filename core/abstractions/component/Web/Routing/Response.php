@@ -3,6 +3,7 @@
 namespace DarlingCms\abstractions\component\Web\Routing;
 
 use DarlingCms\abstractions\component\SwitchableComponent;
+use DarlingCms\classes\primary\Storable as StandardStorable;
 use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\OutputComponent;
@@ -15,13 +16,19 @@ use DarlingCms\interfaces\primary\Switchable;
 abstract class Response extends SwitchableComponent implements ResponseInterface
 {
 
+    public const RESPONSE_CONTAINER = "RESPONSES";
     private $outputComponentStorageInfo = array();
     private $templateStorageInfo = array();
     private $requestStorageInfo = array();
 
     public function __construct(Storable $storable, Switchable $switchable)
     {
-        parent::__construct($storable, $switchable);
+        $st = new StandardStorable(
+            $storable->getName(),
+            $storable->getLocation(),
+            self::RESPONSE_CONTAINER
+        );
+        parent::__construct($st, $switchable);
     }
 
     public function respondsToRequest(Request $request, ComponentCrud $crud): bool

@@ -57,6 +57,12 @@
             <file>Tests/Unit/abstractions/component/UserInterface/StandardUITest.php</file>
             <file>Tests/Unit/classes/component/UserInterface/StandardUITest.php</file>
         </testsuite>
+
+        <testsuite name="Darling Cms Redesign | Response Tests">
+            <file>Tests/Unit/abstractions/component/Web/Routing/ResponseTest.php</file>
+            <file>Tests/Unit/classes/component/Web/Routing/ResponseTest.php</file>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>

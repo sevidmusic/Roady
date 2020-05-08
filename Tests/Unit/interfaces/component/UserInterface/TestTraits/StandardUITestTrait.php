@@ -149,7 +149,7 @@ trait StandardUITestTrait
 
     protected function getResponseContainer(): string
     {
-        return 'StandardUITestResponseContainer';
+        return Response::RESPONSE_CONTAINER;
     }
 
     public function testRouterIsSetPostInstantiation(): void

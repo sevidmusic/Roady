@@ -6,6 +6,7 @@ use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;
 use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as Template;
 use DarlingCms\classes\component\Web\Routing\Request;
+use DarlingCms\classes\component\Web\Routing\Response as StandardResponse;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
@@ -321,6 +322,24 @@ trait ResponseTestTrait
                 $count
             ),
             'Failed removing request storage info by id.'
+        );
+    }
+
+    public function testRESPONSE_CONTAINERConstantIsAssignedStringRESPONSES(): void
+    {
+        $this->assertEquals("RESPONSES", $this->getResponse()::RESPONSE_CONTAINER);
+        $this->assertEquals("RESPONSES", StandardResponse::RESPONSE_CONTAINER);
+    }
+
+    public function testGetContainerReturnsValueOfRESPONSE_CONTAINERConstant(): void
+    {
+        $this->assertEquals(
+            $this->getResponse()::RESPONSE_CONTAINER,
+            $this->getResponse()->getContainer()
+        );
+        $this->assertEquals(
+            $this->getResponse()::RESPONSE_CONTAINER,
+            $this->getResponse()->export()['storable']->getContainer()
         );
     }
 
