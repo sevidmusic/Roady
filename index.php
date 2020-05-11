@@ -14,20 +14,29 @@ use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 
-$tempContainer = "TEMP";
-//$devLocation = "1921683310";
-$devLocation = "dcmsdev";
+$tempContainer = 'TEMP';
+//$devLocation = '1921683310';
+$devLocation = 'dcmsdev';
+$currentRequest = new Request(
+    new Storable(
+        'CurrentRequest',
+        'TEMPORARY_COMPONENTS',
+        $tempContainer
+    ),
+    new Switchable()
+);
+var_dump(preg_replace("/[^A-Za-z0-9]/", '', parse_url($currentRequest->getUrl(), PHP_URL_HOST)));
 
 $crud = new ComponentCrud(
     new Storable(
-        "IndexCrud",
+        'IndexCrud',
         $devLocation,
         $tempContainer
     ),
     new Switchable(),
     new Standard(
         new Storable(
-            "StandardStorageDriver",
+            'StandardStorageDriver',
             $devLocation,
             $tempContainer
         ),
@@ -35,18 +44,9 @@ $crud = new ComponentCrud(
     )
 );
 
-$currentRequest = new Request(
-    new Storable(
-        "'CurrentRequest",
-        $devLocation,
-        $tempContainer
-    ),
-    new Switchable()
-);
-var_dump(parse_url($currentRequest->getUrl()));
 $router = new Router(
     new Storable(
-        "Route",
+        'Router',
         $devLocation,
         $tempContainer
     ),
@@ -57,7 +57,7 @@ $router = new Router(
 
 $userInterface = new StandardUI(
     new Storable(
-        "UserInterface",
+        'UserInterface',
         $devLocation,
         $tempContainer
     ),
