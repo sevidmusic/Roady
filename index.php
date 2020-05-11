@@ -15,8 +15,6 @@ use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 
 $tempContainer = 'TEMP';
-//$devLocation = '1921683310';
-$devLocation = 'dcmsdev';
 $currentRequest = new Request(
     new Storable(
         'CurrentRequest',
@@ -25,8 +23,8 @@ $currentRequest = new Request(
     ),
     new Switchable()
 );
-var_dump(preg_replace("/[^A-Za-z0-9]/", '', parse_url($currentRequest->getUrl(), PHP_URL_HOST)));
-
+$devLocation = preg_replace("/[^A-Za-z0-9]/", '', parse_url($currentRequest->getUrl(), PHP_URL_HOST));
+var_dump($devLocation);
 $crud = new ComponentCrud(
     new Storable(
         'IndexCrud',
