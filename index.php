@@ -8,23 +8,28 @@ use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\UserInterface\StandardUI;
 use DarlingCms\classes\component\Web\Routing\Request;
+use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 
+$tempContainer = "TEMP";
+//$devLocation = "1921683310";
+$devLocation = "dcmsdev";
+
 $crud = new ComponentCrud(
     new Storable(
-        DEMO_SITE_NAME . "IndexCrud",
-        DEMO_SITE_NAME,
-        DEMO_SITE_CRUD_CONTAINER
+        "IndexCrud",
+        $devLocation,
+        $tempContainer
     ),
     new Switchable(),
     new Standard(
         new Storable(
-            DEMO_SITE_NAME . "StandardStorageDriver",
-            DEMO_SITE_NAME,
-            DEMO_SITE_STORAGE_DRIVER_CONTAINER
+            "StandardStorageDriver",
+            $devLocation,
+            $tempContainer
         ),
         new Switchable()
     )
@@ -32,18 +37,18 @@ $crud = new ComponentCrud(
 
 $currentRequest = new Request(
     new Storable(
-        DEMO_SITE_NAME . 'CurrentRequest',
-        DEMO_SITE_NAME,
-        DEMO_SITE_REQUEST_CONTAINER
+        "'CurrentRequest",
+        $devLocation,
+        $tempContainer
     ),
     new Switchable()
 );
-
+var_dump(parse_url($currentRequest->getUrl()));
 $router = new Router(
     new Storable(
-        DEMO_SITE_NAME . 'Router',
-        DEMO_SITE_NAME,
-        DEMO_SITE_ROUTER_CONTAINER
+        "Route",
+        $devLocation,
+        $tempContainer
     ),
     new Switchable(),
     $currentRequest,
@@ -52,15 +57,17 @@ $router = new Router(
 
 $userInterface = new StandardUI(
     new Storable(
-        DEMO_SITE_NAME . 'IndexUserInterface',
-        DEMO_SITE_NAME,
-        DEMO_SITE_OUTPUT_COMPONENT_CONTAINER
+        "UserInterface",
+        $devLocation,
+        $tempContainer
     ),
     new Switchable(),
     new Positionable(),
     $router,
-    DEMO_SITE_NAME,
-    DEMO_SITE_RESPONSE_CONTAINER
+    $devLocation,
+    Response::RESPONSE_CONTAINER
 );
 
 echo $userInterface->getOutput();
+?>
+<!-- Darling Cms -->

@@ -85,10 +85,10 @@ $indexHtmlBody->import(['output' => '
         <p>Welcome</p>
         <p>Use the menu below to navigate around</p>
         <ul>
-            <li><a href="http://192.168.33.10/index.php">Home</a></li>
-            <li><a href="http://192.168.33.10/">Root</a></li>
-            <li><a href="http://192.168.33.10/WorkingDemo.php">Demo</a></li>
-            <li><a href="http://192.168.33.10/index.php?WorkingDemo">Installed WorkingDemo App</a></li>
+            <li><a href="http://dcms.dev/index.php">Home</a></li>
+            <li><a href="http://dcms.dev/">Root</a></li>
+            <li><a href="http://dcms.dev/WorkingDemo.php">Demo</a></li>
+            <li><a href="http://dcms.dev/index.php?WorkingDemo">Installed WorkingDemo App</a></li>
         </ul>
     </div>
     </body>
@@ -132,7 +132,7 @@ $workingDemoDefaultRequest = new Request(
     ),
     new Switchable()
 );
-$workingDemoDefaultRequest->import(['url' => 'http://192.168.33.10/index.php?WorkingDemo']);
+$workingDemoDefaultRequest->import(['url' => 'http://dcms.dev/index.php?WorkingDemo']);
 
 $indexRequest = new Request(
     new Storable(
@@ -142,7 +142,7 @@ $indexRequest = new Request(
     ),
     new Switchable()
 );
-$indexRequest->import(['url' => 'http://192.168.33.10/index.php']);
+$indexRequest->import(['url' => 'http://dcms.dev/index.php']);
 
 $rootRequest = new Request(
     new Storable(
@@ -152,7 +152,7 @@ $rootRequest = new Request(
     ),
     new Switchable()
 );
-$rootRequest->import(['url' => 'http://192.168.33.10/']);
+$rootRequest->import(['url' => 'http://dcms.dev/']);
 
 
 // Responses
