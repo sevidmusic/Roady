@@ -9,6 +9,7 @@ use DarlingCms\interfaces\component\Web\App as AppInterface;
 
 abstract class App extends CoreSwitchableComponent implements AppInterface
 {
+    public const APP_CONTAINER = "APP";
 
     public function __construct(Storable $storable, Switchable $switchable)
     {

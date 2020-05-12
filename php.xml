@@ -64,8 +64,8 @@
         </testsuite>
 
         <testsuite name="Darling Cms Redesign | App Tests">
-            <file>Tests/Unit/abstractions/component/Web/App.php</file>
-            <file>Tests/Unit/classes/component/Web/App.php</file>
+            <file>Tests/Unit/abstractions/component/Web/AppTest.php</file>
+            <file>Tests/Unit/classes/component/Web/AppTest.php</file>
         </testsuite>
 
     </testsuites>

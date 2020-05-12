@@ -3,6 +3,8 @@
 namespace UnitTests\interfaces\component\Web\TestTraits;
 
 use DarlingCms\interfaces\component\Web\App;
+use DarlingCms\abstractions\component\Web\App as AbstractApp;
+use DarlingCms\classes\component\Web\App as CoreApp;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 
@@ -64,8 +66,10 @@ trait AppTestTrait
         return $this->mockRequest;
     }
 
-    public function testTest(): void
+    public function testAPP_CONTAINERConstantIsSetToStringAPP(): void
     {
-        var_dump($this->getMockRequest()->getUrl());
+        $this->assertEquals("APP", AbstractApp::APP_CONTAINER);
+        $this->assertEquals("APP", CoreApp::APP_CONTAINER);
+        $this->assertEquals("APP", $this->getApp()::APP_CONTAINER);
     }
 }
