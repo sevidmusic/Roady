@@ -19,24 +19,23 @@ $tempLocationContainer = 'TEMP';
 $currentRequest = new Request(
     new Storable(
         'CurrentRequest',
-        'TEMPORARY_COMPONENTS',
+        $tempLocationContainer,
         $tempLocationContainer
     ),
     new Switchable()
 );
-$expectedAppLocation = App::deriveNameLocationFromRequest($currentRequest);
-var_dump($expectedAppLocation);
+
 $crud = new ComponentCrud(
     new Storable(
         'IndexCrud',
-        $expectedAppLocation,
+        $tempLocationContainer,
         $tempLocationContainer
     ),
     new Switchable(),
     new Standard(
         new Storable(
             'StandardStorageDriver',
-            $expectedAppLocation,
+            $tempLocationContainer,
             $tempLocationContainer
         ),
         new Switchable()
@@ -46,7 +45,7 @@ $crud = new ComponentCrud(
 $router = new Router(
     new Storable(
         'Router',
-        $expectedAppLocation,
+        $tempLocationContainer,
         $tempLocationContainer
     ),
     new Switchable(),
@@ -57,16 +56,18 @@ $router = new Router(
 $userInterface = new StandardUI(
     new Storable(
         'UserInterface',
-        $expectedAppLocation,
+        $tempLocationContainer,
         $tempLocationContainer
     ),
     new Switchable(),
     new Positionable(),
     $router,
-    $expectedAppLocation,
+    App::deriveNameLocationFromRequest($currentRequest),
     Response::RESPONSE_CONTAINER
 );
 
 echo $userInterface->getOutput();
 ?>
-<!-- Darling Cms -->
+
+<!-- Powered by the Darling Cms | Currently Running App: <?php echo App::deriveNameLocationFromRequest($currentRequest); ?> -->
+
