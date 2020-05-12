@@ -70,12 +70,14 @@ testGetContainerReturnsValueOfAPP_CONTAINERConstant(): void
        1. assertEquals(App::APP_CONTAINER, App->getContainer())
        2. assertEquals(App::APP_CONTAINER, App->export()['storable']->getContainer())
 
+******************* HERE ****************************************************************************************************
 testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHost(): void
    Hint:
        1. assertEquals(
        1.                 preg_replace("/[^A-Ba-b0-9]/", '', parse_url(TestTrait::getMockRequest()->getUrl(), PHP_URL_HOST)),
        1.                 App::deriveAppNameLocationFromRequest(TestTrait::getMockRequest())
        1.             )
+*****************************************************************************************************************************
 
 testGetNameAndGetLocationReturnSameValue()
    Hint:
