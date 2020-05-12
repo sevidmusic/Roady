@@ -63,6 +63,11 @@
             <file>Tests/Unit/classes/component/Web/Routing/ResponseTest.php</file>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | App Tests">
+            <file>Tests/Unit/abstractions/component/Web/App.php</file>
+            <file>Tests/Unit/classes/component/Web/App.php</file>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>
