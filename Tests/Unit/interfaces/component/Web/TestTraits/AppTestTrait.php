@@ -82,4 +82,20 @@ trait AppTestTrait
         );
     }
 
+    public function testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrStringDEFAULTIfUrlHostCantBeDetermined(): void
+    {
+        $expectedNameLocation = preg_replace(
+            "/[^A-Za-z0-9]/",
+            '',
+            parse_url($this->getMockRequest()->getUrl(), PHP_URL_HOST)
+        );
+        if(empty($expectedNameLocation)) {
+            $expectedNameLocation = 'DEFAULT';
+        }
+        $this->assertEquals(
+            $expectedNameLocation,
+            $this->getApp()::deriveNameLocationFromRequest($this->getMockRequest())
+        );
+    }
+
 }
