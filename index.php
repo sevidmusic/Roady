@@ -13,7 +13,7 @@ use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-
+use DarlingCms\classes\component\Web\App;
 $tempContainer = 'TEMP';
 $currentRequest = new Request(
     new Storable(
@@ -23,19 +23,19 @@ $currentRequest = new Request(
     ),
     new Switchable()
 );
-$devLocation = preg_replace("/[^A-Za-z0-9]/", '', parse_url($currentRequest->getUrl(), PHP_URL_HOST));
-var_dump($devLocation);
+$expectedAppLocation = App::deriveNameLocationFromRequest($currentRequest);
+var_dump($expectedAppLocation);
 $crud = new ComponentCrud(
     new Storable(
         'IndexCrud',
-        $devLocation,
+        $expectedAppLocation,
         $tempContainer
     ),
     new Switchable(),
     new Standard(
         new Storable(
             'StandardStorageDriver',
-            $devLocation,
+            $expectedAppLocation,
             $tempContainer
         ),
         new Switchable()
@@ -45,7 +45,7 @@ $crud = new ComponentCrud(
 $router = new Router(
     new Storable(
         'Router',
-        $devLocation,
+        $expectedAppLocation,
         $tempContainer
     ),
     new Switchable(),
@@ -56,13 +56,13 @@ $router = new Router(
 $userInterface = new StandardUI(
     new Storable(
         'UserInterface',
-        $devLocation,
+        $expectedAppLocation,
         $tempContainer
     ),
     new Switchable(),
     new Positionable(),
     $router,
-    $devLocation,
+    $expectedAppLocation,
     Response::RESPONSE_CONTAINER
 );
 
