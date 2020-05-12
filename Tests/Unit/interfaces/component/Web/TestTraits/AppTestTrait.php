@@ -72,4 +72,14 @@ trait AppTestTrait
         $this->assertEquals("APP", CoreApp::APP_CONTAINER);
         $this->assertEquals("APP", $this->getApp()::APP_CONTAINER);
     }
+
+    public function testGetContainerReturnsValueOfAPP_CONTAINERConstant(): void
+    {
+        $this->assertEquals($this->getApp()::APP_CONTAINER, $this->getApp()->getContainer());
+        $this->assertEquals(
+            $this->getApp()::APP_CONTAINER,
+            $this->getApp()->export()['storable']->getContainer()
+        );
+    }
+
 }
