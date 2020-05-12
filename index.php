@@ -7,19 +7,20 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\UserInterface\StandardUI;
+use DarlingCms\classes\component\Web\App;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\component\Web\Routing\Router;
 use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\component\Web\App;
-$tempContainer = 'TEMP';
+
+$tempLocationContainer = 'TEMP';
 $currentRequest = new Request(
     new Storable(
         'CurrentRequest',
         'TEMPORARY_COMPONENTS',
-        $tempContainer
+        $tempLocationContainer
     ),
     new Switchable()
 );
@@ -29,14 +30,14 @@ $crud = new ComponentCrud(
     new Storable(
         'IndexCrud',
         $expectedAppLocation,
-        $tempContainer
+        $tempLocationContainer
     ),
     new Switchable(),
     new Standard(
         new Storable(
             'StandardStorageDriver',
             $expectedAppLocation,
-            $tempContainer
+            $tempLocationContainer
         ),
         new Switchable()
     )
@@ -46,7 +47,7 @@ $router = new Router(
     new Storable(
         'Router',
         $expectedAppLocation,
-        $tempContainer
+        $tempLocationContainer
     ),
     new Switchable(),
     $currentRequest,
@@ -57,7 +58,7 @@ $userInterface = new StandardUI(
     new Storable(
         'UserInterface',
         $expectedAppLocation,
-        $tempContainer
+        $tempLocationContainer
     ),
     new Switchable(),
     new Positionable(),

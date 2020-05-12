@@ -77,7 +77,6 @@ testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSp
        1.                 App::deriveAppNameLocationFromRequest(TestTrait::getMockRequest())
        1.             )
 
-******************* HERE ****************************************************************************************************
 testNameAndLocationWereSetUsingDeriveAppNameLocationFromRequestMethod()
    Hint:
        1. $expectedNameLocation = App::deriveNameLocationFromRequest(TestTrait::getMockRequest())
@@ -86,8 +85,4 @@ testNameAndLocationWereSetUsingDeriveAppNameLocationFromRequestMethod()
        2. assertEquals($expectedNameLocation, App->export()['storable']->getName());
        2. assertEquals($expectedNameLocation, App->export()['storable']->getLocation());
 
-testGetNameAndGetLocationReturnSameValue()
-   Hint:
-       1. assertEquals(App->getName(), App->getLocation());
-       2. assertEquals(App->export()['storable']->getName(), App->export()['storable']->getLocation());
 
