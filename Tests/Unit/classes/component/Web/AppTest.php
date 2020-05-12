@@ -13,11 +13,7 @@ class AppTest extends AbstractAppTest
     {
         $this->setApp(
             new App(
-                new Storable(
-                    'AppName',
-                    'AppLocation',
-                    'AppContainer'
-                ),
+                $this->getMockRequest(),
                 new Switchable(),
             )
         );

@@ -13,14 +13,14 @@ abstract class App extends CoreSwitchableComponent implements AppInterface
 {
     public const APP_CONTAINER = "APP";
 
-    public function __construct(Storable $storable, Switchable $switchable)
+    public function __construct(Request $request, Switchable $switchable)
     {
-        $modStorable = new CoreStorable(
-            $storable->getName(),
-            $storable->getLocation(),
+        $storable = new CoreStorable(
+            self::deriveNameLocationFromRequest($request),
+            self::deriveNameLocationFromRequest($request),
             self::APP_CONTAINER
         );
-        parent::__construct($modStorable, $switchable);
+        parent::__construct($storable, $switchable);
     }
 
     public static function deriveNameLocationFromRequest(Request $request): string {

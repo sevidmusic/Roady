@@ -57,7 +57,7 @@ trait AppTestTrait
         return $urls[array_rand($urls)];
     }
 
-    private function getMockRequest(): Request
+    protected function getMockRequest(): Request
     {
         if(!isset($this->mockRequest)) {
             $this->mockRequest = new CoreRequest(new Storable("MockRequest", "Temp", "Temp"), new Switchable());
@@ -96,6 +96,15 @@ trait AppTestTrait
             $expectedNameLocation,
             $this->getApp()::deriveNameLocationFromRequest($this->getMockRequest())
         );
+    }
+
+    public function testNameAndLocationWereSetUsingDeriveAppNameLocationFromRequestMethod(): void
+    {
+        $expectedNameLocation = CoreApp::deriveNameLocationFromRequest($this->getMockRequest());
+        $this->assertEquals($expectedNameLocation, $this->getApp()->getName());
+        $this->assertEquals($expectedNameLocation, $this->getApp()->getLocation());
+        $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getName());
+        $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getLocation());
     }
 
 }

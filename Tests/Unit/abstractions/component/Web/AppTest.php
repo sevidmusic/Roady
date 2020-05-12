@@ -17,11 +17,7 @@ class AppTest extends CoreSwitchableComponentTest
             $this->getMockForAbstractClass(
                 '\DarlingCms\abstractions\component\Web\App',
                 [
-                    new Storable(
-                        'MockAppName',
-                        'MockAppLocation',
-                        'MockAppContainer'
-                    ),
+                    $this->getMockRequest(),
                     new Switchable(),
                 ]
             )
