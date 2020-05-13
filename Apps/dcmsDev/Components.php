@@ -118,6 +118,7 @@ $componentCrud = new ComponentCrud(
 );
 
 $components = [
+    $app,
     $indexRequest,
     $rootRequest,
     $homeResponse,

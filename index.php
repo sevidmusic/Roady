@@ -16,14 +16,6 @@ use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 
 $tempLocationContainer = 'TEMP';
-$currentRequest = new Request(
-    new Storable(
-        'CurrentRequest',
-        $tempLocationContainer,
-        $tempLocationContainer
-    ),
-    new Switchable()
-);
 
 $crud = new ComponentCrud(
     new Storable(
@@ -41,6 +33,20 @@ $crud = new ComponentCrud(
         new Switchable()
     )
 );
+
+$currentRequest = new Request(
+    new Storable(
+        'CurrentRequest',
+        $tempLocationContainer,
+        $tempLocationContainer
+    ),
+    new Switchable()
+);
+
+$app = $crud->readAll(
+        App::deriveNameLocationFromRequest($currentRequest),
+        App::APP_CONTAINER
+)[0];
 
 $router = new Router(
     new Storable(
@@ -62,7 +68,7 @@ $userInterface = new StandardUI(
     new Switchable(),
     new Positionable(),
     $router,
-    App::deriveNameLocationFromRequest($currentRequest),
+    $app->getLocation(),
     Response::RESPONSE_CONTAINER
 );
 
