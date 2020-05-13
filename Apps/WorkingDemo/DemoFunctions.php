@@ -15,6 +15,7 @@ use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
+use DarlingCms\classes\component\Web\App;
 
 function getBody(): string
 {
@@ -321,7 +322,7 @@ function getStoredRequestMenu(ComponentCrud $crud): string
 {
     $added = [];
     $menu = '<ul>';
-    $requests = $crud->readAll(DEMO_SITE_NAME, DEMO_SITE_REQUEST_CONTAINER);
+    $requests = $crud->readAll(App::deriveNameLocationFromRequest(getCurrentRequest()), 'Requests');
     if (empty($requests) === true) {
         return '';
     }
@@ -402,8 +403,8 @@ function getForm(): string
 
             <div style="clear: both"></div>
 
-            <input type="hidden" name="requestLocation" value="' . DEMO_SITE_NAME . '">
-            <input type="hidden" name="requestContainer" value="' . DEMO_SITE_REQUEST_CONTAINER . '">
+            <input type="hidden" name="requestLocation" value="' . App::deriveNameLocationFromRequest(getCurrentRequest()) . '">
+            <input type="hidden" name="requestContainer" value="' . 'Requests' . '">
 
             <div class="submitButtonContainer">
                 <input type="submit" value="Generate Stored Components For Mock Request">
@@ -462,10 +463,10 @@ function processFormIfSubmitted(ComponentCrud $crud): bool
 function getMockCrud(): ComponentCrud
 {
     return new \DarlingCms\classes\component\Crud\ComponentCrud(
-        new Storable('MockComponentCrud', DEMO_SITE_NAME, DEMO_SITE_CRUD_CONTAINER),
+        new Storable('MockComponentCrud', App::deriveNameLocationFromRequest(getCurrentRequest()), 'ComponentCruds'),
         new Switchable(),
         new Standard(
-            new Storable('MockStorageDriver', DEMO_SITE_NAME, DEMO_SITE_STORAGE_DRIVER_CONTAINER),
+            new Storable('MockStorageDriver', App::deriveNameLocationFromRequest(getCurrentRequest()), 'StorageDrivers'),
             new Switchable()
         )
     );
@@ -474,7 +475,7 @@ function getMockCrud(): ComponentCrud
 function getMockTemplate(): StandardUITemplate
 {
     $template = new \DarlingCms\classes\component\Template\UserInterface\StandardUITemplate(
-        new Storable('MockTemplate', DEMO_SITE_NAME, DEMO_SITE_TEMPLATE_CONTAINER),
+        new Storable('MockTemplate', App::deriveNameLocationFromRequest(getCurrentRequest()), 'Templates'),
         new Switchable(),
         new Positionable()
     );
@@ -487,8 +488,8 @@ function getMockOutputComponent(): OutputComponentInterface
     $outputComponent = new OutputComponent(
         new Storable(
             generateOutputNameFromPostIfSet(),
-            DEMO_SITE_NAME,
-            DEMO_SITE_OUTPUT_COMPONENT_CONTAINER
+            App::deriveNameLocationFromRequest(getCurrentRequest()),
+            'Output'
         ),
         new Switchable(),
         new Positionable(generatePositionFromPostIfSet())
@@ -517,8 +518,8 @@ function generateAndStoreResponse(ComponentCrud $crud, WebRequestComponent $requ
     $response = new Response(
         new Storable(
             'MockResponse',
-            DEMO_SITE_NAME,
-            DEMO_SITE_RESPONSE_CONTAINER
+            App::deriveNameLocationFromRequest(getCurrentRequest()),
+            Response::RESPONSE_CONTAINER
         ),
         new Switchable()
     );
@@ -539,17 +540,19 @@ function getCurrentRequest(): Request
         return new Request(
             new Storable(
                 'Current Request ' . strrev(base64_encode(random_bytes(9))),
-                DEMO_SITE_NAME,
-                DEMO_SITE_REQUEST_CONTAINER),
+                'TEMP',
+                'TEMP'
+            ),
             new Switchable()
         );
     } catch (Exception $e) {
-        error_log('Failed to generate random name for current request using random_bytes(). This is NOT important.', E_NOTICE);
+        error_log('Failed to generate random name for current request using random_bytes(). This is NOT important, just makes debugging easier if request has a unique name.', E_NOTICE);
         return new Request(
             new Storable(
                 'Current Request (Name Not Unique!)',
-                DEMO_SITE_NAME,
-                DEMO_SITE_REQUEST_CONTAINER),
+                'TEMP',
+                'TEMP'
+            ),
             new Switchable()
         );
     }
@@ -617,7 +620,7 @@ function generateOutputNameFromPostIfSet(): string
 function getResponsesToCurrentRequest(ComponentCrud $crud): array
 {
     $responses = [];
-    $storedResponses = $crud->readAll(DEMO_SITE_NAME, DEMO_SITE_RESPONSE_CONTAINER);
+    $storedResponses = $crud->readAll(App::deriveNameLocationFromRequest(getCurrentRequest()), Response::RESPONSE_CONTAINER);
     foreach ($storedResponses as $response) {
         if ($response->respondsToRequest(getCurrentRequest(), getMockCrud()) === true) {
             array_push($responses, $response);
