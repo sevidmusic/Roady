@@ -1,7 +1,6 @@
 <?php
 
 ini_set('display_errors', true);
-require_once __DIR__ . DIRECTORY_SEPARATOR . '/Apps/WorkingDemo/Settings.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
@@ -44,20 +43,19 @@ $currentRequest = new Request(
 );
 
 $apps = $crud->readAll(
-        App::deriveNameLocationFromRequest($currentRequest),
-        App::APP_CONTAINER
+    App::deriveNameLocationFromRequest($currentRequest),
+    App::APP_CONTAINER
 );
 
-switch(empty($apps[0])) {
-case true:
-    die('The requested app has not been installed. Please install the "' . App::deriveNameLocationFromRequest($currentRequest) .  '" app.');
-default:
-    $app = $apps[0];
-    if($app->getState() === false)
-    {
-        die('The requested app ' . $app->getName()  .  ' is not available at this time');
-    }
-    break;
+switch (empty($apps[0])) {
+    case true:
+        die('The requested app has not been installed. Please install the "' . App::deriveNameLocationFromRequest($currentRequest) . '" app.');
+    default:
+        $app = $apps[0];
+        if ($app->getState() === false) {
+            die('The requested app ' . $app->getName() . ' is not available at this time');
+        }
+        break;
 }
 
 $router = new Router(

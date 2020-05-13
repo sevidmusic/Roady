@@ -5,6 +5,7 @@
 
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;
+use DarlingCms\classes\component\Web\App;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\primary\Positionable;
@@ -15,7 +16,6 @@ use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
 use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
-use DarlingCms\classes\component\Web\App;
 
 function getBody(): string
 {
