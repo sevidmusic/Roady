@@ -39,8 +39,8 @@ $rootRequest = new Request(
     ),
     new Switchable()
 );
-$rootRequest->import(['url' => $domain->getUrl()]);
 
+$rootRequest->import(['url' => $domain->getUrl()]);
 
 $indexRequest = new Request(
     new Storable(
