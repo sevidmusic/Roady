@@ -225,6 +225,7 @@ $componentCrud = new ComponentCrud(
 );
 
 $components = [
+    $app,
     $workingDemoStoredRequest,
     $indexRequest,
     $rootRequest,
