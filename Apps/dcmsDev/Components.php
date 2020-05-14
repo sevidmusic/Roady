@@ -77,6 +77,17 @@ $htmlHeadStart = new OutputComponent(
 );
 $htmlHeadStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html')]);
 
+$htmlHeadStylesStart = new OutputComponent(
+    new Storable(
+        'HtmlHeadStylesStart',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(2.0)
+);
+$htmlHeadStylesStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html')]);
+
 $cssBgColorsCommon = new OutputComponent(
     new Storable(
         'CommonBackgroundColors',
@@ -84,7 +95,7 @@ $cssBgColorsCommon = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(5.0)
+    new Positionable(3.0)
 );
 $cssBgColorsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css')]);
 
@@ -95,7 +106,7 @@ $cssFontsCommon = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(5.0)
+    new Positionable(3.0)
 );
 $cssFontsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css')]);
 
@@ -106,9 +117,20 @@ $cssDimensionsCommon = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(5.0)
+    new Positionable(3.0)
 );
 $cssDimensionsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css')]);
+
+$htmlHeadStylesEnd = new OutputComponent(
+    new Storable(
+        'HtmlHeadStylesStart',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(2.0)
+);
+$htmlHeadStylesEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html')]);
 
 $htmlHeadEnd = new OutputComponent(
     new Storable(
@@ -117,7 +139,7 @@ $htmlHeadEnd = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(3.0)
+    new Positionable(5.0)
 );
 $htmlHeadEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html')]);
 
@@ -128,7 +150,7 @@ $htmlBodyStart = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(4.0)
+    new Positionable(6.0)
 );
 $htmlBodyStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html')]);
 
@@ -139,7 +161,7 @@ $htmlContentWelcome = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(5.0)
+    new Positionable(7.0)
 );
 $htmlContentWelcome->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/welcome.html')]);
 
@@ -150,7 +172,7 @@ $htmlBodyEnd = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(6.0)
+    new Positionable(8.0)
 );
 $htmlBodyEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html')]);
 
@@ -161,7 +183,7 @@ $htmlEnd = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(7.0)
+    new Positionable(9.0)
 );
 $htmlEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html')]);
 
@@ -197,9 +219,11 @@ $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($homepageUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlStart);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadStart);
+$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
 $homeResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
 $homeResponse->addOutputComponentStorageInfo($cssFontsCommon);
 $homeResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
+$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadEnd);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyStart);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
@@ -231,9 +255,11 @@ $components = [
     $homeResponse,
     $htmlStart,
     $htmlHeadStart,
+    $htmlHeadStylesStart,
     $cssBgColorsCommon,
     $cssFontsCommon,
     $cssDimensionsCommon,
+    $htmlHeadStylesEnd,
     $htmlHeadEnd,
     $htmlBodyStart,
     $htmlContentWelcome,
