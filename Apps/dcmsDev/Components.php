@@ -79,7 +79,7 @@ $htmlHeadStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARA
 
 $cssBgColorsCommon = new OutputComponent(
     new Storable(
-        'BackgroundColorsCommon',
+        'CommonBackgroundColors',
         $app->getLocation(),
         'CommonOutput'
     ),
@@ -87,6 +87,28 @@ $cssBgColorsCommon = new OutputComponent(
     new Positionable(5.0)
 );
 $cssBgColorsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css')]);
+
+$cssFontsCommon = new OutputComponent(
+    new Storable(
+        'CommonFonts',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(5.0)
+);
+$cssFontsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css')]);
+
+$cssDimensionsCommon = new OutputComponent(
+    new Storable(
+        'CommonDimensions',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(5.0)
+);
+$cssDimensionsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css')]);
 
 $htmlHeadEnd = new OutputComponent(
     new Storable(
@@ -168,6 +190,8 @@ $homeResponse->addTemplateStorageInfo($homepageUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlStart);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadStart);
 $homeResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
+$homeResponse->addOutputComponentStorageInfo($cssFontsCommon);
+$homeResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadEnd);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyStart);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyEnd);
@@ -199,6 +223,8 @@ $components = [
     $htmlStart,
     $htmlHeadStart,
     $cssBgColorsCommon,
+    $cssFontsCommon,
+    $cssDimensionsCommon,
     $htmlHeadEnd,
     $htmlBodyStart,
     $htmlBodyEnd,

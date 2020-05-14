@@ -1,7 +1,10 @@
-        body {
+        /**
+         * Common background colors | i.e. background
+         */
+        .common-body {
             background: #000000;
         }
 
-        .page {
+        .commoon-page {
             background: #ffffff;
         }

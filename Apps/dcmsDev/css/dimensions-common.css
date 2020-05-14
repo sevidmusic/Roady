@@ -1,0 +1,12 @@
+        /**
+         * Common dimensions | i.e., width, height, margin, padding
+         */
+        .common-body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .common-page {
+            margin: 0;
+            padding: 1em;
+        }

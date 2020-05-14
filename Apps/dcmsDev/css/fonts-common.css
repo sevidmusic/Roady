@@ -1,0 +1,15 @@
+        /**
+         * Common fonts | i.e., font-size, font-style, font-family, font-* etc...
+         */
+        html {
+            font-size: 18px;
+        }
+
+        .common-body {
+            font-family: monospace;
+            font-size: 1em;
+        }
+
+        .common-page {
+            font-size: 1em;
+        }
