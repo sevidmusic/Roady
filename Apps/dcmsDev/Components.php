@@ -55,17 +55,27 @@ $indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
 /*****************************/
 /***** OUTPUT COMPONENTS *****/
 /*****************************/
-
-$welcomeMessage = new OutputComponent(
+$htmlStart = new OutputComponent(
     new Storable(
-        'HomepageWelcomeMessage',
+        'HtmlStart',
         $app->getLocation(),
-        'HomepageOutputComponents'
+        'CommonOutput'
     ),
     new Switchable(),
     new Positionable(0)
 );
-$welcomeMessage->import(['output' => 'Welcome to the Darling Cms.']);
+$htmlStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html')]);
+
+$htmlHeadStart = new OutputComponent(
+    new Storable(
+        'HtmlHeadStart',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(0)
+);
+$htmlHeadStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html')]);
 
 /***** StandardUITemplates *****/
 
@@ -82,7 +92,7 @@ $homepageUITemplate = new StandardUITemplate(
 // only new to call addType() on one of them, if there were different
 // types of OutputComponents used then each type would need to be added
 // to be represented in the Template.
-$homepageUITemplate->addType($welcomeMessage);
+$homepageUITemplate->addType($htmlStart);
 
 
 // Responses
@@ -97,7 +107,8 @@ $homeResponse = new Response(
 $homeResponse->addRequestStorageInfo($indexRequest);
 $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($homepageUITemplate);
-$homeResponse->addOutputComponentStorageInfo($welcomeMessage);
+$homeResponse->addOutputComponentStorageInfo($htmlStart);
+$homeResponse->addOutputComponentStorageInfo($htmlHeadStart);
 
 
 $componentCrud = new ComponentCrud(
@@ -122,7 +133,8 @@ $components = [
     $indexRequest,
     $rootRequest,
     $homeResponse,
-    $welcomeMessage,
+    $htmlStart,
+    $htmlHeadStart,
     $homepageUITemplate
 ];
 
