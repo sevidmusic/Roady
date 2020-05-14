@@ -62,7 +62,7 @@ $htmlStart = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(0)
+    new Positionable(0.0)
 );
 $htmlStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html')]);
 
@@ -73,9 +73,58 @@ $htmlHeadStart = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(0)
+    new Positionable(1.0)
 );
 $htmlHeadStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html')]);
+
+// HEAD COMPONENTS | POS 2
+
+$htmlHeadEnd = new OutputComponent(
+    new Storable(
+        'HtmlHeadEnd',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(3.0)
+);
+$htmlHeadEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html')]);
+
+$htmlBodyStart = new OutputComponent(
+    new Storable(
+        'HtmlBodyStart',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(4.0)
+);
+
+$htmlBodyStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html')]);
+
+// Body components | POS 5
+
+$htmlBodyEnd = new OutputComponent(
+    new Storable(
+        'HtmlBodyEnd',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(6.0)
+);
+$htmlBodyEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html')]);
+
+$htmlEnd = new OutputComponent(
+    new Storable(
+        'HtmlEnd',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(7.0)
+);
+$htmlEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html')]);
 
 /***** StandardUITemplates *****/
 
@@ -109,6 +158,10 @@ $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($homepageUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlStart);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadStart);
+$homeResponse->addOutputComponentStorageInfo($htmlHeadEnd);
+$homeResponse->addOutputComponentStorageInfo($htmlBodyStart);
+$homeResponse->addOutputComponentStorageInfo($htmlBodyEnd);
+$homeResponse->addOutputComponentStorageInfo($htmlEnd);
 
 
 $componentCrud = new ComponentCrud(
@@ -135,6 +188,10 @@ $components = [
     $homeResponse,
     $htmlStart,
     $htmlHeadStart,
+    $htmlHeadEnd,
+    $htmlBodyStart,
+    $htmlBodyEnd,
+    $htmlEnd,
     $homepageUITemplate
 ];
 
