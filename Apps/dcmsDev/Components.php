@@ -77,7 +77,16 @@ $htmlHeadStart = new OutputComponent(
 );
 $htmlHeadStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html')]);
 
-// HEAD COMPONENTS | POS 2
+$cssBgColorsCommon = new OutputComponent(
+    new Storable(
+        'BackgroundColorsCommon',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(5.0)
+);
+$cssBgColorsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css')]);
 
 $htmlHeadEnd = new OutputComponent(
     new Storable(
@@ -158,6 +167,7 @@ $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($homepageUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlStart);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadStart);
+$homeResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadEnd);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyStart);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyEnd);
@@ -188,6 +198,7 @@ $components = [
     $homeResponse,
     $htmlStart,
     $htmlHeadStart,
+    $cssBgColorsCommon,
     $htmlHeadEnd,
     $htmlBodyStart,
     $htmlBodyEnd,
