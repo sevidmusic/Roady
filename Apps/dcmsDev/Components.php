@@ -130,10 +130,18 @@ $htmlBodyStart = new OutputComponent(
     new Switchable(),
     new Positionable(4.0)
 );
-
 $htmlBodyStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html')]);
 
-// Body components | POS 5
+$htmlContentWelcome = new OutputComponent(
+    new Storable(
+        'Welcome',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(5.0)
+);
+$htmlContentWelcome->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/welcome.html')]);
 
 $htmlBodyEnd = new OutputComponent(
     new Storable(
@@ -194,6 +202,7 @@ $homeResponse->addOutputComponentStorageInfo($cssFontsCommon);
 $homeResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
 $homeResponse->addOutputComponentStorageInfo($htmlHeadEnd);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyStart);
+$homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
 $homeResponse->addOutputComponentStorageInfo($htmlBodyEnd);
 $homeResponse->addOutputComponentStorageInfo($htmlEnd);
 
@@ -227,6 +236,7 @@ $components = [
     $cssDimensionsCommon,
     $htmlHeadEnd,
     $htmlBodyStart,
+    $htmlContentWelcome,
     $htmlBodyEnd,
     $htmlEnd,
     $homepageUITemplate
