@@ -258,7 +258,7 @@ trait StandardUITestTrait
         foreach ($this->getResponsesToCurrentRequest() as $response) {
             foreach ($response->getOutputComponentStorageInfo() as $storable) {
                 $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                if (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                while (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                     $outputComponent->increasePosition();
                 }
                 $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;

@@ -2,11 +2,12 @@
          * Common fonts | i.e., font-size, font-style, font-family, font-* etc...
          */
         html {
+            font-family: monospace;
             font-size: 18px;
+            color: lightgreen;
         }
 
         .common-body {
-            font-family: monospace;
             font-size: 1em;
         }
 
