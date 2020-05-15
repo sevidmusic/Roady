@@ -1,10 +1,10 @@
         /**
          * Common fonts | i.e., font-size, font-style, font-family, font-* etc...
+         * @todo rename this file to text-common.css
          */
         html {
             font-family: monospace;
             font-size: 18px;
-            color: lightgreen;
         }
 
         .common-body {
@@ -14,3 +14,32 @@
         .common-page {
             font-size: 1em;
         }
+
+        .common-default-text-color, a:hover {
+            color: #b5abbd;
+        }
+
+        .common-highlight-text-color, a, a:visited {
+            color: #b3bdab;
+        }
+
+        .common-light-text-color {
+            color: #597ea6;
+        }
+
+        .common-dark-text-color {
+            color: #a68159;
+        }
+
+        .common-error-text-color {
+            color: #da1412;
+        }
+
+        .common-warning-text-color {
+            color: #ff4f00;
+        }
+
+        .common-notice-text-color {
+            color: #00b0ff;
+        }
+
