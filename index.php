@@ -42,22 +42,6 @@ $currentRequest = new Request(
     new Switchable()
 );
 
-$apps = $crud->readAll(
-    App::deriveNameLocationFromRequest($currentRequest),
-    App::APP_CONTAINER
-);
-
-switch (empty($apps[0])) {
-    case true:
-        die('The requested app has not been installed. Please install the "' . App::deriveNameLocationFromRequest($currentRequest) . '" app.');
-    default:
-        $app = $apps[0];
-        if ($app->getState() === false) {
-            die('The requested app ' . $app->getName() . ' is not available at this time');
-        }
-        break;
-}
-
 $router = new Router(
     new Storable(
         'Router',
@@ -78,7 +62,7 @@ $userInterface = new StandardUI(
     new Switchable(),
     new Positionable(),
     $router,
-    $app->getLocation(),
+    App::getRequestedApp($currentRequest, $crud)->getLocation(),
     Response::RESPONSE_CONTAINER
 );
 
