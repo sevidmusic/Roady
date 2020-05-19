@@ -128,7 +128,7 @@ $htmlHeadStylesEnd = new OutputComponent(
         'CommonOutput'
     ),
     new Switchable(),
-    new Positionable(2.0)
+    new Positionable(4.0)
 );
 $htmlHeadStylesEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html')]);
 
@@ -217,18 +217,19 @@ $homeResponse = new Response(
 $homeResponse->addRequestStorageInfo($indexRequest);
 $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($homepageUITemplate);
-$homeResponse->addOutputComponentStorageInfo($htmlStart);
-$homeResponse->addOutputComponentStorageInfo($htmlHeadStart);
-$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
-$homeResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
-$homeResponse->addOutputComponentStorageInfo($cssFontsCommon);
-$homeResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
-$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd);
-$homeResponse->addOutputComponentStorageInfo($htmlHeadEnd);
-$homeResponse->addOutputComponentStorageInfo($htmlBodyStart);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
-$homeResponse->addOutputComponentStorageInfo($htmlBodyEnd);
-$homeResponse->addOutputComponentStorageInfo($htmlEnd);
+// @todo move to global response, globStart and GlobEnd.
+$homeResponse->addOutputComponentStorageInfo($htmlStart); // move to global
+$homeResponse->addOutputComponentStorageInfo($htmlHeadStart); // move to global;
+$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesStart); // move to global
+$homeResponse->addOutputComponentStorageInfo($cssBgColorsCommon); // move to global;
+$homeResponse->addOutputComponentStorageInfo($cssFontsCommon); // move to global;
+$homeResponse->addOutputComponentStorageInfo($cssDimensionsCommon); // move to global;
+$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd); // move to global
+$homeResponse->addOutputComponentStorageInfo($htmlHeadEnd); // move to global;
+$homeResponse->addOutputComponentStorageInfo($htmlBodyStart); // move to global;
+$homeResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to global;
+$homeResponse->addOutputComponentStorageInfo($htmlEnd); // move to global;
 
 
 $componentCrud = new ComponentCrud(
