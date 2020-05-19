@@ -283,7 +283,9 @@ trait StandardUITestTrait
         $expectedOutput = '';
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
             foreach ($template->getTypes() as $type) {
-                foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses()[$type] as $outputComponent) {
+                $outputComponents =  $this->getStandardUI()->getOutputComponentsAssignedToResponses()[$type];
+                ksort($outputComponents, SORT_NUMERIC);
+                foreach ($outputComponents as $outputComponent) {
                     $expectedOutput .= $outputComponent->getOutput();
                 }
             }
@@ -329,7 +331,7 @@ trait StandardUITestTrait
                 $this->getOutputComponentContainer()
             ),
             new Switchable(),
-            new Positionable(0)
+            new Positionable(rand(0,99))
         );
         $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
         if ($saveToStorage === true) {

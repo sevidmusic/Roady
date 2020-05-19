@@ -69,6 +69,7 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
                         $outputComponent->increasePosition();
                     }
                     $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
+                    ksort($outputComponents[$outputComponent->getType()]);
                 }
             }
             $this->outputComponents = $outputComponents;
