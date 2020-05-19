@@ -32,7 +32,7 @@ trait ResponseTestTrait
         );
     }
 
-    private function getMockRequest(): Request
+    protected function getMockRequest(): Request
     {
         $request = new Request(
             $this->getMockStorable(),
@@ -67,7 +67,7 @@ trait ResponseTestTrait
         return new Switchable();
     }
 
-    private function getMockCrud(): ComponentCrud
+    protected function getMockCrud(): ComponentCrud
     {
         return new \DarlingCms\classes\component\Crud\ComponentCrud(
             new Storable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
