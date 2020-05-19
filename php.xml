@@ -11,7 +11,7 @@
 
     <testsuites>
 
-        <testsuite name="Darling Cms Redesign | Test Utilitiy Tests">
+        <testsuite name="Darling Cms Redesign | Test Utility Tests">
             <directory>Tests/Unit/TestUtilityTests</directory>
         </testsuite>
 
@@ -66,6 +66,11 @@
         <testsuite name="Darling Cms Redesign | App Tests">
             <file>Tests/Unit/abstractions/component/Web/AppTest.php</file>
             <file>Tests/Unit/classes/component/Web/AppTest.php</file>
+        </testsuite>
+
+        <testsuite name="Darling Cms Redesign | Global Response Tests">
+            <file>Tests/Unit/abstractions/component/Web/Routing/GlobalResponseTest.php</file>
+            <file>Tests/Unit/classes/component/Web/Routing/GlobalResponseTest.php</file>
         </testsuite>
 
     </testsuites>
