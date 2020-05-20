@@ -5,6 +5,7 @@ use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\OutputComponent;
 use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\component\Web\App;
+use DarlingCms\classes\component\Web\Routing\GlobalResponse;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\primary\Positionable;
@@ -154,6 +155,17 @@ $htmlBodyStart = new OutputComponent(
 );
 $htmlBodyStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html')]);
 
+$htmlMainMenu = new OutputComponent(
+    new Storable(
+        'MainMenu',
+        $app->getLocation(),
+        'CommonOutput'
+    ),
+    new Switchable(),
+    new Positionable(7.0)
+);
+$htmlMainMenu->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html')]);
+
 $htmlContentWelcome = new OutputComponent(
     new Storable(
         'Welcome',
@@ -206,6 +218,31 @@ $defaultUITemplate->addType($htmlStart);
 
 
 // Responses
+$htmlStartResponse = new GlobalResponse(
+    $app,
+    new Switchable(),
+    new Positionable(0)
+);
+$htmlStartResponse->addTemplateStorageInfo($defaultUITemplate);
+$htmlStartResponse->addOutputComponentStorageInfo($htmlStart); // move to htmlStart
+$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStart); // move to htmlStart;
+$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesStart); // move to htmlStart
+$htmlStartResponse->addOutputComponentStorageInfo($cssBgColorsCommon); // move to htmlStart;
+$htmlStartResponse->addOutputComponentStorageInfo($cssFontsCommon); // move to htmlStart;
+$htmlStartResponse->addOutputComponentStorageInfo($cssDimensionsCommon); // move to htmlStart;
+$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd); // move to htmlStart
+$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadEnd); // move to htmlStart;
+$htmlStartResponse->addOutputComponentStorageInfo($htmlBodyStart); // move to htmlStart;
+
+$mainMenuResponse = new GlobalResponse(
+    $app,
+    new Switchable(),
+    new Positionable(1)
+);
+$mainMenuResponse->addTemplateStorageInfo($defaultUITemplate);
+$mainMenuResponse->addOutputComponentStorageInfo($htmlMainMenu);
+
+
 $homeResponse = new Response(
     new Storable(
         'Homepage',
@@ -213,29 +250,21 @@ $homeResponse = new Response(
         Response::RESPONSE_CONTAINER
     ),
     new Switchable(),
-    new Positionable(5)
+    new Positionable(2)
 );
 $homeResponse->addRequestStorageInfo($indexRequest);
 $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
 
-$globalResponse = new \DarlingCms\classes\component\Web\Routing\GlobalResponse(
+$htmlEndResponse = new GlobalResponse(
     $app,
-    new Switchable()
+    new Switchable(),
+    new Positionable(3)
 );
-$globalResponse->addTemplateStorageInfo($defaultUITemplate);
-$globalResponse->addOutputComponentStorageInfo($htmlStart); // move to global
-$globalResponse->addOutputComponentStorageInfo($htmlHeadStart); // move to global;
-$globalResponse->addOutputComponentStorageInfo($htmlHeadStylesStart); // move to global
-$globalResponse->addOutputComponentStorageInfo($cssBgColorsCommon); // move to global;
-$globalResponse->addOutputComponentStorageInfo($cssFontsCommon); // move to global;
-$globalResponse->addOutputComponentStorageInfo($cssDimensionsCommon); // move to global;
-$globalResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd); // move to global
-$globalResponse->addOutputComponentStorageInfo($htmlHeadEnd); // move to global;
-$globalResponse->addOutputComponentStorageInfo($htmlBodyStart); // move to global;
-$globalResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to global;
-$globalResponse->addOutputComponentStorageInfo($htmlEnd); // move to global;
+$htmlEndResponse->addTemplateStorageInfo($defaultUITemplate);
+$htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to htmlEnd;
+$htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 
 
 $componentCrud = new ComponentCrud(
@@ -259,8 +288,11 @@ $components = [
     $app,
     $indexRequest,
     $rootRequest,
+    $mainMenuResponse,
+    $htmlMainMenu,
     $homeResponse,
-    $globalResponse,
+    $htmlStartResponse,
+    $htmlEndResponse,
     $htmlStart,
     $htmlHeadStart,
     $htmlHeadStylesStart,
