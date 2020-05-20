@@ -29,12 +29,18 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     public function getOutput(): string
     {
         $output = '';
-        foreach ($this->getTemplatesAssignedToResponses() as $template) {
-            foreach ($template->getTypes() as $type) {
-                foreach ($this->getOutputComponentsAssignedToResponses()[$type] as $outputComponent) {
-                    $output .= $outputComponent->getOutput();
+        $assignedTemplates = $this->getTemplatesAssignedToResponses();
+        ksort($assignedTemplates, SORT_NUMERIC);
+        foreach ($assignedTemplates as $responsePosition => $responseTemplates) {
+            foreach ($responseTemplates as $template) {
+                foreach ($template->getTypes() as $type) {
+                    foreach ($this->getOutputComponentsAssignedToResponses()[$responsePosition][$type] as $outputComponent) {
+                        $output .= $outputComponent->getOutput();
+
+                    }
                 }
             }
+
         }
         $this->import(['output' => $output]);
         return parent::getOutput();
@@ -45,16 +51,19 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         if (empty($this->templates) === true) {
             $templates = [];
             foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
+                while (isset($templates[strval($response->getPosition())]) === true) {
+                    $response->increasePosition();
+                }
                 foreach ($response->getTemplateStorageInfo() as $templateStorable) {
                     $template = $this->router->getCrud()->read($templateStorable);
-                    while (isset($templates[strval($template->getPosition())]) === true) {
+                    while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
                         $template->increasePosition();
                     }
-                    $templates[strval($template->getPosition())] = $template;
+                    $templates[strval($response->getPosition())][strval($template->getPosition())] = $template;
                 }
             }
             $this->templates = $templates;
-        } //
+        }
         return $this->templates;
     }
 
@@ -63,13 +72,16 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         if (empty($this->outputComponents) === true) {
             $outputComponents = [];
             foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
+                while (isset($outputComponents[strval($response->getPosition())]) === true) {
+                    $response->increasePosition();
+                }
                 foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
                     $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
-                    while (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                    while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                         $outputComponent->increasePosition();
                     }
-                    $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
-                    ksort($outputComponents[$outputComponent->getType()]);
+                    $outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
+                    ksort($outputComponents[strval($response->getPosition())][$outputComponent->getType()]);
                 }
             }
             $this->outputComponents = $outputComponents;

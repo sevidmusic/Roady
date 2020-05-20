@@ -189,7 +189,7 @@ $htmlEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 
 
 /***** StandardUITemplates *****/
 
-$homepageUITemplate = new StandardUITemplate(
+$defaultUITemplate = new StandardUITemplate(
     new Storable(
         'HomepageUITemplate',
         $app->getLocation(),
@@ -202,7 +202,7 @@ $homepageUITemplate = new StandardUITemplate(
 // only new to call addType() on one of them, if there were different
 // types of OutputComponents used then each type would need to be added
 // to be represented in the Template.
-$homepageUITemplate->addType($htmlStart);
+$defaultUITemplate->addType($htmlStart);
 
 
 // Responses
@@ -212,24 +212,30 @@ $homeResponse = new Response(
         $app->getLocation(),
         Response::RESPONSE_CONTAINER
     ),
-    new Switchable()
+    new Switchable(),
+    new Positionable(5)
 );
 $homeResponse->addRequestStorageInfo($indexRequest);
 $homeResponse->addRequestStorageInfo($rootRequest);
-$homeResponse->addTemplateStorageInfo($homepageUITemplate);
+$homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
-// @todo move to global response, globStart and GlobEnd.
-$homeResponse->addOutputComponentStorageInfo($htmlStart); // move to global
-$homeResponse->addOutputComponentStorageInfo($htmlHeadStart); // move to global;
-$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesStart); // move to global
-$homeResponse->addOutputComponentStorageInfo($cssBgColorsCommon); // move to global;
-$homeResponse->addOutputComponentStorageInfo($cssFontsCommon); // move to global;
-$homeResponse->addOutputComponentStorageInfo($cssDimensionsCommon); // move to global;
-$homeResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd); // move to global
-$homeResponse->addOutputComponentStorageInfo($htmlHeadEnd); // move to global;
-$homeResponse->addOutputComponentStorageInfo($htmlBodyStart); // move to global;
-$homeResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to global;
-$homeResponse->addOutputComponentStorageInfo($htmlEnd); // move to global;
+
+$globalResponse = new \DarlingCms\classes\component\Web\Routing\GlobalResponse(
+    $app,
+    new Switchable()
+);
+$globalResponse->addTemplateStorageInfo($defaultUITemplate);
+$globalResponse->addOutputComponentStorageInfo($htmlStart); // move to global
+$globalResponse->addOutputComponentStorageInfo($htmlHeadStart); // move to global;
+$globalResponse->addOutputComponentStorageInfo($htmlHeadStylesStart); // move to global
+$globalResponse->addOutputComponentStorageInfo($cssBgColorsCommon); // move to global;
+$globalResponse->addOutputComponentStorageInfo($cssFontsCommon); // move to global;
+$globalResponse->addOutputComponentStorageInfo($cssDimensionsCommon); // move to global;
+$globalResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd); // move to global
+$globalResponse->addOutputComponentStorageInfo($htmlHeadEnd); // move to global;
+$globalResponse->addOutputComponentStorageInfo($htmlBodyStart); // move to global;
+$globalResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to global;
+$globalResponse->addOutputComponentStorageInfo($htmlEnd); // move to global;
 
 
 $componentCrud = new ComponentCrud(
@@ -254,6 +260,7 @@ $components = [
     $indexRequest,
     $rootRequest,
     $homeResponse,
+    $globalResponse,
     $htmlStart,
     $htmlHeadStart,
     $htmlHeadStylesStart,
@@ -266,7 +273,7 @@ $components = [
     $htmlContentWelcome,
     $htmlBodyEnd,
     $htmlEnd,
-    $homepageUITemplate
+    $defaultUITemplate
 ];
 
 foreach ($components as $component) {

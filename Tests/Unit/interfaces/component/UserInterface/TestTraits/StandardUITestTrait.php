@@ -170,11 +170,35 @@ trait StandardUITestTrait
         $this->standardUI = $standardUI;
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayOfStandardUITemplates(): void
+    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings()
     {
-        foreach (
-            $this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
-            $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
+        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $responseTemplates) {
+            $this->assertTrue(is_numeric($index));
+        }
+    }
+
+    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreNumericStrings()
+    {
+        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $responseTemplates) {
+            foreach ($responseTemplates as $index => $template) {
+                $this->assertTrue(is_numeric($index));
+            }
+        }
+    }
+
+    public function testGetTemplatesAssignedToResponsesReturnsMultiDimensionalArrayOfArrays()
+    {
+        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $responseTemplates) {
+            $this->assertTrue(is_array($responseTemplates));
+        }
+    }
+
+    public function testGetTemplatesAssignedToResponsesReturnsMultiDimensionalArrayOfArraysOfStandardUITemplates(): void
+    {
+        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $responseTemplates) {
+            foreach ($responseTemplates as $template) {
+                $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
+            }
         }
     }
 
@@ -190,12 +214,15 @@ trait StandardUITestTrait
     {
         $templates = [];
         foreach ($this->getResponsesToCurrentRequest() as $response) {
+            while (isset($templates[strval($response->getPosition())]) === true) {
+                $response->increasePosition();
+            }
             foreach ($response->getTemplateStorageInfo() as $storable) {
                 $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                while (isset($templates[strval($template->getPosition())]) === true) {
+                while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
                     $template->increasePosition();
                 }
-                $templates[strval($template->getPosition())] = $template;
+                $templates[strval($response->getPosition())][strval($template->getPosition())] = $template;
             }
         }
         return $templates;
@@ -212,42 +239,52 @@ trait StandardUITestTrait
 
     public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
     {
-        foreach (
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
-            foreach ($outputComponentTypes as $outputComponent) {
-                $this->assertTrue(
-                    in_array(
-                        'DarlingCms\interfaces\component\OutputComponent',
-                        class_implements($outputComponent)
-                    )
-                );
-
+        foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $responseOutputComponents) {
+            foreach ($responseOutputComponents as $outputComponentTypes) {
+                foreach ($outputComponentTypes as $outputComponent) {
+                    $this->assertTrue(
+                        in_array(
+                            'DarlingCms\interfaces\component\OutputComponent',
+                            class_implements($outputComponent)
+                        )
+                    );
+                }
             }
         }
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreValidOutputComponentTypes()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreValidOutputComponentTypes()
     {
-        foreach (
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentType => $outputComponents) {
+        foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $responseOutputComponents) {
+            foreach ($responseOutputComponents as $outputComponentType => $outputComponents) {
+                $this->assertTrue(
+                    in_array(
+                        'DarlingCms\interfaces\component\OutputComponent',
+                        class_implements($outputComponentType)
+                    )
+                );
+            }
+        }
+    }
+
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings()
+    {
+        foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $index => $outputComponentTypes) {
             $this->assertTrue(
-                in_array(
-                    'DarlingCms\interfaces\component\OutputComponent',
-                    class_implements($outputComponentType)
-                )
+                is_numeric($index)
             );
         }
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreNumericStrings()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseThirdLevelIndexesAreNumericStrings()
     {
-        foreach (
-            $this->getStandardUI()->getOutputComponentsAssignedToResponses() as $outputComponentTypes) {
-            foreach ($outputComponentTypes as $index => $outputComponent) {
-                $this->assertTrue(
-                    is_numeric($index)
-                );
-
+        foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $responseOutputComponents) {
+            foreach ($responseOutputComponents as $outputComponentTypes) {
+                foreach ($outputComponentTypes as $index => $outputComponent) {
+                    $this->assertTrue(
+                        is_numeric($index)
+                    );
+                }
             }
         }
     }
@@ -256,12 +293,15 @@ trait StandardUITestTrait
     {
         $outputComponents = [];
         foreach ($this->getResponsesToCurrentRequest() as $response) {
+            while (isset($outputComponents[strval($response->getPosition())]) === true) {
+                $response->increasePosition();
+            }
             foreach ($response->getOutputComponentStorageInfo() as $storable) {
                 $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
-                while (isset($outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                     $outputComponent->increasePosition();
                 }
-                $outputComponents[$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
+                $outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
             }
         }
         $this->assertEquals(
@@ -270,25 +310,22 @@ trait StandardUITestTrait
         );
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseIndexesAreNumericStrings()
-    {
-        foreach (
-            $this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $templates) {
-            $this->assertTrue(is_numeric($index));
-        }
-    }
-
-    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByTemplateThenOutputComponentPosition()
+    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByResponsePositionThenTemplateOCTypeThenOutputComponentPosition()
     {
         $expectedOutput = '';
-        foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $template) {
-            foreach ($template->getTypes() as $type) {
-                $outputComponents =  $this->getStandardUI()->getOutputComponentsAssignedToResponses()[$type];
-                ksort($outputComponents, SORT_NUMERIC);
-                foreach ($outputComponents as $outputComponent) {
-                    $expectedOutput .= $outputComponent->getOutput();
+        $assignedTemplates = $this->getStandardUI()->getTemplatesAssignedToResponses();
+        ksort($assignedTemplates, SORT_NUMERIC);
+        foreach ($assignedTemplates as $responsePosition => $responseTemplates) {
+            foreach ($responseTemplates as $template) {
+                foreach ($template->getTypes() as $type) {
+                    $outputComponents = $this->getStandardUI()->getOutputComponentsAssignedToResponses()[$responsePosition][$type];
+                    ksort($outputComponents, SORT_NUMERIC);
+                    foreach ($outputComponents as $outputComponent) {
+                        $expectedOutput .= $outputComponent->getOutput();
+                    }
                 }
             }
+
         }
         $this->assertEquals($expectedOutput, $this->getStandardUI()->getOutput());
     }
@@ -331,7 +368,7 @@ trait StandardUITestTrait
                 $this->getOutputComponentContainer()
             ),
             new Switchable(),
-            new Positionable(rand(0,99))
+            new Positionable(rand(0, 99))
         );
         $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
         if ($saveToStorage === true) {
