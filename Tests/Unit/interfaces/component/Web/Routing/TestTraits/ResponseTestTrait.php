@@ -18,6 +18,16 @@ trait ResponseTestTrait
 
     private $response;
 
+    public function testPositionablePropertyIsAssignedAPoitionableImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            in_array(
+                'DarlingCms\interfaces\primary\Positionable',
+                class_implements($this->getResponse()->export()['positionable'])
+            )
+        );
+    }
+
     public function testRespondsToRequestReturnsTrueForAssignedRequest(): void
     {
         $request = $this->getMockRequest();

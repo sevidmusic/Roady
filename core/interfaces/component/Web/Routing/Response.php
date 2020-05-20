@@ -6,8 +6,9 @@ use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\SwitchableComponent;
 use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
+use DarlingCms\interfaces\primary\Positionable;
 
-interface Response extends SwitchableComponent
+interface Response extends SwitchableComponent, Positionable
 {
     public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
 

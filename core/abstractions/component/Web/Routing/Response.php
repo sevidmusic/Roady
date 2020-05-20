@@ -12,6 +12,8 @@ use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Switchable;
+use DarlingCms\interfaces\primary\Positionable;
+use DarlingCms\classes\primary\Positionable as CorePositionable;
 
 abstract class Response extends SwitchableComponent implements ResponseInterface
 {
@@ -20,9 +22,11 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
     private $outputComponentStorageInfo = array();
     private $templateStorageInfo = array();
     private $requestStorageInfo = array();
+    private $positionable;
 
-    public function __construct(Storable $storable, Switchable $switchable)
+    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable = null)
     {
+        $this->positionable = (empty($positionable) === true ? new CorePositionable(0) : $positionable);
         $st = new StandardStorable(
             $storable->getName(),
             $storable->getLocation(),
@@ -130,5 +134,21 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
     {
         return ($this->getState() === false ? [] : $this->templateStorageInfo);
     }
+
+    public function increasePosition(): bool
+    {
+        return $this->positionable->increasePosition();
+    }
+
+    public function decreasePosition(): bool
+    {
+        return $this->positionable->decreasePosition();
+    }
+
+    public function getPosition(): float
+    {
+        return $this->positionable->getPosition();
+    }
+
 }
 
