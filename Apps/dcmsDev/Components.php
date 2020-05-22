@@ -2,7 +2,7 @@
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\component\OutputComponent;
+use DarlingCms\classes\component\Factory\BaseComponentFactory;
 use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\component\Web\App;
 use DarlingCms\classes\component\Web\Routing\GlobalResponse;
@@ -29,6 +29,7 @@ $domain = new Request(
 $domain->import(['url' => 'http://dcms.dev/']);
 $app = new App($domain, new Switchable());
 
+$baseComponentFactory = new BaseComponentFactory($app);
 /****************/
 /*** Requests ***/
 /****************/
@@ -56,149 +57,19 @@ $indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
 /*****************************/
 /***** OUTPUT COMPONENTS *****/
 /*****************************/
-$htmlStart = new OutputComponent(
-    new Storable(
-        'HtmlStart',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(0.0)
-);
-$htmlStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html')]);
-
-$htmlHeadStart = new OutputComponent(
-    new Storable(
-        'HtmlHeadStart',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(1.0)
-);
-$htmlHeadStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html')]);
-
-$htmlHeadStylesStart = new OutputComponent(
-    new Storable(
-        'HtmlHeadStylesStart',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(2.0)
-);
-$htmlHeadStylesStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html')]);
-
-$cssBgColorsCommon = new OutputComponent(
-    new Storable(
-        'CommonBackgroundColors',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(3.0)
-);
-$cssBgColorsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css')]);
-
-$cssFontsCommon = new OutputComponent(
-    new Storable(
-        'CommonFonts',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(3.0)
-);
-$cssFontsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css')]);
-
-$cssDimensionsCommon = new OutputComponent(
-    new Storable(
-        'CommonDimensions',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(3.0)
-);
-$cssDimensionsCommon->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css')]);
-
-$htmlHeadStylesEnd = new OutputComponent(
-    new Storable(
-        'HtmlHeadStylesStart',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(4.0)
-);
-$htmlHeadStylesEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html')]);
-
-$htmlHeadEnd = new OutputComponent(
-    new Storable(
-        'HtmlHeadEnd',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(5.0)
-);
-$htmlHeadEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html')]);
-
-$htmlBodyStart = new OutputComponent(
-    new Storable(
-        'HtmlBodyStart',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(6.0)
-);
-$htmlBodyStart->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html')]);
-
-$htmlMainMenu = new OutputComponent(
-    new Storable(
-        'MainMenu',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(7.0)
-);
-$htmlMainMenu->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html')]);
-
-$htmlContentWelcome = new OutputComponent(
-    new Storable(
-        'Welcome',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(7.0)
-);
-$htmlContentWelcome->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/welcome.html')]);
-
-$htmlBodyEnd = new OutputComponent(
-    new Storable(
-        'HtmlBodyEnd',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(8.0)
-);
-$htmlBodyEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html')]);
-
-$htmlEnd = new OutputComponent(
-    new Storable(
-        'HtmlEnd',
-        $app->getLocation(),
-        'CommonOutput'
-    ),
-    new Switchable(),
-    new Positionable(9.0)
-);
-$htmlEnd->import(['output' => file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html')]);
-
+$htmlStart = $baseComponentFactory->buildOutputComponent('HtmlStart', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'), 0.0);
+$htmlHeadStart = $baseComponentFactory->buildOutputComponent('HtmlHeadStart', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'), 1.0);
+$htmlHeadStylesStart = $baseComponentFactory->buildOutputComponent('HtmlHeadStylesStart', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'), 2.0);
+$cssBgColorsCommon = $baseComponentFactory->buildOutputComponent('CommonBackgroundColors', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css'), 3.0);
+$cssFontsCommon = $baseComponentFactory->buildOutputComponent('CommonFonts', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css'), 3.0);
+$cssDimensionsCommon = $baseComponentFactory->buildOutputComponent('CommonDimensions', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'), 3.0);
+$htmlHeadStylesEnd = $baseComponentFactory->buildOutputComponent('HtmlHeadStylesEnd', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'), 4.0);
+$htmlHeadEnd = $baseComponentFactory->buildOutputComponent('HtmlHeadEnd', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'), 5.0);
+$htmlBodyStart = $baseComponentFactory->buildOutputComponent('HtmlBodyStart', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'), 6.0);
+$htmlMainMenu = $baseComponentFactory->buildOutputComponent('MainMenu', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'), 7.0);
+$htmlContentWelcome = $baseComponentFactory->buildOutputComponent('Welcome', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/welcome.html'), 8.0);
+$htmlBodyEnd = $baseComponentFactory->buildOutputComponent('HtmlBodyEnd', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'), 9.0);
+$htmlEnd = $baseComponentFactory->buildOutputComponent('HtmlEnd', 'CommonOutput', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'), 10.0);
 /***** StandardUITemplates *****/
 
 $defaultUITemplate = new StandardUITemplate(
