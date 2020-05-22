@@ -12,6 +12,9 @@ use DarlingCms\interfaces\component\SwitchableComponent;
 use DarlingCms\classes\component\SwitchableComponent as CoreSwitchableComponent;
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingCms\interfaces\component\Action;
+use DarlingCms\classes\component\Action as CoreAction;
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 
 abstract class BaseComponentFactory extends PrimaryFactory implements BaseComponentFactoryInterface
 {
@@ -48,4 +51,12 @@ abstract class BaseComponentFactory extends PrimaryFactory implements BaseCompon
         return $outputComponent;
     }
 
+    public function buildAction(string $name, string $container, float $initialPosition): Action
+    {
+        return new CoreAction(
+            $this->buildStorable($name, $container),
+            $this->buildSwitchable(),
+            $this->buildPositionable($initialPosition)
+        );
+    }
 }

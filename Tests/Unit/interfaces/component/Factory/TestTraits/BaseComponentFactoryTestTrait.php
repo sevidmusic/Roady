@@ -86,10 +86,20 @@ trait BaseComponentFactoryTestTrait
         );
     }
 
+    public function testBuildActionReturnsActionImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Action',
+                $this->getBaseComponentFactory()->buildAction('AssignedName', 'AssignedContainer', 420.87)
+            )
+        );
+    }
+
     /**
      * *Tests:
-     * All Must test that build*() returns instance whose settable properties refelct parameters passed to build
-     * This will have to be done for each build method since contructors may vary
-     * These tests can be implmented last.
+     * All Must test that build*() returns instance whose settable properties reflect parameters passed to build
+     * This will have to be done for each build method since constructors may vary
+     * These tests can be implemented last.
      */
 }

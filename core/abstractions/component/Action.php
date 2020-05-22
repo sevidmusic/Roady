@@ -6,6 +6,7 @@ use DarlingCms\abstractions\component\OutputComponent as CoreOutputComponent;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
+use DarlingCms\interfaces\primary\Switchable as CoreSwitchableInterface;
 use DarlingCms\interfaces\component\Action as ActionInterface;
 use DarlingCms\interfaces\component\Web\Routing\Request as CoreRequestInterface;
 use DarlingCms\interfaces\primary\Positionable;
@@ -17,7 +18,7 @@ abstract class Action extends CoreOutputComponent implements ActionInterface
     private $wasDone = false;
     private $wasUndone = false;
 
-    public function __construct(CoreStorableInterface $storable, Switchable $switchable, Positionable $positionable)
+    public function __construct(CoreStorableInterface $storable, CoreSwitchableInterface $switchable, Positionable $positionable)
     {
         parent::__construct($storable, $switchable, $positionable);
     }
