@@ -37,9 +37,6 @@ trait BaseComponentFactoryTestTrait
     public function setBaseComponentFactory(BaseComponentFactory $baseComponentFactory)
     {
         $this->baseComponentFactory = $baseComponentFactory;
-        //$this->assertTrue($this->isProperImplementation('DarlingCms\interfaces\component\Factory\PrimaryFactory', $this->baseComponentFactory));
-        //var_dump($this->getMockCrud());
-        //var_dump($this->wasStoredOnBuild($this->getBaseComponentFactory()));
     }
 
     public function testBuildSwitchableComponentReturnsSwitchableComponentImplementationInstance(): void
@@ -78,11 +75,8 @@ trait BaseComponentFactoryTestTrait
         $this->setPrimaryFactoryParentTestInstances();
     }
 
-    /** @noinspection PhpUnusedPrivateMethodInspection */
-
-    private function wasStoredOnBuild(Component $component): bool // note : call after call to build*() | i.e., $comp = build(); wasStoredOnBuild($comp) // true if stored, false otherwise; | i.e for state true assertTrue(wasStoredOnBuild($comp)) | for state false assertFalse(wasStoredOnBuild($comp)
+    private function wasStoredOnBuild(Component $component): bool
     {
-        // keep this line for debugging till dev is finished $this->getMockCrud()->create($component);
         $wasStored = ($this->getMockCrud()->read($component)->getName() === $component->getName());
         $this->getMockCrud()->delete($component);
         return $wasStored;
@@ -134,10 +128,55 @@ trait BaseComponentFactoryTestTrait
         $this->assertTrue($this->wasStoredOnBuild($action), 'buildAction() MUST store built Action!');
     }
 
-    /**
-     * *Tests:
-     * All Must test that build*() returns instance whose settable properties reflect parameters passed to build
-     * This will have to be done for each build method since constructors may vary
-     * These tests can be implemented last.
-     */
+    public function testBuildComponentReturnsComponentWhoseNameAndContainerMatchSpecifiedNameAndContainerAndWhoseLocationMatchesAppLocation(): void
+    {
+        $expectedName = 'AssignedName';
+        $expectedContainer = 'AssignedContainer';
+        $expectedLocation = $this->getBaseComponentFactory()->export()['app']->getLocation();
+        $component = $this->getBaseComponentFactory()->buildComponent($expectedName, $expectedContainer);
+        $this->assertEquals($expectedName, $component->getName());
+        $this->assertEquals($expectedContainer, $component->getContainer());
+        $this->assertEquals($expectedLocation, $component->getLocation());
+    }
+
+    public function testBuildSwitchableComponentReturnsSwitchableComponentWhoseNameAndContainerMatchSpecifiedNameAndContainerAndWhoseLocationMatchesAppLocation(): void
+    {
+        $expectedName = 'AssignedName';
+        $expectedContainer = 'AssignedContainer';
+        $expectedLocation = $this->getBaseComponentFactory()->export()['app']->getLocation();
+        $switchableComponent = $this->getBaseComponentFactory()->buildSwitchableComponent($expectedName, $expectedContainer);
+        $this->assertEquals($expectedName, $switchableComponent->getName());
+        $this->assertEquals($expectedContainer, $switchableComponent->getContainer());
+        $this->assertEquals($expectedLocation, $switchableComponent->getLocation());
+    }
+
+    public function testBuildOutputComponentReturnsOutputComponentWhoseNameAndContainerMatchSpecifiedNameAndContainerAndWhoseLocationMatchesAppLocationAndWhoseOutputMatchesSpecifiedOutputAndWhosePositionMatchesSpecifiedPosition(): void
+    {
+        $expectedName = 'AssignedName';
+        $expectedContainer = 'AssignedContainer';
+        $expectedLocation = $this->getBaseComponentFactory()->export()['app']->getLocation();
+        $expectedOutput = 'Assigned output.';
+        $expectedPosition = 420.87;
+        $outputComponent = $this->getBaseComponentFactory()->buildOutputComponent($expectedName, $expectedContainer, $expectedOutput, $expectedPosition);
+        $this->assertEquals($expectedName, $outputComponent->getName());
+        $this->assertEquals($expectedContainer, $outputComponent->getContainer());
+        $this->assertEquals($expectedLocation, $outputComponent->getLocation());
+        $this->assertEquals($expectedOutput, $outputComponent->getOutput());
+        $this->assertEquals($expectedPosition, $outputComponent->getPosition());
+    }
+
+    public function testBuildActionReturnsActionWhoseNameAndContainerMatchSpecifiedNameAndContainerAndWhoseLocationMatchesAppLocationAndWhosePositionMatchesSpecifiedPosition(): void
+    {
+        $expectedName = 'AssignedName';
+        $expectedContainer = 'AssignedContainer';
+        $expectedLocation = $this->getBaseComponentFactory()->export()['app']->getLocation();
+        $expectedOutput = 'Assigned output.';
+        $expectedPosition = 420.87;
+        $action = $this->getBaseComponentFactory()->buildAction($expectedName, $expectedContainer, $expectedPosition);
+        $this->assertEquals($expectedName, $action->getName());
+        $this->assertEquals($expectedContainer, $action->getContainer());
+        $this->assertEquals($expectedLocation, $action->getLocation());
+        $this->assertEquals($expectedPosition, $action->getPosition());
+    }
+
 }
