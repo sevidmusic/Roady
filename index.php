@@ -5,62 +5,48 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
+use DarlingCms\classes\component\Factory\PrimaryFactory;
 use DarlingCms\classes\component\UserInterface\StandardUI;
 use DarlingCms\classes\component\Web\App;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\component\Web\Routing\Router;
-use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-
-$tempLocationContainer = 'TEMP';
-
-$crud = new ComponentCrud(
-    new Storable(
-        'IndexCrud',
-        $tempLocationContainer,
-        $tempLocationContainer
-    ),
-    new Switchable(),
-    new Standard(
-        new Storable(
-            'StandardStorageDriver',
-            $tempLocationContainer,
-            $tempLocationContainer
-        ),
-        new Switchable()
-    )
-);
 
 $currentRequest = new Request(
     new Storable(
         'CurrentRequest',
-        $tempLocationContainer,
-        $tempLocationContainer
+        'Requests',
+        'Index'
     ),
     new Switchable()
 );
 
+$app = new App($currentRequest, new Switchable());
+
+$primaryFactory = new PrimaryFactory($app);
+
+$crud = new ComponentCrud(
+    $primaryFactory->buildStorable('AppCrud', 'Index'),
+    $primaryFactory->buildSwitchable(),
+    new Standard(
+        $primaryFactory->buildStorable('AppStorageDriver', 'Index'),
+        $primaryFactory->buildSwitchable()
+    )
+);
+
 $router = new Router(
-    new Storable(
-        'Router',
-        $tempLocationContainer,
-        $tempLocationContainer
-    ),
-    new Switchable(),
+    $primaryFactory->buildStorable('AppRouter', 'Index'),
+    $primaryFactory->buildSwitchable(),
     $currentRequest,
     $crud
 );
 try {
     $userInterface = new StandardUI(
-        new Storable(
-            'UserInterface',
-            $tempLocationContainer,
-            $tempLocationContainer
-        ),
-        new Switchable(),
-        new Positionable(),
+        $primaryFactory->buildStorable('AppUI', 'Index'),
+        $primaryFactory->buildSwitchable(),
+        $primaryFactory->buildPositionable(0),
         $router,
         App::getRequestedApp($currentRequest, $crud)->getLocation(),
         Response::RESPONSE_CONTAINER
@@ -70,7 +56,7 @@ try {
 } catch (RuntimeException $runtimeException) {
     ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
         <title>Requested App Is Unavailable</title>
         <style>
@@ -78,6 +64,7 @@ try {
                 background: #0a0800;
                 color: #a68159;
             }
+
             .error {
                 color: #732b3f;
             }
