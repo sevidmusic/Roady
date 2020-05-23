@@ -110,6 +110,11 @@ trait BaseComponentFactoryTestTrait
         );
     }
 
+    public function testBuildComponentStoresBuiltComponent(): void
+    {
+        $component = $this->getBaseComponentFactory()->buildComponent('AssignedName', 'AssignedContainer');
+        $this->assertTrue($this->wasStoredOnBuild($component), 'buildComponent() MUST store built Component!');
+    }
     /**
      * *Tests:
      * All Must test that build*() returns instance whose settable properties reflect parameters passed to build
