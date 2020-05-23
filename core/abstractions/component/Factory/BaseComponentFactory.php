@@ -12,12 +12,16 @@ use DarlingCms\interfaces\component\Factory\BaseComponentFactory as BaseComponen
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\SwitchableComponent;
 use DarlingCms\interfaces\component\Web\App;
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 
 abstract class BaseComponentFactory extends PrimaryFactory implements BaseComponentFactoryInterface
 {
 
-    public function __construct(App $app)
+    private $componentCrud;
+
+    public function __construct(App $app, ComponentCrud $componentCrud)
     {
+        $this->componentCrud = $componentCrud;
         parent::__construct($app);
     }
 

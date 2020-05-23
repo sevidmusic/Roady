@@ -26,6 +26,7 @@ class BaseComponentFactoryTest extends PrimaryFactoryTest
                         ),
                         new Switchable()
                     ),
+                    $this->getMockCrud()
                 ]
             )
         );

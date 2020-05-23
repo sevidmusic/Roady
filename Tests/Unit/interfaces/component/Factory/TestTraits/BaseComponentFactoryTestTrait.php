@@ -100,6 +100,16 @@ trait BaseComponentFactoryTestTrait
         );
     }
 
+    public function testComponentCrudPropertyIsAssignedComponentCrudImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                $this->getBaseComponentFactory()->export()['componentCrud']
+            )
+        );
+    }
+
     /**
      * *Tests:
      * All Must test that build*() returns instance whose settable properties reflect parameters passed to build

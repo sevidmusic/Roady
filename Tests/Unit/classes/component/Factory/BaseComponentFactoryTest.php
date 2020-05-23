@@ -21,7 +21,8 @@ class BaseComponentFactoryTest extends AbstractBaseComponentFactoryTest
                         new Switchable()
                     ),
                     new Switchable()
-                )
+                ),
+                $this->getMockCrud()
             )
         );
         $this->setBaseComponentFactoryParentTestInstances();
