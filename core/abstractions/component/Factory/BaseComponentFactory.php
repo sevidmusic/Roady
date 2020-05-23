@@ -53,6 +53,7 @@ abstract class BaseComponentFactory extends PrimaryFactory implements BaseCompon
             $this->buildPositionable($initialPosition)
         );
         $outputComponent->import(['output' => $output]);
+        $this->componentCrud->create($outputComponent);
         return $outputComponent;
     }
 

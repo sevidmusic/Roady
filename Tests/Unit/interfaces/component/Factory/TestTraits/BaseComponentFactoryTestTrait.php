@@ -122,6 +122,13 @@ trait BaseComponentFactoryTestTrait
         $this->assertTrue($this->wasStoredOnBuild($switchableComponent), 'buildSwitchableComponent() MUST store built SwitchableComponent!');
     }
 
+    public function testBuildOutputComponentStoresBuiltOutputComponent(): void
+    {
+        $outputComponent = $this->getBaseComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned output.', 420.87);
+        $this->assertTrue($this->wasStoredOnBuild($outputComponent), 'buildOutputComponent() MUST store built OutputComponent!');
+    }
+
+
     /**
      * *Tests:
      * All Must test that build*() returns instance whose settable properties reflect parameters passed to build
