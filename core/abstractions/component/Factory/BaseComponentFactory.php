@@ -37,10 +37,12 @@ abstract class BaseComponentFactory extends PrimaryFactory implements BaseCompon
 
     public function buildSwitchableComponent(string $name, string $container): SwitchableComponent
     {
-        return new CoreSwitchableComponent(
+        $switchableComponent = new CoreSwitchableComponent(
             $this->buildStorable($name, $container),
             $this->buildSwitchable()
         );
+        $this->componentCrud->create($switchableComponent);
+        return $switchableComponent;
     }
 
     public function buildOutputComponent(string $name, string $container, string $output, float $initialPosition): OutputComponent
