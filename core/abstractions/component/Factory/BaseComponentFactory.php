@@ -2,19 +2,16 @@
 
 namespace DarlingCms\abstractions\component\Factory;
 
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\abstractions\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Factory\BaseComponentFactory as BaseComponentFactoryInterface;
-use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\classes\component\Component as CoreComponent;
-use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\classes\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\interfaces\component\Action;
 use DarlingCms\classes\component\Action as CoreAction;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\classes\component\Component as CoreComponent;
+use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingCms\classes\component\SwitchableComponent as CoreSwitchableComponent;
+use DarlingCms\interfaces\component\Action;
+use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\Factory\BaseComponentFactory as BaseComponentFactoryInterface;
+use DarlingCms\interfaces\component\OutputComponent;
+use DarlingCms\interfaces\component\SwitchableComponent;
+use DarlingCms\interfaces\component\Web\App;
 
 abstract class BaseComponentFactory extends PrimaryFactory implements BaseComponentFactoryInterface
 {

@@ -2,13 +2,12 @@
 
 namespace UnitTests\classes\component\Factory;
 
-
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use UnitTests\abstractions\component\Factory\BaseComponentFactoryTest as AbstractBaseComponentFactoryTest;
 use DarlingCms\classes\component\Factory\BaseComponentFactory;
 use DarlingCms\classes\component\Web\App;
 use DarlingCms\classes\component\Web\Routing\Request;
+use DarlingCms\classes\primary\Storable;
+use DarlingCms\classes\primary\Switchable;
+use UnitTests\abstractions\component\Factory\BaseComponentFactoryTest as AbstractBaseComponentFactoryTest;
 
 class BaseComponentFactoryTest extends AbstractBaseComponentFactoryTest
 {
@@ -16,13 +15,13 @@ class BaseComponentFactoryTest extends AbstractBaseComponentFactoryTest
     {
         $this->setBaseComponentFactory(
             new BaseComponentFactory(
-                    new App(
-                        new Request(
-                            new Storable('Temp','Temp','Temp'),
-                            new Switchable()
-                        ),
+                new App(
+                    new Request(
+                        new Storable('Temp', 'Temp', 'Temp'),
                         new Switchable()
                     ),
+                    new Switchable()
+                )
             )
         );
         $this->setBaseComponentFactoryParentTestInstances();

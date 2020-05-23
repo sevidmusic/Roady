@@ -2,32 +2,31 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\interfaces\component\Factory\BaseComponentFactory;
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard as StandardStorageDriver;
+use DarlingCms\classes\primary\Storable;
+use DarlingCms\classes\primary\Switchable;
 use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\Factory\BaseComponentFactory;
 
 trait BaseComponentFactoryTestTrait
 {
 
     private $baseComponentFactory;
 
-    private function  getMockCrud(): ComponentCrud
+    public function testBuildComponentReturnsComponentImplementationInstance(): void
     {
-        return new ComponentCrud(
-            $this->getBaseComponentFactory()->buildStorable('MockCrud', 'TEMP'),
-            $this->getBaseComponentFactory()->buildSwitchable(),
-            new StandardStorageDriver(
-                $this->getBaseComponentFactory()->buildStorable('MockStandardStorageDriver','TEMP'),
-                $this->getBaseComponentFactory()->buildSwitchable()
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Component',
+                $this->getBaseComponentFactory()->buildComponent('AssignedName', 'AssignedContainer')
             )
         );
     }
 
-    protected function setBaseComponentFactoryParentTestInstances(): void
+    private function isProperImplementation(string $expectedImplementation, $class): bool
     {
-        $this->setPrimaryFactory($this->getBaseComponentFactory());
-        $this->setPrimaryFactoryParentTestInstances();
+        return in_array($expectedImplementation, class_implements($class));
     }
 
     public function getBaseComponentFactory(): BaseComponentFactory
@@ -41,29 +40,6 @@ trait BaseComponentFactoryTestTrait
         //$this->assertTrue($this->isProperImplementation('DarlingCms\interfaces\component\Factory\PrimaryFactory', $this->baseComponentFactory));
         //var_dump($this->getMockCrud());
         //var_dump($this->wasStoredOnBuild($this->getBaseComponentFactory()));
-    }
-
-    private function isProperImplementation(string $expectedImplementation, $class): bool
-    {
-        return in_array($expectedImplementation, class_implements($class));
-    }
-
-    private function wasStoredOnBuild(Component $component): bool // note : call after call to build*() | i.e., $comp = build(); wasStoredOnBuild($comp) // true if stored, false otherwise; | i.e for state true assertTrue(wasStoredOnBuild($comp)) | for state false assertFalse(wasStoredOnBuild($comp)
-    {
-        // keep this line for debugging till dev is finished $this->getMockCrud()->create($component);
-        $wasStored = ($this->getMockCrud()->read($component)->getName() === $component->getName());
-        $this->getMockCrud()->delete($component);
-        return $wasStored;
-    }
-
-    public function testBuildComponentReturnsComponentImplementationInstance(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Component',
-                $this->getBaseComponentFactory()->buildComponent('AssignedName', 'AssignedContainer')
-            )
-        );
     }
 
     public function testBuildSwitchableComponentReturnsSwitchableComponentImplementationInstance(): void
@@ -92,6 +68,34 @@ trait BaseComponentFactoryTestTrait
             $this->isProperImplementation(
                 'DarlingCms\interfaces\component\Action',
                 $this->getBaseComponentFactory()->buildAction('AssignedName', 'AssignedContainer', 420.87)
+            )
+        );
+    }
+
+    protected function setBaseComponentFactoryParentTestInstances(): void
+    {
+        $this->setPrimaryFactory($this->getBaseComponentFactory());
+        $this->setPrimaryFactoryParentTestInstances();
+    }
+
+    /** @noinspection PhpUnusedPrivateMethodInspection */
+
+    private function wasStoredOnBuild(Component $component): bool // note : call after call to build*() | i.e., $comp = build(); wasStoredOnBuild($comp) // true if stored, false otherwise; | i.e for state true assertTrue(wasStoredOnBuild($comp)) | for state false assertFalse(wasStoredOnBuild($comp)
+    {
+        // keep this line for debugging till dev is finished $this->getMockCrud()->create($component);
+        $wasStored = ($this->getMockCrud()->read($component)->getName() === $component->getName());
+        $this->getMockCrud()->delete($component);
+        return $wasStored;
+    }
+
+    protected function getMockCrud(): ComponentCrud
+    {
+        return new ComponentCrud(
+            new Storable('MockCrud', 'Temp', 'Temp'),
+            new Switchable(),
+            new StandardStorageDriver(
+                new Storable('MockStandardStorageDriver', 'Temp', 'Temp'),
+                new Switchable()
             )
         );
     }
