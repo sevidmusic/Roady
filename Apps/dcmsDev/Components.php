@@ -28,8 +28,23 @@ $domain = new Request(
 );
 $domain->import(['url' => 'http://dcms.dev/']);
 $app = new App($domain, new Switchable());
-
-$baseComponentFactory = new BaseComponentFactory($app);
+$componentCrud = new ComponentCrud(
+    new Storable(
+        'ComponentCrud',
+        $app->getLocation(),
+        'ComponentCruds'
+    ),
+    new Switchable(),
+    new Standard(
+        new Storable(
+            'StorageDriver',
+            $app->getLocation(),
+            'StorageDrivers'
+        ),
+        new Switchable()
+    )
+);
+$baseComponentFactory = new BaseComponentFactory($app, $componentCrud);
 /****************/
 /*** Requests ***/
 /****************/
@@ -138,22 +153,7 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to htmlEn
 $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 
 
-$componentCrud = new ComponentCrud(
-    new Storable(
-        'ComponentCrud',
-        $app->getLocation(),
-        'ComponentCruds'
-    ),
-    new Switchable(),
-    new Standard(
-        new Storable(
-            'StorageDriver',
-            $app->getLocation(),
-            'StorageDrivers'
-        ),
-        new Switchable()
-    )
-);
+
 
 $components = [
     $app,
