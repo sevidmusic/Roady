@@ -157,26 +157,13 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 
 $components = [
     $app,
+    $defaultUITemplate,
     $indexRequest,
     $rootRequest,
-    $mainMenuResponse,
-    $htmlMainMenu,
-    $homeResponse,
     $htmlStartResponse,
+    $mainMenuResponse,
+    $homeResponse,
     $htmlEndResponse,
-    $htmlStart,
-    $htmlHeadStart,
-    $htmlHeadStylesStart,
-    $cssBgColorsCommon,
-    $cssFontsCommon,
-    $cssDimensionsCommon,
-    $htmlHeadStylesEnd,
-    $htmlHeadEnd,
-    $htmlBodyStart,
-    $htmlContentWelcome,
-    $htmlBodyEnd,
-    $htmlEnd,
-    $defaultUITemplate
 ];
 
 foreach ($components as $component) {
