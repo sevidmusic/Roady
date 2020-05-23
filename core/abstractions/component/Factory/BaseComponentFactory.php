@@ -59,10 +59,12 @@ abstract class BaseComponentFactory extends PrimaryFactory implements BaseCompon
 
     public function buildAction(string $name, string $container, float $initialPosition): Action
     {
-        return new CoreAction(
+        $action = new CoreAction(
             $this->buildStorable($name, $container),
             $this->buildSwitchable(),
             $this->buildPositionable($initialPosition)
         );
+        $this->componentCrud->create($action);
+        return $action;
     }
 }

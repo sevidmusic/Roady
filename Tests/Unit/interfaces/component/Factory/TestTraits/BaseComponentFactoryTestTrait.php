@@ -128,6 +128,11 @@ trait BaseComponentFactoryTestTrait
         $this->assertTrue($this->wasStoredOnBuild($outputComponent), 'buildOutputComponent() MUST store built OutputComponent!');
     }
 
+    public function testBuildActionStoresBuiltAction(): void
+    {
+        $action = $this->getBaseComponentFactory()->buildAction('AssignedName', 'AssignedContainer', 420.87);
+        $this->assertTrue($this->wasStoredOnBuild($action), 'buildAction() MUST store built Action!');
+    }
 
     /**
      * *Tests:
