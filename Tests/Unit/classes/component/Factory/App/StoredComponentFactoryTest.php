@@ -13,11 +13,7 @@ class StoredComponentFactoryTest extends AbstractStoredComponentFactoryTest
     {
         $this->setStoredComponentFactory(
             new StoredComponentFactory(
-                new Storable(
-                    'StoredComponentFactoryName',
-                    'StoredComponentFactoryLocation',
-                    'StoredComponentFactoryContainer'
-                ),
+                $this->getMockApp(),
                 new Switchable(),
             )
         );

@@ -17,11 +17,7 @@ class StoredComponentFactoryTest extends CoreSwitchableComponentTest
             $this->getMockForAbstractClass(
                 '\DarlingCms\abstractions\component\Factory\App\StoredComponentFactory',
                 [
-                    new Storable(
-                        'MockStoredComponentFactoryName',
-                        'MockStoredComponentFactoryLocation',
-                        'MockStoredComponentFactoryContainer'
-                    ),
+                    $this->getMockApp(),
                     new Switchable(),
                 ]
             )
