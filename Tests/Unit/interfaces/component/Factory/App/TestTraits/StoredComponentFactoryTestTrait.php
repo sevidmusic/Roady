@@ -20,6 +20,21 @@ trait StoredComponentFactoryTestTrait
     private $storedComponentFactory;
     private $app;
 
+    public function testPrimaryFactoryPropertyIsAssignedPrimaryFactoryImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Factory\PrimaryFactory',
+                $this->getStoredComponentFactory()->export()['primaryFactory']
+            )
+        );
+    }
+
+    protected function isProperImplementation(string $expectedImplementation, $class): bool
+    {
+        return in_array($expectedImplementation, class_implements($class));
+    }
+
     protected function setStoredComponentFactoryParentTestInstances(): void
     {
         $this->setSwitchableComponent($this->getStoredComponentFactory());
@@ -36,36 +51,25 @@ trait StoredComponentFactoryTestTrait
         $this->storedComponentFactory = $storedComponentFactory;
     }
 
-    protected function isProperImplementation(string $expectedImplementation, $class): bool
-    {
-        return in_array($expectedImplementation, class_implements($class));
-    }
-
     protected function getMockPrimaryFactory(): PrimaryFactory
     {
         return new CorePrimaryFactory($this->getMockApp());
     }
 
-    protected function getMockCrud(): ComponentCrud
+    protected function getMockApp(): App
     {
-        return new CoreComponentCrud(
-            new CoreStorable('MockCrud', 'Temp', 'Temp'),
-            new CoreSwitchable(),
-            new CoreStandardStorageDriver(
-                new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
+        if (empty($this->app) === true) {
+            $currentRequest = new CoreRequest(
+                new CoreStorable(
+                    'CurrentRequest',
+                    'Requests',
+                    'Index'
+                ),
                 new CoreSwitchable()
-            )
-        );
-    }
-
-    public function testPrimaryFactoryPropertyIsAssignedPrimaryFactoryImplementationInstancePostInstantiation(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Factory\PrimaryFactory',
-                $this->getStoredComponentFactory()->export()['primaryFactory']
-            )
-        );
+            );
+            $this->app = new CoreApp($currentRequest, new CoreSwitchable());
+        }
+        return $this->app;
     }
 
     /*
@@ -80,21 +84,17 @@ trait StoredComponentFactoryTestTrait
 
         }
      */
-    protected function getMockApp(): App
+
+    protected function getMockCrud(): ComponentCrud
     {
-        if(empty($this->app) === true)
-        {
-            $currentRequest = new CoreRequest(
-                new CoreStorable(
-                    'CurrentRequest',
-                    'Requests',
-                    'Index'
-                ),
+        return new CoreComponentCrud(
+            new CoreStorable('MockCrud', 'Temp', 'Temp'),
+            new CoreSwitchable(),
+            new CoreStandardStorageDriver(
+                new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
                 new CoreSwitchable()
-            );
-            $this->app = new CoreApp($currentRequest, new CoreSwitchable());
-        }
-        return $this->app;
+            )
+        );
     }
 
 }
