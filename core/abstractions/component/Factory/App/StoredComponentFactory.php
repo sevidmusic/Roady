@@ -6,18 +6,22 @@ use DarlingCms\abstractions\component\SwitchableComponent as CoreSwitchableCompo
 use DarlingCms\interfaces\component\Factory\App\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\primary\Switchable;
-
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 abstract class StoredComponentFactory extends CoreSwitchableComponent implements StoredComponentFactoryInterface
 {
 
     private $primaryFactory;
 
-    public function __construct(PrimaryFactory $primaryFactory, Switchable $switchable)
+    public function __construct(PrimaryFactory $primaryFactory, ComponentCrud $componentCrud)
     {
         $this->primaryFactory = $primaryFactory;
         $storable = $this->primaryFactory->buildStorable('StoredComponentFactory', $this->primaryFactory::CONTAINER);
-        parent::__construct($storable, $switchable);
+        parent::__construct($storable, $componentCrud);
     }
 
+    public function getComponentCrud(): ComponentCrud
+    {
+        return $this->export()['switchable'];
+    }
 
 }

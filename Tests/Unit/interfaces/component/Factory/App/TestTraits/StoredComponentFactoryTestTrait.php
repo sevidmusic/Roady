@@ -94,4 +94,12 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
+    public function testGetComponentCrudReturnsComponentCrudInstanceAssignedToSwitchableProperty(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentFactory()->export()['switchable'],
+            $this->getStoredComponentFactory()->getComponentCrud()
+        );
+    }
+
 }
