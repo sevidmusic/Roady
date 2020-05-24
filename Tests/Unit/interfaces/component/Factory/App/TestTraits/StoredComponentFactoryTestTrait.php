@@ -72,18 +72,15 @@ trait StoredComponentFactoryTestTrait
         return $this->app;
     }
 
-    /*
-        public function testSwitchablePropertyIsAssignedComponentCrudImplementationInstancePostInstantiation(): void
-        {
-            $this->assertTrue(
-                $this->isProperImplementation(
-                    'DarlingCms\interfaces\component\Crud\ComponentCrud',
-                    $this->getStoredComponentFactory()->export()['switchable']
-                )
-            );
-
-        }
-     */
+    public function testSwitchablePropertyIsAssignedComponentCrudImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                $this->getStoredComponentFactory()->export()['switchable']
+            )
+        );
+    }
 
     protected function getMockCrud(): ComponentCrud
     {
