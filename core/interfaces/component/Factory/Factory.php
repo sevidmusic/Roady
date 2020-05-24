@@ -6,5 +6,5 @@ use DarlingCms\interfaces\component\Component;
 
 interface Factory extends Component
 {
-
+    public const CONTAINER = 'FACTORIES';
 }

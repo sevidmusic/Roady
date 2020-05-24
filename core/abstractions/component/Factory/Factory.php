@@ -2,11 +2,11 @@
 
 namespace DarlingCms\abstractions\component\Factory;
 
-use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\abstractions\component\Component;
+use DarlingCms\classes\primary\Storable as CoreStorable;
 use DarlingCms\interfaces\component\Factory\Factory as FactoryInterface;
 use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\classes\primary\Storable as CoreStorable;
+
 abstract class Factory extends Component implements FactoryInterface
 {
 
@@ -18,7 +18,7 @@ abstract class Factory extends Component implements FactoryInterface
         $storable = new CoreStorable(
             'Factory',
             $app->getLocation(),
-            $app->getContainer()
+            self::CONTAINER
         );
         parent::__construct($storable);
     }
