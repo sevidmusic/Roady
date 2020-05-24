@@ -13,6 +13,8 @@ use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Factory\App\StoredComponentFactory;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Web\App;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 
 trait StoredComponentFactoryTestTrait
 {
@@ -102,4 +104,29 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
+    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
+    {
+        return new CoreStoredComponentRegistry(
+            new CoreStorable('t','t','t'),
+            $this->getMockCrud()
+        );
+    }
+
+    public function testStoredComponentRegistryPropertyIsAssignedStoredComponentRegistryImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry',
+                $this->getStoredComponentFactory()->export()['storedComponentRegistry']
+            )
+        );
+    }
+
+    /**
+     * @todo:
+     * testRegisterAndStoreTrhowsErrorAndReturnsFalseIfComponentRegistrationFailed()
+     * testRegisterAndStoreThrowsErrorAndReturnsFalseIfComponentCouldNotBeStored()
+     * testRegisterAndStoreThrowsErrorAndReturnsFalseIfComponentWasNotUnregisteredOnFailureToStore()
+     * testRegisterAndStoreReturnsTrueIfComponentWasRegisteredAndStored()
+     * */
 }

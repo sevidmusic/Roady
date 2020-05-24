@@ -12,7 +12,8 @@ class StoredComponentFactoryTest extends AbstractStoredComponentFactoryTest
         $this->setStoredComponentFactory(
             new StoredComponentFactory(
                 $this->getMockPrimaryFactory(),
-                $this->getMockCrud()
+                $this->getMockCrud(),
+                $this->getMockStoredComponentRegistry()
             )
         );
         $this->setStoredComponentFactoryParentTestInstances();

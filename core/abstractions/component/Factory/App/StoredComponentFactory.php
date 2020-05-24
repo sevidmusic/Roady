@@ -7,13 +7,17 @@ use DarlingCms\interfaces\component\Factory\App\StoredComponentFactory as Stored
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+
 abstract class StoredComponentFactory extends CoreSwitchableComponent implements StoredComponentFactoryInterface
 {
 
     private $primaryFactory;
+    private $storedComponentRegistry;
 
-    public function __construct(PrimaryFactory $primaryFactory, ComponentCrud $componentCrud)
+    public function __construct(PrimaryFactory $primaryFactory, ComponentCrud $componentCrud, StoredComponentRegistry $storedComponentRegistry)
     {
+        $this->storedComponentRegistry = $storedComponentRegistry;
         $this->primaryFactory = $primaryFactory;
         $storable = $this->primaryFactory->buildStorable('StoredComponentFactory', $this->primaryFactory::CONTAINER);
         parent::__construct($storable, $componentCrud);
