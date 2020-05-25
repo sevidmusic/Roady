@@ -104,6 +104,14 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
+    public function testGetPrimaryFactoryReturnsPrimaryFactoryInstanceAssignedToPrimaryFactoryProperty(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentFactory()->export()['primaryFactory'],
+            $this->getStoredComponentFactory()->getPrimaryFactory()
+        );
+    }
+
     protected function getMockStoredComponentRegistry(): StoredComponentRegistry
     {
         return new CoreStoredComponentRegistry(
