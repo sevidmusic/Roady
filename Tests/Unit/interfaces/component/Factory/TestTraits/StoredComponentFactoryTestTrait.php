@@ -1,6 +1,6 @@
 <?php
 
-namespace UnitTests\interfaces\component\Factory\App\TestTraits;
+namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
@@ -10,7 +10,7 @@ use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\classes\primary\Storable as CoreStorable;
 use DarlingCms\classes\primary\Switchable as CoreSwitchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\App\StoredComponentFactory;
+use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;

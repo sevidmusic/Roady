@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory\App;
+namespace DarlingCms\abstractions\component\Factory;
 
 use DarlingCms\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingCms\interfaces\component\Factory\App\StoredComponentFactory as StoredComponentFactoryInterface;
+use DarlingCms\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;

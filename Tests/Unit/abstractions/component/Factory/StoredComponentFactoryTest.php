@@ -1,9 +1,9 @@
 <?php
 
-namespace UnitTests\abstractions\component\Factory\App;
+namespace UnitTests\abstractions\component\Factory;
 
 use UnitTests\abstractions\component\SwitchableComponentTest as CoreSwitchableComponentTest;
-use UnitTests\interfaces\component\Factory\App\TestTraits\StoredComponentFactoryTestTrait;
+use UnitTests\interfaces\component\Factory\TestTraits\StoredComponentFactoryTestTrait;
 
 class StoredComponentFactoryTest extends CoreSwitchableComponentTest
 {
@@ -13,7 +13,7 @@ class StoredComponentFactoryTest extends CoreSwitchableComponentTest
     {
         $this->setStoredComponentFactory(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Factory\App\StoredComponentFactory',
+                '\DarlingCms\abstractions\component\Factory\StoredComponentFactory',
                 [
                     $this->getMockPrimaryFactory(),
                     $this->getMockCrud(),

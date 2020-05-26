@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Factory\App;
+namespace DarlingCms\interfaces\component\Factory;
 
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\SwitchableComponent as CoreSwitchableComponent;

@@ -1,9 +1,9 @@
 <?php
 
-namespace UnitTests\classes\component\Factory\App;
+namespace UnitTests\classes\component\Factory;
 
-use DarlingCms\classes\component\Factory\App\StoredComponentFactory;
-use UnitTests\abstractions\component\Factory\App\StoredComponentFactoryTest as AbstractStoredComponentFactoryTest;
+use DarlingCms\classes\component\Factory\StoredComponentFactory;
+use UnitTests\abstractions\component\Factory\StoredComponentFactoryTest as AbstractStoredComponentFactoryTest;
 
 class StoredComponentFactoryTest extends AbstractStoredComponentFactoryTest
 {
