@@ -112,6 +112,15 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
+    public function testGetStoredComponentRegistryReturnsStoredComponentRegistryInstanceAssignedToStoredComponentRegistryProperty(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentFactory()->export()['storedComponentRegistry'],
+            $this->getStoredComponentFactory()->getStoredComponentRegistry()
+        );
+    }
+
+
     protected function getMockStoredComponentRegistry(): StoredComponentRegistry
     {
         return new CoreStoredComponentRegistry(

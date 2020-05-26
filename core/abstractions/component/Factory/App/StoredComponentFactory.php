@@ -33,4 +33,10 @@ abstract class StoredComponentFactory extends CoreSwitchableComponent implements
         return $this->primaryFactory;
     }
 
+
+    public function getStoredComponentRegistry(): StoredComponentRegistry
+    {
+        return $this->storedComponentRegistry;
+    }
+
 }
