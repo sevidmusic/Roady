@@ -15,7 +15,7 @@ use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-
+use DarlingCms\interfaces\component\Component;
 trait StoredComponentFactoryTestTrait
 {
 
@@ -120,6 +120,12 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
+    private function wasStoredOnBuild(Component $component): bool
+    {
+        $wasStored = ($this->getMockCrud()->read($component)->getName() === $component->getName());
+        $this->getMockCrud()->delete($component);
+        return $wasStored;
+    }
 
     protected function getMockStoredComponentRegistry(): StoredComponentRegistry
     {
@@ -139,11 +145,47 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
-    /**
-     * @todo:
-     * testRegisterAndStoreTrhowsErrorAndReturnsFalseIfComponentRegistrationFailed()
-     * testRegisterAndStoreThrowsErrorAndReturnsFalseIfComponentCouldNotBeStored()
-     * testRegisterAndStoreThrowsErrorAndReturnsFalseIfComponentWasNotUnregisteredOnFailureToStore()
-     * testRegisterAndStoreReturnsTrueIfComponentWasRegisteredAndStored()
-     * */
+    public function testStoreAndRegisterReturnsFalseIfComponentWasNotStored(): void
+    {
+        $this->getStoredComponentFactory()->switchState();
+        $this->assertFalse(
+            $this->getStoredComponentFactory()->storeAndRegister(
+                $this->getStoredComponentFactory()
+            )
+        );
+    }
+
+    public function testStoreAndRegisterReturnsFalseIfComponentWasNotRegistered(): void
+    {
+        $this->getStoredComponentFactory()->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Web\App']);
+        $this->assertFalse(
+            $this->getStoredComponentFactory()->storeAndRegister(
+                $this->getStoredComponentFactory()
+            )
+        );
+    }
+
+    public function testStoreAndRegisterReturnsTrueIfComponentWasStored(): void
+    {
+        $this->assertTrue(
+            $this->getStoredComponentFactory()->storeAndRegister(
+                $this->getStoredComponentFactory()
+            )
+        );
+    }
+
+    public function testStoreAndRegisterReturnsTrueIfComponentWasRegistered(): void
+    {
+        $this->assertTrue(
+            $this->getStoredComponentFactory()->storeAndRegister(
+                $this->getStoredComponentFactory()
+            )
+        );
+    }
+
+
+
+
+
+
 }

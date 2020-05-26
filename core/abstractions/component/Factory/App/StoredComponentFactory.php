@@ -8,7 +8,7 @@ use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-
+use DarlingCms\interfaces\component\Component;
 abstract class StoredComponentFactory extends CoreSwitchableComponent implements StoredComponentFactoryInterface
 {
 
@@ -39,4 +39,8 @@ abstract class StoredComponentFactory extends CoreSwitchableComponent implements
         return $this->storedComponentRegistry;
     }
 
+    public function storeAndRegister(Component $component): bool
+    {
+        return ($this->getComponentCrud()->create($component) === true ? $this->getStoredComponentRegistry()->registerComponent($component) : false);
+    }
 }
