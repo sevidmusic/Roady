@@ -208,7 +208,7 @@ showWelcomeMessage() {
   printf "%s" "${CLEARCOLOR}${NOTIFYCOLOR}"
   animatedPrint "Welcome to the Darling Shell" .05
   printf "%s" "${CLEARCOLOR}"
-  showLoadingBar "One moment plaes"
+  showLoadingBar "One moment please"
 }
 
 askUserForTemplateDirectoryName() {
