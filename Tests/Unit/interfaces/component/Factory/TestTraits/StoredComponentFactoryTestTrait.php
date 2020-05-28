@@ -202,7 +202,12 @@ trait StoredComponentFactoryTestTrait
                 $mockInstance
             )
         );
-        $this->assertTrue(in_array($mockInstance, $this->getStoredComponentFactory()->export()['storedComponentRegistry']->getRegisteredComponents()));
+        $this->assertTrue($this->wasRegisteredOnBuild($mockInstance));
+    }
+
+    protected function wasRegisteredOnBuild(Component $component): bool
+    {
+        return in_array($component, $this->getStoredComponentFactory()->export()['storedComponentRegistry']->getRegisteredComponents());
     }
 
 }
