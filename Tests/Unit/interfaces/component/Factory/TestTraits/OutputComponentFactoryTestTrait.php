@@ -1,6 +1,8 @@
 <?php
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 
 use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
 
@@ -23,6 +25,16 @@ trait OutputComponentFactoryTestTrait
     protected function setOutputComponentFactory(OutputComponentFactory $outputComponentFactory): void
     {
         $this->outputComponentFactory = $outputComponentFactory;
+    }
+
+    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
+    {
+        $mockStoredComponentRegistry = new CoreStoredComponentRegistry(
+            $this->getMockPrimaryFactory()->buildStorable('t','t'),
+            $this->getMockCrud()
+        );
+        $mockStoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\OutputComponent']);
+        return $mockStoredComponentRegistry;
     }
 
 }
