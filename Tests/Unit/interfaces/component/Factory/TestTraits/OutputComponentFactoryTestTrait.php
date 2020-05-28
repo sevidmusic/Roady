@@ -37,4 +37,25 @@ trait OutputComponentFactoryTestTrait
         return $mockStoredComponentRegistry;
     }
 
+    public function testBuildOutputComponentReturnsAnOutputComponentImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\OutputComponent',
+                $this->getOutputComponentFactory()->buildOutputComponent(
+                    'AssignedName',
+                    'AssignedContainer',
+                    'Assigned Output', 420.87
+                )
+            )
+        );
+    }
+
+/*
+    public function testDev(): void
+    {
+        $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+    }
+ */
+
 }
