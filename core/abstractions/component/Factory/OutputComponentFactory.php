@@ -26,6 +26,7 @@ abstract class OutputComponentFactory extends CoreStoredComponentFactory impleme
             $this->getPrimaryFactory()->buildPositionable($position)
         );
         $outputComponent->import(['output' => $output]);
+        $this->storeAndRegister($outputComponent);
         return $outputComponent;
     }
 }

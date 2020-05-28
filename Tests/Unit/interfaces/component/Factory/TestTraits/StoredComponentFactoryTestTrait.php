@@ -122,9 +122,9 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
-    private function wasStoredOnBuild(Component $component): bool
+    protected function wasStoredOnBuild(Component $component): bool
     {
-        $wasStored = ($this->getMockCrud()->read($component)->getName() === $component->getName());
+        $wasStored = ($this->getMockCrud()->read($component) == $component);
         $this->getMockCrud()->delete($component);
         return $wasStored;
     }
