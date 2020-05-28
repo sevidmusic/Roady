@@ -51,10 +51,16 @@ trait OutputComponentFactoryTestTrait
         );
     }
 
-    public function testBuildOutputComponentStoresTheOutputComponentImplementationItBuilds(): void
+    public function testBuildOutputComponentStoresTheOutputComponentImplementationInstanceItBuilds(): void
     {
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
         $this->assertTrue($this->wasStoredOnBuild($outputComponent));
+    }
+
+    public function testBuildOutputComponentRegistersTheOutputComponentImplementationInstanceItBuilds(): void
+    {
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+        $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
     }
 
 /*
