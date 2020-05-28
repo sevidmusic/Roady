@@ -63,10 +63,20 @@ trait OutputComponentFactoryTestTrait
         $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
     }
 
+    public function testBuildOutputComponentReturnsOutputComponentWhoseNameMatchesSuppliedName(): void
+    {
+        $expectedName = 'ExpectedName';
+         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
+         $this->assertEquals(
+             $expectedName,
+             $outputComponent->getName(),
+         );
+    }
+
 /*
     public function testDev(): void
     {
-        $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
     }
  */
 
