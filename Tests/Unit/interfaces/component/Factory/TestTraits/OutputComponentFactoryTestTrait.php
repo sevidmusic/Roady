@@ -100,4 +100,14 @@ trait OutputComponentFactoryTestTrait
          );
     }
 
+    public function testBuildOutputComponentReturnsOutputComponentWhosePositionMatchesSuppliedPosition(): void
+    {
+        $expectedPosition = 420.87;
+         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
+         $this->assertEquals(
+             $expectedPosition,
+             $outputComponent->getPosition(),
+         );
+    }
+
 }
