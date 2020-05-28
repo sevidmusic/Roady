@@ -16,6 +16,8 @@ use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingCms\interfaces\component\Component;
+use DarlingCms\classes\utility\ReflectionUtility;
+
 trait StoredComponentFactoryTestTrait
 {
 
@@ -167,25 +169,40 @@ trait StoredComponentFactoryTestTrait
 
     public function testStoreAndRegisterReturnsTrueIfComponentWasStored(): void
     {
-        $this->assertTrue(
-            $this->getStoredComponentFactory()->storeAndRegister(
-                $this->getStoredComponentFactory()
+        $reflectionUtility = new ReflectionUtility();
+        $class = str_replace('interfaces' , 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
+        $mockInstance = $reflectionUtility->getClassInstance(
+            $class,
+            $reflectionUtility->generateMockClassMethodArguments(
+                $class,
+                '__construct'
             )
         );
+        $this->assertTrue(
+            $this->getStoredComponentFactory()->storeAndRegister(
+                $mockInstance
+            )
+        );
+        $this->assertTrue($this->wasStoredOnBuild($mockInstance));
     }
 
     public function testStoreAndRegisterReturnsTrueIfComponentWasRegistered(): void
     {
-        $this->assertTrue(
-            $this->getStoredComponentFactory()->storeAndRegister(
-                $this->getStoredComponentFactory()
+        $reflectionUtility = new ReflectionUtility();
+        $class = str_replace('interfaces' , 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
+        $mockInstance = $reflectionUtility->getClassInstance(
+            $class,
+            $reflectionUtility->generateMockClassMethodArguments(
+                $class,
+                '__construct'
             )
         );
+        $this->assertTrue(
+            $this->getStoredComponentFactory()->storeAndRegister(
+                $mockInstance
+            )
+        );
+        $this->assertTrue(in_array($mockInstance, $this->getStoredComponentFactory()->export()['storedComponentRegistry']->getRegisteredComponents()));
     }
-
-
-
-
-
 
 }
