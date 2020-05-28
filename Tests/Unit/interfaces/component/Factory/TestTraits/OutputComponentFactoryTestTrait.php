@@ -80,4 +80,14 @@ trait OutputComponentFactoryTestTrait
     }
  */
 
+    public function testBuildOutputComponentReturnsOutputComponentWhoseContainerMatchesSuppliedContainer(): void
+    {
+        $expectedContainer = 'ExpectedContainer';
+         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
+         $this->assertEquals(
+             $expectedContainer,
+             $outputComponent->getContainer(),
+         );
+    }
+
 }
