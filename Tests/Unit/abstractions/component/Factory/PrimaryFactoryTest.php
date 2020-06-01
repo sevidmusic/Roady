@@ -2,11 +2,11 @@
 
 namespace UnitTests\abstractions\component\Factory;
 
+use DarlingCms\classes\component\Web\App;
+use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use UnitTests\interfaces\component\Factory\TestTraits\PrimaryFactoryTestTrait;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request;
 
 class PrimaryFactoryTest extends FactoryTest
 {
@@ -20,7 +20,7 @@ class PrimaryFactoryTest extends FactoryTest
                 [
                     new App(
                         new Request(
-                            new Storable('TEMP','TEMP','TEMP'),
+                            new Storable('TEMP', 'TEMP', 'TEMP'),
                             new Switchable()
                         ),
                         new Switchable()

@@ -153,8 +153,6 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to htmlEn
 $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 
 
-
-
 $components = [
     $app,
     $defaultUITemplate,

@@ -10,6 +10,29 @@ trait AppComponentsFactoryTestTrait
 
     private $appComponentsFactory;
 
+    public function testAppComponentsFactoryImplementsOutputComponentFactoryInterface(): void
+    {
+        $this->getOutputComponentFactory();
+        $this->assertTrue(
+            $this->appComponentsFactoryImplementsExpectedInterface(
+                'DarlingCms\interfaces\component\Factory\OutputComponentFactory'
+            )
+        );
+    }
+
+    public function getOutputComponentFactory(): OutputComponentFactory
+    {
+        return $this->getAppComponentsFactory();
+    }
+
+    public function appComponentsFactoryImplementsExpectedInterface(string $expectedInterface): bool
+    {
+        return $this->isProperImplementation(
+            $expectedInterface,
+            $this->getAppComponentsFactory()
+        );
+    }
+
     protected function setAppComponentsFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getAppComponentsFactory());
@@ -24,28 +47,5 @@ trait AppComponentsFactoryTestTrait
     protected function setAppComponentsFactory(AppComponentsFactory $appComponentsFactory): void
     {
         $this->appComponentsFactory = $appComponentsFactory;
-    }
-
-    public function testAppComponentsFactoryImplementsOutputComponentFactoryInterface(): void
-    {
-        $this->getOutputComponentFactory();
-        $this->assertTrue(
-            $this->appComponentsFactoryImplementsExpectedInterface(
-                'DarlingCms\interfaces\component\Factory\OutputComponentFactory'
-            )
-        );
-    }
-
-    public function appComponentsFactoryImplementsExpectedInterface(string $expectedInterface): bool
-    {
-        return $this->isProperImplementation(
-            $expectedInterface,
-            $this->getAppComponentsFactory()
-        );
-    }
-
-    public function getOutputComponentFactory(): OutputComponentFactory
-    {
-        return $this->getAppComponentsFactory();
     }
 }

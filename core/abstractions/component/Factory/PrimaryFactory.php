@@ -2,20 +2,20 @@
 
 namespace DarlingCms\abstractions\component\Factory;
 
-use DarlingCms\interfaces\primary\Storable;
+use DarlingCms\classes\primary\Classifiable as CoreClassifiable;
+use DarlingCms\classes\primary\Exportable as CoreExportable;
+use DarlingCms\classes\primary\Identifiable as CoreIdentifiable;
+use DarlingCms\classes\primary\Positionable as CorePositionable;
 use DarlingCms\classes\primary\Storable as CoreStorable;
+use DarlingCms\classes\primary\Switchable as CoreSwitchable;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\interfaces\primary\Identifiable;
-use DarlingCms\classes\primary\Identifiable as CoreIdentifiable;
 use DarlingCms\interfaces\primary\Classifiable;
-use DarlingCms\classes\primary\Classifiable as CoreClassifiable;
 use DarlingCms\interfaces\primary\Exportable;
-use DarlingCms\classes\primary\Exportable as CoreExportable;
-use DarlingCms\interfaces\primary\Switchable;
-use DarlingCms\classes\primary\Switchable as CoreSwitchable;
+use DarlingCms\interfaces\primary\Identifiable;
 use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\classes\primary\Positionable as CorePositionable;
+use DarlingCms\interfaces\primary\Storable;
+use DarlingCms\interfaces\primary\Switchable;
 
 abstract class PrimaryFactory extends Factory implements PrimaryFactoryInterface
 {

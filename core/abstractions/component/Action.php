@@ -6,11 +6,11 @@ use DarlingCms\abstractions\component\OutputComponent as CoreOutputComponent;
 use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\primary\Switchable as CoreSwitchableInterface;
 use DarlingCms\interfaces\component\Action as ActionInterface;
 use DarlingCms\interfaces\component\Web\Routing\Request as CoreRequestInterface;
 use DarlingCms\interfaces\primary\Positionable;
 use DarlingCms\interfaces\primary\Storable as CoreStorableInterface;
+use DarlingCms\interfaces\primary\Switchable as CoreSwitchableInterface;
 
 abstract class Action extends CoreOutputComponent implements ActionInterface
 {

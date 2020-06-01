@@ -3,8 +3,8 @@
 namespace DS_TESTS_NAMESPACE_PREFIX\abstractions\component\DS_COMPONENT_SUBTYPE;
 
 use DarlingCms\classes\primary\Storable;
-use UnitTests\abstractions\component\ComponentTest;
 use DS_TESTS_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits\DS_COMPONENT_NAMETestTrait;
+use UnitTests\abstractions\component\ComponentTest;
 
 class DS_COMPONENT_NAMETest extends ComponentTest
 {

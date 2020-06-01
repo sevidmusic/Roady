@@ -5,18 +5,18 @@ namespace UnitTests\interfaces\component\Factory\TestTraits;
 use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
 use DarlingCms\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
+use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingCms\classes\component\Web\App as CoreApp;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\classes\primary\Storable as CoreStorable;
 use DarlingCms\classes\primary\Switchable as CoreSwitchable;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingCms\interfaces\component\Component;
 use DarlingCms\classes\utility\ReflectionUtility;
+use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\interfaces\component\Factory\PrimaryFactory;
+use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingCms\interfaces\component\Web\App;
 
 trait StoredComponentFactoryTestTrait
 {
@@ -39,12 +39,6 @@ trait StoredComponentFactoryTestTrait
         return in_array($expectedImplementation, class_implements($class));
     }
 
-    protected function setStoredComponentFactoryParentTestInstances(): void
-    {
-        $this->setSwitchableComponent($this->getStoredComponentFactory());
-        $this->setSwitchableComponentParentTestInstances();
-    }
-
     protected function getStoredComponentFactory(): StoredComponentFactory
     {
         return $this->storedComponentFactory;
@@ -55,45 +49,12 @@ trait StoredComponentFactoryTestTrait
         $this->storedComponentFactory = $storedComponentFactory;
     }
 
-    protected function getMockPrimaryFactory(): PrimaryFactory
-    {
-        return new CorePrimaryFactory($this->getMockApp());
-    }
-
-    protected function getMockApp(): App
-    {
-        if (empty($this->app) === true) {
-            $currentRequest = new CoreRequest(
-                new CoreStorable(
-                    'CurrentRequest',
-                    'Requests',
-                    'Index'
-                ),
-                new CoreSwitchable()
-            );
-            $this->app = new CoreApp($currentRequest, new CoreSwitchable());
-        }
-        return $this->app;
-    }
-
     public function testSwitchablePropertyIsAssignedComponentCrudImplementationInstancePostInstantiation(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
                 'DarlingCms\interfaces\component\Crud\ComponentCrud',
                 $this->getStoredComponentFactory()->export()['switchable']
-            )
-        );
-    }
-
-    protected function getMockCrud(): ComponentCrud
-    {
-        return new CoreComponentCrud(
-            new CoreStorable('MockCrud', 'Temp', 'Temp'),
-            new CoreSwitchable(),
-            new CoreStandardStorageDriver(
-                new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
-                new CoreSwitchable()
             )
         );
     }
@@ -119,21 +80,6 @@ trait StoredComponentFactoryTestTrait
         $this->assertEquals(
             $this->getStoredComponentFactory()->export()['storedComponentRegistry'],
             $this->getStoredComponentFactory()->getStoredComponentRegistry()
-        );
-    }
-
-    protected function wasStoredOnBuild(Component $component): bool
-    {
-        $wasStored = ($this->getMockCrud()->read($component) == $component);
-        $this->getMockCrud()->delete($component);
-        return $wasStored;
-    }
-
-    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
-    {
-        return new CoreStoredComponentRegistry(
-            new CoreStorable('t','t','t'),
-            $this->getMockCrud()
         );
     }
 
@@ -170,7 +116,7 @@ trait StoredComponentFactoryTestTrait
     public function testStoreAndRegisterReturnsTrueIfComponentWasStored(): void
     {
         $reflectionUtility = new ReflectionUtility();
-        $class = str_replace('interfaces' , 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
+        $class = str_replace('interfaces', 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
         $mockInstance = $reflectionUtility->getClassInstance(
             $class,
             $reflectionUtility->generateMockClassMethodArguments(
@@ -186,10 +132,37 @@ trait StoredComponentFactoryTestTrait
         $this->assertTrue($this->wasStoredOnBuild($mockInstance));
     }
 
+    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
+    {
+        return new CoreStoredComponentRegistry(
+            new CoreStorable('t', 't', 't'),
+            $this->getMockCrud()
+        );
+    }
+
+    protected function getMockCrud(): ComponentCrud
+    {
+        return new CoreComponentCrud(
+            new CoreStorable('MockCrud', 'Temp', 'Temp'),
+            new CoreSwitchable(),
+            new CoreStandardStorageDriver(
+                new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
+                new CoreSwitchable()
+            )
+        );
+    }
+
+    protected function wasStoredOnBuild(Component $component): bool
+    {
+        $wasStored = ($this->getMockCrud()->read($component) == $component);
+        $this->getMockCrud()->delete($component);
+        return $wasStored;
+    }
+
     public function testStoreAndRegisterReturnsTrueIfComponentWasRegistered(): void
     {
         $reflectionUtility = new ReflectionUtility();
-        $class = str_replace('interfaces' , 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
+        $class = str_replace('interfaces', 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
         $mockInstance = $reflectionUtility->getClassInstance(
             $class,
             $reflectionUtility->generateMockClassMethodArguments(
@@ -208,6 +181,33 @@ trait StoredComponentFactoryTestTrait
     protected function wasRegisteredOnBuild(Component $component): bool
     {
         return in_array($component, $this->getStoredComponentFactory()->export()['storedComponentRegistry']->getRegisteredComponents());
+    }
+
+    protected function setStoredComponentFactoryParentTestInstances(): void
+    {
+        $this->setSwitchableComponent($this->getStoredComponentFactory());
+        $this->setSwitchableComponentParentTestInstances();
+    }
+
+    protected function getMockPrimaryFactory(): PrimaryFactory
+    {
+        return new CorePrimaryFactory($this->getMockApp());
+    }
+
+    protected function getMockApp(): App
+    {
+        if (empty($this->app) === true) {
+            $currentRequest = new CoreRequest(
+                new CoreStorable(
+                    'CurrentRequest',
+                    'Requests',
+                    'Index'
+                ),
+                new CoreSwitchable()
+            );
+            $this->app = new CoreApp($currentRequest, new CoreSwitchable());
+        }
+        return $this->app;
     }
 
 }

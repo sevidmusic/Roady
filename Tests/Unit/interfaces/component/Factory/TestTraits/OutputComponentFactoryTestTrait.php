@@ -1,41 +1,15 @@
 <?php
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 
+use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
+use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 
 trait OutputComponentFactoryTestTrait
 {
 
     private $outputComponentFactory;
-
-    protected function setOutputComponentFactoryParentTestInstances(): void
-    {
-        $this->setStoredComponentFactory($this->getOutputComponentFactory());
-        $this->setStoredComponentFactoryParentTestInstances();
-    }
-
-    protected function getOutputComponentFactory(): OutputComponentFactory
-    {
-        return $this->outputComponentFactory;
-    }
-
-    protected function setOutputComponentFactory(OutputComponentFactory $outputComponentFactory): void
-    {
-        $this->outputComponentFactory = $outputComponentFactory;
-    }
-
-    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
-    {
-        $mockStoredComponentRegistry = new CoreStoredComponentRegistry(
-            $this->getMockPrimaryFactory()->buildStorable('t','t'),
-            $this->getMockCrud()
-        );
-        $mockStoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\OutputComponent']);
-        return $mockStoredComponentRegistry;
-    }
 
     public function testBuildOutputComponentReturnsAnOutputComponentImplementationInstance(): void
     {
@@ -66,48 +40,74 @@ trait OutputComponentFactoryTestTrait
     public function testBuildOutputComponentReturnsOutputComponentWhoseNameMatchesSuppliedName(): void
     {
         $expectedName = 'ExpectedName';
-         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
-         $this->assertEquals(
-             $expectedName,
-             $outputComponent->getName(),
-         );
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
+        $this->assertEquals(
+            $expectedName,
+            $outputComponent->getName(),
+        );
     }
-
-/*
-    public function testDev(): void
-    {
-         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
-    }
- */
 
     public function testBuildOutputComponentReturnsOutputComponentWhoseContainerMatchesSuppliedContainer(): void
     {
         $expectedContainer = 'ExpectedContainer';
-         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
-         $this->assertEquals(
-             $expectedContainer,
-             $outputComponent->getContainer(),
-         );
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
+        $this->assertEquals(
+            $expectedContainer,
+            $outputComponent->getContainer(),
+        );
     }
 
     public function testBuildOutputComponentReturnsOutputComponentWhoseOutputMatchesSuppliedOutput(): void
     {
         $expectedOutput = 'Expected output';
-         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', $expectedOutput, 420.87);
-         $this->assertEquals(
-             $expectedOutput,
-             $outputComponent->getOutput(),
-         );
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', $expectedOutput, 420.87);
+        $this->assertEquals(
+            $expectedOutput,
+            $outputComponent->getOutput(),
+        );
     }
 
     public function testBuildOutputComponentReturnsOutputComponentWhosePositionMatchesSuppliedPosition(): void
     {
         $expectedPosition = 420.87;
-         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
-         $this->assertEquals(
-             $expectedPosition,
-             $outputComponent->getPosition(),
-         );
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
+        $this->assertEquals(
+            $expectedPosition,
+            $outputComponent->getPosition(),
+        );
+    }
+
+    protected function setOutputComponentFactoryParentTestInstances(): void
+    {
+        $this->setStoredComponentFactory($this->getOutputComponentFactory());
+        $this->setStoredComponentFactoryParentTestInstances();
+    }
+
+    /*
+        public function testDev(): void
+        {
+             $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+        }
+     */
+
+    protected function getOutputComponentFactory(): OutputComponentFactory
+    {
+        return $this->outputComponentFactory;
+    }
+
+    protected function setOutputComponentFactory(OutputComponentFactory $outputComponentFactory): void
+    {
+        $this->outputComponentFactory = $outputComponentFactory;
+    }
+
+    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
+    {
+        $mockStoredComponentRegistry = new CoreStoredComponentRegistry(
+            $this->getMockPrimaryFactory()->buildStorable('t', 't'),
+            $this->getMockCrud()
+        );
+        $mockStoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\OutputComponent']);
+        return $mockStoredComponentRegistry;
     }
 
 }

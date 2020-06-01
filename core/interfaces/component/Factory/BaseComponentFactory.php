@@ -2,10 +2,10 @@
 
 namespace DarlingCms\interfaces\component\Factory;
 
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\Action;
+use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\OutputComponent;
+use DarlingCms\interfaces\component\SwitchableComponent;
 
 interface BaseComponentFactory extends PrimaryFactory
 {

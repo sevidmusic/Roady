@@ -69,10 +69,20 @@ trait BaseComponentFactoryTestTrait
         );
     }
 
-    protected function setBaseComponentFactoryParentTestInstances(): void
+    public function testComponentCrudPropertyIsAssignedComponentCrudImplementationInstancePostInstantiation(): void
     {
-        $this->setPrimaryFactory($this->getBaseComponentFactory());
-        $this->setPrimaryFactoryParentTestInstances();
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                $this->getBaseComponentFactory()->export()['componentCrud']
+            )
+        );
+    }
+
+    public function testBuildComponentStoresBuiltComponent(): void
+    {
+        $component = $this->getBaseComponentFactory()->buildComponent('AssignedName', 'AssignedContainer');
+        $this->assertTrue($this->wasStoredOnBuild($component), 'buildComponent() MUST store built Component!');
     }
 
     private function wasStoredOnBuild(Component $component): bool
@@ -92,22 +102,6 @@ trait BaseComponentFactoryTestTrait
                 new Switchable()
             )
         );
-    }
-
-    public function testComponentCrudPropertyIsAssignedComponentCrudImplementationInstancePostInstantiation(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Crud\ComponentCrud',
-                $this->getBaseComponentFactory()->export()['componentCrud']
-            )
-        );
-    }
-
-    public function testBuildComponentStoresBuiltComponent(): void
-    {
-        $component = $this->getBaseComponentFactory()->buildComponent('AssignedName', 'AssignedContainer');
-        $this->assertTrue($this->wasStoredOnBuild($component), 'buildComponent() MUST store built Component!');
     }
 
     public function testBuildSwitchableComponentStoresBuiltSwitchableComponent(): void
@@ -176,6 +170,12 @@ trait BaseComponentFactoryTestTrait
         $this->assertEquals($expectedContainer, $action->getContainer());
         $this->assertEquals($expectedLocation, $action->getLocation());
         $this->assertEquals($expectedPosition, $action->getPosition());
+    }
+
+    protected function setBaseComponentFactoryParentTestInstances(): void
+    {
+        $this->setPrimaryFactory($this->getBaseComponentFactory());
+        $this->setPrimaryFactoryParentTestInstances();
     }
 
 }

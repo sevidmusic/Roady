@@ -3,8 +3,8 @@
 
 namespace DarlingCms\classes\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\Factory as FactoryInterface;
 use DarlingCms\abstractions\component\Factory\Factory as FactoryBase;
+use DarlingCms\interfaces\component\Factory\Factory as FactoryInterface;
 
 class Factory extends FactoryBase implements FactoryInterface
 {

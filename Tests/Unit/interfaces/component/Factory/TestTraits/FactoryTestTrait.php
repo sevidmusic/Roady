@@ -19,6 +19,16 @@ trait FactoryTestTrait
         );
     }
 
+    public function getFactory(): Factory
+    {
+        return $this->factory;
+    }
+
+    public function setFactory(Factory $factory)
+    {
+        $this->factory = $factory;
+    }
+
     public function testFactoryLocationMatchesAppLocation(): void
     {
         $this->assertEquals(
@@ -39,15 +49,5 @@ trait FactoryTestTrait
     {
         $this->setComponent($this->getFactory());
         $this->setComponentParentTestInstances();
-    }
-
-    public function getFactory(): Factory
-    {
-        return $this->factory;
-    }
-
-    public function setFactory(Factory $factory)
-    {
-        $this->factory = $factory;
     }
 }

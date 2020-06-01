@@ -2,12 +2,12 @@
 
 namespace DarlingCms\interfaces\component\Factory;
 
-use DarlingCms\interfaces\primary\Identifiable;
-use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Classifiable;
 use DarlingCms\interfaces\primary\Exportable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingCms\interfaces\primary\Identifiable;
 use DarlingCms\interfaces\primary\Positionable;
+use DarlingCms\interfaces\primary\Storable;
+use DarlingCms\interfaces\primary\Switchable;
 
 interface PrimaryFactory extends Factory
 {

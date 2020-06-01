@@ -2,8 +2,8 @@
 
 namespace DarlingCms\classes\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 use DarlingCms\abstractions\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
+use DarlingCms\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 
 class OutputComponentFactory extends CoreOutputComponentFactory implements OutputComponentFactoryInterface
 {

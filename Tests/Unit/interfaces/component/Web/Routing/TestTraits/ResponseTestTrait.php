@@ -28,6 +28,16 @@ trait ResponseTestTrait
         );
     }
 
+    public function getResponse(): Response
+    {
+        return $this->response;
+    }
+
+    public function setResponse(Response $response): void
+    {
+        $this->response = $response;
+    }
+
     public function testRespondsToRequestReturnsTrueForAssignedRequest(): void
     {
         $request = $this->getMockRequest();
@@ -91,16 +101,6 @@ trait ResponseTestTrait
                 new Switchable()
             )
         );
-    }
-
-    public function getResponse(): Response
-    {
-        return $this->response;
-    }
-
-    public function setResponse(Response $response): void
-    {
-        $this->response = $response;
     }
 
     public function testRespondsToRequestReturnsFalseForUnknownRequest(): void

@@ -9,22 +9,6 @@ trait PrimaryFactoryTestTrait
 
     private $primaryFactory;
 
-    protected function setPrimaryFactoryParentTestInstances(): void
-    {
-        $this->setFactory($this->getPrimaryFactory());
-        $this->setFactoryParentTestInstances();
-    }
-
-    public function getPrimaryFactory(): PrimaryFactory
-    {
-        return $this->primaryFactory;
-    }
-
-    public function setPrimaryFactory(PrimaryFactory $primaryFactory)
-    {
-        $this->primaryFactory = $primaryFactory;
-    }
-
     public function testBuildIdentifiableReturnsAIdentifiableImplementationInstance(): void
     {
         $this->assertTrue(
@@ -65,7 +49,6 @@ trait PrimaryFactoryTestTrait
         $storable = $this->getPrimaryFactory()->buildStorable('AssignedName', $expectedContainer);
         $this->assertEquals($expectedContainer, $storable->getContainer());
     }
-
 
     public function testBuildStorableReturnsStorableWhoseLocationMatchesFactorysAppInstancesLocation(): void
     {
@@ -111,7 +94,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 'DarlingCms\interfaces\primary\Positionable',
-                class_implements($this->getPrimaryFactory()->buildPositionable(rand(0,1000)))
+                class_implements($this->getPrimaryFactory()->buildPositionable(rand(0, 1000)))
             )
         );
     }
@@ -121,6 +104,22 @@ trait PrimaryFactoryTestTrait
         $expectedPosition = 420.87;
         $positionable = $this->getPrimaryFactory()->buildPositionable($expectedPosition);
         $this->assertEquals($expectedPosition, $positionable->getPosition());
+    }
+
+    protected function setPrimaryFactoryParentTestInstances(): void
+    {
+        $this->setFactory($this->getPrimaryFactory());
+        $this->setFactoryParentTestInstances();
+    }
+
+    public function getPrimaryFactory(): PrimaryFactory
+    {
+        return $this->primaryFactory;
+    }
+
+    public function setPrimaryFactory(PrimaryFactory $primaryFactory)
+    {
+        $this->primaryFactory = $primaryFactory;
     }
 
 }

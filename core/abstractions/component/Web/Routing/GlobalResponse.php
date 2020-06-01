@@ -8,15 +8,15 @@ use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\primary\Switchable;
 use DarlingCms\interfaces\primary\Positionable;
+use DarlingCms\interfaces\primary\Switchable;
 
 abstract class GlobalResponse extends CoreResponse implements GlobalResponseInterface
 {
 
     public function __construct(App $app, Switchable $switchable, Positionable $positionable = null)
     {
-        if(empty($positionable) === true) {
+        if (empty($positionable) === true) {
             parent::__construct($app, $switchable);
         }
         parent::__construct($app, $switchable, $positionable);

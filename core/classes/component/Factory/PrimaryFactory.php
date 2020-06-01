@@ -3,8 +3,8 @@
 
 namespace DarlingCms\classes\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingCms\abstractions\component\Factory\PrimaryFactory as PrimaryFactoryBase;
+use DarlingCms\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 
 class PrimaryFactory extends PrimaryFactoryBase implements PrimaryFactoryInterface
 {
