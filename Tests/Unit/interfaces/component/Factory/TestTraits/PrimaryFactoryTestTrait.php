@@ -35,7 +35,7 @@ trait PrimaryFactoryTestTrait
         );
     }
 
-    public function testBuildIdentifableReturnsIdentifableImplementationInstanceWhoseAssignedNameMatchesSpecifiedName(): void
+    public function testBuildIdentifiableReturnsIdentifiableImplementationInstanceWhoseAssignedNameMatchesSpecifiedName(): void
     {
         $expectedName = 'ExpectedName';
         $identifiable = $this->getPrimaryFactory()->buildIdentifiable($expectedName);
@@ -67,7 +67,7 @@ trait PrimaryFactoryTestTrait
     }
 
 
-    public function testBuildStorableReturnsStorableWhoseLocationMacthesFactorysAppInstancesLocation(): void
+    public function testBuildStorableReturnsStorableWhoseLocationMatchesFactorysAppInstancesLocation(): void
     {
         $this->assertEquals(
             $this->getPrimaryFactory()->export()['app']->getLocation(),

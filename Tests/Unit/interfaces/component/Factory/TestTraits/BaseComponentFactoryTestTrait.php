@@ -170,7 +170,6 @@ trait BaseComponentFactoryTestTrait
         $expectedName = 'AssignedName';
         $expectedContainer = 'AssignedContainer';
         $expectedLocation = $this->getBaseComponentFactory()->export()['app']->getLocation();
-        $expectedOutput = 'Assigned output.';
         $expectedPosition = 420.87;
         $action = $this->getBaseComponentFactory()->buildAction($expectedName, $expectedContainer, $expectedPosition);
         $this->assertEquals($expectedName, $action->getName());

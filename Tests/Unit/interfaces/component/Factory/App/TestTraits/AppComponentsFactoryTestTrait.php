@@ -26,7 +26,7 @@ trait AppComponentsFactoryTestTrait
         $this->appComponentsFactory = $appComponentsFactory;
     }
 
-    public function testAppComponentsFactoryImplementsOutputCompoentFactoryInterface(): void
+    public function testAppComponentsFactoryImplementsOutputComponentFactoryInterface(): void
     {
         $this->getOutputComponentFactory();
         $this->assertTrue(

@@ -4,7 +4,6 @@ namespace UnitTests\abstractions\component\Factory;
 
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use UnitTests\abstractions\component\Factory\PrimaryFactoryTest;
 use UnitTests\interfaces\component\Factory\TestTraits\BaseComponentFactoryTestTrait;
 use DarlingCms\classes\component\Web\App;
 use DarlingCms\classes\component\Web\Routing\Request;

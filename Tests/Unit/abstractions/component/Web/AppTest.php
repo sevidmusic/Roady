@@ -2,7 +2,6 @@
 
 namespace UnitTests\abstractions\component\Web;
 
-use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest as CoreSwitchableComponentTest;
 use UnitTests\interfaces\component\Web\TestTraits\AppTestTrait;

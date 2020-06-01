@@ -18,7 +18,7 @@ trait ResponseTestTrait
 
     private $response;
 
-    public function testPositionablePropertyIsAssignedAPoitionableImplementationInstancePostInstantiation(): void
+    public function testPositionablePropertyIsAssignedAPositionableImplementationInstancePostInstantiation(): void
     {
         $this->assertTrue(
             in_array(

@@ -2,7 +2,6 @@
 
 namespace UnitTests\classes\component\Web;
 
-use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\classes\component\Web\App;
 use UnitTests\abstractions\component\Web\AppTest as AbstractAppTest;
