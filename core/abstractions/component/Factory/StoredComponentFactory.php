@@ -5,7 +5,6 @@ namespace DarlingCms\abstractions\component\Factory;
 use DarlingCms\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
 use DarlingCms\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\primary\Switchable;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\interfaces\component\Component;

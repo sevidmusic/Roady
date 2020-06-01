@@ -2,7 +2,6 @@
 
 namespace DarlingCms\interfaces\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\SwitchableComponent;
 use DarlingCms\interfaces\component\OutputComponent;

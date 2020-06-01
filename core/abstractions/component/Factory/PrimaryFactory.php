@@ -4,7 +4,6 @@ namespace DarlingCms\abstractions\component\Factory;
 
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\classes\primary\Storable as CoreStorable;
-use DarlingCms\abstractions\component\Factory\Factory;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\interfaces\primary\Identifiable;

@@ -2,7 +2,6 @@
 
 namespace DarlingCms\interfaces\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\Factory;
 use DarlingCms\interfaces\primary\Identifiable;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Classifiable;
