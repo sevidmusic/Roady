@@ -241,14 +241,19 @@ $components = [
 
 foreach ($components as $component) {
     printf(
-        "<p>Saving component %s to location <span style='color: purple;'>%s</span> in container <span style='color: green;'>%s</span></p>",
+        "%sSaving component %s to location %s in container %s",
+        PHP_EOL,
         $component->getName(),
         $component->getLocation(),
         $component->getContainer()
     );
+    usleep(50000);
     printf(
-        "%s",
-        ($componentCrud->create($component) === true ? "<p style=\"color: green;\">Saved successfully</p>" : "<p style=\"color: red;\">The component could not be saved</p>")
+        "%s%s",
+        PHP_EOL,
+        ($componentCrud->create($component) === true ? "Saved successfully" : "The component could not be saved")
     );
+    usleep(100000);
+    printf("%s", PHP_EOL);
 }
 
