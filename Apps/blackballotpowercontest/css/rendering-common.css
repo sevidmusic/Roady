@@ -29,15 +29,12 @@
         }
         .common-contact-menu-phone {
             margin: 0 1.3em 0 4em;
-            background: #224e12;
         }
 
         .common-contact-menu-email {
-            background: #006d80;
         }
 
         .common-contact-menu-social {
-            background: #698000;
         }
 
         .common-contact-menu {
@@ -63,4 +60,11 @@
 
         .common-indent-paragraph {
             margin-left: 3em;
+        }
+
+        .common-content-separator {
+            width: 80%;
+            height: 1px;
+            background: #6d0707;
+            margin: 2em auto;
         }
