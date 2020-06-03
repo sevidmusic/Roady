@@ -48,7 +48,7 @@
             color: #00b0ff;
         }
 
-        .common-contact-menu {
+        .common-contact-menu, .common-contact-menu a, .common-contact-menu a:visited {
             color: #ffffff;
             font-size: .83em;
             font-weight: bolder;
@@ -58,3 +58,6 @@
             text-align: center;
         }
 
+        a, a:visited, a:active, a:hover, a:link {
+            text-decoration: none;
+        }

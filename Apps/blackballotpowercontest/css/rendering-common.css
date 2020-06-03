@@ -62,6 +62,14 @@
             margin-left: 3em;
         }
 
+        .common-space-below {
+            margin-bottom: 2em;
+        }
+
+        .common-space-left {
+            margin-left: 1em;
+        }
+
         .common-content-separator {
             width: 80%;
             height: 1px;
