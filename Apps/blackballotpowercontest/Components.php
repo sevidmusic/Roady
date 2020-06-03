@@ -16,9 +16,9 @@ use DarlingCms\classes\primary\Switchable;
 ini_set('display_errors', true);
 require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-/***********/
-/*** App ***/
-/***********/
+/**
+ * App: Represents an application, for example: a website.
+ */
 $domain = new Request(
     new Storable(
         'AppDomain',
@@ -27,12 +27,23 @@ $domain = new Request(
     ),
     new Switchable()
 );
-$domain->import(['url' => 'http://blackballotpowercontest.local/']);
+// Local domain
+$domain->import(['url' => 'https://blackballotpowercontest.local/']);
+// Production domain
+//$domain->import(['url' => 'https://blackballotpowercontest.org/']);
 
 $app = new App($domain, new Switchable());
 
+/**
+ * Primary Factory: Builds instances of primary objects:
+ * Identifiable, Storable, Classifiable, Exportable,
+ * Switchable, and Positionable
+ */
 $primaryFactory = new PrimaryFactory($app);
 
+/**
+ * Component Crud: Create, read, update, and delete components of various types from storage
+ */
 $componentCrud = new ComponentCrud(
     $primaryFactory->buildStorable('Crud', 'TEMP'),
     $primaryFactory->buildSwitchable(),
@@ -41,6 +52,13 @@ $componentCrud = new ComponentCrud(
         $primaryFactory->buildSwitchable()
     )
 );
+
+/**
+ * App Components Factory: Builds and stores various components for an App
+ *
+ * Note: At the moment only OutputComponents are supported, support for other
+ * component types is planned for the future.
+ */
 $appComponentsFactory = new AppComponentsFactory(
     $primaryFactory,
     $componentCrud,
@@ -50,15 +68,20 @@ $appComponentsFactory = new AppComponentsFactory(
     )
 );
 
-/****************/
-/*** Requests ***/
-/****************/
+/**
+ * Requests: Represent requests that can be made to an App.
+ */
 $rootRequest = new Request(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('RootRequest', 'Requests'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
 );
-
 $rootRequest->import(['url' => $domain->getUrl()]);
+
+$rootRequestHttp = new Request(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('RootRequest', 'Requests'),
+    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
+);
+$rootRequestHttp->import(['url' => str_replace('https','http', $domain->getUrl())]);
 
 $indexRequest = new Request(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('HomepageRequest', 'Requests'),
@@ -66,9 +89,15 @@ $indexRequest = new Request(
 );
 $indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
 
-/*****************************/
-/***** OUTPUT COMPONENTS *****/
-/*****************************/
+$indexRequestHttp = new Request(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('HomepageRequest', 'Requests'),
+    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
+);
+$indexRequestHttp->import(['url' => str_replace('https','http', $domain->getUrl()) . 'index.php']);
+
+/**
+ * Output Components: Generate output for an App
+ */
 $htmlStart = $appComponentsFactory->buildOutputComponent(
     'HtmlStart',
     'CommonOutput',
@@ -216,7 +245,9 @@ $homeResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(2)
 );
 $homeResponse->addRequestStorageInfo($indexRequest);
+$homeResponse->addRequestStorageInfo($indexRequestHttp);
 $homeResponse->addRequestStorageInfo($rootRequest);
+$homeResponse->addRequestStorageInfo($rootRequestHttp);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
 
@@ -234,7 +265,9 @@ $components = [
     $app,
     $defaultUITemplate,
     $indexRequest,
+    $indexRequestHttp,
     $rootRequest,
+    $rootRequestHttp,
     $htmlStartResponse,
     $mainMenuResponse,
     $homeResponse,
