@@ -2,9 +2,13 @@
          * Common background colors | i.e. background
          */
         .common-body {
-            background: #00010a;
+            background: #6d0707;
         }
 
-        .common-page {
-            background: #0a0800;
+        .common-content-container {
+            background: #ffffff;
+        }
+
+        .common-main-menu {
+            background: #fbd27d;
         }

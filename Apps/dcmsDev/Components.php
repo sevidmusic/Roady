@@ -111,6 +111,13 @@ $cssDimensionsCommon = $appComponentsFactory->buildOutputComponent(
     3.0
 );
 
+$cssRenderingCommon = $appComponentsFactory->buildOutputComponent(
+    'CommonDimensions',
+    'CommonOutput',
+    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'),
+    3.0
+);
+
 $htmlHeadStylesEnd = $appComponentsFactory->buildOutputComponent(
     'HtmlHeadStylesEnd',
     'CommonOutput',

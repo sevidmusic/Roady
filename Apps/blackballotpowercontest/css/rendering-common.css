@@ -1,0 +1,34 @@
+/**
+ * Common rendering.
+ */
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-float-left {
+    clear: left;
+}
+
+.clear-float-right {
+    clear: right;
+}
+
+.clear-float-both {
+    clear: both;
+}
+.common-contact-menu-phone {
+    background: #224e12;
+}
+
+.common-contact-menu-email {
+    background: #006d80;
+}
+
+.common-contact-menu-social {
+    background: #698000;
+}
+

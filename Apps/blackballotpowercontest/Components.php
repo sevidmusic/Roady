@@ -100,7 +100,7 @@ $cssBgColorsCommon = $appComponentsFactory->buildOutputComponent(
 $cssFontsCommon = $appComponentsFactory->buildOutputComponent(
     'CommonFonts',
     'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css'),
+    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/text-common.css'),
     3.0
 );
 
@@ -111,6 +111,12 @@ $cssDimensionsCommon = $appComponentsFactory->buildOutputComponent(
     3.0
 );
 
+$cssRenderingCommon = $appComponentsFactory->buildOutputComponent(
+    'CommonRendering',
+    'CommonOutput',
+    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'),
+    3.0
+);
 $htmlHeadStylesEnd = $appComponentsFactory->buildOutputComponent(
     'HtmlHeadStylesEnd',
     'CommonOutput',
@@ -187,6 +193,7 @@ $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
 $htmlStartResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
 $htmlStartResponse->addOutputComponentStorageInfo($cssFontsCommon);
 $htmlStartResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
+$htmlStartResponse->addOutputComponentStorageInfo($cssRenderingCommon);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadEnd);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlBodyStart);
