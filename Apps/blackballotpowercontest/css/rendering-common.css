@@ -46,6 +46,7 @@
 
         .common-content-container {
             padding: 3em;
+            line-height: 2em;
         }
 
         .common-main-menu {
@@ -54,4 +55,12 @@
 
         .common-header-logo-w387-h75 {
             margin: .23em 0 0 1em;
+        }
+
+        h1 {
+            margin: 0 0 1.5em 0;
+        }
+
+        .common-indent-paragraph {
+            margin-left: 3em;
         }

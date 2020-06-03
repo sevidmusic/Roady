@@ -6,6 +6,12 @@
             font-size: 18px;
         }
 
+        h1 {
+            font-size: 1.3em;
+            font-weight: bolder;
+            font-style: italic;
+        }
+
         .common-body {
             font-size: 1em;
         }
@@ -46,5 +52,9 @@
             color: #ffffff;
             font-size: .83em;
             font-weight: 500;
+        }
+
+        .common-center-text {
+            text-align: center;
         }
 
