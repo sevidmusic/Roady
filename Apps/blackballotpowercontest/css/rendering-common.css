@@ -1,34 +1,57 @@
-/**
- * Common rendering.
- */
-.float-left {
-    float: left;
-}
+        /**
+         * Common rendering | i.e., margin, padding, float, clear, opacity
+         */
+        * {
+            margin: 0;
+            padding: 0;
+            box-decoration-break: clone;
+            box-sizing: border-box;
+        }
 
-.float-right {
-    float: right;
-}
+        .float-left {
+            float: left;
+        }
 
-.clear-float-left {
-    clear: left;
-}
+        .float-right {
+            float: right;
+        }
 
-.clear-float-right {
-    clear: right;
-}
+        .clear-float-left {
+            clear: left;
+        }
 
-.clear-float-both {
-    clear: both;
-}
-.common-contact-menu-phone {
-    background: #224e12;
-}
+        .clear-float-right {
+            clear: right;
+        }
 
-.common-contact-menu-email {
-    background: #006d80;
-}
+        .clear-float-both {
+            clear: both;
+        }
+        .common-contact-menu-phone {
+            margin: 0 1.3em 0 4em;
+            background: #224e12;
+        }
 
-.common-contact-menu-social {
-    background: #698000;
-}
+        .common-contact-menu-email {
+            background: #006d80;
+        }
 
+        .common-contact-menu-social {
+            background: #698000;
+        }
+
+        .common-contact-menu {
+            padding: .8em;
+        }
+
+        .common-content-container {
+            padding: 3em;
+        }
+
+        .common-main-menu {
+            padding: 1em;
+        }
+
+        .common-header-logo-w387-h75 {
+            margin: .23em 0 0 1em;
+        }

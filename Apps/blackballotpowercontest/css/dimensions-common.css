@@ -1,21 +1,24 @@
         /**
-         * Common dimensions | i.e., width, height, margin, padding
+         * Common dimensions | i.e., width, height
          */
-        .common-body {
-            margin: 0;
-            padding: 0;
-        }
-
         .common-header-container {
             width: 100%;
         }
 
         .common-contact-menu {
-            height: 1em;
+            height: 2.57em;
         }
 
         .common-content-container {
             width: 100%;
         }
 
+        .common-header-logo-w387-h75 {
+            width: 56%;
+            height: auto;
+        }
+
+        .common-main-menu {
+            height: 4.42em;
+        }
 
