@@ -83,4 +83,10 @@ trait SubmissionTestTrait
             'value'
         );
     }
+
+    public function testGetOutputReturnsANonEmptyString(): void
+    {
+        $this->assertNotEmpty($this->getSubmission()->getOutput());
+    }
+
 }

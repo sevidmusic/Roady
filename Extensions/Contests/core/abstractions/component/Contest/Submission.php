@@ -13,6 +13,7 @@ use RuntimeException;
 abstract class Submission extends CoreOutputComponent implements SubmissionInterface
 {
 
+    private const DEFAULT_OUTPUT_SPRINT = 'Submission Name: %s | Submission Id: %s | Submission Timestamp: %s';
     private $submitter;
     private $pathToSubmittedFile;
     private $dateTimeOfSubmission;
@@ -38,4 +39,19 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
     {
         $this->metaData[$key] = $value;
     }
+
+    public function getOutput(): string
+    {
+        return (
+            $this->getState() === false
+            ? ''
+            : sprintf(
+                self::DEFAULT_OUTPUT_SPRINT,
+                $this->getName(),
+                $this->getUniqueId(),
+                $this->dateTimeOfSubmission->getTimestamp()
+            )
+        );
+    }
+
 }
