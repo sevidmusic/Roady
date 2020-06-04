@@ -67,4 +67,11 @@ trait SubmissionTestTrait
             $actualTimestampOfDateTimeAssignedToDateTimeOfSubmissionProperty
         );
     }
+
+    public function testMetaDataPropertyIsAssignedAnEmptyArrayPostInstantiation(): void
+    {
+        $metaData = $this->getSubmission()->export()['metaData'];
+        $this->assertTrue(is_array($metaData));
+        $this->assertEmpty($metaData);
+    }
 }

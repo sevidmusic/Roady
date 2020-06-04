@@ -16,6 +16,7 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
     private $submitter;
     private $pathToSubmittedFile;
     private $dateTimeOfSubmission;
+    private $metaData = [];
 
     public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Submitter $submitter, string $pathToSubmittedFile)
     {
