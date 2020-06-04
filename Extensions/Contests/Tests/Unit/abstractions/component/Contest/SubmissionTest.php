@@ -33,7 +33,8 @@ class SubmissionTest extends CoreOutputComponentTest
                             'MockSubmitterLocation',
                             'MockSubmitterContainer'
                         )
-                    )
+                    ),
+                    '/var/www/html/devData/devImage.jpeg'
                 ]
             )
         );

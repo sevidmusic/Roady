@@ -3,11 +3,42 @@
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits;
 
 use Extensions\Contests\core\interfaces\component\Contest\Submission;
+use RuntimeException;
 
 trait SubmissionTestTrait
 {
 
     private $submission;
+
+    public function testSubmitterPropertyIsAssignedASubmitterImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            in_array(
+                'Extensions\Contests\core\interfaces\component\Contest\Submitter',
+                class_implements($this->getSubmission()->export()['submitter'])
+            )
+        );
+    }
+
+    public function testGetSubmitterReturnsSameSubmitterImplementationInstanceAssignedToSubmitterProperty(): void
+    {
+        $this->assertEquals(
+            $this->getSubmission()->export()['submitter'],
+            $this->getSubmission()->getSubmitter()
+        );
+    }
+
+    public function test__constructThrowsRuntimeExceptionIfStringSuppliedToPathToSubmittedFileArgumentIsANotAPathToAnExistingFile(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->getReflectionUtility()->getClassInstance(
+            $this->getSubmission(),
+            $this->getReflectionUtility()->generateMockClassMethodArguments(
+                $this->getSubmission(),
+                '__construct'
+            )
+        );
+    }
 
     protected function setSubmissionParentTestInstances(): void
     {
@@ -23,22 +54,5 @@ trait SubmissionTestTrait
     public function setSubmission(Submission $submission): void
     {
         $this->submission = $submission;
-    }
-
-    public function testSubmitterPropertyIsAssignedASubmitterImplementationInstancePostInstantitation(): void {
-        $this->assertTrue(
-            in_array(
-                'Extensions\Contests\core\interfaces\component\Contest\Submitter',
-                class_implements($this->getSubmission()->export()['submitter'])
-            )
-        );
-    }
-
-    public function testGetSubmitterReturnsSameSubmitterImplementationInstanceAssignedToSubmitterProperty(): void
-    {
-        $this->assertEquals(
-            $this->getSubmission()->export()['submitter'],
-            $this->getSubmission()->getSubmitter()
-        );
     }
 }

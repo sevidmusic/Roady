@@ -28,7 +28,8 @@ class SubmissionTest extends AbstractSubmissionTest
                         'SubmitterLocation',
                         'SubmitterContainer'
                     )
-                )
+                ),
+                '/var/www/html/devData/devImage.jpeg'
             )
         );
         $this->setSubmissionParentTestInstances();
