@@ -74,4 +74,13 @@ trait SubmissionTestTrait
         $this->assertTrue(is_array($metaData));
         $this->assertEmpty($metaData);
     }
+
+    public function testAssignMetaDataAssignsSpecifiedValueToSpecifiedKeyInMetaDataPropertysArray(): void
+    {
+        $this->getSubmission()->assignMetaData('key', 'value');
+        $this->assertEquals(
+            $this->getSubmission()->export()['metaData']['key'],
+            'value'
+        );
+    }
 }

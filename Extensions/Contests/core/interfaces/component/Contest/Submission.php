@@ -10,4 +10,6 @@ interface Submission extends CoreOutputComponent
 
     public function getSubmitter(): Submitter;
 
+    public function assignMetaData(string $key, $value): void;
+
 }

@@ -33,4 +33,9 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
     {
         return $this->submitter;
     }
+
+    public function assignMetaData(string $key, $value): void
+    {
+        $this->metaData[$key] = $value;
+    }
 }
