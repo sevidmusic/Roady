@@ -15,12 +15,14 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
 
     private $submitter;
     private $pathToSubmittedFile;
+    private $dateTimeOfSubmission;
 
     public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Submitter $submitter, string $pathToSubmittedFile)
     {
         if (!file_exists($pathToSubmittedFile)) {
             throw new RuntimeException();
         }
+        $this->dateTimeOfSubmission = new \DateTime('now');
         $this->pathToSubmittedFile = $pathToSubmittedFile;
         $this->submitter = $submitter;
         parent::__construct($storable, $switchable, $positionable);

@@ -55,4 +55,16 @@ trait SubmissionTestTrait
     {
         $this->submission = $submission;
     }
+
+    public function testDateTimeOfSubmissionIsAssignedADateTimeImplementationInstancePostInstantiationWhoseTimestampMatchesExpectedTimestamp(): void
+    {
+        $expectedDateTime = new \DateTime('now');
+        $expectedTimestamp = $expectedDateTime->getTimestamp();
+        $actuallDateTimeAssignedToDateTimeOfSubmissionProperty = $this->getSubmission()->export()['dateTimeOfSubmission'];
+        $actualTimestampOfDateTimeAssignedToDateTimeOfSubmissionProperty = $actuallDateTimeAssignedToDateTimeOfSubmissionProperty->getTimestamp();
+        $this->assertEquals(
+            $expectedTimestamp,
+            $actualTimestampOfDateTimeAssignedToDateTimeOfSubmissionProperty
+        );
+    }
 }
