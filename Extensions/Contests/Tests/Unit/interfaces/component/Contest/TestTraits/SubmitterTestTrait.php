@@ -25,4 +25,22 @@ trait SubmitterTestTrait
         $this->submitter = $submitter;
     }
 
+    public function testEmailPropertyIsAssignedAValidEmailPostInstantiation(): void{
+        $this->assertTrue(
+            is_string(
+                filter_var(
+                    $this->getSubmitter()->export()['email'],
+                    FILTER_VALIDATE_EMAIL
+                )
+            )
+        );
+    }
+
+    public function testGetEmailreturnsStringThatMatchesStringAssignedToEmailProperty(): void
+    {
+        $this->assertEquals(
+            $this->getSubmitter()->export()['email'],
+            $this->getSubmitter()->getEmail()
+        );
+    }
 }

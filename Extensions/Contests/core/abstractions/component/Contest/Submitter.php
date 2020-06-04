@@ -9,9 +9,15 @@ use Extensions\Contests\core\interfaces\component\Contest\Submitter as Submitter
 abstract class Submitter extends Component implements SubmitterInterface
 {
 
+    private $email = 'someemail@example.com';
+
     public function __construct(Storable $storable)
     {
         parent::__construct($storable);
     }
 
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
 }

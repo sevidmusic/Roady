@@ -7,4 +7,5 @@ use DarlingCms\interfaces\component\Component;
 interface Submitter extends Component
 {
 
+    public function getEmail(): string;
 }
