@@ -33,4 +33,12 @@ trait SubmissionTestTrait
             )
         );
     }
+
+    public function testGetSubmitterReturnsSameSubmitterImplementationInstanceAssignedToSubmitterProperty(): void
+    {
+        $this->assertEquals(
+            $this->getSubmission()->export()['submitter'],
+            $this->getSubmission()->getSubmitter()
+        );
+    }
 }

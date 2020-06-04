@@ -20,4 +20,7 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         parent::__construct($storable, $switchable, $positionable);
     }
 
+    public function getSubmitter(): Submitter {
+        return $this->submitter;
+    }
 }
