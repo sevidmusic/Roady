@@ -70,7 +70,6 @@ trait CreateSubmissionTestTrait
         $expectedOutput = file_get_contents($this->getDevFormFilePath());
         $mockReqest = $this->getMockRequest();
         if(!in_array($this->getCreateSubmission()->getUniqueId(), $mockReqest->getPost())) {
-            var_dump($this->getCreateSubmission()->getOutput());
             $this->assertEquals(
                 $expectedOutput,
                 $this->getCreateSubmission()->getOutput()
