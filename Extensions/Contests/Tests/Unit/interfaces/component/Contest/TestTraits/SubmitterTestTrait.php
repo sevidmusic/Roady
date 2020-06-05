@@ -10,6 +10,38 @@ trait SubmitterTestTrait
 
     private $submitter;
 
+    public function test__constructThrowsRuntimeExceptionIfSuppliedEmailIsNotAValidEmail(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->getReflectionUtility()->getClassInstance(
+            $this->getSubmitter(),
+            $this->getReflectionUtility()->generateMockClassMethodArguments(
+                $this->getSubmitter(),
+                '__construct'
+            )
+        );
+    }
+
+    public function testEmailPropertyIsAssignedAValidEmailPostInstantiation(): void
+    {
+        $this->assertTrue(
+            is_string(
+                filter_var(
+                    $this->getSubmitter()->export()['email'],
+                    FILTER_VALIDATE_EMAIL
+                )
+            )
+        );
+    }
+
+    public function testGetEmailReturnsStringThatMatchesStringAssignedToEmailProperty(): void
+    {
+        $this->assertEquals(
+            $this->getSubmitter()->export()['email'],
+            $this->getSubmitter()->getEmail()
+        );
+    }
+
     protected function setSubmitterParentTestInstances(): void
     {
         $this->setComponent($this->getSubmitter());
@@ -24,35 +56,5 @@ trait SubmitterTestTrait
     public function setSubmitter(Submitter $submitter)
     {
         $this->submitter = $submitter;
-    }
-
-    public function test__constructThrowsRuntimeExceptionIfSuppliedEmailIsNotAValidEmail(): void
-    {
-        $this->expectException(RuntimeException::class);
-        $this->getReflectionUtility()->getClassInstance(
-            $this->getSubmitter(),
-            $this->getReflectionUtility()->generateMockClassMethodArguments(
-                $this->getSubmitter(),
-                '__construct'
-            )
-        );
-    }
-    public function testEmailPropertyIsAssignedAValidEmailPostInstantiation(): void{
-        $this->assertTrue(
-            is_string(
-                filter_var(
-                    $this->getSubmitter()->export()['email'],
-                    FILTER_VALIDATE_EMAIL
-                )
-            )
-        );
-    }
-
-    public function testGetEmailreturnsStringThatMatchesStringAssignedToEmailProperty(): void
-    {
-        $this->assertEquals(
-            $this->getSubmitter()->export()['email'],
-            $this->getSubmitter()->getEmail()
-        );
     }
 }

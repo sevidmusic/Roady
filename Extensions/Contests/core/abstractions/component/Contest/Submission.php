@@ -6,6 +6,7 @@ use DarlingCms\abstractions\component\OutputComponent as CoreOutputComponent;
 use DarlingCms\interfaces\primary\Positionable;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Switchable;
+use DateTime;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
 use Extensions\Contests\core\interfaces\component\Contest\Submission as SubmissionInterface;
 use RuntimeException;
@@ -30,7 +31,7 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         if (!file_exists($pathToSubmittedFile)) {
             throw new RuntimeException();
         }
-        $this->dateTimeOfSubmission = new \DateTime('now');
+        $this->dateTimeOfSubmission = new DateTime('now');
         $this->pathToSubmittedFile = $pathToSubmittedFile;
         $this->submitter = $submitter;
         parent::__construct($storable, $switchable, $positionable);
@@ -49,14 +50,14 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
     public function getOutput(): string
     {
         return (
-            $this->getState() === false
+        $this->getState() === false
             ? ''
             : sprintf(
-                self::DEFAULT_OUTPUT_SPRINT,
-                $this->getName(),
-                $this->getUniqueId(),
-                $this->dateTimeOfSubmission->getTimestamp()
-            )
+            self::DEFAULT_OUTPUT_SPRINT,
+            $this->getName(),
+            $this->getUniqueId(),
+            $this->dateTimeOfSubmission->getTimestamp()
+        )
         );
     }
 

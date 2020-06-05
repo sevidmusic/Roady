@@ -3,8 +3,8 @@
 namespace Extensions\Contests\Tests\Unit\abstractions\component\Contest;
 
 use DarlingCms\classes\primary\Storable;
-use UnitTests\abstractions\component\ComponentTest;
 use Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits\SubmitterTestTrait;
+use UnitTests\abstractions\component\ComponentTest;
 
 class SubmitterTest extends ComponentTest
 {

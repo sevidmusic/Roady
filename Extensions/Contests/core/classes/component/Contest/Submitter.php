@@ -3,8 +3,8 @@
 
 namespace Extensions\Contests\core\classes\component\Contest;
 
-use Extensions\Contests\core\interfaces\component\Contest\Submitter as SubmitterInterface;
 use Extensions\Contests\core\abstractions\component\Contest\Submitter as SubmitterBase;
+use Extensions\Contests\core\interfaces\component\Contest\Submitter as SubmitterInterface;
 
 class Submitter extends SubmitterBase implements SubmitterInterface
 {

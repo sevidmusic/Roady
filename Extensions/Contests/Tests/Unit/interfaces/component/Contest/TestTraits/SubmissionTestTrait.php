@@ -2,6 +2,7 @@
 
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits;
 
+use DateTime;
 use Extensions\Contests\core\interfaces\component\Contest\Submission;
 use RuntimeException;
 
@@ -18,6 +19,16 @@ trait SubmissionTestTrait
                 class_implements($this->getSubmission()->export()['submitter'])
             )
         );
+    }
+
+    public function getSubmission(): Submission
+    {
+        return $this->submission;
+    }
+
+    public function setSubmission(Submission $submission): void
+    {
+        $this->submission = $submission;
     }
 
     public function testGetSubmitterReturnsSameSubmitterImplementationInstanceAssignedToSubmitterProperty(): void
@@ -40,28 +51,12 @@ trait SubmissionTestTrait
         );
     }
 
-    protected function setSubmissionParentTestInstances(): void
-    {
-        $this->setOutputComponent($this->getSubmission());
-        $this->setOutputComponentParentTestInstances();
-    }
-
-    public function getSubmission(): Submission
-    {
-        return $this->submission;
-    }
-
-    public function setSubmission(Submission $submission): void
-    {
-        $this->submission = $submission;
-    }
-
     public function testDateTimeOfSubmissionIsAssignedADateTimeImplementationInstancePostInstantiationWhoseTimestampMatchesExpectedTimestamp(): void
     {
-        $expectedDateTime = new \DateTime('now');
+        $expectedDateTime = new DateTime('now');
         $expectedTimestamp = $expectedDateTime->getTimestamp();
-        $actuallDateTimeAssignedToDateTimeOfSubmissionProperty = $this->getSubmission()->export()['dateTimeOfSubmission'];
-        $actualTimestampOfDateTimeAssignedToDateTimeOfSubmissionProperty = $actuallDateTimeAssignedToDateTimeOfSubmissionProperty->getTimestamp();
+        $actualDateTimeAssignedToDateTimeOfSubmissionProperty = $this->getSubmission()->export()['dateTimeOfSubmission'];
+        $actualTimestampOfDateTimeAssignedToDateTimeOfSubmissionProperty = $actualDateTimeAssignedToDateTimeOfSubmissionProperty->getTimestamp();
         $this->assertEquals(
             $expectedTimestamp,
             $actualTimestampOfDateTimeAssignedToDateTimeOfSubmissionProperty
@@ -87,6 +82,12 @@ trait SubmissionTestTrait
     public function testGetOutputReturnsANonEmptyString(): void
     {
         $this->assertNotEmpty($this->getSubmission()->getOutput());
+    }
+
+    protected function setSubmissionParentTestInstances(): void
+    {
+        $this->setOutputComponent($this->getSubmission());
+        $this->setOutputComponentParentTestInstances();
     }
 
 }

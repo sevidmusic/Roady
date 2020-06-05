@@ -2,12 +2,12 @@
 
 namespace Extensions\Contests\Tests\Unit\classes\component\Contest;
 
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\primary\Positionable;
 use Extensions\Contests\core\classes\component\Contest\Submission;
-use Extensions\Contests\Tests\Unit\abstractions\component\Contest\SubmissionTest as AbstractSubmissionTest;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
+use Extensions\Contests\Tests\Unit\abstractions\component\Contest\SubmissionTest as AbstractSubmissionTest;
 
 class SubmissionTest extends AbstractSubmissionTest
 {

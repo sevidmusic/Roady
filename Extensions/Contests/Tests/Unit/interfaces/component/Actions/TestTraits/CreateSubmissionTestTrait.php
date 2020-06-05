@@ -35,18 +35,6 @@ trait CreateSubmissionTestTrait
         $this->createSubmission = $createSubmission;
     }
 
-    public function getMockRequest(): Request
-    {
-        return new \DarlingCms\classes\component\Web\Routing\Request(
-            new Storable(
-                'MockRequest',
-                'TEMP',
-                'Mocks'
-            ),
-            new Switchable(),
-        );
-    }
-
     public function testPathAssignedToPathToHtmlFormPropertyPointsToAnExistingFile(): void
     {
         $this->assertTrue(
@@ -68,8 +56,8 @@ trait CreateSubmissionTestTrait
     public function testGetOutputReturnsContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInRequestsPOSTData(): void
     {
         $expectedOutput = file_get_contents($this->getDevFormFilePath());
-        $mockReqest = $this->getMockRequest();
-        if(!in_array($this->getCreateSubmission()->getUniqueId(), $mockReqest->getPost())) {
+        $mockRequest = $this->getMockRequest();
+        if (!in_array($this->getCreateSubmission()->getUniqueId(), $mockRequest->getPost())) {
             $this->assertEquals(
                 $expectedOutput,
                 $this->getCreateSubmission()->getOutput()
@@ -85,6 +73,18 @@ trait CreateSubmissionTestTrait
             ],
             '',
             __DIR__ . 'Apps/dcmsDev/htmlContent/devForm.html'
+        );
+    }
+
+    public function getMockRequest(): Request
+    {
+        return new \DarlingCms\classes\component\Web\Routing\Request(
+            new Storable(
+                'MockRequest',
+                'TEMP',
+                'Mocks'
+            ),
+            new Switchable(),
         );
     }
 

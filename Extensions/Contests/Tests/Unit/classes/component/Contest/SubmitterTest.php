@@ -4,8 +4,8 @@ namespace Extensions\Contests\Tests\Unit\classes\component\Contest;
 
 
 use DarlingCms\classes\primary\Storable;
-use Extensions\Contests\Tests\Unit\abstractions\component\Contest\SubmitterTest as AbstractSubmitterTest;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
+use Extensions\Contests\Tests\Unit\abstractions\component\Contest\SubmitterTest as AbstractSubmitterTest;
 
 class SubmitterTest extends AbstractSubmitterTest
 {

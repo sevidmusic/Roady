@@ -25,10 +25,10 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
 
     public function getOutput(): string
     {
-        if($this->getState() === false) {
+        if ($this->getState() === false) {
             return '';
         }
-        if(!in_array($this->getUniqueId(), $this->getCurrentRequest()->getPost())) {
+        if (!in_array($this->getUniqueId(), $this->getCurrentRequest()->getPost())) {
             $this->import(['wasDone' => true]);
             return file_get_contents($this->pathToHtmlForm);
         }
