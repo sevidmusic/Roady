@@ -18,6 +18,7 @@ class SubmitterTest extends AbstractSubmitterTest
                     'SubmitterLocation',
                     'SubmitterContainer'
                 ),
+                'submittertest@example.com'
             )
         );
         $this->setSubmitterParentTestInstances();

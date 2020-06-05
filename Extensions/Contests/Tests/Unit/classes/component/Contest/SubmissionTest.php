@@ -27,7 +27,8 @@ class SubmissionTest extends AbstractSubmissionTest
                         'SubmitterName',
                         'SubmitterLocation',
                         'SubmitterContainer'
-                    )
+                    ),
+                    'mocksubmissiontest@example.com'
                 ),
                 '/var/www/html/devData/devImage.jpeg'
             )

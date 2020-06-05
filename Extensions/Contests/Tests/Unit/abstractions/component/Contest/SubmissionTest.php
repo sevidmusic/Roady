@@ -32,7 +32,8 @@ class SubmissionTest extends CoreOutputComponentTest
                             'MockSubmitter',
                             'MockSubmitterLocation',
                             'MockSubmitterContainer'
-                        )
+                        ),
+                        'submissiontest@example.com'
                     ),
                     '/var/www/html/devData/devImage.jpeg'
                 ]

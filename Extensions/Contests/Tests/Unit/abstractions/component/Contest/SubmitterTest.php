@@ -21,6 +21,7 @@ class SubmitterTest extends ComponentTest
                         'MockSubmitterLocation',
                         'MockSubmitterContainer'
                     ),
+                    'mocksubmittertest@example.com'
                 ]
             )
         );
