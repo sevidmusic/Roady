@@ -25,7 +25,8 @@ class CreateSubmissionTest extends CoreActionTest
                     ),
                     new Switchable(),
                     new Positionable(),
-                    $this->getDevFormFilePath()
+                    $this->getDevFormFilePath(),
+                    $this->getMockCrud()
                 ]
             )
         );

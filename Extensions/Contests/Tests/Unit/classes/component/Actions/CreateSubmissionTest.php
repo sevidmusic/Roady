@@ -21,7 +21,8 @@ class CreateSubmissionTest extends AbstractCreateSubmissionTest
                 ),
                 new Switchable(),
                 new Positionable(),
-                $this->getDevFormFilePath()
+                $this->getDevFormFilePath(),
+                $this->getMockCrud()
             )
         );
         $this->setCreateSubmissionParentTestInstances();
