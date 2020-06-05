@@ -23,4 +23,13 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         parent::__construct($storable, $switchable, $positionable);
     }
 
+    public function getOutput(): string
+    {
+        if($this->getState() === false) {
+            return '';
+        }
+        $this->import(['wasDone' => true]);
+        return file_get_contents($this->pathToHtmlForm);
+    }
+
 }

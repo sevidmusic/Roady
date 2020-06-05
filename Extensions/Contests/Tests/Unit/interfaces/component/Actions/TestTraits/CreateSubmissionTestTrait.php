@@ -2,6 +2,9 @@
 
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Actions\TestTraits;
 
+use DarlingCms\classes\primary\Storable;
+use DarlingCms\classes\primary\Switchable;
+use DarlingCms\interfaces\component\Web\Routing\Request;
 use Extensions\Contests\core\interfaces\component\Actions\CreateSubmission;
 use RuntimeException;
 
@@ -19,6 +22,28 @@ trait CreateSubmissionTestTrait
                 $this->getCreateSubmission(),
                 '__construct'
             )
+        );
+    }
+
+    public function getCreateSubmission(): CreateSubmission
+    {
+        return $this->createSubmission;
+    }
+
+    public function setCreateSubmission(CreateSubmission $createSubmission): void
+    {
+        $this->createSubmission = $createSubmission;
+    }
+
+    public function getMockRequest(): Request
+    {
+        return new \DarlingCms\classes\component\Web\Routing\Request(
+            new Storable(
+                'MockRequest',
+                'TEMP',
+                'Mocks'
+            ),
+            new Switchable(),
         );
     }
 
@@ -40,14 +65,17 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function getCreateSubmission(): CreateSubmission
+    public function testGetOutputReturnsContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInRequestsPOSTData(): void
     {
-        return $this->createSubmission;
-    }
-
-    public function setCreateSubmission(CreateSubmission $createSubmission): void
-    {
-        $this->createSubmission = $createSubmission;
+        $expectedOutput = file_get_contents($this->getDevFormFilePath());
+        $mockReqest = $this->getMockRequest();
+        if(!in_array($this->getCreateSubmission()->getUniqueId(), $mockReqest->getPost())) {
+            var_dump($this->getCreateSubmission()->getOutput());
+            $this->assertEquals(
+                $expectedOutput,
+                $this->getCreateSubmission()->getOutput()
+            );
+        }
     }
 
     protected function getDevFormFilePath(): string
