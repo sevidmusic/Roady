@@ -3,6 +3,7 @@
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits;
 
 use Extensions\Contests\core\interfaces\component\Contest\Submitter;
+use RuntimeException;
 
 trait SubmitterTestTrait
 {
@@ -25,6 +26,17 @@ trait SubmitterTestTrait
         $this->submitter = $submitter;
     }
 
+    public function test__constructThrowsRuntimeExceptionIfSuppliedEmailIsNotAValidEmail(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->getReflectionUtility()->getClassInstance(
+            $this->getSubmitter(),
+            $this->getReflectionUtility()->generateMockClassMethodArguments(
+                $this->getSubmitter(),
+                '__construct'
+            )
+        );
+    }
     public function testEmailPropertyIsAssignedAValidEmailPostInstantiation(): void{
         $this->assertTrue(
             is_string(
