@@ -28,9 +28,6 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         string $pathToSubmittedFile
     )
     {
-        if (!file_exists($pathToSubmittedFile)) {
-            throw new RuntimeException();
-        }
         $this->dateTimeOfSubmission = new DateTime('now');
         $this->pathToSubmittedFile = $pathToSubmittedFile;
         $this->submitter = $submitter;
@@ -59,6 +56,14 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
             $this->dateTimeOfSubmission->getTimestamp()
         )
         );
+    }
+
+    public function getPathToSubmittedFile(): string
+    {
+        if (!file_exists($this->pathToSubmittedFile)) {
+            throw new RuntimeException();
+        }
+        return $this->pathToSubmittedFile;
     }
 
 }

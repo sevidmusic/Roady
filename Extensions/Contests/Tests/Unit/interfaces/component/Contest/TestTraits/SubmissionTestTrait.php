@@ -39,16 +39,11 @@ trait SubmissionTestTrait
         );
     }
 
-    public function test__constructThrowsRuntimeExceptionIfStringSuppliedToPathToSubmittedFileArgumentIsANotAPathToAnExistingFile(): void
+    public function testGetPathToSubmittedFileThrowsARuntimeExceptionIfPathToSubmittedFilePropertyIsNotAssignedAPathToAnExistingFile(): void
     {
+        $this->getSubmission()->import(['pathToSubmittedFile' => 'badFilePath24754h8g8fdh8f9gy983498fd7gs98dfhg5987dyf9g8hdfg89dfg789fgfd889h']);
         $this->expectException(RuntimeException::class);
-        $this->getReflectionUtility()->getClassInstance(
-            $this->getSubmission(),
-            $this->getReflectionUtility()->generateMockClassMethodArguments(
-                $this->getSubmission(),
-                '__construct'
-            )
-        );
+        $this->getSubmission()->getPathToSubmittedFile();
     }
 
     public function testDateTimeOfSubmissionIsAssignedADateTimeImplementationInstancePostInstantiationWhoseTimestampMatchesExpectedTimestamp(): void

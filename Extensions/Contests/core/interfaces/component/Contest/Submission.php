@@ -12,4 +12,6 @@ interface Submission extends CoreOutputComponent
 
     public function assignMetaData(string $key, $value): void;
 
+    public function getPathToSubmittedFile(): string;
+
 }
