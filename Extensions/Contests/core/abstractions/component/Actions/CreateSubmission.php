@@ -3,12 +3,12 @@
 namespace Extensions\Contests\core\abstractions\component\Actions;
 
 use DarlingCms\abstractions\component\Action as CoreAction;
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\primary\Positionable;
 use DarlingCms\interfaces\primary\Storable;
 use DarlingCms\interfaces\primary\Switchable;
 use Extensions\Contests\core\interfaces\component\Actions\CreateSubmission as CreateSubmissionInterface;
 use RuntimeException;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
 
 abstract class CreateSubmission extends CoreAction implements CreateSubmissionInterface
 {
@@ -38,4 +38,9 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         return parent::getOutput();
     }
 
+    public function do(): bool
+    {
+        $this->import(['wasDone' => true]);
+        return true;
+    }
 }
