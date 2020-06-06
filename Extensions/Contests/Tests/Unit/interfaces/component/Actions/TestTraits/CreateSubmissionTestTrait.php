@@ -32,7 +32,7 @@ trait CreateSubmissionTestTrait
         $this->createSubmission = $createSubmission;
     }
 
-    public function testPathAssignedToPathToHtmlFormPropertyPointsToAnExistingFile(): void
+    public function testPathAssignedToTestInstancesPathToHtmlFormPropertyPointsToAnExistingFile(): void
     {
         $this->assertTrue(
             file_exists(
@@ -41,7 +41,7 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testPathAssignedToPathToHtmlFormPropertyDoesNotPointToADirectory(): void
+    public function testPathAssignedToTestInstancesPathToHtmlFormPropertyDoesNotPointToADirectory(): void
     {
         $this->assertFalse(
             is_dir(
