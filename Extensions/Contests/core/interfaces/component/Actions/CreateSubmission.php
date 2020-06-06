@@ -7,4 +7,6 @@ use DarlingCms\interfaces\component\Action as CoreAction;
 interface CreateSubmission extends CoreAction
 {
 
+    public function getPathToHtmlForm(): string;
+
 }

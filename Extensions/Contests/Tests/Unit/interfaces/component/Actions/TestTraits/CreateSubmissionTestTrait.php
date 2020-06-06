@@ -15,16 +15,11 @@ trait CreateSubmissionTestTrait
 
     private $createSubmission;
 
-    public function test__constructThrowsRuntimeExceptionIfStringSuppliedToPathToHtmlFormArgumentIsANotAPathToAnExistingFile(): void
+    public function testGetPathToHtmlFormThrowsRuntimeExceptionIfPathAssignedToPathToHtmlFormPropertyIsNotAPathToAnExistingFile(): void
     {
+        $this->getCreateSubmission()->import(['pathToHtmlForm' => '__badPathDIDDFE34589jf89d__']);
         $this->expectException(RuntimeException::class);
-        $this->getReflectionUtility()->getClassInstance(
-            $this->getCreateSubmission(),
-            $this->getReflectionUtility()->generateMockClassMethodArguments(
-                $this->getCreateSubmission(),
-                '__construct'
-            )
-        );
+        $this->getCreateSubmission()->getPathToHtmlForm();
     }
 
     public function getCreateSubmission(): CreateSubmission

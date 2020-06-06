@@ -18,9 +18,6 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
 
     public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, string $pathToHtmlForm, ComponentCrud $componentCrud)
     {
-        if (file_exists($pathToHtmlForm) === false || is_dir($pathToHtmlForm) === true) {
-            throw new RuntimeException('Warning: A file does not exist at the specified path to the html form: ' . $pathToHtmlForm);
-        }
         $this->pathToHtmlForm = $pathToHtmlForm;
         $this->componentCrud = $componentCrud;
         parent::__construct($storable, $switchable, $positionable);
@@ -42,5 +39,13 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
     {
         $this->import(['wasDone' => true]);
         return true;
+    }
+
+    public function getPathToHtmlForm(): string
+    {
+        if (file_exists($this->pathToHtmlForm) === false || is_dir($this->pathToHtmlForm) === true) {
+            throw new RuntimeException('Warning: A file does not exist at the specified path to the html form: ' . $this->pathToHtmlForm);
+        }
+        return $this->pathToHtmlForm;
     }
 }
