@@ -3,6 +3,7 @@
 namespace DarlingCms\interfaces\component;
 
 use DarlingCms\interfaces\component\OutputComponent as CoreOutputComponent;
+use DarlingCms\interfaces\component\Web\Routing\Request;
 
 interface Action extends CoreOutputComponent
 {
@@ -14,5 +15,7 @@ interface Action extends CoreOutputComponent
     public function undo(): bool;
 
     public function wasUndone(): bool;
+
+    public function getCurrentRequest(): Request;
 
 }
