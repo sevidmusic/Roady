@@ -10,16 +10,11 @@ trait SubmitterTestTrait
 
     private $submitter;
 
-    public function test__constructThrowsRuntimeExceptionIfSuppliedEmailIsNotAValidEmail(): void
+    public function testGetEmailThrowsRuntimeExceptionIfEmailAssignedToEmailPropertyIsNotAValidEmail(): void
     {
+        $this->getSubmitter()->import(['email' => 'bademai$^l']);
         $this->expectException(RuntimeException::class);
-        $this->getReflectionUtility()->getClassInstance(
-            $this->getSubmitter(),
-            $this->getReflectionUtility()->generateMockClassMethodArguments(
-                $this->getSubmitter(),
-                '__construct'
-            )
-        );
+        $this->getSubmitter()->getEmail();
     }
 
     public function testEmailPropertyIsAssignedAValidEmailPostInstantiation(): void

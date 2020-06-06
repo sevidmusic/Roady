@@ -15,14 +15,21 @@ abstract class Submitter extends Component implements SubmitterInterface
     public function __construct(Storable $storable, string $email)
     {
         parent::__construct($storable);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new RuntimeException('Warning: Invalid email supplied to Submitter with name ' . $this->getName() . '  and  id ' . $this->getUniqueId());
-        }
         $this->email = $email;
     }
 
     public function getEmail(): string
     {
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            throw new RuntimeException(
+                sprintf(
+                    "Warning: Invalid email %s assigned to Submitter with name %s  and  id %s",
+                    $this->email,
+                    $this->getName(),
+                    $this->getUniqueId()
+                )
+            );
+        }
         return $this->email;
     }
 }
