@@ -50,7 +50,9 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
                         $this->getCurrentRequest()->getPost()['submissionContainer']
                     ),
                     new \DarlingCms\classes\primary\Switchable(),
-                    new \DarlingCms\classes\primary\Positionable(),
+                    new \DarlingCms\classes\primary\Positionable(
+                        floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
+                    ),
                     new Submitter(
                         new \DarlingCms\classes\primary\Storable(
                             $this->getCurrentRequest()->getPost()['submitterName'],

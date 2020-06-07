@@ -114,23 +114,92 @@ trait CreateSubmissionTestTrait
         $this->getCreateSubmission()->do();
         foreach($this->getStoredSubmissions($mockExpectedSubmission) as $storedSubmission) {
             if($mockExpectedSubmission->getName() === $storedSubmission->getName()) {
-                $this->pathToSubmittedFilesMatch($mockExpectedSubmission, $storedSubmission);
-                $this->dateTimeOfSubmissionTimestampsMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submitterNamesMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submitterEmailsMatch($mockExpectedSubmission, $storedSubmission);
+                /**
+                 * *** Submission Name
+                 * *** Submission Location
+                 * *** Submission Container
+                 * *** Submission Position
+                 * *** Submission dateTime
+                 * *** Submission Meta Data
+                 * *** Submitter Name
+                 * *** Submitter Location
+                 * *** Submitter Container
+                 * *** Submitter email
+                 * *** Submission pathToSubmittedFile
+                 */
+                $this->submissionLocationMatches($mockExpectedSubmission, $storedSubmission);
+                $this->submissionContainerMatches($mockExpectedSubmission, $storedSubmission);
+                $this->submissionStateMatches($mockExpectedSubmission, $storedSubmission);
+                $this->submissionPositionMatches($mockExpectedSubmission, $storedSubmission);
+                $this->submissionDateTimeTimestampsMatch($mockExpectedSubmission, $storedSubmission);
                 $this->submissionMetaDataMatches($mockExpectedSubmission, $storedSubmission);
+                $this->submissionPathToSubmittedFilesMatch($mockExpectedSubmission, $storedSubmission);
+                $this->submitterNamesMatch($mockExpectedSubmission, $storedSubmission);
+                $this->submitterLocationsMatch($mockExpectedSubmission, $storedSubmission);
+                $this->submitterContainersMatch($mockExpectedSubmission, $storedSubmission);
+                $this->submitterEmailsMatch($mockExpectedSubmission, $storedSubmission);
             }
         }
     }
 
-    private function submissionMetaDataMatches(Submission $expectedSubmission, Submission $actualSubmission): void {
+    private function submissionLocationMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getLocation(),
+            $actualSubmission->getLocation()
+        );
+    }
+
+    private function submissionContainerMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getContainer(),
+            $actualSubmission->getContainer()
+        );
+    }
+
+    private function submissionStateMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getState(),
+            $actualSubmission->getState()
+        );
+    }
+
+    private function submissionPositionMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getPosition(),
+            $actualSubmission->getPosition()
+        );
+    }
+
+    private function submitterLocationsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['submitter']->getLocation(),
+            $actualSubmission->export()['submitter']->getLocation()
+        );
+    }
+
+    private function submitterContainersMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['submitter']->getContainer(),
+            $actualSubmission->export()['submitter']->getContainer()
+        );
+    }
+
+    private function submissionMetaDataMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
         $this->assertEquals(
             $expectedSubmission->export()['metaData'],
             $actualSubmission->export()['metaData']
         );
     }
 
-    private function submitterNamesMatch(Submission $expectedSubmission, Submission $actualSubmission): void {
+    private function submitterNamesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
         $this->assertEquals(
             $expectedSubmission->export()['submitter']->getName(),
             $actualSubmission->export()['submitter']->getName()
@@ -144,14 +213,16 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    private function pathToSubmittedFilesMatch(Submission $expectedSubmission, Submission $actualSubmission): void {
+    private function submissionPathToSubmittedFilesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
         $this->assertEquals(
             $expectedSubmission->getPathToSubmittedFile(),
             $actualSubmission->getPathToSubmittedFile()
         );
     }
 
-    private function dateTimeOfSubmissionTimestampsMatch(Submission $expectedSubmission, Submission $actualSubmission): void {
+    private function submissionDateTimeTimestampsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
         $this->assertEquals(
             $expectedSubmission->export()['dateTimeOfSubmission']->getTimestamp(),
             $actualSubmission->export()['dateTimeOfSubmission']->getTimestamp()
@@ -179,7 +250,8 @@ trait CreateSubmissionTestTrait
             ),
             'CreateSubmissionUniqueId' => $this->getCreateSubmission()->getUniqueId(),
             'submissionName' => 'SubmissionName',
-            'submissionContainer' => 'SubmissionContainer'
+            'submissionContainer' => 'SubmissionContainer',
+            'submissionPosition' => '420.87'
         ];
     }
 
@@ -202,6 +274,8 @@ trait CreateSubmissionTestTrait
             !in_array('submissionName', $postDataKeys)
             ||
             !in_array('submissionContainer', $postDataKeys)
+            ||
+            !in_array('submissionPosition', $postDataKeys)
         ) {
             throw new RuntimeException('Mock Post Array for Request Expected by CreateSubmission::do() method is not configured correctly for tests, tests will fail till this is fixed.');
         }
@@ -217,7 +291,7 @@ trait CreateSubmissionTestTrait
                 $request->getPost()['submissionContainer']
             ),
             new Switchable(),
-            new Positionable(),
+            new Positionable(floatval(($request->getPost()['submissionPosition']))),
             new Submitter(
                 new Storable(
                     $request->getPost()['submitterName'],
