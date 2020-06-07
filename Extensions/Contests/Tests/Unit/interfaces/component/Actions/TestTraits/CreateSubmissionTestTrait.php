@@ -88,45 +88,12 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    private function prepareCurrentRequestToMockExpectedPostRequest(): void
-    {
-        $this->getCreateSubmission()->getCurrentRequest()->import(
-            [
-                'post' => $this->mockPostArrayForRequestExpectedByDo()
-            ]
-        );
-        $this->verifyMockPostArrayAssignedToCurrentRequestIsConfiguredAsExpectedByDoMethod();
-
-    }
-
-    private function mockPostAndGetExpectedSubmission(): Submission
-    {
-        $this->prepareCurrentRequestToMockExpectedPostRequest();
-        return $this->mockCreateSubmissionFromPostData(
-            $this->getCreateSubmission()->getCurrentRequest()
-        );
-
-    }
-
     public function testDoCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
     {
         $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->do();
-        foreach($this->getStoredSubmissions($mockExpectedSubmission) as $storedSubmission) {
-            if($mockExpectedSubmission->getName() === $storedSubmission->getName()) {
-                /**
-                 * *** Submission Name
-                 * *** Submission Location
-                 * *** Submission Container
-                 * *** Submission Position
-                 * *** Submission dateTime
-                 * *** Submission Meta Data
-                 * *** Submitter Name
-                 * *** Submitter Location
-                 * *** Submitter Container
-                 * *** Submitter email
-                 * *** Submission pathToSubmittedFile
-                 */
+        foreach ($this->getStoredSubmissions($mockExpectedSubmission) as $storedSubmission) {
+            if ($mockExpectedSubmission->getName() === $storedSubmission->getName()) {
                 $this->submissionLocationMatches($mockExpectedSubmission, $storedSubmission);
                 $this->submissionContainerMatches($mockExpectedSubmission, $storedSubmission);
                 $this->submissionStateMatches($mockExpectedSubmission, $storedSubmission);
@@ -142,99 +109,24 @@ trait CreateSubmissionTestTrait
         }
     }
 
-    private function submissionLocationMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    private function mockPostAndGetExpectedSubmission(): Submission
     {
-        $this->assertEquals(
-            $expectedSubmission->getLocation(),
-            $actualSubmission->getLocation()
+        $this->prepareCurrentRequestToMockExpectedPostRequest();
+        return $this->mockCreateSubmissionFromPostData(
+            $this->getCreateSubmission()->getCurrentRequest()
         );
+
     }
 
-    private function submissionContainerMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    private function prepareCurrentRequestToMockExpectedPostRequest(): void
     {
-        $this->assertEquals(
-            $expectedSubmission->getContainer(),
-            $actualSubmission->getContainer()
+        $this->getCreateSubmission()->getCurrentRequest()->import(
+            [
+                'post' => $this->mockPostArrayForRequestExpectedByDo()
+            ]
         );
-    }
+        $this->verifyMockPostArrayAssignedToCurrentRequestIsConfiguredAsExpectedByDoMethod();
 
-    private function submissionStateMatches(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->getState(),
-            $actualSubmission->getState()
-        );
-    }
-
-    private function submissionPositionMatches(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->getPosition(),
-            $actualSubmission->getPosition()
-        );
-    }
-
-    private function submitterLocationsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->export()['submitter']->getLocation(),
-            $actualSubmission->export()['submitter']->getLocation()
-        );
-    }
-
-    private function submitterContainersMatch(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->export()['submitter']->getContainer(),
-            $actualSubmission->export()['submitter']->getContainer()
-        );
-    }
-
-    private function submissionMetaDataMatches(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->export()['metaData'],
-            $actualSubmission->export()['metaData']
-        );
-    }
-
-    private function submitterNamesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->export()['submitter']->getName(),
-            $actualSubmission->export()['submitter']->getName()
-        );
-    }
-
-    private function submitterEmailsMatch(Submission $expectedSubmission, Submission $actualSubmission): void {
-        $this->assertEquals(
-            $expectedSubmission->export()['submitter']->getEmail(),
-            $actualSubmission->export()['submitter']->getEmail()
-        );
-    }
-
-    private function submissionPathToSubmittedFilesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->getPathToSubmittedFile(),
-            $actualSubmission->getPathToSubmittedFile()
-        );
-    }
-
-    private function submissionDateTimeTimestampsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
-    {
-        $this->assertEquals(
-            $expectedSubmission->export()['dateTimeOfSubmission']->getTimestamp(),
-            $actualSubmission->export()['dateTimeOfSubmission']->getTimestamp()
-        );
-    }
-
-    private function getStoredSubmissions(Submission $expectedSubmission): array
-    {
-        return $this->getMockCrud()->readAll(
-            $expectedSubmission->getLocation(),
-            $expectedSubmission->getContainer()
-        );
     }
 
     private function mockPostArrayForRequestExpectedByDo(): array
@@ -304,6 +196,14 @@ trait CreateSubmissionTestTrait
         );
     }
 
+    private function getStoredSubmissions(Submission $expectedSubmission): array
+    {
+        return $this->getMockCrud()->readAll(
+            $expectedSubmission->getLocation(),
+            $expectedSubmission->getContainer()
+        );
+    }
+
     public function getMockCrud(): ComponentCrud
     {
         return new CoreComponentCrud(
@@ -313,6 +213,94 @@ trait CreateSubmissionTestTrait
                 new Storable('MockStandardStorageDriver', 'TEMP', 'StorageDrivers'),
                 new Switchable()
             )
+        );
+    }
+
+    private function submissionLocationMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getLocation(),
+            $actualSubmission->getLocation()
+        );
+    }
+
+    private function submissionContainerMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getContainer(),
+            $actualSubmission->getContainer()
+        );
+    }
+
+    private function submissionStateMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getState(),
+            $actualSubmission->getState()
+        );
+    }
+
+    private function submissionPositionMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getPosition(),
+            $actualSubmission->getPosition()
+        );
+    }
+
+    private function submissionDateTimeTimestampsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['dateTimeOfSubmission']->getTimestamp(),
+            $actualSubmission->export()['dateTimeOfSubmission']->getTimestamp()
+        );
+    }
+
+    private function submissionMetaDataMatches(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['metaData'],
+            $actualSubmission->export()['metaData']
+        );
+    }
+
+    private function submissionPathToSubmittedFilesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->getPathToSubmittedFile(),
+            $actualSubmission->getPathToSubmittedFile()
+        );
+    }
+
+    private function submitterNamesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['submitter']->getName(),
+            $actualSubmission->export()['submitter']->getName()
+        );
+    }
+
+    private function submitterLocationsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['submitter']->getLocation(),
+            $actualSubmission->export()['submitter']->getLocation()
+        );
+    }
+
+    private function submitterContainersMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['submitter']->getContainer(),
+            $actualSubmission->export()['submitter']->getContainer()
+        );
+    }
+
+    private function submitterEmailsMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    {
+        $this->assertEquals(
+            $expectedSubmission->export()['submitter']->getEmail(),
+            $actualSubmission->export()['submitter']->getEmail()
         );
     }
 
