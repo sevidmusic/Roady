@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
@@ -12,6 +12,7 @@ use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
+use Extensions\Contests\core\classes\component\Actions\CreateSubmission;
 
 ini_set('display_errors', true);
 require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -112,7 +113,7 @@ $cssDimensionsCommon = $appComponentsFactory->buildOutputComponent(
 );
 
 $cssRenderingCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonDimensions',
+    'CommonRendering',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'),
     3.0
@@ -154,6 +155,14 @@ $htmlContentWelcome = $appComponentsFactory->buildOutputComponent(
     8.0
 );
 
+$htmlContentCreateSubmissionForm = new CreateSubmission(
+    $primaryFactory->buildStorable('CreateContestSubmissionForm', 'ContestSubmissions'),
+    $primaryFactory->buildSwitchable(),
+    $primaryFactory->buildPositionable(8.1),
+    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/create-submission-form.html',
+    $componentCrud
+);
+
 $htmlBodyEnd = $appComponentsFactory->buildOutputComponent(
     'HtmlBodyEnd',
     'CommonOutput',
@@ -170,24 +179,33 @@ $htmlEnd = $appComponentsFactory->buildOutputComponent(
 /***** StandardUITemplates *****/
 
 $defaultUITemplate = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('HomepageUITemplate', 'UITemplates'),
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('defaultUITemplate', 'UITemplates'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-/* All the OutputComponents defined at the moment are same type so we
-* only new to call addType() on one of them, if there were different
-* types of OutputComponents used then each type would need to be added
-* to be represented in the Template.
-*/
+// Add type core OutputComponent
 $defaultUITemplate->addType($htmlStart);
+// Add type extensions contests CreateSubmission
+$defaultUITemplate->addType($htmlContentCreateSubmissionForm);
 
-// Responses
+$defaultGlobalUITemplate = new StandardUITemplate(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('defaultGlobalUITemplate', 'UITemplates'),
+    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
+);
+// Add type core OutputComponent
+$defaultGlobalUITemplate->addType($htmlStart);
+
+/**
+ *  Responses
+ */
+
 $htmlStartResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-$htmlStartResponse->addTemplateStorageInfo($defaultUITemplate);
+$htmlStartResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlStart);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStart);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
@@ -203,7 +221,7 @@ $mainMenuResponse = new GlobalResponse(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
 );
-$mainMenuResponse->addTemplateStorageInfo($defaultUITemplate);
+$mainMenuResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
 $mainMenuResponse->addOutputComponentStorageInfo($htmlMainMenu);
 
 
@@ -219,13 +237,14 @@ $homeResponse->addRequestStorageInfo($indexRequest);
 $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
+$homeResponse->addOutputComponentStorageInfo($htmlContentCreateSubmissionForm);
 
 $htmlEndResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
 );
-$htmlEndResponse->addTemplateStorageInfo($defaultUITemplate);
+$htmlEndResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
 $htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to htmlEnd;
 $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 
@@ -233,12 +252,14 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 $components = [
     $app,
     $defaultUITemplate,
+    $defaultGlobalUITemplate,
     $indexRequest,
     $rootRequest,
     $htmlStartResponse,
     $mainMenuResponse,
     $homeResponse,
     $htmlEndResponse,
+    $htmlContentCreateSubmissionForm
 ];
 
 foreach ($components as $component) {
