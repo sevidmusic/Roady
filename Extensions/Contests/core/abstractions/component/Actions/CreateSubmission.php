@@ -33,7 +33,7 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         }
         if (!in_array($this->getUniqueId(), $this->getCurrentRequest()->getPost())) {
             $this->import(['wasDone' => true]);
-            return file_get_contents($this->pathToHtmlForm);
+            $this->import(['output' => file_get_contents($this->pathToHtmlForm)]);
         }
         return parent::getOutput();
     }

@@ -92,6 +92,10 @@ trait CreateSubmissionTestTrait
     {
         $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->do();
+        $this->findAndTestStoredSubmission($mockExpectedSubmission);
+    }
+
+    private function findAndTestStoredSubmission(Submission $mockExpectedSubmission): void {
         foreach ($this->getStoredSubmissions($mockExpectedSubmission) as $storedSubmission) {
             if ($mockExpectedSubmission->getName() === $storedSubmission->getName()) {
                 $this->submissionLocationMatches($mockExpectedSubmission, $storedSubmission);
@@ -106,7 +110,15 @@ trait CreateSubmissionTestTrait
                 $this->submitterContainersMatch($mockExpectedSubmission, $storedSubmission);
                 $this->submitterEmailsMatch($mockExpectedSubmission, $storedSubmission);
             }
+            $this->getMockCrud()->delete($storedSubmission);
         }
+    }
+
+    public function testGetOutputCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
+    {
+        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->getCreateSubmission()->getOutput();
+        $this->findAndTestStoredSubmission($mockExpectedSubmission);
     }
 
     private function mockPostAndGetExpectedSubmission(): Submission
@@ -175,7 +187,6 @@ trait CreateSubmissionTestTrait
 
     private function mockCreateSubmissionFromPostData(Request $request): Submission
     {
-        //var_dump($request->getPost()['submitterEmail']);
         return new ContestSubmission(
             new Storable(
                 $request->getPost()['submissionName'],
