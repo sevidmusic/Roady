@@ -264,11 +264,15 @@ $components = [
 
 foreach ($components as $component) {
     printf(
-        "%sSaving component %s to location %s in container %s",
+        "%sSaving component %s to location %s in container %s%sComponent Type: %s%sComponent Id: %s",
         PHP_EOL,
         $component->getName(),
         $component->getLocation(),
-        $component->getContainer()
+        $component->getContainer(),
+        PHP_EOL,
+        $component->getType(),
+        PHP_EOL,
+        $component->getUniqueId()
     );
     usleep(50000);
     printf(
