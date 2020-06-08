@@ -274,7 +274,7 @@ foreach ($components as $component) {
         PHP_EOL,
         $component->getUniqueId()
     );
-    usleep(50000);
+    usleep(90000);
     printf(
         "%s%s",
         PHP_EOL,
