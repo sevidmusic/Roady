@@ -41,7 +41,7 @@ trait SubmissionTestTrait
 
     public function testGetPathToSubmittedFileThrowsARuntimeExceptionIfPathToSubmittedFilePropertyIsNotAssignedAPathToAnExistingFile(): void
     {
-        $this->getSubmission()->import(['pathToSubmittedFile' => 'badFilePath24754h8g8fdh8f9gy983498fd7gs98dfhg5987dyf9g8hdfg89dfg789fgfd889h']);
+        $this->getSubmission()->import(['pathToSubmittedFile' => '/bad/file/path/' . $this->getSubmission()->getUniqueId() ]);
         $this->expectException(RuntimeException::class);
         $this->getSubmission()->getPathToSubmittedFile();
     }

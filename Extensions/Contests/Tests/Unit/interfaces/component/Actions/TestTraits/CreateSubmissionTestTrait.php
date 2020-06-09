@@ -56,7 +56,7 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testGetOutputReturnsAppropriatlyModifiedContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInCurrentRequestsPOSTData(): void
+    public function testGetOutputReturnsAppropriatelyModifiedContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInCurrentRequestsPOSTData(): void
     {
         $expectedOutput = file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm']);
         if (!in_array($this->getCreateSubmission()->getUniqueId(), $this->getCreateSubmission()->getCurrentRequest()->getPost())) {

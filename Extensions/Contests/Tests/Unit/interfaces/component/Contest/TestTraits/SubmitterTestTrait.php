@@ -12,7 +12,7 @@ trait SubmitterTestTrait
 
     public function testGetEmailThrowsRuntimeExceptionIfEmailAssignedToEmailPropertyIsNotAValidEmail(): void
     {
-        $this->getSubmitter()->import(['email' => 'bademai$^l']);
+        $this->getSubmitter()->import(['email' => 'bad_email']);
         $this->expectException(RuntimeException::class);
         $this->getSubmitter()->getEmail();
     }
