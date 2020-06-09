@@ -26,15 +26,6 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         parent::__construct($storable, $switchable, $positionable);
     }
 
-    private function assignUniqueIdToForm(string $formHtml): string
-    {
-        return str_replace(
-            'UNIQUE_ID',
-            $this->getUniqueId(),
-            $formHtml
-        );
-    }
-
     public function getOutput(): string
     {
         if ($this->getState() === false) {
@@ -47,6 +38,15 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             ]);
         }
         return parent::getOutput();
+    }
+
+    private function assignUniqueIdToForm(string $formHtml): string
+    {
+        return str_replace(
+            'UNIQUE_ID',
+            $this->getUniqueId(),
+            $formHtml
+        );
     }
 
     public function do(): bool
