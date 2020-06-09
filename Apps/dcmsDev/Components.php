@@ -159,7 +159,7 @@ $htmlContentCreateSubmissionForm = new CreateSubmission(
     $primaryFactory->buildStorable('CreateContestSubmissionForm', 'ContestSubmissions'),
     $primaryFactory->buildSwitchable(),
     $primaryFactory->buildPositionable(8.1),
-    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/create-submission-form.html',
+    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
     $componentCrud
 );
 

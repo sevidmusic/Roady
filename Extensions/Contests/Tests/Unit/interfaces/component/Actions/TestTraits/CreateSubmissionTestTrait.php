@@ -56,15 +56,23 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testGetOutputReturnsContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInCurrentRequestsPOSTData(): void
+    public function testGetOutputReturnsAppropriatlyModifiedContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInCurrentRequestsPOSTData(): void
     {
-        $expectedOutput = file_get_contents($this->getDevFormFilePath());
+        $expectedOutput = file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm']);
         if (!in_array($this->getCreateSubmission()->getUniqueId(), $this->getCreateSubmission()->getCurrentRequest()->getPost())) {
             $this->assertEquals(
-                $expectedOutput,
+                $this->mockFormModifications($expectedOutput),
                 $this->getCreateSubmission()->getOutput()
             );
         }
+    }
+
+    private function mockFormModifications(string $formHtml) {
+        return str_replace(
+            'UNIQUE_ID',
+            $this->getCreateSubmission()->getUniqueId(),
+            $formHtml
+        );
     }
 
     protected function getDevFormFilePath(): string
