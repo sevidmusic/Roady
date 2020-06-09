@@ -72,7 +72,7 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
                         ),
                         $this->getCurrentRequest()->getPost()['submitterEmail']
                     ),
-                    $this->getCurrentRequest()->getPost()['pathToSubmittedFile']
+                    $this->getCurrentRequest()->getPost()['submissionUrl']
                 )
             );
         }
@@ -93,7 +93,7 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             ||
             !in_array('submitterEmail', $postDataKeys)
             ||
-            !in_array('pathToSubmittedFile', $postDataKeys)
+            !in_array('submissionUrl', $postDataKeys)
             ||
             !in_array('submissionName', $postDataKeys)
             ||

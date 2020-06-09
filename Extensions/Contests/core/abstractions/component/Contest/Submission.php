@@ -15,8 +15,9 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
 {
 
     private const DEFAULT_OUTPUT_SPRINT = 'Submission Name: %s | Submission Id: %s | Submission Timestamp: %s';
+    private const ERROR_MALFORMED_URL = 'Warning: Submission "%s" with id "%s" is assigned a malformed url "%s"';
     private $submitter;
-    private $pathToSubmittedFile;
+    private $url;
     private $dateTimeOfSubmission;
     private $metaData = [];
 
@@ -25,11 +26,11 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         Switchable $switchable,
         Positionable $positionable,
         Submitter $submitter,
-        string $pathToSubmittedFile
+        string $url
     )
     {
         $this->dateTimeOfSubmission = new DateTime('now');
-        $this->pathToSubmittedFile = $pathToSubmittedFile;
+        $this->url = $url;
         $this->submitter = $submitter;
         parent::__construct($storable, $switchable, $positionable);
     }
@@ -58,12 +59,17 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         );
     }
 
-    public function getPathToSubmittedFile(): string
+    public function getUrl(): string
     {
-        if (!file_exists($this->pathToSubmittedFile)) {
-            throw new RuntimeException();
+        if ($this->urlIsProperlyFormatted() === false) {
+            throw new RuntimeException(sprintf(self::ERROR_MALFORMED_URL, $this->getName(), $this->getUniqueId(), $this->url));
         }
-        return $this->pathToSubmittedFile;
+        return $this->url;
+    }
+
+    private function urlIsProperlyFormatted(): bool
+    {
+        return 1 === preg_match("/\b(?:(?:https?):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $this->url);
     }
 
 }

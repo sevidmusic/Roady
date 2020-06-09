@@ -34,7 +34,7 @@ class SubmissionTest extends CoreOutputComponentTest
                         ),
                         'submissiontest@example.com'
                     ),
-                    '/var/www/html/devData/devImage.jpeg'
+                    'https://www.youtube.com/watch?v=LBQ2305fLeA&list=PLMlf7rmy7J0fYRGu4nxE74rUhzC9RLjWn&index=173'
                 ]
             )
         );

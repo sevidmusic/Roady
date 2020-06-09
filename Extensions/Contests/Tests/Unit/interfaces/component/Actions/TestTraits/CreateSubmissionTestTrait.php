@@ -119,11 +119,7 @@ trait CreateSubmissionTestTrait
             'submitterName' => 'SubmitterName',
             'submitterContainer' => 'SubmitterContainer',
             'submitterEmail' => 'submitteremail@example.com',
-            'pathToSubmittedFile' => str_replace(
-                'Extensions/Contests/Tests/Unit/interfaces/component/Actions/TestTraits',
-                'devData/devImage.jpeg',
-                __DIR__
-            ),
+            'submissionUrl' => 'https://www.youtube.com/watch?v=LBQ2305fLeA&list=PLMlf7rmy7J0fYRGu4nxE74rUhzC9RLjWn&index=173',
             'CreateSubmissionUniqueId' => $this->getCreateSubmission()->getUniqueId(),
             'submissionName' => 'SubmissionName',
             'submissionContainer' => 'SubmissionContainer',
@@ -145,7 +141,7 @@ trait CreateSubmissionTestTrait
             ||
             !in_array('submitterEmail', $postDataKeys)
             ||
-            !in_array('pathToSubmittedFile', $postDataKeys)
+            !in_array('submissionUrl', $postDataKeys)
             ||
             !in_array('submissionName', $postDataKeys)
             ||
@@ -175,7 +171,7 @@ trait CreateSubmissionTestTrait
                 ),
                 $request->getPost()['submitterEmail']
             ),
-            $request->getPost()['pathToSubmittedFile']
+            $request->getPost()['submissionUrl']
         );
     }
 
@@ -270,8 +266,8 @@ trait CreateSubmissionTestTrait
     private function submissionPathToSubmittedFilesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
     {
         $this->assertEquals(
-            $expectedSubmission->getPathToSubmittedFile(),
-            $actualSubmission->getPathToSubmittedFile()
+            $expectedSubmission->getUrl(),
+            $actualSubmission->getUrl()
         );
     }
 

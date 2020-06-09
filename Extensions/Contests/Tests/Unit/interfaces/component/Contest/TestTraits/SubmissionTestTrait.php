@@ -39,11 +39,11 @@ trait SubmissionTestTrait
         );
     }
 
-    public function testGetPathToSubmittedFileThrowsARuntimeExceptionIfPathToSubmittedFilePropertyIsNotAssignedAPathToAnExistingFile(): void
+    public function testGetUrlThrowsARuntimeExceptionIfUrlPropertyIsNotAssignedAProperlyFormattedUrl(): void
     {
-        $this->getSubmission()->import(['pathToSubmittedFile' => '/bad/file/path/' . $this->getSubmission()->getUniqueId()]);
+        $this->getSubmission()->import(['url' => 'bad_url' . $this->getSubmission()->getUniqueId()]);
         $this->expectException(RuntimeException::class);
-        $this->getSubmission()->getPathToSubmittedFile();
+        $this->getSubmission()->getUrl();
     }
 
     public function testDateTimeOfSubmissionIsAssignedADateTimeImplementationInstancePostInstantiationWhoseTimestampMatchesExpectedTimestamp(): void
