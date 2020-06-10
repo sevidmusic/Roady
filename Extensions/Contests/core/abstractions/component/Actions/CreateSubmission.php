@@ -18,8 +18,15 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
 
     private $pathToHtmlForm;
     private $componentCrud;
+    private const ERR_HTML_FORM_NOT_FOUND = 'Warning | %s Error: The specified html form could not be found: %s. Component Name: %s | Component Id: %s | Component Location: %s | Component Container: %s';
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, string $pathToHtmlForm, ComponentCrud $componentCrud)
+    public function __construct(
+        Storable $storable,
+        Switchable $switchable,
+        Positionable $positionable,
+        string $pathToHtmlForm,
+        ComponentCrud $componentCrud
+    )
     {
         $this->pathToHtmlForm = $pathToHtmlForm;
         $this->componentCrud = $componentCrud;
@@ -74,7 +81,14 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
                 $this->getCurrentRequest()->getPost()['submissionUrl']
             );
             $this->componentCrud->create($newSubmission);
-            $this->import(['output' => '<p>Thank you for your submission.</p><iframe src="' . $newSubmission->getUrl() . '"></iframe>']);
+            $this->import(
+                [
+                    'output' =>
+                        '<p>Thank you for your submission.</p><iframe src="' .
+                        $newSubmission->getUrl() .
+                        '"></iframe>'
+                ]
+            );
         }
         return $this->wasDone();
     }
@@ -106,8 +120,22 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
 
     public function getPathToHtmlForm(): string
     {
-        if (file_exists($this->pathToHtmlForm) === false || is_dir($this->pathToHtmlForm) === true) {
-            throw new RuntimeException('Warning: A file does not exist at the specified path to the html form: ' . $this->pathToHtmlForm);
+        if (
+            file_exists($this->pathToHtmlForm) === false
+            ||
+            is_dir($this->pathToHtmlForm) === true
+        ) {
+            throw new RuntimeException(
+                sprintf(
+                    self::ERR_HTML_FORM_NOT_FOUND,
+                    $this->getType(),
+                    $this->pathToHtmlForm,
+                    $this->getName(),
+                    $this->getUniqueId(),
+                    $this->getLocation(),
+                    $this->getContainer()
+                )
+            );
         }
         return $this->pathToHtmlForm;
     }

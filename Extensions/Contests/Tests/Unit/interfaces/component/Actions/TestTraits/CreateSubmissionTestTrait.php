@@ -21,6 +21,13 @@ trait CreateSubmissionTestTrait
 
     private $createSubmission;
 
+    public function testGetPathToHtmlFormThrowsRuntimeExceptionIfPathAssignedToPathToHtmlFormPropertyPointsToADirectory(): void
+    {
+        $this->getCreateSubmission()->import(['pathToHtmlForm' => __DIR__]);
+        $this->expectException(RuntimeException::class);
+        $this->getCreateSubmission()->getPathToHtmlForm();
+    }
+
     public function testGetPathToHtmlFormThrowsRuntimeExceptionIfPathAssignedToPathToHtmlFormPropertyIsNotAPathToAnExistingFile(): void
     {
         $this->getCreateSubmission()->import(['pathToHtmlForm' => '__badPathDIDDFE34589jf89d__']);
