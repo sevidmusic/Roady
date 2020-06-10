@@ -23,11 +23,11 @@
             color: #b3bdab;
         }
 
-        .common-light-text-color {
+        .common-light-text-color, .created-submission-preview-container {
             color: #597ea6;
         }
 
-        .common-dark-text-color {
+        .common-dark-text-color, .created-submission-preview-submission-output {
             color: #a68159;
         }
 
@@ -39,7 +39,7 @@
             color: #ff4f00;
         }
 
-        .common-notice-text-color {
+        .common-notice-text-color, .created-submission-preview-message {
             color: #00b0ff;
         }
 
