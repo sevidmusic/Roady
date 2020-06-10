@@ -14,7 +14,7 @@ use RuntimeException;
 abstract class Submission extends CoreOutputComponent implements SubmissionInterface
 {
 
-    private const DEFAULT_OUTPUT_SPRINT = 'Submission Name: %s | Submission Id: %s | Submission Timestamp: %s';
+    private const DEFAULT_OUTPUT_SPRINT = 'Submission Name: %s | Submission Type: %s | Submission Timestamp: %s';
     private const ERROR_MALFORMED_URL = 'Warning: Submission "%s" with id "%s" is assigned a malformed url "%s"';
     private $submitter;
     private $url;
@@ -53,7 +53,7 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
             : sprintf(
             self::DEFAULT_OUTPUT_SPRINT,
             $this->getName(),
-            $this->getUniqueId(),
+            $this->getType(),
             $this->dateTimeOfSubmission->getTimestamp()
         )
         );

@@ -30,7 +30,9 @@ trait CreateSubmissionTestTrait
 
     public function testGetPathToHtmlFormThrowsRuntimeExceptionIfPathAssignedToPathToHtmlFormPropertyIsNotAPathToAnExistingFile(): void
     {
-        $this->getCreateSubmission()->import(['pathToHtmlForm' => '__badPathDIDDFE34589jf89d__']);
+        $this->getCreateSubmission()->import(
+            ['pathToHtmlForm' => $this->getCreateSubmission()->getUniqueId()]
+        );
         $this->expectException(RuntimeException::class);
         $this->getCreateSubmission()->getPathToHtmlForm();
     }
@@ -106,7 +108,10 @@ trait CreateSubmissionTestTrait
         $this->getCreateSubmission()->do();
         $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
         $this->assertEquals(
-            '<p>Thank you for your submission.</p><iframe src="' . $storedSubmission->getUrl() . '"></iframe>',
+            sprintf(
+                '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>',
+                $storedSubmission->getOutput()
+            ),
             $this->getCreateSubmission()->getOutput()
         );
     }
