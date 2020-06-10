@@ -177,22 +177,29 @@ trait CreateSubmissionTestTrait
 
     private function findAndTestStoredSubmission(Submission $mockExpectedSubmission): void
     {
+        $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
+        $this->submissionLocationMatches($mockExpectedSubmission, $storedSubmission);
+        $this->submissionContainerMatches($mockExpectedSubmission, $storedSubmission);
+        $this->submissionStateMatches($mockExpectedSubmission, $storedSubmission);
+        $this->submissionPositionMatches($mockExpectedSubmission, $storedSubmission);
+        $this->submissionDateTimeTimestampsMatch($mockExpectedSubmission, $storedSubmission);
+        $this->submissionMetaDataMatches($mockExpectedSubmission, $storedSubmission);
+        $this->submissionPathToSubmittedFilesMatch($mockExpectedSubmission, $storedSubmission);
+        $this->submitterNamesMatch($mockExpectedSubmission, $storedSubmission);
+        $this->submitterLocationsMatch($mockExpectedSubmission, $storedSubmission);
+        $this->submitterContainersMatch($mockExpectedSubmission, $storedSubmission);
+        $this->submitterEmailsMatch($mockExpectedSubmission, $storedSubmission);
+        $this->getMockCrud()->delete($storedSubmission);
+    }
+
+    private function findStoredSubmissionByExpectedName(Submission $mockExpectedSubmission): Submission
+    {
         foreach ($this->getStoredSubmissions($mockExpectedSubmission) as $storedSubmission) {
             if ($mockExpectedSubmission->getName() === $storedSubmission->getName()) {
-                $this->submissionLocationMatches($mockExpectedSubmission, $storedSubmission);
-                $this->submissionContainerMatches($mockExpectedSubmission, $storedSubmission);
-                $this->submissionStateMatches($mockExpectedSubmission, $storedSubmission);
-                $this->submissionPositionMatches($mockExpectedSubmission, $storedSubmission);
-                $this->submissionDateTimeTimestampsMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submissionMetaDataMatches($mockExpectedSubmission, $storedSubmission);
-                $this->submissionPathToSubmittedFilesMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submitterNamesMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submitterLocationsMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submitterContainersMatch($mockExpectedSubmission, $storedSubmission);
-                $this->submitterEmailsMatch($mockExpectedSubmission, $storedSubmission);
+                return $storedSubmission;
             }
-            $this->getMockCrud()->delete($storedSubmission);
         }
+        throw new RuntimeException($mockExpectedSubmission->getType() . ' Test Trait Fatal Error: Failed to find Submission whose name matches: ' . $mockExpectedSubmission->getName());
     }
 
     private function getStoredSubmissions(Submission $expectedSubmission): array
