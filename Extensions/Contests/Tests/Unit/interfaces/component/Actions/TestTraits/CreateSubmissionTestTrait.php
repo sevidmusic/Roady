@@ -93,6 +93,17 @@ trait CreateSubmissionTestTrait
         $this->findAndTestStoredSubmission($mockExpectedSubmission);
     }
 
+    public function testDoSetsOutputToExpectedHtmlForSuccessIfSubmissionWasCreatedAndStored(): void
+    {
+        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->getCreateSubmission()->do();
+        $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
+        $this->assertEquals(
+            '<p>Thank you for your submission.</p><iframe src="' . $storedSubmission->getUrl() . '"></iframe>',
+            $this->getCreateSubmission()->getOutput()
+        );
+    }
+
     private function mockPostAndGetExpectedSubmission(): Submission
     {
         $this->prepareCurrentRequestToMockExpectedPostRequest();
@@ -200,6 +211,7 @@ trait CreateSubmissionTestTrait
             }
         }
         throw new RuntimeException($mockExpectedSubmission->getType() . ' Test Trait Fatal Error: Failed to find Submission whose name matches: ' . $mockExpectedSubmission->getName());
+        return $mockExpectedSubmission;
     }
 
     private function getStoredSubmissions(Submission $expectedSubmission): array

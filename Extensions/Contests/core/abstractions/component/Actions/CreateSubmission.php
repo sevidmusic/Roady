@@ -53,28 +53,28 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
     {
         $this->import(['wasDone' => true]);
         if ($this->postDataIsAsExpected() === true) {
-            $this->componentCrud->create(
-                new Submission(
+            $newSubmission = new Submission(
+                new \DarlingCms\classes\primary\Storable(
+                    $this->getCurrentRequest()->getPost()['submissionName'],
+                    App::deriveNameLocationFromRequest($this->getCurrentRequest()),
+                    $this->getCurrentRequest()->getPost()['submissionContainer']
+                ),
+                new \DarlingCms\classes\primary\Switchable(),
+                new \DarlingCms\classes\primary\Positionable(
+                    floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
+                ),
+                new Submitter(
                     new \DarlingCms\classes\primary\Storable(
-                        $this->getCurrentRequest()->getPost()['submissionName'],
+                        $this->getCurrentRequest()->getPost()['submitterName'],
                         App::deriveNameLocationFromRequest($this->getCurrentRequest()),
-                        $this->getCurrentRequest()->getPost()['submissionContainer']
+                        $this->getCurrentRequest()->getPost()['submitterContainer']
                     ),
-                    new \DarlingCms\classes\primary\Switchable(),
-                    new \DarlingCms\classes\primary\Positionable(
-                        floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
-                    ),
-                    new Submitter(
-                        new \DarlingCms\classes\primary\Storable(
-                            $this->getCurrentRequest()->getPost()['submitterName'],
-                            App::deriveNameLocationFromRequest($this->getCurrentRequest()),
-                            $this->getCurrentRequest()->getPost()['submitterContainer']
-                        ),
-                        $this->getCurrentRequest()->getPost()['submitterEmail']
-                    ),
-                    $this->getCurrentRequest()->getPost()['submissionUrl']
-                )
+                    $this->getCurrentRequest()->getPost()['submitterEmail']
+                ),
+                $this->getCurrentRequest()->getPost()['submissionUrl']
             );
+            $this->componentCrud->create($newSubmission);
+            $this->import(['output' => '<p>Thank you for your submission.</p><iframe src="' . $newSubmission->getUrl() . '"></iframe>']);
         }
         return $this->wasDone();
     }
