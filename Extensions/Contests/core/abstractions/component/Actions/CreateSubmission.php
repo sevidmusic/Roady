@@ -57,11 +57,9 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         );
     }
 
-    public function do(): bool
+    private function generateSubmissionFromPostData(): Submission
     {
-        $this->import(['wasDone' => true]);
-        if ($this->postDataIsAsExpected() === true) {
-            $newSubmission = new Submission(
+            return new Submission(
                 new \DarlingCms\classes\primary\Storable(
                     $this->getCurrentRequest()->getPost()['submissionName'],
                     App::deriveNameLocationFromRequest($this->getCurrentRequest()),
@@ -81,15 +79,27 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
                 ),
                 $this->getCurrentRequest()->getPost()['submissionUrl']
             );
+    }
+
+    private function assignDoSuccessMessageToOutput(Submission $newSubmission): void
+    {
+        $this->import(
+            [
+                'output' => sprintf(
+                    self::DO_SUCCESS_MESSAGE_SPRINT,
+                    $newSubmission->getOutput()
+                ),
+            ]
+        );
+    }
+
+    public function do(): bool
+    {
+        $this->import(['wasDone' => true]);
+        if ($this->postDataIsAsExpected() === true) {
+            $newSubmission = $this->generateSubmissionFromPostData();
             $this->componentCrud->create($newSubmission);
-            $this->import(
-                [
-                    'output' => sprintf(
-                        self::DO_SUCCESS_MESSAGE_SPRINT,
-                        $newSubmission->getOutput()
-                    ),
-                ]
-            );
+            $this->assignDoSuccessMessageToOutput($newSubmission);
         }
         return $this->wasDone();
     }
