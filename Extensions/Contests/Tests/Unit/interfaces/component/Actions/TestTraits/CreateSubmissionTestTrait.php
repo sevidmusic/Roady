@@ -28,15 +28,6 @@ trait CreateSubmissionTestTrait
         $this->getCreateSubmission()->getPathToHtmlForm();
     }
 
-    public function testGetPathToHtmlFormThrowsRuntimeExceptionIfPathAssignedToPathToHtmlFormPropertyIsNotAPathToAnExistingFile(): void
-    {
-        $this->getCreateSubmission()->import(
-            ['pathToHtmlForm' => $this->getCreateSubmission()->getUniqueId()]
-        );
-        $this->expectException(RuntimeException::class);
-        $this->getCreateSubmission()->getPathToHtmlForm();
-    }
-
     public function getCreateSubmission(): CreateSubmission
     {
         return $this->createSubmission;
@@ -45,6 +36,15 @@ trait CreateSubmissionTestTrait
     public function setCreateSubmission(CreateSubmission $createSubmission): void
     {
         $this->createSubmission = $createSubmission;
+    }
+
+    public function testGetPathToHtmlFormThrowsRuntimeExceptionIfPathAssignedToPathToHtmlFormPropertyIsNotAPathToAnExistingFile(): void
+    {
+        $this->getCreateSubmission()->import(
+            ['pathToHtmlForm' => $this->getCreateSubmission()->getUniqueId()]
+        );
+        $this->expectException(RuntimeException::class);
+        $this->getCreateSubmission()->getPathToHtmlForm();
     }
 
     public function testPathAssignedToTestInstancesPathToHtmlFormPropertyPointsToAnExistingFile(): void
@@ -100,20 +100,6 @@ trait CreateSubmissionTestTrait
         $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->do();
         $this->findAndTestStoredSubmission($mockExpectedSubmission);
-    }
-
-    public function testDoSetsOutputToExpectedHtmlForSuccessIfSubmissionWasCreatedAndStored(): void
-    {
-        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
-        $this->getCreateSubmission()->do();
-        $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
-        $this->assertEquals(
-            sprintf(
-                '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>',
-                $storedSubmission->getOutput()
-            ),
-            $this->getCreateSubmission()->getOutput()
-        );
     }
 
     private function mockPostAndGetExpectedSubmission(): Submission
@@ -331,6 +317,20 @@ trait CreateSubmissionTestTrait
         $this->assertEquals(
             $expectedSubmission->export()['submitter']->getEmail(),
             $actualSubmission->export()['submitter']->getEmail()
+        );
+    }
+
+    public function testDoSetsOutputToExpectedHtmlForSuccessIfSubmissionWasCreatedAndStored(): void
+    {
+        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->getCreateSubmission()->do();
+        $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
+        $this->assertEquals(
+            sprintf(
+                '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>',
+                $storedSubmission->getOutput()
+            ),
+            $this->getCreateSubmission()->getOutput()
         );
     }
 

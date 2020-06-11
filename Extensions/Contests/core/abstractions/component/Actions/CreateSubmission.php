@@ -16,10 +16,10 @@ use RuntimeException;
 abstract class CreateSubmission extends CoreAction implements CreateSubmissionInterface
 {
 
-    private $pathToHtmlForm;
-    private $componentCrud;
     private const ERR_HTML_FORM_NOT_FOUND = 'Warning | %s Error: The specified html form could not be found: %s. Component Name: %s | Component Id: %s | Component Location: %s | Component Container: %s';
     private const DO_SUCCESS_MESSAGE_SPRINT = '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>';
+    private $pathToHtmlForm;
+    private $componentCrud;
 
     public function __construct(
         Storable $storable,
