@@ -57,42 +57,6 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         );
     }
 
-    private function generateSubmissionFromPostData(): Submission
-    {
-            return new Submission(
-                new \DarlingCms\classes\primary\Storable(
-                    $this->getCurrentRequest()->getPost()['submissionName'],
-                    App::deriveNameLocationFromRequest($this->getCurrentRequest()),
-                    $this->getCurrentRequest()->getPost()['submissionContainer']
-                ),
-                new \DarlingCms\classes\primary\Switchable(),
-                new \DarlingCms\classes\primary\Positionable(
-                    floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
-                ),
-                new Submitter(
-                    new \DarlingCms\classes\primary\Storable(
-                        $this->getCurrentRequest()->getPost()['submitterName'],
-                        App::deriveNameLocationFromRequest($this->getCurrentRequest()),
-                        $this->getCurrentRequest()->getPost()['submitterContainer']
-                    ),
-                    $this->getCurrentRequest()->getPost()['submitterEmail']
-                ),
-                $this->getCurrentRequest()->getPost()['submissionUrl']
-            );
-    }
-
-    private function assignDoSuccessMessageToOutput(Submission $newSubmission): void
-    {
-        $this->import(
-            [
-                'output' => sprintf(
-                    self::DO_SUCCESS_MESSAGE_SPRINT,
-                    $newSubmission->getOutput()
-                ),
-            ]
-        );
-    }
-
     public function do(): bool
     {
         $this->import(['wasDone' => true]);
@@ -127,6 +91,42 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             return false;
         }
         return true;
+    }
+
+    private function generateSubmissionFromPostData(): Submission
+    {
+        return new Submission(
+            new \DarlingCms\classes\primary\Storable(
+                $this->getCurrentRequest()->getPost()['submissionName'],
+                App::deriveNameLocationFromRequest($this->getCurrentRequest()),
+                $this->getCurrentRequest()->getPost()['submissionContainer']
+            ),
+            new \DarlingCms\classes\primary\Switchable(),
+            new \DarlingCms\classes\primary\Positionable(
+                floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
+            ),
+            new Submitter(
+                new \DarlingCms\classes\primary\Storable(
+                    $this->getCurrentRequest()->getPost()['submitterName'],
+                    App::deriveNameLocationFromRequest($this->getCurrentRequest()),
+                    $this->getCurrentRequest()->getPost()['submitterContainer']
+                ),
+                $this->getCurrentRequest()->getPost()['submitterEmail']
+            ),
+            $this->getCurrentRequest()->getPost()['submissionUrl']
+        );
+    }
+
+    private function assignDoSuccessMessageToOutput(Submission $newSubmission): void
+    {
+        $this->import(
+            [
+                'output' => sprintf(
+                    self::DO_SUCCESS_MESSAGE_SPRINT,
+                    $newSubmission->getOutput()
+                ),
+            ]
+        );
     }
 
     public function getPathToHtmlForm(): string

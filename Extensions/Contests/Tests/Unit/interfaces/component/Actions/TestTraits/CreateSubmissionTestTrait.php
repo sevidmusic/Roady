@@ -65,18 +65,27 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testGetOutputReturnsAppropriatelyModifiedContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyIfCreateSubmissionsUniqueIdDoesNotExistInCurrentRequestsPOSTData(): void
+    public function testGetOutputReturnsContentsOfFileLocatedAtPathAssignedToPathToHtmlFormPropertyReplacingStringUNIQUE_IDWithCreateSubmissionInstancesUniqueIdIfCreateSubmissionsUniqueIdDoesNotExistInCurrentRequestsPOSTData(): void
     {
         $expectedOutput = file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm']);
-        if (!in_array($this->getCreateSubmission()->getUniqueId(), $this->getCreateSubmission()->getCurrentRequest()->getPost())) {
-            $this->assertEquals(
-                $this->mockFormModifications($expectedOutput),
-                $this->getCreateSubmission()->getOutput()
+        if (in_array($this->getCreateSubmission()->getUniqueId(), $this->getCreateSubmission()->getCurrentRequest()->getPost())) {
+            throw new RuntimeException(
+                sprintf(
+                    'Warning: %s  expects CreateSubmission\'s current request\'s post data to be empty at time of test. Post array is: %s',
+                    __METHOD__,
+                    json_encode(
+                        $this->getCreateSubmission()->getCurrentRequest()->getPost()
+                    )
+                )
             );
         }
+        $this->assertEquals(
+            $this->mockReplacingUNIQUE_IDWithCreateSubmissionInstancesUniqueId($expectedOutput),
+            $this->getCreateSubmission()->getOutput()
+        );
     }
 
-    private function mockFormModifications(string $formHtml)
+    private function mockReplacingUNIQUE_IDWithCreateSubmissionInstancesUniqueId(string $formHtml)
     {
         return str_replace(
             'UNIQUE_ID',
@@ -97,9 +106,9 @@ trait CreateSubmissionTestTrait
 
     public function testDoCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
     {
-        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->do();
-        $this->findAndTestStoredSubmission($mockExpectedSubmission);
+        $this->findAndTestStoredSubmission($expectedSubmission);
     }
 
     private function mockPostAndGetExpectedSubmission(): Submission
@@ -184,32 +193,32 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    private function findAndTestStoredSubmission(Submission $mockExpectedSubmission): void
+    private function findAndTestStoredSubmission(Submission $expectedSubmission): void
     {
-        $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
-        $this->submissionLocationMatches($mockExpectedSubmission, $storedSubmission);
-        $this->submissionContainerMatches($mockExpectedSubmission, $storedSubmission);
-        $this->submissionStateMatches($mockExpectedSubmission, $storedSubmission);
-        $this->submissionPositionMatches($mockExpectedSubmission, $storedSubmission);
-        $this->submissionDateTimeTimestampsMatch($mockExpectedSubmission, $storedSubmission);
-        $this->submissionMetaDataMatches($mockExpectedSubmission, $storedSubmission);
-        $this->submissionPathToSubmittedFilesMatch($mockExpectedSubmission, $storedSubmission);
-        $this->submitterNamesMatch($mockExpectedSubmission, $storedSubmission);
-        $this->submitterLocationsMatch($mockExpectedSubmission, $storedSubmission);
-        $this->submitterContainersMatch($mockExpectedSubmission, $storedSubmission);
-        $this->submitterEmailsMatch($mockExpectedSubmission, $storedSubmission);
+        $storedSubmission = $this->findStoredSubmissionByExpectedName($expectedSubmission);
+        $this->submissionLocationMatches($expectedSubmission, $storedSubmission);
+        $this->submissionContainerMatches($expectedSubmission, $storedSubmission);
+        $this->submissionStateMatches($expectedSubmission, $storedSubmission);
+        $this->submissionPositionMatches($expectedSubmission, $storedSubmission);
+        $this->submissionDateTimeTimestampsMatch($expectedSubmission, $storedSubmission);
+        $this->submissionMetaDataMatches($expectedSubmission, $storedSubmission);
+        $this->submissionPathToSubmittedFilesMatch($expectedSubmission, $storedSubmission);
+        $this->submitterNamesMatch($expectedSubmission, $storedSubmission);
+        $this->submitterLocationsMatch($expectedSubmission, $storedSubmission);
+        $this->submitterContainersMatch($expectedSubmission, $storedSubmission);
+        $this->submitterEmailsMatch($expectedSubmission, $storedSubmission);
         $this->getMockCrud()->delete($storedSubmission);
     }
 
-    private function findStoredSubmissionByExpectedName(Submission $mockExpectedSubmission): Submission
+    private function findStoredSubmissionByExpectedName(Submission $expectedSubmission): Submission
     {
-        foreach ($this->getStoredSubmissions($mockExpectedSubmission) as $storedSubmission) {
-            if ($mockExpectedSubmission->getName() === $storedSubmission->getName()) {
+        foreach ($this->getStoredSubmissions($expectedSubmission) as $storedSubmission) {
+            if ($expectedSubmission->getName() === $storedSubmission->getName()) {
                 return $storedSubmission;
             }
         }
-        throw new RuntimeException($mockExpectedSubmission->getType() . ' Test Trait Fatal Error: Failed to find Submission whose name matches: ' . $mockExpectedSubmission->getName());
-        return $mockExpectedSubmission;
+        throw new RuntimeException($expectedSubmission->getType() . ' Test Trait Fatal Error: Failed to find Submission whose name matches: ' . $expectedSubmission->getName());
+        return $expectedSubmission;
     }
 
     private function getStoredSubmissions(Submission $expectedSubmission): array
@@ -322,9 +331,9 @@ trait CreateSubmissionTestTrait
 
     public function testDoSetsOutputToExpectedHtmlForSuccessIfSubmissionWasCreatedAndStored(): void
     {
-        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->do();
-        $storedSubmission = $this->findStoredSubmissionByExpectedName($mockExpectedSubmission);
+        $storedSubmission = $this->findStoredSubmissionByExpectedName($expectedSubmission);
         $this->assertEquals(
             sprintf(
                 '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>',
@@ -336,19 +345,19 @@ trait CreateSubmissionTestTrait
 
     public function testGetOutputCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
     {
-        $mockExpectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->getOutput();
-        $this->findAndTestStoredSubmission($mockExpectedSubmission);
+        $this->findAndTestStoredSubmission($expectedSubmission);
     }
 
     protected function getDevFormFilePath(): string
     {
         return str_replace(
             [
-                'Extensions/Contests/Tests/Unit/interfaces/component/Actions/TestTraits',
+                'Tests/Unit/interfaces/component/Actions/TestTraits',
             ],
             '',
-            __DIR__ . 'Apps/dcmsDev/htmlContent/devForm.html'
+            __DIR__ . 'devCreateSubmissionForm.html'
         );
     }
 
