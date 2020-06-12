@@ -12,3 +12,7 @@
         .common-main-menu {
             background: #fbd27d;
         }
+
+        .create-submission-form-container, .created-submission-preview-container {
+            background: green;
+        }

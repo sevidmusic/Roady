@@ -28,11 +28,11 @@
             color: #6d0707;
         }
 
-        .common-light-text-color {
+        .common-light-text-color, {
             color: #666666;
         }
 
-        .common-dark-text-color {
+        .common-dark-text-color, .created-submission-preview-container {
             color: #333333;
         }
 
@@ -61,3 +61,4 @@
         a, a:visited, a:active, a:hover, a:link {
             text-decoration: none;
         }
+

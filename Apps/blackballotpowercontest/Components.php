@@ -12,6 +12,7 @@ use DarlingCms\classes\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
+use Extensions\Contests\core\classes\component\Actions\CreateSubmission;
 
 ini_set('display_errors', true);
 require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
@@ -179,7 +180,15 @@ $htmlContentWelcome = $appComponentsFactory->buildOutputComponent(
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         'htmlContent/welcome.html'),
-    8.0
+    8.2
+);
+
+$htmlContentCreateSubmissionForm = new CreateSubmission(
+    $primaryFactory->buildStorable('CreateContestSubmissionForm', 'Forms'),
+    $primaryFactory->buildSwitchable(),
+    $primaryFactory->buildPositionable(8.1),
+    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/create-submission-form.html',
+    $componentCrud
 );
 
 $htmlBodyEnd = $appComponentsFactory->buildOutputComponent(
@@ -202,12 +211,16 @@ $defaultUITemplate = new StandardUITemplate(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-/* All the OutputComponents defined at the moment are same type so we
-* only new to call addType() on one of them, if there were different
-* types of OutputComponents used then each type would need to be added
-* to be represented in the Template.
-*/
+$defaultUITemplate->addType($htmlContentCreateSubmissionForm);
 $defaultUITemplate->addType($htmlStart);
+
+$defaultGlobalUITemplate = new StandardUITemplate(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('defaultGlobalUITemplate', 'UITemplates'),
+    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
+);
+// Add type core OutputComponent
+$defaultGlobalUITemplate->addType($htmlStart);
 
 // Responses
 $htmlStartResponse = new GlobalResponse(
@@ -215,7 +228,7 @@ $htmlStartResponse = new GlobalResponse(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-$htmlStartResponse->addTemplateStorageInfo($defaultUITemplate);
+$htmlStartResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlStart);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStart);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
@@ -232,7 +245,7 @@ $mainMenuResponse = new GlobalResponse(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
 );
-$mainMenuResponse->addTemplateStorageInfo($defaultUITemplate);
+$mainMenuResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
 $mainMenuResponse->addOutputComponentStorageInfo($htmlMainMenu);
 
 
@@ -250,13 +263,14 @@ $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addRequestStorageInfo($rootRequestHttp);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
+$homeResponse->addOutputComponentStorageInfo($htmlContentCreateSubmissionForm);
 
 $htmlEndResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
 );
-$htmlEndResponse->addTemplateStorageInfo($defaultUITemplate);
+$htmlEndResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
 $htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to htmlEnd;
 $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 
@@ -264,6 +278,7 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
 $components = [
     $app,
     $defaultUITemplate,
+    $defaultGlobalUITemplate,
     $indexRequest,
     $indexRequestHttp,
     $rootRequest,
@@ -272,6 +287,7 @@ $components = [
     $mainMenuResponse,
     $homeResponse,
     $htmlEndResponse,
+    $htmlContentCreateSubmissionForm
 ];
 
 foreach ($components as $component) {
