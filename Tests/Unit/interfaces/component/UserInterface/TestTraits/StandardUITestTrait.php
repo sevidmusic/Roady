@@ -2,6 +2,7 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
+use DarlingCms\classes\component\Action;
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard as StorageDriver;
 use DarlingCms\classes\component\OutputComponent;
@@ -310,13 +311,15 @@ trait StandardUITestTrait
         );
     }
 
-    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByResponsePositionThenTemplateOCTypeThenOutputComponentPosition()
+    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByResponsePositionThenTemplatePositionThenTemplateOCTypeThenOutputComponentPosition()
     {
         $expectedOutput = '';
         $assignedTemplates = $this->getStandardUI()->getTemplatesAssignedToResponses();
         ksort($assignedTemplates, SORT_NUMERIC);
         foreach ($assignedTemplates as $responsePosition => $responseTemplates) {
+            ksort($responseTemplates);
             foreach ($responseTemplates as $template) {
+                var_dump($template->getName(), $template->getPosition());
                 foreach ($template->getTypes() as $type) {
                     $outputComponents = $this->getStandardUI()->getOutputComponentsAssignedToResponses()[$responsePosition][$type];
                     ksort($outputComponents, SORT_NUMERIC);
@@ -348,11 +351,17 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
-        for ($i = 0; $i < 4; $i++) {
+        for ($incrementer = 0; $incrementer < rand(1, 100); $incrementer++) {
             $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
         }
-        for ($i = 0; $i < 3; $i++) {
-            $response->addTemplateStorageInfo($this->generateStoredStandardUITemplate());
+        for ($incrementer = 0; $incrementer < rand(4, 100); $incrementer++) {
+            $response->addTemplateStorageInfo($this->generateStoredStandardUITemplateForOutputComponents(rand(0, 3)));
+        }
+        for ($incrementer = 0; $incrementer < rand(1, 100); $incrementer++) {
+            $response->addOutputComponentStorageInfo($this->generateStoredAction());
+        }
+        for ($incrementer = 0; $incrementer < rand(4, 100); $incrementer++) {
+            $response->addTemplateStorageInfo($this->generateStoredStandardUITemplateForActions(rand(0, 3)));
         }
         $response->addRequestStorageInfo($this->getCurrentRequest());
         $this->getStandardUITestRouter()->getCrud()->create($response);
@@ -377,7 +386,7 @@ trait StandardUITestTrait
         return $outputComponent;
     }
 
-    private function generateStoredStandardUITemplate(): StandardUITemplate
+    private function generateStoredStandardUITemplateForOutputComponents(float $position = 0): StandardUITemplate
     {
         $standardUITemplate = new StandardUITemplate(
             new Storable(
@@ -386,9 +395,43 @@ trait StandardUITestTrait
                 $this->getStandardUITemplateContainer()
             ),
             new Switchable(),
-            new Positionable(0) // !IMPORTANT: We want all Positionable components to be assigned a 0 position to start so we know that positions are increased properly  | @todo need tests for this, i.e., testGet*AssignedToResponsesIncreasesComponentPositionIfPositionOccupied(): void
+            new Positionable($position)
         );
         $standardUITemplate->addType($this->generateStoredOutputComponent(false));
+        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
+        return $standardUITemplate;
+    }
+
+    private function generateStoredAction(bool $saveToStorage = true): Action
+    {
+        $action = new Action(
+            new Storable(
+                'StandardUITestAction' . strval(rand(0, 999)),
+                $this->getComponentLocation(),
+                $this->getOutputComponentContainer()
+            ),
+            new Switchable(),
+            new Positionable(rand(0, 99))
+        );
+        $action->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
+        if ($saveToStorage === true) {
+            $this->getStandardUITestRouter()->getCrud()->create($action);
+        }
+        return $action;
+    }
+
+    private function generateStoredStandardUITemplateForActions(float $position = 0): StandardUITemplate
+    {
+        $standardUITemplate = new StandardUITemplate(
+            new Storable(
+                'StandardUITestTemplate' . strval(rand(10, 99)),
+                $this->getComponentLocation(),
+                $this->getStandardUITemplateContainer()
+            ),
+            new Switchable(),
+            new Positionable($position)
+        );
+        $standardUITemplate->addType($this->generateStoredAction(false));
         $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
         return $standardUITemplate;
     }

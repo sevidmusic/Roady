@@ -32,6 +32,7 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
         $assignedTemplates = $this->getTemplatesAssignedToResponses();
         ksort($assignedTemplates, SORT_NUMERIC);
         foreach ($assignedTemplates as $responsePosition => $responseTemplates) {
+            ksort($responseTemplates);
             foreach ($responseTemplates as $template) {
                 foreach ($template->getTypes() as $type) {
                     foreach ($this->getOutputComponentsAssignedToResponses()[$responsePosition][$type] as $outputComponent) {

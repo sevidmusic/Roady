@@ -209,14 +209,14 @@ $closingHtmlTag = $appComponentsFactory->buildOutputComponent(
 $templateForCreateSubmissionTypes = new StandardUITemplate(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('CreateSubmissionTemplate', 'UITemplates'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(5)
 );
 $templateForCreateSubmissionTypes->addType($createSubmissionForm);
 
 $templateForOutputComponentsTypes = new StandardUITemplate(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('OutputComponentTemplate', 'UITemplates'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
 );
 $templateForOutputComponentsTypes->addType($doctypeAndOpeningHtmlTag);
 
