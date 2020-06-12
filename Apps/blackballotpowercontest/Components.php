@@ -99,21 +99,21 @@ $indexRequestHttp->import(['url' => str_replace('https','http', $domain->getUrl(
 /**
  * Output Components: Generate output for an App
  */
-$htmlStart = $appComponentsFactory->buildOutputComponent(
+$start = $appComponentsFactory->buildOutputComponent(
     'HtmlStart',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'),
     0.0
 );
 
-$htmlHeadStart = $appComponentsFactory->buildOutputComponent(
+$headStart = $appComponentsFactory->buildOutputComponent(
     'HtmlHeadStart',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'),
     1.0
 );
 
-$htmlHeadStylesStart = $appComponentsFactory->buildOutputComponent(
+$headStylesStart = $appComponentsFactory->buildOutputComponent(
     'HtmlHeadStylesStart',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'),
@@ -147,109 +147,107 @@ $cssRenderingCommon = $appComponentsFactory->buildOutputComponent(
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'),
     3.0
 );
-$htmlHeadStylesEnd = $appComponentsFactory->buildOutputComponent(
+$headStylesEnd = $appComponentsFactory->buildOutputComponent(
     'HtmlHeadStylesEnd',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'),
     4.0
 );
 
-$htmlHeadEnd = $appComponentsFactory->buildOutputComponent(
+$headEnd = $appComponentsFactory->buildOutputComponent(
     'HtmlHeadEnd',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'),
     5.0
 );
 
-$htmlBodyStart = $appComponentsFactory->buildOutputComponent(
+$bodyStart = $appComponentsFactory->buildOutputComponent(
     'HtmlBodyStart',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'),
     6.0
 );
 
-$htmlMainMenu = $appComponentsFactory->buildOutputComponent(
+$mainMenu = $appComponentsFactory->buildOutputComponent(
     'MainMenu',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'),
-    7.0
+    0.0
 );
 
-$htmlContentWelcome = $appComponentsFactory->buildOutputComponent(
+$contestInfo = $appComponentsFactory->buildOutputComponent(
     'Welcome',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
         'htmlContent/welcome.html'),
-    8.2
+    0.0
 );
 
-$htmlContentCreateSubmissionForm = new CreateSubmission(
+$createSubmissionForm = new CreateSubmission(
     $primaryFactory->buildStorable('CreateContestSubmissionForm', 'Forms'),
     $primaryFactory->buildSwitchable(),
-    $primaryFactory->buildPositionable(8.1),
+    $primaryFactory->buildPositionable(0.0),
     __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/create-submission-form.html',
     $componentCrud
 );
 
-$htmlBodyEnd = $appComponentsFactory->buildOutputComponent(
+$bodyEnd = $appComponentsFactory->buildOutputComponent(
     'HtmlBodyEnd',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'),
-    9.0
+    0.0
 );
 
-$htmlEnd = $appComponentsFactory->buildOutputComponent(
+$end = $appComponentsFactory->buildOutputComponent(
     'HtmlEnd',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'),
-    10.0
+    1.0
 );
 /***** StandardUITemplates *****/
 
-$defaultUITemplate = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('HomepageUITemplate', 'UITemplates'),
+$templateForCreateSubmissionTypes = new StandardUITemplate(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('OutputComponentAndCreateSubmissionTemplate', 'UITemplates'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-$defaultUITemplate->addType($htmlContentCreateSubmissionForm);
-$defaultUITemplate->addType($htmlStart);
+$templateForCreateSubmissionTypes->addType($createSubmissionForm);
 
-$defaultGlobalUITemplate = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('defaultGlobalUITemplate', 'UITemplates'),
+$templateForOutputComponentsTypes = new StandardUITemplate(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('OutputComponentTemplate', 'UITemplates'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-// Add type core OutputComponent
-$defaultGlobalUITemplate->addType($htmlStart);
+$templateForOutputComponentsTypes->addType($start);
 
 // Responses
-$htmlStartResponse = new GlobalResponse(
+$startResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
-$htmlStartResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlStart);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStart);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
-$htmlStartResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
-$htmlStartResponse->addOutputComponentStorageInfo($cssFontsCommon);
-$htmlStartResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
-$htmlStartResponse->addOutputComponentStorageInfo($cssRenderingCommon);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadEnd);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlBodyStart);
+$startResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
+$startResponse->addOutputComponentStorageInfo($start);
+$startResponse->addOutputComponentStorageInfo($headStart);
+$startResponse->addOutputComponentStorageInfo($headStylesStart);
+$startResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
+$startResponse->addOutputComponentStorageInfo($cssFontsCommon);
+$startResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
+$startResponse->addOutputComponentStorageInfo($cssRenderingCommon);
+$startResponse->addOutputComponentStorageInfo($headStylesEnd);
+$startResponse->addOutputComponentStorageInfo($headEnd);
+$startResponse->addOutputComponentStorageInfo($bodyStart);
 
 $mainMenuResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
 );
-$mainMenuResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$mainMenuResponse->addOutputComponentStorageInfo($htmlMainMenu);
+$mainMenuResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
+$mainMenuResponse->addOutputComponentStorageInfo($mainMenu);
 
 
-$homeResponse = new Response(
+$contestInfoResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'Homepage',
         Response::RESPONSE_CONTAINER
@@ -257,37 +255,38 @@ $homeResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(2)
 );
-$homeResponse->addRequestStorageInfo($indexRequest);
-$homeResponse->addRequestStorageInfo($indexRequestHttp);
-$homeResponse->addRequestStorageInfo($rootRequest);
-$homeResponse->addRequestStorageInfo($rootRequestHttp);
-$homeResponse->addTemplateStorageInfo($defaultUITemplate);
-$homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
-$homeResponse->addOutputComponentStorageInfo($htmlContentCreateSubmissionForm);
+$contestInfoResponse->addRequestStorageInfo($indexRequest);
+$contestInfoResponse->addRequestStorageInfo($indexRequestHttp);
+$contestInfoResponse->addRequestStorageInfo($rootRequest);
+$contestInfoResponse->addRequestStorageInfo($rootRequestHttp);
+$contestInfoResponse->addTemplateStorageInfo($templateForCreateSubmissionTypes);
+$contestInfoResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
+$contestInfoResponse->addOutputComponentStorageInfo($contestInfo);
+$contestInfoResponse->addOutputComponentStorageInfo($createSubmissionForm);
 
-$htmlEndResponse = new GlobalResponse(
+$endResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
 );
-$htmlEndResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd); // move to htmlEnd;
-$htmlEndResponse->addOutputComponentStorageInfo($htmlEnd); // move to htmlEnd;
+$endResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
+$endResponse->addOutputComponentStorageInfo($bodyEnd); // move to htmlEnd;
+$endResponse->addOutputComponentStorageInfo($end); // move to htmlEnd;
 
 
 $components = [
     $app,
-    $defaultUITemplate,
-    $defaultGlobalUITemplate,
+    $templateForCreateSubmissionTypes,
+    $templateForOutputComponentsTypes,
     $indexRequest,
     $indexRequestHttp,
     $rootRequest,
     $rootRequestHttp,
-    $htmlStartResponse,
+    $startResponse,
     $mainMenuResponse,
-    $homeResponse,
-    $htmlEndResponse,
-    $htmlContentCreateSubmissionForm
+    $contestInfoResponse,
+    $endResponse,
+    $createSubmissionForm
 ];
 
 foreach ($components as $component) {
