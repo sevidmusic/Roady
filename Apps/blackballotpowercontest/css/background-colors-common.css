@@ -9,10 +9,12 @@
             background: #ffffff;
         }
 
-        .common-main-menu {
+        .common-main-menu {}
+
+        .common-banner-container {
             background: #fbd27d;
         }
 
-        .create-submission-form-container, .created-submission-preview-container {
-            background: green;
+        .common-form-container, .created-submission-preview-container {
+            background: #ffffff;
         }

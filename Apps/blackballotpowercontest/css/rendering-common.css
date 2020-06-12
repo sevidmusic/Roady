@@ -27,27 +27,22 @@
         .clear-float-both {
             clear: both;
         }
-        .common-contact-menu-phone {
+
+        .common-main-menu {
+            padding: .67em 0;
+        }
+
+        .common-banner-container {
+            padding: .73em;
+        }
+
+        .common-main-menu-phone {
             margin: 0 1.3em 0 4em;
-        }
-
-        .common-contact-menu-email {
-        }
-
-        .common-contact-menu-social {
-        }
-
-        .common-contact-menu {
-            padding: .8em;
         }
 
         .common-content-container {
             padding: 3em;
             line-height: 2em;
-        }
-
-        .common-main-menu {
-            padding: 1em;
         }
 
         .common-header-logo-w387-h75 {
@@ -77,7 +72,7 @@
             margin: 2em auto;
         }
 
-        .create-submission-form-container, .created-submission-preview-container {
+        .common-form-container, .created-submission-preview-container {
             margin: 0 auto;
             padding: 1em 0 0 6em;
         }
