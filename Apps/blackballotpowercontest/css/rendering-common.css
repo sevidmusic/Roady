@@ -8,6 +8,10 @@
             box-sizing: border-box;
         }
 
+        .common-page-container {
+            padding-top: 6em;
+        }
+
         .float-left {
             float: left;
         }
@@ -30,6 +34,7 @@
 
         .common-main-menu {
             padding: .67em 0;
+            width: 100%;
         }
 
         .common-banner-container {
@@ -37,12 +42,20 @@
         }
 
         .common-main-menu-phone {
-            margin: 0 1.3em 0 4em;
+            margin: 0 1.3em 0 17.7em;
+        }
+
+        .common-main-menu-contact {
+            margin: 0 21.69em 0 0;
         }
 
         .common-content-container {
-            padding: 3em;
+            padding: 3em 16.5em 0 14.37em;
             line-height: 2em;
+        }
+
+        .common-header-container {
+            position: fixed;
         }
 
         .common-header-logo-w387-h75 {

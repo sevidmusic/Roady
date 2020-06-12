@@ -1,20 +1,12 @@
         /**
          * Common dimensions | i.e., width, height
          */
-        .common-header-container {
-            width: 100%;
-        }
-
-        .common-content-container {
+        .common-content-container, .created-submission-preview-container, .common-header-container {
             width: 100%;
         }
 
         .common-header-logo-w387-h75 {
             width: 56%;
             height: auto;
-        }
-
-        .created-submission-preview-container {
-            width: 100%;
         }
 
