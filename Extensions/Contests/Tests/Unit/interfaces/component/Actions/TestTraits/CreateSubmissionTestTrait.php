@@ -357,7 +357,7 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testDoSetsOutputToExpectedHtmlForSuccessIfSubmissionWasCreatedAndStored(): void
+    public function testGetOutputReturnsExpectedHtmlForSuccessIfSubmissionWasCreatedAndStoredOnCallToDo(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->getCreateSubmission()->do();
