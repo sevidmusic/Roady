@@ -10,3 +10,16 @@
             height: auto;
         }
 
+        .common-form-container {
+            width: 90%;
+        }
+
+        input[type=submit], input[type=email], input[type=url], input[type=text], select {
+            width: 95%;
+        }
+
+        .common-content-separator {
+            width: 80%;
+            height: 1px;
+        }
+

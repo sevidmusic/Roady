@@ -1,20 +1,35 @@
         /**
          * Common background colors | i.e. background
          */
-        .common-body, .common-main-menu {
+        .common-body, .common-main-menu, input[type=submit]:hover {
             background: #6d0707;
         }
 
-        .common-content-container {
-            background: #ffffff;
+        .common-page-container {
+           background: #ffffff;
         }
 
-        .common-main-menu {}
+        .common-form-container {
+            background: #CCCCCC;
+        }
 
         .common-banner-container {
             background: #fbd27d;
         }
 
-        .common-form-container, .created-submission-preview-container {
-            background: #ffffff;
+        .common-content-separator {
+            background: #6d0707;
         }
+
+        @media only screen and (min-width: 600px) {
+            .common-page-container {
+                background: blue;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            .common-page-container {
+                background: purple;
+            }
+        }
+

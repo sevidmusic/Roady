@@ -9,83 +9,123 @@
         }
 
         .common-page-container {
-            padding-top: 6em;
-        }
-
-        .float-left {
-            float: left;
-        }
-
-        .float-right {
-            float: right;
-        }
-
-        .clear-float-left {
-            clear: left;
-        }
-
-        .clear-float-right {
-            clear: right;
-        }
-
-        .clear-float-both {
-            clear: both;
-        }
-
-        .common-main-menu {
-            padding: .67em 0;
-            width: 100%;
+            padding-top: 1.8em;
         }
 
         .common-banner-container {
             padding: .73em;
         }
 
-        .common-main-menu-phone {
-            margin: 0 1.3em 0 17.7em;
+        .common-main-menu {
+            padding: .67em 1em;
+            width: 100%;
         }
 
-        .common-main-menu-contact {
-            margin: 0 21.69em 0 0;
-        }
 
         .common-content-container {
-            padding: 3em 16.5em 0 14.37em;
+            padding: 0 4.37em 0 4.37em;
             line-height: 2em;
         }
 
-        .common-header-container {
-            position: fixed;
-        }
-
-        .common-header-logo-w387-h75 {
-            margin: .23em 0 0 1em;
-        }
-
-        h1 {
-            margin: 0 0 1.5em 0;
-        }
-
-        .common-indent-paragraph {
-            margin-left: 3em;
+        .common-content-separator {
+            margin: 2em auto;
         }
 
         .common-space-below {
             margin-bottom: 2em;
         }
 
-        .common-space-left {
-            margin-left: 1em;
-        }
-
-        .common-content-separator {
-            width: 80%;
-            height: 1px;
-            background: #6d0707;
+        .created-submission-preview-container, .common-form-container {
             margin: 2em auto;
+            padding: 1em 2em;
         }
 
-        .common-form-container, .created-submission-preview-container {
-            margin: 0 auto;
-            padding: 1em 0 0 6em;
+
+        input[type=email], input[type=url], input[type=text], select {
+            padding: .7em .9em;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: .3em;
+        }
+
+        input[type=submit] {
+            margin-top: .9em;
+            padding: .9em 1.1em;
+            border: none;
+            border-radius: .3em;
+            cursor: pointer;
+        }
+
+        label, .common-form-title {
+            display: block;
+        }
+
+        .common-form-submit-button {
+            margin-bottom: .3em;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .common-page-container {
+                padding-top: 6em;
+            }
+
+            .common-main-menu {
+                padding: .67em 0;
+                width: 100%;
+            }
+
+            .common-content-container {
+                padding: 3em 16.5em 0 14.37em;
+                line-height: 2em;
+            }
+
+            .common-main-menu-phone {
+                margin: 0 1.3em 0 17.7em;
+            }
+
+            .common-main-menu-contact {
+                margin: 0 21.69em 0 0;
+            }
+
+
+            .common-header-container {
+                position: fixed;
+            }
+
+            .common-header-logo-w387-h75 {
+                margin: .23em 0 0 1em;
+            }
+
+            h1 {
+                margin: 0 0 1.5em 0;
+            }
+
+            .common-indent-paragraph {
+                margin-left: 3em;
+            }
+
+            .common-space-left {
+                margin-left: 1em;
+            }
+
+            .float-left {
+                float: left;
+            }
+
+            .float-right {
+                float: right;
+            }
+
+            .clear-float-left {
+                clear: left;
+            }
+
+            .clear-float-right {
+                clear: right;
+            }
+
+            .clear-float-both {
+                clear: both;
+            }
+
         }

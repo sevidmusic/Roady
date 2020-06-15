@@ -16,10 +16,6 @@
             font-size: 1em;
         }
 
-        .common-content-container {
-            font-size: 1em;
-        }
-
         .common-default-text-color, a:hover {
             color: #b5abbd;
         }
@@ -62,3 +58,14 @@
             text-decoration: none;
         }
 
+        input[type=submit]:hover {
+            color: #ffffff;
+        }
+
+        label {
+            color: #555555;
+        }
+
+        .common-form-title {
+            font-style: italic;
+        }
