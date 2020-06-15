@@ -9,7 +9,11 @@
         }
 
         .common-page-container {
-            padding-top: 1.8em;
+            padding-top: 12em;
+        }
+
+        .common-header-container {
+            position: fixed;
         }
 
         .common-banner-container {
@@ -65,8 +69,9 @@
         }
 
         @media only screen and (min-width: 600px) {
+            /* here */
             .common-page-container {
-                padding-top: 6em;
+                padding-top: 8em;
             }
 
             .common-main-menu {
@@ -74,38 +79,12 @@
                 width: 100%;
             }
 
-            .common-content-container {
-                padding: 3em 16.5em 0 14.37em;
-                line-height: 2em;
-            }
-
             .common-main-menu-phone {
-                margin: 0 1.3em 0 17.7em;
+                margin: 0 1em 0 5em;
             }
 
             .common-main-menu-contact {
-                margin: 0 21.69em 0 0;
-            }
-
-
-            .common-header-container {
-                position: fixed;
-            }
-
-            .common-header-logo-w387-h75 {
-                margin: .23em 0 0 1em;
-            }
-
-            h1 {
-                margin: 0 0 1.5em 0;
-            }
-
-            .common-indent-paragraph {
-                margin-left: 3em;
-            }
-
-            .common-space-left {
-                margin-left: 1em;
+                margin: 0 5em 0 0;
             }
 
             .float-left {
@@ -128,4 +107,9 @@
                 clear: both;
             }
 
+            .common-main-menu-contact, .common-main-menu-home {
+                padding-right: 1em;
+            }
+
         }
+

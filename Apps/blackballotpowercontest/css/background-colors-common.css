@@ -21,15 +21,3 @@
             background: #6d0707;
         }
 
-        @media only screen and (min-width: 600px) {
-            .common-page-container {
-                background: blue;
-            }
-        }
-
-        @media only screen and (min-width: 768px) {
-            .common-page-container {
-                background: purple;
-            }
-        }
-
