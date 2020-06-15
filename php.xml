@@ -78,6 +78,10 @@
             <file>Tests/Unit/classes/component/Factory/FactoryTest.php</file>
         </testsuite>
 
+        <testsuite name="Darling Cms Redesign | Contest Extension Tests">
+            <directory>Extensions/Contests</directory>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>

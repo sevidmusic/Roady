@@ -104,6 +104,34 @@ trait CreateSubmissionTestTrait
         );
     }
 
+    public function testDoDoesNotStoreSubmissionIfBadEmailIsSuplliedInPostData(): void
+    {
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->deleteAllExpectedSubmissions($expectedSubmission);
+        $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
+        $modifiedPostData['submitterEmail'] = 'badEmail';
+        $this->getCreateSubmission()->getCurrentRequest()->import(['post' => $modifiedPostData]);
+        $this->getCreateSubmission()->do();
+        $this->assertEmpty(
+            $this->readAllExpectedSubmissions($expectedSubmission)
+        );
+    }
+
+    private function deleteAllExpectedSubmissions(Submission $expectedSubmission): void
+    {
+        foreach($this->readAllExpectedSubmissions($expectedSubmission) as $submision) {
+            $this->getMockCrud()->delete($submision);
+        }
+    }
+
+    private function readAllExpectedSubmissions(Submission $expectedSubmission): array
+    {
+        return $this->getMockCrud()->readAll(
+            $expectedSubmission->getLocation(),
+            $expectedSubmission->getContainer()
+        );
+    }
+
     public function testDoCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();

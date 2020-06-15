@@ -87,6 +87,11 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             !in_array('submissionName', $postDataKeys)
             ||
             !in_array('submissionContainer', $postDataKeys)
+            ||
+            !filter_var(
+                $this->getCurrentRequest()->getPost()['submitterEmail'],
+                FILTER_VALIDATE_EMAIL
+            )
         ) {
             return false;
         }
