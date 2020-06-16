@@ -370,6 +370,26 @@ trait CreateSubmissionTestTrait
         );
     }
 
+    public function testGetOutputReturnsHtmlForBadUrlErrorMessageAndFormIfSubmissionUrlInPostIsABadUrl(): void {
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->deleteAllExpectedSubmissions($expectedSubmission);
+        $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
+        $modifiedPostData['submissionUrl'] = 'badUrl';
+        $this->getCreateSubmission()->getCurrentRequest()->import(['post' => $modifiedPostData]);
+        $this->getCreateSubmission()->do();
+        $this->assertEquals(
+            sprintf(
+                '<p class="create-submission-error">%s is not a valid YouTube url. Please enter a valid YouTube url.</p>%s',
+                $this->getCreateSubmission()->getCurrentRequest()->getPost()['submissionUrl'],
+                $this->mockReplacingUNIQUE_IDWithCreateSubmissionInstancesUniqueId(
+                    file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm'])
+                )
+            ),
+            $this->getCreateSubmission()->getOutput()
+        );
+    }
+
+
     public function testGetOutputReturnsHtmlForBadEmailErrorMessageAndFormIfSubmitterEmailInPostIsABadEmail(): void {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->deleteAllExpectedSubmissions($expectedSubmission);
