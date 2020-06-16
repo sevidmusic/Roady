@@ -102,6 +102,14 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             );
             return false;
         }
+        if(
+            !preg_match(
+                '/http.?:\/\/.*youtu.?be/',
+                $this->getCurrentRequest()->getPost()['submissionUrl']
+            )
+        ) {
+            return false;
+        }
         return true;
     }
 

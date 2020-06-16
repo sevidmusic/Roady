@@ -104,6 +104,19 @@ trait CreateSubmissionTestTrait
         );
     }
 
+    public function testDoDoesNotStoreSubmissionIfBadYoutubeUrlIsSuplliedInPostData(): void
+    {
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->deleteAllExpectedSubmissions($expectedSubmission);
+        $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
+        $modifiedPostData['submissionUrl'] = 'badUrl';
+        $this->getCreateSubmission()->getCurrentRequest()->import(['post' => $modifiedPostData]);
+        $this->getCreateSubmission()->do();
+        $this->assertEmpty(
+            $this->readAllExpectedSubmissions($expectedSubmission)
+        );
+    }
+
     public function testDoDoesNotStoreSubmissionIfBadEmailIsSuplliedInPostData(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
