@@ -17,6 +17,7 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
 {
 
     private const ERR_HTML_FORM_NOT_FOUND = 'Warning | %s Error: The specified html form could not be found: %s. Component Name: %s | Component Id: %s | Component Location: %s | Component Container: %s';
+    private const ERR_BAD_EMAIL = '<p class="create-submission-error">%s is not a valid email. Please enter a valid email.</p>%s';
     private const DO_SUCCESS_MESSAGE_SPRINT = '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>';
     private $pathToHtmlForm;
     private $componentCrud;
@@ -87,12 +88,18 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             !in_array('submissionName', $postDataKeys)
             ||
             !in_array('submissionContainer', $postDataKeys)
-            ||
+        ) {
+            return false;
+        }
+        if (
             !filter_var(
                 $this->getCurrentRequest()->getPost()['submitterEmail'],
                 FILTER_VALIDATE_EMAIL
             )
         ) {
+            $this->assignBadEmailErrorMessageToOutput(
+                $this->getCurrentRequest()->getPost()['submitterEmail']
+            );
             return false;
         }
         return true;
@@ -119,6 +126,19 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
                 $this->getCurrentRequest()->getPost()['submitterEmail']
             ),
             $this->getCurrentRequest()->getPost()['submissionUrl']
+        );
+    }
+
+    private function assignBadEmailErrorMessageToOutput(string $badEmail): void
+    {
+        $this->import(
+            [
+                'output' => sprintf(
+                    self::ERR_BAD_EMAIL,
+                    $badEmail,
+                    file_get_contents($this->pathToHtmlForm)
+                ),
+            ]
         );
     }
 

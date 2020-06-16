@@ -357,6 +357,23 @@ trait CreateSubmissionTestTrait
         );
     }
 
+    public function testGetOutputReturnsHtmlForBadEmailErrorMessageAndFormIfSubmitterEmailInPostIsABadEmail(): void {
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->deleteAllExpectedSubmissions($expectedSubmission);
+        $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
+        $modifiedPostData['submitterEmail'] = 'badEmail';
+        $this->getCreateSubmission()->getCurrentRequest()->import(['post' => $modifiedPostData]);
+        $this->getCreateSubmission()->do();
+        $this->assertEquals(
+            sprintf(
+                '<p class="create-submission-error">%s is not a valid email. Please enter a valid email.</p>%s',
+                $this->getCreateSubmission()->getCurrentRequest()->getPost()['submitterEmail'],
+                file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm'])
+            ),
+            $this->getCreateSubmission()->getOutput()
+        );
+    }
+
     public function testGetOutputReturnsExpectedHtmlForSuccessIfSubmissionWasCreatedAndStoredOnCallToDo(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
