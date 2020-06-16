@@ -1,7 +1,7 @@
         /**
          * Common background colors | i.e. background
          */
-        .common-body, .common-main-menu, input[type=submit]:hover {
+        .common-body, .common-main-menu {
             background: #6d0707;
         }
 
@@ -25,4 +25,10 @@
             background: #fbd27d;
         }
 
+        input[type=submit] {
+            background: #777777;
+        }
 
+        input[type=submit]:hover {
+            background: #999999;
+        }

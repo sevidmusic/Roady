@@ -21,7 +21,7 @@
         }
 
         .common-highlight-text-color, a, a:visited {
-            color: #6d0707;
+            color: #222222;
         }
 
         .common-light-text-color, {
@@ -58,8 +58,16 @@
             text-decoration: none;
         }
 
+        a:hover {
+            color: #6d0707;
+        }
+
+        input[type=submit] {
+            color: #DDDDDD;
+        }
+
         input[type=submit]:hover {
-            color: #ffffff;
+            color: #333333;
         }
 
         label {

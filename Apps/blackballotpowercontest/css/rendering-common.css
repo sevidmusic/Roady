@@ -55,9 +55,13 @@
         input[type=submit] {
             margin-top: .9em;
             padding: .9em 1.1em;
-            border: none;
+            border: .2em outset #CCCCCC;
             border-radius: .3em;
             cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            border: .2em inset #ffffff;
         }
 
         label, .common-form-title {
