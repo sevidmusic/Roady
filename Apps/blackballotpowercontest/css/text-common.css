@@ -32,8 +32,8 @@
             color: #333333;
         }
 
-        .common-error-text-color {
-            color: #ff4f00;
+        .common-error-text-color, .create-submission-error {
+            color: #6d0707;
         }
 
         .common-warning-text-color {
@@ -69,3 +69,5 @@
         .common-form-title {
             font-style: italic;
         }
+
+

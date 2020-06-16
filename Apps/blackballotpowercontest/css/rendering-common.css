@@ -68,6 +68,10 @@
             margin-bottom: .3em;
         }
 
+        .create-submission-error {
+            padding: .7em 4.2em;
+        }
+
         @media only screen and (min-width: 600px) {
             /* here */
             .common-page-container {
