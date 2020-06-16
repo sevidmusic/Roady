@@ -368,7 +368,9 @@ trait CreateSubmissionTestTrait
             sprintf(
                 '<p class="create-submission-error">%s is not a valid email. Please enter a valid email.</p>%s',
                 $this->getCreateSubmission()->getCurrentRequest()->getPost()['submitterEmail'],
-                file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm'])
+                $this->mockReplacingUNIQUE_IDWithCreateSubmissionInstancesUniqueId(
+                    file_get_contents($this->getCreateSubmission()->export()['pathToHtmlForm'])
+                )
             ),
             $this->getCreateSubmission()->getOutput()
         );
@@ -381,7 +383,7 @@ trait CreateSubmissionTestTrait
         $storedSubmission = $this->findStoredSubmissionByExpectedName($expectedSubmission);
         $this->assertEquals(
             sprintf(
-                '<div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>',
+                '<span id="formAnchor"></span><div class="created-submission-preview-container"><p class="created-submission-preview-message">Thank you for your submission.</p><div class="created-submission-preview-submission-output">%s</div></div>',
                 $storedSubmission->getOutput()
             ),
             $this->getCreateSubmission()->getOutput()
