@@ -137,8 +137,12 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
                 ),
                 $this->getCurrentRequest()->getPost()['submitterEmail']
             ),
-            $this->getCurrentRequest()->getPost()['submissionUrl']
+            $this->formatYoutubeUrlsAsEmbedUrl($this->getCurrentRequest()->getPost()['submissionUrl'])
         );
+    }
+
+    private function formatYoutubeUrlsAsEmbedUrl(string $url): string {
+        return str_replace(['watch?v=', 'youtu.be'], ['embed/', 'www.youtube.com/embed'], $url);
     }
 
     private function assignBadYouTubeUrlErrorMessageToOutput(string $badUrl): void

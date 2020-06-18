@@ -148,8 +148,19 @@ trait CreateSubmissionTestTrait
     public function testDoCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $expectedSubmission->import(
+            [
+                'url' => $this->formatYoutubeUrlsAsEmbedUrl(
+                    $expectedSubmission->getUrl()
+                )
+            ]
+        );
         $this->getCreateSubmission()->do();
         $this->findAndTestStoredSubmission($expectedSubmission);
+    }
+
+    private function formatYoutubeUrlsAsEmbedUrl(string $url): string {
+        return str_replace(['watch?v=', 'youtu.be'], ['embed/', 'www.youtube.com/embed'], $url);
     }
 
     private function mockPostAndGetExpectedSubmission(): Submission
@@ -174,11 +185,18 @@ trait CreateSubmissionTestTrait
 
     private function mockPostArrayForRequestExpectedByDo(): array
     {
+        $videoId = 'A4duZjxusGM';
+        $mockUrls = [
+            'https://www.youtube.com/watch?v=' . $videoId,
+            'https://youtu.be/' . $videoId,
+        ];
+//        $properlyFormattedUrl = str_replace(['watch?v=', 'youtu.be'], ['embed/', 'www.youtube.com/embed'], $mockUrls[array_rand($mockUrls)]);
+        $properlyFormattedUrl = $mockUrls[array_rand($mockUrls)];
         return [
             'submitterName' => 'SubmitterName',
             'submitterContainer' => 'SubmitterContainer',
             'submitterEmail' => 'submitteremail@example.com',
-            'submissionUrl' => 'https://www.youtube.com/watch?v=LBQ2305fLeA&list=PLMlf7rmy7J0fYRGu4nxE74rUhzC9RLjWn&index=173',
+            'submissionUrl' => $properlyFormattedUrl,
             'CreateSubmissionUniqueId' => $this->getCreateSubmission()->getUniqueId(),
             'submissionName' => 'SubmissionName',
             'submissionContainer' => 'SubmissionContainer',
@@ -243,7 +261,7 @@ trait CreateSubmissionTestTrait
         $this->submissionPositionMatches($expectedSubmission, $storedSubmission);
         $this->submissionDateTimeTimestampsMatch($expectedSubmission, $storedSubmission);
         $this->submissionMetaDataMatches($expectedSubmission, $storedSubmission);
-        $this->submissionPathToSubmittedFilesMatch($expectedSubmission, $storedSubmission);
+        $this->submissionYouTubeUrlsMatchAndAreFormattedAsEmbedUrls($expectedSubmission, $storedSubmission);
         $this->submitterNamesMatch($expectedSubmission, $storedSubmission);
         $this->submitterLocationsMatch($expectedSubmission, $storedSubmission);
         $this->submitterContainersMatch($expectedSubmission, $storedSubmission);
@@ -330,14 +348,38 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    private function submissionPathToSubmittedFilesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
+    private function submissionYouTubeUrlsMatchAndAreFormattedAsEmbedUrls(Submission $expectedSubmission, Submission $actualSubmission): void
     {
         $this->assertEquals(
             $expectedSubmission->getUrl(),
             $actualSubmission->getUrl()
         );
+        $this->regExUsedToTestYouTubeUrlsMatchesValidYoutubeEmbedUrl();
+        $this->expectedSubmissionsAssignedUrlIsAValidYoutubeEmbedUrl($expectedSubmission);
     }
 
+    private function expectedSubmissionsAssignedUrlIsAValidYoutubeEmbedUrl(Submission $expectedSubmission): void {
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/https:\/\/www.youtube.com\/embed\/[-_A-Za-z0-9]*/',
+                $expectedSubmission->getUrl()
+            ),
+            'CreateSubmission Test Trait Error: Expected submission\'s url,' . $expectedSubmission->getUrl() . ' , is not formatted as a vaild youtube embed url! (Formatting pattern should be: https://www.youtube.com/VIDEO_ID'
+        );
+    }
+
+    private function regExUsedToTestYouTubeUrlsMatchesValidYoutubeEmbedUrl(): void
+    {
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/https:\/\/www.youtube.com\/embed\/[-_A-Za-z0-9]*/',
+                'https://www.youtube.com/embed/8dfjk_d8945a?foo=bar'
+            ),
+            'CreateSubmission Test Trait Error: Regex used to test Youtube urls is failing!'
+        );
+    }
     private function submitterNamesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
     {
         $this->assertEquals(
@@ -426,6 +468,13 @@ trait CreateSubmissionTestTrait
     public function testGetOutputCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $expectedSubmission->import(
+            [
+                'url' => $this->formatYoutubeUrlsAsEmbedUrl(
+                    $expectedSubmission->getUrl()
+                )
+            ]
+        );
         $this->getCreateSubmission()->getOutput();
         $this->findAndTestStoredSubmission($expectedSubmission);
     }
