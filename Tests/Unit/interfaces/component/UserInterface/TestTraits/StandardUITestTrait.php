@@ -85,7 +85,6 @@ trait StandardUITestTrait
     public function getCurrentRequest(): Request
     {
         if (isset($this->currentRequest) === true) {
-            //var_dump($this->currentRequest->getUrl());
             return $this->currentRequest;
         }
         $this->currentRequest = new Request(
@@ -319,7 +318,6 @@ trait StandardUITestTrait
         foreach ($assignedTemplates as $responsePosition => $responseTemplates) {
             ksort($responseTemplates);
             foreach ($responseTemplates as $template) {
-                var_dump($template->getName(), $template->getPosition());
                 foreach ($template->getTypes() as $type) {
                     $outputComponents = $this->getStandardUI()->getOutputComponentsAssignedToResponses()[$responsePosition][$type];
                     ksort($outputComponents, SORT_NUMERIC);
@@ -351,16 +349,16 @@ trait StandardUITestTrait
             ),
             new Switchable()
         );
-        for ($incrementer = 0; $incrementer < rand(1, 100); $incrementer++) {
+        for ($incrementer = 0; $incrementer < rand(1, 10); $incrementer++) {
             $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
         }
-        for ($incrementer = 0; $incrementer < rand(4, 100); $incrementer++) {
+        for ($incrementer = 0; $incrementer < rand(4, 10); $incrementer++) {
             $response->addTemplateStorageInfo($this->generateStoredStandardUITemplateForOutputComponents(rand(0, 3)));
         }
-        for ($incrementer = 0; $incrementer < rand(1, 100); $incrementer++) {
+        for ($incrementer = 0; $incrementer < rand(1, 10); $incrementer++) {
             $response->addOutputComponentStorageInfo($this->generateStoredAction());
         }
-        for ($incrementer = 0; $incrementer < rand(4, 100); $incrementer++) {
+        for ($incrementer = 0; $incrementer < rand(4, 10); $incrementer++) {
             $response->addTemplateStorageInfo($this->generateStoredStandardUITemplateForActions(rand(0, 3)));
         }
         $response->addRequestStorageInfo($this->getCurrentRequest());
