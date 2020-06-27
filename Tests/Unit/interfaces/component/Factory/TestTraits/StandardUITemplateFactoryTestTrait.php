@@ -25,4 +25,19 @@ trait StandardUITemplateFactoryTestTrait
         $this->standardUITemplateFactory = $standardUITemplateFactory;
     }
 
+    public function testBuildStandardUITemplateReturnsAnStandardUITemplateImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate',
+                $this->getStandardUITemplateFactory()->buildStandardUITemplate(
+                    'AssignedName',
+                    'AssignedContainer',
+                    420.87
+                    /* , @todo OutptComponent ...$types */
+                )
+            )
+        );
+    }
+
 }
