@@ -6,10 +6,17 @@
             font-size: 18px;
         }
 
-        h1 {
-            font-size: 1.3em;
+        h1, h2 {
             font-weight: bolder;
             font-style: italic;
+        }
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        h2 {
+            font-size: 1em;
         }
 
         .common-body {
@@ -50,10 +57,6 @@
             font-weight: bolder;
         }
 
-        .common-center-text {
-            text-align: center;
-        }
-
         a, a:visited, a:active, a:hover, a:link {
             text-decoration: none;
         }
@@ -78,4 +81,7 @@
             font-style: italic;
         }
 
+        .common-centered-text {
+            text-align: center;
+        }
 
