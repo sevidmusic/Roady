@@ -3,6 +3,7 @@
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
 use DarlingCms\classes\primary\Positionable;
@@ -56,18 +57,22 @@ trait StandardUITemplateFactoryTestTrait
         );
     }
 
+    private function callBuildStandardUITemplateUsingTestArguments(): StandardUITemplate {
+        return $this->getStandardUITemplateFactory()->buildStandardUITemplate(
+            'AssignedName',
+            'AssignedContainer',
+            420.87,
+            $this->getTestOutputComponent(),
+            $this->getTestAction()
+        );
+    }
+
     public function testBuildStandardUITemplateReturnsAnStandardUITemplateImplementationInstance(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
                 'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate',
-                $this->getStandardUITemplateFactory()->buildStandardUITemplate(
-                    'AssignedName',
-                    'AssignedContainer',
-                    420.87,
-                    $this->getTestOutputComponent(),
-                    $this->getTestAction()
-                )
+                $this->callBuildStandardUITemplateUsingTestArguments()
             )
         );
     }
