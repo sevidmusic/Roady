@@ -83,13 +83,6 @@ trait OutputComponentFactoryTestTrait
         $this->setStoredComponentFactoryParentTestInstances();
     }
 
-    /*
-        public function testDev(): void
-        {
-             $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
-        }
-     */
-
     protected function getOutputComponentFactory(): OutputComponentFactory
     {
         return $this->outputComponentFactory;
