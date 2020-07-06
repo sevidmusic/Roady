@@ -11,75 +11,18 @@
 
     <testsuites>
 
-        <testsuite name="Darling Cms Redesign | Test Utility Tests">
-            <directory>Tests/Unit/TestUtilityTests</directory>
+        <testsuite name="Darling Cms Redesign | Core Tests">
+            <directory>Tests</directory>
         </testsuite>
 
-        <testsuite name="Darling Cms Redesign | Abstract Primary Tests">
-            <directory>Tests/Unit/abstractions/primary</directory>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Abstract Utility Tests">
-            <directory>Tests/Unit/abstractions/utility</directory>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Abstract Component Tests">
-            <directory>Tests/Unit/abstractions/component</directory>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Class  Primary Tests">
-            <directory>Tests/Unit/classes/primary</directory>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Class  Utility Tests">
-            <directory>Tests/Unit/classes/utility</directory>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Class  Component Tests">
-            <directory>Tests/Unit/classes/component</directory>
-        </testsuite>
 
         <testsuite name="Darling Cms Redesign | Extension Tests">
             <directory>Extensions</directory>
         </testsuite>
 
-        <testsuite name="Darling Cms Redesign | Action Tests">
-            <file>Tests/Unit/abstractions/component/ActionTest.php</file>
-            <file>Tests/Unit/classes/component/ActionTest.php</file>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | StoredComponentRegistry Tests">
-            <file>Tests/Unit/abstractions/component/Registry/Storage/StoredComponentRegistryTest.php</file>
-            <file>Tests/Unit/classes/component/Registry/Storage/StoredComponentRegistry.php</file>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | StandardUI Tests">
-            <file>Tests/Unit/abstractions/component/UserInterface/StandardUITest.php</file>
-            <file>Tests/Unit/classes/component/UserInterface/StandardUITest.php</file>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Response Tests">
-            <file>Tests/Unit/abstractions/component/Web/Routing/ResponseTest.php</file>
-            <file>Tests/Unit/classes/component/Web/Routing/ResponseTest.php</file>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | App Tests">
-            <file>Tests/Unit/abstractions/component/Web/AppTest.php</file>
-            <file>Tests/Unit/classes/component/Web/AppTest.php</file>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Global Response Tests">
-            <file>Tests/Unit/abstractions/component/Web/Routing/GlobalResponseTest.php</file>
-            <file>Tests/Unit/classes/component/Web/Routing/GlobalResponseTest.php</file>
-        </testsuite>
-
         <testsuite name="Darling Cms Redesign | Factory Tests">
-            <file>Tests/Unit/abstractions/component/Factory/FactoryTest.php</file>
-            <file>Tests/Unit/classes/component/Factory/FactoryTest.php</file>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Contest Extension Tests">
-            <directory>Extensions/Contests</directory>
+            <directory>Tests/Unit/abstractions/component/Factory</directory>
+            <directory>Tests/Unit/classes/component/Factory</directory>
         </testsuite>
 
     </testsuites>
