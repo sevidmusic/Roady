@@ -83,4 +83,10 @@ trait StandardUITemplateFactoryTestTrait
         $this->assertTrue($this->wasStoredOnBuild($standardUITemplate));
     }
 
+    public function testBuildStandardUITemplateRegistersTheStandardUITemplateImplementationInstanceItBuilds(): void
+    {
+        $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
+        $this->assertTrue($this->wasRegisteredOnBuild($standardUITemplate));
+    }
+
 }
