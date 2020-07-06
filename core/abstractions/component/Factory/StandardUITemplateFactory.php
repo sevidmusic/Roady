@@ -25,7 +25,7 @@ abstract class StandardUITemplateFactory extends CoreStoredComponentFactory impl
         float $position,
         OutputComponent ...$types
     ): StandardUITemplate {
-        return new CoreStandardUITemplate(
+        $standardUITemplate = new CoreStandardUITemplate(
             $this->getPrimaryFactory()->buildStorable(
                 $name,
                 $container
@@ -33,6 +33,11 @@ abstract class StandardUITemplateFactory extends CoreStoredComponentFactory impl
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)
         );
+        foreach($types as $type) {
+            $standardUITemplate->addType($type);
+        }
+        $this->storeAndRegister($standardUITemplate);
+        return $standardUITemplate;
     }
 
 }
