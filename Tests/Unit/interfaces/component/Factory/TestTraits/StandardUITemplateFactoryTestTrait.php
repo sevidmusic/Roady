@@ -15,6 +15,7 @@ trait StandardUITemplateFactoryTestTrait
 
     private $expectedName = 'AssignedName';
     private $expectedContainer = 'AssingedContainer';
+    private $expectedPosition = 420.87;
     private $standardUITemplateFactory;
 
     protected function setStandardUITemplateFactoryParentTestInstances(): void
@@ -63,7 +64,7 @@ trait StandardUITemplateFactoryTestTrait
         return $this->getStandardUITemplateFactory()->buildStandardUITemplate(
             $this->expectedName,
             $this->expectedContainer,
-            420.87,
+            $this->expectedPosition,
             $this->getTestOutputComponent(),
             $this->getTestAction()
         );
@@ -106,6 +107,15 @@ trait StandardUITemplateFactoryTestTrait
         $this->assertEquals(
             $this->expectedContainer,
             $standardUITemplate->getContainer(),
+        );
+    }
+
+    public function testBuildStandardUITemplateReturnsStandardUITemplateWhosePositionMatchesSuppliedPosition(): void
+    {
+        $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
+        $this->assertEquals(
+            $this->expectedPosition,
+            $standardUITemplate->getPosition(),
         );
     }
 
