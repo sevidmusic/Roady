@@ -119,4 +119,21 @@ trait StandardUITemplateFactoryTestTrait
         );
     }
 
+    public function testBuildStandardUITemplateReturnsStandardUITemplateWhoseAssignedTypesReflectSuplliedTypes(): void
+    {
+        $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
+        $this->assertTrue(
+            in_array(
+                OutputComponent::class,
+                $standardUITemplate->getTypes()
+            )
+        );
+        $this->assertTrue(
+            in_array(
+                Action::class,
+                $standardUITemplate->getTypes()
+            )
+        );
+
+    }
 }
