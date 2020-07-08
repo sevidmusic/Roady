@@ -4,6 +4,7 @@ namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
 use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory;
 use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
+use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
 
 trait AppComponentsFactoryTestTrait
 {
@@ -21,6 +22,11 @@ trait AppComponentsFactoryTestTrait
     }
 
     public function getOutputComponentFactory(): OutputComponentFactory
+    {
+        return $this->getAppComponentsFactory();
+    }
+
+    public function getStandardUITemplateFactory(): StandardUITemplateFactory
     {
         return $this->getAppComponentsFactory();
     }
