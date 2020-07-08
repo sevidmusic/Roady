@@ -73,40 +73,6 @@ $indexRequest = new Request(
 );
 $indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
 
-$htmlStart = $appComponentsFactory->buildOutputComponent(
-    'HtmlStart',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'),
-    0.0
-);
-
-$htmlHeadStart = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadStart',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'
-    ),
-    1.0
-);
-
-$htmlHeadStylesStart = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadStylesStart',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'
-    ),
-    2.0
-);
-
-$cssBgColorsCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonBackgroundColors',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css'
-    ),
-    3.0
-);
-
 $cssFontsCommon = $appComponentsFactory->buildOutputComponent(
     'CommonFonts',
     'CommonOutput',
@@ -175,12 +141,12 @@ $htmlContentWelcome = $appComponentsFactory->buildOutputComponent(
 );
 
 $htmlContentCreateSubmissionForm = new CreateSubmission(
-    $primaryFactory->buildStorable(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'CreateContestSubmissionForm',
         'ContestSubmissions'
     ),
-    $primaryFactory->buildSwitchable(),
-    $primaryFactory->buildPositionable(8.1),
+    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(8.1),
     __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
     $componentCrud
 );
@@ -201,26 +167,20 @@ $htmlEnd = $appComponentsFactory->buildOutputComponent(
     10.0
 );
 
-$defaultUITemplate = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'defaultUITemplate',
-        'UITemplates'
-    ),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
+$defaultUITemplate = $appComponentsFactory->buildStandardUITemplate(
+    'defaultUITemplate',
+    'UITemplates',
+    0,
+    $htmlEnd,
+    $htmlContentCreateSubmissionForm
 );
-$defaultUITemplate->addType($htmlStart);
-$defaultUITemplate->addType($htmlContentCreateSubmissionForm);
 
-$defaultGlobalUITemplate = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'defaultGlobalUITemplate',
-        'UITemplates'
-    ),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
+$defaultGlobalUITemplate = $appComponentsFactory->buildStandardUITemplate(
+    'defaultGlobalUITemplate',
+    'UITemplates',
+    0,
+    $htmlEnd,
 );
-$defaultGlobalUITemplate->addType($htmlStart);
 
 $htmlStartResponse = new GlobalResponse(
     $app,
@@ -228,10 +188,44 @@ $htmlStartResponse = new GlobalResponse(
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
 $htmlStartResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlStart);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStart);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesStart);
-$htmlStartResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlStart',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'),
+        0.0
+    )
+);
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadStart',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'
+        ),
+        1.0
+    )
+);
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadStylesStart',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'
+        ),
+        2.0
+    )
+);
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'CommonBackgroundColors',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css'
+        ),
+        3.0
+    )
+);
 $htmlStartResponse->addOutputComponentStorageInfo($cssFontsCommon);
 $htmlStartResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
 $htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd);
@@ -273,8 +267,6 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 
 $components = [
     $app,
-    $defaultUITemplate,
-    $defaultGlobalUITemplate,
     $indexRequest,
     $rootRequest,
     $htmlStartResponse,
