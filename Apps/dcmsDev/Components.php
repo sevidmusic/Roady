@@ -16,7 +16,15 @@ use Extensions\Contests\core\classes\component\Actions\CreateSubmission;
 
 ini_set('display_errors', true);
 
-require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require(
+    '..' .
+    DIRECTORY_SEPARATOR .
+    '..' .
+    DIRECTORY_SEPARATOR .
+    'vendor' .
+    DIRECTORY_SEPARATOR .
+    'autoload.php'
+);
 
 define('REQUEST_CONTAINER', 'Requests');
 
@@ -42,6 +50,7 @@ $componentCrud = new ComponentCrud(
         $primaryFactory->buildSwitchable()
     )
 );
+
 $appComponentsFactory = new AppComponentsFactory(
     $primaryFactory,
     $componentCrud,
@@ -73,73 +82,6 @@ $indexRequest = new Request(
 );
 $indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
 
-$cssFontsCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonFonts',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css'),
-    3.0
-);
-
-$cssDimensionsCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonDimensions',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'
-    ),
-    3.0
-);
-
-$cssRenderingCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonRendering',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'
-    ),
-    3.0
-);
-
-$htmlHeadStylesEnd = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadStylesEnd',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'
-    ),
-    4.0
-);
-
-$htmlHeadEnd = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadEnd',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'
-    ),
-    5.0
-);
-
-$htmlBodyStart = $appComponentsFactory->buildOutputComponent(
-    'HtmlBodyStart',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'
-    ),
-    6.0
-);
-
-$htmlMainMenu = $appComponentsFactory->buildOutputComponent(
-    'MainMenu',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'),
-    7.0
-);
-
-$htmlContentWelcome = $appComponentsFactory->buildOutputComponent(
-    'Welcome',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
-        'htmlContent/welcome.html'),
-    8.0
-);
-
 $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'CreateContestSubmissionForm',
@@ -149,15 +91,6 @@ $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(8.1),
     __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
     $componentCrud
-);
-
-$htmlBodyEnd = $appComponentsFactory->buildOutputComponent(
-    'HtmlBodyEnd',
-    'CommonOutput',
-    file_get_contents(
-        __DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'
-    ),
-    9.0
 );
 
 $htmlEnd = $appComponentsFactory->buildOutputComponent(
@@ -192,7 +125,9 @@ $htmlStartResponse->addOutputComponentStorageInfo(
     $appComponentsFactory->buildOutputComponent(
         'HtmlStart',
         'CommonOutput',
-        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'),
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'
+        ),
         0.0
     )
 );
@@ -226,19 +161,80 @@ $htmlStartResponse->addOutputComponentStorageInfo(
         3.0
     )
 );
-$htmlStartResponse->addOutputComponentStorageInfo($cssFontsCommon);
-$htmlStartResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadStylesEnd);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlHeadEnd);
-$htmlStartResponse->addOutputComponentStorageInfo($htmlBodyStart);
+
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $cssFontsCommon = $appComponentsFactory->buildOutputComponent(
+        'CommonFonts',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css'
+        ),
+        3.0
+    )
+);
+
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'CommonDimensions',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'
+        ),
+        3.0
+    )
+);
+
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadStylesEnd',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'
+        ),
+        4.0
+    )
+);
+
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadEnd',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'
+        ),
+        5.0
+    )
+);
+
+$htmlStartResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlBodyStart',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'
+        ),
+        6.0
+    )
+);
 
 $mainMenuResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
 );
+
 $mainMenuResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$mainMenuResponse->addOutputComponentStorageInfo($htmlMainMenu);
+
+$mainMenuResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'MainMenu',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'
+        ),
+        7.0
+    )
+);
 
 
 $homeResponse = new Response(
@@ -252,7 +248,17 @@ $homeResponse = new Response(
 $homeResponse->addRequestStorageInfo($indexRequest);
 $homeResponse->addRequestStorageInfo($rootRequest);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
-$homeResponse->addOutputComponentStorageInfo($htmlContentWelcome);
+$homeResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'Welcome',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR .
+            'htmlContent/welcome.html'
+        ),
+        8.0
+    )
+);
 $homeResponse->addOutputComponentStorageInfo($htmlContentCreateSubmissionForm);
 
 $htmlEndResponse = new GlobalResponse(
@@ -261,7 +267,16 @@ $htmlEndResponse = new GlobalResponse(
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
 );
 $htmlEndResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$htmlEndResponse->addOutputComponentStorageInfo($htmlBodyEnd);
+$htmlEndResponse->addOutputComponentStorageInfo(
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlBodyEnd',
+        'CommonOutput',
+        file_get_contents(
+            __DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'
+        ),
+        9.0
+    )
+);
 $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 
 
@@ -297,3 +312,20 @@ foreach ($components as $component) {
     printf("%s", PHP_EOL);
 }
 
+foreach(
+    $appComponentsFactory->getStoredComponentRegistry()->getRegistry()
+    as
+    $storable
+)
+{
+    printf(
+        '%sBuilt component %s and saved to location %s in container %s.%sComponent Id: %s%s',
+        PHP_EOL,
+        $storable->getName(),
+        $storable->getLocation(),
+        $storable->getContainer(),
+        PHP_EOL,
+        $storable->getUniqueId(),
+        PHP_EOL
+    );
+}
