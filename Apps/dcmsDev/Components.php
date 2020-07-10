@@ -30,7 +30,7 @@ define('REQUEST_CONTAINER', 'Requests');
 
 $domain = new Request(
     new Storable(
-        'RootUrl',
+        'Domain',
         'dcmsdev',
         REQUEST_CONTAINER
     ),
@@ -38,9 +38,7 @@ $domain = new Request(
 );
 $domain->import(['url' => 'http://dcms.dev/']);
 
-$app = new App($domain, new Switchable());
-
-$primaryFactory = new PrimaryFactory($app);
+$primaryFactory = new PrimaryFactory(new App($domain, new Switchable()));
 
 $componentCrud = new ComponentCrud(
     $primaryFactory->buildStorable('Crud', 'Cruds'),
@@ -116,7 +114,7 @@ $defaultGlobalUITemplate = $appComponentsFactory->buildStandardUITemplate(
 );
 
 $htmlStartResponse = new GlobalResponse(
-    $app,
+    $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
 );
@@ -218,7 +216,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
 );
 
 $mainMenuResponse = new GlobalResponse(
-    $app,
+    $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
 );
@@ -262,7 +260,7 @@ $homeResponse->addOutputComponentStorageInfo(
 $homeResponse->addOutputComponentStorageInfo($htmlContentCreateSubmissionForm);
 
 $htmlEndResponse = new GlobalResponse(
-    $app,
+    $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
 );
@@ -281,7 +279,7 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 
 
 $components = [
-    $app,
+    $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $indexRequest,
     $rootRequest,
     $htmlStartResponse,
