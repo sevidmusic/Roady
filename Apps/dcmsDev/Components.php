@@ -90,7 +90,7 @@ $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(8.1),
     __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
-    $componentCrud
+    $appComponentsFactory->getComponentCrud()
 );
 
 $htmlEnd = $appComponentsFactory->buildOutputComponent(
@@ -307,7 +307,7 @@ foreach ($components as $component) {
     printf(
         "%s%s",
         PHP_EOL,
-        ($componentCrud->create($component) === true ? "Saved successfully" : "The component could not be saved")
+        ($appComponentsFactory->getComponentCrud()->create($component) === true ? "Saved successfully" : "The component could not be saved")
     );
     printf("%s", PHP_EOL);
 }
