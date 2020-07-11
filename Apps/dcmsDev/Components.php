@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
@@ -26,6 +26,32 @@ require(
     'autoload.php'
 );
 
+// @todo Implemnt as static method of AppComponentsFactory
+function defaults(Request $domain): array {
+    $primaryFactory = new PrimaryFactory(new App($domain, new Switchable()));
+
+    $componentCrud = new ComponentCrud(
+        $primaryFactory->buildStorable('Crud', 'Cruds'),
+        $primaryFactory->buildSwitchable(),
+        new Standard(
+            $primaryFactory->buildStorable('StorageDriver', 'StorageDrivers'),
+            $primaryFactory->buildSwitchable()
+        )
+    );
+    $storedComponentRegistry = new StoredComponentRegistry(
+        $primaryFactory->buildStorable(
+            'AppComponentsRegistry',
+            'StoredComponentRegistries'
+        ),
+        $componentCrud
+    );
+    return [
+        $primaryFactory,
+        $componentCrud,
+        $storedComponentRegistry
+    ];
+}
+
 define('REQUEST_CONTAINER', 'Requests');
 
 $domain = new Request(
@@ -38,28 +64,7 @@ $domain = new Request(
 );
 $domain->import(['url' => 'http://dcms.dev/']);
 
-$primaryFactory = new PrimaryFactory(new App($domain, new Switchable()));
-
-$componentCrud = new ComponentCrud(
-    $primaryFactory->buildStorable('Crud', 'Cruds'),
-    $primaryFactory->buildSwitchable(),
-    new Standard(
-        $primaryFactory->buildStorable('StorageDriver', 'StorageDrivers'),
-        $primaryFactory->buildSwitchable()
-    )
-);
-
-$appComponentsFactory = new AppComponentsFactory(
-    $primaryFactory,
-    $componentCrud,
-    new StoredComponentRegistry(
-        $primaryFactory->buildStorable(
-            'AppComponentsRegistry',
-            'StoredComponentRegistries'
-        ),
-        $componentCrud
-    )
-);
+$appComponentsFactory = new AppComponentsFactory(...defaults($domain));
 
 $rootRequest = new Request(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
