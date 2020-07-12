@@ -26,32 +26,6 @@ require(
     'autoload.php'
 );
 
-// @todo Implemnt as static method of AppComponentsFactory
-function defaults(Request $domain): array {
-    $primaryFactory = new PrimaryFactory(new App($domain, new Switchable()));
-
-    $componentCrud = new ComponentCrud(
-        $primaryFactory->buildStorable('Crud', 'Cruds'),
-        $primaryFactory->buildSwitchable(),
-        new Standard(
-            $primaryFactory->buildStorable('StorageDriver', 'StorageDrivers'),
-            $primaryFactory->buildSwitchable()
-        )
-    );
-    $storedComponentRegistry = new StoredComponentRegistry(
-        $primaryFactory->buildStorable(
-            'AppComponentsRegistry',
-            'StoredComponentRegistries'
-        ),
-        $componentCrud
-    );
-    return [
-        $primaryFactory,
-        $componentCrud,
-        $storedComponentRegistry
-    ];
-}
-
 define('REQUEST_CONTAINER', 'Requests');
 
 $domain = new Request(
@@ -64,7 +38,9 @@ $domain = new Request(
 );
 $domain->import(['url' => 'http://dcms.dev/']);
 
-$appComponentsFactory = new AppComponentsFactory(...defaults($domain));
+$appComponentsFactory = new AppComponentsFactory(
+    ...AppComponentsFactory::buildConstructorArgs($domain)
+);
 
 $rootRequest = new Request(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
@@ -306,7 +282,7 @@ foreach ($components as $component) {
         PHP_EOL,
         $component->getUniqueId()
     );
-    usleep(90000);
+    sleep(2);
     printf(
         "%s%s",
         PHP_EOL,
@@ -331,4 +307,5 @@ foreach(
         $storable->getUniqueId(),
         PHP_EOL
     );
+    sleep(2);
 }
