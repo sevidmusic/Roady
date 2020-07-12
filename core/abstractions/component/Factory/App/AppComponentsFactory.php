@@ -6,11 +6,20 @@ use DarlingCms\abstractions\component\Factory\StoredComponentFactory as CoreStor
 use DarlingCms\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
 use DarlingCms\classes\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
+use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
+use DarlingCms\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
+use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingCms\interfaces\component\Web\App;
+use DarlingCms\classes\component\Web\App as CoreApp;
+use DarlingCms\interfaces\primary\Switchable;
+use DarlingCms\classes\primary\Switchable as CoreSwitchable;
+use DarlingCms\classes\component\Driver\Storage\Standard;
 
 abstract class AppComponentsFactory extends CoreStoredComponentFactory implements AppComponentsFactoryInterface
 {
@@ -151,4 +160,28 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $suit;
     }
 
+    public static function buildConstructorArgs(Request $domain): array
+    {
+        $primaryFactory = new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
+        $componentCrud = new CoreComponentCrud(
+            $primaryFactory->buildStorable('Crud', 'Cruds'),
+            $primaryFactory->buildSwitchable(),
+            new Standard(
+                $primaryFactory->buildStorable('StorageDriver', 'StorageDrivers'),
+                $primaryFactory->buildSwitchable()
+            )
+        );
+        $storedComponentRegistry = new CoreStoredComponentRegistry(
+            $primaryFactory->buildStorable(
+                'AppComponentsRegistry',
+                'StoredComponentRegistries'
+            ),
+            $componentCrud
+        );
+        return [
+            $primaryFactory,
+            $componentCrud,
+            $storedComponentRegistry
+        ];
+    }
 }
