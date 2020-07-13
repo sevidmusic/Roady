@@ -10,6 +10,7 @@ use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingCms\classes\component\Web\App;
 
 trait AppComponentsFactoryTestTrait
 {
@@ -132,4 +133,15 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
+/*    public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void {
+        var_dump(
+            App::deriveNameLocationFromRequest(
+                $this->getTestDomain()
+            )
+        );
+        $this->assertEquals(
+            App::deriveNameLocationFromRequest($this->getTestDomain()).
+            $this->getAppComponentsFactory()::buildDomain($this->getTestDomain()->getUrl())
+        );
+}*/
 }

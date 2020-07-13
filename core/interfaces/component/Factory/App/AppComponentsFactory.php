@@ -12,4 +12,5 @@ interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputCo
 
     public static function buildConstructorArgs(Request $domain): array;
 
+    public static function buildDomain(string $url): Request;
 }

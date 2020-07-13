@@ -15,6 +15,7 @@ use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\classes\component\Web\App as CoreApp;
 use DarlingCms\interfaces\primary\Switchable;
@@ -160,28 +161,55 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $suit;
     }
 
-    public static function buildConstructorArgs(Request $domain): array
+    private static function buildPrimaryFactory(Request $domain): PrimaryFactory
     {
-        $primaryFactory = new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
-        $componentCrud = new CoreComponentCrud(
-            $primaryFactory->buildStorable('Crud', 'Cruds'),
-            $primaryFactory->buildSwitchable(),
+        return new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
+    }
+
+    private static function buildComponentCrud(Request $domain): ComponentCrud
+    {
+        return new CoreComponentCrud(
+            self::buildPrimaryFactory($domain)->buildStorable('Crud', 'Cruds'),
+            self::buildPrimaryFactory($domain)->buildSwitchable(),
             new Standard(
-                $primaryFactory->buildStorable('StorageDriver', 'StorageDrivers'),
-                $primaryFactory->buildSwitchable()
+                self::buildPrimaryFactory($domain)->buildStorable('StorageDriver', 'StorageDrivers'),
+                self::buildPrimaryFactory($domain)->buildSwitchable()
             )
         );
-        $storedComponentRegistry = new CoreStoredComponentRegistry(
-            $primaryFactory->buildStorable(
+    }
+
+    private static function buildStoredComponentRegistry(Request $domain): StoredComponentRegistry
+    {
+        return new CoreStoredComponentRegistry(
+            self::buildPrimaryFactory($domain)->buildStorable(
                 'AppComponentsRegistry',
                 'StoredComponentRegistries'
             ),
-            $componentCrud
+            self::buildComponentCrud($domain)
         );
+    }
+
+    public static function buildConstructorArgs(Request $domain): array
+    {
         return [
-            $primaryFactory,
-            $componentCrud,
-            $storedComponentRegistry
+            self::buildPrimaryFactory($domain),
+            self::buildComponentCrud($domain),
+            self::buildStoredComponentRegistry($domain)
         ];
     }
+
+    public static function buildDomain(string $url): Request
+    {
+        $domain = new CoreRequest(
+            new Storable(
+                'Domain',
+                'dcmsdev',
+                REQUEST_CONTAINER
+            ),
+            new Switchable()
+        );
+        $domain->import(['url' => $url]);
+        return $domain;
+    }
+
 }
