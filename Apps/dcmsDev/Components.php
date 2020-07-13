@@ -282,7 +282,6 @@ foreach ($components as $component) {
         PHP_EOL,
         $component->getUniqueId()
     );
-    sleep(2);
     printf(
         "%s%s",
         PHP_EOL,
@@ -307,5 +306,4 @@ foreach(
         $storable->getUniqueId(),
         PHP_EOL
     );
-    sleep(2);
 }
