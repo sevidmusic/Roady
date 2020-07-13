@@ -133,15 +133,12 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-/*    public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void {
-        var_dump(
-            App::deriveNameLocationFromRequest(
-                $this->getTestDomain()
-            )
-        );
+    public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void {
         $this->assertEquals(
-            App::deriveNameLocationFromRequest($this->getTestDomain()).
-            $this->getAppComponentsFactory()::buildDomain($this->getTestDomain()->getUrl())
+            App::deriveNameLocationFromRequest($this->getTestDomain()),
+            $this->getAppComponentsFactory()::buildDomain(
+                $this->getTestDomain()->getUrl(),
+            )->getName()
         );
-}*/
+    }
 }

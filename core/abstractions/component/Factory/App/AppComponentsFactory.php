@@ -19,6 +19,7 @@ use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\classes\component\Web\App as CoreApp;
 use DarlingCms\interfaces\primary\Switchable;
+use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable as CoreSwitchable;
 use DarlingCms\classes\component\Driver\Storage\Standard;
 
@@ -202,15 +203,18 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
 
     public static function buildDomain(string $url): Request
     {
+        $storable = new Storable('TEMP', 'TEMP', 'TEMP');
         $domain = new CoreRequest(
-            new Storable(
-                'Domain',
-                'dcmsdev',
-                REQUEST_CONTAINER
-            ),
-            new Switchable()
+            $storable,
+            new CoreSwitchable()
         );
         $domain->import(['url' => $url]);
+        $actualStorable = new Storable(
+            CoreApp::deriveNameLocationFromRequest($domain),
+            CoreApp::deriveNameLocationFromRequest($domain),
+            CoreApp::deriveNameLocationFromRequest($domain),
+        );
+        $domain->import(['storable' => $actualStorable]);
         return $domain;
     }
 
