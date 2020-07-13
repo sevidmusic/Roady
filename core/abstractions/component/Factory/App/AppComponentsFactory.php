@@ -27,6 +27,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
 
     private $outputComponentFactory;
     private $standardUITemplateFactory;
+    private const REFLECTION_UTILITY = 'reflectionUtility';
+    private const ACCEPTED_IMPLEMENTATION = 'acceptedImplementation';
+    private const CONSTRUCT = '__construct';
 
     public function __construct(
         PrimaryFactory $primaryFactory,
@@ -57,19 +60,18 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         StoredComponentRegistry $storedComponentRegistry
     ): void
     {
-        $ocfRegistry = $this->export()['reflectionUtility']->getClassInstance(
+        $ocfRegistry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
             $storedComponentRegistry->getType(),
-            $this->export()['reflectionUtility']->generateMockClassMethodArguments(
+            $this->export()[self::REFLECTION_UTILITY]->generateMockClassMethodArguments(
                 $storedComponentRegistry->getType(),
-                '__construct'
+                self::CONSTRUCT
             )
         );
         $ocfRegistry->import(
             [
-                'acceptedImplementation'
+                self::ACCEPTED_IMPLEMENTATION
                 =>
-                'DarlingCms\interfaces\component\OutputComponent
-                '
+                OutputComponent::class
             ]
         );
         $this->outputComponentFactory = new CoreOutputComponentFactory(
@@ -94,9 +96,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         );
         $this->getStoredComponentRegistry()->import(
             [
-                'acceptedImplementation'
+                self::ACCEPTED_IMPLEMENTATION
                 =>
-                'DarlingCms\interfaces\component\OutputComponent'
+                OutputComponent::class
             ]
         );
         $this->getStoredComponentRegistry()->registerComponent($oc);
@@ -109,18 +111,18 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         StoredComponentRegistry $storedComponentRegistry
     ): void
     {
-        $ocfRegistry = $this->export()['reflectionUtility']->getClassInstance(
+        $ocfRegistry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
             $storedComponentRegistry->getType(),
-            $this->export()['reflectionUtility']->generateMockClassMethodArguments(
+            $this->export()[self::REFLECTION_UTILITY]->generateMockClassMethodArguments(
                 $storedComponentRegistry->getType(),
-                '__construct'
+                self::CONSTRUCT
             )
         );
         $ocfRegistry->import(
             [
-                'acceptedImplementation'
+                self::ACCEPTED_IMPLEMENTATION
                 =>
-                'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate'
+                StandardUITemplate::class
             ]
         );
         $this->standardUITemplateFactory = new CoreStandardUITemplateFactory(
@@ -151,9 +153,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         $this->standardUITemplateFactory->getComponentCrud()->update($suit, $suit);
         $this->getStoredComponentRegistry()->import(
             [
-                'acceptedImplementation'
+                self::ACCEPTED_IMPLEMENTATION
                 =>
-                'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate'
+                StandardUITemplate::class
             ]
         );
         $this->standardUITemplateFactory->getStoredComponentRegistry()->registerComponent($suit);
