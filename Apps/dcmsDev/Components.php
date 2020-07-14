@@ -34,16 +34,6 @@ $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
-$rootRequest = new Request(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'RootRequest',
-        REQUEST_CONTAINER
-    ),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
-);
-
-$rootRequest->import(['url' => $domain->getUrl()]);
-
 $indexRequest = new Request(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'HomepageRequest',
@@ -217,7 +207,7 @@ $homeResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(2)
 );
 $homeResponse->addRequestStorageInfo($indexRequest);
-$homeResponse->addRequestStorageInfo($rootRequest);
+$homeResponse->addRequestStorageInfo($domain);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo(
     $appComponentsFactory->buildOutputComponent(
@@ -254,7 +244,7 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 $components = [
     $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $indexRequest,
-    $rootRequest,
+    $domain,
     $htmlStartResponse,
     $mainMenuResponse,
     $homeResponse,
