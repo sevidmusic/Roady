@@ -28,15 +28,7 @@ require(
 
 define('REQUEST_CONTAINER', 'Requests');
 
-$domain = new Request(
-    new Storable(
-        'Domain',
-        'dcmsdev',
-        REQUEST_CONTAINER
-    ),
-    new Switchable()
-);
-$domain->import(['url' => 'http://dcms.dev/']);
+$domain = AppComponentsFactory::buildDomain('http://dcms.dev/');
 
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
