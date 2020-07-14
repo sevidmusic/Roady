@@ -141,4 +141,32 @@ trait AppComponentsFactoryTestTrait
             )->getName()
         );
     }
+
+    public function testBuildDomainReturnsRequestWhoseLocationMatchesExpectedAppNameLocation(): void {
+        $this->assertEquals(
+            App::deriveNameLocationFromRequest($this->getTestDomain()),
+            $this->getAppComponentsFactory()::buildDomain(
+                $this->getTestDomain()->getUrl(),
+            )->getLocation()
+        );
+    }
+
+    public function testBuildDomainReturnsRequestWhoseContainerMatchesExpectedAppNameLocation(): void {
+        $this->assertEquals(
+            App::deriveNameLocationFromRequest($this->getTestDomain()),
+            $this->getAppComponentsFactory()::buildDomain(
+                $this->getTestDomain()->getUrl(),
+            )->getContainer()
+        );
+    }
+
+    public function testBuildDomainReturnsRequestWhoseUrlMatchesSuppliedUrl(): void {
+        $this->assertEquals(
+            $this->getTestDomain()->getUrl(),
+            $this->getAppComponentsFactory()::buildDomain(
+                $this->getTestDomain()->getUrl(),
+            )->getUrl()
+        );
+    }
+
 }
