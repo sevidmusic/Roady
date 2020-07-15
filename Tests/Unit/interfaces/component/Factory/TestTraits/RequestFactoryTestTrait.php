@@ -11,72 +11,75 @@ trait RequestFactoryTestTrait
 
     private $requestFactory;
 
+    private function callBuildRequest(): Request
+    {
+        return $this->getRequestFactory()->buildRequest(
+                   'AssignedName',
+                   'AssignedContainer',
+                   'http://assigned.url/'
+               );
+    }
+
     public function testBuildRequestReturnsARequestImplementationInstance(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
                 Request::class,
-                $this->getRequestFactory()->buildRequest(
-                    'AssignedName',
-                    'AssignedContainer',
-                    'http://assigned.url/'
-                )
+                $this->callBuildRequest()
             )
         );
     }
 
-    /**
-
-
     public function testBuildRequestStoresTheRequestImplementationInstanceItBuilds(): void
     {
-        $outputComponent = $this->getRequestFactory()->buildRequest('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
-        $this->assertTrue($this->wasStoredOnBuild($outputComponent));
+        $request = $this->callBuildRequest();
+        $this->assertTrue($this->wasStoredOnBuild($request));
     }
 
     public function testBuildRequestRegistersTheRequestImplementationInstanceItBuilds(): void
     {
-        $outputComponent = $this->getRequestFactory()->buildRequest('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
-        $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
+        $request = $this->callBuildRequest();
+        $this->assertTrue($this->wasRegisteredOnBuild($request));
     }
 
+    /**
     public function testBuildRequestReturnsRequestWhoseNameMatchesSuppliedName(): void
     {
         $expectedName = 'ExpectedName';
-        $outputComponent = $this->getRequestFactory()->buildRequest($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
+        $request = $this->getRequestFactory()->buildRequest($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
         $this->assertEquals(
             $expectedName,
-            $outputComponent->getName(),
+            $request->getName(),
         );
     }
 
     public function testBuildRequestReturnsRequestWhoseContainerMatchesSuppliedContainer(): void
     {
         $expectedContainer = 'ExpectedContainer';
-        $outputComponent = $this->getRequestFactory()->buildRequest('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
+        $request = $this->getRequestFactory()->buildRequest('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
         $this->assertEquals(
             $expectedContainer,
-            $outputComponent->getContainer(),
+            $request->getContainer(),
         );
     }
 
     public function testBuildRequestReturnsRequestWhoseOutputMatchesSuppliedOutput(): void
     {
         $expectedOutput = 'Expected output';
-        $outputComponent = $this->getRequestFactory()->buildRequest('AssignedName', 'AssignedContainer', $expectedOutput, 420.87);
+        $request = $this->getRequestFactory()->buildRequest('AssignedName', 'AssignedContainer', $expectedOutput, 420.87);
         $this->assertEquals(
             $expectedOutput,
-            $outputComponent->getOutput(),
+            $request->getOutput(),
         );
     }
 
     public function testBuildRequestReturnsRequestWhosePositionMatchesSuppliedPosition(): void
     {
         $expectedPosition = 420.87;
-        $outputComponent = $this->getRequestFactory()->buildRequest('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
+        $request = $this->getRequestFactory()->buildRequest('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
         $this->assertEquals(
             $expectedPosition,
-            $outputComponent->getPosition(),
+            $request->getPosition(),
         );
     }
 

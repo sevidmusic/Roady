@@ -25,6 +25,7 @@ abstract class RequestFactory extends CoreStoredComponentFactory implements Requ
             $this->getPrimaryFactory()->buildSwitchable()
         );
         $request->import(['url' => $url]);
+        $this->storeAndRegister($request);
         return $request;
     }
 }
