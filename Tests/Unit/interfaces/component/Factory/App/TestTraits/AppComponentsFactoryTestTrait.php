@@ -27,53 +27,6 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function getOutputComponentFactory(): OutputComponentFactory
-    {
-        return $this->getAppComponentsFactory();
-    }
-
-    public function getStandardUITemplateFactory(): StandardUITemplateFactory
-    {
-        return $this->getAppComponentsFactory();
-    }
-
-    public function appComponentsFactoryImplementsExpectedInterface(
-        string $expectedInterface
-    ): bool
-    {
-        return $this->isProperImplementation(
-            $expectedInterface,
-            $this->getAppComponentsFactory()
-        );
-    }
-
-    protected function setAppComponentsFactoryParentTestInstances(): void
-    {
-        $this->setStoredComponentFactory($this->getAppComponentsFactory());
-        $this->setStoredComponentFactoryParentTestInstances();
-    }
-
-    protected function getAppComponentsFactory(): AppComponentsFactory
-    {
-        return $this->appComponentsFactory;
-    }
-
-    protected function setAppComponentsFactory(AppComponentsFactory $appComponentsFactory): void
-    {
-        $this->appComponentsFactory = $appComponentsFactory;
-    }
-
-    private function getTestDomain(): Request
-    {
-        return new CoreRequest(
-            $this->getAppComponentsFactory()->getPrimaryFactory()->buildStorable(
-                'TestDomain',
-                'TestRequests'
-            ),
-            $this->getAppComponentsFactory()->getPrimaryFactory()->buildSwitchable()
-        );
-    }
-
     public function testBuildConstructorArgsReturnsAnArrayWithExactlyThreeValues(): void {
         $this->assertEquals(
             3,
@@ -168,5 +121,53 @@ trait AppComponentsFactoryTestTrait
             )->getUrl()
         );
     }
+
+    public function getOutputComponentFactory(): OutputComponentFactory
+    {
+        return $this->getAppComponentsFactory();
+    }
+
+    public function getStandardUITemplateFactory(): StandardUITemplateFactory
+    {
+        return $this->getAppComponentsFactory();
+    }
+
+    public function appComponentsFactoryImplementsExpectedInterface(
+        string $expectedInterface
+    ): bool
+    {
+        return $this->isProperImplementation(
+            $expectedInterface,
+            $this->getAppComponentsFactory()
+        );
+    }
+
+    protected function setAppComponentsFactoryParentTestInstances(): void
+    {
+        $this->setStoredComponentFactory($this->getAppComponentsFactory());
+        $this->setStoredComponentFactoryParentTestInstances();
+    }
+
+    protected function getAppComponentsFactory(): AppComponentsFactory
+    {
+        return $this->appComponentsFactory;
+    }
+
+    protected function setAppComponentsFactory(AppComponentsFactory $appComponentsFactory): void
+    {
+        $this->appComponentsFactory = $appComponentsFactory;
+    }
+
+    private function getTestDomain(): Request
+    {
+        return new CoreRequest(
+            $this->getAppComponentsFactory()->getPrimaryFactory()->buildStorable(
+                'TestDomain',
+                'TestRequests'
+            ),
+            $this->getAppComponentsFactory()->getPrimaryFactory()->buildSwitchable()
+        );
+    }
+
 
 }
