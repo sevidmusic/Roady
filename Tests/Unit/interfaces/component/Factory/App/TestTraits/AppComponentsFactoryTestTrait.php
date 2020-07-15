@@ -8,6 +8,7 @@ use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
+use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\classes\component\Web\App;
@@ -19,10 +20,27 @@ trait AppComponentsFactoryTestTrait
 
     public function testAppComponentsFactoryImplementsOutputComponentFactoryInterface(): void
     {
-        $this->getOutputComponentFactory();
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
                 OutputComponentFactory::class
+            )
+        );
+    }
+
+    public function testAppComponentsFactoryImplementsStoredComponentFactoryInterface(): void
+    {
+        $this->assertTrue(
+            $this->appComponentsFactoryImplementsExpectedInterface(
+                StoredComponentFactory::class
+            )
+        );
+    }
+
+    public function testAppComponentsFactoryImplementsStandardUITemplateFactoryInterface(): void
+    {
+        $this->assertTrue(
+            $this->appComponentsFactoryImplementsExpectedInterface(
+                StandardUITemplateFactory::class
             )
         );
     }
