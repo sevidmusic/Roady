@@ -7,6 +7,8 @@ use DarlingCms\interfaces\component\Factory\RequestFactory as RequestFactoryInte
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 
 abstract class RequestFactory extends CoreStoredComponentFactory implements RequestFactoryInterface
 {
@@ -16,4 +18,13 @@ abstract class RequestFactory extends CoreStoredComponentFactory implements Requ
         parent::__construct($primaryFactory, $componentCrud, $storedComponentRegistry);
     }
 
+    public function buildRequest(string $name, string $container, string $url): Request
+    {
+        $request = new CoreRequest(
+            $this->getPrimaryFactory()->buildStorable($name, $container),
+            $this->getPrimaryFactory()->buildSwitchable()
+        );
+        $request->import(['url' => $url]);
+        return $request;
+    }
 }
