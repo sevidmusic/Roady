@@ -34,14 +34,11 @@ $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
-$indexRequest = new Request(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'HomepageRequest',
-        REQUEST_CONTAINER
-    ),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
+$indexRequest = $appComponentsFactory->buildRequest(
+    'HomepageRequest',
+    REQUEST_CONTAINER,
+    $domain->getUrl() . 'index.php'
 );
-$indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
 
 $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
@@ -243,7 +240,6 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 
 $components = [
     $appComponentsFactory->getPrimaryFactory()->export()['app'],
-    $indexRequest,
     $domain,
     $htmlStartResponse,
     $mainMenuResponse,
