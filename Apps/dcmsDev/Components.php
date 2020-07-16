@@ -34,12 +34,6 @@ $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
-$indexRequest = $appComponentsFactory->buildRequest(
-    'HomepageRequest',
-    REQUEST_CONTAINER,
-    $domain->getUrl() . 'index.php'
-);
-
 $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'CreateContestSubmissionForm',
@@ -194,6 +188,15 @@ $mainMenuResponse->addOutputComponentStorageInfo(
     )
 );
 
+/**
+ * $homeResponse = $appComponentsFactory->buildResponse(
+ *     string $name,
+ *     float $position,
+ *     Component ...$RequestsOutputComponentsStandardUITemplates
+ * );
+ *
+ * Requires one for loop with internal switch to handle appropriate types and ignore others
+ */
 
 $homeResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
@@ -203,7 +206,13 @@ $homeResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
     $appComponentsFactory->getPrimaryFactory()->buildPositionable(2)
 );
-$homeResponse->addRequestStorageInfo($indexRequest);
+$homeResponse->addRequestStorageInfo(
+    $appComponentsFactory->buildRequest(
+        'HomepageRequest',
+        REQUEST_CONTAINER,
+        $domain->getUrl() . 'index.php'
+    )
+);
 $homeResponse->addRequestStorageInfo($domain);
 $homeResponse->addTemplateStorageInfo($defaultUITemplate);
 $homeResponse->addOutputComponentStorageInfo(
