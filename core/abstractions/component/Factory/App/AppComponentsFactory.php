@@ -5,6 +5,7 @@ namespace DarlingCms\abstractions\component\Factory\App;
 use DarlingCms\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
 use DarlingCms\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
 use DarlingCms\classes\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
+use DarlingCms\classes\component\Factory\RequestFactory as CoreRequestFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
@@ -28,6 +29,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
 
     private $outputComponentFactory;
     private $standardUITemplateFactory;
+    private $requestFactory;
     private const REFLECTION_UTILITY = 'reflectionUtility';
     private const ACCEPTED_IMPLEMENTATION = 'acceptedImplementation';
     private const CONSTRUCT = '__construct';
@@ -53,6 +55,12 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             $componentCrud,
             $storedComponentRegistry
         );
+        $this->prepareRequestFactory(
+            $primaryFactory,
+            $componentCrud,
+            $storedComponentRegistry
+        );
+
     }
 
     private function prepareOutputComponentFactory(
@@ -127,6 +135,33 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             ]
         );
         $this->standardUITemplateFactory = new CoreStandardUITemplateFactory(
+            $primaryFactory,
+            $componentCrud,
+            $ocfRegistry
+        );
+    }
+
+    private function prepareRequestFactory(
+        PrimaryFactory $primaryFactory,
+        ComponentCrud $componentCrud,
+        StoredComponentRegistry $storedComponentRegistry
+    ): void
+    {
+        $ocfRegistry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
+            $storedComponentRegistry->getType(),
+            $this->export()[self::REFLECTION_UTILITY]->generateMockClassMethodArguments(
+                $storedComponentRegistry->getType(),
+                self::CONSTRUCT
+            )
+        );
+        $ocfRegistry->import(
+            [
+                self::ACCEPTED_IMPLEMENTATION
+                =>
+                Request::class
+            ]
+        );
+        $this->requestFactory = new CoreRequestFactory(
             $primaryFactory,
             $componentCrud,
             $ocfRegistry
@@ -218,4 +253,17 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $domain;
     }
 
+    public function buildRequest(string $name, string $container, string $url): Request
+    {
+        $request = $this->requestFactory->buildRequest($name, $container, $url);
+        $this->getStoredComponentRegistry()->import(
+            [
+                self::ACCEPTED_IMPLEMENTATION
+                =>
+                Request::class
+            ]
+        );
+        $this->getStoredComponentRegistry()->registerComponent($request);
+        return $request;
+   }
 }

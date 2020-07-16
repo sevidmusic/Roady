@@ -6,12 +6,14 @@ use UnitTests\abstractions\component\Factory\StoredComponentFactoryTest as CoreS
 use UnitTests\interfaces\component\Factory\App\TestTraits\AppComponentsFactoryTestTrait;
 use UnitTests\interfaces\component\Factory\TestTraits\OutputComponentFactoryTestTrait;
 use UnitTests\interfaces\component\Factory\TestTraits\StandardUITemplateFactoryTestTrait;
+use UnitTests\interfaces\component\Factory\TestTraits\RequestFactoryTestTrait;
 
 class AppComponentsFactoryTest extends CoreStoredComponentFactoryTest
 {
-    use AppComponentsFactoryTestTrait, OutputComponentFactoryTestTrait, StandardUITemplateFactoryTestTrait {
+    use AppComponentsFactoryTestTrait, OutputComponentFactoryTestTrait, StandardUITemplateFactoryTestTrait, RequestFactoryTestTrait {
         AppComponentsFactoryTestTrait::getOutputComponentFactory insteadof OutputComponentFactoryTestTrait;
         AppComponentsFactoryTestTrait::getStandardUITemplateFactory insteadof StandardUITemplateFactoryTestTrait;
+        AppComponentsFactoryTestTrait::getRequestFactory insteadof RequestFactoryTestTrait;
     }
 
     public function setUp(): void
@@ -31,7 +33,8 @@ class AppComponentsFactoryTest extends CoreStoredComponentFactoryTest
         $this->setOutputComponentFactoryParentTestInstances();
         $this->setStandardUITemplateFactory($this->getAppComponentsFactory());
         $this->setStandardUITemplateFactoryParentTestInstances();
-
+        $this->setRequestFactory($this->getAppComponentsFactory());
+        $this->setRequestFactoryParentTestInstances();
     }
 
 }

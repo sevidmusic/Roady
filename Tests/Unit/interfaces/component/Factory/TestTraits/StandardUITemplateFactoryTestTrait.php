@@ -13,8 +13,8 @@ use DarlingCms\classes\component\Action;
 trait StandardUITemplateFactoryTestTrait
 {
 
-    private $expectedName = 'AssignedName';
-    private $expectedContainer = 'AssingedContainer';
+    private $suitExpectedName = 'AssignedName';
+    private $suitExpectedContainer = 'AssingedContainer';
     private $expectedPosition = 420.87;
     private $standardUITemplateFactory;
 
@@ -62,8 +62,8 @@ trait StandardUITemplateFactoryTestTrait
 
     private function callBuildStandardUITemplateUsingTestArguments(): StandardUITemplate {
         return $this->getStandardUITemplateFactory()->buildStandardUITemplate(
-            $this->expectedName,
-            $this->expectedContainer,
+            $this->suitExpectedName,
+            $this->suitExpectedContainer,
             $this->expectedPosition,
             $this->getTestOutputComponent(),
             $this->getTestAction()
@@ -102,7 +102,7 @@ trait StandardUITemplateFactoryTestTrait
     {
         $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
         $this->assertEquals(
-            $this->expectedName,
+            $this->suitExpectedName,
             $standardUITemplate->getName(),
         );
     }
@@ -111,7 +111,7 @@ trait StandardUITemplateFactoryTestTrait
     {
         $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
         $this->assertEquals(
-            $this->expectedContainer,
+            $this->suitExpectedContainer,
             $standardUITemplate->getContainer(),
         );
     }

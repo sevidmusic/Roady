@@ -5,6 +5,7 @@ namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory;
 use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
 use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
+use DarlingCms\interfaces\component\Factory\RequestFactory;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
@@ -41,6 +42,15 @@ trait AppComponentsFactoryTestTrait
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
                 StandardUITemplateFactory::class
+            )
+        );
+    }
+
+    public function testAppComponentsFactoryImplementsRequestFactoryInterface(): void
+    {
+        $this->assertTrue(
+            $this->appComponentsFactoryImplementsExpectedInterface(
+                RequestFactory::class
             )
         );
     }
@@ -146,6 +156,11 @@ trait AppComponentsFactoryTestTrait
     }
 
     public function getStandardUITemplateFactory(): StandardUITemplateFactory
+    {
+        return $this->getAppComponentsFactory();
+    }
+
+    public function getRequestFactory(): RequestFactory
     {
         return $this->getAppComponentsFactory();
     }
