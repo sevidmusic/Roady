@@ -33,7 +33,7 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         Component ...$requestsOutputComponentsStandardUITemplates
     ): Response
     {
-        return new CoreResponse(
+        $response = new CoreResponse(
             $this->getPrimaryFactory()->buildStorable(
                 $name,
                 CoreResponse::RESPONSE_CONTAINER,
@@ -41,6 +41,8 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)
         );
+        $this->storeAndRegister($response);
+        return $response;
     }
 
 }

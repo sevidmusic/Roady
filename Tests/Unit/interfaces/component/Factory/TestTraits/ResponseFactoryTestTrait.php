@@ -95,19 +95,19 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    /**
     public function testBuildResponseStoresTheResponseImplementationInstanceItBuilds(): void
     {
-        $response = $this->getResponseFactory()->buildResponse('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+        $response = $this->callBuildResponse();
         $this->assertTrue($this->wasStoredOnBuild($response));
     }
 
     public function testBuildResponseRegistersTheResponseImplementationInstanceItBuilds(): void
     {
-        $response = $this->getResponseFactory()->buildResponse('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+        $response = $this->callBuildResponse();
         $this->assertTrue($this->wasRegisteredOnBuild($response));
     }
 
+    /**
     public function testBuildResponseReturnsResponseWhoseNameMatchesSuppliedName(): void
     {
         $expectedName = 'ExpectedName';
