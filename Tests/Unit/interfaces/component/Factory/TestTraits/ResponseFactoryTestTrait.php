@@ -20,6 +20,7 @@ trait ResponseFactoryTestTrait
     private $responseFactory;
     private $expectedResponseName = 'ExpectedResponseName';
     private $expectedContainer = CoreResponse::RESPONSE_CONTAINER;
+    private $expectedPosition = 420.87;
 
     private function buildTestRequest(): Request
     {
@@ -72,7 +73,7 @@ trait ResponseFactoryTestTrait
     {
         return [
             $this->expectedResponseName,
-            420.87,
+            $this->expectedPosition,
             $this->buildTestRequest(),
             $this->buildTestOutputComponent(),
             $this->buildTestStandardUITemplate(),
@@ -127,27 +128,14 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    /**
-    public function testBuildResponseReturnsResponseWhoseOutputMatchesSuppliedOutput(): void
-    {
-        $expectedOutput = 'Expected output';
-        $response = $this->getResponseFactory()->buildResponse('AssignedName', 'AssignedContainer', $expectedOutput, 420.87);
-        $this->assertEquals(
-            $expectedOutput,
-            $response->getOutput(),
-        );
-    }
-
     public function testBuildResponseReturnsResponseWhosePositionMatchesSuppliedPosition(): void
     {
-        $expectedPosition = 420.87;
-        $response = $this->getResponseFactory()->buildResponse('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
+        $response = $this->callBuildResponse();
         $this->assertEquals(
-            $expectedPosition,
+            $this->expectedPosition,
             $response->getPosition(),
         );
     }
-     */
 
     protected function setResponseFactoryParentTestInstances(): void
     {
