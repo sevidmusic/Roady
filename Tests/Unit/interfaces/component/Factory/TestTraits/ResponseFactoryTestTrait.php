@@ -18,6 +18,7 @@ trait ResponseFactoryTestTrait
 {
 
     private $responseFactory;
+    private $expectedResponseName = 'ExpectedResponseName';
 
     private function buildTestRequest(): Request
     {
@@ -69,7 +70,7 @@ trait ResponseFactoryTestTrait
     private function buildBuildResponseTestArguments(): array
     {
         return [
-            'AssignedName',
+            $this->expectedResponseName,
             420.87,
             $this->buildTestRequest(),
             $this->buildTestOutputComponent(),
@@ -107,17 +108,16 @@ trait ResponseFactoryTestTrait
         $this->assertTrue($this->wasRegisteredOnBuild($response));
     }
 
-    /**
     public function testBuildResponseReturnsResponseWhoseNameMatchesSuppliedName(): void
     {
-        $expectedName = 'ExpectedName';
-        $response = $this->getResponseFactory()->buildResponse($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
+        $response = $this->callBuildResponse();
         $this->assertEquals(
-            $expectedName,
+            $this->expectedResponseName,
             $response->getName(),
         );
     }
 
+    /**
     public function testBuildResponseReturnsResponseWhoseContainerMatchesSuppliedContainer(): void
     {
         $expectedContainer = 'ExpectedContainer';
