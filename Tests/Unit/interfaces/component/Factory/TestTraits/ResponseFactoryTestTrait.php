@@ -19,6 +19,7 @@ trait ResponseFactoryTestTrait
 
     private $responseFactory;
     private $expectedResponseName = 'ExpectedResponseName';
+    private $expectedContainer = CoreResponse::RESPONSE_CONTAINER;
 
     private function buildTestRequest(): Request
     {
@@ -117,17 +118,16 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    /**
     public function testBuildResponseReturnsResponseWhoseContainerMatchesSuppliedContainer(): void
     {
-        $expectedContainer = 'ExpectedContainer';
-        $response = $this->getResponseFactory()->buildResponse('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
+        $response = $this->callBuildResponse();
         $this->assertEquals(
-            $expectedContainer,
+            $this->expectedContainer,
             $response->getContainer(),
         );
     }
 
+    /**
     public function testBuildResponseReturnsResponseWhoseOutputMatchesSuppliedOutput(): void
     {
         $expectedOutput = 'Expected output';
