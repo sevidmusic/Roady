@@ -166,6 +166,15 @@ trait ResponseFactoryTestTrait
         );
     }
 
+    public function testBuildResponseReturnsResponseWhoseAssignedStandardUITemplateCountMatchesExpectedStandardUITemplateCount(): void
+    {
+        $response = $this->callBuildResponse();
+        $this->assertEquals(
+            $this->expectedNumberOfStandardUITemplates,
+            count($response->getTemplateStorageInfo())
+        );
+    }
+
     protected function setResponseFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getResponseFactory());
