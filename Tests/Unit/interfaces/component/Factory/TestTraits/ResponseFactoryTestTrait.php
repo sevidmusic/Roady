@@ -21,6 +21,10 @@ trait ResponseFactoryTestTrait
     private $expectedResponseName = 'ExpectedResponseName';
     private $expectedContainer = CoreResponse::RESPONSE_CONTAINER;
     private $expectedPosition = 420.87;
+    private $expectedNumberOfRequests = 2;
+    private $expectedNumberOfStandardUITemplates = 2;
+    private $expectedNumberOfOutputComponents = 2;
+    private $expectedNumberOfActions = 2;
 
     private function buildTestRequest(): Request
     {
@@ -59,7 +63,7 @@ trait ResponseFactoryTestTrait
 
     private function buildTestStandardUITemplate(): StandardUITemplate
     {
-        return new CoreStandardUITemplate(
+        $suit = new CoreStandardUITemplate(
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
                 'TestStandardUITemplate',
                 'TestTemplates'
@@ -67,18 +71,34 @@ trait ResponseFactoryTestTrait
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
             $this->getResponseFactory()->getPrimaryFactory()->buildPositionable(420.87)
         );
+        $suit->addType($this->buildTestOutputComponent());
+        $suit->addType($this->buildTestAction());
+        return $suit;
     }
 
     private function buildBuildResponseTestArguments(): array
     {
-        return [
+        $args = [
             $this->expectedResponseName,
             $this->expectedPosition,
-            $this->buildTestRequest(),
-            $this->buildTestOutputComponent(),
-            $this->buildTestStandardUITemplate(),
-            $this->buildTestAction()
         ];
+        for($i=0;$i < $this->expectedNumberOfRequests; $i++)
+        {
+            array_push($args, $this->buildTestRequest());
+        }
+        for($i=0;$i < $this->expectedNumberOfStandardUITemplates; $i++)
+        {
+            array_push($args, $this->buildTestStandardUITemplate());
+        }
+        for($i=0;$i < $this->expectedNumberOfOutputComponents; $i++)
+        {
+            array_push($args, $this->buildTestOutputComponent());
+        }
+        for($i=0;$i < $this->expectedNumberOfActions; $i++)
+        {
+            array_push($args, $this->buildTestAction());
+        }
+        return $args;
     }
 
     private function callBuildResponse(): Response
@@ -134,6 +154,15 @@ trait ResponseFactoryTestTrait
         $this->assertEquals(
             $this->expectedPosition,
             $response->getPosition(),
+        );
+    }
+
+    public function testBuildResponseReturnsResponseWhoseAssignedRequestCountMatchesExpectedRequestCount(): void
+    {
+        $response = $this->callBuildResponse();
+        $this->assertEquals(
+            $this->expectedNumberOfRequests,
+            count($response->getRequestStorageInfo())
         );
     }
 

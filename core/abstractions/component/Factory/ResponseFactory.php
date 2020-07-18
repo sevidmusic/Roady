@@ -9,6 +9,7 @@ use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\interfaces\component\Component;
 use DarlingCms\interfaces\component\Web\Routing\Response;
+use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
 
 abstract class ResponseFactory extends CoreStoredComponentFactory implements ResponseFactoryInterface
@@ -41,6 +42,17 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)
         );
+        foreach($requestsOutputComponentsStandardUITemplates as $component)
+        {
+            if(
+                in_array(
+                    Request::class,
+                    class_implements($component)
+                ) === true
+            ) {
+                $response->addRequestStorageInfo($component);
+            }
+        }
         $this->storeAndRegister($response);
         return $response;
     }
