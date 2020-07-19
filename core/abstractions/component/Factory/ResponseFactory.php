@@ -12,6 +12,7 @@ use DarlingCms\interfaces\component\Web\Routing\Response;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingCms\interfaces\component\OutputComponent;
 
 abstract class ResponseFactory extends CoreStoredComponentFactory implements ResponseFactoryInterface
 {
@@ -61,7 +62,31 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
             ) {
                 $response->addTemplateStorageInfo($component);
             }
+            if($component->getType() === 'DarlingCms\classes\component\OutputComponent') {
+                var_dump(
+                    in_array(
+                        OutputComponent::class,
+                        class_implements($component)
+                    ) === true
+                );
+            }
+            if($component->getType() === 'DarlingCms\classes\component\Action') {
+                var_dump(
+                    in_array(
+                        OutputComponent::class,
+                        class_implements($component)
+                    ) === true
+                );
+            }
 
+            if(
+                in_array(
+                    OutputComponent::class,
+                    class_implements($component)
+                ) === true
+            ) {
+                $response->addOutputComponentStorageInfo($component);
+            }
         }
         $this->storeAndRegister($response);
         return $response;

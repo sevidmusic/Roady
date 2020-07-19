@@ -175,6 +175,15 @@ trait ResponseFactoryTestTrait
         );
     }
 
+    public function testBuildResponseReturnsResponseWhoseAssignedOutputComponentCountMatchesExpectedOutputComponentCount(): void
+    {
+        $response = $this->callBuildResponse();
+        $this->assertEquals(
+            ($this->expectedNumberOfOutputComponents + $this->expectedNumberOfActions),
+            count($response->getOutputComponentStorageInfo())
+        );
+    }
+
     protected function setResponseFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getResponseFactory());
