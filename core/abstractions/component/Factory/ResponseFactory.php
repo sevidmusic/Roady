@@ -62,23 +62,6 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
             ) {
                 $response->addTemplateStorageInfo($component);
             }
-            if($component->getType() === 'DarlingCms\classes\component\OutputComponent') {
-                var_dump(
-                    in_array(
-                        OutputComponent::class,
-                        class_implements($component)
-                    ) === true
-                );
-            }
-            if($component->getType() === 'DarlingCms\classes\component\Action') {
-                var_dump(
-                    in_array(
-                        OutputComponent::class,
-                        class_implements($component)
-                    ) === true
-                );
-            }
-
             if(
                 in_array(
                     OutputComponent::class,
