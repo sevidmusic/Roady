@@ -19,12 +19,11 @@ trait ResponseFactoryTestTrait
 
     private $responseFactory;
     private $expectedResponseName = 'ExpectedResponseName';
-    private $expectedContainer = CoreResponse::RESPONSE_CONTAINER;
     private $expectedPosition = 420.87;
-    private $expectedNumberOfRequests = 2;
-    private $expectedNumberOfStandardUITemplates = 2;
-    private $expectedNumberOfOutputComponents = 2;
-    private $expectedNumberOfActions = 2;
+    private $expectedNumberOfRequests = 29;
+    private $expectedNumberOfStandardUITemplates = 23;
+    private $expectedNumberOfOutputComponents = 27;
+    private $expectedNumberOfActions = 42;
 
     private function buildTestRequest(): Request
     {
@@ -45,7 +44,7 @@ trait ResponseFactoryTestTrait
                 'TestOutputComponents'
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
-            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable(420.87)
+            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
         );
     }
 
@@ -57,7 +56,7 @@ trait ResponseFactoryTestTrait
                 'TestActions'
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
-            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable(420.87)
+            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
         );
     }
 
@@ -69,7 +68,7 @@ trait ResponseFactoryTestTrait
                 'TestTemplates'
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
-            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable(420.87)
+            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
         );
         $suit->addType($this->buildTestOutputComponent());
         $suit->addType($this->buildTestAction());
@@ -139,11 +138,11 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    public function testBuildResponseReturnsResponseWhoseContainerMatchesSuppliedContainer(): void
+    public function testBuildResponseReturnsResponseWhoseContainerMatchesRESPONSE_CONTAINERConstant(): void
     {
         $response = $this->callBuildResponse();
         $this->assertEquals(
-            $this->expectedContainer,
+            CoreResponse::RESPONSE_CONTAINER,
             $response->getContainer(),
         );
     }
