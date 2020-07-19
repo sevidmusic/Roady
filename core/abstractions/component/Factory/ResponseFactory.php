@@ -46,33 +46,47 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         );
         foreach($requestsOutputComponentsStandardUITemplates as $component)
         {
-            if(
-                in_array(
-                    Request::class,
-                    class_implements($component)
-                ) === true
-            ) {
-                $response->addRequestStorageInfo($component);
-            }
-            if(
-                in_array(
-                    StandardUITemplate::class,
-                    class_implements($component)
-                ) === true
-            ) {
-                $response->addTemplateStorageInfo($component);
-            }
-            if(
-                in_array(
-                    OutputComponent::class,
-                    class_implements($component)
-                ) === true
-            ) {
-                $response->addOutputComponentStorageInfo($component);
-            }
+            $this->ifRequestAddStorageInfo($response, $component);
+            $this->ifStandardUITemplateAddStorageInfo($response, $component);
+            $this->ifOutputComponentAddStorageInfo($response, $component);
         }
         $this->storeAndRegister($response);
         return $response;
     }
 
+    private function ifRequestAddStorageInfo(Response $response, Component $component): void
+    {
+         if(
+            in_array(
+                Request::class,
+                class_implements($component)
+            ) === true
+        ) {
+            $response->addRequestStorageInfo($component);
+        }
+    }
+
+    private function ifStandardUITemplateAddStorageInfo(Response $response, Component $component): void
+    {
+         if(
+            in_array(
+                StandardUITemplate::class,
+                class_implements($component)
+            ) === true
+         ) {
+             $response->addTemplateStorageInfo($component);
+         }
+    }
+
+    private function ifOutputComponentAddStorageInfo(Response $response, Component $component): void
+    {
+        if(
+            in_array(
+                OutputComponent::class,
+                class_implements($component)
+            ) === true
+        ) {
+            $response->addOutputComponentStorageInfo($component);
+        }
+    }
 }
