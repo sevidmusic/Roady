@@ -3,6 +3,7 @@
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingCms\interfaces\component\Factory\ResponseFactory;
+use DarlingCms\classes\component\Factory\ResponseFactory as CoreResponseFactory;
 use DarlingCms\interfaces\component\Web\Routing\Response;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\interfaces\component\OutputComponent;
@@ -182,6 +183,44 @@ trait ResponseFactoryTestTrait
             count($response->getOutputComponentStorageInfo())
         );
     }
+
+    public function testIfRequestAddStorageInfoAddsRequestsStorableToResponse(): void
+    {
+        $response = $this->callBuildResponse();
+        $request = $this->buildTestRequest();
+        CoreResponseFactory::ifRequestAddStorageInfo(
+            $response,
+            $request
+        );
+        $this->assertTrue(
+            in_array(
+                $request->export()['storable'],
+                $response->getRequestStorageInfo()
+            )
+        );
+    }
+
+    public function testIfRequestAddStorageInfoIgnoresComponentsThatAreNotRequests(): void
+    {
+        $components = [
+            $this->buildTestStandardUITemplate(),
+            $this->buildTestOutputComponent(),
+            $this->buildTestAction()
+        ];
+        $response = $this->callBuildResponse();
+        $component = $components[array_rand($components)];
+        CoreResponseFactory::ifRequestAddStorageInfo(
+            $response,
+            $component
+        );
+        $this->assertFalse(
+            in_array(
+                $component->export()['storable'],
+                $response->getRequestStorageInfo()
+            )
+        );
+    }
+
 
     protected function setResponseFactoryParentTestInstances(): void
     {
