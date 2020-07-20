@@ -258,6 +258,43 @@ trait ResponseFactoryTestTrait
         );
     }
 
+    public function testIfOutputComponentAddStorageInfoAddsOutputComponentsStorableToResponse(): void
+    {
+        $response = $this->callBuildResponse();
+        $outputComponent = $this->buildTestOutputComponent();
+        CoreResponseFactory::ifOutputComponentAddStorageInfo(
+            $response,
+            $outputComponent
+        );
+        $this->assertTrue(
+            in_array(
+                $outputComponent->export()['storable'],
+                $response->getOutputComponentStorageInfo()
+            )
+        );
+    }
+
+    public function testIfOutputComponentAddStorageInfoIgnoresComponentsThatAreNotOutputComponents(): void
+    {
+        $components = [
+            $this->buildTestRequest(),
+            $this->buildTestStandardUITemplate(),
+            $this->buildTestAction()
+        ];
+        $response = $this->callBuildResponse();
+        $component = $components[array_rand($components)];
+        CoreResponseFactory::ifOutputComponentAddStorageInfo(
+            $response,
+            $component
+        );
+        $this->assertFalse(
+            in_array(
+                $component->export()['storable'],
+                $response->getOutputComponentStorageInfo()
+            )
+        );
+    }
+
     protected function setResponseFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getResponseFactory());
