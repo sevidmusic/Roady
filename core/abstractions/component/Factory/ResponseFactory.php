@@ -46,15 +46,15 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         );
         foreach($requestsOutputComponentsStandardUITemplates as $component)
         {
-            $this->ifRequestAddStorageInfo($response, $component);
-            $this->ifStandardUITemplateAddStorageInfo($response, $component);
-            $this->ifOutputComponentAddStorageInfo($response, $component);
+            self::ifRequestAddStorageInfo($response, $component);
+            self::ifStandardUITemplateAddStorageInfo($response, $component);
+            self::ifOutputComponentAddStorageInfo($response, $component);
         }
         $this->storeAndRegister($response);
         return $response;
     }
 
-    private function ifRequestAddStorageInfo(Response $response, Component $component): void
+    public static function ifRequestAddStorageInfo(Response $response, Component $component): void
     {
          if(
             in_array(
@@ -66,7 +66,7 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         }
     }
 
-    private function ifStandardUITemplateAddStorageInfo(Response $response, Component $component): void
+    public static function ifStandardUITemplateAddStorageInfo(Response $response, Component $component): void
     {
          if(
             in_array(
@@ -78,7 +78,7 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
          }
     }
 
-    private function ifOutputComponentAddStorageInfo(Response $response, Component $component): void
+    public static function ifOutputComponentAddStorageInfo(Response $response, Component $component): void
     {
         if(
             in_array(
