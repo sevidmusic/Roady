@@ -261,7 +261,8 @@ trait ResponseFactoryTestTrait
     public function testIfOutputComponentAddStorageInfoAddsOutputComponentsStorableToResponse(): void
     {
         $response = $this->callBuildResponse();
-        $outputComponent = $this->buildTestOutputComponent();
+        $outputComponents = [$this->buildTestOutputComponent(), $this->buildTestAction()];
+        $outputComponent = $outputComponents[array_rand($outputComponents)];
         CoreResponseFactory::ifOutputComponentAddStorageInfo(
             $response,
             $outputComponent
@@ -279,7 +280,6 @@ trait ResponseFactoryTestTrait
         $components = [
             $this->buildTestRequest(),
             $this->buildTestStandardUITemplate(),
-            $this->buildTestAction()
         ];
         $response = $this->callBuildResponse();
         $component = $components[array_rand($components)];
