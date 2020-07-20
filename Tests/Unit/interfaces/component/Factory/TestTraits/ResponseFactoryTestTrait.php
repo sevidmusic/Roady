@@ -221,6 +221,42 @@ trait ResponseFactoryTestTrait
         );
     }
 
+    public function testIfStandardUITemplateAddStorageInfoAddsStandardUITemplatesStorableToResponse(): void
+    {
+        $response = $this->callBuildResponse();
+        $standardUITemplate = $this->buildTestStandardUITemplate();
+        CoreResponseFactory::ifStandardUITemplateAddStorageInfo(
+            $response,
+            $standardUITemplate
+        );
+        $this->assertTrue(
+            in_array(
+                $standardUITemplate->export()['storable'],
+                $response->getTemplateStorageInfo()
+            )
+        );
+    }
+
+    public function testIfStandardUITemplateAddStorageInfoIgnoresComponentsThatAreNotStandardUITemplates(): void
+    {
+        $components = [
+            $this->buildTestRequest(),
+            $this->buildTestOutputComponent(),
+            $this->buildTestAction()
+        ];
+        $response = $this->callBuildResponse();
+        $component = $components[array_rand($components)];
+        CoreResponseFactory::ifStandardUITemplateAddStorageInfo(
+            $response,
+            $component
+        );
+        $this->assertFalse(
+            in_array(
+                $component->export()['storable'],
+                $response->getTemplateStorageInfo()
+            )
+        );
+    }
 
     protected function setResponseFactoryParentTestInstances(): void
     {
