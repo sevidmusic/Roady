@@ -5,6 +5,7 @@ namespace UnitTests\interfaces\component\Factory\TestTraits;
 use DarlingCms\interfaces\component\Factory\ResponseFactory;
 use DarlingCms\classes\component\Factory\ResponseFactory as CoreResponseFactory;
 use DarlingCms\interfaces\component\Web\Routing\Response;
+use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\Action;
@@ -295,6 +296,83 @@ trait ResponseFactoryTestTrait
         );
     }
 
+    private function callBuildGlobalResponse(): Response
+    {
+        $args = [$this->expectedPosition];
+        $globalResponse = $this->getResponseFactory()->buildGlobalResponse(
+            ...$args
+        );
+        return $globalResponse;
+    }
+
+    public function testBuildGlobalResponseReturnsAGlobalResponseImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                GlobalResponse::class,
+                $this->callBuildGlobalResponse()
+            )
+        );
+    }
+
+/*
+    public function testBuildGlobalResponseStoresTheResponseImplementationInstanceItBuilds(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertTrue($this->wasStoredOnBuild($response));
+    }
+
+    public function testBuildGlobalResponseRegistersTheResponseImplementationInstanceItBuilds(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertTrue($this->wasRegisteredOnBuild($response));
+    }
+
+    public function testBuildGlobalResponseReturnsResponseWhoseNameMatchesSuppliedName(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertEquals(
+            $this->expectedResponseName,
+            $response->getName(),
+        );
+    }
+
+    public function testBuildGlobalResponseReturnsResponseWhoseContainerMatchesRESPONSE_CONTAINERConstant(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertEquals(
+            CoreResponse::RESPONSE_CONTAINER,
+            $response->getContainer(),
+        );
+    }
+
+    public function testBuildGlobalResponseReturnsResponseWhosePositionMatchesSuppliedPosition(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertEquals(
+            $this->expectedPosition,
+            $response->getPosition(),
+        );
+    }
+
+    public function testBuildGlobalResponseReturnsResponseWhoseAssignedStandardUITemplateCountMatchesExpectedStandardUITemplateCount(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertEquals(
+            $this->expectedNumberOfStandardUITemplates,
+            count($response->getTemplateStorageInfo())
+        );
+    }
+
+    public function testBuildGlobalResponseReturnsResponseWhoseAssignedOutputComponentCountMatchesExpectedOutputComponentCount(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertEquals(
+            ($this->expectedNumberOfOutputComponents + $this->expectedNumberOfActions),
+            count($response->getOutputComponentStorageInfo())
+        );
+    }
+*/
     protected function setResponseFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getResponseFactory());

@@ -27,6 +27,7 @@ use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable as CoreSwitchable;
 use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
 
 abstract class AppComponentsFactory extends CoreStoredComponentFactory implements AppComponentsFactoryInterface
 {
@@ -328,4 +329,30 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         $this->getStoredComponentRegistry()->registerComponent($response);
         return $response;
     }
+
+    public function buildGlobalResponse(float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse
+    {
+        $globalResponse = $this->responseFactory->buildGlobalResponse($position);
+        $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
+            $globalResponse
+        );
+        foreach($requestsOutputComponentsStandardUITemplates as $component)
+        {
+            CoreResponseFactory::ifRequestAddStorageInfo($globalResponse, $component);
+            CoreResponseFactory::ifStandardUITemplateAddStorageInfo($globalResponse, $component);
+            CoreResponseFactory::ifOutputComponentAddStorageInfo($globalResponse, $component);
+        }
+        $this->responseFactory->getComponentCrud()->update($globalResponse, $globalResponse);
+        $this->getStoredComponentRegistry()->import(
+            [
+                self::ACCEPTED_IMPLEMENTATION
+                =>
+                GlobalResponse::class
+            ]
+        );
+        $this->responseFactory->getStoredComponentRegistry()->registerComponent($globalResponse);
+        $this->getStoredComponentRegistry()->registerComponent($globalResponse);
+        return $globalResponse;
+    }
+
 }
