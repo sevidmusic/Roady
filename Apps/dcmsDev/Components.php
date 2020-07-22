@@ -67,13 +67,9 @@ $defaultGlobalUITemplate = $appComponentsFactory->buildStandardUITemplate(
     $htmlEnd,
 );
 
-$htmlStartResponse = new GlobalResponse(
-    $appComponentsFactory->getPrimaryFactory()->export()['app'],
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
-);
-$htmlStartResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$htmlStartResponse->addOutputComponentStorageInfo(
+$htmlStartResponse = $appComponentsFactory->buildGlobalResponse(
+    0,
+    $defaultGlobalUITemplate,
     $appComponentsFactory->buildOutputComponent(
         'HtmlStart',
         'CommonOutput',
@@ -81,9 +77,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'
         ),
         0.0
-    )
-);
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'HtmlHeadStart',
         'CommonOutput',
@@ -91,9 +85,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'
         ),
         1.0
-    )
-);
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'HtmlHeadStylesStart',
         'CommonOutput',
@@ -101,9 +93,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'
         ),
         2.0
-    )
-);
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'CommonBackgroundColors',
         'CommonOutput',
@@ -111,10 +101,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css'
         ),
         3.0
-    )
-);
-
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $cssFontsCommon = $appComponentsFactory->buildOutputComponent(
         'CommonFonts',
         'CommonOutput',
@@ -122,10 +109,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'css/fonts-common.css'
         ),
         3.0
-    )
-);
-
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'CommonDimensions',
         'CommonOutput',
@@ -133,10 +117,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'
         ),
         3.0
-    )
-);
-
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'HtmlHeadStylesEnd',
         'CommonOutput',
@@ -144,10 +125,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'
         ),
         4.0
-    )
-);
-
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'HtmlHeadEnd',
         'CommonOutput',
@@ -155,10 +133,7 @@ $htmlStartResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'
         ),
         5.0
-    )
-);
-
-$htmlStartResponse->addOutputComponentStorageInfo(
+    ),
     $appComponentsFactory->buildOutputComponent(
         'HtmlBodyStart',
         'CommonOutput',
@@ -169,15 +144,9 @@ $htmlStartResponse->addOutputComponentStorageInfo(
     )
 );
 
-$mainMenuResponse = new GlobalResponse(
-    $appComponentsFactory->getPrimaryFactory()->export()['app'],
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
-);
-
-$mainMenuResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-
-$mainMenuResponse->addOutputComponentStorageInfo(
+$mainMenuResponse = $appComponentsFactory->buildGlobalResponse(
+    1,
+    $defaultGlobalUITemplate,
     $appComponentsFactory->buildOutputComponent(
         'MainMenu',
         'CommonOutput',
@@ -188,34 +157,16 @@ $mainMenuResponse->addOutputComponentStorageInfo(
     )
 );
 
-/**
- * $homeResponse = $appComponentsFactory->buildResponse(
- *     string $name,
- *     float $position,
- *     Component ...$RequestsOutputComponentsStandardUITemplates
- * );
- *
- * Requires one for loop with internal switch to handle appropriate types and ignore others
- */
-
-$homeResponse = new Response(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'Homepage',
-        Response::RESPONSE_CONTAINER
-    ),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(2)
-);
-$homeResponse->addRequestStorageInfo(
+$homeResponse = $appComponentsFactory->buildResponse(
+    'Homepage',
+    2,
     $appComponentsFactory->buildRequest(
         'HomepageRequest',
         REQUEST_CONTAINER,
         $domain->getUrl() . 'index.php'
-    )
-);
-$homeResponse->addRequestStorageInfo($domain);
-$homeResponse->addTemplateStorageInfo($defaultUITemplate);
-$homeResponse->addOutputComponentStorageInfo(
+    ),
+    $domain,
+    $defaultUITemplate,
     $appComponentsFactory->buildOutputComponent(
         'Welcome',
         'CommonOutput',
@@ -224,9 +175,9 @@ $homeResponse->addOutputComponentStorageInfo(
             'htmlContent/welcome.html'
         ),
         8.0
-    )
+    ),
+    $htmlContentCreateSubmissionForm
 );
-$homeResponse->addOutputComponentStorageInfo($htmlContentCreateSubmissionForm);
 
 $htmlEndResponse = new GlobalResponse(
     $appComponentsFactory->getPrimaryFactory()->export()['app'],
