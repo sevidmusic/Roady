@@ -11,6 +11,7 @@ use DarlingCms\interfaces\component\OutputComponent;
 use DarlingCms\interfaces\component\Action;
 use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingCms\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
 use DarlingCms\classes\component\Action as CoreAction;
@@ -140,7 +141,7 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    public function testBuildResponseReturnsResponseWhoseContainerMatchesRESPONSE_CONTAINERConstant(): void
+    public function testBuildResponseReturnsResponseWhoseContainerMatchesResponseRESPONSE_CONTAINERConstant(): void
     {
         $response = $this->callBuildResponse();
         $this->assertEquals(
@@ -299,6 +300,22 @@ trait ResponseFactoryTestTrait
     private function callBuildGlobalResponse(): Response
     {
         $args = [$this->expectedPosition];
+        for($i=0;$i < $this->expectedNumberOfRequests; $i++)
+        {
+            array_push($args, $this->buildTestRequest());
+        }
+        for($i=0;$i < $this->expectedNumberOfStandardUITemplates; $i++)
+        {
+            array_push($args, $this->buildTestStandardUITemplate());
+        }
+        for($i=0;$i < $this->expectedNumberOfOutputComponents; $i++)
+        {
+            array_push($args, $this->buildTestOutputComponent());
+        }
+        for($i=0;$i < $this->expectedNumberOfActions; $i++)
+        {
+            array_push($args, $this->buildTestAction());
+        }
         $globalResponse = $this->getResponseFactory()->buildGlobalResponse(
             ...$args
         );
@@ -315,7 +332,6 @@ trait ResponseFactoryTestTrait
         );
     }
 
-/*
     public function testBuildGlobalResponseStoresTheResponseImplementationInstanceItBuilds(): void
     {
         $response = $this->callBuildGlobalResponse();
@@ -328,20 +344,11 @@ trait ResponseFactoryTestTrait
         $this->assertTrue($this->wasRegisteredOnBuild($response));
     }
 
-    public function testBuildGlobalResponseReturnsResponseWhoseNameMatchesSuppliedName(): void
+    public function testBuildGlobalResponseReturnsResponseWhoseContainerMatchesGlobalResponseRESPONSE_CONTAINERConstant(): void
     {
         $response = $this->callBuildGlobalResponse();
         $this->assertEquals(
-            $this->expectedResponseName,
-            $response->getName(),
-        );
-    }
-
-    public function testBuildGlobalResponseReturnsResponseWhoseContainerMatchesRESPONSE_CONTAINERConstant(): void
-    {
-        $response = $this->callBuildGlobalResponse();
-        $this->assertEquals(
-            CoreResponse::RESPONSE_CONTAINER,
+            CoreGlobalResponse::RESPONSE_CONTAINER,
             $response->getContainer(),
         );
     }
@@ -372,7 +379,7 @@ trait ResponseFactoryTestTrait
             count($response->getOutputComponentStorageInfo())
         );
     }
-*/
+
     protected function setResponseFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getResponseFactory());
