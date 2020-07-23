@@ -190,7 +190,12 @@ $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
         ),
         9.0
     ),
-    $htmlEnd
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlEnd',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'),
+        10.0
+    )
 );
 
 
