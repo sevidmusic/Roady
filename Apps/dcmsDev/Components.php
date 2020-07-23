@@ -45,7 +45,7 @@ $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getComponentCrud()
 );
 
-$htmlEnd = $appComponentsFactory->buildOutputComponent(
+$templateOC = $appComponentsFactory->buildOutputComponent(
     'HtmlEnd',
     'CommonOutput',
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'),
@@ -56,7 +56,7 @@ $defaultUITemplate = $appComponentsFactory->buildStandardUITemplate(
     'defaultUITemplate',
     'UITemplates',
     0,
-    $htmlEnd,
+    $templateOC,
     $htmlContentCreateSubmissionForm
 );
 
@@ -64,7 +64,7 @@ $defaultGlobalUITemplate = $appComponentsFactory->buildStandardUITemplate(
     'defaultGlobalUITemplate',
     'UITemplates',
     0,
-    $htmlEnd,
+    $templateOC,
 );
 
 $htmlStartResponse = $appComponentsFactory->buildGlobalResponse(
@@ -202,7 +202,6 @@ $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
 $components = [
     $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $domain,
-    $htmlEndResponse,
     $htmlContentCreateSubmissionForm
 ];
 
