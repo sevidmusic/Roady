@@ -179,13 +179,9 @@ $homeResponse = $appComponentsFactory->buildResponse(
     $htmlContentCreateSubmissionForm
 );
 
-$htmlEndResponse = new GlobalResponse(
-    $appComponentsFactory->getPrimaryFactory()->export()['app'],
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
-);
-$htmlEndResponse->addTemplateStorageInfo($defaultGlobalUITemplate);
-$htmlEndResponse->addOutputComponentStorageInfo(
+$htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
+    3,
+    $defaultGlobalUITemplate,
     $appComponentsFactory->buildOutputComponent(
         'HtmlBodyEnd',
         'CommonOutput',
@@ -193,9 +189,9 @@ $htmlEndResponse->addOutputComponentStorageInfo(
             __DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'
         ),
         9.0
-    )
+    ),
+    $htmlEnd
 );
-$htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 
 
 $components = [
