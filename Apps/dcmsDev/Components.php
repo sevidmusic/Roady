@@ -201,9 +201,6 @@ $htmlEndResponse->addOutputComponentStorageInfo($htmlEnd);
 $components = [
     $appComponentsFactory->getPrimaryFactory()->export()['app'],
     $domain,
-    $htmlStartResponse,
-    $mainMenuResponse,
-    $homeResponse,
     $htmlEndResponse,
     $htmlContentCreateSubmissionForm
 ];
