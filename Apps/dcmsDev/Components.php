@@ -34,6 +34,12 @@ $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
+$appComponentsFactory->getComponentCrud()->create($domain);
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent($domain);
+//
+//$appComponentsFactory->getComponentCrud()->create($component)
+//
+
 $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'CreateContestSubmissionForm',
@@ -44,6 +50,8 @@ $htmlContentCreateSubmissionForm = new CreateSubmission(
     __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
     $appComponentsFactory->getComponentCrud()
 );
+$appComponentsFactory->getComponentCrud()->create($htmlContentCreateSubmissionForm);
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent($htmlContentCreateSubmissionForm);
 
 $templateOC = $appComponentsFactory->buildOutputComponent(
     'HtmlEnd',
@@ -198,47 +206,30 @@ $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
     )
 );
 
-
-$components = [
-    $appComponentsFactory->getPrimaryFactory()->export()['app'],
-    $domain,
-    $htmlContentCreateSubmissionForm
-];
-
-foreach ($components as $component) {
-    printf(
-        "%sSaving component %s to location %s in container %s%sComponent Type: %s%sComponent Id: %s",
-        PHP_EOL,
-        $component->getName(),
-        $component->getLocation(),
-        $component->getContainer(),
-        PHP_EOL,
-        $component->getType(),
-        PHP_EOL,
-        $component->getUniqueId()
-    );
-    printf(
-        "%s%s",
-        PHP_EOL,
-        ($appComponentsFactory->getComponentCrud()->create($component) === true ? "Saved successfully" : "The component could not be saved")
-    );
-    printf("%s", PHP_EOL);
-}
+$appComponentsFactory->getComponentCrud()->create($appComponentsFactory->getPrimaryFactory()->export()['app']);
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent($appComponentsFactory->getPrimaryFactory()->export()['app']);
 
 foreach(
-    $appComponentsFactory->getStoredComponentRegistry()->getRegistry()
+    $appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents()
     as
     $storable
 )
 {
     printf(
-        '%sBuilt component %s and saved to location %s in container %s.%sComponent Id: %s%s',
+        '%sBuilt component %s:%s    Name: %s%s    UniqueId: %s%s    Type: %s%s    Location: %s%s    Container: %s%s',
         PHP_EOL,
         $storable->getName(),
-        $storable->getLocation(),
-        $storable->getContainer(),
+        PHP_EOL,
+        $storable->getName(),
         PHP_EOL,
         $storable->getUniqueId(),
+        PHP_EOL,
+        $storable->getType(),
+        PHP_EOL,
+        $storable->getLocation(),
+        PHP_EOL,
+        $storable->getContainer(),
         PHP_EOL
     );
+    sleep(1);
 }
