@@ -1,4 +1,4 @@
-<?php /** @noinspection DuplicatedCode */
+<?php
 
 use DarlingCms\classes\component\Crud\ComponentCrud;
 use DarlingCms\classes\component\Driver\Storage\Standard;
@@ -15,63 +15,128 @@ use DarlingCms\classes\primary\Switchable;
 use Extensions\Contests\core\classes\component\Actions\CreateSubmission;
 
 ini_set('display_errors', true);
-require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-/**
- * App: Represents an application, for example: a website.
- */
-$domain = new Request(
-    new Storable(
-        'AppDomain',
-        'TEMP',
-        'TEMP'
-    ),
-    new Switchable()
-);
-// Local domain
-$domain->import(['url' => 'https://blackballotpowercontest.local/']);
-// Production domain
-//$domain->import(['url' => 'https://blackballotpowercontest.org/']);
-
-$app = new App($domain, new Switchable());
-
-/**
- * Primary Factory: Builds instances of primary objects:
- * Identifiable, Storable, Classifiable, Exportable,
- * Switchable, and Positionable
- */
-$primaryFactory = new PrimaryFactory($app);
-
-/**
- * Component Crud: Create, read, update, and delete components of various types from storage
- */
-$componentCrud = new ComponentCrud(
-    $primaryFactory->buildStorable('Crud', 'TEMP'),
-    $primaryFactory->buildSwitchable(),
-    new Standard(
-        $primaryFactory->buildStorable('StorageDriver', 'TEMP'),
-        $primaryFactory->buildSwitchable()
-    )
+require(
+    '..' .
+    DIRECTORY_SEPARATOR .
+    '..' .
+    DIRECTORY_SEPARATOR .
+    'vendor' .
+    DIRECTORY_SEPARATOR .
+    'autoload.php'
 );
 
-/**
- * App Components Factory: Builds and stores various components for an App
- *
- * Note: At the moment only OutputComponents are supported, support for other
- * component types is planned for the future.
- */
+define('REQUEST_CONTAINER', 'Requests');
+
+$domain = AppComponentsFactory::buildDomain('https://blackballotpowercontest.local/');
+
 $appComponentsFactory = new AppComponentsFactory(
-    $primaryFactory,
-    $componentCrud,
-    new StoredComponentRegistry(
-        $primaryFactory->buildStorable('AppComponentsRegistry', 'TEMP'),
-        $componentCrud
-    )
+    ...AppComponentsFactory::buildConstructorArgs($domain)
 );
+
+$appComponentsFactory->getComponentCrud()->create(
+    $appComponentsFactory->getPrimaryFactory()->export()['app']
+);
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent(
+    $appComponentsFactory->getPrimaryFactory()->export()['app']
+);
+
+$appComponentsFactory->getComponentCrud()->create($domain);
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent($domain);
+
+$htmlContentCreateSubmissionForm = new CreateSubmission(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable(
+        'CreateContestSubmissionForm',
+        'ContestSubmissions'
+    ),
+    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(8.1),
+    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
+    $appComponentsFactory->getComponentCrud()
+);
+$appComponentsFactory->getComponentCrud()->create($htmlContentCreateSubmissionForm);
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent(
+    $htmlContentCreateSubmissionForm
+);
+
+$appComponentsFactory->buildGlobalResponse(
+    0,
+    $appComponentsFactory->buildStandardUITemplate(
+        'OutputComponentTemplate',
+        'UITemplates',
+        1,
+        $appComponentsFactory->buildOutputComponent(
+            'TemplOC',
+            'Temp',
+            '',
+            0
+        )
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlStart',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'),
+        0.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadStart',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'),
+        1.0
+     ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadStylesStart',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'),
+        2.0
+     ),
+    $appComponentsFactory->buildOutputComponent(
+        'CommonBackgroundColors',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css'),
+        3.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'CommonFonts',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/text-common.css'),
+        3.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'CommonDimensions',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'),
+        3.0
+     ),
+    $appComponentsFactory->buildOutputComponent(
+        'CommonRendering',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'),
+        3.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadStylesEnd',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'),
+        4.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlHeadEnd',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'),
+        5.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlBodyStart',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'),
+        6.0
+    ),
+);
+
 
 /**
  * Requests: Represent requests that can be made to an App.
- */
 $rootRequest = new Request(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('RootRequest', 'Requests'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
@@ -98,75 +163,22 @@ $indexRequestHttp->import(['url' => str_replace('https', 'http', $domain->getUrl
 
 /**
  * Output Components: Generate output for an App
- */
-$doctypeAndOpeningHtmlTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlStart',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-start.html'),
-    0.0
-);
+$openingHeadTag = ;
 
-$openingHeadTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadStart',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'),
-    1.0
-);
+$openingStylesTag = ;
 
-$openingStylesTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadStylesStart',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'),
-    2.0
-);
+$cssBgColorsCommon = ;
 
-$cssBgColorsCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonBackgroundColors',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/background-colors-common.css'),
-    3.0
-);
+$cssFontsCommon = ;
 
-$cssFontsCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonFonts',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/text-common.css'),
-    3.0
-);
+$cssDimensionsCommon = ;
 
-$cssDimensionsCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonDimensions',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'),
-    3.0
-);
+$cssRenderingCommon = ;
+$closingStyleTag = ;
 
-$cssRenderingCommon = $appComponentsFactory->buildOutputComponent(
-    'CommonRendering',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/rendering-common.css'),
-    3.0
-);
-$closingStyleTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadStylesEnd',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-end.html'),
-    4.0
-);
+$closingHeadTag = ;
 
-$closingHeadTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlHeadEnd',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-end.html'),
-    5.0
-);
-
-$openingBodyTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlBodyStart',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'),
-    6.0
-);
+$openingBodyTag = ;
 
 $mainMenuAndBanner = $appComponentsFactory->buildOutputComponent(
     'MainMenu',
@@ -204,7 +216,6 @@ $closingHtmlTag = $appComponentsFactory->buildOutputComponent(
     file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'),
     1.0
 );
-/***** StandardUITemplates *****/
 
 $templateForCreateSubmissionTypes = new StandardUITemplate(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('CreateSubmissionTemplate', 'UITemplates'),
@@ -221,23 +232,6 @@ $templateForOutputComponentsTypes = new StandardUITemplate(
 $templateForOutputComponentsTypes->addType($doctypeAndOpeningHtmlTag);
 
 // Responses
-$openingHtmlResponse = new GlobalResponse(
-    $app,
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0)
-);
-$openingHtmlResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
-$openingHtmlResponse->addOutputComponentStorageInfo($doctypeAndOpeningHtmlTag);
-$openingHtmlResponse->addOutputComponentStorageInfo($openingHeadTag);
-$openingHtmlResponse->addOutputComponentStorageInfo($openingStylesTag);
-$openingHtmlResponse->addOutputComponentStorageInfo($cssBgColorsCommon);
-$openingHtmlResponse->addOutputComponentStorageInfo($cssFontsCommon);
-$openingHtmlResponse->addOutputComponentStorageInfo($cssDimensionsCommon);
-$openingHtmlResponse->addOutputComponentStorageInfo($cssRenderingCommon);
-$openingHtmlResponse->addOutputComponentStorageInfo($closingStyleTag);
-$openingHtmlResponse->addOutputComponentStorageInfo($closingHeadTag);
-$openingHtmlResponse->addOutputComponentStorageInfo($openingBodyTag);
-
 $mainMenuResponse = new GlobalResponse(
     $app,
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
@@ -306,4 +300,31 @@ foreach ($components as $component) {
     usleep(100000);
     printf("%s", PHP_EOL);
 }
+ */
+
+foreach(
+    $appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents()
+    as
+    $storable
+)
+{
+    printf(
+        '%sBuilt component %s:%s    Name: %s%s    UniqueId: %s%s    Type: %s%s    Location: %s%s    Container: %s%s',
+        PHP_EOL,
+        $storable->getName(),
+        PHP_EOL,
+        $storable->getName(),
+        PHP_EOL,
+        $storable->getUniqueId(),
+        PHP_EOL,
+        $storable->getType(),
+        PHP_EOL,
+        $storable->getLocation(),
+        PHP_EOL,
+        $storable->getContainer(),
+        PHP_EOL
+    );
+    sleep(5);
+}
+
 

@@ -231,5 +231,4 @@ foreach(
         $storable->getContainer(),
         PHP_EOL
     );
-    sleep(1);
 }
