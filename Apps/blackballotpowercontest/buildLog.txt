@@ -1,0 +1,154 @@
+
+Built component blackballotpowercontestlocal:
+    Name: blackballotpowercontestlocal
+    UniqueId: u3MevXfabaswtj1jlH68y27buvC1BuF0jdHFD47J4RsBlVpG4kJzrJ6oAsa5U38pXjX6PwwyxN19zcmu3YHJrn1BNmdzfDq96o6ZYw1fPRlnHBCjSIc4kiSqEVa2Y
+    Type: DarlingCms\classes\component\Web\App
+    Location: blackballotpowercontestlocal
+    Container: APP
+
+Built component blackballotpowercontestlocal:
+    Name: blackballotpowercontestlocal
+    UniqueId: tdtwYW7OcVgxLaMpEA1niJBvVc28jfCkIAJKplvIvZx6i9rhqVTYibVHArH8a7Q8IaBOwOFGGyJJnq8ZCRttnCzRshYNpmVRkynCKpyXr65q7tSDtUajvK7miF9yc7vuxITUhVZ7ZZaGmA
+    Type: DarlingCms\classes\component\Web\Routing\Request
+    Location: blackballotpowercontestlocal
+    Container: blackballotpowercontestlocal
+
+Built component CreateContestSubmissionForm:
+    Name: CreateContestSubmissionForm
+    UniqueId: LjkNa9msIe3P4YJCk8L6014o0DdwNhizoHHdYtG2hNyEYikU0QAjfciOom64qsDbIfOLQrTq4sOZmMggQ9vZ8mgk9tbBBLi0cGINTKi8FC6ctKXXbmekwQPGwnHKHBrgp3Q9
+    Type: Extensions\Contests\core\classes\component\Actions\CreateSubmission
+    Location: blackballotpowercontestlocal
+    Container: ContestSubmissions
+
+Built component TemplOC:
+    Name: TemplOC
+    UniqueId: IrIjnKmbjg1MCRu6Qy5SMWPeiXpSaTmijiuBoNaao8UisXuR8yD2F7q4nTi9KZ3mcSQkXkEeqmwCDlEBMvfS853SukbpUIF5HISLLz6KQejfu8WaUc63LAXO
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: Temp
+
+Built component OutputComponentTemplate:
+    Name: OutputComponentTemplate
+    UniqueId: crWtl88h6MCt0vv48kOtF4rTRu1r7ZsR42ytlGt8QUmEevUaMFrTNloYHGFURl6EVa8OLydeiGhr5YB5b4QomATQ4p0BGKG4SOh7La0Qtio4LtHTenQGGC
+    Type: DarlingCms\classes\component\Template\UserInterface\StandardUITemplate
+    Location: blackballotpowercontestlocal
+    Container: UITemplates
+
+Built component HtmlStart:
+    Name: HtmlStart
+    UniqueId: uO5BLgnWHOoaTPOBem8wsjGUeDPp90TOmOmCGn91IuHbDFzs8NyidtEhavBjbYyxOs1qERuYFPb0PCf7aeraq7uIImDDkWxSoamAe2qH9QOjexBV71YaD34wXc9AusJ6fhr0r
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component HtmlHeadStart:
+    Name: HtmlHeadStart
+    UniqueId: Pu7989mL8PSp6LWTsS3MkL4KawvEpryeS1R7lS7Kt3xAW0uWf7WkCDOwyJa4KCpzvrkpgkdMvkD0T7CI6Ayy7AwKOZyKBq0KJsJsaXwg139Wg2kYVyvDcY44AlROkXlXPXrZJ
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component HtmlHeadStylesStart:
+    Name: HtmlHeadStylesStart
+    UniqueId: a80iWfNRk3dc6kLnwfMbYLnozCmNzn1W0D5USVgqGDc3BUo9pw1DpnkStGqyeS9h8DAljfoTfkRe8f5vxOcvxhbvSFxA7UT5YlI9ORIeaBUcKmTn7Ym1Adg58PA
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component CommonBackgroundColors:
+    Name: CommonBackgroundColors
+    UniqueId: VJb8Dkny7BwfQqsn4KuosCZQ29BuA9IPPPFZwoRKy7UUm3eXJnwP3qefwyq0D2Edr7OpoAYIVJCqntjUJCYaVtR2EsD4QOFlYGwsite97ZK38SZ93LGF1cSGJWoeNqVtHe2la6w
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component CommonFonts:
+    Name: CommonFonts
+    UniqueId: MPYBhAG38Wehfh3nsSIFGlaMxS8kkiGzH0lNXjVnjkI1QXYtfM6c6CgAjcyBLcjKQPAcz5h4JCEQ5vJ7zYGY7MW07SqdPccreZtOe8zLwqSd4cm4pNgF6KZCByhLc6fzg5m2E1Ly
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component CommonDimensions:
+    Name: CommonDimensions
+    UniqueId: faLqTSCX8FHDK7DKZg5xIaX8oL4XmQ38tL7fpzRbHFtn6p9c89udkvNRF0fWjwNZp45vfe3UIR2XJOh7kWmjt0b8mvVEWhSbFKSpO9U4DIGaa
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component CommonRendering:
+    Name: CommonRendering
+    UniqueId: 3sNJYYwAXvObhQrfuDEthKcOYiOMf5yVz8Pt3WOZwSy0LSgIjLfI3F7HmBFJldksDDwsKxPosw0juO02rbZjH1NM6AoENdbIUKwjwjUqFDAyWUoSFv4r
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component HtmlHeadStylesEnd:
+    Name: HtmlHeadStylesEnd
+    UniqueId: iMXk4xQlSznx661tcB7Um3rKgh0QagcGMFCahOo3Aj0L8UT6KcCEXd9hH1JkDxZoogLvxVujOJnZvydlGxslyMwnTvQWUWvpK8fp8sMrr2twkWCqPhHtsenSiomNKzv0dIZ
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component HtmlHeadEnd:
+    Name: HtmlHeadEnd
+    UniqueId: CwCx2xDTBhW68LSmXmeapaHLFkVb1yDmfy2locZi0F5a5F7Y2Ao7v0pLKZK6zfWMwlOL8FBcAncP7MMvLncKQjswuV9OXMcwiCYFZX3Qh2pfBzkPuTBdwNJGooXT3hNwmKGLlHWDtD6O3v
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component HtmlBodyStart:
+    Name: HtmlBodyStart
+    UniqueId: wxOI3s66Ayd2J515sm2jwJwTz7VxRlp84Iu7LXJ78qjnXW0sIirXwy2mJwRF0VTlhWYCWgtU5i8duoPT3WY60xKMHsGyB67zvq2ocEtY59n82aBUw6AHaKo3jtcHpR16xg4M
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component RootRequest:
+    Name: RootRequest
+    UniqueId: e0VwLzNu0vtKihNyS3g8TCWIUK9fJlojNhEJXEJh4LYDlroVzKe7eX8TyfAdRKf5gp79etl8agpfxXvjSYPicnOz87VzRBZMEXrZdBtRvAC
+    Type: DarlingCms\classes\component\Web\Routing\Request
+    Location: blackballotpowercontestlocal
+    Container: Requests
+
+Built component RootHttpRequest:
+    Name: RootHttpRequest
+    UniqueId: FQrkTNtYqgVpXdCr63yRLJLwe3c03wqau4nwMtm4VItabc9i2uRC3FVVRIE1k1A6pKNIE5jRCZg7Sw8Pl2Mns9m8fA7JqaYCLmf9lBssQ6Nhl7tcO
+    Type: DarlingCms\classes\component\Web\Routing\Request
+    Location: blackballotpowercontestlocal
+    Container: Requests
+
+Built component IndexRequest:
+    Name: IndexRequest
+    UniqueId: mAFR6YYJldqDKfjdja3eKZh0kSor4txTPAT1MKZgOtU41LIlc4vJqlY1cPw04n8E7hdTJBKN7aFD3BC5bgySmPX8u6essJ0PlmKzHoKrxm9xuOMSx6cFOWfVRWjg
+    Type: DarlingCms\classes\component\Web\Routing\Request
+    Location: blackballotpowercontestlocal
+    Container: Requests
+
+Built component IndexHttpRequest:
+    Name: IndexHttpRequest
+    UniqueId: GPZMazPTKHkOHXFc6CzJRzAErSXXzC6F60mRjl8fgCXTU7YCKUiCnsWTLzsW3h1XsZ9mgZsTepEPd16f5WygeTbe0HtWNXUgBy0RE2YFw7OVNmWbxtWWycOAyaNYKhY1naqWt
+    Type: DarlingCms\classes\component\Web\Routing\Request
+    Location: blackballotpowercontestlocal
+    Container: Requests
+
+Built component blackballotpowercontestlocal:
+    Name: blackballotpowercontestlocal
+    UniqueId: Z4vh4KvadmTiM9df767AaJTxP89yGOwXA4RgyLOd7p3EW5RWpZq1O5US1BgyfgupPU7BmPokywlBOfvKVAPDtSfZocGnVMZ0TcA3PTKfexZ2SVokk5Q3924NN9o7
+    Type: DarlingCms\classes\component\Web\Routing\GlobalResponse
+    Location: blackballotpowercontestlocal
+    Container: RESPONSES
+
+Built component MainMenuAndBanner:
+    Name: MainMenuAndBanner
+    UniqueId: UBFggBee0J34HjTwmEzzaf7oJsevKhfzmMvsdIPx5B4C1DBdlHTsGmcNcjW0nCxufJPC5pA0WfBVPT1NjEXSzKRH4o2ePndBWbeUwAR5si0wbm6eB8wyuDI607uoOw2ZFIUvN0hG5AK
+    Type: DarlingCms\classes\component\OutputComponent
+    Location: blackballotpowercontestlocal
+    Container: CommonOutput
+
+Built component blackballotpowercontestlocal:
+    Name: blackballotpowercontestlocal
+    UniqueId: 1EDNIAN30CQbnPaePWY7FyWxIQuXCHekeRjkgjf3nePwClNw61hR2vbdTClWeBytL9p7JC7cTAAKaZyE2soM080aCHf12GikIcX6YMVOa301hTOaBkGdSoNRNr1
+    Type: DarlingCms\classes\component\Web\Routing\GlobalResponse
+    Location: blackballotpowercontestlocal
+    Container: RESPONSES

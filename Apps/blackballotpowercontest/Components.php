@@ -58,20 +58,21 @@ $appComponentsFactory->getComponentCrud()->create($htmlContentCreateSubmissionFo
 $appComponentsFactory->getStoredComponentRegistry()->registerComponent(
     $htmlContentCreateSubmissionForm
 );
+$templateForOutputComponentsTypes = $appComponentsFactory->buildStandardUITemplate(
+    'OutputComponentTemplate',
+    'UITemplates',
+    1,
+    $appComponentsFactory->buildOutputComponent(
+        'TemplOC',
+        'Temp',
+        '',
+        0
+    )
+);
 
 $appComponentsFactory->buildGlobalResponse(
     0,
-    $appComponentsFactory->buildStandardUITemplate(
-        'OutputComponentTemplate',
-        'UITemplates',
-        1,
-        $appComponentsFactory->buildOutputComponent(
-            'TemplOC',
-            'Temp',
-            '',
-            0
-        )
-    ),
+    $templateForOutputComponentsTypes,
     $appComponentsFactory->buildOutputComponent(
         'HtmlStart',
         'CommonOutput',
@@ -132,60 +133,44 @@ $appComponentsFactory->buildGlobalResponse(
         file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'),
         6.0
     ),
+    $appComponentsFactory->buildRequest(
+        'RootRequest',
+        'Requests',
+        $domain->getUrl()
+    ),
+    $appComponentsFactory->buildRequest(
+        'RootHttpRequest',
+        'Requests',
+        str_replace('https', 'http', $domain->getUrl())
+    ),
+    $appComponentsFactory->buildRequest(
+        'IndexRequest',
+        'Requests',
+        $domain->getUrl() . 'index.php'
+    ),
+    $appComponentsFactory->buildRequest(
+        'IndexHttpRequest',
+        'Requests',
+        str_replace('https', 'http', $domain->getUrl()) . 'index.php'
+    )
+
+);
+
+$appComponentsFactory->buildGlobalResponse(
+    1,
+    $templateForOutputComponentsTypes,
+    $appComponentsFactory->buildOutputComponent(
+        'MainMenuAndBanner',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'),
+        0.0
+    )
 );
 
 
 /**
- * Requests: Represent requests that can be made to an App.
-$rootRequest = new Request(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('RootRequest', 'Requests'),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
-);
-$rootRequest->import(['url' => $domain->getUrl()]);
 
-$rootRequestHttp = new Request(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('RootRequest', 'Requests'),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
-);
-$rootRequestHttp->import(['url' => str_replace('https', 'http', $domain->getUrl())]);
-
-$indexRequest = new Request(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('HomepageRequest', 'Requests'),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
-);
-$indexRequest->import(['url' => $domain->getUrl() . 'index.php']);
-
-$indexRequestHttp = new Request(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('HomepageRequest', 'Requests'),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable()
-);
-$indexRequestHttp->import(['url' => str_replace('https', 'http', $domain->getUrl()) . 'index.php']);
-
-/**
- * Output Components: Generate output for an App
-$openingHeadTag = ;
-
-$openingStylesTag = ;
-
-$cssBgColorsCommon = ;
-
-$cssFontsCommon = ;
-
-$cssDimensionsCommon = ;
-
-$cssRenderingCommon = ;
-$closingStyleTag = ;
-
-$closingHeadTag = ;
-
-$openingBodyTag = ;
-
-$mainMenuAndBanner = $appComponentsFactory->buildOutputComponent(
-    'MainMenu',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'),
-    0.0
-);
+$mainMenuAndBanner = ;
 
 $contestInfo = $appComponentsFactory->buildOutputComponent(
     'Welcome',
@@ -232,14 +217,6 @@ $templateForOutputComponentsTypes = new StandardUITemplate(
 $templateForOutputComponentsTypes->addType($doctypeAndOpeningHtmlTag);
 
 // Responses
-$mainMenuResponse = new GlobalResponse(
-    $app,
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
-);
-$mainMenuResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
-$mainMenuResponse->addOutputComponentStorageInfo($mainMenuAndBanner);
-
 
 $homepageMainContentResponse = new Response(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
@@ -267,48 +244,15 @@ $endResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
 $endResponse->addOutputComponentStorageInfo($closingCommonPageContainerDivAndClosingBodyTag); // move to htmlEnd;
 $endResponse->addOutputComponentStorageInfo($closingHtmlTag); // move to htmlEnd;
 
-
-$components = [
-    $app,
-    $templateForCreateSubmissionTypes,
-    $templateForOutputComponentsTypes,
-    $indexRequest,
-    $indexRequestHttp,
-    $rootRequest,
-    $rootRequestHttp,
-    $openingHtmlResponse,
-    $mainMenuResponse,
-    $homepageMainContentResponse,
-    $endResponse,
-    $createSubmissionForm
-];
-
-foreach ($components as $component) {
-    printf(
-        "%sSaving component %s to location %s in container %s",
-        PHP_EOL,
-        $component->getName(),
-        $component->getLocation(),
-        $component->getContainer()
-    );
-    usleep(50000);
-    printf(
-        "%s%s",
-        PHP_EOL,
-        ($componentCrud->create($component) === true ? "Saved successfully" : "The component could not be saved")
-    );
-    usleep(100000);
-    printf("%s", PHP_EOL);
-}
  */
-
+$buildLog = "";
 foreach(
     $appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents()
     as
     $storable
 )
 {
-    printf(
+    $message = sprintf(
         '%sBuilt component %s:%s    Name: %s%s    UniqueId: %s%s    Type: %s%s    Location: %s%s    Container: %s%s',
         PHP_EOL,
         $storable->getName(),
@@ -324,7 +268,9 @@ foreach(
         $storable->getContainer(),
         PHP_EOL
     );
-    sleep(5);
+    echo $message;
+    $buildLog .= $message;
+    sleep(1);
 }
-
+file_put_contents(__DIR__ . '/buildLog.txt', $buildLog);
 
