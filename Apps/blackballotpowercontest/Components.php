@@ -28,12 +28,15 @@ require(
 
 define('REQUEST_CONTAINER', 'Requests');
 
+// Define App Domain
 $domain = AppComponentsFactory::buildDomain('https://blackballotpowercontest.local/');
 
+// Instantiate AppComponentsFactory
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
+// @todo Move to AppComponentsFactory __construct | Create and Register App
 $appComponentsFactory->getComponentCrud()->create(
     $appComponentsFactory->getPrimaryFactory()->export()['app']
 );
@@ -41,23 +44,26 @@ $appComponentsFactory->getStoredComponentRegistry()->registerComponent(
     $appComponentsFactory->getPrimaryFactory()->export()['app']
 );
 
+// @todo Move to AppComponentsFactory __construct | Create and Register Domain
 $appComponentsFactory->getComponentCrud()->create($domain);
 $appComponentsFactory->getStoredComponentRegistry()->registerComponent($domain);
 
-$htmlContentCreateSubmissionForm = new CreateSubmission(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'CreateContestSubmissionForm',
-        'ContestSubmissions'
-    ),
+// Manually build "Create Submission" Action
+$createSubmissionAction = new CreateSubmission(
+    $appComponentsFactory->getPrimaryFactory()->buildStorable('CreateContestSubmissionForm', 'Forms'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(8.1),
-    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
+    $appComponentsFactory->getPrimaryFactory()->buildPositionable(0.0),
+    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/create-submission-form.html',
     $appComponentsFactory->getComponentCrud()
 );
-$appComponentsFactory->getComponentCrud()->create($htmlContentCreateSubmissionForm);
+
+// Create and Register "Create Submission" Action
+$appComponentsFactory->getComponentCrud()->create($createSubmissionAction);
 $appComponentsFactory->getStoredComponentRegistry()->registerComponent(
-    $htmlContentCreateSubmissionForm
+    $createSubmissionAction
 );
+
+// Build StandardUITemplate for OutputComponents
 $templateForOutputComponentsTypes = $appComponentsFactory->buildStandardUITemplate(
     'OutputComponentTemplate',
     'UITemplates',
@@ -70,6 +76,15 @@ $templateForOutputComponentsTypes = $appComponentsFactory->buildStandardUITempla
     )
 );
 
+// Build StandardUITemplate for CreateSubmission Actions
+$templateForCreateSubmissionTypes = $appComponentsFactory->buildStandardUITemplate(
+    'CreateSubmissionTemplate',
+    'UITemplates',
+    5,
+    $createSubmissionAction
+);
+
+// Build Opening Html Respnse
 $appComponentsFactory->buildGlobalResponse(
     0,
     $templateForOutputComponentsTypes,
@@ -133,6 +148,24 @@ $appComponentsFactory->buildGlobalResponse(
         file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-start.html'),
         6.0
     ),
+);
+
+// Main menu Response
+$appComponentsFactory->buildGlobalResponse(
+    1,
+    $templateForOutputComponentsTypes,
+    $appComponentsFactory->buildOutputComponent(
+        'MainMenuAndBanner',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'),
+        0.0
+    )
+);
+
+// Build Homepage Response
+$appComponentsFactory->buildResponse(
+    'Homepage',
+    2,
     $appComponentsFactory->buildRequest(
         'RootRequest',
         'Requests',
@@ -152,99 +185,37 @@ $appComponentsFactory->buildGlobalResponse(
         'IndexHttpRequest',
         'Requests',
         str_replace('https', 'http', $domain->getUrl()) . 'index.php'
-    )
-
+    ),
+    $templateForOutputComponentsTypes,
+    $templateForCreateSubmissionTypes,
+    $appComponentsFactory->buildOutputComponent(
+        'Welcome',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
+            'htmlContent/welcome.html'),
+        0.0
+    ),
+    $createSubmissionAction
 );
 
+// Build Closing Html Global Response
 $appComponentsFactory->buildGlobalResponse(
-    1,
+    3,
     $templateForOutputComponentsTypes,
     $appComponentsFactory->buildOutputComponent(
-        'MainMenuAndBanner',
+        'HtmlBodyEnd',
         'CommonOutput',
-        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/main-menu.html'),
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'),
         0.0
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'HtmlEnd',
+        'CommonOutput',
+        file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'),
+        1.0
     )
 );
 
-
-/**
-
-$mainMenuAndBanner = ;
-
-$contestInfo = $appComponentsFactory->buildOutputComponent(
-    'Welcome',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
-        'htmlContent/welcome.html'),
-    0.0
-);
-
-$createSubmissionForm = new CreateSubmission(
-    $primaryFactory->buildStorable('CreateContestSubmissionForm', 'Forms'),
-    $primaryFactory->buildSwitchable(),
-    $primaryFactory->buildPositionable(0.0),
-    __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/create-submission-form.html',
-    $componentCrud
-);
-
-$closingCommonPageContainerDivAndClosingBodyTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlBodyEnd',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-body-common-end.html'),
-    0.0
-);
-
-$closingHtmlTag = $appComponentsFactory->buildOutputComponent(
-    'HtmlEnd',
-    'CommonOutput',
-    file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-end.html'),
-    1.0
-);
-
-$templateForCreateSubmissionTypes = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('CreateSubmissionTemplate', 'UITemplates'),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(5)
-);
-$templateForCreateSubmissionTypes->addType($createSubmissionForm);
-
-$templateForOutputComponentsTypes = new StandardUITemplate(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable('OutputComponentTemplate', 'UITemplates'),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(1)
-);
-$templateForOutputComponentsTypes->addType($doctypeAndOpeningHtmlTag);
-
-// Responses
-
-$homepageMainContentResponse = new Response(
-    $appComponentsFactory->getPrimaryFactory()->buildStorable(
-        'Homepage',
-        Response::RESPONSE_CONTAINER
-    ),
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(2)
-);
-$homepageMainContentResponse->addRequestStorageInfo($indexRequest);
-$homepageMainContentResponse->addRequestStorageInfo($indexRequestHttp);
-$homepageMainContentResponse->addRequestStorageInfo($rootRequest);
-$homepageMainContentResponse->addRequestStorageInfo($rootRequestHttp);
-$homepageMainContentResponse->addTemplateStorageInfo($templateForCreateSubmissionTypes);
-$homepageMainContentResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
-$homepageMainContentResponse->addOutputComponentStorageInfo($contestInfo);
-$homepageMainContentResponse->addOutputComponentStorageInfo($createSubmissionForm);
-
-$endResponse = new GlobalResponse(
-    $app,
-    $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
-    $appComponentsFactory->getPrimaryFactory()->buildPositionable(3)
-);
-$endResponse->addTemplateStorageInfo($templateForOutputComponentsTypes);
-$endResponse->addOutputComponentStorageInfo($closingCommonPageContainerDivAndClosingBodyTag); // move to htmlEnd;
-$endResponse->addOutputComponentStorageInfo($closingHtmlTag); // move to htmlEnd;
-
- */
 $buildLog = "";
 foreach(
     $appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents()
@@ -253,24 +224,24 @@ foreach(
 )
 {
     $message = sprintf(
-        '%sBuilt component %s:%s    Name: %s%s    UniqueId: %s%s    Type: %s%s    Location: %s%s    Container: %s%s',
-        PHP_EOL,
-        $storable->getName(),
-        PHP_EOL,
-        $storable->getName(),
-        PHP_EOL,
-        $storable->getUniqueId(),
+        '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
         PHP_EOL,
         $storable->getType(),
         PHP_EOL,
-        $storable->getLocation(),
+        "\033[42m" . $storable->getName() . "\033[0m",
         PHP_EOL,
-        $storable->getContainer(),
+        "\033[1;32m" . $storable->getContainer() . "\033[0m",
+        PHP_EOL,
+        "\033[44m" . $storable->getLocation() . "\033[0m",
+        PHP_EOL,
+        "\033[1;34m" . $storable->getType() . "\033[0m",
+        PHP_EOL,
+        "\033[46m" . $storable->getUniqueId() . "\033[0m",
         PHP_EOL
     );
     echo $message;
-    $buildLog .= $message;
     sleep(1);
+    $buildLog .= $message;
 }
 file_put_contents(__DIR__ . '/buildLog.txt', $buildLog);
 

@@ -1,154 +1,196 @@
 
-Built component blackballotpowercontestlocal:
-    Name: blackballotpowercontestlocal
-    UniqueId: u3MevXfabaswtj1jlH68y27buvC1BuF0jdHFD47J4RsBlVpG4kJzrJ6oAsa5U38pXjX6PwwyxN19zcmu3YHJrn1BNmdzfDq96o6ZYw1fPRlnHBCjSIc4kiSqEVa2Y
-    Type: DarlingCms\classes\component\Web\App
-    Location: blackballotpowercontestlocal
-    Container: APP
+Built DarlingCms\classes\component\Web\App:
+    Name: [42mblackballotpowercontestlocal[0m
+    Container: [1;32mAPP[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\App[0m
+    UniqueId: [46m2WKE5mp8OPm7KjhwCjuiOlJH4ezJsk1XolRFhdJdvh4rlrOfwdgWpHPg9oCoZkt45QnbQF3efTYamUdEiP6wEhrEmXJdGns3hN8f4VVKNoRxlS0oqnm6KWDV4MLCZT[0m
 
-Built component blackballotpowercontestlocal:
-    Name: blackballotpowercontestlocal
-    UniqueId: tdtwYW7OcVgxLaMpEA1niJBvVc28jfCkIAJKplvIvZx6i9rhqVTYibVHArH8a7Q8IaBOwOFGGyJJnq8ZCRttnCzRshYNpmVRkynCKpyXr65q7tSDtUajvK7miF9yc7vuxITUhVZ7ZZaGmA
-    Type: DarlingCms\classes\component\Web\Routing\Request
-    Location: blackballotpowercontestlocal
-    Container: blackballotpowercontestlocal
+Built DarlingCms\classes\component\Web\Routing\Request:
+    Name: [42mblackballotpowercontestlocal[0m
+    Container: [1;32mblackballotpowercontestlocal[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mcSDQKqrvCjyNfYbbRoQWnDtRcEZyto1CFv9BxLONhvgP7OtuXVGOklS93rP2p9vto3X7dvqRUw8uCXxfpzBN4ETSd67hEPGpGvxVfhpOSXGIOb[0m
 
-Built component CreateContestSubmissionForm:
-    Name: CreateContestSubmissionForm
-    UniqueId: LjkNa9msIe3P4YJCk8L6014o0DdwNhizoHHdYtG2hNyEYikU0QAjfciOom64qsDbIfOLQrTq4sOZmMggQ9vZ8mgk9tbBBLi0cGINTKi8FC6ctKXXbmekwQPGwnHKHBrgp3Q9
-    Type: Extensions\Contests\core\classes\component\Actions\CreateSubmission
-    Location: blackballotpowercontestlocal
-    Container: ContestSubmissions
+Built Extensions\Contests\core\classes\component\Actions\CreateSubmission:
+    Name: [42mCreateContestSubmissionForm[0m
+    Container: [1;32mForms[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mExtensions\Contests\core\classes\component\Actions\CreateSubmission[0m
+    UniqueId: [46mQpXJ3V1YhJgYOA39kOJUzYhDjgAy4nz6o3GlCViKPMm3THEF9Y0dLHt2jw70aQsBH9Pfvr46vCvkPlIdcUtpouP4SnMGJIP7LCF6jSjMmrD2kSA98LrSK[0m
 
-Built component TemplOC:
-    Name: TemplOC
-    UniqueId: IrIjnKmbjg1MCRu6Qy5SMWPeiXpSaTmijiuBoNaao8UisXuR8yD2F7q4nTi9KZ3mcSQkXkEeqmwCDlEBMvfS853SukbpUIF5HISLLz6KQejfu8WaUc63LAXO
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: Temp
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mTemplOC[0m
+    Container: [1;32mTemp[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mWOiSvBpYfAauZuUJ8Bhz7IrTxoX0xiImvghkTAUrjkW9BWsczRrdYsvmmrEqgImRDCKine6Cnd8HJmqZ5KR7kDrJJzw5k7C4PszAPCCJXtt6ZfZ[0m
 
-Built component OutputComponentTemplate:
-    Name: OutputComponentTemplate
-    UniqueId: crWtl88h6MCt0vv48kOtF4rTRu1r7ZsR42ytlGt8QUmEevUaMFrTNloYHGFURl6EVa8OLydeiGhr5YB5b4QomATQ4p0BGKG4SOh7La0Qtio4LtHTenQGGC
-    Type: DarlingCms\classes\component\Template\UserInterface\StandardUITemplate
-    Location: blackballotpowercontestlocal
-    Container: UITemplates
+Built DarlingCms\classes\component\Template\UserInterface\StandardUITemplate:
+    Name: [42mOutputComponentTemplate[0m
+    Container: [1;32mUITemplates[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Template\UserInterface\StandardUITemplate[0m
+    UniqueId: [46mdRcagJUbZvwVZT0futEdy5HPz4evU3wXGS5Oa3ug2Urp8Ww7SsIPmJVj5N0dY6UKVZM4XcsMoUtH7Dc0JpAYBijkaczxSLmsTdeTkSqZdSHORxDAgFqDXPIgja[0m
 
-Built component HtmlStart:
-    Name: HtmlStart
-    UniqueId: uO5BLgnWHOoaTPOBem8wsjGUeDPp90TOmOmCGn91IuHbDFzs8NyidtEhavBjbYyxOs1qERuYFPb0PCf7aeraq7uIImDDkWxSoamAe2qH9QOjexBV71YaD34wXc9AusJ6fhr0r
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\Template\UserInterface\StandardUITemplate:
+    Name: [42mCreateSubmissionTemplate[0m
+    Container: [1;32mUITemplates[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Template\UserInterface\StandardUITemplate[0m
+    UniqueId: [46mRP7RnAnY5p7hw95ZLMDXT3MWHepARNlK8QPfGYPMIbj4HFNZU3WSDDfKtMFWiDjLB9WBfBqgpVJm9ihA9E4ru6678GbywhgsG900VsLLGI9JlLOCgCf0jxE2rm1Fz[0m
 
-Built component HtmlHeadStart:
-    Name: HtmlHeadStart
-    UniqueId: Pu7989mL8PSp6LWTsS3MkL4KawvEpryeS1R7lS7Kt3xAW0uWf7WkCDOwyJa4KCpzvrkpgkdMvkD0T7CI6Ayy7AwKOZyKBq0KJsJsaXwg139Wg2kYVyvDcY44AlROkXlXPXrZJ
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlStart[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mw800GrsI0UE6xw7Cege2e2Ugw6zTe49p2IJTvCuZNyNoGqEfdtSxD9WooiWzre3SQopvu9VABaVAAYYfAadwSWm7s4V8fx46J1EJ67ZCo3xW48TPmUz4anqSUa5K5qUROifLMKGDmO[0m
 
-Built component HtmlHeadStylesStart:
-    Name: HtmlHeadStylesStart
-    UniqueId: a80iWfNRk3dc6kLnwfMbYLnozCmNzn1W0D5USVgqGDc3BUo9pw1DpnkStGqyeS9h8DAljfoTfkRe8f5vxOcvxhbvSFxA7UT5YlI9ORIeaBUcKmTn7Ym1Adg58PA
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlHeadStart[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mg2Jm7ZsdsBwA0RmC2aKf0GWrCQvmh2a12dYmNcnUrSPLw9M91YCf4722rWUQkyvV0wZcDs0xuaRHriz0Nr97Hg69rMt7KgmwbeEdhuEcFdjWyApxCPtmsYHI24mmUxFTaHoM[0m
 
-Built component CommonBackgroundColors:
-    Name: CommonBackgroundColors
-    UniqueId: VJb8Dkny7BwfQqsn4KuosCZQ29BuA9IPPPFZwoRKy7UUm3eXJnwP3qefwyq0D2Edr7OpoAYIVJCqntjUJCYaVtR2EsD4QOFlYGwsite97ZK38SZ93LGF1cSGJWoeNqVtHe2la6w
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlHeadStylesStart[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mWtK2bnt6DCDtaW6v2BquUS3TYYTImFzcSYJKwc3QLDrGqokFJgvTPXSfELgr0H5QkPlxVTnxHaJorJPa60sWrslnVqDziwbyPmTtTVNN55DpGdwS5gn[0m
 
-Built component CommonFonts:
-    Name: CommonFonts
-    UniqueId: MPYBhAG38Wehfh3nsSIFGlaMxS8kkiGzH0lNXjVnjkI1QXYtfM6c6CgAjcyBLcjKQPAcz5h4JCEQ5vJ7zYGY7MW07SqdPccreZtOe8zLwqSd4cm4pNgF6KZCByhLc6fzg5m2E1Ly
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mCommonBackgroundColors[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mC7KSNwGFzXzgyQmDSICGKIZ2krfxov2CTW0lDkCw4xu1pgXwO2JwwrGFHLlmC6a5ZUk2FDPVIYMfxlL2MQscdpey6lbjmTl27UZXzdoTOqRF9UaRUi9j3MaWPh5bQCSb9fPSR[0m
 
-Built component CommonDimensions:
-    Name: CommonDimensions
-    UniqueId: faLqTSCX8FHDK7DKZg5xIaX8oL4XmQ38tL7fpzRbHFtn6p9c89udkvNRF0fWjwNZp45vfe3UIR2XJOh7kWmjt0b8mvVEWhSbFKSpO9U4DIGaa
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mCommonFonts[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46msBzHEHgVAUNgEOanspqrabxUbnLT2A8GFGkqCESh9W68nryYOPaRwEEe55Szgnn2F04ygNZNH1kJJy6qDlJFdSrToiLwrgiC1SQmgciEVnl9Ki7wewPf[0m
 
-Built component CommonRendering:
-    Name: CommonRendering
-    UniqueId: 3sNJYYwAXvObhQrfuDEthKcOYiOMf5yVz8Pt3WOZwSy0LSgIjLfI3F7HmBFJldksDDwsKxPosw0juO02rbZjH1NM6AoENdbIUKwjwjUqFDAyWUoSFv4r
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mCommonDimensions[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46m48WjR4YVIymaocfHR09h4EDiMTwBNpyJudJ1cREWZJrHrXFIybPUPzSatcWp73yVTlzwKP55FohMjXTMl51DStIkcrYJQkg0oxJx0gqAfz8vVvtSNcvpO9[0m
 
-Built component HtmlHeadStylesEnd:
-    Name: HtmlHeadStylesEnd
-    UniqueId: iMXk4xQlSznx661tcB7Um3rKgh0QagcGMFCahOo3Aj0L8UT6KcCEXd9hH1JkDxZoogLvxVujOJnZvydlGxslyMwnTvQWUWvpK8fp8sMrr2twkWCqPhHtsenSiomNKzv0dIZ
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mCommonRendering[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mKntSd2hyeOd1M2CVNY2OepYoih17vHlveLSftoS9KWjzt1TNQuF8Exrzi0mJOfjWjcaNLl2q8FGNlsjZV8Xf33WHho4zegIgNfquTPOcBtD3R0lz65t0zIBmluFgrlo3l7HFVBdizqHtgz[0m
 
-Built component HtmlHeadEnd:
-    Name: HtmlHeadEnd
-    UniqueId: CwCx2xDTBhW68LSmXmeapaHLFkVb1yDmfy2locZi0F5a5F7Y2Ao7v0pLKZK6zfWMwlOL8FBcAncP7MMvLncKQjswuV9OXMcwiCYFZX3Qh2pfBzkPuTBdwNJGooXT3hNwmKGLlHWDtD6O3v
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlHeadStylesEnd[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mmekm2pY4lQSmCRxYhjPfkyJFFwdJbrIrmAVXJK5YeQYwZN6T6Vucu6qaC8Gm9NEl4Dy7VNsrF551a78t6vaCWHwtzGMyxAV1szkJCeDXBu3iHjuTm[0m
 
-Built component HtmlBodyStart:
-    Name: HtmlBodyStart
-    UniqueId: wxOI3s66Ayd2J515sm2jwJwTz7VxRlp84Iu7LXJ78qjnXW0sIirXwy2mJwRF0VTlhWYCWgtU5i8duoPT3WY60xKMHsGyB67zvq2ocEtY59n82aBUw6AHaKo3jtcHpR16xg4M
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlHeadEnd[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mFRSZrKzBvgZpKm1NAmbjkS60gUEb4uy6yeE1528uVvgMc9sgFlelZXRZ3dXc3dKud4yw4fFGAwzLvQCJmjry6aUjpPopHHbB0izi5i[0m
 
-Built component RootRequest:
-    Name: RootRequest
-    UniqueId: e0VwLzNu0vtKihNyS3g8TCWIUK9fJlojNhEJXEJh4LYDlroVzKe7eX8TyfAdRKf5gp79etl8agpfxXvjSYPicnOz87VzRBZMEXrZdBtRvAC
-    Type: DarlingCms\classes\component\Web\Routing\Request
-    Location: blackballotpowercontestlocal
-    Container: Requests
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlBodyStart[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46m50t7njHZxV0FYbeJdMSBqlQPWrExQTOcJLkfLNrkv3QqdpwLyRFSqOtuwknJohxVc3wmtyWolJnmmz2vR3VAsRhPBXhMSPBGls4qCH0AC9EJiIpGi6hK2vAUyY[0m
 
-Built component RootHttpRequest:
-    Name: RootHttpRequest
-    UniqueId: FQrkTNtYqgVpXdCr63yRLJLwe3c03wqau4nwMtm4VItabc9i2uRC3FVVRIE1k1A6pKNIE5jRCZg7Sw8Pl2Mns9m8fA7JqaYCLmf9lBssQ6Nhl7tcO
-    Type: DarlingCms\classes\component\Web\Routing\Request
-    Location: blackballotpowercontestlocal
-    Container: Requests
+Built DarlingCms\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mblackballotpowercontestlocal[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46ml69KETFaVGMXEzXBlb8QepvdssoSJdifqWaWSeE8Cd73BxbJMfqsvJJZu2vcFtAgww16sq6xqtzBmWdynRRUJp0fYKD8d6nxGVn182Nxk6M[0m
 
-Built component IndexRequest:
-    Name: IndexRequest
-    UniqueId: mAFR6YYJldqDKfjdja3eKZh0kSor4txTPAT1MKZgOtU41LIlc4vJqlY1cPw04n8E7hdTJBKN7aFD3BC5bgySmPX8u6essJ0PlmKzHoKrxm9xuOMSx6cFOWfVRWjg
-    Type: DarlingCms\classes\component\Web\Routing\Request
-    Location: blackballotpowercontestlocal
-    Container: Requests
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mMainMenuAndBanner[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mtP1p8vBnmxbLCzhoI0xmpvE9czZoQ460mhBfplZ6pFVB5j7EiyIdmwGbtrk0sjxW3ymHqGxXB5lNCdbQXZ2YuYUPnmIKXfVByDwrzZG6RVl4OU1jBXTMCVkaMzdztS8[0m
 
-Built component IndexHttpRequest:
-    Name: IndexHttpRequest
-    UniqueId: GPZMazPTKHkOHXFc6CzJRzAErSXXzC6F60mRjl8fgCXTU7YCKUiCnsWTLzsW3h1XsZ9mgZsTepEPd16f5WygeTbe0HtWNXUgBy0RE2YFw7OVNmWbxtWWycOAyaNYKhY1naqWt
-    Type: DarlingCms\classes\component\Web\Routing\Request
-    Location: blackballotpowercontestlocal
-    Container: Requests
+Built DarlingCms\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mblackballotpowercontestlocal[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mxrh1Rzt5Mz5O02NetFSbY1WNCaLTaWDT9XOO5kTlfPkBIyOGwcDvYAoRsRD3zDrtzK7S0vmjJLOulKRCrOF1vCt2Qv9P5KPY0o8RzbfhHgi13s37iDHDxnJUlhAC6[0m
 
-Built component blackballotpowercontestlocal:
-    Name: blackballotpowercontestlocal
-    UniqueId: Z4vh4KvadmTiM9df767AaJTxP89yGOwXA4RgyLOd7p3EW5RWpZq1O5US1BgyfgupPU7BmPokywlBOfvKVAPDtSfZocGnVMZ0TcA3PTKfexZ2SVokk5Q3924NN9o7
-    Type: DarlingCms\classes\component\Web\Routing\GlobalResponse
-    Location: blackballotpowercontestlocal
-    Container: RESPONSES
+Built DarlingCms\classes\component\Web\Routing\Request:
+    Name: [42mRootRequest[0m
+    Container: [1;32mRequests[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\Request[0m
+    UniqueId: [46maORO9qOmqtoVVSXiP2HCh8ZRkYv2WTsYO5Pefp34MlFwFTQd1sd8z9IgeRtJmu0CWyYQYKsJCVClZKkuKHEN16MjXb6QlrwGALvWN1lIBsO98A7CCwx3qwVWlRi[0m
 
-Built component MainMenuAndBanner:
-    Name: MainMenuAndBanner
-    UniqueId: UBFggBee0J34HjTwmEzzaf7oJsevKhfzmMvsdIPx5B4C1DBdlHTsGmcNcjW0nCxufJPC5pA0WfBVPT1NjEXSzKRH4o2ePndBWbeUwAR5si0wbm6eB8wyuDI607uoOw2ZFIUvN0hG5AK
-    Type: DarlingCms\classes\component\OutputComponent
-    Location: blackballotpowercontestlocal
-    Container: CommonOutput
+Built DarlingCms\classes\component\Web\Routing\Request:
+    Name: [42mRootHttpRequest[0m
+    Container: [1;32mRequests[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mSL3zlHKnd7JBy7wElxLwm6M1892IanIc8nqwjhuupQlCPBYFtPkGM8QepDlSjvoMNQGlTsWP824zZhQbwv7OyKEbeRpcBo5zPYKPvBfB67e8OJy0SPoihvyTX4ByaGZeV7J[0m
 
-Built component blackballotpowercontestlocal:
-    Name: blackballotpowercontestlocal
-    UniqueId: 1EDNIAN30CQbnPaePWY7FyWxIQuXCHekeRjkgjf3nePwClNw61hR2vbdTClWeBytL9p7JC7cTAAKaZyE2soM080aCHf12GikIcX6YMVOa301hTOaBkGdSoNRNr1
-    Type: DarlingCms\classes\component\Web\Routing\GlobalResponse
-    Location: blackballotpowercontestlocal
-    Container: RESPONSES
+Built DarlingCms\classes\component\Web\Routing\Request:
+    Name: [42mIndexRequest[0m
+    Container: [1;32mRequests[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mFIkvsOPTc8oiMSWLjjer6srUPdwkvKCtIN9MlMuCKULn2HeRZxAtzoPBKRRHjiTFdjy9N8OGIIBBtoBdjqrgflKNsZ2xZrTxpr38C4IDAuDJnPzp93fI5[0m
+
+Built DarlingCms\classes\component\Web\Routing\Request:
+    Name: [42mIndexHttpRequest[0m
+    Container: [1;32mRequests[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mjiUm7O3LHwpakS6EBmeFVSPLt5kUshfXvoQhPd35wYFhjWR4J3ZSCTG8OXsboH7zQ5Tfc4yzcfEPESXSwa7ucmKJ1E5rKnTd23QizMtpBAViXanHsl4xnxpez70tnL37m06G6vG2cnDv[0m
+
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mWelcome[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mtWbIvT7MAddbEqawdVUJxSI582L1VsiGNifLKhopkO8vcCrCH8e6BzJmuqPB5AARAntqxPPl95TeH85x8UzhH1W26daUw5PSL13ejGqOy2joDGoAi7OBhAddcuDqkWyBnQ[0m
+
+Built DarlingCms\classes\component\Web\Routing\Response:
+    Name: [42mHomepage[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mRE8fG0jC1FP7HDv4Dl9w4XiOQvBnO51Ik9TFh1wolSgnvfy8HLv6bKFQ48buQk93UPMrW26jnmlNvT9jTsdY0vJNardbspAQN09xGARuZM8NEgPBHWZCJdb3SdG[0m
+
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlBodyEnd[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mfYk1OtCbOy0JsHv5P4UaZ8OakhC54ffDa5vVpzLVCer69VIkEzboCG4XrtBjN2OekVMhklqfac6RDozcJFz2Re491q1KYnYax4CmWyYyhXz1h0cpGhMn[0m
+
+Built DarlingCms\classes\component\OutputComponent:
+    Name: [42mHtmlEnd[0m
+    Container: [1;32mCommonOutput[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\OutputComponent[0m
+    UniqueId: [46mZfIs1RNlN0hFrXSq2OAuVKlxMiEAaodwN88gFhcUynNPhEglBu8raU95OqpXkdy0ujkuKp94vN4Bp3qQpKhVe623GfWq4kh0wzNqUNTaOx59YJPVb8lc6[0m
+
+Built DarlingCms\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mblackballotpowercontestlocal[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mblackballotpowercontestlocal[0m
+    Type: [1;34mDarlingCms\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mwIHfMDCatm2J34UiCJv0qE1FlIuwhtdBQcOU2FDvyiAmU2oK5B9i6zNHdtwZJHohj7V0BdLbBd51DoM8mqzSkRZ3ZJKYyqmsXS0gubqDWKaB[0m
