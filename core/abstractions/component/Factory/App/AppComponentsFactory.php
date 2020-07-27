@@ -71,7 +71,17 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             $componentCrud,
             $storedComponentRegistry
         );
-
+        $this->getStoredComponentRegistry()->import(
+            [
+                self::ACCEPTED_IMPLEMENTATION
+                =>
+                Component::class
+            ]
+        );
+        $this->getComponentCrud()->create($primaryFactory->export()['app']);
+        $this->getStoredComponentRegistry()->registerComponent(
+            $primaryFactory->export()['app']
+        );
     }
 
     private function prepareOutputComponentFactory(
@@ -113,13 +123,6 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             $container,
             $output,
             $position
-        );
-        $this->getStoredComponentRegistry()->import(
-            [
-                self::ACCEPTED_IMPLEMENTATION
-                =>
-                OutputComponent::class
-            ]
         );
         $this->getStoredComponentRegistry()->registerComponent($oc);
         return $oc;
@@ -225,13 +228,6 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             $suit->addType($type);
         }
         $this->standardUITemplateFactory->getComponentCrud()->update($suit, $suit);
-        $this->getStoredComponentRegistry()->import(
-            [
-                self::ACCEPTED_IMPLEMENTATION
-                =>
-                StandardUITemplate::class
-            ]
-        );
         $this->standardUITemplateFactory->getStoredComponentRegistry()->registerComponent($suit);
         $this->getStoredComponentRegistry()->registerComponent($suit);
         return $suit;
@@ -294,13 +290,6 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
     public function buildRequest(string $name, string $container, string $url): Request
     {
         $request = $this->requestFactory->buildRequest($name, $container, $url);
-        $this->getStoredComponentRegistry()->import(
-            [
-                self::ACCEPTED_IMPLEMENTATION
-                =>
-                Request::class
-            ]
-        );
         $this->getStoredComponentRegistry()->registerComponent($request);
         return $request;
     }
@@ -318,13 +307,6 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             CoreResponseFactory::ifOutputComponentAddStorageInfo($response, $component);
         }
         $this->responseFactory->getComponentCrud()->update($response, $response);
-        $this->getStoredComponentRegistry()->import(
-            [
-                self::ACCEPTED_IMPLEMENTATION
-                =>
-                Response::class
-            ]
-        );
         $this->responseFactory->getStoredComponentRegistry()->registerComponent($response);
         $this->getStoredComponentRegistry()->registerComponent($response);
         return $response;
@@ -343,13 +325,6 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             CoreResponseFactory::ifOutputComponentAddStorageInfo($globalResponse, $component);
         }
         $this->responseFactory->getComponentCrud()->update($globalResponse, $globalResponse);
-        $this->getStoredComponentRegistry()->import(
-            [
-                self::ACCEPTED_IMPLEMENTATION
-                =>
-                GlobalResponse::class
-            ]
-        );
         $this->responseFactory->getStoredComponentRegistry()->registerComponent($globalResponse);
         $this->getStoredComponentRegistry()->registerComponent($globalResponse);
         return $globalResponse;

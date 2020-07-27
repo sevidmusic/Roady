@@ -36,6 +36,11 @@ $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
+
+###########################################################
+###########################################################
+############################################################
+
 // @todo Move to AppComponentsFactory __construct | Create and Register App
 $appComponentsFactory->getComponentCrud()->create(
     $appComponentsFactory->getPrimaryFactory()->export()['app']
@@ -47,6 +52,10 @@ $appComponentsFactory->getStoredComponentRegistry()->registerComponent(
 // @todo Move to AppComponentsFactory __construct | Create and Register Domain
 $appComponentsFactory->getComponentCrud()->create($domain);
 $appComponentsFactory->getStoredComponentRegistry()->registerComponent($domain);
+
+###########################################################
+###########################################################
+###########################################################
 
 // Manually build "Create Submission" Action
 $createSubmissionAction = new CreateSubmission(
@@ -240,7 +249,6 @@ foreach(
         PHP_EOL
     );
     echo $message;
-    sleep(1);
     $buildLog .= $message;
 }
 file_put_contents(__DIR__ . '/buildLog.txt', $buildLog);

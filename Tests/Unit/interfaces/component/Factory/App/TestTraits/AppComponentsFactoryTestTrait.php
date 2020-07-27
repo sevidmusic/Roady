@@ -16,11 +16,13 @@ use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingCms\classes\component\Web\App;
+use DarlingCms\interfaces\component\Component;
 
 trait AppComponentsFactoryTestTrait
 {
 
     private $appComponentsFactory;
+    private $testDomain;
 
     public function testAppComponentsFactoryImplementsOutputComponentFactoryInterface(): void
     {
@@ -162,6 +164,33 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
+    public function testAppAssignedToPrimaryFactoryIsStoredAndRegisteredOnInstantiation(): void
+    {
+        $this->wasStoredAndRegistered(
+            $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']
+        );
+    }
+
+    public function testGetStoredComponentRegistryReturnsAStoredComponentRegistryWhoseAcceptedImplementationIsTheComponentInterface(): void
+    {
+        $this->assertEquals(
+            Component::class,
+            $this->getAppComponentsFactory()->getStoredComponentRegistry()->export()['acceptedImplementation']
+        );
+    }
+
+    /*
+     * In order for this test to be possible the App component must be refactored to assing the supplied request
+     * to a property called domain so that an app instance can do: $app->getDomain()
+     * @todo: Implement App->getDomain(): Request;
+    public function testDomainSuppliedToConstructorIsStoredAndRegisteredOnInstantiation(): void
+    {
+        $this->wasStoredAndRegistered(
+            $this->getTestDomain()
+        );
+    }
+    */
+
     public function getOutputComponentFactory(): OutputComponentFactory
     {
         return $this->getAppComponentsFactory();
@@ -210,14 +239,26 @@ trait AppComponentsFactoryTestTrait
 
     private function getTestDomain(): Request
     {
-        return new CoreRequest(
-            $this->getAppComponentsFactory()->getPrimaryFactory()->buildStorable(
-                'TestDomain',
-                'TestRequests'
-            ),
-            $this->getAppComponentsFactory()->getPrimaryFactory()->buildSwitchable()
-        );
+        if(!isset($this->testDomain) === true)
+        {
+            $this->testDomain = new CoreRequest(
+                $this->getAppComponentsFactory()->getPrimaryFactory()->buildStorable(
+                    'TestDomain',
+                    'TestRequests'
+                ),
+                $this->getAppComponentsFactory()->getPrimaryFactory()->buildSwitchable()
+            );
+        }
+        return $this->testDomain;
     }
 
+    private function wasStoredAndRegistered(Component $component): void {
+        $this->assertEquals(
+            $component,
+            $this->getAppComponentsFactory()->getComponentCrud()->read(
+                $component
+            )
+        );
+    }
 
 }
