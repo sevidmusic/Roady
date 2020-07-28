@@ -228,7 +228,7 @@ foreach(
         PHP_EOL
     );
     echo $message;
-    sleep(3);
+    usleep(250000);
     $buildLog .= $message;
 }
 file_put_contents(__DIR__ . '/buildLog.txt', $buildLog);
