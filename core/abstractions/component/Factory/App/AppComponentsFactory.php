@@ -359,6 +359,12 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         }
         if($flags & self::SAVE_LOG) {
             file_put_contents($this->expectedBuildLogPath(), $buildLog);
+            echo sprintf(
+                '%sSaved build log to: %s',
+                PHP_EOL,
+                "\033[1;34m" . $this->expectedBuildLogPath() . "\033[0m" . PHP_EOL
+            );
+            sleep(1);
         }
         return $buildLog;
     }

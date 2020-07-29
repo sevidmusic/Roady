@@ -193,12 +193,22 @@ trait AppComponentsFactoryTestTrait
         $this->expectOutputString($this->expectedBuildLog());
     }
 
-    public function testBuildLogSavesBuildLogToExpectedLocationIfSAVE_LOGFlagIsSupplied(): void
+    public function testBuildLogSavesBuildLogToExpectedLocationAndProducesExpectedOutputIfSAVE_LOGFlagIsSupplied(): void
     {
         $this->getAppComponentsFactory()->buildLog(
             $this->getAppComponentsFactory()::SAVE_LOG
         );
+        $this->expectOutputString($this->expectedSAVE_LOGOutput());
         $this->assertTrue(file_exists($this->expectedBuildLogPath()));
+    }
+
+    private function expectedSAVE_LOGOutput(): string
+    {
+        return sprintf(
+            '%sSaved build log to: %s',
+            PHP_EOL,
+            "\033[1;34m" . $this->expectedBuildLogPath() . "\033[0m" . PHP_EOL
+        );
     }
 
     private function expectedBuildLogPath(): string
