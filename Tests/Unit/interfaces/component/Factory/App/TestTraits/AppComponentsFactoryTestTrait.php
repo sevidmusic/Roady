@@ -193,6 +193,28 @@ trait AppComponentsFactoryTestTrait
         $this->expectOutputString($this->expectedBuildLog());
     }
 
+    public function testBuildLogSavesBuildLogToExpectedLocationIfSAVE_LOGFlagIsSupplied(): void
+    {
+        $this->getAppComponentsFactory()->buildLog(
+            $this->getAppComponentsFactory()::SAVE_LOG
+        );
+        $this->assertTrue(file_exists($this->expectedBuildLogPath()));
+    }
+
+    private function expectedBuildLogPath(): string
+    {
+        return str_replace(
+            'Tests/Unit/interfaces/component/Factory/App/TestTraits',
+            'Apps' .
+                DIRECTORY_SEPARATOR .
+                $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']->getName() .
+                DIRECTORY_SEPARATOR .
+                '.buildLog',
+            __DIR__
+        );
+
+    }
+
     private function expectedBuildLog(): string {
         $buildLog = "";
         foreach(

@@ -13,6 +13,7 @@ interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputCo
 {
 
     public const SHOW_LOG = 2;
+    public const SAVE_LOG = 4;
 
     public static function buildConstructorArgs(Request $domain): array;
 

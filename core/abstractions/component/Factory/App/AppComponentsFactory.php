@@ -357,11 +357,23 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             if($flags & self::SHOW_LOG) { echo $message; usleep(250000); }
             $buildLog .= $message;
         }
-        /*
-        if($flags & SAVE_LOG) {
-            file_put_contents(__DIR__ . '/buildLog.txt', $buildLog);
+        if($flags & self::SAVE_LOG) {
+            file_put_contents($this->expectedBuildLogPath(), $buildLog);
         }
-         */
         return $buildLog;
     }
+
+    private function expectedBuildLogPath(): string
+    {
+        return str_replace(
+            'core/abstractions/component/Factory/App',
+            'Apps' .
+                DIRECTORY_SEPARATOR .
+                $this->getPrimaryFactory()->export()['app']->getName() .
+                DIRECTORY_SEPARATOR .
+                '.buildLog',
+            __DIR__
+        );
+    }
+
 }
