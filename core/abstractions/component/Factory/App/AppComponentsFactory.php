@@ -354,9 +354,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
                 "\033[46m" . $storable->getUniqueId() . "\033[0m",
                 PHP_EOL
             );
-            /*
-            if($flags & SHOW_LOG) { echo $message; usleep(250000); }
-             */
+            if($flags & self::SHOW_LOG) { echo $message; usleep(250000); }
             $buildLog .= $message;
         }
         /*

@@ -187,13 +187,11 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-/*
     public function testBuildLogEchosBuildLogIfSHOW_LOGFlagIsSupplied(): void
     {
         $this->getAppComponentsFactory()->buildLog($this->getAppComponentsFactory()::SHOW_LOG);
         $this->expectOutputString($this->expectedBuildLog());
     }
- */
 
     private function expectedBuildLog(): string {
         $buildLog = "";

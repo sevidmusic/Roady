@@ -12,6 +12,8 @@ use DarlingCms\interfaces\component\Web\Routing\Request;
 interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputComponentFactory, StandardUITemplateFactory, RequestFactory, ResponseFactory
 {
 
+    public const SHOW_LOG = 2;
+
     public static function buildConstructorArgs(Request $domain): array;
 
     public static function buildDomain(string $url): Request;
