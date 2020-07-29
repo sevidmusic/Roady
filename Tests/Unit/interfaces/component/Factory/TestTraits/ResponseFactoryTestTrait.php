@@ -299,7 +299,7 @@ trait ResponseFactoryTestTrait
 
     private function callBuildGlobalResponse(): Response
     {
-        $args = [$this->expectedPosition];
+        $args = [$this->expectedResponseName, $this->expectedPosition];
         for($i=0;$i < $this->expectedNumberOfRequests; $i++)
         {
             array_push($args, $this->buildTestRequest());
@@ -359,6 +359,15 @@ trait ResponseFactoryTestTrait
         $this->assertEquals(
             $this->expectedPosition,
             $response->getPosition(),
+        );
+    }
+
+    public function testBuildGlobalResponseReturnsResponseWhoseNameMatchesSuppliedName(): void
+    {
+        $response = $this->callBuildGlobalResponse();
+        $this->assertEquals(
+            $this->expectedResponseName,
+            $response->getName(),
         );
     }
 

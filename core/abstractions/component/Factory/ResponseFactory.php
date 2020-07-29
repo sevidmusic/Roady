@@ -57,12 +57,23 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
     }
 
     public function buildGlobalResponse(
+        string $name,
         float $position,
         Component ...$requestsOutputComponentsStandardUITemplates
     ): GlobalResponse
     {
+        $app = $this->getPrimaryFactory()->export()['app'];
+        $app->import(
+            [
+                'storable' => $this->getPrimaryFactory()->buildStorable(
+                    $name,
+                    $app->getLocation(),
+                    $app->getContainer()
+                )
+            ]
+        );
         $globalResponse = new CoreGlobalResponse(
-            $this->getPrimaryFactory()->export()['app'],
+            $app,
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)
         );

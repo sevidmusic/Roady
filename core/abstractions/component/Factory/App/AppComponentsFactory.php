@@ -312,9 +312,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $response;
     }
 
-    public function buildGlobalResponse(float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse
+    public function buildGlobalResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse
     {
-        $globalResponse = $this->responseFactory->buildGlobalResponse($position);
+        $globalResponse = $this->responseFactory->buildGlobalResponse($name, $position);
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
             $globalResponse
         );

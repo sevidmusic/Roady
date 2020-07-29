@@ -12,6 +12,6 @@ interface ResponseFactory extends StoredComponentFactoryInterface
 
     public function buildResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): Response;
 
-    public function buildGlobalResponse(float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse;
+    public function buildGlobalResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse;
 
 }
