@@ -179,6 +179,50 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
+    public function testBuildLogReturnsExpectedString(): void
+    {
+        $this->assertEquals(
+            $this->expectedBuildLog(),
+            $this->getAppComponentsFactory()->buildLog()
+        );
+    }
+
+/*
+    public function testBuildLogEchosBuildLogIfSHOW_LOGFlagIsSupplied(): void
+    {
+        $this->getAppComponentsFactory()->buildLog($this->getAppComponentsFactory()::SHOW_LOG);
+        $this->expectOutputString($this->expectedBuildLog());
+    }
+ */
+
+    private function expectedBuildLog(): string {
+        $buildLog = "";
+        foreach(
+            $this->getAppComponentsFactory()->getStoredComponentRegistry()->getRegisteredComponents()
+            as
+            $storable
+        )
+        {
+            $message = sprintf(
+                '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
+                PHP_EOL,
+                $storable->getType(),
+                PHP_EOL,
+                "\033[42m" . $storable->getName() . "\033[0m",
+                PHP_EOL,
+                "\033[1;32m" . $storable->getContainer() . "\033[0m",
+                PHP_EOL,
+                "\033[44m" . $storable->getLocation() . "\033[0m",
+                PHP_EOL,
+                "\033[1;34m" . $storable->getType() . "\033[0m",
+                PHP_EOL,
+                "\033[46m" . $storable->getUniqueId() . "\033[0m",
+                PHP_EOL
+            );
+            $buildLog .= $message;
+        }
+        return $buildLog;
+    }
     /*
      * In order for this test to be possible the App component must be refactored to assing the supplied request
      * to a property called domain so that an app instance can do: $app->getDomain()

@@ -330,4 +330,40 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $globalResponse;
     }
 
+    public function buildLog($flags = 0): string {
+        $buildLog = "";
+        foreach(
+            $this->getStoredComponentRegistry()->getRegisteredComponents()
+            as
+            $storable
+        )
+        {
+            $message = sprintf(
+                '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
+                PHP_EOL,
+                $storable->getType(),
+                PHP_EOL,
+                "\033[42m" . $storable->getName() . "\033[0m",
+                PHP_EOL,
+                "\033[1;32m" . $storable->getContainer() . "\033[0m",
+                PHP_EOL,
+                "\033[44m" . $storable->getLocation() . "\033[0m",
+                PHP_EOL,
+                "\033[1;34m" . $storable->getType() . "\033[0m",
+                PHP_EOL,
+                "\033[46m" . $storable->getUniqueId() . "\033[0m",
+                PHP_EOL
+            );
+            /*
+            if($flags & SHOW_LOG) { echo $message; usleep(250000); }
+             */
+            $buildLog .= $message;
+        }
+        /*
+        if($flags & SAVE_LOG) {
+            file_put_contents(__DIR__ . '/buildLog.txt', $buildLog);
+        }
+         */
+        return $buildLog;
+    }
 }
