@@ -217,9 +217,9 @@ trait AppComponentsFactoryTestTrait
             'Tests/Unit/interfaces/component/Factory/App/TestTraits',
             'Apps' .
                 DIRECTORY_SEPARATOR .
-                $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']->getName() .
+                '.buildLogs' .
                 DIRECTORY_SEPARATOR .
-                '.buildLog',
+                $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']->getName(),
             __DIR__
         );
 

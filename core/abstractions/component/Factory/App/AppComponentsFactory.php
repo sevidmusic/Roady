@@ -375,9 +375,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             'core/abstractions/component/Factory/App',
             'Apps' .
                 DIRECTORY_SEPARATOR .
-                $this->getPrimaryFactory()->export()['app']->getName() .
+                '.buildLogs' .
                 DIRECTORY_SEPARATOR .
-                '.buildLog',
+                $this->getPrimaryFactory()->export()['app']->getName(),
             __DIR__
         );
     }
