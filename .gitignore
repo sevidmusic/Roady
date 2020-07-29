@@ -10,4 +10,5 @@ xaa
 *.swp
 .dcmsJsonData/
 *.txt
-/Apps/DEFAULT/
+Apps/DEFAULT/
+Apps/.buildLogs/
