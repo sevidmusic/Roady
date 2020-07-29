@@ -74,6 +74,7 @@ $templateForCreateSubmissionTypes = $appComponentsFactory->buildStandardUITempla
 
 // Build Opening Html Respnse
 $appComponentsFactory->buildGlobalResponse(
+    'OpeningHtmlResponse',
     0,
     $templateForOutputComponentsTypes,
     $appComponentsFactory->buildOutputComponent(
@@ -140,6 +141,7 @@ $appComponentsFactory->buildGlobalResponse(
 
 // Main menu Response
 $appComponentsFactory->buildGlobalResponse(
+    'MainMenuResponse',
     1,
     $templateForOutputComponentsTypes,
     $appComponentsFactory->buildOutputComponent(
@@ -188,6 +190,7 @@ $appComponentsFactory->buildResponse(
 
 // Build Closing Html Global Response
 $appComponentsFactory->buildGlobalResponse(
+    'ClosingHtmlResponse',
     3,
     $templateForOutputComponentsTypes,
     $appComponentsFactory->buildOutputComponent(

@@ -76,6 +76,7 @@ $defaultGlobalUITemplate = $appComponentsFactory->buildStandardUITemplate(
 );
 
 $htmlStartResponse = $appComponentsFactory->buildGlobalResponse(
+    'OpeningHtmlResponse',
     0,
     $defaultGlobalUITemplate,
     $appComponentsFactory->buildOutputComponent(
@@ -153,6 +154,7 @@ $htmlStartResponse = $appComponentsFactory->buildGlobalResponse(
 );
 
 $mainMenuResponse = $appComponentsFactory->buildGlobalResponse(
+    'MainMenuResponse',
     1,
     $defaultGlobalUITemplate,
     $appComponentsFactory->buildOutputComponent(
@@ -188,6 +190,7 @@ $homeResponse = $appComponentsFactory->buildResponse(
 );
 
 $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
+    'ClosingHtmlResponse',
     3,
     $defaultGlobalUITemplate,
     $appComponentsFactory->buildOutputComponent(
