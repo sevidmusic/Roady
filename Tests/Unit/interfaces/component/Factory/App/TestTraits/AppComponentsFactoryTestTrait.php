@@ -301,18 +301,6 @@ trait AppComponentsFactoryTestTrait
 
     }
 
-    /* @todo
-     * In order for this test to be possible the App component must be refactored to accessing the supplied request
-     * to a property called domain so that an app instance can do: $app->getDomain()
-     * @todo: Implement App->getDomain(): Request;
-     * public function testDomainSuppliedToConstructorIsStoredAndRegisteredOnInstantiation(): void
-     * {
-     * $this->wasStoredAndRegistered(
-     * $this->getTestDomain()
-     * );
-     * }
-     */
-
     public function getOutputComponentFactory(): OutputComponentFactory
     {
         return $this->getAppComponentsFactory();

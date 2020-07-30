@@ -23,12 +23,6 @@ $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs($domain)
 );
 
-$appComponentsFactory->getComponentCrud()->create($domain);
-$appComponentsFactory->getStoredComponentRegistry()->registerComponent($domain);
-//
-//$appComponentsFactory->getComponentCrud()->create($component)
-//
-
 $htmlContentCreateSubmissionForm = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildStorable(
         'CreateContestSubmissionForm',
