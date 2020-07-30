@@ -1,25 +1,25 @@
-        /**
-         * Common dimensions | i.e., width, height
-         */
-        .common-content-container, .created-submission-preview-container, .common-header-container {
-            width: 100%;
-        }
+/**
+ * Common dimensions | i.e., width, height
+ */
+.common-content-container, .created-submission-preview-container, .common-header-container {
+    width: 100%;
+}
 
-        .common-header-logo-w387-h75 {
-            width: 75%;
-            height: auto;
-        }
+.common-header-logo-w387-h75 {
+    width: 75%;
+    height: auto;
+}
 
-        .common-form-container {
-            width: 90%;
-        }
+.common-form-container {
+    width: 90%;
+}
 
-        input[type=submit], input[type=email], input[type=url], input[type=text], select {
-            width: 95%;
-        }
+input[type=submit], input[type=email], input[type=url], input[type=text], select {
+    width: 95%;
+}
 
-        .common-content-separator {
-            width: 80%;
-            height: 1px;
-        }
+.common-content-separator {
+    width: 80%;
+    height: 1px;
+}
 

@@ -201,12 +201,11 @@ $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
 $appComponentsFactory->getComponentCrud()->create($appComponentsFactory->getPrimaryFactory()->export()['app']);
 $appComponentsFactory->getStoredComponentRegistry()->registerComponent($appComponentsFactory->getPrimaryFactory()->export()['app']);
 
-foreach(
+foreach (
     $appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents()
     as
     $storable
-)
-{
+) {
     printf(
         '%sBuilt component %s:%s    Name: %s%s    UniqueId: %s%s    Type: %s%s    Location: %s%s    Container: %s%s',
         PHP_EOL,

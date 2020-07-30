@@ -1,13 +1,13 @@
-        /**
-         * Common dimensions | i.e., width, height, margin, padding
-         */
-        .common-body {
-            margin: 0;
-            padding: 0;
-        }
+/**
+ * Common dimensions | i.e., width, height, margin, padding
+ */
+.common-body {
+    margin: 0;
+    padding: 0;
+}
 
-        .common-content-container {
-            width: 90%;
-            margin: 2em auto;
-            padding: 2em;
-        }
+.common-content-container {
+    width: 90%;
+    margin: 2em auto;
+    padding: 2em;
+}

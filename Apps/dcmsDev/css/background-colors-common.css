@@ -1,10 +1,10 @@
-        /**
-         * Common background colors | i.e. background
-         */
-        .common-body {
-            background: #00010a;
-        }
+/**
+ * Common background colors | i.e. background
+ */
+.common-body {
+    background: #00010a;
+}
 
-        .common-content-container {
-            background: #0a0800;
-        }
+.common-content-container {
+    background: #0a0800;
+}

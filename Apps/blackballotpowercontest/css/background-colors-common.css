@@ -1,34 +1,34 @@
-        /**
-         * Common background colors | i.e. background
-         */
-        .common-body, .common-main-menu {
-            background: #6d0707;
-        }
+/**
+ * Common background colors | i.e. background
+ */
+.common-body, .common-main-menu {
+    background: #6d0707;
+}
 
-        .common-page-container {
-           background: #ffffff;
-        }
+.common-page-container {
+    background: #ffffff;
+}
 
-        .common-form-container {
-            background: #CCCCCC;
-        }
+.common-form-container {
+    background: #CCCCCC;
+}
 
-        .common-banner-container {
-            background: #fbd27d;
-        }
+.common-banner-container {
+    background: #fbd27d;
+}
 
-        .common-content-separator {
-            background: #6d0707;
-        }
+.common-content-separator {
+    background: #6d0707;
+}
 
-        .create-submission-error {
-            background: #fbd27d;
-        }
+.create-submission-error {
+    background: #fbd27d;
+}
 
-        input[type=submit] {
-            background: #777777;
-        }
+input[type=submit] {
+    background: #777777;
+}
 
-        input[type=submit]:hover {
-            background: #999999;
-        }
+input[type=submit]:hover {
+    background: #999999;
+}

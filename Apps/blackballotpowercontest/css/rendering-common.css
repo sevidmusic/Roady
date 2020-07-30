@@ -1,123 +1,123 @@
-        /**
-         * Common rendering | i.e., margin, padding, float, clear, opacity
-         */
-        * {
-            margin: 0;
-            padding: 0;
-            box-decoration-break: clone;
-            box-sizing: border-box;
-        }
+/**
+ * Common rendering | i.e., margin, padding, float, clear, opacity
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-decoration-break: clone;
+    box-sizing: border-box;
+}
 
-        .common-page-container {
-            padding-top: 12em;
-        }
+.common-page-container {
+    padding-top: 12em;
+}
 
-        .common-header-container {
-            position: fixed;
-        }
+.common-header-container {
+    position: fixed;
+}
 
-        .common-banner-container {
-            padding: .73em;
-        }
+.common-banner-container {
+    padding: .73em;
+}
 
-        .common-main-menu {
-            padding: .67em 1em;
-            width: 100%;
-        }
-
-
-        .common-content-container {
-            padding: 0 4.37em 0 4.37em;
-            line-height: 2em;
-        }
-
-        .common-content-separator {
-            margin: 2em auto;
-        }
-
-        .common-space-below {
-            margin-bottom: 2em;
-        }
-
-        .created-submission-preview-container, .common-form-container {
-            margin: 2em auto;
-            padding: 1em 2em;
-        }
+.common-main-menu {
+    padding: .67em 1em;
+    width: 100%;
+}
 
 
-        input[type=email], input[type=url], input[type=text], select {
-            padding: .7em .9em;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: .3em;
-        }
+.common-content-container {
+    padding: 0 4.37em 0 4.37em;
+    line-height: 2em;
+}
 
-        input[type=submit] {
-            margin-top: .9em;
-            padding: .9em 1.1em;
-            border: .2em outset #CCCCCC;
-            border-radius: .3em;
-            cursor: pointer;
-        }
+.common-content-separator {
+    margin: 2em auto;
+}
 
-        input[type=submit]:hover {
-            border: .2em inset #ffffff;
-        }
+.common-space-below {
+    margin-bottom: 2em;
+}
 
-        label, .common-form-title {
-            display: block;
-        }
+.created-submission-preview-container, .common-form-container {
+    margin: 2em auto;
+    padding: 1em 2em;
+}
 
-        .common-form-submit-button {
-            margin-bottom: .3em;
-        }
 
-        .create-submission-error {
-            padding: .7em 4.2em;
-        }
+input[type=email], input[type=url], input[type=text], select {
+    padding: .7em .9em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: .3em;
+}
 
-        @media only screen and (min-width: 600px) {
-            /* here */
-            .common-page-container {
-                padding-top: 8em;
-            }
+input[type=submit] {
+    margin-top: .9em;
+    padding: .9em 1.1em;
+    border: .2em outset #CCCCCC;
+    border-radius: .3em;
+    cursor: pointer;
+}
 
-            .common-main-menu {
-                padding: .67em 0;
-                width: 100%;
-            }
+input[type=submit]:hover {
+    border: .2em inset #ffffff;
+}
 
-            .common-main-menu-phone {
-                margin: 0 1em 0 5em;
-            }
+label, .common-form-title {
+    display: block;
+}
 
-            .common-main-menu-contact {
-                margin: 0 5em 0 0;
-            }
+.common-form-submit-button {
+    margin-bottom: .3em;
+}
 
-            .float-left {
-                float: left;
-            }
+.create-submission-error {
+    padding: .7em 4.2em;
+}
 
-            .float-right {
-                float: right;
-            }
+@media only screen and (min-width: 600px) {
+    /* here */
+    .common-page-container {
+        padding-top: 8em;
+    }
 
-            .clear-float-left {
-                clear: left;
-            }
+    .common-main-menu {
+        padding: .67em 0;
+        width: 100%;
+    }
 
-            .clear-float-right {
-                clear: right;
-            }
+    .common-main-menu-phone {
+        margin: 0 1em 0 5em;
+    }
 
-            .clear-float-both {
-                clear: both;
-            }
+    .common-main-menu-contact {
+        margin: 0 5em 0 0;
+    }
 
-            .common-main-menu-contact, .common-main-menu-home {
-                padding-right: 1em;
-            }
+    .float-left {
+        float: left;
+    }
 
-        }
+    .float-right {
+        float: right;
+    }
+
+    .clear-float-left {
+        clear: left;
+    }
+
+    .clear-float-right {
+        clear: right;
+    }
+
+    .clear-float-both {
+        clear: both;
+    }
+
+    .common-main-menu-contact, .common-main-menu-home {
+        padding-right: 1em;
+    }
+
+}
 

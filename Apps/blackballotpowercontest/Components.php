@@ -74,13 +74,13 @@ $appComponentsFactory->buildGlobalResponse(
         'CommonOutput',
         file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-common-start.html'),
         1.0
-     ),
+    ),
     $appComponentsFactory->buildOutputComponent(
         'HtmlHeadStylesStart',
         'CommonOutput',
         file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'html/html-head-styles-start.html'),
         2.0
-     ),
+    ),
     $appComponentsFactory->buildOutputComponent(
         'CommonBackgroundColors',
         'CommonOutput',
@@ -98,7 +98,7 @@ $appComponentsFactory->buildGlobalResponse(
         'CommonOutput',
         file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'css/dimensions-common.css'),
         3.0
-     ),
+    ),
     $appComponentsFactory->buildOutputComponent(
         'CommonRendering',
         'CommonOutput',
