@@ -13,6 +13,16 @@ trait RequestFactoryTestTrait
     private $expectedContainer = 'expectedContainer';
     private $expectedUrl = 'expectedUrl';
 
+    public function testBuildRequestReturnsARequestImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                Request::class,
+                $this->callBuildRequest()
+            )
+        );
+    }
+
     private function callBuildRequest(): Request
     {
         return $this->getRequestFactory()->buildRequest(
@@ -22,14 +32,14 @@ trait RequestFactoryTestTrait
         );
     }
 
-    public function testBuildRequestReturnsARequestImplementationInstance(): void
+    protected function getRequestFactory(): RequestFactory
     {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                Request::class,
-                $this->callBuildRequest()
-            )
-        );
+        return $this->requestFactory;
+    }
+
+    protected function setRequestFactory(RequestFactory $requestFactory): void
+    {
+        $this->requestFactory = $requestFactory;
     }
 
     public function testBuildRequestStoresTheRequestImplementationInstanceItBuilds(): void
@@ -75,16 +85,6 @@ trait RequestFactoryTestTrait
     {
         $this->setStoredComponentFactory($this->getRequestFactory());
         $this->setStoredComponentFactoryParentTestInstances();
-    }
-
-    protected function getRequestFactory(): RequestFactory
-    {
-        return $this->requestFactory;
-    }
-
-    protected function setRequestFactory(RequestFactory $requestFactory): void
-    {
-        $this->requestFactory = $requestFactory;
     }
 
 }

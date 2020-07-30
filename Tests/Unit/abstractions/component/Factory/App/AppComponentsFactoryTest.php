@@ -5,9 +5,9 @@ namespace UnitTests\abstractions\component\Factory\App;
 use UnitTests\abstractions\component\Factory\StoredComponentFactoryTest as CoreStoredComponentFactoryTest;
 use UnitTests\interfaces\component\Factory\App\TestTraits\AppComponentsFactoryTestTrait;
 use UnitTests\interfaces\component\Factory\TestTraits\OutputComponentFactoryTestTrait;
-use UnitTests\interfaces\component\Factory\TestTraits\StandardUITemplateFactoryTestTrait;
 use UnitTests\interfaces\component\Factory\TestTraits\RequestFactoryTestTrait;
 use UnitTests\interfaces\component\Factory\TestTraits\ResponseFactoryTestTrait;
+use UnitTests\interfaces\component\Factory\TestTraits\StandardUITemplateFactoryTestTrait;
 
 class AppComponentsFactoryTest extends CoreStoredComponentFactoryTest
 {

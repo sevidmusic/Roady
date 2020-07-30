@@ -25,6 +25,16 @@ trait OutputComponentFactoryTestTrait
         );
     }
 
+    protected function getOutputComponentFactory(): OutputComponentFactory
+    {
+        return $this->outputComponentFactory;
+    }
+
+    protected function setOutputComponentFactory(OutputComponentFactory $outputComponentFactory): void
+    {
+        $this->outputComponentFactory = $outputComponentFactory;
+    }
+
     public function testBuildOutputComponentStoresTheOutputComponentImplementationInstanceItBuilds(): void
     {
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
@@ -81,16 +91,6 @@ trait OutputComponentFactoryTestTrait
     {
         $this->setStoredComponentFactory($this->getOutputComponentFactory());
         $this->setStoredComponentFactoryParentTestInstances();
-    }
-
-    protected function getOutputComponentFactory(): OutputComponentFactory
-    {
-        return $this->outputComponentFactory;
-    }
-
-    protected function setOutputComponentFactory(OutputComponentFactory $outputComponentFactory): void
-    {
-        $this->outputComponentFactory = $outputComponentFactory;
     }
 
     protected function getMockStoredComponentRegistry(): StoredComponentRegistry

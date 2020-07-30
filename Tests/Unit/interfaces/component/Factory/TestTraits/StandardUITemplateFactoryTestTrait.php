@@ -2,13 +2,13 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingCms\classes\component\Action;
+use DarlingCms\classes\component\OutputComponent;
+use DarlingCms\classes\primary\Positionable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Action;
+use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
 
 trait StandardUITemplateFactoryTestTrait
 {
@@ -18,10 +18,25 @@ trait StandardUITemplateFactoryTestTrait
     private $expectedPosition = 420.87;
     private $standardUITemplateFactory;
 
-    protected function setStandardUITemplateFactoryParentTestInstances(): void
+    public function testBuildStandardUITemplateReturnsAnStandardUITemplateImplementationInstance(): void
     {
-        $this->setStoredComponentFactory($this->getStandardUITemplateFactory());
-        $this->setStoredComponentFactoryParentTestInstances();
+        $this->assertTrue(
+            $this->isProperImplementation(
+                'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate',
+                $this->callBuildStandardUITemplateUsingTestArguments()
+            )
+        );
+    }
+
+    private function callBuildStandardUITemplateUsingTestArguments(): StandardUITemplate
+    {
+        return $this->getStandardUITemplateFactory()->buildStandardUITemplate(
+            $this->suitExpectedName,
+            $this->suitExpectedContainer,
+            $this->expectedPosition,
+            $this->getTestOutputComponent(),
+            $this->getTestAction()
+        );
     }
 
     protected function getStandardUITemplateFactory(): StandardUITemplateFactory
@@ -37,14 +52,14 @@ trait StandardUITemplateFactoryTestTrait
     private function getTestOutputComponent(): OutputComponent
     {
         return new OutputComponent(
-                   new Storable(
-                       'OutputComponent',
-                       'Temp',
-                       'Temp'
-                   ),
-                   new Switchable(),
-                   new Positionable(420.20)
-               );
+            new Storable(
+                'OutputComponent',
+                'Temp',
+                'Temp'
+            ),
+            new Switchable(),
+            new Positionable(420.20)
+        );
     }
 
     private function getTestAction(): Action
@@ -57,26 +72,6 @@ trait StandardUITemplateFactoryTestTrait
             ),
             new Switchable(),
             new Positionable(420.20)
-        );
-    }
-
-    private function callBuildStandardUITemplateUsingTestArguments(): StandardUITemplate {
-        return $this->getStandardUITemplateFactory()->buildStandardUITemplate(
-            $this->suitExpectedName,
-            $this->suitExpectedContainer,
-            $this->expectedPosition,
-            $this->getTestOutputComponent(),
-            $this->getTestAction()
-        );
-    }
-
-    public function testBuildStandardUITemplateReturnsAnStandardUITemplateImplementationInstance(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate',
-                $this->callBuildStandardUITemplateUsingTestArguments()
-            )
         );
     }
 
@@ -141,5 +136,11 @@ trait StandardUITemplateFactoryTestTrait
             )
         );
 
+    }
+
+    protected function setStandardUITemplateFactoryParentTestInstances(): void
+    {
+        $this->setStoredComponentFactory($this->getStandardUITemplateFactory());
+        $this->setStoredComponentFactoryParentTestInstances();
     }
 }

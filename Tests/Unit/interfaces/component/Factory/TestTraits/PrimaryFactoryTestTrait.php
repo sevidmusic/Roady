@@ -19,6 +19,16 @@ trait PrimaryFactoryTestTrait
         );
     }
 
+    public function getPrimaryFactory(): PrimaryFactory
+    {
+        return $this->primaryFactory;
+    }
+
+    public function setPrimaryFactory(PrimaryFactory $primaryFactory)
+    {
+        $this->primaryFactory = $primaryFactory;
+    }
+
     public function testBuildIdentifiableReturnsIdentifiableImplementationInstanceWhoseAssignedNameMatchesSpecifiedName(): void
     {
         $expectedName = 'ExpectedName';
@@ -110,16 +120,6 @@ trait PrimaryFactoryTestTrait
     {
         $this->setFactory($this->getPrimaryFactory());
         $this->setFactoryParentTestInstances();
-    }
-
-    public function getPrimaryFactory(): PrimaryFactory
-    {
-        return $this->primaryFactory;
-    }
-
-    public function setPrimaryFactory(PrimaryFactory $primaryFactory)
-    {
-        $this->primaryFactory = $primaryFactory;
     }
 
 }

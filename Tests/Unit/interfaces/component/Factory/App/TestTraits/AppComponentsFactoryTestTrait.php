@@ -2,19 +2,19 @@
 
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
+use DarlingCms\classes\component\Web\App;
+use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory;
 use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
-use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
+use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Factory\RequestFactory;
 use DarlingCms\interfaces\component\Factory\ResponseFactory;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
+use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
 use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
 use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\interfaces\component\Component;
+use DarlingCms\interfaces\component\Web\Routing\Request;
 
 trait AppComponentsFactoryTestTrait
 {
@@ -29,6 +29,26 @@ trait AppComponentsFactoryTestTrait
                 OutputComponentFactory::class
             )
         );
+    }
+
+    public function appComponentsFactoryImplementsExpectedInterface(
+        string $expectedInterface
+    ): bool
+    {
+        return $this->isProperImplementation(
+            $expectedInterface,
+            $this->getAppComponentsFactory()
+        );
+    }
+
+    protected function getAppComponentsFactory(): AppComponentsFactory
+    {
+        return $this->appComponentsFactory;
+    }
+
+    protected function setAppComponentsFactory(AppComponentsFactory $appComponentsFactory): void
+    {
+        $this->appComponentsFactory = $appComponentsFactory;
     }
 
     public function testAppComponentsFactoryImplementsResponseFactoryInterface(): void
@@ -67,7 +87,8 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildConstructorArgsReturnsAnArrayWithExactlyThreeValues(): void {
+    public function testBuildConstructorArgsReturnsAnArrayWithExactlyThreeValues(): void
+    {
         $this->assertEquals(
             3,
             count(
@@ -78,14 +99,28 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildConstructorArgsReturnsAnArrayOfObjects(): void {
-        foreach(
+    private function getTestDomain(): Request
+    {
+        if (!isset($this->testDomain) === true) {
+            $this->testDomain = new CoreRequest(
+                $this->getAppComponentsFactory()->getPrimaryFactory()->buildStorable(
+                    'TestDomain',
+                    'TestRequests'
+                ),
+                $this->getAppComponentsFactory()->getPrimaryFactory()->buildSwitchable()
+            );
+        }
+        return $this->testDomain;
+    }
+
+    public function testBuildConstructorArgsReturnsAnArrayOfObjects(): void
+    {
+        foreach (
             $this->appComponentsFactory::buildConstructorArgs(
                 $this->getTestDomain()
             )
             as $value
-        )
-        {
+        ) {
             $this->assertTrue(is_object($value));
         }
     }
@@ -126,7 +161,8 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void {
+    public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void
+    {
         $this->assertEquals(
             App::deriveNameLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
@@ -135,7 +171,8 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildDomainReturnsRequestWhoseLocationMatchesExpectedAppNameLocation(): void {
+    public function testBuildDomainReturnsRequestWhoseLocationMatchesExpectedAppNameLocation(): void
+    {
         $this->assertEquals(
             App::deriveNameLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
@@ -144,7 +181,8 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildDomainReturnsRequestWhoseContainerMatchesExpectedAppNameLocation(): void {
+    public function testBuildDomainReturnsRequestWhoseContainerMatchesExpectedAppNameLocation(): void
+    {
         $this->assertEquals(
             App::deriveNameLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
@@ -153,7 +191,8 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildDomainReturnsRequestWhoseUrlMatchesSuppliedUrl(): void {
+    public function testBuildDomainReturnsRequestWhoseUrlMatchesSuppliedUrl(): void
+    {
         $this->assertEquals(
             $this->getTestDomain()->getUrl(),
             $this->getAppComponentsFactory()::buildDomain(
@@ -166,6 +205,16 @@ trait AppComponentsFactoryTestTrait
     {
         $this->wasStoredAndRegistered(
             $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']
+        );
+    }
+
+    private function wasStoredAndRegistered(Component $component): void
+    {
+        $this->assertEquals(
+            $component,
+            $this->getAppComponentsFactory()->getComponentCrud()->read(
+                $component
+            )
         );
     }
 
@@ -183,6 +232,35 @@ trait AppComponentsFactoryTestTrait
             $this->expectedBuildLog(),
             $this->getAppComponentsFactory()->buildLog()
         );
+    }
+
+    private function expectedBuildLog(): string
+    {
+        $buildLog = "";
+        foreach (
+            $this->getAppComponentsFactory()->getStoredComponentRegistry()->getRegisteredComponents()
+            as
+            $storable
+        ) {
+            $message = sprintf(
+                '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
+                PHP_EOL,
+                $storable->getType(),
+                PHP_EOL,
+                "\033[42m" . $storable->getName() . "\033[0m",
+                PHP_EOL,
+                "\033[1;32m" . $storable->getContainer() . "\033[0m",
+                PHP_EOL,
+                "\033[44m" . $storable->getLocation() . "\033[0m",
+                PHP_EOL,
+                "\033[1;34m" . $storable->getType() . "\033[0m",
+                PHP_EOL,
+                "\033[46m" . $storable->getUniqueId() . "\033[0m",
+                PHP_EOL
+            );
+            $buildLog .= $message;
+        }
+        return $buildLog;
     }
 
     public function testBuildLogEchosBuildLogIfSHOW_LOGFlagIsSupplied(): void
@@ -214,54 +292,26 @@ trait AppComponentsFactoryTestTrait
         return str_replace(
             'Tests/Unit/interfaces/component/Factory/App/TestTraits',
             'Apps' .
-                DIRECTORY_SEPARATOR .
-                '.buildLogs' .
-                DIRECTORY_SEPARATOR .
-                $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']->getName(),
+            DIRECTORY_SEPARATOR .
+            '.buildLogs' .
+            DIRECTORY_SEPARATOR .
+            $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']->getName(),
             __DIR__
         );
 
     }
 
-    private function expectedBuildLog(): string {
-        $buildLog = "";
-        foreach(
-            $this->getAppComponentsFactory()->getStoredComponentRegistry()->getRegisteredComponents()
-            as
-            $storable
-        )
-        {
-            $message = sprintf(
-                '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
-                PHP_EOL,
-                $storable->getType(),
-                PHP_EOL,
-                "\033[42m" . $storable->getName() . "\033[0m",
-                PHP_EOL,
-                "\033[1;32m" . $storable->getContainer() . "\033[0m",
-                PHP_EOL,
-                "\033[44m" . $storable->getLocation() . "\033[0m",
-                PHP_EOL,
-                "\033[1;34m" . $storable->getType() . "\033[0m",
-                PHP_EOL,
-                "\033[46m" . $storable->getUniqueId() . "\033[0m",
-                PHP_EOL
-            );
-            $buildLog .= $message;
-        }
-        return $buildLog;
-    }
     /* @todo
      * In order for this test to be possible the App component must be refactored to accessing the supplied request
      * to a property called domain so that an app instance can do: $app->getDomain()
      * @todo: Implement App->getDomain(): Request;
-    public function testDomainSuppliedToConstructorIsStoredAndRegisteredOnInstantiation(): void
-    {
-        $this->wasStoredAndRegistered(
-            $this->getTestDomain()
-        );
-    }
-    */
+     * public function testDomainSuppliedToConstructorIsStoredAndRegisteredOnInstantiation(): void
+     * {
+     * $this->wasStoredAndRegistered(
+     * $this->getTestDomain()
+     * );
+     * }
+     */
 
     public function getOutputComponentFactory(): OutputComponentFactory
     {
@@ -283,54 +333,10 @@ trait AppComponentsFactoryTestTrait
         return $this->getAppComponentsFactory();
     }
 
-    public function appComponentsFactoryImplementsExpectedInterface(
-        string $expectedInterface
-    ): bool
-    {
-        return $this->isProperImplementation(
-            $expectedInterface,
-            $this->getAppComponentsFactory()
-        );
-    }
-
     protected function setAppComponentsFactoryParentTestInstances(): void
     {
         $this->setStoredComponentFactory($this->getAppComponentsFactory());
         $this->setStoredComponentFactoryParentTestInstances();
-    }
-
-    protected function getAppComponentsFactory(): AppComponentsFactory
-    {
-        return $this->appComponentsFactory;
-    }
-
-    protected function setAppComponentsFactory(AppComponentsFactory $appComponentsFactory): void
-    {
-        $this->appComponentsFactory = $appComponentsFactory;
-    }
-
-    private function getTestDomain(): Request
-    {
-        if(!isset($this->testDomain) === true)
-        {
-            $this->testDomain = new CoreRequest(
-                $this->getAppComponentsFactory()->getPrimaryFactory()->buildStorable(
-                    'TestDomain',
-                    'TestRequests'
-                ),
-                $this->getAppComponentsFactory()->getPrimaryFactory()->buildSwitchable()
-            );
-        }
-        return $this->testDomain;
-    }
-
-    private function wasStoredAndRegistered(Component $component): void {
-        $this->assertEquals(
-            $component,
-            $this->getAppComponentsFactory()->getComponentCrud()->read(
-                $component
-            )
-        );
     }
 
 }

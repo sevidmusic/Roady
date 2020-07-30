@@ -2,20 +2,20 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\interfaces\component\Factory\ResponseFactory;
+use DarlingCms\classes\component\Action as CoreAction;
 use DarlingCms\classes\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingCms\interfaces\component\Web\Routing\Response;
-use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Action;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
 use DarlingCms\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\classes\component\Action as CoreAction;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
+use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingCms\interfaces\component\Action;
+use DarlingCms\interfaces\component\Factory\ResponseFactory;
+use DarlingCms\interfaces\component\OutputComponent;
+use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
+use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingCms\interfaces\component\Web\Routing\Response;
 
 trait ResponseFactoryTestTrait
 {
@@ -28,6 +28,54 @@ trait ResponseFactoryTestTrait
     private $expectedNumberOfOutputComponents = 27;
     private $expectedNumberOfActions = 42;
 
+    public function testBuildResponseReturnsAResponseImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                Response::class,
+                $this->callBuildResponse()
+            )
+        );
+    }
+
+    private function callBuildResponse(): Response
+    {
+        return $this->getResponseFactory()->buildResponse(
+            ...$this->buildBuildResponseTestArguments()
+        );
+    }
+
+    protected function getResponseFactory(): ResponseFactory
+    {
+        return $this->responseFactory;
+    }
+
+    protected function setResponseFactory(ResponseFactory $responseFactory): void
+    {
+        $this->responseFactory = $responseFactory;
+    }
+
+    private function buildBuildResponseTestArguments(): array
+    {
+        $args = [
+            $this->expectedResponseName,
+            $this->expectedPosition,
+        ];
+        for ($i = 0; $i < $this->expectedNumberOfRequests; $i++) {
+            array_push($args, $this->buildTestRequest());
+        }
+        for ($i = 0; $i < $this->expectedNumberOfStandardUITemplates; $i++) {
+            array_push($args, $this->buildTestStandardUITemplate());
+        }
+        for ($i = 0; $i < $this->expectedNumberOfOutputComponents; $i++) {
+            array_push($args, $this->buildTestOutputComponent());
+        }
+        for ($i = 0; $i < $this->expectedNumberOfActions; $i++) {
+            array_push($args, $this->buildTestAction());
+        }
+        return $args;
+    }
+
     private function buildTestRequest(): Request
     {
         return new CoreRequest(
@@ -37,6 +85,21 @@ trait ResponseFactoryTestTrait
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable()
         );
+    }
+
+    private function buildTestStandardUITemplate(): StandardUITemplate
+    {
+        $suit = new CoreStandardUITemplate(
+            $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
+                'TestStandardUITemplate',
+                'TestTemplates'
+            ),
+            $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
+            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
+        );
+        $suit->addType($this->buildTestOutputComponent());
+        $suit->addType($this->buildTestAction());
+        return $suit;
     }
 
     private function buildTestOutputComponent(): OutputComponent
@@ -60,63 +123,6 @@ trait ResponseFactoryTestTrait
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
             $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
-        );
-    }
-
-    private function buildTestStandardUITemplate(): StandardUITemplate
-    {
-        $suit = new CoreStandardUITemplate(
-            $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
-                'TestStandardUITemplate',
-                'TestTemplates'
-            ),
-            $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
-            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
-        );
-        $suit->addType($this->buildTestOutputComponent());
-        $suit->addType($this->buildTestAction());
-        return $suit;
-    }
-
-    private function buildBuildResponseTestArguments(): array
-    {
-        $args = [
-            $this->expectedResponseName,
-            $this->expectedPosition,
-        ];
-        for($i=0;$i < $this->expectedNumberOfRequests; $i++)
-        {
-            array_push($args, $this->buildTestRequest());
-        }
-        for($i=0;$i < $this->expectedNumberOfStandardUITemplates; $i++)
-        {
-            array_push($args, $this->buildTestStandardUITemplate());
-        }
-        for($i=0;$i < $this->expectedNumberOfOutputComponents; $i++)
-        {
-            array_push($args, $this->buildTestOutputComponent());
-        }
-        for($i=0;$i < $this->expectedNumberOfActions; $i++)
-        {
-            array_push($args, $this->buildTestAction());
-        }
-        return $args;
-    }
-
-    private function callBuildResponse(): Response
-    {
-        return $this->getResponseFactory()->buildResponse(
-            ...$this->buildBuildResponseTestArguments()
-        );
-    }
-
-    public function testBuildResponseReturnsAResponseImplementationInstance(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                Response::class,
-                $this->callBuildResponse()
-            )
         );
     }
 
@@ -297,30 +303,6 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    private function callBuildGlobalResponse(): Response
-    {
-        $args = [$this->expectedResponseName, $this->expectedPosition];
-        for($i=0;$i < $this->expectedNumberOfRequests; $i++)
-        {
-            array_push($args, $this->buildTestRequest());
-        }
-        for($i=0;$i < $this->expectedNumberOfStandardUITemplates; $i++)
-        {
-            array_push($args, $this->buildTestStandardUITemplate());
-        }
-        for($i=0;$i < $this->expectedNumberOfOutputComponents; $i++)
-        {
-            array_push($args, $this->buildTestOutputComponent());
-        }
-        for($i=0;$i < $this->expectedNumberOfActions; $i++)
-        {
-            array_push($args, $this->buildTestAction());
-        }
-        return $this->getResponseFactory()->buildGlobalResponse(
-            ...$args
-        );
-    }
-
     public function testBuildGlobalResponseReturnsAGlobalResponseImplementationInstance(): void
     {
         $this->assertTrue(
@@ -328,6 +310,26 @@ trait ResponseFactoryTestTrait
                 GlobalResponse::class,
                 $this->callBuildGlobalResponse()
             )
+        );
+    }
+
+    private function callBuildGlobalResponse(): Response
+    {
+        $args = [$this->expectedResponseName, $this->expectedPosition];
+        for ($i = 0; $i < $this->expectedNumberOfRequests; $i++) {
+            array_push($args, $this->buildTestRequest());
+        }
+        for ($i = 0; $i < $this->expectedNumberOfStandardUITemplates; $i++) {
+            array_push($args, $this->buildTestStandardUITemplate());
+        }
+        for ($i = 0; $i < $this->expectedNumberOfOutputComponents; $i++) {
+            array_push($args, $this->buildTestOutputComponent());
+        }
+        for ($i = 0; $i < $this->expectedNumberOfActions; $i++) {
+            array_push($args, $this->buildTestAction());
+        }
+        return $this->getResponseFactory()->buildGlobalResponse(
+            ...$args
         );
     }
 
@@ -392,16 +394,6 @@ trait ResponseFactoryTestTrait
     {
         $this->setStoredComponentFactory($this->getResponseFactory());
         $this->setStoredComponentFactoryParentTestInstances();
-    }
-
-    protected function getResponseFactory(): ResponseFactory
-    {
-        return $this->responseFactory;
-    }
-
-    protected function setResponseFactory(ResponseFactory $responseFactory): void
-    {
-        $this->responseFactory = $responseFactory;
     }
 
 }
