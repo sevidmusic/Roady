@@ -1,17 +1,6 @@
 <?php
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard;
 use DarlingCms\classes\component\Factory\App\AppComponentsFactory;
-use DarlingCms\classes\component\Factory\PrimaryFactory;
-use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\GlobalResponse;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
 use Extensions\Contests\core\classes\component\Actions\CreateSubmission;
 
 ini_set('display_errors', true);

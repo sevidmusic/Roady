@@ -1,6 +1,6 @@
 <?php
 
-// @devNote: Folowing line for reference only, autoload should be done in file including this file
+// @devNote: Following line for reference only, autoload should be done in the file that is including this file, NOT FROM THIS FILE
 //    require_once('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
 
 use DarlingCms\classes\component\Driver\Storage\Standard;
@@ -79,12 +79,10 @@ HTML;
 
 function formatOutput(): bool
 {
-    return (
-    (empty(getCurrentRequest()->getGet()) === true)
-    || (substr(getCurrentRequest()->getUrl(), 0, 30) === 'http://192.168.33.10/index.php')
-        ? true
-        : false
-    );
+    return
+        (empty(getCurrentRequest()->getGet()) === true)
+        ||
+        (substr(getCurrentRequest()->getUrl(), 0, 30) === 'http://192.168.33.10/index.php');
 }
 
 function getDoctype(): string
