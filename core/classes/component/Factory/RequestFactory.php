@@ -2,8 +2,8 @@
 
 namespace DarlingCms\classes\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
 use DarlingCms\abstractions\component\Factory\RequestFactory as CoreRequestFactory;
+use DarlingCms\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
 
 class RequestFactory extends CoreRequestFactory implements RequestFactoryInterface
 {
