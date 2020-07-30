@@ -19,10 +19,7 @@ use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as Cor
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingCms\interfaces\component\Web\Routing\Response;
-use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingCms\interfaces\component\Web\App;
 use DarlingCms\classes\component\Web\App as CoreApp;
-use DarlingCms\interfaces\primary\Switchable;
 use DarlingCms\classes\primary\Storable;
 use DarlingCms\classes\primary\Switchable as CoreSwitchable;
 use DarlingCms\classes\component\Driver\Storage\Standard;
