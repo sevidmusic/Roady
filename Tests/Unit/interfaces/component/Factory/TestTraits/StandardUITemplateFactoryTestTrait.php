@@ -14,7 +14,7 @@ trait StandardUITemplateFactoryTestTrait
 {
 
     private $suitExpectedName = 'AssignedName';
-    private $suitExpectedContainer = 'AssingedContainer';
+    private $suitExpectedContainer = 'AssignedContainer';
     private $expectedPosition = 420.87;
     private $standardUITemplateFactory;
 
@@ -125,7 +125,7 @@ trait StandardUITemplateFactoryTestTrait
         );
     }
 
-    public function testBuildStandardUITemplateReturnsStandardUITemplateWhoseAssignedTypesReflectSuplliedTypes(): void
+    public function testBuildStandardUITemplateReturnsStandardUITemplateWhoseAssignedTypesReflectSuppliedTypes(): void
     {
         $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
         $this->assertTrue(

@@ -154,6 +154,7 @@ trait StoredComponentFactoryTestTrait
 
     protected function wasStoredOnBuild(Component $component): bool
     {
+        /** @var @devNote: Non-strict comparison used on purpose, instances do not need to be the same in this context, but their data MUST be the same. */
         $wasStored = ($this->getMockCrud()->read($component) == $component);
         $this->getMockCrud()->delete($component);
         return $wasStored;

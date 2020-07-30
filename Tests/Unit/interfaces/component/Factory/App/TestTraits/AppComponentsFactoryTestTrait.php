@@ -9,8 +9,6 @@ use DarlingCms\interfaces\component\Factory\RequestFactory;
 use DarlingCms\interfaces\component\Factory\ResponseFactory;
 use DarlingCms\interfaces\component\Web\Routing\Request;
 use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\interfaces\component\Web\Routing\Response;
-use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingCms\interfaces\component\Factory\PrimaryFactory;
 use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
 use DarlingCms\interfaces\component\Crud\ComponentCrud;
@@ -253,8 +251,8 @@ trait AppComponentsFactoryTestTrait
         }
         return $buildLog;
     }
-    /*
-     * In order for this test to be possible the App component must be refactored to assing the supplied request
+    /* @todo
+     * In order for this test to be possible the App component must be refactored to accessing the supplied request
      * to a property called domain so that an app instance can do: $app->getDomain()
      * @todo: Implement App->getDomain(): Request;
     public function testDomainSuppliedToConstructorIsStoredAndRegisteredOnInstantiation(): void

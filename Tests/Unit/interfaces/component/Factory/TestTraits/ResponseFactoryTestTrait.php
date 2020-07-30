@@ -316,10 +316,9 @@ trait ResponseFactoryTestTrait
         {
             array_push($args, $this->buildTestAction());
         }
-        $globalResponse = $this->getResponseFactory()->buildGlobalResponse(
+        return $this->getResponseFactory()->buildGlobalResponse(
             ...$args
         );
-        return $globalResponse;
     }
 
     public function testBuildGlobalResponseReturnsAGlobalResponseImplementationInstance(): void

@@ -4,7 +4,6 @@ namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingCms\interfaces\component\Factory\RequestFactory;
 use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
 
 trait RequestFactoryTestTrait
 {
