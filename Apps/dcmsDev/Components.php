@@ -192,28 +192,4 @@ $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
     )
 );
 
-$appComponentsFactory->getComponentCrud()->create($appComponentsFactory->getPrimaryFactory()->export()['app']);
-$appComponentsFactory->getStoredComponentRegistry()->registerComponent($appComponentsFactory->getPrimaryFactory()->export()['app']);
-
-foreach (
-    $appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents()
-    as
-    $storable
-) {
-    printf(
-        '%sBuilt component %s:%s    Name: %s%s    UniqueId: %s%s    Type: %s%s    Location: %s%s    Container: %s%s',
-        PHP_EOL,
-        $storable->getName(),
-        PHP_EOL,
-        $storable->getName(),
-        PHP_EOL,
-        $storable->getUniqueId(),
-        PHP_EOL,
-        $storable->getType(),
-        PHP_EOL,
-        $storable->getLocation(),
-        PHP_EOL,
-        $storable->getContainer(),
-        PHP_EOL
-    );
-}
+$appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
