@@ -62,20 +62,18 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         Component ...$requestsOutputComponentsStandardUITemplates
     ): GlobalResponse
     {
-        $app = $this->getPrimaryFactory()->export()['app'];
-        $app->import(
+        $globalResponse = new CoreGlobalResponse(
+            $this->getPrimaryFactory()->export()['app'],
+            $this->getPrimaryFactory()->buildSwitchable(),
+            $this->getPrimaryFactory()->buildPositionable($position)
+        );
+        $globalResponse->import(
             [
                 'storable' => $this->getPrimaryFactory()->buildStorable(
                     $name,
-                    $app->getLocation(),
-                    $app->getContainer()
+                    $globalResponse->getContainer()
                 )
             ]
-        );
-        $globalResponse = new CoreGlobalResponse(
-            $app,
-            $this->getPrimaryFactory()->buildSwitchable(),
-            $this->getPrimaryFactory()->buildPositionable($position)
         );
         foreach($requestsOutputComponentsStandardUITemplates as $component)
         {
