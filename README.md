@@ -13,6 +13,5 @@
 A data driven tool for developing Web applications.
 
 #############################################
-
-![alt text](https://github.com/sevidmusic/DarlingCmsRedesign/blob/master/DCMS_UML.png?raw=true)
+![alt text](https://raw.githubusercontent.com/sevidmusic/DarlingCmsRedesign/unitTests/DCMS_UML.png)
 
