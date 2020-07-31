@@ -13,4 +13,9 @@ interface App extends CoreSwitchableComponent
 
     public static function getRequestedApp(Request $request, ComponentCrud $componentCrud): App;
 
+    /**
+     * @todo: Implement the following:
+     *
+     * getAppDomain(): Request
+     */
 }
