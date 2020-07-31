@@ -158,7 +158,11 @@ $homeResponse = $appComponentsFactory->buildResponse(
         REQUEST_CONTAINER,
         $domain->getUrl() . 'index.php'
     ),
-    $domain,
+    $appComponentsFactory->buildRequest(
+        'RootRequest',
+        REQUEST_CONTAINER,
+        $domain->getUrl()
+    ),
     $defaultUITemplate,
     $appComponentsFactory->buildOutputComponent(
         'Welcome',
