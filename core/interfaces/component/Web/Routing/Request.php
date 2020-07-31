@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Web\Routing;
+namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
 
-use DarlingCms\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
 
 interface Request extends SwitchableComponent
 {

@@ -2,10 +2,10 @@
 
 namespace Extensions\Contests\core\abstractions\component\Contest;
 
-use DarlingCms\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 use DateTime;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
 use Extensions\Contests\core\interfaces\component\Contest\Submission as SubmissionInterface;

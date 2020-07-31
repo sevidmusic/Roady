@@ -2,8 +2,8 @@
 
 namespace UnitTests\abstractions\component\Web\Routing;
 
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest;
 use UnitTests\interfaces\component\Web\Routing\TestTraits\ResponseTestTrait;
 
@@ -15,7 +15,7 @@ class ResponseTest extends SwitchableComponentTest
     {
         $this->setResponse(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Web\Routing\Response',
+                '\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response',
                 [
                     new Storable(
                         'MockResponseName',

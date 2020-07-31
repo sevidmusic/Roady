@@ -2,9 +2,9 @@
 
 namespace UnitTests\abstractions\component\Template\UserInterface;
 
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest;
 use UnitTests\interfaces\component\Template\UserInterface\TestTraits\StandardUITemplateTestTrait;
 use UnitTests\interfaces\primary\TestTraits\PositionableTestTrait;
@@ -18,7 +18,7 @@ class StandardUITemplateTest extends SwitchableComponentTest
     {
         $this->setGenericUITemplate(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Template\UserInterface\StandardUITemplate',
+                '\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate',
                 [
                     new Storable(
                         'MockGenericUITemplateName',

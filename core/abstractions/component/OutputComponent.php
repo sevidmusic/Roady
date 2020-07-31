@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingCms\abstractions\component;
+namespace DarlingDataManagementSystem\abstractions\component;
 
-use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class OutputComponent extends SwitchableComponent implements OutputComponentInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component\Factory;
+namespace DarlingDataManagementSystem\classes\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
-use DarlingCms\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
+use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 
 class StoredComponentFactory extends StoredComponentFactoryBase implements StoredComponentFactoryInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component\Factory;
+namespace DarlingDataManagementSystem\classes\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingCms\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory as CoreResponseFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
 
 class ResponseFactory extends CoreResponseFactory implements ResponseFactoryInterface
 {

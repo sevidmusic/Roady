@@ -2,12 +2,12 @@
 
 namespace UnitTests\classes\component\Web\Routing;
 
-use DarlingCms\classes\component\Crud\ComponentCrud as Crud;
-use DarlingCms\classes\component\Driver\Storage\Standard as StorageDriver;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Router;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as Crud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Web\Routing\RouterTest as AbstractRouterTest;
 
 class RouterTest extends AbstractRouterTest

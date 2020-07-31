@@ -2,7 +2,7 @@
 
 namespace Extensions\Contests\core\interfaces\component\Contest;
 
-use DarlingCms\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Component;
 
 interface Submitter extends Component
 {

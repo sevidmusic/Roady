@@ -1,20 +1,20 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
-use DarlingCms\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
-use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
 
 abstract class ResponseFactory extends CoreStoredComponentFactory implements ResponseFactoryInterface
 {

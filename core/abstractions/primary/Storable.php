@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\abstractions\primary;
+namespace DarlingDataManagementSystem\abstractions\primary;
 
-use DarlingCms\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
 abstract class Storable extends Identifiable implements StorableInterface
 {

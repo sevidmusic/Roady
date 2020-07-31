@@ -2,11 +2,11 @@
 
 namespace UnitTests\abstractions\component\Web\Routing;
 
-use DarlingCms\classes\component\Crud\ComponentCrud as Crud;
-use DarlingCms\classes\component\Driver\Storage\Standard as StorageDriver;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as Crud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest;
 use UnitTests\interfaces\component\Web\Routing\TestTraits\RouterTestTrait;
 
@@ -43,7 +43,7 @@ class RouterTest extends SwitchableComponentTest
 
         $this->setRouter(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Web\Routing\Router',
+                '\DarlingDataManagementSystem\abstractions\component\Web\Routing\Router',
                 [
                     new Storable(
                         'MockRouterName',

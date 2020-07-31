@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
 
 trait PrimaryFactoryTestTrait
 {
@@ -13,7 +13,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Identifiable',
+                'DarlingDataManagementSystem\interfaces\primary\Identifiable',
                 class_implements($this->getPrimaryFactory()->buildIdentifiable('AssignedName'))
             )
         );
@@ -40,7 +40,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Storable',
+                'DarlingDataManagementSystem\interfaces\primary\Storable',
                 class_implements($this->getPrimaryFactory()->buildStorable('AssignedName', 'AssignedContainer'))
             )
         );
@@ -73,7 +73,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Classifiable',
+                'DarlingDataManagementSystem\interfaces\primary\Classifiable',
                 class_implements($this->getPrimaryFactory()->buildClassifiable())
             )
         );
@@ -83,7 +83,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Exportable',
+                'DarlingDataManagementSystem\interfaces\primary\Exportable',
                 class_implements($this->getPrimaryFactory()->buildExportable())
             )
         );
@@ -93,7 +93,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Switchable',
+                'DarlingDataManagementSystem\interfaces\primary\Switchable',
                 class_implements($this->getPrimaryFactory()->buildSwitchable())
             )
         );
@@ -103,7 +103,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Positionable',
+                'DarlingDataManagementSystem\interfaces\primary\Positionable',
                 class_implements($this->getPrimaryFactory()->buildPositionable(rand(0, 1000)))
             )
         );

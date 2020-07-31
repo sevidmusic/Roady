@@ -13,7 +13,7 @@ class ClassifiableTest extends TestCase
     {
         $this->setClassifiable(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\primary\Classifiable'
+                '\DarlingDataManagementSystem\abstractions\primary\Classifiable'
             )
         );
     }

@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\interfaces\primary\Identifiable;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable;
 use UnitTests\TestTraits\StringTester;
 
 trait IdentifiableTestTrait

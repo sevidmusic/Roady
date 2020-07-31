@@ -2,9 +2,9 @@
 
 namespace UnitTests\classes\component\Web\Routing;
 
-use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Web\Routing\ResponseTest as AbstractResponseTest;
 
 class ResponseTest extends AbstractResponseTest

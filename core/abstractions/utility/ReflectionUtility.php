@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\abstractions\utility;
+namespace DarlingDataManagementSystem\abstractions\utility;
 
-use DarlingCms\dev\traits\Logger;
-use DarlingCms\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use DarlingDataManagementSystem\dev\traits\Logger;
+use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
@@ -185,7 +185,7 @@ EOD;
                 continue;
             }
             /** For unknown types assume class instance. */
-            $type = str_replace(['DarlingCms\interfaces'], ['DarlingCms\classes'], $type);
+            $type = str_replace(['DarlingDataManagementSystem\interfaces'], ['DarlingDataManagementSystem\classes'], $type);
             array_push($defaults, $this->getClassInstance('\\' . $type));
         }
         return $defaults;

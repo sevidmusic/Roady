@@ -2,11 +2,11 @@
 
 namespace UnitTests\interfaces\component\Template\UserInterface\TestTraits;
 
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
 
 trait StandardUITemplateTestTrait
 {

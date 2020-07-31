@@ -2,7 +2,7 @@
 
 namespace DS_TESTS_NAMESPACE_PREFIX\abstractions\component\DS_COMPONENT_SUBTYPE;
 
-use DarlingCms\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable;
 use UnitTests\abstractions\component\ComponentTest;
 use DS_TESTS_NAMESPACE_PREFIX\interfaces\component\DS_COMPONENT_SUBTYPE\TestTraits\DS_COMPONENT_NAMETestTrait;
 

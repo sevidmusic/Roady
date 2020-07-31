@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingCms\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
 
 trait OutputComponentTestTrait
 {
@@ -13,7 +13,7 @@ trait OutputComponentTestTrait
     {
         $this->assertTrue(
             isset($this->getOutputComponent()->export()['positionable']),
-            'The \DarlingCms\interfaces\primary\Positionable implementation instance must be assigned to the $positionable property on instantiation.'
+            'The \DarlingDataManagementSystem\interfaces\primary\Positionable implementation instance must be assigned to the $positionable property on instantiation.'
         );
     }
 

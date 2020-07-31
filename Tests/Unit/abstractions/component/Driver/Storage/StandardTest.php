@@ -2,8 +2,8 @@
 
 namespace UnitTests\abstractions\component\Driver\Storage;
 
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonTest;
 use UnitTests\interfaces\component\Driver\Storage\TestTraits\StandardTestTrait;
 
@@ -15,7 +15,7 @@ class StandardTest extends JsonTest
     {
         $this->setStandard(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Driver\Storage\Standard',
+                '\DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard',
                 [
                     new Storable(
                         'MockStandardName',

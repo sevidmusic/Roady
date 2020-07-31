@@ -1,15 +1,15 @@
 <?php
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 
 ini_set('display_errors', true);
 require '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';

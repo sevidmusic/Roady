@@ -13,7 +13,7 @@ class IdentifiableTest extends TestCase
     {
         $this->setIdentifiable(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\primary\Identifiable',
+                '\DarlingDataManagementSystem\abstractions\primary\Identifiable',
                 ['MockName']
             )
         );

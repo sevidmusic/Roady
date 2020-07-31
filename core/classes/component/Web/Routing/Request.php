@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Web\Routing;
+namespace DarlingDataManagementSystem\classes\component\Web\Routing;
 
-use DarlingCms\abstractions\component\Web\Routing\Request as RequestBase;
-use DarlingCms\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\abstractions\component\Web\Routing\Request as RequestBase;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
 class Request extends RequestBase implements RequestInterface
 {

@@ -2,12 +2,12 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard as StandardStorageDriver;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Factory\BaseComponentFactory;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StandardStorageDriver;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Factory\BaseComponentFactory;
 
 trait BaseComponentFactoryTestTrait
 {
@@ -18,7 +18,7 @@ trait BaseComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Component',
+                'DarlingDataManagementSystem\interfaces\component\Component',
                 $this->getBaseComponentFactory()->buildComponent('AssignedName', 'AssignedContainer')
             )
         );
@@ -43,7 +43,7 @@ trait BaseComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\SwitchableComponent',
+                'DarlingDataManagementSystem\interfaces\component\SwitchableComponent',
                 $this->getBaseComponentFactory()->buildSwitchableComponent('AssignedName', 'AssignedContainer')
             )
         );
@@ -53,7 +53,7 @@ trait BaseComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\OutputComponent',
+                'DarlingDataManagementSystem\interfaces\component\OutputComponent',
                 $this->getBaseComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned output.', 420.87)
             )
         );
@@ -63,7 +63,7 @@ trait BaseComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Action',
+                'DarlingDataManagementSystem\interfaces\component\Action',
                 $this->getBaseComponentFactory()->buildAction('AssignedName', 'AssignedContainer', 420.87)
             )
         );
@@ -73,7 +73,7 @@ trait BaseComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud',
                 $this->getBaseComponentFactory()->export()['componentCrud']
             )
         );

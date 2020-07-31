@@ -13,7 +13,7 @@ class StandardUITemplateFactoryTest extends CoreStoredComponentFactoryTest
     {
         $this->setStandardUITemplateFactory(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Factory\StandardUITemplateFactory',
+                '\DarlingDataManagementSystem\abstractions\component\Factory\StandardUITemplateFactory',
                 [
                     $this->getMockPrimaryFactory(),
                     $this->getMockCrud(),

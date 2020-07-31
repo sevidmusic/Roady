@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\Factory;
 
-use DarlingCms\classes\component\Factory\StandardUITemplateFactory;
+use DarlingDataManagementSystem\classes\component\Factory\StandardUITemplateFactory;
 use UnitTests\abstractions\component\Factory\StandardUITemplateFactoryTest as CoreStandardUITemplateFactoryTest;
 
 class StandardUITemplateFactoryTest extends CoreStandardUITemplateFactoryTest

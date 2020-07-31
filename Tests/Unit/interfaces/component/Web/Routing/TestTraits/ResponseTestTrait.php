@@ -2,16 +2,16 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as Template;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response as StandardResponse;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as Template;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as StandardResponse;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
 
 trait ResponseTestTrait
 {
@@ -22,7 +22,7 @@ trait ResponseTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\primary\Positionable',
+                'DarlingDataManagementSystem\interfaces\primary\Positionable',
                 class_implements($this->getResponse()->export()['positionable'])
             )
         );
@@ -89,7 +89,7 @@ trait ResponseTestTrait
 
     protected function getMockCrud(): ComponentCrud
     {
-        return new \DarlingCms\classes\component\Crud\ComponentCrud(
+        return new \DarlingDataManagementSystem\classes\component\Crud\ComponentCrud(
             new Storable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
             new Switchable(),
             new Standard(

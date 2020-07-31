@@ -1,14 +1,14 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Driver\Storage\FileSystem;
+namespace DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem;
 
-use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\classes\component\Component as StandardComponent;
-use DarlingCms\classes\primary\Storable as StandardStorable;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Driver\Storage\FileSystem\Json as JsonInterface;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\classes\component\Component as StandardComponent;
+use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\Json as JsonInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class Json extends SwitchableComponent implements JsonInterface
 {
@@ -39,7 +39,7 @@ abstract class Json extends SwitchableComponent implements JsonInterface
     public function getStorageDirectoryPath(): string
     {
         $namespacePath = str_replace(
-            ['DarlingCms', '\\'],
+            ['DarlingDataManagementSystem', '\\'],
             ['core', DIRECTORY_SEPARATOR],
             __NAMESPACE__
         );
@@ -284,7 +284,7 @@ abstract class Json extends SwitchableComponent implements JsonInterface
 
     private function isAComponent(Storable $storable): bool
     {
-        return in_array('DarlingCms\interfaces\component\Component', class_implements($storable));
+        return in_array('DarlingDataManagementSystem\interfaces\component\Component', class_implements($storable));
     }
 
 }

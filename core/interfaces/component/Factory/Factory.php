@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Factory;
+namespace DarlingDataManagementSystem\interfaces\component\Factory;
 
-use DarlingCms\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Component;
 
 interface Factory extends Component
 {

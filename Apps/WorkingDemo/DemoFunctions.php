@@ -3,19 +3,19 @@
 // @devNote: Following line for reference only, autoload should be done in the file that is including this file, NOT FROM THIS FILE
 //    require_once('..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
 
-use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\interfaces\component\Web\Routing\Request as WebRequestComponent;
-use DarlingCms\interfaces\component\Web\Routing\Response as WebResponseComponent;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as WebRequestComponent;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as WebResponseComponent;
 
 function getBody(): string
 {
@@ -460,7 +460,7 @@ function processFormIfSubmitted(ComponentCrud $crud): bool
 
 function getMockCrud(): ComponentCrud
 {
-    return new \DarlingCms\classes\component\Crud\ComponentCrud(
+    return new \DarlingDataManagementSystem\classes\component\Crud\ComponentCrud(
         new Storable('MockComponentCrud', App::deriveNameLocationFromRequest(getCurrentRequest()), 'ComponentCruds'),
         new Switchable(),
         new Standard(
@@ -472,7 +472,7 @@ function getMockCrud(): ComponentCrud
 
 function getMockTemplate(): StandardUITemplate
 {
-    $template = new \DarlingCms\classes\component\Template\UserInterface\StandardUITemplate(
+    $template = new \DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate(
         new Storable('MockTemplate', App::deriveNameLocationFromRequest(getCurrentRequest()), 'Templates'),
         new Switchable(),
         new Positionable()

@@ -1,18 +1,18 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\classes\component\Action as CoreAction;
-use DarlingCms\classes\component\Component as CoreComponent;
-use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\classes\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingCms\interfaces\component\Action;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\BaseComponentFactory as BaseComponentFactoryInterface;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\interfaces\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Action as CoreAction;
+use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\SwitchableComponent as CoreSwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Action;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\BaseComponentFactory as BaseComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
 
 abstract class BaseComponentFactory extends PrimaryFactory implements BaseComponentFactoryInterface
 {

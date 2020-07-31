@@ -3,7 +3,7 @@
 namespace DS_TESTS_NAMESPACE_PREFIX\classes\component\DS_COMPONENT_SUBTYPE;
 
 
-use DarlingCms\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable;
 use DS_TESTS_NAMESPACE_PREFIX\abstractions\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAMETest as AbstractDS_COMPONENT_NAMETest;
 use DS_CORE_NAMESPACE_PREFIX\classes\component\DS_COMPONENT_SUBTYPE\DS_COMPONENT_NAME;
 

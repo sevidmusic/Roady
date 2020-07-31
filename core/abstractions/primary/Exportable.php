@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingCms\abstractions\primary;
+namespace DarlingDataManagementSystem\abstractions\primary;
 
-use DarlingCms\classes\utility\ReflectionUtility;
-use DarlingCms\dev\traits\Logger;
-use DarlingCms\interfaces\primary\Exportable as ExportableInterface;
-use DarlingCms\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility;
+use DarlingDataManagementSystem\dev\traits\Logger;
+use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;

@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 trait StorableTestTrait
 {

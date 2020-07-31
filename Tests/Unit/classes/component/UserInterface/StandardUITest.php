@@ -2,10 +2,10 @@
 
 namespace UnitTests\classes\component\UserInterface;
 
-use DarlingCms\classes\component\UserInterface\StandardUI;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\UserInterface\StandardUI;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\UserInterface\StandardUITest as AbstractStandardUITest;
 
 class StandardUITest extends AbstractStandardUITest

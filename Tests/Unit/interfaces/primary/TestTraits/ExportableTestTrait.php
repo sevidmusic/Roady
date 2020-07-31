@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\interfaces\primary\Exportable;
+use DarlingDataManagementSystem\interfaces\primary\Exportable;
 use UnitTests\classes\utility\ReflectionUtilityTest;
 use UnitTests\TestTraits\ArrayTester;
 use UnitTests\TestTraits\ReflectionUtilityInstance;

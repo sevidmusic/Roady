@@ -1,16 +1,16 @@
 <?php
 
-namespace DarlingCms\abstractions\component;
+namespace DarlingDataManagementSystem\abstractions\component;
 
-use DarlingCms\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Action as ActionInterface;
-use DarlingCms\interfaces\component\Web\Routing\Request as CoreRequestInterface;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable as CoreStorableInterface;
-use DarlingCms\interfaces\primary\Switchable as CoreSwitchableInterface;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as CoreRequestInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as CoreStorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as CoreSwitchableInterface;
 
 abstract class Action extends CoreOutputComponent implements ActionInterface
 {

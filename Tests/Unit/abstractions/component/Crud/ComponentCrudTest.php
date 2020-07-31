@@ -2,9 +2,9 @@
 
 namespace UnitTests\abstractions\component\Crud;
 
-use DarlingCms\classes\component\Driver\Storage\FileSystem\Json as StorageDriver;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\Json as StorageDriver;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest;
 use UnitTests\interfaces\component\Crud\TestTraits\ComponentCrudTestTrait;
 
@@ -16,7 +16,7 @@ class ComponentCrudTest extends SwitchableComponentTest
     {
         $this->setComponentCrud(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Crud\ComponentCrud',
+                '\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud',
                 [
                     new Storable(
                         'MockComponentCrudName',

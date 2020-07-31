@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\interfaces\primary\DS_COMPONENT_NAME;
+use DarlingDataManagementSystem\interfaces\primary\DS_COMPONENT_NAME;
 
 trait DS_COMPONENT_NAMETestTrait
 {

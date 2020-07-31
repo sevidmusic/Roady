@@ -1,21 +1,21 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\classes\primary\Classifiable as CoreClassifiable;
-use DarlingCms\classes\primary\Exportable as CoreExportable;
-use DarlingCms\classes\primary\Identifiable as CoreIdentifiable;
-use DarlingCms\classes\primary\Positionable as CorePositionable;
-use DarlingCms\classes\primary\Storable as CoreStorable;
-use DarlingCms\classes\primary\Switchable as CoreSwitchable;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\interfaces\primary\Classifiable;
-use DarlingCms\interfaces\primary\Exportable;
-use DarlingCms\interfaces\primary\Identifiable;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Classifiable as CoreClassifiable;
+use DarlingDataManagementSystem\classes\primary\Exportable as CoreExportable;
+use DarlingDataManagementSystem\classes\primary\Identifiable as CoreIdentifiable;
+use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable;
+use DarlingDataManagementSystem\interfaces\primary\Exportable;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class PrimaryFactory extends Factory implements PrimaryFactoryInterface
 {

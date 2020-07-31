@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Crud;
+namespace DarlingDataManagementSystem\abstractions\component\Crud;
 
-use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingCms\interfaces\component\Driver\Storage\Standard as StorageDriver;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class ComponentCrud extends SwitchableComponent implements ComponentCrudInterface
 {
@@ -26,8 +26,8 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
     public function read(Storable $storable): Component
     {
         if ($this->getState() === false) {
-            return new \DarlingCms\classes\component\Component(
-                new \DarlingCms\classes\primary\Storable(
+            return new \DarlingDataManagementSystem\classes\component\Component(
+                new \DarlingDataManagementSystem\classes\primary\Storable(
                     '__MOCK_COMPONENT__',
                     '__MOCK_COMPONENT__',
                     '__MOCK_COMPONENT__'

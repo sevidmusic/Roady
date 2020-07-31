@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Driver\Storage\FileSystem;
+namespace DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem;
 
-use DarlingCms\abstractions\component\Driver\Storage\FileSystem\Json as JsonBase;
-use DarlingCms\interfaces\component\Driver\Storage\FileSystem\Json as JsonInterface;
+use DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json as JsonBase;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\Json as JsonInterface;
 
 class Json extends JsonBase implements JsonInterface
 {

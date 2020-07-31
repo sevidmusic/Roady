@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\interfaces\component\Factory\Factory;
+use DarlingDataManagementSystem\interfaces\component\Factory\Factory;
 
 trait FactoryTestTrait
 {
@@ -13,7 +13,7 @@ trait FactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\component\Web\App',
+                'DarlingDataManagementSystem\interfaces\component\Web\App',
                 class_implements($this->getFactory()->export()['app'])
             )
         );

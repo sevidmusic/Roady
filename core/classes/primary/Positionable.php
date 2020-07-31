@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\primary;
+namespace DarlingDataManagementSystem\classes\primary;
 
-use DarlingCms\abstractions\primary\Positionable as PositionableBase;
-use DarlingCms\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\abstractions\primary\Positionable as PositionableBase;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
 class Positionable extends PositionableBase implements PositionableInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\abstractions\primary;
+namespace DarlingDataManagementSystem\abstractions\primary;
 
-use DarlingCms\dev\traits\Logger;
-use DarlingCms\interfaces\primary\Identifiable as IdentifiableInterface;
+use DarlingDataManagementSystem\dev\traits\Logger;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
 use Exception;
 
 abstract class Identifiable implements IdentifiableInterface

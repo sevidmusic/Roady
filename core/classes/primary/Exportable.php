@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\primary;
+namespace DarlingDataManagementSystem\classes\primary;
 
-use DarlingCms\abstractions\primary\Exportable as ExportableBase;
-use DarlingCms\interfaces\primary\Exportable as ExportableInterface;
+use DarlingDataManagementSystem\abstractions\primary\Exportable as ExportableBase;
+use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
 
 class Exportable extends ExportableBase implements ExportableInterface
 {

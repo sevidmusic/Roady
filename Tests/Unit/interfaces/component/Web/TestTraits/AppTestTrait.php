@@ -2,16 +2,16 @@
 
 namespace UnitTests\interfaces\component\Web\TestTraits;
 
-use DarlingCms\abstractions\component\Web\App as AbstractApp;
-use DarlingCms\classes\component\Component;
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard as StandardStorageDriver;
-use DarlingCms\classes\component\Web\App as CoreApp;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\abstractions\component\Web\App as AbstractApp;
+use DarlingDataManagementSystem\classes\component\Component;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 use RuntimeException;
 
 trait AppTestTrait

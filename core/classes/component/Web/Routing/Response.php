@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Web\Routing;
+namespace DarlingDataManagementSystem\classes\component\Web\Routing;
 
-use DarlingCms\abstractions\component\Web\Routing\Response as ResponseBase;
-use DarlingCms\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\abstractions\component\Web\Routing\Response as ResponseBase;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 
 class Response extends ResponseBase implements ResponseInterface
 {

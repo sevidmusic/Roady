@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Crud;
+namespace DarlingDataManagementSystem\interfaces\component\Crud;
 
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 interface ComponentCrud extends SwitchableComponent
 {

@@ -2,12 +2,12 @@
 
 namespace Extensions\Contests\core\abstractions\component\Actions;
 
-use DarlingCms\abstractions\component\Action as CoreAction;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\Action as CoreAction;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 use Extensions\Contests\core\classes\component\Contest\Submission;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
 use Extensions\Contests\core\interfaces\component\Actions\CreateSubmission as CreateSubmissionInterface;
@@ -120,17 +120,17 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
     private function generateSubmissionFromPostData(): Submission
     {
         return new Submission(
-            new \DarlingCms\classes\primary\Storable(
+            new \DarlingDataManagementSystem\classes\primary\Storable(
                 $this->getCurrentRequest()->getPost()['submissionName'],
                 App::deriveNameLocationFromRequest($this->getCurrentRequest()),
                 $this->getCurrentRequest()->getPost()['submissionContainer']
             ),
-            new \DarlingCms\classes\primary\Switchable(),
-            new \DarlingCms\classes\primary\Positionable(
+            new \DarlingDataManagementSystem\classes\primary\Switchable(),
+            new \DarlingDataManagementSystem\classes\primary\Positionable(
                 floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
             ),
             new Submitter(
-                new \DarlingCms\classes\primary\Storable(
+                new \DarlingDataManagementSystem\classes\primary\Storable(
                     $this->getCurrentRequest()->getPost()['submitterName'],
                     App::deriveNameLocationFromRequest($this->getCurrentRequest()),
                     $this->getCurrentRequest()->getPost()['submitterContainer']

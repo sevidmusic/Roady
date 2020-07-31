@@ -2,10 +2,10 @@
 
 namespace UnitTests\abstractions\component\Registry\Storage;
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\ComponentTest;
 use UnitTests\interfaces\component\Registry\Storage\TestTraits\StoredComponentRegistryTestTrait;
 
@@ -17,7 +17,7 @@ class StoredComponentRegistryTest extends ComponentTest
     {
         $this->setStoredComponentRegistry(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Registry\Storage\StoredComponentRegistry',
+                '\DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry',
                 [
                     new Storable(
                         'MockStoredComponentRegistryName',

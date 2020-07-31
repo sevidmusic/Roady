@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Registry\Storage;
+namespace DarlingDataManagementSystem\classes\component\Registry\Storage;
 
-use DarlingCms\abstractions\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryBase;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryBase;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 class StoredComponentRegistry extends StoredComponentRegistryBase implements StoredComponentRegistryInterface
 {

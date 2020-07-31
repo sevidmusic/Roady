@@ -2,8 +2,8 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\interfaces\component\Factory\RequestFactory;
-use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 
 trait RequestFactoryTestTrait
 {

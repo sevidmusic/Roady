@@ -1,15 +1,15 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Web\Routing;
+namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingCms\abstractions\component\Web\Routing\Response as CoreResponse;
-use DarlingCms\classes\component\Web\App as CoreApp;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Web\App;
-use DarlingCms\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\Web\Routing\Response as CoreResponse;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class GlobalResponse extends CoreResponse implements GlobalResponseInterface
 {

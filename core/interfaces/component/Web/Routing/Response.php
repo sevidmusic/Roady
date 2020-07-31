@@ -1,12 +1,12 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Web\Routing;
+namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
 
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
-use DarlingCms\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
 
 interface Response extends SwitchableComponent, Positionable
 {

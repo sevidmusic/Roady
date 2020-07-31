@@ -2,10 +2,10 @@
 
 namespace UnitTests\abstractions\component\Factory;
 
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\ComponentTest;
 use UnitTests\interfaces\component\Factory\TestTraits\FactoryTestTrait;
 
@@ -17,7 +17,7 @@ class FactoryTest extends ComponentTest
     {
         $this->setFactory(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Factory\Factory',
+                '\DarlingDataManagementSystem\abstractions\component\Factory\Factory',
                 [
                     new App(
                         new Request(

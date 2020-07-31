@@ -1,14 +1,14 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
-use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
 
 abstract class OutputComponentFactory extends CoreStoredComponentFactory implements OutputComponentFactoryInterface
 {

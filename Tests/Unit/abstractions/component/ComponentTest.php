@@ -2,7 +2,7 @@
 
 namespace UnitTests\abstractions\component;
 
-use DarlingCms\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable;
 use UnitTests\abstractions\primary\ExportableTest;
 use UnitTests\interfaces\component\TestTraits\ComponentTestTrait;
 
@@ -14,7 +14,7 @@ class ComponentTest extends ExportableTest
     {
         $this->setComponent(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Component',
+                '\DarlingDataManagementSystem\abstractions\component\Component',
                 [
                     new Storable(
                         'MockComponentName',

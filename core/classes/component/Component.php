@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component;
+namespace DarlingDataManagementSystem\classes\component;
 
-use DarlingCms\abstractions\component\Component as ComponentBase;
-use DarlingCms\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\abstractions\component\Component as ComponentBase;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 
 class Component extends ComponentBase implements ComponentInterface
 {

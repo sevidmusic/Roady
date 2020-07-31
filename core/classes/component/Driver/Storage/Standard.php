@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Driver\Storage;
+namespace DarlingDataManagementSystem\classes\component\Driver\Storage;
 
-use DarlingCms\abstractions\component\Driver\Storage\Standard as StandardBase;
-use DarlingCms\interfaces\component\Driver\Storage\Standard as StandardInterface;
+use DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard as StandardBase;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\Standard as StandardInterface;
 
 class Standard extends StandardBase implements StandardInterface
 {

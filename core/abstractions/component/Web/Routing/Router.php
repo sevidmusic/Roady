@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Web\Routing;
+namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\component\Web\Routing\Router as RouterInterface;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class Router extends SwitchableComponent implements RouterInterface
 {
@@ -53,7 +53,7 @@ abstract class Router extends SwitchableComponent implements RouterInterface
             is_object($response)
             &&
             in_array(
-                'DarlingCms\interfaces\component\Web\Routing\Response',
+                'DarlingDataManagementSystem\interfaces\component\Web\Routing\Response',
                 class_implements($response)
             )
         );

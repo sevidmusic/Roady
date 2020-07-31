@@ -2,8 +2,8 @@
 
 namespace UnitTests\abstractions\component;
 
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\interfaces\component\TestTraits\SwitchableComponentTestTrait;
 
 class SwitchableComponentTest extends ComponentTest
@@ -14,7 +14,7 @@ class SwitchableComponentTest extends ComponentTest
     {
         $this->setSwitchableComponent(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\SwitchableComponent',
+                '\DarlingDataManagementSystem\abstractions\component\SwitchableComponent',
                 [
                     new Storable(
                         'MockSwitchableComponentName',

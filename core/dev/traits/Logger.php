@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DarlingCms\dev\traits;
+namespace DarlingDataManagementSystem\dev\traits;
 
 
 trait Logger

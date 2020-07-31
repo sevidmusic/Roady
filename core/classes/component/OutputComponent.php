@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component;
+namespace DarlingDataManagementSystem\classes\component;
 
-use DarlingCms\abstractions\component\OutputComponent as OutputComponentBase;
-use DarlingCms\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 
 class OutputComponent extends OutputComponentBase implements OutputComponentInterface
 {

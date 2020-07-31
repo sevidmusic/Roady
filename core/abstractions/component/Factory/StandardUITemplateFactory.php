@@ -1,15 +1,15 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
 
 abstract class StandardUITemplateFactory extends CoreStoredComponentFactory implements StandardUITemplateFactoryInterface
 {

@@ -2,10 +2,10 @@
 
 namespace UnitTests\classes\component\Crud;
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\FileSystem\Json as StorageDriver;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\Json as StorageDriver;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Crud\ComponentCrudTest as AbstractComponentCrudTest;
 
 class ComponentCrudTest extends AbstractComponentCrudTest

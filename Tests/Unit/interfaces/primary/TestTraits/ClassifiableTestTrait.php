@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\interfaces\primary\Classifiable;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable;
 use UnitTests\TestTraits\StringTester;
 
 trait ClassifiableTestTrait

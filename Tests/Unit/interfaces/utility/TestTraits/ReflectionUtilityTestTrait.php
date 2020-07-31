@@ -2,14 +2,14 @@
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
-use DarlingCms\classes\primary\Classifiable;
-use DarlingCms\classes\primary\Exportable;
-use DarlingCms\classes\primary\Identifiable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\classes\utility\ReflectionUtility as ReflectionUtilityImplementation;
-use DarlingCms\dev\traits\Logger;
-use DarlingCms\interfaces\utility\ReflectionUtility;
+use DarlingDataManagementSystem\classes\primary\Classifiable;
+use DarlingDataManagementSystem\classes\primary\Exportable;
+use DarlingDataManagementSystem\classes\primary\Identifiable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility as ReflectionUtilityImplementation;
+use DarlingDataManagementSystem\dev\traits\Logger;
+use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
@@ -103,12 +103,12 @@ EOD;
             new Storable('Roady', 'Spruceton', '1833'),
             new Exportable(),
             new ReflectionUtilityImplementation(),
-            '\DarlingCms\classes\primary\Identifiable',
-            '\DarlingCms\classes\primary\Classifiable',
-            '\DarlingCms\classes\primary\Switchable',
-            '\DarlingCms\classes\primary\Storable',
-            '\DarlingCms\classes\primary\Exportable',
-            '\DarlingCms\classes\utility\ReflectionUtility'
+            '\DarlingDataManagementSystem\classes\primary\Identifiable',
+            '\DarlingDataManagementSystem\classes\primary\Classifiable',
+            '\DarlingDataManagementSystem\classes\primary\Switchable',
+            '\DarlingDataManagementSystem\classes\primary\Storable',
+            '\DarlingDataManagementSystem\classes\primary\Exportable',
+            '\DarlingDataManagementSystem\classes\utility\ReflectionUtility'
         );
         return $testClasses[array_rand($testClasses)];
     }
@@ -451,7 +451,7 @@ EOD;
 
 /**
  * The following classes are used by the ReflectionUtilityTestTrait to test the
- * \DarlingCms\abstractions\utility\ReflectionUtility class's methods.
+ * \DarlingDataManagementSystem\abstractions\utility\ReflectionUtility class's methods.
  */
 class Baz
 {

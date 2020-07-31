@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingCms\abstractions\component;
+namespace DarlingDataManagementSystem\abstractions\component;
 
-use DarlingCms\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class SwitchableComponent extends Component implements SwitchableComponentInterface
 {

@@ -13,7 +13,7 @@ class SwitchableTest extends TestCase
     {
         $this->setSwitchable(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\primary\Switchable'
+                '\DarlingDataManagementSystem\abstractions\primary\Switchable'
             )
         );
     }

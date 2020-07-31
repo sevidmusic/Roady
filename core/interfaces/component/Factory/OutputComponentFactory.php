@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Factory;
+namespace DarlingDataManagementSystem\interfaces\component\Factory;
 
-use DarlingCms\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
-use DarlingCms\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
 
 interface OutputComponentFactory extends StoredComponentFactoryInterface
 {

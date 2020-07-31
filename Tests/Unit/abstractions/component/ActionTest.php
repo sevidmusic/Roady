@@ -2,9 +2,9 @@
 
 namespace UnitTests\abstractions\component;
 
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\OutputComponentTest as CoreOutputComponentTest;
 use UnitTests\interfaces\component\TestTraits\ActionTestTrait;
 
@@ -16,7 +16,7 @@ class ActionTest extends CoreOutputComponentTest
     {
         $this->setAction(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Action',
+                '\DarlingDataManagementSystem\abstractions\component\Action',
                 [
                     new Storable(
                         'MockActionName',

@@ -1,17 +1,17 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Registry\Storage;
+namespace DarlingDataManagementSystem\abstractions\component\Registry\Storage;
 
-use DarlingCms\abstractions\component\Component as AbstractComponent;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\abstractions\component\Component as AbstractComponent;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 abstract class StoredComponentRegistry extends AbstractComponent implements StoredComponentRegistryInterface
 {
 
-    private $acceptedImplementation = 'DarlingCms\interfaces\component\Component';
+    private $acceptedImplementation = 'DarlingDataManagementSystem\interfaces\component\Component';
     private $componentCrud;
     private $registry = [];
 
@@ -82,7 +82,7 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
 
     private function storableIsAComponent(Storable $storable): bool
     {
-        return in_array('DarlingCms\interfaces\component\Component', class_implements($storable));
+        return in_array('DarlingDataManagementSystem\interfaces\component\Component', class_implements($storable));
     }
 
     private function getStorableFromComponent(Component $component): Storable

@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\abstractions\primary;
+namespace DarlingDataManagementSystem\abstractions\primary;
 
-use DarlingCms\interfaces\primary\Classifiable as ClassifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
 
 abstract class Classifiable implements ClassifiableInterface
 {

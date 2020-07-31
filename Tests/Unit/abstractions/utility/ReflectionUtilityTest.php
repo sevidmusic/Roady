@@ -2,7 +2,7 @@
 
 namespace UnitTests\abstractions\utility;
 
-use DarlingCms\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use PHPUnit\Framework\TestCase;
 use UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait;
 
@@ -14,7 +14,7 @@ class ReflectionUtilityTest extends TestCase implements ReflectionUtilityInterfa
     {
         $this->setReflectionUtility(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\utility\ReflectionUtility'
+                '\DarlingDataManagementSystem\abstractions\utility\ReflectionUtility'
             )
         );
     }

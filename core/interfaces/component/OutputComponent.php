@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\interfaces\component;
+namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingCms\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
 
 interface OutputComponent extends SwitchableComponent, Positionable
 {

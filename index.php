@@ -3,16 +3,16 @@
 ini_set('display_errors', true);
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\component\Factory\PrimaryFactory;
-use DarlingCms\classes\component\UserInterface\StandardUI;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\component\Web\Routing\Router;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\classes\component\UserInterface\StandardUI;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 
 $currentRequest = new Request(
     new Storable(

@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\Driver\Storage\TestTraits;
 
-use DarlingCms\abstractions\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard;
 use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonTestTrait;
 
 trait StandardTestTrait

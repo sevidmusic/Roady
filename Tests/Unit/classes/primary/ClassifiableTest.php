@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingCms\classes\primary\Classifiable;
+use DarlingDataManagementSystem\classes\primary\Classifiable;
 use UnitTests\abstractions\primary\ClassifiableTest as AbstractClassifiableTest;
 
 class ClassifiableTest extends AbstractClassifiableTest

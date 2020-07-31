@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingCms\interfaces\primary;
+namespace DarlingDataManagementSystem\interfaces\primary;
 
 interface Identifiable
 {

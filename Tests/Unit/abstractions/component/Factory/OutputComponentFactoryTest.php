@@ -13,7 +13,7 @@ class OutputComponentFactoryTest extends CoreStoredComponentFactoryTest
     {
         $this->setOutputComponentFactory(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Factory\OutputComponentFactory',
+                '\DarlingDataManagementSystem\abstractions\component\Factory\OutputComponentFactory',
                 [
                     $this->getMockPrimaryFactory(),
                     $this->getMockCrud(),

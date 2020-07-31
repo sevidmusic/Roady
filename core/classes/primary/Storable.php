@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\primary;
+namespace DarlingDataManagementSystem\classes\primary;
 
-use DarlingCms\abstractions\primary\Storable as StorableBase;
-use DarlingCms\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\abstractions\primary\Storable as StorableBase;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
 class Storable extends StorableBase implements StorableInterface
 {

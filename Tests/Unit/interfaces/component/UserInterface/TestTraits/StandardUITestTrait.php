@@ -2,19 +2,19 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
-use DarlingCms\classes\component\Action;
-use DarlingCms\classes\component\Crud\ComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard as StorageDriver;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\component\Web\Routing\Response;
-use DarlingCms\classes\component\Web\Routing\Router;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingCms\interfaces\component\UserInterface\StandardUI;
+use DarlingDataManagementSystem\classes\component\Action;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI;
 
 trait StandardUITestTrait
 {
@@ -155,7 +155,7 @@ trait StandardUITestTrait
     public function testRouterIsSetPostInstantiation(): void
     {
         $this->assertEquals
-        ("DarlingCms\classes\component\Web\Routing\Router",
+        ("DarlingDataManagementSystem\classes\component\Web\Routing\Router",
             $this->getStandardUI()->export()['router']->getType()
         );
     }
@@ -197,7 +197,7 @@ trait StandardUITestTrait
     {
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $responseTemplates) {
             foreach ($responseTemplates as $template) {
-                $this->assertTrue(in_array('DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
+                $this->assertTrue(in_array('DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
             }
         }
     }
@@ -244,7 +244,7 @@ trait StandardUITestTrait
                 foreach ($outputComponentTypes as $outputComponent) {
                     $this->assertTrue(
                         in_array(
-                            'DarlingCms\interfaces\component\OutputComponent',
+                            'DarlingDataManagementSystem\interfaces\component\OutputComponent',
                             class_implements($outputComponent)
                         )
                     );
@@ -259,7 +259,7 @@ trait StandardUITestTrait
             foreach ($responseOutputComponents as $outputComponentType => $outputComponents) {
                 $this->assertTrue(
                     in_array(
-                        'DarlingCms\interfaces\component\OutputComponent',
+                        'DarlingDataManagementSystem\interfaces\component\OutputComponent',
                         class_implements($outputComponentType)
                     )
                 );

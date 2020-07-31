@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingCms\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Component;
 use UnitTests\interfaces\primary\TestTraits\StorableTestTrait;
 
 trait ComponentTestTrait

@@ -2,19 +2,19 @@
 
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory;
-use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Factory\RequestFactory;
-use DarlingCms\interfaces\component\Factory\ResponseFactory;
-use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
-use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 
 trait AppComponentsFactoryTestTrait
 {

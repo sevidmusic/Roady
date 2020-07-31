@@ -2,9 +2,9 @@
 
 namespace UnitTests\classes\component\Driver\Storage\FileSystem;
 
-use DarlingCms\classes\component\Driver\Storage\FileSystem\Json;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\Json;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonTest as AbstractJsonTest;
 
 class JsonTest extends AbstractJsonTest

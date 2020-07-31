@@ -2,7 +2,7 @@
 
 namespace Extensions\Contests\Tests\Unit\abstractions\component\Contest;
 
-use DarlingCms\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable;
 use Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits\SubmitterTestTrait;
 use UnitTests\abstractions\component\ComponentTest;
 

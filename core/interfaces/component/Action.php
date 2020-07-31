@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\interfaces\component;
+namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingCms\interfaces\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 
 interface Action extends CoreOutputComponent
 {

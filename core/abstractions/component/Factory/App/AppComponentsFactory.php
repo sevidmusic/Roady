@@ -1,30 +1,30 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory\App;
+namespace DarlingDataManagementSystem\abstractions\component\Factory\App;
 
-use DarlingCms\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
-use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard;
-use DarlingCms\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
-use DarlingCms\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
-use DarlingCms\classes\component\Factory\RequestFactory as CoreRequestFactory;
-use DarlingCms\classes\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingCms\classes\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
-use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingCms\classes\component\Web\App as CoreApp;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable as CoreSwitchable;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
+use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
+use DarlingDataManagementSystem\classes\component\Factory\RequestFactory as CoreRequestFactory;
+use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
+use DarlingDataManagementSystem\classes\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
+use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
 
 abstract class AppComponentsFactory extends CoreStoredComponentFactory implements AppComponentsFactoryInterface
 {

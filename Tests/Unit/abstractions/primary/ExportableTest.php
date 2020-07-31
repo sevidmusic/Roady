@@ -12,7 +12,7 @@ class ExportableTest extends ClassifiableTest
     {
         $this->setExportable(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\primary\Exportable'
+                '\DarlingDataManagementSystem\abstractions\primary\Exportable'
             )
         );
         $this->setClassifiable($this->getExportable());

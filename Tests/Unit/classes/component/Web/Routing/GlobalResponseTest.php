@@ -2,9 +2,9 @@
 
 namespace UnitTests\classes\component\Web\Routing;
 
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\GlobalResponse;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Web\Routing\GlobalResponseTest as AbstractGlobalResponseTest;
 
 class GlobalResponseTest extends AbstractGlobalResponseTest

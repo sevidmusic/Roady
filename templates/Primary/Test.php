@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingCms\classes\primary\DS_COMPONENT_NAME;
+use DarlingDataManagementSystem\classes\primary\DS_COMPONENT_NAME;
 use UnitTests\abstractions\primary\DS_COMPONENT_NAMETest as AbstractDS_COMPONENT_NAMETest;
 
 class DS_COMPONENT_NAMETest extends AbstractDS_COMPONENT_NAMETest

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component;
+namespace DarlingDataManagementSystem\classes\component;
 
-use DarlingCms\abstractions\component\Action as ActionBase;
-use DarlingCms\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\abstractions\component\Action as ActionBase;
+use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
 
 class Action extends ActionBase implements ActionInterface
 {

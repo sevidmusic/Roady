@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component\Web;
+namespace DarlingDataManagementSystem\classes\component\Web;
 
-use DarlingCms\abstractions\component\Web\App as AppBase;
-use DarlingCms\interfaces\component\Web\App as AppInterface;
+use DarlingDataManagementSystem\abstractions\component\Web\App as AppBase;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
 
 class App extends AppBase implements AppInterface
 {

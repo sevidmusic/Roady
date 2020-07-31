@@ -1,14 +1,14 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Web;
+namespace DarlingDataManagementSystem\abstractions\component\Web;
 
-use DarlingCms\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingCms\classes\primary\Storable as CoreStorable;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Web\App as AppInterface;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 use RuntimeException;
 
 abstract class App extends CoreSwitchableComponent implements AppInterface
@@ -51,7 +51,7 @@ abstract class App extends CoreSwitchableComponent implements AppInterface
             }
             throw new RuntimeException('The requested app has not been installed. Please install the "' . App::deriveNameLocationFromRequest($request) . '" app.');
         }
-        $app = (empty($app) ? new \DarlingCms\classes\component\Web\App($request, new \DarlingCms\classes\primary\Switchable()) : $app);
+        $app = (empty($app) ? new \DarlingDataManagementSystem\classes\component\Web\App($request, new \DarlingDataManagementSystem\classes\primary\Switchable()) : $app);
         if (self::isAnApp($app) === false) {
             throw new RuntimeException('The requested App is corrupted. Please remove and re-install the "' . App::deriveNameLocationFromRequest($request) . '" app.');
         }
@@ -64,7 +64,7 @@ abstract class App extends CoreSwitchableComponent implements AppInterface
     private static function isAnApp(Component $component): bool
     {
         return (
-        in_array('DarlingCms\interfaces\component\Web\App', class_implements($component))
+        in_array('DarlingDataManagementSystem\interfaces\component\Web\App', class_implements($component))
             ? true
             : false
         );

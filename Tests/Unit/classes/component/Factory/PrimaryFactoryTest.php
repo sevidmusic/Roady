@@ -3,11 +3,11 @@
 namespace UnitTests\classes\component\Factory;
 
 
-use DarlingCms\classes\component\Factory\PrimaryFactory;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Factory\PrimaryFactoryTest as AbstractPrimaryFactoryTest;
 
 class PrimaryFactoryTest extends AbstractPrimaryFactoryTest

@@ -13,7 +13,7 @@ class ResponseFactoryTest extends CoreStoredComponentFactoryTest
     {
         $this->setResponseFactory(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Factory\ResponseFactory',
+                '\DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory',
                 [
                     $this->getMockPrimaryFactory(),
                     $this->getMockCrud(),

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\UserInterface;
+namespace DarlingDataManagementSystem\classes\component\UserInterface;
 
-use DarlingCms\abstractions\component\UserInterface\StandardUI as StandardUIBase;
-use DarlingCms\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
+use DarlingDataManagementSystem\abstractions\component\UserInterface\StandardUI as StandardUIBase;
+use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
 
 class StandardUI extends StandardUIBase implements StandardUIInterface
 {

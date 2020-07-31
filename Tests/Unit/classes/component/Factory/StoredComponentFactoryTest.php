@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\Factory;
 
-use DarlingCms\classes\component\Factory\StoredComponentFactory;
+use DarlingDataManagementSystem\classes\component\Factory\StoredComponentFactory;
 use UnitTests\abstractions\component\Factory\StoredComponentFactoryTest as AbstractStoredComponentFactoryTest;
 
 class StoredComponentFactoryTest extends AbstractStoredComponentFactoryTest

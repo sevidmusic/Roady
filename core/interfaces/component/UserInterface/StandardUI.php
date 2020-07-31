@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\interfaces\component\UserInterface;
+namespace DarlingDataManagementSystem\interfaces\component\UserInterface;
 
-use DarlingCms\interfaces\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as CoreOutputComponent;
 
 interface StandardUI extends CoreOutputComponent
 {

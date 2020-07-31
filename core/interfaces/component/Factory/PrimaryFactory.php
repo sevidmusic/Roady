@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Factory;
+namespace DarlingDataManagementSystem\interfaces\component\Factory;
 
-use DarlingCms\interfaces\primary\Classifiable;
-use DarlingCms\interfaces\primary\Exportable;
-use DarlingCms\interfaces\primary\Identifiable;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable;
+use DarlingDataManagementSystem\interfaces\primary\Exportable;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 interface PrimaryFactory extends Factory
 {

@@ -1,6 +1,6 @@
 {
-    "name": "darling/cms",
-    "description": "Experimental re-design of the Darling Cms",
+    "name": "darling/ddms",
+    "description": "A data driven tool for developing Web applications.",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DarlingCms\\": "core/",
+            "DarlingDataManagementSystem\\": "core/",
             "Apps\\": "apps/",
             "UnitTests\\": "Tests/Unit/",
             "Extensions\\": "Extensions/"

@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingCms\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
 
 trait PositionableTestTrait
 {

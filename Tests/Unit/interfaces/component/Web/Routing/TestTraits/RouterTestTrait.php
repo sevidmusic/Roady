@@ -2,10 +2,10 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingCms\classes\component\Web\Routing\Response as StandardResponse;
-use DarlingCms\classes\primary\Storable as StandardStorable;
-use DarlingCms\classes\primary\Switchable as StandardSwitchable;
-use DarlingCms\interfaces\component\Web\Routing\Router;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as StandardResponse;
+use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as StandardSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router;
 
 trait RouterTestTrait
 {
@@ -17,7 +17,7 @@ trait RouterTestTrait
         $this->assertTrue(
             $this->objectInstanceIsSetAndCorrectType(
                 'request',
-                'DarlingCms\interfaces\component\Web\Routing\Request'
+                'DarlingDataManagementSystem\interfaces\component\Web\Routing\Request'
             )
         );
     }
@@ -49,7 +49,7 @@ trait RouterTestTrait
         $this->assertTrue(
             $this->objectInstanceIsSetAndCorrectType(
                 'crud',
-                'DarlingCms\interfaces\component\Crud\ComponentCrud'
+                'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud'
             )
         );
     }
@@ -110,7 +110,7 @@ trait RouterTestTrait
         );
         foreach ($this->getRouter()->getResponses($response->getLocation(), $response->getContainer()) as $response) {
             $this->assertTrue(
-                in_array('DarlingCms\interfaces\component\Web\Routing\Response', class_implements($response)),
+                in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Response', class_implements($response)),
                 'The response data was corrupted between the time it was created via the Crud and returned by the Router. Check the Storage Driver being used by the Crud'
             );
         }

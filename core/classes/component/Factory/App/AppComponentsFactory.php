@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component\Factory\App;
+namespace DarlingDataManagementSystem\classes\component\Factory\App;
 
-use DarlingCms\abstractions\component\Factory\App\AppComponentsFactory as CoreAppComponentsFactory;
-use DarlingCms\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory as CoreAppComponentsFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 
 class AppComponentsFactory extends CoreAppComponentsFactory implements AppComponentsFactoryInterface
 {

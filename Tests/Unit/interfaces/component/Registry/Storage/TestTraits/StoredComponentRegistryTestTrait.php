@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\Registry\Storage\TestTraits;
 
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
 
 trait StoredComponentRegistryTestTrait
 {
@@ -29,10 +29,10 @@ trait StoredComponentRegistryTestTrait
     public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplementationPostInstantiation(): void
     {
         $this->assertTrue(
-            $this->getStoredComponentRegistry()->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
+            $this->getStoredComponentRegistry()->export()['acceptedImplementation'] === 'DarlingDataManagementSystem\interfaces\component\Component'
             ||
             in_array(
-                'DarlingCms\interfaces\component\Component',
+                'DarlingDataManagementSystem\interfaces\component\Component',
                 class_implements($this->getStoredComponentRegistry()->export()['acceptedImplementation']),
                 true
             )
@@ -43,7 +43,7 @@ trait StoredComponentRegistryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud',
                 class_implements($this->getStoredComponentRegistry()->export()['componentCrud'])
             )
         );
@@ -93,7 +93,7 @@ trait StoredComponentRegistryTestTrait
 
     public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
     {
-        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry']);
+        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry']);
         $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry()->export()['componentCrud']);
         $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry()->export()['componentCrud']);
         $this->assertEquals(
@@ -105,7 +105,7 @@ trait StoredComponentRegistryTestTrait
 
     public function testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
     {
-        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry']);
+        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry']);
         $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
         $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
         $this->assertTrue(
@@ -135,7 +135,7 @@ trait StoredComponentRegistryTestTrait
 
     public function testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
     {
-        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud']);
+        $this->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud']);
         $status = $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
         if (
         !in_array(

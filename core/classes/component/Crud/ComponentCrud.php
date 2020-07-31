@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Crud;
+namespace DarlingDataManagementSystem\classes\component\Crud;
 
-use DarlingCms\abstractions\component\Crud\ComponentCrud as ComponentCrudBase;
-use DarlingCms\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud as ComponentCrudBase;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 
 class ComponentCrud extends ComponentCrudBase implements ComponentCrudInterface
 {

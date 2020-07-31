@@ -13,7 +13,7 @@ class DS_COMPONENT_NAMETest extends TestCase
     {
         $this->setDS_COMPONENT_NAME(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\primary\DS_COMPONENT_NAME',
+                '\DarlingDataManagementSystem\abstractions\primary\DS_COMPONENT_NAME',
             )
         );
     }

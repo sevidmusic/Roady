@@ -1,6 +1,6 @@
 <?php
 
-use DarlingCms\classes\component\Factory\App\AppComponentsFactory;
+use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
 use Extensions\Contests\core\classes\component\Actions\CreateSubmission;
 
 ini_set('display_errors', true);

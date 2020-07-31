@@ -2,13 +2,13 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\classes\component\Action;
-use DarlingCms\classes\component\OutputComponent;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\classes\component\Action;
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
 
 trait StandardUITemplateFactoryTestTrait
 {
@@ -22,7 +22,7 @@ trait StandardUITemplateFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate',
+                'DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate',
                 $this->callBuildStandardUITemplateUsingTestArguments()
             )
         );

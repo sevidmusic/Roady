@@ -2,8 +2,8 @@
 
 namespace Extensions\Contests\core\abstractions\component\Contest;
 
-use DarlingCms\abstractions\component\Component;
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\abstractions\component\Component;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 use Extensions\Contests\core\interfaces\component\Contest\Submitter as SubmitterInterface;
 use RuntimeException;
 

@@ -2,21 +2,21 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
-use DarlingCms\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
-use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingCms\classes\component\Web\App as CoreApp;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\classes\primary\Storable as CoreStorable;
-use DarlingCms\classes\primary\Switchable as CoreSwitchable;
-use DarlingCms\classes\utility\ReflectionUtility;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Factory\StoredComponentFactory;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingCms\interfaces\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
+use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
 
 trait StoredComponentFactoryTestTrait
 {
@@ -28,7 +28,7 @@ trait StoredComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Factory\PrimaryFactory',
+                'DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory',
                 $this->getStoredComponentFactory()->export()['primaryFactory']
             )
         );
@@ -53,7 +53,7 @@ trait StoredComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud',
                 $this->getStoredComponentFactory()->export()['switchable']
             )
         );
@@ -87,7 +87,7 @@ trait StoredComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry',
+                'DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry',
                 $this->getStoredComponentFactory()->export()['storedComponentRegistry']
             )
         );
@@ -105,7 +105,7 @@ trait StoredComponentFactoryTestTrait
 
     public function testStoreAndRegisterReturnsFalseIfComponentWasNotRegistered(): void
     {
-        $this->getStoredComponentFactory()->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Web\App']);
+        $this->getStoredComponentFactory()->getStoredComponentRegistry()->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Web\App']);
         $this->assertFalse(
             $this->getStoredComponentFactory()->storeAndRegister(
                 $this->getStoredComponentFactory()

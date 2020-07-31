@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\abstractions\primary;
+namespace DarlingDataManagementSystem\abstractions\primary;
 
-use DarlingCms\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
 // @todo Need to define test that tests that position property's value is an int/whole number after instantiation
 abstract class Positionable implements PositionableInterface

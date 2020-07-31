@@ -2,8 +2,8 @@
 
 namespace UnitTests\abstractions\component\Driver\Storage\FileSystem;
 
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest;
 use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonTestTrait;
 
@@ -15,7 +15,7 @@ class JsonTest extends SwitchableComponentTest
     {
         $this->setJson(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Driver\Storage\FileSystem\Json',
+                '\DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json',
                 [
                     new Storable(
                         'MockJsonName',

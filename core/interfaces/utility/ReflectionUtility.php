@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingCms\interfaces\utility;
+namespace DarlingDataManagementSystem\interfaces\utility;
 
 use ReflectionClass;
 

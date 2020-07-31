@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Template\UserInterface;
+namespace DarlingDataManagementSystem\interfaces\component\Template\UserInterface;
 
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\SwitchableComponent;
-use DarlingCms\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
 
 interface StandardUITemplate extends SwitchableComponent, Positionable
 {

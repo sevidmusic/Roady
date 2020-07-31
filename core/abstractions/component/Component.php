@@ -1,12 +1,12 @@
 <?php
 
 
-namespace DarlingCms\abstractions\component;
+namespace DarlingDataManagementSystem\abstractions\component;
 
 
-use DarlingCms\abstractions\primary\Exportable;
-use DarlingCms\interfaces\component\Component as ComponentInterface;
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\abstractions\primary\Exportable;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 abstract class Component extends Exportable implements ComponentInterface
 {

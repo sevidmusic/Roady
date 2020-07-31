@@ -1,19 +1,19 @@
 <?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 
-namespace DarlingCms\abstractions\component\Web\Routing;
+namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\classes\primary\Positionable as CorePositionable;
-use DarlingCms\classes\primary\Storable as StandardStorable;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class Response extends SwitchableComponent implements ResponseInterface
 {
@@ -57,7 +57,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
     private function isARequest(Component $component): bool
     {
         return (
-        in_array('DarlingCms\interfaces\component\Web\Routing\Request', class_implements($component)) === false
+        in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Request', class_implements($component)) === false
             ? false
             : true
         );

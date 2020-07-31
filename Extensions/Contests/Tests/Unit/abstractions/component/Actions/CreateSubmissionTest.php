@@ -2,9 +2,9 @@
 
 namespace Extensions\Contests\Tests\Unit\abstractions\component\Actions;
 
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use Extensions\Contests\Tests\Unit\interfaces\component\Actions\TestTraits\CreateSubmissionTestTrait;
 use UnitTests\abstractions\component\ActionTest as CoreActionTest;
 

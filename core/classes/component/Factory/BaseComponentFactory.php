@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component\Factory;
+namespace DarlingDataManagementSystem\classes\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\BaseComponentFactory as BaseComponentFactoryBase;
-use DarlingCms\interfaces\component\Factory\BaseComponentFactory as BaseComponentFactoryInterface;
+use DarlingDataManagementSystem\abstractions\component\Factory\BaseComponentFactory as BaseComponentFactoryBase;
+use DarlingDataManagementSystem\interfaces\component\Factory\BaseComponentFactory as BaseComponentFactoryInterface;
 
 class BaseComponentFactory extends BaseComponentFactoryBase implements BaseComponentFactoryInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Web\Routing;
+namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
 
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
 
 interface Router extends SwitchableComponent
 {

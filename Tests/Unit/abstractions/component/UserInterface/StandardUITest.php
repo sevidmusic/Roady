@@ -2,9 +2,9 @@
 
 namespace UnitTests\abstractions\component\UserInterface;
 
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\OutputComponentTest as CoreOutputComponentTest;
 use UnitTests\interfaces\component\UserInterface\TestTraits\StandardUITestTrait;
 
@@ -16,7 +16,7 @@ class StandardUITest extends CoreOutputComponentTest
     {
         $this->setStandardUI(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\UserInterface\StandardUI',
+                '\DarlingDataManagementSystem\abstractions\component\UserInterface\StandardUI',
                 [
                     new Storable(
                         'MockStandardUIName',

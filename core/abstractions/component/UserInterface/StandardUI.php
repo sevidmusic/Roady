@@ -1,13 +1,13 @@
 <?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
 
-namespace DarlingCms\abstractions\component\UserInterface;
+namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 
-use DarlingCms\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\classes\component\Web\Routing\Router;
-use DarlingCms\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class StandardUI extends CoreOutputComponent implements StandardUIInterface
 {

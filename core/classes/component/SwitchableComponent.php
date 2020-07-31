@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingCms\classes\component;
+namespace DarlingDataManagementSystem\classes\component;
 
-use DarlingCms\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingCms\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 
 class SwitchableComponent extends SwitchableComponentBase implements SwitchableComponentInterface
 {

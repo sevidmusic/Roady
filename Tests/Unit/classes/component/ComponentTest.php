@@ -4,8 +4,8 @@
 namespace UnitTests\classes\component;
 
 
-use DarlingCms\classes\component\Component;
-use DarlingCms\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\component\Component;
+use DarlingDataManagementSystem\classes\primary\Storable;
 use UnitTests\abstractions\component\ComponentTest as AbstractComponentTest;
 
 class ComponentTest extends AbstractComponentTest

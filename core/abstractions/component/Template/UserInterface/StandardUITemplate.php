@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Template\UserInterface;
+namespace DarlingDataManagementSystem\abstractions\component\Template\UserInterface;
 
-use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate as GenericUITemplateInterface;
-use DarlingCms\interfaces\primary\Positionable;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as GenericUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class StandardUITemplate extends SwitchableComponent implements GenericUITemplateInterface
 {

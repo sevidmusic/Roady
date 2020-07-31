@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component\Web\Routing;
+namespace DarlingDataManagementSystem\classes\component\Web\Routing;
 
-use DarlingCms\abstractions\component\Web\Routing\GlobalResponse as GlobalResponseBase;
-use DarlingCms\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse as GlobalResponseBase;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 
 class GlobalResponse extends GlobalResponseBase implements GlobalResponseInterface
 {

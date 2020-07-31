@@ -2,9 +2,9 @@
 
 namespace Extensions\Contests\Tests\Unit\abstractions\component\Contest;
 
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
 use Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits\SubmissionTestTrait;
 use UnitTests\abstractions\component\OutputComponentTest as CoreOutputComponentTest;

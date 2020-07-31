@@ -2,20 +2,20 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\classes\component\Action as CoreAction;
-use DarlingCms\classes\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingCms\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingCms\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
-use DarlingCms\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
-use DarlingCms\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingCms\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingCms\interfaces\component\Action;
-use DarlingCms\interfaces\component\Factory\ResponseFactory;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingCms\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingCms\interfaces\component\Web\Routing\Request;
-use DarlingCms\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\component\Action as CoreAction;
+use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
+use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingDataManagementSystem\interfaces\component\Action;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
 
 trait ResponseFactoryTestTrait
 {

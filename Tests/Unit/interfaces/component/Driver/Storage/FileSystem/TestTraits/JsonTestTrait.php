@@ -2,9 +2,9 @@
 
 namespace UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits;
 
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Driver\Storage\FileSystem\Json;
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\Json;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 trait JsonTestTrait
 {

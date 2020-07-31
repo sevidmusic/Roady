@@ -176,7 +176,7 @@ generatePHPCodeFromTemplate() {
     _gpcft_filePath=$(printf "%s" "${_gpcft_fileRootDirectoryPath}/${USER_DEFINED_COMPONENT_SUBTYPE}/TestTraits/${USER_DEFINED_COMPONENT_NAME}${_gpcft_fileName}.php" | sed -E "s,\\\,/,g; s,//,/,g; s,DS_NAMESPACE_SEPERATOR,/,g;")
   fi
   if [[ "${EXTENDING}" == "Core" ]]; then
-    _gpcft_phpCode=$(sed -E "s/DS_CORE_NAMESPACE_PREFIX/DarlingCms/g; s/DS_TESTS_NAMESPACE_PREFIX/UnitTests/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/DS_NAMESPACE_SEPERATOR/\\\/g; s/\\\;/;/g; s,[\][\],\\\,g;" "${1}")
+    _gpcft_phpCode=$(sed -E "s/DS_CORE_NAMESPACE_PREFIX/DarlingDataManagementSystem/g; s/DS_TESTS_NAMESPACE_PREFIX/UnitTests/g; s/DS_COMPONENT_SUBTYPE/${USER_DEFINED_COMPONENT_SUBTYPE}/g; s/DS_COMPONENT_NAME/${USER_DEFINED_COMPONENT_NAME}/g; s/[$][A-Z]/\L&/g; s/->[A-Z]/\L&/g; s/DS_NAMESPACE_SEPERATOR/\\\/g; s/\\\;/;/g; s,[\][\],\\\,g;" "${1}")
   fi
   if [[ "${EXTENDING}" == "Extension" ]]; then
     _namespace_seperator='\\'
@@ -200,7 +200,7 @@ askUserForComponentName() {
 }
 
 askUserForComponentSubtype() {
-  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the component's ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR}, the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR} is used to construct namespaces for the Component. Example: ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}\\DarlingCms\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}${NOTIFYCOLOR} Note: You must escape backslash characters. Note: Do not include a preceding backslash in the sub-type. ${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}Wrong: \\\\Foo\\\\Bar ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Right: Foo\\\\Bar${CLEARCOLOR}" "showInfo"
+  promptUserAndVerifyInput "${CLEARCOLOR}${NOTIFYCOLOR}Please enter the component's ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR}, the ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}sub-type${CLEARCOLOR}${NOTIFYCOLOR} is used to construct namespaces for the Component. Example: ${CLEARCOLOR}${HIGHLIGHTCOLOR2}${DARKTEXTCOLOR}${DARKTEXTCOLOR}\\DarlingDataManagementSystem\\*\\component\\SUB\\TYPE\\${USER_DEFINED_COMPONENT_NAME}${CLEARCOLOR}${NOTIFYCOLOR} Note: You must escape backslash characters. Note: Do not include a preceding backslash in the sub-type. ${CLEARCOLOR}${ATTENTIONEFFECTCOLOR}Wrong: \\\\Foo\\\\Bar ${CLEARCOLOR}${HIGHLIGHTCOLOR}${DARKTEXTCOLOR}Right: Foo\\\\Bar${CLEARCOLOR}" "showInfo"
   USER_DEFINED_COMPONENT_SUBTYPE=$(printf "%s" "${PREVIOUS_USER_INPUT}" | sed -E "s,[\\],DS_NAMESPACE_SEPERATOR,g")
 }
 

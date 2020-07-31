@@ -2,14 +2,14 @@
 
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Actions\TestTraits;
 
-use DarlingCms\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingCms\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
-use DarlingCms\classes\component\Web\App;
-use DarlingCms\classes\primary\Positionable;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\primary\Positionable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 use Extensions\Contests\core\classes\component\Contest\Submission as ContestSubmission;
 use Extensions\Contests\core\classes\component\Contest\Submitter;
 use Extensions\Contests\core\interfaces\component\Actions\CreateSubmission;
@@ -98,7 +98,7 @@ trait CreateSubmissionTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingCms\interfaces\component\Crud\ComponentCrud',
+                'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud',
                 class_implements($this->getCreateSubmission()->export()['componentCrud'])
             )
         );

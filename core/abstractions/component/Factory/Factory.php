@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\abstractions\component\Component;
-use DarlingCms\classes\primary\Storable as CoreStorable;
-use DarlingCms\interfaces\component\Factory\Factory as FactoryInterface;
-use DarlingCms\interfaces\component\Web\App;
+use DarlingDataManagementSystem\abstractions\component\Component;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
 
 abstract class Factory extends Component implements FactoryInterface
 {

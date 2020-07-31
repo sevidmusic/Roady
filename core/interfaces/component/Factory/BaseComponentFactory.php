@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Factory;
+namespace DarlingDataManagementSystem\interfaces\component\Factory;
 
-use DarlingCms\interfaces\component\Action;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\OutputComponent;
-use DarlingCms\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Action;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
 
 interface BaseComponentFactory extends PrimaryFactory
 {

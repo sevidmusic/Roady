@@ -57,8 +57,8 @@ APP_CONTAINER = "APP"
 
 testAPP_CONTAINERIsSetToStringAPP(): void
    Hint:
-       1. assertEquals("APP", DarlingCms\abstractions\component\App\App::APP_CONTAINER) // test direct call from abstraction
-       2. assertEquals("APP", DarlingCms\classes\component\App\App::APP_CONTAINER) // test direct call from class
+       1. assertEquals("APP", DarlingDataManagementSystem\abstractions\component\App\App::APP_CONTAINER) // test direct call from abstraction
+       2. assertEquals("APP", DarlingDataManagementSystem\classes\component\App\App::APP_CONTAINER) // test direct call from class
        3. assertEquals("APP", TestTrait::getApp()::APP_CONTAINER) // test instance call
 
 *******

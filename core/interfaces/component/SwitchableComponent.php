@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingCms\interfaces\component;
+namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 interface SwitchableComponent extends Switchable, Component
 {

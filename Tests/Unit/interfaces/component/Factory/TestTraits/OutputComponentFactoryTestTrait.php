@@ -2,9 +2,9 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingCms\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingCms\interfaces\component\Factory\OutputComponentFactory;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
 
 trait OutputComponentFactoryTestTrait
 {
@@ -15,7 +15,7 @@ trait OutputComponentFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingCms\interfaces\component\OutputComponent',
+                'DarlingDataManagementSystem\interfaces\component\OutputComponent',
                 $this->getOutputComponentFactory()->buildOutputComponent(
                     'AssignedName',
                     'AssignedContainer',
@@ -99,7 +99,7 @@ trait OutputComponentFactoryTestTrait
             $this->getMockPrimaryFactory()->buildStorable('t', 't'),
             $this->getMockCrud()
         );
-        $mockStoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\OutputComponent']);
+        $mockStoredComponentRegistry->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\OutputComponent']);
         return $mockStoredComponentRegistry;
     }
 

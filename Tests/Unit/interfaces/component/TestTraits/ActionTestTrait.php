@@ -2,11 +2,11 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingCms\classes\component\Web\Routing\Request;
-use DarlingCms\classes\primary\Storable;
-use DarlingCms\classes\primary\Switchable;
-use DarlingCms\interfaces\component\Action;
-use DarlingCms\interfaces\component\Web\Routing\Request as CoreRequestInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Action;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as CoreRequestInterface;
 
 trait ActionTestTrait
 {

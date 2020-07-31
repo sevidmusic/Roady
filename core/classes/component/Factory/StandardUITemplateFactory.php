@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\component\Factory;
+namespace DarlingDataManagementSystem\classes\component\Factory;
 
-use DarlingCms\abstractions\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
-use DarlingCms\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
+use DarlingDataManagementSystem\abstractions\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 
 class StandardUITemplateFactory extends CoreStandardUITemplateFactory implements StandardUITemplateFactoryInterface
 {

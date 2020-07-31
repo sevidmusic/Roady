@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Web;
+namespace DarlingDataManagementSystem\interfaces\component\Web;
 
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingCms\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as CoreSwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 
 interface App extends CoreSwitchableComponent
 {

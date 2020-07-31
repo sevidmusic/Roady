@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Factory;
+namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingCms\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingCms\interfaces\component\Component;
-use DarlingCms\interfaces\component\Crud\ComponentCrud;
-use DarlingCms\interfaces\component\Factory\PrimaryFactory;
-use DarlingCms\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
-use DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
 
 abstract class StoredComponentFactory extends CoreSwitchableComponent implements StoredComponentFactoryInterface
 {

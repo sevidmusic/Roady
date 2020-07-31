@@ -2,7 +2,7 @@
 
 namespace UnitTests\TestTraits;
 
-use DarlingCms\classes\utility\ReflectionUtility as RealReflectionUtility;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility as RealReflectionUtility;
 
 trait ReflectionUtilityInstance
 {

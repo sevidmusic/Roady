@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\primary;
+namespace DarlingDataManagementSystem\classes\primary;
 
-use DarlingCms\abstractions\primary\Switchable as SwitchableBase;
-use DarlingCms\interfaces\primary\Switchable as SwitchableInterface;
+use DarlingDataManagementSystem\abstractions\primary\Switchable as SwitchableBase;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 class Switchable extends SwitchableBase implements SwitchableInterface
 {

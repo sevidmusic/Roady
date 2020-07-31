@@ -2,7 +2,7 @@
 
 namespace UnitTests\abstractions\component\Web;
 
-use DarlingCms\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest as CoreSwitchableComponentTest;
 use UnitTests\interfaces\component\Web\TestTraits\AppTestTrait;
 
@@ -14,7 +14,7 @@ class AppTest extends CoreSwitchableComponentTest
     {
         $this->setApp(
             $this->getMockForAbstractClass(
-                '\DarlingCms\abstractions\component\Web\App',
+                '\DarlingDataManagementSystem\abstractions\component\Web\App',
                 [
                     $this->getMockRequest(),
                     new Switchable(),

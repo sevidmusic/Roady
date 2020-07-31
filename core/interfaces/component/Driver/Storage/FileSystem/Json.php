@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingCms\interfaces\component\Driver\Storage\FileSystem;
+namespace DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem;
 
 
-use DarlingCms\interfaces\component\Driver\Storage\Standard as StorageDriverInterface;
-use DarlingCms\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\Standard as StorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 interface Json extends StorageDriverInterface
 {

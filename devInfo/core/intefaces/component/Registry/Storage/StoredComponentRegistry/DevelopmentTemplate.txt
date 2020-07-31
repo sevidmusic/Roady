@@ -53,10 +53,10 @@ testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplmena
 
    Hint:
        1. assertTrue(
-       1.     StoredComponentRegistry->export()['acceptedImplementation'] === 'DarlingCms\interfaces\component\Component'
+       1.     StoredComponentRegistry->export()['acceptedImplementation'] === 'DarlingDataManagementSystem\interfaces\component\Component'
        1.     ||
        1.     in_array(
-       1.         'DarlingCms\interfaces\component\Component',
+       1.         'DarlingDataManagementSystem\interfaces\component\Component',
        1.         class_implements(StoredComponentRegistry->export()['acceptedImplementation']),
        1.         true
        1.     )
@@ -68,13 +68,13 @@ private $componentCrud
 
 testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostInstantiation(): void
 
-   Tests that the componentCrud property is assigned an instance of a DarlingCms\interfaces\component\Crud\ComponentCrud
+   Tests that the componentCrud property is assigned an instance of a DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud
    implementation on instnatiation.
 
    Hint:
        1. assertTrue(
        1.     in_array(
-       1.         "DarlingCms\interfaces\component\Crud\ComponentCrud"
+       1.         "DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud"
        1.         class_implements(StoredComponentRegistry->export()['componentCrud']),
        1.         true
        1.     )
@@ -161,7 +161,7 @@ testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfCompo
    acceptedImplementation property.
 
    Hint:
-       1. StoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
+       1. StoredComponentRegistry->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry'])
        2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry->export()['componentCrud'])
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry->export()['componentCrud'])
        4. assertTrue(0, count(StoredComponentRegistry->export()['registry']))
@@ -175,7 +175,7 @@ testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentEx
    * The component implments the interface indicated by the namespcae assigned to the acceptedImplementation property.
 
    Hint:
-       1. StoredComponentRegistry->import(['acceptedImplementation' => 'DarlingCms\interfaces\component\Registry\Storage\StoredComponentRegistry'])
+       1. StoredComponentRegistry->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry'])
        2. StoredComponentRegistry->export()['componentCrud']->create(StoredComponentRegistry)
        3. StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        4. assertTrue(
@@ -213,7 +213,7 @@ testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
    propertys array.
 
    Hint:
-       1. StoredComponentRegistry->import('acceptedImplementation' => 'DarlingCms\interfaces\component\Crud\ComponentCrud'])
+       1. StoredComponentRegistry->import('acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud'])
        2. $status = StoredComponentRegistry->registerComponent(StoredComponentRegistry)
        3. if(
        3.     !in_array(

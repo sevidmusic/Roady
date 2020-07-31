@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingCms\abstractions\component\Web\Routing;
+namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingCms\abstractions\component\SwitchableComponent;
-use DarlingCms\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingCms\interfaces\primary\Storable;
-use DarlingCms\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
 abstract class Request extends SwitchableComponent implements RequestInterface
 {

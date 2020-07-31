@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\Factory;
 
-use DarlingCms\classes\component\Factory\ResponseFactory;
+use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory;
 use UnitTests\abstractions\component\Factory\ResponseFactoryTest as CoreResponseFactoryTest;
 
 class ResponseFactoryTest extends CoreResponseFactoryTest

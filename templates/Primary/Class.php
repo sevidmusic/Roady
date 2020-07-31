@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\primary;
+namespace DarlingDataManagementSystem\classes\primary;
 
-use DarlingCms\abstractions\primary\DS_COMPONENT_NAME as DS_COMPONENT_NAMEBase;
-use DarlingCms\interfaces\primary\DS_COMPONENT_NAME as DS_COMPONENT_NAMEInterface;
+use DarlingDataManagementSystem\abstractions\primary\DS_COMPONENT_NAME as DS_COMPONENT_NAMEBase;
+use DarlingDataManagementSystem\interfaces\primary\DS_COMPONENT_NAME as DS_COMPONENT_NAMEInterface;
 
 class DS_COMPONENT_NAME extends DS_COMPONENT_NAMEBase implements DS_COMPONENT_NAMEInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingCms\classes\primary;
+namespace DarlingDataManagementSystem\classes\primary;
 
-use DarlingCms\abstractions\primary\Classifiable as ClassifiableBase;
-use DarlingCms\interfaces\primary\Classifiable as ClassifiableInterface;
+use DarlingDataManagementSystem\abstractions\primary\Classifiable as ClassifiableBase;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
 
 class Classifiable extends ClassifiableBase implements ClassifiableInterface
 {
