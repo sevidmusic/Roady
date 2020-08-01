@@ -27,6 +27,14 @@ trait FactoryTestTrait
         );
     }
 
+    public function testGetAppDomainReturnsRequestReturnedByAssignedAppsGetAppDomainMethod(): void
+    {
+        $this->assertEquals(
+            $this->getFactory()->getApp()->getAppDomain(),
+            $this->getFactory()->getAppDomain()
+        );
+    }
+
     public function getFactory(): Factory
     {
         return $this->factory;

@@ -6,6 +6,7 @@ use DarlingDataManagementSystem\abstractions\component\Component;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\App;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 
 abstract class Factory extends Component implements FactoryInterface
 {
@@ -26,6 +27,11 @@ abstract class Factory extends Component implements FactoryInterface
     public function getApp(): App
     {
         return $this->app;
+    }
+
+    public function getAppDomain(): Request
+    {
+        return $this->getApp()->getAppDomain();
     }
 
 }
