@@ -3,478 +3,463 @@
   <ID>PHP</ID>
   <OriginalElement>\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud</OriginalElement>
   <nodes>
-    <node x="1096.162785664819" y="147.5">\DarlingDataManagementSystem\interfaces\primary\Exportable</node>
-    <node x="3571.4347154893803" y="2553.0">\DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory</node>
-    <node x="1236.1627856648188" y="135.5">\DarlingDataManagementSystem\abstractions\primary\Classifiable</node>
-    <node x="499.1627856648188" y="656.5">\DarlingDataManagementSystem\interfaces\component\Component</node>
-    <node x="2786.876558171745" y="1177.0">\DarlingDataManagementSystem\interfaces\component\SwitchableComponent</node>
-    <node x="999.8765581717448" y="2108.5">\DarlingDataManagementSystem\abstractions\component\Web\Routing\Request</node>
-    <node x="1030.162785664819" y="544.0">\DarlingDataManagementSystem\abstractions\primary\Exportable</node>
-    <node x="1274.6265581717448" y="2119.5">\DarlingDataManagementSystem\abstractions\component\OutputComponent</node>
-    <node x="0.0" y="3160.0">\DarlingDataManagementSystem\abstractions\primary\Positionable</node>
-    <node x="5071.43471548938" y="2796.0">\DarlingDataManagementSystem\abstractions\component\Factory\RequestFactory</node>
-    <node x="209.20833333333348" y="2120.0">\DarlingDataManagementSystem\abstractions\component\Factory\PrimaryFactory</node>
-    <node x="2971.876558171745" y="1142.5">\DarlingDataManagementSystem\abstractions\primary\Switchable</node>
-    <node x="2304.126558171745" y="1567.0">\DarlingDataManagementSystem\abstractions\component\SwitchableComponent</node>
-    <node x="2630.876558171745" y="1976.0">\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response</node>
-    <node x="332.350285664819" y="147.5">\DarlingDataManagementSystem\interfaces\primary\Storable</node>
-    <node x="628.662785664819" y="1446.0">\DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry</node>
-    <node x="1013.8482600415487" y="1087.0">\DarlingDataManagementSystem\abstractions\component\Component</node>
-    <node x="0.0" y="1120.0">\DarlingDataManagementSystem\abstractions\primary\Storable</node>
-    <node x="2968.876558171745" y="2097.5">\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate</node>
-    <node x="4503.93471548938" y="2119.5">\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory</node>
-    <node x="861.3765581717448" y="2718.5">\DarlingDataManagementSystem\abstractions\component\UserInterface\StandardUI</node>
-    <node x="2435.626558171745" y="2807.5">\DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard</node>
-    <node x="5529.43471548938" y="2752.0">\DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory</node>
-    <node x="2069.876558171745" y="2119.0">\DarlingDataManagementSystem\abstractions\component\Web\App</node>
-    <node x="614.1627856648188" y="325.0">\DarlingDataManagementSystem\abstractions\utility\ReflectionUtility</node>
-    <node x="197.45833333333348" y="2751.5">\DarlingDataManagementSystem\abstractions\component\Factory\BaseComponentFactory</node>
-    <node x="2912.751558171745" y="633.5">\DarlingDataManagementSystem\interfaces\primary\Switchable</node>
-    <node x="3306.876558171745" y="2108.5">\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud</node>
-    <node x="1709.8765581717448" y="2119.5">\DarlingDataManagementSystem\abstractions\component\Web\Routing\Router</node>
-    <node x="4155.43471548938" y="2796.0">\DarlingDataManagementSystem\abstractions\component\Factory\OutputComponentFactory</node>
-    <node x="297.45833333333326" y="1589.0">\DarlingDataManagementSystem\abstractions\component\Factory\Factory</node>
-    <node x="2747.2505049630645" y="2796.0">\DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse</node>
-    <node x="540.9127856648188" y="125.0">\DarlingDataManagementSystem\dev\traits\Logger</node>
-    <node x="1485.3765581717448" y="2707.5">\DarlingDataManagementSystem\abstractions\component\Action</node>
-    <node x="110.25" y="577.0">\DarlingDataManagementSystem\abstractions\primary\Identifiable</node>
-    <node x="3459.876558171745" y="1579.0">\DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud</node>
-    <node x="318.43361899815227" y="0.0">\DarlingDataManagementSystem\interfaces\primary\Identifiable</node>
-    <node x="765.3973915050781" y="11.0">\DarlingDataManagementSystem\interfaces\primary\Classifiable</node>
-    <node x="2359.876558171745" y="1933.0">\DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json</node>
-    <node x="4613.43471548938" y="2796.0">\DarlingDataManagementSystem\abstractions\component\Factory\StandardUITemplateFactory</node>
+    <node x="960.6721346952907" y="125.5">\DarlingDataManagementSystem\interfaces\primary\Exportable</node>
+    <node x="3508.2770371652805" y="1882.0">\DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory</node>
+    <node x="724.9349319021226" y="524.5">\DarlingDataManagementSystem\interfaces\component\Component</node>
+    <node x="1955.875" y="125.0">\DarlingDataManagementSystem\abstractions\primary\Classifiable</node>
+    <node x="2865.7770371652805" y="913.5">\DarlingDataManagementSystem\interfaces\component\SwitchableComponent</node>
+    <node x="1821.2083333333335" y="456.5">\DarlingDataManagementSystem\abstractions\primary\Exportable</node>
+    <node x="3392.7770371652805" y="1580.5">\DarlingDataManagementSystem\abstractions\component\Web\Routing\Request</node>
+    <node x="1321.1849319021228" y="1569.5">\DarlingDataManagementSystem\abstractions\component\OutputComponent</node>
+    <node x="0.0" y="2157.0">\DarlingDataManagementSystem\abstractions\primary\Positionable</node>
+    <node x="4044.2770371652805" y="1959.0">\DarlingDataManagementSystem\abstractions\component\Factory\RequestFactory</node>
+    <node x="408.6304680286239" y="1547.5">\DarlingDataManagementSystem\abstractions\component\Factory\PrimaryFactory</node>
+    <node x="3050.7770371652805" y="890.5">\DarlingDataManagementSystem\abstractions\primary\Switchable</node>
+    <node x="2709.7770371652805" y="1459.0">\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response</node>
+    <node x="2019.8793859649124" y="1205.0">\DarlingDataManagementSystem\abstractions\component\SwitchableComponent</node>
+    <node x="387.64326523545606" y="1139.0">\DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry</node>
+    <node x="401.08076523545606" y="125.5">\DarlingDataManagementSystem\interfaces\primary\Storable</node>
+    <node x="953.5982600415498" y="857.0">\DarlingDataManagementSystem\abstractions\component\Component</node>
+    <node x="0.0" y="879.0">\DarlingDataManagementSystem\abstractions\primary\Storable</node>
+    <node x="2293.1849319021226" y="1547.5">\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate</node>
+    <node x="4387.5270371652805" y="1569.5">\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory</node>
+    <node x="864.4349319021228" y="1970.5">\DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard</node>
+    <node x="1556.0931873268696" y="1937.0">\DarlingDataManagementSystem\abstractions\component\UserInterface\StandardUI</node>
+    <node x="4960.2770371652805" y="1915.0">\DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory</node>
+    <node x="1659.1849319021228" y="1569.0">\DarlingDataManagementSystem\abstractions\component\Web\App</node>
+    <node x="386.93493190212257" y="281.0">\DarlingDataManagementSystem\abstractions\utility\ReflectionUtility</node>
+    <node x="415.64326523545606" y="1926.0">\DarlingDataManagementSystem\abstractions\component\Factory\BaseComponentFactory</node>
+    <node x="2991.6520371652805" y="501.5">\DarlingDataManagementSystem\interfaces\primary\Switchable</node>
+    <node x="1949.1849319021228" y="1558.5">\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud</node>
+    <node x="4502.2770371652805" y="1959.0">\DarlingDataManagementSystem\abstractions\component\Factory\OutputComponentFactory</node>
+    <node x="3048.7770371652805" y="1580.5">\DarlingDataManagementSystem\abstractions\component\Web\Routing\Router</node>
+    <node x="684.6849319021228" y="1205.0">\DarlingDataManagementSystem\abstractions\component\Factory\Factory</node>
+    <node x="2809.5270371652805" y="1959.0">\DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse</node>
+    <node x="1118.4349319021228" y="1904.0">\DarlingDataManagementSystem\abstractions\component\Action</node>
+    <node x="95.75" y="478.5">\DarlingDataManagementSystem\abstractions\primary\Identifiable</node>
+    <node x="403.08076523545606" y="0.0">\DarlingDataManagementSystem\interfaces\primary\Identifiable</node>
+    <node x="2273.879385964912" y="1183.5">\DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud</node>
+    <node x="928.1849319021228" y="1547.5">\DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json</node>
+    <node x="849.0390985687893" y="11.0">\DarlingDataManagementSystem\interfaces\primary\Classifiable</node>
+    <node x="5496.2770371652805" y="1959.0">\DarlingDataManagementSystem\abstractions\component\Factory\StandardUITemplateFactory</node>
   </nodes>
   <notes />
   <edges>
     <edge source="\DarlingDataManagementSystem\interfaces\component\Component" target="\DarlingDataManagementSystem\interfaces\primary\Exportable">
       <point x="35.625" y="-14.5" />
-      <point x="582.2877856648188" y="305.0" />
-      <point x="1126.162785664819" y="305.0" />
+      <point x="808.0599319021226" y="261.0" />
+      <point x="990.6721346952907" y="261.0" />
       <point x="-30.0" y="37.5" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
+      <point x="-79.5" y="-181.5" />
+      <point x="2789.2770371652805" y="1419.0" />
+      <point x="2162.879385964912" y="1419.0" />
+      <point x="26.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory">
       <point x="-129.0" y="-82.0" />
-      <point x="5658.43471548938" y="2513.0" />
-      <point x="4898.134715489381" y="2513.0" />
-      <point x="175.19999999999982" y="93.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="-79.5" y="-237.0" />
-      <point x="2710.376558171745" y="1903.0" />
-      <point x="2447.126558171745" y="1903.0" />
-      <point x="26.0" y="82.5" />
+      <point x="5089.2770371652805" y="1852.0" />
+      <point x="4694.127037165281" y="1852.0" />
+      <point x="87.60000000000036" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="79.5" y="-237.0" />
+      <point x="79.5" y="-181.5" />
       <point x="0.0" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="-85.0" y="-104.5" />
-      <point x="3391.876558171745" y="1883.0" />
-      <point x="2499.126558171745" y="1883.0" />
-      <point x="78.0" y="82.5" />
+      <point x="-81.0" y="-82.0" />
+      <point x="2030.1849319021228" y="1439.0" />
+      <point x="2110.879385964912" y="1439.0" />
+      <point x="-26.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Router" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-85.0" y="-93.5" />
-      <point x="1794.8765581717448" y="1386.0" />
-      <point x="2825.955505540166" y="1386.0" />
-      <point x="-43.42105263157873" y="14.5" />
+      <point x="80.99999999999989" y="-60.0" />
+      <point x="3291.7770371652805" y="1109.0" />
+      <point x="2965.645458217912" y="1109.0" />
+      <point x="17.368421052631675" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\primary\Switchable" target="\DarlingDataManagementSystem\interfaces\primary\Switchable">
-      <point x="0.0" y="-49.0" />
-      <point x="3028.876558171745" y="1067.0" />
-      <point x="2998.251558171745" y="1067.0" />
+      <point x="0.0" y="-37.5" />
+      <point x="3107.7770371652805" y="837.0" />
+      <point x="3077.1520371652805" y="837.0" />
       <point x="28.5" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
       <point x="0.0" y="-70.5" />
-      <point x="3561.876558171745" y="1416.0" />
-      <point x="2886.7449792243765" y="1416.0" />
-      <point x="17.368421052631675" y="14.5" />
+      <point x="2375.879385964912" y="1099.0" />
+      <point x="2922.224405586333" y="1099.0" />
+      <point x="-26.052631578947512" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-141.0" y="-281.0" />
-      <point x="3712.4347154893803" y="1396.0" />
-      <point x="2904.113400277008" y="1396.0" />
+      <point x="-129.0" y="-115.0" />
+      <point x="3637.2770371652805" y="1089.0" />
+      <point x="2983.013879270544" y="1089.0" />
       <point x="34.73684210526335" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\BaseComponentFactory" target="\DarlingDataManagementSystem\interfaces\component\Component">
-      <point x="102.0" y="-82.5" />
-      <point x="503.4583333333335" y="2533.0" />
-      <point x="466.70833333333326" y="2533.0" />
-      <point x="466.70833333333326" y="1057.0" />
-      <point x="538.7461189981523" y="1057.0" />
-      <point x="-7.916666666666515" y="14.5" />
+      <point x="102.0" y="-71.0" />
+      <point x="721.643265235456" y="1862.0" />
+      <point x="827.1849319021228" y="1862.0" />
+      <point x="827.1849319021228" y="837.0" />
+      <point x="780.3515985687893" y="837.0" />
+      <point x="7.9166666666667425" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud" target="\DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud">
-      <point x="85.0" y="-104.5" />
+      <point x="81.0" y="-82.0" />
+      <point x="2192.184931902123" y="1439.0" />
+      <point x="2375.879385964912" y="1439.0" />
       <point x="0.0" y="70.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\primary\Exportable" target="\DarlingDataManagementSystem\interfaces\primary\Exportable">
-      <point x="0.0" y="-127.0" />
+      <point x="0.0" y="-82.5" />
+      <point x="1925.2083333333335" y="221.0" />
+      <point x="1050.6721346952907" y="221.0" />
       <point x="30.0" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent" target="\DarlingDataManagementSystem\interfaces\component\Component">
       <point x="-41.25" y="-14.5" />
-      <point x="2828.126558171745" y="1057.0" />
-      <point x="586.2461189981523" y="1057.0" />
+      <point x="2907.0270371652805" y="817.0" />
+      <point x="812.018265235456" y="817.0" />
       <point x="39.58333333333337" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Request" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="58.5" y="-104.5" />
-      <point x="1175.3765581717448" y="1883.0" />
-      <point x="2317.126558171745" y="1883.0" />
-      <point x="-104.0" y="82.5" />
+      <point x="-58.5" y="-60.0" />
+      <point x="3451.2770371652805" y="1399.0" />
+      <point x="2214.879385964912" y="1399.0" />
+      <point x="78.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent" target="\DarlingDataManagementSystem\interfaces\primary\Switchable">
       <point x="41.25" y="-14.5" />
-      <point x="2910.626558171745" y="1067.0" />
-      <point x="2941.251558171745" y="1067.0" />
+      <point x="2989.5270371652805" y="837.0" />
+      <point x="3020.1520371652805" y="837.0" />
       <point x="-28.5" y="37.5" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
+      <point x="79.5" y="-93.0" />
+      <point x="2531.6849319021226" y="1439.0" />
+      <point x="2627.9349319021226" y="1439.0" />
+      <point x="2627.9349319021226" y="1109.0" />
+      <point x="2930.908616112649" y="1109.0" />
+      <point x="-17.368421052631675" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\primary\Exportable" target="\DarlingDataManagementSystem\interfaces\primary\Classifiable">
       <point x="0.0" y="-37.5" />
-      <point x="1156.162785664819" y="105.0" />
-      <point x="823.3973915050781" y="105.0" />
+      <point x="1020.6721346952907" y="105.0" />
+      <point x="907.0390985687893" y="105.0" />
       <point x="0.0" y="26.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="79.5" y="-115.5" />
-      <point x="3207.376558171745" y="1426.0" />
-      <point x="2878.0607686980607" y="1426.0" />
-      <point x="8.684210526315837" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\component\Component" target="\DarlingDataManagementSystem\interfaces\primary\Identifiable">
       <point x="-11.875" y="-14.5" />
-      <point x="534.7877856648188" y="275.0" />
-      <point x="462.8502856648188" y="275.0" />
-      <point x="462.8502856648188" y="105.0" />
-      <point x="415.1002856648188" y="105.0" />
+      <point x="760.5599319021226" y="241.0" />
+      <point x="813.9349319021226" y="241.0" />
+      <point x="813.9349319021226" y="105.0" />
+      <point x="499.74743190212257" y="105.0" />
       <point x="38.666666666666515" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\PrimaryFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\Factory">
       <point x="60.0" y="-93.0" />
-      <point x="389.2083333333335" y="1913.0" />
-      <point x="371.45833333333326" y="1913.0" />
-      <point x="0.0" y="60.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="109.5" y="-93.5" />
-      <point x="4832.43471548938" y="1376.0" />
-      <point x="2921.4818213296394" y="1376.0" />
-      <point x="52.10526315789457" y="14.5" />
+      <point x="588.6304680286239" y="1439.0" />
+      <point x="750.6849319021228" y="1439.0" />
+      <point x="0.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\primary\Exportable" target="\DarlingDataManagementSystem\abstractions\primary\Classifiable">
-      <point x="104.0" y="-127.0" />
-      <point x="1290.162785664819" y="305.0" />
-      <point x="1301.1627856648188" y="305.0" />
-      <point x="0.0" y="49.5" />
+      <point x="69.33333333333326" y="-82.5" />
+      <point x="1994.5416666666667" y="261.0" />
+      <point x="2013.875" y="261.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
+      <point x="109.5" y="-71.0" />
+      <point x="4716.0270371652805" y="1069.0" />
+      <point x="3000.382300323175" y="1069.0" />
+      <point x="52.10526315789457" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\primary\Storable" target="\DarlingDataManagementSystem\interfaces\primary\Storable">
-      <point x="-66.0" y="-71.5" />
-      <point x="66.0" y="1067.0" />
-      <point x="62.104166666666515" y="1067.0" />
-      <point x="62.104166666666515" y="285.0" />
-      <point x="362.350285664819" y="285.0" />
+      <point x="-66.0" y="-49.0" />
+      <point x="66.0" y="837.0" />
+      <point x="85.25" y="837.0" />
+      <point x="85.25" y="241.0" />
+      <point x="431.08076523545606" y="241.0" />
       <point x="-30.0" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\BaseComponentFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\PrimaryFactory">
-      <point x="-102.0" y="-82.5" />
-      <point x="299.4583333333335" y="2533.0" />
-      <point x="329.2083333333335" y="2533.0" />
+      <point x="-102.0" y="-71.0" />
+      <point x="517.643265235456" y="1862.0" />
+      <point x="528.6304680286239" y="1862.0" />
       <point x="0.0" y="93.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse" target="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Response">
       <point x="-72.0" y="-38.0" />
-      <point x="2819.2505049630645" y="2533.0" />
-      <point x="2789.876558171745" y="2533.0" />
-      <point x="0.0" y="237.0" />
+      <point x="2881.5270371652805" y="1862.0" />
+      <point x="2868.7770371652805" y="1862.0" />
+      <point x="0.0" y="181.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard" target="\DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json">
-      <point x="-58.5" y="-26.5" />
-      <point x="2494.126558171745" y="2533.0" />
-      <point x="2484.876558171745" y="2533.0" />
-      <point x="0.0" y="280.0" />
+      <point x="58.5" y="-26.5" />
+      <point x="1039.9349319021228" y="1862.0" />
+      <point x="1045.1849319021228" y="1862.0" />
+      <point x="0.0" y="93.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\component\Component" target="\DarlingDataManagementSystem\interfaces\primary\Storable">
       <point x="-35.625" y="-14.5" />
-      <point x="511.0377856648188" y="285.0" />
-      <point x="422.350285664819" y="285.0" />
+      <point x="736.8099319021226" y="241.0" />
+      <point x="491.08076523545606" y="241.0" />
       <point x="30.0" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="62.5" y="-280.0" />
-      <point x="2547.376558171745" y="1913.0" />
-      <point x="2548.626558171745" y="1913.0" />
-      <point x="2548.626558171745" y="1416.0" />
-      <point x="2852.008137119113" y="1416.0" />
-      <point x="-17.368421052631675" y="14.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="-79.5" y="-115.5" />
-      <point x="3048.376558171745" y="1893.0" />
-      <point x="2473.126558171745" y="1893.0" />
-      <point x="52.0" y="82.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\RequestFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="109.5" y="-38.0" />
-      <point x="5399.93471548938" y="1356.0" />
-      <point x="2938.850242382271" y="1356.0" />
-      <point x="69.47368421052624" y="14.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Request" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-58.5" y="-104.5" />
-      <point x="1058.3765581717448" y="1356.0" />
-      <point x="2799.9028739612186" y="1356.0" />
+      <point x="-58.5" y="-93.0" />
+      <point x="986.6849319021228" y="1049.0" />
+      <point x="2878.8033529547542" y="1049.0" />
       <point x="-69.47368421052624" y="14.5" />
     </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
+      <point x="-79.5" y="-93.0" />
+      <point x="2372.6849319021226" y="1429.0" />
+      <point x="2136.879385964912" y="1429.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\RequestFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
+      <point x="-109.5" y="-38.0" />
+      <point x="4153.7770371652805" y="1079.0" />
+      <point x="2991.6980897968597" y="1079.0" />
+      <point x="43.42105263157919" y="14.5" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Request" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
+      <point x="58.5" y="-60.0" />
+      <point x="3568.2770371652805" y="1099.0" />
+      <point x="2974.329668744228" y="1099.0" />
+      <point x="26.052631578947512" y="14.5" />
+    </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory">
-      <point x="141.0" y="-281.0" />
-      <point x="3994.4347154893803" y="2523.0" />
-      <point x="4547.734715489381" y="2523.0" />
-      <point x="-175.19999999999982" y="93.5" />
+      <point x="129.0" y="-115.0" />
+      <point x="3895.2770371652805" y="1852.0" />
+      <point x="4431.327037165281" y="1852.0" />
+      <point x="-175.19999999999982" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\StandardUITemplateFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
       <point x="109.5" y="-38.0" />
-      <point x="4941.93471548938" y="2533.0" />
-      <point x="4952.43471548938" y="2533.0" />
-      <point x="4952.43471548938" y="1366.0" />
-      <point x="2930.166031855955" y="1366.0" />
-      <point x="60.78947368421041" y="14.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\primary\Storable" target="\DarlingDataManagementSystem\abstractions\primary\Identifiable">
-      <point x="66.0" y="-71.5" />
-      <point x="198.0" y="1067.0" />
-      <point x="193.25" y="1067.0" />
-      <point x="0.0" y="94.0" />
+      <point x="5824.7770371652805" y="1039.0" />
+      <point x="3026.4349319021226" y="1039.0" />
+      <point x="78.15789473684208" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\App" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="67.5" y="-94.0" />
-      <point x="2272.376558171745" y="1913.0" />
-      <point x="2395.126558171745" y="1913.0" />
-      <point x="-26.0" y="82.5" />
+      <point x="67.5" y="-71.5" />
+      <point x="1861.6849319021228" y="1429.0" />
+      <point x="2084.879385964912" y="1429.0" />
+      <point x="-52.0" y="49.0" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\primary\Storable" target="\DarlingDataManagementSystem\abstractions\primary\Identifiable">
+      <point x="66.0" y="-49.0" />
+      <point x="198.0" y="837.0" />
+      <point x="178.75" y="837.0" />
+      <point x="0.0" y="60.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\PrimaryFactory" target="\DarlingDataManagementSystem\interfaces\component\Component">
       <point x="-60.0" y="-93.0" />
-      <point x="269.2083333333335" y="1913.0" />
-      <point x="286.95833333333326" y="1913.0" />
-      <point x="286.95833333333326" y="1037.0" />
-      <point x="507.0794523314855" y="1037.0" />
+      <point x="468.6304680286239" y="1439.0" />
+      <point x="377.14326523545606" y="1439.0" />
+      <point x="377.14326523545606" y="817.0" />
+      <point x="732.8515985687893" y="817.0" />
       <point x="-39.58333333333326" y="14.5" />
     </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\RequestFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory">
-      <point x="-109.5" y="-38.0" />
-      <point x="5180.93471548938" y="2523.0" />
-      <point x="4810.534715489381" y="2523.0" />
-      <point x="87.60000000000036" y="93.5" />
-    </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\OutputComponent" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-83.5" y="-93.5" />
-      <point x="1358.1265581717448" y="1366.0" />
-      <point x="2808.5870844875344" y="1366.0" />
-      <point x="-60.78947368421041" y="14.5" />
+      <point x="-79.5" y="-71.0" />
+      <point x="1400.6849319021228" y="1069.0" />
+      <point x="2896.171774007386" y="1069.0" />
+      <point x="-52.10526315789457" y="14.5" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\RequestFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory">
+      <point x="109.5" y="-38.0" />
+      <point x="4372.7770371652805" y="1862.0" />
+      <point x="4518.92703716528" y="1862.0" />
+      <point x="-87.60000000000036" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\OutputComponentFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-109.5" y="-38.0" />
-      <point x="4264.93471548938" y="1386.0" />
-      <point x="2912.797610803324" y="1386.0" />
-      <point x="43.42105263157919" y="14.5" />
+      <point x="109.5" y="-38.0" />
+      <point x="4830.7770371652805" y="1862.0" />
+      <point x="4836.0270371652805" y="1862.0" />
+      <point x="4836.0270371652805" y="1059.0" />
+      <point x="3009.066510849491" y="1059.0" />
+      <point x="60.78947368421041" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="-62.5" y="-280.0" />
-      <point x="2422.376558171745" y="1913.0" />
-      <point x="2421.126558171745" y="1913.0" />
-      <point x="0.0" y="82.5" />
+      <point x="58.5" y="-93.0" />
+      <point x="1103.6849319021228" y="1409.0" />
+      <point x="2032.8793859649124" y="1409.0" />
+      <point x="-104.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="58.5" y="-82.5" />
-      <point x="2479.626558171745" y="1406.0" />
-      <point x="2843.3239265927973" y="1406.0" />
-      <point x="-26.052631578947512" y="14.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Web\App" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-67.5" y="-94.0" />
-      <point x="2137.376558171745" y="1396.0" />
-      <point x="2834.6397160664815" y="1396.0" />
+      <point x="58.5" y="-49.0" />
+      <point x="2195.379385964912" y="1089.0" />
+      <point x="2913.540195060017" y="1089.0" />
       <point x="-34.73684210526335" y="14.5" />
     </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Web\App" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
+      <point x="-67.5" y="-71.5" />
+      <point x="1726.6849319021228" y="1079.0" />
+      <point x="2904.8559845337018" y="1079.0" />
+      <point x="-43.42105263157873" y="14.5" />
+    </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\Factory" target="\DarlingDataManagementSystem\abstractions\component\Component">
-      <point x="37.0" y="-60.5" />
-      <point x="408.45833333333326" y="1326.0" />
-      <point x="1043.5149267082154" y="1326.0" />
-      <point x="-59.33333333333326" y="104.5" />
+      <point x="33.0" y="-49.0" />
+      <point x="783.6849319021228" y="1029.0" />
+      <point x="1034.5982600415498" y="1029.0" />
+      <point x="0.0" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry" target="\DarlingDataManagementSystem\interfaces\component\Component">
-      <point x="-63.0" y="-203.5" />
-      <point x="691.662785664819" y="1316.0" />
-      <point x="508.95833333333326" y="1316.0" />
-      <point x="508.95833333333326" y="1067.0" />
-      <point x="554.5794523314853" y="1067.0" />
-      <point x="7.916666666666515" y="14.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\primary\Identifiable" target="\DarlingDataManagementSystem\dev\traits\Logger">
-      <point x="41.5" y="-94.0" />
-      <point x="234.75" y="295.0" />
-      <point x="582.9127856648188" y="295.0" />
-      <point x="-84.0" y="60.0" />
+      <point x="-63.0" y="-115.0" />
+      <point x="450.64326523545606" y="827.0" />
+      <point x="748.6849319021226" y="827.0" />
+      <point x="-23.75" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry" target="\DarlingDataManagementSystem\abstractions\component\Component">
-      <point x="63.0" y="-203.5" />
-      <point x="817.662785664819" y="1336.0" />
-      <point x="1102.8482600415487" y="1336.0" />
-      <point x="0.0" y="104.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\Factory" target="\DarlingDataManagementSystem\interfaces\component\Component">
-      <point x="-37.0" y="-60.5" />
-      <point x="334.45833333333326" y="1047.0" />
-      <point x="522.9127856648188" y="1047.0" />
-      <point x="-23.75" y="14.5" />
+      <point x="63.0" y="-115.0" />
+      <point x="576.643265235456" y="1019.0" />
+      <point x="980.5982600415498" y="1019.0" />
+      <point x="-54.0" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\component\Component" target="\DarlingDataManagementSystem\interfaces\primary\Classifiable">
       <point x="11.875" y="-14.5" />
-      <point x="558.5377856648188" y="265.0" />
-      <point x="473.8502856648188" y="265.0" />
-      <point x="473.8502856648188" y="105.0" />
-      <point x="784.7307248384113" y="105.0" />
+      <point x="784.3099319021226" y="251.0" />
+      <point x="824.9349319021226" y="251.0" />
+      <point x="824.9349319021226" y="105.0" />
+      <point x="868.3724319021226" y="105.0" />
       <point x="-38.66666666666674" y="26.5" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\Factory" target="\DarlingDataManagementSystem\interfaces\component\Component">
+      <point x="-33.0" y="-49.0" />
+      <point x="717.6849319021228" y="837.0" />
+      <point x="764.5182652354558" y="837.0" />
+      <point x="-7.9166666666667425" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
       <point x="129.0" y="-82.0" />
-      <point x="5916.43471548938" y="1346.0" />
-      <point x="2947.534452908587" y="1346.0" />
-      <point x="78.15789473684208" y="14.5" />
+      <point x="5347.2770371652805" y="1049.0" />
+      <point x="3017.7507213758067" y="1049.0" />
+      <point x="69.47368421052624" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\primary\Classifiable" target="\DarlingDataManagementSystem\interfaces\primary\Classifiable">
-      <point x="0.0" y="-49.5" />
-      <point x="1301.1627856648188" y="95.0" />
-      <point x="862.0640581717448" y="95.0" />
+      <point x="0.0" y="-38.0" />
+      <point x="2013.875" y="95.0" />
+      <point x="945.705765235456" y="95.0" />
       <point x="38.66666666666663" y="26.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\component\OutputComponent" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="83.5" y="-93.5" />
-      <point x="1525.1265581717448" y="1893.0" />
-      <point x="2343.126558171745" y="1893.0" />
-      <point x="-78.0" y="82.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
       <point x="72.0" y="-38.0" />
-      <point x="2963.2505049630645" y="2533.0" />
-      <point x="3674.376558171745" y="2533.0" />
-      <point x="3674.376558171745" y="1406.0" />
-      <point x="2895.4291897506923" y="1406.0" />
-      <point x="26.052631578947512" y="14.5" />
+      <point x="3025.5270371652805" y="1862.0" />
+      <point x="3038.2770371652805" y="1862.0" />
+      <point x="3038.2770371652805" y="1119.0" />
+      <point x="2956.9612476915963" y="1119.0" />
+      <point x="8.684210526315837" y="14.5" />
+    </edge>
+    <edge source="\DarlingDataManagementSystem\abstractions\component\OutputComponent" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
+      <point x="79.5" y="-71.0" />
+      <point x="1559.6849319021228" y="1419.0" />
+      <point x="2058.879385964912" y="1419.0" />
+      <point x="-78.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\UserInterface\StandardUI" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="-151.0" y="-115.5" />
-      <point x="1012.3765581717448" y="2533.0" />
-      <point x="989.3765581717448" y="2533.0" />
-      <point x="989.3765581717448" y="1346.0" />
-      <point x="2791.2186634349027" y="1346.0" />
-      <point x="-78.15789473684208" y="14.5" />
+      <point x="147.0" y="-60.0" />
+      <point x="1997.0931873268696" y="1862.0" />
+      <point x="2677.2770371652805" y="1862.0" />
+      <point x="2677.2770371652805" y="1119.0" />
+      <point x="2939.5928266389647" y="1119.0" />
+      <point x="-8.684210526315837" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="-109.5" y="-93.5" />
-      <point x="4613.43471548938" y="1873.0" />
-      <point x="2525.126558171745" y="1873.0" />
-      <point x="104.0" y="82.5" />
+      <point x="-109.5" y="-71.0" />
+      <point x="4497.0270371652805" y="1389.0" />
+      <point x="2240.879385964912" y="1389.0" />
+      <point x="104.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\primary\Identifiable" target="\DarlingDataManagementSystem\interfaces\primary\Identifiable">
-      <point x="-41.5" y="-94.0" />
-      <point x="151.75" y="275.0" />
-      <point x="21.604166666666515" y="275.0" />
-      <point x="21.604166666666515" y="105.0" />
-      <point x="337.7669523314855" y="105.0" />
+      <point x="-41.5" y="-60.5" />
+      <point x="137.25" y="231.0" />
+      <point x="44.75" y="231.0" />
+      <point x="44.75" y="105.0" />
+      <point x="422.4140985687893" y="105.0" />
       <point x="-38.66666666666674" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\UserInterface\StandardUI" target="\DarlingDataManagementSystem\abstractions\component\OutputComponent">
-      <point x="151.0" y="-115.5" />
-      <point x="1314.3765581717448" y="2533.0" />
-      <point x="1358.1265581717448" y="2533.0" />
-      <point x="-83.5" y="93.5" />
+      <point x="-147.0" y="-60.0" />
+      <point x="1703.0931873268696" y="1862.0" />
+      <point x="1559.6849319021228" y="1862.0" />
+      <point x="79.5" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Action" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="83.5" y="-126.5" />
-      <point x="1735.8765581717448" y="2533.0" />
-      <point x="1699.3765581717448" y="2533.0" />
-      <point x="1699.3765581717448" y="1376.0" />
-      <point x="2817.2712950138502" y="1376.0" />
-      <point x="-52.10526315789457" y="14.5" />
-    </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\primary\Exportable" target="\DarlingDataManagementSystem\dev\traits\Logger">
-      <point x="-104.0" y="-127.0" />
-      <point x="1082.162785664819" y="285.0" />
-      <point x="750.9127856648188" y="285.0" />
-      <point x="84.0" y="60.0" />
+      <point x="-79.5" y="-93.0" />
+      <point x="1197.9349319021228" y="1862.0" />
+      <point x="1232.4349319021228" y="1862.0" />
+      <point x="1232.4349319021228" y="1059.0" />
+      <point x="2887.48756348107" y="1059.0" />
+      <point x="-60.78947368421041" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\interfaces\primary\Storable" target="\DarlingDataManagementSystem\interfaces\primary\Identifiable">
       <point x="0.0" y="-37.5" />
-      <point x="392.350285664819" y="105.0" />
-      <point x="376.43361899815227" y="105.0" />
       <point x="0.0" y="37.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard" target="\DarlingDataManagementSystem\interfaces\component\SwitchableComponent">
-      <point x="58.5" y="-26.5" />
-      <point x="2611.126558171745" y="2533.0" />
-      <point x="2620.376558171745" y="2533.0" />
-      <point x="2620.376558171745" y="1426.0" />
-      <point x="2860.692347645429" y="1426.0" />
-      <point x="-8.684210526315837" y="14.5" />
+      <point x="-58.5" y="-26.5" />
+      <point x="922.9349319021228" y="1862.0" />
+      <point x="917.6849319021228" y="1862.0" />
+      <point x="917.6849319021228" y="1039.0" />
+      <point x="2870.1191424284384" y="1039.0" />
+      <point x="-78.15789473684208" y="14.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Action" target="\DarlingDataManagementSystem\abstractions\component\OutputComponent">
-      <point x="-83.5" y="-126.5" />
-      <point x="1568.8765581717448" y="2533.0" />
-      <point x="1525.1265581717448" y="2533.0" />
-      <point x="83.5" y="93.5" />
+      <point x="79.5" y="-93.0" />
+      <point x="1356.9349319021228" y="1862.0" />
+      <point x="1400.6849319021228" y="1862.0" />
+      <point x="-79.5" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\OutputComponentFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory">
-      <point x="109.5" y="-38.0" />
-      <point x="4483.93471548938" y="2533.0" />
-      <point x="4635.33471548938" y="2533.0" />
-      <point x="-87.60000000000036" y="93.5" />
+      <point x="-109.5" y="-38.0" />
+      <point x="4611.7770371652805" y="1862.0" />
+      <point x="4606.5270371652805" y="1862.0" />
+      <point x="0.0" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent" target="\DarlingDataManagementSystem\abstractions\component\Component">
-      <point x="-58.5" y="-82.5" />
-      <point x="2362.626558171745" y="1336.0" />
-      <point x="1162.181593374882" y="1336.0" />
-      <point x="59.33333333333326" y="104.5" />
+      <point x="-58.5" y="-49.0" />
+      <point x="2078.379385964912" y="1029.0" />
+      <point x="1088.5982600415498" y="1029.0" />
+      <point x="54.0" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Factory\StandardUITemplateFactory" target="\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory">
       <point x="-109.5" y="-38.0" />
-      <point x="0.0" y="93.5" />
+      <point x="5605.7770371652805" y="1842.0" />
+      <point x="4781.72703716528" y="1842.0" />
+      <point x="175.19999999999982" y="71.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Web\Routing\Router" target="\DarlingDataManagementSystem\abstractions\component\SwitchableComponent">
-      <point x="85.0" y="-93.5" />
-      <point x="1964.8765581717448" y="1903.0" />
-      <point x="2369.126558171745" y="1903.0" />
-      <point x="-52.0" y="82.5" />
+      <point x="-81.0" y="-60.0" />
+      <point x="3129.7770371652805" y="1409.0" />
+      <point x="2188.879385964912" y="1409.0" />
+      <point x="52.0" y="49.0" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Component" target="\DarlingDataManagementSystem\abstractions\primary\Exportable">
-      <point x="44.5" y="-104.5" />
-      <point x="1147.3482600415487" y="1067.0" />
-      <point x="1186.162785664819" y="1067.0" />
-      <point x="0.0" y="127.0" />
+      <point x="40.5" y="-71.0" />
+      <point x="1075.0982600415498" y="837.0" />
+      <point x="1925.2083333333335" y="837.0" />
+      <point x="0.0" y="82.5" />
     </edge>
     <edge source="\DarlingDataManagementSystem\abstractions\component\Component" target="\DarlingDataManagementSystem\interfaces\component\Component">
-      <point x="-44.5" y="-104.5" />
-      <point x="1058.3482600415487" y="1067.0" />
-      <point x="570.4127856648188" y="1067.0" />
+      <point x="-40.5" y="-71.0" />
+      <point x="994.0982600415498" y="827.0" />
+      <point x="796.1849319021226" y="827.0" />
       <point x="23.75" y="14.5" />
     </edge>
-    <edge source="\DarlingDataManagementSystem\abstractions\utility\ReflectionUtility" target="\DarlingDataManagementSystem\dev\traits\Logger">
-      <point x="0.0" y="-346.0" />
-      <point x="812.1627856648188" y="295.0" />
-      <point x="666.9127856648188" y="295.0" />
-      <point x="0.0" y="60.0" />
-    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5106530243755643" x="3023.0" y="1651.5" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="1.0" x="6634.87" y="1138.5" />
+  <SelectedNodes>
+    <node>\DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constants</Category>
     <Category>Constructors</Category>
     <Category>Methods</Category>
   </Categories>
-  <VISIBILITY>private</VISIBILITY>
+  <VISIBILITY>public</VISIBILITY>
 </Diagram>
 
