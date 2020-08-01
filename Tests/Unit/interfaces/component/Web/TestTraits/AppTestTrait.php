@@ -37,6 +37,14 @@ trait AppTestTrait
         $this->app = $app;
     }
 
+    public function testGetAppDomainReturnsRequestSuplliedToConstructorOnInstantiation(): void
+    {
+        $this->assertEquals(
+            $this->getMockRequest(),
+            $this->getApp()->getAppDomain()
+        );
+    }
+
     public function testGetContainerReturnsValueOfAPP_CONTAINERConstant(): void
     {
         $this->assertEquals($this->getApp()::APP_CONTAINER, $this->getApp()->getContainer());

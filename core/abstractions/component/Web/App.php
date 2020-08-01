@@ -14,6 +14,7 @@ use RuntimeException;
 abstract class App extends CoreSwitchableComponent implements AppInterface
 {
     public const APP_CONTAINER = "APP";
+    private $domain;
 
     public function __construct(Request $request, Switchable $switchable)
     {
@@ -23,6 +24,7 @@ abstract class App extends CoreSwitchableComponent implements AppInterface
             self::APP_CONTAINER
         );
         parent::__construct($storable, $switchable);
+        $this->domain = $request;
     }
 
     public static function deriveNameLocationFromRequest(Request $request): string
@@ -69,4 +71,10 @@ abstract class App extends CoreSwitchableComponent implements AppInterface
             : false
         );
     }
+
+    public function getAppDomain(): Request
+    {
+        return $this->domain;
+    }
+
 }
