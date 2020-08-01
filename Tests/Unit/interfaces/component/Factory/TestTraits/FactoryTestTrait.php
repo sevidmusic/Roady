@@ -19,6 +19,14 @@ trait FactoryTestTrait
         );
     }
 
+    public function testGetAppReturnsAppAssignedToAppProperty(): void
+    {
+        $this->assertEquals(
+            $this->getFactory()->export()['app'],
+            $this->getFactory()->getApp()
+        );
+    }
+
     public function getFactory(): Factory
     {
         return $this->factory;

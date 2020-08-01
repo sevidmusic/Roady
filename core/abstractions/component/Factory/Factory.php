@@ -23,4 +23,9 @@ abstract class Factory extends Component implements FactoryInterface
         parent::__construct($storable);
     }
 
+    public function getApp(): App
+    {
+        return $this->app;
+    }
+
 }
