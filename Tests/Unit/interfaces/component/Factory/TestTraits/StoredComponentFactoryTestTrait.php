@@ -13,6 +13,7 @@ use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\utility\ReflectionUtility;
 use DarlingDataManagementSystem\interfaces\component\Component;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Factory\Factory;
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
 use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
@@ -37,6 +38,11 @@ trait StoredComponentFactoryTestTrait
     protected function isProperImplementation(string $expectedImplementation, $class): bool
     {
         return in_array($expectedImplementation, class_implements($class));
+    }
+
+    protected function getFactory(): Factory
+    {
+        return $this->storedComponentFactory;
     }
 
     protected function getStoredComponentFactory(): StoredComponentFactory

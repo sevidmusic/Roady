@@ -4,23 +4,27 @@ namespace UnitTests\abstractions\component\Factory;
 
 use UnitTests\abstractions\component\SwitchableComponentTest as CoreSwitchableComponentTest;
 use UnitTests\interfaces\component\Factory\TestTraits\StoredComponentFactoryTestTrait;
+use UnitTests\interfaces\component\Factory\TestTraits\FactoryTestTrait;
 
 class StoredComponentFactoryTest extends CoreSwitchableComponentTest
 {
-    use StoredComponentFactoryTestTrait;
+    use StoredComponentFactoryTestTrait, FactoryTestTrait {
+        StoredComponentFactoryTestTrait::getFactory insteadof FactoryTestTrait;
+    }
 
     public function setUp(): void
     {
-        $this->setStoredComponentFactory(
-            $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory',
-                [
-                    $this->getMockPrimaryFactory(),
-                    $this->getMockCrud(),
-                    $this->getMockStoredComponentRegistry()
-                ]
-            )
+        $storedComponentFactory = $this->getMockForAbstractClass(
+            '\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory',
+            [
+               $this->getMockPrimaryFactory(),
+               $this->getMockCrud(),
+               $this->getMockStoredComponentRegistry()
+            ]
         );
+        $this->setStoredComponentFactory($storedComponentFactory);
         $this->setStoredComponentFactoryParentTestInstances();
+        $this->setFactory($storedComponentFactory);
+        $this->setFactoryParentTestInstances();
     }
 }

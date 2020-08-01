@@ -8,19 +8,28 @@ use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
 use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Web\App;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 
 abstract class StoredComponentFactory extends CoreSwitchableComponent implements StoredComponentFactoryInterface
 {
 
     private $primaryFactory;
     private $storedComponentRegistry;
+    private $app;
 
     public function __construct(PrimaryFactory $primaryFactory, ComponentCrud $componentCrud, StoredComponentRegistry $storedComponentRegistry)
     {
+        parent::__construct(
+            $primaryFactory->buildStorable(
+                'StoredComponentFactory',
+                $primaryFactory::CONTAINER
+            ),
+            $componentCrud
+        );
         $this->storedComponentRegistry = $storedComponentRegistry;
         $this->primaryFactory = $primaryFactory;
-        $storable = $this->primaryFactory->buildStorable('StoredComponentFactory', $this->primaryFactory::CONTAINER);
-        parent::__construct($storable, $componentCrud);
+        $this->app = $primaryFactory->getApp();
     }
 
     public function getPrimaryFactory(): PrimaryFactory
@@ -42,4 +51,16 @@ abstract class StoredComponentFactory extends CoreSwitchableComponent implements
     {
         return $this->storedComponentRegistry;
     }
+
+    public function getApp(): App
+    {
+        return $this->app;
+    }
+
+    public function getAppDomain(): Request
+    {
+        return $this->getApp()->getAppDomain();
+    }
+
+
 }
