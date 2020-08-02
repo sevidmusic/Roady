@@ -17,10 +17,12 @@ require(
 
 define('REQUEST_CONTAINER', 'Requests');
 
-$domain = AppComponentsFactory::buildDomain('http://dcms.dev/');
+
 
 $appComponentsFactory = new AppComponentsFactory(
-    ...AppComponentsFactory::buildConstructorArgs($domain)
+    ...AppComponentsFactory::buildConstructorArgs(
+        AppComponentsFactory::buildDomain('http://dcms.dev/')
+    )
 );
 
 $htmlContentCreateSubmissionForm = new CreateSubmission(
@@ -33,8 +35,13 @@ $htmlContentCreateSubmissionForm = new CreateSubmission(
     __DIR__ . DIRECTORY_SEPARATOR . 'htmlContent/devForm.html',
     $appComponentsFactory->getComponentCrud()
 );
-$appComponentsFactory->getComponentCrud()->create($htmlContentCreateSubmissionForm);
-$appComponentsFactory->getStoredComponentRegistry()->registerComponent($htmlContentCreateSubmissionForm);
+$appComponentsFactory->getComponentCrud()->create(
+    $htmlContentCreateSubmissionForm
+);
+
+$appComponentsFactory->getStoredComponentRegistry()->registerComponent(
+    $htmlContentCreateSubmissionForm
+);
 
 $templateOC = $appComponentsFactory->buildOutputComponent(
     'HtmlEnd',
@@ -156,12 +163,12 @@ $homeResponse = $appComponentsFactory->buildResponse(
     $appComponentsFactory->buildRequest(
         'HomepageRequest',
         REQUEST_CONTAINER,
-        $domain->getUrl() . 'index.php'
+        $appComponentsFactory->getAppDomain()->getUrl() . 'index.php'
     ),
     $appComponentsFactory->buildRequest(
         'RootRequest',
         REQUEST_CONTAINER,
-        $domain->getUrl()
+        $appComponentsFactory->getAppDomain()->getUrl()
     ),
     $defaultUITemplate,
     $appComponentsFactory->buildOutputComponent(
@@ -196,4 +203,6 @@ $htmlEndResponse = $appComponentsFactory->buildGlobalResponse(
     )
 );
 
-$appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
+$appComponentsFactory->buildLog(
+    AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG
+);
