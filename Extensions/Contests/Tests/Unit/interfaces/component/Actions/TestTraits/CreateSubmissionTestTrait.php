@@ -11,7 +11,7 @@ use DarlingDataManagementSystem\classes\primary\Switchable;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
 use Extensions\Contests\core\classes\component\Contest\Submission as ContestSubmission;
-use Extensions\Contests\core\classes\component\Contest\Submitter;
+use Extensions\Contests\core\classes\component\Contest\User;
 use Extensions\Contests\core\interfaces\component\Actions\CreateSubmission;
 use Extensions\Contests\core\interfaces\component\Contest\Submission;
 use RuntimeException;
@@ -240,7 +240,7 @@ trait CreateSubmissionTestTrait
             ),
             new Switchable(),
             new Positionable(floatval(($request->getPost()['submissionPosition']))),
-            new Submitter(
+            new User(
                 new Storable(
                     $request->getPost()['submitterName'],
                     App::deriveNameLocationFromRequest($request),

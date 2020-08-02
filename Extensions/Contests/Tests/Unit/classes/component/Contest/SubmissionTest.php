@@ -6,7 +6,7 @@ use DarlingDataManagementSystem\classes\primary\Positionable;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
 use Extensions\Contests\core\classes\component\Contest\Submission;
-use Extensions\Contests\core\classes\component\Contest\Submitter;
+use Extensions\Contests\core\classes\component\Contest\User;
 use Extensions\Contests\Tests\Unit\abstractions\component\Contest\SubmissionTest as AbstractSubmissionTest;
 
 class SubmissionTest extends AbstractSubmissionTest
@@ -22,7 +22,7 @@ class SubmissionTest extends AbstractSubmissionTest
                 ),
                 new Switchable(),
                 new Positionable(),
-                new Submitter(
+                new User(
                     new Storable(
                         'SubmitterName',
                         'SubmitterLocation',

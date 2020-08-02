@@ -9,7 +9,7 @@ use DarlingDataManagementSystem\interfaces\primary\Positionable;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
 use DarlingDataManagementSystem\interfaces\primary\Switchable;
 use Extensions\Contests\core\classes\component\Contest\Submission;
-use Extensions\Contests\core\classes\component\Contest\Submitter;
+use Extensions\Contests\core\classes\component\Contest\User;
 use Extensions\Contests\core\interfaces\component\Actions\CreateSubmission as CreateSubmissionInterface;
 use RuntimeException;
 
@@ -129,7 +129,7 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             new \DarlingDataManagementSystem\classes\primary\Positionable(
                 floatval($this->getCurrentRequest()->getPost()['submissionPosition'])
             ),
-            new Submitter(
+            new User(
                 new \DarlingDataManagementSystem\classes\primary\Storable(
                     $this->getCurrentRequest()->getPost()['submitterName'],
                     App::deriveNameLocationFromRequest($this->getCurrentRequest()),

@@ -4,10 +4,10 @@ namespace Extensions\Contests\core\abstractions\component\Contest;
 
 use DarlingDataManagementSystem\abstractions\component\Component;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
-use Extensions\Contests\core\interfaces\component\Contest\Submitter as SubmitterInterface;
+use Extensions\Contests\core\interfaces\component\Contest\User as UserInterface;
 use RuntimeException;
 
-abstract class Submitter extends Component implements SubmitterInterface
+abstract class User extends Component implements UserInterface
 {
 
     private $email;
@@ -23,7 +23,7 @@ abstract class Submitter extends Component implements SubmitterInterface
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             throw new RuntimeException(
                 sprintf(
-                    "Warning: Invalid email %s assigned to Submitter with name %s  and  id %s",
+                    "Warning: Invalid email %s assigned to User with name %s  and  id %s",
                     $this->email,
                     $this->getName(),
                     $this->getUniqueId()

@@ -15,7 +15,7 @@ trait SubmissionTestTrait
     {
         $this->assertTrue(
             in_array(
-                'Extensions\Contests\core\interfaces\component\Contest\Submitter',
+                'Extensions\Contests\core\interfaces\component\Contest\User',
                 class_implements($this->getSubmission()->export()['submitter'])
             )
         );

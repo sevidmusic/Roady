@@ -2,29 +2,29 @@
 
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits;
 
-use Extensions\Contests\core\interfaces\component\Contest\Submitter;
+use Extensions\Contests\core\interfaces\component\Contest\User;
 use RuntimeException;
 
-trait SubmitterTestTrait
+trait UserTestTrait
 {
 
-    private $submitter;
+    private $user;
 
     public function testGetEmailThrowsRuntimeExceptionIfEmailAssignedToEmailPropertyIsNotAValidEmail(): void
     {
-        $this->getSubmitter()->import(['email' => 'bad_email']);
+        $this->getUser()->import(['email' => 'bad_email']);
         $this->expectException(RuntimeException::class);
-        $this->getSubmitter()->getEmail();
+        $this->getUser()->getEmail();
     }
 
-    public function getSubmitter(): Submitter
+    public function getUser(): User
     {
-        return $this->submitter;
+        return $this->user;
     }
 
-    public function setSubmitter(Submitter $submitter)
+    public function setUser(User $user)
     {
-        $this->submitter = $submitter;
+        $this->user = $user;
     }
 
     public function testEmailPropertyIsAssignedAValidEmailPostInstantiation(): void
@@ -32,7 +32,7 @@ trait SubmitterTestTrait
         $this->assertTrue(
             is_string(
                 filter_var(
-                    $this->getSubmitter()->export()['email'],
+                    $this->getUser()->export()['email'],
                     FILTER_VALIDATE_EMAIL
                 )
             )
@@ -42,14 +42,14 @@ trait SubmitterTestTrait
     public function testGetEmailReturnsStringThatMatchesStringAssignedToEmailProperty(): void
     {
         $this->assertEquals(
-            $this->getSubmitter()->export()['email'],
-            $this->getSubmitter()->getEmail()
+            $this->getUser()->export()['email'],
+            $this->getUser()->getEmail()
         );
     }
 
-    protected function setSubmitterParentTestInstances(): void
+    protected function setUserParentTestInstances(): void
     {
-        $this->setComponent($this->getSubmitter());
+        $this->setComponent($this->getUser());
         $this->setComponentParentTestInstances();
     }
 }

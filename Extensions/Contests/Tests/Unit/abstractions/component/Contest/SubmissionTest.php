@@ -5,7 +5,7 @@ namespace Extensions\Contests\Tests\Unit\abstractions\component\Contest;
 use DarlingDataManagementSystem\classes\primary\Positionable;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
-use Extensions\Contests\core\classes\component\Contest\Submitter;
+use Extensions\Contests\core\classes\component\Contest\User;
 use Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits\SubmissionTestTrait;
 use UnitTests\abstractions\component\OutputComponentTest as CoreOutputComponentTest;
 
@@ -26,7 +26,7 @@ class SubmissionTest extends CoreOutputComponentTest
                     ),
                     new Switchable(),
                     new Positionable(),
-                    new Submitter(
+                    new User(
                         new Storable(
                             'MockSubmitter',
                             'MockSubmitterLocation',
