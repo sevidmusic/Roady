@@ -15,15 +15,15 @@ require(
     'autoload.php'
 );
 
-// Define App Domain
-$domain = AppComponentsFactory::buildDomain('https://blackballotpowercontest.local/');
 
-// Instantiate AppComponentsFactory
 $appComponentsFactory = new AppComponentsFactory(
-    ...AppComponentsFactory::buildConstructorArgs($domain)
+    ...AppComponentsFactory::buildConstructorArgs(
+        AppComponentsFactory::buildDomain(
+            'https://blackballotpowercontest.local/'
+        )
+    )
 );
 
-// Manually build "Create Submission" Action
 $createSubmissionAction = new CreateSubmission(
     $appComponentsFactory->getPrimaryFactory()->buildStorable('CreateContestSubmissionForm', 'Forms'),
     $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
@@ -32,13 +32,11 @@ $createSubmissionAction = new CreateSubmission(
     $appComponentsFactory->getComponentCrud()
 );
 
-// Create and Register "Create Submission" Action
 $appComponentsFactory->getComponentCrud()->create($createSubmissionAction);
 $appComponentsFactory->getStoredComponentRegistry()->registerComponent(
     $createSubmissionAction
 );
 
-// Build StandardUITemplate for OutputComponents
 $templateForOutputComponentsTypes = $appComponentsFactory->buildStandardUITemplate(
     'OutputComponentTemplate',
     'UITemplates',
@@ -51,7 +49,6 @@ $templateForOutputComponentsTypes = $appComponentsFactory->buildStandardUITempla
     )
 );
 
-// Build StandardUITemplate for CreateSubmission Actions
 $templateForCreateSubmissionTypes = $appComponentsFactory->buildStandardUITemplate(
     'CreateSubmissionTemplate',
     'UITemplates',
@@ -125,7 +122,6 @@ $appComponentsFactory->buildGlobalResponse(
     ),
 );
 
-// Main menu Response
 $appComponentsFactory->buildGlobalResponse(
     'MainMenuResponse',
     1,
@@ -138,29 +134,28 @@ $appComponentsFactory->buildGlobalResponse(
     )
 );
 
-// Build Homepage Response
 $appComponentsFactory->buildResponse(
     'Homepage',
     2,
     $appComponentsFactory->buildRequest(
         'RootRequest',
         'Requests',
-        $domain->getUrl()
+        $appComponentsFactory->getAppDomain()->getUrl()
     ),
     $appComponentsFactory->buildRequest(
         'RootHttpRequest',
         'Requests',
-        str_replace('https', 'http', $domain->getUrl())
+        str_replace('https', 'http', $appComponentsFactory->getAppDomain()->getUrl())
     ),
     $appComponentsFactory->buildRequest(
         'IndexRequest',
         'Requests',
-        $domain->getUrl() . 'index.php'
+        $appComponentsFactory->getAppDomain()->getUrl() . 'index.php'
     ),
     $appComponentsFactory->buildRequest(
         'IndexHttpRequest',
         'Requests',
-        str_replace('https', 'http', $domain->getUrl()) . 'index.php'
+        str_replace('https', 'http', $appComponentsFactory->getAppDomain()->getUrl()) . 'index.php'
     ),
     $templateForOutputComponentsTypes,
     $templateForCreateSubmissionTypes,
@@ -174,7 +169,6 @@ $appComponentsFactory->buildResponse(
     $createSubmissionAction
 );
 
-// Build Closing Html Global Response
 $appComponentsFactory->buildGlobalResponse(
     'ClosingHtmlResponse',
     3,
