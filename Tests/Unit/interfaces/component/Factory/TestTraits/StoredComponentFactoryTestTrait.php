@@ -40,11 +40,6 @@ trait StoredComponentFactoryTestTrait
         return in_array($expectedImplementation, class_implements($class));
     }
 
-    protected function getFactory(): Factory
-    {
-        return $this->storedComponentFactory;
-    }
-
     protected function getStoredComponentFactory(): StoredComponentFactory
     {
         return $this->storedComponentFactory;
@@ -188,6 +183,11 @@ trait StoredComponentFactoryTestTrait
     protected function wasRegisteredOnBuild(Component $component): bool
     {
         return in_array($component, $this->getStoredComponentFactory()->export()['storedComponentRegistry']->getRegisteredComponents());
+    }
+
+    protected function getFactory(): Factory
+    {
+        return $this->storedComponentFactory;
     }
 
     protected function setStoredComponentFactoryParentTestInstances(): void

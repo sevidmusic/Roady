@@ -3,9 +3,9 @@
 namespace Extensions\Contests\Tests\Unit\abstractions\component\Contest;
 
 use DarlingDataManagementSystem\classes\primary\Storable;
+use Extensions\Contests\core\abstractions\component\Contest\User;
 use Extensions\Contests\Tests\Unit\interfaces\component\Contest\TestTraits\UserTestTrait;
 use UnitTests\abstractions\component\ComponentTest;
-use Extensions\Contests\core\abstractions\component\Contest\User;
 
 class UserTest extends ComponentTest
 {

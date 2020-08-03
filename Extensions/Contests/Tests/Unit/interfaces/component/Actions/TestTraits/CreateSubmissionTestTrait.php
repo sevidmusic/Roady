@@ -104,7 +104,7 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testDoDoesNotStoreSubmissionIfBadYoutubeUrlIsSuplliedInPostData(): void
+    public function testDoDoesNotStoreSubmissionIfBadYoutubeUrlIsSuppliedInPostData(): void
     {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->deleteAllExpectedSubmissions($expectedSubmission);
@@ -115,52 +115,6 @@ trait CreateSubmissionTestTrait
         $this->assertEmpty(
             $this->readAllExpectedSubmissions($expectedSubmission)
         );
-    }
-
-    public function testDoDoesNotStoreSubmissionIfBadEmailIsSuplliedInPostData(): void
-    {
-        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
-        $this->deleteAllExpectedSubmissions($expectedSubmission);
-        $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
-        $modifiedPostData['submitterEmail'] = 'badEmail';
-        $this->getCreateSubmission()->getCurrentRequest()->import(['post' => $modifiedPostData]);
-        $this->getCreateSubmission()->do();
-        $this->assertEmpty(
-            $this->readAllExpectedSubmissions($expectedSubmission)
-        );
-    }
-
-    private function deleteAllExpectedSubmissions(Submission $expectedSubmission): void
-    {
-        foreach($this->readAllExpectedSubmissions($expectedSubmission) as $submision) {
-            $this->getMockCrud()->delete($submision);
-        }
-    }
-
-    private function readAllExpectedSubmissions(Submission $expectedSubmission): array
-    {
-        return $this->getMockCrud()->readAll(
-            $expectedSubmission->getLocation(),
-            $expectedSubmission->getContainer()
-        );
-    }
-
-    public function testDoCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
-    {
-        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
-        $expectedSubmission->import(
-            [
-                'url' => $this->formatYoutubeUrlsAsEmbedUrl(
-                    $expectedSubmission->getUrl()
-                )
-            ]
-        );
-        $this->getCreateSubmission()->do();
-        $this->findAndTestStoredSubmission($expectedSubmission);
-    }
-
-    private function formatYoutubeUrlsAsEmbedUrl(string $url): string {
-        return str_replace(['watch?v=', 'youtu.be'], ['embed/', 'www.youtube.com/embed'], $url);
     }
 
     private function mockPostAndGetExpectedSubmission(): Submission
@@ -252,6 +206,65 @@ trait CreateSubmissionTestTrait
         );
     }
 
+    private function deleteAllExpectedSubmissions(Submission $expectedSubmission): void
+    {
+        foreach ($this->readAllExpectedSubmissions($expectedSubmission) as $submission) {
+            $this->getMockCrud()->delete($submission);
+        }
+    }
+
+    private function readAllExpectedSubmissions(Submission $expectedSubmission): array
+    {
+        return $this->getMockCrud()->readAll(
+            $expectedSubmission->getLocation(),
+            $expectedSubmission->getContainer()
+        );
+    }
+
+    public function getMockCrud(): ComponentCrud
+    {
+        return new CoreComponentCrud(
+            new Storable('MockCrud', 'TEMP', 'Cruds'),
+            new Switchable(),
+            new CoreStandardStorageDriver(
+                new Storable('MockStandardStorageDriver', 'TEMP', 'StorageDrivers'),
+                new Switchable()
+            )
+        );
+    }
+
+    public function testDoDoesNotStoreSubmissionIfBadEmailIsSuppliedInPostData(): void
+    {
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $this->deleteAllExpectedSubmissions($expectedSubmission);
+        $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
+        $modifiedPostData['submitterEmail'] = 'badEmail';
+        $this->getCreateSubmission()->getCurrentRequest()->import(['post' => $modifiedPostData]);
+        $this->getCreateSubmission()->do();
+        $this->assertEmpty(
+            $this->readAllExpectedSubmissions($expectedSubmission)
+        );
+    }
+
+    public function testDoCreatesAndStoresSubmissionFromExpectedPostDataWhoseDataMatchesExpectedSubmissionExceptForUniqueIds(): void
+    {
+        $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
+        $expectedSubmission->import(
+            [
+                'url' => $this->formatYoutubeUrlsAsEmbedUrl(
+                    $expectedSubmission->getUrl()
+                )
+            ]
+        );
+        $this->getCreateSubmission()->do();
+        $this->findAndTestStoredSubmission($expectedSubmission);
+    }
+
+    private function formatYoutubeUrlsAsEmbedUrl(string $url): string
+    {
+        return str_replace(['watch?v=', 'youtu.be'], ['embed/', 'www.youtube.com/embed'], $url);
+    }
+
     private function findAndTestStoredSubmission(Submission $expectedSubmission): void
     {
         $storedSubmission = $this->findStoredSubmissionByExpectedName($expectedSubmission);
@@ -285,18 +298,6 @@ trait CreateSubmissionTestTrait
         return $this->getMockCrud()->readAll(
             $expectedSubmission->getLocation(),
             $expectedSubmission->getContainer()
-        );
-    }
-
-    public function getMockCrud(): ComponentCrud
-    {
-        return new CoreComponentCrud(
-            new Storable('MockCrud', 'TEMP', 'Cruds'),
-            new Switchable(),
-            new CoreStandardStorageDriver(
-                new Storable('MockStandardStorageDriver', 'TEMP', 'StorageDrivers'),
-                new Switchable()
-            )
         );
     }
 
@@ -358,17 +359,6 @@ trait CreateSubmissionTestTrait
         $this->expectedSubmissionsAssignedUrlIsAValidYoutubeEmbedUrl($expectedSubmission);
     }
 
-    private function expectedSubmissionsAssignedUrlIsAValidYoutubeEmbedUrl(Submission $expectedSubmission): void {
-        $this->assertEquals(
-            1,
-            preg_match(
-                '/https:\/\/www.youtube.com\/embed\/[-_A-Za-z0-9]*/',
-                $expectedSubmission->getUrl()
-            ),
-            'CreateSubmission Test Trait Error: Expected submission\'s url,' . $expectedSubmission->getUrl() . ' , is not formatted as a vaild youtube embed url! (Formatting pattern should be: https://www.youtube.com/VIDEO_ID'
-        );
-    }
-
     private function regExUsedToTestYouTubeUrlsMatchesValidYoutubeEmbedUrl(): void
     {
         $this->assertEquals(
@@ -380,6 +370,19 @@ trait CreateSubmissionTestTrait
             'CreateSubmission Test Trait Error: Regex used to test Youtube urls is failing!'
         );
     }
+
+    private function expectedSubmissionsAssignedUrlIsAValidYoutubeEmbedUrl(Submission $expectedSubmission): void
+    {
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/https:\/\/www.youtube.com\/embed\/[-_A-Za-z0-9]*/',
+                $expectedSubmission->getUrl()
+            ),
+            'CreateSubmission Test Trait Error: Expected submission\'s url,' . $expectedSubmission->getUrl() . ' , is not formatted as a valid youtube embed url! (Formatting pattern should be: https://www.youtube.com/VIDEO_ID'
+        );
+    }
+
     private function submitterNamesMatch(Submission $expectedSubmission, Submission $actualSubmission): void
     {
         $this->assertEquals(
@@ -412,7 +415,8 @@ trait CreateSubmissionTestTrait
         );
     }
 
-    public function testGetOutputReturnsHtmlForBadUrlErrorMessageAndFormIfSubmissionUrlInPostIsABadUrl(): void {
+    public function testGetOutputReturnsHtmlForBadUrlErrorMessageAndFormIfSubmissionUrlInPostIsABadUrl(): void
+    {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->deleteAllExpectedSubmissions($expectedSubmission);
         $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();
@@ -432,7 +436,8 @@ trait CreateSubmissionTestTrait
     }
 
 
-    public function testGetOutputReturnsHtmlForBadEmailErrorMessageAndFormIfSubmitterEmailInPostIsABadEmail(): void {
+    public function testGetOutputReturnsHtmlForBadEmailErrorMessageAndFormIfSubmitterEmailInPostIsABadEmail(): void
+    {
         $expectedSubmission = $this->mockPostAndGetExpectedSubmission();
         $this->deleteAllExpectedSubmissions($expectedSubmission);
         $modifiedPostData = $this->getCreateSubmission()->getCurrentRequest()->getPost();

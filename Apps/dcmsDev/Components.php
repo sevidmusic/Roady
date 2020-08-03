@@ -18,11 +18,10 @@ require(
 define('REQUEST_CONTAINER', 'Requests');
 
 
-
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
-        AppComponentsFactory::buildDomain('http://dcms.dev/')
-    )
+    AppComponentsFactory::buildDomain('http://dcms.dev/')
+)
 );
 
 $htmlContentCreateSubmissionForm = new CreateSubmission(

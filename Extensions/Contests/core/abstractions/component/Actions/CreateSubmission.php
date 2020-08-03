@@ -93,21 +93,21 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             return false;
         }
         if (
-            !filter_var(
-                $this->getCurrentRequest()->getPost()['submitterEmail'],
-                FILTER_VALIDATE_EMAIL
-            )
+        !filter_var(
+            $this->getCurrentRequest()->getPost()['submitterEmail'],
+            FILTER_VALIDATE_EMAIL
+        )
         ) {
             $this->assignBadEmailErrorMessageToOutput(
                 $this->getCurrentRequest()->getPost()['submitterEmail']
             );
             return false;
         }
-        if(
-            !preg_match(
-                '/http.?:\/\/.*youtu.?be/',
-                $this->getCurrentRequest()->getPost()['submissionUrl']
-            )
+        if (
+        !preg_match(
+            '/http.?:\/\/.*youtu.?be/',
+            $this->getCurrentRequest()->getPost()['submissionUrl']
+        )
         ) {
             $this->assignBadYouTubeUrlErrorMessageToOutput(
                 $this->getCurrentRequest()->getPost()['submissionUrl']
@@ -115,6 +115,32 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
             return false;
         }
         return true;
+    }
+
+    private function assignBadEmailErrorMessageToOutput(string $badEmail): void
+    {
+        $this->import(
+            [
+                'output' => sprintf(
+                    self::ERR_BAD_EMAIL,
+                    $badEmail,
+                    $this->assignUniqueIdToForm(file_get_contents($this->pathToHtmlForm))
+                ),
+            ]
+        );
+    }
+
+    private function assignBadYouTubeUrlErrorMessageToOutput(string $badUrl): void
+    {
+        $this->import(
+            [
+                'output' => sprintf(
+                    self::ERR_BAD_URL,
+                    $badUrl,
+                    $this->assignUniqueIdToForm(file_get_contents($this->pathToHtmlForm))
+                ),
+            ]
+        );
     }
 
     private function generateSubmissionFromPostData(): Submission
@@ -141,34 +167,9 @@ abstract class CreateSubmission extends CoreAction implements CreateSubmissionIn
         );
     }
 
-    private function formatYoutubeUrlsAsEmbedUrl(string $url): string {
+    private function formatYoutubeUrlsAsEmbedUrl(string $url): string
+    {
         return str_replace(['watch?v=', 'youtu.be'], ['embed/', 'www.youtube.com/embed'], $url);
-    }
-
-    private function assignBadYouTubeUrlErrorMessageToOutput(string $badUrl): void
-    {
-        $this->import(
-            [
-                'output' => sprintf(
-                    self::ERR_BAD_URL,
-                    $badUrl,
-                    $this->assignUniqueIdToForm(file_get_contents($this->pathToHtmlForm))
-                ),
-            ]
-        );
-    }
-
-    private function assignBadEmailErrorMessageToOutput(string $badEmail): void
-    {
-        $this->import(
-            [
-                'output' => sprintf(
-                    self::ERR_BAD_EMAIL,
-                    $badEmail,
-                    $this->assignUniqueIdToForm(file_get_contents($this->pathToHtmlForm))
-                ),
-            ]
-        );
     }
 
     private function assignDoSuccessMessageToOutput(Submission $newSubmission): void

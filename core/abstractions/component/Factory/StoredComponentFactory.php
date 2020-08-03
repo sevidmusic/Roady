@@ -52,14 +52,14 @@ abstract class StoredComponentFactory extends CoreSwitchableComponent implements
         return $this->storedComponentRegistry;
     }
 
-    public function getApp(): App
-    {
-        return $this->app;
-    }
-
     public function getAppDomain(): Request
     {
         return $this->getApp()->getAppDomain();
+    }
+
+    public function getApp(): App
+    {
+        return $this->app;
     }
 
 

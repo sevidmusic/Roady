@@ -37,36 +37,11 @@ trait AppTestTrait
         $this->app = $app;
     }
 
-    public function testGetAppDomainReturnsRequestSuplliedToConstructorOnInstantiation(): void
+    public function testGetAppDomainReturnsRequestSuppliedToConstructorOnInstantiation(): void
     {
         $this->assertEquals(
             $this->getMockRequest(),
             $this->getApp()->getAppDomain()
-        );
-    }
-
-    public function testGetContainerReturnsValueOfAPP_CONTAINERConstant(): void
-    {
-        $this->assertEquals($this->getApp()::APP_CONTAINER, $this->getApp()->getContainer());
-        $this->assertEquals(
-            $this->getApp()::APP_CONTAINER,
-            $this->getApp()->export()['storable']->getContainer()
-        );
-    }
-
-    public function testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrStringDEFAULTIfUrlHostCantBeDetermined(): void
-    {
-        $expectedNameLocation = preg_replace(
-            "/[^A-Za-z0-9]/",
-            '',
-            parse_url($this->getMockRequest()->getUrl(), PHP_URL_HOST)
-        );
-        if (empty($expectedNameLocation)) {
-            $expectedNameLocation = 'DEFAULT';
-        }
-        $this->assertEquals(
-            $expectedNameLocation,
-            $this->getApp()::deriveNameLocationFromRequest($this->getMockRequest())
         );
     }
 
@@ -101,6 +76,31 @@ trait AppTestTrait
             'dcms',
         ];
         return $urls[array_rand($urls)];
+    }
+
+    public function testGetContainerReturnsValueOfAPP_CONTAINERConstant(): void
+    {
+        $this->assertEquals($this->getApp()::APP_CONTAINER, $this->getApp()->getContainer());
+        $this->assertEquals(
+            $this->getApp()::APP_CONTAINER,
+            $this->getApp()->export()['storable']->getContainer()
+        );
+    }
+
+    public function testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrStringDEFAULTIfUrlHostCantBeDetermined(): void
+    {
+        $expectedNameLocation = preg_replace(
+            "/[^A-Za-z0-9]/",
+            '',
+            parse_url($this->getMockRequest()->getUrl(), PHP_URL_HOST)
+        );
+        if (empty($expectedNameLocation)) {
+            $expectedNameLocation = 'DEFAULT';
+        }
+        $this->assertEquals(
+            $expectedNameLocation,
+            $this->getApp()::deriveNameLocationFromRequest($this->getMockRequest())
+        );
     }
 
     public function testNameAndLocationWereSetUsingDeriveAppNameLocationFromRequestMethod(): void

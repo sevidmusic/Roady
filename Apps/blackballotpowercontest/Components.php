@@ -18,10 +18,10 @@ require(
 
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
-        AppComponentsFactory::buildDomain(
-            'https://blackballotpowercontest.local/'
-        )
+    AppComponentsFactory::buildDomain(
+        'https://blackballotpowercontest.local/'
     )
+)
 );
 
 $createSubmissionAction = new CreateSubmission(

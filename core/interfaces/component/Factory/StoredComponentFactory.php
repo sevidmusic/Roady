@@ -6,7 +6,6 @@ use DarlingDataManagementSystem\interfaces\component\Component;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
 use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory;
 
 interface StoredComponentFactory extends CoreSwitchableComponent, Factory
 {
