@@ -88,6 +88,9 @@ trait SubmissionTestTrait
     {
         $expectedIndex = time();
         $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->assertTrue(
+            isset($this->getSubmission()->export()['voterEmails'][$expectedIndex])
+        );
         $this->assertEquals(
             $this->getSubmission()->export()['voterEmails'][$expectedIndex],
             $this->getSubmission()->getSubmitter()->getEmail()
