@@ -14,6 +14,7 @@ use RuntimeException;
 abstract class Submission extends CoreOutputComponent implements SubmissionInterface
 {
 
+    private const ONE_DAY = 86400;
     private const DEFAULT_OUTPUT_SPRINT = '<p>Submission Name: %s</p><p>Submission Type: %s</p><p>Submitted On: %s</p><p>Submitted By: %s</p><p>Submission Url: <a href="%s">%s</a></p><div><iframe src="%s"></iframe></div>';
     private const ERROR_MALFORMED_URL = 'Warning: Submission "%s" with id "%s" is assigned a malformed url "%s"';
     private $submitter;
@@ -81,10 +82,19 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         return 1 === preg_match("/\b(?:(?:https?):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $this->url);
     }
 
+    private function timeSinceLastVote(User $user): int
+    {
+        return (time() - array_search($user->getEmail(), $this->voterEmails));
+    }
+
     public function registerVote(User $user): bool
     {
-        $this->voterEmails[time()] = $user->getEmail();
-        return true;
+        if($this->timeSinceLastVote($user) > self::ONE_DAY)
+        {
+            $this->voterEmails[time()] = $user->getEmail();
+            return true;
+        }
+        return false;
     }
 
 }

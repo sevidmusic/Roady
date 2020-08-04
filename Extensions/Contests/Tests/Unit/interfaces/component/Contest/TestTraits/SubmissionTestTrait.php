@@ -94,6 +94,17 @@ trait SubmissionTestTrait
         );
     }
 
+    public function testRegisterVoteDoesNotAddSpecifiedUsersEmailToVoterEmailsPropertysArrayIfUserHasVotedWithinLast24Hours(): void
+    {
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        sleep(1);
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->assertEquals(
+            1,
+            count($this->getSubmission()->export()['voterEmails']),
+        );
+    }
+
     protected function setSubmissionParentTestInstances(): void
     {
         $this->setOutputComponent($this->getSubmission());
