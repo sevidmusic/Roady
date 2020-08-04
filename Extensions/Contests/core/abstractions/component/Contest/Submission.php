@@ -81,4 +81,10 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         return 1 === preg_match("/\b(?:(?:https?):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $this->url);
     }
 
+    public function registerVote(User $user): bool
+    {
+        $this->voterEmails[time()] = $user->getEmail();
+        return true;
+    }
+
 }

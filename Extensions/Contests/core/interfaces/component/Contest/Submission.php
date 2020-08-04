@@ -14,4 +14,6 @@ interface Submission extends CoreOutputComponent
 
     public function getUrl(): string;
 
+    public function registerVote(User $user): bool;
+
 }

@@ -84,6 +84,16 @@ trait SubmissionTestTrait
         $this->assertTrue(is_array($this->getSubmission()->export()['voterEmails']));
     }
 
+    public function testRegisterVoteAddsSpecifiedUsersEmailToVoterEmailsPropertysArrayIndexedByCurrentTimestamp(): void
+    {
+        $expectedIndex = time();
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->assertEquals(
+            $this->getSubmission()->export()['voterEmails'][$expectedIndex],
+            $this->getSubmission()->getSubmitter()->getEmail()
+        );
+    }
+
     protected function setSubmissionParentTestInstances(): void
     {
         $this->setOutputComponent($this->getSubmission());
