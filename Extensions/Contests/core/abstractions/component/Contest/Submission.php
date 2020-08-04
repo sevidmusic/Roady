@@ -20,6 +20,7 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
     private $url;
     private $dateTimeOfSubmission;
     private $metaData = [];
+    private $voterEmails = [];
 
     public function __construct(
         Storable $storable,

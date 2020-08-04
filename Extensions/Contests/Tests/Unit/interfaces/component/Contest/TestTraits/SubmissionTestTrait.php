@@ -79,6 +79,11 @@ trait SubmissionTestTrait
         $this->assertNotEmpty($this->getSubmission()->getOutput());
     }
 
+    public function testVoterEmailsPropertyIsAssignedAnEmptyArrayPostInstantiation(): void
+    {
+        $this->assertTrue(is_array($this->getSubmission()->export()['voterEmails']));
+    }
+
     protected function setSubmissionParentTestInstances(): void
     {
         $this->setOutputComponent($this->getSubmission());
