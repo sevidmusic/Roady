@@ -98,10 +98,10 @@ trait SubmissionTestTrait
     {
         $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
         sleep(1);
+        $expectedIndex = time();
         $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
-        $this->assertEquals(
-            1,
-            count($this->getSubmission()->export()['voterEmails']),
+        $this->assertFalse(
+            isset($this->getSubmission()->export()['voterEmails'][$expectedIndex]),
         );
     }
 
