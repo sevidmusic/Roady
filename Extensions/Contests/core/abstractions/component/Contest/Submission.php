@@ -110,4 +110,9 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         return false;
     }
 
+    public function totalVotes(): int
+    {
+        return count($this->voterEmails);
+    }
+
 }

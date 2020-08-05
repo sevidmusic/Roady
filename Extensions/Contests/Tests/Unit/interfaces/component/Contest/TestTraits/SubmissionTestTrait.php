@@ -154,6 +154,15 @@ trait SubmissionTestTrait
         );
     }
 
+
+    public function testTotalVotesReturnsCountOfVoterEmailsArray(): void
+    {
+        $this->assertEquals(
+            count($this->getSubmission()->export()['voterEmails']),
+            $this->getSubmission()->totalVotes()
+        );
+    }
+
     protected function setSubmissionParentTestInstances(): void
     {
         $this->setOutputComponent($this->getSubmission());

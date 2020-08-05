@@ -16,4 +16,6 @@ interface Submission extends CoreOutputComponent
 
     public function registerVote(User $user): bool;
 
+    public function totalVotes(): int;
+
 }
