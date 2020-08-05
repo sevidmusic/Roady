@@ -99,12 +99,37 @@ trait SubmissionTestTrait
 
     public function testRegisterVoteDoesNotAddSpecifiedUsersEmailToVoterEmailsPropertysArrayIfUserHasVotedWithinLast24Hours(): void
     {
-        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
-        sleep(1);
+        $this->getSubmission()->import(
+            [
+                'voterEmails' => [
+                    (strtotime("-1 day", time())) => $this->getSubmission()->getSubmitter()->getEmail()
+                ]
+            ]
+        );
         $expectedIndex = time();
         $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
         $this->assertFalse(
             isset($this->getSubmission()->export()['voterEmails'][$expectedIndex]),
+        );
+    }
+
+    public function testRegisterVoteDoesAddSpecifiedUsersEmailToVoterEmailsPropertysArrayIfUserHasNotVotedWithinLast24Hours(): void
+    {
+        $this->getSubmission()->import(
+            [
+                'voterEmails' => [
+                    (strtotime("-1 day", time()) - 1) => $this->getSubmission()->getSubmitter()->getEmail()
+                ]
+            ]
+        );
+        $expectedIndex = time();
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->assertTrue(
+            isset($this->getSubmission()->export()['voterEmails'][$expectedIndex]),
+        );
+        $this->assertEquals(
+            $this->getSubmission()->export()['voterEmails'][$expectedIndex],
+            $this->getSubmission()->getSubmitter()->getEmail()
         );
     }
 
