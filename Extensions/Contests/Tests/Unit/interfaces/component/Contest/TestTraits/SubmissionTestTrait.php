@@ -97,6 +97,27 @@ trait SubmissionTestTrait
         );
     }
 
+    public function testRegisterVoteDoesNotIncreaseSubmissionPostionIfVoteWasNotRegistered(): void
+    {
+        $initialPosition = $this->getSubmission()->getPosition();
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->assertEquals(
+            $initialPosition + 0.01,
+            $this->getSubmission()->getPosition()
+        );
+    }
+
+    public function testRegisterVoteIncreasesSubmissionPostionIfVoteWasRegistered(): void
+    {
+        $initialPosition = $this->getSubmission()->getPosition();
+        $this->getSubmission()->registerVote($this->getSubmission()->getSubmitter());
+        $this->assertEquals(
+            $initialPosition + 0.01,
+            $this->getSubmission()->getPosition()
+        );
+    }
+
     public function testRegisterVoteDoesNotAddSpecifiedUsersEmailToVoterEmailsPropertysArrayIfUserHasVotedWithinLast24Hours(): void
     {
         $this->getSubmission()->import(

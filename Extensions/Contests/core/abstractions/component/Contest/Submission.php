@@ -104,6 +104,7 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         if($this->timeSinceLastVote($user) > self::ONE_DAY)
         {
             $this->voterEmails[time()] = $user->getEmail();
+            $this->increasePosition();
             return true;
         }
         return false;
