@@ -11,18 +11,13 @@
 
     <testsuites>
 
-        <testsuite name="Darling Cms Redesign | Core Tests">
+        <testsuite name="Core">
             <directory>Tests</directory>
         </testsuite>
 
 
-        <testsuite name="Darling Cms Redesign | Extension Tests">
+        <testsuite name="Extensions">
             <directory>Extensions</directory>
-        </testsuite>
-
-        <testsuite name="Darling Cms Redesign | Factory Tests">
-            <directory>Tests/Unit/abstractions/component/Factory</directory>
-            <directory>Tests/Unit/classes/component/Factory</directory>
         </testsuite>
 
     </testsuites>
