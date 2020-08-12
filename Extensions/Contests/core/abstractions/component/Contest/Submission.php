@@ -5,9 +5,10 @@ namespace Extensions\Contests\core\abstractions\component\Contest;
 use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
 use DarlingDataManagementSystem\interfaces\primary\Positionable;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\interfaces\primary\Switchable;
 use DateTime;
-use Extensions\Contests\core\classes\component\Contest\User;
+use Extensions\Contests\core\classes\component\Contest\User; // @todo Ref interface, not class
 use Extensions\Contests\core\interfaces\component\Contest\Submission as SubmissionInterface;
 use RuntimeException;
 
@@ -31,6 +32,11 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         string $url
     )
     {
+        $storable = new CoreStorable(
+            $storable->getName(),
+            $storable->getLocation(),
+            self::SUBMISSION_CONTAINER
+        );
         $this->dateTimeOfSubmission = new DateTime('now');
         $this->url = $url;
         $this->submitter = $submitter;

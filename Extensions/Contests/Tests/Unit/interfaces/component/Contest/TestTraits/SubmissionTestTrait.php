@@ -163,6 +163,22 @@ trait SubmissionTestTrait
         );
     }
 
+    public function testSUBMISSION_CONTAINERConstantIsAssignedStringSUBMISSIONS(): void
+    {
+        $this->assertEquals(
+            'SUBMISSIONS',
+            $this->getSubmission()::SUBMISSION_CONTAINER
+        );
+    }
+
+    public function testAssignedStorablesContainerIsEqualToSUBMISSION_CONTAINERConstantPostInstantiation(): void
+    {
+        $this->assertEquals(
+            $this->getSubmission()::SUBMISSION_CONTAINER,
+            $this->getSubmission()->export()['storable']->getContainer()
+        );
+    }
+
     protected function setSubmissionParentTestInstances(): void
     {
         $this->setOutputComponent($this->getSubmission());

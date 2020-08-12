@@ -8,6 +8,8 @@ use Extensions\Contests\core\classes\component\Contest\User;
 interface Submission extends CoreOutputComponent
 {
 
+    public const SUBMISSION_CONTAINER = 'SUBMISSIONS';
+
     public function getSubmitter(): User;
 
     public function assignMetaData(string $key, $value): void;
