@@ -9,7 +9,8 @@ use DarlingDataManagementSystem\classes\component\OutputComponent;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
 use DarlingDataManagementSystem\classes\primary\Positionable;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
@@ -59,7 +60,7 @@ trait StandardUITestTrait
         if (isset($this->router)) {
             return $this->router;
         }
-        $this->router = new Router(
+        $this->router = new CoreRouter(
             new Storable(
                 'StandardUITestRouter' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
@@ -152,11 +153,13 @@ trait StandardUITestTrait
         return Response::RESPONSE_CONTAINER;
     }
 
-    public function testRouterIsSetPostInstantiation(): void
+    public function testRouterPropertyIsAssignedARouterImplementationInstancePostInstantiation(): void
     {
-        $this->assertEquals
-        ("DarlingDataManagementSystem\classes\component\Web\Routing\Router",
-            $this->getStandardUI()->export()['router']->getType()
+        $this->assertTrue(
+            in_array(
+                Router::class,
+                class_implements($this->getStandardUI()->export()['router'])
+            )
         );
     }
 
