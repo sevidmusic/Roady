@@ -12,9 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "ext-json": "*",
-        "ext-pdo": "*",
-        "ext-bcmath": "*",
-        "ext-mbstring": "*"
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
@@ -25,6 +23,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^9.0"
     }
 }
