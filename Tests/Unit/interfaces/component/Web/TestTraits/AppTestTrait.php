@@ -89,10 +89,19 @@ trait AppTestTrait
 
     public function testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrStringDEFAULTIfUrlHostCantBeDetermined(): void
     {
+        $mockRequest = $this->getMockRequest();
+        $testUrls = ['http://localhost:8080', 'http://example.com'];
+        $testUrl = $testUrls[array_rand($testUrls)];
+        $mockRequest->import(['url' => $testUrl]);
+
+        $host = parse_url($mockRequest->getUrl(), PHP_URL_HOST);
+        $port = parse_url($mockRequest->getUrl(), PHP_URL_PORT);
+        $hostPort = $host . strval($port);
+
         $expectedNameLocation = preg_replace(
             "/[^A-Za-z0-9]/",
             '',
-            parse_url($this->getMockRequest()->getUrl(), PHP_URL_HOST)
+            $hostPort
         );
         if (empty($expectedNameLocation)) {
             $expectedNameLocation = 'DEFAULT';

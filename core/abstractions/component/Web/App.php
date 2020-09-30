@@ -29,7 +29,11 @@ abstract class App extends CoreSwitchableComponent implements AppInterface
 
     public static function deriveNameLocationFromRequest(Request $request): string
     {
-        $nameLocation = preg_replace("/[^A-Za-z0-9]/", '', parse_url($request->getUrl(), PHP_URL_HOST));
+        $nameLocation = preg_replace(
+                            "/[^A-Za-z0-9]/",
+                            '',
+                            parse_url($request->getUrl(), PHP_URL_HOST) . strval(parse_url($request->getUrl(), PHP_URL_PORT))
+                        );
         return (empty($nameLocation) === true ? 'DEFAULT' : $nameLocation);
     }
 
