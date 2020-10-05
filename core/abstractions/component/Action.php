@@ -2,38 +2,39 @@
 
 namespace DarlingDataManagementSystem\abstractions\component;
 
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
 use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as CoreRequestInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable as CoreStorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as CoreSwitchableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 
-abstract class Action extends CoreOutputComponent implements ActionInterface
+
+abstract class Action extends OutputComponentBase implements ActionInterface
 {
-    private $currentRequest;
-    private $wasDone = false;
-    private $wasUndone = false;
+    private ?RequestInterface $currentRequest = null;
+    private bool $wasDone = false;
+    private bool $wasUndone = false;
 
-    public function __construct(CoreStorableInterface $storable, CoreSwitchableInterface $switchable, Positionable $positionable)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable)
     {
         parent::__construct($storable, $switchable, $positionable);
     }
 
 
-    public function getCurrentRequest(): CoreRequestInterface
+    public function getCurrentRequest(): RequestInterface
     {
         if (isset($this->currentRequest) === false) {
-            $this->currentRequest = new Request(
-                new Storable(
+            $this->currentRequest = new CoreRequest(
+                new CoreStorable(
                     'CurrentRequest',
                     'CurrentRequestLocation',
                     'CurrentRequestContainer'
                 ),
-                new Switchable()
+                new CoreSwitchable()
             );
         }
         return $this->currentRequest;
