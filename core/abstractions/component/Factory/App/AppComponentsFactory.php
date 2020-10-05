@@ -291,9 +291,8 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $request;
     }
 
-    public function buildResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): Response
+    private function configureResponse(Response $response, array $requestsOutputComponentsStandardUITemplates = [])
     {
-        $response = $this->responseFactory->buildResponse($name, $position);
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
             $response
         );
@@ -308,21 +307,16 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $response;
     }
 
+    public function buildResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): Response // @todo As soon as Php 8 is in use, refactor to union type declaration: i.e Response | GlobalResponse
+    {
+        $response = $this->responseFactory->buildResponse($name, $position);
+        return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
+    }
+
     public function buildGlobalResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse
     {
         $globalResponse = $this->responseFactory->buildGlobalResponse($name, $position);
-        $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
-            $globalResponse
-        );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
-            CoreResponseFactory::ifRequestAddStorageInfo($globalResponse, $component);
-            CoreResponseFactory::ifStandardUITemplateAddStorageInfo($globalResponse, $component);
-            CoreResponseFactory::ifOutputComponentAddStorageInfo($globalResponse, $component);
-        }
-        $this->responseFactory->getComponentCrud()->update($globalResponse, $globalResponse);
-        $this->responseFactory->getStoredComponentRegistry()->registerComponent($globalResponse);
-        $this->getStoredComponentRegistry()->registerComponent($globalResponse);
-        return $globalResponse;
+        return $this->configureResponse($globalResponse, $requestsOutputComponentsStandardUITemplates);
     }
 
     public function buildLog($flags = 0): string
