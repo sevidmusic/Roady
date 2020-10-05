@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\Driver\Storage\TestTraits;
 
-use DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\abstractions\component\Driver\Storage\StandardStorageDriver;
 use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonTestTrait;
 
 trait StandardTestTrait
@@ -20,12 +20,12 @@ trait StandardTestTrait
         $this->setSwitchableComponentParentTestInstances();
     }
 
-    public function getStandard(): Standard
+    public function getStandard(): StandardStorageDriver
     {
         return $this->standard;
     }
 
-    public function setStandard(Standard $standard): void
+    public function setStandard(StandardStorageDriver $standard): void
     {
         $this->standard = $standard;
     }

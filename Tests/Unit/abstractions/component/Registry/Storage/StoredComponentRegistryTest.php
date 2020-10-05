@@ -3,7 +3,7 @@
 namespace UnitTests\abstractions\component\Registry\Storage;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\ComponentTest;
@@ -31,7 +31,7 @@ class StoredComponentRegistryTest extends ComponentTest
                             'Temp'
                         ),
                         new Switchable(),
-                        new Standard(
+                        new StandardStorageDriver(
                             new Storable(
                                 'StandardStorageDriver',
                                 'Temp',

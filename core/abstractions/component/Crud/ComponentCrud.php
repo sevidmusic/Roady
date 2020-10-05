@@ -5,7 +5,7 @@ namespace DarlingDataManagementSystem\abstractions\component\Crud;
 use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
 use DarlingDataManagementSystem\interfaces\component\Component;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StorageDriver;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
 use DarlingDataManagementSystem\interfaces\primary\Switchable;
 

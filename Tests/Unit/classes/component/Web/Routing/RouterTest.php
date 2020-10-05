@@ -3,7 +3,7 @@
 namespace UnitTests\classes\component\Web\Routing;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as Crud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as StorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
 use DarlingDataManagementSystem\classes\primary\Storable;

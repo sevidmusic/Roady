@@ -15,7 +15,7 @@ class StandardTest extends JsonTest
     {
         $this->setStandard(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\component\Driver\Storage\Standard',
+                '\DarlingDataManagementSystem\abstractions\component\Driver\Storage\StandardStorageDriver',
                 [
                     new Storable(
                         'MockStandardName',

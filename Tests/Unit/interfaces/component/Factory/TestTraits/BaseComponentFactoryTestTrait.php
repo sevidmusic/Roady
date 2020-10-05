@@ -3,7 +3,7 @@
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as StandardStorageDriver;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
 use DarlingDataManagementSystem\interfaces\component\Component;

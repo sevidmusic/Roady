@@ -5,7 +5,7 @@ namespace UnitTests\interfaces\component\Web\TestTraits;
 use DarlingDataManagementSystem\abstractions\component\Web\App as AbstractApp;
 use DarlingDataManagementSystem\classes\component\Component;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as StandardStorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\primary\Storable;

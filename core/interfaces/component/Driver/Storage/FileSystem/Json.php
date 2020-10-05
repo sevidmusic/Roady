@@ -3,7 +3,7 @@
 namespace DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem;
 
 
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\Standard as StorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
 
 interface Json extends StorageDriverInterface

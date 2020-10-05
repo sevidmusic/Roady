@@ -3,7 +3,7 @@
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as CoreStandardStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;

@@ -4,7 +4,7 @@ namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Action;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as StorageDriver;
 use DarlingDataManagementSystem\classes\component\OutputComponent;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
