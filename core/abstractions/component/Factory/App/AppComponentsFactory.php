@@ -354,6 +354,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
             $buildLog .= $message;
         }
         if ($flags & self::SAVE_LOG) {
+            if (is_dir($this->expectedBuildLogDirectoryPath()) === false) {
+                mkdir($this->expectedBuildLogDirectoryPath());
+            }
             file_put_contents($this->expectedBuildLogPath(), $buildLog);
             echo sprintf(
                 '%sSaved build log to: %s',
@@ -365,17 +368,21 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $buildLog;
     }
 
-    private function expectedBuildLogPath(): string
+    private function expectedBuildLogDirectoryPath(): string
     {
         return str_replace(
             'core/abstractions/component/Factory/App',
             'Apps' .
             DIRECTORY_SEPARATOR .
             '.buildLogs' .
-            DIRECTORY_SEPARATOR .
-            $this->getPrimaryFactory()->export()['app']->getName(),
+            DIRECTORY_SEPARATOR,
             __DIR__
         );
+    }
+
+    private function expectedBuildLogPath(): string
+    {
+        return$this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
     }
 
 }
