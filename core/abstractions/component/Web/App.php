@@ -4,6 +4,7 @@ namespace DarlingDataManagementSystem\abstractions\component\Web;
 
 use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
@@ -14,7 +15,7 @@ use RuntimeException as PHPRuntimeException;
 abstract class App extends SwitchableComponentBase implements AppInterface
 {
     public const APP_CONTAINER = "APP";
-    private ?RequestInterface $domain = null;
+    private ?RequestInterface $domain;
 
     public function __construct(RequestInterface $request, SwitchableInterface $switchable)
     {
@@ -57,7 +58,7 @@ abstract class App extends SwitchableComponentBase implements AppInterface
             }
             throw new PHPRuntimeException('The requested app has not been installed. Please install the "' . App::deriveNameLocationFromRequest($request) . '" app.');
         }
-        $app = (empty($app) ? new \DarlingDataManagementSystem\classes\component\Web\App($request, new \DarlingDataManagementSystem\classes\primary\Switchable()) : $app);
+        $app = (empty($app) ? new \DarlingDataManagementSystem\classes\component\Web\App($request, new CoreSwitchable()) : $app);
         if (self::isAnApp($app) === false) {
             throw new PHPRuntimeException('The requested App is corrupted. Please remove and re-install the "' . App::deriveNameLocationFromRequest($request) . '" app.');
         }
