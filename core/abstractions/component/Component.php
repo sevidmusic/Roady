@@ -1,51 +1,40 @@
 <?php
 
-
 namespace DarlingDataManagementSystem\abstractions\component;
 
-
-use DarlingDataManagementSystem\abstractions\primary\Exportable;
+use DarlingDataManagementSystem\abstractions\primary\Exportable as ExportableBase;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
-abstract class Component extends Exportable implements ComponentInterface
+abstract class Component extends ExportableBase implements ComponentInterface
 {
 
-    private $storable;
+    private StorableInterface $storable;
 
-    public function __construct(Storable $storable)
+    public function __construct(StorableInterface $storable)
     {
         parent::__construct();
-        $this->setStorable($storable);
-    }
-
-    private function setStorable(Storable $storable)
-    {
         $this->storable = $storable;
     }
 
     public function getName(): string
     {
-        return $this->getStorable()->getName();
-    }
-
-    private function getStorable(): Storable
-    {
-        return $this->storable;
+        return $this->storable->getName();
     }
 
     public function getUniqueId(): string
     {
-        return $this->getStorable()->getUniqueId();
+        return $this->storable->getUniqueId();
     }
 
     public function getLocation(): string
     {
-        return $this->getStorable()->getLocation();
+        return $this->storable->getLocation();
     }
 
     public function getContainer(): string
     {
-        return $this->getStorable()->getContainer();
+        return $this->storable->getContainer();
     }
+
 }
