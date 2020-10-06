@@ -28,7 +28,10 @@ while test $# -gt 0; do
       if [[ -z "${1}" || "${1}" == 'app' || "${1}" == 'apps' ]]
       then
           notifyUser "dsh provides various flags for working with apps." 0 'dontClear'
-          notifyUser "The -s, or --start-app-server will start a local server for you to use while in development." 0 'dontClear'
+          notifyUser "The -s, or --start-app-server flag will start a local server for you to use while in development." 0 'dontClear'
+          notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -s localhost:8080" 0 'dontClear'
+          notifyUser "The -t, or --test-ddms flag will run phpunit using ${HIGHLIGHTCOLOR}${PATH_TO_DDMS}php.xml${NOTIFYCOLOR} for configuration." 0 'dontClear'
+          notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -t" 0 'dontClear'
           exit 0
       fi
       notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
@@ -47,6 +50,11 @@ while test $# -gt 0; do
       fi
       notifyUser "Error! You must specify a port when using the -s flag. For example: ${HIGHLIGHTCOLOR}dsh -s 8888${CLEAR_ALL_TEXT_STYLES}"
       ;;
+      -t|--test-ddms*)
+      shift
+      $PATH_TO_DSH_DIR/phpunit.sh
+      ;;
+
     *)
       notifyUser "${WARNING_COLOR}Invalid flag ${1}"
       break
