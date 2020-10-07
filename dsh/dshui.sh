@@ -69,27 +69,25 @@ initTextStyles() {
   BANNER_MSG_COLOR="${CLEAR_ALL_TEXT_STYLES}${GREEN_BG_COLOR}${BLINK_TEXT_ON}${BLACK_FG_COLOR}"
 }
 
-showBanner()
-{
-    [[ -n "$(command -v figlet)" ]] && figlet DSH && return
-    printf "\n\n#######\n  ${HIGHLIGHTCOLOR}DSH${CLEAR_ALL_TEXT_STYLES}  \n#######"
+showBanner() {
+  [[ -n "$(command -v figlet)" ]] && figlet DSH && return
+  printf "\n\n#######\n  %sDSH%s  \n#######" "${HIGHLIGHTCOLOR}" "${CLEAR_ALL_TEXT_STYLES}"
 }
 
-animatedPrint()
-{
+animatedPrint() {
   local _charsToAnimate _speed _currentChar _charCount
   # For some reason spaces get mangled using ${VAR:POS:LIMIT}. so replace spaces with _ here,
   # then add spaces back when needed.
-  _charsToAnimate=$( printf "%s" "${1}" | sed -E "s/ /*/g;")
+  _charsToAnimate=$(printf "%s" "${1}" | sed -E "s/ /*/g;")
   _speed="${2:-0.0242}"
   _charCount=0
-  for (( i=0; i< ${#_charsToAnimate}; i++ )); do
-      ((_charCount++))
-      [[ $_charCount == $((_slb_adjustedNumChars - 10)) ]] && _charCount=0 && printf "\n\n "
-      # Replace placeholder _ with space | i.e., fix spaces that were replaced
-      _currentChar=$(printf "%s" "${_charsToAnimate:$i:1}" | sed -E "s/[*]/ /g;")
-      printf "%s" "${_currentChar}"
-      sleep $_speed
+  for ((i = 0; i < ${#_charsToAnimate}; i++)); do
+    ((_charCount++))
+    [[ $_charCount == $((_slb_adjustedNumChars - 10)) ]] && _charCount=0 && printf "\n\n "
+    # Replace placeholder _ with space | i.e., fix spaces that were replaced
+    _currentChar=$(printf "%s" "${_charsToAnimate:$i:1}" | sed -E "s/[*]/ /g;")
+    printf "%s" "${_currentChar}"
+    sleep "${_speed}"
   done
 }
 
@@ -112,27 +110,24 @@ showLoadingBar() {
   [[ "${2}" != "dontClear" ]] && clear
 }
 
-exitOrContinue()
-{
-    [[ "${2}" == "forceExit" ]] && exit "${1:-0}"
-    [[ -n "${CONTINUE}" ]] && return
-    exit "${1:-0}"
+exitOrContinue() {
+  [[ "${2}" == "forceExit" ]] && exit "${1:-0}"
+  [[ -n "${CONTINUE}" ]] && return
+  exit "${1:-0}"
 }
 
-notifyUser()
-{
-    [[ "${4}" != 'no_newline' ]] && printf "\n"
-    printf "${NOTIFYCOLOR}"
-    animatedPrint "${1}" 0.009
-    sleep ${2:-2}
-    [[ "${3}" == "dontClear" ]] || clear
-    printf "${CLEAR_ALL_TEXT_STYLES}\n"
+notifyUser() {
+  [[ "${4}" != 'no_newline' ]] && printf "\n"
+  printf "%s" "${NOTIFYCOLOR}"
+  animatedPrint "${1}" 0.009
+  sleep "${2:-2}"
+  [[ "${3}" == "dontClear" ]] || clear
+  printf "%s\n" "${CLEAR_ALL_TEXT_STYLES}"
 }
 
-notifyUserAndExit()
-{
-    notifyUser "${1}" "${2:-1}" "${3:-CLEAR}"
-    exitOrContinue "${4:-0}" "${5:-default}"
+notifyUserAndExit() {
+  notifyUser "${1}" "${2:-1}" "${3:-CLEAR}"
+  exitOrContinue "${4:-0}" "${5:-default}"
 }
 
 initTextStyles
