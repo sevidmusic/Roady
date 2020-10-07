@@ -27,11 +27,17 @@ while test $# -gt 0; do
       shift
       if [[ -z "${1}" || "${1}" == 'app' || "${1}" == 'apps' ]]
       then
-          notifyUser "dsh provides various flags for working with apps." 0 'dontClear'
-          notifyUser "The -s, or --start-app-server flag will start a local server for you to use while in development." 0 'dontClear'
-          notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -s localhost:8080" 0 'dontClear'
+          notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
+          notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
+          notifyUser "the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
+          notifyUser "The -s, or --start-app-server flag will start a local server" 0 'dontClear'
+          notifyUser "for you to use while in development." 0 'dontClear'
+          notifyUser "The -s flag expects one argument, a port number." 0 'dontClear'
+          notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -s 8080" 0 'dontClear'
+          notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --start-app-server 8888" 0 'dontClear'
           notifyUser "The -t, or --test-ddms flag will run phpunit using ${HIGHLIGHTCOLOR}${PATH_TO_DDMS}php.xml${NOTIFYCOLOR} for configuration." 0 'dontClear'
           notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -t" 0 'dontClear'
+          notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --test-ddms" 0 'dontClear'
           exit 0
       fi
       notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
