@@ -5,12 +5,21 @@ namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as StandardResponse;
 use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as StandardSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router;
 
 trait RouterTestTrait
 {
 
     private $router;
+
+    public function testGetResponseContainerReturnsStringWhoseValueMatchesTheResponseInterfacesResponseContainerConstant(): void
+    {
+        $this->assertEquals(
+            Response::RESPONSE_CONTAINER,
+            $this->getRouter()->getResponseContainer()
+        );
+    }
 
     public function testRequestIsSetPostInstantiation(): void
     {

@@ -2,20 +2,21 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class Router extends SwitchableComponent implements RouterInterface
+abstract class Router extends SwitchableComponentBase implements RouterInterface
 {
 
-    private $request;
-    private $crud;
+    private RequestInterface $request;
+    private ComponentCrudInterface $crud;
 
-    public function __construct(Storable $storable, Switchable $switchable, Request $request, ComponentCrud $crud)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, RequestInterface $request, ComponentCrudInterface $crud)
     {
         parent::__construct($storable, $switchable);
         $this->request = $request;
@@ -23,6 +24,11 @@ abstract class Router extends SwitchableComponent implements RouterInterface
         if ($this->crud->getState() === false) {
             $this->crud->switchState();
         }
+    }
+
+    public function getResponseContainer(): string
+    {
+        return ResponseInterface::RESPONSE_CONTAINER;
     }
 
     public function getResponses(string $location, string $container): array
@@ -42,7 +48,7 @@ abstract class Router extends SwitchableComponent implements RouterInterface
         return $responses;
     }
 
-    public function getCrud(): ComponentCrud
+    public function getCrud(): ComponentCrudInterface
     {
         return $this->crud;
     }
@@ -59,7 +65,7 @@ abstract class Router extends SwitchableComponent implements RouterInterface
         );
     }
 
-    public function getRequest(): Request
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }

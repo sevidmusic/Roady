@@ -2,13 +2,13 @@
 
 namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 
-interface Router extends SwitchableComponent
+interface Router extends SwitchableComponentInterface
 {
 
-    public function getCrud(): ComponentCrud;
+    public function getCrud(): ComponentCrudInterface;
 
     public function getRequest(): Request;
 
@@ -17,4 +17,5 @@ interface Router extends SwitchableComponent
     // @todo Also, add test to RouterTestTrait: testGetResponsesReturnsArrayWithOne404ResponseIfCurrentRequestDoesNotExistInStorage
     public function getResponses(string $location, string $container): array;
 
+    public function getResponseContainer(): string;
 }
