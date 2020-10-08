@@ -2,28 +2,26 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class StandardUI extends CoreOutputComponent implements StandardUIInterface
+abstract class StandardUI extends OutputComponentBase implements StandardUIInterface
 {
 
     private $router;
     private $templates = [];
     private $outputComponents = [];
     private $responseLocation;
-    private $responseContainer;
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Router $router, string $responseLocation, string $responseContainer)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, RouterInterface $router, string $responseLocation)
     {
         parent::__construct($storable, $switchable, $positionable);
         $this->router = $router;
         $this->responseLocation = $responseLocation;
-        $this->responseContainer = $responseContainer;
     }
 
     public function getOutput(): string
@@ -51,7 +49,7 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     {
         if (empty($this->templates) === true) {
             $templates = [];
-            foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
+            foreach ($this->router->getResponses($this->responseLocation, $this->router->getResponseContainer()) as $response) {
                 while (isset($templates[strval($response->getPosition())]) === true) {
                     $response->increasePosition();
                 }
@@ -72,7 +70,7 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     {
         if (empty($this->outputComponents) === true) {
             $outputComponents = [];
-            foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
+            foreach ($this->router->getResponses($this->responseLocation, $this->router->getResponseContainer()) as $response) {
                 while (isset($outputComponents[strval($response->getPosition())]) === true) {
                     $response->increasePosition();
                 }
