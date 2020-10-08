@@ -12,4 +12,4 @@ xaa
 *.txt
 Apps/DEFAULT/
 Apps/.buildLogs/
-dsh/.dsh_license_already_shown
+dsh/.dsh_license_notice_already_shown
