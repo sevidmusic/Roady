@@ -10,6 +10,8 @@ use DarlingDataManagementSystem\interfaces\primary\Positionable;
 
 interface Response extends SwitchableComponent, Positionable
 {
+    public const RESPONSE_CONTAINER = "RESPONSES";
+
     public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
 
     public function addRequestStorageInfo(Request $request): bool;

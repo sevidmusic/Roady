@@ -18,7 +18,6 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable;
 abstract class Response extends SwitchableComponent implements ResponseInterface
 {
 
-    public const RESPONSE_CONTAINER = "RESPONSES";
     private $outputComponentStorageInfo = array();
     private $templateStorageInfo = array();
     private $requestStorageInfo = array();
