@@ -1,8 +1,9 @@
-<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+<?php
 
 namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 
 use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
@@ -12,16 +13,16 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 abstract class StandardUI extends OutputComponentBase implements StandardUIInterface
 {
 
-    private $router;
-    private $templates = [];
-    private $outputComponents = [];
-    private $responseLocation;
+    private RouterInterface $router;
+    private array $templates = [];
+    private array $outputComponents = [];
+    private string $appLocation;
 
-    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, RouterInterface $router, string $responseLocation)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, RouterInterface $router)
     {
         parent::__construct($storable, $switchable, $positionable);
         $this->router = $router;
-        $this->responseLocation = $responseLocation;
+        $this->appLocation = CoreApp::deriveNameLocationFromRequest($router->getRequest());
     }
 
     public function getOutput(): string
@@ -49,7 +50,7 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
     {
         if (empty($this->templates) === true) {
             $templates = [];
-            foreach ($this->router->getResponses($this->responseLocation, $this->router->getResponseContainer()) as $response) {
+            foreach ($this->router->getResponses($this->appLocation, $this->router->getResponseContainer()) as $response) {
                 while (isset($templates[strval($response->getPosition())]) === true) {
                     $response->increasePosition();
                 }
@@ -70,7 +71,7 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
     {
         if (empty($this->outputComponents) === true) {
             $outputComponents = [];
-            foreach ($this->router->getResponses($this->responseLocation, $this->router->getResponseContainer()) as $response) {
+            foreach ($this->router->getResponses($this->appLocation, $this->router->getResponseContainer()) as $response) {
                 while (isset($outputComponents[strval($response->getPosition())]) === true) {
                     $response->increasePosition();
                 }

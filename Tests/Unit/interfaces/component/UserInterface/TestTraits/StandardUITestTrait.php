@@ -2,6 +2,7 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
+use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
 use DarlingDataManagementSystem\classes\component\Action as CoreAction;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
@@ -31,6 +32,13 @@ trait StandardUITestTrait
     private RequestInterface $currentRequest;
     private int $generateComponentCalls = 0;
 
+    public function testAppLocationPropertyMatchesAppLocationDerivedFromRoutersRequest(): void
+    {
+        $this->assertEquals(
+            App::deriveNameLocationFromRequest($this->getRouter()->getRequest()),
+            $this->getStandardUI()->export()['appLocation']
+        );
+    }
     public function getStandardUIContainer(): string
     {
         return 'StandardUITestStandardUIContainer';
