@@ -1,29 +1,35 @@
-<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+<?php
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Action;
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as StorageDriver;
-use DarlingDataManagementSystem\classes\component\OutputComponent;
-use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\classes\component\Action as CoreAction;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StandardStorageDriverInterface;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
+use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
+use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 
 trait StandardUITestTrait
 {
 
-    private $standardUI;
-    private $router;
-    private $currentRequest;
-    private $generateComponentCalls = 0;
+    private StandardUIInterface $standardUI;
+    private RouterInterface $router;
+    private RequestInterface $currentRequest;
+    private int $generateComponentCalls = 0;
 
     public function getStandardUIContainer(): string
     {
@@ -33,40 +39,40 @@ trait StandardUITestTrait
     public function tearDown(): void
     {
         // @todo : Working on fixing this...
-        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getOutputComponentContainer()) as $storedComponent) {
-            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
+        foreach ($this->getStoredComponents($this->getOutputComponentContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
         }
-        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getStandardUITemplateContainer()) as $storedComponent) {
-            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
+        foreach ($this->getStoredComponents($this->getStandardUITemplateContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
         }
-        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getResponseContainer()) as $storedComponent) {
-            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
+        foreach ($this->getStoredComponents($this->getResponseContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
         }
-        foreach ($this->getStoredComponents($this->getComponentLocation(), $this->getRequestContainer()) as $storedComponent) {
-            $this->getStandardUITestRouter()->getCrud()->delete($storedComponent);
+        foreach ($this->getStoredComponents($this->getRequestContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
         }
     }
 
-    protected function getStoredComponents(string $location, string $container): array
+    protected function getStoredComponents(string $container): array
     {
-        return $this->getStandardUITestRouter()->getCrud()->readAll(
-            $location,
+        return $this->getRouter()->getCrud()->readAll(
+            $this->getComponentLocation(),
             $container
         );
     }
 
-    public function getStandardUITestRouter(): Router
+    public function getRouter(): RouterInterface
     {
         if (isset($this->router)) {
             return $this->router;
         }
         $this->router = new CoreRouter(
-            new Storable(
+            new CoreStorable(
                 'StandardUITestRouter' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
                 $this->getRouterContainer()
             ),
-            new Switchable(),
+            new CoreSwitchable(),
             $this->getCurrentRequest(),
             $this->getComponentCrudForRouter()
         );
@@ -75,7 +81,7 @@ trait StandardUITestTrait
 
     public function getComponentLocation(): string
     {
-        return 'StandardUITestComponentsLocation';
+        return 'DEFAULT';
     }
 
     public function getRouterContainer(): string
@@ -83,20 +89,20 @@ trait StandardUITestTrait
         return "StandardUITestRouterContainer";
     }
 
-    public function getCurrentRequest(): Request
+    public function getCurrentRequest(): RequestInterface
     {
         if (isset($this->currentRequest) === true) {
             return $this->currentRequest;
         }
-        $this->currentRequest = new Request(
-            new Storable(
+        $this->currentRequest = new CoreRequest(
+            new CoreStorable(
                 'StandardUICurrentRequest' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
                 $this->getRequestContainer()
             ),
-            new Switchable()
+            new CoreSwitchable()
         );
-        $this->getStandardUITestRouter()->getCrud()->create($this->currentRequest);
+        $this->getRouter()->getCrud()->create($this->currentRequest);
         return $this->currentRequest;
     }
 
@@ -108,23 +114,28 @@ trait StandardUITestTrait
     private function getComponentCrudForRouter(): ComponentCrudInterface
     {
         if (isset($this->router) === true) {
-            return $this->getStandardUITestRouter()->getCrud();
+            return $this->getRouter()->getCrud();
         }
-        return new ComponentCrud(
-            new Storable(
+        return new CoreComponentCrud(
+            new CoreStorable(
                 'StandardUITestComponentCrudForStandardUITestRouter' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
                 $this->getComponentCrudContainer()
             ),
-            new Switchable(),
-            new StorageDriver(
-                new Storable(
-                    'StandardUITestStorageDriver' . strval(rand(0, 999)),
-                    $this->getComponentLocation(),
-                    $this->getStorageDriverContainer()
-                ),
-                new Switchable()
-            )
+            new CoreSwitchable(),
+            $this->getStandardStorageDriverForCrud()
+        );
+    }
+
+    private function getStandardStorageDriverForCrud(): StandardStorageDriverInterface
+    {
+        return new CoreStandardStorageDriver(
+            new CoreStorable(
+                'StandardUITestStorageDriver' . strval(rand(0, 999)),
+                $this->getComponentLocation(),
+                $this->getStandardStorageDriverContainer()
+            ),
+            new CoreSwitchable()
         );
     }
 
@@ -133,7 +144,7 @@ trait StandardUITestTrait
         return "StandardUITestComponentCruds";
     }
 
-    public function getStorageDriverContainer(): string
+    public function getStandardStorageDriverContainer(): string
     {
         return "StandardUITestStorageDrivers";
     }
@@ -150,25 +161,25 @@ trait StandardUITestTrait
 
     protected function getResponseContainer(): string
     {
-        return Response::RESPONSE_CONTAINER;
+        return ResponseInterface::RESPONSE_CONTAINER;
     }
 
     public function testRouterPropertyIsAssignedARouterImplementationInstancePostInstantiation(): void
     {
         $this->assertTrue(
             in_array(
-                Router::class,
+                RouterInterface::class,
                 class_implements($this->getStandardUI()->export()['router'])
             )
         );
     }
 
-    public function getStandardUI(): StandardUI
+    public function getStandardUI(): StandardUIInterface
     {
         return $this->standardUI;
     }
 
-    public function setStandardUI(StandardUI $standardUI): void
+    public function setStandardUI(StandardUIInterface $standardUI): void
     {
         $this->standardUI = $standardUI;
     }
@@ -221,7 +232,7 @@ trait StandardUITestTrait
                 $response->increasePosition();
             }
             foreach ($response->getTemplateStorageInfo() as $storable) {
-                $template = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                $template = $this->getRouter()->getCrud()->read($storable);
                 while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
                     $template->increasePosition();
                 }
@@ -234,7 +245,7 @@ trait StandardUITestTrait
     private function getResponsesToCurrentRequest(): array
     {
         $responses = [];
-        foreach ($this->getStandardUITestRouter()->getResponses($this->getComponentLocation(), $this->getResponseContainer()) as $response) {
+        foreach ($this->getRouter()->getResponses($this->getComponentLocation(), $this->getResponseContainer()) as $response) {
             array_push($responses, $response);
         }
         return $responses;
@@ -300,7 +311,7 @@ trait StandardUITestTrait
                 $response->increasePosition();
             }
             foreach ($response->getOutputComponentStorageInfo() as $storable) {
-                $outputComponent = $this->getStandardUITestRouter()->getCrud()->read($storable);
+                $outputComponent = $this->getRouter()->getCrud()->read($storable);
                 while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                     $outputComponent->increasePosition();
                 }
@@ -343,14 +354,14 @@ trait StandardUITestTrait
         //  this is helpful when debugging: $this->devNumberOfGenerateCalls();
     }
 
-    protected function generateStoredResponse(): Response
+    protected function generateStoredResponse(): ResponseInterface
     {
-        $response = new Response(
-            new Storable('StandardUITestResponse' . strval(rand(0, 999)),
+        $response = new CoreResponse(
+            new CoreStorable('StandardUITestResponse' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
                 $this->getResponseContainer()
             ),
-            new Switchable()
+            new CoreSwitchable()
         );
         for ($incrementer = 0; $incrementer < rand(1, 10); $incrementer++) {
             $response->addOutputComponentStorageInfo($this->generateStoredOutputComponent());
@@ -365,75 +376,75 @@ trait StandardUITestTrait
             $response->addTemplateStorageInfo($this->generateStoredStandardUITemplateForActions(rand(0, 3)));
         }
         $response->addRequestStorageInfo($this->getCurrentRequest());
-        $this->getStandardUITestRouter()->getCrud()->create($response);
+        $this->getRouter()->getCrud()->create($response);
         return $response;
     }
 
-    private function generateStoredOutputComponent(bool $saveToStorage = true): OutputComponent
+    private function generateStoredOutputComponent(bool $saveToStorage = true): OutputComponentInterface
     {
-        $outputComponent = new OutputComponent(
-            new Storable(
+        $outputComponent = new CoreOutputComponent(
+            new CoreStorable(
                 'StandardUITestOutputComponent' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
                 $this->getOutputComponentContainer()
             ),
-            new Switchable(),
-            new Positionable(rand(0, 99))
+            new CoreSwitchable(),
+            new CorePositionable(rand(0, 99))
         );
         $outputComponent->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
         if ($saveToStorage === true) {
-            $this->getStandardUITestRouter()->getCrud()->create($outputComponent);
+            $this->getRouter()->getCrud()->create($outputComponent);
         }
         return $outputComponent;
     }
 
-    private function generateStoredStandardUITemplateForOutputComponents(float $position = 0): StandardUITemplate
+    private function generateStoredStandardUITemplateForOutputComponents(float $position = 0): StandardUITemplateInterface
     {
-        $standardUITemplate = new StandardUITemplate(
-            new Storable(
+        $standardUITemplate = new CoreStandardUITemplate(
+            new CoreStorable(
                 'StandardUITestTemplate' . strval(rand(10, 99)),
                 $this->getComponentLocation(),
                 $this->getStandardUITemplateContainer()
             ),
-            new Switchable(),
-            new Positionable($position)
+            new CoreSwitchable(),
+            new CorePositionable($position)
         );
         $standardUITemplate->addType($this->generateStoredOutputComponent(false));
-        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
+        $this->getRouter()->getCrud()->create($standardUITemplate);
         return $standardUITemplate;
     }
 
-    private function generateStoredAction(bool $saveToStorage = true): Action
+    private function generateStoredAction(bool $saveToStorage = true): ActionInterface
     {
-        $action = new Action(
-            new Storable(
+        $action = new CoreAction(
+            new CoreStorable(
                 'StandardUITestAction' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
                 $this->getOutputComponentContainer()
             ),
-            new Switchable(),
-            new Positionable(rand(0, 99))
+            new CoreSwitchable(),
+            new CorePositionable(rand(0, 99))
         );
         $action->import(['output' => 'Some plain text' . strval(rand(10000, 99999))]);
         if ($saveToStorage === true) {
-            $this->getStandardUITestRouter()->getCrud()->create($action);
+            $this->getRouter()->getCrud()->create($action);
         }
         return $action;
     }
 
-    private function generateStoredStandardUITemplateForActions(float $position = 0): StandardUITemplate
+    private function generateStoredStandardUITemplateForActions(float $position = 0): CoreStandardUITemplate
     {
-        $standardUITemplate = new StandardUITemplate(
-            new Storable(
+        $standardUITemplate = new CoreStandardUITemplate(
+            new CoreStorable(
                 'StandardUITestTemplate' . strval(rand(10, 99)),
                 $this->getComponentLocation(),
                 $this->getStandardUITemplateContainer()
             ),
-            new Switchable(),
-            new Positionable($position)
+            new CoreSwitchable(),
+            new CorePositionable($position)
         );
         $standardUITemplate->addType($this->generateStoredAction(false));
-        $this->getStandardUITestRouter()->getCrud()->create($standardUITemplate);
+        $this->getRouter()->getCrud()->create($standardUITemplate);
         return $standardUITemplate;
     }
 
@@ -459,7 +470,7 @@ trait StandardUITestTrait
 
     private function countNumberOfStoredComponentsInContainer(string $container): int
     {
-        return count($this->getStandardUITestRouter()->getCrud()->readAll($this->getComponentLocation(), $container));
+        return count($this->getRouter()->getCrud()->readAll($this->getComponentLocation(), $container));
     }
 
     /**
@@ -484,10 +495,7 @@ trait StandardUITestTrait
         var_dump(
             [
                 '# Stored ' . $type . 's' => count(
-                    $this->getStoredComponents(
-                        $this->getComponentLocation(),
-                        $container
-                    )
+                    $this->getStoredComponents($container)
                 )
             ]
         );
@@ -496,7 +504,7 @@ trait StandardUITestTrait
 
     private function getStoredComponentStorableInfo(string $container): void
     {
-        foreach ($this->getStoredComponents($this->getComponentLocation(), $container) as $storedComponent) {
+        foreach ($this->getStoredComponents($container) as $storedComponent) {
             var_dump(
                 [
                     'name' => $storedComponent->getName(),
@@ -507,5 +515,18 @@ trait StandardUITestTrait
                 ]
             );
         }
+    }
+
+    protected function getTestInstanceArgs(): array {
+        return [
+            new CoreStorable(
+                'StandardUIName',
+                $this->getComponentLocation(),
+                $this->getStandardUIContainer()
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+            $this->getRouter(),
+        ];
     }
 }
