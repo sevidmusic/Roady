@@ -39,7 +39,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     private ?OutputComponentFactory $outputComponentFactory = null;
     private ?StandardUITemplateFactoryInterface $standardUITemplateFactory = null;
     private ?RequestFactoryInterface $requestFactory = null;
-    private ?ResponseFactoryInterface $responseFactory =null;
+    private ?ResponseFactoryInterface $responseFactory = null;
 
     public function __construct(
         PrimaryFactoryInterface $primaryFactory,
@@ -295,6 +295,12 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $request;
     }
 
+    public function buildResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): ResponseInterface // @todo As soon as Php 8 is in use, refactor to union type declaration: i.e Response | GlobalResponse
+    {
+        $response = $this->responseFactory->buildResponse($name, $position);
+        return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
+    }
+
     private function configureResponse(ResponseInterface $response, array $requestsOutputComponentsStandardUITemplates = [])
     {
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
@@ -309,12 +315,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         $this->responseFactory->getStoredComponentRegistry()->registerComponent($response);
         $this->getStoredComponentRegistry()->registerComponent($response);
         return $response;
-    }
-
-    public function buildResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): ResponseInterface // @todo As soon as Php 8 is in use, refactor to union type declaration: i.e Response | GlobalResponse
-    {
-        $response = $this->responseFactory->buildResponse($name, $position);
-        return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
     }
 
     public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): GlobalResponseInterface
@@ -382,7 +382,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
 
     private function expectedBuildLogPath(): string
     {
-        return$this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
+        return $this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
     }
 
 }

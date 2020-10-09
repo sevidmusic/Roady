@@ -14,8 +14,8 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 abstract class ComponentCrud extends SwitchableComponentBase implements ComponentCrudInterface
 {
 
-    private StandardStorageDriverInterface $storageDriver;
     private const MOCK_COMPONENT = '__MOCK_COMPONENT__';
+    private StandardStorageDriverInterface $storageDriver;
 
     public function __construct(StorableInterface $storable, SwitchableInterface $switchable, StandardStorageDriverInterface $storageDriver)
     {

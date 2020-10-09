@@ -2,15 +2,15 @@
 
 namespace DarlingDataManagementSystem\abstractions\component;
 
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 
 
 abstract class Action extends OutputComponentBase implements ActionInterface
