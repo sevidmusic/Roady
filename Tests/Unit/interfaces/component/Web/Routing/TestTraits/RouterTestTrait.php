@@ -21,6 +21,16 @@ trait RouterTestTrait
         );
     }
 
+    public function getRouter(): Router
+    {
+        return $this->router;
+    }
+
+    public function setRouter(Router $router): void
+    {
+        $this->router = $router;
+    }
+
     public function testRequestIsSetPostInstantiation(): void
     {
         $this->assertTrue(
@@ -41,16 +51,6 @@ trait RouterTestTrait
             )
         )
         );
-    }
-
-    public function getRouter(): Router
-    {
-        return $this->router;
-    }
-
-    public function setRouter(Router $router): void
-    {
-        $this->router = $router;
     }
 
     public function testCrudIsSetPostInstantiation(): void

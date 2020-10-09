@@ -2,27 +2,27 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\App;
-use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
 use DarlingDataManagementSystem\classes\component\Action as CoreAction;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StandardStorageDriverInterface;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as CoreStandardStorageDriver;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StandardStorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 use RuntimeException as PHPRuntimeException;
 
 trait StandardUITestTrait
@@ -38,43 +38,6 @@ trait StandardUITestTrait
         $this->assertEquals(
             App::deriveNameLocationFromRequest($this->getRouter()->getRequest()),
             $this->getStandardUI()->export()['appLocation']
-        );
-    }
-
-    public function testGetOutputThrowsRuntimeExceptionIfOutputIsEmpty(): void
-    {
-        $this->tearDown();
-        $this->expectException(PhpRuntimeException::class);
-        $this->getStandardUI()->getOutput();
-    }
-
-    public function getStandardUIContainer(): string
-    {
-        return 'StandardUITestStandardUIContainer';
-    }
-
-    public function tearDown(): void
-    {
-        // @todo : Working on fixing this...
-        foreach ($this->getStoredComponents($this->getOutputComponentContainer()) as $storedComponent) {
-            $this->getRouter()->getCrud()->delete($storedComponent);
-        }
-        foreach ($this->getStoredComponents($this->getStandardUITemplateContainer()) as $storedComponent) {
-            $this->getRouter()->getCrud()->delete($storedComponent);
-        }
-        foreach ($this->getStoredComponents($this->getResponseContainer()) as $storedComponent) {
-            $this->getRouter()->getCrud()->delete($storedComponent);
-        }
-        foreach ($this->getStoredComponents($this->getRequestContainer()) as $storedComponent) {
-            $this->getRouter()->getCrud()->delete($storedComponent);
-        }
-    }
-
-    protected function getStoredComponents(string $container): array
-    {
-        return $this->getRouter()->getCrud()->readAll(
-            $this->getComponentLocation(),
-            $container
         );
     }
 
@@ -144,6 +107,11 @@ trait StandardUITestTrait
         );
     }
 
+    public function getComponentCrudContainer(): string
+    {
+        return "StandardUITestComponentCruds";
+    }
+
     private function getStandardStorageDriverForCrud(): StandardStorageDriverInterface
     {
         return new CoreStandardStorageDriver(
@@ -156,14 +124,51 @@ trait StandardUITestTrait
         );
     }
 
-    public function getComponentCrudContainer(): string
-    {
-        return "StandardUITestComponentCruds";
-    }
-
     public function getStandardStorageDriverContainer(): string
     {
         return "StandardUITestStorageDrivers";
+    }
+
+    public function getStandardUI(): StandardUIInterface
+    {
+        return $this->standardUI;
+    }
+
+    public function setStandardUI(StandardUIInterface $standardUI): void
+    {
+        $this->standardUI = $standardUI;
+    }
+
+    public function testGetOutputThrowsRuntimeExceptionIfOutputIsEmpty(): void
+    {
+        $this->tearDown();
+        $this->expectException(PhpRuntimeException::class);
+        $this->getStandardUI()->getOutput();
+    }
+
+    public function tearDown(): void
+    {
+        // @todo : Working on fixing this...
+        foreach ($this->getStoredComponents($this->getOutputComponentContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
+        }
+        foreach ($this->getStoredComponents($this->getStandardUITemplateContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
+        }
+        foreach ($this->getStoredComponents($this->getResponseContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
+        }
+        foreach ($this->getStoredComponents($this->getRequestContainer()) as $storedComponent) {
+            $this->getRouter()->getCrud()->delete($storedComponent);
+        }
+    }
+
+    protected function getStoredComponents(string $container): array
+    {
+        return $this->getRouter()->getCrud()->readAll(
+            $this->getComponentLocation(),
+            $container
+        );
     }
 
     public function getOutputComponentContainer(): string
@@ -189,16 +194,6 @@ trait StandardUITestTrait
                 class_implements($this->getStandardUI()->export()['router'])
             )
         );
-    }
-
-    public function getStandardUI(): StandardUIInterface
-    {
-        return $this->standardUI;
-    }
-
-    public function setStandardUI(StandardUIInterface $standardUI): void
-    {
-        $this->standardUI = $standardUI;
     }
 
     public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings()
@@ -471,6 +466,25 @@ trait StandardUITestTrait
         $this->setOutputComponentParentTestInstances();
     }
 
+    protected function getTestInstanceArgs(): array
+    {
+        return [
+            new CoreStorable(
+                'StandardUIName',
+                $this->getComponentLocation(),
+                $this->getStandardUIContainer()
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+            $this->getRouter(),
+        ];
+    }
+
+    public function getStandardUIContainer(): string
+    {
+        return 'StandardUITestStandardUIContainer';
+    }
+
     /**
      * DONT REMOVE THIS METHOD | IT IS USEFUL FOR DEBUGGING
      * @noinspection PhpUnusedPrivateMethodInspection
@@ -532,18 +546,5 @@ trait StandardUITestTrait
                 ]
             );
         }
-    }
-
-    protected function getTestInstanceArgs(): array {
-        return [
-            new CoreStorable(
-                'StandardUIName',
-                $this->getComponentLocation(),
-                $this->getStandardUIContainer()
-            ),
-            new CoreSwitchable(),
-            new CorePositionable(),
-            $this->getRouter(),
-        ];
     }
 }
