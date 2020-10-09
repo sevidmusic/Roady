@@ -9,7 +9,6 @@ use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
 use DarlingDataManagementSystem\classes\component\UserInterface\StandardUI;
 use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
@@ -39,7 +38,7 @@ $crud = new ComponentCrud(
 $router = new Router(
     $primaryFactory->buildStorable('AppRouter', 'Index'),
     $primaryFactory->buildSwitchable(),
-    $currentRequest,
+    $currentRequest, // @todo This should be passed App
     $crud
 );
 try {
@@ -48,8 +47,6 @@ try {
         $primaryFactory->buildSwitchable(),
         $primaryFactory->buildPositionable(0),
         $router,
-        App::getRequestedApp($currentRequest, $crud)->getLocation(),
-        Response::RESPONSE_CONTAINER
     );
 
     echo $userInterface->getOutput();
@@ -58,7 +55,7 @@ try {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <title>Requested App Is Unavailable</title>
+        <title>Your request could not be processed.</title>
         <style>
             body {
                 background: #0a0800;
@@ -72,7 +69,7 @@ try {
     </head>
     <body>
     <h1>404 Not Found</h1>
-    <p>Sorry, the App you requested could not be loaded at this time. Please try again later.</p>
+    <p>Sorry, the you request you made is not valid. Please try again later.</p>
     <ul>
         <li>App Name: <?php echo App::deriveNameLocationFromRequest($currentRequest); ?></li>
         <li class="error">Error Message: <?php echo $runtimeException->getMessage(); ?></li>
