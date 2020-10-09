@@ -4,10 +4,10 @@ namespace UnitTests\abstractions\component\Driver\Storage;
 
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
-use UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonTest;
+use UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriverTest;
 use UnitTests\interfaces\component\Driver\Storage\TestTraits\StandardTestTrait;
 
-class StandardTest extends JsonTest
+class StandardStorageDriverTest extends JsonStorageDriverTest
 {
     use StandardTestTrait;
 

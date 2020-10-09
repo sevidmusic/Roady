@@ -2,37 +2,38 @@
 
 namespace UnitTests\interfaces\component\Web\TestTraits;
 
-use DarlingDataManagementSystem\abstractions\component\Web\App as AbstractApp;
-use DarlingDataManagementSystem\classes\component\Component;
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as StandardStorageDriver;
+use DarlingDataManagementSystem\abstractions\component\Web\App as AppBase;
+use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as CoreStandardStorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\interfaces\component\Web\App;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use RuntimeException;
 
 trait AppTestTrait
 {
 
-    private $app;
-    private $mockRequest;
+    private AppInterface $app;
+    private RequestInterface $mockRequest;
+    protected string $expectedAppContainer=  'APP';
 
     public function testAPP_CONTAINERConstantIsSetToStringAPP(): void
     {
-        $this->assertEquals("APP", AbstractApp::APP_CONTAINER);
-        $this->assertEquals("APP", CoreApp::APP_CONTAINER);
-        $this->assertEquals("APP", $this->getApp()::APP_CONTAINER);
+        $this->assertEquals($this->expectedAppContainer, AppBase::APP_CONTAINER);
+        $this->assertEquals($this->expectedAppContainer, CoreApp::APP_CONTAINER);
+        $this->assertEquals($this->expectedAppContainer, $this->getApp()::APP_CONTAINER);
     }
 
-    protected function getApp(): App
+    protected function getApp(): AppInterface
     {
         return $this->app;
     }
 
-    protected function setApp(App $app): void
+    protected function setApp(AppInterface $app): void
     {
         $this->app = $app;
     }
@@ -45,10 +46,17 @@ trait AppTestTrait
         );
     }
 
-    protected function getMockRequest(): Request
+    protected function getMockRequest(): RequestInterface
     {
         if (!isset($this->mockRequest)) {
-            $this->mockRequest = new CoreRequest(new Storable("MockRequest", "Temp", "Temp"), new Switchable());
+            $this->mockRequest = new CoreRequest(
+                new CoreStorable(
+                    "MockRequest",
+                    "Temp",
+                    "Temp"
+                ),
+                new CoreSwitchable()
+            );
             $this->mockRequest->import(['url' => $this->getRandomUrl()]);
         }
         return $this->mockRequest;
@@ -90,14 +98,10 @@ trait AppTestTrait
     public function testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrStringDEFAULTIfUrlHostCantBeDetermined(): void
     {
         $mockRequest = $this->getMockRequest();
-        $testUrls = ['http://localhost:8080', 'http://example.com'];
-        $testUrl = $testUrls[array_rand($testUrls)];
-        $mockRequest->import(['url' => $testUrl]);
-
+        $mockRequest->import(['url' => $this->getRandomUrl()]);
         $host = parse_url($mockRequest->getUrl(), PHP_URL_HOST);
         $port = parse_url($mockRequest->getUrl(), PHP_URL_PORT);
         $hostPort = $host . strval($port);
-
         $expectedNameLocation = preg_replace(
             "/[^A-Za-z0-9]/",
             '',
@@ -139,14 +143,14 @@ trait AppTestTrait
         }
     }
 
-    protected function getMockCrud(): ComponentCrud
+    protected function getMockCrud(): CoreComponentCrud
     {
-        return new ComponentCrud(
-            new Storable('MockCrud', 'TEMP', 'TEMP'),
-            new Switchable(),
-            new StandardStorageDriver(
-                new Storable('MockStandardStorageDriver', 'Temp', 'Temp'),
-                new Switchable()
+        return new CoreComponentCrud(
+            new CoreStorable('MockCrud', 'TEMP', 'TEMP'),
+            new CoreSwitchable(),
+            new CoreStandardStorageDriver(
+                new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
+                new CoreSwitchable()
             )
         );
     }
@@ -154,8 +158,8 @@ trait AppTestTrait
     public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAppDataIsCorrupted(): void
     {
         $this->purgeAppStorage();
-        $component = new Component(
-            new Storable(
+        $component = new CoreComponent(
+            new CoreStorable(
                 CoreApp::deriveNameLocationFromRequest($this->getMockRequest()),
                 CoreApp::deriveNameLocationFromRequest($this->getMockRequest()),
                 CoreApp::APP_CONTAINER
@@ -169,7 +173,7 @@ trait AppTestTrait
     public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAppStateIsFalse(): void
     {
         $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new Switchable());
+        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
         if ($app->getState() === true) {
             $app->switchState();
         }
@@ -188,8 +192,8 @@ trait AppTestTrait
     public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAppDataIsCorrupted(): void
     {
         $this->purgeAppStorage();
-        $component = new Component(
-            new Storable(
+        $component = new CoreComponent(
+            new CoreStorable(
                 $this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()),
                 $this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()),
                 $this->getApp()::APP_CONTAINER
@@ -203,7 +207,7 @@ trait AppTestTrait
     public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAppStateIsFalse(): void
     {
         $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new Switchable());
+        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
         if ($app->getState() === true) {
             $app->switchState();
         }
@@ -215,8 +219,8 @@ trait AppTestTrait
     public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAnAppCantBeFoundInStorageWhoseNameMatchesTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethod(): void
     {
         $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new Switchable());
-        $app->import(['storable' => new Storable('BadImportedName', $app->getLocation(), $app->getContainer())]);
+        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
+        $app->import(['storable' => new CoreStorable('BadImportedName', $app->getLocation(), $app->getContainer())]);
         $this->getMockCrud()->create($app);
         $this->expectException(RuntimeException::class);
         CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
@@ -225,7 +229,7 @@ trait AppTestTrait
     public function testGetRequestedAppReturnsAppOnStaticCallWhoseNameAndLocationMatchTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethodAndWhoseContainerMatchesTheValueOfTheAppAPP_CONTAINERConstant(): void
     {
         $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new Switchable());
+        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
         $this->getMockCrud()->create($app);
         $requestedApp = CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
         $this->assertEquals(CoreApp::deriveNameLocationFromRequest($this->getMockRequest()), $requestedApp->getName());
@@ -236,8 +240,8 @@ trait AppTestTrait
     public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAnAppCantBeFoundInStorageWhoseNameMatchesTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethod(): void
     {
         $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new Switchable());
-        $app->import(['storable' => new Storable('BadImportedName', $app->getLocation(), $app->getContainer())]);
+        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
+        $app->import(['storable' => new CoreStorable('BadImportedName', $app->getLocation(), $app->getContainer())]);
         $this->getMockCrud()->create($app);
         $this->expectException(RuntimeException::class);
         $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
@@ -246,7 +250,7 @@ trait AppTestTrait
     public function testGetRequestedAppReturnsAppOnInstanceCallWhoseNameAndLocationMatchTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethodAndWhoseContainerMatchesTheValueOfTheAppAPP_CONTAINERConstant(): void
     {
         $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new Switchable());
+        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
         $this->getMockCrud()->create($app);
         $requestedApp = $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
         $this->assertEquals($this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()), $requestedApp->getName());

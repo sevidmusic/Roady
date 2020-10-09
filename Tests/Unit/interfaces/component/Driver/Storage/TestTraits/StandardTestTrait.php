@@ -3,18 +3,18 @@
 namespace UnitTests\interfaces\component\Driver\Storage\TestTraits;
 
 use DarlingDataManagementSystem\abstractions\component\Driver\Storage\StandardStorageDriver;
-use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonTestTrait;
+use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonStorageDriverTestTrait;
 
 trait StandardTestTrait
 {
 
-    use JsonTestTrait;
+    use JsonStorageDriverTestTrait;
 
     private $standard;
 
     protected function setStandardParentTestInstances(): void
     {
-        $this->setJson($this->getStandard());
+        $this->setJsonStorageDriver($this->getStandard());
         $this->setJsonParentTestInstances();
         $this->setSwitchableComponent($this->getStandard());
         $this->setSwitchableComponentParentTestInstances();

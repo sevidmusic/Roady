@@ -6,7 +6,7 @@ namespace DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSy
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
 
-interface Json extends StorageDriverInterface
+interface JsonStorageDriver extends StorageDriverInterface
 {
 
     public function getStorageDirectoryPath(): string;

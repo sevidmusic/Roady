@@ -2,15 +2,15 @@
 
 namespace UnitTests\interfaces\component\Crud\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StorageDriver;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StandardStorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
 trait ComponentCrudTestTrait
 {
 
-    private $componentCrud;
+    private ComponentCrudInterface $componentCrud;
 
     public function testStorageDriverIsSetAndIsAStorageDriverPostInstantiation(): void
     {
@@ -22,17 +22,17 @@ trait ComponentCrudTestTrait
         );
     }
 
-    private function getComponentCrudStorageDriver(): StorageDriver
+    private function getComponentCrudStorageDriver(): StandardStorageDriverInterface
     {
         return $this->getComponentCrud()->export()['storageDriver'];
     }
 
-    public function getComponentCrud(): ComponentCrud
+    public function getComponentCrud(): ComponentCrudInterface
     {
         return $this->componentCrud;
     }
 
-    public function setComponentCrud(ComponentCrud $componentCrud): void
+    public function setComponentCrud(ComponentCrudInterface $componentCrud): void
     {
         $this->componentCrud = $componentCrud;
     }
@@ -62,12 +62,12 @@ trait ComponentCrudTestTrait
         );
     }
 
-    private function getStoredComponent(): Component
+    private function getStoredComponent(): ComponentInterface
     {
         return $this->getComponentCrud()->read($this->getComponentCrudStorable());
     }
 
-    private function getComponentCrudStorable(): Storable
+    private function getComponentCrudStorable(): StorableInterface
     {
         return $this->getComponentCrud()->export()['storable'];
     }

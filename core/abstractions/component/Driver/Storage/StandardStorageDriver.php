@@ -2,8 +2,8 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Driver\Storage;
 
-use DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\Json as JsonStorageDriverBase;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\Json as JsonStorageDriverInterface;
+use DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverBase;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StandardStorageDriver as StandardStorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
