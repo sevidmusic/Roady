@@ -23,6 +23,7 @@ use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use RuntimeException as PHPRuntimeException;
 
 trait StandardUITestTrait
 {
@@ -39,6 +40,14 @@ trait StandardUITestTrait
             $this->getStandardUI()->export()['appLocation']
         );
     }
+
+    public function testGetOutputThrowsRuntimeExceptionIfOutputIsEmpty(): void
+    {
+        $this->tearDown();
+        $this->expectException(PhpRuntimeException::class);
+        $this->getStandardUI()->getOutput();
+    }
+
     public function getStandardUIContainer(): string
     {
         return 'StandardUITestStandardUIContainer';

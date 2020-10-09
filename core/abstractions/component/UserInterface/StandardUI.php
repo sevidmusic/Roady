@@ -9,6 +9,7 @@ use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as Route
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use RuntimeException as PHPRuntimeException;
 
 abstract class StandardUI extends OutputComponentBase implements StandardUIInterface
 {
@@ -43,6 +44,9 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
 
         }
         $this->import(['output' => $output]);
+        if (empty($output)) {
+            throw new PHPRuntimeException('404: Nothing tho show for ' . $this->router->getRequest()->getUrl());
+        }
         return parent::getOutput();
     }
 
