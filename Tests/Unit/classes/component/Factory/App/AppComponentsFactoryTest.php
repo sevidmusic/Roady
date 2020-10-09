@@ -11,9 +11,7 @@ class AppComponentsFactoryTest extends CoreAppComponentsFactoryTest
     {
         $this->setAppComponentsFactory(
             new AppComponentsFactory(
-                $this->getMockPrimaryFactory(),
-                $this->getMockCrud(),
-                $this->getMockStoredComponentRegistry()
+                ...$this->getTestInstanceArgs()
             )
         );
         $this->setAppComponentsFactoryParentTestInstances();
