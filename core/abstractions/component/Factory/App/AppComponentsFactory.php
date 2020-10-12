@@ -4,7 +4,7 @@ namespace DarlingDataManagementSystem\abstractions\component\Factory\App;
 
 use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStandardStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingDataManagementSystem\classes\component\Factory\RequestFactory as CoreRequestFactory;

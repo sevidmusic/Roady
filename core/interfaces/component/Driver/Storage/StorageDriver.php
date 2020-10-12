@@ -6,8 +6,7 @@ use DarlingDataManagementSystem\interfaces\component\Component as ComponentInter
 use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
-
-interface StandardStorageDriver extends SwitchableComponentInterface
+interface StorageDriver extends SwitchableComponentInterface
 {
     public function write(ComponentInterface $component): bool;
 

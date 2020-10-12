@@ -4,7 +4,7 @@ ini_set('display_errors', true);
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
 use DarlingDataManagementSystem\classes\component\UserInterface\StandardUI;
 use DarlingDataManagementSystem\classes\component\Web\App;
@@ -29,7 +29,7 @@ $primaryFactory = new PrimaryFactory($app);
 $crud = new ComponentCrud(
     $primaryFactory->buildStorable('AppCrud', 'Index'),
     $primaryFactory->buildSwitchable(),
-    new StandardStorageDriver(
+    new StorageDriver(
         $primaryFactory->buildStorable('AppStorageDriver', 'Index'),
         $primaryFactory->buildSwitchable()
     )

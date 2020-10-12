@@ -3,7 +3,7 @@
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Actions\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStandardStorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\classes\primary\Positionable;
 use DarlingDataManagementSystem\classes\primary\Storable;

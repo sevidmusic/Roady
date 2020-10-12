@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver;
 use DarlingDataManagementSystem\classes\component\OutputComponent;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as Template;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
@@ -92,7 +92,7 @@ trait ResponseTestTrait
         return new \DarlingDataManagementSystem\classes\component\Crud\ComponentCrud(
             new Storable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
             new Switchable(),
-            new StandardStorageDriver(
+            new StorageDriver(
                 new Storable(
                     'MockStandardStorageDriver',
                     'MockStandardStorageDriverLocation',
