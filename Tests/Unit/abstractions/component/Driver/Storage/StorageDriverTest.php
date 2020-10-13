@@ -7,7 +7,7 @@ use DarlingDataManagementSystem\classes\primary\Switchable;
 use UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriverTest;
 use UnitTests\interfaces\component\Driver\Storage\TestTraits\StandardTestTrait;
 
-class StandardStorageDriverTest extends JsonStorageDriverTest
+class StorageDriverTest extends JsonStorageDriverTest
 {
     use StandardTestTrait;
 
