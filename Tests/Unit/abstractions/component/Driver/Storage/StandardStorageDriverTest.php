@@ -13,7 +13,7 @@ class StandardStorageDriverTest extends JsonStorageDriverTest
 
     public function setUp(): void
     {
-        $this->setStandard(
+        $this->setStorageDriver(
             $this->getMockForAbstractClass(
                 '\DarlingDataManagementSystem\abstractions\component\Driver\Storage\StorageDriver',
                 [
@@ -26,7 +26,7 @@ class StandardStorageDriverTest extends JsonStorageDriverTest
                 ]
             )
         );
-        $this->setStandardParentTestInstances();
+        $this->setStorageDriverParentTestInstances();
     }
 
 }

@@ -11,7 +11,7 @@ class StandardTest extends AbstractStandardTest
 {
     public function setUp(): void
     {
-        $this->setStandard(
+        $this->setStorageDriver(
             new StorageDriver(
                 new Storable(
                     'StandardName',
@@ -21,6 +21,6 @@ class StandardTest extends AbstractStandardTest
                 new Switchable()
             )
         );
-        $this->setStandardParentTestInstances();
+        $this->setStorageDriverParentTestInstances();
     }
 }
