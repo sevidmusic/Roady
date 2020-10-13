@@ -2,27 +2,28 @@
 
 namespace UnitTests\interfaces\component\Template\UserInterface\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\OutputComponent;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 
 trait StandardUITemplateTestTrait
 {
 
-    private $genericUITemplate;
-    private $standardOutputComponent;
+    private StandardUITemplateInterface $standardUITemplate;
+    private OutputComponentInterface $outputComponent;
 
     public function testAddTypeAddsSpecifiedComponentsTypeAtAppropriateIndex(): void
     {
         $this->getStandardOutputComponent()->increasePosition();
-        $this->getGenericUITemplate()->addType(
+        $this->getStandardUITemplate()->addType(
             $this->getStandardOutputComponent()
         );
         $this->assertTrue(
             isset(
-                $this->getGenericUITemplate()->export()['types'][strval(
+                $this->getStandardUITemplate()->export()['types'][strval(
                     $this->getStandardOutputComponent()->getPosition()
                 )]
             ),
@@ -30,48 +31,48 @@ trait StandardUITemplateTestTrait
         );
     }
 
-    private function getStandardOutputComponent(): OutputComponent
+    private function getStandardOutputComponent(): OutputComponentInterface
     {
-        if (isset($this->standardOutputComponent)) {
-            return $this->standardOutputComponent;
+        if (isset($this->outputComponent)) {
+            return $this->outputComponent;
         }
-        $this->standardOutputComponent = new OutputComponent(
-            new Storable(
+        $this->outputComponent = new CoreOutputComponent(
+            new CoreStorable(
                 'StandardOutputComponent',
                 'StandardOutputComponent',
                 'StandardOutputComponent'
             ),
-            new Switchable(),
-            new Positionable()
+            new CoreSwitchable(),
+            new CorePositionable()
         );
-        if ($this->standardOutputComponent->getState() === false) {
-            $this->standardOutputComponent->switchState();
+        if ($this->outputComponent->getState() === false) {
+            $this->outputComponent->switchState();
         }
-        return $this->standardOutputComponent;
+        return $this->outputComponent;
     }
 
-    public function getGenericUITemplate(): StandardUITemplate
+    public function getStandardUITemplate(): StandardUITemplateInterface
     {
-        return $this->genericUITemplate;
+        return $this->standardUITemplate;
     }
 
-    public function setGenericUITemplate(StandardUITemplate $genericUITemplate): void
+    public function setStandardUITemplate(StandardUITemplateInterface $standardUITemplate): void
     {
-        $this->genericUITemplate = $genericUITemplate;
+        $this->standardUITemplate = $standardUITemplate;
     }
 
     public function testAddTypeIncreasesPositionIfCorrespondingIndexOccupied(): void
     {
         for ($i = 0; $i < 3; $i++) {
-            $this->getGenericUITemplate()->addType(
+            $this->getStandardUITemplate()->addType(
                 $this->getStandardOutputComponent()
             );
         }
         $this->assertTrue(
             isset(
-                $this->getGenericUITemplate()->export()['types']['0'],
-                $this->getGenericUITemplate()->export()['types']['0.01'],
-                $this->getGenericUITemplate()->export()['types']['0.02']
+                $this->getStandardUITemplate()->export()['types']['0'],
+                $this->getStandardUITemplate()->export()['types']['0.01'],
+                $this->getStandardUITemplate()->export()['types']['0.02']
             )
         );
     }
@@ -79,47 +80,47 @@ trait StandardUITemplateTestTrait
     public function testRemoveTypeRemovesType(): void
     {
         for ($i = 0; $i < 3; $i++) {
-            $this->getGenericUITemplate()->addType(
+            $this->getStandardUITemplate()->addType(
                 $this->getStandardOutputComponent()
             );
         }
-        $this->getGenericUITemplate()->removeType(
+        $this->getStandardUITemplate()->removeType(
             $this->getStandardOutputComponent()->getType()
         );
-        $this->getGenericUITemplate()->removeType($this->getStandardOutputComponent()->getType());
+        $this->getStandardUITemplate()->removeType($this->getStandardOutputComponent()->getType());
         $this->assertEmpty(
-            $this->getGenericUITemplate()->export()['types'],
+            $this->getStandardUITemplate()->export()['types'],
             'Failed to remove all ' . $this->getStandardOutputComponent()->getType() . ' types from types array.'
         );
     }
 
     public function testGetTypesReturnsArrayOfAssignedTypes(): void
     {
-        if ($this->getGenericUITemplate()->getState() === false) {
-            $this->getGenericUITemplate()->switchState();
+        if ($this->getStandardUITemplate()->getState() === false) {
+            $this->getStandardUITemplate()->switchState();
         }
         for ($i = 0; $i < 3; $i++) {
-            $this->getGenericUITemplate()->addType(
+            $this->getStandardUITemplate()->addType(
                 $this->getStandardOutputComponent()
             );
         }
         $this->assertEquals(
             3,
-            count($this->getGenericUITemplate()->getTypes())
+            count($this->getStandardUITemplate()->getTypes())
         );
     }
 
     public function testGetTypesReturnsEmptyArrayIfStateIsFalse(): void
     {
         $this->assertEmpty(
-            $this->getGenericUITemplate()->getTypes(),
+            $this->getStandardUITemplate()->getTypes(),
             'getTypes() must return empty array if state is false.'
         );
     }
 
     protected function setGenericUITemplateParentTestInstances(): void
     {
-        $this->setSwitchableComponent($this->getGenericUITemplate());
+        $this->setSwitchableComponent($this->getStandardUITemplate());
         $this->setSwitchableComponentParentTestInstances();
     }
 

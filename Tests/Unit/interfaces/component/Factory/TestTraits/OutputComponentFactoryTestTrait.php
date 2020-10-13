@@ -3,19 +3,20 @@
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 
 trait OutputComponentFactoryTestTrait
 {
 
-    private $outputComponentFactory;
+    private OutputComponentFactoryInterface $outputComponentFactory;
 
     public function testBuildOutputComponentReturnsAnOutputComponentImplementationInstance(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingDataManagementSystem\interfaces\component\OutputComponent',
+                OutputComponentInterface::class,
                 $this->getOutputComponentFactory()->buildOutputComponent(
                     'AssignedName',
                     'AssignedContainer',
@@ -25,32 +26,47 @@ trait OutputComponentFactoryTestTrait
         );
     }
 
-    protected function getOutputComponentFactory(): OutputComponentFactory
+    protected function getOutputComponentFactory(): OutputComponentFactoryInterface
     {
         return $this->outputComponentFactory;
     }
 
-    protected function setOutputComponentFactory(OutputComponentFactory $outputComponentFactory): void
+    protected function setOutputComponentFactory(OutputComponentFactoryInterface $outputComponentFactory): void
     {
         $this->outputComponentFactory = $outputComponentFactory;
     }
 
     public function testBuildOutputComponentStoresTheOutputComponentImplementationInstanceItBuilds(): void
     {
-        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            'Assigned Output',
+            420.87
+        );
         $this->assertTrue($this->wasStoredOnBuild($outputComponent));
     }
 
     public function testBuildOutputComponentRegistersTheOutputComponentImplementationInstanceItBuilds(): void
     {
-        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned Output', 420.87);
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            'Assigned Output',
+            420.87
+        );
         $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
     }
 
     public function testBuildOutputComponentReturnsOutputComponentWhoseNameMatchesSuppliedName(): void
     {
         $expectedName = 'ExpectedName';
-        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent($expectedName, 'AssignedContainer', 'Assigned Output', 420.87);
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
+            $expectedName,
+            'AssignedContainer',
+            'Assigned Output',
+            420.87
+        );
         $this->assertEquals(
             $expectedName,
             $outputComponent->getName(),
@@ -60,7 +76,12 @@ trait OutputComponentFactoryTestTrait
     public function testBuildOutputComponentReturnsOutputComponentWhoseContainerMatchesSuppliedContainer(): void
     {
         $expectedContainer = 'ExpectedContainer';
-        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', $expectedContainer, 'Assigned Output', 420.87);
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
+            'AssignedName',
+            $expectedContainer,
+            'Assigned Output',
+            420.87
+        );
         $this->assertEquals(
             $expectedContainer,
             $outputComponent->getContainer(),
@@ -70,7 +91,12 @@ trait OutputComponentFactoryTestTrait
     public function testBuildOutputComponentReturnsOutputComponentWhoseOutputMatchesSuppliedOutput(): void
     {
         $expectedOutput = 'Expected output';
-        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', $expectedOutput, 420.87);
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            $expectedOutput,
+            420.87
+        );
         $this->assertEquals(
             $expectedOutput,
             $outputComponent->getOutput(),
@@ -80,7 +106,12 @@ trait OutputComponentFactoryTestTrait
     public function testBuildOutputComponentReturnsOutputComponentWhosePositionMatchesSuppliedPosition(): void
     {
         $expectedPosition = 420.87;
-        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent('AssignedName', 'AssignedContainer', 'Assigned output', $expectedPosition);
+        $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            'Assigned output',
+            $expectedPosition
+        );
         $this->assertEquals(
             $expectedPosition,
             $outputComponent->getPosition(),
@@ -93,13 +124,17 @@ trait OutputComponentFactoryTestTrait
         $this->setStoredComponentFactoryParentTestInstances();
     }
 
-    protected function getMockStoredComponentRegistry(): StoredComponentRegistry
+    protected function getMockStoredComponentRegistry(): StoredComponentRegistryInterface
     {
         $mockStoredComponentRegistry = new CoreStoredComponentRegistry(
             $this->getMockPrimaryFactory()->buildStorable('t', 't'),
             $this->getMockCrud()
         );
-        $mockStoredComponentRegistry->import(['acceptedImplementation' => 'DarlingDataManagementSystem\interfaces\component\OutputComponent']);
+        $mockStoredComponentRegistry->import(
+            [
+                'acceptedImplementation' => OutputComponentInterface::class
+            ]
+        );
         return $mockStoredComponentRegistry;
     }
 

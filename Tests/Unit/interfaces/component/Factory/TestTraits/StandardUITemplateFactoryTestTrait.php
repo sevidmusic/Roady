@@ -2,33 +2,33 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Action;
-use DarlingDataManagementSystem\classes\component\OutputComponent;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\classes\component\Action as CoreAction;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 
 trait StandardUITemplateFactoryTestTrait
 {
 
-    private $suitExpectedName = 'AssignedName';
-    private $suitExpectedContainer = 'AssignedContainer';
-    private $expectedPosition = 420.87;
-    private $standardUITemplateFactory;
+    private string $suitExpectedName = 'AssignedName';
+    private string $suitExpectedContainer = 'AssignedContainer';
+    private float $expectedPosition = 420.87;
+    private StandardUITemplateFactoryInterface $standardUITemplateFactory;
 
     public function testBuildStandardUITemplateReturnsAnStandardUITemplateImplementationInstance(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                'DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate',
+                StandardUITemplateInterface::class,
                 $this->callBuildStandardUITemplateUsingTestArguments()
             )
         );
     }
 
-    private function callBuildStandardUITemplateUsingTestArguments(): StandardUITemplate
+    private function callBuildStandardUITemplateUsingTestArguments(): StandardUITemplateInterface
     {
         return $this->getStandardUITemplateFactory()->buildStandardUITemplate(
             $this->suitExpectedName,
@@ -39,39 +39,39 @@ trait StandardUITemplateFactoryTestTrait
         );
     }
 
-    protected function getStandardUITemplateFactory(): StandardUITemplateFactory
+    protected function getStandardUITemplateFactory(): StandardUITemplateFactoryInterface
     {
         return $this->standardUITemplateFactory;
     }
 
-    protected function setStandardUITemplateFactory(StandardUITemplateFactory $standardUITemplateFactory): void
+    protected function setStandardUITemplateFactory(StandardUITemplateFactoryInterface $standardUITemplateFactory): void
     {
         $this->standardUITemplateFactory = $standardUITemplateFactory;
     }
 
-    private function getTestOutputComponent(): OutputComponent
+    private function getTestOutputComponent(): CoreOutputComponent
     {
-        return new OutputComponent(
-            new Storable(
+        return new CoreOutputComponent(
+            new CoreStorable(
                 'OutputComponent',
                 'Temp',
                 'Temp'
             ),
-            new Switchable(),
-            new Positionable(420.20)
+            new CoreSwitchable(),
+            new CorePositionable(420.20)
         );
     }
 
-    private function getTestAction(): Action
+    private function getTestAction(): CoreAction
     {
-        return new Action(
-            new Storable(
+        return new CoreAction(
+            new CoreStorable(
                 'Action',
                 'Temp',
                 'Temp'
             ),
-            new Switchable(),
-            new Positionable(420.20)
+            new CoreSwitchable(),
+            new CorePositionable(420.20)
         );
     }
 
@@ -125,13 +125,13 @@ trait StandardUITemplateFactoryTestTrait
         $standardUITemplate = $this->callBuildStandardUITemplateUsingTestArguments();
         $this->assertTrue(
             in_array(
-                OutputComponent::class,
+                CoreOutputComponent::class,
                 $standardUITemplate->getTypes()
             )
         );
         $this->assertTrue(
             in_array(
-                Action::class,
+                CoreAction::class,
                 $standardUITemplate->getTypes()
             )
         );

@@ -2,27 +2,26 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 
 trait OutputComponentTestTrait
 {
 
-    private $outputComponent;
+    private OutputComponentInterface $outputComponent;
 
     public function testPositionableInstanceIsSetOnInstantiation(): void
     {
         $this->assertTrue(
             isset($this->getOutputComponent()->export()['positionable']),
-            'The \DarlingDataManagementSystem\interfaces\primary\Positionable implementation instance must be assigned to the $positionable property on instantiation.'
         );
     }
 
-    protected function getOutputComponent(): OutputComponent
+    protected function getOutputComponent(): OutputComponentInterface
     {
         return $this->outputComponent;
     }
 
-    protected function setOutputComponent(OutputComponent $outputComponent): void
+    protected function setOutputComponent(OutputComponentInterface $outputComponent): void
     {
         $this->outputComponent = $outputComponent;
     }
@@ -30,8 +29,15 @@ trait OutputComponentTestTrait
     public function testGetOutputReturnsEmptyStringIfStateIsFalse(): void
     {
         $this->forceFalseState();
-        $this->assertFalse($this->getOutputComponent()->getState(), 'Failed to properly test that getOutput() returns an empty string if state is false because state could not be set to false');
-        $this->assertTrue(empty($this->getOutputComponent()->getOutput()), 'getOutput() returned a non empty string even though state is false. getOutput() must return an empty string if state is false.');
+        $this->assertFalse(
+            $this->getOutputComponent()->getState(),
+            'Failed to properly test that getOutput() returns an empty string if state is false because state could not be set to false'
+        );
+        $this->assertTrue(
+            empty(
+                $this->getOutputComponent()->getOutput()),
+            'getOutput() returned a non empty string even though state is false. getOutput() must return an empty string if state is false.'
+        );
     }
 
     private function forceFalseState(): void
@@ -45,8 +51,14 @@ trait OutputComponentTestTrait
     {
         $this->forceTrueState();
         $initialPosition = $this->getOutputComponent()->getPosition();
-        $this->assertTrue($this->getOutputComponent()->increasePosition(), 'increasePosition() returned false');
-        $this->assertTrue($initialPosition < $this->getOutputComponent()->getPosition(), 'Failed to increase position.');
+        $this->assertTrue(
+            $this->getOutputComponent()->increasePosition(),
+            'increasePosition() returned false'
+        );
+        $this->assertTrue(
+            $initialPosition < $this->getOutputComponent()->getPosition(),
+            'Failed to increase position.'
+        );
     }
 
     private function forceTrueState(): void
@@ -72,8 +84,14 @@ trait OutputComponentTestTrait
     {
         $this->forceTrueState();
         $initialPosition = $this->getOutputComponent()->getPosition();
-        $this->assertTrue($this->getOutputComponent()->decreasePosition(), 'decreasePosition() returned false');
-        $this->assertTrue($initialPosition > $this->getOutputComponent()->getPosition(), 'Failed to decrease position.');
+        $this->assertTrue(
+            $this->getOutputComponent()->decreasePosition(),
+            'decreasePosition() returned false'
+        );
+        $this->assertTrue(
+            $initialPosition > $this->getOutputComponent()->getPosition(),
+            'Failed to decrease position.'
+        );
     }
 
     public function testDecreasePositionDecreasesPositionByOneHundredth(): void

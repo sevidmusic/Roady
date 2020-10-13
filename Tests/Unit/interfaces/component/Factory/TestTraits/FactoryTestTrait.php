@@ -2,29 +2,30 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory;
+use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
 
 trait FactoryTestTrait
 {
 
-    private $factory;
+    private FactoryInterface $factory;
 
     public function testAppPropertyIsAssignedAppImplementationInstancePostInstantiation(): void
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\component\Web\App',
+                AppInterface::class,
                 class_implements($this->getFactory()->export()['app'])
             )
         );
     }
 
-    public function getFactory(): Factory
+    public function getFactory(): FactoryInterface
     {
         return $this->factory;
     }
 
-    public function setFactory(Factory $factory)
+    public function setFactory(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }

@@ -16,7 +16,7 @@ class StandardUITemplateTest extends SwitchableComponentTest
 
     public function setUp(): void
     {
-        $this->setGenericUITemplate(
+        $this->setStandardUITemplate(
             $this->getMockForAbstractClass(
                 '\DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate',
                 [
@@ -31,7 +31,7 @@ class StandardUITemplateTest extends SwitchableComponentTest
             )
         );
         $this->setGenericUITemplateParentTestInstances();
-        $this->setPositionable($this->getGenericUITemplate());
+        $this->setPositionable($this->getStandardUITemplate());
     }
 
 }
