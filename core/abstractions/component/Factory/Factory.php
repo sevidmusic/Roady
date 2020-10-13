@@ -2,18 +2,18 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Component;
+use DarlingDataManagementSystem\abstractions\component\Component as ComponentBase;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
-abstract class Factory extends Component implements FactoryInterface
+abstract class Factory extends ComponentBase implements FactoryInterface
 {
 
-    private $app;
+    private AppInterface $app;
 
-    public function __construct(App $app)
+    public function __construct(AppInterface $app)
     {
         $this->app = $app;
         $storable = new CoreStorable(
@@ -24,12 +24,12 @@ abstract class Factory extends Component implements FactoryInterface
         parent::__construct($storable);
     }
 
-    public function getAppDomain(): Request
+    public function getAppDomain(): RequestInterface
     {
         return $this->getApp()->getAppDomain();
     }
 
-    public function getApp(): App
+    public function getApp(): AppInterface
     {
         return $this->app;
     }

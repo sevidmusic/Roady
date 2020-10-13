@@ -3,18 +3,18 @@
 namespace DarlingDataManagementSystem\abstractions\component;
 
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class OutputComponent extends SwitchableComponent implements OutputComponentInterface
 {
 
-    private $output = '';
-    private $positionable;
+    private string $output = '';
+    private PositionableInterface $positionable;
 
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable)
     {
         parent::__construct($storable, $switchable);
         $this->positionable = $positionable;
