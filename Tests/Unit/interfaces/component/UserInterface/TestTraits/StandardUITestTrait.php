@@ -4,7 +4,7 @@ namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Action as CoreAction;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
 use DarlingDataManagementSystem\classes\component\Web\App;
@@ -114,7 +114,7 @@ trait StandardUITestTrait
 
     private function getStandardStorageDriverForCrud(): StandardStorageDriverInterface
     {
-        return new CoreStandardStorageDriver(
+        return new JsonStorageDriver(
             new CoreStorable(
                 'StandardUITestStorageDriver' . strval(rand(0, 999)),
                 $this->getComponentLocation(),

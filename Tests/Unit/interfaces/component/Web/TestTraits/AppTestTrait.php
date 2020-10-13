@@ -5,7 +5,7 @@ namespace UnitTests\interfaces\component\Web\TestTraits;
 use DarlingDataManagementSystem\abstractions\component\Web\App as AppBase;
 use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
@@ -148,7 +148,7 @@ trait AppTestTrait
         return new CoreComponentCrud(
             new CoreStorable('MockCrud', 'TEMP', 'TEMP'),
             new CoreSwitchable(),
-            new CoreStandardStorageDriver(
+            new JsonStorageDriver(
                 new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
                 new CoreSwitchable()
             )

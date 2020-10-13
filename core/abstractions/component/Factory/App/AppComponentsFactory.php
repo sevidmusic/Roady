@@ -4,7 +4,7 @@ namespace DarlingDataManagementSystem\abstractions\component\Factory\App;
 
 use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingDataManagementSystem\classes\component\Factory\RequestFactory as CoreRequestFactory;
@@ -207,12 +207,13 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
     }
 
-    private static function buildComponentCrud(RequestInterface $domain): ComponentCrudInterface
+    /* @todo Implement optional $storageDriver parameter so alternative to JsonStorageDriver can be specified */
+    private static function buildComponentCrud(RequestInterface $domain /* @todo , $storageDriver = null */): ComponentCrudInterface
     {
         return new CoreComponentCrud(
             self::buildPrimaryFactory($domain)->buildStorable('Crud', 'Cruds'),
             self::buildPrimaryFactory($domain)->buildSwitchable(),
-            new CoreStandardStorageDriver(
+            new JsonStorageDriver(
                 self::buildPrimaryFactory($domain)->buildStorable('StorageDriver', 'StorageDrivers'),
                 self::buildPrimaryFactory($domain)->buildSwitchable()
             )

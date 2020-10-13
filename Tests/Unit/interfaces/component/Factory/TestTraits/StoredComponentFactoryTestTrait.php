@@ -3,7 +3,7 @@
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
@@ -146,7 +146,7 @@ trait StoredComponentFactoryTestTrait
         return new CoreComponentCrud(
             new CoreStorable('MockCrud', 'Temp', 'Temp'),
             new CoreSwitchable(),
-            new CoreStandardStorageDriver(
+            new JsonStorageDriver(
                 new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
                 new CoreSwitchable()
             )

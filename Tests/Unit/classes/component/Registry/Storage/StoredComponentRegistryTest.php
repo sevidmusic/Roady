@@ -3,7 +3,7 @@
 namespace UnitTests\classes\component\Registry\Storage;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
@@ -27,7 +27,7 @@ class StoredComponentRegistryTest extends AbstractStoredComponentRegistryTest
                         'Temp'
                     ),
                     new Switchable(),
-                    new StorageDriver(
+                    new JsonStorageDriver(
                         new Storable(
                             'StandardStorageDriver',
                             'Temp',
