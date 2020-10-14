@@ -207,9 +207,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
     }
 
-    /* @todo Implement optional $storageDriver parameter so alternative to JsonStorageDriver can be specified */
-    private static function buildComponentCrud(RequestInterface $domain /* @todo , $storageDriver = null */): ComponentCrudInterface
+    private static function buildComponentCrud(RequestInterface $domain/* @todo , $storageDriver = null */): ComponentCrudInterface
     {
+        /* @todo Implement optional $storageDriver parameter so alternative to JsonStorageDriver can be specified */
         return new CoreComponentCrud(
             self::buildPrimaryFactory($domain)->buildStorable('Crud', 'Cruds'),
             self::buildPrimaryFactory($domain)->buildSwitchable(),
@@ -302,6 +302,11 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @param array $requestsOutputComponentsStandardUITemplates
+     * @return ResponseInterface|GlobalResponseInterface
+     */
     private function configureResponse(ResponseInterface $response, array $requestsOutputComponentsStandardUITemplates = [])
     {
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
@@ -332,6 +337,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
             as
             $storable
         ) {
+            /** @noinspection DuplicatedCode */
             $message = sprintf(
                 '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
                 PHP_EOL,

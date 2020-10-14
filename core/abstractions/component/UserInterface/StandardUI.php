@@ -60,9 +60,12 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
                 }
                 foreach ($response->getTemplateStorageInfo() as $templateStorable) {
                     $template = $this->router->getCrud()->read($templateStorable);
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
+                        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                         $template->increasePosition();
                     }
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     $templates[strval($response->getPosition())][strval($template->getPosition())] = $template;
                 }
             }
@@ -81,9 +84,12 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
                 }
                 foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
                     $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                         $outputComponent->increasePosition();
                     }
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     $outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
                     ksort($outputComponents[strval($response->getPosition())][$outputComponent->getType()]);
                 }
