@@ -2,18 +2,18 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class Request extends SwitchableComponent implements RequestInterface
+abstract class Request extends SwitchableComponentBase implements RequestInterface
 {
-    private $url = '';
-    private $get;
-    private $post;
+    private string $url = '';
+    private array $get;
+    private array $post;
 
-    public function __construct(Storable $storable, Switchable $switchable)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable)
     {
         parent::__construct($storable, $switchable);
         $this->setUrl();
@@ -23,7 +23,19 @@ abstract class Request extends SwitchableComponent implements RequestInterface
 
     private function setUrl(): void
     {
-        $this->url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '');
+        $this->url = (
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'
+                ? 'https'
+                : 'http'
+            ) . '://' . (
+            isset($_SERVER['HTTP_HOST'])
+                ? $_SERVER['HTTP_HOST']
+                : ''
+            ) . (
+            isset($_SERVER['REQUEST_URI'])
+                ? $_SERVER['REQUEST_URI']
+                : ''
+            );
     }
 
     public function getGet(): array

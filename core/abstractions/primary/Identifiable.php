@@ -18,9 +18,9 @@ str_shuffle(). You can safely ignore this warning if the generated
 id does not need to be cryptographically secure.
 EOD;
 
-    private $name;
+    private string $name;
 
-    private $uniqueId;
+    private string $uniqueId;
 
     public function __construct(string $name)
     {

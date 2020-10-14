@@ -7,7 +7,7 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 abstract class Switchable implements SwitchableInterface
 {
 
-    private $state = false;
+    private bool $state = false;
 
     public function switchState(): bool
     {

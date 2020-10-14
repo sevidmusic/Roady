@@ -2,27 +2,27 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Template\UserInterface;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as GenericUITemplateInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class StandardUITemplate extends SwitchableComponent implements GenericUITemplateInterface
+abstract class StandardUITemplate extends SwitchableComponentBase implements StandardUITemplateInterface
 {
 
-    private $types = [];
-    private $positionable;
+    private array $types = [];
+    private PositionableInterface $positionable;
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable)
     {
         parent::__construct($storable, $switchable);
         $this->positionable = $positionable;
     }
 
 
-    public function addType(OutputComponent $outputComponent): void
+    public function addType(OutputComponentInterface $outputComponent): void
     {
         while (isset($this->types[strval($outputComponent->getPosition())]) === true) {
             $outputComponent->increasePosition();
