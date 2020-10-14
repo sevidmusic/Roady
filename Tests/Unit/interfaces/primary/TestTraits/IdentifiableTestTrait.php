@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Identifiable;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
 use UnitTests\TestTraits\StringTester;
 
 trait IdentifiableTestTrait
@@ -10,19 +10,19 @@ trait IdentifiableTestTrait
 
     use StringTester;
 
-    private $identifiable;
+    private IdentifiableInterface $identifiable;
 
     public function testGetNameReturnsNonEmptyString(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getIdentifiable()->getName());
     }
 
-    protected function getIdentifiable(): Identifiable
+    protected function getIdentifiable(): IdentifiableInterface
     {
         return $this->identifiable;
     }
 
-    protected function setIdentifiable(Identifiable $identifiable): void
+    protected function setIdentifiable(IdentifiableInterface $identifiable): void
     {
         $this->identifiable = $identifiable;
     }

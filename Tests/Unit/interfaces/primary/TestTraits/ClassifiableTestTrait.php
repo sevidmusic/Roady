@@ -2,26 +2,26 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Classifiable;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
 use UnitTests\TestTraits\StringTester;
 
 trait ClassifiableTestTrait
 {
     use StringTester;
 
-    private $classifiable;
+    private ClassifiableInterface $classifiable;
 
     public function testGetTypeReturnsNonEmptyString()
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getClassifiable()->getType());
     }
 
-    protected function getClassifiable(): Classifiable
+    protected function getClassifiable(): ClassifiableInterface
     {
         return $this->classifiable;
     }
 
-    protected function setClassifiable(Classifiable $classifiable): void
+    protected function setClassifiable(ClassifiableInterface $classifiable): void
     {
         $this->classifiable = $classifiable;
     }
