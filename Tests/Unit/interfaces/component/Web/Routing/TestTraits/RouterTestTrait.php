@@ -2,31 +2,33 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as StandardResponse;
-use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as StandardSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 
 trait RouterTestTrait
 {
 
-    private $router;
+    private RouterInterface $router;
 
     public function testGetResponseContainerReturnsStringWhoseValueMatchesTheResponseInterfacesResponseContainerConstant(): void
     {
         $this->assertEquals(
-            Response::RESPONSE_CONTAINER,
+            ResponseInterface::RESPONSE_CONTAINER,
             $this->getRouter()->getResponseContainer()
         );
     }
 
-    public function getRouter(): Router
+    public function getRouter(): RouterInterface
     {
         return $this->router;
     }
 
-    public function setRouter(Router $router): void
+    public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
     }
@@ -36,7 +38,7 @@ trait RouterTestTrait
         $this->assertTrue(
             $this->objectInstanceIsSetAndCorrectType(
                 'request',
-                'DarlingDataManagementSystem\interfaces\component\Web\Routing\Request'
+                Request::class
             )
         );
     }
@@ -58,7 +60,7 @@ trait RouterTestTrait
         $this->assertTrue(
             $this->objectInstanceIsSetAndCorrectType(
                 'crud',
-                'DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud'
+                ComponentCrud::class
             )
         );
     }
@@ -125,15 +127,15 @@ trait RouterTestTrait
         }
     }
 
-    private function getStandardResponse(string $name = '', string $location = '', string $container = ''): StandardResponse
+    private function getStandardResponse(string $name = '', string $location = '', string $container = ''): CoreResponse
     {
-        return new StandardResponse(
-            new StandardStorable(
+        return new CoreResponse(
+            new CoreStorable(
                 (empty($name) === true ? 'RouterTestTraitStandardResponseName' : $name),
                 (empty($location) === true ? 'RouterTestTraitStandardResponseLocation' : $location),
                 (empty($container) === true ? 'RouterTestTraitStandardResponseContainer' : $container)
             ),
-            new StandardSwitchable()
+            new CoreSwitchable()
         );
     }
 

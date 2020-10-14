@@ -2,38 +2,39 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use DarlingDataManagementSystem\classes\component\OutputComponent;
-use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as Template;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as StandardResponse;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
+use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
 trait ResponseTestTrait
 {
 
-    private $response;
+    private ResponseInterface $response;
 
     public function testPositionablePropertyIsAssignedAPositionableImplementationInstancePostInstantiation(): void
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Positionable',
+                PositionableInterface::class,
                 class_implements($this->getResponse()->export()['positionable'])
             )
         );
     }
 
-    public function getResponse(): Response
+    public function getResponse(): ResponseInterface
     {
         return $this->response;
     }
 
-    public function setResponse(Response $response): void
+    public function setResponse(ResponseInterface $response): void
     {
         $this->response = $response;
     }
@@ -52,9 +53,9 @@ trait ResponseTestTrait
         );
     }
 
-    protected function getMockRequest(): Request
+    protected function getMockRequest(): CoreRequest
     {
-        $request = new Request(
+        $request = new CoreRequest(
             $this->getMockStorable(),
             $this->getMockSwitchable()
         );
@@ -73,32 +74,32 @@ trait ResponseTestTrait
         return $request;
     }
 
-    private function getMockStorable(): Storable
+    private function getMockStorable(): CoreStorable
     {
-        return new Storable(
+        return new CoreStorable(
             'MockName',
             'MockLocation',
             'MockContainer'
         );
     }
 
-    private function getMockSwitchable(): Switchable
+    private function getMockSwitchable(): CoreSwitchable
     {
-        return new Switchable();
+        return new CoreSwitchable();
     }
 
-    protected function getMockCrud(): ComponentCrud
+    protected function getMockCrud(): ComponentCrudInterface
     {
         return new \DarlingDataManagementSystem\classes\component\Crud\ComponentCrud(
-            new Storable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
-            new Switchable(),
-            new JsonStorageDriver(
-                new Storable(
+            new CoreStorable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
+            new CoreSwitchable(),
+            new CoreJsonStorageDriver(
+                new CoreStorable(
                     'MockStandardStorageDriver',
                     'MockStandardStorageDriverLocation',
                     'MockStandardStorageDriverContainer'
                 ),
-                new Switchable()
+                new CoreSwitchable()
             )
         );
     }
@@ -132,12 +133,12 @@ trait ResponseTestTrait
         );
     }
 
-    private function getMockOutputComponent(): OutputComponent
+    private function getMockOutputComponent(): CoreOutputComponent
     {
-        return new OutputComponent(
+        return new CoreOutputComponent(
             $this->getMockStorable(),
             $this->getMockSwitchable(),
-            new Positionable()
+            new CorePositionable()
         );
     }
 
@@ -228,12 +229,12 @@ trait ResponseTestTrait
         );
     }
 
-    private function getMockTemplate(): Template
+    private function getMockTemplate(): CoreStandardUITemplate
     {
-        return new Template(
+        return new CoreStandardUITemplate(
             $this->getMockStorable(),
             $this->getMockSwitchable(),
-            new Positionable()
+            new CorePositionable()
         );
     }
 
@@ -338,7 +339,7 @@ trait ResponseTestTrait
     public function testRESPONSE_CONTAINERConstantIsAssignedStringRESPONSES(): void
     {
         $this->assertEquals("RESPONSES", $this->getResponse()::RESPONSE_CONTAINER);
-        $this->assertEquals("RESPONSES", StandardResponse::RESPONSE_CONTAINER);
+        $this->assertEquals("RESPONSES", CoreResponse::RESPONSE_CONTAINER);
     }
 
     public function testGetContainerReturnsValueOfRESPONSE_CONTAINERConstant(): void
@@ -358,4 +359,5 @@ trait ResponseTestTrait
         $this->setSwitchableComponent($this->getResponse());
         $this->setSwitchableComponentParentTestInstances();
     }
+    
 }

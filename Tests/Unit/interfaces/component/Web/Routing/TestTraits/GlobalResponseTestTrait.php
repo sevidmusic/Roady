@@ -2,13 +2,13 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\App;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 
 trait GlobalResponseTestTrait
 {
 
-    private $globalResponse;
+    private GlobalResponseInterface $globalResponse;
 
     public function testRespondsToRequestReturnsTrueForAssignedRequest(): void
     {
@@ -18,7 +18,7 @@ trait GlobalResponseTestTrait
     private function insteadTestRespondsToRequestReturnsTrueIfValueReturnedByPassingSuppliedRequestToAnAppImplementationsDeriveNameLocationFromRequestMethodMatchesResponsesLocation(): void
     {
         $request = $this->getMockRequest();
-        if ($this->getGlobalResponse()->getLocation() === App::deriveNameLocationFromRequest($request)) {
+        if ($this->getGlobalResponse()->getLocation() === CoreApp::deriveNameLocationFromRequest($request)) {
             $this->assertTrue(
                 $this->getGlobalResponse()->respondsToRequest(
                     $request,
@@ -27,18 +27,14 @@ trait GlobalResponseTestTrait
                 'respondsToRequest() must return true for any Request made to the App the GlobalResponse belongs to, i.e. if the return value of App::deriveNameLocationFromRequest(Request) is equal to Response->getLocation() then Response->respondsToRequest(Request) MUST return true.'
             );
         }
-        /*
-        $this->getMockCrud()->create($request);
-        $this->getGlobalResponse()->addRequestStorageInfo($request);
-         */
     }
 
-    protected function getGlobalResponse(): GlobalResponse
+    protected function getGlobalResponse(): GlobalResponseInterface
     {
         return $this->globalResponse;
     }
 
-    protected function setGlobalResponse(GlobalResponse $globalResponse): void
+    protected function setGlobalResponse(GlobalResponseInterface $globalResponse): void
     {
         $this->globalResponse = $globalResponse;
     }
