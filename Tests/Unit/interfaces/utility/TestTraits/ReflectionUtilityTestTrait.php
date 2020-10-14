@@ -130,6 +130,7 @@ EOD;
         return array_unique($propertyNames);
     }
 
+    /** @noinspection DuplicatedCode */
     private function getClassPropertyReflections($class): array
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
@@ -509,13 +510,13 @@ class Bar implements ReflectionUtilityTestClass
 {
     private string $str;
 
-    public function isTestClass(): bool
-    {
-        return true;
-    }
-
     public function __construct(string $str)
     {
         $this->str = $str;
+    }
+
+    public function isTestClass(): bool
+    {
+        return true;
     }
 }

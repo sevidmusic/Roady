@@ -13,17 +13,6 @@ trait JsonStorageDriverTestTrait
 
     private JsonStorageDriverInterface $jsonStorageDriver;
 
-    protected function getTestInstanceArgs(): array
-    {
-        return [
-            new Storable(
-                'MockJsonName',
-                'MockJsonLocation',
-                'MockJsonContainer'
-            ),
-            new Switchable()
-        ];
-    }
     public static function tearDownAfterClass(): void
     {
         self::removeDirectory(self::getExpectedStorageDirectoryPath());
@@ -261,6 +250,18 @@ trait JsonStorageDriverTestTrait
             $this->getStoredComponent()->getUniqueId(),
             'read() must return a __MOCK__COMPONENT__ if state is false.'
         );
+    }
+
+    protected function getTestInstanceArgs(): array
+    {
+        return [
+            new Storable(
+                'MockJsonName',
+                'MockJsonLocation',
+                'MockJsonContainer'
+            ),
+            new Switchable()
+        ];
     }
 
     protected function setJsonParentTestInstances(): void

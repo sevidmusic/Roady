@@ -8,7 +8,7 @@ use UnitTests\TestUtilities\ArrayTestUtility;
 class ArrayTestUtilityTest extends TestCase
 {
 
-    private $arrayTestUtility;
+    private ArrayTestUtility $arrayTestUtility;
 
     public function setUp(): void
     {

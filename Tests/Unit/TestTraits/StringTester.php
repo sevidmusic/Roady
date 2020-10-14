@@ -7,7 +7,7 @@ use UnitTests\TestUtilities\StringTestUtility;
 trait StringTester
 {
 
-    private $stringTestUtility;
+    private StringTestUtility $stringTestUtility;
 
     /**
      * @before

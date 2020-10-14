@@ -17,9 +17,9 @@ trait StandardTestTrait
 
     private StorageDriverBase $standardStorageDriver;
 
-    private function storageDriverImplements(string $interface, StorageDriverInterface $storageDriver)
+    public function setStorageDriver(StorageDriverBase $standardStorageDriver): void
     {
-        return in_array($interface, class_implements($storageDriver));
+        $this->standardStorageDriver = $standardStorageDriver;
     }
 
     protected function setStorageDriverParentTestInstances(): void
@@ -53,9 +53,9 @@ trait StandardTestTrait
         return $this->standardStorageDriver;
     }
 
-    public function setStorageDriver(StorageDriverBase $standardStorageDriver): void
+    private function storageDriverImplements(string $interface, StorageDriverInterface $storageDriver)
     {
-        $this->standardStorageDriver = $standardStorageDriver;
+        return in_array($interface, class_implements($storageDriver));
     }
 
 }

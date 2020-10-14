@@ -2,11 +2,11 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 trait SwitchableTestTrait
 {
-    private $switchable;
+    private SwitchableInterface $switchable;
 
     public function testCanSwitchState(): void
     {
@@ -18,12 +18,12 @@ trait SwitchableTestTrait
         );
     }
 
-    protected function getSwitchable(): Switchable
+    protected function getSwitchable(): SwitchableInterface
     {
         return $this->switchable;
     }
 
-    protected function setSwitchable(Switchable $switchable): void
+    protected function setSwitchable(SwitchableInterface $switchable): void
     {
         $this->switchable = $switchable;
     }

@@ -17,9 +17,9 @@ use RuntimeException;
 trait AppTestTrait
 {
 
+    protected string $expectedAppContainer = 'APP';
     private AppInterface $app;
     private RequestInterface $mockRequest;
-    protected string $expectedAppContainer=  'APP';
 
     public function testAPP_CONTAINERConstantIsSetToStringAPP(): void
     {

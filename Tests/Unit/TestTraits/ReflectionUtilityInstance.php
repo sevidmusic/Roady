@@ -2,29 +2,29 @@
 
 namespace UnitTests\TestTraits;
 
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility as RealReflectionUtility;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility as CoreReflectionUtility;
 
 trait ReflectionUtilityInstance
 {
 
-    private $reflectionUtility;
+    private CoreReflectionUtility $reflectionUtility;
 
     /**
      * @before
      */
     public function initializeReflectionUtility(): void
     {
-        $this->setReflectionUtility(new RealReflectionUtility());
+        $this->setReflectionUtility(new CoreReflectionUtility());
     }
 
-    private function setReflectionUtility(RealReflectionUtility $reflectionUtility)
+    private function setReflectionUtility(CoreReflectionUtility $reflectionUtility)
     {
         if (!isset($this->reflectionUtility)) {
             $this->reflectionUtility = $reflectionUtility;
         }
     }
 
-    public function getReflectionUtility(): RealReflectionUtility
+    public function getReflectionUtility(): CoreReflectionUtility
     {
         return $this->reflectionUtility;
     }

@@ -2,14 +2,14 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
 trait StorableTestTrait
 {
 
     use IdentifiableTestTrait;
 
-    private $storable;
+    private StorableInterface $storable;
 
     public function testGetLocationReturnsNonEmptyAlphaNumericString(): void
     {
@@ -17,12 +17,12 @@ trait StorableTestTrait
         $this->getStringTestUtility()->stringIsAlphaNumeric($this->getStorable()->getLocation());
     }
 
-    protected function getStorable(): Storable
+    protected function getStorable(): StorableInterface
     {
         return $this->storable;
     }
 
-    protected function setStorable(Storable $storable)
+    protected function setStorable(StorableInterface $storable)
     {
         $this->storable = $storable;
     }

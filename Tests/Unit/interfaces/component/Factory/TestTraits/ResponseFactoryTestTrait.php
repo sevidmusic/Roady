@@ -76,14 +76,6 @@ trait ResponseFactoryTestTrait
         return $args;
     }
 
-    private function callBuildGlobalResponse(): ResponseInterface
-    {
-        return $this->getResponseFactory()->buildGlobalResponse(
-            ...$this->buildBuildResponseTestArguments()
-        );
-    }
-
-
     private function buildTestRequest(): RequestInterface
     {
         return new CoreRequest(
@@ -318,6 +310,13 @@ trait ResponseFactoryTestTrait
                 GlobalResponseInterface::class,
                 $this->callBuildGlobalResponse()
             )
+        );
+    }
+
+    private function callBuildGlobalResponse(): ResponseInterface
+    {
+        return $this->getResponseFactory()->buildGlobalResponse(
+            ...$this->buildBuildResponseTestArguments()
         );
     }
 

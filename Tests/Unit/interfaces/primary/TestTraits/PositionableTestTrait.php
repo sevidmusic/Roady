@@ -2,12 +2,12 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
 trait PositionableTestTrait
 {
 
-    private $positionable;
+    private PositionableInterface $positionable;
 
     public function testDecreasePositionDecreasesPositionByOneHundredth(): void
     {
@@ -20,12 +20,12 @@ trait PositionableTestTrait
         );
     }
 
-    protected function getPositionable(): Positionable
+    protected function getPositionable(): PositionableInterface
     {
         return $this->positionable;
     }
 
-    protected function setPositionable(Positionable $positionable): void
+    protected function setPositionable(PositionableInterface $positionable): void
     {
         $this->positionable = $positionable;
     }

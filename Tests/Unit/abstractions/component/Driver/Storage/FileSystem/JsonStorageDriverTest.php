@@ -2,9 +2,9 @@
 
 namespace UnitTests\abstractions\component\Driver\Storage\FileSystem;
 
+use DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverBase;
 use UnitTests\abstractions\component\SwitchableComponentTest;
 use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonStorageDriverTestTrait;
-use DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverBase;
 
 class JsonStorageDriverTest extends SwitchableComponentTest
 {

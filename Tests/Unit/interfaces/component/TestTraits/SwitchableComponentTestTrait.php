@@ -12,6 +12,21 @@ trait SwitchableComponentTestTrait
 
     private SwitchableComponentInterface $switchableComponent;
 
+    public function testStateIsTruePostInstantiation(): void
+    {
+        $this->assertTrue($this->getSwitchableComponent()->getState());
+    }
+
+    public function getSwitchableComponent(): SwitchableComponentInterface
+    {
+        return $this->switchableComponent;
+    }
+
+    public function setSwitchableComponent(SwitchableComponentInterface $switchableComponent)
+    {
+        $this->switchableComponent = $switchableComponent;
+    }
+
     protected function turnSwitchableComponentOn(SwitchableComponentInterface $switchableComponent): void
     {
         if ($switchableComponent->getState() === false) {
@@ -26,25 +41,11 @@ trait SwitchableComponentTestTrait
         }
     }
 
-    public function testStateIsTruePostInstantiation(): void{
-        $this->assertTrue($this->getSwitchableComponent()->getState());
-    }
-
     protected function setSwitchableComponentParentTestInstances(): void
     {
         $this->setComponent($this->getSwitchableComponent());
         $this->setComponentParentTestInstances();
         $this->setSwitchable($this->getSwitchableComponent());
-    }
-
-    public function getSwitchableComponent(): SwitchableComponentInterface
-    {
-        return $this->switchableComponent;
-    }
-
-    public function setSwitchableComponent(SwitchableComponentInterface $switchableComponent)
-    {
-        $this->switchableComponent = $switchableComponent;
     }
 
 }

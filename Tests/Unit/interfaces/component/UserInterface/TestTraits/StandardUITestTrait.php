@@ -1,4 +1,10 @@
-<?php
+<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+
+/** @noinspection PhpPossiblePolymorphicInvocationInspection */
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 

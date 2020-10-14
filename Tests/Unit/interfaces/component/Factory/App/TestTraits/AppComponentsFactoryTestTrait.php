@@ -3,7 +3,6 @@
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
@@ -15,6 +14,7 @@ use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as 
 use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait AppComponentsFactoryTestTrait
 {
@@ -234,6 +234,7 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
+    /** @noinspection DuplicatedCode */
     private function expectedBuildLog(): string
     {
         $buildLog = "";
@@ -329,7 +330,7 @@ trait AppComponentsFactoryTestTrait
 
     protected function getTestInstanceArgs(): array
     {
-        return   [
+        return [
             $this->getMockPrimaryFactory(),
             $this->getMockCrud(),
             $this->getMockStoredComponentRegistry()

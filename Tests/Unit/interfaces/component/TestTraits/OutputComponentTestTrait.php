@@ -35,7 +35,7 @@ trait OutputComponentTestTrait
         );
         $this->assertTrue(
             empty(
-                $this->getOutputComponent()->getOutput()),
+            $this->getOutputComponent()->getOutput()),
             'getOutput() returned a non empty string even though state is false. getOutput() must return an empty string if state is false.'
         );
     }

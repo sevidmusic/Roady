@@ -2,6 +2,7 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
@@ -90,7 +91,7 @@ trait ResponseTestTrait
 
     protected function getMockCrud(): ComponentCrudInterface
     {
-        return new \DarlingDataManagementSystem\classes\component\Crud\ComponentCrud(
+        return new CoreComponentCrud(
             new CoreStorable('MockCrud', 'MockCrudLocation', 'MockCrudContainer'),
             new CoreSwitchable(),
             new CoreJsonStorageDriver(
@@ -359,5 +360,5 @@ trait ResponseTestTrait
         $this->setSwitchableComponent($this->getResponse());
         $this->setSwitchableComponentParentTestInstances();
     }
-    
+
 }
