@@ -3,7 +3,7 @@
 namespace Extensions\Contests\Tests\Unit\interfaces\component\Actions\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as CoreStandardStorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\classes\primary\Positionable;
 use DarlingDataManagementSystem\classes\primary\Storable;
@@ -226,7 +226,7 @@ trait CreateSubmissionTestTrait
         return new CoreComponentCrud(
             new Storable('MockCrud', 'TEMP', 'Cruds'),
             new Switchable(),
-            new CoreStandardStorageDriver(
+            new JsonStorageDriver(
                 new Storable('MockStandardStorageDriver', 'TEMP', 'StorageDrivers'),
                 new Switchable()
             )

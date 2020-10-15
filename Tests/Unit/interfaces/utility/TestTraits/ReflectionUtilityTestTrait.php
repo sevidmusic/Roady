@@ -2,14 +2,14 @@
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
-use DarlingDataManagementSystem\classes\primary\Classifiable;
-use DarlingDataManagementSystem\classes\primary\Exportable;
-use DarlingDataManagementSystem\classes\primary\Identifiable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility as ReflectionUtilityImplementation;
+use DarlingDataManagementSystem\classes\primary\Classifiable as CoreClassifiable;
+use DarlingDataManagementSystem\classes\primary\Exportable as CoreExportable;
+use DarlingDataManagementSystem\classes\primary\Identifiable as CoreIdentifiable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility as CoreReflectionUtility;
 use DarlingDataManagementSystem\dev\traits\Logger;
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility;
+use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
@@ -25,58 +25,58 @@ trait ReflectionUtilityTestTrait
     use StringTester;
     use Logger;
 
-    private $errFailedToReflectClass = <<<EOD
+    private string $errFailedToReflectClass = <<<EOD
 ReflectionUtilityTestTrait Error: Failed to reflect class %s.
 Defaulting to reflect empty stdClass() instance.
 EOD;
 
-    private $errFailedToReflectMockStd = <<<EOD
+    private string  $errFailedToReflectMockStd = <<<EOD
 ReflectionUtilityTestTrait Fatal Error: Failed to reflect class %s,
 and also failed to reflect empty stdClass() by default.
 EOD;
 
-    private $errRandomBytesFailed = <<<EOD
+    private string  $errRandomBytesFailed = <<<EOD
 ReflectionUtilityTestTrait Warning:
 Failed to generate alpha-numeric string using random_bytes(), defaulting to
 str_shuffle(). You can safely ignore this warning if the generated string
 does not need to be cryptographically secure.
 EOD;
-    private $errMethodNotDefined = <<<EOD
+    private string  $errMethodNotDefined = <<<EOD
 ReflectionUtilityTestTrait Warning:
 The specified method %s() is not defined in class %s.
 You may safely ignore this warning if this is expected.
 EOD;
 
-    private $errSpecifiedMethodCouldNotBeReflected = <<<EOD
+    private string  $errSpecifiedMethodCouldNotBeReflected = <<<EOD
 ReflectionUtilityTestTrait Error:
 The specified method %s() could not be reflected for class %s.
 Defaulting to stdClass().
 EOD;
 
-    private $errFailedToReflectStdMethod = <<<EOD
+    private string  $errFailedToReflectStdMethod = <<<EOD
 ReflectionUtilityTestTrait Fatal Error:
 The specified method %s() could not be reflected for class %s,
 and also failed to default to an empty instance of stdClass().
 EOD;
 
-    private $errInvalidClassParameter = <<<EOD
+    private string  $errInvalidClassParameter = <<<EOD
 ReflectionUtilityTestTrait Error: Invalid type %s passed to %s
 EOD;
 
-    private $reflectionUtility;
+    private ReflectionUtilityInterface $reflectionUtility;
 
     /**
-     * @var Baz|Bazzer|Foo|Bar
+     * @var ReflectionUtilityTestClass|string
      */
     private $classToReflect;
-    private $booleanType = 'boolean';
-    private $integerType = 'integer';
-    private $doubleType = 'double';
-    private $stringType = 'string';
-    private $arrayType = 'array';
-    private $nullType = 'NULL';
-    private $objectType = 'object';
-    private $constructMethod = '__construct';
+    private string  $booleanType = 'boolean';
+    private string  $integerType = 'integer';
+    private string  $doubleType = 'double';
+    private string  $stringType = 'string';
+    private string  $arrayType = 'array';
+    private string  $nullType = 'NULL';
+    private string  $objectType = 'object';
+    private string $constructMethod = '__construct';
 
     /**
      * @before
@@ -97,18 +97,18 @@ EOD;
             '\UnitTests\interfaces\utility\TestTraits\Bazzer',
             '\UnitTests\interfaces\utility\TestTraits\Foo',
             '\UnitTests\interfaces\utility\TestTraits\Bar',
-            new Identifiable('Dorian'),
-            new Classifiable(),
-            new Switchable(),
-            new Storable('Roady', 'Spruceton', '1833'),
-            new Exportable(),
-            new ReflectionUtilityImplementation(),
-            '\DarlingDataManagementSystem\classes\primary\Identifiable',
-            '\DarlingDataManagementSystem\classes\primary\Classifiable',
-            '\DarlingDataManagementSystem\classes\primary\Switchable',
-            '\DarlingDataManagementSystem\classes\primary\Storable',
-            '\DarlingDataManagementSystem\classes\primary\Exportable',
-            '\DarlingDataManagementSystem\classes\utility\ReflectionUtility'
+            new CoreIdentifiable('Name'),
+            new CoreClassifiable(),
+            new CoreSwitchable(),
+            new CoreStorable('Name', 'Location', 'Container'),
+            new CoreExportable(),
+            new CoreReflectionUtility(),
+            '\\' . CoreIdentifiable::class,
+            '\\' . CoreClassifiable::class,
+            '\\' . CoreSwitchable::class,
+            '\\' . CoreStorable::class,
+            '\\' . CoreExportable::class,
+            '\\' . CoreReflectionUtility::class
         );
         return $testClasses[array_rand($testClasses)];
     }
@@ -130,6 +130,7 @@ EOD;
         return array_unique($propertyNames);
     }
 
+    /** @noinspection DuplicatedCode */
     private function getClassPropertyReflections($class): array
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
@@ -188,12 +189,12 @@ EOD;
         return $this->classToReflect;
     }
 
-    protected function getReflectionUtility(): ReflectionUtility
+    protected function getReflectionUtility(): ReflectionUtilityInterface
     {
         return $this->reflectionUtility;
     }
 
-    protected function setReflectionUtility(ReflectionUtility $reflectionUtility): void
+    protected function setReflectionUtility(ReflectionUtilityInterface $reflectionUtility): void
     {
         $this->reflectionUtility = $reflectionUtility;
     }
@@ -453,9 +454,19 @@ EOD;
  * The following classes are used by the ReflectionUtilityTestTrait to test the
  * \DarlingDataManagementSystem\abstractions\utility\ReflectionUtility class's methods.
  */
-class Baz
+interface ReflectionUtilityTestClass
 {
-    public $fooBarBaz = array();
+    public function isTestClass(): bool;
+}
+
+class Baz implements ReflectionUtilityTestClass
+{
+    public array $fooBarBaz = array();
+
+    public function isTestClass(): bool
+    {
+        return true;
+    }
 
     public function getFooBarBaz(): array
     {
@@ -463,9 +474,9 @@ class Baz
     }
 }
 
-class Bazzer extends Baz
+class Bazzer extends Baz implements ReflectionUtilityTestClass
 {
-    private $baz = '12345';
+    private string $baz = '12345';
 
     public function getBaz(): string
     {
@@ -473,14 +484,14 @@ class Bazzer extends Baz
     }
 }
 
-class Foo extends Bazzer
+class Foo extends Bazzer implements ReflectionUtilityTestClass
 {
-    public $float;
-    protected $bool;
-    protected $str;
-    protected $bar;
-    private $int;
-    private $arr;
+    public float $float;
+    protected bool $bool;
+    protected string $str;
+    protected ReflectionUtilityTestClass $bar;
+    private int $int;
+    private array $arr;
     private $null;
 
     public function __construct(bool $bool, int $int, float $float, string $str, array $arr, Bar $bar, $null = null)
@@ -495,12 +506,17 @@ class Foo extends Bazzer
     }
 }
 
-class Bar
+class Bar implements ReflectionUtilityTestClass
 {
-    private $str;
+    private string $str;
 
     public function __construct(string $str)
     {
         $this->str = $str;
+    }
+
+    public function isTestClass(): bool
+    {
+        return true;
     }
 }

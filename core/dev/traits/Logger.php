@@ -6,7 +6,7 @@ namespace DarlingDataManagementSystem\dev\traits;
 
 trait Logger
 {
-    private $logging = false;
+    private bool $logging = false;
 
     protected function log($sprintFormattedMessage, string ...$sprints)
     {

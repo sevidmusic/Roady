@@ -9,48 +9,48 @@ use DarlingDataManagementSystem\classes\component\Template\UserInterface\Standar
 use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\interfaces\component\Action;
-use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 
 trait ResponseFactoryTestTrait
 {
 
-    private $responseFactory;
-    private $expectedResponseName = 'ExpectedResponseName';
-    private $expectedPosition = 420.87;
-    private $expectedNumberOfRequests = 29;
-    private $expectedNumberOfStandardUITemplates = 23;
-    private $expectedNumberOfOutputComponents = 27;
-    private $expectedNumberOfActions = 42;
+    private ResponseFactoryInterface $responseFactory;
+    private string $expectedResponseName = 'ExpectedResponseName';
+    private float $expectedPosition = 420.87;
+    private int $expectedNumberOfRequests = 29;
+    private int $expectedNumberOfStandardUITemplates = 23;
+    private int $expectedNumberOfOutputComponents = 27;
+    private int $expectedNumberOfActions = 42;
 
     public function testBuildResponseReturnsAResponseImplementationInstance(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                Response::class,
+                ResponseInterface::class,
                 $this->callBuildResponse()
             )
         );
     }
 
-    private function callBuildResponse(): Response
+    private function callBuildResponse(): ResponseInterface
     {
         return $this->getResponseFactory()->buildResponse(
             ...$this->buildBuildResponseTestArguments()
         );
     }
 
-    protected function getResponseFactory(): ResponseFactory
+    protected function getResponseFactory(): ResponseFactoryInterface
     {
         return $this->responseFactory;
     }
 
-    protected function setResponseFactory(ResponseFactory $responseFactory): void
+    protected function setResponseFactory(ResponseFactoryInterface $responseFactory): void
     {
         $this->responseFactory = $responseFactory;
     }
@@ -76,7 +76,7 @@ trait ResponseFactoryTestTrait
         return $args;
     }
 
-    private function buildTestRequest(): Request
+    private function buildTestRequest(): RequestInterface
     {
         return new CoreRequest(
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
@@ -87,7 +87,7 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    private function buildTestStandardUITemplate(): StandardUITemplate
+    private function buildTestStandardUITemplate(): StandardUITemplateInterface
     {
         $suit = new CoreStandardUITemplate(
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
@@ -102,7 +102,7 @@ trait ResponseFactoryTestTrait
         return $suit;
     }
 
-    private function buildTestOutputComponent(): OutputComponent
+    private function buildTestOutputComponent(): OutputComponentInterface
     {
         return new CoreOutputComponent(
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
@@ -114,7 +114,7 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    private function buildTestAction(): Action
+    private function buildTestAction(): ActionInterface
     {
         return new CoreAction(
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
@@ -307,29 +307,16 @@ trait ResponseFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                GlobalResponse::class,
+                GlobalResponseInterface::class,
                 $this->callBuildGlobalResponse()
             )
         );
     }
 
-    private function callBuildGlobalResponse(): Response
+    private function callBuildGlobalResponse(): ResponseInterface
     {
-        $args = [$this->expectedResponseName, $this->expectedPosition];
-        for ($i = 0; $i < $this->expectedNumberOfRequests; $i++) {
-            array_push($args, $this->buildTestRequest());
-        }
-        for ($i = 0; $i < $this->expectedNumberOfStandardUITemplates; $i++) {
-            array_push($args, $this->buildTestStandardUITemplate());
-        }
-        for ($i = 0; $i < $this->expectedNumberOfOutputComponents; $i++) {
-            array_push($args, $this->buildTestOutputComponent());
-        }
-        for ($i = 0; $i < $this->expectedNumberOfActions; $i++) {
-            array_push($args, $this->buildTestAction());
-        }
         return $this->getResponseFactory()->buildGlobalResponse(
-            ...$args
+            ...$this->buildBuildResponseTestArguments()
         );
     }
 

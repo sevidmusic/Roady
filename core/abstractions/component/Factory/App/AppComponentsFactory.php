@@ -2,9 +2,9 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Factory\App;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingDataManagementSystem\classes\component\Factory\RequestFactory as CoreRequestFactory;
@@ -13,34 +13,38 @@ use DarlingDataManagementSystem\classes\component\Factory\StandardUITemplateFact
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 
-abstract class AppComponentsFactory extends CoreStoredComponentFactory implements AppComponentsFactoryInterface
+abstract class AppComponentsFactory extends StoredComponentFactoryBase implements AppComponentsFactoryInterface
 {
 
     private const REFLECTION_UTILITY = 'reflectionUtility';
     private const ACCEPTED_IMPLEMENTATION = 'acceptedImplementation';
     private const CONSTRUCT = '__construct';
-    private $outputComponentFactory;
-    private $standardUITemplateFactory;
-    private $requestFactory;
-    private $responseFactory;
+    private ?OutputComponentFactory $outputComponentFactory = null;
+    private ?StandardUITemplateFactoryInterface $standardUITemplateFactory = null;
+    private ?RequestFactoryInterface $requestFactory = null;
+    private ?ResponseFactoryInterface $responseFactory = null;
 
     public function __construct(
-        PrimaryFactory $primaryFactory,
-        ComponentCrud $componentCrud,
-        StoredComponentRegistry $storedComponentRegistry
+        PrimaryFactoryInterface $primaryFactory,
+        ComponentCrudInterface $componentCrud,
+        StoredComponentRegistryInterface $storedComponentRegistry
     )
     {
         parent::__construct(
@@ -72,7 +76,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             [
                 self::ACCEPTED_IMPLEMENTATION
                 =>
-                    Component::class
+                    ComponentInterface::class
             ]
         );
         $this->getComponentCrud()->create($primaryFactory->export()['app']);
@@ -82,9 +86,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
     }
 
     private function prepareOutputComponentFactory(
-        PrimaryFactory $primaryFactory,
-        ComponentCrud $componentCrud,
-        StoredComponentRegistry $storedComponentRegistry
+        PrimaryFactoryInterface $primaryFactory,
+        ComponentCrudInterface $componentCrud,
+        StoredComponentRegistryInterface $storedComponentRegistry
     ): void
     {
         $registry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
@@ -98,7 +102,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             [
                 self::ACCEPTED_IMPLEMENTATION
                 =>
-                    OutputComponent::class
+                    OutputComponentInterface::class
             ]
         );
         $this->outputComponentFactory = new CoreOutputComponentFactory(
@@ -109,9 +113,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
     }
 
     private function prepareStandardUITemplateFactory(
-        PrimaryFactory $primaryFactory,
-        ComponentCrud $componentCrud,
-        StoredComponentRegistry $storedComponentRegistry
+        PrimaryFactoryInterface $primaryFactory,
+        ComponentCrudInterface $componentCrud,
+        StoredComponentRegistryInterface $storedComponentRegistry
     ): void
     {
         $registry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
@@ -125,7 +129,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             [
                 self::ACCEPTED_IMPLEMENTATION
                 =>
-                    StandardUITemplate::class
+                    StandardUITemplateInterface::class
             ]
         );
         $this->standardUITemplateFactory = new CoreStandardUITemplateFactory(
@@ -136,9 +140,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
     }
 
     private function prepareRequestFactory(
-        PrimaryFactory $primaryFactory,
-        ComponentCrud $componentCrud,
-        StoredComponentRegistry $storedComponentRegistry
+        PrimaryFactoryInterface $primaryFactory,
+        ComponentCrudInterface $componentCrud,
+        StoredComponentRegistryInterface $storedComponentRegistry
     ): void
     {
         $registry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
@@ -152,7 +156,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             [
                 self::ACCEPTED_IMPLEMENTATION
                 =>
-                    Request::class
+                    RequestInterface::class
             ]
         );
         $this->requestFactory = new CoreRequestFactory(
@@ -163,9 +167,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
     }
 
     private function prepareResponseFactory(
-        PrimaryFactory $primaryFactory,
-        ComponentCrud $componentCrud,
-        StoredComponentRegistry $storedComponentRegistry
+        PrimaryFactoryInterface $primaryFactory,
+        ComponentCrudInterface $componentCrud,
+        StoredComponentRegistryInterface $storedComponentRegistry
     ): void
     {
         $registry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
@@ -179,7 +183,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             [
                 self::ACCEPTED_IMPLEMENTATION
                 =>
-                    Response::class
+                    ResponseInterface::class
             ]
         );
         $this->responseFactory = new CoreResponseFactory(
@@ -189,7 +193,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         );
     }
 
-    public static function buildConstructorArgs(Request $domain): array
+    public static function buildConstructorArgs(RequestInterface $domain): array
     {
         return [
             self::buildPrimaryFactory($domain),
@@ -198,24 +202,25 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         ];
     }
 
-    private static function buildPrimaryFactory(Request $domain): PrimaryFactory
+    private static function buildPrimaryFactory(RequestInterface $domain): PrimaryFactoryInterface
     {
         return new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
     }
 
-    private static function buildComponentCrud(Request $domain): ComponentCrud
+    private static function buildComponentCrud(RequestInterface $domain/* @todo , $storageDriver = null */): ComponentCrudInterface
     {
+        /* @todo Implement optional $storageDriver parameter so alternative to JsonStorageDriver can be specified */
         return new CoreComponentCrud(
             self::buildPrimaryFactory($domain)->buildStorable('Crud', 'Cruds'),
             self::buildPrimaryFactory($domain)->buildSwitchable(),
-            new Standard(
+            new JsonStorageDriver(
                 self::buildPrimaryFactory($domain)->buildStorable('StorageDriver', 'StorageDrivers'),
                 self::buildPrimaryFactory($domain)->buildSwitchable()
             )
         );
     }
 
-    private static function buildStoredComponentRegistry(Request $domain): StoredComponentRegistry
+    private static function buildStoredComponentRegistry(RequestInterface $domain): StoredComponentRegistryInterface
     {
         return new CoreStoredComponentRegistry(
             self::buildPrimaryFactory($domain)->buildStorable(
@@ -226,15 +231,15 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         );
     }
 
-    public static function buildDomain(string $url): Request
+    public static function buildDomain(string $url): RequestInterface
     {
-        $storable = new Storable('TEMP', 'TEMP', 'TEMP');
+        $storable = new CoreStorable('TEMP', 'TEMP', 'TEMP');
         $domain = new CoreRequest(
             $storable,
             new CoreSwitchable()
         );
         $domain->import(['url' => $url]);
-        $actualStorable = new Storable(
+        $actualStorable = new CoreStorable(
             CoreApp::deriveNameLocationFromRequest($domain),
             CoreApp::deriveNameLocationFromRequest($domain),
             CoreApp::deriveNameLocationFromRequest($domain),
@@ -248,7 +253,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         string $container,
         string $output,
         float $position
-    ): OutputComponent
+    ): OutputComponentInterface
     {
         $oc = $this->outputComponentFactory->buildOutputComponent(
             $name,
@@ -264,8 +269,8 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         string $name,
         string $container,
         float $position,
-        OutputComponent ...$types
-    ): StandardUITemplate
+        OutputComponentInterface ...$types
+    ): StandardUITemplateInterface
     {
         $suit = $this->standardUITemplateFactory->buildStandardUITemplate(
             $name,
@@ -284,16 +289,26 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $suit;
     }
 
-    public function buildRequest(string $name, string $container, string $url): Request
+    public function buildRequest(string $name, string $container, string $url): RequestInterface
     {
         $request = $this->requestFactory->buildRequest($name, $container, $url);
         $this->getStoredComponentRegistry()->registerComponent($request);
         return $request;
     }
 
-    public function buildResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): Response
+    public function buildResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): ResponseInterface // @todo As soon as Php 8 is in use, refactor to union type declaration: i.e Response | GlobalResponse
     {
         $response = $this->responseFactory->buildResponse($name, $position);
+        return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @param array $requestsOutputComponentsStandardUITemplates
+     * @return ResponseInterface|GlobalResponseInterface
+     */
+    private function configureResponse(ResponseInterface $response, array $requestsOutputComponentsStandardUITemplates = [])
+    {
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
             $response
         );
@@ -308,21 +323,10 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $response;
     }
 
-    public function buildGlobalResponse(string $name, float $position, Component ...$requestsOutputComponentsStandardUITemplates): GlobalResponse
+    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): GlobalResponseInterface
     {
         $globalResponse = $this->responseFactory->buildGlobalResponse($name, $position);
-        $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
-            $globalResponse
-        );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
-            CoreResponseFactory::ifRequestAddStorageInfo($globalResponse, $component);
-            CoreResponseFactory::ifStandardUITemplateAddStorageInfo($globalResponse, $component);
-            CoreResponseFactory::ifOutputComponentAddStorageInfo($globalResponse, $component);
-        }
-        $this->responseFactory->getComponentCrud()->update($globalResponse, $globalResponse);
-        $this->responseFactory->getStoredComponentRegistry()->registerComponent($globalResponse);
-        $this->getStoredComponentRegistry()->registerComponent($globalResponse);
-        return $globalResponse;
+        return $this->configureResponse($globalResponse, $requestsOutputComponentsStandardUITemplates);
     }
 
     public function buildLog($flags = 0): string
@@ -333,6 +337,7 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             as
             $storable
         ) {
+            /** @noinspection DuplicatedCode */
             $message = sprintf(
                 '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
                 PHP_EOL,
@@ -356,6 +361,9 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
             $buildLog .= $message;
         }
         if ($flags & self::SAVE_LOG) {
+            if (is_dir($this->expectedBuildLogDirectoryPath()) === false) {
+                mkdir($this->expectedBuildLogDirectoryPath());
+            }
             file_put_contents($this->expectedBuildLogPath(), $buildLog);
             echo sprintf(
                 '%sSaved build log to: %s',
@@ -367,17 +375,21 @@ abstract class AppComponentsFactory extends CoreStoredComponentFactory implement
         return $buildLog;
     }
 
-    private function expectedBuildLogPath(): string
+    private function expectedBuildLogDirectoryPath(): string
     {
         return str_replace(
             'core/abstractions/component/Factory/App',
             'Apps' .
             DIRECTORY_SEPARATOR .
             '.buildLogs' .
-            DIRECTORY_SEPARATOR .
-            $this->getPrimaryFactory()->export()['app']->getName(),
+            DIRECTORY_SEPARATOR,
             __DIR__
         );
+    }
+
+    private function expectedBuildLogPath(): string
+    {
+        return $this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
     }
 
 }

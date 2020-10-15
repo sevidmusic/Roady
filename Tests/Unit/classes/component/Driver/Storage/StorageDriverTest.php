@@ -2,17 +2,17 @@
 
 namespace UnitTests\classes\component\Driver\Storage;
 
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
-use UnitTests\abstractions\component\Driver\Storage\StandardTest as AbstractStandardTest;
+use UnitTests\abstractions\component\Driver\Storage\StorageDriverTest as AbstractStandardTest;
 
-class StandardTest extends AbstractStandardTest
+class StorageDriverTest extends AbstractStandardTest
 {
     public function setUp(): void
     {
-        $this->setStandard(
-            new Standard(
+        $this->setStorageDriver(
+            new StorageDriver(
                 new Storable(
                     'StandardName',
                     'StandardLocation',
@@ -21,6 +21,6 @@ class StandardTest extends AbstractStandardTest
                 new Switchable()
             )
         );
-        $this->setStandardParentTestInstances();
+        $this->setStorageDriverParentTestInstances();
     }
 }

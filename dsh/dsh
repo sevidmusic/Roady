@@ -1,0 +1,70 @@
+#!/bin/bash
+
+set -o posix
+
+clear
+
+# Determine real path to dsh directory
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
+PATH_TO_DDMS="${PATH_TO_DSH_DIR//dsh/}"
+# PATH_TO_DDMS="$(echo "${PATH_TO_DSH_DIR}" | sed 's/dsh//g')"
+
+[[ ! -f "${PATH_TO_DSHUI}" ]] && printf '\n\n\e[33mError! Failed to load user interface!\e[0m\n\n'
+
+# shellcheck source=src/util.sh
+. "${PATH_TO_DSHUI}"
+
+####### Process flags #######
+while test $# -gt 0; do
+  case "$1" in
+  -h | --help)
+    showBanner
+    shift
+    if [[ -z "${1}" || "${1}" == 'app' || "${1}" == 'apps' ]]; then
+      notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
+      notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
+      notifyUser "the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
+      notifyUser "The -s, or --start-app-server flag will start a local server" 0 'dontClear'
+      notifyUser "for you to use while in development." 0 'dontClear'
+      notifyUser "The -s flag expects one argument, a port number." 0 'dontClear'
+      notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -s 8080" 0 'dontClear'
+      notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --start-app-server 8888" 0 'dontClear'
+      notifyUser "The -t, or --test-ddms flag will run phpunit using ${HIGHLIGHTCOLOR}${PATH_TO_DDMS}php.xml${NOTIFYCOLOR} for configuration." 0 'dontClear'
+      notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -t" 0 'dontClear'
+      notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --test-ddms" 0 'dontClear'
+      exit 0
+    fi
+    notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
+    notifyUser "Options:" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}dsh --help${CLEAR_ALL_TEXT_STYLES}  ${HIGHLIGHTCOLOR}dsh --help app${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}dsh --help apps${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    exit 0
+    ;;
+  -s | --start-app-server*)
+    shift
+    if [[ -n "${1}" ]]; then
+      notifyUser "Starting local development server at localhost:${1}"
+      /usr/bin/php -S "localhost:${1}" -t "${PATH_TO_DDMS}"
+      exit 0
+    fi
+    notifyUser "Error! You must specify a port when using the -s flag. For example: ${HIGHLIGHTCOLOR}dsh -s 8888${CLEAR_ALL_TEXT_STYLES}"
+    ;;
+  -t | --test-ddms*)
+    shift
+    "${PATH_TO_DSH_DIR}/phpunit.sh"
+    ;;
+  *)
+    notifyUser "${WARNING_COLOR}Invalid flag ${1}"
+    break
+    ;;
+  esac
+done
+
+showLoadingBar "Exiting"

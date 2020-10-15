@@ -2,14 +2,16 @@
 
 namespace UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\Json;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
-trait JsonTestTrait
+trait JsonStorageDriverTestTrait
 {
 
-    private $json;
+    private JsonStorageDriverInterface $jsonStorageDriver;
 
     public static function tearDownAfterClass(): void
     {
@@ -34,33 +36,41 @@ trait JsonTestTrait
 
     private static function getExpectedStorageDirectoryPath(): string
     {
-        $namespacePath = str_replace(['UnitTests', '\\'], ['Tests\\Unit', DIRECTORY_SEPARATOR], __NAMESPACE__);
+        $namespacePath = str_replace(
+            ['UnitTests', '\\'],
+            ['Tests\\Unit', DIRECTORY_SEPARATOR],
+            __NAMESPACE__
+        );
         return str_replace($namespacePath, '', __DIR__) . '.dcmsJsonData';
     }
 
     public function testGetStorageDirectoryPathReturnsExpectedStorageDirectoryPath(): void
     {
-        $this->assertEquals(self::getExpectedStorageDirectoryPath(), $this->getJson()->getStorageDirectoryPath(), 'getStorageDirectoryPath() did not return the expected storage directory path.');
+        $this->assertEquals(
+            self::getExpectedStorageDirectoryPath(),
+            $this->getJsonStorageDriver()->getStorageDirectoryPath(),
+            'getStorageDirectoryPath() did not return the expected storage directory path.'
+        );
     }
 
-    public function getJson(): Json
+    public function getJsonStorageDriver(): JsonStorageDriverInterface
     {
-        return $this->json;
+        return $this->jsonStorageDriver;
     }
 
-    public function setJson(Json $json): void
+    public function setJsonStorageDriver(JsonStorageDriverInterface $jsonStorageDriver): void
     {
-        $this->json = $json;
+        $this->jsonStorageDriver = $jsonStorageDriver;
     }
 
     public function testWriteAddsComponentsStorableToStorageIndex(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
         $storageIndex = json_decode(file_get_contents($this->getExpectedStorageIndexPath()), true);
         $this->assertTrue(
             isset(
-                $storageIndex[$this->getJson()->getLocation()][$this->getJson()->getContainer()][$this->getJson()->getUniqueId()]
+                $storageIndex[$this->getJsonStorageDriver()->getLocation()][$this->getJsonStorageDriver()->getContainer()][$this->getJsonStorageDriver()->getUniqueId()]
             ),
             'Component\'s storable was not saved to storage index on write.'
         );
@@ -68,8 +78,8 @@ trait JsonTestTrait
 
     private function turnJsonOn(): void
     {
-        if ($this->getJson()->getState() === false) {
-            $this->getJson()->switchState();
+        if ($this->getJsonStorageDriver()->getState() === false) {
+            $this->getJsonStorageDriver()->switchState();
         }
     }
 
@@ -81,12 +91,15 @@ trait JsonTestTrait
     public function testDeleteRemovesSpecifiedComponent(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
-        $this->getJson()->delete($this->getJson()->export()['storable']);
-        $this->assertFalse(file_exists($this->getExpectedStoragePath($this->getJson())), 'delete() failed to remove the data stored at ' . $this->getExpectedStoragePath($this->getJson()));
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
+        $this->getJsonStorageDriver()->delete($this->getJsonStorageDriver()->export()['storable']);
+        $this->assertFalse(
+            file_exists($this->getExpectedStoragePath($this->getJsonStorageDriver())),
+            'delete() failed to remove the data stored at ' . $this->getExpectedStoragePath($this->getJsonStorageDriver())
+        );
     }
 
-    private static function getExpectedStoragePath(Storable $storable): string
+    private static function getExpectedStoragePath(StorableInterface $storable): string
     {
         return
             self::getExpectedStorageDirectoryPath() .
@@ -101,12 +114,12 @@ trait JsonTestTrait
     public function testDeleteRemovesComponentsStorableFromStorageIndex(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
-        $this->getJson()->delete($this->getJson()->export()['storable']);
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
+        $this->getJsonStorageDriver()->delete($this->getJsonStorageDriver()->export()['storable']);
         $storageIndex = json_decode(file_get_contents($this->getExpectedStorageIndexPath()), true);
         $this->assertFalse(
             isset(
-                $storageIndex[$this->getJson()->getLocation()][$this->getJson()->getContainer()][$this->getJson()->getUniqueId()]
+                $storageIndex[$this->getJsonStorageDriver()->getLocation()][$this->getJsonStorageDriver()->getContainer()][$this->getJsonStorageDriver()->getUniqueId()]
             ),
             'Component\'s storable was not removed from storage index on delete.'
         );
@@ -114,53 +127,59 @@ trait JsonTestTrait
 
     public function testStorageDirectoryExistsPostInstantiation(): void
     {
-        $this->assertTrue(is_dir(self::getExpectedStorageDirectoryPath()), 'Storage directory " ' . self::getExpectedStorageDirectoryPath() . '" does not exist, and was not created on instantiation.');
+        $this->assertTrue(
+            is_dir(self::getExpectedStorageDirectoryPath()),
+            'Storage directory " ' . self::getExpectedStorageDirectoryPath() . '" does not exist, and was not created on instantiation.'
+        );
     }
 
     public function testStorageIndexExistsPostInstantiation(): void
     {
-        $this->assertTrue(file_exists($this->getExpectedStorageIndexPath()), 'Storage index does not exist at ' . self::getExpectedStorageDirectoryPath() . DIRECTORY_SEPARATOR . 'storageIndex.json');
+        $this->assertTrue(
+            file_exists($this->getExpectedStorageIndexPath()),
+            'Storage index does not exist at ' . self::getExpectedStorageDirectoryPath() . DIRECTORY_SEPARATOR . 'storageIndex.json'
+        );
     }
 
     public function testWriteSavesComponentDataToJsonFileNamedUsingComponentIdUnderSubPathDefinedUsingComponentLocationAndContainer(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
         $this->assertTrue(
-            file_exists(self::getExpectedStoragePath($this->getJson())),
-            'Write did not create json data file ' . self::getExpectedStoragePath($this->getJson())
+            file_exists(self::getExpectedStoragePath($this->getJsonStorageDriver())),
+            'Write did not create json data file ' . self::getExpectedStoragePath($this->getJsonStorageDriver())
         );
     }
 
     public function testGetStoragePathReturnsExpectedStoragePath(): void
     {
         $this->assertEquals(
-            self::getExpectedStoragePath($this->getJson()),
-            $this->getJson()->getStoragePath($this->getJson())
+            self::getExpectedStoragePath($this->getJsonStorageDriver()),
+            $this->getJsonStorageDriver()->getStoragePath($this->getJsonStorageDriver())
         );
     }
 
     public function testReadReturnsComponentSpecifiedByStorable(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
-        $storedComponent = $this->getJson()->read($this->getJson());
-        $this->assertEquals($this->getJson(), $storedComponent);
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
+        $storedComponent = $this->getJsonStorageDriver()->read($this->getJsonStorageDriver());
+        $this->assertEquals($this->getJsonStorageDriver(), $storedComponent);
     }
 
     public function testReadAllReturnsArrayOfAllComponentsStoredInSpecifiedContainerAtSpecifiedLocation(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
         $this->assertTrue(
             in_array(
-                $this->getJson(),
-                $this->getJson()->readAll(
-                    $this->getJson()->getLocation(),
-                    $this->getJson()->getContainer()
+                $this->getJsonStorageDriver(),
+                $this->getJsonStorageDriver()->readAll(
+                    $this->getJsonStorageDriver()->getLocation(),
+                    $this->getJsonStorageDriver()->getContainer()
                 )
             ),
-            'Read all did not return all components stored in ' . $this->getJson()->getContainer() . ' at ' . $this->getJson()->getLocation()
+            'Read all did not return all components stored in ' . $this->getJsonStorageDriver()->getContainer() . ' at ' . $this->getJsonStorageDriver()->getLocation()
         );
     }
 
@@ -168,11 +187,11 @@ trait JsonTestTrait
     {
         $this->turnJsonOff();
         $this->assertFalse(
-            $this->getJson()->write($this->getJson()),
+            $this->getJsonStorageDriver()->write($this->getJsonStorageDriver()),
             'write() must return false if state is false.'
         );
         $this->assertNotEquals(
-            $this->getJson()->getUniqueId(),
+            $this->getJsonStorageDriver()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId(),
             'write() must not write if state is false.'
         );
@@ -180,23 +199,23 @@ trait JsonTestTrait
 
     private function turnJsonOff(): void
     {
-        if ($this->getJson()->getState() === true) {
-            $this->getJson()->switchState();
+        if ($this->getJsonStorageDriver()->getState() === true) {
+            $this->getJsonStorageDriver()->switchState();
         }
     }
 
-    private function getStoredComponent(): Component
+    private function getStoredComponent(): ComponentInterface
     {
-        return $this->getJson()->read($this->getJson()->export()['storable']);
+        return $this->getJsonStorageDriver()->read($this->getJsonStorageDriver()->export()['storable']);
     }
 
     public function testReadReturnsMockComponentIfStateIsFalse(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
         $this->turnJsonOff();
         $this->assertNotEquals(
-            $this->getJson()->getUniqueId(),
+            $this->getJsonStorageDriver()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId(),
             'read() must return a __MOCK__COMPONENT__ if state is false.'
         );
@@ -220,22 +239,34 @@ trait JsonTestTrait
     public function testDeleteReturnsFalseAndDoesNotDeleteIfStateIsFalse(): void
     {
         $this->turnJsonOn();
-        $this->getJson()->write($this->getJson());
+        $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
         $this->turnJsonOff();
         $this->assertFalse(
-            $this->getJson()->delete($this->getJson()->export()['storable'])
+            $this->getJsonStorageDriver()->delete($this->getJsonStorageDriver()->export()['storable'])
         );
         $this->turnJsonOn();
         $this->assertEquals(
-            $this->getJson()->getUniqueId(),
+            $this->getJsonStorageDriver()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId(),
             'read() must return a __MOCK__COMPONENT__ if state is false.'
         );
     }
 
+    protected function getTestInstanceArgs(): array
+    {
+        return [
+            new Storable(
+                'MockJsonName',
+                'MockJsonLocation',
+                'MockJsonContainer'
+            ),
+            new Switchable()
+        ];
+    }
+
     protected function setJsonParentTestInstances(): void
     {
-        $this->setSwitchableComponent($this->getJson());
+        $this->setSwitchableComponent($this->getJsonStorageDriver());
         $this->setSwitchableComponentParentTestInstances();
     }
 

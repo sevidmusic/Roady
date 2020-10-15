@@ -2,28 +2,28 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait RequestFactoryTestTrait
 {
 
-    private $requestFactory;
-    private $expectedName = 'expectedName';
-    private $expectedContainer = 'expectedContainer';
-    private $expectedUrl = 'expectedUrl';
+    private RequestFactoryInterface $requestFactory;
+    private string $expectedName = 'expectedName';
+    private string $expectedContainer = 'expectedContainer';
+    private string $expectedUrl = 'expectedUrl';
 
     public function testBuildRequestReturnsARequestImplementationInstance(): void
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                Request::class,
+                RequestInterface::class,
                 $this->callBuildRequest()
             )
         );
     }
 
-    private function callBuildRequest(): Request
+    private function callBuildRequest(): RequestInterface
     {
         return $this->getRequestFactory()->buildRequest(
             $this->expectedName,
@@ -32,12 +32,12 @@ trait RequestFactoryTestTrait
         );
     }
 
-    protected function getRequestFactory(): RequestFactory
+    protected function getRequestFactory(): RequestFactoryInterface
     {
         return $this->requestFactory;
     }
 
-    protected function setRequestFactory(RequestFactory $requestFactory): void
+    protected function setRequestFactory(RequestFactoryInterface $requestFactory): void
     {
         $this->requestFactory = $requestFactory;
     }

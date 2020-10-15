@@ -3,7 +3,7 @@
 namespace UnitTests\classes\component\Web\Routing;
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as Crud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\Standard as StorageDriver;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
 use DarlingDataManagementSystem\classes\primary\Storable;
@@ -29,7 +29,7 @@ class RouterTest extends AbstractRouterTest
                 'RouterTestCrudContainer'
             ),
             new Switchable(),
-            new StorageDriver(
+            new JsonStorageDriver(
                 new Storable(
                     'RouterTestStorageDriverName',
                     'RouterTestStorageDriverLocation',

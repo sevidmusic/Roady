@@ -1,15 +1,13 @@
 <?php
 
-
 namespace DarlingDataManagementSystem\interfaces\component;
 
+use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
-use DarlingDataManagementSystem\interfaces\primary\Classifiable;
-use DarlingDataManagementSystem\interfaces\primary\Exportable;
-use DarlingDataManagementSystem\interfaces\primary\Identifiable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-
-interface Component extends Identifiable, Classifiable, Storable, Exportable
+interface Component extends IdentifiableInterface, ClassifiableInterface, StorableInterface, ExportableInterface
 {
 
 }

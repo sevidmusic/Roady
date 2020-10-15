@@ -2,19 +2,22 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Crud;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\Component;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\Standard as StorageDriver;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class ComponentCrud extends SwitchableComponent implements ComponentCrudInterface
+abstract class ComponentCrud extends SwitchableComponentBase implements ComponentCrudInterface
 {
 
-    private $storageDriver;
+    private const MOCK_COMPONENT = '__MOCK_COMPONENT__';
+    private StandardStorageDriverInterface $storageDriver;
 
-    public function __construct(Storable $storable, Switchable $switchable, StorageDriver $storageDriver)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, StandardStorageDriverInterface $storageDriver)
     {
         parent::__construct($storable, $switchable);
         $this->storageDriver = $storageDriver;
@@ -23,26 +26,26 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
         }
     }
 
-    public function read(Storable $storable): Component
+    public function read(StorableInterface $storable): ComponentInterface
     {
         if ($this->getState() === false) {
-            return new \DarlingDataManagementSystem\classes\component\Component(
-                new \DarlingDataManagementSystem\classes\primary\Storable(
-                    '__MOCK_COMPONENT__',
-                    '__MOCK_COMPONENT__',
-                    '__MOCK_COMPONENT__'
+            return new CoreComponent(
+                new CoreStorable(
+                    self::MOCK_COMPONENT,
+                    self::MOCK_COMPONENT,
+                    self::MOCK_COMPONENT
                 )
             );
         }
         return $this->getStorageDriver()->read($storable);
     }
 
-    private function getStorageDriver(): StorageDriver
+    private function getStorageDriver(): StandardStorageDriverInterface
     {
         return $this->storageDriver;
     }
 
-    public function update(Storable $storable, Component $component): bool
+    public function update(StorableInterface $storable, ComponentInterface $component): bool
     {
         if ($this->getState() !== false && $this->delete($storable) === true) {
             return $this->create($component);
@@ -50,7 +53,7 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
         return false;
     }
 
-    public function delete(Storable $storable): bool
+    public function delete(StorableInterface $storable): bool
     {
         return ($this->getState() === false
             ? false
@@ -58,7 +61,7 @@ abstract class ComponentCrud extends SwitchableComponent implements ComponentCru
         );
     }
 
-    public function create(Component $component): bool
+    public function create(ComponentInterface $component): bool
     {
         return ($this->getState() === false
             ? false

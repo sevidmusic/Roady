@@ -2,15 +2,17 @@
 
 namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
-interface Response extends SwitchableComponent, Positionable
+interface Response extends SwitchableComponentInterface, PositionableInterface
 {
-    public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
+    public const RESPONSE_CONTAINER = "RESPONSES";
+
+    public function respondsToRequest(Request $request, ComponentCrudInterface $crud): bool;
 
     public function addRequestStorageInfo(Request $request): bool;
 
@@ -18,13 +20,13 @@ interface Response extends SwitchableComponent, Positionable
 
     public function removeRequestStorageInfo(string $nameOrId): bool;
 
-    public function addOutputComponentStorageInfo(OutputComponent $outputComponent): bool;
+    public function addOutputComponentStorageInfo(OutputComponentInterface $outputComponent): bool;
 
     public function removeOutputComponentStorageInfo(string $nameOrId): bool;
 
     public function getOutputComponentStorageInfo(): array;
 
-    public function addTemplateStorageInfo(Template $template): bool;
+    public function addTemplateStorageInfo(StandardUITemplateInterface $template): bool;
 
     public function removeTemplateStorageInfo(string $nameOrId): bool;
 

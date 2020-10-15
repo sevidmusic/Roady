@@ -2,32 +2,31 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
-use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as Template;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class Response extends SwitchableComponent implements ResponseInterface
+abstract class Response extends SwitchableComponentBase implements ResponseInterface
 {
 
-    public const RESPONSE_CONTAINER = "RESPONSES";
-    private $outputComponentStorageInfo = array();
-    private $templateStorageInfo = array();
-    private $requestStorageInfo = array();
-    private $positionable;
+    private array $outputComponentStorageInfo = array();
+    private array  $templateStorageInfo = array();
+    private array  $requestStorageInfo = array();
+    private PositionableInterface  $positionable;
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable = null)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable = null)
     {
         $this->positionable = (empty($positionable) === true ? new CorePositionable(0) : $positionable);
-        $st = new StandardStorable(
+        $st = new CoreStorable(
             $storable->getName(),
             $storable->getLocation(),
             self::RESPONSE_CONTAINER
@@ -35,7 +34,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
         parent::__construct($st, $switchable);
     }
 
-    public function respondsToRequest(Request $request, ComponentCrud $crud): bool
+    public function respondsToRequest(RequestInterface $request, ComponentCrudInterface $crud): bool
     {
         foreach ($this->getRequestStorageInfo() as $storable) {
             $storedRequest = $crud->read($storable);
@@ -54,7 +53,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
         return ($this->getState() === false ? [] : $this->requestStorageInfo);
     }
 
-    private function isARequest(Component $component): bool
+    private function isARequest(ComponentInterface $component): bool
     {
         return (
         in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Request', class_implements($component)) === false
@@ -63,7 +62,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
         );
     }
 
-    public function addOutputComponentStorageInfo(OutputComponent $outputComponent): bool
+    public function addOutputComponentStorageInfo(OutputComponentInterface $outputComponent): bool
     {
         $initialCount = count($this->outputComponentStorageInfo);
         array_push($this->outputComponentStorageInfo, $outputComponent->export()['storable']);
@@ -82,7 +81,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
         return false;
     }
 
-    public function addRequestStorageInfo(Request $request): bool
+    public function addRequestStorageInfo(RequestInterface $request): bool
     {
         $initialCount = count($this->requestStorageInfo);
         array_push(
@@ -97,7 +96,7 @@ abstract class Response extends SwitchableComponent implements ResponseInterface
         return ($this->getState() === false ? [] : $this->outputComponentStorageInfo);
     }
 
-    public function addTemplateStorageInfo(Template $template): bool
+    public function addTemplateStorageInfo(StandardUITemplateInterface $template): bool
     {
         $initialCount = count($this->templateStorageInfo);
         array_push($this->templateStorageInfo, $template->export()['storable']);

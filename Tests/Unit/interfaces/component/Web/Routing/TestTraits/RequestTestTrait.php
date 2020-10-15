@@ -2,17 +2,20 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait RequestTestTrait
 {
 
-    private $request;
+    private RequestInterface $request;
 
     public function testGetGetReturnsGetArray(): void
     {
         $this->turnRequestOn();
-        $this->getArrayTestUtility()->arraysAreEqual($_GET, $this->getRequest()->getGet());
+        $this->getArrayTestUtility()->arraysAreEqual(
+            $_GET,
+            $this->getRequest()->getGet()
+        );
     }
 
     private function turnRequestOn(): void
@@ -22,12 +25,12 @@ trait RequestTestTrait
         }
     }
 
-    public function getRequest(): Request
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }
 
-    public function setRequest(Request $request): void
+    public function setRequest(RequestInterface $request): void
     {
         $this->request = $request;
     }
@@ -42,7 +45,9 @@ trait RequestTestTrait
     {
         $this->turnRequestOn();
         $this->setMockUrl();
-        $this->getStringTestUtility()->stringIsNotEmpty($this->getRequest()->getUrl());
+        $this->getStringTestUtility()->stringIsNotEmpty(
+            $this->getRequest()->getUrl()
+        );
         $this->assertEquals(
             'https://www.example.com/',
             $this->getRequest()->getUrl(),

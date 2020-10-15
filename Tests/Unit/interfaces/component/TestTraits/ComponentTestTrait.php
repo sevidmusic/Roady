@@ -2,21 +2,21 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Component;
-use UnitTests\interfaces\primary\TestTraits\StorableTestTrait;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use UnitTests\interfaces\primary\TestTraits\StorableTestTrait as StorableTestTraitInterface;
 
 trait ComponentTestTrait
 {
-    use StorableTestTrait;
+    use StorableTestTraitInterface;
 
-    private $component;
+    private ComponentInterface $component;
 
-    public function getComponent(): Component
+    public function getComponent(): ComponentInterface
     {
         return $this->component;
     }
 
-    public function setComponent(Component $component)
+    public function setComponent(ComponentInterface $component)
     {
         $this->component = $component;
     }

@@ -2,7 +2,7 @@
 
 namespace DarlingDataManagementSystem\abstractions\primary;
 
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility;
+use DarlingDataManagementSystem\classes\utility\ReflectionUtility as CoreReflectionUtility;
 use DarlingDataManagementSystem\dev\traits\Logger;
 use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
 use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
@@ -30,12 +30,12 @@ Exportable Fatal Error:
 Exportable type "%s" was unable to get property "%s" in preparation
 for import() from mock stdClass instance. Shutting down.
 EOD;
-    private $reflectionUtility;
+    private ReflectionUtilityInterface $reflectionUtility;
 
     public function __construct()
     {
         parent::__construct();
-        $this->setReflectionUtility(new ReflectionUtility());
+        $this->setReflectionUtility(new CoreReflectionUtility());
     }
 
     private function setReflectionUtility(ReflectionUtilityInterface $reflectionUtility)

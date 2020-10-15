@@ -55,6 +55,10 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         return $response;
     }
 
+    /**
+     * @param Response $response
+     * @param Component|Request $component
+     */
     public static function ifRequestAddStorageInfo(Response $response, Component $component): void
     {
         if (
@@ -67,6 +71,10 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         }
     }
 
+    /**
+     * @param Response $response
+     * @param Component|StandardUITemplate $component
+     */
     public static function ifStandardUITemplateAddStorageInfo(Response $response, Component $component): void
     {
         if (
@@ -79,6 +87,10 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
         }
     }
 
+    /**
+     * @param Response $response
+     * @param Component|OutputComponent $component
+     */
     public static function ifOutputComponentAddStorageInfo(Response $response, Component $component): void
     {
         if (

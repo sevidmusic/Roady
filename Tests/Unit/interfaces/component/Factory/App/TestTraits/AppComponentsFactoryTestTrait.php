@@ -2,31 +2,31 @@
 
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait AppComponentsFactoryTestTrait
 {
 
-    private $appComponentsFactory;
-    private $testDomain;
+    private AppComponentsFactoryInterface $appComponentsFactory;
+    private RequestInterface $testDomain;
 
     public function testAppComponentsFactoryImplementsOutputComponentFactoryInterface(): void
     {
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
-                OutputComponentFactory::class
+                OutputComponentFactoryInterface::class
             )
         );
     }
@@ -41,12 +41,12 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    protected function getAppComponentsFactory(): AppComponentsFactory
+    protected function getAppComponentsFactory(): AppComponentsFactoryInterface
     {
         return $this->appComponentsFactory;
     }
 
-    protected function setAppComponentsFactory(AppComponentsFactory $appComponentsFactory): void
+    protected function setAppComponentsFactory(AppComponentsFactoryInterface $appComponentsFactory): void
     {
         $this->appComponentsFactory = $appComponentsFactory;
     }
@@ -55,7 +55,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
-                ResponseFactory::class
+                ResponseFactoryInterface::class
             )
         );
     }
@@ -64,7 +64,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
-                StoredComponentFactory::class
+                StoredComponentFactoryInterface::class
             )
         );
     }
@@ -73,7 +73,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
-                StandardUITemplateFactory::class
+                StandardUITemplateFactoryInterface::class
             )
         );
     }
@@ -82,7 +82,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
-                RequestFactory::class
+                RequestFactoryInterface::class
             )
         );
     }
@@ -99,7 +99,7 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    private function getTestDomain(): Request
+    private function getTestDomain(): RequestInterface
     {
         if (!isset($this->testDomain) === true) {
             $this->testDomain = new CoreRequest(
@@ -129,7 +129,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                PrimaryFactory::class,
+                PrimaryFactoryInterface::class,
                 $this->getAppComponentsFactory()::buildConstructorArgs(
                     $this->getTestDomain()
                 )[0]
@@ -141,7 +141,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                ComponentCrud::class,
+                ComponentCrudInterface::class,
                 $this->getAppComponentsFactory()::buildConstructorArgs(
                     $this->getTestDomain()
                 )[1]
@@ -153,7 +153,7 @@ trait AppComponentsFactoryTestTrait
     {
         $this->assertTrue(
             $this->isProperImplementation(
-                StoredComponentRegistry::class,
+                StoredComponentRegistryInterface::class,
                 $this->getAppComponentsFactory()::buildConstructorArgs(
                     $this->getTestDomain()
                 )[2]
@@ -164,7 +164,7 @@ trait AppComponentsFactoryTestTrait
     public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void
     {
         $this->assertEquals(
-            App::deriveNameLocationFromRequest($this->getTestDomain()),
+            CoreApp::deriveNameLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getName()
@@ -174,7 +174,7 @@ trait AppComponentsFactoryTestTrait
     public function testBuildDomainReturnsRequestWhoseLocationMatchesExpectedAppNameLocation(): void
     {
         $this->assertEquals(
-            App::deriveNameLocationFromRequest($this->getTestDomain()),
+            CoreApp::deriveNameLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getLocation()
@@ -184,7 +184,7 @@ trait AppComponentsFactoryTestTrait
     public function testBuildDomainReturnsRequestWhoseContainerMatchesExpectedAppNameLocation(): void
     {
         $this->assertEquals(
-            App::deriveNameLocationFromRequest($this->getTestDomain()),
+            CoreApp::deriveNameLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getContainer()
@@ -208,7 +208,7 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    private function wasStoredAndRegistered(Component $component): void
+    private function wasStoredAndRegistered(ComponentInterface $component): void
     {
         $this->assertEquals(
             $component,
@@ -221,7 +221,7 @@ trait AppComponentsFactoryTestTrait
     public function testGetStoredComponentRegistryReturnsAStoredComponentRegistryWhoseAcceptedImplementationIsTheComponentInterface(): void
     {
         $this->assertEquals(
-            Component::class,
+            ComponentInterface::class,
             $this->getAppComponentsFactory()->getStoredComponentRegistry()->export()['acceptedImplementation']
         );
     }
@@ -234,6 +234,7 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
+    /** @noinspection DuplicatedCode */
     private function expectedBuildLog(): string
     {
         $buildLog = "";
@@ -301,22 +302,22 @@ trait AppComponentsFactoryTestTrait
 
     }
 
-    public function getOutputComponentFactory(): OutputComponentFactory
+    public function getOutputComponentFactory(): OutputComponentFactoryInterface
     {
         return $this->getAppComponentsFactory();
     }
 
-    public function getStandardUITemplateFactory(): StandardUITemplateFactory
+    public function getStandardUITemplateFactory(): StandardUITemplateFactoryInterface
     {
         return $this->getAppComponentsFactory();
     }
 
-    public function getRequestFactory(): RequestFactory
+    public function getRequestFactory(): RequestFactoryInterface
     {
         return $this->getAppComponentsFactory();
     }
 
-    public function getResponseFactory(): RequestFactory
+    public function getResponseFactory(): RequestFactoryInterface
     {
         return $this->getAppComponentsFactory();
     }
@@ -327,4 +328,12 @@ trait AppComponentsFactoryTestTrait
         $this->setStoredComponentFactoryParentTestInstances();
     }
 
+    protected function getTestInstanceArgs(): array
+    {
+        return [
+            $this->getMockPrimaryFactory(),
+            $this->getMockCrud(),
+            $this->getMockStoredComponentRegistry()
+        ];
+    }
 }

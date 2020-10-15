@@ -2,8 +2,8 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Exportable;
-use UnitTests\classes\utility\ReflectionUtilityTest;
+use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use UnitTests\classes\utility\ReflectionUtilityTest as ReflectionUtilityTestInterface;
 use UnitTests\TestTraits\ArrayTester;
 use UnitTests\TestTraits\ReflectionUtilityInstance;
 
@@ -13,7 +13,7 @@ trait ExportableTestTrait
     use ArrayTester;
     use ReflectionUtilityInstance;
 
-    private $exportable;
+    private ExportableInterface $exportable;
 
     public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
     {
@@ -23,12 +23,12 @@ trait ExportableTestTrait
         );
     }
 
-    protected function getExportable(): Exportable
+    protected function getExportable(): ExportableInterface
     {
         return $this->exportable;
     }
 
-    protected function setExportable(Exportable $exportable)
+    protected function setExportable(ExportableInterface $exportable)
     {
         $this->exportable = $exportable;
     }
@@ -36,7 +36,7 @@ trait ExportableTestTrait
     public function testPropertiesMatchImportedPropertiesPostImport()
     {
         $originalValues = $this->getReflectionUtility()->getClassPropertyValues($this->getExportable());
-        $this->getExportable()->import(['reflectionUtility' => new ReflectionUtilityTest()]);
+        $this->getExportable()->import(['reflectionUtility' => new ReflectionUtilityTestInterface()]);
         $this->assertNotEquals(
             $originalValues,
             $this->getReflectionUtility()->getClassPropertyValues($this->getExportable())

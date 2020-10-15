@@ -1,29 +1,29 @@
-<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+<?php
 
 namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
+use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use RuntimeException as PHPRuntimeException;
 
-abstract class StandardUI extends CoreOutputComponent implements StandardUIInterface
+abstract class StandardUI extends OutputComponentBase implements StandardUIInterface
 {
 
-    private $router;
-    private $templates = [];
-    private $outputComponents = [];
-    private $responseLocation;
-    private $responseContainer;
+    private RouterInterface $router;
+    private array $templates = [];
+    private array $outputComponents = [];
+    private string $appLocation;
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, Router $router, string $responseLocation, string $responseContainer)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, RouterInterface $router)
     {
         parent::__construct($storable, $switchable, $positionable);
         $this->router = $router;
-        $this->responseLocation = $responseLocation;
-        $this->responseContainer = $responseContainer;
+        $this->appLocation = CoreApp::deriveNameLocationFromRequest($router->getRequest());
     }
 
     public function getOutput(): string
@@ -44,6 +44,9 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
 
         }
         $this->import(['output' => $output]);
+        if (empty($output)) {
+            throw new PHPRuntimeException('404: Nothing tho show for ' . $this->router->getRequest()->getUrl());
+        }
         return parent::getOutput();
     }
 
@@ -51,15 +54,18 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     {
         if (empty($this->templates) === true) {
             $templates = [];
-            foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
+            foreach ($this->router->getResponses($this->appLocation, $this->router->getResponseContainer()) as $response) {
                 while (isset($templates[strval($response->getPosition())]) === true) {
                     $response->increasePosition();
                 }
                 foreach ($response->getTemplateStorageInfo() as $templateStorable) {
                     $template = $this->router->getCrud()->read($templateStorable);
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
+                        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                         $template->increasePosition();
                     }
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     $templates[strval($response->getPosition())][strval($template->getPosition())] = $template;
                 }
             }
@@ -72,15 +78,18 @@ abstract class StandardUI extends CoreOutputComponent implements StandardUIInter
     {
         if (empty($this->outputComponents) === true) {
             $outputComponents = [];
-            foreach ($this->router->getResponses($this->responseLocation, $this->responseContainer) as $response) {
+            foreach ($this->router->getResponses($this->appLocation, $this->router->getResponseContainer()) as $response) {
                 while (isset($outputComponents[strval($response->getPosition())]) === true) {
                     $response->increasePosition();
                 }
                 foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
                     $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
+                        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                         $outputComponent->increasePosition();
                     }
+                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     $outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
                     ksort($outputComponents[strval($response->getPosition())][$outputComponent->getType()]);
                 }

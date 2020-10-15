@@ -3,15 +3,15 @@
 namespace DarlingDataManagementSystem\abstractions\component;
 
 use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class SwitchableComponent extends Component implements SwitchableComponentInterface
 {
 
-    private $switchable;
+    private SwitchableInterface $switchable;
 
-    public function __construct(Storable $storable, Switchable $switchable)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable)
     {
         parent::__construct($storable);
         $this->setSwitchable($switchable);
@@ -20,7 +20,7 @@ abstract class SwitchableComponent extends Component implements SwitchableCompon
         }
     }
 
-    private function setSwitchable(Switchable $switchable)
+    private function setSwitchable(SwitchableInterface $switchable)
     {
         $this->switchable = $switchable;
     }
@@ -30,7 +30,7 @@ abstract class SwitchableComponent extends Component implements SwitchableCompon
         return $this->getSwitchable()->getState();
     }
 
-    private function getSwitchable(): Switchable
+    private function getSwitchable(): SwitchableInterface
     {
         return $this->switchable;
     }

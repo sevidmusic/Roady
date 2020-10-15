@@ -2,47 +2,50 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
-use UnitTests\interfaces\primary\TestTraits\SwitchableTestTrait;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use UnitTests\interfaces\primary\TestTraits\SwitchableTestTrait as SwitchableTestTraitInterface;
 
 trait SwitchableComponentTestTrait
 {
 
-    use SwitchableTestTrait;
+    use SwitchableTestTraitInterface;
 
-    private $switchableComponent;
+    private SwitchableComponentInterface $switchableComponent;
 
-    protected function turnSwitchableComponentOn(SwitchableComponent $switchableComponent): void
+    public function testStateIsTruePostInstantiation(): void
+    {
+        $this->assertTrue($this->getSwitchableComponent()->getState());
+    }
+
+    public function getSwitchableComponent(): SwitchableComponentInterface
+    {
+        return $this->switchableComponent;
+    }
+
+    public function setSwitchableComponent(SwitchableComponentInterface $switchableComponent)
+    {
+        $this->switchableComponent = $switchableComponent;
+    }
+
+    protected function turnSwitchableComponentOn(SwitchableComponentInterface $switchableComponent): void
     {
         if ($switchableComponent->getState() === false) {
             $switchableComponent->switchState();
         }
     }
 
-    protected function turnSwitchableComponentOff(SwitchableComponent $switchableComponent): void
+    protected function turnSwitchableComponentOff(SwitchableComponentInterface $switchableComponent): void
     {
         if ($switchableComponent->getState() === true) {
             $switchableComponent->switchState();
         }
     }
 
-    // @todo implement testStateIsTruePostInstantiation()
-
     protected function setSwitchableComponentParentTestInstances(): void
     {
         $this->setComponent($this->getSwitchableComponent());
         $this->setComponentParentTestInstances();
         $this->setSwitchable($this->getSwitchableComponent());
-    }
-
-    public function getSwitchableComponent(): SwitchableComponent
-    {
-        return $this->switchableComponent;
-    }
-
-    public function setSwitchableComponent(SwitchableComponent $switchableComponent)
-    {
-        $this->switchableComponent = $switchableComponent;
     }
 
 }

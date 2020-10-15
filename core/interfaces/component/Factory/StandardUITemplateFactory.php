@@ -3,8 +3,8 @@
 namespace DarlingDataManagementSystem\interfaces\component\Factory;
 
 use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 
 interface StandardUITemplateFactory extends StoredComponentFactoryInterface
 {
@@ -13,6 +13,6 @@ interface StandardUITemplateFactory extends StoredComponentFactoryInterface
         string $name,
         string $container,
         float $position,
-        OutputComponent ...$types
-    ): StandardUITemplate;
+        OutputComponentInterface ...$types
+    ): StandardUITemplateInterface;
 }

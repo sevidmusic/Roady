@@ -8,7 +8,7 @@ use UnitTests\TestUtilities\ArrayTestUtility;
 trait ArrayTester
 {
 
-    private $arrayTestUtility;
+    private ArrayTestUtility $arrayTestUtility;
 
     /**
      * @before

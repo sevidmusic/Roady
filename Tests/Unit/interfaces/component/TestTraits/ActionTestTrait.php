@@ -2,17 +2,18 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\interfaces\component\Action;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as CoreRequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait ActionTestTrait
 {
 
-    private $action;
-    private $currentRequest;
+    private ActionInterface $action;
+    private RequestInterface $currentRequest;
 
     public function testGetCurrentRequestReturnsRequestImplementationInstanceThatReflectsCurrentRequest(): void
     {
@@ -35,25 +36,25 @@ trait ActionTestTrait
     protected function getCurrentRequest(): CoreRequestInterface
     {
         if (isset($this->currentRequest) === false) {
-            $currentRequest = new Request(
-                new Storable(
+            $currentRequest = new CoreRequest(
+                new CoreStorable(
                     "CurrentRequest",
                     'CurrentRequestLocation',
                     'CurrentRequestContainer'
                 ),
-                new Switchable()
+                new CoreSwitchable()
             );
             $this->currentRequest = $currentRequest;
         }
         return $this->currentRequest;
     }
 
-    public function getAction(): Action
+    public function getAction(): ActionInterface
     {
         return $this->action;
     }
 
-    public function setAction(Action $action): void
+    public function setAction(ActionInterface $action): void
     {
         $this->action = $action;
     }

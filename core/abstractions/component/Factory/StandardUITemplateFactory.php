@@ -2,19 +2,19 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
 use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplate;
 
-abstract class StandardUITemplateFactory extends CoreStoredComponentFactory implements StandardUITemplateFactoryInterface
+abstract class StandardUITemplateFactory extends StoredComponentFactoryBase implements StandardUITemplateFactoryInterface
 {
 
-    public function __construct(PrimaryFactory $primaryFactory, ComponentCrud $componentCrud, StoredComponentRegistry $storedComponentRegistry)
+    public function __construct(PrimaryFactoryInterface $primaryFactory, ComponentCrudInterface $componentCrud, StoredComponentRegistryInterface $storedComponentRegistry)
     {
         parent::__construct($primaryFactory, $componentCrud, $storedComponentRegistry);
     }
@@ -23,7 +23,7 @@ abstract class StandardUITemplateFactory extends CoreStoredComponentFactory impl
         string $name,
         string $container,
         float $position,
-        OutputComponent ...$types
+        OutputComponentInterface ...$types
     ): StandardUITemplate
     {
         $standardUITemplate = new CoreStandardUITemplate(

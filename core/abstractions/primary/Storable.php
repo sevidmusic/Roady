@@ -7,8 +7,8 @@ use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface
 abstract class Storable extends Identifiable implements StorableInterface
 {
 
-    private $location;
-    private $container;
+    private string $location;
+    private string $container;
 
     public function __construct(string $name, string $location, string $container)
     {

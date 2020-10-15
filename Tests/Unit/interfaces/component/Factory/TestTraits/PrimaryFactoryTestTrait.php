@@ -2,29 +2,35 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 trait PrimaryFactoryTestTrait
 {
 
-    private $primaryFactory;
+    private PrimaryFactoryInterface $primaryFactory;
 
     public function testBuildIdentifiableReturnsAIdentifiableImplementationInstance(): void
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Identifiable',
+                IdentifiableInterface::class,
                 class_implements($this->getPrimaryFactory()->buildIdentifiable('AssignedName'))
             )
         );
     }
 
-    public function getPrimaryFactory(): PrimaryFactory
+    public function getPrimaryFactory(): PrimaryFactoryInterface
     {
         return $this->primaryFactory;
     }
 
-    public function setPrimaryFactory(PrimaryFactory $primaryFactory)
+    public function setPrimaryFactory(PrimaryFactoryInterface $primaryFactory)
     {
         $this->primaryFactory = $primaryFactory;
     }
@@ -40,8 +46,13 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Storable',
-                class_implements($this->getPrimaryFactory()->buildStorable('AssignedName', 'AssignedContainer'))
+                StorableInterface::class,
+                class_implements(
+                    $this->getPrimaryFactory()->buildStorable(
+                        'AssignedName',
+                        'AssignedContainer'
+                    )
+                )
             )
         );
     }
@@ -49,14 +60,20 @@ trait PrimaryFactoryTestTrait
     public function testBuildStorableReturnsStorableImplementationInstanceWhoseAssignedNameMatchesSpecifiedName(): void
     {
         $expectedName = 'ExpectedName';
-        $storable = $this->getPrimaryFactory()->buildStorable($expectedName, 'AssignedContainer');
+        $storable = $this->getPrimaryFactory()->buildStorable(
+            $expectedName,
+            'AssignedContainer'
+        );
         $this->assertEquals($expectedName, $storable->getName());
     }
 
     public function testBuildStorableReturnsStorableImplementationInstanceWhoseAssignedContainerMatchesSpecifiedContainer(): void
     {
         $expectedContainer = 'ExpectedContainer';
-        $storable = $this->getPrimaryFactory()->buildStorable('AssignedName', $expectedContainer);
+        $storable = $this->getPrimaryFactory()->buildStorable(
+            'AssignedName',
+            $expectedContainer
+        );
         $this->assertEquals($expectedContainer, $storable->getContainer());
     }
 
@@ -73,7 +90,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Classifiable',
+                ClassifiableInterface::class,
                 class_implements($this->getPrimaryFactory()->buildClassifiable())
             )
         );
@@ -83,7 +100,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Exportable',
+                ExportableInterface::class,
                 class_implements($this->getPrimaryFactory()->buildExportable())
             )
         );
@@ -93,7 +110,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Switchable',
+                SwitchableInterface::class,
                 class_implements($this->getPrimaryFactory()->buildSwitchable())
             )
         );
@@ -103,7 +120,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\primary\Positionable',
+                PositionableInterface::class,
                 class_implements($this->getPrimaryFactory()->buildPositionable(rand(0, 1000)))
             )
         );

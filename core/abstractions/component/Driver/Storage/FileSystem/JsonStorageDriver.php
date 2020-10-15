@@ -2,15 +2,15 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent;
+use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
 use DarlingDataManagementSystem\classes\component\Component as StandardComponent;
 use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
 use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\Json as JsonInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
 use DarlingDataManagementSystem\interfaces\primary\Switchable;
 
-abstract class Json extends SwitchableComponent implements JsonInterface
+abstract class JsonStorageDriver extends SwitchableComponentBase implements JsonInterface
 {
 
     public function __construct(Storable $storable, Switchable $switchable)

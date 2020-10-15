@@ -8,7 +8,7 @@ use UnitTests\TestUtilities\StringTestUtility;
 class StringTestUtilityTest extends TestCase
 {
 
-    private $stringTestUtility;
+    private StringTestUtility $stringTestUtility;
 
     public function setUp(): void
     {

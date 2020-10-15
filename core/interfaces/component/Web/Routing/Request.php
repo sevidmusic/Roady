@@ -2,9 +2,9 @@
 
 namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 
-interface Request extends SwitchableComponent
+interface Request extends SwitchableComponentInterface
 {
 
     public function getGet(): array;

@@ -12,7 +12,7 @@ class StandardUITemplateTest extends AbstractGenericUITemplateTest
 {
     public function setUp(): void
     {
-        $this->setGenericUITemplate(
+        $this->setStandardUITemplate(
             new StandardUITemplate(
                 new Storable(
                     'GenericUITemplateName',
@@ -24,6 +24,6 @@ class StandardUITemplateTest extends AbstractGenericUITemplateTest
             )
         );
         $this->setGenericUITemplateParentTestInstances();
-        $this->setPositionable($this->getGenericUITemplate());
+        $this->setPositionable($this->getStandardUITemplate());
     }
 }

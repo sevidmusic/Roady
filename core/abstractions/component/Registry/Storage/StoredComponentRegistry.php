@@ -3,19 +3,19 @@
 namespace DarlingDataManagementSystem\abstractions\component\Registry\Storage;
 
 use DarlingDataManagementSystem\abstractions\component\Component as AbstractComponent;
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 
 abstract class StoredComponentRegistry extends AbstractComponent implements StoredComponentRegistryInterface
 {
 
-    private $acceptedImplementation = 'DarlingDataManagementSystem\interfaces\component\Component';
-    private $componentCrud;
-    private $registry = [];
+    private string $acceptedImplementation = ComponentInterface::class;
+    private ComponentCrudInterface $componentCrud;
+    private array $registry = [];
 
-    public function __construct(Storable $storable, ComponentCrud $componentCrud)
+    public function __construct(StorableInterface $storable, ComponentCrudInterface $componentCrud)
     {
         parent::__construct($storable);
         $this->componentCrud = $componentCrud;
@@ -26,12 +26,12 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         return $this->acceptedImplementation;
     }
 
-    public function getComponentCrud(): ComponentCrud
+    public function getComponentCrud(): ComponentCrudInterface
     {
         return $this->componentCrud;
     }
 
-    public function registerComponent(Component $component): bool
+    public function registerComponent(ComponentInterface $component): bool
     {
         if ($this->isRegistered($component) === true) {
             return false;
@@ -46,18 +46,18 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         return true;
     }
 
-    private function isRegistered(Component $component): bool
+    private function isRegistered(ComponentInterface $component): bool
     {
         return in_array($component->export()['storable'], $this->registry, true);
     }
 
-    private function isStored(Component $component): bool
+    private function isStored(ComponentInterface $component): bool
     {
         /** @noinspection PhpNonStrictObjectEqualityInspection */
         return ($this->componentCrud->read($component) == $component);
     }
 
-    private function isAcceptedImplementation(Component $component): bool
+    private function isAcceptedImplementation(ComponentInterface $component): bool
     {
         return in_array(
             $this->acceptedImplementation,
@@ -65,7 +65,7 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         );
     }
 
-    public function unRegisterComponent(Storable $storable): bool
+    public function unRegisterComponent(StorableInterface $storable): bool
     {
         /** @noinspection PhpParamsInspection */
         $actualStorable = (
@@ -80,12 +80,12 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         return !in_array($actualStorable, $this->registry);
     }
 
-    private function storableIsAComponent(Storable $storable): bool
+    private function storableIsAComponent(StorableInterface $storable): bool
     {
-        return in_array('DarlingDataManagementSystem\interfaces\component\Component', class_implements($storable));
+        return in_array(ComponentInterface::class, class_implements($storable));
     }
 
-    private function getStorableFromComponent(Component $component): Storable
+    private function getStorableFromComponent(ComponentInterface $component): StorableInterface
     {
         return $component->export()['storable'];
     }
