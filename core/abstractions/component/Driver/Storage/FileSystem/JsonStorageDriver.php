@@ -3,17 +3,17 @@
 namespace DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem;
 
 use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingDataManagementSystem\classes\component\Component as StandardComponent;
-use DarlingDataManagementSystem\classes\primary\Storable as StandardStorable;
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
-abstract class JsonStorageDriver extends SwitchableComponentBase implements JsonInterface
+abstract class JsonStorageDriver extends SwitchableComponentBase implements JsonStorageDriverInterface
 {
 
-    public function __construct(Storable $storable, Switchable $switchable)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable)
     {
         parent::__construct($storable, $switchable);
         $this->mkdir($this->getStorageDirectoryPath());
@@ -51,7 +51,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return $this->getStorageDirectoryPath() . DIRECTORY_SEPARATOR . 'storageIndex.json';
     }
 
-    public function write(Component $component): bool
+    public function write(ComponentInterface $component): bool
     {
         if ($this->getState() === false) {
             return false;
@@ -72,7 +72,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return !in_array(false, $status);
     }
 
-    private function getStorageRootPath(Storable $storable): string
+    private function getStorageRootPath(StorableInterface $storable): string
     {
         return
             $this->getStorageDirectoryPath() .
@@ -83,14 +83,14 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
             DIRECTORY_SEPARATOR;
     }
 
-    public function getStoragePath(Storable $storable): string
+    public function getStoragePath(StorableInterface $storable): string
     {
         return
             $this->getStorageRootPath($storable) .
             substr($storable->getUniqueId(), 0, 32) . '.json';
     }
 
-    private function pack(Component $component): string
+    private function pack(ComponentInterface $component): string
     {
         $data = $component->export();
         return json_encode($this->packObjectsInArray($data));
@@ -110,7 +110,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
 
     }
 
-    private function addToStorageIndex(Component $component): bool
+    private function addToStorageIndex(ComponentInterface $component): bool
     {
         $storageIndex = $this->getStorageIndex();
         $storageIndex[$component->getLocation()][$component->getContainer()][$component->getUniqueId()] = base64_encode(serialize($component->export()['storable']));
@@ -131,7 +131,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return ((is_array($storageIndex) === true) ? $storageIndex : []);
     }
 
-    public function delete(Storable $storable): bool
+    public function delete(StorableInterface $storable): bool
     {
         if ($this->getState() === false || $this->notStored($storable) === true) {
             return false;
@@ -142,12 +142,12 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return $this->notStored($storable);
     }
 
-    private function notStored(Storable $storable): bool
+    private function notStored(StorableInterface $storable): bool
     {
         return (file_exists($this->getStoragePath($storable)) === false);
     }
 
-    private function removeFromStorageIndex(Storable $storable): bool
+    private function removeFromStorageIndex(StorableInterface $storable): bool
     {
         $storageIndex = $this->getStorageIndex();
         unset(
@@ -174,11 +174,11 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return $components;
     }
 
-    public function read(Storable $storable): Component
+    public function read(StorableInterface $storable): ComponentInterface
     {
         if ($this->getState() === false) {
-            return new StandardComponent(
-                new StandardStorable(
+            return new CoreComponent(
+                new CoreStorable(
                     '__MOCK_COMPONENT__',
                     '__MOCK_COMPONENT__',
                     '__MOCK_COMPONENT__'
@@ -197,17 +197,17 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         /**
          * !IMPORTANT: Clone's storable must match supplied storable.
          * This MUST be the last thing done before returning!!!
-         * Note, since Components are Storable, export MUST
+         * Note, since Components are StorableInterface, export MUST
          * be used when handling actual components or the
-         * Component passed to read as the Storable will
+         * ComponentInterface passed to read as the StorableInterface will
          * be assigned in it's entirety to the returned
-         * Component's storable, which may not break the
-         * returned Component, but will corrupt it's data.
+         * ComponentInterface's storable, which may not break the
+         * returned ComponentInterface, but will corrupt it's data.
          */
         switch ($this->isAComponent($storable)) {
             case true:
                 /**
-                 * @var Component $storable If isAComponent(), then use export to get actual storable.
+                 * @var ComponentInterface $storable If isAComponent(), then use export to get actual storable.
                  */
                 $clone->import(['storable' => $storable->export()['storable']]);
                 break;
@@ -218,11 +218,11 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return $clone;
     }
 
-    private function getStandardComponent(): Component
+    private function getStandardComponent(): ComponentInterface
     {
-        return new StandardComponent(
-            new StandardStorable(
-                'StandardComponent',
+        return new CoreComponent(
+            new CoreStorable(
+                'CoreComponent',
                 'StandardComponentLocation',
                 'StandardComponentContainer'
             )
@@ -230,7 +230,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
 
     }
 
-    private function getStoredData(Storable $storable)
+    private function getStoredData(StorableInterface $storable)
     {
         return json_decode(file_get_contents($this->getStoragePath($storable)), true);
     }
@@ -240,7 +240,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return (is_array($data) === false);
     }
 
-    private function getClone(string $type): Component
+    private function getClone(string $type): ComponentInterface
     {
         $reflectionUtility = $this->export()['reflectionUtility'];
         return $reflectionUtility->getClassInstance(
@@ -282,9 +282,9 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return $array;
     }
 
-    private function isAComponent(Storable $storable): bool
+    private function isAComponent(StorableInterface $storable): bool
     {
-        return in_array('DarlingDataManagementSystem\interfaces\component\Component', class_implements($storable));
+        return in_array(ComponentInterface::class, class_implements($storable));
     }
 
 }

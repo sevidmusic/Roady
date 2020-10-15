@@ -9,49 +9,49 @@ use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App;
-use DarlingDataManagementSystem\interfaces\primary\Classifiable;
-use DarlingDataManagementSystem\interfaces\primary\Exportable;
-use DarlingDataManagementSystem\interfaces\primary\Identifiable;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class PrimaryFactory extends Factory implements PrimaryFactoryInterface
 {
 
-    public function __construct(App $app)
+    public function __construct(AppInterface $app)
     {
         parent::__construct($app);
     }
 
-    public function buildIdentifiable(string $name): Identifiable
+    public function buildIdentifiable(string $name): IdentifiableInterface
     {
         return new CoreIdentifiable($name);
     }
 
-    public function buildStorable(string $name, string $container): Storable
+    public function buildStorable(string $name, string $container): StorableInterface
     {
         return new CoreStorable($name, $this->export()['app']->getLocation(), $container);
     }
 
-    public function buildClassifiable(): Classifiable
+    public function buildClassifiable(): ClassifiableInterface
     {
         return new CoreClassifiable();
     }
 
-    public function buildExportable(): Exportable
+    public function buildExportable(): ExportableInterface
     {
         return new CoreExportable();
     }
 
-    public function buildSwitchable(): Switchable
+    public function buildSwitchable(): SwitchableInterface
     {
         return new CoreSwitchable();
     }
 
 
-    public function buildPositionable(float $initialPosition): Positionable
+    public function buildPositionable(float $initialPosition): PositionableInterface
     {
         return new CorePositionable($initialPosition);
     }
