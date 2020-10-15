@@ -2,9 +2,10 @@
 
 namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 
-interface OutputComponent extends SwitchableComponent, Positionable
+interface OutputComponent extends SwitchableComponentInterface, PositionableInterface
 {
 
     public function getOutput(): string;
