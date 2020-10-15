@@ -18,7 +18,7 @@ use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory;
+use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
@@ -36,7 +36,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     private const REFLECTION_UTILITY = 'reflectionUtility';
     private const ACCEPTED_IMPLEMENTATION = 'acceptedImplementation';
     private const CONSTRUCT = '__construct';
-    private ?OutputComponentFactory $outputComponentFactory = null;
+    private ?OutputComponentFactoryInterface $outputComponentFactory = null;
     private ?StandardUITemplateFactoryInterface $standardUITemplateFactory = null;
     private ?RequestFactoryInterface $requestFactory = null;
     private ?ResponseFactoryInterface $responseFactory = null;
