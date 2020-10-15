@@ -2,16 +2,16 @@
 
 namespace DarlingDataManagementSystem\interfaces\component\Factory;
 
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Web\App;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
-interface Factory extends Component
+interface Factory extends ComponentInterface
 {
     public const CONTAINER = 'FACTORIES';
 
-    public function getApp(): App;
+    public function getApp(): AppInterface;
 
-    public function getAppDomain(): Request;
+    public function getAppDomain(): RequestInterface;
 
 }

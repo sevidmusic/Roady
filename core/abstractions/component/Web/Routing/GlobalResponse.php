@@ -4,17 +4,17 @@ namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
 use DarlingDataManagementSystem\abstractions\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Web\App;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
-use DarlingDataManagementSystem\interfaces\primary\Positionable;
-use DarlingDataManagementSystem\interfaces\primary\Switchable;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class GlobalResponse extends CoreResponse implements GlobalResponseInterface
 {
 
-    public function __construct(App $app, Switchable $switchable, Positionable $positionable = null)
+    public function __construct(AppInterface $app, SwitchableInterface $switchable, PositionableInterface $positionable = null)
     {
         if (empty($positionable) === true) {
             parent::__construct($app, $switchable);
@@ -22,7 +22,7 @@ abstract class GlobalResponse extends CoreResponse implements GlobalResponseInte
         parent::__construct($app, $switchable, $positionable);
     }
 
-    public function respondsToRequest(Request $request, ComponentCrud $componentCrud): bool
+    public function respondsToRequest(RequestInterface $request, ComponentCrudInterface $componentCrud): bool
     {
         if (CoreApp::deriveNameLocationFromRequest($request) === $this->getLocation()) {
             return true;

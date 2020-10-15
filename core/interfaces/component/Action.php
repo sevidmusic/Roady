@@ -2,10 +2,10 @@
 
 namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 
-interface Action extends CoreOutputComponent
+interface Action extends OutputComponentInterface
 {
 
     public function do(): bool;
@@ -16,6 +16,6 @@ interface Action extends CoreOutputComponent
 
     public function wasUndone(): bool;
 
-    public function getCurrentRequest(): Request;
+    public function getCurrentRequest(): RequestInterface;
 
 }
