@@ -2,27 +2,27 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
+use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
 use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\interfaces\component\Component;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 
-abstract class ResponseFactory extends CoreStoredComponentFactory implements ResponseFactoryInterface
+abstract class ResponseFactory extends StoredComponentFactoryBase implements ResponseFactoryInterface
 {
 
     public function __construct(
-        PrimaryFactory $primaryFactory,
-        ComponentCrud $componentCrud,
-        StoredComponentRegistry $storedComponentRegistry
+        PrimaryFactoryInterface $primaryFactory,
+        ComponentCrudInterface $componentCrud,
+        StoredComponentRegistryInterface $storedComponentRegistry
     )
     {
         parent::__construct(
@@ -35,8 +35,8 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
     public function buildResponse(
         string $name,
         float $position,
-        Component ...$requestsOutputComponentsStandardUITemplates
-    ): Response
+        ComponentInterface ...$requestsOutputComponentsStandardUITemplates
+    ): ResponseInterface
     {
         $response = new CoreResponse(
             $this->getPrimaryFactory()->buildStorable(
@@ -56,14 +56,14 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
     }
 
     /**
-     * @param Response $response
-     * @param Component|Request $component
+     * @param ResponseInterface $response
+     * @param ComponentInterface|RequestInterface $component
      */
-    public static function ifRequestAddStorageInfo(Response $response, Component $component): void
+    public static function ifRequestAddStorageInfo(ResponseInterface $response, ComponentInterface $component): void
     {
         if (
             in_array(
-                Request::class,
+                RequestInterface::class,
                 class_implements($component)
             ) === true
         ) {
@@ -72,14 +72,14 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
     }
 
     /**
-     * @param Response $response
-     * @param Component|StandardUITemplate $component
+     * @param ResponseInterface $response
+     * @param ComponentInterface|StandardUITemplateInterface $component
      */
-    public static function ifStandardUITemplateAddStorageInfo(Response $response, Component $component): void
+    public static function ifStandardUITemplateAddStorageInfo(ResponseInterface $response, ComponentInterface $component): void
     {
         if (
             in_array(
-                StandardUITemplate::class,
+                StandardUITemplateInterface::class,
                 class_implements($component)
             ) === true
         ) {
@@ -88,14 +88,14 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
     }
 
     /**
-     * @param Response $response
-     * @param Component|OutputComponent $component
+     * @param ResponseInterface $response
+     * @param ComponentInterface|OutputComponentInterface $component
      */
-    public static function ifOutputComponentAddStorageInfo(Response $response, Component $component): void
+    public static function ifOutputComponentAddStorageInfo(ResponseInterface $response, ComponentInterface $component): void
     {
         if (
             in_array(
-                OutputComponent::class,
+                OutputComponentInterface::class,
                 class_implements($component)
             ) === true
         ) {
@@ -106,8 +106,8 @@ abstract class ResponseFactory extends CoreStoredComponentFactory implements Res
     public function buildGlobalResponse(
         string $name,
         float $position,
-        Component ...$requestsOutputComponentsStandardUITemplates
-    ): GlobalResponse
+        ComponentInterface ...$requestsOutputComponentsStandardUITemplates
+    ): GlobalResponseInterface
     {
         $globalResponse = new CoreGlobalResponse(
             $this->getPrimaryFactory()->export()['app'],
