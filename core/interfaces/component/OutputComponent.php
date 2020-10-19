@@ -2,8 +2,8 @@
 
 namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
 interface OutputComponent extends SwitchableComponentInterface, PositionableInterface
 {

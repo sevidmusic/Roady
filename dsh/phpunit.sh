@@ -16,8 +16,7 @@ PATH_TO_DDMS="${PATH_TO_DSH_DIR//dsh/}"
 # shellcheck source=src/util.sh
 . "${PATH_TO_DSHUI}"
 
-if [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ]
-then
+if [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ]; then
   clear && showBanner
   notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not apart of" 0 'dontClear'
   notifyUser "the Darling Data Managent System, it is a third party library developed by" 0 'dontClear'
@@ -49,5 +48,4 @@ fi
 
 sleep 5
 
-echo "License message already shown" > "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown"
-
+echo "License message already shown" >"${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown"

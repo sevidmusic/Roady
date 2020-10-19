@@ -3,14 +3,16 @@
 namespace Extensions\Contests\core\abstractions\component\Contest;
 
 use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\interfaces\primary\Positionable;
 use DarlingDataManagementSystem\interfaces\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\interfaces\primary\Switchable;
 use DateTime;
-use Extensions\Contests\core\classes\component\Contest\User; // @todo Ref interface, not class
+use Extensions\Contests\core\classes\component\Contest\User;
 use Extensions\Contests\core\interfaces\component\Contest\Submission as SubmissionInterface;
 use RuntimeException;
+
+// @todo Ref interface, not class
 
 abstract class Submission extends CoreOutputComponent implements SubmissionInterface
 {
@@ -88,6 +90,20 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         return 1 === preg_match("/\b(?:(?:https?):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $this->url);
     }
 
+    public function registerVote(User $user): bool
+    {
+        if ($this->timeSinceLastVote($user) > self::ONE_DAY) {
+            $this->voterEmails[time()] = $user->getEmail();
+            $this->increasePosition();
+            return true;
+        }
+        return false;
+    }
+
+    private function timeSinceLastVote(User $user): int
+    {
+        return (time() - $this->getTimeOfLastVote($user));
+    }
 
     private function getTimeOfLastVote(User $user): int
     {
@@ -98,22 +114,6 @@ abstract class Submission extends CoreOutputComponent implements SubmissionInter
         );
         $lastVoteTime = array_pop($times);
         return (is_null($lastVoteTime) ? (time() - (self::ONE_DAY + 1)) : $lastVoteTime);
-    }
-
-    private function timeSinceLastVote(User $user): int
-    {
-        return (time() - $this->getTimeOfLastVote($user));
-    }
-
-    public function registerVote(User $user): bool
-    {
-        if($this->timeSinceLastVote($user) > self::ONE_DAY)
-        {
-            $this->voterEmails[time()] = $user->getEmail();
-            $this->increasePosition();
-            return true;
-        }
-        return false;
     }
 
     public function totalVotes(): int
