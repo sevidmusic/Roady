@@ -63,7 +63,7 @@ while test $# -gt 0; do
       newLine
       notifyUser "Server is running @ ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}http://localhost:${1}${CLEAR_ALL_TEXT_STYLES}${NOTIFYCOLOR}, to stop use ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}CTRL-C${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
       newLine
-      /usr/bin/php -S "localhost:${1}" -t "${PATH_TO_DDMS}"
+      /usr/bin/php -S "localhost:${1}" -t "${PATH_TO_DDMS}" &> /dev/null & xdg-open "http://localhost:${1}" &>/dev/null & disown
       enableCtrlC
       exit 0
     fi
