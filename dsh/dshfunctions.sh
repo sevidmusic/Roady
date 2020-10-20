@@ -13,9 +13,6 @@ disableCtrlC() {
 
 enableCtrlC() {
     trap 2
-    newLine
-    notifyUser "${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}CTRL-C${GREEN_BG_COLOR} is enabled again.${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
-    newLine
 }
 
 getJsonStorageDriverInterfacePath()
