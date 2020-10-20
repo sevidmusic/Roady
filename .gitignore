@@ -8,7 +8,7 @@ php.tags
 ctags.tags
 xaa
 *.swp
-.dcmsJsonData/
+.dcmsJsonData*/
 *.txt
 Apps/DEFAULT/
 Apps/.buildLogs/
