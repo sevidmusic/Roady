@@ -33,8 +33,8 @@ loadLibrary "${PATH_TO_DSHUI}"
 while test $# -gt 0; do
   case "$1" in
   -h | --help)
-    showBanner
     shift
+    showBanner
     if [[ -z "${1}" || "${1}" == 'app' || "${1}" == 'apps' ]]; then
       notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
       notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
@@ -72,17 +72,11 @@ while test $# -gt 0; do
   -t | --test-ddms*)
     shift
     disableCtrlC
-    # Generate random directory name
-    # NEW_NAME="ddmsTestStorage${RANDOM}${RANDOM}${RANDOM}"
-    # capture original JsonStorageDriver::STORAGE_DIRECTORY_NAME
-    # JSON_STORAGE_DIRECTORY_NAME_ORIGINAL="$(grep ...)"
-    # temporarily replace JsonStorageDriver::STORAGE_DIRECTORY_NAME with name appropriate for testing
-    # sed -i ...JsonStorageDriver.php "s/${JSON_STORAGE_DIRECTORY_NAME}/NEW_NAME/g"
+    modifyJsonStorageDir
     "${PATH_TO_DSH_DIR}/phpunit.sh"
-    # Restore original JsonStorageDriver::STORAGE_DIRECTORY_NAME
-    # sed -i ...JsonStorageDriver.php "s/${NEW_NAME}/${JSON_STORAGE_DIRECTORY_NAME_ORIGINAL}"
-    showLoadingBar "All done" 'dontClear'
+    restoreJsonStorageDir
     enableCtrlC
+    showLoadingBar "All done" 'dontClear'
     ;;
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"
