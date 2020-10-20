@@ -9,6 +9,8 @@ use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface
 interface JsonStorageDriver extends StorageDriverInterface
 {
 
+    public const STORAGE_DIRECTORY_NAME = 'dcmsJsonData';
+
     public function getStorageDirectoryPath(): string;
 
     public function getStoragePath(StorableInterface $storable): string;

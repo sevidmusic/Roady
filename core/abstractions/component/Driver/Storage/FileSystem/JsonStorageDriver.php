@@ -43,7 +43,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
             ['core', DIRECTORY_SEPARATOR],
             __NAMESPACE__
         );
-        return str_replace($namespacePath, '', __DIR__) . '.dcmsJsonData';
+        return str_replace($namespacePath, '', __DIR__) . '.' . self::STORAGE_DIRECTORY_NAME;
     }
 
     private function getStorageIndexFilePath(): string

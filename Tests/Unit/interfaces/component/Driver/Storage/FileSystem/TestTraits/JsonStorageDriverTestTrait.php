@@ -34,6 +34,13 @@ trait JsonStorageDriverTestTrait
         }
     }
 
+    public function testSTORAGE_DIRECTORY_NAMEConstantIsAssignedAnAlphaNumericString(): void
+    {
+        $this->getStringTestUtility()->stringIsAlphaNumeric(
+            $this->getJsonStorageDriver()::STORAGE_DIRECTORY_NAME
+        );
+    }
+
     private static function getExpectedStorageDirectoryPath(): string
     {
         $namespacePath = str_replace(
@@ -41,7 +48,7 @@ trait JsonStorageDriverTestTrait
             ['Tests\\Unit', DIRECTORY_SEPARATOR],
             __NAMESPACE__
         );
-        return str_replace($namespacePath, '', __DIR__) . '.dcmsJsonData';
+        return str_replace($namespacePath, '', __DIR__) . '.' . JsonStorageDriverInterface::STORAGE_DIRECTORY_NAME;
     }
 
     public function testGetStorageDirectoryPathReturnsExpectedStorageDirectoryPath(): void
