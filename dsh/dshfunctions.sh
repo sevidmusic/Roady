@@ -4,8 +4,7 @@ set -o posix
 
 clear
 
-runPhpUnit() {
-    if [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ]; then
+showPhpUnitLicenseMsg() {
       clear && showBanner
       notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not apart of" 0 'dontClear'
       notifyUser "the Darling Data Managent System, it is a third party library developed by" 0 'dontClear'
@@ -31,12 +30,20 @@ runPhpUnit() {
       notifyUser "This message will not show again unless the relevant .dsh_* cache file is deleted." 0 'dontClear'
       sleep 4
       showLoadingBar "Starting PhpUnit"
-    fi
+}
+
+runPhpUnit() {
+    disableCtrlC
+    modifyJsonStorageDir
+    [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ] && showPhpUnitLicenseMsg
     "${PATH_TO_DDMS}vendor/phpunit/phpunit/phpunit" -c "${PATH_TO_DDMS}php.xml"
     echo "License message already shown" >"${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown"
+    restoreJsonStorageDir
+    enableCtrlC
 }
 
 showHelpMsg() {
+    showBanner
     if [[ -z "${1}" || "${1}" == 'app' || "${1}" == 'apps' ]]; then
         notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
         notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
@@ -58,10 +65,14 @@ showHelpMsg() {
 }
 
 startAppServer() {
+    disableCtrlC
+    showLoadingBar "Starting local development server at localhost:${1}"
     newLine
-    notifyUser "Server is running @ ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}http://localhost:${1}${CLEAR_ALL_TEXT_STYLES}${NOTIFYCOLOR}, to stop use ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}CTRL-C${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    notifyUser "Server is running @ ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}http://localhost:${1}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    sleep 2
     newLine
     /usr/bin/php -S "localhost:${1}" -t "${PATH_TO_DDMS}" &> /dev/null & xdg-open "http://localhost:${1}" &>/dev/null & disown
+    enableCtrlC
 }
 
 disableCtrlC() {
@@ -103,8 +114,19 @@ modifyJsonStorageDir() {
 
 restoreJsonStorageDir() {
     sed -i "s/${NEW_STORAGE_DIRECTORY_NAME}/${ORIGINAL_STORAGE_DIRECTORY_NAME}/g" "$(getJsonStorageDriverInterfacePath)"
+    [ "${1}" == "keepDir" ] && return
     showLoadingBar "Removing temporary storage directory: ${HIGHLIGHTCOLOR}${PATH_TO_TEMP_STORAGE_DIRECTORY}" 'dontClear'
     rm -R "${PATH_TO_TEMP_STORAGE_DIRECTORY}"
 }
 
+# todo change to buildApp
+buildApp() {
+   disableCtrlC
+   [ -z "${1}" ] && notifyUser "${ERRORCOLOR}You must specify an app to run. For example: ${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
+   MOST_RECENTLY_RUN_APP_PATH="${PATH_TO_DDMS}Apps/${1}"
+   [ ! -d "${MOST_RECENTLY_RUN_APP_PATH}" ] && notifyUser "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not exist. Please specify an existing app as follows:" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh -b AppName${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && newLine && notifyUser "${CLEAR_ALL_TEXT_STYLES}${GREEN_BG_COLOR}${BLACK_FG_COLOR}The following apps are available" 0 'dontClear' && cd "${PATH_TO_DDMS}" && newLine && ls --color Apps && newLine && exit 1
+   cd "${MOST_RECENTLY_RUN_APP_PATH}"
+   /usr/bin/php Components.php
+   enableCtrlC
+}
 

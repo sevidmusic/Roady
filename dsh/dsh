@@ -34,29 +34,27 @@ while test $# -gt 0; do
   case "$1" in
   -h | --help)
     shift
-    showBanner
     showHelpMsg
     exit 0
     ;;
   -s | --start-app-server*)
     shift
     if [[ -n "${1}" ]]; then
-      disableCtrlC
-      showLoadingBar "Starting local development server at localhost:${1}"
       startAppServer "${1}"
-      enableCtrlC
       exit 0
     fi
     notifyUser "Error! You must specify a port when using the -s flag. For example: ${HIGHLIGHTCOLOR}dsh -s 8888${CLEAR_ALL_TEXT_STYLES}"
+    exit 1
     ;;
   -t | --test-ddms*)
     shift
-    disableCtrlC
-    modifyJsonStorageDir
     runPhpUnit
-    restoreJsonStorageDir
-    enableCtrlC
-    showLoadingBar "All done" 'dontClear'
+    exit 0
+    ;;
+  -b | --build-app*)
+    shift
+    buildApp "${1}"
+    exit 0
     ;;
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"
@@ -65,5 +63,3 @@ while test $# -gt 0; do
   esac
 done
 
-# re-enable ctrl-c
-trap 2
