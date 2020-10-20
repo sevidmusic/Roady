@@ -130,4 +130,8 @@ notifyUserAndExit() {
   exitOrContinue "${4:-0}" "${5:-default}"
 }
 
+newLine() {
+    printf "\n"
+}
+
 initTextStyles

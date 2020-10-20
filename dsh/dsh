@@ -4,22 +4,30 @@ set -o posix
 
 clear
 
-# Determine real path to dsh directory
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-  DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-done
-PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
-PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
-PATH_TO_DDMS="${PATH_TO_DSH_DIR//dsh/}"
-# PATH_TO_DDMS="$(echo "${PATH_TO_DSH_DIR}" | sed 's/dsh//g')"
+setupPaths() {
+    # Determine real path to dsh directory
+    SOURCE="${BASH_SOURCE[0]}"
+    while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+      DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+      SOURCE="$(readlink "$SOURCE")"
+      [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
+    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
+    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh/}"
+}
 
-[[ ! -f "${PATH_TO_DSHUI}" ]] && printf '\n\n\e[33mError! Failed to load user interface!\e[0m\n\n'
+loadLibrary() {
+    [[ ! -f "${1}" ]] && printf "\n\n\e[33mError! Failed to load ${1}!\e[0m\n\n" && exit 1
+    . "${1}"
+}
 
-# shellcheck source=src/util.sh
-. "${PATH_TO_DSHUI}"
+setupPaths
+
+loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
+
+loadLibrary "${PATH_TO_DSHUI}"
 
 ####### Process flags #######
 while test $# -gt 0; do
@@ -50,15 +58,31 @@ while test $# -gt 0; do
   -s | --start-app-server*)
     shift
     if [[ -n "${1}" ]]; then
-      notifyUser "Starting local development server at localhost:${1}"
+      disableCtrlC
+      showLoadingBar "Starting local development server at localhost:${1}"
+      newLine
+      notifyUser "Server is running @ ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}http://localhost:${1}${CLEAR_ALL_TEXT_STYLES}${NOTIFYCOLOR}, to stop use ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}CTRL-C${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+      newLine
       /usr/bin/php -S "localhost:${1}" -t "${PATH_TO_DDMS}"
+      enableCtrlC
       exit 0
     fi
     notifyUser "Error! You must specify a port when using the -s flag. For example: ${HIGHLIGHTCOLOR}dsh -s 8888${CLEAR_ALL_TEXT_STYLES}"
     ;;
   -t | --test-ddms*)
     shift
+    disableCtrlC
+    # Generate random directory name
+    # NEW_NAME="ddmsTestStorage${RANDOM}${RANDOM}${RANDOM}"
+    # capture original JsonStorageDriver::STORAGE_DIRECTORY_NAME
+    # JSON_STORAGE_DIRECTORY_NAME_ORIGINAL="$(grep ...)"
+    # temporarily replace JsonStorageDriver::STORAGE_DIRECTORY_NAME with name appropriate for testing
+    # sed -i ...JsonStorageDriver.php "s/${JSON_STORAGE_DIRECTORY_NAME}/NEW_NAME/g"
     "${PATH_TO_DSH_DIR}/phpunit.sh"
+    # Restore original JsonStorageDriver::STORAGE_DIRECTORY_NAME
+    # sed -i ...JsonStorageDriver.php "s/${NEW_NAME}/${JSON_STORAGE_DIRECTORY_NAME_ORIGINAL}"
+    showLoadingBar "All done" 'dontClear'
+    enableCtrlC
     ;;
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"
@@ -67,4 +91,5 @@ while test $# -gt 0; do
   esac
 done
 
-showLoadingBar "Exiting"
+# re-enable ctrl-c
+trap 2
