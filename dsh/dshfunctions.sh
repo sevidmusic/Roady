@@ -159,6 +159,9 @@ modifyAppDomain() {
     sed -i "s,${ORIGINAL_APP_DOMAIN_NAME},${NEW_APP_DOMAIN_NAME},g" "$(getAppComponentsFilePath ${1})"
 }
 
+restoreAppDomain() {
+    sed -i "s,${NEW_APP_DOMAIN_NAME},${ORIGINAL_APP_DOMAIN_NAME},g" "$(getAppComponentsFilePath ${1})"
+}
 
 determinePort() {
     printf "$(getCurrentAppDomainName ${1} | grep -Eo '[0-9][0-9][0-9][0-9]')"
@@ -172,4 +175,5 @@ runApp() {
         buildApp "${1}"
     fi
     startAppServer "$(determinePort ${1})"
+    restoreAppDomain "${1}"
 }
