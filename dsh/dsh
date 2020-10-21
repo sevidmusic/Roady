@@ -56,6 +56,12 @@ while test $# -gt 0; do
     buildApp "${1}"
     exit 0
     ;;
+  -r | --run-app*)
+    shift
+    runApp "${1}"
+    exit 0
+    ;;
+
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"
     break

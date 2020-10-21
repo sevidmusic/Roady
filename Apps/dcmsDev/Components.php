@@ -20,7 +20,7 @@ define('REQUEST_CONTAINER', 'Requests');
 
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
-    AppComponentsFactory::buildDomain('http://localhost:8080/')
+    AppComponentsFactory::buildDomain('http://localhost:8970')
 )
 );
 

@@ -133,3 +133,43 @@ buildApp() {
    enableCtrlC
 }
 
+getAppComponentsFilePath()
+{
+    printf "%s" "${PATH_TO_DDMS}/Apps/${1}/Components.php"
+    # @todo printf "%s" "${PATH_TO_DDMS}/Apps/${1}/Components.php"
+}
+
+getCurrentAppDomainName() {
+    grep -E "::buildDomain" "$(getAppComponentsFilePath ${1})" | grep -Eo "'.*'" | sed -E "s/'//g"
+}
+
+generateRandomAppDomainName() {
+    printf "%s" "http://localhost:8${RANDOM: -3}"
+}
+
+modifyAppDomain() {
+    ORIGINAL_APP_DOMAIN_NAME="$(getCurrentAppDomainName ${1})"
+    NEW_APP_DOMAIN_NAME="$(generateRandomAppDomainName)"
+    showLoadingBar "Configuring temporary App Domain Name" 'dontClear'
+    notifyUser "Original App Domain Name:" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}${ORIGINAL_APP_DOMAIN_NAME}" 0 'dontClear'
+    notifyUser "Temporary App Domain Name:" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}${NEW_APP_DOMAIN_NAME}" 0 'dontClear'
+    newLine
+    sed -i "s,${ORIGINAL_APP_DOMAIN_NAME},${NEW_APP_DOMAIN_NAME},g" "$(getAppComponentsFilePath ${1})"
+}
+
+
+determinePort() {
+    printf "$(getCurrentAppDomainName ${1} | grep -Eo '[0-9][0-9][0-9][0-9]')"
+}
+
+runApp() {
+    [ -z "${1}" ] && notifyUser "${ERRORCOLOR}The dsh --run-app flag expects you to specify the name of the app to run." 0 'dontClear' && notifyUser "For example:" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
+    showLoadingBar "Starting up the ${1} app."
+    modifyAppDomain "${1}"
+    if [ ! -d "${PATH_TO_DDMS}.dcmsJsonData/$(getCurrentAppDomainName ${1}) | sed 's,:,,g')" ]; then
+        buildApp "${1}"
+    fi
+    startAppServer "$(determinePort ${1})"
+}
