@@ -56,6 +56,9 @@ showHelpMsg() {
         notifyUser "The -t, or --test-ddms flag will run phpunit using ${HIGHLIGHTCOLOR}${PATH_TO_DDMS}php.xml${NOTIFYCOLOR} for configuration." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -t" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --test-ddms" 0 'dontClear'
+        notifyUser "The -b, or --build-app flag will run the specified app's Components.php to build the app's components." 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -b AppName" 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --build-app AppName" 0 'dontClear'
         exit 0
    fi
    notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
