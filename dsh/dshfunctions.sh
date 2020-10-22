@@ -44,27 +44,55 @@ runPhpUnit() {
 
 showHelpMsg() {
     showBanner
-    if [[ -z "${1}" || "${1}" == 'app' || "${1}" == 'apps' ]]; then
-        notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
-        notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
-        notifyUser "the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
+    if [[ -z "${1}" || "${1}" == 'help' || "${1}" == 'h' ]]; then
+        notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility that provides various utilities to aide in development with the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
+        notifyUser "Note: To get information about a specific flag supply the ${HIGHLIGHTCOLOR}-h${NOTIFYCOLOR}" 0 'dontClear'
+        notifyUser "      flag with either the flag's ${HIGHLIGHTCOLOR}letter name${NOTIFYCOLOR}, or the flag's ${HIGHLIGHTCOLOR}full name${NOTIFYCOLOR}," 0 'dontClear'
+        notifyUser "      excluding the preceding - or --" 0 'dontClear'
+        notifyUser "      For example, you could use either of the following to get help information about the ${HIGHLIGHTCOLOR}--test-ddms${NOTIFYCOLOR} flag:" 0 'dontClear'
+        notifyUser "      ${HIGHLIGHTCOLOR}dsh -h test-ddms" 0 'dontClear'
+        notifyUser "      ${HIGHLIGHTCOLOR}dsh -h t" 0 'dontClear'
+        notifyUser "To get a list of the available flags use ${HIGHLIGHTCOLOR} dsh -h flags" 0 'dontClear'
+        exit 0
+    fi
+    if [[ "${1}" == 'start-app-server' || "${1}" == 's' ]]; then
         notifyUser "The -s, or --start-app-server flag will start a local server" 0 'dontClear'
         notifyUser "for you to use while in development." 0 'dontClear'
         notifyUser "The -s flag expects one argument, a port number." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -s 8080" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --start-app-server 8888" 0 'dontClear'
+        exit 0
+    fi
+    if [[ "${1}" == 'test-ddms' || "${1}" == 't' ]]; then
         notifyUser "The -t, or --test-ddms flag will run phpunit using ${HIGHLIGHTCOLOR}${PATH_TO_DDMS}php.xml${NOTIFYCOLOR} for configuration." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -t" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --test-ddms" 0 'dontClear'
+        exit 0
+    fi
+    if [[ "${1}" == 'build-app' || "${1}" == 'b' ]]; then
         notifyUser "The -b, or --build-app flag will run the specified app's Components.php to build the app's components." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -b AppName" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --build-app AppName" 0 'dontClear'
         exit 0
-   fi
-   notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
-   notifyUser "Options:" 0 'dontClear'
-   notifyUser "${HIGHLIGHTCOLOR}dsh --help${CLEAR_ALL_TEXT_STYLES}  ${HIGHLIGHTCOLOR}dsh --help app${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
-   notifyUser "${HIGHLIGHTCOLOR}dsh --help apps${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    fi
+    if [[ "${1}" == 'run-app' || "${1}" == 'r' ]]; then
+        notifyUser "The -r, or --run-app flag will run PhpUnit, build the specified app, and start an development server for the specified app." 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}Note: --run-app runs the app in isolation. Temporary storage and a temporary app domain will be used while the app is running in order to protect any existing app data from being harmed." 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}Note: Once the development server that was started for the app instance is stopped, the app instance, and it's data, will no longer be available." 0 'dontClear'
+        exit 0
+    fi
+    if [[ "${1}" == 'flags' ]]; then
+        notifyUser "${HIGHLIGHTCOLOR}--help FLAGNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-h FLAGNAME${NOTIFYCOLOR}: Show help information. If FLAGNAME is specified show detailed help information about specified flag." 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}--test-ddms${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-t${NOTIFYCOLOR} : Run the Darling Data Management System's php unit tests." 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}--build-app APPNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-b APPNAME${NOTIFYCOLOR} : Build the specified app by running the app's Components.php file." 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}--start-app-server PORT${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-s PORT${NOTIFYCOLOR} : Start a development server to use for the app @ ${HIGHLIGHTCOLOR}http://localhost:PORT" 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}--run-app APPNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-r APPNAME${NOTIFYCOLOR} : Run the specified app. First, phpunit will run, then the app will be built, and an development server will be started for the app using a random PORT, for example: ${HIGHLIGHTCOLOR}http://localhost:RANDOM_PORT" 0 'dontClear'
+        exit 0
+    fi
+    notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
+    notifyUser "Options:" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}dsh --help${CLEAR_ALL_TEXT_STYLES}  ${HIGHLIGHTCOLOR}dsh --help app${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}dsh --help apps${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
 }
 
 startAppServer() {
