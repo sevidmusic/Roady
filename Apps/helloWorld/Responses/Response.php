@@ -15,19 +15,26 @@ $appComponentsFactory->buildResponse(
         )
     ),
     $appComponentsFactory->buildOutputComponent(
-        'OutputComponent',
+        'AppRootLink',
         'Components',
         '<div style="font-family: monospace; font-size: 3.2em; padding: 1em; background: #E5581A; color: #000000;"><a href="/">App Root</a></div>',
         2
     ),
     $appComponentsFactory->buildOutputComponent(
-        'OutputComponent',
+        'HelloWorld',
         'Components',
         '<p style="font-family: monospace; font-size: 3.2em; padding: 1em; background: #1AA7E5; color: #000000;">Hello World</p>',
         0
     ),
+    $appComponentsFactory->buildOutputComponent(
+        'ClosingHtml',
+        'Components',
+        '</body></html>',
+        1
+    ),
+
     $appComponentsFactory->buildRequest(
-        'Home',
+        'HomeRequest',
         'Components',
         $appComponentsFactory->getAppDomain()->getUrl() . '/index.php'
     )

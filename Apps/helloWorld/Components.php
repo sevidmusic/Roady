@@ -16,13 +16,13 @@ require(
 
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
-    AppComponentsFactory::buildDomain('http://localhost:8832')
+    AppComponentsFactory::buildDomain('http://localhost:8080')
 )
 );
 
-require __DIR__ . DIRECTORY_SEPARATOR . 'GlobalResponse.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/GlobalResponse.php';
 
-require __DIR__ . DIRECTORY_SEPARATOR . 'Response.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/Response.php';
 
 $appComponentsFactory->buildLog(
     AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG
