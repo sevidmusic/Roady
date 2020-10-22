@@ -5,7 +5,7 @@ set -o posix
 clear
 
 showPhpUnitLicenseMsg() {
-      clear && showBanner
+      showBanner
       notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not apart of" 0 'dontClear'
       notifyUser "the Darling Data Managent System, it is a third party library developed by" 0 'dontClear'
       notifyUser "Sebastian Bergmann." 0 'dontClear'
@@ -33,6 +33,7 @@ showPhpUnitLicenseMsg() {
 }
 
 runPhpUnit() {
+    showBanner
     disableCtrlC
     modifyJsonStorageDir
     [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ] && showPhpUnitLicenseMsg
@@ -96,6 +97,7 @@ showHelpMsg() {
 }
 
 startAppServer() {
+    showBanner
     disableCtrlC
     showLoadingBar "Starting local development server at localhost:${1}"
     newLine
@@ -131,6 +133,7 @@ generateRandomStorageDirectoryName() {
 }
 
 modifyJsonStorageDir() {
+    showBanner
     ORIGINAL_STORAGE_DIRECTORY_NAME="$(getCurrentJsonStorageDirectoryName)"
     NEW_STORAGE_DIRECTORY_NAME="$(generateRandomStorageDirectoryName)"
     PATH_TO_TEMP_STORAGE_DIRECTORY="${PATH_TO_DDMS}.${NEW_STORAGE_DIRECTORY_NAME}"
@@ -176,6 +179,7 @@ generateRandomAppDomainName() {
 }
 
 modifyAppDomain() {
+    showBanner
     ORIGINAL_APP_DOMAIN_NAME="$(getCurrentAppDomainName ${1})"
     NEW_APP_DOMAIN_NAME="$(generateRandomAppDomainName)"
     showLoadingBar "Configuring temporary App Domain Name" 'dontClear'
@@ -196,6 +200,7 @@ determinePort() {
 }
 
 runApp() {
+    showBanner
     [ -z "${1}" ] && notifyUser "${ERRORCOLOR}The dsh --run-app flag expects you to specify the name of the app to run." 0 'dontClear' && notifyUser "For example:" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
     showLoadingBar "Running tests before starting the ${1} app"
     runPhpUnit
@@ -207,4 +212,26 @@ runApp() {
     fi
     startAppServer "$(determinePort ${1})"
     restoreAppDomain "${1}"
+}
+
+activeServers() {
+    printf "%s" "$(ps -aux | grep -Eo 'php -S localhost:[0-9][0-9][0-9][0-9]' | sed 's,localhost,http://localhost,g')"
+}
+
+showActiveDevelopmentServers() {
+    showBanner
+    local numberOfActiveServers
+    numberOfActiveServers="$(activeServers | wc -l)"
+    notifyUser "There are ${numberOfActiveServers} active development servers." 0 'dontClear'
+    [[ "${numberOfActiveServers}" == '0' ]] && exit 0
+    notifyUser "To determine which app is running on which server just open one of the urls from the list below in your browser." 0 'dontClear'
+    printf "%s" "$(activeServers | column)"
+}
+
+stopAllDevelopmentServers() {
+    showBanner
+    showLoadingBar "Stopping all active development servers"
+    killall php &> /dev/null
+    showActiveDevelopmentServers
+    exit 0
 }

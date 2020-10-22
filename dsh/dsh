@@ -61,7 +61,15 @@ while test $# -gt 0; do
     runApp "${1}"
     exit 0
     ;;
-
+   -j | --active-development-servers*)
+    shift
+    showActiveDevelopmentServers
+    exit 0
+    ;;
+  -k | --stop-all-development-servers*)
+    stopAllDevelopmentServers
+    exit 0
+    ;;
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"
     break
