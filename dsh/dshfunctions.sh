@@ -169,9 +169,12 @@ determinePort() {
 
 runApp() {
     [ -z "${1}" ] && notifyUser "${ERRORCOLOR}The dsh --run-app flag expects you to specify the name of the app to run." 0 'dontClear' && notifyUser "For example:" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
-    showLoadingBar "Starting up the ${1} app."
+    showLoadingBar "Running tests before starting the ${1} app"
+    runPhpUnit
+    showLoadingBar "Starting up the ${1} app"
     modifyAppDomain "${1}"
     if [ ! -d "${PATH_TO_DDMS}.dcmsJsonData/$(getCurrentAppDomainName ${1}) | sed 's,:,,g')" ]; then
+        showLoadingBar "Preparing to build the ${1} app"
         buildApp "${1}"
     fi
     startAppServer "$(determinePort ${1})"
