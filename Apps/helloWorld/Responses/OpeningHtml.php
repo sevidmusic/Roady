@@ -29,21 +29,21 @@ $appComponentsFactory->buildGlobalResponse(
     $appComponentsFactory->buildOutputComponent(
         'Head',
         'Components',
-        '<head><title>Darling Data Management System | Welcome</title></head>',
+        '<head><title>Darling Data Management System | Welcome</title><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>',
         2
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'MainStyleSheet',
+        'Components',
+        '<link rel="stylesheet" href="' . $appComponentsFactory->getAppDomain()->getUrl() . '/Apps/helloWorld/css/styles.css">',
+        3
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningBodyTag',
         'Components',
         '<body style="background: #000000;">',
-        3
+        3000
     ),
-    $appComponentsFactory->buildOutputComponent(
-        'HomeLink',
-        'Components',
-        '<div style="font-family: monospace; font-size: 3.2em; padding: 1em; background: #E5581A; color: #000000;"><a href="index.php">Home</a></div>',
-        4
-    )
 );
 
 

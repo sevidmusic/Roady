@@ -1,0 +1,35 @@
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    font-style: bold;
+    padding: .1em 5em;
+    color:#1AA7E5;
+    background: #000000;
+    border-radius: 1em;
+    display: inline-block;
+}
+
+a:hover {
+    color:#ffffff;
+    background: #1AA7E5;
+}
+
+p {
+    font-family: monospace;
+    font-size: 3.2em;
+    padding: 1em;
+    background: #1AA7E5;
+    color: #000000;
+}
+
+.menu {
+    font-family: monospace;
+    font-size: 3.2em;
+    padding: 1em;
+    background: #E5581A;
+    color: #000000;
+}
