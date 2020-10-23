@@ -166,14 +166,18 @@ restoreJsonStorageDir() {
     rm -R "${PATH_TO_TEMP_STORAGE_DIRECTORY}"
 }
 
-# todo change to buildApp
+expectedPathToAppStorageDir() {
+    printf "%s" "${PATH_TO_DDMS}.dcmsJsonData/localhost$(determinePort ${1})"
+}
+
 buildApp() {
    disableCtrlC
    [ -z "${1}" ] && notifyUser "${ERRORCOLOR}You must specify an app to run. For example: ${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
    MOST_RECENTLY_RUN_APP_PATH="${PATH_TO_DDMS}Apps/${1}"
    [ ! -d "${MOST_RECENTLY_RUN_APP_PATH}" ] && notifyUser "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not exist. Please specify an existing app as follows:" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh -b AppName${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && newLine && notifyUser "${CLEAR_ALL_TEXT_STYLES}${GREEN_BG_COLOR}${BLACK_FG_COLOR}The following apps are available" 0 'dontClear' && cd "${PATH_TO_DDMS}" && newLine && ls --color Apps && newLine && exit 1
    cd "${MOST_RECENTLY_RUN_APP_PATH}"
-   /usr/bin/php Components.php
+   [[ -d "$(expectedPathToAppStorageDir ${1})" ]] && notifyUser "${WARNINGCOLOR}The ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${WARNINGCOLOR} app was already built, to build the app again, please remove the following directory:${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}$(expectedPathToAppStorageDir ${1})${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+   [[ ! -d "$(expectedPathToAppStorageDir ${1})" ]] && /usr/bin/php Components.php
    enableCtrlC
 }
 
