@@ -5,7 +5,7 @@ set -o posix
 clear
 
 showPhpUnitLicenseMsg() {
-      showBanner
+      showBanner 'PHP UNIT License Message'
       notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not apart of" 0 'dontClear'
       notifyUser "the Darling Data Managent System, it is a third party library developed by" 0 'dontClear'
       notifyUser "Sebastian Bergmann." 0 'dontClear'
@@ -13,11 +13,11 @@ showPhpUnitLicenseMsg() {
       notifyUser "The official PhpUnit source can be found at:" 0 'dontClear'
       notifyUser "${HIGHLIGHTCOLOR}https://github.com/sebastianbergmann/phpunit" 0 'dontClear'
       sleep 4
-      clear && showBanner
+      showBanner 'PHP UNIT License Message'
       notifyUser "A copy of the LICENSE associated with PhpUnit can be found at:" 0 'dontClear'
       notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DSH_DIR}/PHP_UNIT_LICENSE" 0 'dontClear'
       sleep 4
-      clear && showBanner
+      showBanner 'PHP UNIT License Message'
       notifyUser "Note: The PHP_UNIT_LICENSE is not associated with the Darling Data" 0 'dontClear'
       notifyUser "Management System, or dsh, which both are licensed under the MIT" 0 'dontClear'
       notifyUser "license." 0 'dontClear'
@@ -26,14 +26,14 @@ showPhpUnitLicenseMsg() {
       notifyUser "dsh is part of the Darling Data Management system, and therfore uses the same license:" 0 'dontClear'
       notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DDMS}LICENSE" 0 'dontClear'
       sleep 4
-      clear && showBanner
+      showBanner 'PHP UNIT License Message'
       notifyUser "This message will not show again unless the relevant .dsh_* cache file is deleted." 0 'dontClear'
       sleep 4
       showLoadingBar "Starting PhpUnit"
 }
 
 runPhpUnit() {
-    showBanner
+    showBanner "dsh --test-ddms | Run Php Unit Tests"
     disableCtrlC
     modifyJsonStorageDir
     [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ] && showPhpUnitLicenseMsg
@@ -44,7 +44,7 @@ runPhpUnit() {
 }
 
 showHelpMsg() {
-    showBanner
+    showBanner "dsh --help | Help"
     if [[ -z "${1}" || "${1}" == 'help' || "${1}" == 'h' ]]; then
         notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility that provides various utilities to aide in development with the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
         notifyUser "Note: To get information about a specific flag supply the ${HIGHLIGHTCOLOR}-h${NOTIFYCOLOR}" 0 'dontClear'
@@ -78,6 +78,8 @@ showHelpMsg() {
     fi
     if [[ "${1}" == 'run-app' || "${1}" == 'r' ]]; then
         notifyUser "The -r, or --run-app flag will run PhpUnit, build the specified app, and start an development server for the specified app." 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear'
         notifyUser "${HIGHLIGHTCOLOR}Note: --run-app runs the app in isolation. Temporary storage and a temporary app domain will be used while the app is running in order to protect any existing app data from being harmed." 0 'dontClear'
         notifyUser "${HIGHLIGHTCOLOR}Note: Once the development server that was started for the app instance is stopped, the app instance, and it's data, will no longer be available." 0 'dontClear'
         exit 0
@@ -90,6 +92,18 @@ showHelpMsg() {
         notifyUser "${HIGHLIGHTCOLOR}--run-app APPNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-r APPNAME${NOTIFYCOLOR} : Run the specified app. First, phpunit will run, then the app will be built, and an development server will be started for the app using a random PORT, for example: ${HIGHLIGHTCOLOR}http://localhost:RANDOM_PORT" 0 'dontClear'
         exit 0
     fi
+    if [[ "${1}" == '--active-development-servers' || "${1}" == 'j' ]]; then
+        notifyUser "The -j, or --active-development-servers will list all currently running development servers." 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -j" 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --active-development-servers" 0 'dontClear'
+        exit 0
+    fi
+    if [[ "${1}" == '--stop-all-development-servers' || "${1}" == 'k' ]]; then
+        notifyUser "The -k, or --stop-all-development-servers will stop all currently running development servers." 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -k" 0 'dontClear'
+        notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --stop-all-development-servers" 0 'dontClear'
+        exit 0
+    fi
     notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
     notifyUser "Options:" 0 'dontClear'
     notifyUser "${HIGHLIGHTCOLOR}dsh --help${CLEAR_ALL_TEXT_STYLES}  ${HIGHLIGHTCOLOR}dsh --help app${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
@@ -97,9 +111,9 @@ showHelpMsg() {
 }
 
 startAppServer() {
-    showBanner
+    showBanner "dsh --start-app-server ${1} | Start development server on port ${1}"
     disableCtrlC
-    showLoadingBar "Starting local development server at localhost:${1}"
+    showLoadingBar "Starting local development server at localhost:${1}" 'dontClear'
     newLine
     notifyUser "Server is running @ ${HIGHLIGHTCOLOR}${BLACK_FG_COLOR}http://localhost:${1}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
     sleep 2
@@ -133,7 +147,6 @@ generateRandomStorageDirectoryName() {
 }
 
 modifyJsonStorageDir() {
-    showBanner
     ORIGINAL_STORAGE_DIRECTORY_NAME="$(getCurrentJsonStorageDirectoryName)"
     NEW_STORAGE_DIRECTORY_NAME="$(generateRandomStorageDirectoryName)"
     PATH_TO_TEMP_STORAGE_DIRECTORY="${PATH_TO_DDMS}.${NEW_STORAGE_DIRECTORY_NAME}"
@@ -179,7 +192,7 @@ generateRandomAppDomainName() {
 }
 
 modifyAppDomain() {
-    showBanner
+    showBanner "Setting up temporary app domain"
     ORIGINAL_APP_DOMAIN_NAME="$(getCurrentAppDomainName ${1})"
     NEW_APP_DOMAIN_NAME="$(generateRandomAppDomainName)"
     showLoadingBar "Configuring temporary App Domain Name" 'dontClear'
@@ -200,7 +213,7 @@ determinePort() {
 }
 
 runApp() {
-    showBanner
+    showBanner " dsh --run-app ${1} | Running app ${1}"
     [ -z "${1}" ] && notifyUser "${ERRORCOLOR}The dsh --run-app flag expects you to specify the name of the app to run." 0 'dontClear' && notifyUser "For example:" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
     showLoadingBar "Running tests before starting the ${1} app"
     runPhpUnit
@@ -219,7 +232,7 @@ activeServers() {
 }
 
 showActiveDevelopmentServers() {
-    showBanner
+    showBanner "dsh --active-development-servers | Active development servers"
     local numberOfActiveServers
     numberOfActiveServers="$(activeServers | wc -l)"
     notifyUser "There are ${numberOfActiveServers} active development servers." 0 'dontClear'
@@ -229,7 +242,7 @@ showActiveDevelopmentServers() {
 }
 
 stopAllDevelopmentServers() {
-    showBanner
+    showBanner "dsh --stop-all-development-servers | Shutting down all development servers"
     showLoadingBar "Stopping all active development servers"
     killall php &> /dev/null
     showActiveDevelopmentServers

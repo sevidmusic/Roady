@@ -70,8 +70,13 @@ initTextStyles() {
 }
 
 showBanner() {
-  [[ -n "$(command -v figlet)" ]] && figlet DSH && return
-  printf "\n\n#######\n  %sDSH%s  \n#######" "${HIGHLIGHTCOLOR}" "${CLEAR_ALL_TEXT_STYLES}"
+  [[ ! "${2}" == 'dontClear' ]] && clear
+  if [ -n "$(command -v figlet)" ]; then
+      figlet DSH
+  else
+      printf "\n%sD S H%s" "${HIGHLIGHTCOLOR}" "${CLEAR_ALL_TEXT_STYLES}"
+  fi
+  [[ -n "${1}" ]] && notifyUser "${HIGHLIGHTCOLOR}${1}" 0 'dontClear'
 }
 
 animatedPrint() {

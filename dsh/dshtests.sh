@@ -29,144 +29,164 @@ loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
 
-showBanner
-
-showLoadingBar "Preparing to run dsh tests"
-
-clear && showBanner
+showBanner "Test dsh --help"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -h"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -h
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh --help help"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help help" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help help
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -h h"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h h" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -h h
 sleep 2
 
 # BUILD APP #
-clear && showBanner
+showBanner "Test dsh --help build-app"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help build-app" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help build-app
 sleep 2
 
-clear && showBanner
-showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h build-app" 'dontClear'
+showBanner "Test dsh -h b"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h b" 'dontClear'
 sleep 2
-$PATH_TO_DSH_DIR/dsh -h build-app
+$PATH_TO_DSH_DIR/dsh -h b
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh --build-app helloWorld"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --build-app helloWorld" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --build-app helloWorld
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -b helloWorld"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -b helloWorld" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -b helloWorld
 sleep 2
 
 # TEST DDMS #
-clear && showBanner
+showBanner "Test dsh --help test-ddms"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help test-ddms" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help test-ddms
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -h t"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h t" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -h t
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh --test-ddms"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --test-ddms" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --test-ddms
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -t"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -t" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -t
 sleep 2
 
 # START APP SERVER #
-clear && showBanner
+showBanner "Test dsh --help start-app-server"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help start-app-server" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help start-app-server
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -h s"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h s" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -h s
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh --start-app-server 8080"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --start-app-server 8080" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --start-app-server 8080
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -s 8080"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -s 8080" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -s 8080
 sleep 2
 
 # RUN APP #
-clear && showBanner
+showBanner "Test dsh --help run-app"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help run-app" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help run-app
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -h r"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h r" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh -h r
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh --run-app helloWorld"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --run-app helloWorld"
 sleep 2
 $PATH_TO_DSH_DIR/dsh --run-app helloWorld
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -r helloWorld"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -r helloWorld"
 sleep 2
 $PATH_TO_DSH_DIR/dsh -r helloWorld
 sleep 2
 
 # FLAGS #
-clear && showBanner
+showBanner "Test dsh --help flags"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --help flags" 'dontClear'
 sleep 2
 $PATH_TO_DSH_DIR/dsh --help flags
 sleep 2
 
-clear && showBanner
+showBanner "Test dsh -h flags"
 showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -h flags"
 sleep 2
 $PATH_TO_DSH_DIR/dsh -h flags
+sleep 2
+
+showBanner "Test dsh --active-development-servers"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --active-development-servers"
+sleep 2
+$PATH_TO_DSH_DIR/dsh --active-development-servers
+sleep 2
+
+showBanner "Test dsh -j"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -j"
+sleep 2
+$PATH_TO_DSH_DIR/dsh -j
+sleep 2
+
+showBanner "Test dsh --stop-all-development-servers"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --stop-all-development-servers"
+sleep 2
+$PATH_TO_DSH_DIR/dsh --stop-all-development-servers
+sleep 2
+
+showBanner "Test dsh -k"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -k"
+sleep 2
+$PATH_TO_DSH_DIR/dsh -k
 sleep 2
 
