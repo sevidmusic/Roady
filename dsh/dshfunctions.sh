@@ -78,10 +78,9 @@ showHelpMsg() {
     fi
     if [[ "${1}" == 'run-app' || "${1}" == 'r' ]]; then
         notifyUser "The -r, or --run-app flag will run PhpUnit, build the specified app, and start an development server for the specified app." 0 'dontClear'
+        notifyUser "Finally, if xdg-open is available on the system, the App will open in the user's default web browser." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear'
-        notifyUser "${HIGHLIGHTCOLOR}Note: --run-app runs the app in isolation. Temporary storage and a temporary app domain will be used while the app is running in order to protect any existing app data from being harmed." 0 'dontClear'
-        notifyUser "${HIGHLIGHTCOLOR}Note: Once the development server that was started for the app instance is stopped, the app instance, and it's data, will no longer be available." 0 'dontClear'
         exit 0
     fi
     if [[ "${1}" == 'flags' ]]; then
