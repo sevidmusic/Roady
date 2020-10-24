@@ -27,16 +27,34 @@ $appComponentsFactory->buildGlobalResponse(
         1
     ),
     $appComponentsFactory->buildOutputComponent(
-        'Head',
+        'OpeningHeadTag',
         'Components',
-        '<head><title>Darling Data Management System | Welcome</title><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>',
+        '<head>',
         2
     ),
     $appComponentsFactory->buildOutputComponent(
-        'MainStyleSheet',
+        'Title',
+        'Components',
+        '<title>Darling Data Management System | Welcome</title>',
+        2.1
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'MetaViewport',
+        'Components',
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        2.12
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'Styles',
         'Components',
         '<link rel="stylesheet" href="' . $appComponentsFactory->getAppDomain()->getUrl() . '/Apps/helloWorld/css/styles.css">',
-        3
+        2.13
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'ClosingHeadTag',
+        'Components',
+        '</head>',
+        2.99999
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningBodyTag',
@@ -45,5 +63,4 @@ $appComponentsFactory->buildGlobalResponse(
         3000
     ),
 );
-
 

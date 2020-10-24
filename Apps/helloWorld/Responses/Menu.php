@@ -30,7 +30,7 @@ $appComponentsFactory->buildGlobalResponse(
         'AppDomainLink',
         'Components',
         '<a href="/">App Domain</a>',
-        1
+        1.1
     ),
     $appComponentsFactory->buildOutputComponent(
         'ClosingMenuDiv',
