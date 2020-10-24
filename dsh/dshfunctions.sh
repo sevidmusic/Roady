@@ -232,13 +232,13 @@ runApp() {
 }
 
 activeServers() {
-    printf "%s" "$(ps -aux | grep -Eo 'php -S localhost:[0-9][0-9][0-9][0-9]' | sed 's,localhost,http://localhost,g')"
+    printf "%s" "$(ps -aux | grep -Eo 'php -S localhost:[0-9][0-9][0-9][0-9]' | sed 's,php -S localhost,http://localhost,g')"
 }
 
 showActiveDevelopmentServers() {
     showBanner "dsh --active-development-servers | Active development servers"
     local numberOfActiveServers
-    numberOfActiveServers="$(activeServers | wc -l)"
+    numberOfActiveServers="$(activeServers | wc -w)"
     notifyUser "There are ${numberOfActiveServers} active development servers." 0 'dontClear'
     [[ "${numberOfActiveServers}" == '0' ]] && exit 0
     notifyUser "To determine which app is running on which server just open one of the urls from the list below in your browser." 0 'dontClear'
