@@ -38,6 +38,7 @@ runPhpUnit() {
     modifyJsonStorageDir
     [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ] && showPhpUnitLicenseMsg
     "${PATH_TO_DDMS}vendor/phpunit/phpunit/phpunit" -c "${PATH_TO_DDMS}php.xml"
+    sleep 5
     echo "License message already shown" >"${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown"
     restoreJsonStorageDir
     enableCtrlC
