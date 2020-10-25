@@ -2,25 +2,16 @@
 
 namespace UnitTests\classes\component;
 
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
-use UnitTests\abstractions\component\DynamicOutputComponentTest as AbstractDynamicOutputComponentTest;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
+use UnitTests\abstractions\component\DynamicOutputComponentTest as DynamicOutputCompoenentBaseTest;
 
-class DynamicOutputComponentTest extends AbstractDynamicOutputComponentTest
+class DynamicOutputComponentTest extends DynamicOutputCompoenentBaseTest
 {
     public function setUp(): void
     {
         $this->setDynamicOutputComponent(
-            new DynamicOutputComponent(
-                new Storable(
-                    'DynamicOutputComponentName',
-                    'DynamicOutputComponentLocation',
-                    'DynamicOutputComponentContainer'
-                ),
-                new Switchable(),
-                new Positionable()
+            new CoreDynamicOutputComponent(
+                ...$this->getDynamicOutputComponentTestArgs()
             )
         );
         $this->setDynamicOutputComponentParentTestInstances();

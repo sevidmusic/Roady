@@ -2,9 +2,9 @@
 
 namespace DarlingDataManagementSystem\interfaces\component;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 
-interface DynamicOutputComponent extends CoreOutputComponent
+interface DynamicOutputComponent extends OutputComponentInterface
 {
 
 }
