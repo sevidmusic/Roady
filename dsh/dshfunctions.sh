@@ -229,6 +229,7 @@ runApp() {
     fi
     startAppServer "$(determinePort ${1})"
     restoreAppDomain "${1}"
+    showActiveDevelopmentServers
 }
 
 activeServers() {
