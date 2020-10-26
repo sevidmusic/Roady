@@ -12,12 +12,11 @@ use RuntimeException;
 abstract class DynamicOutputComponent extends OutputCompoenentBase implements DynamicOutputComponentInterface
 {
 
-    private string $appDirectoryName;
+    private $appDirectoryName = 'helloWorld';
 
-    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, string $appDirectoryName)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable)
     {
         parent::__construct($storable, $switchable, $positionable);
-        $this->appDirectoryName = $appDirectoryName;
         if(!is_dir(str_replace('core/abstractions/component', 'Apps/' . $this->appDirectoryName, __DIR__))) {
             throw new RuntimeException('App directory missing.');
         }
@@ -28,7 +27,7 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
         $sharedDynamicOutputFilesDir = str_replace('core/abstractions/component', 'SharedDynamicOutput', __DIR__);
         if(!is_dir($sharedDynamicOutputFilesDir))
         {
-            throw new RuntimeException('The Shared Dynamic Output directory does not exist.');
+            throw new RuntimeException('The Shared Dynamic Output directory does not exist. Please create it manually at: ' . $sharedDynamicOutputFilesDir);
         }
         return $sharedDynamicOutputFilesDir;
     }
