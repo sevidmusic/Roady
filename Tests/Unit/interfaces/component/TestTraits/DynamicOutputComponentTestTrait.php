@@ -6,6 +6,7 @@ use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as D
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use RuntimeException;
 
 trait DynamicOutputComponentTestTrait
 {
@@ -39,5 +40,32 @@ trait DynamicOutputComponentTestTrait
             new CoreSwitchable(),
             new CorePositionable()
         ];
+    }
+
+    private function expectedSharedDynamicOutputFileDirectoryPath(): string
+    {
+        return str_replace('Tests/Unit/interfaces/component/TestTraits', 'SharedDynamicOutput', __DIR__);
+    }
+
+    public function testGetSharedDynamicOutputFilesDirectoryPathReturnsExpectedPath(): void
+    {
+        if(!is_dir($this->expectedSharedDynamicOutputFileDirectoryPath()))
+        {
+            $this->expectException(RuntimeException::class);
+        }
+        $this->assertEquals(
+            $this->expectedSharedDynamicOutputFileDirectoryPath(),
+            $this->getDynamicOutputComponent()->getSharedDynamicOutputFilesDirectoryPath()
+        );
+    }
+
+    public function testGetSharedDynamicOutputFilesDirectoryPathThrowsRuntimeExceptionIfSharedDynamicOutputDirectoryDoesNotExist(): void
+    {
+        if(!is_dir($this->expectedSharedDynamicOutputFileDirectoryPath()))
+        {
+            $this->expectException(RuntimeException::class);
+            $this->getDynamicOutputComponent()->getSharedDynamicOutputFilesDirectoryPath();
+        }
+        $this->assertTrue(true);
     }
 }

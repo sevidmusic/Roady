@@ -7,4 +7,6 @@ use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputCo
 interface DynamicOutputComponent extends OutputComponentInterface
 {
 
+    public function getSharedDynamicOutputFilesDirectoryPath(): string;
+
 }
