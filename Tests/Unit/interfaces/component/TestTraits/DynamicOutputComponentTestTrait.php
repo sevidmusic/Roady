@@ -248,4 +248,23 @@ trait DynamicOutputComponentTestTrait
             $this->getRandomName()
         );
     }
+
+
+    private function executePhpFileInOutputBuffer(string $pathToFile): string
+    {
+        ob_start();
+        require $pathToFile;
+        return ob_get_clean();
+    }
+
+    public function testGetOutputReturnsStringConstructedByExecutingDynamicOutputFileIfDynamicOutputFileIsAPhpFile(): void
+    {
+        $this->assertEquals(
+            $this->executePhpFileInOutputBuffer(
+                $this->getDynamicOutputComponent()->getDynamicFilePath()
+            ),
+            $this->getDynamicOutputComponent()->getOutput()
+        );
+    }
+
 }
