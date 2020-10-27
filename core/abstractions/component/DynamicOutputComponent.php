@@ -104,16 +104,25 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
         return $this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName;
     }
 
-    private function executePhpFileInOutputBuffer(string $pathToFile): string
+    private function executeDynamicFileInPhpOutputBuffer(): string
     {
         ob_start();
-        require $pathToFile;
+        require $this->getDynamicFilePath();
         return ob_get_clean();
+    }
+
+    private function getDynamicFileContentsAsPlainText(): string
+    {
+        return file_get_contents($this->getDynamicFilePath());
     }
 
     public function getOutput(): string
     {
-        $this->import(['output' => $this->executePhpFileInOutputBuffer($this->getDynamicFilePath())]);
+        if(pathinfo($this->getDynamicFilePath(), PATHINFO_EXTENSION) === 'php') {
+            $this->import(['output' => $this->executeDynamicFileInPhpOutputBuffer()]);
+        } else {
+            $this->import(['output' => $this->getDynamicFileContentsAsPlainText()]);
+        }
         return parent::getOutput();
     }
 }

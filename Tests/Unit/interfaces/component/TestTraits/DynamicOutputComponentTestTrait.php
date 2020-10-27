@@ -178,6 +178,11 @@ trait DynamicOutputComponentTestTrait
         );
     }
 
+    private function getDuplicateDynamicTxtFileName(): string
+    {
+        return 'Duplicate.txt';
+    }
+
     private function getDuplicateDynamicPhpFileName(): string
     {
         return 'Duplicate.php';
@@ -227,6 +232,25 @@ trait DynamicOutputComponentTestTrait
         ob_start();
         require $pathToFile;
         return ob_get_clean();
+    }
+
+    private function getFileContentsAsPlainText(string $pathToFile): string
+    {
+        return file_get_contents($pathToFile);
+    }
+
+    public function testGetOutputReturnsStringConstructedByGettingContentsOfDynamicOutputFileAsPlainTextIfDynamicOutputFileDoesNotHaveThePhpExtension(): void
+    {
+        $doc = $this->buildCoreDynamicOutputComponent(
+            $this->getExitingAppName(),
+            $this->getDuplicateDynamicTxtFileName()
+        );
+        $this->assertEquals(
+            $this->getFileContentsAsPlainText(
+                $doc->getDynamicFilePath()
+            ),
+            $doc->getOutput()
+        );
     }
 
     public function testGetOutputReturnsStringConstructedByExecutingDynamicOutputFileIfDynamicOutputFileIsAPhpFile(): void

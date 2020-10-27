@@ -1,0 +1,6 @@
+Plain text from duplicater shared.
+<?php
+    echo "This php code should also render as plain text since this file does not use the .php extension";
+?>
+
+<p>This html should also render as plain text.</p>
