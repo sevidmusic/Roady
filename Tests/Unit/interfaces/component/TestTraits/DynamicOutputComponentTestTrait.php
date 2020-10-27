@@ -67,25 +67,11 @@ trait DynamicOutputComponentTestTrait
 
     public function testRuntimeExceptionIsNotThrownOnInstantiationIfDynamicOutputFileNamePropertyMatchesTheNameOfAFileThatExistsInEitherTheAppsOrSharedDynamicOutputFilesDirectory(): void
     {
-         $appDoc = new CoreDynamicOutputComponent(
-            new CoreStorable(
-                'DynamicOutputComponentName',
-                'DynamicOutputComponentLocation',
-                'DynamicOutputComponentContainer'
-            ),
-            new CoreSwitchable(),
-            new CorePositionable(),
+        $appDoc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
             $this->getExistingAppDynamicFileName()
         );
-        $sharedDoc = new CoreDynamicOutputComponent(
-            new CoreStorable(
-                'DynamicOutputComponentName',
-                'DynamicOutputComponentLocation',
-                'DynamicOutputComponentContainer'
-            ),
-            new CoreSwitchable(),
-            new CorePositionable(),
+        $appDoc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
             $this->getExistingSharedDynamicFileName()
         );
@@ -96,14 +82,7 @@ trait DynamicOutputComponentTestTrait
     {
         $invalidFileName = $this->getRandomName();
         $this->expectException(RuntimeException::class);
-        $doc = new CoreDynamicOutputComponent(
-            new CoreStorable(
-                'DynamicOutputComponentName',
-                'DynamicOutputComponentLocation',
-                'DynamicOutputComponentContainer'
-            ),
-            new CoreSwitchable(),
-            new CorePositionable(),
+        $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
             $invalidFileName
         );
@@ -113,14 +92,7 @@ trait DynamicOutputComponentTestTrait
     {
         $invalidAppName = $this->getRandomName();
         $this->expectException(RuntimeException::class);
-        $doc = new CoreDynamicOutputComponent(
-             new CoreStorable(
-                'DynamicOutputComponentName',
-                'DynamicOutputComponentLocation',
-                'DynamicOutputComponentContainer'
-            ),
-            new CoreSwitchable(),
-            new CorePositionable(),
+        $doc = $this->buildCoreDynamicOutputComponent(
             $invalidAppName,
             $this->getExistingAppDynamicFileName()
         );
@@ -191,7 +163,7 @@ trait DynamicOutputComponentTestTrait
         $this->assertTrue(true);
     }
 
-    private function buildCoreDynamicOutputComponent(string $appName, string $fileName): CoreDynamicOutputComponent
+    protected function buildCoreDynamicOutputComponent(string $appName, string $fileName): CoreDynamicOutputComponent
     {
          return new CoreDynamicOutputComponent(
             new CoreStorable(
