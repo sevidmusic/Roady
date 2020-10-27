@@ -41,7 +41,7 @@ trait DynamicOutputComponentTestTrait
             new CoreSwitchable(),
             new CorePositionable(),
             $this->getExitingAppName(),
-            $this->getExistingAppDynamicFileName()
+            $this->getExistingAppDynamicPhpFileName()
         ];
     }
 
@@ -69,11 +69,11 @@ trait DynamicOutputComponentTestTrait
     {
         $appDoc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getExistingAppDynamicFileName()
+            $this->getExistingAppDynamicPhpFileName()
         );
         $appDoc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getExistingSharedDynamicFileName()
+            $this->getExistingSharedDynamicPhpFileName()
         );
         $this->assertTrue(true);
     }
@@ -94,16 +94,16 @@ trait DynamicOutputComponentTestTrait
         $this->expectException(RuntimeException::class);
         $doc = $this->buildCoreDynamicOutputComponent(
             $invalidAppName,
-            $this->getExistingAppDynamicFileName()
+            $this->getExistingAppDynamicPhpFileName()
         );
     }
 
-    private function getExistingAppDynamicFileName(): string
+    private function getExistingAppDynamicPhpFileName(): string
     {
         return 'DisplayCurrentDateTime.php';
     }
 
-    private function getExistingSharedDynamicFileName(): string
+    private function getExistingSharedDynamicPhpFileName(): string
     {
         return 'CurrentRequestDisplay.php';
     }
@@ -178,12 +178,12 @@ trait DynamicOutputComponentTestTrait
         );
     }
 
-    private function getDuplicateDynamicFileName(): string
+    private function getDuplicateDynamicPhpFileName(): string
     {
         return 'Duplicate.php';
     }
 
-    private function getUniqueSharedDynamicOutputFileName(): string
+    private function getUniqueSharedDynamicPhpFileName(): string
     {
         return 'UniqueSharedOutput.php';
     }
@@ -192,10 +192,10 @@ trait DynamicOutputComponentTestTrait
     {
         $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getDuplicateDynamicFileName()
+            $this->getDuplicateDynamicPhpFileName()
         );
         $this->assertEquals(
-            $this->expectedAppsDynamicOutputFileDirectoryPath() . $this->getDuplicateDynamicFileName(),
+            $this->expectedAppsDynamicOutputFileDirectoryPath() . $this->getDuplicateDynamicPhpFileName(),
             $doc->getDynamicFilePath()
         );
     }
@@ -204,10 +204,10 @@ trait DynamicOutputComponentTestTrait
     {
         $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getUniqueSharedDynamicOutputFileName()
+            $this->getUniqueSharedDynamicPhpFileName()
         );
         $this->assertEquals(
-            $this->expectedSharedDynamicOutputFileDirectoryPath() . $this->getUniqueSharedDynamicOutputFileName(),
+            $this->expectedSharedDynamicOutputFileDirectoryPath() . $this->getUniqueSharedDynamicPhpFileName(),
             $doc->getDynamicFilePath()
         );
     }
@@ -231,11 +231,15 @@ trait DynamicOutputComponentTestTrait
 
     public function testGetOutputReturnsStringConstructedByExecutingDynamicOutputFileIfDynamicOutputFileIsAPhpFile(): void
     {
+        $doc = $this->buildCoreDynamicOutputComponent(
+            $this->getExitingAppName(),
+            $this->getDuplicateDynamicPhpFileName()
+        );
         $this->assertEquals(
             $this->executePhpFileInOutputBuffer(
-                $this->getDynamicOutputComponent()->getDynamicFilePath()
+                $doc->getDynamicFilePath()
             ),
-            $this->getDynamicOutputComponent()->getOutput()
+            $doc->getOutput()
         );
     }
 
