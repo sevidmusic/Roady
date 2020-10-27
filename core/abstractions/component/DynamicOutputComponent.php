@@ -26,14 +26,6 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
 
     private function verifyDynamicFileExists(): void
     {
-        var_dump(
-            !file_exists(
-                $this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
-            ) &&
-            !file_exists(
-                $this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
-            )
-        );
         if(
             !file_exists(
                 $this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
