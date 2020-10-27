@@ -86,4 +86,21 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
 
         return $appDynamicOutputFileDir;
     }
+
+    public function getDynamicFilePath(): string
+    {
+        if(
+            !file_exists($this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName)
+            &&
+            !file_exists($this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName)
+        )
+        {
+            throw new RuntimeException('The Dynamic Output file does not exist.');
+        }
+        if(file_exists($this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName))
+        {
+            return $this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName;
+        }
+        return $this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName;
+    }
 }

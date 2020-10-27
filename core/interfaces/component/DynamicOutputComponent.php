@@ -11,4 +11,6 @@ interface DynamicOutputComponent extends OutputComponentInterface
 
     public function getAppsDynamicOutputFilesDirectoryPath(): string;
 
+    public function getDynamicFilePath(): string;
+
 }

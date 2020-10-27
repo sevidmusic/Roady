@@ -190,4 +190,62 @@ trait DynamicOutputComponentTestTrait
         }
         $this->assertTrue(true);
     }
+
+    private function buildCoreDynamicOutputComponent(string $appName, string $fileName): CoreDynamicOutputComponent
+    {
+         return new CoreDynamicOutputComponent(
+            new CoreStorable(
+                'DynamicOutputComponentName',
+                'DynamicOutputComponentLocation',
+                'DynamicOutputComponentContainer'
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+            $appName,
+            $fileName
+        );
+    }
+
+    private function getDuplicateDynamicFileName(): string
+    {
+        return 'Duplicate.php';
+    }
+
+    private function getUniqueSharedDynamicOutputFileName(): string
+    {
+        return 'UniqueSharedOutput.php';
+    }
+
+    public function testGetDynamicFilePathReturnsAppDynamicFilePathIfDynamicFileExistsInAppDynamicDirectory(): void
+    {
+        $doc = $this->buildCoreDynamicOutputComponent(
+            $this->getExitingAppName(),
+            $this->getDuplicateDynamicFileName()
+        );
+        $this->assertEquals(
+            $this->expectedAppsDynamicOutputFileDirectoryPath() . $this->getDuplicateDynamicFileName(),
+            $doc->getDynamicFilePath()
+        );
+    }
+
+    public function testGetDynamicFilePathReturnsSharedDynamicFilePathIfDynamicFileDoesNotExistInAppDynamicDirectory(): void
+    {
+        $doc = $this->buildCoreDynamicOutputComponent(
+            $this->getExitingAppName(),
+            $this->getUniqueSharedDynamicOutputFileName()
+        );
+        $this->assertEquals(
+            $this->expectedSharedDynamicOutputFileDirectoryPath() . $this->getUniqueSharedDynamicOutputFileName(),
+            $doc->getDynamicFilePath()
+        );
+    }
+
+    public function testGetDynamicFilePathThrowsRuntimeExceptionIfDynamicFileDoesNotExistInEitherAppOrSharedDynamicOutputDirectory(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $doc = $this->buildCoreDynamicOutputComponent(
+            $this->getExitingAppName(),
+            $this->getRandomName()
+        );
+    }
 }
