@@ -18,18 +18,49 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
     {
         parent::__construct($storable, $switchable, $positionable);
         $this->appDirectoryName = $appDirectoryName;
-        if(!is_dir(str_replace('core/abstractions/component', 'Apps/' . $this->appDirectoryName, __DIR__))) {
+        if(
+            !is_dir(
+                $this->expectedAppDirectoryPath()
+            )
+        )
+        {
             throw new RuntimeException('App directory missing.');
         }
     }
 
+    private function expectedAppDirectoryPath(): string
+    {
+        return str_replace(
+            $this->currentSubDirectory(),
+            'Apps' . DIRECTORY_SEPARATOR . $this->appDirectoryName,
+            __DIR__
+        );
+    }
+
+    private function currentSubDirectory(): string
+    {
+        return 'core' . DIRECTORY_SEPARATOR . 'abstractions' . DIRECTORY_SEPARATOR . 'component';
+    }
+
     public function getSharedDynamicOutputFilesDirectoryPath(): string
     {
-        $sharedDynamicOutputFilesDir = str_replace('core/abstractions/component', 'SharedDynamicOutput', __DIR__);
+        $sharedDynamicOutputFilesDir = str_replace($this->currentSubDirectory(), 'SharedDynamicOutput' . DIRECTORY_SEPARATOR, __DIR__);
         if(!is_dir($sharedDynamicOutputFilesDir))
         {
             throw new RuntimeException('The Shared Dynamic Output directory does not exist.');
         }
         return $sharedDynamicOutputFilesDir;
+    }
+
+
+    public function getAppsDynamicOutputFilesDirectoryPath(): string
+    {
+        $appDynamicOutputFileDir = str_replace($this->currentSubDirectory(), 'Apps'. DIRECTORY_SEPARATOR . $this->appDirectoryName . DIRECTORY_SEPARATOR . 'DynamicOutput', __DIR__);
+        if(!is_dir($appDynamicOutputFileDir))
+        {
+            throw new RuntimeException('The App\'s Dynamic Output directory does not exist.');
+        }
+
+        return $appDynamicOutputFileDir;
     }
 }
