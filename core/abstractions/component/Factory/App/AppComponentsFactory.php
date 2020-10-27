@@ -24,11 +24,14 @@ use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as R
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+# DEV
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
 
 abstract class AppComponentsFactory extends StoredComponentFactoryBase implements AppComponentsFactoryInterface
 {
@@ -390,6 +393,18 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     private function expectedBuildLogPath(): string
     {
         return $this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
+    }
+
+    // DEV METHOD
+    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position): DynamicOutputComponentInterface
+    {
+        return new CoreDynamicOutputComponent(
+            $this->getPrimaryFactory()->buildStorable($name, $container),
+            $this->getPrimaryFactory()->buildSwitchable(),
+            $this->getPrimaryFactory()->buildPositionable($position),
+            'helloWorld',
+            'Duplicate.php'
+        );
     }
 
 }

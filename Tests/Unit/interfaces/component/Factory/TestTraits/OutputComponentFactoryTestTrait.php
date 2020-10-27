@@ -148,4 +148,22 @@ trait OutputComponentFactoryTestTrait
         return $mockStoredComponentRegistry;
     }
 
+    public function testBuildDynamicOutputComponentReturnsADynamicOutputComponentImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                DynamicOutputComponentInterface::class,
+                $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+                    'AssignedName',
+                    'AssignedContainer',
+                    'Assigned Output',
+                    420.87,
+                    'helloWorld',
+                    'Duplicate.php'
+                )
+            )
+        );
+
+    }
+
 }
