@@ -40,7 +40,8 @@ trait DynamicOutputComponentTestTrait
             ),
             new CoreSwitchable(),
             new CorePositionable(),
-            'helloWorld'
+            $this->getExitingAppName(),
+            $this->getExistingAppDynamicFileName()
         ];
     }
 
@@ -53,14 +54,64 @@ trait DynamicOutputComponentTestTrait
         );
     }
 
-    private function getRandomAppDirectoryName(): string
+    private function getRandomName(): string
     {
         return 'foo' . rand(100000,99999) . 'bar' . rand(100,999) . 'baz' . rand(10000000,99999999);
     }
 
+    private function getExitingAppName(): string
+    {
+        return 'helloWorld';
+    }
+
+
+    public function testRuntimeExceptionIsNotThrownOnInstantiationIfDynamicOutputFileNamePropertyMatchesTheNameOfAFileThatExistsInEitherTheAppsOrSharedDynamicOutputFilesDirectory(): void
+    {
+         $appDoc = new CoreDynamicOutputComponent(
+            new CoreStorable(
+                'DynamicOutputComponentName',
+                'DynamicOutputComponentLocation',
+                'DynamicOutputComponentContainer'
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+            $this->getExitingAppName(),
+            $this->getExistingAppDynamicFileName()
+        );
+        $sharedDoc = new CoreDynamicOutputComponent(
+            new CoreStorable(
+                'DynamicOutputComponentName',
+                'DynamicOutputComponentLocation',
+                'DynamicOutputComponentContainer'
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+            $this->getExitingAppName(),
+            $this->getExistingSharedDynamicFileName()
+        );
+        $this->assertTrue(true);
+    }
+
+    public function testRuntimeExceptionIsThrownOnInstantiationIfDynamicOutputFileNamePropertyDoesNotMatchTheNameOfAFileThatExistsInEitherTheAppsOrSharedDynamicOutputFilesDirectory(): void
+    {
+        $invalidFileName = $this->getRandomName();
+        $this->expectException(RuntimeException::class);
+        $doc = new CoreDynamicOutputComponent(
+            new CoreStorable(
+                'DynamicOutputComponentName',
+                'DynamicOutputComponentLocation',
+                'DynamicOutputComponentContainer'
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+            $this->getExitingAppName(),
+            $invalidFileName
+        );
+    }
+
     public function testRuntimeExceptionIsThrownOnInstantiationIfAppDirectoryNamePropertyDoesNotMatchTheNameOfAnExistingAppDirectroy(): void
     {
-        $invalidAppName = $this->getRandomAppDirectoryName();
+        $invalidAppName = $this->getRandomName();
         $this->expectException(RuntimeException::class);
         $doc = new CoreDynamicOutputComponent(
              new CoreStorable(
@@ -70,8 +121,19 @@ trait DynamicOutputComponentTestTrait
             ),
             new CoreSwitchable(),
             new CorePositionable(),
-            $invalidAppName
+            $invalidAppName,
+            $this->getExistingAppDynamicFileName()
         );
+    }
+
+    private function getExistingAppDynamicFileName(): string
+    {
+        return 'DisplayCurrentDateTime.php';
+    }
+
+    private function getExistingSharedDynamicFileName(): string
+    {
+        return 'CurrentRequestDisplay.php';
     }
 
     private function expectedSharedDynamicOutputFileDirectoryPath(): string
@@ -81,7 +143,7 @@ trait DynamicOutputComponentTestTrait
 
     private function expectedAppsDynamicOutputFileDirectoryPath(): string
     {
-        return str_replace('Tests' . DIRECTORY_SEPARATOR . 'Unit' . DIRECTORY_SEPARATOR . 'interfaces' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'TestTraits', 'Apps' . DIRECTORY_SEPARATOR . $this->getDynamicOutputComponent()->export()['appDirectoryName'] . DIRECTORY_SEPARATOR . 'DynamicOutput', __DIR__);
+        return str_replace('Tests' . DIRECTORY_SEPARATOR . 'Unit' . DIRECTORY_SEPARATOR . 'interfaces' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'TestTraits', 'Apps' . DIRECTORY_SEPARATOR . $this->getDynamicOutputComponent()->export()['appDirectoryName'] . DIRECTORY_SEPARATOR . 'DynamicOutput' . DIRECTORY_SEPARATOR, __DIR__);
     }
 
     public function testGetAppsDynamicOutputFilesDirectoryPathReturnsExpectedPath(): void
@@ -98,7 +160,7 @@ trait DynamicOutputComponentTestTrait
 
     public function testGetAppsDynamicFilesDirectoryPathThrowsRuntimeExceptionIfAppsDynamicOutputDirectoryDoesNotExist(): void
     {
-        $this->getDynamicOutputComponent()->import(['appDirectoryName' => $this->getRandomAppDirectoryName()]);
+        $this->getDynamicOutputComponent()->import(['appDirectoryName' => $this->getRandomName()]);
         if(!is_dir($this->expectedAppsDynamicOutputFileDirectoryPath()))
         {
             $this->expectException(RuntimeException::class);

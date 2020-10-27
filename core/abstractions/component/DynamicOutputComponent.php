@@ -13,11 +13,42 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
 {
 
     private string $appDirectoryName;
+    private string $dynamicFileName;
 
-    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, string $appDirectoryName)
+    public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, string $appDirectoryName, string $dynamicFileName)
     {
         parent::__construct($storable, $switchable, $positionable);
         $this->appDirectoryName = $appDirectoryName;
+        $this->dynamicFileName = $dynamicFileName;
+        $this->verifyAppDirectoryExists();
+        $this->verifyDynamicFileExists();
+    }
+
+    private function verifyDynamicFileExists(): void
+    {
+        var_dump(
+            !file_exists(
+                $this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
+            ) &&
+            !file_exists(
+                $this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
+            )
+        );
+        if(
+            !file_exists(
+                $this->getAppsDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
+            ) &&
+            !file_exists(
+                $this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName
+            )
+        )
+        {
+            throw new RuntimeException('Dynamic file missing.');
+        }
+    }
+
+    private function verifyAppDirectoryExists(): void
+    {
         if(
             !is_dir(
                 $this->expectedAppDirectoryPath()
@@ -55,7 +86,7 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
 
     public function getAppsDynamicOutputFilesDirectoryPath(): string
     {
-        $appDynamicOutputFileDir = str_replace($this->currentSubDirectory(), 'Apps'. DIRECTORY_SEPARATOR . $this->appDirectoryName . DIRECTORY_SEPARATOR . 'DynamicOutput', __DIR__);
+        $appDynamicOutputFileDir = str_replace($this->currentSubDirectory(), 'Apps'. DIRECTORY_SEPARATOR . $this->appDirectoryName . DIRECTORY_SEPARATOR . 'DynamicOutput' . DIRECTORY_SEPARATOR, __DIR__);
         if(!is_dir($appDynamicOutputFileDir))
         {
             throw new RuntimeException('The App\'s Dynamic Output directory does not exist.');
