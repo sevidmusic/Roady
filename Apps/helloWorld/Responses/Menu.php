@@ -12,7 +12,14 @@ $appComponentsFactory->buildGlobalResponse(
             'Components',
             '',
             0
-        )
+        ),
+        $appComponentsFactory->buildDynamicOutputComponent(
+            'DynamicOutputComponent',
+            'Components',
+            0,
+            'helloWorld',
+            'Duplicate.php'
+        ),
     ),
     $appComponentsFactory->buildOutputComponent(
         'HomeLink',
@@ -32,18 +39,18 @@ $appComponentsFactory->buildGlobalResponse(
         '<a href="/">App Domain</a>',
         1.1
     ),
+    $appComponentsFactory->buildDynamicOutputComponent(
+        'DateTime',
+        'Components',
+        1.2,
+        'helloWorld',
+        'Duplicate.php',
+    ),
     $appComponentsFactory->buildOutputComponent(
         'ClosingMenuDiv',
         'Components',
         '</div>',
         1000
-    ),
-    $appComponentsFactory->buildDynamicOutputComponent(
-        'DateTime',
-        'DateTime',
-        1.2,
-        'helloWorld',
-        'DisplayCurrentDateTime.php',
     ),
 );
 
