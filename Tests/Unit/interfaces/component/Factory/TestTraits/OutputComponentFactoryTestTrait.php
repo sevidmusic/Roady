@@ -6,6 +6,7 @@ use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredCompone
 use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 trait OutputComponentFactoryTestTrait
@@ -190,6 +191,33 @@ trait OutputComponentFactoryTestTrait
             'Duplicate.php'
         );
         $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
+    }
+
+    public function testBuildDynamicOutputComonentReturnsADynamicOutputComponentWhoseOutputMatchesOutputOfADynamicOutputComponentInstantiatedWithSameAppDirectoryAndDynamicFileName(): void
+    {
+        $doc = new CoreDynamicOutputComponent(
+            $this->getMockPrimaryFactory()->buildStorable(
+                'Name',
+                'Location',
+                'Container'
+            ),
+            $this->getMockPrimaryFactory()->buildSwitchable(),
+            $this->getMockPrimaryFactory()->buildPositionable(420.87),
+            'helloWorld',
+            'Duplicate.php'
+        );
+        $fdoc = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            'Assigned Output',
+            420.87,
+            'helloWorld',
+            'Duplicate.php'
+        );
+        $this->assertEquals(
+            $doc->getOutput(),
+            $fdoc->getOutput()
+        );
     }
 
 }
