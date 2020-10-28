@@ -169,7 +169,7 @@ trait OutputComponentFactoryTestTrait
 
     public function testBuildDynamicOutputComponentStoresTheDynamicOutputComponentImplementationInstanceItBuilds(): void
     {
-        $outputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+        $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
             'Assigned Output',
@@ -177,12 +177,12 @@ trait OutputComponentFactoryTestTrait
             'helloWorld',
             'Duplicate.php'
         );
-        $this->assertTrue($this->wasStoredOnBuild($outputComponent));
+        $this->assertTrue($this->wasStoredOnBuild($dynamicOutputComponent));
     }
 
     public function testBuildDynamicOutputComponentRegistersTheDynamicOutputComponentImplementationInstanceItBuilds(): void
     {
-        $outputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+        $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
             'Assigned Output',
@@ -190,7 +190,7 @@ trait OutputComponentFactoryTestTrait
             'helloWorld',
             'Duplicate.php'
         );
-        $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
+        $this->assertTrue($this->wasRegisteredOnBuild($dynamicOutputComponent));
     }
 
     public function testBuildDynamicOutputComonentReturnsADynamicOutputComponentWhoseOutputMatchesOutputOfADynamicOutputComponentInstantiatedWithSameAppDirectoryAndDynamicFileName(): void
@@ -217,6 +217,40 @@ trait OutputComponentFactoryTestTrait
         $this->assertEquals(
             $doc->getOutput(),
             $fdoc->getOutput()
+        );
+    }
+
+    public function testBuildDynamicOutputComponentReturnsDynamicOutputComponentWhoseNameMatchesSuppliedName(): void
+    {
+        $expectedName = 'ExpectedName';
+        $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+            $expectedName,
+            'AssignedContainer',
+            'Assigned DynamicOutput',
+            420.87,
+            'helloWorld',
+            'Duplicate.php'
+        );
+        $this->assertEquals(
+            $expectedName,
+            $dynamicOutputComponent->getName(),
+        );
+    }
+
+    public function testBuildDynamicOutputComponentReturnsDynamicOutputComponentWhoseContainerMatchesSuppliedContainer(): void
+    {
+        $expectedContainer = 'ExpectedContainer';
+        $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+            'AssignedName',
+            $expectedContainer,
+            'Assigned DynamicOutput',
+            420.87,
+            'helloWorld',
+            'Duplicate.php'
+        );
+        $this->assertEquals(
+            $expectedContainer,
+            $dynamicOutputComponent->getContainer(),
         );
     }
 
