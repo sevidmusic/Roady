@@ -112,7 +112,7 @@ trait DynamicOutputComponentTestTrait
         );
     }
 
-    public function testGetAppsDynamicFilesDirectoryPathThrowsRuntimeExceptionIfAppsDynamicOutputDirectoryDoesNotExist(): void
+    public function testGetAppsDynamicOutputFilesDirectoryPathThrowsRuntimeExceptionIfAppsDynamicOutputDirectoryDoesNotExist(): void
     {
         $this->getDynamicOutputComponent()->import(['appDirectoryName' => $this->getRandomName()]);
         if(!is_dir($this->expectedAppsDynamicOutputFileDirectoryPath()))
