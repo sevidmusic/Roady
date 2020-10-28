@@ -12,7 +12,14 @@ $appComponentsFactory->buildGlobalResponse(
             'Components',
             '',
             0
-        )
+        ),
+        $appComponentsFactory->buildDynamicOutputComponent(
+            'DynamicOutputComponent',
+            'Components',
+            0,
+            'helloWorld',
+            'Duplicate.php'
+        ),
     ),
     $appComponentsFactory->buildOutputComponent(
         'Doctype',
@@ -32,12 +39,14 @@ $appComponentsFactory->buildGlobalResponse(
         '<head>',
         2
     ),
-    $appComponentsFactory->buildOutputComponent(
+    $appComponentsFactory->buildDynamicOutputComponent(
         'Title',
         'Components',
-        '<title>Darling Data Management System | Welcome</title>',
-        2.1
+        2.1,
+        'helloWorld',
+        'Title.php'
     ),
+
     $appComponentsFactory->buildOutputComponent(
         'MetaViewport',
         'Components',
