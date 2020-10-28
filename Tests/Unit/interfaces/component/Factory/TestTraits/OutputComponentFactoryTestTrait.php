@@ -179,4 +179,17 @@ trait OutputComponentFactoryTestTrait
         $this->assertTrue($this->wasStoredOnBuild($outputComponent));
     }
 
+    public function testBuildDynamicOutputComponentRegistersTheDynamicOutputComponentImplementationInstanceItBuilds(): void
+    {
+        $outputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            'Assigned Output',
+            420.87,
+            'helloWorld',
+            'Duplicate.php'
+        );
+        $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
+    }
+
 }
