@@ -35,12 +35,14 @@ abstract class OutputComponentFactory extends CoreStoredComponentFactory impleme
 
     public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
     {
-        return new CoreDynamicOutputComponent(
+        $dynamicOutputComponent = new CoreDynamicOutputComponent(
             $this->getPrimaryFactory()->buildStorable($name, $container),
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position),
             $appDirectoryName,
             $dynamicFileName
         );
+        $this->storeAndRegister($dynamicOutputComponent);
+        return $dynamicOutputComponent;
     }
 }
