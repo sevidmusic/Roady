@@ -254,4 +254,21 @@ trait OutputComponentFactoryTestTrait
         );
     }
 
+    public function testBuildDynamicOutputComponentReturnsDynamicOutputComponentWhosePositionMatchesSuppliedPosition(): void
+    {
+        $expectedPosition = 420.87;
+        $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+            'AssignedName',
+            'AssignedContainer',
+            'Assigned output',
+            $expectedPosition,
+            'helloWorld',
+            'Duplicate.php'
+        );
+        $this->assertEquals(
+            $expectedPosition,
+            $dynamicOutputComponent->getPosition(),
+        );
+    }
+
 }
