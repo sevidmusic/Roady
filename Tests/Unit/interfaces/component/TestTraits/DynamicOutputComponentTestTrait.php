@@ -30,6 +30,16 @@ trait DynamicOutputComponentTestTrait
         $this->dynamicOutputComponent = $dynamicOutputComponent;
     }
 
+    private function defaultAppName(): string
+    {
+        return $this->getExitingAppName();
+    }
+
+    private function defaultDynamicFileName(): string
+    {
+        return $this->getExistingAppDynamicPhpFileName();
+    }
+
     public function getDynamicOutputComponentTestArgs(): array
     {
         return [
@@ -40,8 +50,8 @@ trait DynamicOutputComponentTestTrait
             ),
             new CoreSwitchable(),
             new CorePositionable(),
-            $this->getExitingAppName(),
-            $this->getExistingAppDynamicPhpFileName()
+            $this->defaultAppName(),
+            $this->defaultDynamicFileName()
         ];
     }
 
@@ -244,6 +254,22 @@ trait DynamicOutputComponentTestTrait
                 $doc->getDynamicFilePath()
             ),
             $doc->getOutput()
+        );
+    }
+
+    public function testAppDirectoryNamePropertyMatchesSpecifiedAppDirectoryName(): void
+    {
+        $this->assertEquals(
+            $this->defaultAppName(),
+            $this->getDynamicOutputComponent()->export()['appDirectoryName']
+        );
+    }
+
+    public function testDynamicFileNamePropertyMatchesSpecifiedDynamicFileName(): void
+    {
+        $this->assertEquals(
+            $this->defaultDynamicFileName(),
+            $this->getDynamicOutputComponent()->export()['dynamicFileName']
         );
     }
 
