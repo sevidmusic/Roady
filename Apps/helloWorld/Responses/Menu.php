@@ -40,12 +40,20 @@ $appComponentsFactory->buildGlobalResponse(
         1.1
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
-        'DateTime',
+        'DuplicateDOCDefinedInAppAndSharedAppWillBeUsed',
         'Components',
         1.2,
         'helloWorld',
         'Duplicate.php',
     ),
+    $appComponentsFactory->buildDynamicOutputComponent(
+        'DateTime',
+        'Components',
+        1.2,
+        'helloWorld',
+        'DisplayCurrentDateTime.php',
+    ),
+
     $appComponentsFactory->buildOutputComponent(
         'ClosingMenuDiv',
         'Components',
