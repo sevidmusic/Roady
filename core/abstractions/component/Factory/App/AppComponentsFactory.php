@@ -396,14 +396,14 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     }
 
     // DEV METHOD
-    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position): DynamicOutputComponentInterface
+    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
     {
         return new CoreDynamicOutputComponent(
             $this->getPrimaryFactory()->buildStorable($name, $container),
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position),
-            'helloWorld',
-            'Duplicate.php'
+            $appDirectoryName,
+            $dynamicFileName
         );
     }
 
