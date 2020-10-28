@@ -11,9 +11,7 @@ class OutputComponentFactoryTest extends CoreOutputComponentFactoryTest
     {
         $this->setOutputComponentFactory(
             new OutputComponentFactory(
-                $this->getMockPrimaryFactory(),
-                $this->getMockCrud(),
-                $this->getMockStoredComponentRegistry()
+                ...$this->getOutputComponentFactoryTestArgs()
             )
         );
         $this->setOutputComponentFactoryParentTestInstances();

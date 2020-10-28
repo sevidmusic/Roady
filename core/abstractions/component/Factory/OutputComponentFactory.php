@@ -4,10 +4,12 @@ namespace DarlingDataManagementSystem\abstractions\component\Factory;
 
 use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as CoreStoredComponentFactory;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 abstract class OutputComponentFactory extends CoreStoredComponentFactory implements OutputComponentFactoryInterface
@@ -28,5 +30,17 @@ abstract class OutputComponentFactory extends CoreStoredComponentFactory impleme
         $outputComponent->import(['output' => $output]);
         $this->storeAndRegister($outputComponent);
         return $outputComponent;
+    }
+
+
+    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
+    {
+        return new CoreDynamicOutputComponent(
+            $this->getPrimaryFactory()->buildStorable($name, $container),
+            $this->getPrimaryFactory()->buildSwitchable(),
+            $this->getPrimaryFactory()->buildPositionable($position),
+            $appDirectoryName,
+            $dynamicFileName
+        );
     }
 }

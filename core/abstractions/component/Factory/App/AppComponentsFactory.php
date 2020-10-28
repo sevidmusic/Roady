@@ -24,6 +24,7 @@ use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as R
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
@@ -390,6 +391,20 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     private function expectedBuildLogPath(): string
     {
         return $this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
+    }
+
+    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
+    {
+        $doc = $this->outputComponentFactory->buildDynamicOutputComponent(
+            $name,
+            $container,
+            $output,
+            $position,
+            $appDirectoryName,
+            $dynamicFileName
+        );
+        $this->getStoredComponentRegistry()->registerComponent($doc);
+        return $doc;
     }
 
 }

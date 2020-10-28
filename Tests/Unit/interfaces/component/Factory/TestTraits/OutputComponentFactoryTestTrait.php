@@ -5,12 +5,22 @@ namespace UnitTests\interfaces\component\Factory\TestTraits;
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 trait OutputComponentFactoryTestTrait
 {
 
     private OutputComponentFactoryInterface $outputComponentFactory;
+
+    protected function getOutputComponentFactoryTestArgs(): array
+    {
+        return array(
+            $this->getMockPrimaryFactory(),
+            $this->getMockCrud(),
+            $this->getMockStoredComponentRegistry()
+        );
+    }
 
     public function testBuildOutputComponentReturnsAnOutputComponentImplementationInstance(): void
     {
@@ -136,6 +146,24 @@ trait OutputComponentFactoryTestTrait
             ]
         );
         return $mockStoredComponentRegistry;
+    }
+
+    public function testBuildDynamicOutputComponentReturnsADynamicOutputComponentImplementationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                DynamicOutputComponentInterface::class,
+                $this->getOutputComponentFactory()->buildDynamicOutputComponent(
+                    'AssignedName',
+                    'AssignedContainer',
+                    'Assigned Output',
+                    420.87,
+                    'helloWorld',
+                    'Duplicate.php'
+                )
+            )
+        );
+
     }
 
 }
