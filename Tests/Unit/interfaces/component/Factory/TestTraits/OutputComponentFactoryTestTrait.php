@@ -157,7 +157,6 @@ trait OutputComponentFactoryTestTrait
                 $this->getOutputComponentFactory()->buildDynamicOutputComponent(
                     'AssignedName',
                     'AssignedContainer',
-                    'Assigned Output',
                     420.87,
                     'helloWorld',
                     'Duplicate.php'
@@ -172,7 +171,6 @@ trait OutputComponentFactoryTestTrait
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
-            'Assigned Output',
             420.87,
             'helloWorld',
             'Duplicate.php'
@@ -185,7 +183,6 @@ trait OutputComponentFactoryTestTrait
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
-            'Assigned Output',
             420.87,
             'helloWorld',
             'Duplicate.php'
@@ -209,7 +206,6 @@ trait OutputComponentFactoryTestTrait
         $fdoc = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
-            'Assigned Output',
             420.87,
             'helloWorld',
             'Duplicate.php'
@@ -226,7 +222,6 @@ trait OutputComponentFactoryTestTrait
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             $expectedName,
             'AssignedContainer',
-            'Assigned DynamicOutput',
             420.87,
             'helloWorld',
             'Duplicate.php'
@@ -243,7 +238,6 @@ trait OutputComponentFactoryTestTrait
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             $expectedContainer,
-            'Assigned DynamicOutput',
             420.87,
             'helloWorld',
             'Duplicate.php'
@@ -260,7 +254,6 @@ trait OutputComponentFactoryTestTrait
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
-            'Assigned output',
             $expectedPosition,
             'helloWorld',
             'Duplicate.php'

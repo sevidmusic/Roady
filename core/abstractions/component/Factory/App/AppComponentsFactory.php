@@ -393,12 +393,11 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $this->expectedBuildLogDirectoryPath() . $this->getPrimaryFactory()->export()['app']->getName();
     }
 
-    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
+    public function buildDynamicOutputComponent(string $name, string $container, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
     {
         $doc = $this->outputComponentFactory->buildDynamicOutputComponent(
             $name,
             $container,
-            $output,
             $position,
             $appDirectoryName,
             $dynamicFileName

@@ -11,5 +11,5 @@ interface OutputComponentFactory extends StoredComponentFactoryInterface
 
     public function buildOutputComponent(string $name, string $container, string $output, float $position): OutputComponentInterface;
 
-    public function buildDynamicOutputComponent(string $name, string $container, string $output, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface;
+    public function buildDynamicOutputComponent(string $name, string $container, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface;
 }

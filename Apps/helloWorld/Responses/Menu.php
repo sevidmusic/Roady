@@ -38,6 +38,13 @@ $appComponentsFactory->buildGlobalResponse(
         '</div>',
         1000
     ),
+    $appComponentsFactory->buildDynamicOutputComponent(
+        'DateTime',
+        'DateTime',
+        1.2,
+        'helloWorld',
+        'DisplayCurrentDateTime.php',
+    ),
 );
 
 
