@@ -2,7 +2,7 @@
 
 $appComponentsFactory->buildGlobalResponse(
     'GlobalResponse',
-    1,
+    0,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',
         'Components',
@@ -22,44 +22,54 @@ $appComponentsFactory->buildGlobalResponse(
         ),
     ),
     $appComponentsFactory->buildOutputComponent(
-        'HomeLink',
+        'Doctype',
         'Components',
-        '<div class="menu">',
+        '<!DOCTYPE html>',
         0
     ),
     $appComponentsFactory->buildOutputComponent(
-        'HomeLink',
+        'OpeningHtmlTag',
         'Components',
-        '<a href="index.php">Home</a>',
+        '<html lang="en">',
         1
     ),
     $appComponentsFactory->buildOutputComponent(
-        'AppDomainLink',
+        'OpeningHeadTag',
         'Components',
-        '<a href="/">App Domain</a>',
-        1.1
+        '<head>',
+        2
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
-        'DuplicateDOCDefinedInAppAndSharedAppWillBeUsed',
+        'Title',
         'Components',
-        1.2,
+        2.1,
         'helloWorld',
-        'Duplicate.php',
-    ),
-    $appComponentsFactory->buildDynamicOutputComponent(
-        'DateTime',
-        'Components',
-        1.2,
-        'helloWorld',
-        'DisplayCurrentDateTime.php',
+        'Title.php'
     ),
 
     $appComponentsFactory->buildOutputComponent(
-        'ClosingMenuDiv',
+        'MetaViewport',
         'Components',
-        '</div>',
-        1000
+        '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        2.12
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'Styles',
+        'Components',
+        '<link rel="stylesheet" href="' . $appComponentsFactory->getAppDomain()->getUrl() . '/Apps/helloWorld/css/styles.css">',
+        2.13
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'ClosingHeadTag',
+        'Components',
+        '</head>',
+        2.99999
+    ),
+    $appComponentsFactory->buildOutputComponent(
+        'OpeningBodyTag',
+        'Components',
+        '<body style="background: #000000;">',
+        3000
     ),
 );
-
 
