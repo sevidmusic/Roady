@@ -4,5 +4,5 @@ $stylesheets = array_diff(scandir($path), array('.', '..'));
 
 foreach($stylesheets as $stylesheet)
 {
-    echo '<link rel="stylesheet" href="' . $path . DIRECTORY_SEPARATOR . $stylesheet . '">';
+    echo '<link rel="stylesheet" href="Apps/helloWorld/css/' . $stylesheet . '">';
 }

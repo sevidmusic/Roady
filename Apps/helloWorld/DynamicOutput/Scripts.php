@@ -4,5 +4,5 @@ $scripts = array_diff(scandir($path), array('.', '..'));
 
 foreach($scripts as $script)
 {
-    echo '<script type="text/javascript" src="' . $path . DIRECTORY_SEPARATOR . $script. '"></script>';
+    echo '<script src="' . 'Apps/helloWorld/js/' . $script. '"></script>';
 }

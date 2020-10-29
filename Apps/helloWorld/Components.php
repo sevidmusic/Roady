@@ -24,6 +24,10 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/DoctypeOpenHtmlOpenHead.php';
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/TitleMetaStylesScripts.php';
 
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/CloseHeadOpenBody.php';
+
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/CloseBodyCloseHtml.php';
+
 $appComponentsFactory->buildLog(
     AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG
 );
