@@ -29,5 +29,12 @@ $appComponentsFactory->buildGlobalResponse(
         'helloWorld',
         'Meta.html'
     ),
+    $appComponentsFactory->buildDynamicOutputComponent(
+        'Meta',
+        'Components',
+        1,
+        'helloWorld',
+        'Stylesheets.php'
+    ),
 );
 
