@@ -1,7 +1,7 @@
 <?php
 
 $appComponentsFactory->buildGlobalResponse(
-    'GlobalResponse',
+    'DoctypeOpenHtmlOpenHead',
     0,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',

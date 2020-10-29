@@ -1,7 +1,7 @@
 <?php
 
 $appComponentsFactory->buildGlobalResponse(
-    'GlobalResponse',
+    'Homepage',
     3,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',

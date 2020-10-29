@@ -1,7 +1,7 @@
 <?php
 
 $appComponentsFactory->buildGlobalResponse(
-    'GlobalResponse',
+    'TitleMetaStylesScripts',
     1,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',
