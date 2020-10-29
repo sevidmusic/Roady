@@ -36,5 +36,12 @@ $appComponentsFactory->buildGlobalResponse(
         'helloWorld',
         'Stylesheets.php'
     ),
+    $appComponentsFactory->buildDynamicOutputComponent(
+        'Scripts',
+        'Components',
+        1,
+        'helloWorld',
+        'Scripts.php'
+    ),
 );
 
