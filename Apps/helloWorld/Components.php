@@ -28,6 +28,8 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/CloseHeadOpenBody.php';
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/CloseBodyCloseHtml.php';
 
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/MainMenu.php';
+
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/Homepage.php';
 
 $appComponentsFactory->buildLog(

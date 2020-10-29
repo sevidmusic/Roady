@@ -16,11 +16,11 @@ $appComponentsFactory->buildGlobalResponse(
         ),
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
-        'MainMenu   ',
+        'Welcome',
         'Components',
         0,
         'helloWorld',
-        'MainMenu.html'
+        'Welcome.html'
     ),
 );
 
