@@ -158,7 +158,7 @@ trait OutputComponentFactoryTestTrait
                     'AssignedName',
                     'AssignedContainer',
                     420.87,
-                    'helloWorld',
+                    'DDMSTestApp',
                     'Duplicate.php'
                 )
             )
@@ -172,7 +172,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             'AssignedContainer',
             420.87,
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $this->assertTrue($this->wasStoredOnBuild($dynamicOutputComponent));
@@ -184,7 +184,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             'AssignedContainer',
             420.87,
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $this->assertTrue($this->wasRegisteredOnBuild($dynamicOutputComponent));
@@ -200,14 +200,14 @@ trait OutputComponentFactoryTestTrait
             ),
             $this->getMockPrimaryFactory()->buildSwitchable(),
             $this->getMockPrimaryFactory()->buildPositionable(420.87),
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $fdoc = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
             420.87,
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $this->assertEquals(
@@ -223,7 +223,7 @@ trait OutputComponentFactoryTestTrait
             $expectedName,
             'AssignedContainer',
             420.87,
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $this->assertEquals(
@@ -239,7 +239,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             $expectedContainer,
             420.87,
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $this->assertEquals(
@@ -255,7 +255,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             'AssignedContainer',
             $expectedPosition,
-            'helloWorld',
+            'DDMSTestApp',
             'Duplicate.php'
         );
         $this->assertEquals(

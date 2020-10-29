@@ -86,7 +86,7 @@ trait DynamicOutputComponentTestTrait
 
     private function getExitingAppName(): string
     {
-        return 'helloWorld';
+        return 'DDMSTestApp';
     }
 
     private function getExistingAppDynamicPhpFileName(): string
