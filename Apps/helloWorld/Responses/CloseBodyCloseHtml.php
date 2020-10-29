@@ -2,7 +2,7 @@
 
 $appComponentsFactory->buildGlobalResponse(
     'CloseBodyCloseHtml',
-    0,
+    9999999999999999,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',
         'Components',

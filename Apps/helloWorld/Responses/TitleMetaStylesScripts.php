@@ -2,7 +2,7 @@
 
 $appComponentsFactory->buildGlobalResponse(
     'GlobalResponse',
-    0,
+    1,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',
         'Components',

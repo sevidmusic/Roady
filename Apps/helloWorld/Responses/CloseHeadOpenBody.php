@@ -2,7 +2,7 @@
 
 $appComponentsFactory->buildGlobalResponse(
     'CloseHeadOpenBody',
-    0,
+    2,
     $appComponentsFactory->buildStandardUITemplate(
         'StandardUITemplate',
         'Components',
