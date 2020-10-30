@@ -14,6 +14,46 @@ trait DynamicOutputComponentTestTrait
 
     private $dynamicOutputComponent;
 
+    public static function setUpBeforeClass(): void
+    {
+        self::createTestAppDirectory();
+    }
+
+    private static function tempAppDirectoryName(): string
+    {
+        return 'Foo';
+    }
+
+    private static function getTempAppDirectoryPath(): string
+    {
+        $tempAppDirName = self::tempAppDirectoryName();
+        $tempAppDirPath = self::determineDDMSRootDirectory() . 'Apps' . DIRECTORY_SEPARATOR . $tempAppDirName;
+        return $tempAppDirPath;
+    }
+
+    private static function createTestAppDirectory(): void
+    {
+        if(!is_dir(self::getTempAppDirectoryPath()))
+        {
+            # THIS MUST BE FIRST
+            mkdir(self::getTempAppDirectoryPath());
+        }
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::removeTestAppDirectory();
+    }
+
+    private static function removeTestAppDirectory(): void
+    {
+        if(is_dir(self::getTempAppDirectoryPath()))
+        {
+            # THIS MUST BE LAST REMOVAL OR RMDIR WILL FAIL
+            rmdir(self::getTempAppDirectoryPath());
+        }
+    }
+
     protected function setDynamicOutputComponentParentTestInstances(): void
     {
         $this->setOutputComponent($this->getDynamicOutputComponent());
@@ -87,6 +127,7 @@ trait DynamicOutputComponentTestTrait
     private function getExitingAppName(): string
     {
         return 'DDMSTestApp';
+        // once setup tear down implemented: return self::tempAppDirectoryName();
     }
 
     private function getExistingAppDynamicPhpFileName(): string
