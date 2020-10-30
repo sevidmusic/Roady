@@ -14,9 +14,64 @@ trait DynamicOutputComponentTestTrait
 
     private $dynamicOutputComponent;
 
+    private function getExitingAppName(): string
+    {
+        return 'DDMSTestApp';
+        // once setup tear down implemented:
+//        return self::tempAppDirectoryName();
+    }
+
     public static function setUpBeforeClass(): void
     {
         self::createTestAppDirectory();
+        self::createTestAppDynamicOutputDirectory();
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::removeTestAppDynamicOutputDirectory();
+        self::removeTestAppDirectory();
+    }
+
+    private static function createTestAppDynamicOutputDirectory(): void
+    {
+        if(!is_dir(self::getTestAppDynamicOutputDirectoryPath()))
+        {
+            # THIS MUST BE FIRST
+            mkdir(self::getTestAppDynamicOutputDirectoryPath());
+        }
+    }
+
+    private static function removeTestAppDynamicOutputDirectory(): void
+    {
+        if(is_dir(self::getTestAppDynamicOutputDirectoryPath()))
+        {
+            # THIS MUST BE LAST REMOVAL OR RMDIR WILL FAIL
+            rmdir(self::getTestAppDynamicOutputDirectoryPath());
+        }
+    }
+
+    private static function getTestAppDynamicOutputDirectoryPath(): string
+    {
+       return self::getTestApDirectoryPath() . 'DynamicOutput';
+    }
+
+    private static function createTestAppDirectory(): void
+    {
+        if(!is_dir(self::getTestApDirectoryPath()))
+        {
+            # THIS MUST BE FIRST
+            mkdir(self::getTestApDirectoryPath());
+        }
+    }
+
+    private static function removeTestAppDirectory(): void
+    {
+        if(is_dir(self::getTestApDirectoryPath()))
+        {
+            # THIS MUST BE LAST REMOVAL OR RMDIR WILL FAIL
+            rmdir(self::getTestApDirectoryPath());
+        }
     }
 
     private static function tempAppDirectoryName(): string
@@ -24,34 +79,9 @@ trait DynamicOutputComponentTestTrait
         return 'Foo';
     }
 
-    private static function getTempAppDirectoryPath(): string
+    private static function getTestApDirectoryPath(): string
     {
-        $tempAppDirName = self::tempAppDirectoryName();
-        $tempAppDirPath = self::determineDDMSRootDirectory() . 'Apps' . DIRECTORY_SEPARATOR . $tempAppDirName;
-        return $tempAppDirPath;
-    }
-
-    private static function createTestAppDirectory(): void
-    {
-        if(!is_dir(self::getTempAppDirectoryPath()))
-        {
-            # THIS MUST BE FIRST
-            mkdir(self::getTempAppDirectoryPath());
-        }
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        self::removeTestAppDirectory();
-    }
-
-    private static function removeTestAppDirectory(): void
-    {
-        if(is_dir(self::getTempAppDirectoryPath()))
-        {
-            # THIS MUST BE LAST REMOVAL OR RMDIR WILL FAIL
-            rmdir(self::getTempAppDirectoryPath());
-        }
+        return self::determineDDMSRootDirectory() . 'Apps' . DIRECTORY_SEPARATOR . self::tempAppDirectoryName() . DIRECTORY_SEPARATOR;
     }
 
     protected function setDynamicOutputComponentParentTestInstances(): void
@@ -122,12 +152,6 @@ trait DynamicOutputComponentTestTrait
     private function getRandomName(): string
     {
         return 'foo' . rand(100000,99999) . 'bar' . rand(100,999) . 'baz' . rand(10000000,99999999);
-    }
-
-    private function getExitingAppName(): string
-    {
-        return 'DDMSTestApp';
-        // once setup tear down implemented: return self::tempAppDirectoryName();
     }
 
     private function getExistingAppDynamicPhpFileName(): string
