@@ -188,7 +188,7 @@ trait DynamicOutputComponentTestTrait
         }
     }
 
-    private static function tempAppDirectoryName(): string
+    public static function tempAppDirectoryName(): string
     {
         return 'Foo';
     }

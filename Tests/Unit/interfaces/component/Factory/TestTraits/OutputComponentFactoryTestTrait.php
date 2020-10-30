@@ -8,11 +8,22 @@ use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputCo
 use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use UnitTests\interfaces\component\TestTraits\DynamicOutputComponentTestTrait;
 
 trait OutputComponentFactoryTestTrait
 {
 
     private OutputComponentFactoryInterface $outputComponentFactory;
+
+    public static function setUpBeforeClass(): void
+    {
+        DynamicOutputComponentTestTrait::setUpBeforeClass();
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        DynamicOutputComponentTestTrait::tearDownAfterClass();
+    }
 
     protected function getOutputComponentFactoryTestArgs(): array
     {
@@ -158,7 +169,7 @@ trait OutputComponentFactoryTestTrait
                     'AssignedName',
                     'AssignedContainer',
                     420.87,
-                    'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
                     'Duplicate.php'
                 )
             )
@@ -172,7 +183,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             'AssignedContainer',
             420.87,
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $this->assertTrue($this->wasStoredOnBuild($dynamicOutputComponent));
@@ -184,7 +195,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             'AssignedContainer',
             420.87,
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $this->assertTrue($this->wasRegisteredOnBuild($dynamicOutputComponent));
@@ -200,14 +211,14 @@ trait OutputComponentFactoryTestTrait
             ),
             $this->getMockPrimaryFactory()->buildSwitchable(),
             $this->getMockPrimaryFactory()->buildPositionable(420.87),
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $fdoc = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             'AssignedName',
             'AssignedContainer',
             420.87,
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $this->assertEquals(
@@ -223,7 +234,7 @@ trait OutputComponentFactoryTestTrait
             $expectedName,
             'AssignedContainer',
             420.87,
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $this->assertEquals(
@@ -239,7 +250,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             $expectedContainer,
             420.87,
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $this->assertEquals(
@@ -255,7 +266,7 @@ trait OutputComponentFactoryTestTrait
             'AssignedName',
             'AssignedContainer',
             $expectedPosition,
-            'DDMSTestApp',
+            DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
         );
         $this->assertEquals(
