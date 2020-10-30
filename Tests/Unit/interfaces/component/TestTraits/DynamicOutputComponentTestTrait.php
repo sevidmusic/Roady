@@ -28,9 +28,9 @@ trait DynamicOutputComponentTestTrait
 
     public static function tearDownAfterClass(): void
     {
-        //self::removeAppsDuplicateDynamicOutputFiles();
-        //self::removeTestAppDynamicOutputDirectory();
-        //self::removeTestAppDirectory();
+        self::removeDuplicateDynamicOutputFiles();
+        self::removeTestAppDynamicOutputDirectory();
+        self::removeTestAppDirectory();
     }
 
 
@@ -60,12 +60,10 @@ trait DynamicOutputComponentTestTrait
         $php = '<?php echo "Hello world";';
         if(!file_exists(self::getAppsDuplicateTxtFilePath()))
         {
-            # THIS MUST BE FIRST
             file_put_contents(self::getAppsDuplicateTxtFilePath(), $plainText);
         }
         if(!file_exists(self::getAppsDuplicatePhpFilePath()))
         {
-            # THIS MUST BE FIRST
             file_put_contents(self::getAppsDuplicatePhpFilePath(), $php);
         }
     }
@@ -74,12 +72,10 @@ trait DynamicOutputComponentTestTrait
     {
         if(file_exists(self::getAppsDuplicateTxtFilePath()))
         {
-            # THIS MUST BE FIRST
             unlink(self::getAppsDuplicateTxtFilePath());
         }
         if(file_exists(self::getAppsDuplicatePhpFilePath()))
         {
-            # THIS MUST BE FIRST
             unlink(self::getAppsDuplicatePhpFilePath());
         }
     }
@@ -90,26 +86,23 @@ trait DynamicOutputComponentTestTrait
         $php = '<?php echo "Hello world";';
         if(!file_exists(self::getSharedDuplicateTxtFilePath()))
         {
-            # THIS MUST BE FIRST
             file_put_contents(self::getSharedDuplicateTxtFilePath(), $plainText);
         }
         if(!file_exists(self::getSharedDuplicatePhpFilePath()))
         {
-            # THIS MUST BE FIRST
             file_put_contents(self::getSharedDuplicatePhpFilePath(), $php);
         }
     }
 
     private static function removeSharedDuplicateDynamicOutputFiles(): void
     {
+        var_dump('cleaning shared');
         if(file_exists(self::getSharedDuplicateTxtFilePath()))
         {
-            # THIS MUST BE FIRST
             unlink(self::getSharedDuplicateTxtFilePath());
         }
         if(file_exists(self::getSharedDuplicatePhpFilePath()))
         {
-            # THIS MUST BE FIRST
             unlink(self::getSharedDuplicatePhpFilePath());
         }
     }
@@ -123,7 +116,7 @@ trait DynamicOutputComponentTestTrait
     private static function removeDuplicateDynamicOutputFiles(): void
     {
         self::removeAppsDuplicateDynamicOutputFiles();
-//        self::removeSharedDuplicateDynamicOutputFiles();
+        self::removeSharedDuplicateDynamicOutputFiles();
     }
 
     private static function createTestAppDynamicOutputDirectory(): void
