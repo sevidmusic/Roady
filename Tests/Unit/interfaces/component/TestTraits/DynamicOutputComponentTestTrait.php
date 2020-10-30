@@ -24,15 +24,16 @@ trait DynamicOutputComponentTestTrait
         self::createTestAppDirectory();
         self::createTestAppDynamicOutputDirectory();
         self::createDuplicateDynamicOutputFiles();
+        self::createUniqueSharedDynamicOutputFile();
     }
 
     public static function tearDownAfterClass(): void
     {
+        self::removeUniqueSharedDynamicOutputFile();
         self::removeDuplicateDynamicOutputFiles();
         self::removeTestAppDynamicOutputDirectory();
         self::removeTestAppDirectory();
     }
-
 
     private static function getAppsDuplicateTxtFilePath(): string
     {
@@ -53,6 +54,34 @@ trait DynamicOutputComponentTestTrait
     {
         return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getDuplicateDynamicPhpFileName();
     }
+
+
+    private static function getUniqueSharedPhpFilePath(): string
+    {
+        return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getUniqueSharedDynamicPhpFileName();
+    }
+
+    private static function createUniqueSharedDynamicOutputFile(): void
+    {
+        $php = '<?php echo "Hello world";';
+        if(!file_exists(self::getUniqueSharedPhpFilePath()))
+        {
+            file_put_contents(self::getUniqueSharedPhpFilePath(), $php);
+        }
+    }
+
+    private static function removeUniqueSharedDynamicOutputFile(): void
+    {
+        if(file_exists(self::getUniqueSharedPhpFilePath()))
+        {
+            unlink(self::getUniqueSharedPhpFilePath());
+        }
+    }
+
+
+
+
+
 
     private static function createAppsDuplicateDynamicOutputFiles(): void
     {
@@ -96,7 +125,6 @@ trait DynamicOutputComponentTestTrait
 
     private static function removeSharedDuplicateDynamicOutputFiles(): void
     {
-        var_dump('cleaning shared');
         if(file_exists(self::getSharedDuplicateTxtFilePath()))
         {
             unlink(self::getSharedDuplicateTxtFilePath());
