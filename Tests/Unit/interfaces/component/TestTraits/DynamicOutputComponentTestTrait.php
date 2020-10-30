@@ -16,21 +16,114 @@ trait DynamicOutputComponentTestTrait
 
     private function getExitingAppName(): string
     {
-        return 'DDMSTestApp';
-        // once setup tear down implemented:
-//        return self::tempAppDirectoryName();
+        return self::tempAppDirectoryName();
     }
 
     public static function setUpBeforeClass(): void
     {
         self::createTestAppDirectory();
         self::createTestAppDynamicOutputDirectory();
+        self::createDuplicateDynamicOutputFiles();
     }
 
     public static function tearDownAfterClass(): void
     {
-        self::removeTestAppDynamicOutputDirectory();
-        self::removeTestAppDirectory();
+        //self::removeAppsDuplicateDynamicOutputFiles();
+        //self::removeTestAppDynamicOutputDirectory();
+        //self::removeTestAppDirectory();
+    }
+
+
+    private static function getAppsDuplicateTxtFilePath(): string
+    {
+        return self::getTestAppDynamicOutputDirectoryPath() . self::getDuplicateDynamicTxtFileName();
+    }
+
+    private static function getAppsDuplicatePhpFilePath(): string
+    {
+        return self::getTestAppDynamicOutputDirectoryPath() . self::getDuplicateDynamicPhpFileName();
+    }
+
+    private static function getSharedDuplicateTxtFilePath(): string
+    {
+        return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getDuplicateDynamicTxtFileName();
+    }
+
+    private static function getSharedDuplicatePhpFilePath(): string
+    {
+        return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getDuplicateDynamicPhpFileName();
+    }
+
+    private static function createAppsDuplicateDynamicOutputFiles(): void
+    {
+        $plainText = 'plain text';
+        $php = '<?php echo "Hello world";';
+        if(!file_exists(self::getAppsDuplicateTxtFilePath()))
+        {
+            # THIS MUST BE FIRST
+            file_put_contents(self::getAppsDuplicateTxtFilePath(), $plainText);
+        }
+        if(!file_exists(self::getAppsDuplicatePhpFilePath()))
+        {
+            # THIS MUST BE FIRST
+            file_put_contents(self::getAppsDuplicatePhpFilePath(), $php);
+        }
+    }
+
+    private static function removeAppsDuplicateDynamicOutputFiles(): void
+    {
+        if(file_exists(self::getAppsDuplicateTxtFilePath()))
+        {
+            # THIS MUST BE FIRST
+            unlink(self::getAppsDuplicateTxtFilePath());
+        }
+        if(file_exists(self::getAppsDuplicatePhpFilePath()))
+        {
+            # THIS MUST BE FIRST
+            unlink(self::getAppsDuplicatePhpFilePath());
+        }
+    }
+
+    private static function createSharedDuplicateDynamicOutputFiles(): void
+    {
+        $plainText = 'plain text';
+        $php = '<?php echo "Hello world";';
+        if(!file_exists(self::getSharedDuplicateTxtFilePath()))
+        {
+            # THIS MUST BE FIRST
+            file_put_contents(self::getSharedDuplicateTxtFilePath(), $plainText);
+        }
+        if(!file_exists(self::getSharedDuplicatePhpFilePath()))
+        {
+            # THIS MUST BE FIRST
+            file_put_contents(self::getSharedDuplicatePhpFilePath(), $php);
+        }
+    }
+
+    private static function removeSharedDuplicateDynamicOutputFiles(): void
+    {
+        if(file_exists(self::getSharedDuplicateTxtFilePath()))
+        {
+            # THIS MUST BE FIRST
+            unlink(self::getSharedDuplicateTxtFilePath());
+        }
+        if(file_exists(self::getSharedDuplicatePhpFilePath()))
+        {
+            # THIS MUST BE FIRST
+            unlink(self::getSharedDuplicatePhpFilePath());
+        }
+    }
+
+    private static function createDuplicateDynamicOutputFiles(): void
+    {
+        self::createAppsDuplicateDynamicOutputFiles();
+        self::createSharedDuplicateDynamicOutputFiles();
+    }
+
+    private static function removeDuplicateDynamicOutputFiles(): void
+    {
+        self::removeAppsDuplicateDynamicOutputFiles();
+//        self::removeSharedDuplicateDynamicOutputFiles();
     }
 
     private static function createTestAppDynamicOutputDirectory(): void
@@ -53,7 +146,7 @@ trait DynamicOutputComponentTestTrait
 
     private static function getTestAppDynamicOutputDirectoryPath(): string
     {
-       return self::getTestApDirectoryPath() . 'DynamicOutput';
+       return self::getTestApDirectoryPath() . 'DynamicOutput' . DIRECTORY_SEPARATOR;
     }
 
     private static function createTestAppDirectory(): void
@@ -107,7 +200,7 @@ trait DynamicOutputComponentTestTrait
 
     private function defaultDynamicFileName(): string
     {
-        return $this->getExistingAppDynamicPhpFileName();
+        return self::getExistingAppDynamicPhpFileName();
     }
 
     public function getDynamicOutputComponentTestArgs(): array
@@ -149,22 +242,22 @@ trait DynamicOutputComponentTestTrait
         return self::determineDDMSRootDirectory() . $this->determineAppsSubDirectoryPath();
     }
 
-    private function getRandomName(): string
+    private static function getRandomName(): string
     {
         return 'foo' . rand(100000,99999) . 'bar' . rand(100,999) . 'baz' . rand(10000000,99999999);
     }
 
-    private function getExistingAppDynamicPhpFileName(): string
+    private static function getExistingAppDynamicPhpFileName(): string
     {
         return 'DisplayCurrentDateTime.php';
     }
 
-    private function getExistingSharedDynamicPhpFileName(): string
+/*    private static function getExistingSharedDynamicPhpFileName(): string
     {
         return 'CurrentRequestDisplay.php';
     }
-
-    private function expectedSharedDynamicOutputFileDirectoryPath(): string
+*/
+    private static function expectedSharedDynamicOutputFileDirectoryPath(): string
     {
 
         return self::determineDDMSRootDirectory() . 'SharedDynamicOutput' . DIRECTORY_SEPARATOR;
@@ -189,7 +282,7 @@ trait DynamicOutputComponentTestTrait
 
     public function testGetAppsDynamicOutputFilesDirectoryPathThrowsRuntimeExceptionIfAppsDynamicOutputDirectoryDoesNotExist(): void
     {
-        $this->getDynamicOutputComponent()->import(['appDirectoryName' => $this->getRandomName()]);
+        $this->getDynamicOutputComponent()->import(['appDirectoryName' => self::getRandomName()]);
         if(!is_dir($this->expectedAppsDynamicOutputFileDirectoryPath()))
         {
             $this->expectException(RuntimeException::class);
@@ -200,19 +293,19 @@ trait DynamicOutputComponentTestTrait
 
     public function testGetSharedDynamicOutputFilesDirectoryPathReturnsExpectedPath(): void
     {
-        if(!is_dir($this->expectedSharedDynamicOutputFileDirectoryPath()))
+        if(!is_dir(self::expectedSharedDynamicOutputFileDirectoryPath()))
         {
             $this->expectException(RuntimeException::class);
         }
         $this->assertEquals(
-            $this->expectedSharedDynamicOutputFileDirectoryPath(),
+            self::expectedSharedDynamicOutputFileDirectoryPath(),
             $this->getDynamicOutputComponent()->getSharedDynamicOutputFilesDirectoryPath()
         );
     }
 
     public function testGetSharedDynamicOutputFilesDirectoryPathThrowsRuntimeExceptionIfSharedDynamicOutputDirectoryDoesNotExist(): void
     {
-        if(!is_dir($this->expectedSharedDynamicOutputFileDirectoryPath()))
+        if(!is_dir(self::expectedSharedDynamicOutputFileDirectoryPath()))
         {
             $this->expectException(RuntimeException::class);
             $this->getDynamicOutputComponent()->getSharedDynamicOutputFilesDirectoryPath();
@@ -235,41 +328,41 @@ trait DynamicOutputComponentTestTrait
         );
     }
 
-    private function getDuplicateDynamicTxtFileName(): string
+    private static function getDuplicateDynamicTxtFileName(): string
     {
         return 'Duplicate.txt';
     }
 
-    private function getDuplicateDynamicPhpFileName(): string
+    private static function getDuplicateDynamicPhpFileName(): string
     {
         return 'Duplicate.php';
     }
 
-    private function getUniqueSharedDynamicPhpFileName(): string
+    private static function getUniqueSharedDynamicPhpFileName(): string
     {
         return 'UniqueSharedOutput.php';
     }
 
-    public function testGetDynamicFilePathReturnsAppDynamicFilePathIfDynamicFileExistsInAppDynamicDirectory(): void
+    public function testGetDynamicFilePathReturnsAppDynamicFilePathIfDynamicFileExistsInBothAppDynamicOutputDirectoryAndSharedDynamicOutputDirectory(): void
     {
         $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getDuplicateDynamicPhpFileName()
+            self::getDuplicateDynamicPhpFileName()
         );
         $this->assertEquals(
-            $this->expectedAppsDynamicOutputFileDirectoryPath() . $this->getDuplicateDynamicPhpFileName(),
+            $this->expectedAppsDynamicOutputFileDirectoryPath() . self::getDuplicateDynamicPhpFileName(),
             $doc->getDynamicFilePath()
         );
     }
 
-    public function testGetDynamicFilePathReturnsSharedDynamicFilePathIfDynamicFileDoesNotExistInAppDynamicDirectory(): void
+    public function testGetDynamicFilePathReturnsSharedDynamicFilePathIfDynamicFileDoesNotExistInAppDynamicOutputDirectory(): void
     {
         $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getUniqueSharedDynamicPhpFileName()
+            self::getUniqueSharedDynamicPhpFileName()
         );
         $this->assertEquals(
-            $this->expectedSharedDynamicOutputFileDirectoryPath() . $this->getUniqueSharedDynamicPhpFileName(),
+            self::expectedSharedDynamicOutputFileDirectoryPath() . self::getUniqueSharedDynamicPhpFileName(),
             $doc->getDynamicFilePath()
         );
     }
@@ -277,7 +370,7 @@ trait DynamicOutputComponentTestTrait
     public function testGetDynamicFilePathThrowsRuntimeExceptionIfDynamicFileDoesNotExistInEitherAppOrSharedDynamicOutputDirectory(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->getDynamicOutputComponent()->import(['dynamicFileName' => $this->getRandomName()]);
+        $this->getDynamicOutputComponent()->import(['dynamicFileName' => self::getRandomName()]);
         $this->getDynamicOutputComponent()->getDynamicFilePath();
     }
 
@@ -298,7 +391,7 @@ trait DynamicOutputComponentTestTrait
     {
         $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getDuplicateDynamicTxtFileName()
+            self::getDuplicateDynamicTxtFileName()
         );
         $this->assertEquals(
             $this->getFileContentsAsPlainText(
@@ -312,7 +405,7 @@ trait DynamicOutputComponentTestTrait
     {
         $doc = $this->buildCoreDynamicOutputComponent(
             $this->getExitingAppName(),
-            $this->getDuplicateDynamicPhpFileName()
+            self::getDuplicateDynamicPhpFileName()
         );
         $this->assertEquals(
             $this->executePhpFileInOutputBuffer(

@@ -33,7 +33,7 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
             )
         )
         {
-            throw new RuntimeException('Dynamic file missing.');
+            throw new RuntimeException($this->getSharedDynamicOutputFilesDirectoryPath() . $this->dynamicFileName . ' file missing.');
         }
     }
 

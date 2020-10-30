@@ -1,3 +1,1 @@
-<?php
-
-echo 'Duplicate Dynmaic File Content from shared';
+<?php echo "Hello world";
