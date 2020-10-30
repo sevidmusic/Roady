@@ -55,7 +55,7 @@ trait DynamicOutputComponentTestTrait
         ];
     }
 
-    private function determineCurrentSubDirectoryPath(): string
+    private static function determineCurrentSubDirectoryPath(): string
     {
         return 'Tests' . DIRECTORY_SEPARATOR . 'Unit' . DIRECTORY_SEPARATOR . 'interfaces' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'TestTraits';
     }
@@ -65,10 +65,10 @@ trait DynamicOutputComponentTestTrait
         return 'Apps' . DIRECTORY_SEPARATOR . $this->getDynamicOutputComponent()->export()['appDirectoryName'] . DIRECTORY_SEPARATOR;
     }
 
-    private function determinDDMSRootDirectory(): string
+    private static function determineDDMSRootDirectory(): string
     {
         return str_replace(
-            $this->determineCurrentSubDirectoryPath(),
+            self::determineCurrentSubDirectoryPath(),
             '',
             __DIR__
         );
@@ -76,7 +76,7 @@ trait DynamicOutputComponentTestTrait
 
     private function expectedCurrentAppDirectoryPath(): string
     {
-        return $this->determinDDMSRootDirectory() . $this->determineAppsSubDirectoryPath();
+        return self::determineDDMSRootDirectory() . $this->determineAppsSubDirectoryPath();
     }
 
     private function getRandomName(): string
@@ -102,7 +102,7 @@ trait DynamicOutputComponentTestTrait
     private function expectedSharedDynamicOutputFileDirectoryPath(): string
     {
 
-        return $this->determinDDMSRootDirectory() . 'SharedDynamicOutput' . DIRECTORY_SEPARATOR;
+        return self::determineDDMSRootDirectory() . 'SharedDynamicOutput' . DIRECTORY_SEPARATOR;
     }
 
     private function expectedAppsDynamicOutputFileDirectoryPath(): string
