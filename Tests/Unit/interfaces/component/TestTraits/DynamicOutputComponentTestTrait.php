@@ -270,7 +270,7 @@ trait DynamicOutputComponentTestTrait
 
     private static function getExistingAppDynamicPhpFileName(): string
     {
-        return 'DisplayCurrentDateTime.php';
+        return self::getDuplicateDynamicPhpFileName();
     }
 
 /*    private static function getExistingSharedDynamicPhpFileName(): string
