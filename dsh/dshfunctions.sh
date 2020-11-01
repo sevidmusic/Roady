@@ -5,16 +5,21 @@ set -o posix
 clear
 
 showHelpMsg() {
-    showBanner "dsh --help | Help"
+    showBanner "dsh --help | dsh -h | ${HIGHLIGHTCOLOR}Help"
     if [[ -z "${1}" || "${1}" == 'help' || "${1}" == 'h' ]]; then
-        notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility that provides various utilities to aide in development with the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
-        notifyUser "Note: To get information about a specific flag supply the ${HIGHLIGHTCOLOR}-h${NOTIFYCOLOR}" 0 'dontClear'
-        notifyUser "      flag with either the flag's ${HIGHLIGHTCOLOR}letter name${NOTIFYCOLOR}, or the flag's ${HIGHLIGHTCOLOR}full name${NOTIFYCOLOR}," 0 'dontClear'
-        notifyUser "      excluding the preceding - or --" 0 'dontClear'
-        notifyUser "      For example, you could use either of the following to get help information about the ${HIGHLIGHTCOLOR}--test-ddms${NOTIFYCOLOR} flag:" 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
+        notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
+        notifyUser "the ${HIGHLIGHTCOLOR}Darling Data Management System${NOTIFYCOLOR}." 0 'dontClear'
+        notifyUser "Note: To get information about a specific flag supply the" 0 'dontClear'
+        notifyUser "      ${HIGHLIGHTCOLOR}-h${NOTIFYCOLOR} flag with either the flag's ${HIGHLIGHTCOLOR}letter name${NOTIFYCOLOR}, or" 0 'dontClear'
+        notifyUser "      the flag's ${HIGHLIGHTCOLOR}full name${NOTIFYCOLOR}, excluding the preceding - or --" 0 'dontClear'
+        notifyUser "      For example, you could use either of the following to" 0 'dontClear'
+        notifyUser "      get help information about the ${HIGHLIGHTCOLOR}--test-ddms" 0 'dontClear'
+        notifyUser "      flag:" 0 'dontClear'
         notifyUser "      ${HIGHLIGHTCOLOR}dsh -h test-ddms" 0 'dontClear'
         notifyUser "      ${HIGHLIGHTCOLOR}dsh -h t" 0 'dontClear'
-        notifyUser "To get a list of the available flags use ${HIGHLIGHTCOLOR} dsh -h flags" 0 'dontClear'
+        notifyUser "To get a list of the available flags use:" 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}dsh -h flags" 0 'dontClear'
         exit 0
     fi
     if [[ "${1}" == 'start-app-server' || "${1}" == 's' ]]; then
