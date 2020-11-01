@@ -5,41 +5,49 @@ set -o posix
 clear
 
 showPhpUnitLicenseMsg() {
-      showBanner 'PHP UNIT License Message'
-      notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not apart of" 0 'dontClear'
-      notifyUser "the Darling Data Managent System, it is a third party library developed by" 0 'dontClear'
-      notifyUser "Sebastian Bergmann." 0 'dontClear'
+      showBanner 'About PHP UNIT by Sebastian Bergman'
+      notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not" 0 'dontClear'
+      notifyUser "apart of the Darling Data Managent System, it is a third party" 0 'dontClear'
+      notifyUser "library developed by Sebastian Bergmann." 0 'dontClear'
       notifyUser "PhpUnit is a unit testing framework for Php applications." 0 'dontClear'
       notifyUser "The official PhpUnit source can be found at:" 0 'dontClear'
       notifyUser "${HIGHLIGHTCOLOR}https://github.com/sebastianbergmann/phpunit" 0 'dontClear'
-      sleep 4
-      showBanner 'PHP UNIT License Message'
+      sleep 5
+      showBanner 'About PHP UNIT by Sebastian Bergman'
       notifyUser "A copy of the LICENSE associated with PhpUnit can be found at:" 0 'dontClear'
       notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DSH_DIR}/PHP_UNIT_LICENSE" 0 'dontClear'
       sleep 4
-      showBanner 'PHP UNIT License Message'
-      notifyUser "Note: The PHP_UNIT_LICENSE is not associated with the Darling Data" 0 'dontClear'
-      notifyUser "Management System, or dsh, which both are licensed under the MIT" 0 'dontClear'
-      notifyUser "license." 0 'dontClear'
-      notifyUser "The Darling Data Managemet System's license can be found at:" 0 'dontClear'
-      notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DDMS}LICENSE" 0 'dontClear'
-      notifyUser "dsh is part of the Darling Data Management system, and therfore uses the same license:" 0 'dontClear'
+      showBanner 'About PHP UNIT by Sebastian Bergman'
+      notifyUser "Note: Php Unit's license is not associated with the Darling" 0 'dontClear'
+      notifyUser "Data Management System, or dsh, which are both licensed under" 0 'dontClear'
+      notifyUser "the MIT license." 0 'dontClear'
+      notifyUser "The license for both the Darling Data Managemet System and dsh." 0 'dontClear'
+      notifyUser "can be found at:" 0 'dontClear'
       notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DDMS}LICENSE" 0 'dontClear'
       sleep 4
-      showBanner 'PHP UNIT License Message'
-      notifyUser "This message will not show again unless the relevant .dsh_* cache file is deleted." 0 'dontClear'
-      sleep 4
+      showBanner 'About PHP UNIT by Sebastian Bergman'
+      notifyUser "This message will not show again unless the relevant dsh cache " 0 'dontClear'
+      notifyUser "file is deleted." 0 'dontClear'
       showLoadingBar "Starting PhpUnit"
 }
 
-runPhpUnit() {
-    showBanner "dsh --test-ddms | Run Php Unit Tests"
-    disableCtrlC
-    modifyJsonStorageDir
-    [ ! -f "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown" ] && showPhpUnitLicenseMsg
+phpUnitLicenceMsgCache() {
+    printf "%s" "${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown"
+}
+
+executePhpUnitTests() {
     "${PATH_TO_DDMS}vendor/phpunit/phpunit/phpunit" -c "${PATH_TO_DDMS}php.xml"
+}
+
+runPhpUnit() {
+    showBanner "dsh --test-ddms | dsh -t | ${HIGHLIGHTCOLOR}Run Php Unit Tests"
+    disableCtrlC
+    [ ! -f "$(phpUnitLicenceMsgCache)" ] && showPhpUnitLicenseMsg
+    showBanner "dsh --test-ddms | dsh -t | ${HIGHLIGHTCOLOR}Run Php Unit Tests"
+    modifyJsonStorageDir
+    executePhpUnitTests
     sleep 5
-    echo "License message already shown" >"${PATH_TO_DSH_DIR}/.dsh_license_notice_already_shown"
+    echo "License message already shown" > "$(phpUnitLicenceMsgCache)"
     restoreJsonStorageDir
     enableCtrlC
 }
