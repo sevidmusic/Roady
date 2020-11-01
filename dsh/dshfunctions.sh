@@ -5,7 +5,7 @@ set -o posix
 clear
 
 showHelpMsg() {
-    showBanner "dsh --help | dsh -h | ${HIGHLIGHTCOLOR}Help"
+    showBanner "dsh --help ${1:-''}| dsh -h ${1:-''} | ${HIGHLIGHTCOLOR}Help"
     if [[ -z "${1}" || "${1}" == 'help' || "${1}" == 'h' ]]; then
         notifyUser "${HIGHLIGHTCOLOR}dsh${NOTIFYCOLOR} is a command line utility" 0 'dontClear'
         notifyUser "that provides various utilities to aide in development with" 0 'dontClear'
