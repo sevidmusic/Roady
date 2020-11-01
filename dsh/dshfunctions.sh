@@ -4,6 +4,18 @@ set -o posix
 
 clear
 
+runPhpUnit() {
+    showBanner "dsh --test-ddms | dsh -t | ${HIGHLIGHTCOLOR}Run Php Unit Tests"
+    disableCtrlC
+    [ ! -f "$(phpUnitLicenceMsgCache)" ] && showPhpUnitLicenseMsg
+    showBanner "dsh --test-ddms | dsh -t | ${HIGHLIGHTCOLOR}Run Php Unit Tests"
+    modifyJsonStorageDir
+    executePhpUnitTests
+    sleep 5
+    echo "License message already shown" > "$(phpUnitLicenceMsgCache)"
+    restoreJsonStorageDir
+    enableCtrlC
+}
 showPhpUnitLicenseMsg() {
       showBanner 'About PHP UNIT by Sebastian Bergman'
       notifyUser "PhpUnit will start in a moment. Please note, PhpUnit is not" 0 'dontClear'
@@ -37,19 +49,6 @@ phpUnitLicenceMsgCache() {
 
 executePhpUnitTests() {
     "${PATH_TO_DDMS}vendor/phpunit/phpunit/phpunit" -c "${PATH_TO_DDMS}php.xml"
-}
-
-runPhpUnit() {
-    showBanner "dsh --test-ddms | dsh -t | ${HIGHLIGHTCOLOR}Run Php Unit Tests"
-    disableCtrlC
-    [ ! -f "$(phpUnitLicenceMsgCache)" ] && showPhpUnitLicenseMsg
-    showBanner "dsh --test-ddms | dsh -t | ${HIGHLIGHTCOLOR}Run Php Unit Tests"
-    modifyJsonStorageDir
-    executePhpUnitTests
-    sleep 5
-    echo "License message already shown" > "$(phpUnitLicenceMsgCache)"
-    restoreJsonStorageDir
-    enableCtrlC
 }
 
 showHelpMsg() {
