@@ -55,21 +55,22 @@ showHelpMsg() {
         notifyUser "${HIGHLIGHTCOLOR}--build-app APPNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-b APPNAME${NOTIFYCOLOR} : Build the specified app by running the app's Components.php file." 0 'dontClear'
         notifyUser "${HIGHLIGHTCOLOR}--start-app-server PORT${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-s PORT${NOTIFYCOLOR} : Start a development server to use for the app @ ${HIGHLIGHTCOLOR}http://localhost:PORT" 0 'dontClear'
         notifyUser "${HIGHLIGHTCOLOR}--run-app APPNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-r APPNAME${NOTIFYCOLOR} : Run the specified app. First, phpunit will run, then the app will be built, and an development server will be started for the app using a random PORT, for example: ${HIGHLIGHTCOLOR}http://localhost:RANDOM_PORT" 0 'dontClear'
+        notifyUser "${HIGHLIGHTCOLOR}--new MODE ARGS${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-n MODE ARGS${NOTIFYCOLOR} : Can be used to create a new App, shared or App specific Dynamic Output files, and Responses for an App. The --new flag is modal, meaning, the argument following the --new, or -n, flag will determine what is to be created. For example: ${HIGHLIGHTCOLOR}dsh --new app Foo https://www.foo.com${NOTIFYCOLOR} would create and setup a new starter app named Foo in the Apps directory, whereas, ${HIGHLIGHTCOLOR}dsh --new response Foo DynamicOutput${NOTIFYCOLOR} would create a new Response for the Foo app that used DynamicOutput components to generate output." 0 'dontClear'
         exit 0
     fi
-    if [[ "${1}" == '--active-development-servers' || "${1}" == 'j' ]]; then
+    if [[ "${1}" == 'active-development-servers' || "${1}" == 'j' ]]; then
         notifyUser "The -j, or --active-development-servers will list all currently running development servers." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -j" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --active-development-servers" 0 'dontClear'
         exit 0
     fi
-    if [[ "${1}" == '--stop-all-development-servers' || "${1}" == 'k' ]]; then
+    if [[ "${1}" == 'stop-all-development-servers' || "${1}" == 'k' ]]; then
         notifyUser "The -k, or --stop-all-development-servers will stop all currently running development servers." 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh -k" 0 'dontClear'
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --stop-all-development-servers" 0 'dontClear'
         exit 0
     fi
-    if [[ "${1}" == '--new' || "${1}" == 'n' ]]; then
+    if [[ "${1}" == 'new' || "${1}" == 'n' ]]; then
         if [[ -z "${2}" || "${2}" == 'modes' || "${2}" == 'm' ]]; then
             notifyUser "The --new, or -n, flag can be used to create new Apps, define" 0 'dontClear'
             notifyUser "new Responses for existing apps, create new Dynamic Output" 0 'dontClear'
