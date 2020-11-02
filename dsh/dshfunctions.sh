@@ -114,10 +114,7 @@ showHelpMsg() {
             exit 0
         fi
     fi
-    notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
-    notifyUser "Options:" 0 'dontClear'
-    notifyUser "${HIGHLIGHTCOLOR}dsh --help${CLEAR_ALL_TEXT_STYLES}  ${HIGHLIGHTCOLOR}dsh --help app${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
-    notifyUser "${HIGHLIGHTCOLOR}dsh --help apps${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    notifyUser "${ERRORCOLOR}Invalid option supplied to --help flag." 0 'dontClear'
 }
 
 runPhpUnit() {
