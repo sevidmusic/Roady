@@ -196,11 +196,20 @@ showAppDoesNotExistErrorAndExit() {
     exit 1
 }
 
+showAppsConponentsPhpDoesNotExistErrorAndExit() {
+    notifyUser "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not have" 0 'dontClear'
+    notifyUser "${ERRORCOLOR}a Components.php file. Please define one at:" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DDMS}Apps/${1}/Components.php" 0 'dontClear'
+    newLine
+    exit 1
+}
+
 buildApp() {
    disableCtrlC
    [ -z "${1}" ] && notifyUser "${ERRORCOLOR}You must specify an app to run. For example: ${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
    MOST_RECENTLY_RUN_APP_PATH="${PATH_TO_DDMS}Apps/${1}"
    [ ! -d "${MOST_RECENTLY_RUN_APP_PATH}" ] && showAppDoesNotExistErrorAndExit "${1}"
+   [ ! -f "${MOST_RECENTLY_RUN_APP_PATH}/Components.php" ] && showAppsConponentsPhpDoesNotExistErrorAndExit "${1}"
    cd "${MOST_RECENTLY_RUN_APP_PATH}"
    [[ -d "$(expectedPathToAppStorageDir ${1})" ]] && notifyUser "${WARNINGCOLOR}The ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${WARNINGCOLOR} app was already built, to build the app again, please remove the following directory:${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}$(expectedPathToAppStorageDir ${1})${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
    [[ ! -d "$(expectedPathToAppStorageDir ${1})" ]] && /usr/bin/php Components.php
