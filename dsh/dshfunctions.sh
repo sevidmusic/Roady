@@ -209,7 +209,7 @@ buildApp() {
    [ -z "${1}" ] && notifyUser "${ERRORCOLOR}You must specify an app to run. For example: ${HIGHLIGHTCOLOR}dsh -r AppName" 0 'dontClear' && exit 1
    MOST_RECENTLY_RUN_APP_PATH="${PATH_TO_DDMS}Apps/${1}"
    [ ! -d "${MOST_RECENTLY_RUN_APP_PATH}" ] && showAppDoesNotExistErrorAndExit "${1}"
-   [ ! -f "${MOST_RECENTLY_RUN_APP_PATH}/Components.php" ] && showAppsConponentsPhpDoesNotExistErrorAndExit "${1}"
+   [ ! -f "$(getAppComponentsFilePath ${1})" ] && showAppsConponentsPhpDoesNotExistErrorAndExit "${1}"
    cd "${MOST_RECENTLY_RUN_APP_PATH}"
    [[ -d "$(expectedPathToAppStorageDir ${1})" ]] && notifyUser "${WARNINGCOLOR}The ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${WARNINGCOLOR} app was already built, to build the app again, please remove the following directory:${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}$(expectedPathToAppStorageDir ${1})${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
    [[ ! -d "$(expectedPathToAppStorageDir ${1})" ]] && /usr/bin/php Components.php
@@ -219,7 +219,6 @@ buildApp() {
 getAppComponentsFilePath()
 {
     printf "%s" "${PATH_TO_DDMS}/Apps/${1}/Components.php"
-    # @todo printf "%s" "${PATH_TO_DDMS}/Apps/${1}/Components.php"
 }
 
 getCurrentAppDomainName() {
@@ -232,6 +231,7 @@ generateRandomAppDomainName() {
 
 modifyAppDomain() {
     showBanner "Setting up temporary app domain"
+    [ ! -f "$(getAppComponentsFilePath ${1})" ] && showAppsConponentsPhpDoesNotExistErrorAndExit "${1}"
     ORIGINAL_APP_DOMAIN_NAME="$(getCurrentAppDomainName ${1})"
     NEW_APP_DOMAIN_NAME="$(generateRandomAppDomainName)"
     showLoadingBar "Configuring temporary App Domain Name" 'dontClear'
