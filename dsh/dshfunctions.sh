@@ -49,7 +49,7 @@ showHelpMsg() {
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --run-app AppName" 0 'dontClear'
         exit 0
     fi
-    if [[ "${1}" == 'flags' ]]; then
+    if [[ "${1}" == 'flags' || "${1}" == 'f' ]]; then
         notifyUser "${HIGHLIGHTCOLOR}--help FLAGNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-h FLAGNAME${NOTIFYCOLOR}: Show help information. If FLAGNAME is specified show detailed help information about specified flag." 0 'dontClear'
         notifyUser "${HIGHLIGHTCOLOR}--test-ddms${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-t${NOTIFYCOLOR} : Run the Darling Data Management System's php unit tests." 0 'dontClear'
         notifyUser "${HIGHLIGHTCOLOR}--build-app APPNAME${NOTIFYCOLOR}, ${HIGHLIGHTCOLOR}-b APPNAME${NOTIFYCOLOR} : Build the specified app by running the app's Components.php file." 0 'dontClear'
