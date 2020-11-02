@@ -69,6 +69,51 @@ showHelpMsg() {
         notifyUser "    For example: ${HIGHLIGHTCOLOR}dsh --stop-all-development-servers" 0 'dontClear'
         exit 0
     fi
+    if [[ "${1}" == '--new' || "${1}" == 'n' ]]; then
+        if [[ -z "${2}" || "${2}" == 'modes' || "${2}" == 'm' ]]; then
+            notifyUser "The --new, or -n, flag can be used to create new Apps, define" 0 'dontClear'
+            notifyUser "new Responses for existing apps, create new Dynamic Output" 0 'dontClear'
+            notifyUser "files for existng Apps, or create new Shared Dynamic Output" 0 'dontClear'
+            notifyUser "files." 0 'dontClear'
+            notifyUser "The syntax for the --new flag is as follows" 0 'dontClear'
+            notifyUser "    ${HIGHLIGHTCOLOR}dsh --new <mode> <args>" 0 'dontClear'
+            notifyUser "For information on a specific mode use ${HIGHLIGHTCOLOR}dsh --help --new MODE" 0 'dontClear'
+            notifyUser "The following modes are available:" 0 'dontClear'
+            notifyUser "    app: Create a new App that can be used as a starting point." 0 'dontClear'
+            notifyUser "    Usage: ${HIGHLIGHTCOLOR}dsh --new app APPNAME APPDOMAIN" 0 'dontClear'
+            newLine
+#            notifyUser "    MODE: Message" 0 'dontClear'
+#            notifyUser "    Usage: ${HIGHLIGHTCOLOR}dsh --new MODE ARGS" 0 'dontClear'
+#            newLine
+            exit 0
+        fi
+        if [[ "${2}" == 'app' || "${2}" == 'a' ]]; then
+            notifyUser "dsh --new app APPNAME APPDOMAIN" 0 'dontClear'
+            notifyUser "The ${HIGHLIGHTCOLOR}app${NOTIFYCOLOR} mode can be used to create new Apps for the Darling Data Management System." 0 'dontClear'
+            notifyUser "The ${HIGHLIGHTCOLOR}app${NOTIFYCOLOR} mode expects two arguments:" 0 'dontClear'
+            notifyUser "1. The name of the App to create" 0 'dontClear'
+            notifyUser "2. The Apps ${HIGHLIGHTCOLOR}production${NOTIFYCOLOR} donain." 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}It is recomended that you always use the" 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}App's production domain, and that you always" 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}use dsh to run development tasks." 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}This allows you to configure your app so its" 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}ready for production, and allows dsh figure" 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}out when an isolated develompent enviornment" 0 'dontClear'
+            notifyUser "${WARNINGCOLOR}should be setup and used." 0 'dontClear'
+            notifyUser "For example, to create a new App named Foo, whose procution domain" 0 'dontClear'
+            notifyUser "is https://www.foo.com, either of the following examples could be used:" 0 'dontClear'
+            notifyUser "    ${HIGHLIGHTCOLOR}dsh -n app \"Foo\" \"https://www.foo.com/\"" 0 'dontClear'
+            notifyUser "    ${HIGHLIGHTCOLOR}dsh --new app \"Foo\" \"https://www.foo.com/\"" 0 'dontClear'
+            notifyUser "Note: dsh creates a starter app for you, it will get you going," 0 'dontClear'
+            notifyUser "      but it's up to you to implment the App." 0 'dontClear'
+            notifyUser "      dsh --new app will specifically create a new App" 0 'dontClear'
+            notifyUser "      directory using the specified APPNAME, and will" 0 'dontClear'
+            notifyUser "      setup the neccessary subdirectories, files, and your" 0 'dontClear'
+            notifyUser "      Apps production domain, giving you a simple starter" 0 'dontClear'
+            notifyUser "      starter App to build on." 0 'dontClear'
+            exit 0
+        fi
+    fi
     notifyUser "${ERRORCOLOR}Invalid option supplied to -help flag." 0 'dontClear'
     notifyUser "Options:" 0 'dontClear'
     notifyUser "${HIGHLIGHTCOLOR}dsh --help${CLEAR_ALL_TEXT_STYLES}  ${HIGHLIGHTCOLOR}dsh --help app${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
