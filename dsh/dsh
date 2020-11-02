@@ -67,6 +67,7 @@ while test $# -gt 0; do
     exit 0
     ;;
   -k | --stop-all-development-servers*)
+    shift
     stopAllDevelopmentServers
     exit 0
     ;;
