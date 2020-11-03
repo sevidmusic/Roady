@@ -337,7 +337,9 @@ createAppDirectory() {
     local newAppPath
     newAppPath="${PATH_TO_DDMS}Apps/${1}"
     if [[ ! -d "${newAppPath}" ]]; then
+        showBanner "dsh --new app | Create new App's directory"
         mkdir "${newAppPath}"
+        notifyUser "New app was created at ${newAppPath}"
     fi
 }
 
