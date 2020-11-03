@@ -332,3 +332,8 @@ stopAllDevelopmentServers() {
     showActiveDevelopmentServers
     exit 0
 }
+
+createAppDirectory() {
+    mkdir "${PATH_TO_DDMS}Apps/${1}"
+}
+

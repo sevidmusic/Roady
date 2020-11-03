@@ -71,6 +71,14 @@ while test $# -gt 0; do
     stopAllDevelopmentServers
     exit 0
     ;;
+  -n | --new*)
+    shift
+    if [[ "${1}" == 'app' || "${1}" == 'a' ]]; then
+        createAppDirectory "${2}"
+        exit 0
+    fi
+    exit 0
+    ;;
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"
     break
