@@ -21,4 +21,9 @@ trait ComponentTestTrait
         $this->component = $component;
     }
 
+    protected function isProperImplementation(string $expectedImplementation, $class): bool
+    {
+        return in_array($expectedImplementation, class_implements($class));
+    }
+
 }

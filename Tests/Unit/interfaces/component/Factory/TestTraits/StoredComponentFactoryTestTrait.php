@@ -35,11 +35,6 @@ trait StoredComponentFactoryTestTrait
         );
     }
 
-    protected function isProperImplementation(string $expectedImplementation, $class): bool
-    {
-        return in_array($expectedImplementation, class_implements($class));
-    }
-
     protected function getStoredComponentFactory(): StoredComponentFactoryInterface
     {
         return $this->storedComponentFactory;
