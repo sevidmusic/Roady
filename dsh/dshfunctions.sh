@@ -334,6 +334,10 @@ stopAllDevelopmentServers() {
 }
 
 createAppDirectory() {
-    mkdir "${PATH_TO_DDMS}Apps/${1}"
+    local newAppPath
+    newAppPath="${PATH_TO_DDMS}Apps/${1}"
+    if [[ ! -d "${newAppPath}" ]]; then
+        mkdir "${newAppPath}"
+    fi
 }
 
