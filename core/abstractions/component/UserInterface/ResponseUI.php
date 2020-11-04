@@ -12,9 +12,12 @@ use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as Route
 abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInterface
 {
 
-    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable)
+    private RouterInterface $router;
+
+    public function __construct(Storable $storable, Switchable $switchable, Positionable $positionable, RouterInterface $router)
     {
         parent::__construct($storable, $switchable, $positionable);
+        $this->router = $router;
     }
 
 }

@@ -45,7 +45,8 @@ trait ResponseUITestTrait
                 'MockResponseUIContainer'
             ),
             new CoreSwitchable(),
-            new CorePositionable()
+            new CorePositionable(),
+            $this->getRouter()
         ];
     }
 
@@ -147,4 +148,13 @@ trait ResponseUITestTrait
         return 'StorageDriver' . strval(rand(1000,999));
     }
 
+    public function testRouterPropertyIsAssignedARouterImplementationInstancePostInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                RouterInterface::class,
+                $this->getResponseUI()->export()['router']
+            )
+        );
+    }
 }
