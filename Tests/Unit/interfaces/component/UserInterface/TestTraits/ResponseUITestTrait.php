@@ -4,6 +4,13 @@ namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
+use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStorageDriver;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
@@ -40,6 +47,16 @@ trait ResponseUITestTrait
             new CoreSwitchable(),
             new CorePositionable()
         ];
+    }
+
+    public function testGetRouterTestMethodReturnsARouterImplemnetationInstance(): void
+    {
+        $this->assertTrue(
+            $this->isProperImplementation(
+                RouterInterface::class,
+                $this->getRouter()
+            )
+        );
     }
 
     public function getRouter(): RouterInterface
@@ -113,9 +130,9 @@ trait ResponseUITestTrait
         return "StandardUITestComponentCruds";
     }
 
-    private function getStandardStorageDriverForCrud(): StandardStorageDriverInterface
+    private function getStandardStorageDriverForCrud(): StorageDriverInterface
     {
-        return new JsonStorageDriver(
+        return new CoreStorageDriver(
             new CoreStorable(
                 'StandardUITestStorageDriver' . strval(rand(0, 999)),
                 $this->getComponentLocation(),
@@ -125,5 +142,9 @@ trait ResponseUITestTrait
         );
     }
 
+    public function getStandardStorageDriverContainer(): string
+    {
+        return 'StorageDriver' . strval(rand(1000,999));
+    }
 
 }
