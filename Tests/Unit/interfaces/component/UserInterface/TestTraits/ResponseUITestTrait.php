@@ -3,6 +3,10 @@
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\primary\Positionable;
 
 trait ResponseUITestTrait
 {
@@ -25,4 +29,16 @@ trait ResponseUITestTrait
         $this->responseUI = $responseUI;
     }
 
+    public function getResponseUITestArgs(): array
+    {
+        return [
+            new Storable(
+                'MockResponseUIName',
+                'MockResponseUILocation',
+                'MockResponseUIContainer'
+            ),
+            new Switchable(),
+            new Positionable()
+        ];
+    }
 }

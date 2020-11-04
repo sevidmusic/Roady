@@ -2,25 +2,16 @@
 
 namespace UnitTests\classes\component\UserInterface;
 
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\component\UserInterface\ResponseUI;
-use UnitTests\abstractions\component\UserInterface\ResponseUITest as AbstractResponseUITest;
+use DarlingDataManagementSystem\classes\component\UserInterface\ResponseUI as CoreResponseUI;
+use UnitTests\abstractions\component\UserInterface\ResponseUITest as ResponseUITestBase;
 
-class ResponseUITest extends AbstractResponseUITest
+class ResponseUITest extends ResponseUITestBase
 {
     public function setUp(): void
     {
         $this->setResponseUI(
-            new ResponseUI(
-                new Storable(
-                    'ResponseUIName',
-                    'ResponseUILocation',
-                    'ResponseUIContainer'
-                ),
-                new Switchable(),
-                new Positionable()
+            new CoreResponseUI(
+                ...$this->getResponseUITestArgs()
             )
         );
         $this->setResponseUIParentTestInstances();
