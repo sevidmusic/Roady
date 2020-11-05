@@ -21,10 +21,21 @@ use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 trait ResponseUITestTrait
 {
 
+////public static function getOutputComponent()
+////public static function getDynamicOutputComponent()
+////////public static function createDynamicOutputFile()
+////////public static function removeDynamicOutputFile()
+////public static function getAction()
+////public static function getResponse()
+
     public static function setUpBeforeClass(): void
     {
         var_dump(self::getRequest()->getUniqueId());
         self::getComponentCrud()->create(self::getRequest());
+////////self::getComponentCrud()->create(self::getOutputComponent());
+////////self::getComponentCrud()->create(self::getDynamicOutputComponent());
+////////self::getComponentCrud()->create(self::getAction());
+////////self::getComponentCrud()->create(self::getResponse());
     }
 
     public static function tearDownAfterClass(): void
@@ -33,6 +44,7 @@ trait ResponseUITestTrait
         {
             self::getComponentCrud()->delete($storable);
         }
+////////foreach(self::getComponentCrud()->readAll(self::getTestComponentLocation(), ResponseInterface::RESPONSE_CONTAINER) as $storable)
         var_dump(count(self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer())));
     }
 
