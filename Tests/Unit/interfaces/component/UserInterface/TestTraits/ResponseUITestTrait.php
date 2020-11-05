@@ -21,6 +21,21 @@ use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 trait ResponseUITestTrait
 {
 
+    public static function setUpBeforeClass(): void
+    {
+        var_dump(self::getRequest()->getUniqueId());
+        self::getComponentCrud()->create(self::getRequest());
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        foreach(self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer()) as $storable)
+        {
+            self::getComponentCrud()->delete($storable);
+        }
+        var_dump(count(self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer())));
+    }
+
     private $responseUI;
 
     protected function setResponseUIParentTestInstances(): void
@@ -49,7 +64,7 @@ trait ResponseUITestTrait
             ),
             new CoreSwitchable(),
             new CorePositionable(),
-            $this->getRouter()
+            self::getRouter()
         ];
     }
 
@@ -58,27 +73,23 @@ trait ResponseUITestTrait
         $this->assertTrue(
             $this->isProperImplementation(
                 RouterInterface::class,
-                $this->getRouter()
+                self::getRouter()
             )
         );
     }
 
-    public function getRouter(): RouterInterface
+    public static function getRouter(): RouterInterface
     {
-        if (isset($this->router)) {
-            return $this->router;
-        }
-        $this->router = new CoreRouter(
+        return new CoreRouter(
             new CoreStorable(
                 'StandardUITestRouter' . strval(rand(0, 999)),
                 self::getTestComponentLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
-            $this->getCurrentRequest(),
-            $this->getComponentCrudForRouter()
+            self::getRequest(),
+            self::getComponentCrud()
         );
-        return $this->router;
     }
 
     protected static function getTestComponentLocation(): string
@@ -91,12 +102,9 @@ trait ResponseUITestTrait
         return 'TestComponents';
     }
 
-    public function getCurrentRequest(): RequestInterface
+    public static function getRequest(): RequestInterface
     {
-        if (isset($this->currentRequest) === true) {
-            return $this->currentRequest;
-        }
-        $this->currentRequest = new CoreRequest(
+        return new CoreRequest(
             new CoreStorable(
                 'StandardUICurrentRequest' . strval(rand(0, 999)),
                 self::getTestComponentLocation(),
@@ -104,15 +112,10 @@ trait ResponseUITestTrait
             ),
             new CoreSwitchable()
         );
-        $this->getRouter()->getCrud()->create($this->currentRequest);
-        return $this->currentRequest;
     }
 
-    private function getComponentCrudForRouter(): ComponentCrudInterface
+    private static function getComponentCrud(): ComponentCrudInterface
     {
-        if (isset($this->router) === true) {
-            return $this->getRouter()->getCrud();
-        }
         return new CoreComponentCrud(
             new CoreStorable(
                 'StandardUITestComponentCrudForStandardUITestRouter' . strval(rand(0, 999)),
@@ -120,11 +123,11 @@ trait ResponseUITestTrait
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
-            $this->getStandardStorageDriverForCrud()
+            self::getStandardStorageDriver()
         );
     }
 
-    private function getStandardStorageDriverForCrud(): StorageDriverInterface
+    private static function getStandardStorageDriver(): StorageDriverInterface
     {
         return new CoreStorageDriver(
             new CoreStorable(
