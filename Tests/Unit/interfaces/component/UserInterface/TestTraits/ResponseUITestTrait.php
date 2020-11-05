@@ -45,7 +45,7 @@ trait ResponseUITestTrait
             new CoreStorable(
                 'MockResponseUIName',
                 self::getTestComponentLocation(),
-                'MockResponseUIContainer'
+                self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
             new CorePositionable(),
