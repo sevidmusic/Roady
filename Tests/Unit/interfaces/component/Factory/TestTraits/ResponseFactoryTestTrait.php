@@ -118,7 +118,7 @@ trait ResponseFactoryTestTrait
     {
         return new CoreAction(
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
-                'TestAction',
+                'ResponseFactoryTestAction',
                 'TestActions'
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
