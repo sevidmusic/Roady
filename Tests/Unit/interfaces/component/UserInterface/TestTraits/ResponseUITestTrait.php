@@ -8,6 +8,7 @@ use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRout
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
@@ -17,35 +18,73 @@ use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
 
 trait ResponseUITestTrait
 {
 
-////public static function getOutputComponent()
-////public static function getDynamicOutputComponent()
-////////public static function createDynamicOutputFile()
-////////public static function removeDynamicOutputFile()
-////public static function getAction()
-////public static function getResponse()
+    public static function generateTestOutputComponent(): OutputComponentInterface
+    {
+        $outputComponent = new CoreOutputComponent(
+             new CoreStorable(
+                'TestOutputComponent',
+                self::getTestComponentLocation(),
+                self::getTestComponentContainer()
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+        );
+        $outputComponent->import(['output' => strval(rand(1000000,9999999))]);
+        return $outputComponent;
+    }
+
+    public static function generateTestResponse(): ResponseInterface
+    {
+        $request = self::getRequest();
+        self::getComponentCrud()->create($request);
+        $outputComponent = self::generateTestOutputComponent();
+        self::getComponentCrud()->create($outputComponent);
+        $response = new CoreResponse(
+             new CoreStorable(
+                'TestResponse',
+                ResponseInterface::RESPONSE_CONTAINER,
+                self::getTestComponentContainer()
+            ),
+            new CoreSwitchable(),
+            new CorePositionable(),
+        );
+        $response->addRequestStorageInfo($request);
+        $response->addOutputComponentStorageInfo($outputComponent);
+        return $response;
+    }
 
     public static function setUpBeforeClass(): void
     {
-        var_dump(self::getRequest()->getUniqueId());
-        self::getComponentCrud()->create(self::getRequest());
-////////self::getComponentCrud()->create(self::getOutputComponent());
-////////self::getComponentCrud()->create(self::getDynamicOutputComponent());
-////////self::getComponentCrud()->create(self::getAction());
-////////self::getComponentCrud()->create(self::getResponse());
+        self::getComponentCrud()->create(self::generateTestResponse());
+    }
+
+    private static function readAllFromContainer(string $container): array
+    {
+        return self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer());
+    }
+
+    private static function deleteAllInContainer(string $container): void
+    {
+        foreach(self::getComponentCrud()->readAll(self::getTestComponentLocation(), $container) as $storable)
+        {
+            self::getComponentCrud()->delete($storable);
+        }
     }
 
     public static function tearDownAfterClass(): void
     {
-        foreach(self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer()) as $storable)
-        {
-            self::getComponentCrud()->delete($storable);
-        }
-////////foreach(self::getComponentCrud()->readAll(self::getTestComponentLocation(), ResponseInterface::RESPONSE_CONTAINER) as $storable)
-        var_dump(count(self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer())));
+        var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
+        var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
+        self::deleteAllInContainer(self::getTestComponentContainer());
+        self::deleteAllInContainer(ResponseInterface::RESPONSE_CONTAINER);
+        var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
+        var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
     }
 
     private $responseUI;
