@@ -228,14 +228,11 @@ trait ResponseUITestTrait
 
     private function expectedOutput(): string
     {
-        var_dump($this->getResponseUI()->export()['router']->getRequest()->getUrl());
-        var_dump(count($this->expectedResponses()));
         $expectedOutput = '';
         $expectedResponses = $this->expectedResponses();
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;
         foreach($sortedResponses as $response)
         {
-            var_dump($response->getName());
             $outputComponents = [];
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
@@ -251,7 +248,7 @@ trait ResponseUITestTrait
                 $expectedOutput .= $outputComponent->getOutput();
             }
         }
-        //var_dump($expectedOutput);
+        var_dump($expectedOutput);
         return '';
     }
 
