@@ -3,33 +3,22 @@
 $appComponentsFactory->buildGlobalResponse(
     'GlobalResponse',
     0,
-    $appComponentsFactory->buildStandardUITemplate(
-        'StandardUITemplate',
-        'Components',
-        0,
-        $appComponentsFactory->buildOutputComponent(
-            'OutputComponent',
-            'Components',
-            '',
-            0
-        )
-    ),
     $appComponentsFactory->buildOutputComponent(
         'Doctype',
         'Components',
-        '<!DOCTYPE html>',
+        '<!DOCTYPE html>' . PHP_EOL,
         0
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningHtmlTag',
         'Components',
-        '<html lang="en">',
+        '<html lang="en">' . PHP_EOL,
         0.1
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningHeadTag',
         'Components',
-        '<head>',
+        '<head>' . PHP_EOL,
         0.2
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
@@ -56,13 +45,13 @@ $appComponentsFactory->buildGlobalResponse(
     $appComponentsFactory->buildOutputComponent(
         'ClosingHeadTag',
         'Components',
-        '</head>',
+        '</head>' . PHP_EOL,
         0.6
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningBodyTag',
         'Components',
-        '<body style="background: #000000;">',
+        '<body style="background: #000000;">' . PHP_EOL,
         0.7
     ),
 );
