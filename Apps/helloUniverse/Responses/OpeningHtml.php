@@ -51,7 +51,7 @@ $appComponentsFactory->buildGlobalResponse(
     $appComponentsFactory->buildOutputComponent(
         'OpeningBodyTag',
         'Components',
-        '<body style="background: #000000;">' . PHP_EOL,
+        '<body>' . PHP_EOL,
         0.7
     ),
 );
