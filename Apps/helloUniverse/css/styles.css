@@ -1,0 +1,18 @@
+
+html {
+    font-size: 18px;
+    font-family: monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #333333;
+}
+
+/*
+ * #E55E1A
+ * #1AA7E5;
+ */
