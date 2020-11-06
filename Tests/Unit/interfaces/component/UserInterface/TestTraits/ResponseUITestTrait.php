@@ -20,6 +20,7 @@ use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use RuntimeException as PHPRuntimeException;
 
 trait ResponseUITestTrait
 {
@@ -272,4 +273,12 @@ trait ResponseUITestTrait
             $this->getResponseUI()->getOutput()
         );
     }
+
+    public function testGetOutputThrowsRuntimeExceptionIfOutputIsEmpty(): void
+    {
+        self::tearDownAfterClass();
+        $this->expectException(PhpRuntimeException::class);
+        $this->getResponseUI()->getOutput();
+    }
+
 }

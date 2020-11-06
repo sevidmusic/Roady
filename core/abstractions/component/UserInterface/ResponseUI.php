@@ -11,6 +11,7 @@ use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use RuntimeException as PHPRuntimeException;
 
 abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInterface
 {
@@ -66,6 +67,10 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
             {
                 $expectedOutput .= $outputComponent->getOutput();
             }
+        }
+        if(empty($expectedOutput))
+        {
+            throw new PHPRuntimeException('There is nothing to show for this request.');
         }
         return $expectedOutput;
     }
