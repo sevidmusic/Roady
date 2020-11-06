@@ -29,7 +29,7 @@ trait ResponseUITestTrait
         $outputComponent = new CoreOutputComponent(
              new CoreStorable(
                 'TestOutputComponent' . strval(rand(1000,9999)),
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
@@ -46,7 +46,7 @@ trait ResponseUITestTrait
         $response = new CoreResponse(
              new CoreStorable(
                 'TestResponse',
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 ResponseInterface::RESPONSE_CONTAINER,
             ),
             new CoreSwitchable(),
@@ -71,12 +71,12 @@ trait ResponseUITestTrait
 
     private static function readAllFromContainer(string $container): array
     {
-        return self::getComponentCrud()->readAll(self::getTestComponentLocation(), self::getTestComponentContainer());
+        return self::getComponentCrud()->readAll(self::expectedAppLocation(), self::getTestComponentContainer());
     }
 
     private static function deleteAllInContainer(string $container): void
     {
-        foreach(self::getComponentCrud()->readAll(self::getTestComponentLocation(), $container) as $storable)
+        foreach(self::getComponentCrud()->readAll(self::expectedAppLocation(), $container) as $storable)
         {
             self::getComponentCrud()->delete($storable);
         }
@@ -111,7 +111,7 @@ trait ResponseUITestTrait
         return [
             new CoreStorable(
                 'MockResponseUIName',
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
@@ -135,7 +135,7 @@ trait ResponseUITestTrait
         return new CoreRouter(
             new CoreStorable(
                 'StandardUITestRouter' . strval(rand(0, 999)),
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
@@ -144,9 +144,9 @@ trait ResponseUITestTrait
         );
     }
 
-    protected static function getTestComponentLocation(): string
+    protected static function expectedAppLocation(): string
     {
-        return 'ResponseUITestComponents';
+        return CoreApp::deriveNameLocationFromRequest(self::getIndependantTestRequest());
     }
 
     protected static function getTestComponentContainer(): string
@@ -154,12 +154,25 @@ trait ResponseUITestTrait
         return 'TestComponents';
     }
 
+    public static function getIndependantTestRequest(): RequestInterface
+    {
+        $request =  new CoreRequest(
+            new CoreStorable(
+                'StandardUICurrentRequest' . strval(rand(0, 999)),
+                'TestUrls',
+                self::getTestComponentContainer()
+            ),
+            new CoreSwitchable()
+        );
+        return $request;
+    }
+
     public static function getRequest(): RequestInterface
     {
         return new CoreRequest(
             new CoreStorable(
                 'StandardUICurrentRequest' . strval(rand(0, 999)),
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable()
@@ -171,7 +184,7 @@ trait ResponseUITestTrait
         return new CoreComponentCrud(
             new CoreStorable(
                 'StandardUITestComponentCrudForStandardUITestRouter' . strval(rand(0, 999)),
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
@@ -184,7 +197,7 @@ trait ResponseUITestTrait
         return new CoreStorageDriver(
             new CoreStorable(
                 'StandardUITestStorageDriver' . strval(rand(0, 999)),
-                self::getTestComponentLocation(),
+                self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable()
@@ -204,7 +217,7 @@ trait ResponseUITestTrait
     private function expectedResponses(): array
     {
         return $this->getResponseUI()->export()['router']->getResponses(
-            self::getTestComponentLocation(),
+            self::expectedAppLocation(),
             ResponseInterface::RESPONSE_CONTAINER
         );
     }
@@ -250,7 +263,7 @@ trait ResponseUITestTrait
                 var_dump($outputComponent->getPosition());
             }
         }
-        var_dump($expectedOutput);
+        //return $expectedOutput;
         return '';
     }
 
