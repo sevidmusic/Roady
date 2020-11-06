@@ -48,8 +48,8 @@ trait ResponseUITestTrait
         $response = new CoreResponse(
              new CoreStorable(
                 'TestResponse',
+                self::getTestComponentLocation(),
                 ResponseInterface::RESPONSE_CONTAINER,
-                self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
             new CorePositionable(),
@@ -79,12 +79,12 @@ trait ResponseUITestTrait
 
     public static function tearDownAfterClass(): void
     {
-        var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
-        var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
+        //var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
+        //var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
         self::deleteAllInContainer(self::getTestComponentContainer());
         self::deleteAllInContainer(ResponseInterface::RESPONSE_CONTAINER);
-        var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
-        var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
+        //var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
+        //var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
     }
 
     private $responseUI;
@@ -228,11 +228,14 @@ trait ResponseUITestTrait
 
     private function expectedOutput(): string
     {
+        var_dump($this->getResponseUI()->export()['router']->getRequest()->getUrl());
+        var_dump(count($this->expectedResponses()));
         $expectedOutput = '';
         $expectedResponses = $this->expectedResponses();
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;
         foreach($sortedResponses as $response)
         {
+            var_dump($response->getName());
             $outputComponents = [];
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
@@ -248,6 +251,7 @@ trait ResponseUITestTrait
                 $expectedOutput .= $outputComponent->getOutput();
             }
         }
+        //var_dump($expectedOutput);
         return '';
     }
 
