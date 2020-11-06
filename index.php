@@ -6,7 +6,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
-use DarlingDataManagementSystem\classes\component\UserInterface\StandardUI;
+use DarlingDataManagementSystem\classes\component\UserInterface\ResponseUI;
 use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
@@ -42,7 +42,7 @@ $router = new Router(
     $crud
 );
 try {
-    $userInterface = new StandardUI(
+    $userInterface = new ResponseUI(
         $primaryFactory->buildStorable('AppUI', 'Index'),
         $primaryFactory->buildSwitchable(),
         $primaryFactory->buildPositionable(0),
