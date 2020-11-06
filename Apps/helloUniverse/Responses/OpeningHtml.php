@@ -46,11 +46,12 @@ $appComponentsFactory->buildGlobalResponse(
         'helloUniverse',
         'Meta.php'
     ),
-    $appComponentsFactory->buildOutputComponent(
-        'Styles',
+    $appComponentsFactory->buildDynamicOutputComponent(
+        'Stylesheets',
         'Components',
-        '<link rel="stylesheet" href="' . $appComponentsFactory->getAppDomain()->getUrl() . '/Apps/helloWorld/css/styles.css">',
-        0.5
+        0.5,
+        'helloUniverse',
+        'Stylesheets.php'
     ),
     $appComponentsFactory->buildOutputComponent(
         'ClosingHeadTag',
