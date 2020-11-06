@@ -1,7 +1,7 @@
 <?php
 
 $appComponentsFactory->buildGlobalResponse(
-    'GlobalResponse',
+    'OpeningHtml',
     0,
     $appComponentsFactory->buildOutputComponent(
         'Doctype',

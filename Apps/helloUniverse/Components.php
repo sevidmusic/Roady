@@ -21,6 +21,7 @@ $appComponentsFactory = new AppComponentsFactory(
 );
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/OpeningHtml.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/Homepage.php';
 
 $appComponentsFactory->buildLog(
     AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG

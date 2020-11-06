@@ -1,7 +1,27 @@
-
+/**
+ * LIGHT COLORS:
+ * Complementery: #ff6708: Base orange | #087bff: Base Blue
+ * Monochromatic: #ff6708: Base orange | #e67935: Light orange
+ * Analogous:     #ff6708: Base orange | #ffa408: Yellow | #ff2908: Red
+ * Split:         #ff6708: Base orange | #4a08ff: Blue | #08ff8c: Green
+ * Triadic:       #ff6708: Base orange | #c508ff: Purple | #42ff08: Light Green
+ * Tetradic:      #ff6708: Base orange | #087bff: Alt Blue | #c508ff: Purple | #ffe208: Yellow
+ *
+ * DARK CLORS:
+ * Complementery: #021a36: Dark Blue Base | #361602: Dark Red Brown
+ * Monochromatic: #021a36: Dark Blue Base | #132f50: Darl Light Blue
+ * Analogous:     #021a36: Dark Blue Base | #100236: Dark Blue Alt | #02361e; Dark Green
+ * Split:         #021a36: Dark Blue Base | #362302: Dark Pale Brown | #360902: Dark Red
+ * Triadic:       #021a36: Dark Blue Base | 363002: Dark Yellow Green | #36020e: Dark Red Alt
+ * Tetradic:      #021a36: Dark Blue Base | #361602: Dark Red Brown | #363002: Dark Yellow Green | #2a0236: Dark Purple
+ *
+ * GRAYS
+ * #36302b: Brown Gray | #353842: Blue Gray
+ */
 html {
     font-size: 18px;
     font-family: monospace;
+    color: #087bff;
 }
 
 * {
@@ -9,10 +29,10 @@ html {
 }
 
 body {
-    background: #333333;
+    background: #030303;
 }
 
-/*
- * #E55E1A
- * #1AA7E5;
- */
+div {
+    background: #1d1717;
+}
+
