@@ -4,21 +4,21 @@ namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStorageDriver;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
 
 trait ResponseUITestTrait
@@ -55,14 +55,12 @@ trait ResponseUITestTrait
         $request = self::getRequest();
         self::getComponentCrud()->create($request);
         $response->addRequestStorageInfo($request);
-/////////////////////////////////
         for($i=0; $i < rand(10,100); $i++)
         {
             $outputComponent = self::generateTestOutputComponent();
             self::getComponentCrud()->create($outputComponent);
             $response->addOutputComponentStorageInfo($outputComponent);
         }
-/////////////////////////////////
         return $response;
     }
 
@@ -86,12 +84,8 @@ trait ResponseUITestTrait
 
     public static function tearDownAfterClass(): void
     {
-        //var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
-        //var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
         self::deleteAllInContainer(self::getTestComponentContainer());
         self::deleteAllInContainer(ResponseInterface::RESPONSE_CONTAINER);
-        //var_dump(count(self::readAllFromContainer(self::getTestComponentContainer())));
-        //var_dump(count(self::readAllFromContainer(ResponseInterface::RESPONSE_CONTAINER)));
     }
 
     private $responseUI;
