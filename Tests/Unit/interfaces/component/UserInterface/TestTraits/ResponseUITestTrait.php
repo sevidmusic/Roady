@@ -28,23 +28,21 @@ trait ResponseUITestTrait
     {
         $outputComponent = new CoreOutputComponent(
              new CoreStorable(
-                'TestOutputComponent',
+                'TestOutputComponent' . strval(rand(1000,9999)),
                 self::getTestComponentLocation(),
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
             new CorePositionable(),
         );
-        $outputComponent->import(['output' => strval(rand(1000000,9999999))]);
+        $outputComponent->import([
+            'output' => PHP_EOL . 'OC ID: ' . $outputComponent->getUniqueId() . PHP_EOL . 'OC NAME: ' . $outputComponent->getName() . PHP_EOL
+        ]);
         return $outputComponent;
     }
 
     public static function generateTestResponse(): ResponseInterface
     {
-        $request = self::getRequest();
-        self::getComponentCrud()->create($request);
-        $outputComponent = self::generateTestOutputComponent();
-        self::getComponentCrud()->create($outputComponent);
         $response = new CoreResponse(
              new CoreStorable(
                 'TestResponse',
@@ -54,8 +52,17 @@ trait ResponseUITestTrait
             new CoreSwitchable(),
             new CorePositionable(),
         );
+        $request = self::getRequest();
+        self::getComponentCrud()->create($request);
         $response->addRequestStorageInfo($request);
-        $response->addOutputComponentStorageInfo($outputComponent);
+/////////////////////////////////
+        for($i=0; $i < rand(10,100); $i++)
+        {
+            $outputComponent = self::generateTestOutputComponent();
+            self::getComponentCrud()->create($outputComponent);
+            $response->addOutputComponentStorageInfo($outputComponent);
+        }
+/////////////////////////////////
         return $response;
     }
 
@@ -246,6 +253,7 @@ trait ResponseUITestTrait
             foreach($sortedOutputComponents as $outputComponent)
             {
                 $expectedOutput .= $outputComponent->getOutput();
+                var_dump($outputComponent->getPosition());
             }
         }
         var_dump($expectedOutput);
