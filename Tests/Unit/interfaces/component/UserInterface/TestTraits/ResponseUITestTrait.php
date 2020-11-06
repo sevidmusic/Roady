@@ -260,11 +260,9 @@ trait ResponseUITestTrait
             foreach($sortedOutputComponents as $outputComponent)
             {
                 $expectedOutput .= $outputComponent->getOutput();
-                var_dump($outputComponent->getPosition());
             }
         }
-        //return $expectedOutput;
-        return '';
+        return $expectedOutput;
     }
 
     public function testGetOutputReturnsCollectiveOutputFromAllResponsesReturnedByRouterSortedByResponsePositionThenOutputComponentPosition(): void

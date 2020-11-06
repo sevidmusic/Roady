@@ -7,7 +7,10 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 
 abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInterface
 {
@@ -34,9 +37,42 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     }
 
 
-    public function getOutput(): string
+    private function getRoutersComponentCrud(): ComponentCrudInterface
     {
-        return '';
+        return $this->router->export()['crud'];
     }
 
+    private function buildOutput(): string
+    {
+        $expectedOutput = '';
+        $expectedResponses = $this->router->getResponses(
+            CoreApp::deriveNameLocationFromRequest($this->router->getRequest()),
+            ResponseInterface::RESPONSE_CONTAINER
+        );
+        $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        foreach($sortedResponses as $response)
+        {
+            $outputComponents = [];
+            foreach($response->getOutputComponentStorageInfo() as $storable)
+            {
+                $component = $this->getRoutersComponentCrud()->read($storable);
+                if($component->getName() !== 'CoreComponent')
+                {
+                    array_push($outputComponents, $component);
+                }
+            }
+            $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            foreach($sortedOutputComponents as $outputComponent)
+            {
+                $expectedOutput .= $outputComponent->getOutput();
+            }
+        }
+        return $expectedOutput;
+    }
+
+    public function getOutput(): string
+    {
+        $this->import(['output' => $this->buildOutput()]);
+        return parent::getOutput();
+    }
 }
