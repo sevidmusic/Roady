@@ -34,7 +34,7 @@ trait ResponseUITestTrait
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
-            new CorePositionable(),
+            new CorePositionable(rand(100, 999)),
         );
         $outputComponent->import([
             'output' => PHP_EOL . 'OC ID: ' . $outputComponent->getUniqueId() . PHP_EOL . 'OC NAME: ' . $outputComponent->getName() . PHP_EOL
@@ -51,7 +51,7 @@ trait ResponseUITestTrait
                 ResponseInterface::RESPONSE_CONTAINER,
             ),
             new CoreSwitchable(),
-            new CorePositionable(),
+            new CorePositionable(rand(0,100)),
         );
         $request = self::getRequest();
         self::getComponentCrud()->create($request);
@@ -227,12 +227,15 @@ trait ResponseUITestTrait
     {
         $sorted = [];
         foreach($postionables as $postionable) {
+            var_dump($postionable->getPosition());
+            var_dump($postionable->getName(), $postionable->getType());
             while(isset($sorted[strval($postionable->getPosition())]))
             {
                 $postionable->increasePosition();
             }
             $sorted[strval($postionable->getPosition())] = $postionable;
         }
+        ksort($sorted, SORT_NUMERIC);
         return $sorted;
     }
 

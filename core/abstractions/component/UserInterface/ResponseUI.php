@@ -34,6 +34,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
             }
             $sorted[strval($postionable->getPosition())] = $postionable;
         }
+        ksort($sorted, SORT_NUMERIC);
         return $sorted;
     }
 
