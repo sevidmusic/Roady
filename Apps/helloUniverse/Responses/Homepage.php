@@ -2,7 +2,7 @@
 
 $appComponentsFactory->buildResponse(
     'Homepage',
-    0,
+    2,
     $appComponentsFactory->buildRequest(
         'HomepageRequest',
         'Requests',

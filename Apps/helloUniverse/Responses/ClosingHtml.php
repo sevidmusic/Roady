@@ -2,7 +2,7 @@
 
 $appComponentsFactory->buildGlobalResponse(
     'ClosingHtml',
-    0,
+    999999999999999999999999999,
     $appComponentsFactory->buildOutputComponent(
         'ClosingBodyTag',
         'Components',

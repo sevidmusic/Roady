@@ -22,6 +22,7 @@ $appComponentsFactory = new AppComponentsFactory(
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/OpeningHtml.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/Homepage.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/LogoMainMenu.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/ClosingHtml.php';
 
 $appComponentsFactory->buildLog(
