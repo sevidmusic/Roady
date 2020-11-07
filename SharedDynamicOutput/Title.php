@@ -1,5 +1,1 @@
-<?php
-
-$dateTime = date('l m/d/Y h:m A');
-
-echo '<title>' . $dateTime . '</title>';
+    <title><?php echo date('l m/d/Y h:m A'); ?></title>
