@@ -4,6 +4,9 @@ set -o posix
 
 clear
 
+APP="${1}"
+[[ -z "${APP}" ]] && printf "Please specify an existing App to run tests against." && exit 1
+
 setupPaths() {
     # Determine real path to dsh directory
     SOURCE="${BASH_SOURCE[0]}"
@@ -66,16 +69,16 @@ sleep 2
 $PATH_TO_DSH_DIR/dsh -h b
 sleep 2
 
-showBanner "Test dsh --build-app helloWorld"
-showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --build-app helloWorld" 'dontClear'
+showBanner "Test dsh --build-app ${APP}"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --build-app ${APP}" 'dontClear'
 sleep 2
-$PATH_TO_DSH_DIR/dsh --build-app helloWorld
+$PATH_TO_DSH_DIR/dsh --build-app "${APP}"
 sleep 2
 
-showBanner "Test dsh -b helloWorld"
-showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -b helloWorld" 'dontClear'
+showBanner "Test dsh -b ${APP}"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -b ${APP}" 'dontClear'
 sleep 2
-$PATH_TO_DSH_DIR/dsh -b helloWorld
+$PATH_TO_DSH_DIR/dsh -b "${APP}"
 sleep 2
 
 # TEST DDMS #
@@ -141,16 +144,16 @@ sleep 2
 $PATH_TO_DSH_DIR/dsh -h r
 sleep 2
 
-showBanner "Test dsh --run-app helloWorld"
-showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --run-app helloWorld"
+showBanner "Test dsh --run-app ${APP}"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh --run-app ${APP}"
 sleep 2
-$PATH_TO_DSH_DIR/dsh --run-app helloWorld
+$PATH_TO_DSH_DIR/dsh --run-app "${APP}"
 sleep 2
 
-showBanner "Test dsh -r helloWorld"
-showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -r helloWorld"
+showBanner "Test dsh -r ${APP}"
+showLoadingBar "Starting test of ${HIGHLIGHTCOLOR}dsh -r ${APP}"
 sleep 2
-$PATH_TO_DSH_DIR/dsh -r helloWorld
+$PATH_TO_DSH_DIR/dsh -r "${APP}"
 sleep 2
 
 # FLAGS #
