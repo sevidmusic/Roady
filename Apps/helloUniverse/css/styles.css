@@ -34,5 +34,24 @@ body {
 
 div {
     background: #1d1717;
+    border: .27em solid #353842;
+    border-radius: .7em;
+    padding: .3em;
+    margin: .3333333em;
 }
 
+a {
+    color: #ff6708;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e67935;
+    text-decoration: underline overline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Serif;
+    font-style: italic;
+    color: #ff6708;
+}
