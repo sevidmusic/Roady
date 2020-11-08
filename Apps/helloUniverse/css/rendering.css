@@ -24,6 +24,8 @@
     font-size: .7em;
     font-style: italic;
     margin-top: 0;
+    letter-spacing: 1.07em;
+    letter-spacing: 1em;
 }
 
 .main-menu a {
@@ -41,7 +43,7 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
-    width: 8em;
+    width: 5em;
     height: 100%;
     position: fixed;
     overflow: auto;
@@ -53,8 +55,8 @@
     /* border: .17em solid #132f50; */
     border-radius: .7em;
     overflow: auto;
-    font-size: .8em;
-    margin: 0 8em; /** left and right MUST match main-menu-links width or menu will cover output **/
+    font-size: 1.123em;
+    margin: 0 5em; /** left and right MUST match main-menu-links "width" or menu will cover output **/
     padding: 1em;
 }
 
