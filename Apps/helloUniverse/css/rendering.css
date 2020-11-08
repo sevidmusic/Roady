@@ -1,0 +1,54 @@
+
+.font-concert-one {
+    font-family: 'Concert One';
+}
+
+.default-padding {
+    padding: 0 1em;
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo h1 {
+    color: #ffffff;
+    margin-bottom: 0;
+    padding: 0;
+}
+.logo-description {
+    font-size: .7em;
+    font-style: italic;
+    margin-top: 0;
+}
+
+.main-menu a {
+    color: #ff6708;
+    text-decoration: none;
+    display: block;
+}
+
+.main-menu a:hover {
+    color: #e67935;
+    text-decoration: underline overline;
+}
+
+.main-menu-links {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 8em;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+}
+
+.output {
+    background: #1d1717;
+    border: .17em solid #132f50;
+    border-radius: .7em;
+    overflow: auto;
+    font-size: .8em;
+    margin: 0 8em; /** left and right MUST match main-menu-links width or menu will cover output **/
+}
+

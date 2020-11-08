@@ -1,0 +1,41 @@
+
+.default-text-color {
+    color: #087bff;
+}
+
+.highlight-text-color {
+    color: #ff6708;
+}
+
+.light-highlight-text-color {
+    color: #e67935;
+}
+
+.warning-text-color {
+    color: #ffa408;
+}
+
+.error-text-color {
+    color: #ff2908;
+}
+
+.success-text-color {
+    color: #08ff8c;
+}
+
+.notice-text-color {
+    color: #4a08ff;
+}
+
+.important-text-color {
+    color: #c508ff;
+}
+
+.code-text-color {
+    color: #42ff08;
+}
+
+.note-text-color {
+    color: #353842;
+}
+
