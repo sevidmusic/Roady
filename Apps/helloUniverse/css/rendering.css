@@ -7,12 +7,10 @@
     font-family: 'Audiowide';
 }
 
-.default-padding {
-    padding: 0 1em;
-}
-
 .logo {
     text-align: center;
+    height: 4.2em;
+    background: red;
 }
 
 .logo h1 {
@@ -78,17 +76,24 @@
 }
 
 
-.animate-menu-links {
+.animate-menu {
     animation-name: animateMenu;
-    animation-duration: 4s;
-    animation-iteration-count: 3;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+}
+
+.animate-logo {
+    animation-name: animateLogo;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
 }
 
 @keyframes animateMenu {
-    0%   {width: 0; color: red;}
-    25%  {width: 2em;}
-    50%  {width: 4em;}
-    75%  {width: 7em;}
-    100% {width: 5em; color: white;}
+    0%   {width: 0; }
+    100% {width: 5em; }
 }
 
+@keyframes animateLogo {
+    0%   {width: 0; height: 4.2em; font-size: 0.3em; margin-bottom: 17em; overflow: hidden; opacity: 0; }
+    100% {width: 100%; font-size: 1em; opacity: 1; margin-bottom: 0; }
+}
