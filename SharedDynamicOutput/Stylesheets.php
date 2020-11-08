@@ -22,9 +22,8 @@ $rootUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . (isset($parsedUrl
     <link href="./Apps/helloUniverse/css/textColors.css" rel="stylesheet">
     <link href="./Apps/helloUniverse/css/rendering.css" rel="stylesheet">
 <?php
-    echo '<!-- ' . $rootUrl . ' | ' . $currentRequest->getUrl() . ' -->';
     if($currentRequest->getUrl() === $rootUrl) {
-        echo '<link href="./Apps/helloUniverse/css/animations.css" rel="stylesheet">' . PHP_EOL;
+        echo '    <link href="./Apps/helloUniverse/css/animations.css" rel="stylesheet">' . PHP_EOL;
     }
 ?>
 
