@@ -16,7 +16,7 @@ require(
 
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
-    AppComponentsFactory::buildDomain('http://hellouniverse.com')
+    AppComponentsFactory::buildDomain('http://localhost:8966')
     )
 );
 
