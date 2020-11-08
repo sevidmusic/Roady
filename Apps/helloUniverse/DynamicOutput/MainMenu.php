@@ -1,4 +1,4 @@
-<div class="main-menu animate-menu">
+<div class="main-menu">
     <ul class="main-menu-links">
         <li><a href="./">Home</a></li>
         <li><a href="https://github.com/sevidmusic/DarlingDataManagementSystem">GitHub</a></li>

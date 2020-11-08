@@ -9,8 +9,9 @@
 
 .logo {
     text-align: center;
-    height: 4.2em;
-    background: red;
+    height: 5em;
+    margin-bottom: 1em;
+    overflow: hidden;
 }
 
 .logo h1 {
@@ -47,13 +48,11 @@
     width: 5em;
     height: 100%;
     position: fixed;
-    overflow: auto;
 }
 
 .output {
     background: #1d1717;
     border: .123em solid #ffffff;
-    /* border: .17em solid #132f50; */
     border-radius: .7em;
     overflow: auto;
     font-size: 1.123em;
@@ -62,7 +61,7 @@
 }
 
 .component-info {
-    font-size: .7em;
+    font-size: .65em;
 }
 
 .output a {
@@ -75,25 +74,15 @@
     text-decoration: none;
 }
 
-
-.animate-menu {
-    animation-name: animateMenu;
-    animation-duration: 2s;
-    animation-iteration-count: 1;
-}
-
 .animate-logo {
     animation-name: animateLogo;
     animation-duration: 2s;
     animation-iteration-count: 1;
 }
 
-@keyframes animateMenu {
-    0%   {width: 0; }
-    100% {width: 5em; }
-}
-
 @keyframes animateLogo {
-    0%   {width: 0; height: 4.2em; font-size: 0.3em; margin-bottom: 17em; overflow: hidden; opacity: 0; }
-    100% {width: 100%; font-size: 1em; opacity: 1; margin-bottom: 0; }
+    0%   {opacity: 0; margin-bottom: 270em; margin-left: 17em; }
+    42%  {opacity: 0; margin-bottom: 53em; }
+    87%  {opacity: .17; }
+    100% {opacity: 1; margin-bottom: 2em; margin-left: 0; }
 }
