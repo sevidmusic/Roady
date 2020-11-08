@@ -45,10 +45,12 @@
 
 .output {
     background: #1d1717;
-    border: .17em solid #132f50;
+    border: .123em solid #ffffff;
+    /* border: .17em solid #132f50; */
     border-radius: .7em;
     overflow: auto;
     font-size: .8em;
     margin: 0 8em; /** left and right MUST match main-menu-links width or menu will cover output **/
+    padding: 1em;
 }
 
