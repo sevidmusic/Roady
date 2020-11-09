@@ -5,14 +5,14 @@ $appComponentsFactory->buildGlobalResponse(
     1,
     $appComponentsFactory->buildDynamicOutputComponent(
         'Logo',
-        'Components',
+        'Output',
         0,
         'helloUniverse',
         'Logo.php'
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
         'Main Menu',
-        'Components',
+        'Output',
         0.1,
         'helloUniverse',
         'MainMenu.php'

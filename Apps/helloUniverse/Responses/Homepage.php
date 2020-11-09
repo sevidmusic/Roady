@@ -15,7 +15,7 @@ $appComponentsFactory->buildResponse(
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
         'Welcome',
-        'Components',
+        'Output',
         0,
         'helloUniverse',
         'Welcome.php'

@@ -5,52 +5,52 @@ $appComponentsFactory->buildGlobalResponse(
     0,
     $appComponentsFactory->buildOutputComponent(
         'Doctype',
-        'Components',
+        'Output',
         '<!DOCTYPE html>' . PHP_EOL,
         0
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningHtmlTag',
-        'Components',
+        'Output',
         '<html lang="en">' . PHP_EOL,
         0.1
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningHeadTag',
-        'Components',
+        'Output',
         '<head>' . PHP_EOL,
         0.2
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
         'Title',
-        'Components',
+        'Output',
         0.3,
         'helloUniverse',
         'Title.php'
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
         'Meta',
-        'Components',
+        'Output',
         0.4,
         'helloUniverse',
         'Meta.php'
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
         'Stylesheets',
-        'Components',
+        'Output',
         0.5,
         'helloUniverse',
         'Stylesheets.php'
     ),
     $appComponentsFactory->buildOutputComponent(
         'ClosingHeadTag',
-        'Components',
+        'Output',
         '</head>' . PHP_EOL,
         0.6
     ),
     $appComponentsFactory->buildOutputComponent(
         'OpeningBodyTag',
-        'Components',
+        'Output',
         '<body>' . PHP_EOL,
         0.7
     ),

@@ -5,13 +5,13 @@ $appComponentsFactory->buildGlobalResponse(
     999999999999999999999999999,
     $appComponentsFactory->buildOutputComponent(
         'ClosingBodyTag',
-        'Components',
+        'Output',
         '</body>' . PHP_EOL,
         0
     ),
     $appComponentsFactory->buildOutputComponent(
         'ClosingHtmlTag',
-        'Components',
+        'Output',
         '</html>' . PHP_EOL,
         0.1
     ),
