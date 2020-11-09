@@ -46,10 +46,11 @@ $crud = new ComponentCrud(
         <p>Unique Id: ' . substr($outputComponent->getUniqueId(), 0, 17) . '...</p>
         <p>Storage Location: ' . $outputComponent->getLocation() . '</p>
         <p>Storage Container: ' . $outputComponent->getContainer() . '</p>
+        <p>Position: ' . $outputComponent->getPosition() . '</p>
         <p>Type: ' . $outputComponent->getType() . '</p>
         <p>Output:</p>
         <div class="component-info-output-preview">
-        ' . str_replace(['<', '>'], ['&lt;', '&gt;'], $outputComponent->getOutput()) . '
+        ' . str_replace(['<', '>'], ['&lt;' . '<br>', '&gt;' . '<br>'], $outputComponent->getOutput()) . '
         </div>
     </div>
             ';
