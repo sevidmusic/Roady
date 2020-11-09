@@ -62,6 +62,16 @@
 
 .component-info {
     font-size: .65em;
+    padding: .5em;
+}
+
+.component-info-output-preview {
+    background: white;
+    color: black;
+    padding: 1em;
+    border: .2em solid #087bff;
+    border-radius: 3em;
+    margin: 1em;
 }
 
 .output a {

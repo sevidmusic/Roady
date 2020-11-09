@@ -41,14 +41,14 @@ $crud = new ComponentCrud(
         if($outputComponent->getName() !== 'OutputComponentOverview') {
             $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
             echo '
-    <div class="component-info font-audio-wide code-text-color" style="padding: .5em; background: ' . $bgcolor . ';">
+    <div class="component-info font-audio-wide code-text-color" style="background: ' . $bgcolor . ';">
         <p>Name: ' . $outputComponent->getName() . '</p>
         <p>Unique Id: ' . substr($outputComponent->getUniqueId(), 0, 17) . '...</p>
         <p>Storage Location: ' . $outputComponent->getLocation() . '</p>
         <p>Storage Container: ' . $outputComponent->getContainer() . '</p>
         <p>Type: ' . $outputComponent->getType() . '</p>
         <p>Output:</p>
-        <div style="background: red; color: balck;">
+        <div class="component-info-output-preview">
         ' . str_replace(['<', '>'], ['&lt;', '&gt;'], $outputComponent->getOutput()) . '
         </div>
     </div>
