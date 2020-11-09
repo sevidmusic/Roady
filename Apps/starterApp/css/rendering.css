@@ -45,7 +45,7 @@
 }
 
 .main-menu {
-    width: 5em;
+    width: 8em; /** width MUST match output left and right margin */
     height: 100%;
     position: fixed;
 }
@@ -56,13 +56,14 @@
     border-radius: .7em;
     overflow: auto;
     font-size: 1.123em;
-    margin: 0 5em; /** left and right MUST match main-menu-links "width" or menu will cover output **/
+    margin: 0 8em; /** left and right margin MUST match main-menu-links "width" or menu will cover output **/
     padding: 1em;
 }
 
 .component-info {
     font-size: .65em;
     padding: .5em;
+    overflow: auto;
 }
 
 .component-info-output-preview {
@@ -72,6 +73,7 @@
     border: .2em solid #087bff;
     border-radius: 3em;
     margin: 1em;
+    overflow: auto;
 }
 
 .output a {

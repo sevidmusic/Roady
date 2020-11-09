@@ -32,13 +32,13 @@ $crud = new ComponentCrud(
     foreach($crud->readAll($this->getLocation(), Response::RESPONSE_CONTAINER) as $response) {
         $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
         echo '
-    <div class="component-info font-audio-wide code-text-color" style="background: ' . $bgcolor . ';">
-        <p>Name: ' . $response->getName() . '</p>
-        <p>Unique Id: ' . substr($response->getUniqueId(), 0, 17) . '...</p>
-        <p>Storage Location: ' . $response->getLocation() . '</p>
-        <p>Storage Container: ' . $response->getContainer() . '</p>
-        <p>Position: ' . $response->getPosition() . '</p>
-        <p>Type: ' . $response->getType() . '</p>
+    <div class="component-info font-audio-wide highlight-text-color" style="background: ' . $bgcolor . ';">
+        <p>Name: <span class="default-text-color">' . $response->getName() . '</span></p>
+        <p>Unique Id: <span class="default-text-color">' . substr($response->getUniqueId(), 0, 17) . '...</span></p>
+        <p>Storage Location: <span class="default-text-color">' . $response->getLocation() . '</span></p>
+        <p>Storage Container: <span class="default-text-color">' . $response->getContainer() . '</span></p>
+        <p>Position: <span class="default-text-color">' . $response->getPosition() . '</span></p>
+        <p>Type: <span class="default-text-color">' . $response->getType() . '</span></p>
     </div>
             ';
     }
