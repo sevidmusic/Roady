@@ -1,1 +1,1 @@
-    <title><?php echo date('l m/d/Y h:m A'); ?></title>
+    <title>DDMS | <?php echo date('l m/d/Y h:m A'); ?></title>

@@ -24,8 +24,8 @@ $crud = new ComponentCrud(
 );
 
 ?>
-<h1 class="overview-title">Responses</h1>
 <div class="output font-concert-one">
+<h1 class="overview-title">Responses</h1>
 <?php
     $bgcolors = ['#000000', '#333333'];
     $bgcolor = ['#000000'];
