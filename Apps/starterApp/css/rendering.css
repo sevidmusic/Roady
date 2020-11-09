@@ -48,7 +48,22 @@ body {
     overflow: auto;
 }
 
-.main-menu, .output, .component-info, .component-info-output-preview {
+.main-menu {
     padding: 0 1em;
 }
 
+.output {
+    padding: 1.3em 1em;
+}
+
+.output h1 {
+    margin-bottom: .3em;
+}
+
+.component-info, .component-info-output-preview {
+    padding: 1.3em;
+}
+
+.component-info-output-preview {
+    margin-top: 2em;
+}
