@@ -1,3 +1,6 @@
+html {
+    color: #087bff;
+}
 
 .default-text-color {
     color: #087bff;
@@ -38,4 +41,30 @@
 .note-text-color {
     color: #353842;
 }
+
+.logo a {
+    color: #ffffff;
+}
+
+.main-menu a {
+    color: #ff6708;
+}
+
+.main-menu a:hover {
+    color: #e67935;
+}
+
+
+.component-info-output-preview {
+    color: #000000;
+}
+
+.output a {
+    color: #ff6708;
+}
+
+.output a:hover {
+    color: #c508ff;
+}
+
 

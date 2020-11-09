@@ -18,8 +18,8 @@ $rootUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . (isset($parsedUrl
 ?>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Concert One' rel='stylesheet'>
-    <link href="./Apps/starterApp/css/rootElements.css" rel="stylesheet">
     <link href="./Apps/starterApp/css/textColors.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/textStyles.css" rel="stylesheet">
     <link href="./Apps/starterApp/css/rendering.css" rel="stylesheet">
 <?php
     if($currentRequest->getUrl() === $rootUrl) {

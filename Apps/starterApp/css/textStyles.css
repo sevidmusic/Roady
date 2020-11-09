@@ -1,0 +1,48 @@
+html {
+    font-size: 15px;
+    font-family: 'Audiowide';
+}
+
+a {
+    text-decoration: none;
+}
+
+.font-concert-one {
+    font-family: 'Concert One';
+}
+
+.font-audio-wide {
+    font-family: 'Audiowide';
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo-description {
+    font-size: .7em;
+    font-style: italic;
+    letter-spacing: 1.07em;
+    letter-spacing: 1em;
+}
+
+.main-menu a:hover {
+    text-decoration: underline overline;
+}
+
+.output {
+    font-size: 1.123em;
+}
+
+.component-info {
+    font-size: .65em;
+}
+
+
+.output a {
+    text-decoration: none;
+}
+
+.overview-title {
+    text-align: center;
+}
