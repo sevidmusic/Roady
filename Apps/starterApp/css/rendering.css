@@ -1,0 +1,86 @@
+
+.font-concert-one {
+    font-family: 'Concert One';
+}
+
+.font-audio-wide {
+    font-family: 'Audiowide';
+}
+
+.logo {
+    text-align: center;
+    height: 5em;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+
+.logo h1 {
+    color: #ffffff;
+    margin-bottom: 0;
+    padding: 0;
+}
+.logo-description {
+    font-size: .7em;
+    font-style: italic;
+    margin-top: 0;
+    letter-spacing: 1.07em;
+    letter-spacing: 1em;
+}
+
+.main-menu a {
+    color: #ff6708;
+    text-decoration: none;
+    display: block;
+}
+
+.main-menu a:hover {
+    color: #e67935;
+    text-decoration: underline overline;
+}
+
+.main-menu-links {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.main-menu {
+    width: 5em;
+    height: 100%;
+    position: fixed;
+}
+
+.output {
+    background: #1d1717;
+    border: .123em solid #ffffff;
+    border-radius: .7em;
+    overflow: auto;
+    font-size: 1.123em;
+    margin: 0 5em; /** left and right MUST match main-menu-links "width" or menu will cover output **/
+    padding: 1em;
+}
+
+.component-info {
+    font-size: .65em;
+    padding: .5em;
+}
+
+.component-info-output-preview {
+    background: white;
+    color: black;
+    padding: 1em;
+    border: .2em solid #087bff;
+    border-radius: 3em;
+    margin: 1em;
+}
+
+.output a {
+    color: #ff6708;
+    text-decoration: none;
+}
+
+.output a:hover {
+    color: #c508ff;
+    text-decoration: none;
+}
+
