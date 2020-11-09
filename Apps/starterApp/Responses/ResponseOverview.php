@@ -6,7 +6,7 @@ $appComponentsFactory->buildResponse(
     $appComponentsFactory->buildRequest(
         'ResponseOverviewRequest',
         'Requests',
-        $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/index.php?outputComponentOverview',
+        $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/index.php?responseOverview',
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
         'ResponseOverview',
