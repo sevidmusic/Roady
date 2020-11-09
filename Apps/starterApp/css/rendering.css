@@ -34,7 +34,7 @@ body {
     border: .123em solid #ffffff;
     border-radius: .7em;
     overflow: auto;
-    margin: 0 8em; /** left and right margin MUST match main-menu-links "width" or menu will cover output **/
+    margin: 0.2em 8em; /** left and right margin MUST match main-menu-links "width" or menu will cover output **/
 }
 
 .component-info {

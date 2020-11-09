@@ -24,7 +24,7 @@ $crud = new ComponentCrud(
 
 ?>
 <div class="output font-concert-one">
-<h1 class="overview-title">Output Components</h1>
+<h2 class="overview-title font-audio-wide">Output Components</h2>
 <?php
     $bgcolors = ['#000000', '#333333'];
     $bgcolor = ['#000000'];
@@ -32,7 +32,7 @@ $crud = new ComponentCrud(
         if($outputComponent->getName() !== 'OutputComponentOverview') {
             $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
             echo '
-    <div id="' . $outputComponent->getUniqueId() . '" class="component-info font-audio-wide highlight-text-color" style="background: ' . $bgcolor . ';">
+    <div id="' . $outputComponent->getUniqueId() . '" class="component-info highlight-text-color" style="background: ' . $bgcolor . ';">
         <p>Name: <span class="default-text-color">' . $outputComponent->getName() . '</span></p>
         <p>Unique Id: <span class="default-text-color">' . substr($outputComponent->getUniqueId(), 0, 17) . '...</span></p>
         <p>Storage Location: <span class="default-text-color">' . $outputComponent->getLocation() . '</span></p>
@@ -40,7 +40,7 @@ $crud = new ComponentCrud(
         <p>Position: <span class="default-text-color">' . $outputComponent->getPosition() . '</span></p>
         <p>Type: <span class="default-text-color">' . $outputComponent->getType() . '</span></p>
         <p>Output:</p>
-        <div class="component-info-output-preview">
+        <div class="component-info-output-preview font-audio-wide">
         ' . str_replace(['<', '>'], ['&lt;', '&gt;' . '<br>'], $outputComponent->getOutput()) . '
         </div>
     </div>

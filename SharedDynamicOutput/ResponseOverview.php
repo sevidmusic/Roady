@@ -25,14 +25,14 @@ $crud = new ComponentCrud(
 
 ?>
 <div class="output font-concert-one">
-<h1 class="overview-title">Responses</h1>
+<h2 class="overview-title font-audio-wide">Responses</h2>
 <?php
     $bgcolors = ['#000000', '#333333'];
     $bgcolor = ['#000000'];
     foreach($crud->readAll($this->getLocation(), Response::RESPONSE_CONTAINER) as $response) {
         $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
         echo '
-    <div class="component-info font-audio-wide highlight-text-color" style="background: ' . $bgcolor . ';">
+    <div class="component-info highlight-text-color" style="background: ' . $bgcolor . ';">
         <p>Name: <span class="default-text-color">' . $response->getName() . '</span></p>
         <p>Unique Id: <span class="default-text-color">' . substr($response->getUniqueId(), 0, 17) . '...</span></p>
         <p>Storage Location: <span class="default-text-color">' . $response->getLocation() . '</span></p>

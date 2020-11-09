@@ -1,5 +1,5 @@
 html {
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Audiowide';
 }
 
@@ -45,5 +45,5 @@ a {
 
 .overview-title {
     text-align: center;
-    font-family: 'AudioWide';
+    overflow: visible;
 }
