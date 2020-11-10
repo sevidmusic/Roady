@@ -54,3 +54,7 @@ caption {
 .request-info-header {
     text-decoration: underline overline;
 }
+
+.component-info-output-preview {
+    font-size: .7em;
+}
