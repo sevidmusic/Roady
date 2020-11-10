@@ -26,8 +26,8 @@ $crud = new ComponentCrud(
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Output Components</h2>
 <?php
-    $bgcolors = ['#000000', '#333333'];
-    $bgcolor = ['#000000'];
+    $bgcolors = ['linear-gradient(90deg, #000000, #090909)', 'linear-gradient(90deg, #090909, #000000)'];
+    $bgcolor = $bgcolors[1];
     foreach($crud->readAll($this->getLocation(), 'Output') as $outputComponent) {
         if($outputComponent->getName() !== 'OutputComponentOverview') {
             $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);

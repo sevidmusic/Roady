@@ -2,11 +2,11 @@
  * textColors.css
  */
 
-.default-text-color, html {
+.default-text-color, html, .component-info-table-cell-even {
     color: #087bff;
 }
 
-.highlight-text-color {
+.highlight-text-color, caption, .main-menu a, .component-info-table-cell-odd, .link-text-color, .output a {
     color: #ff6708;
 }
 
@@ -34,16 +34,12 @@
     color: #c508ff;
 }
 
-.code-text-color, .component-info-table-cell-odd {
+.code-text-color {
     color: #42ff08;
 }
 
-.note-text-color, .component-info-table-cell-even {
+.note-text-color {
     color: #353842;
-}
-
-.main-menu a {
-    color: #ff6708;
 }
 
 .main-menu a:hover {
@@ -52,10 +48,6 @@
 
 .black-text-color, .component-info-output-preview {
     color: #000000;
-}
-
-.link-text-color, .output a {
-    color: #ff6708;
 }
 
 .link-hover-text-color, .output a:hover {

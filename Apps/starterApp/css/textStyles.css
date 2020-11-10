@@ -11,6 +11,10 @@ a {
     text-decoration: none;
 }
 
+caption {
+    font-size: 2em;
+}
+
 .font-concert-one {
     font-family: 'Concert One';
 }
@@ -43,3 +47,6 @@ a {
     overflow: visible;
 }
 
+.component-info-table {
+    font-size: .7em;
+}

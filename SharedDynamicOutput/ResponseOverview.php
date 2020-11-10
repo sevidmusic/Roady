@@ -28,6 +28,7 @@ function getOutputComponentInfoTable(ResponseInterface $response, ComponentCrud 
 {
     return '
             <table class="component-info-table">
+                <caption>Assigned Output Components</caption>
                 <tr class="component-info-table-row component-info-table-header-row">
                     <th class="component-info-table-header-cell">Name</th>
                     <th class="component-info-table-header-cell">Type</th>
@@ -57,21 +58,19 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Responses</h2>
 <?php
-    $bgcolors = ['#000000', '#333333'];
-    $bgcolor = ['#000000'];
+    $bgcolors = ['linear-gradient(90deg, #000000, #090909)', 'linear-gradient(90deg, #090909, #000000)'];
+    $bgcolor = $bgcolors[1];
     foreach($crud->readAll($this->getLocation(), Response::RESPONSE_CONTAINER) as $response) {
         $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
         echo '
-    <div class="component-info highlight-text-color" style="background: ' . $bgcolor . ';">
+    <div class="component-info highlight-text-color" style="background-image: ' . $bgcolor . ';">
         <p>Name: <span class="default-text-color">' . $response->getName() . '</span></p>
         <p>Unique Id: <span class="default-text-color">' . substr($response->getUniqueId(), 0, 17) . '...</span></p>
         <p>Storage Location: <span class="default-text-color">' . $response->getLocation() . '</span></p>
         <p>Storage Container: <span class="default-text-color">' . $response->getContainer() . '</span></p>
         <p>Position: <span class="default-text-color">' . $response->getPosition() . '</span></p>
         <p>Type: <span class="default-text-color">' . $response->getType() . '</span></p>
-        <div class="response-assigned-output">
         ' . getOutputComponentInfoTable($response, $crud) . '
-        </div>
     </div>
             ';
     }
