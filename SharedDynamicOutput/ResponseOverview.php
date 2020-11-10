@@ -32,6 +32,7 @@ function getOutputComponentInfoTable(ResponseInterface $response, ComponentCrud 
                 <tr class="component-info-table-row component-info-table-header-row">
                     <th class="component-info-table-header-cell">Name</th>
                     <th class="component-info-table-header-cell">Type</th>
+                    <th class="component-info-table-header-cell">Position</th>
                 </tr>
             ' . getOutputComponentInfo($response, $crud) . '
             </table>
@@ -48,6 +49,7 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
                 <tr>
                     <td class="component-info-table-cell component-info-table-cell-odd"><a href="./index.php?outputComponentOverview#' . $outputComponent->getUniqueId() . '">' . $outputComponent->getName() . '</a></td>
                     <td class="component-info-table-cell component-info-table-cell-even">' . $outputComponent->getType() . '</td>
+                    <td class="component-info-table-cell component-info-table-cell-even">' . $outputComponent->getPosition() . '</td>
                 </tr>
         ';
     }
