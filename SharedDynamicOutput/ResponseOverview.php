@@ -64,7 +64,7 @@ function getRequestStorageInfo(ResponseInterface $response, ComponentCrud $crud)
     foreach($response->getRequestStorageInfo() as $storable)
     {
         $request = $crud->read($storable);
-        $info .= '<p style="color: red;">' . $request->getUrl() . '</p>';
+        $info .= '<p><a href="' . $request->getUrl() . '">' . $request->getUrl() .  '</p>';
     }
     return ($info === $header ? 'Not assigned to any requests.' : $info);
 }
