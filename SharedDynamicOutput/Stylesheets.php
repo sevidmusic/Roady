@@ -23,7 +23,7 @@ $rootUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . (isset($parsedUrl
     <link href="./Apps/starterApp/css/rendering.css" rel="stylesheet">
 <?php
     if($currentRequest->getUrl() === $rootUrl) {
-        echo '    <link href="./Apps/starterApp/css/animations.css" rel="stylesheet">' . PHP_EOL;
+        echo '    <link href="./Apps/starterApp/css/landingPageAnimations.css" rel="stylesheet">' . PHP_EOL;
     }
 ?>
 

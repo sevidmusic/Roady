@@ -117,3 +117,16 @@ caption {
     margin: 1em auto;
 }
 
+/**
+ * Animations that apply to all requests | landing page animations are defined in animations.css
+ */
+.output {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeIn {
+    0%   {opacity: 0; }
+    100%   {opacity: 1; }
+}
