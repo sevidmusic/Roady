@@ -1,8 +1,8 @@
-html {
-    color: #087bff;
-}
+/*
+ * textColors.css
+ */
 
-.default-text-color {
+.default-text-color, html {
     color: #087bff;
 }
 
