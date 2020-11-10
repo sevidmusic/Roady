@@ -54,7 +54,7 @@
     color: #c508ff;
 }
 
-.white-text-color, .logo a, .overview-title, .component-info-table, .request-info-header {
+.white-text-color, .component-info-output-preview, .logo a, .overview-title, .component-info-table, .request-info-header {
     color: #ffffff;
     text-shadow: 2px 2px 4px #000000;
 }
