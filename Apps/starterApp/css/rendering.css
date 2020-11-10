@@ -10,6 +10,10 @@ body {
     scroll-behavior: smooth;
 }
 
+.response-assigned-output {
+    background: #030303;
+}
+
 .logo {
     height: 7em;
     overflow: hidden;

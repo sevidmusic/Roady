@@ -1,5 +1,6 @@
 <?php
 
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
@@ -23,6 +24,34 @@ $crud = new ComponentCrud(
     )
 );
 
+function getOutputComponentInfoTable(ResponseInterface $response, ComponentCrud $crud): string
+{
+    return '
+            <table>
+                <tr class="component-info-table-row component-info-table-header-row">
+                    <th class="component-info-table-header-cell">Name</th>
+                    <th class="component-info-table-header-cell">Type</th>
+                </tr>
+            ' . getOutputComponentInfo($response, $crud) . '
+            </table>
+    ';
+}
+
+function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud): string
+{
+    foreach($response->getOutputComponentStorageInfo() as $storable)
+    {
+        $outputComponent = $crud->read($storable);
+        $info .= '
+                <tr>
+                    <td class="component-info-table-cell"><span class="highlight-text-color">' . $outputComponent->getName() . '</span></td>
+                    <td class="component-info-table-cell"><span class="highlight-text-color">' . $outputComponent->getType() . '</span></td>
+                </tr>
+        ';
+    }
+    return $info;
+}
+
 ?>
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Responses</h2>
@@ -39,6 +68,9 @@ $crud = new ComponentCrud(
         <p>Storage Container: <span class="default-text-color">' . $response->getContainer() . '</span></p>
         <p>Position: <span class="default-text-color">' . $response->getPosition() . '</span></p>
         <p>Type: <span class="default-text-color">' . $response->getType() . '</span></p>
+        <div class="response-assigned-output">
+        ' . getOutputComponentInfoTable($response, $crud) . '
+        </div>
     </div>
             ';
     }
