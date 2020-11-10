@@ -40,6 +40,10 @@ body {
     margin: 0.2em 2.3em 0 8em; /** left margin MUST match main-menu-links "width" or menu will cover output **/
 }
 
+.output p {
+    margin-bottom: 1em;
+}
+
 .component-info {
     overflow: auto;
 }

@@ -58,7 +58,8 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
 
 function getRequestStorageInfo(ResponseInterface $response, ComponentCrud $crud): string
 {
-    $info = '<h4 class="request-info-header">Assigned to the following Requests</h4>';
+    $header = '<h4 class="request-info-header">Assigned to the following Requests</h4>';
+    $info = $header;
     if($response->getType() === 'DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse')
     {
         return $info . '<p class="success-text-color">Global Responses are assigned to all requests</p>';
