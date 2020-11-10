@@ -54,6 +54,21 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
     return $info;
 }
 
+function getRequestStorageInfo(ResponseInterface $response, ComponentCrud $crud): string
+{
+    $info = '<h4 class="request-info-header">Assigned to the following Requests</h4>';
+    if($response->getType() === 'DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse')
+    {
+        return $info . '<p class="success-text-color">Global Responses are assigned to all requests</p>';
+    }
+    foreach($response->getRequestStorageInfo() as $storable)
+    {
+        $request = $crud->read($storable);
+        $info .= '<p style="color: red;">' . $request->getUrl() . '</p>';
+    }
+    return ($info === $header ? 'Not assigned to any requests.' : $info);
+}
+
 ?>
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Responses</h2>
@@ -70,6 +85,7 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
         <p>Storage Container: <span class="default-text-color">' . $response->getContainer() . '</span></p>
         <p>Position: <span class="default-text-color">' . $response->getPosition() . '</span></p>
         <p>Type: <span class="default-text-color">' . $response->getType() . '</span></p>
+        ' . getRequestStorageInfo($response, $crud) . '
         ' . getOutputComponentInfoTable($response, $crud) . '
     </div>
             ';

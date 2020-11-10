@@ -27,7 +27,7 @@ body {
 }
 
 .main-menu {
-    width: 8em; /** width MUST match output left and right margin */
+    width: 8em; /** width MUST match output left margin */
     height: 100%;
     position: fixed;
 }
@@ -37,7 +37,7 @@ body {
     border: .123em solid #ffffff;
     border-radius: .7em;
     overflow: auto;
-    margin: 0.2em 8em; /** left and right margin MUST match main-menu-links "width" or menu will cover output **/
+    margin: 0.2em 2.3em 0 8em; /** left margin MUST match main-menu-links "width" or menu will cover output **/
 }
 
 .component-info {
@@ -86,6 +86,14 @@ body {
     padding: 1em;
 }
 
+.component-info-table-cell-odd {
+    background: #020202;;
+}
+
+.component-info-table-cell-even {
+    background: #202020;
+}
+
 .component-info-table-header-cell {
     border-bottom: 3px solid #ffffff;
     border-radius: 0 0 .3em .7em;
@@ -95,3 +103,8 @@ body {
 caption {
     margin: 1em 0;
 }
+
+.request-info-header {
+    margin: 1em auto;
+}
+

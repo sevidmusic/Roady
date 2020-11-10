@@ -23,19 +23,19 @@
 }
 
 .success-text-color {
-    color: #08ff8c;
+    color: #42ff08;
 }
 
 .notice-text-color {
     color: #4a08ff;
 }
 
-.important-text-color, .component-info-table {
+.important-text-color {
     color: #c508ff;
 }
 
 .code-text-color {
-    color: #42ff08;
+    color: #08ff8c;
 }
 
 .note-text-color {
@@ -54,7 +54,8 @@
     color: #c508ff;
 }
 
-.white-text-color, .logo a, .overview-title {
+.white-text-color, .logo a, .overview-title, .component-info-table, .request-info-header {
     color: #ffffff;
+    text-shadow: 2px 2px 4px #000000;
 }
 

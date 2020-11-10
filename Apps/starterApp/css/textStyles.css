@@ -50,3 +50,7 @@ caption {
 .component-info-table-cell {
     font-size: .7em;
 }
+
+.request-info-header {
+    text-decoration: underline overline;
+}
