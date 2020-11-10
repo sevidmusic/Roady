@@ -58,7 +58,7 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Responses</h2>
 <?php
-    $bgcolors = ['linear-gradient(90deg, #000000, #090909)', 'linear-gradient(90deg, #090909, #000000)'];
+    $bgcolors = ['linear-gradient(90deg, #02060a, #0a0502)', 'linear-gradient(90deg, #0a0502, #02060a)'];
     $bgcolor = $bgcolors[1];
     foreach($crud->readAll($this->getLocation(), Response::RESPONSE_CONTAINER) as $response) {
         $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);

@@ -48,7 +48,7 @@ $crud = new ComponentCrud(
         }
     }
 ?>
-    <div id="<?php echo $this->getUniqueId(); ?>" class="component-info font-audio-wide note-text-color" style="border: .3em solid #ffffff; border-radius: 3em; margin-top: 1.4em;">
+    <div id="<?php echo $this->getUniqueId(); ?>" class="component-info font-audio-wide note-text-color">
         <p>Name: <span class="notice-text-color"><?php echo $this->getName(); ?></span></p>
         <p>Unique Id: <span class="notice-text-color"><?php echo substr($this->getUniqueId(), 0, 17); ?></span>...</p>
         <p>Storage Location: <span class="notice-text-color"><?php echo $this->getLocation(); ?></span></p>
