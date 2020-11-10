@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    overflow: auto;
 }
 
 body {
@@ -71,3 +70,10 @@ body {
 .component-info-output-preview {
     margin-top: 2em;
 }
+
+
+.component-info-table {
+    margin-top: 1em;
+}
+
+

@@ -1,5 +1,5 @@
 html {
-    font-size: 14px;
+    font-size: 18px;
     font-family: 'Audiowide';
 }
 
@@ -30,15 +30,6 @@ a {
     text-decoration: underline overline;
 }
 
-.output {
-    font-size: 1.123em;
-}
-
-.component-info {
-    font-size: .65em;
-}
-
-
 .output a {
     text-decoration: none;
 }
@@ -47,3 +38,14 @@ a {
     text-align: center;
     overflow: visible;
 }
+
+/*
+.component-info-table {
+}
+
+.output {
+}
+
+.component-info {
+}
+*/

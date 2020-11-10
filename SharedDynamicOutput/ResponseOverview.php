@@ -27,7 +27,7 @@ $crud = new ComponentCrud(
 function getOutputComponentInfoTable(ResponseInterface $response, ComponentCrud $crud): string
 {
     return '
-            <table>
+            <table class="component-info-table">
                 <tr class="component-info-table-row component-info-table-header-row">
                     <th class="component-info-table-header-cell">Name</th>
                     <th class="component-info-table-header-cell">Type</th>
@@ -39,13 +39,14 @@ function getOutputComponentInfoTable(ResponseInterface $response, ComponentCrud 
 
 function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud): string
 {
+    $info = '';
     foreach($response->getOutputComponentStorageInfo() as $storable)
     {
         $outputComponent = $crud->read($storable);
         $info .= '
                 <tr>
-                    <td class="component-info-table-cell"><span class="highlight-text-color">' . $outputComponent->getName() . '</span></td>
-                    <td class="component-info-table-cell"><span class="highlight-text-color">' . $outputComponent->getType() . '</span></td>
+                    <td class="component-info-table-cell-odd">' . $outputComponent->getName() . '</td>
+                    <td class="component-info-table-cell-even">' . $outputComponent->getType() . '</td>
                 </tr>
         ';
     }
