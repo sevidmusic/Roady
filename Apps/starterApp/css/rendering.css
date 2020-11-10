@@ -75,9 +75,20 @@ body {
     margin-top: 2em;
 }
 
-
 .component-info-table {
     margin-top: 1em;
+    padding: 3em;
+    border: 1px solid #ffffff;
+    border-radius: 3em;
 }
 
+.component-info-table-cell {
+    padding: 1em;
+}
+
+.component-info-table-header-cell {
+    border-bottom: 3px solid #ffffff;
+    border-radius: 0 0 .3em .7em;
+    padding: .2em;
+}
 
