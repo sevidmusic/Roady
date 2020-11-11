@@ -218,6 +218,7 @@ modifyJsonStorageDir() {
 restoreJsonStorageDir() {
     sed -i "s/${NEW_STORAGE_DIRECTORY_NAME}/${ORIGINAL_STORAGE_DIRECTORY_NAME}/g" "$(getJsonStorageDriverInterfacePath)"
     [ "${1}" == "keepDir" ] && return
+    [ ! -d "${PATH_TO_TEMP_STORAGE_DIRECTORY}" ] && return
     showLoadingBar "Removing temporary storage directory: ${HIGHLIGHTCOLOR}${PATH_TO_TEMP_STORAGE_DIRECTORY}" 'dontClear'
     rm -R "${PATH_TO_TEMP_STORAGE_DIRECTORY}"
 }
@@ -345,8 +346,10 @@ createAppDirectory() {
     fi
     showLoadingBar "Creating new app ${1}" 'dontClear'
     cp -R "${PATH_TO_DDMS}Apps/starterApp/" "${newAppPath}"
+    showLoadingBar "Configuring new app ${1}"
+    find "${newAppPath}" -type f | xargs sed -i "s/starterApp/${1}/g"
 # [ ! -d new app ] error msg
     notifyUser "New app ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} was created at ${HIGHLIGHTCOLOR}${newAppPath}${NOTIFYCOLOR}" 0 'dontClear'
-    notifyUser "To run your new app use: ${HIGHLIGHTCOLOR}dsh -r ${1}" 0 'dontClear'
+    runApp "${1}"
 }
 
