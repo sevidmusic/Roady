@@ -343,18 +343,10 @@ createAppDirectory() {
         notifyUser "${ERRORCOLOR}remove the original App and then re-run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}dsh -r a ${1}" 0 'dontClear'
         exit 1
     fi
+    showLoadingBar "Creating new app ${1}" 'dontClear'
     cp -R "${PATH_TO_DDMS}Apps/starterApp/" "${newAppPath}"
 # [ ! -d new app ] error msg
-    showBanner "dsh --new app | Create new App \"${1}\" | New App Structure"
-    notifyUser "New app ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} was created at ${HIGHLIGHTCOLOR}${newAppPath}${NOTIFYCOLOR} with the following structure:" 0 'dontClear'
-    newLine
-    ls -RA --group-directories-first --color "${newAppPath}"
-    sleep 5
-    showBanner "dsh --new app | Create new App \"${1}\" | Available Apps"
-    notifyUser "The following Apps are now available:" 0 'dontClear' 0 'dontClear'
-    ls -A --group-directories-first --color "${PATH_TO_DDMS}Apps" | sed 's/README.md//g' | sed 's/.buildLogs//g'
-    sleep 5
-    showBanner "dsh --new app | Create new App \"${1}\" | Finished"
+    notifyUser "New app ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} was created at ${HIGHLIGHTCOLOR}${newAppPath}${NOTIFYCOLOR}" 0 'dontClear'
     notifyUser "To run your new app use: ${HIGHLIGHTCOLOR}dsh -r ${1}" 0 'dontClear'
 }
 
