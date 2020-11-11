@@ -336,6 +336,11 @@ stopAllDevelopmentServers() {
 
 createNewApp() {
     local newAppPath
+    if [ "${1}" == 'Foo' ]; then
+        showBanner "dsh --new app | Create new App | Error" 'dontClear'
+        notifyUser "${ERRORCOLOR}Sorry, \"${1}\" is a reserved App name. Please choose another name." 0 'dontClear'
+        exit 1
+    fi
     newAppPath="${PATH_TO_DDMS}Apps/${1}"
     showBanner "dsh --new app | Create new App \"${1}\""
     if [[ -d "${newAppPath}" ]]; then
