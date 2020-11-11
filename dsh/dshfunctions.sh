@@ -334,7 +334,7 @@ stopAllDevelopmentServers() {
     exit 0
 }
 
-createAppDirectory() {
+createNewApp() {
     local newAppPath
     newAppPath="${PATH_TO_DDMS}Apps/${1}"
     showBanner "dsh --new app | Create new App \"${1}\""
@@ -350,6 +350,5 @@ createAppDirectory() {
     find "${newAppPath}" -type f | xargs sed -i "s/starterApp/${1}/g"
 # [ ! -d new app ] error msg
     notifyUser "New app ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} was created at ${HIGHLIGHTCOLOR}${newAppPath}${NOTIFYCOLOR}" 0 'dontClear'
-    runApp "${1}"
 }
 

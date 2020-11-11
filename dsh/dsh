@@ -74,7 +74,7 @@ while test $# -gt 0; do
   -n | --new*)
     shift
     if [[ "${1}" == 'app' || "${1}" == 'a' ]]; then
-        createAppDirectory "${2}"
+        createNewApp "${2}" && runApp "${2}"
         exit 0
     fi
     exit 0
