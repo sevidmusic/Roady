@@ -18,9 +18,16 @@ $rootUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . (isset($parsedUrl
 ?>
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Concert%20One' rel='stylesheet'>
-    <link href="./Apps/starterApp/css/textColors.css" rel="stylesheet">
-    <link href="./Apps/starterApp/css/textStyles.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/backgrounds.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/borders.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/colors.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/dimensions.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/globalAnimations.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/links.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/lists.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/marginsPadding.css" rel="stylesheet">
     <link href="./Apps/starterApp/css/rendering.css" rel="stylesheet">
+    <link href="./Apps/starterApp/css/text.css" rel="stylesheet">
 <?php
     if($currentRequest->getUrl() === $rootUrl) {
         echo '    <link href="./Apps/starterApp/css/landingPageAnimations.css" rel="stylesheet">' . PHP_EOL;

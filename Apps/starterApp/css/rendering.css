@@ -1,20 +1,17 @@
 /*
  * rendering.css
+ * opacity, box-sizing, overflow, display, position
  */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
-    background: #030303;
     scroll-behavior: smooth;
 }
 
 .logo {
-    height: 7em;
     overflow: hidden;
 }
 
@@ -22,108 +19,22 @@ body {
     display: block;
 }
 
-.main-menu-links {
-    list-style-type: none;
-}
-
 .main-menu {
-    width: 8em; /** width MUST match output left margin */
-    height: 100%;
     position: fixed;
 }
 
 .output {
-    background: #1d1717;
-    border: .123em solid #ffffff;
-    border-radius: .7em;
     overflow: auto;
-    margin: 0.2em 2.3em 0 8em; /** left margin MUST match main-menu-links "width" or menu will cover output **/
-}
-
-.output p {
-    margin-bottom: 1em;
 }
 
 .component-info {
     overflow: auto;
-}
-
-.component-info-table, .component-info-output-preview {
-    background-image: linear-gradient(90deg, rgb(0, 0, 0, 0), #202020);
-    border: .2em solid #087bff;
-    border-radius: 3em;
 }
 
 .component-info-output-preview {
     overflow: auto;
 }
 
-.main-menu {
-    padding: 0 1em;
-}
-
-.output {
-    padding: 1.3em 1em;
-}
-
-.output h1 {
-    margin-bottom: .3em;
-}
-
-.component-info-output-preview {
-    padding: 1em 3em;
-    margin-top: 1em;
-}
-
-.component-info {
-    padding: 1.3em;
-}
-
-.component-info {
-    border: .3em solid #ffffff;
-    border-radius: 3em;
-    margin-top: 1.4em;
-}
-
-.component-info-table {
-    margin: .1em auto;
-    width:90%;
-    padding: 3em;
-}
-
-.component-info-table-cell {
-    padding: 1em;
-}
-
-.component-info-table-cell-odd {
-    background: #020202;;
-}
-
-.component-info-table-cell-even {
-    background: #202020;
-}
-
-.component-info-table-header-cell {
-    border-bottom: 3px solid #ffffff;
-    border-radius: 0 0 .3em .7em;
-    padding: .2em;
-}
-
-caption {
-    margin: 1em 0;
-}
-
-.request-info-header {
-    margin: 1em auto;
-}
-
-.output {
-    animation-name: fadeIn;
-    animation-duration: 1s;
-    animation-iteration-count: 1;
-}
-
-@keyframes fadeIn {
-    0%   {opacity: 0; }
-    100%   {opacity: 1; }
+.overview-title {
+    overflow: visible;
 }

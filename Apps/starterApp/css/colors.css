@@ -1,5 +1,6 @@
 /*
  * textColors.css
+ * color
  */
 
 .default-text-color, html, .component-info-table-cell-even {
@@ -56,6 +57,5 @@
 
 .white-text-color, .component-info-output-preview, .logo a, .overview-title, .component-info-table, .request-info-header {
     color: #ffffff;
-    text-shadow: 2px 2px 4px #000000;
 }
 
