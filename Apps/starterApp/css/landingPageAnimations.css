@@ -10,6 +10,6 @@
 }
 
 @keyframes animateLogo {
-    0%   {opacity: 0; margin-bottom: 270em; margin-left: 17em; }
-    100% {opacity: 1; margin-bottom: 0em; margin-left: 0; }
+    0%   {opacity: 0; margin: 0 auto; margin-bottom: 270em;}
+    100% {opacity: 1; margin: 0 auto;}
 }

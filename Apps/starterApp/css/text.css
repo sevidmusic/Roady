@@ -28,6 +28,10 @@ caption {
     text-align: center;
 }
 
+.logo h1 {
+    font-size: 2.23em;
+}
+
 .logo-description {
     font-size: .7em;
     font-style: italic;
