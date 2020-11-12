@@ -11,7 +11,5 @@
 
 @keyframes animateLogo {
     0%   {opacity: 0; margin-bottom: 270em; margin-left: 17em; }
-    42%  {opacity: 0; margin-bottom: 53em; }
-    87%  {opacity: .17; }
     100% {opacity: 1; margin-bottom: 2em; margin-left: 0; }
 }

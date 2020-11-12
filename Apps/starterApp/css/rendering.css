@@ -38,3 +38,7 @@ body {
 .overview-title {
     overflow: visible;
 }
+
+.component-info {
+    opacity: .72;
+}

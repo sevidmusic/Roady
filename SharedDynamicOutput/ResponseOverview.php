@@ -76,12 +76,12 @@ function getRequestStorageInfo(ResponseInterface $response, ComponentCrud $crud)
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Responses</h2>
 <?php
-    $bgcolors = ['linear-gradient(90deg, #02060a, #0a0502)', 'linear-gradient(90deg, #0a0502, #02060a)'];
-    $bgcolor = $bgcolors[1];
+    $bgClasses = ['group-odd', 'group-even'];
+    $bgClass = $bgClasses[1];
     foreach($crud->readAll($this->getLocation(), Response::RESPONSE_CONTAINER) as $response) {
-        $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
+        $bgClass = ($bgClass === $bgClasses[0] ? $bgClasses[1] : $bgClasses[0]);
         echo '
-    <div class="component-info highlight-text-color" style="background-image: ' . $bgcolor . ';">
+    <div class="component-info highlight-text-color ' . $bgClass . '">
         <p>Name: <span class="default-text-color">' . $response->getName() . '</span></p>
         <p>Unique Id: <span class="default-text-color">' . substr($response->getUniqueId(), 0, 17) . '...</span></p>
         <p>Storage Location: <span class="default-text-color">' . $response->getLocation() . '</span></p>

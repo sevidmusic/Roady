@@ -26,13 +26,13 @@ $crud = new ComponentCrud(
 <div class="output font-concert-one">
 <h2 class="overview-title font-audio-wide">Output Components</h2>
 <?php
-    $bgcolors = ['linear-gradient(90deg, #000000, #090909)', 'linear-gradient(90deg, #090909, #000000)'];
-    $bgcolor = $bgcolors[1];
+    $bgClasses = ['group-odd', 'group-even'];
+    $bgClass = $bgClasses[1];
     foreach($crud->readAll($this->getLocation(), 'Output') as $outputComponent) {
         if($outputComponent->getName() !== 'OutputComponentOverview') {
-            $bgcolor = ($bgcolor === $bgcolors[0] ? $bgcolors[1] : $bgcolors[0]);
+            $bgClass = ($bgClass === $bgClasses[0] ? $bgClasses[1] : $bgClasses[0]);
             echo '
-    <div id="' . $outputComponent->getUniqueId() . '" class="component-info highlight-text-color" style="background: ' . $bgcolor . ';">
+    <div id="' . $outputComponent->getUniqueId() . '" class="component-info highlight-text-color ' . $bgClass . '">
         <p>Name: <span class="default-text-color">' . $outputComponent->getName() . '</span></p>
         <p>Unique Id: <span class="default-text-color">' . substr($outputComponent->getUniqueId(), 0, 17) . '...</span></p>
         <p>Storage Location: <span class="default-text-color">' . $outputComponent->getLocation() . '</span></p>
