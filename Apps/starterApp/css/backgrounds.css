@@ -1,0 +1,7 @@
+body {
+    background: #f8f8ff;
+}
+
+.output {
+    background-image: linear-gradient(187deg, #000000, #050505, #111111, #222222, #030310, #050505, #000000);
+}
