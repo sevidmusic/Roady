@@ -1,14 +1,12 @@
 # Darling Data Management System
 
-![alt text](https://raw.githubusercontent.com/sevidmusic/DarlingCmsRedesign/unitTests/DCMS_UML.png)
-
 Welcome to the Darling Data Management System, a tool designed to aide in the development of well organized PHP applications.
 
 
 To install the Darling Data Management System, open terminal, navigate to the directory
 you want to install the Darling Data Management System in, and then run the following:
 
-   git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git && cd DarlingDataManagementSystem && composer upgrade && composer update && dsh/dsh -n a TestApp
+       git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git && cd DarlingDataManagementSystem && composer upgrade && composer update && dsh/dsh -n a TestApp
 
 The above will do the following:
 
