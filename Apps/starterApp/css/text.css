@@ -62,3 +62,8 @@ caption {
 .white-text-color, .component-info-output-preview, .logo a, .overview-title, .component-info-table, .request-info-header {
     text-shadow: 2px 2px 4px #000000;
 }
+
+
+.default-text-color, html, .component-info-table-cell-even {
+    text-shadow: .1em .1em 0 #1f1d1b;
+}
