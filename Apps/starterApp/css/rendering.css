@@ -12,7 +12,10 @@ body {
 }
 
 .logo {
+    position: -webkit-sticky;
+    position: sticky;
     overflow: hidden;
+    top: 0;
 }
 
 .main-menu a {
