@@ -357,3 +357,11 @@ createNewApp() {
     notifyUser "New app ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} was created at ${HIGHLIGHTCOLOR}${newAppPath}${NOTIFYCOLOR}" 0 'dontClear'
 }
 
+determinePhpVersion() {
+    /usr/bin/php -v | grep -E 'PHP [0-9][.][0-9]' | sed 's/[.][0-9][0-9] (.*//g' | sed 's/[.]//g' | sed 's/PHP//g'
+}
+
+showPHPVersionErrorAndExit() {
+    notifyUser "${HIGHLIGHTCOLOR}dsh${ERRORCOLOR}, and the ${HIGHLIGHTCOLOR}Darling Data Management System${ERRORCOLOR} require PHP >= 7.4, please install PHP 7.4 or greater.${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    exit 1
+}

@@ -29,6 +29,11 @@ loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
 
+[[ "$(command -v php)" != "/usr/bin/php" ]] && showPHPVersionErrorAndExit
+
+[[ "$(determinePhpVersion)" -lt '74' ]] && showPHPVersionErrorAndExit
+
+
 ####### Process flags #######
 while test $# -gt 0; do
   case "$1" in
@@ -85,4 +90,5 @@ while test $# -gt 0; do
     ;;
   esac
 done
+
 
