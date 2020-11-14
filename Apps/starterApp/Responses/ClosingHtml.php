@@ -3,12 +3,7 @@
 $appComponentsFactory->buildGlobalResponse(
     'ClosingHtml',
     999999999999999999999999999,
-    $appComponentsFactory->buildOutputComponent(
-        'ClosingBodyTag',
-        'Output',
-        '</body>' . PHP_EOL,
-        0
-    ),
+    $closingBodyTag,
     $appComponentsFactory->buildOutputComponent(
         'ClosingHtmlTag',
         'Output',
