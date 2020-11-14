@@ -1,0 +1,61 @@
+/*
+ * textColors.css
+ * color
+ */
+
+.default-text-color, html, .component-info-table-cell-even {
+    color: #087bff;
+}
+
+.highlight-text-color, caption, .main-menu a, .component-info-table-cell-odd, .link-text-color, .output a {
+    color: #ff6708;
+}
+
+.light-highlight-text-color {
+    color: #e67935;
+}
+
+.warning-text-color {
+    color: #ffa408;
+}
+
+.error-text-color {
+    color: #ff2908;
+}
+
+.success-text-color {
+    color: #42ff08;
+}
+
+.notice-text-color {
+    color: #4a08ff;
+}
+
+.important-text-color {
+    color: #c508ff;
+}
+
+.code-text-color {
+    color: #08ff8c;
+}
+
+.note-text-color {
+    color: #353842;
+}
+
+.main-menu a:hover {
+    color: #e67935;
+}
+
+.black-text-color {
+    color: #000000;
+}
+
+.link-hover-text-color, .output a:hover {
+    color: #c508ff;
+}
+
+.white-text-color, .component-info-output-preview, .logo a, .overview-title, .component-info-table, .request-info-header {
+    color: #ffffff;
+}
+
