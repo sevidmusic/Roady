@@ -227,8 +227,6 @@ trait ResponseUITestTrait
     {
         $sorted = [];
         foreach($postionables as $postionable) {
-            var_dump($postionable->getPosition());
-            var_dump($postionable->getName(), $postionable->getType());
             while(isset($sorted[strval($postionable->getPosition())]))
             {
                 $postionable->increasePosition();
