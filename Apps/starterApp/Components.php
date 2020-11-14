@@ -20,6 +20,9 @@ $appComponentsFactory = new AppComponentsFactory(
     )
 );
 
+require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/Homepage.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/RootRequest.php';
+
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/OpeningHtml.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/LogoMainMenu.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/Homepage.php';
