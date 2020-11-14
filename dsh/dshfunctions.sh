@@ -358,7 +358,7 @@ createNewApp() {
 }
 
 determinePhpVersion() {
-    /usr/bin/php -v | grep -E 'PHP [0-9][.][0-9]' | sed 's/[.][0-9][0-9] (.*//g' | sed 's/[.]//g' | sed 's/PHP//g'
+    /usr/bin/php -v | grep -E 'PHP [0-9][.][0-9]' | sed 's/[.][0-9][0-9].*//g' | sed 's/[.]//g' | sed 's/PHP//g'
 }
 
 showPHPVersionErrorAndExit() {
