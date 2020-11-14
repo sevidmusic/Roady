@@ -351,6 +351,8 @@ createNewApp() {
     fi
     showLoadingBar "Creating new app ${1}" 'dontClear'
     cp -R "${PATH_TO_DDMS}Apps/starterApp/" "${newAppPath}"
+    showLoadingBar "Creating Stylesheets.php" 'dontClear'
+    cp "${PATH_TO_DDMS}SharedDynamicOutput/Stylesheets.php" "${PATH_TO_DDMS}Apps/${1}/DynamicOutput/Stylesheets.php"
     showLoadingBar "Configuring new app ${1}"
     find "${newAppPath}" -type f | xargs sed -i "s/starterApp/${1}/g"
 # [ ! -d new app ] error msg
