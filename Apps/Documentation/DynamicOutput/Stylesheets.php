@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Stylesheets.php
+ */
+
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;

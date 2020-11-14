@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Components.php
+ */
+
 use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
 
 ini_set('display_errors', true);
