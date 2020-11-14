@@ -45,3 +45,8 @@ body {
 .component-info {
     opacity: .72;
 }
+
+.main-menu a {
+    display: block;
+}
+

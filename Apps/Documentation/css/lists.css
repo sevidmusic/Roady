@@ -3,7 +3,7 @@
  *
  */
 
-.main-menu-links {
+.main-menu-links, .landing-page-links {
     list-style-type: none;
 }
 

@@ -9,7 +9,7 @@
 }
 
 .output {
-    margin: 0.2em 2.3em 0 8em; /** left margin MUST match main-menu-links "width" or menu will cover output **/
+    margin: 0.2em 2.3em 0 8em;
 }
 
 .output p {
