@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Homepage.php
+ * Responds to:
+ * ./
+ * ./index.php
+ */
+
 $appComponentsFactory->buildResponse(
     'Homepage',
     2,

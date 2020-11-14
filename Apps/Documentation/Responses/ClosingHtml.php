@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * ClosingHtml.php
+ * Responds to:
+ * ALL
+ */
+
 $appComponentsFactory->buildGlobalResponse(
     'ClosingHtml',
     999999999999999999999999999,

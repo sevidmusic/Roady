@@ -43,6 +43,10 @@ caption {
     text-decoration: underline overline;
 }
 
+.output {
+    font-size: 1.17em;
+}
+
 .output a {
     text-decoration: none;
 }

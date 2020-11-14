@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * OpeningHtml.php
+ * Responds to:
+ * ALL
+ */
+
 $appComponentsFactory->buildGlobalResponse(
     'OpeningHtml',
     0,

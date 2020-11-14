@@ -1,4 +1,4 @@
 <div class="output font-concert-one">
-    <h1>How To Use It</h1>
+    <h1>What It Is</h1>
 </div>
 

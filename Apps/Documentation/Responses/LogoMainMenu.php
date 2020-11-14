@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * LogoMainMenu.php
+ * Responds to:
+ * ALL
+ */
+
 $appComponentsFactory->buildGlobalResponse(
     'LogoMainMenu',
     1,

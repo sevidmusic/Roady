@@ -1,24 +1,31 @@
 <?php
 
+/**
+ * HowToUseIt.php
+ * Responds to:
+ * ./index.php?howToUseIt
+ * ./?howToUseIt
+ */
+
 $appComponentsFactory->buildResponse(
-    'Homepage',
+    'HowToUseIt',
     2,
     $appComponentsFactory->buildRequest(
-        'HomepageRequest',
+        'HowToUseItRequest',
         'Requests',
-        $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/', // @todo possibly create new issue: Response should match getUrl() and getUrl() . '/', i.e. with or without trailing slash, or getUrl() should include trailing slash, either way this is annoying because getUrl() and getUrl() . '/' are different...
+        $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/?howToUseIt', // @todo possibly create new issue: Response should match getUrl() and getUrl() . '/', i.e. with or without trailing slash, or getUrl() should include trailing slash, either way this is annoying because getUrl() and getUrl() . '/' are different...
     ),
     $appComponentsFactory->buildRequest(
-        'HomepageRequest',
+        'HowToUseItRequest',
         'Requests',
-        $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/index.php', // @todo possibly create new issue: Response should match getUrl() and getUrl() . '/', i.e. with or without trailing slash, or getUrl() should include trailing slash, either way this is annoying because getUrl() and getUrl() . '/' are different...
+        $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/index.php?howToUseIt', // @todo possibly create new issue: Response should match getUrl() and getUrl() . '/', i.e. with or without trailing slash, or getUrl() should include trailing slash, either way this is annoying because getUrl() and getUrl() . '/' are different...
     ),
     $appComponentsFactory->buildDynamicOutputComponent(
-        'Welcome',
+        'HowToUseIt',
         'Output',
         0,
         'Documentation',
-        'Welcome.php'
+        'HowToUseIt.php'
     ),
 );
 
