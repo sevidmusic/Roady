@@ -10,6 +10,7 @@ use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as Compo
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use \RuntimeException;
 
 abstract class ComponentCrud extends SwitchableComponentBase implements ComponentCrudInterface
 {
@@ -26,16 +27,21 @@ abstract class ComponentCrud extends SwitchableComponentBase implements Componen
         }
     }
 
+    private function getDefaultComponent(): ComponentInterface
+    {
+        return new CoreComponent(
+            new CoreStorable(
+                self::MOCK_COMPONENT,
+                self::MOCK_COMPONENT,
+                self::MOCK_COMPONENT
+            )
+        );
+    }
+
     public function read(StorableInterface $storable): ComponentInterface
     {
         if ($this->getState() === false) {
-            return new CoreComponent(
-                new CoreStorable(
-                    self::MOCK_COMPONENT,
-                    self::MOCK_COMPONENT,
-                    self::MOCK_COMPONENT
-                )
-            );
+            return $this->getDefaultComponent();
         }
         return $this->getStorageDriver()->read($storable);
     }
@@ -76,4 +82,18 @@ abstract class ComponentCrud extends SwitchableComponentBase implements Componen
             : $this->getStorageDriver()->readAll($location, $container)
         );
     }
+
+    public function readByNameAndType(string $name, string $type, string $location, string $container): ComponentInterface
+    {
+        $components = $this->readAll($location, $container);
+        foreach($components as $component)
+        {
+            if($component->getName() === $name && $component->getType() === $type) {
+                return $component;
+            }
+        }
+        throw new RuntimeException("A component named $name of type $type does not exist in the $container container in the $location location: Using defualt Component of type " . $this->getDefaultComponent()->getType());
+        return $this->getDefaultComponent();
+    }
+
 }

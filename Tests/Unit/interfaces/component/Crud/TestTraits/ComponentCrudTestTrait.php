@@ -6,6 +6,7 @@ use DarlingDataManagementSystem\interfaces\component\Component as ComponentInter
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use \RuntimeException;
 
 trait ComponentCrudTestTrait
 {
@@ -228,4 +229,19 @@ trait ComponentCrudTestTrait
         $this->setSwitchableComponent($this->getComponentCrud());
         $this->setSwitchableComponentParentTestInstances();
     }
+
+    public function testReadByNameAndTypeThrowsRuntimeExceptionIfAMatchIsNotFound(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->getComponentCrud()->readByNameAndType(
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999))
+        );
+    }
+/*
+    public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound()
+    public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
+*/
 }
