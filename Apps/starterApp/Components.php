@@ -32,10 +32,12 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/Meta.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/Stylesheets.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/ClosingHeadTag.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/OpeningBodyTag.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/OutputComponentOverview.php';
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/Homepage.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/RootRequest.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/ResponseOverviewRequest.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/OutputComponentOverview.php';
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/OpeningHtml.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Responses/LogoMainMenu.php';
