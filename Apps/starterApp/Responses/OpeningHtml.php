@@ -1,6 +1,7 @@
 <?php
 
 use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
 
 $appComponentsFactory->buildGlobalResponse(
     'OpeningHtml',
@@ -17,10 +18,30 @@ $appComponentsFactory->buildGlobalResponse(
         $appComponentsFactory->getLocation(),
         'Output'
     ),
-    $openingHeadTag,
-    $title,
-    $meta,
-    $stylesheets,
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'OpeningHeadTag',
+        OutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'Title',
+        DynamicOutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'Meta',
+        DynamicOutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'Stylesheets',
+        DynamicOutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
     $closingHeadTag,
     $openingBodyTag,
 );
