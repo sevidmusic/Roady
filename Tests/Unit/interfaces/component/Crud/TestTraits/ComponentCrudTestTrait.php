@@ -251,13 +251,32 @@ trait ComponentCrudTestTrait
             strval(rand(1000, 9999)),
             strval(rand(1000, 9999))
         );
-        $this->assertTrue('DEFAULT', $component->getName());
-        $this->assertTrue('DEFAULT', $component->getLocation());
-        $this->assertTrue('DEFAULT', $component->getContainer());
+        $this->assertEquals('DEFAULT', $component->getName());
+        $this->assertEquals('DEFAULT', $component->getLocation());
+        $this->assertEquals('DEFAULT', $component->getContainer());
     }
 
-/*
     public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
+    {
+        $crud = $this->getComponentCrud();
+        $crud->create($crud);
+        $component = $crud->readByNameAndType(
+            $crud->getName(),
+            $crud->getType(),
+            $crud->getLocation(),
+            $crud->getContainer()
+        );
+        $this->assertEquals(
+            $crud->getName(),
+            $component->getName()
+        );
+        $this->assertEquals(
+            $crud->getType(),
+            $component->getType()
+        );
+        $crud->delete($crud);
+    }
+/*
 
 // Addressing read()
     public function testReadReturnsComponentWhoseNameLocationAndContainerAreDEFAULTIfAMatchIsNotFound(): void
