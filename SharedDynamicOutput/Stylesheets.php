@@ -16,8 +16,11 @@ $currentRequest = new Request(
 $parsedUrl = parse_url($currentRequest->getUrl());
 $rootUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . (isset($parsedUrl['port']) ? ':' . $parsedUrl['port'] : '') . '/';
 ?>
-    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+<?php
+/*    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Concert%20One' rel='stylesheet'>
+*/
+?>
     <link href="./Apps/starterApp/css/backgrounds.css" rel="stylesheet">
     <link href="./Apps/starterApp/css/borders.css" rel="stylesheet">
     <link href="./Apps/starterApp/css/colors.css" rel="stylesheet">
