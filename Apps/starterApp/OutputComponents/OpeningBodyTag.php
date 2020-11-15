@@ -1,7 +1,7 @@
 <?php
 
 $openingBodyTag = $appComponentsFactory->buildOutputComponent(
-    'OpeningBodyTag',
+   'OpeningBodyTag',
     'Output',
     '<body>' . PHP_EOL,
     0.7
