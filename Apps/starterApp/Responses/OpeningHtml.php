@@ -42,7 +42,17 @@ $appComponentsFactory->buildGlobalResponse(
         $appComponentsFactory->getLocation(),
         'Output'
     ),
-    $closingHeadTag,
-    $openingBodyTag,
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'ClosingHeadTag',
+        OutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'OpeningBodyTag',
+        OutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
 );
 
