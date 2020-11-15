@@ -240,8 +240,27 @@ trait ComponentCrudTestTrait
             strval(rand(1000, 9999))
         );
     }
-/*
+
+
     public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound()
+    {
+        $this->expectException(RuntimeException::class);
+        $component = $this->getComponentCrud()->readByNameAndType(
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999))
+        );
+        $this->assertTrue('DEFAULT', $component->getName());
+        $this->assertTrue('DEFAULT', $component->getLocation());
+        $this->assertTrue('DEFAULT', $component->getContainer());
+    }
+
+/*
     public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
+
+// Addressing read()
+    public function testReadReturnsComponentWhoseNameLocationAndContainerAreDEFAULTIfAMatchIsNotFound(): void
+    public function testReadThrowsRuntimeExceptionIfAMatchNotFound(): void
 */
 }
