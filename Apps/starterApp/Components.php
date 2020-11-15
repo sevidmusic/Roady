@@ -33,6 +33,8 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/Stylesheets.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/ClosingHeadTag.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/OpeningBodyTag.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/OutputComponentOverview.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/MainMenu.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'OutputComponents/Logo.php';
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/Homepage.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'Requests/RootRequest.php';
