@@ -6,6 +6,7 @@ use DarlingDataManagementSystem\interfaces\component\Component as ComponentInter
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use \RuntimeException;
 
 trait ComponentCrudTestTrait
 {
@@ -228,4 +229,57 @@ trait ComponentCrudTestTrait
         $this->setSwitchableComponent($this->getComponentCrud());
         $this->setSwitchableComponentParentTestInstances();
     }
+
+    public function testReadByNameAndTypeThrowsRuntimeExceptionIfAMatchIsNotFound(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->getComponentCrud()->readByNameAndType(
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999))
+        );
+    }
+
+
+    public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound()
+    {
+        $this->expectException(RuntimeException::class);
+        $component = $this->getComponentCrud()->readByNameAndType(
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999))
+        );
+        $this->assertEquals('DEFAULT', $component->getName());
+        $this->assertEquals('DEFAULT', $component->getLocation());
+        $this->assertEquals('DEFAULT', $component->getContainer());
+    }
+
+    public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
+    {
+        $crud = $this->getComponentCrud();
+        $crud->create($crud);
+        $component = $crud->readByNameAndType(
+            $crud->getName(),
+            $crud->getType(),
+            $crud->getLocation(),
+            $crud->getContainer()
+        );
+        $this->assertEquals(
+            $crud->getName(),
+            $component->getName()
+        );
+        $this->assertEquals(
+            $crud->getType(),
+            $component->getType()
+        );
+        $crud->delete($crud);
+    }
+/*
+
+// Addressing read()
+    public function testReadReturnsComponentWhoseNameLocationAndContainerAreDEFAULTIfAMatchIsNotFound(): void
+    public function testReadThrowsRuntimeExceptionIfAMatchNotFound(): void
+*/
 }

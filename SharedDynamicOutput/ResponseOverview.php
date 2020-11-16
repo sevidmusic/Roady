@@ -83,7 +83,7 @@ function getRequestStorageInfo(ResponseInterface $response, ComponentCrud $crud)
         echo '
     <div class="component-info highlight-text-color ' . $bgClass . '">
         <p>Name: <span class="default-text-color">' . $response->getName() . '</span></p>
-        <p>Unique Id: <span class="default-text-color">' . substr($response->getUniqueId(), 0, 17) . '...</span></p>
+        <p>Unique Id: <span class="tiny-text box-text">' . $response->getUniqueId() . '</span></p>
         <p>Storage Location: <span class="default-text-color">' . $response->getLocation() . '</span></p>
         <p>Storage Container: <span class="default-text-color">' . $response->getContainer() . '</span></p>
         <p>Position: <span class="default-text-color">' . $response->getPosition() . '</span></p>

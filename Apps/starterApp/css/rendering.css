@@ -45,3 +45,9 @@ body {
 .component-info {
     opacity: .72;
 }
+
+.box-text {
+    opacity: 0.72em;
+    display: inline-block;
+    overflow: auto;
+}

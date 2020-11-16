@@ -19,4 +19,6 @@ interface ComponentCrud extends SwitchableComponentInterface
 
     public function readAll(string $location, string $container): array;
 
+    public function readByNameAndType(string $name, string $type, string $location, string $container): ComponentInterface;
+
 }
