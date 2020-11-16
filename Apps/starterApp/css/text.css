@@ -71,3 +71,14 @@ caption {
 .default-text-color, html, .component-info-table-cell-even {
     text-shadow: .1em .1em 0 #1f1d1b;
 }
+
+.tiny-text {
+    font-size: 0.720em;
+}
+
+.box-text {
+    text-shadow: none;
+    text-decoration: none;
+}
+
+

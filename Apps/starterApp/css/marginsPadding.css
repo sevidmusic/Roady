@@ -65,3 +65,8 @@ caption {
 .logo {
     margin: 0 auto;
 }
+
+.box-text {
+    margin: .5em auto;
+    padding: 1em;
+}
