@@ -82,7 +82,16 @@ while test $# -gt 0; do
         createNewApp "${2}" && runApp "${2}"
         exit 0
     fi
-    exit 0
+    if [[ "${1}" == 'DynamicOutputComponent' || "${1}" == 'doc' ]]; then
+        createNewynamicOutputComponent "${2}" "${3}" "${4}" "${5}"
+        exit 0
+    fi
+    showBanner "Error: dsh --new expects mode be specified"
+    notifyUser "${ERRORCOLOR}The --new flag expects a mode be specified. The following modes are available:" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}dsh --new app <APP_DIRECTORY_NAME>" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}dsh --new DynamicOutputComponent <APP_DIRECTORY_NAME> <DYNAMIC_OUTPUT_COMPONENT_NAME> <DYNAMIC_OUTPUT_COMPONENT_POSITION> <DYNAMIC_OUTPUT_FILE_NAME>" 0 'dontClear'
+    notifyUser "For help with the --new flag, run ${HIGHLIGHTCOLOR}dsh --help new" 0 'dontClear'
+    exit 1
     ;;
   *)
     notifyUser "${WARNING_COLOR}Invalid flag ${1}"

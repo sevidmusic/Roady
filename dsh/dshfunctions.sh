@@ -367,3 +367,8 @@ showPHPVersionErrorAndExit() {
     notifyUser "${HIGHLIGHTCOLOR}dsh${ERRORCOLOR}, and the ${HIGHLIGHTCOLOR}Darling Data Management System${ERRORCOLOR} require PHP >= 7.4, please install PHP 7.4 or greater.${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
     exit 1
 }
+
+createNewynamicOutputComponent () {
+    printf "AppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
+    exit 0
+}
