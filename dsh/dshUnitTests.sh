@@ -72,3 +72,10 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'active-development-servers' 
     dsh -j
 fi
 
+if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'stop-all-development-servers' ]]; then
+    $PATH_TO_DSH_DIR/dsh --help stop-all-development-servers
+    dsh --stop-all-development-servers
+    $PATH_TO_DSH_DIR/dsh -h k
+    dsh -k
+fi
+
