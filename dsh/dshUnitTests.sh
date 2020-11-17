@@ -79,3 +79,14 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'stop-all-development-servers
     dsh -k
 fi
 
+if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
+    $PATH_TO_DSH_DIR/dsh --help new DynamicOutputComponent
+    sleep 7
+    dsh --new DynamicOutputComponent starterApp TestDoc 4.2 Welcome.php
+    sleep 3
+    $PATH_TO_DSH_DIR/dsh -h n doc
+    sleep 7
+    dsh -n doc starterApp TestDoc 4.2 Welcome.php
+    sleep 3
+fi
+

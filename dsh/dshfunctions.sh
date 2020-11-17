@@ -114,6 +114,16 @@ showHelpMsg() {
             notifyUser "      starter App to build on." 0 'dontClear'
             exit 0
         fi
+        if [[ "${2}" == 'DynamicOutputComponent' || "${2}" == 'doc' ]]; then
+            notifyUser "dsh --new DynamicOutputComponent <APP_DIRECTORY_NAME> <DYNAMIC_OUTPUT_COMPONENT_NAME> <DYNAMIC_OUTPUT_COMPONENT_POSITION> <DYNAMIC_OUTPUT_FILE_NAME>" 0 'dontClear'
+            notifyUser "The ${HIGHLIGHTCOLOR}DynamicOutputComponent${NOTIFYCOLOR} mode can be used to create new DynamicOutputComponents for the specified App." 0 'dontClear'
+            notifyUser "The ${HIGHLIGHTCOLOR}DynamicOutputComponent${NOTIFYCOLOR} mode expects four arguments:" 0 'dontClear'
+            notifyUser "1. ${HIGHLIGHTCOLOR}<APP_DIRECTORY_NAME>${NOTIFYCOLOR} The App's directory name. (This is the App the DynamicOutputComponent will be created for)" 0 'dontClear'
+            notifyUser "2. ${HIGHLIGHTCOLOR}<DYNAMIC_OUTPUT_COMPONENT_NAME>${NOTIFYCOLOR} The name to assign to the DynamicOutputComponent" 0 'dontClear'
+            notifyUser "3. ${HIGHLIGHTCOLOR}<DYNAMIC_OUTPUT_COMPONENT_POSITION>${NOTIFYCOLOR} The position to assign to the DynamicOutputComponent" 0 'dontClear'
+            notifyUser "4. ${HIGHLIGHTCOLOR}<DYNAMIC_OUTPUT_FILE_NAME>${NOTIFYCOLOR} The name of the file that will generate the DynamicOutputComponent's output." 0 'dontClear'
+            exit 0
+        fi
     fi
     notifyUser "${ERRORCOLOR}Invalid option supplied to --help flag." 0 'dontClear'
 }
