@@ -79,6 +79,26 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'stop-all-development-servers
     dsh -k
 fi
 
+#######
+
+assertSuccess() {
+    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error : )" 0 'dontClear' && return
+    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error occured, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see error messages." 0 'dontClear'
+}
+
+assertError() {
+    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error  did not occur, an error was expected, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see actual output." 0 'dontClear' && return
+    notifyUser "As expected, an error occured running ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}" 0 'dontClear'
+}
+assertSuccess 'ls'
+assertSuccess 'ldfs'
+assertError 'ls'
+assertError 'ldfs'
+
+exit 0
+
+######
+
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
     $PATH_TO_DSH_DIR/dsh --help new DynamicOutputComponent
     sleep 7
