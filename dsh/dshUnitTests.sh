@@ -31,13 +31,13 @@ loadLibrary() {
 #######
 
 assertSuccess() {
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error : )" 0 'dontClear' && return
+    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error ${SUCCESSCOLOR}:)" 0 'dontClear' && return
     notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error occured, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see error messages." 0 'dontClear'
 }
 
 assertError() {
     { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error  did not occur, an error was expected, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see actual output." 0 'dontClear' && return
-    notifyUser "As expected, an error occured running ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}" 0 'dontClear'
+    notifyUser "As expected, an error occured running ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ${SUCCESSCOLOR}:)" 0 'dontClear'
 }
 
 ######
@@ -49,6 +49,7 @@ loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
 
+disableCtrlC
 notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
 showLoadingBar "Starting ${TESTGROUP} tests" 'dontClear'
 
@@ -110,3 +111,8 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
     assertSuccess "dsh -n doc starterApp TestDoc 4.2 Welcome.php"
 fi
 
+
+
+
+# THIS IS IMPORTANT | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
+enableCtrlC
