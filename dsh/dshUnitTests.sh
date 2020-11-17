@@ -49,56 +49,58 @@ loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
 
+notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
+showLoadingBar "Starting ${TESTGROUP} tests" 'dontClear'
 
 [[ ! -d "${PATH_TO_DDMS}/Apps/${APP}" ]] && printf "\nPlease specify the name of an existing App directory to run tests against.\n" && exit 1
 # dsh --help
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'help' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help
-    $PATH_TO_DSH_DIR/dsh -h
-    $PATH_TO_DSH_DIR/dsh --help help
-    $PATH_TO_DSH_DIR/dsh -h h
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help help"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h h"
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'start-app-server' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help start-app-server
-    dsh --start-app-server 8080
-    $PATH_TO_DSH_DIR/dsh -h s
-    dsh -s 8080
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help start-app-server"
+    assertSuccess "dsh --start-app-server 8080"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h s"
+    assertSuccess "dsh -s 8080"
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'test-ddms' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help test-ddms
-    dsh --test-ddms
-    $PATH_TO_DSH_DIR/dsh -h t
-    dsh -t
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help test-ddms"
+    assertSuccess "dsh --test-ddms"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h t"
+    assertSuccess "dsh -t"
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'build-app' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help build-app
-    dsh --build-app "${APP}"
-    $PATH_TO_DSH_DIR/dsh -h b
-    dsh -b "${APP}"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help build-app"
+    assertSuccess "dsh --build-app "${APP}""
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h b"
+    assertSuccess "dsh -b "${APP}""
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'run-app' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help run-app
-    dsh --run-app "${APP}"
-    $PATH_TO_DSH_DIR/dsh -h r
-    dsh -r "${APP}"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help run-app"
+    assertSuccess "dsh --run-app "${APP}""
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h r"
+    assertSuccess "dsh -r "${APP}""
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'active-development-servers' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help active-development-servers
-    dsh --active-development-servers
-    $PATH_TO_DSH_DIR/dsh -h j
-    dsh -j
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help active-development-servers"
+    assertSuccess "dsh --active-development-servers"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h j"
+    assertSuccess "dsh -j"
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'stop-all-development-servers' ]]; then
-    $PATH_TO_DSH_DIR/dsh --help stop-all-development-servers
-    dsh --stop-all-development-servers
-    $PATH_TO_DSH_DIR/dsh -h k
-    dsh -k
+    assertSuccess "$PATH_TO_DSH_DIR/dsh --help stop-all-development-servers"
+    assertSuccess "dsh --stop-all-development-servers"
+    assertSuccess "$PATH_TO_DSH_DIR/dsh -h k"
+    assertSuccess "dsh -k"
 fi
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
