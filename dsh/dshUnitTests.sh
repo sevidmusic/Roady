@@ -109,6 +109,8 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
     assertSuccess "${PATH_TO_DSH_DIR}/dsh --new DynamicOutputComponent starterApp TestDoc 4.2 Welcome.php"
     assertSuccess "$PATH_TO_DSH_DIR/dsh -h n doc"
     assertSuccess "dsh -n doc starterApp TestDoc 4.2 Welcome.php"
+    assertError "dsh -n doc nonExistentAppName${RANDOM} TestDoc 4.2 Welcome.php"
+    sleep 3
 fi
 
 

@@ -378,7 +378,18 @@ showPHPVersionErrorAndExit() {
     exit 1
 }
 
+expectedAppDirectoryPath() {
+    printf "%s" "${PATH_TO_DDMS}Apps/${1}"
+}
+
+appExists() {
+    printf "%s" "$(expectedAppDirectoryPath "${1}")"
+    [[ -d "$(expectedAppDirectoryPath "${1}")" ]] && return 0
+    return 1
+}
+
 createNewynamicOutputComponent () {
+    appExists "${1}" || showAppDoesNotExistErrorAndExit "${1}"
     printf "AppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
     exit 0
 }
