@@ -382,14 +382,21 @@ expectedAppDirectoryPath() {
     printf "%s" "${PATH_TO_DDMS}Apps/${1}"
 }
 
-appExists() {
-    printf "%s" "$(expectedAppDirectoryPath "${1}")"
-    [[ -d "$(expectedAppDirectoryPath "${1}")" ]] && return 0
+directoryExists() {
+    printf "\n\n%s" "${1}"
+    [[ -d "${1}" ]] && return 0
     return 1
 }
 
+createAppsOutputComponentsDirectory() {
+    showLoadingBar "Creating App's OutputComponents Directory" 'dontClear'
+}
+
 createNewynamicOutputComponent () {
-    appExists "${1}" || showAppDoesNotExistErrorAndExit "${1}"
-    printf "AppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
+    showBanner "dsh --new DynamicOutputComponent ${1} ${2} ${3} ${4}" 'dontClear'
+    [[ "${1}" == '' ]] && notifyUser "Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUser "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
+    directoryExists "$(expectedAppDirectoryPath "${1}")" || showAppDoesNotExistErrorAndExit "${1}"
+    directoryExists "$(expectedAppDirectoryPath "${1}/OutputComponents")" || createAppsOutputComponentsDirectory "${1}"
+    printf "\n\nAppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
     exit 0
 }

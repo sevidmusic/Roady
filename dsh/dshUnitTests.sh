@@ -19,6 +19,7 @@ setupPaths() {
     done
     PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
     PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
+    PATH_TO_DSHUNIT="${PATH_TO_DSH_DIR}/dshUnit"
     PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
     PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh/}"
 }
@@ -28,26 +29,13 @@ loadLibrary() {
     . "${1}"
 }
 
-#######
-
-assertSuccess() {
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error ${SUCCESSCOLOR}:)" 0 'dontClear' && return
-    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error occured, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see error messages." 0 'dontClear'
-}
-
-assertError() {
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error  did not occur, an error was expected, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see actual output." 0 'dontClear' && return
-    notifyUser "As expected, an error occured running ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ${SUCCESSCOLOR}:)" 0 'dontClear'
-}
-
-######
-
-
 setupPaths
 
 loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
+
+loadLibrary "${PATH_TO_DSHUNIT}"
 
 disableCtrlC
 notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
@@ -104,12 +92,19 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'stop-all-development-servers
     assertSuccess "dsh -k"
 fi
 
-if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
-    assertSuccess "${PATH_TO_DSH_DIR}/dsh --help new DynamicOutputComponent"
-    assertSuccess "${PATH_TO_DSH_DIR}/dsh --new DynamicOutputComponent starterApp TestDoc 4.2 Welcome.php"
-    assertSuccess "$PATH_TO_DSH_DIR/dsh -h n doc"
-    assertSuccess "dsh -n doc starterApp TestDoc 4.2 Welcome.php"
+testErrorIfAppDoesNotExist() {
+    notifyUser "Running ${HIGHLIGHTCOLOR}assertErrorIfAppDoesNotExist()" 0 'dontClear'
     assertError "dsh -n doc nonExistentAppName${RANDOM} TestDoc 4.2 Welcome.php"
+}
+
+testErrorIfSpecifiedAppDirectoryNameIsEmpty() {
+    notifyUser "Running ${HIGHLIGHTCOLOR}assertErrorIfSpecifiedAppNameIsEmpty()" 0 'dontClear'
+    assertError "dsh -n doc \"\" TestDoc 4.2 Welcome.php"
+}
+
+if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
+    testErrorIfAppDoesNotExist
+    testErrorIfSpecifiedAppDirectoryNameIsEmpty
     sleep 3
 fi
 
