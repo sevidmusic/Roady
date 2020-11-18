@@ -37,3 +37,5 @@ assertError() {
     notifyUser "As expected, an error occured running ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ${SUCCESSCOLOR}:)" 0 'dontClear'
 }
 
+[[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+

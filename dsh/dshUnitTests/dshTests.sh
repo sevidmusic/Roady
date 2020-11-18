@@ -3,9 +3,9 @@ set -o posix
 
 clear
 
-APP="${1}"
+APP="starterApp"
 
-TESTGROUP="${2:-all}"
+TESTGROUP="${1:-all}"
 
 [[ -z "${APP}" ]] && printf "\nPlease specify the name of an existing App directory to run tests against.\n" && exit 1
 
@@ -17,7 +17,8 @@ setupPaths() {
       SOURCE="$(readlink "$SOURCE")"
       [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
     done
-    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+    PATH_TO_THIS_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+    PATH_TO_DSH_DIR="${PATH_TO_THIS_DIR/dshUnitTests/}"
     PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
     PATH_TO_DSHUNIT="${PATH_TO_DSH_DIR}/dshUnit"
     PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
@@ -38,10 +39,13 @@ loadLibrary "${PATH_TO_DSHUI}"
 loadLibrary "${PATH_TO_DSHUNIT}"
 
 disableCtrlC
+
 notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
-showLoadingBar "Starting ${TESTGROUP} tests" 'dontClear'
+
+showLoadingBar "Starting ${TESTGROUP} tests defined in for test group ${TESTGROUP}. Using app ${APP} as a testing App where needed." 'dontClear'
 
 [[ ! -d "${PATH_TO_DDMS}/Apps/${APP}" ]] && printf "\nPlease specify the name of an existing App directory to run tests against.\n" && exit 1
+
 # dsh --help
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'help' ]]; then
     assertSuccess "$PATH_TO_DSH_DIR/dsh --help"
