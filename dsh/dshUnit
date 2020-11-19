@@ -21,18 +21,29 @@ setupPaths() {
     PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh\//}"
 }
 
+setupVars() {
+    TEST_FILE_NAME="${1}"
+    TEST_GROUP_NAME="${2}"
+}
+
 loadLibrary() {
     [[ ! -f "${1}" ]] && printf "\n\n\e[33mError! Failed to load ${1}!\e[0m\n\n" && exit 1
     . "${1}"
 }
 
+runTestFile() {
+    [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+}
+
 setupPaths
+
+setupVars "${1}" "${2}"
 
 loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
 
-[[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+runTestFile "${TEST_FILE_NAME}" "${TEST_GROUP_NAME}"
 
 # Assertion Function Definitions #
 
