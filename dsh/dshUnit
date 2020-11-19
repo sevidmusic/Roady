@@ -37,6 +37,7 @@ loadLibrary() {
 runTestFileIfSpecified() {
     if [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]]; then
         disableCtrlC
+        notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
         "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
         # THIS IS IMPORTANT | THIS MUST BE LAST | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
         enableCtrlC

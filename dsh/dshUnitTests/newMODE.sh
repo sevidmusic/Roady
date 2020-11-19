@@ -5,12 +5,14 @@ clear
 # THIS LINE IS VERY IMPORTANT | IT IS THE ONLY LINE REQUIRED FOR ALL TEST FILES source dshUnit
 . "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd | sed 's/dshUnitTests//g')dshUnit"
 
+setTestGroup() {
+    TESTGROUP="${1:-all}"
+}
+
 setRandomTestAppName() {
     APP="TestApp${RANDOM}"
     [[ -z "${APP}" ]] && notifyUser "${ERRORCOLOR}A random App name could not be generated for testing." 0 'dontClear' && exit 1
 }
-
-TESTGROUP="${1:-all}"
 
 getTestAppDirectory() {
     printf "%s" "${PATH_TO_DDMS_APP_DIR}${APP}"
@@ -42,13 +44,13 @@ tearDownTestAppDirectory() {
     rm -R "$(getTestAppDirectory)"
 }
 
+setTestGroup
+
 setRandomTestAppName
 
 setUpTestAppDirectory
 
-notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
-
-showLoadingBar "Starting ${TESTGROUP} tests defined in for test group ${TESTGROUP}. Using app ${APP} as a testing App where needed." 'dontClear'
+showLoadingBar "Starting ${TESTGROUP} tests defined in the newMode.sh test file for test group ${TESTGROUP}. An app, ${HIGHLIGHTCOLOR}${APP}${NOTIFYCOLOR} has been set up for  testing." 'dontClear'
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
     testErrorIfAppDoesNotExist
