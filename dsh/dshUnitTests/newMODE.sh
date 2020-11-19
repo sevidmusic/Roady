@@ -18,8 +18,6 @@ setUpTestAppDirectory() {
     mkdir "$(getTestAppDirectory)"
 }
 
-disableCtrlC
-
 [[ -z "${APP}" ]] && notifyUser "${ERRORCOLOR}A random App name could not be generated for testing." 0 'dontClear' && exit 1
 
 setUpTestAppDirectory
@@ -59,6 +57,3 @@ tearDownTestAppDirectory() {
 
 tearDownTestAppDirectory
 
-
-# THIS IS IMPORTANT | THIS MUST BE LAST | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
-enableCtrlC

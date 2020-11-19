@@ -34,8 +34,13 @@ loadLibrary() {
     . "${1}"
 }
 
-runTestFile() {
-    [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+runTestFileIfSpecified() {
+    if [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]]; then
+        disableCtrlC
+        "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+        # THIS IS IMPORTANT | THIS MUST BE LAST | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
+        enableCtrlC
+    fi
 }
 
 devShowPaths() {
@@ -58,6 +63,5 @@ loadLibrary "${PATH_TO_DSHUI}"
 
 loadLibrary "${PATH_TO_DSH_UNIT_ASSERTIONS}"
 
-runTestFile "${TEST_FILE_NAME}" "${TEST_GROUP_NAME}"
-
+runTestFileIfSpecified "${TEST_FILE_NAME}" "${TEST_GROUP_NAME}"
 
