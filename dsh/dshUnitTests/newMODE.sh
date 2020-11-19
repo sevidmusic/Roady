@@ -19,6 +19,7 @@ getTestAppDirectory() {
 setUpTestAppDirectory() {
     showLoadingBar "Creating test app ${APP}"
     mkdir "$(getTestAppDirectory)"
+    [[ ! -d "$(getTestAppDirectory)" ]] && notifyUser "${ERRORCOLOR}A test App does not could not be created at $(getTestAppDirectory)." 0 'dontClear' && exit 1
 }
 
 testErrorIfAppDoesNotExist() {
@@ -42,9 +43,8 @@ tearDownTestAppDirectory() {
 }
 
 setRandomTestAppName
-setUpTestAppDirectory
 
-[[ ! -d "$(getTestAppDirectory)" ]] && notifyUser "${ERRORCOLOR}A test App does not could not be created at $(getTestAppDirectory)." 0 'dontClear' && exit 1
+setUpTestAppDirectory
 
 notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
 
