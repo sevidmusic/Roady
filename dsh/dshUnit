@@ -34,7 +34,7 @@ assertSuccess() {
 
 assertError() {
     { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}An error  did not occur, an error was expected, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see actual output." 0 'dontClear' && return
-    notifyUser "As expected, an error occured running ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ${SUCCESSCOLOR}:)" 0 'dontClear'
+    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} triggered an error as expected ${SUCCESSCOLOR}:)" 0 'dontClear'
 }
 
 [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
