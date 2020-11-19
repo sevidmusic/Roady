@@ -3,20 +3,19 @@
 set -o posix
 
 currentDirectoryPath() {
-    local SOURCE
-    SOURCE="${BASH_SOURCE[0]}"
-    while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-      DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
-      SOURCE="$(readlink "$SOURCE")"
-      [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    local CURRENT_DIRECTORY
+    CURRENT_DIRECTORY="${BASH_SOURCE[0]}"
+    # Resolve symlynks
+    while [ -h "$CURRENT_DIRECTORY" ]; do
+      DIR="$(cd -P "$(dirname "$CURRENT_DIRECTORY")" >/dev/null 2>&1 && pwd)"
+      CURRENT_DIRECTORY="$(readlink "$CURRENT_DIRECTORY")"
+      [[ $CURRENT_DIRECTORY != /* ]] && CURRENT_DIRECTORY="$DIR/$CURRENT_DIRECTORY" # if $CURRENT_DIRECTORY was a relative symlink, we need to resolve it relative to the path where the symlink file was located
     done
-    printf "%s" "${SOURCE}"
+    printf "%s" "${CURRENT_DIRECTORY}"
 }
 
 setupPaths() {
-    local SOURCE
-    SOURCE="$(currentDirectoryPath)"
-    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
+    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$(currentDirectoryPath)")" >/dev/null 2>&1 && pwd)"
     PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
     PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
     PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh/}"
