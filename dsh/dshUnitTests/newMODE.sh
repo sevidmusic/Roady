@@ -39,10 +39,6 @@ setUpTestAppDirectory() {
 
 setupPaths
 
-loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
-
-loadLibrary "${PATH_TO_DSHUI}"
-
 loadLibrary "${PATH_TO_DSHUNIT}"
 
 disableCtrlC
