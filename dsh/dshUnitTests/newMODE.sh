@@ -2,7 +2,7 @@
 set -o posix
 
 clear
-# source dshUnit
+# THIS LINE IS VERY IMPORTANT | IT IS THE ONLY LINE REQUIRED FOR ALL TEST FILES source dshUnit
 . "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd | sed 's/dshUnitTests//g')dshUnit"
 
 APP="TestApp${RANDOM}"
@@ -17,17 +17,7 @@ setUpTestAppDirectory() {
     showLoadingBar "Creating test app ${APP}"
     mkdir "$(getTestAppDirectory)"
 }
-devShowPaths() {
-    printf "\n%s\n" "${PATH_TO_DSH_DIR}"
-    printf "\n%s\n" "${PATH_TO_DSHUI}"
-    printf "\n%s\n" "${PATH_TO_DSH_FUNCTIONS}"
-    printf "\n%s\n" "${PATH_TO_DSH_UNIT_ASSERTIONS}"
-    printf "\n%s\n" "${PATH_TO_DDMS}"
-    printf "\n%s\n" "${PATH_TO_DSHUNIT}"
-    printf "\n%s\n" "${PATH_TO_DDMS_APP_DIR}"
-}
-devShowPaths
-exit 0
+
 disableCtrlC
 
 [[ -z "${APP}" ]] && notifyUser "${ERRORCOLOR}A random App name could not be generated for testing." 0 'dontClear' && exit 1

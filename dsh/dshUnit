@@ -15,10 +15,10 @@ currentDirectoryPath() {
 }
 
 setupPaths() {
-    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$(currentDirectoryPath)")" >/dev/null 2>&1 && pwd)"
-    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
-    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
-    PATH_TO_DSH_UNIT_ASSERTIONS="${PATH_TO_DSH_DIR}/dshUnitAssertions.sh"
+    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$(currentDirectoryPath)")" >/dev/null 2>&1 && pwd)/"
+    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}dshui.sh"
+    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}dshfunctions.sh"
+    PATH_TO_DSH_UNIT_ASSERTIONS="${PATH_TO_DSH_DIR}dshUnitAssertions.sh"
     PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh\//}"
     PATH_TO_DSHUNIT="${PATH_TO_DSH_DIR}dshUnit"
     PATH_TO_DDMS_APP_DIR="${PATH_TO_DDMS}Apps/"
@@ -36,6 +36,16 @@ loadLibrary() {
 
 runTestFile() {
     [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+}
+
+devShowPaths() {
+    printf "\n%s\n" "${PATH_TO_DSH_DIR}"
+    printf "\n%s\n" "${PATH_TO_DSHUI}"
+    printf "\n%s\n" "${PATH_TO_DSH_FUNCTIONS}"
+    printf "\n%s\n" "${PATH_TO_DSH_UNIT_ASSERTIONS}"
+    printf "\n%s\n" "${PATH_TO_DDMS}"
+    printf "\n%s\n" "${PATH_TO_DSHUNIT}"
+    printf "\n%s\n" "${PATH_TO_DDMS_APP_DIR}"
 }
 
 setupPaths
