@@ -8,7 +8,6 @@ APP="TestApp${RANDOM}"
 TESTGROUP="${1:-all}"
 
 setupPaths() {
-    # Determine real path to dsh directory
     SOURCE="${BASH_SOURCE[0]}"
     while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
       DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
@@ -71,7 +70,6 @@ testErrorIfSpecifiedAppDirectoryNameIsEmpty() {
 testDynamicOutputDirectoryExistsAfterRunningDshNewDoc() {
     notifyUser "Running ${HIGHLIGHTCOLOR}testDynamicOutputDirectoryExistsAfterRunningDshNewDoc()" 0 'dontClear'
     assertDirectroyExists "${PATH_TO_DDMS_APP_DIR}${APP}/DynamicOutput"
-
 }
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
@@ -82,11 +80,11 @@ if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
 fi
 
 tearDownTestAppDirectory() {
-    showLoadingBar "Removing test app ${APP}"
+    showLoadingBar "Removing test app ${APP}" 'dontClear'
     rm -R "$(getTestAppDirectory)"
 }
 
-#tearDownTestAppDirectory
+tearDownTestAppDirectory
 
 
 # THIS IS IMPORTANT | THIS MUST BE LAST | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
