@@ -18,7 +18,7 @@ setupPaths() {
     PATH_TO_DSH_DIR="$(cd -P "$(dirname "$(currentDirectoryPath)")" >/dev/null 2>&1 && pwd)"
     PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
     PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
-    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh/}"
+    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh\//}"
 }
 
 loadLibrary() {
