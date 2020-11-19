@@ -3,11 +3,9 @@ set -o posix
 
 clear
 
-APP="starterApp"
+APP="TestApp${RANDOM}"
 
 TESTGROUP="${1:-all}"
-
-[[ -z "${APP}" ]] && printf "\nPlease specify the name of an existing App directory to run tests against.\n" && exit 1
 
 setupPaths() {
     # Determine real path to dsh directory
@@ -19,15 +17,25 @@ setupPaths() {
     done
     PATH_TO_THIS_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
     PATH_TO_DSH_DIR="${PATH_TO_THIS_DIR/dshUnitTests/}"
-    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
-    PATH_TO_DSHUNIT="${PATH_TO_DSH_DIR}/dshUnit"
-    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
-    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh/}"
+    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}dshui.sh"
+    PATH_TO_DSHUNIT="${PATH_TO_DSH_DIR}dshUnit"
+    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}dshfunctions.sh"
+    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh\//}"
+    PATH_TO_DDMS_APP_DIR="${PATH_TO_DDMS}Apps/"
 }
 
 loadLibrary() {
     [[ ! -f "${1}" ]] && printf "\n\n\e[33mError! Failed to load ${1}!\e[0m\n\n" && exit 1
     . "${1}"
+}
+
+getTestAppDirectory() {
+    printf "%s" "${PATH_TO_DDMS_APP_DIR}${APP}"
+}
+
+setUpTestAppDirectory() {
+    showLoadingBar "Creating test app ${APP}"
+    mkdir "$(getTestAppDirectory)"
 }
 
 setupPaths
@@ -40,27 +48,46 @@ loadLibrary "${PATH_TO_DSHUNIT}"
 
 disableCtrlC
 
+[[ -z "${APP}" ]] && notifyUser "${ERRORCOLOR}A random App name could not be generated for testing." 0 'dontClear' && exit 1
+
+setUpTestAppDirectory
+
+[[ ! -d "$(getTestAppDirectory)" ]] && notifyUser "${ERRORCOLOR}A test App does not could not be created at $(getTestAppDirectory)." 0 'dontClear' && exit 1
+
 notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
 
 showLoadingBar "Starting ${TESTGROUP} tests defined in for test group ${TESTGROUP}. Using app ${APP} as a testing App where needed." 'dontClear'
 
-[[ ! -d "${PATH_TO_DDMS}/Apps/${APP}" ]] && printf "\nPlease specify the name of an existing App directory to run tests against.\n" && exit 1
-
 testErrorIfAppDoesNotExist() {
-    notifyUser "Running ${HIGHLIGHTCOLOR}assertErrorIfAppDoesNotExist()" 0 'dontClear'
+    notifyUser "Running ${HIGHLIGHTCOLOR}testErrorIfAppDoesNotExist()" 0 'dontClear'
     assertError "dsh -n doc nonExistentAppName${RANDOM} TestDoc 4.2 Welcome.php"
 }
 
 testErrorIfSpecifiedAppDirectoryNameIsEmpty() {
-    notifyUser "Running ${HIGHLIGHTCOLOR}assertErrorIfSpecifiedAppNameIsEmpty()" 0 'dontClear'
+    notifyUser "Running ${HIGHLIGHTCOLOR}testErrorIfSpecifiedAppNameIsEmpty()" 0 'dontClear'
     assertError "dsh -n doc \"\" TestDoc 4.2 Welcome.php"
+}
+
+testDynamicOutputDirectoryExistsAfterRunningDshNewDoc() {
+    notifyUser "Running ${HIGHLIGHTCOLOR}testDynamicOutputDirectoryExistsAfterRunningDshNewDoc()" 0 'dontClear'
+    assertDirectroyExists "${PATH_TO_DDMS_APP_DIR}${APP}/DynamicOutput"
+
 }
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
     testErrorIfAppDoesNotExist
     testErrorIfSpecifiedAppDirectoryNameIsEmpty
+    testDynamicOutputDirectoryExistsAfterRunningDshNewDoc
     sleep 3
 fi
 
-# THIS IS IMPORTANT | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
+tearDownTestAppDirectory() {
+    showLoadingBar "Removing test app ${APP}"
+    rm -R "$(getTestAppDirectory)"
+}
+
+#tearDownTestAppDirectory
+
+
+# THIS IS IMPORTANT | THIS MUST BE LAST | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
 enableCtrlC
