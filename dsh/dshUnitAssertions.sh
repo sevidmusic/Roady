@@ -5,21 +5,15 @@ set -o posix
 captureError() {
     error=$( ${1} 2>&1 1>/dev/null)
     if [ $? -eq 0 ]; then
-       printf "No Error"
+        notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error ${SUCCESSCOLOR}:)" 0 'dontClear'
     else
-        printf "Error: %s" "${error}"
+        notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting success. An error occured:" 0 'dontClear'
+        notifyUser "${error}" 0 'dontClear'
     fi
 }
 
 assertSuccess() {
-###
-    captureError "ls"
-    captureError "ls asdfjkdf"
-    exit 0
-###
-
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error ${SUCCESSCOLOR}:)" 0 'dontClear' && return
-    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting success. An error occured:" 0 'dontClear' && captureError "{$1}"
+    captureError "{$1}"
 }
 
 assertError() {
