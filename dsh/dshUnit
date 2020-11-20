@@ -2,18 +2,31 @@
 
 set -o posix
 
-setupPaths() {
-    # Determine real path to dsh directory
-    SOURCE="${BASH_SOURCE[0]}"
-    while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-      DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
-      SOURCE="$(readlink "$SOURCE")"
-      [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+currentDirectoryPath() {
+    local CURRENT_DIRECTORY
+    CURRENT_DIRECTORY="${BASH_SOURCE[0]}"
+    # Resolve symlynks
+    while [ -h "$CURRENT_DIRECTORY" ]; do
+      DIR="$(cd -P "$(dirname "$CURRENT_DIRECTORY")" >/dev/null 2>&1 && pwd)"
+      CURRENT_DIRECTORY="$(readlink "$CURRENT_DIRECTORY")"
+      [[ $CURRENT_DIRECTORY != /* ]] && CURRENT_DIRECTORY="$DIR/$CURRENT_DIRECTORY" # if $CURRENT_DIRECTORY was a relative symlink, we need to resolve it relative to the path where the symlink file was located
     done
-    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
-    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}/dshui.sh"
-    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}/dshfunctions.sh"
-    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh/}"
+    printf "%s" "${CURRENT_DIRECTORY}"
+}
+
+setupPaths() {
+    PATH_TO_DSH_DIR="$(cd -P "$(dirname "$(currentDirectoryPath)")" >/dev/null 2>&1 && pwd)/"
+    PATH_TO_DSHUI="${PATH_TO_DSH_DIR}dshui.sh"
+    PATH_TO_DSH_FUNCTIONS="${PATH_TO_DSH_DIR}dshfunctions.sh"
+    PATH_TO_DSH_UNIT_ASSERTIONS="${PATH_TO_DSH_DIR}dshUnitAssertions.sh"
+    PATH_TO_DDMS="${PATH_TO_DSH_DIR/dsh\//}"
+    PATH_TO_DSHUNIT="${PATH_TO_DSH_DIR}dshUnit"
+    PATH_TO_DDMS_APP_DIR="${PATH_TO_DDMS}Apps/"
+}
+
+setupVars() {
+    TEST_FILE_NAME="${1}"
+    TEST_GROUP_NAME="${2}"
 }
 
 loadLibrary() {
@@ -21,27 +34,39 @@ loadLibrary() {
     . "${1}"
 }
 
+showTestsRunningLoadingBar() {
+    showLoadingBar "Running tests defined in the ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES} test group which is defined in the ${HIGHLIGHTCOLOR}${2}${CLEAR_ALL_TEXT_STYLES} test file. An app, ${HIGHLIGHTCOLOR}${3}${CLEAR_ALL_TEXT_STYLES} has been set up for testing." 'dontClear'
+}
+
+runTestFileIfSpecified() {
+    if [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]]; then
+        disableCtrlC
+        notifyUser "${HIGHLIGHTCOLOR}dsh Unit Tests will begin in a moment, please note, some tests may take awhile, and their output is hidden, the tests are running, please be patient and let this script complete." 0 'dontClear'
+        "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+        # THIS IS IMPORTANT | THIS MUST BE LAST | IF NOT RE-ENABLED HERE USER WILL NOT HAVE CTRL-C AFTER THIS SCRIPT HAS RUN
+        enableCtrlC
+    fi
+}
+
+devShowPaths() {
+    printf "\n%s\n" "${PATH_TO_DSH_DIR}"
+    printf "\n%s\n" "${PATH_TO_DSHUI}"
+    printf "\n%s\n" "${PATH_TO_DSH_FUNCTIONS}"
+    printf "\n%s\n" "${PATH_TO_DSH_UNIT_ASSERTIONS}"
+    printf "\n%s\n" "${PATH_TO_DDMS}"
+    printf "\n%s\n" "${PATH_TO_DSHUNIT}"
+    printf "\n%s\n" "${PATH_TO_DDMS_APP_DIR}"
+}
+
 setupPaths
+
+setupVars "${1}" "${2}"
 
 loadLibrary "${PATH_TO_DSH_FUNCTIONS}"
 
 loadLibrary "${PATH_TO_DSHUI}"
 
-[[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]] && "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" "${2}"
+loadLibrary "${PATH_TO_DSH_UNIT_ASSERTIONS}"
 
-# Assertion Function Definitions #
+runTestFileIfSpecified "${TEST_FILE_NAME}" "${TEST_GROUP_NAME}"
 
-assertSuccess() {
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error ${SUCCESSCOLOR}:)" 0 'dontClear' && return
-    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting success. An error occured, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see error messages." 0 'dontClear'
-}
-
-assertError() {
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting error. An error did not occur even though one was was expected, run ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR} manually to see actual output." 0 'dontClear' && return
-    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} triggered an error as expected ${SUCCESSCOLOR}:)" 0 'dontClear'
-}
-
-assertDirectroyExists() {
-    [[ ! -d "${1}" ]] && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting that the directory ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} exists" 0 'dontClear' && return
-    notifyUser "The ${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} directory exists ${SUCCESSCOLOR}:)" 0 'dontClear'
-}
