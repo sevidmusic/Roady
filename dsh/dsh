@@ -83,7 +83,7 @@ while test $# -gt 0; do
         exit 0
     fi
     if [[ "${1}" == 'DynamicOutputComponent' || "${1}" == 'doc' ]]; then
-        createNewynamicOutputComponent "${2}" "${3}" "${4}" "${5}"
+        createNewDynamicOutputComponent "${2}" "${3}" "${4}" "${5}"
         exit 0
     fi
     showBanner "Error: dsh --new expects mode be specified"
