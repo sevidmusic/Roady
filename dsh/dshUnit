@@ -34,6 +34,10 @@ loadLibrary() {
     . "${1}"
 }
 
+showTestsRunningLoadingBar() {
+    showLoadingBar "Running tests defined in the ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES} test group which is defined in the ${HIGHLIGHTCOLOR}${2}${CLEAR_ALL_TEXT_STYLES} test file. An app, ${HIGHLIGHTCOLOR}${3}${CLEAR_ALL_TEXT_STYLES} has been set up for testing." 'dontClear'
+}
+
 runTestFileIfSpecified() {
     if [[ -f "${PATH_TO_DSH_DIR}/dshUnitTests/${1}" ]]; then
         disableCtrlC

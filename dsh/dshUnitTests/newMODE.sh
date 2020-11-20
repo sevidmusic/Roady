@@ -1,7 +1,6 @@
 #!/bin/bash
 set -o posix
 
-clear
 # THIS LINE IS VERY IMPORTANT | IT IS THE ONLY LINE REQUIRED FOR ALL TEST FILES source dshUnit
 . "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd | sed 's/dshUnitTests//g')dshUnit"
 
@@ -19,7 +18,7 @@ getTestAppDirectory() {
 }
 
 setUpTestAppDirectory() {
-    showLoadingBar "Creating test app ${APP}"
+    showLoadingBar "Creating test app ${APP}" 'dontClear'
     mkdir "$(getTestAppDirectory)"
     [[ ! -d "$(getTestAppDirectory)" ]] && notifyUser "${ERRORCOLOR}A test App does not could not be created at $(getTestAppDirectory)." 0 'dontClear' && exit 1
 }
@@ -50,7 +49,7 @@ setRandomTestAppName
 
 setUpTestAppDirectory
 
-showLoadingBar "Starting ${TESTGROUP} tests defined in the newMode.sh test file for test group ${TESTGROUP}. An app, ${HIGHLIGHTCOLOR}${APP}${NOTIFYCOLOR} has been set up for  testing." 'dontClear'
+showTestsRunningLoadingBar "${TESTGROUP}" "newMODE.sh" "${APP}"
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
     testErrorIfAppDoesNotExist
