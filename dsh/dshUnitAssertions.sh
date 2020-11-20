@@ -17,8 +17,7 @@ assertSuccess() {
 }
 
 assertError() {
-    { ${1} &> /dev/null; } && notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting error. An error did not occur even though one was was expected running ${CLEAR_ALL_TEXT_STYLES}${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${ERRORCOLOR}." 0 'dontClear' && return
-    notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} triggered an error as expected ${SUCCESSCOLOR}:)" 0 'dontClear'
+    captureError "${1}"
 }
 
 assertDirectroyExists() {
