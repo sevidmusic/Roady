@@ -3,7 +3,7 @@
 set -o posix
 
 captureError() {
-    showLoadingBar "Running: ${1}" 'dontClear'
+    showLoadingBar "    Testing: ${HIGHLIGHTCOLOR}${1}" 'dontClear'
     error="$( ${1} 2>&1 1>/dev/null)"
     if [ $? -eq 0 ]; then
         notifyUser "${2}"

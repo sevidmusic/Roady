@@ -238,9 +238,9 @@ expectedPathToAppStorageDir() {
 }
 
 showAppDoesNotExistErrorAndExit() {
-    notifyUser "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not exist" 0 'dontClear'
-    notifyUser "Please specify an existing app as follows:" 0 'dontClear'
-    notifyUser "${HIGHLIGHTCOLOR}dsh -b AppName${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    notifyUserOfError "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not exist" 0 'dontClear'
+    notifyUserOfError "Please specify an existing app as follows:" 0 'dontClear'
+    notifyUserOfError "${HIGHLIGHTCOLOR}dsh -b AppName${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
     newLine
     notifyUser "${CLEAR_ALL_TEXT_STYLES}${GREEN_BG_COLOR}${BLACK_FG_COLOR}The following apps are available" 0 'dontClear'
     cd "${PATH_TO_DDMS}"
@@ -251,9 +251,9 @@ showAppDoesNotExistErrorAndExit() {
 }
 
 showAppsConponentsPhpDoesNotExistErrorAndExit() {
-    notifyUser "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not have" 0 'dontClear'
-    notifyUser "${ERRORCOLOR}a Components.php file. Please define one at:" 0 'dontClear'
-    notifyUser "${HIGHLIGHTCOLOR}${PATH_TO_DDMS}Apps/${1}/Components.php" 0 'dontClear'
+    notifyUserOfError "${ERRORCOLOR}The specified app,${HIGHLIGHTCOLOR}${1}${ERRORCOLOR}, does not have" 0 'dontClear'
+    notifyUserOfError "${ERRORCOLOR}a Components.php file. Please define one at:" 0 'dontClear'
+    notifyUserOfError "${HIGHLIGHTCOLOR}${PATH_TO_DDMS}Apps/${1}/Components.php" 0 'dontClear'
     newLine
     exit 1
 }
@@ -399,9 +399,7 @@ createAppsOutputComponentsDirectory() {
 
 createNewDynamicOutputComponent () {
     showBanner "dsh --new DynamicOutputComponent ${1} ${2} ${3} ${4}" 'dontClear'
-    notifyUserOfError "FOO" 0 'dontClear'
-    exit 1
-    [[ "${1}" == '' ]] && logErrorMsg "createNewDynmaicOutputComponent(): App name cannot be empty." && notifyUser "Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUser "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
+    [[ "${1}" == '' ]] && notifyUserOfError "Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUser "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
     directoryExists "$(expectedAppDirectoryPath "${1}")" || showAppDoesNotExistErrorAndExit "${1}"
     directoryExists "$(expectedOutputComponentsDirectoryPath ${1})" || createAppsOutputComponentsDirectory "${1}"
     printf "\n\nAppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
@@ -414,5 +412,5 @@ notifyUserOfError() {
 }
 
 logErrorMsg() {
-    printf "Error: %s" "${1}" >> /dev/stderr
+    printf "\nError: %s\n" "${1}" >> /dev/stderr
 }
