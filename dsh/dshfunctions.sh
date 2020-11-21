@@ -394,14 +394,14 @@ directoryExists() {
 
 createAppsOutputComponentsDirectory() {
     showLoadingBar "Creating App's OutputComponents Directory at $(expectedOutputComponentsDirectoryPath ${1})" 'dontClear'
-    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || notifyUserOfError "The ${1} app's OutputComponents directory does not exist, nor could it be created. Please manually create $(expectedOutputComponentsDirectoryPath ${1})" 0 'dontClear' && exit 1
+    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || { notifyUserOfError "The OC DIR was not created" 0 'dontClear' && exit 1 }
 }
 
 createNewDynamicOutputComponent () {
     showBanner "dsh --new DynamicOutputComponent ${1} ${2} ${3} ${4}" 'dontClear'
     [[ "${1}" == '' ]] && notifyUserOfError "${ERRORCOLOR}Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUserOfError "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
     directoryExists "$(expectedAppDirectoryPath "${1}")" || showAppDoesNotExistErrorAndExit "${1}"
-    directoryExists "$(expectedOutputComponentsDirectoryPath ${1})" # error is here --> || createAppsOutputComponentsDirectory "${1}"
+    directoryExists "$(expectedOutputComponentsDirectoryPath ${1})" || createAppsOutputComponentsDirectory "${1}"
     exit 0
 }
 
