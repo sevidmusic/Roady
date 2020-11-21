@@ -399,9 +399,20 @@ createAppsOutputComponentsDirectory() {
 
 createNewDynamicOutputComponent () {
     showBanner "dsh --new DynamicOutputComponent ${1} ${2} ${3} ${4}" 'dontClear'
-    [[ "${1}" == '' ]] && notifyUser "Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUser "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
+    notifyUserOfError "FOO" 0 'dontClear'
+    exit 1
+    [[ "${1}" == '' ]] && logErrorMsg "createNewDynmaicOutputComponent(): App name cannot be empty." && notifyUser "Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUser "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
     directoryExists "$(expectedAppDirectoryPath "${1}")" || showAppDoesNotExistErrorAndExit "${1}"
     directoryExists "$(expectedOutputComponentsDirectoryPath ${1})" || createAppsOutputComponentsDirectory "${1}"
     printf "\n\nAppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
     exit 0
+}
+
+notifyUserOfError() {
+    notifyUser "${1}" "${2}" "${3}"
+    logErrorMsg "${1}"
+}
+
+logErrorMsg() {
+    printf "Error: %s" "${1}" >> /dev/stderr
 }
