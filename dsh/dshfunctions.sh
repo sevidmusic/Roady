@@ -4,6 +4,15 @@ set -o posix
 
 clear
 
+notifyUserOfError() {
+    notifyUser "${1}" "${2}" "${3}"
+    logErrorMsg "${1}"
+}
+
+logErrorMsg() {
+    printf "\n%s\n" "${1}" >> /dev/stderr
+}
+
 showHelpMsg() {
     showBanner "dsh --help ${1:-''}| dsh -h ${1:-''} | ${HIGHLIGHTCOLOR}Help"
     if [[ -z "${1}" || "${1}" == 'help' || "${1}" == 'h' ]]; then
@@ -392,12 +401,12 @@ directoryExists() {
 }
 
 showOutputDirectoryCouldNotBeCreatedError() {
-    notifyUserOfError "The OC DIR was not created" 0 'dontClear' && exit 1
+    notifyUserOfError "${ERRORCOLOR}The App's OutputComponent directory does not exist, and could not be created at: ${HIGHLIGHTCOLOR}$(expectedOutputComponentsDirectoryPath ${1})" 0 'dontClear' && exit 1
 }
 
 createAppsOutputComponentsDirectory() {
     showLoadingBar "Creating App's OutputComponents Directory at $(expectedOutputComponentsDirectoryPath ${1})" 'dontClear'
-    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || showOutputDirectoryCouldNotBeCreatedError
+    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || showOutputDirectoryCouldNotBeCreatedError "${1}"
 }
 
 createNewDynamicOutputComponent () {
@@ -408,11 +417,4 @@ createNewDynamicOutputComponent () {
     exit 0
 }
 
-notifyUserOfError() {
-    notifyUser "${1}" "${2}" "${3}"
-    logErrorMsg "${1}"
-}
 
-logErrorMsg() {
-    printf "\n%s\n" "${1}" >> /dev/stderr
-}
