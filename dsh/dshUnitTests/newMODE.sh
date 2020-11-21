@@ -35,6 +35,7 @@ testErrorIfSpecifiedAppDirectoryNameIsEmpty() {
 
 testDynamicOutputDirectoryExistsAfterRunningDshNewDoc() {
     notifyUser "Running ${HIGHLIGHTCOLOR}testDynamicOutputDirectoryExistsAfterRunningDshNewDoc()" 0 'dontClear'
+    assertSuccess "echo hi"
     assertSuccess "dsh -n doc ${APP} TestDoc${RANDOM} ${RANDOM} Welcome.php"
     assertDirectroyExists "${PATH_TO_DDMS_APP_DIR}${APP}/OutputComponents"
 }

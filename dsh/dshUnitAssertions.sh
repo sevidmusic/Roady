@@ -6,15 +6,15 @@ captureError() {
     showLoadingBar "    Testing: ${HIGHLIGHTCOLOR}${1}" 'dontClear'
     error="$( ${1} 2>&1 1>/dev/null)"
     if [ $? -eq 0 ]; then
-        notifyUser "${2}"
+        notifyUser "${2}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
     else
-        notifyUser "${3}" 0 'dontClear'
+        notifyUser "${3}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
         notifyUser "${ERRORCOLOR}${error}" 0 'dontClear'
     fi
 }
 
 assertSuccess() {
-    captureError "${1}" "${SUCCESSCOLOR}No errors occurred running ${HIGHLIGHTCOLOR}${1}" "${ERRORCOLOR}An error occured running ${HIGHLIGHTCOLOR}${1}"
+    captureError "${1}" "${SUCCESSCOLOR}As expected, no errors occured running ${HIGHLIGHTCOLOR}${1}" "${ERRORCOLOR}An error occurred running ${HIGHLIGHTCOLOR}${1}"
 }
 
 assertError() {
