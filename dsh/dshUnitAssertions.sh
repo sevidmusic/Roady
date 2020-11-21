@@ -14,11 +14,11 @@ captureError() {
 }
 
 assertSuccess() {
-    captureError "${1}" "${SUCCESSCOLOR}As expected, no errors occured running ${HIGHLIGHTCOLOR}${1}" "${ERRORCOLOR}An error occurred running ${HIGHLIGHTCOLOR}${1}"
+    captureError "${1}" "${SUCCESSCOLOR}${RED_FG_COLOR}As expected, no errors occured running ${HIGHLIGHTCOLOR}${1}" "${ERRORCOLOR}An error occurred running ${HIGHLIGHTCOLOR}${1}"
 }
 
 assertError() {
-    captureError "${1}" "${ERRORCOLOR}An error was expected, no errors occurred running ${HIGHLIGHTCOLOR}${1}" "${SUCCESSCOLOR}As expected, an error occured running ${HIGHLIGHTCOLOR}${1}"
+    captureError "${1}" "${ERRORCOLOR}An error was expected, no errors occurred running ${HIGHLIGHTCOLOR}${1}" "${SUCCESSCOLOR}${RED_FG_COLOR}As expected, an error occured running ${HIGHLIGHTCOLOR}${1}"
 }
 
 assertDirectroyExists() {

@@ -383,9 +383,10 @@ expectedAppDirectoryPath() {
 }
 
 expectedOutputComponentsDirectoryPath(){
-   printf "%s" "$(expectedAppDirectoryPath "${1}/OutputComponents")"
+   printf "%s" "$(expectedAppDirectoryPath "${1}")OutputComponents"
 }
-
+expectedAppDirectoryPath
+expectedOutputComponentsDirectoryPath
 directoryExists() {
     #printf "\n\n%s" "${1}"
     [[ -d "${1}" ]] && return 0
