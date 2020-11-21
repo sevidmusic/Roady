@@ -6,10 +6,10 @@ captureError() {
     showLoadingBar "    Testing: ${HIGHLIGHTCOLOR}${1}" 'dontClear'
     error="$( ${1} 2>&1 1>/dev/null)"
     if [ $? -eq 0 ]; then
-        notifyUser "${2}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+        notifyUser "    ${2}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
     else
-        notifyUser "${3}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
-        notifyUser "${ERRORCOLOR}${error}" 0 'dontClear'
+        notifyUser "    ${3}${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+        notifyUser "    ${ERRORCOLOR}${error}" 0 'dontClear'
     fi
 }
 
