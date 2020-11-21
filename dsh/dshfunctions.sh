@@ -265,7 +265,7 @@ buildApp() {
    [ ! -d "${MOST_RECENTLY_RUN_APP_PATH}" ] && showAppDoesNotExistErrorAndExit "${1}"
    [ ! -f "$(getAppComponentsFilePath ${1})" ] && showAppsConponentsPhpDoesNotExistErrorAndExit "${1}"
    cd "${MOST_RECENTLY_RUN_APP_PATH}"
-   [[ -d "$(expectedPathToAppStorageDir ${1})" ]] && notifyUser "${WARNINGCOLOR}The ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${WARNINGCOLOR} app was already built, to build the app again, please remove the following directory:${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}$(expectedPathToAppStorageDir ${1})${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+   [[ -d "$(expectedPathToAppStorageDir ${1})" ]] && notifyUseOfErrorr "${WARNINGCOLOR}The ${HIGHLIGHTCOLOR}${1}${CLEAR_ALL_TEXT_STYLES}${WARNINGCOLOR} app was already built, to build the app again, please remove the following directory:${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear' && notifyUser "${HIGHLIGHTCOLOR}$(expectedPathToAppStorageDir ${1})${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
    [[ ! -d "$(expectedPathToAppStorageDir ${1})" ]] && /usr/bin/php Components.php
    enableCtrlC
 }
@@ -348,7 +348,7 @@ createNewApp() {
     local newAppPath
     if [ "${1}" == 'Foo' ]; then
         showBanner "dsh --new app | Create new App | Error" 'dontClear'
-        notifyUser "${ERRORCOLOR}Sorry, \"${1}\" is a reserved App name. Please choose another name." 0 'dontClear'
+        notifyUserOfError "${ERRORCOLOR}Sorry, \"${1}\" is a reserved App name. Please choose another name." 0 'dontClear'
         exit 1
     fi
     newAppPath="${PATH_TO_DDMS}Apps/${1}"
@@ -374,7 +374,7 @@ determinePhpVersion() {
 }
 
 showPHPVersionErrorAndExit() {
-    notifyUser "${HIGHLIGHTCOLOR}dsh${ERRORCOLOR}, and the ${HIGHLIGHTCOLOR}Darling Data Management System${ERRORCOLOR} require PHP >= 7.4, please install PHP 7.4 or greater.${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
+    notifyUserOfError "${HIGHLIGHTCOLOR}dsh${ERRORCOLOR}, and the ${HIGHLIGHTCOLOR}Darling Data Management System${ERRORCOLOR} require PHP >= 7.4, please install PHP 7.4 or greater.${CLEAR_ALL_TEXT_STYLES}" 0 'dontClear'
     exit 1
 }
 
@@ -394,12 +394,12 @@ directoryExists() {
 
 createAppsOutputComponentsDirectory() {
     showLoadingBar "Creating App's OutputComponents Directory at $(expectedOutputComponentsDirectoryPath ${1})" 'dontClear'
-    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || notifyUser "The ${1} app's OutputComponents directory does not exist, nor could it be created. Please manually create $(expectedOutputComponentsDirectoryPath ${1})" 0 'dontClear' && exit 1
+    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || notifyUserOfError "The ${1} app's OutputComponents directory does not exist, nor could it be created. Please manually create $(expectedOutputComponentsDirectoryPath ${1})" 0 'dontClear' && exit 1
 }
 
 createNewDynamicOutputComponent () {
     showBanner "dsh --new DynamicOutputComponent ${1} ${2} ${3} ${4}" 'dontClear'
-    [[ "${1}" == '' ]] && notifyUserOfError "Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUser "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
+    [[ "${1}" == '' ]] && notifyUserOfError "${ERRORCOLOR}Error: App name cannot be empty. Please specify the name of an existing App." 0 'dontClear' && notifyUserOfError "For example: ${HIGHLIGHTCOLOR}dsh -n a starterApp FooBar 4.2 Welcome.php" 0 'dontClear' && exit 1
     directoryExists "$(expectedAppDirectoryPath "${1}")" || showAppDoesNotExistErrorAndExit "${1}"
     directoryExists "$(expectedOutputComponentsDirectoryPath ${1})" || createAppsOutputComponentsDirectory "${1}"
     printf "\n\nAppDir: %s | DOC Name: %s | DOC Position: %s | DOC Output File Name: %s" "${1}" "${2}" "${3}" "${4}"
@@ -412,5 +412,5 @@ notifyUserOfError() {
 }
 
 logErrorMsg() {
-    printf "\nError: %s\n" "${1}" >> /dev/stderr
+    printf "\n%s\n" "${1}" >> /dev/stderr
 }
