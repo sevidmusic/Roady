@@ -387,14 +387,17 @@ expectedOutputComponentsDirectoryPath(){
 }
 
 directoryExists() {
-    #printf "\n\n%s" "${1}"
     [[ -d "${1}" ]] && return 0
     return 1
 }
 
+showOutputDirectoryCouldNotBeCreatedError() {
+    notifyUserOfError "The OC DIR was not created" 0 'dontClear' && exit 1
+}
+
 createAppsOutputComponentsDirectory() {
     showLoadingBar "Creating App's OutputComponents Directory at $(expectedOutputComponentsDirectoryPath ${1})" 'dontClear'
-    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || { notifyUserOfError "The OC DIR was not created" 0 'dontClear' && exit 1 }
+    mkdir "$(expectedOutputComponentsDirectoryPath ${1})" || showOutputDirectoryCouldNotBeCreatedError
 }
 
 createNewDynamicOutputComponent () {
