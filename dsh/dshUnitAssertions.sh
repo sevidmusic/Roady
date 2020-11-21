@@ -3,21 +3,22 @@
 set -o posix
 
 captureError() {
-    error=$( ${1} 2>&1 1>/dev/null)
+    showLoadingBar "Running: ${1}" 'dontClear'
+    error="$( ${1} 2>&1 1>/dev/null)"
     if [ $? -eq 0 ]; then
-        notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR} ran without error ${SUCCESSCOLOR}:)" 0 'dontClear'
+        notifyUser "${2}"
     else
-        notifyUser "${HIGHLIGHTCOLOR}${1}${NOTIFYCOLOR}: ${ERRORCOLOR}Failed asserting success. An error occured:" 0 'dontClear'
-        notifyUser "${error}" 0 'dontClear'
+        notifyUser "${3}" 0 'dontClear'
+        notifyUser "${ERRORCOLOR}${error}" 0 'dontClear'
     fi
 }
 
 assertSuccess() {
-    captureError "{$1}"
+    captureError "${1}" "${SUCCESSCOLOR}No errors occurred running ${HIGHLIGHTCOLOR}${1}" "${ERRORCOLOR}An error occured running ${HIGHLIGHTCOLOR}${1}"
 }
 
 assertError() {
-    captureError "${1}"
+    captureError "${1}" "${ERRORCOLOR}An error was expected, no errors occurred running ${HIGHLIGHTCOLOR}${1}" "${SUCCESSCOLOR}As expected, an error occured running ${HIGHLIGHTCOLOR}${1}"
 }
 
 assertDirectroyExists() {

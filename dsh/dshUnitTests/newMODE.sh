@@ -53,8 +53,8 @@ setUpTestAppDirectory
 showTestsRunningLoadingBar "${TESTGROUP}" "newMODE.sh" "${APP}"
 
 if [[ "${TESTGROUP}" == 'all' || "${TESTGROUP}" == 'ndoc' ]]; then
-#    testErrorIfAppDoesNotExist
-#    testErrorIfSpecifiedAppDirectoryNameIsEmpty
+    testErrorIfAppDoesNotExist
+    testErrorIfSpecifiedAppDirectoryNameIsEmpty
     testDynamicOutputDirectoryExistsAfterRunningDshNewDoc
     sleep 3
 fi
