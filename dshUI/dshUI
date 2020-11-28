@@ -1,0 +1,149 @@
+#!/bin/bash
+
+set -o posix
+
+demoTheme() {
+    printf "\n%sNORMAL_TEXT" "${NORMAL_TEXT}"
+    printf "\n%sBOLD_TEXT" "${BOLD_TEXT}"
+    printf "\n%sUNDERLINED_TEXT" "${UNDERLINED_TEXT}"
+    printf "\n%sBLINKING_TEXT" "${BLINKING_TEXT}"
+    printf "\n%sREVERSE_TEXT" "${REVERSE_TEXT}"
+
+    printf "\n%sNORMAL_COLOR 1" "${NORMAL_COLOR_1}"
+    printf "\n%sNORMAL_COLOR 2" "${NORMAL_COLOR_2}"
+    printf "\n%sNORMAL_COLOR 3" "${NORMAL_COLOR_3}"
+    printf "\n%sNORMAL_COLOR 4" "${NORMAL_COLOR_4}"
+    printf "\n%sNORMAL_COLOR 5" "${NORMAL_COLOR_5}"
+    printf "\n%sNORMAL_COLOR 6" "${NORMAL_COLOR_6}"
+    printf "\n%sNORMAL_COLOR 7" "${NORMAL_COLOR_7}"
+    printf "\n%sNORMAL_COLOR 8" "${NORMAL_COLOR_8}"
+    printf "\n%sNORMAL_COLOR 9" "${NORMAL_COLOR_9}"
+    printf "\n%sNORMAL_COLOR 10" "${NORMAL_COLOR_10}"
+    printf "\n%sNORMAL_COLOR 11" "${NORMAL_COLOR_12}"
+    printf "\n%sNORMAL_COLOR 12" "${NORMAL_COLOR_12}"
+    printf "\n%sNORMAL_COLOR 13" "${NORMAL_COLOR_13}"
+    printf "\n%sNORMAL_COLOR 14" "${NORMAL_COLOR_14}"
+    printf "\n%sNORMAL_COLOR 15" "${NORMAL_COLOR_15}"
+    printf "\n%sNORMAL_COLOR 16" "${NORMAL_COLOR_16}"
+
+    printf "\n%sBOLD_COLOR 1" "${BOLD_COLOR_1}"
+    printf "\n%sBOLD_COLOR 2" "${BOLD_COLOR_2}"
+    printf "\n%sBOLD_COLOR 3" "${BOLD_COLOR_3}"
+    printf "\n%sBOLD_COLOR 4" "${BOLD_COLOR_4}"
+    printf "\n%sBOLD_COLOR 5" "${BOLD_COLOR_5}"
+    printf "\n%sBOLD_COLOR 6" "${BOLD_COLOR_6}"
+    printf "\n%sBOLD_COLOR 7" "${BOLD_COLOR_7}"
+    printf "\n%sBOLD_COLOR 8" "${BOLD_COLOR_8}"
+    printf "\n%sBOLD_COLOR 9" "${BOLD_COLOR_9}"
+    printf "\n%sBOLD_COLOR 10" "${BOLD_COLOR_10}"
+    printf "\n%sBOLD_COLOR 11" "${BOLD_COLOR_12}"
+    printf "\n%sBOLD_COLOR 12" "${BOLD_COLOR_12}"
+    printf "\n%sBOLD_COLOR 13" "${BOLD_COLOR_13}"
+    printf "\n%sBOLD_COLOR 14" "${BOLD_COLOR_14}"
+    printf "\n%sBOLD_COLOR 15" "${BOLD_COLOR_15}"
+    printf "\n%sBOLD_COLOR 16" "${BOLD_COLOR_16}"
+
+    printf "\n%sUNDERLINED_COLOR 1" "${UNDERLINED_COLOR_1}"
+    printf "\n%sUNDERLINED_COLOR 2" "${UNDERLINED_COLOR_2}"
+    printf "\n%sUNDERLINED_COLOR 3" "${UNDERLINED_COLOR_3}"
+    printf "\n%sUNDERLINED_COLOR 4" "${UNDERLINED_COLOR_4}"
+    printf "\n%sUNDERLINED_COLOR 5" "${UNDERLINED_COLOR_5}"
+    printf "\n%sUNDERLINED_COLOR 6" "${UNDERLINED_COLOR_6}"
+    printf "\n%sUNDERLINED_COLOR 7" "${UNDERLINED_COLOR_7}"
+    printf "\n%sUNDERLINED_COLOR 8" "${UNDERLINED_COLOR_8}"
+    printf "\n%sUNDERLINED_COLOR 9" "${UNDERLINED_COLOR_9}"
+    printf "\n%sUNDERLINED_COLOR 10" "${UNDERLINED_COLOR_10}"
+    printf "\n%sUNDERLINED_COLOR 11" "${UNDERLINED_COLOR_12}"
+    printf "\n%sUNDERLINED_COLOR 12" "${UNDERLINED_COLOR_12}"
+    printf "\n%sUNDERLINED_COLOR 13" "${UNDERLINED_COLOR_13}"
+    printf "\n%sUNDERLINED_COLOR 14" "${UNDERLINED_COLOR_14}"
+    printf "\n%sUNDERLINED_COLOR 15" "${UNDERLINED_COLOR_15}"
+    printf "\n%sUNDERLINED_COLOR 16" "${UNDERLINED_COLOR_16}"
+
+    printf "\n%sBLINKING_COLOR 1" "${BLINKING_COLOR_1}"
+    printf "\n%sBLINKING_COLOR 2" "${BLINKING_COLOR_2}"
+    printf "\n%sBLINKING_COLOR 3" "${BLINKING_COLOR_3}"
+    printf "\n%sBLINKING_COLOR 4" "${BLINKING_COLOR_4}"
+    printf "\n%sBLINKING_COLOR 5" "${BLINKING_COLOR_5}"
+    printf "\n%sBLINKING_COLOR 6" "${BLINKING_COLOR_6}"
+    printf "\n%sBLINKING_COLOR 7" "${BLINKING_COLOR_7}"
+    printf "\n%sBLINKING_COLOR 8" "${BLINKING_COLOR_8}"
+    printf "\n%sBLINKING_COLOR 9" "${BLINKING_COLOR_9}"
+    printf "\n%sBLINKING_COLOR 10" "${BLINKING_COLOR_10}"
+    printf "\n%sBLINKING_COLOR 11" "${BLINKING_COLOR_12}"
+    printf "\n%sBLINKING_COLOR 12" "${BLINKING_COLOR_12}"
+    printf "\n%sBLINKING_COLOR 13" "${BLINKING_COLOR_13}"
+    printf "\n%sBLINKING_COLOR 14" "${BLINKING_COLOR_14}"
+    printf "\n%sBLINKING_COLOR 15" "${BLINKING_COLOR_15}"
+    printf "\n%sBLINKING_COLOR 16" "${BLINKING_COLOR_16}"
+
+    printf "\n%sREVERSE_COLOR 1" "${REVERSE_COLOR_1}"
+    printf "\n%sREVERSE_COLOR 2" "${REVERSE_COLOR_2}"
+    printf "\n%sREVERSE_COLOR 3" "${REVERSE_COLOR_3}"
+    printf "\n%sREVERSE_COLOR 4" "${REVERSE_COLOR_4}"
+    printf "\n%sREVERSE_COLOR 5" "${REVERSE_COLOR_5}"
+    printf "\n%sREVERSE_COLOR 6" "${REVERSE_COLOR_6}"
+    printf "\n%sREVERSE_COLOR 7" "${REVERSE_COLOR_7}"
+    printf "\n%sREVERSE_COLOR 8" "${REVERSE_COLOR_8}"
+    printf "\n%sREVERSE_COLOR 9" "${REVERSE_COLOR_9}"
+    printf "\n%sREVERSE_COLOR 10" "${REVERSE_COLOR_10}"
+    printf "\n%sREVERSE_COLOR 11" "${REVERSE_COLOR_12}"
+    printf "\n%sREVERSE_COLOR 12" "${REVERSE_COLOR_12}"
+    printf "\n%sREVERSE_COLOR 13" "${REVERSE_COLOR_13}"
+    printf "\n%sREVERSE_COLOR 14" "${REVERSE_COLOR_14}"
+    printf "\n%sREVERSE_COLOR 15" "${REVERSE_COLOR_15}"
+    printf "\n%sREVERSE_COLOR 16" "${REVERSE_COLOR_16}"
+}
+
+setTextStyleCode() {
+  printf "\e[%sm" "${1}"
+}
+
+setupPaths() {
+    local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH
+    CURRENT_FILE_PATH="${BASH_SOURCE[0]}"
+    while [ -h "$CURRENT_FILE_PATH" ]; do # resolve $CURRENT_FILE_PATH until the file is no longer a symlink | -h is true if file exists and is a symlink
+      CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+      CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"
+      [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH" # if $CURRENT_FILE_PATH was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    PATH_TO_DSHUI_DIR="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+    PATH_TO_DDMS_DIR="${PATH_TO_DSHUI_DIR/\/dshUI/}"
+}
+
+loadLibrary() {
+    # use of -x instead of -f is intentinal, the file MUST exist and be executable
+    # @seehttps://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Conditional-Expressions
+    [[ ! -x "${1}" ]] && printf "\n\n\e[33mError! Failed to load ${1}!\e[0m\n\n" && exit 1
+    . "${1}"
+}
+
+setupPaths
+
+# Load specified theme, or default theme if specified theme does not exist or if a theme was not specified.
+# @todo Implement --theme flag, and shorthand -t
+loadLibrary "${PATH_TO_DSHUI_DIR}/dshUIThemes/dshUIDefaultTheme.sh"
+
+while test $# -gt 0; do
+  case "$1" in
+  -h | --help)
+    shift
+    printf "\n%sdshUI is a library that proivdes various functions for generating a themeable UI for command line utilities.\n" "${BOLD_COLOR_5}"
+    exit 0
+    ;;
+  -t | --theme*)
+    shift
+    [[ -z "${1}" ]] && printf "\n%sYou must specify the name of a theme file when using the --theme flag\n" "${BOLD_COLOR_2}" && exit 1
+    printf "\n%sUsing theme: %s\n" "${BOLD_COLOR_15}" "${1}"
+    exit 0
+    ;;
+  *)
+    printf "\n%sInvalid flag %s\n" "${BOLD_COLOR_10}" "${1}"
+    printf "\n%sdshUI accepts one flag, --theme, or -t for short. The --theme flag is used to specify an alternative theme file.\n" "${BOLD_COLOR_10}"
+    exit 1
+    ;;
+  esac
+done
+
+
+demoTheme
