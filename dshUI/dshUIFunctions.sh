@@ -7,7 +7,7 @@ showBanner() {
   if [ -n "$(command -v figlet)" ]; then
       figlet DSH
   else
-      printf "\n%sD S H%s" "${HIGHLIGHTCOLOR}" "${CLEAR_ALL_TEXT_STYLES}"
+      printf "\n%sD S H%s" "${HIGHLIGHTCOLOR}" "${CLEAR_ALL_STYLES}"
   fi
   [[ -n "${1}" ]] && notifyUser "${HIGHLIGHTCOLOR}${1}" 0 'dontClear'
 }
@@ -43,7 +43,7 @@ showLoadingBar() {
     animatedPrint ":" .000242
     _slb_inc=$((_slb_inc + 1))
   done
-  printf " %s\n" "${CLEAR_ALL_TEXT_STYLES}${BLINK_TEXT_ON}${LIGHT_BLUE_BG_COLOR}[100%]${CLEAR_ALL_TEXT_STYLES}"
+  printf " %s\n" "${CLEAR_ALL_STYLES}${BLINKING_TEXT}${COLOR_27}[100%]${CLEAR_ALL_STYLES}"
   sleep 0.23
   [[ "${2}" != "dontClear" ]] && clear
 }
@@ -56,11 +56,11 @@ exitOrContinue() {
 
 notifyUser() {
   [[ "${4}" != 'no_newline' ]] && printf "\n"
-  printf "%s" "${NOTIFYCOLOR}"
+  printf "%s" "${COLOR_12}"
   animatedPrint "${1}" 0.009
   sleep "${2:-2}"
   [[ "${3}" == "dontClear" ]] || clear
-  printf "%s\n" "${CLEAR_ALL_TEXT_STYLES}"
+  printf "%s\n" "${CLEAR_ALL_STYLES}"
 }
 
 notifyUserAndExit() {
