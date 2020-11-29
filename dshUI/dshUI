@@ -1,0 +1,133 @@
+#!/bin/bash
+
+set -o posix
+
+demoTheme() {
+    printf "%s CLEAR_TEXT_STYLES" "${CLEAR_TEXT_STYLES}"
+    printf "%s DIM_TEXT" "${DIM_TEXT}"
+    printf "%s BOLD_TEXT" "${BOLD_TEXT}"
+    printf "%s UNDERLINED_TEXT" "${UNDERLINED_TEXT}"
+    printf "%s BLINKING_TEXT" "${BLINKING_TEXT}"
+    printf "%s REVERSE_FGBG" "${REVERSE_FGBG}"
+    printf "%s HIDDEN_TEXT" "${HIDDEN_TEXT}"
+    printf "%s COLOR_1" "${COLOR_1}"
+    printf "%s COLOR_2" "${COLOR_2}"
+    printf "%s COLOR_3" "${COLOR_3}"
+    printf "%s COLOR_4" "${COLOR_4}"
+    printf "%s COLOR_5" "${COLOR_5}"
+    printf "%s COLOR_6" "${COLOR_6}"
+    printf "%s COLOR_7" "${COLOR_7}"
+    printf "%s COLOR_8" "${COLOR_8}"
+    printf "%s COLOR_9" "${COLOR_9}"
+    printf "%s COLOR_10" "${COLOR_10}"
+    printf "%s COLOR_11" "${COLOR_11}"
+    printf "%s COLOR_12" "${COLOR_12}"
+    printf "%s COLOR_13" "${COLOR_13}"
+    printf "%s COLOR_14" "${COLOR_14}"
+    printf "%s COLOR_15" "${COLOR_15}"
+    printf "%s COLOR_16" "${COLOR_16}"
+    printf "%s COLOR_17" "${COLOR_17}"
+    printf "%s COLOR_18" "${COLOR_18}"
+    printf "%s COLOR_19" "${COLOR_19}"
+    printf "%s COLOR_20" "${COLOR_20}"
+    printf "%s COLOR_21" "${COLOR_21}"
+    printf "%s COLOR_22" "${COLOR_22}"
+    printf "%s COLOR_23" "${COLOR_23}"
+    printf "%s COLOR_24" "${COLOR_24}"
+    printf "%s COLOR_25" "${COLOR_25}"
+    printf "%s COLOR_26" "${COLOR_26}"
+    printf "%s COLOR_27" "${COLOR_27}"
+    printf "%s COLOR_28" "${COLOR_28}"
+    printf "%s COLOR_29" "${COLOR_29}"
+    printf "%s COLOR_30" "${COLOR_30}"
+    printf "%s COLOR_31" "${COLOR_31}"
+    printf "%s COLOR_32" "${COLOR_32}"
+    printf "%s HIGHLIGHTCOLOR" "${HIGHLIGHTCOLOR}"
+}
+
+setTextStyleCode() {
+  printf "\e[%sm" "${1}"
+}
+
+logErrorMsg() {
+    printf "\n%s%s\n%s" "$(setTextStyleCode 33)" "${1}" "$(setTextStyleCode 0)" >> /dev/stderr
+}
+
+logErrorMsgAndExit1() {
+    logErrorMsg "${1}"
+    exit 1
+}
+
+determineCurrentDirectoryPath() {
+    local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH
+    CURRENT_FILE_PATH="${BASH_SOURCE[0]}"
+    while [ -h "$CURRENT_FILE_PATH" ]; do # resolve $CURRENT_FILE_PATH until the file is no longer a symlink | -h is true if file exists and is a symlink
+      CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+      CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"
+      [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH" # if $CURRENT_FILE_PATH was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+}
+
+loadLibrary() {
+    # use of -x instead of -f is intentinal, the file MUST exist and be executable
+    # @seehttps://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Conditional-Expressions
+    [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."
+    . "${1}"
+}
+
+logInvalidFlagErrorAndExit1() {
+    logErrorMsg "Invalid flag ${1}"
+    logErrorMsgAndExit1 "dshUI accepts one flag, --theme, or -t for short. The --theme flag is used to specify an alternative theme file."
+}
+
+logMissingFlagArgumentErrorAndExit1() {
+    logErrorMsgAndExit1 "You must specify the ${1} when using the ${2} flag"
+}
+
+logFileDoesNotExistErrorAndExit1() {
+    logErrorMsgAndExit1 "The ${1} file either does not exist, or is not executable."
+}
+
+determineThemeFilePath() {
+    printf "%s" "$(determineCurrentDirectoryPath)/dshUIThemes/${1}"
+}
+
+while test $# -gt 0; do
+  case "$1" in
+  -h | --help)
+    shift
+    printf "\ndshUI is a library that proivdes various functions for generating a themeable UI for command line utilities.\n"
+    exit 0
+    ;;
+  -t | --theme*)
+    shift
+    [[ -z "${1}" ]] && logMissingFlagArgumentErrorAndExit1 "name of the theme file" "--theme"
+    [[ -x "$(determineThemeFilePath "$1")" ]] || logFileDoesNotExistErrorAndExit1 "$(determineThemeFilePath "${1}")"
+    DSHUI_THEME="${1}"
+    ;;
+  -d | --demo-theme*)
+    shift
+    DEMO_THEME="show"
+    ;;
+  *)
+    shift
+    [[ "${1}" == "$(echo)" ]] && break # This is a bit of a hack to capture <enter>, the call to shift above will set $1 to <enter> if there are no more arguments/flags to parse, if $1 is <enter> then the loop MUST break since there are no more args/flags to parse. <enter> is captured using echo in a subshell. This hack was discovered @ https://stackoverflow.com/questions/6264596/simulating-enter-keypress-in-bash-script
+    [[ -z "${1}" ]] && [[ "${DEMO_THEME}" != 'show' ]] && logInvalidFlagErrorAndExit1 "${1}"
+    ;;
+  esac
+done
+
+[[ -z "${DSHUI_THEME}" ]] && DSHUI_THEME='dshUIDefaultTheme.sh'
+# Load specified theme, or default theme if specified theme does not exist or if a theme was not specified.
+# @todo Implement --theme flag, and shorthand -t
+loadLibrary "$(determineThemeFilePath "${DSHUI_THEME}")"
+loadLibrary "$(determineCurrentDirectoryPath)/dshUIFunctions.sh" # MUST be loaded AFTER theme UNLESS you keep initTextStyles()
+
+if [[ "${DEMO_THEME}" == 'show' ]]; then
+    showLoadingBar "Loading demo of the ${DSHUI_THEME} theme's colors" 'dontClear'
+    demoTheme | column
+    exit 0
+fi
+
+
