@@ -2,6 +2,7 @@
 
 set -o posix
 
+clear
 printf "\nTesting dshUI: There should not be any output\n"
 sleep 3 && clear
 dshUI
@@ -22,7 +23,7 @@ sleep 3 && clear
 dshUI --theme Foo
 sleep 5 && clear
 
-printf "\nTesting dshUI --theme CustomTheme.sh\n"
+printf "\nTesting dshUI --theme CustomTheme.sh. There should not be any output.\n"
 sleep 3 && clear
 dshUI --theme CustomTheme.sh
 sleep 5 && clear
