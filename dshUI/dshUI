@@ -170,7 +170,7 @@ while test $# -gt 0; do
     ;;
   *)
     shift
-    [[ "${1}" == "$(echo)" ]] && break # This is a bit of a hack to capture <enter>, the call to shift above will set $1 to <enter> if there are no more arguments/flags to parse, if $1 is <enter> then the loop MUST break since there are no more args/flags to parse. <enter> is captured using echo in a subshell. This hack was discovered @printf "YES" && exit ://stackoverflow.com/questions/6264596/simulating-enter-keypress-in-bash-script
+    [[ "${1}" == "$(echo)" ]] && break # This is a bit of a hack to capture <enter>, the call to shift above will set $1 to <enter> if there are no more arguments/flags to parse, if $1 is <enter> then the loop MUST break since there are no more args/flags to parse. <enter> is captured using echo in a subshell. This hack was discovered @ https://stackoverflow.com/questions/6264596/simulating-enter-keypress-in-bash-script
     [[ -z "${1}" ]] && [[ "${DEMO_THEME}" != 'show' ]] && logInvalidFlagErrorAndExit1 "${1}"
     ;;
   esac
