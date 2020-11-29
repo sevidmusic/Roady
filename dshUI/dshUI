@@ -130,7 +130,7 @@ determineCurrentDirectoryPath() {
 loadLibrary() {
     # use of -x instead of -f is intentinal, the file MUST exist and be executable
     # @seehttps://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Conditional-Expressions
-    [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && exit 1
+    [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."
     . "${1}"
 }
 
@@ -180,6 +180,7 @@ done
 # Load specified theme, or default theme if specified theme does not exist or if a theme was not specified.
 # @todo Implement --theme flag, and shorthand -t
 loadLibrary "$(determineThemeFilePath "${DSHUI_THEME}")"
+loadLibrary "$(determineCurrentDirectoryPath)/dshUIFunctions.sh" # MUST be loaded AFTER theme UNLESS you keep initTextStyles()
 
 [[ "${DEMO_THEME}" ]] && demoTheme | column && printf "\n%sUsing theme: %s\n" "${BOLD_COLOR_15}" "${DSHUI_THEME}" && exit 0
 
