@@ -164,6 +164,10 @@ while test $# -gt 0; do
     [[ -x "$(determineThemeFilePath "$1")" ]] || logFileDoesNotExistErrorAndExit1 "$(determineThemeFilePath "${1}")"
     DSHUI_THEME="${1}"
     ;;
+  -d | --demo-theme*)
+    shift
+    DEMO_THEME="show"
+    ;;
   *)
     [[ -n "${DSHUI_THEME}" ]] && break
     logInvalidFlagErrorAndExit1 "${1}"
@@ -175,7 +179,6 @@ done
 # Load specified theme, or default theme if specified theme does not exist or if a theme was not specified.
 # @todo Implement --theme flag, and shorthand -t
 loadLibrary "$(determineThemeFilePath "${DSHUI_THEME}")"
-demoTheme | column
-printf "\n%sUsing theme: %s\n" "${BOLD_COLOR_15}" "${DSHUI_THEME}"
-exit 0
+
+[[ "${DEMO_THEME}" ]] && demoTheme | column && printf "\n%sUsing theme: %s\n" "${BOLD_COLOR_15}" "${DSHUI_THEME}" && exit 0
 
