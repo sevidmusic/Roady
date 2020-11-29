@@ -182,5 +182,10 @@ done
 loadLibrary "$(determineThemeFilePath "${DSHUI_THEME}")"
 loadLibrary "$(determineCurrentDirectoryPath)/dshUIFunctions.sh" # MUST be loaded AFTER theme UNLESS you keep initTextStyles()
 
-[[ "${DEMO_THEME}" ]] && demoTheme | column && printf "\n%sUsing theme: %s\n" "${BOLD_COLOR_15}" "${DSHUI_THEME}" && exit 0
+if [[ "${DEMO_THEME}" == 'show' ]]; then
+    showLoadingBar "Loading demo of the ${DSHUI_THEME} theme's colors" 'dontClear'
+    demoTheme | column
+    exit 0
+fi
+
 
