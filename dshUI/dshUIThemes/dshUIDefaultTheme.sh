@@ -2,6 +2,10 @@
 
 set -o posix
 
+# NOTE: Some text styles may not work on some terminals, for a good compatibility
+#       overview @see:
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting#terminals_compatibility
+
 # Just apply text styles
 NORMAL_TEXT="$(setTextStyleCode 0)"
 BOLD_TEXT="$(setTextStyleCode 0)$(setTextStyleCode 1)"
@@ -100,3 +104,60 @@ REVERSE_COLOR_15="$(setTextStyleCode 0)$(setTextStyleCode 7)$(setTextStyleCode 4
 REVERSE_COLOR_16="$(setTextStyleCode 0)$(setTextStyleCode 7)$(setTextStyleCode 47)"
 
 
+# Formatting On
+BOLD_TEXT_ON=$(setTextStyleCode 1)
+DIM_TEXT_ON=$(setTextStyleCode 2)
+UNDERLINE_TEXT_ON=$(setTextStyleCode 4)
+BLINK_TEXT_ON=$(setTextStyleCode 5)
+INVERT_FGBG_TEXT_ON=$(setTextStyleCode 7)
+HIDDEN_TEXT_ON=$(setTextStyleCode 8)
+# Formatting Off
+CLEAR_ALL_TEXT_STYLES=$(setTextStyleCode 0)
+BOLD_TEXT_OFF=$(setTextStyleCode 21)
+DIM_TEXT_OFF=$(setTextStyleCode 22)
+UNDERLINE_TEXT_OFF=$(setTextStyleCode 24)
+BLINK_TEXT_OFF=$(setTextStyleCode 25)
+INVERT_FGBG_TEXT_OFF=$(setTextStyleCode 27)
+HIDDEN_TEXT_OFF=$(setTextStyleCode 28)
+# Foreground Colors
+DEFAULT_FG_COLOR=$(setTextStyleCode 39)
+BLACK_FG_COLOR=$(setTextStyleCode 30)
+RED_FG_COLOR=$(setTextStyleCode 31)
+GREEN_FG_COLOR=$(setTextStyleCode 32)
+YELLOW_FG_COLOR=$(setTextStyleCode 33)
+BLUE_FG_COLOR=$(setTextStyleCode 34)
+MAGENTA_FG_COLOR=$(setTextStyleCode 35)
+CYAN_FG_COLOR=$(setTextStyleCode 36)
+LIGHT_GRAY_FG_COLOR=$(setTextStyleCode 37)
+DARK_GRAY_FG_COLOR=$(setTextStyleCode 90)
+LIGHT_RED_FG_COLOR=$(setTextStyleCode 91)
+LIGHT_GREEN_FG_COLOR=$(setTextStyleCode 92)
+LIGHT_YELLOW_FG_COLOR=$(setTextStyleCode 93)
+LIGHT_BLUE_FG_COLOR=$(setTextStyleCode 94)
+LIGHT_MAGENTA_FG_COLOR=$(setTextStyleCode 95)
+LIGHT_CYAN_FG_COLOR=$(setTextStyleCode 96)
+WHITE_FG_COLOR=$(setTextStyleCode 97)
+# BackgroundColors
+DEFAULT_BG_COLOR=$(setTextStyleCode 49)
+BLACK_BG_COLOR=$(setTextStyleCode 40)
+RED_BG_COLOR=$(setTextStyleCode 41)
+GREEN_BG_COLOR=$(setTextStyleCode 42)
+YELLOW_BG_COLOR=$(setTextStyleCode 43)
+BLUE_BG_COLOR=$(setTextStyleCode 44)
+MAGENTA_BG_COLOR=$(setTextStyleCode 45)
+CYAN_BG_COLOR=$(setTextStyleCode 46)
+LIGHT_GRAY_BG_COLOR=$(setTextStyleCode 47)
+DARK_GRAY_BG_COLOR=$(setTextStyleCode 100)
+LIGHT_RED_BG_COLOR=$(setTextStyleCode 101)
+LIGHT_GREEN_BG_COLOR=$(setTextStyleCode 102)
+LIGHT_YELLOW_BG_COLOR=$(setTextStyleCode 103)
+LIGHT_BLUE_BG_COLOR=$(setTextStyleCode 104)
+LIGHT_MAGENTA_BG_COLOR=$(setTextStyleCode 105)
+LIGHT_CYAN_BG_COLOR=$(setTextStyleCode 106)
+WHITE_BG_COLOR=$(setTextStyleCode 107)
+# Niche Colors
+WARNINGCOLOR="${CLEAR_ALL_TEXT_STYLES}${BOLD_TEXT_ON}${YELLOW_BG_COLOR}${BLACK_FG_COLOR}"
+ERRORCOLOR="${CLEAR_ALL_TEXT_STYLES}${BOLD_TEXT_ON}${RED_BG_COLOR}${BLACK_FG_COLOR}"
+NOTIFYCOLOR="${CLEAR_ALL_TEXT_STYLES}${LIGHT_BLUE_FG_COLOR}"
+HIGHLIGHTCOLOR="${CLEAR_ALL_TEXT_STYLES}${LIGHT_BLUE_BG_COLOR}${BLACK_FG_COLOR}"
+BANNER_MSG_COLOR="${CLEAR_ALL_TEXT_STYLES}${GREEN_BG_COLOR}${BLINK_TEXT_ON}${BLACK_FG_COLOR}"
