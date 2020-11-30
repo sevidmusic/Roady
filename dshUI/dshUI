@@ -95,6 +95,13 @@ determineThemeFilePath() {
 
 while test $# -gt 0; do
   case "$1" in
+  "$(determineCurrentDirectoryPath)/dshUI")
+    # Strangely, when dshUI is sourced from another script with '. ./path/to/dshUI/dshUI',
+    # ${1} is set to the path to dshUI, so in this case we need to shift to get the first
+    # actual flag passed to the script that loaded dshUI.
+    # @todo: Look into this further, at least to understand why this happens.
+    shift && continue
+    ;;
   -h | --help)
     shift
     printf "\ndshUI is a library that proivdes various functions for generating a themeable UI for command line utilities.\n"
