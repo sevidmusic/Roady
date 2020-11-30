@@ -105,15 +105,16 @@ while test $# -gt 0; do
     [[ -z "${1}" ]] && logMissingFlagArgumentErrorAndExit1 "name of the theme file" "--theme"
     [[ -x "$(determineThemeFilePath "$1")" ]] || logFileDoesNotExistErrorAndExit1 "$(determineThemeFilePath "${1}")"
     DSHUI_THEME="${1}"
+    shift && continue
     ;;
-  -d | --demo-theme*)
+  -d | --demo-theme)
     shift
     DEMO_THEME="show"
+    continue
     ;;
   *)
     shift
-    [[ "${1}" == "$(echo)" ]] && break # This is a bit of a hack to capture <enter>, the call to shift above will set $1 to <enter> if there are no more arguments/flags to parse, if $1 is <enter> then the loop MUST break since there are no more args/flags to parse. <enter> is captured using echo in a subshell. This hack was discovered @ https://stackoverflow.com/questions/6264596/simulating-enter-keypress-in-bash-script
-    [[ -z "${1}" ]] && [[ "${DEMO_THEME}" != 'show' ]] && logInvalidFlagErrorAndExit1 "${1}"
+    logInvalidFlagErrorAndExit1 "${1}"
     ;;
   esac
 done
