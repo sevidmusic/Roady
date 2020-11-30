@@ -43,7 +43,7 @@ showLoadingBar() {
     animatedPrint ":" .000242
     _slb_inc=$((_slb_inc + 1))
   done
-  printf " %s\n" "${CLEAR_ALL_STYLES}${BLINKING_TEXT}${COLOR_27}[100%]${CLEAR_ALL_STYLES}"
+  printf " %s\n" "${CLEAR_ALL_STYLES}${BLINKING_TEXT}${SUCCESS_COLOR}[100%]${CLEAR_ALL_STYLES}"
   sleep 0.23
   [[ "${2}" != "dontClear" ]] && clear
 }
@@ -56,7 +56,7 @@ exitOrContinue() {
 
 notifyUser() {
   [[ "${4}" != 'no_newline' ]] && printf "\n"
-  printf "%s" "${COLOR_12}"
+  printf "%s" "${NOTIFY_COLOR}"
   animatedPrint "${1}" 0.009
   sleep "${2:-2}"
   [[ "${3}" == "dontClear" ]] || clear
