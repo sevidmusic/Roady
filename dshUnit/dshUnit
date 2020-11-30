@@ -1,0 +1,74 @@
+#!/bin/bash
+
+set -o posix
+
+logErrorMsg() {
+    printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr
+}
+
+logErrorMsgAndExit1() {
+    logErrorMsg "${1}"
+    exit 1
+}
+
+determineDshUnitDirectoryPath() {
+    local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH
+    CURRENT_FILE_PATH="${BASH_SOURCE[0]}"
+    while [ -h "$CURRENT_FILE_PATH" ]; do # resolve $CURRENT_FILE_PATH until the file is no longer a symlink | -h is true if file exists and is a symlink
+      CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+      CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"
+      [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH" # if $CURRENT_FILE_PATH was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+}
+
+loadLibrary() {
+    # use of -x instead of -f is intentinal, the file MUST exist and be executable
+    # @seehttps://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Conditional-Expressions
+    [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."
+    . ${1} ${2}
+}
+
+getSpecifiedTestGroup() {
+    TEST_GROUP="${TEST_GROUP:-all}"
+    printf "%s" "${TEST_GROUP}"
+}
+
+loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"
+
+while test $# -gt 0; do
+  case "$1" in
+  -h | --help)
+    shift
+    printf "\n\n\e[35mdshUnit is a command line unit testing framework.\e[0m" "${1}"
+    continue
+    ;;
+  -c | --config*)
+    shift
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify a config file when using the --config flag."
+    [[ "${1}" == "-h" ]] && logErrorMsgAndExit1 "You must specify an existing config file when using the --config flag."
+    [[ "${1}" == "-t" ]] && logErrorMsgAndExit1 "You must specify an existing config file when using the --config flag."
+    [[ ! -x "$(determineDshUnitDirectoryPath)/${1}" ]] && logErrorMsgAndExit1 "You must specify a existing executable config file when using the --config flag."
+    CONFIG_FILE_PATH="$(determineDshUnitDirectoryPath)/${1}"
+    shift && continue
+    ;;
+  -t | --test-group*)
+    shift
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify a test group when using the --test-group flag."
+    [[ "${1}" == "-h" ]] && logErrorMsgAndExit1 "-h is not a valid test group."
+    [[ "${1}" == "-c" ]] && logErrorMsgAndExit1 "-c is not a valid test group."
+    TEST_GROUP="${1}"
+    shift && continue
+    ;;
+
+  *)
+    shift
+    logErrorMsgAndExit1 "Invalid flag ${1}"
+    ;;
+  esac
+done
+
+CONFIG_FILE_PATH="${CONFIG_FILE_PATH:-$(determineDshUnitDirectoryPath)/dshUnitConfig.sh}"
+notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
+showLoadingBar "One moment please" 'dontClear'
+. "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
