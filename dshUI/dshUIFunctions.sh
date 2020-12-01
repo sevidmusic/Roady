@@ -33,7 +33,7 @@ showLoadingBar() {
   local _slb_inc _slb_windowWidth _slb_numChars _slb_adjustedNumChars _slb_loadingBarLimit
   printf "\n"
   animatedPrint "${1}" .00242
-  printf "%s" "${HIGHLIGHTCOLOR}"
+  printf "%s" "${CLEAR_ALL_STYLES}${HIGHLIGHTCOLOR}"
   _slb_inc=0
   _slb_windowWidth=$(tput cols)
   _slb_numChars="${#1}"
