@@ -1,8 +1,8 @@
 #!/bin/bash
-# dshUnitTests.sh
+# dshUnitConfig.sh
 
 set -o posix
 
-if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'testsCanRun' ]]; then
-    . "$(determineDshUnitDirectoryPath)/dshUnitTests.sh"
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertSuccess' ]]; then
+    . "$(determineDshUnitDirectoryPath)/AssertSuccessTests.sh"
 fi
