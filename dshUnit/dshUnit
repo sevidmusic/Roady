@@ -34,7 +34,19 @@ getSpecifiedTestGroup() {
     printf "%s" "${TEST_GROUP}"
 }
 
+runTests() {
+    PASSES="${PASSES:-0}";
+    FAILS="${FAILS:-0}";
+    CONFIG_FILE_PATH="${CONFIG_FILE_PATH:-$(determineDshUnitDirectoryPath)/dshUnitConfig.sh}"
+    notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
+    showLoadingBar "One moment please" 'dontClear'
+    . "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
+    notifyUser "There were ${PASSES} passing tests." 0 'dontClear'
+    notifyUser "There were ${FAILS} failing tests." 0 'dontClear'
+}
+
 loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"
+loadLibrary "$(determineDshUnitDirectoryPath)/dshUnitAssertions.sh" "--theme dshUnit.sh"
 
 while test $# -gt 0; do
   case "$1" in
@@ -61,7 +73,6 @@ while test $# -gt 0; do
     TEST_GROUP="${1}"
     shift && continue
     ;;
-
   *)
     shift
     logErrorMsgAndExit1 "Invalid flag ${1}"
@@ -69,7 +80,6 @@ while test $# -gt 0; do
   esac
 done
 
-CONFIG_FILE_PATH="${CONFIG_FILE_PATH:-$(determineDshUnitDirectoryPath)/dshUnitConfig.sh}"
-notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
-showLoadingBar "One moment please" 'dontClear'
-. "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
+runTests
+
+
