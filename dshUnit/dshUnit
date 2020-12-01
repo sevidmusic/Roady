@@ -41,13 +41,13 @@ while test $# -gt 0; do
   -h | --help)
     shift
     printf "\n\n\e[35mdshUnit is a command line unit testing framework.\e[0m" "${1}"
-    continue
+    exit 0
     ;;
   -c | --config*)
     shift
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify a config file when using the --config flag."
-    [[ "${1}" == "-h" ]] && logErrorMsgAndExit1 "You must specify an existing config file when using the --config flag."
-    [[ "${1}" == "-t" ]] && logErrorMsgAndExit1 "You must specify an existing config file when using the --config flag."
+    [[ "${1}" == "-h" ]] && logErrorMsgAndExit1 "-h is not a valid config file name or path"
+    [[ "${1}" == "-t" ]] && logErrorMsgAndExit1 "-t is not a valid config file name or path"
     [[ -x "${1}" ]] && CONFIG_FILE_PATH="${1}" && shift && continue
     [[ ! -x "$(determineDshUnitDirectoryPath)/${1}" ]] && logErrorMsgAndExit1 "You must specify a existing executable config file when using the --config flag."
     CONFIG_FILE_PATH="$(determineDshUnitDirectoryPath)/${1}"
