@@ -48,6 +48,7 @@ while test $# -gt 0; do
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify a config file when using the --config flag."
     [[ "${1}" == "-h" ]] && logErrorMsgAndExit1 "You must specify an existing config file when using the --config flag."
     [[ "${1}" == "-t" ]] && logErrorMsgAndExit1 "You must specify an existing config file when using the --config flag."
+    [[ -x "${1}" ]] && CONFIG_FILE_PATH="${1}" && shift && continue
     [[ ! -x "$(determineDshUnitDirectoryPath)/${1}" ]] && logErrorMsgAndExit1 "You must specify a existing executable config file when using the --config flag."
     CONFIG_FILE_PATH="$(determineDshUnitDirectoryPath)/${1}"
     shift && continue
