@@ -21,3 +21,23 @@ testAssertSuccessIncreasesPASSESForPassingTest() {
 }
 
 testAssertSuccessIncreasesPASSESForPassingTest
+
+testAssertSuccessIncreasesFAILSForFailingTest() {
+    local initial_fails
+    initial_fails="${FAILS}"
+    notifyUser "Testing that assertSuccess increases FAILS on a failing test." 0 'dontClear'
+    assertSuccess '${RANDOM}' "The randomly generated command SHOULD produce an error, something is wrong!" "-> NOTE: Actually testing FAILS increases for failing assertSuccess text. The randomly generated command is not the actual target of this test"
+    [[ "${initial_fails}" == "${FAILS}" ]] && ((FAILS++)) && notifyUser "Failed asserting that FAILS increases after a failing assertSuccess test." 0 'dontClear' && return
+    notifyUser "    FAILS was increased after a failing assertSuccess test." 0 'dontClear'
+    # Manually reduce FAILS so failure count is accurate, we expected an error, as long as FAILS was increased, we can safely decrease it here and know this test passed
+    ((FAILS--))
+    # Manually increase PASSES, if we are here this test passed, but since were testing for failure assertSuccess will not have increased PASSES, so we have to
+    ((PASSES++))
+}
+
+testAssertSuccessIncreasesFAILSForFailingTest
+
+
+
+
+
