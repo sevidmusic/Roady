@@ -14,7 +14,8 @@ testAssertNoErrorRunsWithoutErrorForTestThatIsExpectedToPass
 testAssertNoErrorIncreasesPASSESForPassingTest() {
     local initial_passes
     initial_passes="${PASSES}"
-    showLoadingBar "    Testing: assertNoError increases number of PASSES on passing test" 'dontClear'
+    notifyUser "    Testing: assertNoError increases number of PASSES on passing test" 0 'dontClear'
+    showLoadingBar "    Testing: ${CLEAR_ALL_STYLES}${COLOR_19}assertNoError \"${CLEAR_ALL_STYLES}${COLOR_21}pwd${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
     assertNoError 'pwd' &> /dev/null
     [[ "${initial_passes}" == "${PASSES}" ]] && ((FAILS++)) && notifyUser "Failed asserting that PASSES increases after a passing assertNoError test." 0 'dontClear' && return
     [[ "${initial_passes}" -lt "${PASSES}" ]] && notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Test Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear' && return
@@ -27,7 +28,8 @@ testAssertNoErrorIncreasesFAILSForFailingTest() {
     local initial_fails initial_passes
     initial_passes="${PASSES}"
     initial_fails="${FAILS}"
-    showLoadingBar "    Testing: assertNoError increases number of FAILS on failing test" 'dontClear'
+    notifyUser "    Testing: assertNoError increases number of FAILS on failing test" 0 'dontClear'
+    showLoadingBar "    Testing: ${CLEAR_ALL_STYLES}${COLOR_19}assertNoError \"${CLEAR_ALL_STYLES}${COLOR_21}\${RANDOM}${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
     assertNoError '${RANDOM}' &> /dev/null
     [[ "${initial_fails}" == "${FAILS}" ]] && ((FAILS++)) && notifyUser "    ${ERROR_COLOR}Test failed ${HIGHLIGHTCOLOR}:(" 0 'dontClear' && return
     # Manually reduce FAILS so failure count is accurate, we expected an error, as long as FAILS was increased, we can safely decrease it here and know this test passed
