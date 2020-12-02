@@ -18,6 +18,7 @@ testAssertNoErrorIncreasesPASSESForPassingTest() {
     assertNoError 'pwd' &> /dev/null
     [[ "${initial_passes}" == "${PASSES}" ]] && ((FAILS++)) && notifyUser "Failed asserting that PASSES increases after a passing assertNoError test." 0 'dontClear' && return
     [[ "${initial_passes}" -lt "${PASSES}" ]] && notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Test Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear' && return
+    notifyUser "    ${ERROR_COLOR}Test failed ${HIGHLIGHTCOLOR}:(" 0 'dontClear'
 }
 
 testAssertNoErrorIncreasesPASSESForPassingTest
@@ -28,7 +29,7 @@ testAssertNoErrorIncreasesFAILSForFailingTest() {
     initial_fails="${FAILS}"
     showLoadingBar "    Testing: assertNoError increases number of FAILS on failing test" 'dontClear'
     assertNoError '${RANDOM}' &> /dev/null
-    [[ "${initial_fails}" == "${FAILS}" ]] && ((FAILS++)) && notifyUser "Failed asserting that FAILS increases after a failing assertNoError test." 0 'dontClear' && return
+    [[ "${initial_fails}" == "${FAILS}" ]] && ((FAILS++)) && notifyUser "    ${ERROR_COLOR}Test failed ${HIGHLIGHTCOLOR}:(" 0 'dontClear' && return
     # Manually reduce FAILS so failure count is accurate, we expected an error, as long as FAILS was increased, we can safely decrease it here and know this test passed
     ((FAILS--))
     # Manually increase PASSES, if we are here this test passed, but since were testing for failure assertNoError will not have increased PASSES, so we have to
