@@ -3,12 +3,12 @@
 
 set -o posix
 
-assertSuccess() {
+assertNoError() {
     local initial_passes
     initial_passes="${PASSES}"
     initial_fails="${FAILS}"
     notifyUser "    ${2}" 0 'dontClear'
-    showLoadingBar "    Testing: ${CLEAR_ALL_STYLES}${COLOR_19}assertSuccess \"${CLEAR_ALL_STYLES}${COLOR_21}${1}${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
+    showLoadingBar "    Testing: ${CLEAR_ALL_STYLES}${COLOR_19}assertNoError \"${CLEAR_ALL_STYLES}${COLOR_21}${1}${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
     error="$( ${1} 2>&1 1>/dev/null)"
     if [ $? -eq 0 ]; then
         ((PASSES++))
