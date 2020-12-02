@@ -1,17 +1,17 @@
 #!/bin/bash
-# AssertSuccessTests.sh
+# AssertNoErrorTests.sh
 
 set -o posix
 
-testAssertSuccessRunsWithoutErrorForTestThatIsExpectedToPass() {
+testAssertNoErrorRunsWithoutErrorForTestThatIsExpectedToPass() {
     assertNoError "ls" "Testing that assertNoError runs without error testing system command ${HIGHLIGHTCOLOR}ls${NOTIFY_COLOR}. This should pass. dshUnit's assertions MUST also be able to test commands that are not related to dsh, dshUnit, dshUI, or the Darling Data Management System."
     assertNoError "pwd" "Testing that assertNoError runs without error testing system command ${HIGHLIGHTCOLOR}pwd${NOTIFY_COLOR}. This should pass. dshUnit's assertions MUST also be able to test commands that are not related to dsh, dshUnit, dshUI, or the Darling Data Management System."
     assertNoError "assertNoError ls '${test_msg}'" "Test assertNoError runs without error testing itself."
 }
 
-testAssertSuccessRunsWithoutErrorForTestThatIsExpectedToPass
+testAssertNoErrorRunsWithoutErrorForTestThatIsExpectedToPass
 
-testAssertSuccessIncreasesPASSESForPassingTest() {
+testAssertNoErrorIncreasesPASSESForPassingTest() {
     local initial_passes
     initial_passes="${PASSES}"
     showLoadingBar "    Testing: assertNoError increases number of PASSES on passing test" 'dontClear'
@@ -20,9 +20,9 @@ testAssertSuccessIncreasesPASSESForPassingTest() {
     [[ "${initial_passes}" -lt "${PASSES}" ]] && notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Test Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear' && return
 }
 
-testAssertSuccessIncreasesPASSESForPassingTest
+testAssertNoErrorIncreasesPASSESForPassingTest
 
-testAssertSuccessIncreasesFAILSForFailingTest() {
+testAssertNoErrorIncreasesFAILSForFailingTest() {
     local initial_fails initial_passes
     initial_passes="${PASSES}"
     initial_fails="${FAILS}"
@@ -34,8 +34,8 @@ testAssertSuccessIncreasesFAILSForFailingTest() {
     # Manually increase PASSES, if we are here this test passed, but since were testing for failure assertNoError will not have increased PASSES, so we have to
     ((PASSES++))
     [[ "${initial_fails}" == "${FAILS}" ]] && [[ "${initial_passes}" -lt "${PASSES}" ]] &&  notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Test Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear' && return
-    notifyUser "    ${ERROR_COLOR}testAssertSuccessIncreasesFAILSForFailingTest failed correcting PASSES and FAILS after successful test!" 0 'dontClear'
+    notifyUser "    ${ERROR_COLOR}testAssertNoErrorIncreasesFAILSForFailingTest failed correcting PASSES and FAILS after successful test!" 0 'dontClear'
 }
 
-testAssertSuccessIncreasesFAILSForFailingTest
+testAssertNoErrorIncreasesFAILSForFailingTest
 
