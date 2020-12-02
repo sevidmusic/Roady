@@ -7,7 +7,7 @@ set -o posix
 # https://misc.flogisoft.com/bash/tip_colors_and_formatting#terminals_compatibility
 
 # Formatting | Just styles, no color
-CLEAR_TEXT_STYLES="$(setTextStyleCode 0)"
+CLEAR_ALL_STYLES="$(setTextStyleCode 0)"
 BOLD_TEXT="$(setTextStyleCode 0)$(setTextStyleCode 1)"
 DIM_TEXT="$(setTextStyleCode 0)$(setTextStyleCode 2)"
 UNDERLINED_TEXT="$(setTextStyleCode 0)$(setTextStyleCode 4)"
