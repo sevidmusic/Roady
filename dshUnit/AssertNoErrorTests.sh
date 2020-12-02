@@ -14,12 +14,10 @@ testAssertNoErrorRunsWithoutErrorForTestThatIsExpectedToPass
 testAssertNoErrorIncreasesPASSESForPassingTest() {
     local initial_passes
     initial_passes="${PASSES}"
-    notifyUser "    Testing: assertNoError increases number of PASSES on passing test" 0 'dontClear'
-    showLoadingBar "    Testing: ${CLEAR_ALL_STYLES}${COLOR_19}assertNoError \"${CLEAR_ALL_STYLES}${COLOR_21}pwd${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
-    assertNoError 'pwd' &> /dev/null
-    [[ "${initial_passes}" == "${PASSES}" ]] && ((FAILS++)) && notifyUser "Failed asserting that PASSES increases after a passing assertNoError test." 0 'dontClear' && return
-    [[ "${initial_passes}" -lt "${PASSES}" ]] && notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Test Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear' && return
-    notifyUser "    ${ERROR_COLOR}Test failed ${HIGHLIGHTCOLOR}:(" 0 'dontClear'
+    assertNoError 'echo There should not be any errors' "Testing: assertNoError increases number of PASSES on passing test"
+    [[ "${initial_passes}" -lt "${PASSES}" ]] && showTestPassedMsg && return
+    ((FAILS++))
+    showTestFailedMsg
 }
 
 testAssertNoErrorIncreasesPASSESForPassingTest
@@ -28,16 +26,11 @@ testAssertNoErrorIncreasesFAILSForFailingTest() {
     local initial_fails initial_passes
     initial_passes="${PASSES}"
     initial_fails="${FAILS}"
-    notifyUser "    Testing: assertNoError increases number of FAILS on failing test" 0 'dontClear'
-    showLoadingBar "    Testing: ${CLEAR_ALL_STYLES}${COLOR_19}assertNoError \"${CLEAR_ALL_STYLES}${COLOR_21}\${RANDOM}${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
-    assertNoError '${RANDOM}' &> /dev/null
-    [[ "${initial_fails}" == "${FAILS}" ]] && ((FAILS++)) && notifyUser "    ${ERROR_COLOR}Test failed ${HIGHLIGHTCOLOR}:(" 0 'dontClear' && return
-    # Manually reduce FAILS so failure count is accurate, we expected an error, as long as FAILS was increased, we can safely decrease it here and know this test passed
-    ((FAILS--))
-    # Manually increase PASSES, if we are here this test passed, but since were testing for failure assertNoError will not have increased PASSES, so we have to
-    ((PASSES++))
-    [[ "${initial_fails}" == "${FAILS}" ]] && [[ "${initial_passes}" -lt "${PASSES}" ]] &&  notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Test Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear' && return
-    notifyUser "    ${ERROR_COLOR}testAssertNoErrorIncreasesFAILSForFailingTest failed correcting PASSES and FAILS after successful test!" 0 'dontClear'
+    assertNoError '${RANDOM}' "Testing: assertNoError increases number of FAILS on failing test"
+    [[ "${initial_fails}" -lt "${FAILS}" ]] && showTestPassedMsg && FAILS="${initial_fails}" && ((PASSES++)) && return # ((PASSES++))
+    # Manually increase FAILS an error occured but FAILS was not increased.
+    ((FAILS++))
+    showTestFailedMsg
 }
 
 testAssertNoErrorIncreasesFAILSForFailingTest
