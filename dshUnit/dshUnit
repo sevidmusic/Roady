@@ -38,6 +38,7 @@ runTests() {
     clear
     PASSING_ASSERTIONS="${PASSING_ASSERTIONS:-0}";
     FAILING_ASSERTIONS="${FAILING_ASSERTIONS:-0}";
+    PASSING_TESTS="${PASSING_TESTS:-0}";
     FAILING_TESTS="${FAILING_TESTS:-0}";
     CONFIG_FILE_PATH="${CONFIG_FILE_PATH:-$(determineDshUnitDirectoryPath)/dshUnitConfig.sh}"
     notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
@@ -45,6 +46,7 @@ runTests() {
     . "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
     notifyUser "There were ${PASSING_ASSERTIONS} passing assertions." 0 'dontClear'
     notifyUser "There were ${FAILING_ASSERTIONS} failing assertions." 0 'dontClear'
+    notifyUser "There were ${PASSING_TESTS} passing tests." 0 'dontClear'
     notifyUser "There were ${FAILING_TESTS} failing tests." 0 'dontClear'
 }
 
@@ -56,6 +58,11 @@ increasePassingAssertions() {
 increaseFailedAssertions() {
     ((FAILING_ASSERTIONS++))
     showAssertionFailedMsg
+}
+
+increasePassingTests() {
+    ((PASSING_TESTS++))
+    showTestPassedMsg
 }
 
 increaseFailingTests() {
