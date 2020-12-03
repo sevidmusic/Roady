@@ -42,8 +42,8 @@ runTests() {
     notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
     showLoadingBar "One moment please" 'dontClear'
     . "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
-    notifyUser "There were ${PASSES} passing tests." 0 'dontClear'
-    notifyUser "There were ${FAILS} failing tests." 0 'dontClear'
+    notifyUser "There were ${PASSES} passing assertions." 0 'dontClear'
+    notifyUser "There were ${FAILS} failing assertions." 0 'dontClear'
 }
 
 loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"
