@@ -32,7 +32,7 @@ showAssertionFailedMsg() {
 
 # showFailingTestDidNotIncreaseFAILING_ASSERTIONSWarning
 showFailingTestDidNotIncreaseFAILING_ASSERTIONSWarning() {
-    notifyUser "    ${CLEAR_ALL_STYLES}${COLOR_17}Warning: The test failed, but the number of FAILING_ASSERTIONS was not increased!" 0 'dontClear'
+    notifyUser "    ${CLEAR_ALL_STYLES}${COLOR_17}Warning: The test failed, however, the number of FAILING_ASSERTIONS was not increased!" 0 'dontClear'
 }
 
 # showRunningTestMsg <TEST_FUNCTION_NAME>
@@ -42,4 +42,8 @@ showRunningTestMsg() {
 
 showTestPassedMsg() {
     notifyUser "$(showAssertionPassedMsg | sed 's/Assertion/Test/g')" 0 'dontClear'
+}
+
+showTestFailedMsg() {
+    notifyUser "$(showAssertionFailedMsg | sed 's/Assertion/Test/g')" 0 'dontClear'
 }
