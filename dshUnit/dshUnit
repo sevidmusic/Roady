@@ -36,14 +36,14 @@ getSpecifiedTestGroup() {
 
 runTests() {
     clear
-    PASSES="${PASSES:-0}";
-    FAILS="${FAILS:-0}";
+    PASSING_ASSERTIONS="${PASSING_ASSERTIONS:-0}";
+    FAILING_ASSERTIONS="${FAILING_ASSERTIONS:-0}";
     CONFIG_FILE_PATH="${CONFIG_FILE_PATH:-$(determineDshUnitDirectoryPath)/dshUnitConfig.sh}"
     notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
     showLoadingBar "One moment please" 'dontClear'
     . "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
-    notifyUser "There were ${PASSES} passing assertions." 0 'dontClear'
-    notifyUser "There were ${FAILS} failing assertions." 0 'dontClear'
+    notifyUser "There were ${PASSING_ASSERTIONS} passing assertions." 0 'dontClear'
+    notifyUser "There were ${FAILING_ASSERTIONS} failing assertions." 0 'dontClear'
 }
 
 loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"

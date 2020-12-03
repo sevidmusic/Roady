@@ -12,29 +12,29 @@ testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass() {
 
 testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass
 
-testAssertNoErrorIncreasesPASSESForPassingTest() {
+testAssertNoErrorIncreasesPASSING_ASSERTIONSForPassingTest() {
     local initial_passes
-    initial_passes="${PASSES}"
-    showRunningTestMsg "testAssertNoErrorIncreasesPASSESForPassingTest"
-    assertNoError 'echo There should not be any errors' "Testing: assertNoError increases number of PASSES on passing test"
-    [[ "${initial_passes}" -lt "${PASSES}" ]] && showTestPassedMsg && return
-    ((FAILS++))
+    initial_passes="${PASSING_ASSERTIONS}"
+    showRunningTestMsg "testAssertNoErrorIncreasesPASSING_ASSERTIONSForPassingTest"
+    assertNoError 'echo There should not be any errors' "Testing: assertNoError increases number of PASSING_ASSERTIONS on passing test"
+    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && showTestPassedMsg && return
+    ((FAILING_ASSERTIONS++))
     showAssertionFailedMsg
 }
 
-testAssertNoErrorIncreasesPASSESForPassingTest
+testAssertNoErrorIncreasesPASSING_ASSERTIONSForPassingTest
 
-testAssertNoErrorIncreasesFAILSForFailingTest() {
+testAssertNoErrorIncreasesFAILING_ASSERTIONSForFailingTest() {
     local initial_fails initial_passes
-    initial_passes="${PASSES}"
-    initial_fails="${FAILS}"
-    showRunningTestMsg "testAssertNoErrorIncreasesFAILSForFailingTest"
-    assertNoError '${RANDOM}' "Testing: assertNoError increases number of FAILS on failing test"
-    [[ "${initial_fails}" -lt "${FAILS}" ]] && showTestPassedMsg && FAILS="${initial_fails}" && ((PASSES++)) && return
-    # Manually increase FAILS an error occured but FAILS was not increased.
-    ((FAILS++))
+    initial_passes="${PASSING_ASSERTIONS}"
+    initial_fails="${FAILING_ASSERTIONS}"
+    showRunningTestMsg "testAssertNoErrorIncreasesFAILING_ASSERTIONSForFailingTest"
+    assertNoError '${RANDOM}' "Testing: assertNoError increases number of FAILING_ASSERTIONS on failing test"
+    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && showTestPassedMsg && FAILING_ASSERTIONS="${initial_fails}" && ((PASSING_ASSERTIONS++)) && return
+    # Manually increase FAILING_ASSERTIONS an error occured but FAILING_ASSERTIONS was not increased.
+    ((FAILING_ASSERTIONS++))
     showAssertionFailedMsg
 }
 
-testAssertNoErrorIncreasesFAILSForFailingTest
+testAssertNoErrorIncreasesFAILING_ASSERTIONSForFailingTest
 

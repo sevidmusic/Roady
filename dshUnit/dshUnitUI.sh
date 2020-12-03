@@ -14,9 +14,9 @@ showAssertionPassedMsg() {
     notifyUser "${CLEAR_ALL_STYLES}    ${SUCCESS_COLOR}Assertion Passed ${HIGHLIGHTCOLOR}:)" 0 'dontClear'
 }
 
-# showPassingTestDidNotIncreasePASSESWarning
-showPassingTestDidNotIncreasePASSESWarning() {
-    notifyUser "    ${CLEAR_ALL_STYLES}${COLOR_17}Warning: The test passed, however, the number of PASSES was not increased!" 0 'dontClear'
+# showPassingTestDidNotIncreasePASSING_ASSERTIONSWarning
+showPassingTestDidNotIncreasePASSING_ASSERTIONSWarning() {
+    notifyUser "    ${CLEAR_ALL_STYLES}${COLOR_17}Warning: The test passed, however, the number of PASSING_ASSERTIONS was not increased!" 0 'dontClear'
 }
 
 # showErrorOccurredMsg <ERROR_MESSAGE>
@@ -30,9 +30,9 @@ showAssertionFailedMsg() {
     notifyUser "${CLEAR_ALL_STYLES}    ${ERROR_COLOR}Assertion Failed ${HIGHLIGHTCOLOR}:(" 0 'dontClear'
 }
 
-# showFailingTestDidNotIncreaseFAILSWarning
-showFailingTestDidNotIncreaseFAILSWarning() {
-    notifyUser "    ${CLEAR_ALL_STYLES}${COLOR_17}Warning: The test failed, but the number of FAILS was not increased!" 0 'dontClear'
+# showFailingTestDidNotIncreaseFAILING_ASSERTIONSWarning
+showFailingTestDidNotIncreaseFAILING_ASSERTIONSWarning() {
+    notifyUser "    ${CLEAR_ALL_STYLES}${COLOR_17}Warning: The test failed, but the number of FAILING_ASSERTIONS was not increased!" 0 'dontClear'
 }
 
 # showRunningTestMsg <TEST_FUNCTION_NAME>
