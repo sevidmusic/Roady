@@ -4,14 +4,14 @@
 set -o posix
 
 testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass() {
-    local initial_passes
+    local initial_passes numberOfAssertions
+    numberOfAssertions="3"
     initial_passes="${PASSING_ASSERTIONS}"
     showRunningTestMsg "testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass"
     assertNoError "ls" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}ls${NOTIFY_COLOR}."
     assertNoError "pwd" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}pwd${NOTIFY_COLOR}."
     assertNoError "assertNoError ls '${test_msg}'" "assertNoError MUST run without error on itself."
-    assertNoError 'asdfjkdfj'
-    [[ "$((initial_passes + 4))" == "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
+    [[ "$((initial_passes + numberOfAssertions))" == "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
     increaseFailingTests
 }
 
