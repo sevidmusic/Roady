@@ -3,11 +3,11 @@
 
 set -o posix
 
-testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass() {
+testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected() {
     local initial_passes numberOfAssertions
     numberOfAssertions="3"
     initial_passes="${PASSING_ASSERTIONS}"
-    showRunningTestMsg "testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass"
+    showRunningTestMsg "testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected"
     assertNoError "ls" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}ls${NOTIFY_COLOR}."
     assertNoError "pwd" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}pwd${NOTIFY_COLOR}."
     assertNoError "assertNoError ls '${test_msg}'" "assertNoError MUST run without error on itself."
@@ -15,7 +15,7 @@ testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass() {
     increaseFailingTests
 }
 
-testAssertNoErrorIndicatesPassingTestForCommandsThatAreExpectedToPass
+testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected
 
 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
     local initial_passes
