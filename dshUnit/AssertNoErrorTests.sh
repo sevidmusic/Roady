@@ -10,20 +10,32 @@ testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected() {
     showRunningTestMsg "testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected"
     assertNoError "ls" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}ls${NOTIFY_COLOR}."
     assertNoError "pwd" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}pwd${NOTIFY_COLOR}."
-    assertNoError "assertNoError ls '${test_msg}'" "assertNoError MUST run without error on itself."
+    assertNoError "assertNoError ls 'Test message'" "assertNoError MUST run without error on itself."
     [[ "$((initial_passes + numberOfAssertions))" == "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
     increaseFailingTests
 }
 
 testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected
 
+testAssertNoErrorRunsWithErrorWhenFailingAssertionIsExpected() {
+    local initial_fails numberOfAssertions
+    numberOfAssertions="2"
+    initial_fails="${FAILING_ASSERTIONS}"
+    showRunningTestMsg "testAssertNoErrorRunsWithErrorWhenFailingAssertionIsExpected"
+    assertNoError "ls some/dir/that/does/not/exist/${RANDOM}" "Expecting an error, and a failed assertion."
+    assertNoError "printf \"%s%29.5'%%s\" \"Foo\" \"bar\"" "Expecting an error, and a failed assertion."
+    [[ "$((initial_fails + numberOfAssertions))" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
+    increaseFailingTests
+}
+
+testAssertNoErrorRunsWithErrorWhenFailingAssertionIsExpected
+
 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
     local initial_passes
     initial_passes="${PASSING_ASSERTIONS}"
     showRunningTestMsg "testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion"
     assertNoError 'echo There should not be any errors and PASSING_ASSERTIONS MUST increase' "assertNoError MUST increase the number of PASSING_ASSERTIONS on passing assertion."
-    notifyUser "${HIGHLIGHTCOLOR}Note: The previous call to assertNoError's results will not be tracked, it was just used to test that PASSING_ASSERTIONS are increased by assertNoError on a pssing assertion." 0 'dontClear'
-    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests && PASSING_ASSERTIONS="${initial_passes}" && return
+    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
     increaseFailingTests
 }
 
@@ -35,8 +47,7 @@ testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
     initial_fails="${FAILING_ASSERTIONS}"
     showRunningTestMsg "testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion"
     assertNoError '${RANDOM}' "assertNoError MUST increase the number of FAILING_ASSERTIONS on failing assertion."
-    notifyUser "${HIGHLIGHTCOLOR}Note: The previous call to assertNoError's results will not be tracked, it was just used to test that FAILING_ASSERTIONS are increased by assertNoError on a failing assertion." 0 'dontClear'
-    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests && FAILING_ASSERTIONS="${initial_fails}" && return
+    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
     increaseFailingTests
 }
 
