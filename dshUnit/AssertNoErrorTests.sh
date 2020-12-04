@@ -3,32 +3,19 @@
 
 set -o posix
 
-testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected() {
-    local initial_passes numberOfAssertions
-    numberOfAssertions="3"
-    initial_passes="${PASSING_ASSERTIONS}"
-    showRunningTestMsg "testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected"
-    assertNoError "ls" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}ls${NOTIFY_COLOR}."
-    assertNoError "pwd" "assertNoError MUST run without error on system command ${HIGHLIGHTCOLOR}pwd${NOTIFY_COLOR}."
-    assertNoError "assertNoError ls 'Test message'" "assertNoError MUST run without error on itself."
-    [[ "$((initial_passes + numberOfAssertions))" == "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected() {
+    showRunningTestMsg "testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
+    assertNoError "assertNoError ls 'Test message'" "assertNoError MUST run without error"
+    [[ $? -gt 0 ]] && increaseFailingTests && return
+    increasePassingTests
 }
 
-testAssertNoErrorRunsWithoutErrorWhenPassingAssertionIsExpected
-
-testAssertNoErrorRunsWithErrorWhenFailingAssertionIsExpected() {
-    local initial_fails numberOfAssertions
-    numberOfAssertions="2"
-    initial_fails="${FAILING_ASSERTIONS}"
-    showRunningTestMsg "testAssertNoErrorRunsWithErrorWhenFailingAssertionIsExpected"
-    assertNoError "ls some/dir/that/does/not/exist/${RANDOM}" "Expecting an error, and a failed assertion."
-    assertNoError "printf \"%s%29.5'%%s\" \"Foo\" \"bar\"" "Expecting an error, and a failed assertion."
-    [[ "$((initial_fails + numberOfAssertions))" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected() {
+    showRunningTestMsg "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
+    assertNoError "${RANDOM}${RANDOM}Foo" "assertError MUST not produce any errors on a failing assertion, rather errors produced by the command passed to assertError should be captured and displayed in dshUnit's UI."
+    [[ $? -gt 0 ]] && increaseFailingTests && return
+    increasePassingTests
 }
-
-testAssertNoErrorRunsWithErrorWhenFailingAssertionIsExpected
 
 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
     local initial_passes
@@ -38,8 +25,6 @@ testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
     [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
     increaseFailingTests
 }
-
-testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion
 
 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
     local initial_fails initial_passes
@@ -51,5 +36,8 @@ testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
     increaseFailingTests
 }
 
+testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected
+testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected
+testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion
 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion
 
