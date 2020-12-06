@@ -44,10 +44,10 @@ runTests() {
     notifyUser "Preparing to run test group ${HIGHLIGHTCOLOR}$(getSpecifiedTestGroup)${NOTIFY_COLOR} defined in the ${CONFIG_FILE_PATH} config file." 0 'dontClear'
     showLoadingBar "One moment please" 'dontClear'
     . "${CONFIG_FILE_PATH}" "${TEST_GROUP}"
-    notifyUser "${SUCCESS_COLOR}There were ${PASSING_ASSERTIONS} passing assertions." 0 'dontClear'
-    notifyUser "${ERROR_COLOR}There were ${FAILING_ASSERTIONS} failing assertions." 0 'dontClear'
-    notifyUser "${SUCCESS_COLOR}There were ${PASSING_TESTS} passing tests." 0 'dontClear'
-    notifyUser "${ERROR_COLOR}There were ${FAILING_TESTS} failing tests." 0 'dontClear'
+    showNumberOfPassingAssertions
+    showNumberOfFailingAssertions
+    showNumberOfPassingTests
+    showNumberOfFailingTests
 }
 
 increasePassingAssertions() {
