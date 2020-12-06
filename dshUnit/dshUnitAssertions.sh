@@ -21,7 +21,8 @@ assertError() {
 
 assertErrorIfDirectoryExists() {
     showAssertionMsg "assertErrorIfDirectoryExists" "${1}" "${3}"
-    error="$( "${1}" "${2}" 2>&1 1>/dev/null)"
+    error="$( "${1}" 2>&1 1>/dev/null)"
     [[ -d "${2}" ]] && [[ $? -eq 0 ]] && increaseFailedAssertions && return
+    [[ $? -gt 0 ]] && showErrorOccurredMsg "${error}"
     increasePassingAssertions
 }
