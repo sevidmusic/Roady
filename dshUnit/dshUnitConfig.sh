@@ -10,3 +10,7 @@ fi
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertError' ]]; then
     . "$(determineDshUnitDirectoryPath)/AssertErrorTests.sh"
 fi
+
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfDirectoryExists' ]]; then
+    . "$(determineDshUnitDirectoryPath)/AssertErrorIfDirectoryExistsTests.sh"
+fi
