@@ -39,3 +39,11 @@ assertErrorIfFileExists() {
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
     increasePassingAssertions
 }
+
+assertErrorIfDirectoryDoesNotExist() {
+    showAssertionMsg "assertErrorIfDirectoryDoesNotExist" "${1}" "${3}"
+    captureError "${1}"
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -d "${2}" ]] && increaseFailedAssertions && return
+    showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
+    increasePassingAssertions
+}
