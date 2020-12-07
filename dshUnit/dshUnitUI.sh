@@ -47,3 +47,20 @@ showTestPassedMsg() {
 showTestFailedMsg() {
     notifyUser "$(showAssertionFailedMsg | sed 's/Assertion/Test/g')" 0 'dontClear'
 }
+
+showNumberOfPassingAssertions() {
+    notifyUser "${SUCCESS_COLOR}There were ${PASSING_ASSERTIONS} passing assertions." 0 'dontClear'
+}
+
+showNumberOfFailingAssertions() {
+    notifyUser "${ERROR_COLOR}There were ${FAILING_ASSERTIONS} failing assertions." 0 'dontClear'
+}
+
+showNumberOfPassingTests() {
+    notifyUser "${SUCCESS_COLOR}There were ${PASSING_TESTS} passing tests." 0 'dontClear'
+}
+
+showNumberOfFailingTests() {
+    [[ "${FAILING_TESTS}" -gt 0 ]] && notifyUser "${ERROR_COLOR}There were ${FAILING_TESTS} failing tests." 0 'dontClear'
+    notifyUser "${SUCCESS_COLOR}There were ${FAILING_TESTS} failing tests." 0 'dontClear'
+}
