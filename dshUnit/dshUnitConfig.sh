@@ -26,3 +26,7 @@ fi
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfFileDoesNotExist' ]]; then
     . "$(determineDshUnitDirectoryPath)/AssertErrorIfFileDoesNotExistTests.sh"
 fi
+
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfFileIsNotExecutable' ]]; then
+    . "$(determineDshUnitDirectoryPath)/AssertErrorIfFileIsNotExecutable.sh"
+fi

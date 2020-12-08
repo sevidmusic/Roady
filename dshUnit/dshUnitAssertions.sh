@@ -56,3 +56,10 @@ assertErrorIfFileDoesNotExist() {
     increasePassingAssertions
 }
 
+assertErrorIfFileIsNotExecutable() {
+    showAssertionMsg "assertErrorIfFileIsNotExecutable" "${1}" "${3}"
+    captureError "${1}"
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -x "${2}" ]] && increaseFailedAssertions && return
+    showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
+    increasePassingAssertions
+}
