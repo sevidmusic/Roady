@@ -53,22 +53,22 @@ runTests() {
 
 increasePassingAssertions() {
     ((PASSING_ASSERTIONS++))
-    showAssertionPassedMsg
+    showAssertionPassedMsg "${1}"
 }
 
 increaseFailedAssertions() {
     ((FAILING_ASSERTIONS++))
-    showAssertionFailedMsg
+    showAssertionFailedMsg "${1}"
 }
 
 increasePassingTests() {
     ((PASSING_TESTS++))
-    showTestPassedMsg
+    showTestPassedMsg "${1}"
 }
 
 increaseFailingTests() {
     ((FAILING_TESTS++))
-    showTestFailedMsg
+    showTestFailedMsg "${1}"
 }
 
 loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"
