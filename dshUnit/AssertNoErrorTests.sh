@@ -19,14 +19,18 @@ testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected(
 
 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
     assertNoError 'echo There should not be any errors and PASSING_ASSERTIONS MUST increase' "assertNoError MUST increase the number of PASSING_ASSERTIONS on passing assertion."
+    assertNoError 'ls' "assertNoError MUST increase the number of PASSING_ASSERTIONS on passing assertion."
+    assertNoError 'printf There should not be any errors and PASSING_ASSERTIONS MUST increase' "assertNoError MUST increase the number of PASSING_ASSERTIONS on passing assertion."
 }
 
 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
     assertNoError '${RANDOM}' "assertNoError MUST increase the number of FAILING_ASSERTIONS on failing assertion."
+    assertNoError 'ls ${RANDOM}' "assertNoError MUST increase the number of FAILING_ASSERTIONS on failing assertion."
+    assertNoError 'cat ${RANDOM}' "assertNoError MUST increase the number of FAILING_ASSERTIONS on failing assertion."
 }
 
 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected
 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected
-runTest testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion
-runTest testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion "" "allAssertionsFail"
+runTest testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion "3"
+runTest testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion "3" "allAssertionsFail"
 
