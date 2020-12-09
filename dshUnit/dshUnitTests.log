@@ -142,3 +142,68 @@
 
 [0m[43m[30mWed Dec  9 08:58:52 AM EST 2020 assertNoError Failed[0m
 [0m[104m[30mWed Dec  9 08:58:55 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30mWed Dec  9 10:11:21 AM EST 2020 assertNoError Passed[0m
+[0m[44m[30mWed Dec  9 10:11:22 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:11:26 AM EST 2020 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[43m[30mWed Dec  9 10:11:38 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:11:43 AM EST 2020 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30mWed Dec  9 10:11:49 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:11:53 AM EST 2020 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 10:12:03 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:12:07 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30mWed Dec  9 10:15:11 AM EST 2020 assertNoError Passed[0m
+[0m[44m[30mWed Dec  9 10:15:12 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:15:16 AM EST 2020 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[43m[30mWed Dec  9 10:15:28 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:15:33 AM EST 2020 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30mWed Dec  9 10:15:39 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:15:43 AM EST 2020 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 10:15:53 AM EST 2020 assertNoError Failed[0m
+[0m[103m[30mWed Dec  9 10:15:57 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Failed[0m
+
+[0m[44m[30mWed Dec  9 10:16:31 AM EST 2020 assertNoError Passed[0m
+[0m[44m[30mWed Dec  9 10:16:33 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:16:37 AM EST 2020 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[43m[30mWed Dec  9 10:16:48 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:16:53 AM EST 2020 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30mWed Dec  9 10:16:59 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:17:03 AM EST 2020 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 10:17:13 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:17:17 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30mWed Dec  9 10:18:15 AM EST 2020 assertNoError Passed[0m
+[0m[44m[30mWed Dec  9 10:18:16 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:18:20 AM EST 2020 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[43m[30mWed Dec  9 10:18:32 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:18:36 AM EST 2020 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30mWed Dec  9 10:18:43 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:18:47 AM EST 2020 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 10:18:57 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:19:01 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30mWed Dec  9 10:21:18 AM EST 2020 assertNoError Passed[0m
+[0m[44m[30mWed Dec  9 10:21:19 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:21:23 AM EST 2020 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[43m[30mWed Dec  9 10:21:35 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:21:39 AM EST 2020 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30mWed Dec  9 10:21:46 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 10:21:50 AM EST 2020 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 10:22:00 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 10:22:04 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
