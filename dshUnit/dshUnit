@@ -36,19 +36,21 @@ getSpecifiedTestGroup() {
 }
 
 runTest() {
-    local initial_fails initial_passes test_name number_of_assertions expectation
+    local initial_fails initial_passes test_name number_of_assertions expectation expected_fails expected_passes
     initial_passes="${PASSING_ASSERTIONS}"
     initial_fails="${FAILING_ASSERTIONS}"
     test_name="${1}"
     number_of_assertions="${2:-1}"
     expectation="${3:-allAssertionsPass}"
+    expected_fails=$(( initial_fails+number_of_assertions ))
+    expected_passes=$(( initial_passes+number_of_assertions ))
     showRunningTestMsg "${1}"
     "${test_name}"
     if [[ "${expectation}" == "allAssertionsFail" ]]; then
-        [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "${test_name}" && return 0
+        [[ "${FAILING_ASSERTIONS}" == "${expected_fails}" ]] && increasePassingTests "${test_name}" && return 0
         increaseFailingTests "${test_name}" && return 0
     fi
-    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests "${test_name}" && return 0
+    [[ "${PASSING_ASSERTIONS}" == "${expected_passes}" ]] && increasePassingTests "${test_name}" && return 0
     increaseFailingTests "${test_name}" && return 0
 }
 

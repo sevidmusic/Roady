@@ -12,7 +12,7 @@ testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected() {
 
 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected() {
     showRunningTestMsg "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
-    assertNoError "${RANDOM}${RANDOM}Foo" "assertError MUST not produce any errors on a failing assertion, rather errors produced by the command passed to assertError should be captured and displayed in dshUnit's UI."
+    assertNoError "assertNoError ${RANDOM}${RANDOM}Foo" "assertError MUST not produce any errors on a failing assertion, rather errors produced by the command passed to assertError should be captured and displayed in dshUnit's UI."
     [[ $? -gt 0 ]] && increaseFailingTests "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected" && return
     increasePassingTests "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
 }
