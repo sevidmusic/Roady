@@ -27,9 +27,6 @@ testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
 }
 
 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
-    local initial_fails initial_passes
-    initial_passes="${PASSING_ASSERTIONS}"
-    initial_fails="${FAILING_ASSERTIONS}"
     assertNoError '${RANDOM}' "assertNoError MUST increase the number of FAILING_ASSERTIONS on failing assertion."
 }
 

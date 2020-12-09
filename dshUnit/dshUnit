@@ -36,6 +36,9 @@ getSpecifiedTestGroup() {
 }
 
 runTest() {
+    local initial_fails initial_passes
+    initial_passes="${PASSING_ASSERTIONS}"
+    initial_fails="${FAILING_ASSERTIONS}"
     showRunningTestMsg "${1}"
     "${1}"
     if [[ "${3}" == "allAssertionsFail" ]]; then
