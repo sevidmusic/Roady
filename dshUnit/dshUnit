@@ -42,9 +42,11 @@ runTest() {
     showRunningTestMsg "${1}"
     "${1}"
     if [[ "${3}" == "allAssertionsFail" ]]; then
-        [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "${1}" && return
-        increaseFailingTests "${1}"
+        [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "${1}" && return 0
+        increaseFailingTests "${1}" && return 0
     fi
+    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests "${1}" && return 0
+    increaseFailingTests "${1}" && return 0
 }
 
 runTests() {
