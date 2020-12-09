@@ -54,21 +54,25 @@ runTests() {
 increasePassingAssertions() {
     ((PASSING_ASSERTIONS++))
     showAssertionPassedMsg "${1}"
+    printf "\n\e[0m\e[44m\e[30m%s Passed\e[0m" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 increaseFailedAssertions() {
     ((FAILING_ASSERTIONS++))
     showAssertionFailedMsg "${1}"
+    printf "\n\e[0m\e[43m\e[30m%s Failed\e[0m" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 increasePassingTests() {
     ((PASSING_TESTS++))
     showTestPassedMsg "${1}"
+    printf "\n\e[0m\e[104m\e[30m%s Passed\e[0m\n" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 increaseFailingTests() {
     ((FAILING_TESTS++))
     showTestFailedMsg "${1}"
+    printf "\n\e[0m\e[103m\e[30m%s Failed\e[0m\n" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"

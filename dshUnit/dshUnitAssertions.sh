@@ -68,6 +68,6 @@ assertDirectoryExists() {
     showAssertionMsg "assertDirectoryExists" "${1}" "${3}"
     captureError "${1}"
     [[ "${CURRENT_ERROR_COUNT:-0}" -gt 0 ]] && showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    [[ -d "${2}" ]] && increasePassingAssertions "assertDirectoryExists"
-    increaseFailedAssertions "assertDirectoryExists" && return
+    [[ -d "${2}" ]] && increasePassingAssertions "assertDirectoryExists" && return
+    increaseFailedAssertions "assertDirectoryExists"
 }

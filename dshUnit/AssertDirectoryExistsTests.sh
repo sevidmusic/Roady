@@ -9,8 +9,8 @@ testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected() {
     random_directory_path="${RANDOM}/${RANDOM}/FooBar${RANDOM}"
     showRunningTestMsg "testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
     assertNoError "assertDirectoryExists \"ls ${random_directory_path}\" \"${random_directory_path}\" 'Test message'" "assertDirectoryExists MUST run without error when failing assertion is expected."
-    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests "testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected" && return
+    increaseFailingTests "testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
 }
 
 testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected() {
@@ -18,8 +18,8 @@ testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected() {
     initial_fails="${FAILING_ASSERTIONS}"
     showRunningTestMsg "testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
     assertNoError "assertDirectoryExists \"ls $(determineDshUnitDirectoryPath)\" \"$(determineDshUnitDirectoryPath)\" 'Test message'" "assertDirectoryExists MUST run without error when passing assertion is expected."
-    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increasePassingTests
+    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests  "testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected" && return
+    increaseFailingTests "testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
 }
 
 testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
@@ -27,8 +27,8 @@ testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
     initial_passes="${PASSING_ASSERTIONS}"
     showRunningTestMsg "testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion"
     assertDirectoryExists "ls $(determineDshUnitDirectoryPath)" "$(determineDshUnitDirectoryPath)" "assertDirectoryExists MUST increase the number of PASSING_ASSERTIONS on passing assertion."
-    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests "testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion" && return
+    increaseFailingTests "testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion"
 }
 
 testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
@@ -37,8 +37,8 @@ testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
     random_directory_path="${RANDOM}/FooBar${RANDOM}"
     showRunningTestMsg "testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion"
     assertDirectoryExists "ls ${random_directory_path}" "${random_directory_path}" "assertDirectoryExists MUST increase the number of FAILING_ASSERTIONS on failing assertion."
-    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion" && return
+    increaseFailingTests "testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion"
 }
 
 testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected

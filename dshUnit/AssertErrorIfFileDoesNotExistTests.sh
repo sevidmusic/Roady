@@ -9,8 +9,8 @@ testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpe
     random_file_path="${RANDOM}/${RANDOM}/Foo${RANDOM}"
     showRunningTestMsg "testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
     assertNoError "assertErrorIfFileDoesNotExist \"echo ${random_file_path}\" \"${random_file_path}\" 'Test message'" "assertErrorIfFileDoesNotExist MUST run without error when failing assertion is expected."
-    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests "testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected" && return
+    increaseFailingTests"testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
 }
 
 testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected() {
@@ -19,8 +19,8 @@ testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpe
     random_file_path="${RANDOM}/${RANDOM}/Bar${RANDOM}"
     showRunningTestMsg "testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
     assertNoError "assertErrorIfFileDoesNotExist \"cat ${random_file_path}\" \"${random_file_path}\" 'Test message'" "assertErrorIfFileDoesNotExist MUST run without error when passing assertion is expected."
-    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increasePassingTests
+    [[ "${initial_fails}" == "${FAILING_ASSERTIONS}" ]] && increasePassingTests "testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected" && return
+    increasePassingTests "testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
 }
 
 testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion() {
@@ -29,8 +29,8 @@ testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion()
     random_file_path="${RANDOM}/Foo${RANDOM}"
     showRunningTestMsg "testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion"
     assertErrorIfFileDoesNotExist "cat ${random_file_path}" "${random_file_path}" "assertErrorIfFileDoesNotExist MUST increase the number of PASSING_ASSERTIONS on passing assertion."
-    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+    [[ "${initial_passes}" -lt "${PASSING_ASSERTIONS}" ]] && increasePassingTests "testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion" && return
+    increaseFailingTests "testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion"
 }
 
 testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
@@ -39,8 +39,8 @@ testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion()
     random_file_path="${RANDOM}/Bar${RANDOM}"
     showRunningTestMsg "testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion"
     assertErrorIfFileDoesNotExist "echo ${random_file_path}" "${random_file_path}" "assertErrorIfFileDoesNotExist MUST increase the number of FAILING_ASSERTIONS on failing assertion."
-    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests && return
-    increaseFailingTests
+    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion" && return
+    increaseFailingTests "testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion"
 }
 
 testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected
