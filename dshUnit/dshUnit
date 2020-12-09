@@ -35,6 +35,15 @@ getSpecifiedTestGroup() {
     printf "%s" "${TEST_GROUP}"
 }
 
+runTest() {
+    showRunningTestMsg "${1}"
+    "${1}"
+    if [[ "${3}" == "allAssertionsFail" ]]; then
+        [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "${1}" && return
+        increaseFailingTests "${1}"
+    fi
+}
+
 runTests() {
     clear
     PASSING_ASSERTIONS="${PASSING_ASSERTIONS:-0}";

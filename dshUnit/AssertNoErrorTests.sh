@@ -30,14 +30,11 @@ testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion() {
     local initial_fails initial_passes
     initial_passes="${PASSING_ASSERTIONS}"
     initial_fails="${FAILING_ASSERTIONS}"
-    showRunningTestMsg "testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion"
     assertNoError '${RANDOM}' "assertNoError MUST increase the number of FAILING_ASSERTIONS on failing assertion."
-    [[ "${initial_fails}" -lt "${FAILING_ASSERTIONS}" ]] && increasePassingTests "testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion" && return
-    increaseFailingTests "testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion"
 }
 
-testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected
-testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected
-testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion
-testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion
+#testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected
+#testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected
+#testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion
+runTest testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion "" "allAssertionsFail"
 

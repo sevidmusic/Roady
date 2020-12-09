@@ -109,3 +109,36 @@
 
 [0m[43m[30mWed Dec  9 06:56:54 AM EST 2020 assertDirectoryExists Failed[0m
 [0m[104m[30mWed Dec  9 06:56:58 AM EST 2020 testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30mWed Dec  9 08:50:12 AM EST 2020 assertNoError Passed[0m
+[0m[44m[30mWed Dec  9 08:50:13 AM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec  9 08:50:17 AM EST 2020 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[43m[30mWed Dec  9 08:50:42 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:50:46 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:51:32 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:51:36 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:52:04 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:52:08 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:52:48 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:52:52 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:53:56 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:54:00 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:56:08 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:56:12 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:56:34 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:56:38 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:57:52 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:57:56 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[104m[30mWed Dec  9 08:58:00 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[43m[30mWed Dec  9 08:58:52 AM EST 2020 assertNoError Failed[0m
+[0m[104m[30mWed Dec  9 08:58:55 AM EST 2020 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
