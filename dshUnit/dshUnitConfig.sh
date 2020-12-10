@@ -47,4 +47,12 @@ if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'Test
     . "$(determineDshUnitDirectoryPath)/AssertFileDoesNotExistTests.sh"
 fi
 
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertEquals' ]]; then
+    . "$(determineDshUnitDirectoryPath)/AssertEqualsTests.sh"
+fi
+
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertNotEquals' ]]; then
+    . "$(determineDshUnitDirectoryPath)/AssertNotEqualsTests.sh"
+fi
+
 
