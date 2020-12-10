@@ -34,3 +34,7 @@ fi
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertDirectoryExists' ]]; then
     . "$(determineDshUnitDirectoryPath)/AssertDirectoryExistsTests.sh"
 fi
+
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertDirectoryDoesNotExist' ]]; then
+    . "$(determineDshUnitDirectoryPath)/AssertDirectoryDoesNotExistTests.sh"
+fi
