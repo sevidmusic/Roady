@@ -35,6 +35,26 @@ getSpecifiedTestGroup() {
     printf "%s" "${TEST_GROUP}"
 }
 
+runTest() {
+    local initial_fails initial_passes test_name number_of_assertions expectation expected_fails expected_passes
+    initial_passes="${PASSING_ASSERTIONS}"
+    initial_fails="${FAILING_ASSERTIONS}"
+    test_name="${1}"
+    number_of_assertions="${2:-1}"
+    expectation="${3:-allAssertionsPass}"
+    expected_fails=$(( initial_fails+number_of_assertions ))
+    expected_passes=$(( initial_passes+number_of_assertions ))
+    showRunningTestMsg "${1}"
+    notifyUser "    ${HIGHLIGHTCOLOR}Expecting ${number_of_assertions} assertions." 0 'dontClear'
+    "${test_name}"
+    if [[ "${expectation}" == "allAssertionsFail" ]]; then
+        [[ "${FAILING_ASSERTIONS}" == "${expected_fails}" ]] && increasePassingTests "${test_name}" && return 0
+        increaseFailingTests "${test_name}" && return 0
+    fi
+    [[ "${PASSING_ASSERTIONS}" == "${expected_passes}" ]] && increasePassingTests "${test_name}" && return 0
+    increaseFailingTests "${test_name}" && return 0
+}
+
 runTests() {
     clear
     PASSING_ASSERTIONS="${PASSING_ASSERTIONS:-0}";
@@ -53,22 +73,26 @@ runTests() {
 
 increasePassingAssertions() {
     ((PASSING_ASSERTIONS++))
-    showAssertionPassedMsg
+    showAssertionPassedMsg "${1}"
+    printf "\n\e[0m\e[44m\e[30m$(date) %s Passed\e[0m" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 increaseFailedAssertions() {
     ((FAILING_ASSERTIONS++))
-    showAssertionFailedMsg
+    showAssertionFailedMsg "${1}"
+    printf "\n\e[0m\e[43m\e[30m$(date) %s Failed\e[0m" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 increasePassingTests() {
     ((PASSING_TESTS++))
-    showTestPassedMsg
+    showTestPassedMsg "${1}"
+    printf "\n\e[0m\e[104m\e[30m$(date) %s Passed\e[0m\n" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 increaseFailingTests() {
     ((FAILING_TESTS++))
-    showTestFailedMsg
+    showTestFailedMsg "${1}"
+    printf "\n\e[0m\e[103m\e[30m$(date) %s Failed\e[0m\n" "${1:-Assertion}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 loadLibrary "$(determineDshUnitDirectoryPath | sed 's/\/dshUnit//g')/dshUI/dshUI" "--theme dshUnit.sh"

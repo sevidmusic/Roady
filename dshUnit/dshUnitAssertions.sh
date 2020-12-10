@@ -11,63 +11,63 @@ captureError() {
 assertNoError() {
     showAssertionMsg "assertNoError" "${1}" "${2}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && increasePassingAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && increasePassingAssertions "assertNoError" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increaseFailedAssertions
+    increaseFailedAssertions "assertNoError"
 }
 
 assertError() {
     showAssertionMsg "assertError" "${1}" "${2}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && increaseFailedAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && increaseFailedAssertions "assertError" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increasePassingAssertions
+    increasePassingAssertions "assertError"
 }
 
 assertErrorIfDirectoryExists() {
     showAssertionMsg "assertErrorIfDirectoryExists" "${1}" "${3}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ -d "${2}" ]] && increaseFailedAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ -d "${2}" ]] && increaseFailedAssertions "assertErrorIfDirectoryExists" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increasePassingAssertions
+    increasePassingAssertions "assertErrorIfDirectoryExists"
 }
 
 assertErrorIfFileExists() {
     showAssertionMsg "assertErrorIfFileExists" "${1}" "${3}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ -f "${2}" ]] && increaseFailedAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ -f "${2}" ]] && increaseFailedAssertions "assertErrorIfFileExists" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increasePassingAssertions
+    increasePassingAssertions "assertErrorIfFileExists"
 }
 
 assertErrorIfDirectoryDoesNotExist() {
     showAssertionMsg "assertErrorIfDirectoryDoesNotExist" "${1}" "${3}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -d "${2}" ]] && increaseFailedAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -d "${2}" ]] && increaseFailedAssertions "assertErrorIfDirectoryDoesNotExist" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increasePassingAssertions
+    increasePassingAssertions "assertErrorIfDirectoryDoesNotExist"
 }
 
 assertErrorIfFileDoesNotExist() {
     showAssertionMsg "assertErrorIfFileDoesNotExist" "${1}" "${3}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -f "${2}" ]] && increaseFailedAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -f "${2}" ]] && increaseFailedAssertions "assertErrorIfFileDoesNotExist" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increasePassingAssertions
+    increasePassingAssertions "assertErrorIfFileDoesNotExist"
 }
 
 assertErrorIfFileIsNotExecutable() {
     showAssertionMsg "assertErrorIfFileIsNotExecutable" "${1}" "${3}"
     captureError "${1}"
-    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -x "${2}" ]] && increaseFailedAssertions && return
+    [[ "${CURRENT_ERROR_COUNT:-0}" -eq 0 ]] && [[ ! -x "${2}" ]] && increaseFailedAssertions "assertErrorIfFileIsNotExecutable" && return
     showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    increasePassingAssertions
+    increasePassingAssertions "assertErrorIfFileIsNotExecutable"
 }
 
 assertDirectoryExists() {
     showAssertionMsg "assertDirectoryExists" "${1}" "${3}"
     captureError "${1}"
     [[ "${CURRENT_ERROR_COUNT:-0}" -gt 0 ]] && showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
-    [[ -d "${2}" ]] && increasePassingAssertions
-    increaseFailedAssertions
+    [[ -d "${2}" ]] && increasePassingAssertions "assertDirectoryExists" && return
+    increaseFailedAssertions "assertDirectoryExists"
 }
