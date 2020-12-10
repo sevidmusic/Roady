@@ -79,3 +79,19 @@ assertDirectoryDoesNotExist() {
     [[ ! -d "${2}" ]] && increasePassingAssertions "assertDirectoryDoesNotExist" && return
     increaseFailedAssertions "assertDirectoryDoesNotExist"
 }
+
+assertFileExists() {
+    showAssertionMsg "assertFileExists" "${1}" "${3}"
+    captureError "${1}"
+    [[ "${CURRENT_ERROR_COUNT:-0}" -gt 0 ]] && showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
+    [[ -f "${2}" ]] && increasePassingAssertions "assertFileExists" && return
+    increaseFailedAssertions "assertFileExists"
+}
+
+assertFileDoesNotExist() {
+    showAssertionMsg "assertFileDoesNotExist" "${1}" "${3}"
+    captureError "${1}"
+    [[ "${CURRENT_ERROR_COUNT:-0}" -gt 0 ]] && showErrorOccurredMsg "${LAST_CAPTURED_ERROR_MSG:-NO_MESSAGE}"
+    [[ ! -f "${2}" ]] && increasePassingAssertions "assertFileDoesNotExist" && return
+    increaseFailedAssertions "assertFileDoesNotExist"
+}
