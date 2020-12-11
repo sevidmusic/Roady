@@ -36,7 +36,7 @@ showRunningTestMsg() {
     notifyUser "${running_msg}" 0 'dontClear'
     notifyUser "${expected_assertion_msg}" 0 'dontClear'
     printf "\n\e[0m\e[44m\e[30m%s\e[0m" "${running_msg}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
-    printf "\n\e[0m\e[44m\e[30m%s\e[0m" "${expected_assertion_msg}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
+    #printf "\n\e[0m\e[44m\e[30m%s\e[0m" "${expected_assertion_msg}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 showTestPassedMsg() {
