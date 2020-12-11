@@ -95,3 +95,15 @@ assertFileDoesNotExist() {
     [[ ! -f "${2}" ]] && increasePassingAssertions "assertFileDoesNotExist" && return
     increaseFailedAssertions "assertFileDoesNotExist"
 }
+
+assertEquals() {
+    showAssertionMsg "assertEquals" "${1}" "${3}"
+    [[ "${1}" == "${2}" ]] && increasePassingAssertions "assertEquals" && return
+    increaseFailedAssertions "assertEquals"
+}
+
+assertNotEquals() {
+    showAssertionMsg "assertNotEquals" "${1}" "${3}"
+    [[ "${1}" != "${2}" ]] && increasePassingAssertions "assertNotEquals" && return
+    increaseFailedAssertions "assertNotEquals"
+}
