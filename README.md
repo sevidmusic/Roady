@@ -20,7 +20,7 @@ The above will do the following:
    web browser.
 
 Note: The Darling Data Management System is still in development, an official
-      development and production release will be ready by the end of November 2020.
+      development and production release will be ready by the end of December 2020.
 
 Note: The Darling Data Management System requires PHP >= 7.4
 
