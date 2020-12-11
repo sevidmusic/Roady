@@ -44,8 +44,7 @@ runTest() {
     expectation="${3:-allAssertionsPass}"
     expected_fails=$(( initial_fails+number_of_assertions ))
     expected_passes=$(( initial_passes+number_of_assertions ))
-    showRunningTestMsg "${1}"
-    notifyUser "    ${HIGHLIGHTCOLOR}Expecting ${number_of_assertions} assertions." 0 'dontClear'
+    showRunningTestMsg "${1}" "${number_of_assertions}"
     "${test_name}"
     if [[ "${expectation}" == "allAssertionsFail" ]]; then
         [[ "${FAILING_ASSERTIONS}" == "${expected_fails}" ]] && increasePassingTests "${test_name}" && return 0

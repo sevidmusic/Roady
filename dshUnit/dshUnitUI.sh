@@ -30,7 +30,13 @@ showFailingTestDidNotIncreaseFAILING_ASSERTIONSWarning() {
 }
 
 showRunningTestMsg() {
-    notifyUser "${COLOR_17}-=-=     Running ${1}     =-=-" 0 'dontClear'
+    local running_msg expected_assertion_msg
+    running_msg="${COLOR_17}-=-=     Running ${1}     =-=-"
+    expected_assertion_msg="    ${HIGHLIGHTCOLOR}Expecting ${2} assertions."
+    notifyUser "${running_msg}" 0 'dontClear'
+    notifyUser "${expected_assertion_msg}" 0 'dontClear'
+    printf "\n\e[0m\e[44m\e[30m%s\e[0m" "${running_msg}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
+    printf "\n\e[0m\e[44m\e[30m%s\e[0m" "${expected_assertion_msg}" >> "$(determineDshUnitDirectoryPath)/dshUnitTests.log"
 }
 
 showTestPassedMsg() {
