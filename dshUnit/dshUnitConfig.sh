@@ -4,55 +4,55 @@
 set -o posix
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertNoError' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertNoErrorTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertNoErrorTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertError' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertErrorTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertErrorTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfDirectoryExists' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertErrorIfDirectoryExistsTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertErrorIfDirectoryExistsTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfFileExists' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertErrorIfFileExistsTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertErrorIfFileExistsTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfDirectoryDoesNotExist' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertErrorIfDirectoryDoesNotExistTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertErrorIfDirectoryDoesNotExistTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfFileDoesNotExist' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertErrorIfFileDoesNotExistTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertErrorIfFileDoesNotExistTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertErrorIfFileIsNotExecutable' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertErrorIfFileIsNotExecutable.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertErrorIfFileIsNotExecutable.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertDirectoryExists' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertDirectoryExistsTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertDirectoryExistsTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertDirectoryDoesNotExist' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertDirectoryDoesNotExistTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertDirectoryDoesNotExistTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertFileExists' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertFileExistsTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertFileExistsTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertFileDoesNotExist' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertFileDoesNotExistTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertFileDoesNotExistTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertEquals' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertEqualsTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertEqualsTests.sh"
 fi
 
 if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestAssertNotEquals' ]]; then
-    . "$(determineDshUnitDirectoryPath)/AssertNotEqualsTests.sh"
+    loadLibrary "$(determineDshUnitDirectoryPath)/AssertNotEqualsTests.sh"
 fi
 
 

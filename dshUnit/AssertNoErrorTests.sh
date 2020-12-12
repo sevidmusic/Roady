@@ -4,14 +4,14 @@
 set -o posix
 
 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected() {
-    showRunningTestMsg "testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
+    showRunningTestMsg "testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected" "1"
     assertNoError "assertNoError ls 'Test message'" "assertNoError MUST run without error"
     [[ $? -gt 0 ]] && increaseFailingTests "testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected" && return
     increasePassingTests "testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected"
 }
 
 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected() {
-    showRunningTestMsg "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
+    showRunningTestMsg "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected" "1"
     assertNoError "assertNoError ${RANDOM}${RANDOM}Foo" "assertError MUST not produce any errors on a failing assertion, rather errors produced by the command passed to assertError should be captured and displayed in dshUnit's UI."
     [[ $? -gt 0 ]] && increaseFailingTests "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected" && return
     increasePassingTests "testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected"
