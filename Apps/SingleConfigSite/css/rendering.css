@@ -1,0 +1,53 @@
+/*
+ * rendering.css
+ * opacity, box-sizing, overflow, display, position
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+.logo {
+    position: -webkit-sticky;
+    position: sticky;
+    overflow: hidden;
+    top: 0;
+}
+
+.main-menu a {
+    display: block;
+}
+
+.main-menu {
+    position: fixed;
+}
+
+.output {
+    overflow: auto;
+}
+
+.component-info {
+    overflow: auto;
+}
+
+.component-info-output-preview {
+    overflow: auto;
+}
+
+.overview-title {
+    overflow: visible;
+}
+
+.component-info {
+    opacity: .72;
+}
+
+.box-text {
+    opacity: 0.72em;
+    display: inline-block;
+    overflow: auto;
+}

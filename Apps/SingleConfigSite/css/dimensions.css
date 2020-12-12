@@ -1,0 +1,25 @@
+/*
+ * dimensions.css
+ * *width*, *height*
+ */
+
+.logo {
+    height: 7em;
+}
+
+.main-menu {
+    width: 8em; /** width MUST match output left margin */
+    height: 100%;
+}
+
+.component-info-table {
+    width:90%;
+}
+
+.logo {
+    width: 100%;
+}
+
+.box-text {
+    width: 90%;
+}
