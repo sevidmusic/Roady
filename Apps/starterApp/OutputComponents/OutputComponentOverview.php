@@ -1,6 +1,6 @@
 <?php
 
-$outputComponentOverview = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'OutputComponentOverview',
     'Output',
     0,

@@ -1,6 +1,6 @@
 <?php
 
-$logo = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'Logo',
     'Output',
     0,

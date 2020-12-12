@@ -1,6 +1,6 @@
 <?php
 
-$closingHtmlTag = $appComponentsFactory->buildOutputComponent(
+ $appComponentsFactory->buildOutputComponent(
     'ClosingHtmlTag',
     'Output',
     '</html>' . PHP_EOL,

@@ -1,6 +1,6 @@
 <?php
 
-$stylesheets = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'Stylesheets',
     'Output',
     0.5,

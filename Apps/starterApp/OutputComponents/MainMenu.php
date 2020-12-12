@@ -1,6 +1,6 @@
 <?php
 
-$mainMenu = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'MainMenu',
     'Output',
     0.1,

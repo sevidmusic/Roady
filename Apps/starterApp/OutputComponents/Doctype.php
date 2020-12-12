@@ -1,6 +1,6 @@
 <?php
 
-$doctype = $appComponentsFactory->buildOutputComponent(
+ $appComponentsFactory->buildOutputComponent(
     'Doctype',
     'Output',
     '<!DOCTYPE html>' . PHP_EOL,

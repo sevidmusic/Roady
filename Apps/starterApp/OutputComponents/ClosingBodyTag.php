@@ -1,6 +1,6 @@
 <?php
 
-$closingBodyTag = $appComponentsFactory->buildOutputComponent(
+ $appComponentsFactory->buildOutputComponent(
     'ClosingBodyTag',
     'Output',
     '</body>' . PHP_EOL,

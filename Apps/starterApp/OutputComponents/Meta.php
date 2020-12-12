@@ -1,6 +1,6 @@
 <?php
 
-$meta = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'Meta',
     'Output',
     0.4,
