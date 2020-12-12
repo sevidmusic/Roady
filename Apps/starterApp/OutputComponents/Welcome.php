@@ -1,6 +1,6 @@
 <?php
 
-$welcome = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'Welcome',
     'Output',
     0,

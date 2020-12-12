@@ -1,6 +1,6 @@
 <?php
 
-$title = $appComponentsFactory->buildDynamicOutputComponent(
+ $appComponentsFactory->buildDynamicOutputComponent(
     'Title',
     'Output',
     0.3,

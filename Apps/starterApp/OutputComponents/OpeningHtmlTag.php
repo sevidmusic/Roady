@@ -1,6 +1,6 @@
 <?php
 
-$openingHtmlTag = $appComponentsFactory->buildOutputComponent(
+ $appComponentsFactory->buildOutputComponent(
     'OpeningHtmlTag',
     'Output',
     '<html lang="en">' . PHP_EOL,

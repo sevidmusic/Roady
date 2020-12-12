@@ -1,6 +1,6 @@
 <?php
 
-$openingHeadTag = $appComponentsFactory->buildOutputComponent(
+ $appComponentsFactory->buildOutputComponent(
     'OpeningHeadTag',
     'Output',
     '<head>' . PHP_EOL,
