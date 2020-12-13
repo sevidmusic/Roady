@@ -14,17 +14,22 @@ require(
     'autoload.php'
 );
 
+function loadComponentConfigFiles(string $configurationDirectoryName, AppComponentsFactory $appComponentsFactory): void {
+    $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
+    foreach(array_diff(scandir($configurationDirectoryPath), array('.', '..')) as $file) {
+        require $configurationDirectoryPath . $file;
+    }
+}
+
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
     AppComponentsFactory::buildDomain('http://localhost:8080')
     )
 );
 
-require __DIR__ . DIRECTORY_SEPARATOR . 'Output.php';
-require __DIR__ . DIRECTORY_SEPARATOR . 'Requests.php';
-require __DIR__ . DIRECTORY_SEPARATOR . 'Responses.php';
+loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
+loadComponentConfigFiles('Requests', $appComponentsFactory);
+loadComponentConfigFiles('Responses', $appComponentsFactory);
 
-$appComponentsFactory->buildLog(
-    AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG
-);
+$appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
 
