@@ -1,0 +1,6 @@
+#!/bin/bash
+# dsh
+
+set -o posix
+
+printf "\e[0m\e[30m\e[102m\ndsh is still under development.\e[0m\n\n"
