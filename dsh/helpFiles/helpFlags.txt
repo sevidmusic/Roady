@@ -1,0 +1,1 @@
+Show brief help information about all flags.
