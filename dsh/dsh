@@ -4,3 +4,28 @@
 set -o posix
 
 printf "\e[0m\e[30m\e[102m\ndsh is still under development.\e[0m\n\n"
+
+showManPage() {
+    local users_man_directory_path users_man1_directory_path
+    users_man_directory_path="${HOME}/.local/share/man"
+    users_man1_directory_path="${users_man_directory_path}/man1"
+    [[ ! -d "${users_man_directory_path}" ]] && mkdir "${users_man_directory_path}"
+    [[ ! -d "${users_man1_directory_path}" ]] && mkdir "${users_man1_directory_path}"
+    [[ -d "${users_man1_directory_path}" ]] && printf "dsh help test create man from dsh" > "${users_man1_directory_path}/dsh.1"
+}
+
+while test $# -gt 0; do
+  case "$1" in
+  -h | --help)
+    shift
+    showManPage
+    exit 0
+    ;;
+  *)
+    shift
+    logErrorMsgAndExit1 "Invalid flag ${1}"
+    ;;
+  esac
+done
+
+

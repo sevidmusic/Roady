@@ -1,5 +1,9 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpRunsWithoutError     =-=-[0m
-[0m[44m[30mWed Dec 16 06:25:17 PM EST 2020 assertNoError Passed[0m
-[0m[104m[30mWed Dec 16 06:25:20 PM EST 2020 testDshHelpRunsWithoutError Passed[0m
+[0m[44m[30mWed Dec 16 07:20:04 PM EST 2020 assertNoError Passed[0m
+[0m[104m[30mWed Dec 16 07:20:07 PM EST 2020 testDshHelpRunsWithoutError Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpCreatesSystemManPageForDsh     =-=-[0m
+[0m[44m[30mWed Dec 16 07:20:13 PM EST 2020 assertFileExists Passed[0m
+[0m[104m[30mWed Dec 16 07:20:16 PM EST 2020 testDshHelpCreatesSystemManPageForDsh Passed[0m
