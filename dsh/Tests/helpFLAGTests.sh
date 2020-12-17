@@ -29,8 +29,8 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh -h help" "dsh -h help MUST run without error."
     assertNoError "dsh -h FLAG" "dsh -h FLAG MUST run without error."
     assertNoError "dsh -h flags" "dsh -h flags MUST run without error."
-    assertNoError "dsh -h -s" "dsh -h -start-development-server MUST run without error."
-    assertNoError "dsh -h -b" "dsh -h -build-app MUST run without error."
+    assertNoError "dsh -h -s" "dsh -h -s MUST run without error."
+    assertNoError "dsh -h -b" "dsh -h -b MUST run without error."
     assertNoError "dsh -h -n" "dsh -h -n MUST run without error."
     assertNoError "dsh -h -n App" "dsh -h -n App MUST run without error."
     assertNoError "dsh -h -n OutputComponent" "dsh -h -n OutputComponent MUST run without error."
@@ -38,9 +38,9 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh -h -n Request" "dsh -h -n Request MUST run without error."
     assertNoError "dsh -h -n Response" "dsh -h -n Response MUST run without error."
     assertNoError "dsh -h -n GlobalResponse" "dsh -h -n GlobalResponse MUST run without error."
-    assertNoError "dsh -h -a" "dsh -h -assign-to-response MUST run without error."
-    assertNoError "dsh -h -p" "dsh -h -php-unit MUST run without error."
-    assertNoError "dsh -h -d" "dsh -h -dsh-unit MUST run without error."
+    assertNoError "dsh -h -a" "dsh -h -a MUST run without error."
+    assertNoError "dsh -h -p" "dsh -h -p MUST run without error."
+    assertNoError "dsh -h -d" "dsh -h -d MUST run without error."
 
 }
 
