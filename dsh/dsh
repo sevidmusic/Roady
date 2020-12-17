@@ -3,6 +3,15 @@
 
 set -o posix
 
+logErrorMsg() {
+    printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr
+}
+
+logErrorMsgAndExit1() {
+    logErrorMsg "${1}"
+    exit 1
+}
+
 determineDshDirectoryPath() {
     local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH
     CURRENT_FILE_PATH="${BASH_SOURCE[0]}"
@@ -12,6 +21,13 @@ determineDshDirectoryPath() {
       [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH" # if $CURRENT_FILE_PATH was a relative symlink, we need to resolve it relative to the path where the symlink file was located
     done
     printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+}
+
+loadLibrary() {
+    # use of -x instead of -f is intentinal, the file MUST exist and be executable
+    # @seehttps://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Conditional-Expressions
+    [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."
+    . ${1} ${2}
 }
 
 updateAndShowManPage() {
@@ -24,6 +40,8 @@ updateAndShowManPage() {
     [[ -d "${users_man1_directory_path}" ]] && cp "${help_file_path}" "${users_man1_directory_path}/dsh.1"
     man "${users_man1_directory_path}/dsh.1"
 }
+
+loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
   case "$1" in
