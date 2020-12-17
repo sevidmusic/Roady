@@ -3,22 +3,33 @@
 
 set -o posix
 
-printf "\e[0m\e[30m\e[102m\ndsh is still under development.\e[0m\n\n"
+determineDshDirectoryPath() {
+    local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH
+    CURRENT_FILE_PATH="${BASH_SOURCE[0]}"
+    while [ -h "$CURRENT_FILE_PATH" ]; do # resolve $CURRENT_FILE_PATH until the file is no longer a symlink | -h is true if file exists and is a symlink
+      CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+      CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"
+      [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH" # if $CURRENT_FILE_PATH was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+}
 
-showManPage() {
-    local users_man_directory_path users_man1_directory_path
+updateAndShowManPage() {
+    local users_man_directory_path users_man1_directory_path help_file_path
     users_man_directory_path="${HOME}/.local/share/man"
     users_man1_directory_path="${users_man_directory_path}/man1"
+    help_file_path="$(determineDshDirectoryPath)/helpFiles/help.txt"
     [[ ! -d "${users_man_directory_path}" ]] && mkdir "${users_man_directory_path}"
     [[ ! -d "${users_man1_directory_path}" ]] && mkdir "${users_man1_directory_path}"
-    [[ -d "${users_man1_directory_path}" ]] && printf "dsh help test create man from dsh" > "${users_man1_directory_path}/dsh.1"
+    [[ -d "${users_man1_directory_path}" ]] && cp "${help_file_path}" "${users_man1_directory_path}/dsh.1"
+    man "${users_man1_directory_path}/dsh.1"
 }
 
 while test $# -gt 0; do
   case "$1" in
   -h | --help)
     shift
-    showManPage
+    updateAndShowManPage
     exit 0
     ;;
   *)
@@ -29,3 +40,4 @@ while test $# -gt 0; do
 done
 
 
+printf "\e[0m\e[30m\e[102m\ndsh is still under development.\e[0m\n\n"

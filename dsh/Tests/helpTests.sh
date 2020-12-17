@@ -13,5 +13,10 @@ testDshHelpCreatesSystemManPageForDsh() {
     assertFileExists "dsh --help" "${dsh_man_file_path}" "dsh --help MUST create a man page for dsh at ${dsh_man_file_path}. This may entail creating the parent directories."
 }
 
+testDshHelpOutputMatchesManDshOutput() {
+    assertEquals "$(man dsh)" "$(dsh --help)" "man dsh and dsh --help MUST porduce the same output."
+}
+
 runTest testDshHelpRunsWithoutError
 runTest testDshHelpCreatesSystemManPageForDsh
+runTest testDshHelpOutputMatchesManDshOutput
