@@ -1,1 +1,70 @@
-dsh --help --new Response
+dsh --new Response <APP_NAME> <RESPONSE_NAME> <RESPONSE_POSITION>
+Create a new Response at Apps/<APP_NAME>/Responses/<RESPONSE_NAME>.php
+witht the following structure:
+
+<?php
+/** <APP_NAME> | <RESPONSE_NAME>.php */
+
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+
+$appComponentsFactory->buildResponse(
+    '<RESPONSE_NAME>',
+    <RESPONSE_POSITION>,
+);
+
+For example:
+dsh --new Response Foo BarResponse 2
+Would create the following configuration file at Apps/Foo/Responses/BarResponse.php:
+
+<?php
+/** Foo | BarResponse.php */
+
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+
+$appComponentsFactory->buildResponse(
+    'BarResponse',
+    2,
+);
+
+Note: This new Response will not be assigned any OutputComponents or requests,
+such assignments will need to be made after the new Response is created via
+dsh --assign-to-response <APP_NAME> <COMPONENT_NAME> <COMPONENT_TYPE> <COMPONENT_CONTAINER> <RESPONSE_NAME>
+For example to create a new Response named BarResponse for the Foo app with 1 new
+OutputComponent and 1 new Request assigned:
+
+dsh --new OutputComponent Foo BarOutput Output 0 "Baz"
+dsh --new Request Foo BarRequest Requests index.php
+dsh --new Response Foo BarResponse 0
+dsh --assign-to-response Foo BarOutput OutputComponent Output BarResponse
+dsh --assign-to-response Foo BarRequest Request Requests BarResponse
+
+Would create the following Response configuration file at Apps/Foo/Responses/BarResponse.php:
+
+<?php
+/** Foo | BarResponse.php */
+
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+
+$appComponentsFactory->buildResponse(
+    'BarResponse',
+    0,
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'BarRequest',
+        Request::class,
+        $appComponentsFactory->getLocation(),
+        'Requests'
+    ),
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'BarOutput',
+        OutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
+);
+

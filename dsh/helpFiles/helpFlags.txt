@@ -1,1 +1,1 @@
-dsh --help flags
+dsh --help flags : Show brief help information about all available flags.

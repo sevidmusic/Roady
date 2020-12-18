@@ -1,1 +1,31 @@
-dsh --help --new OutputComponent
+dsh --new OutputComponent <APP_NAME> <OUTPUT_COMPONENT_NAME> <OUTPUT_COMPONENT_CONTAINER> <OUTPUT_COMPONENT_POSITION> <OUTPUT>
+Creates a new OutputComponent configuration file at
+Apps/<APP_NAME>/OutputComponents/<OUTPUT_COMPONENT_NAME>.php with the following
+structure:
+
+<?php
+/** <APP_NAME> | <OUTPUT_COMPONENT_NAME>.php */
+
+$appComponentsFactory->buildOutputComponent(
+    '<OUTPUT_COMPONENT_NAME>',
+    '<OUTPUT_COMPONENT_CONTAINER>',
+    '<OUTPUT>'
+    <OUTPUT_COMPONENT_POSITION>
+);
+
+For example:
+
+dsh --new OutputComponent Foo Bar Output 0 "Baz"
+
+Would create the following configuration file at Apps/Foo/OutputComponents/Bar.php
+
+<?php
+/** Foo | Bar.php */
+
+$appComponentsFactory->buildOutputComponent(
+    'Bar',
+    'Output',
+    'Baz'
+    0
+);
+

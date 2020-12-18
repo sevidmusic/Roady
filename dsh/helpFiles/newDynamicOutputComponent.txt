@@ -1,1 +1,31 @@
-dsh --help --new DynamicOutputComponent
+dsh --new DynamicOutputComponent <APP_NAME> <DYNAMIC_OUTPUT_COMPONENT_NAME> <DYNAMIC_OUTPUT_COMPONENT_CONTAINER> <DYNAMIC_OUTPUT_COMPONENT_POSITION> <DYNAMIC_OUTPUT_FILE_NAME>
+Creates a new DynamicOutputComponent configuration file at Apps/<APP_NAME>/OutputComponents/<DYNAMIC_OUTPUT_COMPONENT_NAME>.php
+with the following structure:
+
+<?php
+/** <APP_NAME> | <DYNAMIC_OUTPUT_COMPONENT_NAME>.php */
+
+$appComponentsFactory->buildDynamicOutputComponent(
+    '<DYNAMIC_OUTPUT_COMPONENT_NAME>',
+    '<DYNAMIC_OUTPUT_COMPONENT_CONTAINER>',
+    <DYNAMIC_OUTPUT_COMPONENT_POSITION>,
+    '<APP_NAME>',
+    '<DYNAMIC_OUTPUT_FILE_NAME>'
+);
+
+For example:
+
+dsh --new DynamicOutput Foo Baz Output 0.4 BazDynamicOutputFile.php
+
+Would create the following DynamicOutputComponent configuration file at Apps/Foo/OutputComponents/Baz.php
+
+<?php
+/** Foo | Baz.php */
+
+$appComponentsFactory->buildDynamicOutputComponent(
+    'Baz',
+    'Output',
+    0.4,
+    'Foo',
+    'BazDynamicOutputFile.php'
+);

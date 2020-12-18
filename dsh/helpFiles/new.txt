@@ -1,1 +1,19 @@
-dsh --help --new
+dsh --new | -n <MODE> <...ARGUMENTS> : The new flag is used to create. The
+new flag is modal, meaning the specified <MODE> determines what is created.
+Different modes expect different <...ARGUMENTS>, and different modes may
+expect different numbers of <...ARGUMENTS>.
+
+The following modes are available:
+
+dsh --new App
+dsh --new OutputComponent
+dsh --new DynamicOutputComponent
+dsh --new Request
+dsh --new Response
+dsh --new GlobalResponse
+
+For more information on the specific modes use:
+dsh --help --new <MODE>
+
+For example, to get more inforamation about the "App" mode:
+dsh --help --new App
