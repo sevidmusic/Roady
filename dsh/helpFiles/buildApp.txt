@@ -1,0 +1,1 @@
+dsh --help --build-app

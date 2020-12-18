@@ -1,5 +1,1 @@
-dsh is a command line utility designed to aide in development with the
-Darling Data Management System.
-
-dsh can perform various tasks, from running tests, to building apps and starting
-a development server.
+dsh --help help
