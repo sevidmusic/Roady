@@ -92,6 +92,17 @@ testDshHelpNewGlobalResponseOutputMatchesHelpFlagsHelpFileContent() {
     assertEquals "$(dsh --help --new GlobalResponse)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newGlobalResponse.txt")" "dsh --help --new GlobalResponse output MUST match newGlobalResponse.txt help file content."
 }
 
+testDshHelpAssignToResponseOutputMatchesHelpFlagsHelpFileContent() {
+    assertEquals "$(dsh --help --assign-to-response )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/assignToResponse.txt")" "dsh --help --assign-to-response output MUST match assignToResponse.txt help file content."
+}
+
+testDshHelpPhpUnitOutputMatchesHelpFlagsHelpFileContent() {
+    assertEquals "$(dsh --help --php-unit )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/phpUnit.txt")" "dsh --help --php-unit output MUST match phpUnit.txt help file content."
+}
+
+testDshHelpDshUnitOutputMatchesHelpFlagsHelpFileContent() {
+    assertEquals "$(dsh --help --dsh-unit )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/dshUnit.txt")" "dsh --help --dsh-unit output MUST match dshUnit.txt help file content."
+}
 
 runTest testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid 3
 runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 30
@@ -107,6 +118,7 @@ runTest testDshHelpNewDynamicOutputComponentOutputMatchesHelpFlagsHelpFileConten
 runTest testDshHelpNewRequestOutputMatchesHelpFlagsHelpFileContent
 runTest testDshHelpNewResponseOutputMatchesHelpFlagsHelpFileContent
 runTest testDshHelpNewGlobalResponseOutputMatchesHelpFlagsHelpFileContent
-
-
+runTest testDshHelpAssignToResponseOutputMatchesHelpFlagsHelpFileContent
+runTest testDshHelpPhpUnitOutputMatchesHelpFlagsHelpFileContent
+runTest testDshHelpDshUnitOutputMatchesHelpFlagsHelpFileContent
 
