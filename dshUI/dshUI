@@ -110,6 +110,12 @@ while test $# -gt 0; do
     printf "\ndshUI is a library that proivdes various functions for generating a themeable UI for command line utilities.\n"
     exit 0
     ;;
+  -c | --colorize)
+    shift
+    "$(determineCurrentDirectoryPath)/colorize.sh" "${1}" "${2}" "$@"
+    exit 0
+    ;;
+
   -t | --theme*)
     shift
     [[ -z "${1}" ]] && logMissingFlagArgumentErrorAndExit1 "name of the theme file" "--theme"
