@@ -1,0 +1,4 @@
+dsh --dsh-unit <DSH_UNIT_CONFIG_FILE_PATH> <TEST_GROUP_NAME> Run dshUnit tests.
+If <DSH_UNIT_CONFIG_FILE_PATH> is specified it will be used, otherwise dshUnit's
+dshUnitConfig.sh file will be used. If <TEST_GROUP_NAME> is specified, then the
+specified test group will be run, otherwise the all test group will be run.

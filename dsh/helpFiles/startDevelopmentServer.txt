@@ -1,0 +1,3 @@
+dsh --start-development-server | -s <PORT> : Start a development server at
+http://localhost:<PORT>. If <PORT> is not specified start a development
+server at http://localhost:8080.

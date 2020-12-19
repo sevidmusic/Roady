@@ -34,7 +34,7 @@ updateAndShowManPage() {
     local users_man_directory_path users_man1_directory_path help_file_path
     users_man_directory_path="${HOME}/.local/share/man"
     users_man1_directory_path="${users_man_directory_path}/man1"
-    help_file_path="$(determineDshDirectoryPath)/helpFiles/help.txt"
+    help_file_path="$(determineDshDirectoryPath)/helpFiles/man.txt"
     [[ ! -d "${users_man_directory_path}" ]] && mkdir "${users_man_directory_path}"
     [[ ! -d "${users_man1_directory_path}" ]] && mkdir "${users_man1_directory_path}"
     [[ -d "${users_man1_directory_path}" ]] && cp "${help_file_path}" "${users_man1_directory_path}/dsh.1"
@@ -43,55 +43,58 @@ updateAndShowManPage() {
 }
 
 showHelpFile() {
-    notifyUser "$(cat "$(determineDshDirectoryPath)/helpFiles/${1}")" 0 'dontClear'
+    cat "$(determineDshDirectoryPath)/helpFiles/${1}"
     exit 0
 }
 
 showHelpInfo() {
-    if [[ -z "${1}" || "${1}" == 'help' || "${1}" == 'h' ]]; then
+    if [[ -z "${1}" ]]; then
         updateAndShowManPage
     fi
+    if [[ -z "${1}" || "${1}" == '--help' || "${1}" == '-h' ]]; then
+        showHelpFile "help.txt"
+    fi
     if [[ "${1}" == "FLAG" ]]; then
-        showHelpFile "helpFlags.txt"
+        showHelpFile "helpFLAG.txt"
     fi
     if [[ "${1}" == "flags" ]]; then
         showHelpFile "helpFlags.txt"
     fi
     if [[ "${1}" == "--start-development-server" ]] || [[ "${1}" == "-s" ]]; then
-        showHelpFile "helpFlags.txt"
+        showHelpFile "startDevelopmentServer.txt"
     fi
     if [[ "${1}" == "--build-app" ]] || [[ "${1}" == "-b" ]]; then
-        showHelpFile "helpFlags.txt"
+        showHelpFile "buildApp.txt"
     fi
-    if [[ "${1}" == "--new" ]] || [[ "${1}" == "-n" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && -z "${2}" ]] || [[ "${1}" == "-n" && -z "${2}" ]]; then
+        showHelpFile "new.txt"
     fi
-    if [[ "${1}" == "--new " && "${2}" == "App" ]] || [[ "${1}" == "-n" && "${2}" ==  "App" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && "${2}" == "App" ]] || [[ "${1}" == "-n" && "${2}" ==  "App" ]]; then
+        showHelpFile "newApp.txt"
     fi
-    if [[ "${1}" == "--new " && "${2}" == "OutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "OutputComponent" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && "${2}" == "OutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "OutputComponent" ]]; then
+        showHelpFile "newOutputComponent.txt"
     fi
-    if [[ "${1}" == "--new " && "${2}" == "DynamicOutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "DynamicOutputComponent" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && "${2}" == "DynamicOutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "DynamicOutputComponent" ]]; then
+        showHelpFile "newDynamicOutputComponent.txt"
     fi
-    if [[ "${1}" == "--new " && "${2}" == "Request" ]] || [[ "${1}" == "-n" && "${2}" ==  "Request" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && "${2}" == "Request" ]] || [[ "${1}" == "-n" && "${2}" ==  "Request" ]]; then
+        showHelpFile "newRequest.txt"
     fi
-    if [[ "${1}" == "--new " && "${2}" == "Response" ]] || [[ "${1}" == "-n" && "${2}" ==  "Response" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && "${2}" == "Response" ]] || [[ "${1}" == "-n" && "${2}" ==  "Response" ]]; then
+        showHelpFile "newResponse.txt"
     fi
-    if [[ "${1}" == "--new " && "${2}" == "GlobalResponse" ]] || [[ "${1}" == "-n" && "${2}" ==  "GlobalResponse" ]]; then
-        showHelpFile "helpFlags.txt"
+    if [[ "${1}" == "--new" && "${2}" == "GlobalResponse" ]] || [[ "${1}" == "-n" && "${2}" ==  "GlobalResponse" ]]; then
+        showHelpFile "newGlobalResponse.txt"
     fi
     if [[ "${1}" == "--assign-to-response" ]] || [[ "${1}" == "-a" ]]; then
-        showHelpFile "helpFlags.txt"
+        showHelpFile "assignToResponse.txt"
     fi
     if [[ "${1}" == "--php-unit" ]] || [[ "${1}" == "-p" ]]; then
-        showHelpFile "helpFlags.txt"
+        showHelpFile "phpUnit.txt"
     fi
     if [[ "${1}" == "--dsh-unit" ]] || [[ "${1}" == "-d" ]]; then
-        showHelpFile "helpFlags.txt"
+        showHelpFile "dshUnit.txt"
     fi
     logErrorMsgAndExit1 "dsh --help <FLAG> expects a valid dsh flag. Run dsh --help or man dsh for more information on how dsh works."
 }
@@ -102,7 +105,7 @@ while test $# -gt 0; do
   case "$1" in
   -h | --help)
     shift
-    showHelpInfo "${1}"
+    showHelpInfo "${1}" "${2}"
     ;;
   *)
     shift

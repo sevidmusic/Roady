@@ -1,0 +1,44 @@
+dsh --new GlobalResponse <APP_NAME> <GLOBAL_RESPONSE_NAME> <GLOBAL_RESPONSE_POSITION>
+Create a new GlobalResponse at Apps/<APP_NAME>/Responses/<GLOBAL_RESPONSE_NAME>.php
+with the following structure:
+
+<?php
+/** <APP_NAME> | <GLOBAL_RESPONSE_NAME>.php */
+
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
+
+$appComponentsFactory->buildGlobalResponse(
+    '<GLOBAL_RESPONSE_NAME>',
+    <GLOBAL_RESPONSE_POSITION>,
+);
+
+Note: This new GlobalResponse will not be assigned any OutputComponents.
+OutputComponents will need to be assigned after the new GlobalResponse is created via dsh --assign-to-response <APP_NAME> <COMPONENT_NAME> <COMPONENT_TYPE> <COMPONENT_CONTAINER> <RESPONSE_NAME>
+For example to create a new GlobalResponse named BarGlobalResponse for the
+Foo app with 1 new OutputComponent assigned:
+
+dsh --new GlobalResponse Foo BarGlobalResponse 0
+dsh --new DynamicOutputComponent Foo BarDynamicOutput Output 0 "Baz.html"
+dsh --assign-to-response Foo BarDynamicOutput DynamicOutputComponent Output BarGlobalResponse
+
+Would create the following GlobalResponse configuration file at
+Apps/Foo/GlobalResponses/BarGlobalResponse.php:
+
+<?php
+/** Foo | BarGlobalResponse.php */
+
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
+
+$appComponentsFactory->buildGlobalResponse(
+    'BarGlobalResponse',
+    1,
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'BarDynamicOutput',
+        DynamicOutputComponent::class,
+        $appComponentsFactory->getLocation(),
+        'Output'
+    ),
+);
+

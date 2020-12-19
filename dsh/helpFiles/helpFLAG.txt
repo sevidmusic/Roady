@@ -1,0 +1,3 @@
+dsh --help | -h <FLAG> : Detailed help information about the specified flag.
+For example, dsh -h --build-app would show detailed help information about the
+--build-app flag.

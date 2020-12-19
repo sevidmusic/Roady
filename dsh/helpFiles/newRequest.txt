@@ -1,0 +1,26 @@
+dsh --new Request <APP_NAME> <REQUEST_NAME> <REQUEST_CONTAINER> <RELATIVE_URL>
+Creates a new Request configuration file at Apps/<APP_NAME>/Requests/<REQUEST_NAME>.php
+with the following structure:
+
+<?php
+/** <APP_NAME> | <REQUEST_NAME>.php */
+
+$appComponentsFactory->buildRequest(
+    '<REQUEST_NAME>',
+    '<REQUEST_CONTAINER>',
+    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/<RELATIVE_URL>',
+);
+
+dsh --new Request Foo Bar Requests index.php
+
+Would create the following Request configuration file at Apps/Foo/Requests/Bar.php
+
+<?php
+/** Foo | Bar.php */
+
+$appComponentsFactory->buildRequest(
+    'Bar',
+    'Requests',
+    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/index.php',
+);
+

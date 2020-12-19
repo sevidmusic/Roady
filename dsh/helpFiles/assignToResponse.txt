@@ -1,0 +1,35 @@
+dsh --assign-to-response <APP_NAME> <COMPONENT_NAME> <COMPONENT_TYPE> <COMPONENT_CONTAINER> <RESPONSE_NAME>
+Assign the component defined for the <APP_NAME> app whose name is <COMPONENT_NAME> and type is <COMPONENT_TYPE>
+to the response defined for the <APP_NAME> app whose name is <RESPONSE_NAME>.
+This will add code structured as follows to the specified Respone's definition:
+
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        '<COMPONENT_NAME>',
+        <COMPONENT_TYPE>::class,
+        $appComponentsFactory->getLocation(),
+        '<COMPONENT_CONTAINER>'
+    ),
+
+For example, assuming BarResponse is defined for the Foo app, and is not already assigned any components,
+and that BarRequest is also defined for the Foo app:
+dsh --assign-to-response Foo BarRequest Request Requests BarResponse
+Would result in the following Response configuration file at Apps/Foo/Responses/BarResponse.php:
+
+<?php
+/** Foo | BarResponse.php */
+
+use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\DynamicOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+
+$appComponentsFactory->buildResponse(
+    'BarResponse',
+    0,
+    $appComponentsFactory->getComponentCrud()->readByNameAndType(
+        'BarRequest',
+        Request::class,
+        $appComponentsFactory->getLocation(),
+        'Requests'
+    ),
+);
+
