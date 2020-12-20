@@ -101,6 +101,12 @@ showHelpInfo() {
     logErrorMsgAndExit1 "dsh --help <FLAG> expects a valid dsh flag. Run dsh --help or man dsh for more information on how dsh works."
 }
 
+
+startDevelopmentServer() {
+    /usr/bin/php -S "localhost:${1:-8888}" -t "${HOME}/Downloads/DarlingDataManagementSystem/" &> /dev/null & xdg-open "http://localhost:${1:-8888}" &>/dev/null & disown
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -111,7 +117,7 @@ while test $# -gt 0; do
     ;;
   -s | --start-development-server)
     shift
-    continue
+    startDevelopmentServer "${1:-8080}"
     ;;
   *)
     shift
