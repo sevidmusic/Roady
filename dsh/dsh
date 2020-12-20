@@ -109,6 +109,10 @@ while test $# -gt 0; do
     shift
     showHelpInfo "${1}" "${2}"
     ;;
+  -s | --start-development-server)
+    shift
+    continue
+    ;;
   *)
     shift
     logErrorMsgAndExit1 "Invalid flag ${1}"
