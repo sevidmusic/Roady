@@ -43,7 +43,9 @@ updateAndShowManPage() {
 }
 
 showHelpFile() {
-    cat "$(determineDshDirectoryPath)/helpFiles/${1}"
+    local text
+    text="$(dshUI -c "$(determineDshDirectoryPath)/helpFiles/${1}" 33 "dsh -.*[>]" "[<].*[>]" "dshUnit ")"
+    printf "%s" "${text}"
     exit 0
 }
 
