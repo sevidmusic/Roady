@@ -103,7 +103,8 @@ showHelpInfo() {
 
 
 startDevelopmentServer() {
-    /usr/bin/php -S "localhost:${1:-8888}" -t "${HOME}/Downloads/DarlingDataManagementSystem/" &> /dev/null & xdg-open "http://localhost:${1:-8888}" &>/dev/null & disown
+    showLoadingBar "    Starting development server at http://localhost:${1:-8080}" 'dontClear'
+    /usr/bin/php -S "localhost:${1:-8080}" -t "${HOME}/Downloads/DarlingDataManagementSystem/" &> /dev/null & xdg-open "http://localhost:${1:-8080}" &>/dev/null & disown
     exit 0
 }
 
