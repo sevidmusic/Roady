@@ -3,6 +3,16 @@
 
 set -o posix
 
+determineHelpFilesDirectoryPath() {
+   printf "%s" "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles"
+}
+
+expectedHelpFileOutput() {
+    local text
+    text="$(dshUI -c "$(determineHelpFilesDirectoryPath)/${1}" 33 "dsh -.*[>]" "[<].*[>]" "dshUnit ")"
+    printf "%s" "${text}"
+}
+
 testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid() {
     assertError "dsh --help foo" "dsh --help <FLAG> must log an error if an invalid flag is specified."
     assertError "dsh --help --foo" "dsh --help <FLAG> must log an error if an invalid flag is specified."
@@ -44,81 +54,81 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh -h -d" "dsh -h -d MUST run without error."
 }
 
-testDshHelpHelpOutputMatchesHelpTxtHelpFileContent() {
-    assertEquals "$(dsh --help --help)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/help.txt")" "dsh --help --help output MUST match help.txt help file content."
+testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent() {
+    assertEquals "$(dsh --help --help)" "$(expectedHelpFileOutput help.txt)" "dsh --help --help MUST match help.txt help file content."
 }
 
-testDshHelpFLAGOutputMatchesHelpFLAGHelpFileContent() {
-    assertEquals "$(dsh --help FLAG)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/helpFLAG.txt")" "dsh --help FLAG output MUST match helpFLAG.txt help file content."
+testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent() {
+    assertEquals "$(dsh --help FLAG)" "$(expectedHelpFileOutput helpFLAG.txt)" "dsh --help FLAG MUST match helpFLAG.txt help file content."
 }
 
-testDshHelpFlagsOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help flags)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/helpFlags.txt")" "dsh --help flags output MUST match helpFlags.txt help file content."
+testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput() {
+    assertEquals "$(dsh --help flags)" "$(expectedHelpFileOutput helpFlags.txt)" "dsh --help flags MUST match helpFlags.txt help file content."
 }
 
-testDshHelpStartDevelopmentServerOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --start-development-server)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/startDevelopmentServer.txt")" "dsh --help --start-development-server output MUST match startDevelopmentServer.txt help file content."
+testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput() {
+    assertEquals "$(dsh --help --start-development-server)" "$(expectedHelpFileOutput startDevelopmentServer.txt)" "dsh --help --start-development-server MUST match startDevelopmentServer.txt help file content."
 }
 
-testDshHelpBuildAppOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --build-app)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/buildApp.txt")" "dsh --help --build-app output MUST match buildApp.txt help file content."
+testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput() {
+    assertEquals "$(dsh --help --build-app)" "$(expectedHelpFileOutput buildApp.txt)" "dsh --help --build-app MUST match buildApp.txt help file content."
 }
 
-testDshHelpNewOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/new.txt")" "dsh --help --new output MUST match new.txt help file content."
+testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput() {
+    assertEquals "$(dsh --help --new)" "$(expectedHelpFileOutput new.txt)" "dsh --help --new MUST match new.txt help file content."
 }
 
-testDshHelpNewAppOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new App)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newApp.txt")" "dsh --help --new App output MUST match newApp.txt help file content."
+testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput() {
+    assertEquals "$(dsh --help --new App)" "$(expectedHelpFileOutput newApp.txt)" "dsh --help --new App MUST match newApp.txt help file content."
 }
 
-testDshHelpNewOutputComponentOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new OutputComponent)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newOutputComponent.txt")" "dsh --help --new OutputComponent output MUST match newOutputComponent.txt help file content."
+testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput() {
+    assertEquals "$(dsh --help --new OutputComponent)" "$(expectedHelpFileOutput newOutputComponent.txt)" "dsh --help --new OutputComponent MUST match newOutputComponent.txt help file content."
 }
 
-testDshHelpNewDynamicOutputComponentOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new DynamicOutputComponent)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newDynamicOutputComponent.txt")" "dsh --help --new DynamicOutputComponent output MUST match newDynamicOutputComponent.txt help file content."
+testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput() {
+    assertEquals "$(dsh --help --new DynamicOutputComponent)" "$(expectedHelpFileOutput newDynamicOutputComponent.txt)" "dsh --help --new DynamicOutputComponent MUST match newDynamicOutputComponent.txt help file content."
 }
 
-testDshHelpNewRequestOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new Request)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newRequest.txt")" "dsh --help --new Request output MUST match newRequest.txt help file content."
+testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput() {
+    assertEquals "$(dsh --help --new Request)" "$(expectedHelpFileOutput newRequest.txt)" "dsh --help --new Request MUST match newRequest.txt help file content."
 }
 
-testDshHelpNewResponseOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new Response)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newResponse.txt")" "dsh --help --new Response output MUST match newResponse.txt help file content."
+testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput() {
+    assertEquals "$(dsh --help --new Response)" "$(expectedHelpFileOutput newResponse.txt)" "dsh --help --new Response MUST match newResponse.txt help file content."
 }
 
-testDshHelpNewGlobalResponseOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --new GlobalResponse)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/newGlobalResponse.txt")" "dsh --help --new GlobalResponse output MUST match newGlobalResponse.txt help file content."
+testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput() {
+    assertEquals "$(dsh --help --new GlobalResponse)" "$(expectedHelpFileOutput newGlobalResponse.txt)" "dsh --help --new GlobalResponse MUST match newGlobalResponse.txt help file content."
 }
 
-testDshHelpAssignToResponseOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --assign-to-response )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/assignToResponse.txt")" "dsh --help --assign-to-response output MUST match assignToResponse.txt help file content."
+testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput() {
+    assertEquals "$(dsh --help --assign-to-response)" "$(expectedHelpFileOutput assignToResponse.txt)" "dsh --help --assign-to-response output MUST match assignToResponse.txt help file content."
 }
 
-testDshHelpPhpUnitOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --php-unit )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/phpUnit.txt")" "dsh --help --php-unit output MUST match phpUnit.txt help file content."
+testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput() {
+    assertEquals "$(dsh --help --php-unit )" "$(expectedHelpFileOutput phpUnit.txt)" "dsh --help --php-unit output MUST match phpUnit.txt help file content."
 }
 
-testDshHelpDshUnitOutputMatchesHelpFlagsHelpFileContent() {
-    assertEquals "$(dsh --help --dsh-unit )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/helpFiles/dshUnit.txt")" "dsh --help --dsh-unit output MUST match dshUnit.txt help file content."
+testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput() {
+    assertEquals "$(dsh --help --dsh-unit )" "$(expectedHelpFileOutput dshUnit.txt)" "dsh --help --dsh-unit output MUST match dshUnit.txt help file content."
 }
 
 runTest testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid 3
 runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 30
-runTest testDshHelpHelpOutputMatchesHelpTxtHelpFileContent
-runTest testDshHelpFLAGOutputMatchesHelpFLAGHelpFileContent
-runTest testDshHelpFlagsOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpStartDevelopmentServerOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpBuildAppOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewAppOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewOutputComponentOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewDynamicOutputComponentOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewRequestOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewResponseOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpNewGlobalResponseOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpAssignToResponseOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpPhpUnitOutputMatchesHelpFlagsHelpFileContent
-runTest testDshHelpDshUnitOutputMatchesHelpFlagsHelpFileContent
+runTest testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent
+runTest testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent
+runTest testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput
+runTest testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput
+runTest testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput
+runTest testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput
+runTest testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput
+runTest testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput
+runTest testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput
+runTest testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput
+runTest testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput
+runTest testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput
+runTest testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput
+runTest testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput
+runTest testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput
 
