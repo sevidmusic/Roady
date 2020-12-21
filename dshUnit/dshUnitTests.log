@@ -1,5 +1,9 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDhBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Dec 21 07:02:50 AM EST 2020 assertError Passed[0m
-[0m[104m[30mMon Dec 21 07:02:54 AM EST 2020 testDhBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mMon Dec 21 06:30:45 PM EST 2020 assertError Passed[0m
+[0m[104m[30mMon Dec 21 06:30:49 PM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
+[0m[44m[30mMon Dec 21 06:31:06 PM EST 2020 assertNoError Passed[0m
+[0m[104m[30mMon Dec 21 06:31:12 PM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
