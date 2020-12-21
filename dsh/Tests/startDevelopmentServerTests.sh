@@ -11,17 +11,13 @@ numberOfActiveServers() {
     printf "%s" "$(activeServers | wc -w)"
 }
 
-testDshStartDevelopmentServerRunsWithoutError() {
+testDshStartDevelopmentServerStartsADevelopmentServerWithoutError() {
+    killall php &> /dev/null
     assertNoError "dsh --start-development-server" "dsh --start-development-server MUST run without error."
-}
-
-testDshStartDevelopmentServerStartsDevelopmentServer() {
-    killall php &> /dev/null
-    dsh --start-development-server
     assertEquals "1" "$(numberOfActiveServers)" "dsh --start-development-server MUST start a development server."
+    printf "\n    \e[0m\e[104m\e[30mActive Servers:\e[0m\n    \e[0m\e[104m\e30m%s\e[0m\n" "$(activeServers)"
     killall php &> /dev/null
 }
 
-runTest testDshStartDevelopmentServerRunsWithoutError
-runTest testDshStartDevelopmentServerStartsDevelopmentServer
+runTest testDshStartDevelopmentServerStartsADevelopmentServerWithoutError 2
 
