@@ -120,6 +120,10 @@ while test $# -gt 0; do
     shift
     startDevelopmentServer "${1:-8080}"
     ;;
+  -b | --build-app)
+    shift
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --build-app <APP_NAME> <DOMAIN> expects the name of the app be specified as the first parameter."
+    ;;
   *)
     shift
     logErrorMsgAndExit1 "Invalid flag ${1}"
