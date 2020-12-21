@@ -1,6 +1,10 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshStartDevelopmentServerStartsADevelopmentServerWithoutError     =-=-[0m
-[0m[44m[30mSun Dec 20 08:19:10 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mSun Dec 20 08:19:13 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mSun Dec 20 08:19:17 PM EST 2020 testDshStartDevelopmentServerStartsADevelopmentServerWithoutError Passed[0m
+[0m[44m[30mSun Dec 20 08:43:38 PM EST 2020 assertNoError Passed[0m
+[0m[44m[30mSun Dec 20 08:43:41 PM EST 2020 assertEquals Passed[0m
+[0m[104m[30mSun Dec 20 08:43:44 PM EST 2020 testDshStartDevelopmentServerStartsADevelopmentServerWithoutError Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Dec 20 08:43:52 PM EST 2020 assertEquals Passed[0m
+[0m[104m[30mSun Dec 20 08:43:56 PM EST 2020 testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified Passed[0m

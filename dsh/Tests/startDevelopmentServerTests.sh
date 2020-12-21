@@ -19,5 +19,13 @@ testDshStartDevelopmentServerStartsADevelopmentServerWithoutError() {
     killall php &> /dev/null
 }
 
-runTest testDshStartDevelopmentServerStartsADevelopmentServerWithoutError 2
+testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified() {
+    killall php &> /dev/null
+    dsh --start-development-server &> /dev/null
+    assertEquals "http://localhost:8080" "$(activeServers)" "dsh --start-development-server MUST start a development server at http://localhost:8080 if <PORT> is not specified."
+    killall php &> /dev/null
+}
 
+runTest testDshStartDevelopmentServerStartsADevelopmentServerWithoutError 2
+runTest testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified
+# testDshStartDevelopmentServerUsesSpecifiedPORTIfPORTIsSpecified()
