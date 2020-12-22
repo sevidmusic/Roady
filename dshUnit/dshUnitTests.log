@@ -1,49 +1,13 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:30:44 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:30:47 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mTue Dec 22 03:10:45 PM EST 2020 assertError Passed[0m
+[0m[104m[30mTue Dec 22 03:10:48 PM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:31:26 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:31:29 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
-[0m[44m[30mTue Dec 22 02:32:06 AM EST 2020 assertNoError Passed[0m
-[0m[104m[30mTue Dec 22 02:32:11 AM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:34:00 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:34:03 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:35:52 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:35:55 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:36:40 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:36:43 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:37:43 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:37:46 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
+[0m[44m[30mTue Dec 22 03:10:58 PM EST 2020 assertError Passed[0m
+[0m[104m[30mTue Dec 22 03:11:02 PM EST 2020 testDshBuildAppRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
-[0m[44m[30mTue Dec 22 02:38:18 AM EST 2020 assertNoError Passed[0m
-[0m[104m[30mTue Dec 22 02:38:23 AM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:39:04 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:39:07 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
-[0m[44m[30mTue Dec 22 02:39:39 AM EST 2020 assertNoError Passed[0m
-[0m[104m[30mTue Dec 22 02:39:45 AM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 02:40:20 AM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 02:40:23 AM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
-[0m[44m[30mTue Dec 22 02:40:53 AM EST 2020 assertNoError Passed[0m
-[0m[104m[30mTue Dec 22 02:40:58 AM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
+[0m[44m[30mTue Dec 22 05:00:48 PM EST 2020 assertNoError Passed[0m
+[0m[104m[30mTue Dec 22 05:00:53 PM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
