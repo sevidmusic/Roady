@@ -40,5 +40,15 @@ testDshBuildAppBuildsSpecifiedApp() {
 }
 
 runTest testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified
-# @todo Propmt before running this test since it will delete .dcmsJsonData
-runTest testDshBuildAppBuildsSpecifiedApp
+
+notifyUser "    ${ERROR_COLOR}Warning: testDshBuildAppBuildsSpecifiedApp will delete the $(determineDcmsJsonDataDirectoryPath) directory?" 0 'dontClear'
+notifyUser "    ${ERROR_COLOR} DO NOT RUN THIS TEST IF IT IS NOT OKAY TO REMOVE $(determineDcmsJsonDataDirectoryPath)" 0 'dontClear'
+notifyUser "    ${HIGHLIGHTCOLOR}Please enter \"1\" to run the test and allow dsh to delete the $(determineDcmsJsonDataDirectoryPath)" 0 'dontClear'
+notifyUser "    ${HIGHLIGHTCOLOR}Please enter \"2\", to skip the test, in which case the $(determineDcmsJsonDataDirectoryPath) directory will not be deleted: " 0 'dontClear'
+select rs in "Run" "Skip"; do
+    case $rs in
+        Run ) runTest testDshBuildAppBuildsSpecifiedApp; break;;
+        Skip ) notifyUser "Skipping testDshBuildAppBuildsSpecifiedApp" 0 'dontClear'; break;;
+    esac
+done
+
