@@ -6,7 +6,7 @@ Welcome to the Darling Data Management System, a tool designed to aide in the de
 To install the Darling Data Management System, open terminal, navigate to the directory
 you want to install the Darling Data Management System in, and then run the following:
 
-       git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git && cd DarlingDataManagementSystem && composer upgrade && composer update && dsh/dsh -n a TestApp
+       git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git && cd DarlingDataManagementSystem && composer upgrade && composer update && dsh/dsh -b starterApp && dsh -s 8080
 
 The above will do the following:
 
