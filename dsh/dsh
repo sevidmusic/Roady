@@ -108,6 +108,21 @@ startDevelopmentServer() {
     exit 0
 }
 
+determineAppDirectoryPath() {
+    printf "%s" "$(determineDshDirectoryPath | sed "s/dsh/Apps\/${1}/g")"
+}
+
+buildApp() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --build-app <APP_NAME> <DOMAIN> expects the name of the app be specified as the first parameter."
+    [[ ! -d "$(determineAppDirectoryPath "${1}")" ]] && logErrorMsgAndExit1 "dsh --build-app <APP_NAME> <DOMAIN> expects the name of the app be specified as the first parameter."
+    cd "$(determineAppDirectoryPath "${1}")"
+    /usr/bin/php ./Components.php
+    # Note to self: Remeber, an App's name is always the camel case alphanumeric form of the App's domain
+    # For example, an App built for the domain examplesite.com would be assigned the name "examplesite"
+    printf "\n    \e[103m\e[30m--build app is still in development\e[0m\n"
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -119,6 +134,10 @@ while test $# -gt 0; do
   -s | --start-development-server)
     shift
     startDevelopmentServer "${1:-8080}"
+    ;;
+  -b | --build-app)
+    shift
+    buildApp "${1}" "${2}"
     ;;
   *)
     shift
