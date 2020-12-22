@@ -31,6 +31,10 @@ testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified() {
     assertError "dsh --build-app" "dsh --build-app <APP_NAME> <DOMAIN> MUST run with an error if <APP_NAME> is not specified."
 }
 
+testDshBuildAppRunsWithErrorIfSpecifiedAppDoesNotExist() {
+    assertError "dsh --build-app FooBar${RANDOM}" "dsh --build-app <APP_NAME> <DOMAIN> MUST run with an error if specified App does not exist."
+}
+
 testDshBuildAppBuildsSpecifiedApp() {
     removeDcmsJsonDirectory
     moveIntoStarterAppDirectory
@@ -40,6 +44,7 @@ testDshBuildAppBuildsSpecifiedApp() {
 }
 
 runTest testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified
+runTest testDshBuildAppRunsWithErrorIfSpecifiedAppDoesNotExist
 
 notifyUser "    ${ERROR_COLOR}Warning: testDshBuildAppBuildsSpecifiedApp will delete the $(determineDcmsJsonDataDirectoryPath) directory?" 0 'dontClear'
 notifyUser "    ${ERROR_COLOR} DO NOT RUN THIS TEST IF IT IS NOT OKAY TO REMOVE $(determineDcmsJsonDataDirectoryPath)" 0 'dontClear'
