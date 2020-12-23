@@ -1,9 +1,5 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 23 03:00:27 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 23 03:00:30 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotValid     =-=-[0m
-[0m[44m[30mWed Dec 23 03:00:43 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 23 03:00:46 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotValid Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mWed Dec 23 04:56:07 PM EST 2020 assertError Passed[0m
+[0m[104m[30mWed Dec 23 04:56:11 PM EST 2020 testNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
