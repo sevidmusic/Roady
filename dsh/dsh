@@ -135,6 +135,14 @@ buildApp() {
     exit 0
 }
 
+validateMode() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --new <MODE> <ARGUMENTS>... expects a mode be specified as the first parameter."
+    declare -a validModes=( App OutputComponent DynamicOutputComponent Request Response GlobalResponse)
+    declare -A map
+    for key in "${!validModes[@]}"; do map[${validModes[$key]}]="$key"; done
+    [[ -z "${map[${1}]}" ]] && logErrorMsg "dsh --new expects a valid mode. The following modes are available:" && logErrorMsg "$(printf '\n\e[0m\e[104m\e[30m%s\e[0m\n' "${validModes[@]}" | column)" && logErrorMsg "For more information about the dsh --new flag, use dsh --help --new" && logErrorMsgAndExit1 "For more information about a specific mode, use dsh --help --new <MODE>"
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -150,6 +158,11 @@ while test $# -gt 0; do
   -b | --build-app)
     shift
     buildApp "${1}" "${2}"
+    ;;
+  -n | --new)
+    shift
+    validateMode "${1}"
+    exit 0
     ;;
   *)
     shift
