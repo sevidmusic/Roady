@@ -63,7 +63,13 @@ testDshBuildAppBuildsSpecifiedApp() {
 testDshBuildAppBuildsAppForDomainLocalhost8080IfDomainIsNotSpecified() {
     removeDcmsJsonDirectory
     assertDirectoryExists "dsh --build-app starterApp" "$(determineDcmsJsonDataDirectoryPath)/localhost8080" "The $(determineDcmsJsonDataDirectoryPath)/localhost8080 directory MUST exist after call to dsh --build-app, if it does not then dsh --build-app failed to build the specified App for the domain http:localhost:8080 even though <DOMAIN> was not specified. http://localhost:8080 MUST be the default domain if <DOMAIN> is not specified."
-#
+    removeDcmsJsonDirectory
+}
+
+testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified() {
+    removeDcmsJsonDirectory
+    # @todo use random domain
+    assertDirectoryExists "dsh --build-app starterApp http://localhost:8987" "$(determineDcmsJsonDataDirectoryPath)/localhost8987" "dsh --build-app MUST build app for specified domain if <DOMAIN> is spcified as the second parameter."
     removeDcmsJsonDirectory
 }
 
@@ -94,4 +100,11 @@ select rs in "Run" "Skip"; do
     esac
 done
 
+showDcmsJsonDataWillBeDeletedByTestWarning "testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified"
+select rs in "Run" "Skip"; do
+    case $rs in
+        Run ) runTest testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified; break;;
+        Skip ) notifyUser "Skipping testDshBuildAppBuildsSpecifiedApp" 0 'dontClear'; break;;
+    esac
+done
 

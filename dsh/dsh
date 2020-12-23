@@ -112,15 +112,26 @@ determineAppDirectoryPath() {
     printf "%s" "$(determineDshDirectoryPath | sed "s/dsh/Apps\/${1}/g")"
 }
 
+getAppDomainNameFromComponentsPhp() {
+    grep -E "::buildDomain" "$(determineAppDirectoryPath "${1}")/Components.php" | grep -Eo "'.*'" | sed -E "s/'//g"
+}
+
+modifyAppDomain() {
+    sed -i "s,$(getAppDomainNameFromComponentsPhp "${1}"),${2},g" "$(determineAppDirectoryPath "${1}")/Components.php"
+}
+
 buildApp() {
+    local actual_domain
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --build-app <APP_NAME> <DOMAIN> expects the name of the app be specified as the first parameter."
     [[ ! -d "$(determineAppDirectoryPath "${1}")" ]] && logErrorMsg "The specified App does not exist at $(determineAppDirectoryPath "${1}")" && notifyUser "The following Apps are available:" 0 'dontClear' && printf "\n\e[0m\e[102m\e[30m%s\e[0m\n" "$(ls Apps | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "Please specify an existing App."
     [[ ! -f "$(determineAppDirectoryPath "${1}")/Components.php" ]] && logErrorMsg "The specified App does not define a Components.php file. It cannot be built with dsh." && logErrorMsgAndExit1 "Please define a Components.php file for the App. Hint: You can always use dsh --new App <APP_NAME> <DOMAIN> to create a new app with the proper structure, and a pre-configured Components.php file. : )"
+    actual_domain="$(getAppDomainNameFromComponentsPhp "${1}")"
+    # Modify
+    [[ -n "${2}" ]] && modifyAppDomain "${1}" "${2}"
     cd "$(determineAppDirectoryPath "${1}")"
     /usr/bin/php ./Components.php
-    # Note to self: Remeber, an App's name is always the camel case alphanumeric form of the App's domain
-    # For example, an App built for the domain examplesite.com would be assigned the name "examplesite"
-    printf "\n    \e[103m\e[30m--build app is still in development\e[0m\n"
+    # Restore
+    [[ -n "${2}" ]] && modifyAppDomain "${1}" "${actual_domain}"
     exit 0
 }
 
