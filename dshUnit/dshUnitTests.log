@@ -1,5 +1,17 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 23 02:11:45 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 23 02:11:48 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotSpecified Passed[0m
+[0m[44m[30mWed Dec 23 02:50:30 PM EST 2020 assertError Passed[0m
+[0m[104m[30mWed Dec 23 02:50:33 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotValid     =-=-[0m
+[0m[44m[30mWed Dec 23 02:50:45 PM EST 2020 assertError Passed[0m
+[0m[104m[30mWed Dec 23 02:50:48 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotValid Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotSpecified     =-=-[0m
+[0m[44m[30mWed Dec 23 02:51:44 PM EST 2020 assertError Passed[0m
+[0m[104m[30mWed Dec 23 02:51:47 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotValid     =-=-[0m
+[0m[44m[30mWed Dec 23 02:52:00 PM EST 2020 assertError Passed[0m
+[0m[104m[30mWed Dec 23 02:52:03 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotValid Passed[0m
