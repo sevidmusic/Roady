@@ -1,13 +1,25 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Dec 22 03:10:45 PM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 03:10:48 PM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mTue Dec 22 08:49:05 PM EST 2020 assertError Passed[0m
+[0m[104m[30mTue Dec 22 08:49:08 PM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mTue Dec 22 03:10:58 PM EST 2020 assertError Passed[0m
-[0m[104m[30mTue Dec 22 03:11:02 PM EST 2020 testDshBuildAppRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfSpecifiedAppsDirectoryDoesNotExist     =-=-[0m
+[0m[44m[30mTue Dec 22 08:49:18 PM EST 2020 assertError Passed[0m
+[0m[104m[30mTue Dec 22 08:49:22 PM EST 2020 testDshBuildAppRunsWithErrorIfSpecifiedAppsDirectoryDoesNotExist Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfSpecifiedAppsComponentsPhpFileDoesNotExist     =-=-[0m
+[0m[44m[30mTue Dec 22 08:49:58 PM EST 2020 assertError Passed[0m
+[0m[104m[30mTue Dec 22 08:50:02 PM EST 2020 testDshBuildAppRunsWithErrorIfSpecifiedAppsComponentsPhpFileDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
-[0m[44m[30mTue Dec 22 05:00:48 PM EST 2020 assertNoError Passed[0m
-[0m[104m[30mTue Dec 22 05:00:53 PM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
+[0m[44m[30mTue Dec 22 08:50:34 PM EST 2020 assertNoError Passed[0m
+[0m[104m[30mTue Dec 22 08:50:39 PM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsAppForDomainLocalhost8080IfDomainIsNotSpecified     =-=-[0m
+[0m[44m[30mTue Dec 22 08:51:14 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Dec 22 08:51:21 PM EST 2020 testDshBuildAppBuildsAppForDomainLocalhost8080IfDomainIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified     =-=-[0m
+[0m[44m[30mTue Dec 22 08:51:55 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Dec 22 08:52:01 PM EST 2020 testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified Passed[0m
