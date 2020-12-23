@@ -151,6 +151,11 @@ while test $# -gt 0; do
     shift
     buildApp "${1}" "${2}"
     ;;
+  -n | --new)
+    shift
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --new <MODE> <ARGUMENTS>... expects a valid mode be specified as the first parameter."
+    exit 0
+    ;;
   *)
     shift
     logErrorMsgAndExit1 "Invalid flag ${1}"
