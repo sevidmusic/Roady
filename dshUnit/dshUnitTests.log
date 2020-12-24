@@ -1,33 +1,46 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mThu Dec 24 01:05:42 AM EST 2020 assertError Passed[0m
-[0m[104m[30mThu Dec 24 01:05:45 AM EST 2020 testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mThu Dec 24 06:24:05 PM EST 2020 assertError Passed[0m
+[0m[104m[30mThu Dec 24 06:24:09 PM EST 2020 testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME     =-=-[0m
+[0m[44m[30mThu Dec 24 06:24:19 PM EST 2020 assertError Passed[0m
+[0m[104m[30mThu Dec 24 06:24:22 PM EST 2020 testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:06:01 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:06:04 AM EST 2020 testDshNewAppCreatesNewAppsDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:24:47 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:24:50 PM EST 2020 testDshNewAppCreatesNewAppsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsOutputComponentsDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:06:21 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:06:24 AM EST 2020 testDshNewAppCreatesNewAppsOutputComponentsDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:25:15 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:25:18 PM EST 2020 testDshNewAppCreatesNewAppsOutputComponentsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsRequestsDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:06:40 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:06:44 AM EST 2020 testDshNewAppCreatesNewAppsRequestsDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:25:43 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:25:46 PM EST 2020 testDshNewAppCreatesNewAppsRequestsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsResponsesDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:07:00 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:07:03 AM EST 2020 testDshNewAppCreatesNewAppsResponsesDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:26:11 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:26:14 PM EST 2020 testDshNewAppCreatesNewAppsResponsesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDynamicOutputDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:07:20 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:07:23 AM EST 2020 testDshNewAppCreatesNewAppsDynamicOutputDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:26:39 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:26:43 PM EST 2020 testDshNewAppCreatesNewAppsDynamicOutputDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsCssDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:07:39 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:07:42 AM EST 2020 testDshNewAppCreatesNewAppsCssDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:27:07 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:27:10 PM EST 2020 testDshNewAppCreatesNewAppsCssDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsJsDirectory     =-=-[0m
-[0m[44m[30mThu Dec 24 01:07:59 AM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mThu Dec 24 01:08:02 AM EST 2020 testDshNewAppCreatesNewAppsJsDirectory Passed[0m
+[0m[44m[30mThu Dec 24 06:27:35 PM EST 2020 assertDirectoryExists Passed[0m
+[0m[104m[30mThu Dec 24 06:27:38 PM EST 2020 testDshNewAppCreatesNewAppsJsDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFile     =-=-[0m
+[0m[44m[30mThu Dec 24 06:28:03 PM EST 2020 assertFileExists Passed[0m
+[0m[104m[30mThu Dec 24 06:28:06 PM EST 2020 testDshNewAppCreatesNewAppsComponentsPhpFile Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate     =-=-[0m
+[0m[44m[30mThu Dec 24 06:28:33 PM EST 2020 assertNoError Passed[0m
+[0m[44m[30mThu Dec 24 06:28:58 PM EST 2020 assertEquals Passed[0m
+[0m[104m[30mThu Dec 24 06:29:03 PM EST 2020 testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate Passed[0m
