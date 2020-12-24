@@ -167,6 +167,12 @@ while test $# -gt 0; do
       shift
       [[ -z "${1}" ]] && logErrorMsg "dsh --new App <APP_NAME> <DOMAIN> expects the new App's name be specified as the first modal argument." && logErrorMsg "For example, to create an app named Foo:" && logErrorMsg "dsh --new App Foo" && logErrorMsgAndExit1 "For more information use dsh --help --new App"
       mkdir "$(determineAppDirectoryPath "${1}")"
+      mkdir "$(determineAppDirectoryPath "${1}")/OutputComponents"
+      mkdir "$(determineAppDirectoryPath "${1}")/Requests"
+      mkdir "$(determineAppDirectoryPath "${1}")/Responses"
+      mkdir "$(determineAppDirectoryPath "${1}")/DynamicOutput"
+      mkdir "$(determineAppDirectoryPath "${1}")/css"
+      mkdir "$(determineAppDirectoryPath "${1}")/js"
       printf "\nAPP MODE\n"
       ;;
     esac
