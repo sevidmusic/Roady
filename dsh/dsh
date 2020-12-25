@@ -166,7 +166,8 @@ while test $# -gt 0; do
     App)
       shift
       [[ -z "${1}" ]] && logErrorMsg "dsh --new App <APP_NAME> <DOMAIN> expects the new App's name be specified as the first modal argument." && logErrorMsg "For example, to create an app named Foo:" && logErrorMsg "dsh --new App Foo" && logErrorMsgAndExit1 "For more information use dsh --help --new App"
-      showLoadingBar "Preparing to create the new ${1} app at $(determineDshDirectoryPath "${1}")" 'dontClear'
+      [[ -d "$(determineAppDirectoryPath "${1}")" ]] && logErrorMsgAndExit1 "An App named ${1} already exists, please specify a unique name for the new App."
+      showLoadingBar "Preparing to create the new ${1} app at $(determineAppDirectoryPath "${1}")" 'dontClear'
       showLoadingBar "    Creating App directory at $(determineAppDirectoryPath "${1}")" 'dontClear'
       mkdir "$(determineAppDirectoryPath "${1}")"
 
@@ -187,6 +188,9 @@ while test $# -gt 0; do
 
       showLoadingBar "    Creating App's js directory at $(determineAppDirectoryPath "${1}")/js" 'dontClear'
       mkdir "$(determineAppDirectoryPath "${1}")/js"
+
+      showLoadingBar "    Creating App's Components.php file at $(determineAppDirectoryPath "${1}")/Components.php" 'dontClear'
+      cp "$(determineDshDirectoryPath)/FileTemplates/Components.php" "$(determineAppDirectoryPath "${1}")/Components.php"
 
       notifyUser "The ${1} App was created successfully." 0 'dontClear'
       ;;
