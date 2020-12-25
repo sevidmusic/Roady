@@ -176,13 +176,24 @@ createNewApp() {
 }
 
 createNewOutputComponent() {
-    [[ ! -d "$(determineAppDirectoryPath ${1})" ]] && logErrorMsg "The specified App, ${1}, does not exist. Please specify an existing App to define the new OutputComponent for. The following apps are available:" && logErrorMsg "$(ls "$(determineDshDirectoryPath | sed 's/dsh/Apps/g')" | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --new OutputComponent."
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify the name of the App the new OutputComponent will be defined for."
-    [[ -f "$(determineAppDirectoryPath ${1})/OutputComponents/${2}.php" ]] && logErrorMsgAndExit1 "An OutputComponent named ${2} is already defined for the App, please specify a unique name to assign to the new OutputComponent."
     [[ -z "${2}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new OutputComponent."
     [[ -z "${3}" ]] && logErrorMsgAndExit1 "You must specify a container to assign to the new OutputComponent."
     [[ -z "${4}" ]] && logErrorMsgAndExit1 "You must specify a position to assign to the new OutputComponent."
     [[ -z "${5}" ]] && logErrorMsgAndExit1 "You must specify the output to assignt to the new OutputComponent."
+    [[ ! -d "$(determineAppDirectoryPath ${1})" ]] && logErrorMsg "The specified App, ${1}, does not exist. Please specify an existing App to define the new OutputComponent for. The following apps are available:" && logErrorMsg "$(ls "$(determineDshDirectoryPath | sed 's/dsh/Apps/g')" | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --new OutputComponent."
+    [[ -f "$(determineAppDirectoryPath ${1})/OutputComponents/${2}.php" ]] && logErrorMsgAndExit1 "An OutputComponent named ${2} is already defined for the App, please specify a unique name to assign to the new OutputComponent."
+    notifyUser "Creating new OutputComponent \"${2}\" for the ${1} App:" 0 'dontClear'
+    showLoadingBar "    Copying $(determineDshDirectoryPath)/FileTemplates/OutputComponent.php to $(determineAppDirectoryPath "${1}")" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/OutputComponent.php" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    showLoadingBar "    Configuring $(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php" 'dontClear'
+    sed -i "s/APP_NAME/${1}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    sed -i "s/OUTPUT_COMPONENT_NAME/${2}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    sed -i "s/OUTPUT_COMPONENT_CONTAINER/${3}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    sed -i "s/OUTPUT_COMPONENT_POSITION/${4}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    sed -i "s/OUTPUT/${5}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    notifyUser "The "${2}" OutputComponent was defined for the ${1} App successfully. It's configuration file can be located at:" 0 'dontClear'
+    notifyUser "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php" 0 'dontClear'
     exit 0
 }
 
