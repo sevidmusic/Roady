@@ -143,28 +143,7 @@ validateMode() {
     [[ -z "${map[${1}]}" ]] && logErrorMsg "dsh --new expects a valid mode. The following modes are available:" && logErrorMsg "$(printf '\n\e[0m\e[104m\e[30m%s\e[0m\n' "${validModes[@]}" | column)" && logErrorMsg "For more information about the dsh --new flag, use dsh --help --new" && logErrorMsgAndExit1 "For more information about a specific mode, use dsh --help --new <MODE>"
 }
 
-loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
-
-while test $# -gt 0; do
-  case "${1}" in
-  -h | --help)
-    shift
-    showHelpInfo "${1}" "${2}"
-    ;;
-  -s | --start-development-server)
-    shift
-    startDevelopmentServer "${1:-8080}"
-    ;;
-  -b | --build-app)
-    shift
-    buildApp "${1}" "${2}"
-    ;;
-  -n | --new)
-    shift
-    validateMode "${1}"
-    case "${1}" in
-    App)
-      shift
+createNewApp() {
       [[ -z "${1}" ]] && logErrorMsg "dsh --new App <APP_NAME> <DOMAIN> expects the new App's name be specified as the first modal argument." && logErrorMsg "For example, to create an app named Foo:" && logErrorMsg "dsh --new App Foo" && logErrorMsgAndExit1 "For more information use dsh --help --new App"
       [[ -d "$(determineAppDirectoryPath "${1}")" ]] && logErrorMsgAndExit1 "An App named ${1} already exists, please specify a unique name for the new App."
       showLoadingBar "Preparing to create the new ${1} app at $(determineAppDirectoryPath "${1}")" 'dontClear'
@@ -193,9 +172,49 @@ while test $# -gt 0; do
       cp "$(determineDshDirectoryPath)/FileTemplates/Components.php" "$(determineAppDirectoryPath "${1}")/Components.php"
 
       notifyUser "The ${1} App was created successfully." 0 'dontClear'
+      exit 0
+}
+
+createNewOutputComponent() {
+    [[ ! -d "$(determineAppDirectoryPath ${1})" ]] && logErrorMsg "The specified App, ${1}, does not exist. Please specify an existing App to define the new OutputComponent for. The following apps are available:" && logErrorMsg "$(ls "$(determineDshDirectoryPath | sed 's/dsh/Apps/g')" | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --new OutputComponent."
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify the name of the App the new OutputComponent will be defined for."
+    [[ -f "$(determineAppDirectoryPath ${1})/OutputComponents/${2}.php" ]] && logErrorMsgAndExit1 "An OutputComponent named ${2} is already defined for the App, please specify a unique name to assign to the new OutputComponent."
+    [[ -z "${2}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new OutputComponent."
+    [[ -z "${3}" ]] && logErrorMsgAndExit1 "You must specify a container to assign to the new OutputComponent."
+    [[ -z "${4}" ]] && logErrorMsgAndExit1 "You must specify a position to assign to the new OutputComponent."
+    [[ -z "${5}" ]] && logErrorMsgAndExit1 "You must specify the output to assignt to the new OutputComponent."
+    exit 0
+}
+
+loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
+
+while test $# -gt 0; do
+  case "${1}" in
+  -h | --help)
+    shift
+    showHelpInfo "${1}" "${2}"
+    ;;
+  -s | --start-development-server)
+    shift
+    startDevelopmentServer "${1:-8080}"
+    ;;
+  -b | --build-app)
+    shift
+    buildApp "${1}" "${2}"
+    ;;
+  -n | --new)
+    shift
+    validateMode "${1}"
+    case "${1}" in
+    App)
+      shift
+      createNewApp "${1}" "${2}"
+      ;;
+    OutputComponent)
+      shift
+      createNewOutputComponent "${1}" "${2}" "${3}" "${4}" "${5}"
       ;;
     esac
-    exit 0
     ;;
   *)
     shift
