@@ -143,28 +143,7 @@ validateMode() {
     [[ -z "${map[${1}]}" ]] && logErrorMsg "dsh --new expects a valid mode. The following modes are available:" && logErrorMsg "$(printf '\n\e[0m\e[104m\e[30m%s\e[0m\n' "${validModes[@]}" | column)" && logErrorMsg "For more information about the dsh --new flag, use dsh --help --new" && logErrorMsgAndExit1 "For more information about a specific mode, use dsh --help --new <MODE>"
 }
 
-loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
-
-while test $# -gt 0; do
-  case "${1}" in
-  -h | --help)
-    shift
-    showHelpInfo "${1}" "${2}"
-    ;;
-  -s | --start-development-server)
-    shift
-    startDevelopmentServer "${1:-8080}"
-    ;;
-  -b | --build-app)
-    shift
-    buildApp "${1}" "${2}"
-    ;;
-  -n | --new)
-    shift
-    validateMode "${1}"
-    case "${1}" in
-    App)
-      shift
+createNewApp() {
       [[ -z "${1}" ]] && logErrorMsg "dsh --new App <APP_NAME> <DOMAIN> expects the new App's name be specified as the first modal argument." && logErrorMsg "For example, to create an app named Foo:" && logErrorMsg "dsh --new App Foo" && logErrorMsgAndExit1 "For more information use dsh --help --new App"
       [[ -d "$(determineAppDirectoryPath "${1}")" ]] && logErrorMsgAndExit1 "An App named ${1} already exists, please specify a unique name for the new App."
       showLoadingBar "Preparing to create the new ${1} app at $(determineAppDirectoryPath "${1}")" 'dontClear'
@@ -193,9 +172,43 @@ while test $# -gt 0; do
       cp "$(determineDshDirectoryPath)/FileTemplates/Components.php" "$(determineAppDirectoryPath "${1}")/Components.php"
 
       notifyUser "The ${1} App was created successfully." 0 'dontClear'
+      exit 0
+}
+
+createNewOutputComponent() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new OutputComponent"
+    exit 0
+}
+
+loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
+
+while test $# -gt 0; do
+  case "${1}" in
+  -h | --help)
+    shift
+    showHelpInfo "${1}" "${2}"
+    ;;
+  -s | --start-development-server)
+    shift
+    startDevelopmentServer "${1:-8080}"
+    ;;
+  -b | --build-app)
+    shift
+    buildApp "${1}" "${2}"
+    ;;
+  -n | --new)
+    shift
+    validateMode "${1}"
+    case "${1}" in
+    App)
+      shift
+      createNewApp "${1}" "${2}"
+      ;;
+    OutputComponent)
+      shift
+      createNewOutputComponent
       ;;
     esac
-    exit 0
     ;;
   *)
     shift
