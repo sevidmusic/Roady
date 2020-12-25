@@ -7,6 +7,10 @@ testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified() {
     assertError "dsh --new OutputComponent" "dsh --new OutputComponent <APP_NAME> <OUTPUT_COMPONENT_NAME> <OUTPUT_COMPONENT_CONTAINER> <OUTPUT_COMPONENT_POSITION> <OUTPUT> MUST run with an error if <APP_NAME> is not specified."
 }
 
+testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist() {
+    assertError "dsh --new OutputComponent Foo${RANDOM} Logo Bar 4 FooBarBaz" "--new OutputComponent <APP_NAME> <OUTPUT_COMPONENT_NAME> <OUTPUT_COMPONENT_CONTAINER> <OUTPUT_COMPONENT_POSITION> <OUTPUT> MUST run with an error if App does not exist."
+}
+
 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists() {
     assertError "dsh --new OutputComponent starterApp Logo Bar 4 FooBarBaz" "--new OutputComponent <APP_NAME> <OUTPUT_COMPONENT_NAME> <OUTPUT_COMPONENT_CONTAINER> <OUTPUT_COMPONENT_POSITION> <OUTPUT> MUST run with an error if an OutputComponent named <OUTPUT_COMPONENT> is already defined for the secified App."
 }
