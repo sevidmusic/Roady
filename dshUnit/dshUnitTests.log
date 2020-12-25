@@ -1,5 +1,25 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mThu Dec 24 09:05:24 PM EST 2020 assertError Passed[0m
-[0m[104m[30mThu Dec 24 09:05:27 PM EST 2020 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Dec 25 02:54:08 AM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 02:54:12 AM EST 2020 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
+[0m[44m[30mFri Dec 25 02:54:25 AM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 02:54:29 AM EST 2020 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mFri Dec 25 02:54:40 AM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 02:54:44 AM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
+[0m[44m[30mFri Dec 25 02:54:54 AM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 02:54:59 AM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
+[0m[44m[30mFri Dec 25 02:55:09 AM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 02:55:13 AM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
+[0m[44m[30mFri Dec 25 02:55:24 AM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 02:55:27 AM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m

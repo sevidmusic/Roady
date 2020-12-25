@@ -176,7 +176,12 @@ createNewApp() {
 }
 
 createNewOutputComponent() {
-    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new OutputComponent"
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify the name of the App the new OutputComponent will be defined for."
+    [[ -f "$(determineAppDirectoryPath ${1})/OutputComponents/${2}.php" ]] && logErrorMsgAndExit1 "An OutputComponent named ${2} is already defined for the App, please specify a unique name to assign to the new OutputComponent."
+    [[ -z "${2}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new OutputComponent."
+    [[ -z "${3}" ]] && logErrorMsgAndExit1 "You must specify a container to assign to the new OutputComponent."
+    [[ -z "${4}" ]] && logErrorMsgAndExit1 "You must specify a position to assign to the new OutputComponent."
+    [[ -z "${5}" ]] && logErrorMsgAndExit1 "You must specify the output to assignt to the new OutputComponent."
     exit 0
 }
 
@@ -206,7 +211,7 @@ while test $# -gt 0; do
       ;;
     OutputComponent)
       shift
-      createNewOutputComponent
+      createNewOutputComponent "${1}" "${2}" "${3}" "${4}" "${5}"
       ;;
     esac
     ;;
