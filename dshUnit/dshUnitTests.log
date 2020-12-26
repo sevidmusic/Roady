@@ -1,37 +1,5 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mSat Dec 26 03:07:24 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:07:28 PM EST 2020 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mSat Dec 26 03:07:43 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:07:47 PM EST 2020 testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mSat Dec 26 03:08:10 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:08:15 PM EST 2020 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mSat Dec 26 03:08:26 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:08:30 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
-[0m[44m[30mSat Dec 26 03:08:41 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:08:45 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mSat Dec 26 03:08:56 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:09:01 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
-[0m[44m[30mSat Dec 26 03:09:11 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSat Dec 26 03:09:15 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mSat Dec 26 03:09:33 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mSat Dec 26 03:09:37 PM EST 2020 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mSat Dec 26 03:09:54 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mSat Dec 26 03:10:00 PM EST 2020 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
+[0m[44m[30mSat Dec 26 05:41:16 PM EST 2020 assertEquals Passed[0m
+[0m[104m[30mSat Dec 26 05:41:21 PM EST 2020 testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m

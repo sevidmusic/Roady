@@ -220,6 +220,28 @@ createNewDynamicOutputComponent() {
     exit 0
 }
 
+createNewRequest() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify the name of the App the new Request will be defined for."
+    [[ -z "${2}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new Request."
+    [[ -z "${3}" ]] && logErrorMsgAndExit1 "You must specify a container to assign to the new Request."
+    [[ -z "${4}" ]] && logErrorMsgAndExit1 "You must specify the relative url to assignt to the new Request."
+    [[ ! -d "$(determineAppDirectoryPath ${1})" ]] && logErrorMsg "The specified App, ${1}, does not exist. Please specify an existing App to define the new Request for. The following apps are available:" && logErrorMsg "$(ls "$(determineDshDirectoryPath | sed 's/dsh/Apps/g')" | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --new Request."
+    [[ -f "$(determineAppDirectoryPath ${1})/Requests/${2}.php" ]] && logErrorMsgAndExit1 "A Request named ${2} is already defined for the App, please specify a unique name to assign to the new Request."
+    notifyUser "Creating new Request \"${2}\" for the ${1} App:" 0 'dontClear'
+    showLoadingBar "    Copying $(determineDshDirectoryPath)/FileTemplates/Request.php to $(determineAppDirectoryPath "${1}")" 'dontClear'
+    [[ ! -f "$(determineDshDirectoryPath)/FileTemplates/Request.php" ]] && logErrorMsgAndExit1 "The Request.php file template does not exist at $(determineDshDirectoryPath)/FileTemplates/Request.php!"
+    cp "$(determineDshDirectoryPath)/FileTemplates/Request.php" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
+    showLoadingBar "    Configuring $(determineAppDirectoryPath "${1}")/Requests/${2}.php" 'dontClear'
+    sed -i "s/APP_NAME/${1}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
+    sed -i "s/REQUEST_NAME/${2}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
+    sed -i "s/REQUEST_CONTAINER/${3}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
+    sed -i "s/RELATIVE_URL/${4}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
+    notifyUser "The "${2}" Request was defined for the ${1} App successfully. It's configuration file can be located at:" 0 'dontClear'
+    notifyUser "$(determineAppDirectoryPath "${1}")/Requests/${2}.php" 0 'dontClear'
+    exit 0
+}
+
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -253,6 +275,12 @@ while test $# -gt 0; do
       createNewDynamicOutputComponent "${1}" "${2}" "${3}" "${4}" "${5}"
       exit 0
       ;;
+    Request)
+      shift
+      createNewRequest "${1}" "${2}" "${3}" "${4}" "${5}"
+      exit 0
+      ;;
+
     esac
     ;;
   *)
