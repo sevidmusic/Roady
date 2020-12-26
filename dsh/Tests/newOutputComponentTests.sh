@@ -31,6 +31,12 @@ testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified() {
     assertError "dsh --new OutputComponent starterApp Foo Bar 2" "dsh --new OutputComponent <APP_NAME> <OUTPUT_COMPONENT_NAME> <OUTPUT_COMPONENT_CONTAINER> <OUTPUT_COMPONENT_POSITION> <OUTPUT> MUST run with an error if <APP_NAME> is not specified."
 }
 
+testNewOutputComponentDefinesSpecifiedOutputComponentForSpecifiedApp() {
+    local output_component_name
+    output_component_name="OCName${RANDOM}"
+    assertFileExists "dsh --new OutputComponent starterApp ${output_component_name} OCContainer 4 Output" "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/starterApp/OutputComponents/${output_component_name}.php" "dsh --new OutputComponent <OUTPUT_COMPONENT_NAME> <OUTPUT_COMPONENT_CONTAINER> <OUTPUT_COMPONENT_POSITION> <OUTPUT> MUST create a OutputComponent configuration file at Apps/<APP_NAME>/OutputComponents/<OUTPUT_COMPONENT_NAME>.php"
+}
+
 runTest testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist
 runTest testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists
@@ -38,3 +44,4 @@ runTest testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified
 runTest testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified
 runTest testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified
 runTest testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified
+runTest testNewOutputComponentDefinesSpecifiedOutputComponentForSpecifiedApp
