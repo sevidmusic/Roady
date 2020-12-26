@@ -1,46 +1,33 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mFri Dec 25 10:36:32 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 10:36:36 PM EST 2020 testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mSat Dec 26 08:14:30 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:14:34 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME     =-=-[0m
-[0m[44m[30mFri Dec 25 10:36:58 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 10:37:02 PM EST 2020 testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
+[0m[44m[30mSat Dec 26 08:14:49 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:14:53 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:37:21 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:37:24 PM EST 2020 testDshNewAppCreatesNewAppsDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
+[0m[44m[30mSat Dec 26 08:15:18 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:15:23 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsOutputComponentsDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:37:43 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:37:47 PM EST 2020 testDshNewAppCreatesNewAppsOutputComponentsDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mSat Dec 26 08:15:35 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:15:40 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsRequestsDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:38:06 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:38:09 PM EST 2020 testDshNewAppCreatesNewAppsRequestsDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
+[0m[44m[30mSat Dec 26 08:15:52 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:15:57 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsResponsesDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:38:28 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:38:32 PM EST 2020 testDshNewAppCreatesNewAppsResponsesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
+[0m[44m[30mSat Dec 26 08:16:09 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:16:14 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDynamicOutputDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:38:51 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:38:54 PM EST 2020 testDshNewAppCreatesNewAppsDynamicOutputDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
+[0m[44m[30mSat Dec 26 08:16:25 AM EST 2020 assertError Passed[0m
+[0m[104m[30mSat Dec 26 08:16:29 AM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsCssDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:39:13 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:39:16 PM EST 2020 testDshNewAppCreatesNewAppsCssDirectory Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsJsDirectory     =-=-[0m
-[0m[44m[30mFri Dec 25 10:39:35 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mFri Dec 25 10:39:38 PM EST 2020 testDshNewAppCreatesNewAppsJsDirectory Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFile     =-=-[0m
-[0m[44m[30mFri Dec 25 10:39:57 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mFri Dec 25 10:40:00 PM EST 2020 testDshNewAppCreatesNewAppsComponentsPhpFile Passed[0m
-
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate     =-=-[0m
-[0m[44m[30mFri Dec 25 10:40:20 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mFri Dec 25 10:40:45 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mFri Dec 25 10:40:50 PM EST 2020 testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentDefinesSpecifiedDynamicOutputComponentForSpecifiedApp     =-=-[0m
+[0m[44m[30mSat Dec 26 08:16:48 AM EST 2020 assertFileExists Passed[0m
+[0m[104m[30mSat Dec 26 08:16:53 AM EST 2020 testNewDynamicOutputComponentDefinesSpecifiedDynamicOutputComponentForSpecifiedApp Passed[0m
