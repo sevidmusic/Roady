@@ -12,7 +12,12 @@ testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified() {
 }
 
 testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME() {
-    assertError "dsh --new App starterApp" "dsh --new App <APP_NAME> <DOMAIN> MUST run with an error if the name to assign to the new App is not specified via the first parameter."
+    local test_app_name
+    test_app_name="AppName${RANDOM}"
+    showLoadingBar "Creating test App ${test_app_name} for testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME()" 'dontClear'
+    dsh --new App "${test_app_name}" &> /dev/null
+    assertError "dsh --new App ${test_app_name}" "dsh --new App <APP_NAME> <DOMAIN> MUST run with an error if the name to assign to the new App is not specified via the first parameter."
+    [[ -d "$(determineAppsDirectoryPath "${test_app_name}")" ]] && rm -R "$(determineAppsDirectoryPath "${test_app_name}")"
 }
 
 testDshNewAppCreatesNewAppsDirectory() {
