@@ -1,33 +1,33 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mFri Dec 25 09:06:56 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:06:59 PM EST 2020 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Dec 25 10:14:07 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:14:11 PM EST 2020 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mFri Dec 25 09:07:13 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:07:17 PM EST 2020 testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Dec 25 10:14:25 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:14:28 PM EST 2020 testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mFri Dec 25 09:07:30 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:07:34 PM EST 2020 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
+[0m[44m[30mFri Dec 25 10:14:51 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:14:55 PM EST 2020 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mFri Dec 25 09:07:45 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:07:49 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Dec 25 10:15:06 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:15:10 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
-[0m[44m[30mFri Dec 25 09:08:00 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:08:04 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
+[0m[44m[30mFri Dec 25 10:15:21 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:15:25 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mFri Dec 25 09:08:15 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:08:19 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
+[0m[44m[30mFri Dec 25 10:15:36 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:15:40 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
-[0m[44m[30mFri Dec 25 09:08:30 PM EST 2020 assertError Passed[0m
-[0m[104m[30mFri Dec 25 09:08:33 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
+[0m[44m[30mFri Dec 25 10:15:51 PM EST 2020 assertError Passed[0m
+[0m[104m[30mFri Dec 25 10:15:54 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentDefinesSpecifiedOutputComponentForSpecifiedApp     =-=-[0m
-[0m[44m[30mFri Dec 25 09:08:50 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mFri Dec 25 09:08:54 PM EST 2020 testNewOutputComponentDefinesSpecifiedOutputComponentForSpecifiedApp Passed[0m
+[0m[44m[30mFri Dec 25 10:16:11 PM EST 2020 assertFileExists Passed[0m
+[0m[104m[30mFri Dec 25 10:16:16 PM EST 2020 testNewOutputComponentDefinesSpecifiedOutputComponentForSpecifiedApp Passed[0m
