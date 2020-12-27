@@ -1,29 +1,29 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mSun Dec 27 03:56:42 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSun Dec 27 03:56:45 PM EST 2020 testNewResponseRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Dec 27 05:27:51 PM EST 2020 assertError Passed[0m
+[0m[104m[30mSun Dec 27 05:27:54 PM EST 2020 testNewGlobalResponseRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mSun Dec 27 03:56:58 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSun Dec 27 03:57:02 PM EST 2020 testNewResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
+[0m[44m[30mSun Dec 27 05:28:08 PM EST 2020 assertError Passed[0m
+[0m[104m[30mSun Dec 27 05:28:12 PM EST 2020 testNewGlobalResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfAnResponseNamedRESPONSE_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mSun Dec 27 03:57:22 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSun Dec 27 03:57:26 PM EST 2020 testNewResponseRunsWithErrorIfAnResponseNamedRESPONSE_NAMEAlreadyExists Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfAnGlobalResponseNamedGLOBAL_RESPONSE_NAMEAlreadyExists     =-=-[0m
+[0m[44m[30mSun Dec 27 05:28:34 PM EST 2020 assertError Passed[0m
+[0m[104m[30mSun Dec 27 05:28:39 PM EST 2020 testNewGlobalResponseRunsWithErrorIfAnGlobalResponseNamedGLOBAL_RESPONSE_NAMEAlreadyExists Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfRESPONSE_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mSun Dec 27 03:57:36 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSun Dec 27 03:57:39 PM EST 2020 testNewResponseRunsWithErrorIfRESPONSE_NAMEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Dec 27 05:28:49 PM EST 2020 assertError Passed[0m
+[0m[104m[30mSun Dec 27 05:28:53 PM EST 2020 testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfRESPONSE_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mSun Dec 27 03:57:49 PM EST 2020 assertError Passed[0m
-[0m[104m[30mSun Dec 27 03:57:53 PM EST 2020 testNewResponseRunsWithErrorIfRESPONSE_POSITIONIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_POSITIONIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Dec 27 05:29:04 PM EST 2020 assertError Passed[0m
+[0m[104m[30mSun Dec 27 05:29:08 PM EST 2020 testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_POSITIONIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseCreatesNewResponseConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mSun Dec 27 03:58:09 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mSun Dec 27 03:58:13 PM EST 2020 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedApp Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedApp     =-=-[0m
+[0m[44m[30mSun Dec 27 05:29:26 PM EST 2020 assertFileExists Passed[0m
+[0m[104m[30mSun Dec 27 05:29:30 PM EST 2020 testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedApp Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseCreatesNewResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mSun Dec 27 03:58:33 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mSun Dec 27 03:58:38 PM EST 2020 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
+[0m[44m[30mSun Dec 27 05:29:49 PM EST 2020 assertEquals Passed[0m
+[0m[104m[30mSun Dec 27 05:29:54 PM EST 2020 testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
