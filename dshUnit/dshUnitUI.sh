@@ -5,7 +5,7 @@ set -o posix
 
 showAssertionMsg() {
     notifyUser "    ${3}" 0 'dontClear'
-    showLoadingBar "    ${CLEAR_ALL_STYLES}${COLOR_3}Asserting: ${CLEAR_ALL_STYLES}${COLOR_19}${1} \"${CLEAR_ALL_STYLES}${COLOR_21}${2}${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
+    showLoadingBar "    ${CLEAR_ALL_STYLES}${COLOR_3}Asserting: ${CLEAR_ALL_STYLES}${COLOR_19}${1} \"${CLEAR_ALL_STYLES}${COLOR_21}$(printf "%s" "${2}" | sed "s/==/${CLEAR_ALL_STYLES}${COLOR_12}    ==    ${CLEAR_ALL_STYLES}${COLOR_21}/g")${CLEAR_ALL_STYLES}${COLOR_19}\"" 'dontClear'
 }
 
 showAssertionPassedMsg() {
