@@ -48,16 +48,16 @@ testNewResponseRunsWithErrorIfRELATIVE_URLIsNotSpecified() {
 }
 
 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedApp() {
-    local request_name
-    request_name="RESName${RANDOM}"
-    assertFileExists "dsh --new Response ${test_app_name} ${request_name} RESPosition " "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Responses/${request_name}.php" "dsh --new Response <RESPONSE_NAME> <RESPONSE_POSITION> <RESPONSE_POSITION> <DYNAMIC_RESPONSE_FILE> MUST create a Response configuration file at Apps/<APP_NAME>/Responses/<RESPONSE_NAME>.php"
+    local response_name
+    response_name="RESName${RANDOM}"
+    assertFileExists "dsh --new Response ${test_app_name} ${response_name} RESPosition " "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Responses/${response_name}.php" "dsh --new Response <RESPONSE_NAME> <RESPONSE_POSITION> <RESPONSE_POSITION> <DYNAMIC_RESPONSE_FILE> MUST create a Response configuration file at Apps/<APP_NAME>/Responses/<RESPONSE_NAME>.php"
 }
 
 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent() {
-    local request_name
-    request_name="RESName${RANDOM}"
-    dsh --new Response ${test_app_name} ${request_name} RESPosition
-    assertEquals "$(expectedResponseFileContent ${test_app_name} ${request_name} RESPosition )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Responses/${request_name}.php")"
+    local response_name
+    response_name="RESName${RANDOM}"
+    dsh --new Response ${test_app_name} ${response_name} RESPosition
+    assertEquals "$(expectedResponseFileContent ${test_app_name} ${response_name} RESPosition )" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Responses/${response_name}.php")"
 }
 
 runTest testNewResponseRunsWithErrorIfAPP_NAMEIsNotSpecified
