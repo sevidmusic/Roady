@@ -61,13 +61,13 @@ testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatch
     dsh --new Request ${test_app_name} ${request_name} REQContainer index.php
     assertEquals "$(expectedRequestFileContent ${test_app_name} ${request_name} REQContainer index.php)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Requests/${request_name}.php")"
 }
-#runTest testNewRequestRunsWithErrorIfAPP_NAMEIsNotSpecified
-#runTest testNewRequestRunsWithErrorIfSpecifiedAppDoesNotExist
-#runTest testNewRequestRunsWithErrorIfAnRequestNamedREQUEST_NAMEAlreadyExists
-#runTest testNewRequestRunsWithErrorIfREQUEST_NAMEIsNotSpecified
-#runTest testNewRequestRunsWithErrorIfREQUEST_CONTAINERIsNotSpecified
-#runTest testNewRequestRunsWithErrorIfRELATIVE_URLIsNotSpecified
-#runTest testNewRequestCreatesNewRequestConfigurationFileForSpecifiedApp
+runTest testNewRequestRunsWithErrorIfAPP_NAMEIsNotSpecified
+runTest testNewRequestRunsWithErrorIfSpecifiedAppDoesNotExist
+runTest testNewRequestRunsWithErrorIfAnRequestNamedREQUEST_NAMEAlreadyExists
+runTest testNewRequestRunsWithErrorIfREQUEST_NAMEIsNotSpecified
+runTest testNewRequestRunsWithErrorIfREQUEST_CONTAINERIsNotSpecified
+runTest testNewRequestRunsWithErrorIfRELATIVE_URLIsNotSpecified
+runTest testNewRequestCreatesNewRequestConfigurationFileForSpecifiedApp
 runTest testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent
 
 [[ -d "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}" ]] && rm -R "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}"
