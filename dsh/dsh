@@ -279,6 +279,42 @@ createNewGlobalResponse() {
     exit 0
 }
 
+configureResponseAssignment() {
+    target_response_name="${2}"
+    target_response_path="$(determineAppDirectoryPath "${1}")/Responses/${target_response_name}.php"
+    component_name="${3}"
+    component_container="${4}"
+    component_type="${5}"
+    sed "s/);/    \$appComponentsFactory->getComponentCrud()->readByNameAndType(@        ${component_name},@        ${component_type}::class,@        \$appComponentsFactory->getLocation(),@        '${component_container}',@    ),@);/g" "${target_response_path}" | tr '@' '\n'
+}
+
+assignToResponse() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --assign-to-response expects the name of the App the target Response is defined for be specified as the first parameter"
+    [[ -z "${2}" ]] && logErrorMsgAndExit1 "dsh --assign-to-response expects the name of the Response be specified as the second parameter"
+    [[ -z "${3}" ]] && logErrorMsgAndExit1 "dsh --assign-to-response expects the name of the Component to assign to the Response be specified as the third parameter"
+    [[ -z "${4}" ]] && logErrorMsgAndExit1 "dsh --assign-to-response expects the Component's container be specified as the fourth parameter"
+    [[ -z "${5}" ]] && logErrorMsgAndExit1 "dsh --assign-to-response expects the Component's type be specified as the fith parameter"
+    [[ ! -d "$(determineAppDirectoryPath ${1})" ]] && logErrorMsg "The specified App, ${1}, does not exist. Please specify an existing App. The following apps are available:" && logErrorMsg "$(ls "$(determineDshDirectoryPath | sed 's/dsh/Apps/g')" | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --assign-to-response."
+    [[ ! -f "$(determineAppDirectoryPath ${1})/Responses/${2}.php" ]] && logErrorMsg "The specified Response, ${2}, does not exist. Please specify an existing Response. The following Responses are available:" && logErrorMsg "$(ls "$(determineAppDirectoryPath "${1}")/Responses" | sed 's/[.]php//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --assign-to-response."
+    case "${5}" in
+    OutputComponent | DynamicOutputComponent)
+      [[ ! -f "$(determineAppDirectoryPath ${1})/OutputComponents/${3}.php" ]] && logErrorMsgAndExit1 "The specified ${5}, ${3}, does not exist. For help use dsh --help --assign-to-response."
+      break
+      ;;
+    Request)
+      [[ ! -f "$(determineAppDirectoryPath ${1})/Requests/${3}.php" ]] && logErrorMsgAndExit1 "The specified ${5}, ${3}, does not exist. For help use dsh --help --assign-to-response."
+      break
+      ;;
+    *)
+      break
+      ;;
+    esac
+    target_response_path="$(determineAppDirectoryPath "${1}")/Responses/${2}.php"
+    showLoadingBar "Assigning the ${3} ${5} to the ${2} Response defined for the ${1} App in the ${target_response_path} Response configuration file." 'dontClear'
+    printf "%s" "$(configureResponseAssignment "${1}" "${2}" "${3}" "${4}" "${5}")" > "${target_response_path}"
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -310,24 +346,24 @@ while test $# -gt 0; do
     DynamicOutputComponent)
       shift
       createNewDynamicOutputComponent "${1}" "${2}" "${3}" "${4}" "${5}"
-      exit 0
       ;;
     Request)
       shift
       createNewRequest "${1}" "${2}" "${3}" "${4}" "${5}"
-      exit 0
       ;;
     Response)
       shift
       createNewResponse "${1}" "${2}" "${3}"
-      exit 0
       ;;
     GlobalResponse)
       shift
       createNewGlobalResponse "${1}" "${2}" "${3}"
-      exit 0
       ;;
     esac
+    ;;
+  -a | --assign-to-response)
+    shift
+    assignToResponse "${1}" "${2}" "${3}" "${4}" "${5}"
     ;;
   *)
     shift
@@ -337,3 +373,20 @@ while test $# -gt 0; do
 done
 
 notifyUser "dsh is still under development. It is not ready for use." 0 'dontClear'
+
+
+
+#    case "${5}" in
+#    OutputComponent | DynamicOutputComponent)
+#      [[ ! -f "$(determineAppDirectoryPath ${1})/OutputComponents/${3}.php" ]] && logErrorMsgAndExit1 "The specified Component, ${3}, does not exist. For help use dsh --help --assign-to-response."
+#      break
+#      ;;
+#    Request)
+#      [[ ! -f "$(determineAppDirectoryPath ${1})/Requests/${3}.php" ]] && logErrorMsgAndExit1 "The specified Component, ${3}, does not exist. For help use dsh --help --assign-to-response."
+#      break
+#      ;;
+#    *)
+#      break
+#      ;;
+#    esac
+
