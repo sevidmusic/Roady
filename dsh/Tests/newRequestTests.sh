@@ -5,7 +5,7 @@ set -o posix
 
 test_app_name="AppName${RANDOM}"
 showLoadingBar "Creating test App ${test_app_name} for use by tests defined in newRequests.sh" 'dontClear'
-dsh -n App "${test_app_name}" &> /dev/null
+dsh -n App "${test_app_name}"
 
 expectedRequestFileContent() {
     local expectedREQTemplateFilePath
@@ -19,7 +19,7 @@ expectedRequestFileContent() {
     expectedContent="$(echo "${expectedContent}" | sed "s/APP_NAME/${1}/g")"
     expectedContent="$(echo "${expectedContent}" | sed "s/REQUEST_NAME/${2}/g")"
     expectedContent="$(echo "${expectedContent}" | sed "s/REQUEST_CONTAINER/${3}/g")"
-    expectedContent="$(echo "${expectedContent}" | sed "s/RELATIVE_URL/${4}/g")"
+    expectedContent="$(echo "${expectedContent}" | sed "s/RELATIVE_URL/${4}/g" | sed 's/\/\//\//g')"
     printf "%s" "${expectedContent}"
 }
 
@@ -58,8 +58,8 @@ testNewRequestCreatesNewRequestConfigurationFileForSpecifiedApp() {
 testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent() {
     local request_name
     request_name="REQName${RANDOM}"
-    dsh --new Request ${test_app_name} ${request_name} REQContainer index.php
-    assertEquals "$(expectedRequestFileContent ${test_app_name} ${request_name} REQContainer index.php)" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Requests/${request_name}.php")"
+    dsh --new Request ${test_app_name} ${request_name} REQContainer "\/"
+    assertEquals "$(expectedRequestFileContent ${test_app_name} ${request_name} REQContainer "\/")" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/Requests/${request_name}.php")"
 }
 runTest testNewRequestRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testNewRequestRunsWithErrorIfSpecifiedAppDoesNotExist
