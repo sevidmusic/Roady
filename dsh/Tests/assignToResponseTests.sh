@@ -15,7 +15,7 @@ expectedResponseConfiguration() {
     component_name="${3}"
     component_container="${4}"
     component_type="${5}"
-    sed "s/);/    \$appComponentsFactory->getComponentCrud()->readByNameAndType(@        ${component_name},@        ${component_type}::class,@        \$appComponentsFactory->getLocation(),@        '${component_container}',@    ),@);/g" "${target_response_path}" | tr '@' '\n'
+    sed "s/);/    \$appComponentsFactory->getComponentCrud()->readByNameAndType(@        '${component_name}',@        ${component_type}::class,@        \$appComponentsFactory->getLocation(),@        '${component_container}',@    ),@);/g" "${target_response_path}" | tr '@' '\n'
 }
 
 test_app_name="AppName${RANDOM}"
