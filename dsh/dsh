@@ -176,6 +176,7 @@ createNewApp() {
 }
 
 createNewOutputComponent() {
+    local expectedContent
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify the name of the App the new OutputComponent will be defined for."
     [[ -z "${2}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new OutputComponent."
     [[ -z "${3}" ]] && logErrorMsgAndExit1 "You must specify a container to assign to the new OutputComponent."
@@ -191,7 +192,8 @@ createNewOutputComponent() {
     sed -i "s/OUTPUT_COMPONENT_NAME/${2}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
     sed -i "s/OUTPUT_COMPONENT_CONTAINER/${3}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
     sed -i "s/OUTPUT_COMPONENT_POSITION/${4}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
-    sed -i "s/OUTPUT/${5}/g" "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
+    expectedContent="$(cat "$(determineAppDirectoryPath ${1})/OutputComponents/${2}.php")"
+    awk -v output="${5}" -v expectedContent="${expectedContent}" 'BEGIN { gsub( "(\"|\047)", "__ESCAPE__&", output  ); gsub( "__ESCAPE__", "\\", output);  gsub( "OUTPUT", output, expectedContent ); print expectedContent }' > "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php"
     notifyUser "The "${2}" OutputComponent was defined for the ${1} App successfully. It's configuration file can be located at:" 0 'dontClear'
     notifyUser "$(determineAppDirectoryPath "${1}")/OutputComponents/${2}.php" 0 'dontClear'
     exit 0
