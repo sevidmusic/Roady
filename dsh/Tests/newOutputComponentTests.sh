@@ -5,7 +5,7 @@ set -o posix
 
 test_app_name="AppName${RANDOM}"
 showLoadingBar "Creating test App ${test_app_name} for use by tests defined in newOutputComponents.sh" 'dontClear'
-dsh -n App "${test_app_name}" &> /dev/null
+dsh -n App "${test_app_name}"
 
 expectedOutputComponentFileContent() {
     local expectedOCTemplateFilePath
@@ -62,10 +62,11 @@ testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp(
 }
 
 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent() {
-    local output_component_name
+    local output_component_name output
+    output="\<p class='bazzer'\>Foo bar baz\<\/p\>"
     output_component_name="OCName${RANDOM}"
-    dsh --new OutputComponent ${test_app_name} ${output_component_name} OCContainer 4 "Foo bar baz"
-    assertEquals "$(expectedOutputComponentFileContent ${test_app_name} ${output_component_name} OCContainer 4 "Foo bar baz")" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/OutputComponents/${output_component_name}.php")"
+    dsh --new OutputComponent ${test_app_name} ${output_component_name} OCContainer 4 "${output}"
+    assertEquals "$(expectedOutputComponentFileContent ${test_app_name} ${output_component_name} OCContainer 4 "${output}")" "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/Apps/g')/${test_app_name}/OutputComponents/${output_component_name}.php")"
 }
 runTest testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist

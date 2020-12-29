@@ -5,5 +5,5 @@
 $appComponentsFactory->buildRequest(
     'REQUEST_NAME',
     'REQUEST_CONTAINER',
-    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/RELATIVE_URL.php',
+    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/RELATIVE_URL',
 );
