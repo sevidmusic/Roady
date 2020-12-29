@@ -236,6 +236,7 @@ createNewRequest() {
     sed -i "s/REQUEST_NAME/${2}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
     sed -i "s/REQUEST_CONTAINER/${3}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
     sed -i "s/RELATIVE_URL/${4}/g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
+    sed -i "s/\/\//\//g" "$(determineAppDirectoryPath "${1}")/Requests/${2}.php"
     notifyUser "The "${2}" Request was defined for the ${1} App successfully. It's configuration file can be located at:" 0 'dontClear'
     notifyUser "$(determineAppDirectoryPath "${1}")/Requests/${2}.php" 0 'dontClear'
     exit 0
