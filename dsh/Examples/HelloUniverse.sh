@@ -16,7 +16,7 @@ dsh --new Request "${app1_name}" HelloWorldRootRequest RootRequests "\/"
 
 dsh --new Request "${app1_name}" HelloWorldIndexRequest IndexRequests "index.php"
 
-dsh --new OutputComponent "${app1_name}" HelloWorld HelloWorldOutput 1 "Hello World"
+dsh --new OutputComponent "${app1_name}" HelloWorld HelloWorldOutput 1 "<p style='padding: 2em;background: #000303; color: #fefeff; border: 3px solid #f7e7f9; border-radius: 1em;'>Hello World</p>"
 
 dsh --assign-to-response "${app1_name}" Homepage HelloWorldRootRequest RootRequests Request
 
@@ -44,9 +44,9 @@ dsh --new Request "${app2_name}" HelloUniverseIndexRequest IndexRequests "index.
 
 dsh --new Request "${app2_name}" HelloUniverseAboutRequest IndexRequests "index.php?page=about"
 
-dsh --new OutputComponent "${app2_name}" HelloUniverse HelloUniverseOutput 1 "Hello Universe"
+dsh --new OutputComponent "${app2_name}" HelloUniverse HelloUniverseOutput 1 "<p style='padding: 2em;background: #007090; color: #77feAA; border: 3px dotted #77e799; border-radius: 1em;'>Hello Universe</p>"
 
-dsh --new OutputComponent "${app2_name}" HelloUniverseAbout HelloUniverseOutput 1 "About Hello Universe"
+dsh --new OutputComponent "${app2_name}" HelloUniverseAbout HelloUniverseOutput 1 "<p style='padding: 2em;background: #090909; color: #f2f2f2; border: 3px solid #f7e7f9; border-radius: 3em;'>About Hello Universe</p>"
 
 printf "<div>\n    <ul>\n        <li>\n            <a href='/index.php'>Homepage</a>\n        </li>\n        <li>\n            <a href='/index.php?page=about'>About</a>\n        </li>\n    </ul>\n</div>" > "$(pwd)/Apps/${app2_name}/DynamicOutput/MainMenu.html"
 
