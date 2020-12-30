@@ -127,9 +127,11 @@ buildApp() {
     [[ ! -f "$(determineAppDirectoryPath "${1}")/Components.php" ]] && logErrorMsg "The specified App does not define a Components.php file. It cannot be built with dsh." && logErrorMsgAndExit1 "Please define a Components.php file for the App. Hint: You can always use dsh --new App <APP_NAME> <DOMAIN> to create a new app with the proper structure, and a pre-configured Components.php file. : )"
     actual_domain="$(getAppDomainNameFromComponentsPhp "${1}")"
     # Modify
+    current_directory="$(determineDshDirectoryPath | sed 's/dsh//g')"
     [[ -n "${2}" ]] && modifyAppDomain "${1}" "${2}"
     cd "$(determineAppDirectoryPath "${1}")"
     /usr/bin/php ./Components.php
+    cd "${current_directory}"
     # Restore
     [[ -n "${2}" ]] && modifyAppDomain "${1}" "${actual_domain}"
     exit 0
