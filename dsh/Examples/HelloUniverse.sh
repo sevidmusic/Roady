@@ -48,7 +48,9 @@ dsh --new OutputComponent "${app2_name}" HelloUniverse HelloUniverseOutput 1 "He
 
 dsh --new OutputComponent "${app2_name}" HelloUniverseAbout HelloUniverseOutput 1 "About Hello Universe"
 
-dsh --new OutputComponent "${app2_name}" MainMenu Menus 0 "<div><ul><li><a href='/index.php'>Homepage</a></li><li><a href='/index.php?page=about'>About</a></li></ul></div>"
+printf "<div>\n    <ul>\n        <li>\n            <a href='/index.php'>Homepage</a>\n        </li>\n        <li>\n            <a href='/index.php?page=about'>About</a>\n        </li>\n    </ul>\n</div>" > "$(pwd)/Apps/${app2_name}/DynamicOutput/MainMenu.html"
+
+dsh --new DynamicOutputComponent "${app2_name}" MainMenu Menus 0 "MainMenu.html"
 
 dsh --assign-to-response "${app2_name}" Homepage HelloUniverseRootRequest RootRequests Request
 
@@ -60,7 +62,7 @@ dsh --assign-to-response "${app2_name}" Homepage HelloUniverse HelloUniverseOutp
 
 dsh --assign-to-response "${app2_name}" About HelloUniverseAbout HelloUniverseOutput OutputComponent
 
-dsh --assign-to-response "${app2_name}" Menu MainMenu Menus OutputComponent
+dsh --assign-to-response "${app2_name}" Menu MainMenu Menus DynamicOutputComponent
 
 # Build the Apps
 dsh --build-app "${app1_name}" "${app1_development_domain}"
