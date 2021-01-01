@@ -1,400 +1,646 @@
 
 
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:23:40 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:23:42 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:23:45 PM EST 2021 testAssertNoErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:23:59 PM EST 2021 assertNoError Failed[0m
+[0m[44m[30mFri Jan  1 12:24:00 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:24:05 PM EST 2021 testAssertNoErrorCapturesButDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:24:13 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:24:19 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:24:24 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:24:28 PM EST 2021 testAssertNoErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:24:40 PM EST 2021 assertNoError Failed[0m
+[0m[43m[30mFri Jan  1 12:24:46 PM EST 2021 assertNoError Failed[0m
+[0m[43m[30mFri Jan  1 12:24:53 PM EST 2021 assertNoError Failed[0m
+[0m[104m[30mFri Jan  1 12:24:57 PM EST 2021 testAssertNoErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:25:07 PM EST 2021 assertError Failed[0m
+[0m[44m[30mFri Jan  1 12:25:08 PM EST 2021 assertNoError Passed[0m
+[0m[43m[30mFri Jan  1 12:25:15 PM EST 2021 assertError Failed[0m
+[0m[44m[30mFri Jan  1 12:25:16 PM EST 2021 assertNoError Passed[0m
+[0m[43m[30mFri Jan  1 12:25:23 PM EST 2021 assertError Failed[0m
+[0m[44m[30mFri Jan  1 12:25:25 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:25:29 PM EST 2021 testAssertErrorDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:25:39 PM EST 2021 assertError Failed[0m
+[0m[44m[30mFri Jan  1 12:25:40 PM EST 2021 assertNoError Passed[0m
+[0m[43m[30mFri Jan  1 12:25:47 PM EST 2021 assertError Failed[0m
+[0m[44m[30mFri Jan  1 12:25:48 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:25:52 PM EST 2021 testAssertErrorDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:26:03 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:26:07 PM EST 2021 testAssertErrorIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:26:15 PM EST 2021 assertError Failed[0m
+[0m[43m[30mFri Jan  1 12:26:20 PM EST 2021 assertError Failed[0m
+[0m[43m[30mFri Jan  1 12:26:26 PM EST 2021 assertError Failed[0m
+[0m[104m[30mFri Jan  1 12:26:31 PM EST 2021 testAssertErrorIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:26:47 PM EST 2021 assertErrorIfDirectoryExists Passed[0m
+[0m[44m[30mFri Jan  1 12:26:48 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:26:52 PM EST 2021 testAssertErrorIfDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:27:08 PM EST 2021 assertErrorIfDirectoryExists Passed[0m
+[0m[44m[30mFri Jan  1 12:27:09 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:27:14 PM EST 2021 testAssertErrorIfDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:27:27 PM EST 2021 assertErrorIfDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:27:32 PM EST 2021 testAssertErrorIfDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:27:40 PM EST 2021 assertErrorIfDirectoryExists Failed[0m
+[0m[104m[30mFri Jan  1 12:27:44 PM EST 2021 testAssertErrorIfDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:27:59 PM EST 2021 assertErrorIfFileExists Passed[0m
+[0m[44m[30mFri Jan  1 12:28:00 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:28:04 PM EST 2021 testAssertErrorIfFileExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:28:20 PM EST 2021 assertErrorIfFileExists Passed[0m
+[0m[44m[30mFri Jan  1 12:28:21 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:28:26 PM EST 2021 testAssertErrorIfFileExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:28:37 PM EST 2021 assertErrorIfFileExists Passed[0m
+[0m[104m[30mFri Jan  1 12:28:41 PM EST 2021 testAssertErrorIfFileExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:28:49 PM EST 2021 assertErrorIfFileExists Failed[0m
+[0m[104m[30mFri Jan  1 12:28:53 PM EST 2021 testAssertErrorIfFileExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:29:06 PM EST 2021 assertErrorIfDirectoryDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:29:08 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:29:13 PM EST 2021 testAssertErrorIfDirectoryDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:29:28 PM EST 2021 assertErrorIfDirectoryDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:29:30 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:29:35 PM EST 2021 testAssertErrorIfDirectoryDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:29:46 PM EST 2021 assertErrorIfDirectoryDoesNotExist Passed[0m
+[0m[104m[30mFri Jan  1 12:29:51 PM EST 2021 testAssertErrorIfDirectoryDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfDirectoryDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:29:59 PM EST 2021 assertErrorIfDirectoryDoesNotExist Failed[0m
+[0m[104m[30mFri Jan  1 12:30:05 PM EST 2021 testAssertErrorIfDirectoryDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:30:22 PM EST 2021 assertErrorIfFileDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:30:23 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:30:28 PM EST 2021 testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:30:43 PM EST 2021 assertErrorIfFileDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:30:45 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:30:50 PM EST 2021 testAssertErrorIfFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:31:01 PM EST 2021 assertErrorIfFileDoesNotExist Passed[0m
+[0m[104m[30mFri Jan  1 12:31:06 PM EST 2021 testAssertErrorIfFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:31:15 PM EST 2021 assertErrorIfFileDoesNotExist Failed[0m
+[0m[104m[30mFri Jan  1 12:31:20 PM EST 2021 testAssertErrorIfFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileIsNotExecutableDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:31:35 PM EST 2021 assertErrorIfFileIsNotExecutable Passed[0m
+[0m[44m[30mFri Jan  1 12:31:36 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:31:42 PM EST 2021 testAssertErrorIfFileIsNotExecutableDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileIsNotExecutableDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:31:57 PM EST 2021 assertErrorIfFileIsNotExecutable Passed[0m
+[0m[44m[30mFri Jan  1 12:31:58 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:32:04 PM EST 2021 testAssertErrorIfFileIsNotExecutableDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileIsNotExecutableIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:32:16 PM EST 2021 assertErrorIfFileIsNotExecutable Passed[0m
+[0m[104m[30mFri Jan  1 12:32:21 PM EST 2021 testAssertErrorIfFileIsNotExecutableIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertErrorIfFileIsNotExecutableIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:32:30 PM EST 2021 assertErrorIfFileIsNotExecutable Failed[0m
+[0m[104m[30mFri Jan  1 12:32:35 PM EST 2021 testAssertErrorIfFileIsNotExecutableIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:32:49 PM EST 2021 assertDirectoryExists Failed[0m
+[0m[44m[30mFri Jan  1 12:32:50 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:32:54 PM EST 2021 testAssertDirectoryExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:33:09 PM EST 2021 assertDirectoryExists Failed[0m
+[0m[44m[30mFri Jan  1 12:33:10 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:33:15 PM EST 2021 testAssertDirectoryExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:33:22 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:33:27 PM EST 2021 testAssertDirectoryExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:33:38 PM EST 2021 assertDirectoryExists Failed[0m
+[0m[104m[30mFri Jan  1 12:33:42 PM EST 2021 testAssertDirectoryExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:33:56 PM EST 2021 assertDirectoryDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:33:57 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:34:02 PM EST 2021 testAssertDirectoryDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:34:17 PM EST 2021 assertDirectoryDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:34:19 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:34:24 PM EST 2021 testAssertDirectoryDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:34:35 PM EST 2021 assertDirectoryDoesNotExist Passed[0m
+[0m[104m[30mFri Jan  1 12:34:39 PM EST 2021 testAssertDirectoryDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertDirectoryDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:34:48 PM EST 2021 assertDirectoryDoesNotExist Failed[0m
+[0m[104m[30mFri Jan  1 12:34:52 PM EST 2021 testAssertDirectoryDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:35:07 PM EST 2021 assertFileExists Failed[0m
+[0m[44m[30mFri Jan  1 12:35:08 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:35:13 PM EST 2021 testAssertFileExistsDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:35:32 PM EST 2021 assertFileExists Failed[0m
+[0m[44m[30mFri Jan  1 12:35:34 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:35:38 PM EST 2021 testAssertFileExistsDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:35:47 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 12:35:51 PM EST 2021 testAssertFileExistsIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:36:02 PM EST 2021 assertFileExists Failed[0m
+[0m[104m[30mFri Jan  1 12:36:06 PM EST 2021 testAssertFileExistsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:36:24 PM EST 2021 assertFileDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:36:25 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:36:30 PM EST 2021 testAssertFileDoesNotExistDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:36:43 PM EST 2021 assertFileDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:36:45 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:36:49 PM EST 2021 testAssertFileDoesNotExistDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:36:59 PM EST 2021 assertFileDoesNotExist Passed[0m
+[0m[104m[30mFri Jan  1 12:37:04 PM EST 2021 testAssertFileDoesNotExistIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:37:12 PM EST 2021 assertFileDoesNotExist Failed[0m
+[0m[104m[30mFri Jan  1 12:37:17 PM EST 2021 testAssertFileDoesNotExistIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertEqualsDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:37:26 PM EST 2021 assertEquals Failed[0m
+[0m[44m[30mFri Jan  1 12:37:27 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:37:31 PM EST 2021 testAssertEqualsDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertEqualsDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:37:40 PM EST 2021 assertEquals Passed[0m
+[0m[44m[30mFri Jan  1 12:37:41 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:37:45 PM EST 2021 testAssertEqualsDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertEqualsIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:37:52 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:37:56 PM EST 2021 testAssertEqualsIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertEqualsIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:38:03 PM EST 2021 assertEquals Failed[0m
+[0m[104m[30mFri Jan  1 12:38:07 PM EST 2021 testAssertEqualsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNotEqualsDoesNotProduceAnErrorWhenFailingAssertionIsExpected     =-=-[0m
+[0m[43m[30mFri Jan  1 12:38:18 PM EST 2021 assertNotEquals Failed[0m
+[0m[44m[30mFri Jan  1 12:38:19 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:38:23 PM EST 2021 testAssertNotEqualsDoesNotProduceAnErrorWhenFailingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNotEqualsDoesNotProduceAnErrorWhenPassingAssertionIsExpected     =-=-[0m
+[0m[44m[30mFri Jan  1 12:38:32 PM EST 2021 assertNotEquals Passed[0m
+[0m[44m[30mFri Jan  1 12:38:34 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:38:38 PM EST 2021 testAssertNotEqualsDoesNotProduceAnErrorWhenPassingAssertionIsExpected Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNotEqualsIncreasesPASSING_ASSERTIONSOnPassingAssertion     =-=-[0m
+[0m[44m[30mFri Jan  1 12:38:45 PM EST 2021 assertNotEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:38:49 PM EST 2021 testAssertNotEqualsIncreasesPASSING_ASSERTIONSOnPassingAssertion Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testAssertNotEqualsIncreasesFAILING_ASSERTIONSOnFailingAssertion     =-=-[0m
+[0m[43m[30mFri Jan  1 12:38:56 PM EST 2021 assertNotEquals Failed[0m
+[0m[104m[30mFri Jan  1 12:39:00 PM EST 2021 testAssertNotEqualsIncreasesFAILING_ASSERTIONSOnFailingAssertion Passed[0m
+
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpRunsWithoutError     =-=-[0m
-[0m[44m[30mWed Dec 30 04:00:54 PM EST 2020 assertNoError Passed[0m
-[0m[104m[30mWed Dec 30 04:00:57 PM EST 2020 testDshHelpRunsWithoutError Passed[0m
+[0m[44m[30mFri Jan  1 12:39:16 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:39:20 PM EST 2021 testDshHelpRunsWithoutError Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpCreatesSystemManPageForDsh     =-=-[0m
-[0m[44m[30mWed Dec 30 04:01:05 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:01:08 PM EST 2020 testDshHelpCreatesSystemManPageForDsh Passed[0m
+[0m[44m[30mFri Jan  1 12:39:28 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 12:39:32 PM EST 2021 testDshHelpCreatesSystemManPageForDsh Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpOutputMatchesManDshOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:01:18 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:01:21 PM EST 2020 testDshHelpOutputMatchesManDshOutput Passed[0m
+[0m[43m[30mFri Jan  1 12:39:41 PM EST 2021 assertEquals Failed[0m
+[0m[103m[30mFri Jan  1 12:39:44 PM EST 2021 testDshHelpOutputMatchesManDshOutput Failed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid     =-=-[0m
-[0m[44m[30mWed Dec 30 04:01:31 PM EST 2020 assertError Passed[0m
-[0m[44m[30mWed Dec 30 04:01:39 PM EST 2020 assertError Passed[0m
-[0m[44m[30mWed Dec 30 04:01:47 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:01:51 PM EST 2020 testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid Passed[0m
+[0m[44m[30mFri Jan  1 12:39:55 PM EST 2021 assertError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:03 PM EST 2021 assertError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:13 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:40:17 PM EST 2021 testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid     =-=-[0m
-[0m[44m[30mWed Dec 30 04:01:58 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:02 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:06 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:11 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:16 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:20 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:24 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:29 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:33 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:38 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:42 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:47 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:52 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:02:56 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:00 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:05 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:09 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:13 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:18 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:22 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:26 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:31 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:35 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:40 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:44 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:48 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:53 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:03:57 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:04:01 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:04:06 PM EST 2020 assertNoError Passed[0m
-[0m[104m[30mWed Dec 30 04:04:09 PM EST 2020 testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid Passed[0m
+[0m[44m[30mFri Jan  1 12:40:24 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:28 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:32 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:37 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:41 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:45 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:48 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:52 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:40:57 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:02 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:06 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:12 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:16 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:20 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:25 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:28 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:33 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:37 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:41 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:45 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:49 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:52 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:41:56 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:01 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:06 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:11 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:17 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:21 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:25 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:42:31 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:42:35 PM EST 2021 testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:04:16 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:04:20 PM EST 2020 testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent Passed[0m
+[0m[44m[30mFri Jan  1 12:42:42 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:42:46 PM EST 2021 testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:04:30 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:04:34 PM EST 2020 testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent Passed[0m
+[0m[44m[30mFri Jan  1 12:42:57 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:43:02 PM EST 2021 testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:04:42 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:04:46 PM EST 2020 testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:43:10 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:43:14 PM EST 2021 testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:04:58 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:05:03 PM EST 2020 testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:43:27 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:43:33 PM EST 2021 testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:05:17 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:05:21 PM EST 2020 testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:43:48 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:43:52 PM EST 2021 testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:05:40 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:05:44 PM EST 2020 testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:44:11 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:44:15 PM EST 2021 testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:06:34 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:06:38 PM EST 2020 testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:45:09 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:45:13 PM EST 2021 testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:07:00 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:07:05 PM EST 2020 testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:45:43 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:45:48 PM EST 2021 testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:07:33 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:07:38 PM EST 2020 testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:46:20 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:46:26 PM EST 2021 testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:07:59 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:08:03 PM EST 2020 testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:46:48 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:46:53 PM EST 2021 testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:08:57 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:09:01 PM EST 2020 testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:47:51 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:47:55 PM EST 2021 testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:09:41 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:09:46 PM EST 2020 testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:48:44 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:48:48 PM EST 2021 testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:10:21 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:10:26 PM EST 2020 testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:49:28 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:49:33 PM EST 2021 testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:10:36 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:10:41 PM EST 2020 testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:49:44 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:49:49 PM EST 2021 testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput     =-=-[0m
-[0m[44m[30mWed Dec 30 04:10:54 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:10:58 PM EST 2020 testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput Passed[0m
+[0m[44m[30mFri Jan  1 12:50:04 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:50:10 PM EST 2021 testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshStartDevelopmentServerStartsADevelopmentServerWithoutError     =-=-[0m
-[0m[44m[30mWed Dec 30 04:11:08 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:11:12 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:11:16 PM EST 2020 testDshStartDevelopmentServerStartsADevelopmentServerWithoutError Passed[0m
+[0m[44m[30mFri Jan  1 12:50:21 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 12:50:26 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:50:31 PM EST 2021 testDshStartDevelopmentServerStartsADevelopmentServerWithoutError Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:11:27 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:11:31 PM EST 2020 testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:50:41 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:50:45 PM EST 2021 testDshStartDevelopmentServerUsesPort8080IfPORTIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshStartDevelopmentServerUsesSpecifiedPORTIfPORTIsSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:11:41 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:11:45 PM EST 2020 testDshStartDevelopmentServerUsesSpecifiedPORTIfPORTIsSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:50:56 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 12:51:00 PM EST 2021 testDshStartDevelopmentServerUsesSpecifiedPORTIfPORTIsSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:11:56 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:11:59 PM EST 2020 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:51:12 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:51:16 PM EST 2021 testDshBuildAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfSpecifiedAppsDirectoryDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:12:11 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:12:15 PM EST 2020 testDshBuildAppRunsWithErrorIfSpecifiedAppsDirectoryDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:51:30 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:51:34 PM EST 2021 testDshBuildAppRunsWithErrorIfSpecifiedAppsDirectoryDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppRunsWithErrorIfSpecifiedAppsComponentsPhpFileDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:32:36 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:32:40 PM EST 2020 testDshBuildAppRunsWithErrorIfSpecifiedAppsComponentsPhpFileDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 12:54:01 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:54:06 PM EST 2021 testDshBuildAppRunsWithErrorIfSpecifiedAppsComponentsPhpFileDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:33:09 PM EST 2020 assertNoError Passed[0m
-[0m[104m[30mWed Dec 30 04:33:15 PM EST 2020 testDshBuildAppBuildsSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 12:54:42 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mFri Jan  1 12:54:48 PM EST 2021 testDshBuildAppBuildsSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsAppForDomainLocalhost8080IfDomainIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:33:50 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:33:58 PM EST 2020 testDshBuildAppBuildsAppForDomainLocalhost8080IfDomainIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:55:44 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:55:52 PM EST 2021 testDshBuildAppBuildsAppForDomainLocalhost8080IfDomainIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:34:29 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:34:37 PM EST 2020 testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:56:30 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:56:38 PM EST 2021 testDshBuildAppBuildsAppForSpecifiedDomainIfDomainIsSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:34:47 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:34:50 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:56:48 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:56:51 PM EST 2021 testDshNewRunsWithErrorIfMODEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewRunsWithErrorIfMODEIsNotValid     =-=-[0m
-[0m[44m[30mWed Dec 30 04:35:05 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:35:09 PM EST 2020 testDshNewRunsWithErrorIfMODEIsNotValid Passed[0m
+[0m[44m[30mFri Jan  1 12:57:07 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:57:11 PM EST 2021 testDshNewRunsWithErrorIfMODEIsNotValid Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:35:22 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:35:26 PM EST 2020 testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 12:57:25 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:57:29 PM EST 2021 testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME     =-=-[0m
-[0m[44m[30mWed Dec 30 04:36:02 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:36:06 PM EST 2020 testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME Passed[0m
+[0m[44m[30mFri Jan  1 12:58:00 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 12:58:05 PM EST 2021 testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:36:36 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:36:39 PM EST 2020 testDshNewAppCreatesNewAppsDirectory Passed[0m
+[0m[44m[30mFri Jan  1 12:58:33 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:58:36 PM EST 2021 testDshNewAppCreatesNewAppsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsOutputComponentsDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:37:10 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:37:14 PM EST 2020 testDshNewAppCreatesNewAppsOutputComponentsDirectory Passed[0m
+[0m[44m[30mFri Jan  1 12:59:03 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:59:07 PM EST 2021 testDshNewAppCreatesNewAppsOutputComponentsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsRequestsDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:37:45 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:37:48 PM EST 2020 testDshNewAppCreatesNewAppsRequestsDirectory Passed[0m
+[0m[44m[30mFri Jan  1 12:59:38 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 12:59:42 PM EST 2021 testDshNewAppCreatesNewAppsRequestsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsResponsesDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:38:18 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:38:22 PM EST 2020 testDshNewAppCreatesNewAppsResponsesDirectory Passed[0m
+[0m[44m[30mFri Jan  1 01:00:11 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 01:00:15 PM EST 2021 testDshNewAppCreatesNewAppsResponsesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDynamicOutputDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:38:53 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:38:56 PM EST 2020 testDshNewAppCreatesNewAppsDynamicOutputDirectory Passed[0m
+[0m[44m[30mFri Jan  1 01:00:47 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 01:00:51 PM EST 2021 testDshNewAppCreatesNewAppsDynamicOutputDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsCssDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:39:26 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:39:30 PM EST 2020 testDshNewAppCreatesNewAppsCssDirectory Passed[0m
+[0m[44m[30mFri Jan  1 01:01:21 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 01:01:26 PM EST 2021 testDshNewAppCreatesNewAppsCssDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsJsDirectory     =-=-[0m
-[0m[44m[30mWed Dec 30 04:40:00 PM EST 2020 assertDirectoryExists Passed[0m
-[0m[104m[30mWed Dec 30 04:40:03 PM EST 2020 testDshNewAppCreatesNewAppsJsDirectory Passed[0m
+[0m[44m[30mFri Jan  1 01:01:57 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mFri Jan  1 01:02:00 PM EST 2021 testDshNewAppCreatesNewAppsJsDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFile     =-=-[0m
-[0m[44m[30mWed Dec 30 04:40:34 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:40:37 PM EST 2020 testDshNewAppCreatesNewAppsComponentsPhpFile Passed[0m
+[0m[44m[30mFri Jan  1 01:02:29 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 01:02:33 PM EST 2021 testDshNewAppCreatesNewAppsComponentsPhpFile Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate     =-=-[0m
-[0m[44m[30mWed Dec 30 04:41:10 PM EST 2020 assertNoError Passed[0m
-[0m[44m[30mWed Dec 30 04:41:38 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:41:42 PM EST 2020 testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate Passed[0m
+[0m[44m[30mFri Jan  1 01:03:02 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mFri Jan  1 01:03:34 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:03:39 PM EST 2021 testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:42:19 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:42:23 PM EST 2020 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:04:12 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:04:16 PM EST 2021 testNewOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:42:38 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:42:42 PM EST 2020 testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 01:04:31 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:04:35 PM EST 2021 testNewOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mWed Dec 30 04:43:07 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:43:12 PM EST 2020 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
+[0m[44m[30mFri Jan  1 01:05:00 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:05:06 PM EST 2021 testNewOutputComponentRunsWithErrorIfAnOutputComponentNamedOUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:43:24 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:43:28 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:05:20 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:05:24 PM EST 2021 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:43:40 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:43:45 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:05:36 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:05:41 PM EST 2021 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:43:57 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:44:01 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:05:53 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:05:58 PM EST 2021 testNewOutputComponentRunsWithErrorIfOUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:44:13 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:44:16 PM EST 2020 testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:06:11 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:06:15 PM EST 2021 testNewOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:44:36 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:44:40 PM EST 2020 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:06:35 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 01:06:40 PM EST 2021 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:44:59 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:45:04 PM EST 2020 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mFri Jan  1 01:06:58 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:07:04 PM EST 2021 testNewOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:45:42 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:45:46 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:07:38 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:07:42 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:46:02 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:46:06 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 01:07:58 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:08:03 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mWed Dec 30 04:46:33 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:46:39 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
+[0m[44m[30mFri Jan  1 01:08:30 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:08:35 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:46:52 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:46:56 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:08:49 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:08:53 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:47:09 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:47:14 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:09:07 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:09:12 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:47:27 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:47:32 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:09:26 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:09:32 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:47:45 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:47:49 PM EST 2020 testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:09:45 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:09:49 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:48:09 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:48:14 PM EST 2020 testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:10:11 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 01:10:17 PM EST 2021 testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:48:33 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:48:39 PM EST 2020 testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mFri Jan  1 01:10:38 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:10:45 PM EST 2021 testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:49:15 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:49:18 PM EST 2020 testNewRequestRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:11:18 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:11:23 PM EST 2021 testNewRequestRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:49:32 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:49:36 PM EST 2020 testNewRequestRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 01:11:38 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:11:42 PM EST 2021 testNewRequestRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestRunsWithErrorIfAnRequestNamedREQUEST_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mWed Dec 30 04:50:00 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:50:04 PM EST 2020 testNewRequestRunsWithErrorIfAnRequestNamedREQUEST_NAMEAlreadyExists Passed[0m
+[0m[44m[30mFri Jan  1 01:12:05 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:12:10 PM EST 2021 testNewRequestRunsWithErrorIfAnRequestNamedREQUEST_NAMEAlreadyExists Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestRunsWithErrorIfREQUEST_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:50:15 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:50:19 PM EST 2020 testNewRequestRunsWithErrorIfREQUEST_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:12:24 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:12:29 PM EST 2021 testNewRequestRunsWithErrorIfREQUEST_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestRunsWithErrorIfREQUEST_CONTAINERIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:50:30 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:50:33 PM EST 2020 testNewRequestRunsWithErrorIfREQUEST_CONTAINERIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:12:41 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:12:45 PM EST 2021 testNewRequestRunsWithErrorIfREQUEST_CONTAINERIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestRunsWithErrorIfRELATIVE_URLIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:50:44 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:50:48 PM EST 2020 testNewRequestRunsWithErrorIfRELATIVE_URLIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:12:56 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:12:59 PM EST 2021 testNewRequestRunsWithErrorIfRELATIVE_URLIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestCreatesNewRequestConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:51:06 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:51:10 PM EST 2020 testNewRequestCreatesNewRequestConfigurationFileForSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:13:20 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 01:13:25 PM EST 2021 testNewRequestCreatesNewRequestConfigurationFileForSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:51:28 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:51:34 PM EST 2020 testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mFri Jan  1 01:13:46 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:13:51 PM EST 2021 testNewRequestCreatesNewRequestConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:52:09 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:52:13 PM EST 2020 testNewResponseRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:14:21 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:14:25 PM EST 2021 testNewResponseRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:52:26 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:52:30 PM EST 2020 testNewResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 01:14:38 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:14:42 PM EST 2021 testNewResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfAnResponseNamedRESPONSE_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mWed Dec 30 04:52:54 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:52:58 PM EST 2020 testNewResponseRunsWithErrorIfAnResponseNamedRESPONSE_NAMEAlreadyExists Passed[0m
+[0m[44m[30mFri Jan  1 01:15:05 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:15:10 PM EST 2021 testNewResponseRunsWithErrorIfAnResponseNamedRESPONSE_NAMEAlreadyExists Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfRESPONSE_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:53:09 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:53:12 PM EST 2020 testNewResponseRunsWithErrorIfRESPONSE_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:15:22 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:15:27 PM EST 2021 testNewResponseRunsWithErrorIfRESPONSE_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseRunsWithErrorIfRESPONSE_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:53:23 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:53:27 PM EST 2020 testNewResponseRunsWithErrorIfRESPONSE_POSITIONIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:15:38 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:15:42 PM EST 2021 testNewResponseRunsWithErrorIfRESPONSE_POSITIONIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseCreatesNewResponseConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:53:45 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:53:49 PM EST 2020 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:16:00 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 01:16:05 PM EST 2021 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewResponseCreatesNewResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:54:10 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:54:15 PM EST 2020 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mFri Jan  1 01:16:28 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:16:34 PM EST 2021 testNewResponseCreatesNewResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:54:50 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:54:54 PM EST 2020 testNewGlobalResponseRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:17:07 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:17:12 PM EST 2021 testNewGlobalResponseRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:55:08 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:55:12 PM EST 2020 testNewGlobalResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 01:17:29 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:17:34 PM EST 2021 testNewGlobalResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfAnGlobalResponseNamedGLOBAL_RESPONSE_NAMEAlreadyExists     =-=-[0m
-[0m[44m[30mWed Dec 30 04:55:37 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:55:42 PM EST 2020 testNewGlobalResponseRunsWithErrorIfAnGlobalResponseNamedGLOBAL_RESPONSE_NAMEAlreadyExists Passed[0m
+[0m[44m[30mFri Jan  1 01:17:59 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:18:04 PM EST 2021 testNewGlobalResponseRunsWithErrorIfAnGlobalResponseNamedGLOBAL_RESPONSE_NAMEAlreadyExists Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:55:53 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:55:57 PM EST 2020 testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:18:16 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:18:20 PM EST 2021 testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_POSITIONIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:56:09 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:56:13 PM EST 2020 testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_POSITIONIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:18:33 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:18:37 PM EST 2021 testNewGlobalResponseRunsWithErrorIfGLOBAL_RESPONSE_POSITIONIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:56:32 PM EST 2020 assertFileExists Passed[0m
-[0m[104m[30mWed Dec 30 04:56:37 PM EST 2020 testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:18:56 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mFri Jan  1 01:19:00 PM EST 2021 testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mWed Dec 30 04:56:57 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 04:57:03 PM EST 2020 testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mFri Jan  1 01:19:21 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:19:27 PM EST 2021 testNewGlobalResponseCreatesNewGlobalResponseConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfAppNameIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:57:49 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:57:52 PM EST 2020 testDshAssignToResponseRunsWithErrorIfAppNameIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:20:13 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:20:18 PM EST 2021 testDshAssignToResponseRunsWithErrorIfAppNameIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfResponseNameIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:58:03 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:58:07 PM EST 2020 testDshAssignToResponseRunsWithErrorIfResponseNameIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:20:30 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:20:34 PM EST 2021 testDshAssignToResponseRunsWithErrorIfResponseNameIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfComponentNameIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:58:19 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:58:23 PM EST 2020 testDshAssignToResponseRunsWithErrorIfComponentNameIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:20:46 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:20:50 PM EST 2021 testDshAssignToResponseRunsWithErrorIfComponentNameIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfComponentContainerIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:58:35 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:58:39 PM EST 2020 testDshAssignToResponseRunsWithErrorIfComponentContainerIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:21:01 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:21:05 PM EST 2021 testDshAssignToResponseRunsWithErrorIfComponentContainerIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfComponentTypeIsNotSpecified     =-=-[0m
-[0m[44m[30mWed Dec 30 04:58:50 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:58:54 PM EST 2020 testDshAssignToResponseRunsWithErrorIfComponentTypeIsNotSpecified Passed[0m
+[0m[44m[30mFri Jan  1 01:21:17 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:21:21 PM EST 2021 testDshAssignToResponseRunsWithErrorIfComponentTypeIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
-[0m[44m[30mWed Dec 30 04:59:07 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:59:11 PM EST 2020 testDshAssignToResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+[0m[44m[30mFri Jan  1 01:21:35 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:21:39 PM EST 2021 testDshAssignToResponseRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfSpecifiedResponseIsNotDefinedForSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:59:24 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 04:59:29 PM EST 2020 testDshAssignToResponseRunsWithErrorIfSpecifiedResponseIsNotDefinedForSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:21:53 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:21:58 PM EST 2021 testDshAssignToResponseRunsWithErrorIfSpecifiedResponseIsNotDefinedForSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseRunsWithErrorIfSpecifiedComponentIsNotDefinedForTheSpecifiedApp     =-=-[0m
-[0m[44m[30mWed Dec 30 04:59:40 PM EST 2020 assertError Passed[0m
-[0m[44m[30mWed Dec 30 04:59:49 PM EST 2020 assertError Passed[0m
-[0m[44m[30mWed Dec 30 04:59:58 PM EST 2020 assertError Passed[0m
-[0m[104m[30mWed Dec 30 05:00:03 PM EST 2020 testDshAssignToResponseRunsWithErrorIfSpecifiedComponentIsNotDefinedForTheSpecifiedApp Passed[0m
+[0m[44m[30mFri Jan  1 01:22:11 PM EST 2021 assertError Passed[0m
+[0m[44m[30mFri Jan  1 01:22:22 PM EST 2021 assertError Passed[0m
+[0m[44m[30mFri Jan  1 01:22:32 PM EST 2021 assertError Passed[0m
+[0m[104m[30mFri Jan  1 01:22:36 PM EST 2021 testDshAssignToResponseRunsWithErrorIfSpecifiedComponentIsNotDefinedForTheSpecifiedApp Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshAssignToResponseProducesExpectedResponseConfiguration     =-=-[0m
-[0m[44m[30mWed Dec 30 05:00:41 PM EST 2020 assertEquals Passed[0m
-[0m[104m[30mWed Dec 30 05:00:45 PM EST 2020 testDshAssignToResponseProducesExpectedResponseConfiguration Passed[0m
+[0m[44m[30mFri Jan  1 01:23:19 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mFri Jan  1 01:23:23 PM EST 2021 testDshAssignToResponseProducesExpectedResponseConfiguration Passed[0m
