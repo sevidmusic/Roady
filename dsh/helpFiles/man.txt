@@ -1,5 +1,43 @@
-dsh is a command line utility designed to aide in development with the
-Darling Data Management System.
+.\" Manpage for dsh.
+.\" Contact sdmwebsdm@gmail.com to submit issues.
+.TH man 1 "01 January 2021" "0.0" "dsh man page"
+.SH NAME
+dsh
+.SH SYNOPSIS
+dsh [OPTION...]
+.SH DESCRIPTION
+dsh is a command line utility designed to aide in development with the Darling Data Management System.
+.SH OPTIONS
+dsh [-h|--help] [-n|--new [MODE]] [-b|--build-app [APP_NAME] [DOMAIN]] [-s|--start-development-server [PORT]] [-a|--assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]]
 
-dsh can perform various tasks, from running tests, to building apps and starting
-a development server.
+For information about a specific flag please use dsh --help [FLAG]
+
+For example, to get information about the --new flag:
+
+    dsh --help --new
+
+.B or
+
+    dsh -h -n
+
+.SH SEE ALSO
+dshUI(1)
+.SH BUGS
+.B There are bugs if dsh and dshUI do not exist in PATH!
+.B Please make sure dsh and dshUI are in your PATH.
+.B If both dsh and dshUI are not in your PATH then there will likly be errors related to files
+.B and directories not being found, which may also lead to other errors. This is currently being
+.B addressed.
+
+.B Another important reason to make sure dsh is in your PATH:
+.B    If you have multiple installations of the Darling Data Management System
+.B    installed on your system you want to make sure the dsh that is run is always
+.B    the dsh that came with the installation you are currently developing with,
+.B    or you risk dsh acting on a one of the other installations!
+
+Please contact sdmwebsdm@gmail.com to submit issues. Please include a description of which dsh commands
+were run and in what order. Also, before submitting an issue please make sure dsh and dshUI are in your PATH,
+and if you have multiple installations of the Darling Data Management System make sure your PATH refers to the
+correct installations of dsh and dshUI.
+.SH AUTHOR
+Sevi Donnelly Foreman (sdmwebsdm@gmail.com)
