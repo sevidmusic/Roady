@@ -1,3 +1,42 @@
-dsh --help | -h <FLAG> : Detailed help information about the specified flag.
-For example, dsh -h --build-app would show detailed help information about the
---build-app flag.
+dsh --help | -h <FLAG> : Show detailed help information about the specified flag.
+
+The following options are possible:
+
+dsh --help --help
+dsh -h -h
+
+dsh --help --new
+dsh -h -n
+
+dsh --help --new App
+dsh -h -n App
+
+dsh --help --new OutputComponent
+dsh -h -n OutputComponent
+
+dsh --help --new DynamicOutputComponent
+dsh -h -n DynamicOutputComponent
+
+dsh --help --new Request
+dsh -h -n Request
+
+dsh --help --new Response
+dsh -h -n Response
+
+dsh --help --new GlobalResponse
+dsh -h -n GlobalResponse
+
+dsh --help --build-app
+dsh -h -b
+
+dsh --help --start-development-server
+dsh -h -s
+
+dsh --help --assign-to-response
+dsh -h -a
+
+dsh --help --dsh-unit
+dsh -h -d
+
+dsh --help --php-unit
+dsh -h -p
