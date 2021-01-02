@@ -9,7 +9,7 @@ determineHelpFilesDirectoryPath() {
 
 expectedHelpFileOutput() {
     local text
-    text="$(dshUI -c "$(determineHelpFilesDirectoryPath)/${1}" 33 "dsh -.*[>]" "[<].*[>]" "dshUnit ")"
+    text="$(dshUI -c "$(determineHelpFilesDirectoryPath)/${1}" 93 "[<]\b[^>]*[>]" "[[]\b[^]]*[]]" "dsh --.*[^ A-Z]" "dsh -.*[^ A-Z]" "Darling Data Management System" "DDMS" "dshUnit" "dshUI" "http:\/\/localhost:" "8080")"
     printf "%s" "${text}"
 }
 

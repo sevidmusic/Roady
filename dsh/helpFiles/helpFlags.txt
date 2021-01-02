@@ -1,1 +1,57 @@
-dsh --help flags : Show brief help information about all available flags.
+### dsh flags ###
+
+The following is a brief summary of all the flags available to dsh:
+
+dsh --help : Show help information about dsh
+Shorthand: Shorthand: dsh -h
+For more information use: dsh -h -h
+
+dsh --help flags : Show brief help information about all dsh flags
+Shorthand: dsh -h flags
+Your are currently viewing the output of dsh --help flags
+
+dsh --help [FLAG] : Show detailed help information about the specified flag.
+For example: dsh --help --new or dsh -h -n
+Shorthand: dsh -h [FLAG]
+For more information use: dsh -h FLAG
+
+dsh --new [MODE] [ARGUMENTS...] : The new flag is used to create. The new flag is
+modal, meaning the specified [MODE] determines what is created.
+Different modes expect different [ARGUMENTS...], and different modes may
+expect different numbers of [ARGUMENTS..].
+Shorthand: dsh -n [ARGUMENTS...]
+For more information use: dsh -h -n
+
+dsh --build-app | -b [APP_NAME] [DOMAIN] : Build an App for a
+specified [DOMAIN] by running php Apps/[APP_NAME]/Components.php.
+If [DOMAIN] is not specified then the domain defined in the App's
+Components.php file will be used. If the specified App was already built for the
+specified [DOMAIN], then the App will not be built, an error will be logged,
+and dsh will exit.
+Shorthand: dsh -b
+For more information use: dsh -h -b
+
+dsh --start-development-server | -s [PORT] : Start a development server at
+http://localhost:[PORT]. If [PORT] is not specified start a development
+server at http://localhost:8080.
+Shorthand: dsh -s
+For more information use: dsh -h -s
+
+dsh --assign-to-response [APP_NAME] [COMPONENT_NAME] [COMPONENT_TYPE] [COMPONENT_CONTAINER] [RESPONSE_NAME] :
+Assign the component defined for the [APP_NAME] app whose name is [COMPONENT_NAME] and type is [COMPONENT_TYPE]
+to the response defined for the [APP_NAME] app whose name is [RESPONSE_NAME].
+Shorthand: dsh -a
+For more information use: dsh -h -a
+
+dsh --dsh-unit <DSH_UNIT_CONFIG_FILE_PATH> <TEST_GROUP_NAME> Run dshUnit tests.
+If <DSH_UNIT_CONFIG_FILE_PATH> is specified it will be used, otherwise dshUnit's
+dshUnitConfig.sh file will be used. If <TEST_GROUP_NAME> is specified, then the
+specified test group will be run, otherwise the all test group will be run.
+Shorthand: dsh -d
+For more information use: dsh -h -d
+
+dsh --php-unit <PHP_UNIT_CONFIG_FILE_PATH> Run PhpUnit tests. If <PHP_UNIT_CONFIG_FILE_PATH>
+is specified it will be used, otherwise the Darling Data Management System's php.xml
+file will be used.
+Shorthand: dsh -p
+For more information use: dsh -h -p
