@@ -1,26 +1,30 @@
 dsh --new Request <APP_NAME> <REQUEST_NAME> <REQUEST_CONTAINER> <RELATIVE_URL>
+
 Creates a new Request configuration file at Apps/<APP_NAME>/Requests/<REQUEST_NAME>.php
-with the following structure:
 
-<?php
-/** <APP_NAME> | <REQUEST_NAME>.php */
+[APP_NAME] : The name of the app the Request will be defined for.
 
-$appComponentsFactory->buildRequest(
-    '<REQUEST_NAME>',
-    '<REQUEST_CONTAINER>',
-    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/<RELATIVE_URL>',
-);
+[REQUEST_NAME] : An alphanumeric name to assign to the Request.
 
-dsh --new Request Foo Bar Requests index.php
+[REQUEST_CONTAINER] : The container to assign to the Request.
 
-Would create the following Request configuration file at Apps/Foo/Requests/Bar.php
+[RELATIVE_URL] : The relative url to assign to the Request.
 
-<?php
-/** Foo | Bar.php */
+                 This is a string that represents the part of the url
+                 following the domain the App was built for.
 
-$appComponentsFactory->buildRequest(
-    'Bar',
-    'Requests',
-    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/index.php',
-);
+                 For example, if an App named Foo is built for the domain
+                 http://localhost:8080 then a [RELATIVE_URL] of index.php
+                 would assign http://localhost:8080/index.php as the
+                 Request's url.
+
+                 You MUST only specify the relative url, do not include
+                 the domain!
+
+                 This will insure that the Request's actual url will be
+                 correct regarless of what domain the App is built for.
+
+Example:
+
+    dsh -n Request AppName RequestName RequestContainer index.php?foo=bare
 

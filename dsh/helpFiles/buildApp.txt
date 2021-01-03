@@ -1,6 +1,18 @@
-dsh --build-app | -b <APP_NAME> <DOMAIN> : Build an App for a
-specified <DOMAIN> by running php Apps/<APP_NAME>/Components.php.
-If <DOMAIN> is not specified then the domain defined in the App's
-Components.php file will be used. If the specified App was already built for the
-specified <DOMAIN>, then the App will not be built, an error will be logged,
-and dsh will exit.
+dsh --build-app | -b [APP_NAME] [DOMAIN] : Build an App for a specified [DOMAIN]
+by running Apps/[APP_NAME]/Components.php file.
+
+If [DOMAIN] is not specified then the domain defined in the App's
+Components.php file will be used.
+
+[APP_NAME] : The name of the App to build.
+
+[DOMAIN] : The domain to build the App for.
+
+Example:
+
+dsh -b AppName http://localhost:8080/
+
+WARNING: dsh will not prevent you from building an App multiple times for
+         the same [DOMAIN], whether or not this is problematic depends
+         on the App being built.
+

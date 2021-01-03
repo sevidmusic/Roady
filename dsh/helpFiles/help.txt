@@ -1,1 +1,13 @@
 dsh --help help
+
+To get general information about dsh, use:
+
+    dsh --help
+
+To get information about a specified flag use:
+
+    dsh --help [FLAG]
+
+To get information about all flags use:
+
+    dsh --help flags
