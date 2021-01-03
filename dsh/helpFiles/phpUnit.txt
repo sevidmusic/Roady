@@ -1,3 +1,4 @@
-dsh --php-unit <PHP_UNIT_CONFIG_FILE_PATH> Run PhpUnit tests. If <PHP_UNIT_CONFIG_FILE_PATH>
-is specified it will be used, otherwise the Darling Data Management System's php.xml
-file will be used.
+dsh --php-unit [PHP_UNIT_CONFIG_FILE_PATH] Run PhpUnit tests.
+
+If [PHP_UNIT_CONFIG_FILE_PATH] is specified it will be used, otherwise the
+Darling Data Management System's php.xml file will be used.
