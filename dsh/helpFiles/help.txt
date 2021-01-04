@@ -1,4 +1,7 @@
-dsh --help help
+
+dsh --help --help
+
+The following is a brief summary of how to use the --help flag:
 
 To get general information about dsh, use:
 
@@ -11,3 +14,4 @@ To get information about a specified flag use:
 To get information about all flags use:
 
     dsh --help flags
+

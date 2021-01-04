@@ -1,21 +1,27 @@
-dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME]
-[OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]
+dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]
+
+Description:
 
 Creates a new OutputComponent configuration file at
 Apps/[APP_NAME]/OutputComponents/[OUTPUT_COMPONENT_NAME].php
 
+Shorthand:
 
-[APP_NAME] : The name of the App the OutputComponent will be defined for.
+dsh -n OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]
 
-[OUTPUT_COMPONENT_NAME] : An alphanumeric name to assign to the OutputComponent.
+Arguments:
 
-[OUTPUT_COMPONENT_CONTAINER] : The container to assign to the OutputComponent.
-                               MUST be alphanumeric.
+[APP_NAME]                   The name of the App the OutputComponent will be defined for.
 
-[OUTPUT_COMPONENT_POSITION] : The position to assign to the OutputComponent.
-                              MUST be a number, whole or decimal.
+[OUTPUT_COMPONENT_NAME]      An alphanumeric name to assign to the OutputComponent.
 
-[OUTPUT] : The output to assign to the OutputComponent
+[OUTPUT_COMPONENT_CONTAINER] The container to assign to the OutputComponent.
+                             MUST be alphanumeric.
+
+[OUTPUT_COMPONENT_POSITION]  The position to assign to the OutputComponent.
+                             MUST be a number, whole or decimal.
+
+[OUTPUT]                     The output to assign to the OutputComponent
 
 Example:
 
