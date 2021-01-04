@@ -21,7 +21,7 @@ expectedOutputComponentFileContent() {
     expectedContent="$(echo "${expectedContent}" | sed "s/OUTPUT_COMPONENT_NAME/${2}/g")"
     expectedContent="$(echo "${expectedContent}" | sed "s/OUTPUT_COMPONENT_CONTAINER/${3}/g")"
     expectedContent="$(echo "${expectedContent}" | sed "s/OUTPUT_COMPONENT_POSITION/${4}/g")"
-    expectedContent="$(awk -v output="${5}" -v expectedContent="${expectedContent}" 'BEGIN { gsub( "(\"|\047)", "__ESCAPE__&", output  ); gsub( "__ESCAPE__", "\\", output);  gsub( "OUTPUT", output, expectedContent ); print expectedContent }')"
+    expectedContent="$(awk -v output="${5}" -v expectedContent="${expectedContent}" 'BEGIN { gsub( "(\047)", "__ESCAPE__&", output  ); gsub( "__ESCAPE__", "\\", output);  gsub( "OUTPUT", output, expectedContent ); print expectedContent }')"
     printf "%s" "${expectedContent}"
 }
 
