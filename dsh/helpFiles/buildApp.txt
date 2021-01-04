@@ -15,11 +15,11 @@ dsh -b [APP_NAME] [DOMAIN]
 
 Arguments:
 
-[APP_NAME] : The name of the App to build.
+[APP_NAME] The name of the App to build.
 
-[DOMAIN]   : The domain to build the App for.
-             If [DOMAIN] is not specified then the domain defined
-             in the App's Components.php file will be used.
+[DOMAIN]   The domain to build the App for.
+           If [DOMAIN] is not specified then the domain defined
+           in the App's Components.php file will be used.
 Example:
 
 dsh -b AppName http://localhost:8080/
