@@ -1,15 +1,23 @@
-dsh --new Response <APP_NAME> <RESPONSE_NAME> <RESPONSE_POSITION>
+dsh --new Response [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]
 
-Create a new Response at Apps/<APP_NAME>/Responses/<RESPONSE_NAME>.php
+Description:
 
-[APP_NAME] : The name of the App the Responses will be defined for.
+Create a new Response configuration at Apps/[APP_NAME]/Responses/[RESPONSE_NAME].php
 
-[RESPONSE_NAME] : An alphanumeric name to assign to the Response.
+Shorthand:
 
-[RESPONSE_POSITION] : The position to assign to the Response.
-                      MUST be a number, whole or decimal.
+dsh -n Responses [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]
 
-Example
+Arguments:
+
+[APP_NAME]          The name of the App the Responses will be defined for.
+
+[RESPONSE_NAME]     An alphanumeric name to assign to the Response.
+
+[RESPONSE_POSITION] The position to assign to the Response.
+                    MUST be a number, whole or decimal.
+
+Example:
 
 dsh -n Response AppName ResponseName 0.3
 

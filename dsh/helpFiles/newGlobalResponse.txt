@@ -1,12 +1,21 @@
+
 dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]
 
-Create a new GlobalResponse at Apps/[APP_NAME]/Responses/[GLOBAL_RESPONSE_NAME].php
+Description:
 
-[APP_NAME] : The name of the App the new GlobalResponse will be defined for.
+Create a new GlobalResponse configuration at Apps/[APP_NAME]/Responses/[GLOBAL_RESPONSE_NAME].php
 
-[GLOBAL_RESPONSE_NAME] : An alphanumeric name to assign to the new GlobalResponse
+Shorthand:
 
-[GLOBAL_RESPONSE_POSITION] : A numeric position to assign to the new GlobalResponse.
+dsh -n GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]
+
+Arguments:
+
+[APP_NAME]                 The name of the App the new GlobalResponse will be defined for.
+
+[GLOBAL_RESPONSE_NAME]     An alphanumeric name to assign to the new GlobalResponse
+
+[GLOBAL_RESPONSE_POSITION] A numeric position to assign to the new GlobalResponse.
 
 Example:
 

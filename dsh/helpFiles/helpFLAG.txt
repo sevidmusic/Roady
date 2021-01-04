@@ -1,4 +1,10 @@
-dsh --help | -h <FLAG> : Show detailed help information about the specified flag.
+
+dsh --help [FLAG]
+
+Show detailed help information about the specified flag.
+
+Shorthand:
+dsh -h [FLAG]
 
 The following options are possible:
 

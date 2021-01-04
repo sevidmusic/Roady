@@ -1,31 +1,42 @@
-dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME]
-[DYNAMIC_OUTPUT_COMPONENT_CONTAINER] [DYNAMIC_OUTPUT_COMPONENT_POSITION]
-[DYNAMIC_OUTPUT_FILE_NAME]
+
+dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER]
+                                 [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]
+
+Description:
 
 Creates a new DynamicOutputComponent configuration file at
 Apps/[APP_NAME]/OutputComponents/[DYNAMIC_OUTPUT_COMPONENT_NAME]
 
-[APP_NAME] : The name of the App the DynamicOutputComponent will be defined for.
+Shorthand:
 
-[DYNAMIC_OUTPUT_COMPONENT_NAME] : An alphanumeric name to assign to the DynamicOutputComponent.
+dsh -n DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER]
+                              [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]
 
-[DYNAMIC_OUTPUT_COMPONENT_CONTAINER] : The container to assign to the DynamicOutputComponent.
-                                       MUST be alphanumeric.
+Arguments:
 
-[DYNAMIC_OUTPUT_COMPONENT_POSITION] : The position to assign to the DynamicOutputComponent.
-                                      MUST be an number, whole or decimal.
+[APP_NAME]                           The name of the App the DynamicOutputComponent will be defined for.
 
-[DYNAMIC_OUTPUT_FILE_NAME] : The name of the Dynamic Output file to assign to the
-                             DynamicOutputComponent. This file MUST exist in either:
-                                 SharedDynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]
-                             or
-                                 Apps/[APP_NAME]/DynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]
+[DYNAMIC_OUTPUT_COMPONENT_NAME]      An alphanumeric name to assign to the DynamicOutputComponent.
+
+[DYNAMIC_OUTPUT_COMPONENT_CONTAINER] The container to assign to the DynamicOutputComponent.
+                                     MUST be alphanumeric.
+
+[DYNAMIC_OUTPUT_COMPONENT_POSITION]  The position to assign to the DynamicOutputComponent.
+                                     MUST be an number, whole or decimal.
+
+[DYNAMIC_OUTPUT_FILE_NAME]           The name of the Dynamic Output file to assign to the
+                                     DynamicOutputComponent. This file MUST exist in either:
+
+                                         SharedDynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]
+                                     or
+                                         Apps/[APP_NAME]/DynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]
 
 Example:
 
 dsh -n DynamicOutputComponent AppName DOCName DOCContainer 0 "DOCFile.html"
 
 The example above would expect a Dynamic Output file named DOCFile.html exists in either:
+
     SharedDynamicOutput/DOCFile.html
 or
     Apps/[APP_NAME]/DOCFile.html

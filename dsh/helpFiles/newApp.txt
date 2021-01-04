@@ -1,53 +1,44 @@
-dsh --new App <APP_NAME> <DOMAIN> : Create a new App at Apps/<APP_NAME>/
-The domain assigned to the new App will be <DOMAIN> if specified, or
+
+dsh --new App [APP_NAME] [DOMAIN]
+
+Description:
+
+Create a new App at Apps/[APP_NAME]
+
+The domain assigned to the new App will be [DOMAIN] if specified, or
 http://localhost:8080 by default.
+
 The following will be created for the new App:
 
-    A directory for the App at Apps/<APP_NAME>
-    A Components.php configuration file for the App at Apps/<APP_NAME>/Components.php
-    This generated Components.php file will look as follows, with <DOMAIN>
-    replaced either by the specified <DOMAIN> or http:/localhost:8080
-    if <DOMAIN> was not specified:
+    A directory for the App at Apps/[APP_NAME]
 
-<?php
-/** <APP_NAME> | Components.php *>
+    A Components.php configuration file for the App at Apps/[APP_NAME]/Components.php
 
-use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
+    A directory for all of the App's OutputComponent and DynamicOutputComponent
+    configuration files at Apps/[APP_NAME]/OutputComponents/
 
-ini_set('display_errors', true);
+    A directory for all of the App's Request configuration files at Apps/[APP_NAME]/Requests/
 
-require(
-    '..' .
-    DIRECTORY_SEPARATOR .
-    '..' .
-    DIRECTORY_SEPARATOR .
-    'vendor' .
-    DIRECTORY_SEPARATOR .
-    'autoload.php'
-);
+    A directory for all of the App's Response and GlobalResponse configuration
+    files at Apps/[APP_NAME]/Responses/
 
-function loadComponentConfigFiles(string $configurationDirectoryName, AppComponentsFactory $appComponentsFactory): void {
-    $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
-    foreach(array_diff(scandir($configurationDirectoryPath), array('.', '..')) as $file) {
-        require $configurationDirectoryPath . $file;
-    }
-}
-
-$appComponentsFactory = new AppComponentsFactory(
-    ...AppComponentsFactory::buildConstructorArgs(
-    AppComponentsFactory::buildDomain('<DOMAIN>')
-    )
-);
-
-loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
-loadComponentConfigFiles('Requests', $appComponentsFactory);
-loadComponentConfigFiles('Responses', $appComponentsFactory);
-
-$appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
-
-    A directory for all of the App's Output component configuration files at Apps/<APP_NAME>/OutputComponents/
-    A directory for all of the App's Request component configuration files at Apps/<APP_NAME>/Requests/
-    A directory for all of the App's Response component configuration files at Apps/<APP_NAME>/Responses/
     A directory for the App's unique Dynamic Output files at Apps/DynamicOutput/
-    A directory for the App's css at Apps/<APP_NAME>/css/
-    A directory for the App's js files Apps/<APP_NAME>/js
+
+    A directory for the App's css at Apps/[APP_NAME]/css/
+
+    A directory for the App's js files Apps/[APP_NAME]/js
+
+Shorthand:
+
+dsh -n App [APP_NAME] [DOMAIN]
+
+Arguments:
+
+[APP_NAME] The name to assign the new App.
+
+[DOMAIN]   The domain to assign the new App.
+
+Example:
+
+dsh -n App AppName http://some.domain
+

@@ -1,13 +1,31 @@
-dsh --dsh-unit [DSH_UNIT_CONFIG_FILE_PATH] [TEST_GROUP_NAME] Run dshUnit tests.
+dsh --dsh-unit [DSH_UNIT_CONFIG_FILE_PATH] [TEST_GROUP_NAME]
 
-If [DSH_UNIT_CONFIG_FILE_PATH] is specified it will be used, otherwise
-dshUnit/dshUnitConfig.sh file will be used.
+Description:
 
-If [TEST_GROUP_NAME] is specified, then the specified test group will be run,
-otherwise the "all" test group will be run.
+Run dshUnit. If [DSH_UNIT_CONFIG_FILE_PATH] is specified, then the file
+at that path will be passed to dshUnit as the configiguration file,
+otherwise dshUnit's dshUnitConfig.sh configuration file will be used.
+
+If [TEST_GROUP_NAME] is specified, it will be passed to dshUnit as the
+test group name, otherwise "all" will be used by default.
+
+Shorthand:
+
+dsh -d [DSH_UNIT_CONFIG_FILE_PATH] [TEST_GROUP_NAME]
+
+Arguments:
+
+[DSH_UNIT_CONFIG_FILE_PATH] The path to the condiguration file to pass to dshUnit's -c flag,
+                            dshUnit's dshUnitConfig.sh configuration file will be used
+                            if [DSH_UNIT_CONFIG_FILE_PATH] is not specified.
+
+[TEST_GROUP_NAME]           The name of the test group to run, defaults to "all"
 
 Example:
 
-dsh -d "/path/to/dsh/unit/config/file" "targetTestGroup"
+dsh -d /path/to/php/unit/configuration/file testGroupToRun
+
+WARNING: This flag has not been implemented for dsh yet, it is stil under development.
+         It will not do anything at the moment.
 
 
