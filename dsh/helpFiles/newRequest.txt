@@ -31,7 +31,7 @@ Arguments:
                     the domain!
 
                     This will insure that the Request's actual url will be
-                    correct regarless of what domain the App is built for.
+                    correct regardless of what domain the App is built for.
 
 Example:
 
