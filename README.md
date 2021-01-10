@@ -20,15 +20,20 @@ The above will do the following:
 
 Note: The Darling Data Management System is still in development, an official
       development and production release is expected to be ready by the end of
-      December 2020.
+      January 2021. The Darling Data Management System is currently in a releasable
+      state, everything is working, all tests are passing, but I am a bit of a perfectionist
+      and there are a few issues I want to solve, and a few features I still want to implement.
+
+      For a roadmap of what needs to be finished before the official release just go to the
+      [issues] (https://github.com/sevidmusic/DarlingDataManagementSystem/issues) for this Repo.
 
 Note: The Darling Data Management System requires PHP >= 7.4
 
 Note: The Darling Data Managment System requires Composer.
 
 Note: The Darling Data Management System comes with a command line utility called
-      **dsh** which can be used to manage and aide in development with the Darling
-      Data Management System.
+      **dsh** which can be used aide in development with the Darling Data
+      Management System.
 
 More complete documentation is currently being developed.
 
