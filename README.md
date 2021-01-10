@@ -24,7 +24,7 @@ Note: The Darling Data Management System is still in development, an official
       state, everything is working, all tests are passing, but I am a bit of a perfectionist
       and there are a few issues I want to solve, and a few features I still want to implement.
       For a roadmap of what needs to be finished before the official release just go to the
-      [issues] (https://github.com/sevidmusic/DarlingDataManagementSystem/issues) for this Repo.
+      [issues](https://github.com/sevidmusic/DarlingDataManagementSystem/issues) for this Repo.
 
 Note: The Darling Data Management System requires PHP >= 7.4
 
