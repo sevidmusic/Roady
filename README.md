@@ -31,8 +31,12 @@ Note: The Darling Data Management System requires PHP >= 7.4
 Note: The Darling Data Managment System requires Composer.
 
 Note: The Darling Data Management System comes with a command line utility called
-      **dsh** which can be used aide in development with the Darling Data
-      Management System.
+      `dsh` which can be used aide in development with the Darling Data
+      Management System. Once you have downloaded the Darling Data Management System
+      you can run `dsh/dsh -h` to get started with `dsh`. If you decide to develop
+      with the Darling Data Management System make sure to add `dsh` to your `$PATH`
+      as you will use it frequently to develop, build, install, upgrade, configure,
+      and remove Darling Data Management System Apps.
 
 More complete documentation is currently being developed.
 
