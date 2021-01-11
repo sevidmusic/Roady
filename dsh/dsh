@@ -326,6 +326,9 @@ createNewAppPackage() {
     [[ -f "${2}/${1}" ]] && logErrorMsgAndExit1 "An file exists at ${2}/${1}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
     [[ -d "${2}/${1}" ]] && logErrorMsgAndExit1 "An directory exists at ${2}/${1}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
     mkdir "${2}/${1}"
+    mkdir "${2}/${1}/css"
+#    mkdir "${2}/${1}/js"
+#    mkdir "${2}/${1}/DynamicOutput"
     exit 0
 }
 
