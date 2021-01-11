@@ -1,5 +1,9 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 11 01:12:54 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 01:12:58 AM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 11 01:28:42 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 01:28:46 AM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
+[0m[44m[30mMon Jan 11 01:28:58 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 01:29:02 AM EST 2021 testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m

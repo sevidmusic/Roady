@@ -322,6 +322,7 @@ assignToResponse() {
 
 createNewAppPackage() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the name of the App be specified as the first parameter. For help please use dsh -n AppPackage"
+    [[ -z "${2}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the path to the new App Package be specified as the second parameter. This is the path where the App Pacakage will be created. For help please use dsh -n AppPackage"
     exit 0
 }
 
@@ -387,20 +388,4 @@ while test $# -gt 0; do
 done
 
 notifyUser "dsh is still under development. It is not ready for use." 0 'dontClear'
-
-
-
-#    case "${5}" in
-#    OutputComponent | DynamicOutputComponent)
-#      [[ ! -f "$(determineAppDirectoryPath ${1})/OutputComponents/${3}.php" ]] && logErrorMsgAndExit1 "The specified Component, ${3}, does not exist. For help use dsh --help --assign-to-response."
-#      break
-#      ;;
-#    Request)
-#      [[ ! -f "$(determineAppDirectoryPath ${1})/Requests/${3}.php" ]] && logErrorMsgAndExit1 "The specified Component, ${3}, does not exist. For help use dsh --help --assign-to-response."
-#      break
-#      ;;
-#    *)
-#      break
-#      ;;
-#    esac
 

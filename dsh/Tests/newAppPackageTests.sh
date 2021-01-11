@@ -7,6 +7,10 @@ testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified() {
     assertError "dsh --new AppPackage"
 }
 
+testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified() {
+    assertError "dsh --new AppPackage AppName"
+}
+
 #testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified()
 #testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE
 #testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE
@@ -26,3 +30,4 @@ testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified() {
 #testDshNewAppPackageCreatesConfigSHForAppPackageWhoseContentMatchesExpectedContent()
 
 runTest testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified
+runTest testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
