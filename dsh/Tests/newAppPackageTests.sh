@@ -48,7 +48,11 @@ testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory() {
     rm -R "${HOME}/AppName/"
 }
 
-#testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
+testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent() {
+    dsh --new AppPackage AppName "${HOME}"
+    assertEquals "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/Responses.sh")" "$(cat ${HOME}/AppName/Responses.sh)"
+}
+
 #testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory()
 #testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
 #testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory()
@@ -65,3 +69,4 @@ runTest testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory
+runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
