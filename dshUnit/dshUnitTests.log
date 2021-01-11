@@ -1,17 +1,17 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 11 10:25:53 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:25:57 AM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 11 10:30:31 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 10:30:36 AM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 11 10:26:10 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:26:14 AM EST 2021 testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 11 10:30:49 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 10:30:54 AM EST 2021 testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE     =-=-[0m
-[0m[44m[30mMon Jan 11 10:26:24 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:26:29 AM EST 2021 testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
+[0m[44m[30mMon Jan 11 10:31:04 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 10:31:09 AM EST 2021 testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE     =-=-[0m
-[0m[44m[30mMon Jan 11 10:26:40 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:26:45 AM EST 2021 testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
+[0m[44m[30mMon Jan 11 10:31:20 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 10:31:25 AM EST 2021 testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
