@@ -328,7 +328,7 @@ createNewAppPackage() {
     mkdir "${2}/${1}"
     mkdir "${2}/${1}/css"
     mkdir "${2}/${1}/js"
-#    mkdir "${2}/${1}/DynamicOutput"
+    mkdir "${2}/${1}/DynamicOutput"
     exit 0
 }
 
