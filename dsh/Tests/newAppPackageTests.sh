@@ -12,20 +12,22 @@ testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified() {
 }
 
 testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE() {
-    echo "" > "${HOME}/temp.temp"
-    assertError "dsh --new AppPackage AppName ${HOME}/temp.temp"
-    rm "${HOME}/temp.temp"
+    echo "" > "${HOME}/AppName"
+    assertError "dsh --new AppPackage AppName ${HOME}"
+    rm "${HOME}/AppName"
 }
 
 testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE() {
-    mkdir "${HOME}/tempTempDir"
-    assertError "dsh --new AppPackage AppName ${HOME}/tempTempDir"
-    rm -R "${HOME}/tempTempDir"
+    mkdir "${HOME}/AppName"
+    assertError "dsh --new AppPackage AppName ${HOME}"
+    rm -R "${HOME}/AppName"
 }
 
-# NOTE: [DOMAIN] is optional, no need to test that it is supplied
+testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName() {
+    assertDirectoryExists "dsh --new AppPackage AppName ${HOME}" "${HOME}/AppName"
+    rm -R "${HOME}/AppName/"
+}
 
-#testDshNewAppPackageCreatesADirectoryInTheNewAppPackagesDirectoryAtPATH_TO_NEW_APP_PACKAGE()
 #testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory()
 #testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory()
 #testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory()
@@ -43,3 +45,4 @@ runTest testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE
 runTest testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE
+runTest testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName
