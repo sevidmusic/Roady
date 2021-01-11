@@ -329,6 +329,7 @@ createNewAppPackage() {
     mkdir "${2}/${1}/css"
     mkdir "${2}/${1}/js"
     mkdir "${2}/${1}/DynamicOutput"
+    cp "$(determineDshDirectoryPath)/FileTemplates/Responses.sh" "${2}/${1}/Responses.sh"
     exit 0
 }
 

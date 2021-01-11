@@ -43,7 +43,11 @@ testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory() 
     rm -R "${HOME}/AppName/"
 }
 
-#testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory()
+testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory() {
+    assertFileExists "dsh --new AppPackage AppName ${HOME}" "${HOME}/AppName/Responses.sh"
+    rm -R "${HOME}/AppName/"
+}
+
 #testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
 #testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory()
 #testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
@@ -60,3 +64,4 @@ runTest testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW
 runTest testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory
+runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory
