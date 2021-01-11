@@ -323,8 +323,8 @@ assignToResponse() {
 createNewAppPackage() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the name of the App be specified as the first parameter. For help please use dsh -n AppPackage"
     [[ -z "${2}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the path to the new App Package be specified as the second parameter. This is the path where the App Pacakage will be created. For help please use dsh -n AppPackage"
-    [[ -f "${2}" ]] && logErrorMsgAndExit1 "An file exists at ${2}, please specify an available path for the AppPackage."
-#    [[ -d "${2}" ]] && logErrorMsgAndExit1 "An file exists at ${2}, please specify an available path for the AppPackage."
+    [[ -f "${2}" ]] && logErrorMsgAndExit1 "An file exists at ${2}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
+    [[ -d "${2}" ]] && logErrorMsgAndExit1 "An directory exists at ${2}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
     exit 0
 }
 

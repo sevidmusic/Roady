@@ -17,22 +17,29 @@ testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE() {
     rm "${HOME}/temp.temp"
 }
 
-#testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE
+testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE() {
+    mkdir "${HOME}/tempTempDir"
+    assertError "dsh --new AppPackage AppName ${HOME}/tempTempDir"
+    rm -R "${HOME}/tempTempDir"
+}
+
 # NOTE: [DOMAIN] is optional, no need to test that it is supplied
 
-#testDshNewAppPackageCreatesCssDirectoryForAppPackage()
-#testDshNewAppPackageCreatesJsDirectoryForAppPackage()
-#testDshNewAppPackageCreatesDynamicOutputDirectoryForAppPackage()
+#testDshNewAppPackageCreatesADirectoryForTheAppPackage()
+#testDshNewAppPackageCreatesCssDirectoryForTheAppPackage()
+#testDshNewAppPackageCreatesJsDirectoryForTheAppPackage()
+#testDshNewAppPackageCreatesDynamicOutputDirectoryForTheAppPackage()
 
-#testDshNewAppPackageCreatesResponsesSHForAppPackage()
-#testDshNewAppPackageCreatesResponsesSHForAppPackageWhoseContentMatchesExpectedContent()
-#testDshNewAppPackageCreatesRequestsSHForAppPackage()
-#testDshNewAppPackageCreatesRequestsSHForAppPackageWhoseContentMatchesExpectedContent()
-#testDshNewAppPackageCreatesOutputComponentsSHForAppPackage()
-#testDshNewAppPackageCreatesOutputComponentsSHForAppPackageWhoseContentMatchesExpectedContent()
-#testDshNewAppPackageCreatesConfigSHForAppPackage()
-#testDshNewAppPackageCreatesConfigSHForAppPackageWhoseContentMatchesExpectedContent()
+#testDshNewAppPackageCreatesResponsesSHForTheAppPackage()
+#testDshNewAppPackageCreatesResponsesSHForTheAppPackageWhoseContentMatchesExpectedContent()
+#testDshNewAppPackageCreatesRequestsSHForTheAppPackage()
+#testDshNewAppPackageCreatesRequestsSHForTheAppPackageWhoseContentMatchesExpectedContent()
+#testDshNewAppPackageCreatesOutputComponentsSHForTheAppPackage()
+#testDshNewAppPackageCreatesOutputComponentsSHForTheAppPackageWhoseContentMatchesExpectedContent()
+#testDshNewAppPackageCreatesConfigSHForTheAppPackage()
+#testDshNewAppPackageCreatesConfigSHForTheAppPackageWhoseContentMatchesExpectedContent()
 
 runTest testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE
+runTest testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE
