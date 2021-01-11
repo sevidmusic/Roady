@@ -31,10 +31,13 @@ testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PAC
 testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory() {
     assertDirectoryExists "dsh --new AppPackage AppName ${HOME}" "${HOME}/AppName/css"
     rm -R "${HOME}/AppName/"
-
 }
 
-#testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory()
+testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory() {
+    assertDirectoryExists "dsh --new AppPackage AppName ${HOME}" "${HOME}/AppName/js"
+    rm -R "${HOME}/AppName/"
+}
+
 #testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory()
 
 #testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory()
@@ -52,3 +55,4 @@ runTest testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE
 runTest testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE
 runTest testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName
 runTest testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory
+runTest testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory
