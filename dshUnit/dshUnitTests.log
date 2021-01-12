@@ -1,65 +1,65 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 11 10:27:42 PM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:27:46 PM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 11 11:07:14 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 11:07:18 PM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 11 10:27:55 PM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:28:00 PM EST 2021 testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 11 11:07:28 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 11:07:32 PM EST 2021 testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE     =-=-[0m
-[0m[44m[30mMon Jan 11 10:28:10 PM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:28:16 PM EST 2021 testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
+[0m[44m[30mMon Jan 11 11:07:42 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 11:07:46 PM EST 2021 testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE     =-=-[0m
-[0m[44m[30mMon Jan 11 10:28:26 PM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 11 10:28:31 PM EST 2021 testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
+[0m[44m[30mMon Jan 11 11:07:55 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 11 11:07:59 PM EST 2021 testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName     =-=-[0m
-[0m[44m[30mMon Jan 11 10:28:47 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mMon Jan 11 10:28:52 PM EST 2021 testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName Passed[0m
+[0m[44m[30mMon Jan 11 11:08:16 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mMon Jan 11 11:08:24 PM EST 2021 testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:29:06 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mMon Jan 11 10:29:10 PM EST 2021 testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:08:41 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mMon Jan 11 11:08:45 PM EST 2021 testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:29:24 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mMon Jan 11 10:29:29 PM EST 2021 testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:09:02 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mMon Jan 11 11:09:07 PM EST 2021 testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:29:43 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mMon Jan 11 10:29:47 PM EST 2021 testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:09:24 PM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mMon Jan 11 11:09:29 PM EST 2021 testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:30:07 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mMon Jan 11 10:30:13 PM EST 2021 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:09:44 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mMon Jan 11 11:09:48 PM EST 2021 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mMon Jan 11 10:31:11 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mMon Jan 11 10:31:17 PM EST 2021 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mMon Jan 11 11:11:00 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mMon Jan 11 11:11:06 PM EST 2021 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:31:31 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mMon Jan 11 10:31:35 PM EST 2021 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:11:20 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mMon Jan 11 11:11:24 PM EST 2021 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mMon Jan 11 10:32:35 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mMon Jan 11 10:32:40 PM EST 2021 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mMon Jan 11 11:12:22 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mMon Jan 11 11:12:27 PM EST 2021 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:32:55 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mMon Jan 11 10:33:00 PM EST 2021 testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:12:41 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mMon Jan 11 11:12:46 PM EST 2021 testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mMon Jan 11 10:33:51 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mMon Jan 11 10:33:56 PM EST 2021 testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mMon Jan 11 11:13:48 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mMon Jan 11 11:13:53 PM EST 2021 testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mMon Jan 11 10:34:13 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mMon Jan 11 10:34:17 PM EST 2021 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30mMon Jan 11 11:14:07 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mMon Jan 11 11:14:11 PM EST 2021 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mMon Jan 11 10:34:48 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mMon Jan 11 10:34:54 PM EST 2021 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30mMon Jan 11 11:14:39 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mMon Jan 11 11:14:45 PM EST 2021 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
