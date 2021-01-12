@@ -325,11 +325,18 @@ createNewAppPackage() {
     [[ -z "${2}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the path to the new App Package be specified as the second parameter. This is the path where the App Pacakage will be created. For help please use dsh -n AppPackage"
     [[ -f "${2}/${1}" ]] && logErrorMsgAndExit1 "An file exists at ${2}/${1}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
     [[ -d "${2}/${1}" ]] && logErrorMsgAndExit1 "An directory exists at ${2}/${1}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
+    showLoadingBar "Createing AppPackage at ${2}/${1}" 'dontClear'
     mkdir "${2}/${1}"
+    showLoadingBar "Createing css directory for AppPackage at ${2}/${1}/css" 'dontClear'
     mkdir "${2}/${1}/css"
+    showLoadingBar "Createing js directory for AppPackage at ${2}/${1}/js" 'dontClear'
     mkdir "${2}/${1}/js"
+    showLoadingBar "Createing DynamicOutput directory for AppPackage at ${2}/${1}/DynamicOutput" 'dontClear'
     mkdir "${2}/${1}/DynamicOutput"
+    showLoadingBar "Createing Responses.sh for AppPackage at ${2}/${1}/Responses.sh" 'dontClear'
     cp "$(determineDshDirectoryPath)/FileTemplates/Responses.sh" "${2}/${1}/Responses.sh"
+    showLoadingBar "Createing Requests.sh for AppPackage at ${2}/${1}/Requests.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/Requests.sh" "${2}/${1}/Requests.sh"
     exit 0
 }
 
