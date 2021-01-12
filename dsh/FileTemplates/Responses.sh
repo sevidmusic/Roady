@@ -4,6 +4,7 @@
 set -o posix
 
 ########################## DO NOT REMOVE OR MODIFY UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+##########################      Please place all dsh calls at the end of this file      ##########################
 
 # logErrorMsg [ERROR_MESSAGE] : Log the specified [ERROR_MESSAGE] to stderr with some color to highlight the error message.
 logErrorMsg() {
@@ -40,3 +41,16 @@ loadLibrary() {
 loadLibrary "$(determineDirectoryPath)/config.sh"
 
 #################################################################################################################
+
+##########################          Please place all dsh calls after this line         ##########################
+
+
+# This file is where Responses, and GlobalResponses are defined.
+
+# Example Response:
+# dsh -n Response "${app_name}" RESName 0
+
+# Example GlobalResponse:
+# dsh -n GlobalResponse "${app_name}" GRESName 0
+
+# For help use dsh --help, or dsh --help flags

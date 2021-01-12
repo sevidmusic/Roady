@@ -4,6 +4,7 @@
 set -o posix
 
 ########################## DO NOT REMOVE OR MODIFY UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+##########################      Please place all dsh calls at the end of this file      ##########################
 
 # logErrorMsg [ERROR_MESSAGE] : Log the specified [ERROR_MESSAGE] to stderr with some color to highlight the error message.
 logErrorMsg() {
@@ -40,3 +41,15 @@ loadLibrary() {
 loadLibrary "$(determineDirectoryPath)/config.sh"
 
 #################################################################################################################
+
+##########################          Please place all dsh calls after this line         ##########################
+
+# This file is where OutputComponents, and DynamicOutputComponents are defined.
+
+# Example OutputComponent
+# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
+
+# Example DynamicOutputComponent
+# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
+
+# For help use dsh --help, or dsh --help flags
