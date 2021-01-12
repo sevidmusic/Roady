@@ -1,3 +1,0 @@
-App Package: Requests.sh
-
-Requests.sh is where Requests are defined via dsh calls.

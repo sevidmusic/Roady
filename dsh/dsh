@@ -74,6 +74,13 @@ showHelpInfo() {
     if [[ "${1}" == "--new" && "${2}" == "App" ]] || [[ "${1}" == "-n" && "${2}" ==  "App" ]]; then
         showHelpFile "newApp.txt"
     fi
+
+
+    if [[ "${1}" == "--new" && "${2}" == "AppPackage" ]] || [[ "${1}" == "-n" && "${2}" ==  "AppPackage" ]]; then
+        showHelpFile "newAppPackage.txt"
+    fi
+
+
     if [[ "${1}" == "--new" && "${2}" == "OutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "OutputComponent" ]]; then
         showHelpFile "newOutputComponent.txt"
     fi

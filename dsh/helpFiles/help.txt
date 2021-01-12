@@ -11,7 +11,7 @@ To get information about a specified flag use:
 
     dsh --help [FLAG]
 
-To get information about all flags use:
+To get brief information about all flags use:
 
     dsh --help flags
 

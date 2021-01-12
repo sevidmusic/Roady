@@ -1,65 +1,105 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Jan 12 04:18:07 PM EST 2021 assertError Passed[0m
-[0m[104m[30mTue Jan 12 04:18:11 PM EST 2021 testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid     =-=-[0m
+[0m[44m[30mTue Jan 12 05:38:41 PM EST 2021 assertError Passed[0m
+[0m[44m[30mTue Jan 12 05:38:48 PM EST 2021 assertError Passed[0m
+[0m[44m[30mTue Jan 12 05:38:54 PM EST 2021 assertError Passed[0m
+[0m[104m[30mTue Jan 12 05:38:58 PM EST 2021 testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
-[0m[44m[30mTue Jan 12 04:18:21 PM EST 2021 assertError Passed[0m
-[0m[104m[30mTue Jan 12 04:18:25 PM EST 2021 testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid     =-=-[0m
+[0m[44m[30mTue Jan 12 05:39:03 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:06 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:09 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:13 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:16 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:19 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:22 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:26 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:29 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:33 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:36 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:39 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:42 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:46 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:49 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:52 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:55 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:39:58 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:01 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:04 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:07 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:10 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:13 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:17 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:21 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:24 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:28 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:31 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:34 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:37 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 12 05:40:40 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mTue Jan 12 05:40:43 PM EST 2021 testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE     =-=-[0m
-[0m[44m[30mTue Jan 12 04:18:34 PM EST 2021 assertError Passed[0m
-[0m[104m[30mTue Jan 12 04:18:38 PM EST 2021 testDshNewAppPackageRunsWithErrorIfAFileExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent     =-=-[0m
+[0m[44m[30mTue Jan 12 05:40:55 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:40:58 PM EST 2021 testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE     =-=-[0m
-[0m[44m[30mTue Jan 12 04:18:47 PM EST 2021 assertError Passed[0m
-[0m[104m[30mTue Jan 12 04:18:51 PM EST 2021 testDshNewAppPackageRunsWithErrorIfADirectoryExistsAtPATH_TO_NEW_APP_PACKAGE Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent     =-=-[0m
+[0m[44m[30mTue Jan 12 05:41:24 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:41:27 PM EST 2021 testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName     =-=-[0m
-[0m[44m[30mTue Jan 12 04:19:08 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mTue Jan 12 04:19:13 PM EST 2021 testDshNewAppPackageCreatesADirectoryForTheTheNewAppPackageAtPATH_TO_NEW_APP_PACKAGEForwardSlashAppName Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:42:15 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:42:19 PM EST 2021 testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:19:29 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mTue Jan 12 04:19:33 PM EST 2021 testDshNewAppPackageCreatesCssDirectoryInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:42:32 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:42:37 PM EST 2021 testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:19:49 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mTue Jan 12 04:19:53 PM EST 2021 testDshNewAppPackageCreatesJsDirectoryInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:42:57 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:43:01 PM EST 2021 testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:20:10 PM EST 2021 assertDirectoryExists Passed[0m
-[0m[104m[30mTue Jan 12 04:20:14 PM EST 2021 testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:43:20 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:43:23 PM EST 2021 testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:20:31 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mTue Jan 12 04:20:35 PM EST 2021 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:43:50 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:43:54 PM EST 2021 testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mTue Jan 12 04:21:18 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mTue Jan 12 04:21:23 PM EST 2021 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewAppPackageOutputMatchesDshUIColorized_NewAppPackage_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:44:20 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:44:25 PM EST 2021 testDshHelpNewAppPackageOutputMatchesDshUIColorized_NewAppPackage_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:21:39 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mTue Jan 12 04:21:43 PM EST 2021 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:44:54 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:44:59 PM EST 2021 testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mTue Jan 12 04:22:24 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mTue Jan 12 04:22:29 PM EST 2021 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:45:42 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:45:48 PM EST 2021 testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:22:45 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mTue Jan 12 04:22:49 PM EST 2021 testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:46:22 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:46:26 PM EST 2021 testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mTue Jan 12 04:23:32 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mTue Jan 12 04:23:37 PM EST 2021 testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:46:46 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:46:50 PM EST 2021 testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory     =-=-[0m
-[0m[44m[30mTue Jan 12 04:23:53 PM EST 2021 assertFileExists Passed[0m
-[0m[104m[30mTue Jan 12 04:23:57 PM EST 2021 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:47:10 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:47:14 PM EST 2021 testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent     =-=-[0m
-[0m[44m[30mTue Jan 12 04:24:28 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mTue Jan 12 04:24:33 PM EST 2021 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:47:42 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:47:47 PM EST 2021 testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:48:09 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:48:13 PM EST 2021 testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput     =-=-[0m
+[0m[44m[30mTue Jan 12 05:48:50 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 12 05:48:53 PM EST 2021 testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput Passed[0m

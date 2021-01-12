@@ -17,6 +17,9 @@ dsh -h -n
 dsh --help --new App
 dsh -h -n App
 
+dsh --help --new AppPackage
+dsh -h -n AppPackage
+
 dsh --help --new OutputComponent
 dsh -h -n OutputComponent
 

@@ -28,6 +28,9 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh --help --build-app" "dsh --help --build-app MUST run without error."
     assertNoError "dsh --help --new" "dsh --help --new MUST run without error."
     assertNoError "dsh --help --new App" "dsh --help --new App MUST run without error."
+
+    assertNoError "dsh --help --new AppPackage" "dsh --help --new AppPackage MUST run without error."
+
     assertNoError "dsh --help --new OutputComponent" "dsh --help --new OutputComponent MUST run without error."
     assertNoError "dsh --help --new DynamicOutputComponent" "dsh --help --new DynamicOutputComponent MUST run without error."
     assertNoError "dsh --help --new Request" "dsh --help --new Request MUST run without error."
@@ -82,6 +85,10 @@ testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput() {
     assertEquals "$(dsh --help --new App)" "$(expectedHelpFileOutput newApp.txt)" "dsh --help --new App MUST match newApp.txt help file content."
 }
 
+testDshHelpNewAppPackageOutputMatchesDshUIColorized_NewAppPackage_HelpFileOutput() {
+    assertEquals "$(dsh --help --new AppPackage)" "$(expectedHelpFileOutput newAppPackage.txt)" "dsh --help --new AppPackage MUST match newAppPackage.txt help file content."
+}
+
 testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput() {
     assertEquals "$(dsh --help --new OutputComponent)" "$(expectedHelpFileOutput newOutputComponent.txt)" "dsh --help --new OutputComponent MUST match newOutputComponent.txt help file content."
 }
@@ -115,7 +122,7 @@ testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput() {
 }
 
 runTest testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid 3
-runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 30
+runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 31
 runTest testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent
 runTest testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent
 runTest testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput
@@ -123,6 +130,7 @@ runTest testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelo
 runTest testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput
 runTest testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput
 runTest testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput
+runTest testDshHelpNewAppPackageOutputMatchesDshUIColorized_NewAppPackage_HelpFileOutput
 runTest testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput
 runTest testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput
 runTest testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput

@@ -1,3 +1,0 @@
-App Package: OutputComponents.sh
-
-OutputComponents.sh is where OutputComponents and DynamicOutputComponents are defined via dsh calls.
