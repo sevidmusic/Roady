@@ -81,10 +81,17 @@ testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory() {
     rm -R "${HOME}/AppName/"
 }
 
+expectedConfigSHContent() {
+    cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/config.sh" | sed "s/APP_NAME/${1}/g" | sed "s,DOMAIN,${2},g"
+}
+
 testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent() {
-    dsh --new AppPackage AppName "${HOME}"
-    assertEquals "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/config.sh")" "$(cat ${HOME}/AppName/config.sh)"
-    rm -R "${HOME}/AppName/"
+    local app_name domain
+    app_name="AppName${RANDOM}"
+    domain="http://localhost:8942/"
+    dsh --new AppPackage "${app_name}" "${HOME}" "${domain}"
+    assertEquals "$(expectedConfigSHContent "${app_name}" "${domain}")" "$(cat ${HOME}/${app_name}/config.sh)"
+    rm -R "${HOME}/${app_name}/"
 }
 
 runTest testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified
@@ -103,3 +110,4 @@ runTest testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirector
 runTest testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
 runTest testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
+
