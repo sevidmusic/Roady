@@ -65,10 +65,27 @@ testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMat
     rm -R "${HOME}/AppName/"
 }
 
-#testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory()
-#testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
-#testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory()
-#testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
+testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory() {
+    assertFileExists "dsh --new AppPackage AppName ${HOME}" "${HOME}/AppName/OutputComponents.sh"
+    rm -R "${HOME}/AppName/"
+}
+
+testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent() {
+    dsh --new AppPackage AppName "${HOME}"
+    assertEquals "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/OutputComponents.sh")" "$(cat ${HOME}/AppName/OutputComponents.sh)"
+    rm -R "${HOME}/AppName/"
+}
+
+testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory() {
+    assertFileExists "dsh --new AppPackage AppName ${HOME}" "${HOME}/AppName/config.sh"
+    rm -R "${HOME}/AppName/"
+}
+
+testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent() {
+    dsh --new AppPackage AppName "${HOME}"
+    assertEquals "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/config.sh")" "$(cat ${HOME}/AppName/config.sh)"
+    rm -R "${HOME}/AppName/"
+}
 
 runTest testDshNewAppPackageRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testDshNewAppPackageRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
@@ -82,3 +99,7 @@ runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
 runTest testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
+runTest testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory
+runTest testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
+runTest testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory
+runTest testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent

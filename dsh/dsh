@@ -337,6 +337,10 @@ createNewAppPackage() {
     cp "$(determineDshDirectoryPath)/FileTemplates/Responses.sh" "${2}/${1}/Responses.sh"
     showLoadingBar "Createing Requests.sh for AppPackage at ${2}/${1}/Requests.sh" 'dontClear'
     cp "$(determineDshDirectoryPath)/FileTemplates/Requests.sh" "${2}/${1}/Requests.sh"
+    showLoadingBar "Createing OutputComponents.sh for AppPackage at ${2}/${1}/OutputComponents.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/OutputComponents.sh" "${2}/${1}/OutputComponents.sh"
+    showLoadingBar "Createing config.sh for AppPackage at ${2}/${1}/config.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/config.sh" "${2}/${1}/config.sh"
     exit 0
 }
 
