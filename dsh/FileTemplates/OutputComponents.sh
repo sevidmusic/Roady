@@ -1,10 +1,17 @@
 #!/bin/bash
 # OutputComponents.sh
 
+# This file is where OutputComponents, and DynamicOutputComponents are defined.
+# Example OutputComponent
+# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
+# Example DynamicOutputComponent
+# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
+# For more information about this file use dsh -h -n AppPackage OutputComponents.sh
+
 set -o posix
 
-########################## DO NOT REMOVE OR MODIFY UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
-##########################      Please place all dsh calls at the end of this file      ##########################
+########################## DO NOT REMOVE OR MODIFY THESE FUNCTIONS UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+##########################             Please place all dsh calls at the end of this file              ##########################
 
 # logErrorMsg [ERROR_MESSAGE] : Log the specified [ERROR_MESSAGE] to stderr with some color to highlight the error message.
 logErrorMsg() {
@@ -40,16 +47,5 @@ loadLibrary() {
 # Load the App Package's config.sh to get the configuration variables defined for this App Package
 loadLibrary "$(determineDirectoryPath)/config.sh"
 
-#################################################################################################################
-
 ##########################          Please place all dsh calls after this line         ##########################
 
-# This file is where OutputComponents, and DynamicOutputComponents are defined.
-
-# Example OutputComponent
-# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
-
-# Example DynamicOutputComponent
-# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
-
-# For help use dsh --help, or dsh --help flags

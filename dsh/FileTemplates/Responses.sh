@@ -1,6 +1,13 @@
 #!/bin/bash
 # Responses.sh
 
+# This file is where Responses, and GlobalResponses are defined.
+# Example Response:
+# dsh -n Response "${app_name}" ResponseName 0
+# Example GlobalResponse:
+# dsh -n GlobalResponse "${app_name}" GlobalResponseName 0
+# For more information about this file use dsh -h -n AppPackage Responses.sh
+
 set -o posix
 
 ########################## DO NOT REMOVE OR MODIFY UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
@@ -40,17 +47,5 @@ loadLibrary() {
 # Load the App Package's config.sh to get the configuration variables defined for this App Package
 loadLibrary "$(determineDirectoryPath)/config.sh"
 
-#################################################################################################################
-
 ##########################          Please place all dsh calls after this line         ##########################
 
-
-# This file is where Responses, and GlobalResponses are defined.
-
-# Example Response:
-# dsh -n Response "${app_name}" RESName 0
-
-# Example GlobalResponse:
-# dsh -n GlobalResponse "${app_name}" GRESName 0
-
-# For help use dsh --help, or dsh --help flags
