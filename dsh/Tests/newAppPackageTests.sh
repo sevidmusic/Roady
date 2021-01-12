@@ -51,6 +51,7 @@ testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory() {
 testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent() {
     dsh --new AppPackage AppName "${HOME}"
     assertEquals "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/Responses.sh")" "$(cat ${HOME}/AppName/Responses.sh)"
+    rm -R "${HOME}/AppName/"
 }
 
 testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory() {
@@ -58,7 +59,12 @@ testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory() {
     rm -R "${HOME}/AppName/"
 }
 
-#testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
+testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent() {
+    dsh --new AppPackage AppName "${HOME}"
+    assertEquals "$(cat "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/FileTemplates/Requests.sh")" "$(cat ${HOME}/AppName/Requests.sh)"
+    rm -R "${HOME}/AppName/"
+}
+
 #testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectory()
 #testDshNewAppPackageCreatesOutputComponentsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent()
 #testDshNewAppPackageCreatesConfigSHInTheNewAppPackagesDirectory()
@@ -75,3 +81,4 @@ runTest testDshNewAppPackageCreatesDynamicOutputDirectoryInTheNewAppPackagesDire
 runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectory
 runTest testDshNewAppPackageCreatesResponsesSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
 runTest testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectory
+runTest testDshNewAppPackageCreatesRequestsSHInTheNewAppPackagesDirectoryWhoseContentMatchesExpectedContent
