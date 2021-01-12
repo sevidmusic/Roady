@@ -10,6 +10,7 @@ expect different numbers of [ARGUMENTS...].
 The following modes are available:
 
 dsh --new App
+dsh --new AppPackage
 dsh --new OutputComponent
 dsh --new DynamicOutputComponent
 dsh --new Request

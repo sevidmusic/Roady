@@ -74,6 +74,13 @@ showHelpInfo() {
     if [[ "${1}" == "--new" && "${2}" == "App" ]] || [[ "${1}" == "-n" && "${2}" ==  "App" ]]; then
         showHelpFile "newApp.txt"
     fi
+
+
+    if [[ "${1}" == "--new" && "${2}" == "AppPackage" ]] || [[ "${1}" == "-n" && "${2}" ==  "AppPackage" ]]; then
+        showHelpFile "newAppPackage.txt"
+    fi
+
+
     if [[ "${1}" == "--new" && "${2}" == "OutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "OutputComponent" ]]; then
         showHelpFile "newOutputComponent.txt"
     fi
@@ -139,7 +146,7 @@ buildApp() {
 
 validateMode() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --new <MODE> <ARGUMENTS>... expects a mode be specified as the first parameter."
-    declare -a validModes=( App OutputComponent DynamicOutputComponent Request Response GlobalResponse)
+    declare -a validModes=( App AppPackage OutputComponent DynamicOutputComponent Request Response GlobalResponse)
     declare -A map
     for key in "${!validModes[@]}"; do map[${validModes[$key]}]="$key"; done
     [[ -z "${map[${1}]}" ]] && logErrorMsg "dsh --new expects a valid mode. The following modes are available:" && logErrorMsg "$(printf '\n\e[0m\e[104m\e[30m%s\e[0m\n' "${validModes[@]}" | column)" && logErrorMsg "For more information about the dsh --new flag, use dsh --help --new" && logErrorMsgAndExit1 "For more information about a specific mode, use dsh --help --new <MODE>"
@@ -320,6 +327,32 @@ assignToResponse() {
     exit 0
 }
 
+createNewAppPackage() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the name of the App be specified as the first parameter. For help please use dsh -n AppPackage"
+    [[ -z "${2}" ]] && logErrorMsgAndExit1 "dsh --new AppPackage expects the path to the new App Package be specified as the second parameter. This is the path where the App Pacakage will be created. For help please use dsh -n AppPackage"
+    [[ -f "${2}/${1}" ]] && logErrorMsgAndExit1 "An file exists at ${2}/${1}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
+    [[ -d "${2}/${1}" ]] && logErrorMsgAndExit1 "An directory exists at ${2}/${1}, please specify an available path for the AppPackage. For help please use dsh -n AppPackage"
+    showLoadingBar "Createing AppPackage at ${2}/${1}" 'dontClear'
+    mkdir "${2}/${1}"
+    showLoadingBar "Createing css directory for AppPackage at ${2}/${1}/css" 'dontClear'
+    mkdir "${2}/${1}/css"
+    showLoadingBar "Createing js directory for AppPackage at ${2}/${1}/js" 'dontClear'
+    mkdir "${2}/${1}/js"
+    showLoadingBar "Createing DynamicOutput directory for AppPackage at ${2}/${1}/DynamicOutput" 'dontClear'
+    mkdir "${2}/${1}/DynamicOutput"
+    showLoadingBar "Createing Responses.sh for AppPackage at ${2}/${1}/Responses.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/Responses.sh" "${2}/${1}/Responses.sh"
+    showLoadingBar "Createing Requests.sh for AppPackage at ${2}/${1}/Requests.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/Requests.sh" "${2}/${1}/Requests.sh"
+    showLoadingBar "Createing OutputComponents.sh for AppPackage at ${2}/${1}/OutputComponents.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/OutputComponents.sh" "${2}/${1}/OutputComponents.sh"
+    showLoadingBar "Createing config.sh for AppPackage at ${2}/${1}/config.sh" 'dontClear'
+    cp "$(determineDshDirectoryPath)/FileTemplates/config.sh" "${2}/${1}/config.sh"
+    sed -i "s/APP_NAME/${1}/g" "${2}/${1}/config.sh"
+    sed -i "s,DOMAIN,${3:-"http://localhost:8080"},g" "${2}/${1}/config.sh"
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -343,6 +376,10 @@ while test $# -gt 0; do
     App)
       shift
       createNewApp "${1}" "${2}"
+      ;;
+    AppPackage)
+      shift
+      createNewAppPackage "${1}" "${2}" "${3}"
       ;;
     OutputComponent)
       shift
@@ -378,20 +415,4 @@ while test $# -gt 0; do
 done
 
 notifyUser "dsh is still under development. It is not ready for use." 0 'dontClear'
-
-
-
-#    case "${5}" in
-#    OutputComponent | DynamicOutputComponent)
-#      [[ ! -f "$(determineAppDirectoryPath ${1})/OutputComponents/${3}.php" ]] && logErrorMsgAndExit1 "The specified Component, ${3}, does not exist. For help use dsh --help --assign-to-response."
-#      break
-#      ;;
-#    Request)
-#      [[ ! -f "$(determineAppDirectoryPath ${1})/Requests/${3}.php" ]] && logErrorMsgAndExit1 "The specified Component, ${3}, does not exist. For help use dsh --help --assign-to-response."
-#      break
-#      ;;
-#    *)
-#      break
-#      ;;
-#    esac
 
