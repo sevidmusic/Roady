@@ -12,11 +12,12 @@ set -o posix
 app_name="APP_NAME"
 domain="DOMAIN"
 development_port="PORT"
-version="0.0.0"
-version_date="1610419164"
-developers=""
-dependencies=""
-bug_contact="someemail@example.com"
-documentation="self-documented"
-config_locked="0"
+version="VERSION"
+version_date="DATE"
+developers=( "Dev 1" "Dev 2") # Modify this as needed
+declare -A dependencies
+dependencies=([version]=AppName [Version]=AppName2 ["versioN"]="AppName3")
+bug_contact="EMAIL"
+documentation="DOCUMENTATION_SOURCE"
+config_locked="LOCK_CONFIG"
 description="DESCRIPTION"
