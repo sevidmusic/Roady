@@ -311,14 +311,11 @@ assignToResponse() {
     case "${5}" in
     OutputComponent | DynamicOutputComponent)
       [[ ! -f "$(determineAppDirectoryPath ${1})/OutputComponents/${3}.php" ]] && logErrorMsgAndExit1 "The specified ${5}, ${3}, does not exist. For help use dsh --help --assign-to-response."
-      break
       ;;
     Request)
       [[ ! -f "$(determineAppDirectoryPath ${1})/Requests/${3}.php" ]] && logErrorMsgAndExit1 "The specified ${5}, ${3}, does not exist. For help use dsh --help --assign-to-response."
-      break
       ;;
     *)
-      break
       ;;
     esac
     target_response_path="$(determineAppDirectoryPath "${1}")/Responses/${2}.php"
