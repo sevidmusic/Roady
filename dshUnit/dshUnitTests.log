@@ -1,1 +1,20 @@
 
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryRunsWithoutError     =-=-[0m
+[0m[44m[30mMon Jan 18 04:11:09 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mMon Jan 18 04:11:11 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mMon Jan 18 04:11:14 PM EST 2021 testDshLocateDDMSDirectoryRunsWithoutError Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryReturnsExpectedPath     =-=-[0m
+[0m[44m[30mMon Jan 18 04:11:20 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mMon Jan 18 04:11:23 PM EST 2021 testDshLocateDDMSDirectoryReturnsExpectedPath Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryRunsWithoutError     =-=-[0m
+[0m[44m[30mMon Jan 18 04:12:23 PM EST 2021 assertNoError Passed[0m
+[0m[44m[30mMon Jan 18 04:12:25 PM EST 2021 assertNoError Passed[0m
+[0m[104m[30mMon Jan 18 04:12:29 PM EST 2021 testDshLocateDDMSDirectoryRunsWithoutError Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryReturnsExpectedPath     =-=-[0m
+[0m[44m[30mMon Jan 18 04:12:34 PM EST 2021 assertEquals Passed[0m
+[0m[44m[30mMon Jan 18 04:12:37 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mMon Jan 18 04:12:41 PM EST 2021 testDshLocateDDMSDirectoryReturnsExpectedPath Passed[0m
