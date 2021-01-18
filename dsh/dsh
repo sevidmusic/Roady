@@ -350,6 +350,11 @@ createNewAppPackage() {
     exit 0
 }
 
+locateDDMSDirectory() {
+    printf "%s" "$(determineDshDirectoryPath | sed 's/dsh//g')"
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -403,6 +408,9 @@ while test $# -gt 0; do
   -a | --assign-to-response)
     shift
     assignToResponse "${1}" "${2}" "${3}" "${4}" "${5}"
+    ;;
+  -l | --locate-ddms-directory)
+    locateDDMSDirectory
     ;;
   *)
     shift
