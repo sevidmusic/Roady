@@ -1,20 +1,57 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryRunsWithoutError     =-=-[0m
-[0m[44m[30mMon Jan 18 04:11:09 PM EST 2021 assertNoError Passed[0m
-[0m[44m[30mMon Jan 18 04:11:11 PM EST 2021 assertNoError Passed[0m
-[0m[104m[30mMon Jan 18 04:11:14 PM EST 2021 testDshLocateDDMSDirectoryRunsWithoutError Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mTue Jan 19 01:01:22 AM EST 2021 assertError Passed[0m
+[0m[104m[30mTue Jan 19 01:01:25 AM EST 2021 testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryReturnsExpectedPath     =-=-[0m
-[0m[44m[30mMon Jan 18 04:11:20 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mMon Jan 18 04:11:23 PM EST 2021 testDshLocateDDMSDirectoryReturnsExpectedPath Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME     =-=-[0m
+[0m[44m[30mTue Jan 19 01:02:00 AM EST 2021 assertError Passed[0m
+[0m[104m[30mTue Jan 19 01:02:04 AM EST 2021 testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryRunsWithoutError     =-=-[0m
-[0m[44m[30mMon Jan 18 04:12:23 PM EST 2021 assertNoError Passed[0m
-[0m[44m[30mMon Jan 18 04:12:25 PM EST 2021 assertNoError Passed[0m
-[0m[104m[30mMon Jan 18 04:12:29 PM EST 2021 testDshLocateDDMSDirectoryRunsWithoutError Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:02:34 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:02:37 AM EST 2021 testDshNewAppCreatesNewAppsDirectory Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshLocateDDMSDirectoryReturnsExpectedPath     =-=-[0m
-[0m[44m[30mMon Jan 18 04:12:34 PM EST 2021 assertEquals Passed[0m
-[0m[44m[30mMon Jan 18 04:12:37 PM EST 2021 assertEquals Passed[0m
-[0m[104m[30mMon Jan 18 04:12:41 PM EST 2021 testDshLocateDDMSDirectoryReturnsExpectedPath Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsOutputComponentsDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:03:07 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:03:11 AM EST 2021 testDshNewAppCreatesNewAppsOutputComponentsDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsRequestsDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:03:41 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:03:44 AM EST 2021 testDshNewAppCreatesNewAppsRequestsDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsResponsesDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:04:14 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:04:18 AM EST 2021 testDshNewAppCreatesNewAppsResponsesDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsDynamicOutputDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:04:48 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:04:52 AM EST 2021 testDshNewAppCreatesNewAppsDynamicOutputDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsCssDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:05:22 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:05:25 AM EST 2021 testDshNewAppCreatesNewAppsCssDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsJsDirectory     =-=-[0m
+[0m[44m[30mTue Jan 19 01:05:55 AM EST 2021 assertDirectoryExists Passed[0m
+[0m[104m[30mTue Jan 19 01:05:58 AM EST 2021 testDshNewAppCreatesNewAppsJsDirectory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFile     =-=-[0m
+[0m[44m[30mTue Jan 19 01:06:28 AM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mTue Jan 19 01:06:31 AM EST 2021 testDshNewAppCreatesNewAppsComponentsPhpFile Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate     =-=-[0m
+[0m[44m[30mTue Jan 19 01:07:03 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mTue Jan 19 01:07:29 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 19 01:07:34 AM EST 2021 testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppAssignsSpecifiedDOMAINAsNewAppsDefaultDomainIfDOMAINIsSpecified     =-=-[0m
+[0m[44m[30mTue Jan 19 01:08:02 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mTue Jan 19 01:08:06 AM EST 2021 testDshNewAppAssignsSpecifiedDOMAINAsNewAppsDefaultDomainIfDOMAINIsSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewAppRunsWithErrorIfSpecifiedDOMAINIsNotAValidDomain     =-=-[0m
+[0m[44m[30mTue Jan 19 01:08:38 AM EST 2021 assertError Passed[0m
+[0m[44m[30mTue Jan 19 01:09:08 AM EST 2021 assertError Passed[0m
+[0m[44m[30mTue Jan 19 01:09:38 AM EST 2021 assertError Passed[0m
+[0m[44m[30mTue Jan 19 01:10:08 AM EST 2021 assertError Passed[0m
+[0m[104m[30mTue Jan 19 01:10:12 AM EST 2021 testDshNewAppRunsWithErrorIfSpecifiedDOMAINIsNotAValidDomain Passed[0m

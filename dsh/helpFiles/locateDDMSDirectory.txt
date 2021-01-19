@@ -1,0 +1,11 @@
+
+dsh --locate-ddms-directory
+
+Description:
+Returns the path to the Darling Data Management System installation that dsh is acting on.
+
+Shorthand:
+dsh -l
+
+Example:
+dsh -l
