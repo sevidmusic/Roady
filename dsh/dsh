@@ -74,13 +74,9 @@ showHelpInfo() {
     if [[ "${1}" == "--new" && "${2}" == "App" ]] || [[ "${1}" == "-n" && "${2}" ==  "App" ]]; then
         showHelpFile "newApp.txt"
     fi
-
-
     if [[ "${1}" == "--new" && "${2}" == "AppPackage" ]] || [[ "${1}" == "-n" && "${2}" ==  "AppPackage" ]]; then
         showHelpFile "newAppPackage.txt"
     fi
-
-
     if [[ "${1}" == "--new" && "${2}" == "OutputComponent" ]] || [[ "${1}" == "-n" && "${2}" ==  "OutputComponent" ]]; then
         showHelpFile "newOutputComponent.txt"
     fi
@@ -104,6 +100,9 @@ showHelpInfo() {
     fi
     if [[ "${1}" == "--dsh-unit" ]] || [[ "${1}" == "-d" ]]; then
         showHelpFile "dshUnit.txt"
+    fi
+    if [[ "${1}" == "--locate-ddms-directory" ]] || [[ "${1}" == "-l" ]]; then
+        showHelpFile "locateDDMSDirectory.txt"
     fi
     logErrorMsgAndExit1 "dsh --help <FLAG> expects a valid dsh flag. Run dsh --help or man dsh for more information on how dsh works."
 }

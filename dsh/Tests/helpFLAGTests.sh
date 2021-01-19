@@ -39,6 +39,9 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh --help --assign-to-response" "dsh --help --assign-to-response MUST run without error."
     assertNoError "dsh --help --php-unit" "dsh --help --php-unit MUST run without error."
     assertNoError "dsh --help --dsh-unit" "dsh --help --dsh-unit MUST run without error."
+
+    assertNoError "dsh --help --locate-ddms-directory" "dsh --help --locate-ddms-directory MUST run without error."
+
     # short form tests
     assertNoError "dsh -h -h" "dsh -h -h MUST run without error."
     assertNoError "dsh -h FLAG" "dsh -h FLAG MUST run without error."
@@ -47,6 +50,9 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh -h -b" "dsh -h -b MUST run without error."
     assertNoError "dsh -h -n" "dsh -h -n MUST run without error."
     assertNoError "dsh -h -n App" "dsh -h -n App MUST run without error."
+
+    assertNoError "dsh -h -n AppPackage" "dsh -h -n AppPackage MUST run without error."
+
     assertNoError "dsh -h -n OutputComponent" "dsh -h -n OutputComponent MUST run without error."
     assertNoError "dsh -h -n DynamicOutputComponent" "dsh -h -n DynamicOutputComponent MUST run without error."
     assertNoError "dsh -h -n Request" "dsh -h -n Request MUST run without error."
@@ -55,6 +61,8 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh -h -a" "dsh -h -a MUST run without error."
     assertNoError "dsh -h -p" "dsh -h -p MUST run without error."
     assertNoError "dsh -h -d" "dsh -h -d MUST run without error."
+
+    assertNoError "dsh -h -l" "dsh --help --locate-ddms-directory MUST run without error."
 }
 
 testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent() {
@@ -121,8 +129,13 @@ testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput() {
     assertEquals "$(dsh --help --dsh-unit )" "$(expectedHelpFileOutput dshUnit.txt)" "dsh --help --dsh-unit output MUST match dshUnit.txt help file content."
 }
 
+testDshHelpLocateDDMSDirectoryOutputMatchesDshUIColorized_LocateDDMSDirectory_HelpFileOutput() {
+    assertEquals "$(dsh --help --locate-ddms-directory )" "$(expectedHelpFileOutput locateDDMSDirectory.txt)" "dsh --help --locate-ddms-directory output MUST match locateDDMSDirectory.txt help file content."
+    assertEquals "$(dsh -h -l )" "$(expectedHelpFileOutput locateDDMSDirectory.txt)" "dsh -h -l output MUST match locateDDMSDirectory.txt h file content."
+}
+
 runTest testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid 3
-runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 31
+runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 34
 runTest testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent
 runTest testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent
 runTest testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput
@@ -139,4 +152,4 @@ runTest testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalRespons
 runTest testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput
 runTest testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput
 runTest testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput
-
+runTest testDshHelpLocateDDMSDirectoryOutputMatchesDshUIColorized_LocateDDMSDirectory_HelpFileOutput 2
