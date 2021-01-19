@@ -151,6 +151,13 @@ validateMode() {
     [[ -z "${map[${1}]}" ]] && logErrorMsg "dsh --new expects a valid mode. The following modes are available:" && logErrorMsg "$(printf '\n\e[0m\e[104m\e[30m%s\e[0m\n' "${validModes[@]}" | column)" && logErrorMsg "For more information about the dsh --new flag, use dsh --help --new" && logErrorMsgAndExit1 "For more information about a specific mode, use dsh --help --new <MODE>"
 }
 
+assignSpecifiedDomain() {
+    local regex
+    regex="(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]"
+    [[ $2 =~ $regex ]] && sed -i "s,http.*['],${2}',g"  "$(determineAppDirectoryPath "${1}")/Components.php" && notifyUser "The ${1} App was created successfully, and the domain ${2} was assigned as the defult domain." 0 'dontClear' && exit 0
+    logErrorMsgAndExit1 "Warning: The specified [DOMAIN], ${2}, does not appear to be a valid domain, http://localhost:8080/ will be used instead. To correct the domain, either edit the ${1} App's Components.php, or re-run dsh -n App ${1} [DOMAIN] and make sure [DOMAIN] is correct."
+}
+
 createNewApp() {
       [[ -z "${1}" ]] && logErrorMsg "dsh --new App <APP_NAME> <DOMAIN> expects the new App's name be specified as the first modal argument." && logErrorMsg "For example, to create an app named Foo:" && logErrorMsg "dsh --new App Foo" && logErrorMsgAndExit1 "For more information use dsh --help --new App"
       [[ -d "$(determineAppDirectoryPath "${1}")" ]] && logErrorMsgAndExit1 "An App named ${1} already exists, please specify a unique name for the new App."
@@ -179,7 +186,10 @@ createNewApp() {
       showLoadingBar "    Creating App's Components.php file at $(determineAppDirectoryPath "${1}")/Components.php" 'dontClear'
       cp "$(determineDshDirectoryPath)/FileTemplates/Components.php" "$(determineAppDirectoryPath "${1}")/Components.php"
 
-      notifyUser "The ${1} App was created successfully." 0 'dontClear'
+      if [[ -n "${2}" ]]; then
+        assignSpecifiedDomain "${1}" "${2}"
+      fi
+      notifyUser "The ${1} App was created successfully, http://localhost:8080 was assigned as the default domain." 0 'dontClear'
       exit 0
 }
 

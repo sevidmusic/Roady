@@ -86,6 +86,27 @@ testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFile
     [[ -d "$(determineAppsDirectoryPath "${random_app_name}")" ]] && rm -R "$(determineAppsDirectoryPath "${random_app_name}")"
 }
 
+actualDomain() {
+    local test_app_name
+    test_app_name="${1}"
+    printf "%s" "$(grep -o "http.*[']" "$(dsh -l)/Apps/${test_app_name}/Components.php" | sed "s/'//g")"
+}
+
+testDshNewAppAssignsSpecifiedDOMAINAsNewAppsDefaultDomainIfDOMAINIsSpecified() {
+     local test_app_name expected_domain
+     test_app_name="App${RANDOM}"
+     expected_domain="http://testdomain${RANDOM}.example/"
+     dsh -n App "${test_app_name}" "${expected_domain}"
+     assertEquals "${expected_domain}" "$(actualDomain "${test_app_name}")"
+}
+
+testDshNewAppRunsWithErrorIfSpecifiedDOMAINIsNotAValidDomain() {
+    assertError "dsh -n App AppName${RANDOM} fooBarBaz"
+    assertError "dsh -n App AppName${RANDOM} 'http:mistypedurl'"
+    assertError "dsh -n App AppName${RANDOM} 'http/:mistypedurl'"
+    assertError "dsh -n App AppName${RANDOM} 'mistypedurl.com'"
+}
+
 runTest testDshNewAppRunsWithErrorIfAPP_NAMEIsNotSpecified
 runTest testDshNewAppRunsWithErrorIfAnAppAlreadyExistsNamedAPP_NAME
 runTest testDshNewAppCreatesNewAppsDirectory
@@ -97,5 +118,5 @@ runTest testDshNewAppCreatesNewAppsCssDirectory
 runTest testDshNewAppCreatesNewAppsJsDirectory
 runTest testDshNewAppCreatesNewAppsComponentsPhpFile
 runTest testDshNewAppCreatesNewAppsComponentsPhpFileWhoseContentMatchesComponentsPhpFileTemplate 2
-
-
+runTest testDshNewAppAssignsSpecifiedDOMAINAsNewAppsDefaultDomainIfDOMAINIsSpecified
+runTest testDshNewAppRunsWithErrorIfSpecifiedDOMAINIsNotAValidDomain 4
