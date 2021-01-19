@@ -59,3 +59,7 @@ if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'Test
     loadLibrary "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/Tests/locateDDMSDirectoryTests.sh"
 fi
 
+if [[ "$(getSpecifiedTestGroup)" == 'all' || "$(getSpecifiedTestGroup)" == 'TestDshQueryAppPackageConfig' ]]; then
+    loadLibrary "$(determineDshUnitDirectoryPath | sed 's/dshUnit/dsh/g')/Tests/queryAppPackageConfigTests.sh"
+fi
+
