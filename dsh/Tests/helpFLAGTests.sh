@@ -42,6 +42,8 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
 
     assertNoError "dsh --help --locate-ddms-directory" "dsh --help --locate-ddms-directory MUST run without error."
 
+    assertNoError "dsh --help --query-app-package-config" "dsh --help --query-app-package-config MUST run without error."
+
     # short form tests
     assertNoError "dsh -h -h" "dsh -h -h MUST run without error."
     assertNoError "dsh -h FLAG" "dsh -h FLAG MUST run without error."
@@ -63,6 +65,8 @@ testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid() {
     assertNoError "dsh -h -d" "dsh -h -d MUST run without error."
 
     assertNoError "dsh -h -l" "dsh --help --locate-ddms-directory MUST run without error."
+
+    assertNoError "dsh -h -q" "dsh -h -q MUST run without error."
 }
 
 testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent() {
@@ -130,12 +134,17 @@ testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput() {
 }
 
 testDshHelpLocateDDMSDirectoryOutputMatchesDshUIColorized_LocateDDMSDirectory_HelpFileOutput() {
-    assertEquals "$(dsh --help --locate-ddms-directory )" "$(expectedHelpFileOutput locateDDMSDirectory.txt)" "dsh --help --locate-ddms-directory output MUST match locateDDMSDirectory.txt help file content."
+    assertEquals "$(dsh --help --locate-ddms-directory)" "$(expectedHelpFileOutput locateDDMSDirectory.txt)" "dsh --help --locate-ddms-directory output MUST match locateDDMSDirectory.txt help file content."
     assertEquals "$(dsh -h -l )" "$(expectedHelpFileOutput locateDDMSDirectory.txt)" "dsh -h -l output MUST match locateDDMSDirectory.txt h file content."
 }
 
+testDshHelpQueryAppPackageConfigOutputMatchesDshUIColorized_QueryAppPackageConfig_HelpFileOutput() {
+    assertEquals "$(dsh --help --query-app-package-config)" "$(expectedHelpFileOutput queryAppPackageConfig.txt)" "dsh --help --query-app-package-config output MUST match queryAppPackageConfig.txt help file content."
+    assertEquals "$(dsh -h -q)" "$(expectedHelpFileOutput queryAppPackageConfig.txt)" "dsh -h -q output MUST match queryAppPackageConfig.txt help file content."
+}
+
 runTest testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid 3
-runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 34
+runTest testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid 36
 runTest testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent
 runTest testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent
 runTest testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput
@@ -153,3 +162,4 @@ runTest testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_
 runTest testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput
 runTest testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput
 runTest testDshHelpLocateDDMSDirectoryOutputMatchesDshUIColorized_LocateDDMSDirectory_HelpFileOutput 2
+runTest testDshHelpQueryAppPackageConfigOutputMatchesDshUIColorized_QueryAppPackageConfig_HelpFileOutput 2

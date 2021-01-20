@@ -104,6 +104,9 @@ showHelpInfo() {
     if [[ "${1}" == "--locate-ddms-directory" ]] || [[ "${1}" == "-l" ]]; then
         showHelpFile "locateDDMSDirectory.txt"
     fi
+    if [[ "${1}" == "--query-app-package-config" ]] || [[ "${1}" == "-q" ]]; then
+        showHelpFile "queryAppPackageConfig.txt"
+    fi
     logErrorMsgAndExit1 "dsh --help <FLAG> expects a valid dsh flag. Run dsh --help or man dsh for more information on how dsh works."
 }
 
