@@ -1,0 +1,12 @@
+
+dsh --query-app-package-config [PATH_TO_APP_PACKAGE] [SETTING_NAME]
+
+Description:
+Returns the value of the configuration setting named [SETTING_NAME] defined in App Package at [PATH_TO_APP_PACKAGE]
+
+Shorthand:
+dsh -q PATH_TO_APP_PACKAGE] [SETTING_NAME]
+
+Example:
+dsh -q /path/to/app/package domain
+

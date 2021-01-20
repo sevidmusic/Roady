@@ -365,6 +365,17 @@ locateDDMSDirectory() {
     exit 0
 }
 
+queryConfigSH() {
+    printf "%s" "$(grep -E "^${2}=.*$" "${1}/config.sh" | sed 's,^.*=,,g' | sed 's/"//g' | sed "s/'//g")"
+}
+
+queryAppPackageConfig() {
+    [[ ! -d "${1}" ]] && logErrorMsgAndExit1 "An App Package does not exist at ${1}. Please specify a path to an existing App Package. For help use dsh -h -q."
+    [[ -z "$(queryConfigSH "${1}" "${2}")" ]] && logErrorMsgAndExit1 "A setting named ${2} is either not defined in ${1}/config.sh, or has no value."
+    printf "%s" "$(grep -E "^${2}=.*$" "${1}/config.sh" | sed 's,^.*=,,g' | sed 's/"//g' | sed "s/'//g")"
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -421,6 +432,10 @@ while test $# -gt 0; do
     ;;
   -l | --locate-ddms-directory)
     locateDDMSDirectory
+    ;;
+  -q | --query-app-package-config)
+    shift
+    queryAppPackageConfig "${1}" "${2}"
     ;;
   *)
     shift
