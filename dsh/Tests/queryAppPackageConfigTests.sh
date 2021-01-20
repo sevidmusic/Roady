@@ -3,15 +3,41 @@
 
 set -o posix
 
-#testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE()
-#testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH()
-#testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue()
-#testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE()
+getTestAppPackagePath() {
+    printf "%s" "${HOME}/TestAppPackage"
+}
 
+setup() {
+    showLoadingBar "Creating ${HOME}/TestAppPackage" 'dontClear'
+    dsh -n AppPackage "TestAppPackage" "${HOME}"
+}
 
-#### Pseudo Code ####
-# set -o posix
-# PATH_TO_APP_PACKAGE="${1}"
-# SETTING_NAME="${2}"
-# printf "%s" "$(grep -E "^${SETTING_NAME}=.*$" "${PATH_TO_APP_PACKAGE}/config.sh" | sed 's,^.*=,,g' | sed 's/"//g' | sed "s/'//g")"
+teardown() {
+    showLoadingBar "Removing $(getTestAppPackagePath)" 'dontClear'
+    rm -Rf "$(getTestAppPackagePath)"
+}
+
+testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE() {
+    assertError "dsh --query-app-package-config ${RANDOM} app_name"
+}
+
+testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH() {
+    assertError "dsh --query-app-package-config $(getTestAppPackagePath) setting${RANDOM}"
+}
+
+testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue() {
+    printf "%s" 'emptySetting=""' >> "$(getTestAppPackagePath)/config.sh"
+    assertError "dsh --query-app-package-config $(getTestAppPackagePath) emptySetting"
+}
+
+testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE() {
+    assertEquals "TestAppPackage" "$(dsh --query-app-package-config $(getTestAppPackagePath) app_name)"
+}
+
+setup
+runTest testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
+runTest testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH
+runTest testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue
+runTest testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE
+teardown
 

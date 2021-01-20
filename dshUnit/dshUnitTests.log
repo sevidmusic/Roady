@@ -1,1 +1,17 @@
 
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE     =-=-[0m
+[0m[44m[30mWed Jan 20 01:02:45 AM EST 2021 assertError Passed[0m
+[0m[104m[30mWed Jan 20 01:02:50 AM EST 2021 testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH     =-=-[0m
+[0m[44m[30mWed Jan 20 01:02:59 AM EST 2021 assertError Passed[0m
+[0m[104m[30mWed Jan 20 01:03:04 AM EST 2021 testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue     =-=-[0m
+[0m[44m[30mWed Jan 20 01:03:12 AM EST 2021 assertError Passed[0m
+[0m[104m[30mWed Jan 20 01:03:17 AM EST 2021 testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE     =-=-[0m
+[0m[44m[30mWed Jan 20 01:03:23 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 01:03:28 AM EST 2021 testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE Passed[0m
