@@ -1,17 +1,120 @@
 
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE     =-=-[0m
-[0m[44m[30mWed Jan 20 01:02:45 AM EST 2021 assertError Passed[0m
-[0m[104m[30mWed Jan 20 01:02:50 AM EST 2021 testDshQueryAppPackageConfigRunsWithErrorIfAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid     =-=-[0m
+[0m[44m[30mWed Jan 20 02:21:15 AM EST 2021 assertError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:22 AM EST 2021 assertError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:28 AM EST 2021 assertError Passed[0m
+[0m[104m[30mWed Jan 20 02:21:32 AM EST 2021 testDshHelpFLAGRunsWithAnErrorIfSpecifiedFlagIsNotValid Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH     =-=-[0m
-[0m[44m[30mWed Jan 20 01:02:59 AM EST 2021 assertError Passed[0m
-[0m[104m[30mWed Jan 20 01:03:04 AM EST 2021 testDshQueryAppPackageConfigRunsWithErrorIfASettingNamedSETTING_NAMEIsNotDefinedInTheAppPackagesConfigSH Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid     =-=-[0m
+[0m[44m[30mWed Jan 20 02:21:37 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:40 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:43 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:47 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:50 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:53 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:21:56 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:00 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:03 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:07 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:10 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:13 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:17 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:20 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:23 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:27 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:30 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:34 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:37 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:40 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:43 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:45 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:48 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:51 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:54 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:22:58 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:01 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:04 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:08 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:11 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:14 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:17 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:20 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:23 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:26 AM EST 2021 assertNoError Passed[0m
+[0m[44m[30mWed Jan 20 02:23:29 AM EST 2021 assertNoError Passed[0m
+[0m[104m[30mWed Jan 20 02:23:33 AM EST 2021 testDshHelpFLAGRunsWithoutErrorIfSpecifiedFlagIsValid Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue     =-=-[0m
-[0m[44m[30mWed Jan 20 01:03:12 AM EST 2021 assertError Passed[0m
-[0m[104m[30mWed Jan 20 01:03:17 AM EST 2021 testDshQueryAppPackageConfigRunsWithErrorIfSettingNamedSETTING_NAMEHasNoValue Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent     =-=-[0m
+[0m[44m[30mWed Jan 20 02:23:45 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:23:49 AM EST 2021 testDshHelpHelpOutputMatchesDshUIColorized_Help_HelpFileContent Passed[0m
 
-[0m[44m[30m[0m[7m[90m-=-=     Running testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE     =-=-[0m
-[0m[44m[30mWed Jan 20 01:03:23 AM EST 2021 assertEquals Passed[0m
-[0m[104m[30mWed Jan 20 01:03:28 AM EST 2021 testDshQueryAppPackageConfigReturnsValueOfSettingNamedSETTING_NAMEDefinedInAppPackageConfigSHAtPATH_TO_APP_PACKAGE Passed[0m
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent     =-=-[0m
+[0m[44m[30mWed Jan 20 02:24:15 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:24:19 AM EST 2021 testDshHelpFLAGOutputMatchesDshUIColorized_HelpFLAG_HelpFileContent Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:25:09 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:25:13 AM EST 2021 testDshHelpFlagsOutputMatchesDshUIColorized_HelpFlags_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:25:27 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:25:32 AM EST 2021 testDshHelpStartDevelopmentServerOutputMatchesDshUIColorized_StartDevelopmentServer_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:25:53 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:25:56 AM EST 2021 testDshHelpBuildAppOutputMatchesDshUIColorized_BuildApp_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:26:16 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:26:20 AM EST 2021 testDshHelpNewOutputMatchesDshUIColorized_New_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:26:48 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:26:52 AM EST 2021 testDshHelpNewAppOutputMatchesDshUIColorized_NewApp_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewAppPackageOutputMatchesDshUIColorized_NewAppPackage_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:27:19 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:27:23 AM EST 2021 testDshHelpNewAppPackageOutputMatchesDshUIColorized_NewAppPackage_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:27:52 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:27:57 AM EST 2021 testDshHelpNewOutputComponentOutputMatchesDshUIColorized_NewOutputComponent_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:28:38 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:28:43 AM EST 2021 testDshHelpNewDynamicOutputComponentOutputMatchesDshUIColorized_NewDynamicOutputComponent_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:29:16 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:29:20 AM EST 2021 testDshHelpNewRequestOutputMatchesDshUIColorized_NewRequest_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:29:39 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:29:43 AM EST 2021 testDshHelpNewResponseOutputMatchesDshUIColorized_NewResponse_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:30:03 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:30:08 AM EST 2021 testDshHelpNewGlobalResponseOutputMatchesDshUIColorized_NewGlobalResponse_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:30:36 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:30:40 AM EST 2021 testDshHelpAssignToResponseOutputMatchesDshUIColorized_AssignToResponse_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:31:02 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:31:06 AM EST 2021 testDshHelpPhpUnitOutputMatchesDshUIColorized_PhpUnit_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:31:34 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:31:38 AM EST 2021 testDshHelpDshUnitOutputMatchesDshUIColorized_DshUnit_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpLocateDDMSDirectoryOutputMatchesDshUIColorized_LocateDDMSDirectory_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:31:49 AM EST 2021 assertEquals Passed[0m
+[0m[44m[30mWed Jan 20 02:31:56 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:32:01 AM EST 2021 testDshHelpLocateDDMSDirectoryOutputMatchesDshUIColorized_LocateDDMSDirectory_HelpFileOutput Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshHelpQueryAppPackageConfigOutputMatchesDshUIColorized_QueryAppPackageConfig_HelpFileOutput     =-=-[0m
+[0m[44m[30mWed Jan 20 02:32:15 AM EST 2021 assertEquals Passed[0m
+[0m[44m[30mWed Jan 20 02:32:25 AM EST 2021 assertEquals Passed[0m
+[0m[104m[30mWed Jan 20 02:32:30 AM EST 2021 testDshHelpQueryAppPackageConfigOutputMatchesDshUIColorized_QueryAppPackageConfig_HelpFileOutput Passed[0m
