@@ -2,6 +2,36 @@
 
 set -o posix
 
+test_app_name="TestApp${RANDOM}"
+test_app_packages="${HOME}/TestAppPackages"
+test_app_package_path="${test_app_packages}/${test_app_name}"
+
+setup() {
+    [[ -d "${test_app_packages}" ]] || mkdir "${test_app_packages}"
+    dsh -n AppPackage "${test_app_name}" "${HOME}/TestAppPackages" "http://localhost:8420"
+    showLoadingBar "${COLOR_23}Creating files for the ${test_app_name} Test App Package" 'dontClear'
+    printf "\nbody {background: #000000; color: #ffffff; }" > "${test_app_package_path}/css/styles.css"
+    printf "\nconsole.log('test js');" > "${test_app_package_path}/js/js.js"
+    printf "\n<h1>Test Dynamic Output</h1>" > "${test_app_package_path}/DynamicOutput/DynamicOutputFile.html"
+    printf "\ndsh -n GlobalResponse \"\${app_name}\" FooGlobalRes 0" >> "${test_app_package_path}/Responses.sh"
+    printf "\ndsh -n Response \"\${app_name}\" FooRes 0" >> "${test_app_package_path}/Responses.sh"
+    printf "\ndsh -n Request \"\${app_name}\" FooResReq ReqContainer \"index.php\"" >> "${test_app_package_path}/Requests.sh"
+    printf "\ndsh -a \"\${app_name}\" FooRes FooResReq ReqContainer Request" >> "${test_app_package_path}/Requests.sh"
+    printf "\ndsh -n DynamicOutputComponent \"\${app_name}\" DOC DOCContainer 0 \"DynamicOutputFile.html\"" >> "${test_app_package_path}/OutputComponents.sh"
+    printf "\ndsh -a \"\${app_name}\" FooGlobalRes DOC DOCContainer DynamicOutputComponent" >> "${test_app_package_path}/OutputComponents.sh"
+    printf "\ndsh -n OutputComponent \"\${app_name}\" OC OCContainer 0 \"Some Static Output\"" >> "${test_app_package_path}/OutputComponents.sh"
+    printf "\ndsh -a \"\${app_name}\" FooRes OC OCContainer OutputComponent" >> "${test_app_package_path}/OutputComponents.sh"
+    chmod -R 0755 "${test_app_package_path}"
+
+}
+
+tearDown() {
+    [[ -d "${test_app_packages}" ]] && rm -Rf "${test_app_packages}"
+}
+
+setup
+#tearDown
+
 #testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE()
 #testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace()
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory
