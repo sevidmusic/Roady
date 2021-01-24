@@ -31,7 +31,17 @@ tearDown() {
 setup
 tearDown
 
-#testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE()
+testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified() {
+    assertError "dsh --make-app"
+}
+
+testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE() {
+    assertError "dsh --make-app ${RANDOM}AppPackage"
+}
+
+runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
+runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
+
 #testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace()
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory

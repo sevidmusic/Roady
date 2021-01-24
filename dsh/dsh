@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 # dsh
 
 set -o posix
@@ -390,6 +390,12 @@ queryAppPackageConfig() {
     exit 0
 }
 
+makeApp() {
+    [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh -m [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP] expects the path to the App Package be specified as the first parameter. For help use dsh -h -m"
+    [[ ! -d "${1}" ]] && logErrorMsgAndExit1 "The ${1} App Package does not exist. For help use dsh -h -m"
+    exit 0
+}
+
 loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
 
 while test $# -gt 0; do
@@ -450,6 +456,10 @@ while test $# -gt 0; do
   -q | --query-app-package-config)
     shift
     queryAppPackageConfig "${1}" "${2}"
+    ;;
+  -m | --make-app)
+    shift
+    makeApp "${1}" "${2}"
     ;;
   *)
     shift
