@@ -22,7 +22,6 @@ setup() {
     printf "\ndsh -n OutputComponent \"\${app_name}\" OC OCContainer 0 \"Some Static Output\"" >> "${test_app_package_path}/OutputComponents.sh"
     printf "\ndsh -a \"\${app_name}\" FooRes OC OCContainer OutputComponent" >> "${test_app_package_path}/OutputComponents.sh"
     chmod -R 0755 "${test_app_package_path}"
-
 }
 
 tearDown() {
@@ -30,7 +29,7 @@ tearDown() {
 }
 
 setup
-#tearDown
+tearDown
 
 #testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE()
 #testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace()
