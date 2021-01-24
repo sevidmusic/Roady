@@ -5,6 +5,7 @@ set -o posix
 test_app_name="TestApp${RANDOM}"
 test_app_packages="${HOME}/TestAppPackages"
 test_app_package_path="${test_app_packages}/${test_app_name}"
+test_app_path="$(dsh -l)Apps/${test_app_name}"
 
 setup() {
     [[ -d "${test_app_packages}" ]] || mkdir "${test_app_packages}"
@@ -28,8 +29,19 @@ tearDown() {
     [[ -d "${test_app_packages}" ]] && rm -Rf "${test_app_packages}"
 }
 
+testMakeApp() {
+    dsh -n App "${test_app_name}" "$(dsh -q domain)"
+    cp "${test_app_package_path}/css/styles.css" "${test_app_path}/css/styles.css"
+    cp "${test_app_package_path}/js/js.js" "${test_app_path}/js/js.js"
+    cp "${test_app_package_path}/DynamicOutput/DynamicOutputFile.html" "${test_app_path}/DynamicOutput/DynamicOutputFile.html"
+    cp "${test_app_package_path}/config.sh" "${test_app_path}/.config.sh"
+    . "${test_app_package_path}/Responses.sh"
+    . "${test_app_package_path}/Requests.sh"
+    . "${test_app_package_path}/OutputComponents.sh"
+}
+
 setup
-tearDown
+testMakeApp
 
 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified() {
     assertError "dsh --make-app"
@@ -64,3 +76,5 @@ runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKA
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting
 #testDshMakeAppCreatesAHiddenCopyOfTheAppPackagesConfigSHInTheNewAppsDirectory()
 #testDshMakeAppMakesTheApp() # 1. manuall make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
+
+tearDown
