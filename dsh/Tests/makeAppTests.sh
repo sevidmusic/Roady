@@ -31,9 +31,13 @@ tearDown() {
 
 testMakeApp() {
     dsh -n App "${test_app_name}" "$(dsh -q domain)"
-    cp "${test_app_package_path}/css/styles.css" "${test_app_path}/css/styles.css"
-    cp "${test_app_package_path}/js/js.js" "${test_app_path}/js/js.js"
-    cp "${test_app_package_path}/DynamicOutput/DynamicOutputFile.html" "${test_app_path}/DynamicOutput/DynamicOutputFile.html"
+    [[ -d "${test_app_path}/css" ]] &&  rm -Rf "${test_app_path}/css"
+    [[ -d "${test_app_path}/js" ]] &&  rm -Rf "${test_app_path}/js"
+    [[ -d "${test_app_path}/DynamicOutput" ]] &&  rm -Rf "${test_app_path}/DynamicOutput"
+
+    cp -R "${test_app_package_path}/css" "${test_app_path}/css"
+    cp -R "${test_app_package_path}/js" "${test_app_path}/js"
+    cp -R "${test_app_package_path}/DynamicOutput" "${test_app_path}/DynamicOutput"
     cp "${test_app_package_path}/config.sh" "${test_app_path}/.config.sh"
     . "${test_app_package_path}/Responses.sh"
     . "${test_app_package_path}/Requests.sh"
