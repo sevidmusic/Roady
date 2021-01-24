@@ -53,4 +53,4 @@ tearDown
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting
 #testDshMakeAppCreatesAHiddenCopyOfTheAppPackagesConfigSHInTheNewAppsDirectory()
-
+#testDshMakeAppMakesTheApp() # 1. manuall make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
