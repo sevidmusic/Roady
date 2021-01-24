@@ -1,1 +1,41 @@
 
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Jan 24 12:25:58 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:26:02 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfAPP_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist     =-=-[0m
+[0m[44m[30mSun Jan 24 12:26:19 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:26:23 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfSpecifiedAppDoesNotExist Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists     =-=-[0m
+[0m[44m[30mSun Jan 24 12:26:48 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:26:53 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfAnDynamicOutputComponentNamedDYNAMIC_OUTPUT_COMPONENT_NAMEAlreadyExists Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Jan 24 12:27:05 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:27:10 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_NAMEIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Jan 24 12:27:22 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:27:27 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_CONTAINERIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Jan 24 12:27:39 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:27:44 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfDYNAMIC_OUTPUT_COMPONENT_POSITIONIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified     =-=-[0m
+[0m[44m[30mSun Jan 24 12:27:56 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:28:00 PM EST 2021 testNewDynamicOutputComponentRunsWithErrorIfOUTPUTIsNotSpecified Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp     =-=-[0m
+[0m[44m[30mSun Jan 24 12:28:19 PM EST 2021 assertFileExists Passed[0m
+[0m[104m[30mSun Jan 24 12:28:24 PM EST 2021 testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedApp Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent     =-=-[0m
+[0m[44m[30mSun Jan 24 12:28:42 PM EST 2021 assertEquals Passed[0m
+[0m[104m[30mSun Jan 24 12:28:48 PM EST 2021 testNewDynamicOutputComponentCreatesNewOutputComponentConfigurationFileForSpecifiedAppWhoseContentMatchesExpectedContent Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshNewDynamicOutputComponentRunsWithErrorIfSpecifiedDynamicOutputFileDoesNotExist     =-=-[0m
+[0m[44m[30mSun Jan 24 12:29:05 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 12:29:09 PM EST 2021 testDshNewDynamicOutputComponentRunsWithErrorIfSpecifiedDynamicOutputFileDoesNotExist Passed[0m
