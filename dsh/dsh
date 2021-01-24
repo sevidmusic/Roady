@@ -220,6 +220,17 @@ createNewOutputComponent() {
     exit 0
 }
 
+logDynamicOutputFileDoesNotExistErrorAndExit() {
+    logErrorMsg "A Dynamic Output file named ${5} does not exist at either:"
+    logErrorMsg "$(locateDDMSDirectory)SharedDynamicOutput/${5}"
+    logErrorMsg "or"
+    logErrorMsg "$(determineAppDirectoryPath "${1}")/DynamicOutput/${5}"
+    logErrorMsg "The ${5} Dynamic Output file will need to be created at one of these locations before"
+    logErrorMsg "dsh -n DynamicOutputComponent ${1} ${2} ${3} ${4} ${5} can create a new"
+    logErrorMsg "DynamicOutputComponent."
+    logErrorMsgAndExit1 "For help use dsh -h -n DynamicOutputComponent"
+}
+
 createNewDynamicOutputComponent() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "You must specify the name of the App the new DynamicOutputComponent will be defined for."
     [[ -z "${2}" ]] && logErrorMsgAndExit1 "You must specify a name to assign to the new DynamicOutputComponent."
@@ -228,7 +239,7 @@ createNewDynamicOutputComponent() {
     [[ -z "${5}" ]] && logErrorMsgAndExit1 "You must specify the name of the Dynamic Output file that will generate the output for the new DynamicOutputComponent."
     [[ ! -d "$(determineAppDirectoryPath ${1})" ]] && logErrorMsg "The specified App, ${1}, does not exist. Please specify an existing App to define the new DynamicOutputComponent for. The following apps are available:" && logErrorMsg "$(ls "$(determineDshDirectoryPath | sed 's/dsh/Apps/g')" | sed 's/README.md//g' | column)" && logErrorMsgAndExit1 "For help use dsh --help --new DynamicOutputComponent."
     [[ -f "$(determineAppDirectoryPath ${1})/OutputComponents/${2}.php" ]] && logErrorMsgAndExit1 "A DynamicOutputComponent named ${2} is already defined for the App, please specify a unique name to assign to the new DynamicOutputComponent."
-    [[ ! -f "$(determineAppDirectoryPath ${1})/DynamicOutput/${5}" ]] && logErrorMsgAndExit1 "A Dynamic Output file named ${5} does not exist at $(dsh -l)Apps/${1}/DynamicOutput"
+    [[ ! -f "$(locateDDMSDirectory)SharedDynamicOutput/${5}" ]] && [[ ! -f "$(determineAppDirectoryPath ${1})/DynamicOutput/${5}" ]] && logDynamicOutputFileDoesNotExistErrorAndExit "${1}" "${2}" "${3}" "${4}" "${5}"
     notifyUser "Creating new DynamicOutputComponent \"${2}\" for the ${1} App:" 0 'dontClear'
     showLoadingBar "    Copying $(determineDshDirectoryPath)/FileTemplates/OutputComponent.php to $(determineAppDirectoryPath "${1}")" 'dontClear'
     [[ ! -f "$(determineDshDirectoryPath)/FileTemplates/DynamicOutputComponent.php" ]] && logErrorMsgAndExit1 "The DynamicOutputComponent.php file template does not exist at $(determineDshDirectoryPath)/FileTemplates/DynamicOutputComponent.php!"
