@@ -27,6 +27,7 @@ setup() {
 
 tearDown() {
     [[ -d "${test_app_packages}" ]] && rm -Rf "${test_app_packages}"
+    [[ -d "${test_app_path}" ]] && rm -Rf "${test_app_path}"
 }
 
 testMakeApp() {
@@ -84,5 +85,6 @@ runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOf
 #testDshMakeAppCreatesAHiddenCopyOfTheAppPackagesConfigSHInTheNewAppsDirectory()
 #testDshMakeAppMakesTheApp() # 1. manuall make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
 #testDshMakeAppMakesAppEvenIfAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeIfREPLACE_EXISTING_APPIsSetTo_replace
+#testDshMakeAppMakesAnAppThatCanBeBuiltByDshBuildAppWithoutError
 
 tearDown
