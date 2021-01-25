@@ -113,6 +113,23 @@ testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script() {
     tearDown
 }
 
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting() {
+    setup
+    dsh -q "${test_app_package_path}" app_name
+    sed -i "s/${test_app_name}//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    dsh -q "${test_app_package_path}" app_name
+    tearDown
+}
+#{
+#    setup
+#    dsh -q "${test_app_package_path}" app_name
+#    sed -i "s/${test_app_name}//g" "${test_app_package_path}/config.sh"
+#    dsh -q "${test_app_package_path}" app_name
+#    tearDown
+#    exit 0
+#}
+
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
 runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace
@@ -123,8 +140,8 @@ runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Scri
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting
 
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_bug_contact_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_config_locked_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_dependencies_Setting

@@ -393,6 +393,10 @@ queryAppPackageConfig() {
 makeApp() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh -m [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP] expects the path to the App Package be specified as the first parameter. For help use dsh -h -m"
     [[ ! -d "${1}" ]] && logErrorMsgAndExit1 "An App Package does not exist at ${1}. Please specify a path to an existing App Package. For help use dsh -h -m"
+###
+    [[ "$(dsh -q "${1}"  app_name &> /dev/null)" ]] || logErrorMsgAndExit1 "The app_name configuration variable is not defined in ${1}/config.sh. Please set the app_name configuration variable as follows: app_name='APP_NAME'"
+
+###
     [[ "${2}" != 'replace' ]] && [[ -d "$(locateDDMSDirectory)Apps/$(dsh -q "${1}" app_name)" ]] && logErrorMsgAndExit1 "An App named $(dsh -q "${1}" app_name) already exists, if you wish to replace it please pass \"replace\" to the [REPLACE_EXISTING_APP] parameter. For help use dsh -h -m"
     [[ ! -d "${1}/css" ]] && logErrorMsgAndExit1 "The ${1}/css directory does not exist. All App Packages MUST have a css directory, even if it is empty."
     [[ ! -d "${1}/js" ]] && logErrorMsgAndExit1 "The ${1}/js directory does not exist. All App Packages MUST have a js directory, even if it is empty."
