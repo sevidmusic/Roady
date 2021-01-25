@@ -394,7 +394,19 @@ makeApp() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh -m [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP] expects the path to the App Package be specified as the first parameter. For help use dsh -h -m"
     [[ ! -d "${1}" ]] && logErrorMsgAndExit1 "An App Package does not exist at ${1}. Please specify a path to an existing App Package. For help use dsh -h -m"
 ###
-    [[ "$(dsh -q "${1}"  app_name &> /dev/null)" ]] || logErrorMsgAndExit1 "The app_name configuration variable is not defined in ${1}/config.sh. Please set the app_name configuration variable as follows: app_name='APP_NAME'"
+    [[ ! -f "${1}/config.sh" ]] && logErrorMsgAndExit1 "The ${1}/config.sh directory does not exist. All App Packages MUST have a config.sh configuration file."
+    [[ "$(dsh -q "${1}" app_name)" ]] || logErrorMsgAndExit1 "The app_name configuration variable is not defined in ${1}/config.sh. Please set the app_name configuration variable as follows: app_name='APP_NAME'"
+    [[ "$(dsh -q "${1}" bug_contact)" ]] || logErrorMsgAndExit1 "The bug_contact configuration variable is not defined in ${1}/config.sh. Please set the bug_contact configuration variable as follows: bug_contact='APP_NAME'"
+    [[ "$(dsh -q "${1}" config_locked)" ]] || logErrorMsgAndExit1 "The config_locked configuration variable is not defined in ${1}/config.sh. Please set the config_locked configuration variable as follows: config_locked='APP_NAME'"
+    [[ "$(dsh -q "${1}" dependencies)" ]] || logErrorMsgAndExit1 "The dependencies configuration variable is not defined in ${1}/config.sh. Please set the dependencies configuration variable as follows: dependencies='APP_NAME'"
+    [[ "$(dsh -q "${1}" description)" ]] || logErrorMsgAndExit1 "The description configuration variable is not defined in ${1}/config.sh. Please set the description configuration variable as follows: description='APP_NAME'"
+    [[ "$(dsh -q "${1}" developers)" ]] || logErrorMsgAndExit1 "The developers configuration variable is not defined in ${1}/config.sh. Please set the developers configuration variable as follows: developers='APP_NAME'"
+    [[ "$(dsh -q "${1}" development_port)" ]] || logErrorMsgAndExit1 "The port configuration variable is not defined in ${1}/config.sh. Please set the port configuration variable as follows: port='APP_NAME'"
+    [[ "$(dsh -q "${1}" documentation)" ]] || logErrorMsgAndExit1 "The documentation configuration variable is not defined in ${1}/config.sh. Please set the documentation configuration variable as follows: documentation='APP_NAME'"
+    [[ "$(dsh -q "${1}" domain)" ]] || logErrorMsgAndExit1 "The domain configuration variable is not defined in ${1}/config.sh. Please set the domain configuration variable as follows: domain='APP_NAME'"
+    [[ "$(dsh -q "${1}" license)" ]] || logErrorMsgAndExit1 "The license configuration variable is not defined in ${1}/config.sh. Please set the license configuration variable as follows: license='APP_NAME'"
+    [[ "$(dsh -q "${1}" version)" ]] || logErrorMsgAndExit1 "The version configuration variable is not defined in ${1}/config.sh. Please set the version configuration variable as follows: version='APP_NAME'"
+    [[ "$(dsh -q "${1}" version_date)" ]] || logErrorMsgAndExit1 "The version_date configuration variable is not defined in ${1}/config.sh. Please set the version_date configuration variable as follows: version_date='APP_NAME'"
 
 ###
     [[ "${2}" != 'replace' ]] && [[ -d "$(locateDDMSDirectory)Apps/$(dsh -q "${1}" app_name)" ]] && logErrorMsgAndExit1 "An App named $(dsh -q "${1}" app_name) already exists, if you wish to replace it please pass \"replace\" to the [REPLACE_EXISTING_APP] parameter. For help use dsh -h -m"
@@ -404,7 +416,6 @@ makeApp() {
     [[ ! -f "${1}/Responses.sh" ]] && logErrorMsgAndExit1 "The ${1}/Responses.sh directory does not exist. All App Packages MUST have a Responses.sh script, even if it does not define any dsh calls."
     [[ ! -f "${1}/Requests.sh" ]] && logErrorMsgAndExit1 "The ${1}/Requests.sh directory does not exist. All App Packages MUST have a Requests.sh script, even if it does not define any dsh calls."
     [[ ! -f "${1}/OutputComponents.sh" ]] && logErrorMsgAndExit1 "The ${1}/OutputComponents.sh directory does not exist. All App Packages MUST have a OutputComponents.sh script, even if it does not define any dsh calls."
-    [[ ! -f "${1}/config.sh" ]] && logErrorMsgAndExit1 "The ${1}/config.sh directory does not exist. All App Packages MUST have a config.sh configuration file."
     exit 0
 }
 

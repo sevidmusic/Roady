@@ -119,6 +119,82 @@ testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setti
     assertError "dsh --make-app ${test_app_package_path}"
     tearDown
 }
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_bug_contact_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" bug_contact)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_config_locked_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" config_locked)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_dependencies_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" dependencies)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_description_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" description)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_developers_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" developers)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_development_port_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" development_port)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_documentation_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" documentation)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_domain_Setting() {
+    setup
+    sed -i "s,$(dsh -q "${test_app_package_path}" domain),,g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_license_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" license)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" version)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting() {
+    setup
+    sed -i "s/$(dsh -q "${test_app_package_path}" version_date)//g" "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
 
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
@@ -131,18 +207,20 @@ runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Scrip
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script
 runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_bug_contact_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_config_locked_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_dependencies_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_description_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_developers_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_development_port_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_documentation_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_domain_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_license_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_Setting
+runTest testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting
 
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_bug_contact_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_config_locked_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_dependencies_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_description_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_developers_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_development_port_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_documentation_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_domain_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_license_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting
+
+##############
 #testDshMakeAppCreatesAHiddenCopyOfTheAppPackagesConfigSHInTheNewAppsDirectory()
 #testDshMakeAppMakesTheApp() # 1. manually make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
 #testDshMakeAppMakesAppEvenIfAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeIfREPLACE_EXISTING_APPIsSetTo_replace
