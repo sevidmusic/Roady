@@ -397,6 +397,9 @@ makeApp() {
     [[ ! -d "${1}/css" ]] && logErrorMsgAndExit1 "The ${1}/css directory does not exist. All App Packages MUST have a css directory, even if it is empty."
     [[ ! -d "${1}/js" ]] && logErrorMsgAndExit1 "The ${1}/js directory does not exist. All App Packages MUST have a js directory, even if it is empty."
     [[ ! -d "${1}/DynamicOutput" ]] && logErrorMsgAndExit1 "The ${1}/DynamicOutput directory does not exist. All App Packages MUST have a DynamicOutput directory, even if it is empty."
+    [[ ! -f "${1}/Responses.sh" ]] && logErrorMsgAndExit1 "The ${1}/Responses.sh directory does not exist. All App Packages MUST have a Responses.sh script, even if it does not define any dsh calls."
+    [[ ! -f "${1}/Requests.sh" ]] && logErrorMsgAndExit1 "The ${1}/Requests.sh directory does not exist. All App Packages MUST have a Requests.sh script, even if it does not define any dsh calls."
+    [[ ! -f "${1}/OutputComponents.sh" ]] && logErrorMsgAndExit1 "The ${1}/OutputComponents.sh directory does not exist. All App Packages MUST have a OutputComponents.sh script, even if it does not define any dsh calls."
     exit 0
 }
 

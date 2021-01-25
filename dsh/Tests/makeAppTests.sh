@@ -84,16 +84,38 @@ testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Director
     tearDown
 }
 
+
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script() {
+    setup
+    rm "${test_app_package_path}/Responses.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script() {
+    setup
+    rm "${test_app_package_path}/Requests.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script() {
+    setup
+    rm "${test_app_package_path}/OutputComponents.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
 runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script
 
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineAbug_contact_Setting
