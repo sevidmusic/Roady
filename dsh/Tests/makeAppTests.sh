@@ -115,20 +115,10 @@ testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script() {
 
 testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting() {
     setup
-    dsh -q "${test_app_package_path}" app_name
-    sed -i "s/${test_app_name}//g" "${test_app_package_path}/config.sh"
+    sed -i "s/$(dsh -q "${test_app_package_path}" app_name)//g" "${test_app_package_path}/config.sh"
     assertError "dsh --make-app ${test_app_package_path}"
-    dsh -q "${test_app_package_path}" app_name
     tearDown
 }
-#{
-#    setup
-#    dsh -q "${test_app_package_path}" app_name
-#    sed -i "s/${test_app_name}//g" "${test_app_package_path}/config.sh"
-#    dsh -q "${test_app_package_path}" app_name
-#    tearDown
-#    exit 0
-#}
 
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE

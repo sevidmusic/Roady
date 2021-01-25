@@ -1,45 +1,45 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 25 11:40:33 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:40:36 AM EST 2021 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 25 12:10:25 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:10:29 PM EST 2021 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE     =-=-[0m
-[0m[44m[30mMon Jan 25 11:40:56 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:41:01 AM EST 2021 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
+[0m[44m[30mMon Jan 25 12:10:48 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:10:52 PM EST 2021 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace     =-=-[0m
-[0m[44m[30mMon Jan 25 11:42:22 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:42:28 AM EST 2021 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace Passed[0m
+[0m[44m[30mMon Jan 25 12:12:11 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:12:17 PM EST 2021 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory     =-=-[0m
-[0m[44m[30mMon Jan 25 11:42:48 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:42:52 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory Passed[0m
+[0m[44m[30mMon Jan 25 12:12:37 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:12:41 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory     =-=-[0m
-[0m[44m[30mMon Jan 25 11:43:13 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:43:17 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory Passed[0m
+[0m[44m[30mMon Jan 25 12:13:02 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:13:06 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory     =-=-[0m
-[0m[44m[30mMon Jan 25 11:43:38 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:43:42 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory Passed[0m
+[0m[44m[30mMon Jan 25 12:13:26 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:13:31 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 11:44:03 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:44:07 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:13:51 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:13:55 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 11:44:28 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:44:32 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:14:16 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:14:20 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 11:44:52 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:44:57 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:14:40 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:14:45 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 11:45:18 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:45:22 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:15:05 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:15:09 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting     =-=-[0m
-[0m[44m[30mMon Jan 25 11:45:42 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 11:45:47 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting Passed[0m
+[0m[44m[30mMon Jan 25 12:15:30 PM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:15:34 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting Passed[0m
