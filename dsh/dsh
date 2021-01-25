@@ -393,6 +393,7 @@ queryAppPackageConfig() {
 makeApp() {
     [[ -z "${1}" ]] && logErrorMsgAndExit1 "dsh -m [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP] expects the path to the App Package be specified as the first parameter. For help use dsh -h -m"
     [[ ! -d "${1}" ]] && logErrorMsgAndExit1 "The ${1} App Package does not exist. For help use dsh -h -m"
+    [[ "${2}" != 'replace' ]] && [[ -d "$(locateDDMSDirectory)Apps/$(dsh -q "${1}" app_name)" ]] && logErrorMsgAndExit1 "An App named $(dsh -q "${1}" app_name) already exists, if you wish to replace it please pass \"replace\" to the [REPLACE_EXISTING_APP] parameter. For help use dsh -h -m"
     exit 0
 }
 

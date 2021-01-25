@@ -30,11 +30,10 @@ tearDown() {
 }
 
 testMakeApp() {
-    dsh -n App "${test_app_name}" "$(dsh -q domain)"
+    dsh -n App "${test_app_name}" "$(dsh -q "${test_app_package_path}" domain)"
     [[ -d "${test_app_path}/css" ]] &&  rm -Rf "${test_app_path}/css"
     [[ -d "${test_app_path}/js" ]] &&  rm -Rf "${test_app_path}/js"
     [[ -d "${test_app_path}/DynamicOutput" ]] &&  rm -Rf "${test_app_path}/DynamicOutput"
-
     cp -R "${test_app_package_path}/css" "${test_app_path}/css"
     cp -R "${test_app_package_path}/js" "${test_app_path}/js"
     cp -R "${test_app_package_path}/DynamicOutput" "${test_app_path}/DynamicOutput"
@@ -45,7 +44,6 @@ testMakeApp() {
 }
 
 setup
-testMakeApp
 
 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified() {
     assertError "dsh --make-app"
@@ -55,10 +53,15 @@ testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE() {
     assertError "dsh --make-app ${RANDOM}AppPackage"
 }
 
+testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace() {
+    testMakeApp
+    assertError "dsh --make-app ${test_app_package_path}"
+}
+
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
+runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace
 
-#testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace()
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory
@@ -80,5 +83,6 @@ runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKA
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting
 #testDshMakeAppCreatesAHiddenCopyOfTheAppPackagesConfigSHInTheNewAppsDirectory()
 #testDshMakeAppMakesTheApp() # 1. manuall make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
+#testDshMakeAppMakesAppEvenIfAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeIfREPLACE_EXISTING_APPIsSetTo_replace
 
 tearDown
