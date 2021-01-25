@@ -44,28 +44,53 @@ testMakeApp() {
     . "${test_app_package_path}/OutputComponents.sh"
 }
 
-setup
-
 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified() {
+    setup
     assertError "dsh --make-app"
+    tearDown
 }
 
 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE() {
+    setup
     assertError "dsh --make-app ${RANDOM}AppPackage"
+    tearDown
 }
 
 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace() {
+    setup
     testMakeApp
     assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory() {
+    setup
+    rm -Rf "${test_app_package_path}/css"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory() {
+    setup
+    rm -Rf "${test_app_package_path}/js"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory() {
+    setup
+    rm -Rf "${test_app_package_path}/DynamicOutput"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
 }
 
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
 runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory
 
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script
 #testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script
@@ -87,4 +112,3 @@ runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOf
 #testDshMakeAppMakesAppEvenIfAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeIfREPLACE_EXISTING_APPIsSetTo_replace
 #testDshMakeAppMakesAnAppThatCanBeBuiltByDshBuildAppWithoutError
 
-tearDown

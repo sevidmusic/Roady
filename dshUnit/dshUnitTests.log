@@ -1,13 +1,25 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
-[0m[44m[30mSun Jan 24 09:18:10 PM EST 2021 assertError Passed[0m
-[0m[104m[30mSun Jan 24 09:18:14 PM EST 2021 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
+[0m[44m[30mSun Jan 24 11:22:38 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 11:22:42 PM EST 2021 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE     =-=-[0m
-[0m[44m[30mSun Jan 24 09:18:22 PM EST 2021 assertError Passed[0m
-[0m[104m[30mSun Jan 24 09:18:26 PM EST 2021 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
+[0m[44m[30mSun Jan 24 11:23:02 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 11:23:06 PM EST 2021 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace     =-=-[0m
-[0m[44m[30mSun Jan 24 09:19:35 PM EST 2021 assertError Passed[0m
-[0m[104m[30mSun Jan 24 09:19:41 PM EST 2021 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace Passed[0m
+[0m[44m[30mSun Jan 24 11:24:24 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 11:24:30 PM EST 2021 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory     =-=-[0m
+[0m[44m[30mSun Jan 24 11:24:50 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 11:24:54 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory     =-=-[0m
+[0m[44m[30mSun Jan 24 11:25:14 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 11:25:18 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory     =-=-[0m
+[0m[44m[30mSun Jan 24 11:25:39 PM EST 2021 assertError Passed[0m
+[0m[104m[30mSun Jan 24 11:25:43 PM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory Passed[0m
