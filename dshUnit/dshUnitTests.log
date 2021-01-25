@@ -1,37 +1,41 @@
 
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified     =-=-[0m
-[0m[44m[30mMon Jan 25 12:02:37 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:02:41 AM EST 2021 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
+[0m[44m[30mMon Jan 25 12:27:23 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:27:27 AM EST 2021 testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE     =-=-[0m
-[0m[44m[30mMon Jan 25 12:03:00 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:03:04 AM EST 2021 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
+[0m[44m[30mMon Jan 25 12:27:46 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:27:50 AM EST 2021 testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace     =-=-[0m
-[0m[44m[30mMon Jan 25 12:04:23 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:04:29 AM EST 2021 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace Passed[0m
+[0m[44m[30mMon Jan 25 12:29:08 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:29:14 AM EST 2021 testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory     =-=-[0m
-[0m[44m[30mMon Jan 25 12:04:48 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:04:53 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory Passed[0m
+[0m[44m[30mMon Jan 25 12:29:33 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:29:38 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_css_Directory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory     =-=-[0m
-[0m[44m[30mMon Jan 25 12:05:12 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:05:17 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory Passed[0m
+[0m[44m[30mMon Jan 25 12:29:57 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:30:01 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_js_Directory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory     =-=-[0m
-[0m[44m[30mMon Jan 25 12:05:37 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:05:41 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory Passed[0m
+[0m[44m[30mMon Jan 25 12:30:21 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:30:26 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_Directory Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 12:06:02 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:06:06 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:30:46 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:30:51 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 12:06:26 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:06:31 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:31:11 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:31:15 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script Passed[0m
 
 [0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script     =-=-[0m
-[0m[44m[30mMon Jan 25 12:06:51 AM EST 2021 assertError Passed[0m
-[0m[104m[30mMon Jan 25 12:06:56 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script Passed[0m
+[0m[44m[30mMon Jan 25 12:31:36 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:31:40 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script Passed[0m
+
+[0m[44m[30m[0m[7m[90m-=-=     Running testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script     =-=-[0m
+[0m[44m[30mMon Jan 25 12:32:07 AM EST 2021 assertError Passed[0m
+[0m[104m[30mMon Jan 25 12:32:11 AM EST 2021 testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script Passed[0m

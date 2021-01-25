@@ -106,6 +106,13 @@ testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Scrip
     tearDown
 }
 
+testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script() {
+    setup
+    rm "${test_app_package_path}/config.sh"
+    assertError "dsh --make-app ${test_app_package_path}"
+    tearDown
+}
+
 runTest testDshMakeAppRunsWithErrorIfPATH_TO_APP_PACKAGEIsNotSpecified
 runTest testDshMakeAppRunsWithErrorIfAnAppPackageDoesNotExistAtPATH_TO_APP_PACKAGE
 runTest testDshMakeAppRunsWithErrorIfAnAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeAndREPLACE_EXISTING_APPIsNotSetTo_replace
@@ -115,10 +122,10 @@ runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_DynamicOutput_
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Responses_Script
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Requests_Script
 runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponents_Script
+runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script
 
-#testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_Config_Script
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_app_name_Setting
-#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineAbug_contact_Setting
+#testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_bug_contact_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_config_locked_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_dependencies_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_description_Setting
@@ -130,7 +137,7 @@ runTest testDshMakeAppRunsWithErrorIfTheAppPackageDoesNotContainA_OutputComponen
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_Setting
 #testDshMakeAppRunsWithErrorIfTheAppPackagesConfigSHDoesNotDefineA_version_date_Setting
 #testDshMakeAppCreatesAHiddenCopyOfTheAppPackagesConfigSHInTheNewAppsDirectory()
-#testDshMakeAppMakesTheApp() # 1. manuall make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
+#testDshMakeAppMakesTheApp() # 1. manually make test app package. 2. build test app package. 3. find/cat > res1.txt test app in DDMS. 4. run dsh -m test app package. 5. find/cat res2.txt test app in DDMS. 6. assertEquals res1.txt res2.txt
 #testDshMakeAppMakesAppEvenIfAppAlreadyExistsWhoseNameMatchesTheNameOfTheAppToBeMadeIfREPLACE_EXISTING_APPIsSetTo_replace
 #testDshMakeAppMakesAnAppThatCanBeBuiltByDshBuildAppWithoutError
 

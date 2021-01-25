@@ -400,6 +400,7 @@ makeApp() {
     [[ ! -f "${1}/Responses.sh" ]] && logErrorMsgAndExit1 "The ${1}/Responses.sh directory does not exist. All App Packages MUST have a Responses.sh script, even if it does not define any dsh calls."
     [[ ! -f "${1}/Requests.sh" ]] && logErrorMsgAndExit1 "The ${1}/Requests.sh directory does not exist. All App Packages MUST have a Requests.sh script, even if it does not define any dsh calls."
     [[ ! -f "${1}/OutputComponents.sh" ]] && logErrorMsgAndExit1 "The ${1}/OutputComponents.sh directory does not exist. All App Packages MUST have a OutputComponents.sh script, even if it does not define any dsh calls."
+    [[ ! -f "${1}/config.sh" ]] && logErrorMsgAndExit1 "The ${1}/config.sh directory does not exist. All App Packages MUST have a config.sh configuration file."
     exit 0
 }
 
