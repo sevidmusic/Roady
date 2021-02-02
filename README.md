@@ -54,7 +54,7 @@ The above will do the following:
 
 [Back to top](#darling-data-management-system) | [Installation](#installation)
 
-![alt text](https://ddmsmedia.us-east-1.linodeobjects.com/DDMSInstallationExample.gif)
+![DDMSInstallationDemo](https://ddmsmedia.us-east-1.linodeobjects.com/DDMSInstallationExample.gif)
 
 # Getting Started
 
@@ -144,5 +144,5 @@ a "Hello World" App might begin:
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
 
-![alt text](https://ddmsmedia.us-east-1.linodeobjects.com/DDMSHelloWorldExample.gif)
+![DDMSHelloWorldDemo](https://ddmsmedia.us-east-1.linodeobjects.com/DDMSHelloWorldExample.gif)
 
