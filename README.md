@@ -54,7 +54,7 @@ The above will do the following:
 
 [Back to top](#darling-data-management-system) | [Installation](#installation)
 
-![DDMSInstallationDemo](https://ddmsmedia.us-east-1.linodeobjects.com/DDMSInstallationExample.gif)
+![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
 # Getting Started
 
@@ -144,5 +144,5 @@ a "Hello World" App might begin:
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
 
-![DDMSHelloWorldDemo](https://ddmsmedia.us-east-1.linodeobjects.com/DDMSHelloWorldExample.gif)
+![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
