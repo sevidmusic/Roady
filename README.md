@@ -60,6 +60,8 @@ and setup via [Composer](https://github.com/composer/composer).
 
 # Setup development tools
 
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Example](#installation-example)
+
 The **Darling Data Management System** comes with three command line utilities:
 
 `dsh`     (required): Used frequently for development with the **Darling Data Management System**.
