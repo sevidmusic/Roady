@@ -111,7 +111,7 @@ are intended to be used during development with the Darling Data Management Syst
 
 ### Installation Example
 
-[Back to top](#darling-data-management-system) | [Installation](#installation)
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
 
 ![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
