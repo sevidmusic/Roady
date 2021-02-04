@@ -13,7 +13,7 @@
 
 [Back to top](#darling-data-management-system)
 
-Welcome to the Darling Data Management System, a tool designed to aide in the
+Welcome to the **Darling Data Management System**, a tool designed to aide in the
 development of well organized PHP applications.
 
 The **Darling Data Management System** requires [PHP](https://github.com/php/php-src) >= 7.4
