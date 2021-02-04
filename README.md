@@ -20,12 +20,12 @@ The **Darling Data Management System** requires [PHP](https://github.com/php/php
 
 The **Darling Data Management System** requires [Composer](https://github.com/composer/composer).
 
-A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.0-alpha) of the Darling Data Management System** is available now.
+A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.0-alpha) of the **Darling Data Management System** is available now.
 
 The **Darling Data Management System** version 1.0.0 will be released in the next few days.
 
 For an overview of what needs to be done please see the
-[issues](https://github.com/sevidmusic/DarlingDataManagementSystem/issues) for this Repo.
+[open issues](https://github.com/sevidmusic/DarlingDataManagementSystem/issues).
 
 A website is being developed for the Darling Data Management System at [darlingdata.tech](http://darlingdata.tech)
 
