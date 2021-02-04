@@ -1,12 +1,10 @@
 # Darling Data Management System
 
 [About](#about)
-
 [Installation](#installation)
 1. [Installation Example](#installation-example)
 
 [Getting Started](#getting-started)
-
 1. [Apps and App Packages](#apps-and-app-packages)
 2. [Hello World Guide](#hello-world-guide)
 3. [Hello World Example](#hello-world-example)
@@ -18,13 +16,13 @@
 Welcome to the Darling Data Management System, a tool designed to aide in the
 development of well organized PHP applications.
 
-The Darling Data Management System requires [PHP](https://github.com/php/php-src) >= 7.4
+The **Darling Data Management System** requires [PHP](https://github.com/php/php-src) >= 7.4
 
-The Darling Data Managment System requires [Composer](https://github.com/composer/composer).
+The **Darling Data Management System** requires [Composer](https://github.com/composer/composer).
 
 A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.0-alpha) of the Darling Data Management System** is available now.
 
-The Darling Data Managment System version 1.0.0 will be released in the next few days.
+The **Darling Data Management System** version 1.0.0 will be released in the next few days.
 
 For an overview of what needs to be done please see the
 [issues](https://github.com/sevidmusic/DarlingDataManagementSystem/issues) for this Repo.
@@ -38,13 +36,11 @@ A website is being developed for the Darling Data Management System at [darlingd
 The **Darling Data Management System** can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
 
-_Adjust installation path as needed._
-
 1. Move into directory where you want to install the **Darling Data Management System**:
 
    Run: `cd "$HOME/Downloads"`
 
-2. Clone the **Darling Data Management System** from GitHub:
+2. Clone the **Darling Data Management System** from [GitHub](https://github.com/sevidmusic/DarlingDataManagementSystem):
 
    Run: `git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git`
 
@@ -56,7 +52,7 @@ _Adjust installation path as needed._
 
    Run: `composer update && composer upgrade`
 
-# Add dsh, dshUI, and optionally dshUnit to your `$PATH`
+### Add dsh, dshUI, and optionally dshUnit to your `$PATH`
 
 The **Darling Data Management System** comes with three command line utilities:
 
