@@ -95,7 +95,6 @@ Note: Example uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, th
    Run: `vim "${HOME}/.bash_profile"`
 
    _Make sure to adjust the paths in the examples below if the Darling Data_
-
    _Management System is installed in a different location._
 
    Add: `${HOME}/Downloads/DarlingDataManagementSystem/dsh:`
