@@ -120,7 +120,7 @@ are intended to be used during development with the Darling Data Management Syst
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide) | [Hello World Example](#hello-world-example) | [Installation](#installation)
 
-One of the ways the Darling Data Management System helps encourage organization
+One of the ways the **Darling Data Management System** helps encourage organization
 is by providing an architecture that allows the development of large applications
 to be broken up into smaller niche applications that can be used together to fulfill
 the requirements of one or more larger applications.
@@ -132,7 +132,7 @@ larger applications.
 
 [Back to top](#darling-data-management-system) | [Hello World Guide](#hello-world-guide) | [Hello World Example](#hello-world-example)
 
-Development with the Darling Data Management System always begins with the
+Development with the **Darling Data Management System** always begins with the
 creation of a new **App Package**.
 
 App Packages define the basic configuration of an **App**.
@@ -198,7 +198,7 @@ a "Hello World" App might begin:
    Run:`w3m http://localhost:8080`
 
    Note: "w3m" is the browser used in this demo, w3m is awesome, but it is not
-         required or related to the Darling Data Management System.
+         required or related to the **Darling Data Management System**.
 
 # Hello World Example
 
