@@ -197,7 +197,7 @@ a "Hello World" **App** might begin:
 
    Run:`w3m http://localhost:8080`
 
-   Note: "w3m" is the browser used in this demo, w3m is awesome, but it is not
+   Note: [w3m](https://github.com/acg/w3m) is the browser used in this demo, w3m is awesome, but it is not
          required or related to the **Darling Data Management System**.
 
 # Hello World Example
