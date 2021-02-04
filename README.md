@@ -135,34 +135,34 @@ larger applications.
 Development with the **Darling Data Management System** always begins with the
 creation of a new **App Package**.
 
-App Packages define the basic configuration of an **App**.
+**App Packages** define the basic configuration of an **App**.
 
-They are intended to provide a snapshot of an App that can be used
-to make instances of the App over and over again.
+They are intended to provide a snapshot of an **App** that can be used
+to make instances of the **App** over and over again.
 
-Developing an App as an App Package makes it easier to maintain, share, develop,
+Developing an **App** as an **App Package** makes it easier to maintain, share, develop,
 refactor, release, and reuse different versions of an App.
 
-Once an App Package is defined, it can be used to make an instance of an App
-based on the App Package's configuration.
+Once an **App Package** is defined, it can be used to make an instance of an App
+based on the **App** Package's configuration.
 
-Once an App has been made from an App Package it can be built to run on a domain.
+Once an **App** has been made from an **App Package** it can be built to run on a domain.
 
 Multiple Apps can be built to run on a single domain, and individual Apps can
 be built to run on many domains.
 
 To demonstrate, the following is one possible example of how the development of
-a "Hello World" App might begin:
+a "Hello World" **App** might begin:
 
 # Hello World Guide
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
 
-1. Creatae a new App Package for the HelloWorld App
+1. Creatae a new **App Package** for the HelloWorld App
 
    Run:`dsh -n AppPackage HelloWorld "$HOME"`
 
-2. Make sure the App Package's scripts are executable
+2. Make sure the **App Package**'s scripts are executable
 
    Run:`chmod -R 0755 $HOME/HelloWorld/*.sh`
 
@@ -180,11 +180,11 @@ a "Hello World" App might begin:
 
    Add: `dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent`
 
-5. Make the HelloWorld App from the HelloWorld App Package
+5. Make the HelloWorld **App** from the HelloWorld **App** Package
 
    Run:`dsh -m "$HOME/HelloWorld"`
 
-6. Build the HelloWorld App to run on http://localhost:8080
+6. Build the HelloWorld **App** to run on http://localhost:8080
 
    Run:`dsh -b HelloWorld "http://localhost:8080"`
 
@@ -193,7 +193,7 @@ a "Hello World" App might begin:
 
    Run:`dsh -s 8080`
 
-8. View the new HelloWorld App running on http://localhost:8080 in a web browser.
+8. View the new HelloWorld **App** running on http://localhost:8080 in a web browser.
 
    Run:`w3m http://localhost:8080`
 
@@ -202,7 +202,7 @@ a "Hello World" App might begin:
 
 # Hello World Example
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
+[Back to top](#darling-data-management-system) | [Apps and **App** Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
