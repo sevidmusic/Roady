@@ -41,15 +41,19 @@ and setup via [Composer](https://github.com/composer/composer).
 _Adjust installation path as needed._
 
 1. Move into directory where you want to install the **Darling Data Management System**:
+
    Run: `cd "$HOME/Downloads"`
 
 2. Clone the **Darling Data Management System** from GitHub:
+
    Run: `git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git`
 
 3. Move into the `DarlingDataManagementSystem` directory:
+
    Run: `cd DarlingDataManagementSystem`
 
 4. Run composer to set everything up:
+
    Run: `composer update && composer upgrade`
 
 # Add dsh, dshUI, and optionally dshUnit to your `$PATH`
@@ -75,13 +79,17 @@ Note: Examples use [vim](https://github.com/vim/vim) to edit files, this is not 
       unrelated to the **Darling Data Management System**. Any text editor will suffice.
 
 5. Add **dsh**, **dshUI**, and optionally **dshUnit** to your `$PATH`.
+
    Run: `vim "${HOME}/.bash_profile"`
 
    _Make sure to adjust the paths in the examples below if the Darling Data_
+
    _Management System is installed in a different location._
 
    Add: `${HOME}/Downloads/DarlingDataManagementSystem/dsh:`
+
    Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUI:`
+
    Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUnit`
 
    Run: `source "${HOME}/.bash_profile"`
