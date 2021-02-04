@@ -18,12 +18,13 @@
 Welcome to the Darling Data Management System, a tool designed to aide in the
 development of well organized PHP applications.
 
-The Darling Data Management System requires PHP >= 7.4
+The Darling Data Management System requires [PHP](https://github.com/php/php-src) >= 7.4
 
-The Darling Data Managment System requires Composer.
+The Darling Data Managment System requires [Composer](https://github.com/composer/composer).
 
-The Darling Data Management System is on track to be released on
-January 31, 2021.
+A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.0-alpha) of the Darling Data Management System** is available now.
+
+The Darling Data Managment System version 1.0.0 will be released in the next few days.
 
 For an overview of what needs to be done please see the
 [issues](https://github.com/sevidmusic/DarlingDataManagementSystem/issues) for this Repo.
@@ -34,18 +35,10 @@ A website is being developed for the Darling Data Management System at [darlingd
 
 [Back to top](#darling-data-management-system) | [Installation Example](#installation-example)
 
-#######
-
 The **Darling Data Management System** can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
 
-The **Darling Data Management System** requires [PHP](https://github.com/php/php-src) >= 7.4**
-
-Please make sure you are in the directory you want to install the
-**Darling Data Management System** in before installing the **Darling
-Data Management System**.
-
--- Installation Steps | _Adjust installation path to your needs_ --
+_Adjust installation path as needed._
 
 1. Move into directory where you want to install the **Darling Data Management System**:
    Run: `cd "$HOME/Downloads"`
@@ -58,6 +51,8 @@ Data Management System**.
 
 4. Run composer to set everything up:
    Run: `composer update && composer upgrade`
+
+# Add dsh, dshUI, and optionally dshUnit to your `$PATH`
 
 The **Darling Data Management System** comes with three command line utilities:
 
@@ -82,8 +77,8 @@ Note: Examples use [vim](https://github.com/vim/vim) to edit files, this is not 
 5. Add **dsh**, **dshUI**, and optionally **dshUnit** to your `$PATH`.
    Run: `vim "${HOME}/.bash_profile"`
 
-   # Make sure to adjust the paths in the examples below if the Darling Data
-   # Management System is installed in a different location.
+   _Make sure to adjust the paths in the examples below if the Darling Data_
+   _Management System is installed in a different location._
 
    Add: `${HOME}/Downloads/DarlingDataManagementSystem/dsh:`
    Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUI:`
@@ -95,8 +90,6 @@ Finally, please note that **dsh**, **dshUI**, and **dshUnit** are not required o
 production installation of the **Darling Data Management System**, in fact, for
 security, they should probably not be included in production installation! They
 are intended to be used during development with the Darling Data Management System..
-
-###########
 
 ### Installation Example
 
