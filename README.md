@@ -35,7 +35,7 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
-[Back to top](#darling-data-management-system) | [Installation Example](#installation-example)
+[Back to top](#darling-data-management-system) | [Setup Development Tools](#setup-development-tools) | [Installation Example](#installation-example)
 
 The **Darling Data Management System** can be installed from **GitHub**
 and setup via [Composer](https://github.com/composer/composer).
@@ -58,7 +58,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
    Run: `composer update && composer upgrade`
 
-### Add dsh, dshUI, and optionally dshUnit to your `$PATH`
+# Setup development tools
 
 The **Darling Data Management System** comes with three command line utilities:
 
@@ -76,8 +76,11 @@ The **Darling Data Management System** comes with three command line utilities:
   need **dshUnit**. However, **dshUnit** can be used on it's own as a bash unit testing
   framework. If you write a lot of bash, you may find **dshUnit** useful.
 
-Make sure to at least ADD **dsh** AND **dshUI** TO YOUR `$PATH`! If you would like to try
-**dshUnit**, add it as well.
+**Make sure to at least ADD dsh AND dshUI TO YOUR `$PATH`!**
+
+If you would like to try **dshUnit**, add it as well.
+
+### Add dsh, dshUI, and optionally dshUnit to your `$PATH`
 
 Note: Example uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
       is not required, vim is awesome, but unrelated to the **Darling Data Management**
