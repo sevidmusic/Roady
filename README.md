@@ -34,21 +34,69 @@ A website is being developed for the Darling Data Management System at [darlingd
 
 [Back to top](#darling-data-management-system) | [Installation Example](#installation-example)
 
-To install the Darling Data Management System, open a terminal, navigate to the
-directory you want to install the Darling Data Management System in, and then
-run the following:
+#######
 
-```
-git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git &&
-cd DarlingDataManagementSystem &&
-composer upgrade && composer update
-```
+The **Darling Data Management System** can be installed from GitHub
+and setup via [Composer](https://github.com/composer/composer).
 
-The above will do the following:
+The **Darling Data Management System** requires [PHP](https://github.com/php/php-src) >= 7.4**
 
-1. Download the Darling Data Management System from GitHub into the current directory.
-2. Move into the Darling Data Management System's directory.
-3. Upgrade/update Composer.
+Please make sure you are in the directory you want to install the
+**Darling Data Management System** in before installing the **Darling
+Data Management System**.
+
+-- Installation Steps | _Adjust installation path to your needs_ --
+
+1. Move into directory where you want to install the **Darling Data Management System**:
+   Run: `cd "$HOME/Downloads"`
+
+2. Clone the **Darling Data Management System** from GitHub:
+   Run: `git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git`
+
+3. Move into the `DarlingDataManagementSystem` directory:
+   Run: `cd DarlingDataManagementSystem`
+
+4. Run composer to set everything up:
+   Run: `composer update && composer upgrade`
+
+The **Darling Data Management System** comes with three command line utilities:
+
+`dsh`     (required): Used frequently for development with the **Darling Data Management System**.
+`dshUI`   (required): Required by **dsh**, it is the back end of **dsh**'s user interface.
+`dshUnit` (optional) : *
+
+**dsh** and **dshUI** **MUST** be in your `$PATH` or they will not work properly.
+
+* **dshUnit** is not required for development with the **Darling Data Management System**,
+  or by **dsh**. **dshUnit** is a bash unit testing framework that is used to develop and
+  test **dsh**. Unless you are planning on modifying **dsh**'s source code then you don't
+  need **dshUnit**. However, **dshUnit** can be used on it's own as a bash unit testing
+  framework. If you write a lot of bash, you may find **dshUnit** useful.
+
+Make sure to at least ADD **dsh** AND **dshUI** TO YOUR `$PATH`! If you would like to try
+**dshUnit**, add it as well.
+
+Note: Examples use [vim](https://github.com/vim/vim) to edit files, this is not required, vim is awesome, but
+      unrelated to the **Darling Data Management System**. Any text editor will suffice.
+
+5. Add **dsh**, **dshUI**, and optionally **dshUnit** to your `$PATH`.
+   Run: `vim "${HOME}/.bash_profile"`
+
+   # Make sure to adjust the paths in the examples below if the Darling Data
+   # Management System is installed in a different location.
+
+   Add: `${HOME}/Downloads/DarlingDataManagementSystem/dsh:`
+   Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUI:`
+   Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUnit`
+
+   Run: `source "${HOME}/.bash_profile"`
+
+Finally, please note that **dsh**, **dshUI**, and **dshUnit** are not required on
+production installation of the **Darling Data Management System**, in fact, for
+security, they should probably not be included in production installation! They
+are intended to be used during development with the Darling Data Management System..
+
+###########
 
 ### Installation Example
 
