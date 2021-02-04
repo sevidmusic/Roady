@@ -1,8 +1,10 @@
 # Darling Data Management System
 
 [About](#about)
+
 [Installation](#installation)
-1. [Installation Example](#installation-example)
+1. [Setup Development Tools](#setup-development-tools)
+2. [Installation Example](#installation-example)
 
 [Getting Started](#getting-started)
 1. [Apps and App Packages](#apps-and-app-packages)
