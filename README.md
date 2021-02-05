@@ -209,7 +209,7 @@ a "Hello World" App might begin:
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-### Single App Website Example
+# Single App Website Example
 
 [Back to top](#darling-data-management-system)
 
@@ -236,7 +236,7 @@ a "Hello World" App might begin:
 21. []()
 22. [Single App Website Demo](#single-app-website-demo)
 
-# Preface
+### Preface
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -252,7 +252,7 @@ Single App Site Pages:
 1. Homepage: Show a welcome message.
 2. Pictures: Show a simple image gallery that uses javascript for image selection.
 
-# Create A New App Package
+### Create A New App Package
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -277,7 +277,7 @@ Step 1. Create a new App Package for the App that will generate output for
 
         Run: `dsh -n AppPackage SingleAppWebsite "$HOME"`
 
-# Make The New App Package's Scripts Executable
+### Make The New App Package's Scripts Executable
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -291,7 +291,7 @@ Note: Issue #111 will make this step unnecessary in future versions of dsh.
 
    Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
 
-# App Data
+### App Data
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -312,7 +312,7 @@ In this example a single App is going to generate a website.
 To do this the App needs to define appropriate Components to represent the various
 parts of the website.
 
-# Components
+### Components
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -345,7 +345,7 @@ DynamicOutputComponent DynamicOutputComponents are used to define an App's dynam
                              interpreted as executable PHP code, all other file
                              types will be interpreted as plain text.
 
-# Responses And Global Responses
+### Responses And Global Responses
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -373,7 +373,7 @@ Foo Position: 0
 Bar Position: 0.1
 Baz Position: 0.2
 
-# Define The App's Responses And Global Responses
+### Define The App's Responses And Global Responses
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
@@ -418,7 +418,7 @@ configuration script.
 
    Add: `dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent`
 
-# Dynamic Output Files
+### Dynamic Output Files
 
 The next step is to create any dynamic output files referenced by the
 DynamicOutputComponents defined by the App Package.
@@ -449,7 +449,7 @@ If an App defines a dynamic output file that shares a name with a dynamic output
 file defined in the `SharedDynamicOutput` directory, the  App's dynamic output file
 will be used.
 
-# Create The HtmlHead.php Dynamic Output File
+### Create The HtmlHead.php Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named HtmlHead
 which references a dynamic output file named HtmlHead.php, this file must be created
@@ -489,7 +489,7 @@ $pagename = array_pop($getKeys);
 </head>
 ```
 
-# Create The Css File Referenced By HtmlHead.php
+### Create The Css File Referenced By HtmlHead.php
 
 The HtmlHead.php dynamic output file's content contains a `<link>` tag that references
 a css file, styles.css, this css file must be created in the App Package's css directory.
@@ -521,7 +521,7 @@ a css file, styles.css, this css file must be created in the App Package's css d
 
         p { margin-left: 3em; }
 ```
-# Create The MainMenu.html Dynamic Output File
+### Create The MainMenu.html Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named MainMenu
 which references a dynamic output file named MainMenu.html, this file must be created
@@ -542,7 +542,7 @@ in the App Package's DynamicOutput directory.
          </div>
 ```
 
-# Making An App From An App Package
+### Making An App From An App Package
 Note: The `[REPLACE_EXISTING_APP]` parameter is optional, and can be set to the
 string `replace` to force `dsh --make-app` to make the App even if an App with
 the same name already exists. WARNING: This will remove the original App, so use
