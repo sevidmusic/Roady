@@ -211,7 +211,7 @@ a "Hello World" App might begin:
 
 # Single App Website Example
 
-[Back to top](#darling-data-management-system)
+[Back to top](#darling-data-management-system) | [Single App Website Demo](#single-app-website-demo)
 
 1. [Preface](#preface)
 2. [Create A New App Package](#create-a-new-app-package)
@@ -234,7 +234,12 @@ a "Hello World" App might begin:
 19. []()
 20. []()
 21. []()
-22. [Single App Website Demo](#single-app-website-demo)
+
+# Single App Website Demo
+
+[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
+
+![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
 ### Preface
 
@@ -559,9 +564,4 @@ string `replace` to force `dsh --make-app` to make the App even if an App with
 the same name already exists. WARNING: This will remove the original App, so use
 the `[REPLACE_EXISTING_APP]` parameter with care.
 
-# Single App Website Demo
-
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
-
-![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
