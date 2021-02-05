@@ -403,11 +403,11 @@ Management System's SharedDynamicOutput directory.
 
 For example:
 
-    `/path/to/Darling/Data/Management/System/Apps/APP_NAME/DynamicOutput/DYNAMIC_OUTPUT_FILE`
+`/path/to/Darling/Data/Management/System/Apps/APP_NAME/DynamicOutput/DYNAMIC_OUTPUT_FILE`
 
-    or
+or
 
-    `/path/to/Darling/Data/Management/System/SharedDynamicOutput/DYNAMIC_OUTPUT_FILE`
+`/path/to/Darling/Data/Management/System/SharedDynamicOutput/DYNAMIC_OUTPUT_FILE`
 
 Dynamic output files that are used by a single App should be defined in the
 relevant App Package's `DynamicOutput` directory so that dsh can copy them to the
