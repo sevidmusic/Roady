@@ -40,7 +40,18 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
-[Back to top](#darling-data-management-system) | [Setup Development Tools](#setup-development-tools) | [Installation Demo](#installation-demo)
+[Back to top](#darling-data-management-system) | [Installation Demo](#installation-demo)
+
+1. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
+2. [Setup Development Tools](#setup-development-tools)
+
+### Installation Demo
+
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
+
+![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
+
+### Install From GitHub And Setup Via Composer
 
 The Darling Data Management System can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
@@ -63,7 +74,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
    Run: `composer update && composer upgrade`
 
-# Setup development tools
+### Setup Development Tools
 
 [Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo)
 
@@ -87,7 +98,7 @@ Make sure to at least ADD dsh AND dshUI TO YOUR `$PATH`!
 
 If you would like to try dshUnit, add it as well.
 
-### Add dsh, dshUI, and optionally dshUnit to your `$PATH`
+### Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`
 
 Note: Demo uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
       is not required, vim is awesome, but unrelated to the Darling Data Management
@@ -113,12 +124,6 @@ production installation of the Darling Data Management System, in fact, for
 security, they should probably not be included in production installation! They
 are intended to be used during development with the Darling Data Management System..
 
-### Installation Demo
-
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
-
-![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
-
 # Getting Started
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example) | [Hello World Demo](#hello-world-demo) | [Installation](#installation)
@@ -131,7 +136,7 @@ the requirements of one or more larger applications.
 This makes reuse and refactoring much easier, and makes it easier to maintain
 larger applications.
 
-# Apps And App Packages
+### Apps And App Packages
 
 [Back to top](#darling-data-management-system) | [Hello World Example](#hello-world-example) | [Hello World Demo](#hello-world-demo)
 
@@ -161,7 +166,7 @@ a "Hello World" App might begin:
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Demo](#hello-world-demo)
 
-# Hello World Demo
+### Hello World Demo
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
 
