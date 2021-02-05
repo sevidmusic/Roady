@@ -10,6 +10,9 @@
 1. [Apps and App Packages](#apps-and-app-packages)
 2. [Hello World Guide](#hello-world-guide)
 3. [Hello World Example](#hello-world-example)
+4. [Single App Website Guide](#single-app-website-guide)
+5. [Single App Website Example](#single-app-website-example)
+
 
 # About
 
@@ -206,11 +209,21 @@ a "Hello World" App might begin:
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-### Single App Website
+### Single App Website Guide
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
-Documentation coming soon...
+PHP is most commonly used to develop websites. The Darling Data Management System
+was designed with this in mind, and though it could be used for other purposes,
+the most likely use case is web development.
+
+The following example will demonstrate how to use a single App to generate an
+entire website. This website will be very simple, just two unique pages, some
+css styles, some javascript, and appropriate links to navigate the site.
+
+Single App Site Pages:
+1. Homepage: Show a welcome message.
+2. Pictures: Show a simple image gallery that uses javascript for image selection.
 
 # Single App Website Example
 
