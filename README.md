@@ -206,3 +206,11 @@ a "Hello World" App might begin:
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
+### Single App Website
+
+Documentation coming soon...
+
+# Single App Website Example
+
+![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebstiteDemo.gif?raw=true)
+
