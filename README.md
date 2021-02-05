@@ -489,7 +489,7 @@ $pagename = array_pop($getKeys);
 </head>
 ```
 
-# Create The Css File Referenced By The HtmlHead.php Dynamic Output File
+# Create The Css File Referenced By HtmlHead.php
 
 The HtmlHead.php dynamic output file's content contains a `<link>` tag that references
 a css file, styles.css, this css file must be created in the App Package's css directory.
