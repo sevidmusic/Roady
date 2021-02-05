@@ -161,6 +161,14 @@ a "Hello World" App might begin:
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Demo](#hello-world-demo)
 
+# Hello World Demo
+
+[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
+
+![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
+
+### Documentation is being revised for this section...
+
 1. Creatae a new App Package for the HelloWorld App
 
    Run:`dsh -n AppPackage HelloWorld "$HOME"`
@@ -202,12 +210,6 @@ a "Hello World" App might begin:
 
    Note: [w3m](https://github.com/acg/w3m) is the browser used in this demo, w3m is awesome, but it is not
          required or related to the Darling Data Management System.
-
-# Hello World Demo
-
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
-
-![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
 # Single App Website Example
 
