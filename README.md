@@ -418,6 +418,7 @@ configuration script.
 
    Add: `dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent`
 
+# Dynamic Output Files
 
 The next step is to create any dynamic output files referenced by the
 DynamicOutputComponents defined by the App Package.
@@ -447,6 +448,8 @@ App.
 If an App defines a dynamic output file that shares a name with a dynamic output
 file defined in the `SharedDynamicOutput` directory, the  App's dynamic output file
 will be used.
+
+# Create the HtmlHead.php dynamic output file
 
 The App Package in this example defines a DynamicOutputComponent named HtmlHead
 which references a dynamic output file named HtmlHead.php, this file must be created
@@ -486,6 +489,8 @@ $pagename = array_pop($getKeys);
 </head>
 ```
 
+# Create the css file referenced by the HtmlHead.php dynamic output file
+
 The HtmlHead.php dynamic output file's content contains a `<link>` tag that references
 a css file, styles.css, this css file must be created in the App Package's css directory.
 
@@ -516,6 +521,7 @@ a css file, styles.css, this css file must be created in the App Package's css d
 
         p { margin-left: 3em; }
 ```
+# Create the MainMenu.html dynamic output file
 
 The App Package in this example defines a DynamicOutputComponent named MainMenu
 which references a dynamic output file named MainMenu.html, this file must be created
