@@ -324,6 +324,8 @@ DynamicOutputComponent DynamicOutputComponents are used to define an App's dynam
                              interpreted as executable PHP code, all other file
                              types will be interpreted as plain text.
 
+# Responses and Global Responses
+
 It is usually best to define the App's Responses and GlobalResponses first, this
 will help to make the App's larger structure clear before other Components are
 defined.
@@ -347,6 +349,8 @@ positions will be adjusted as follows:
 Foo Position: 0
 Bar Position: 0.1
 Baz Position: 0.2
+
+# Define the App's Responses and Global Responses
 
 Responses and GlobalResponses are defined in the App Package's Responses.sh
 configuration script.
