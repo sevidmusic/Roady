@@ -211,7 +211,32 @@ a "Hello World" App might begin:
 
 ### Single App Website Example
 
-[Back to top](#darling-data-management-system) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system)
+
+1. [Preface](#preface)
+2. [Create a new App Package](#create-a-new-app-package)
+3. [Make the new App Package's Scripts Executable](#make-the-new-app-packages-scripts-executable)
+4. [App Data](#app-data)
+5. [Components](#components)
+6. [Responses And Global Responses](#responses-and-global-responses)
+7. [Define the App's Responses and Global Responses](#define-the-apps-responses-and-global-responses)
+8. []()
+9. []()
+10. []()
+11. []()
+12. []()
+13. []()
+14. []()
+15. []()
+16. []()
+17. []()
+18. []()
+19. []()
+20. []()
+21. []()
+22. [Single App Website Demo](#single-app-website-demo)
+
+# Preface
 
 PHP is most commonly used to develop websites. The Darling Data Management System
 was designed with this in mind, and though it could be used for other purposes,
@@ -225,6 +250,8 @@ Single App Site Pages:
 1. Homepage: Show a welcome message.
 2. Pictures: Show a simple image gallery that uses javascript for image selection.
 
+# Create a new App Package
+
 The first step in the development process with the Darling Data Management System
 is always to create a new App Package for the App to be developed.
 
@@ -234,7 +261,9 @@ to reproduce an instance of the App for a Darling Data Management System install
 Step 1. Create a new App Package for the App that will generate output for
         the website, this App will be named "SingleAppWebsite":
 
-        Run: dsh -n AppPackage SingleAppWebsite "$HOME"
+        Run: `dsh -n AppPackage SingleAppWebsite "$HOME"`
+
+# Make the new App Package's Scripts Executable
 
 App's are made from App Packages via the dsh --make-app command.
 
@@ -243,7 +272,9 @@ the bash scripts in the App package must be executable.
 
 2. Make sure the App Package's scripts are executable:
 
-   Run: chmod -R 0755 $HOME/SingleAppWebsite/*.sh
+   Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
+
+# App Data
 
 The Darling Data Management System's understanding of an App is based on the App's
 data. An App's data consists of the App's source code, and the Darling Data Management
@@ -262,7 +293,12 @@ In this example a single App is going to generate a website.
 To do this the App needs to define appropriate Components to represent the various
 parts of the website.
 
-Request                Represents a url such as http://DOMAIN/
+# Components
+
+iThe following Component types will be used in this example:
+
+
+Request                Represents a url such as `http://DOMAIN/`
                        Note: Requests can be used to represent any url, not just
                              urls relative to the domain the App is running on.
 
@@ -284,7 +320,7 @@ DynamicOutputComponent DynamicOutputComponents are used to define an App's dynam
                        SharedDynamicOutput directory, or the App's DynamicOutput directory.
                        This file can be a plain text file, a PHP file, an html file, a json
                        file, etc.
-                       Note: Files that have the .php file extension will be
+                       Note: Files that have the `.php` file extension will be
                              interpreted as executable PHP code, all other file
                              types will be interpreted as plain text.
 
@@ -317,28 +353,28 @@ configuration script.
 
 5. Define the App's OutputComponents and assign them to the appropriate Responses:
 
-   Run: vim "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: `vim "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Add: dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">'
-   Add: dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponent
+   Add: `dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">'`
+   Add: `dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponent`
 
-   Add: dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php"
-   Add: dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponent
+   Add: `dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php"`
+   Add: `dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponent`
 
-   Add: dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>'
-   Add: dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponent
+   Add: `dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>'`
+   Add: `dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponent`
 
-   Add: dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html"
-   Add: dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponent
+   Add: `dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html"`
+   Add: `dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponent`
 
-   Add: dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php"
-   Add: dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponent
+   Add: `dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php"`
+   Add: `dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponent`
 
-   Add: dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html"
-   Add: dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponent
+   Add: `dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html"`
+   Add: `dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponent`
 
-   Add: dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>'
-   Add: dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent
+   Add: `dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>'`
+   Add: `dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent`
 
 The next step is to create any dynamic output files referenced by the
 DynamicOutputComponents defined by the App Package.
