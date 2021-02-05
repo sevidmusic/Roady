@@ -281,12 +281,7 @@ Step 1. Create a new App Package for the App that will generate output for
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
-App's are made from App Packages via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
-
-Note: The `[REPLACE_EXISTING_APP]` parameter is optional, and can be set to the
-string `replace` to force `dsh --make-app` to make the App even if an App with
-the same name already exists. WARNING: This will remove the original App, so use
-the `[REPLACE_EXISTING_APP]` parameter with care.
+App's are [made](#making-an-app-from-an-app-package) from App Packages via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
 
 In order for the App Package to be able to be made into an App later via dsh --make-app,
 the bash scripts in the App package must be executable.
@@ -540,6 +535,13 @@ in the App Package's DynamicOutput directory.
              </ul>
          </div>
 ```
+
+# Making an App from an App Package
+Note: The `[REPLACE_EXISTING_APP]` parameter is optional, and can be set to the
+string `replace` to force `dsh --make-app` to make the App even if an App with
+the same name already exists. WARNING: This will remove the original App, so use
+the `[REPLACE_EXISTING_APP]` parameter with care.
+
 # Single App Website Demo
 
 ![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
