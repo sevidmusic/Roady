@@ -9,9 +9,9 @@
 
 [Getting Started](#getting-started)
 1. [Apps and App Packages](#apps-and-app-packages)
-2. [Hello World Example](#hello-world-example)
+2. [Hello World Guide](#hello-world-guide)
 3. [Hello World Demo](#hello-world-demo)
-4. [Single App Website Example](#single-app-website-example)
+4. [Single App Website Guide](#single-app-website-guide)
 5. [Single App Website Demo](#single-app-website-demo)
 
 
@@ -127,7 +127,7 @@ are intended to be used during development with the Darling Data Management Syst
 
 # Getting Started
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example) | [Hello World Demo](#hello-world-demo) | [Installation](#installation)
+[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide) | [Hello World Demo](#hello-world-demo) | [Installation](#installation)
 
 One of the ways the Darling Data Management System helps encourage organization
 is by providing an architecture that allows the development of large applications
@@ -139,7 +139,7 @@ larger applications.
 
 ### Apps And App Packages
 
-[Back to top](#darling-data-management-system) | [Hello World Example](#hello-world-example) | [Hello World Demo](#hello-world-demo)
+[Back to top](#darling-data-management-system) | [Hello World Guide](#hello-world-guide) | [Hello World Demo](#hello-world-demo)
 
 Development with the Darling Data Management System always begins with the
 creation of a new App Package.
@@ -163,13 +163,13 @@ be built to run on many domains.
 To demonstrate, the following is one possible example of how the development of
 a "Hello World" App might begin:
 
-# Hello World Example
+# Hello World Guide
 
 [Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Demo](#hello-world-demo)
 
 ### Hello World Demo
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
+[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
@@ -217,7 +217,7 @@ a "Hello World" App might begin:
    Note: [w3m](https://github.com/acg/w3m) is the browser used in this demo, w3m is awesome, but it is not
          required or related to the Darling Data Management System.
 
-# Single App Website Example
+# Single App Website Guide
 
 [Back to top](#darling-data-management-system) | [Single App Website Demo](#single-app-website-demo)
 
@@ -245,13 +245,13 @@ a "Hello World" App might begin:
 
 # Single App Website Demo
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide)
 
 ![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
 ### Preface
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 PHP is most commonly used to develop websites. The Darling Data Management System
 was designed with this in mind, and though it could be used for other purposes,
@@ -267,7 +267,7 @@ Single App Site Pages:
 
 ### Create A New App Package
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 The first step in the development process with the Darling Data Management System
 is always to create a new App Package for the App to be developed.
@@ -292,7 +292,7 @@ Step 1. Create a new App Package for the App that will generate output for
 
 ### Make The New App Package's Scripts Executable
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 App's are [made](#making-an-app-from-an-app-package) from App Packages via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
 
@@ -306,7 +306,7 @@ Note: Issue #111 will make this step unnecessary in future versions of dsh.
 
 ### App Data
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 The Darling Data Management System's understanding of an App is based on the App's
 data. An App's data consists of the App's source code, and the Darling Data Management
@@ -327,7 +327,7 @@ parts of the website.
 
 ### Components
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 iThe following Component types will be used in this example:
 
@@ -360,7 +360,7 @@ DynamicOutputComponent DynamicOutputComponents are used to define an App's dynam
 
 ### Responses And Global Responses
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 It is usually best to define the App's Responses and GlobalResponses first, this
 will help to make the App's larger structure clear before other Components are
@@ -388,7 +388,7 @@ Baz Position: 0.2
 
 ### Define The App's Responses And Global Responses
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 Responses and GlobalResponses are defined in the App Package's Responses.sh
 configuration script.
@@ -433,7 +433,7 @@ configuration script.
 
 ### Dynamic Output Files
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 The next step is to create any dynamic output files referenced by the
 DynamicOutputComponents defined by the App Package.
@@ -466,7 +466,7 @@ will be used.
 
 ### Create The HtmlHead.php Dynamic Output File
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 The App Package in this example defines a DynamicOutputComponent named HtmlHead
 which references a dynamic output file named HtmlHead.php, this file must be created
@@ -508,7 +508,7 @@ $pagename = array_pop($getKeys);
 
 ### Create The Css File Referenced By HtmlHead.php
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 The HtmlHead.php dynamic output file's content contains a `<link>` tag that references
 a css file, styles.css, this css file must be created in the App Package's css directory.
@@ -542,7 +542,7 @@ a css file, styles.css, this css file must be created in the App Package's css d
 ```
 ### Create The MainMenu.html Dynamic Output File
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 The App Package in this example defines a DynamicOutputComponent named MainMenu
 which references a dynamic output file named MainMenu.html, this file must be created
@@ -565,7 +565,7 @@ in the App Package's DynamicOutput directory.
 
 ### Making An App From An App Package
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example) | [Single App Website Demo](#single-app-website-demo)
+[Back to top](#darling-data-management-system) | [Single App Website Guide](#single-app-website-guide) | [Single App Website Demo](#single-app-website-demo)
 
 Note: The `[REPLACE_EXISTING_APP]` parameter is optional, and can be set to the
 string `replace` to force `dsh --make-app` to make the App even if an App with
