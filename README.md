@@ -2,9 +2,10 @@
 
 [About](#about)
 
-[Installation](#installation)
-1. [Setup Development Tools](#setup-development-tools)
-2. [Installation Demo](#installation-demo)
+[Installation](#installation) | [Installation Demo](#installation-demo)
+
+1. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
+2. [Setup Development Tools](#setup-development-tools)
 
 [Getting Started](#getting-started)
 1. [Apps and App Packages](#apps-and-app-packages)
