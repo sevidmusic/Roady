@@ -208,9 +208,11 @@ a "Hello World" App might begin:
 
 ### Single App Website
 
+[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-demo)
+
 Documentation coming soon...
 
 # Single App Website Example
 
-![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebstiteDemo.gif?raw=true)
+![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
