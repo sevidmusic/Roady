@@ -262,7 +262,7 @@ is always to create a new App Package for the App to be developed.
 The purpose of an App Package is to provide a snapshot of an App that can be used
 to reproduce an instance of the App for a Darling Data Management System installation.
 
-App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE]`.
+App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`.
 
 Note: A default domain to run the App on can optionally be specified via the third `[DOMAIN]`
 parameter. If the `[DOMAIN]` parameter is not specified the default domain will be `http://localhost:8080`
