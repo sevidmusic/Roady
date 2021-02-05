@@ -264,12 +264,13 @@ to reproduce an instance of the App for a Darling Data Management System install
 
 App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`.
 
-Note: Do not include the name of the new App Package in the `[PATH_TO_APP_PACKAGE]` parameter,
-only specify the path to the directory where the new App Package will be created. The name
-of the App Package's directory will be `[APP_NAME]`.
+Note: Do not specify a name for the new App Package in the `[PATH_TO_APP_PACKAGE]`
+parameter, only specify the path to the directory where the new App Package should
+be created. The name of the App Package's directory will be `[APP_NAME]`.
 
-Note: A default domain to run the App on can optionally be specified via the third `[DOMAIN]`
-parameter. If the `[DOMAIN]` parameter is not specified the default domain will be `http://localhost:8080`
+Note: A default domain to run the App on can optionally be specified via the third
+`[DOMAIN]` parameter. If the `[DOMAIN]` parameter is not specified the default
+domain will be `http://localhost:8080`.
 
 Step 1. Create a new App Package for the App that will generate output for
         the website, this App will be named "SingleAppWebsite":
@@ -280,11 +281,17 @@ Step 1. Create a new App Package for the App that will generate output for
 
 [Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
 
-App's are made from App Packages via the `dsh --make-app command`.
+App's are made from App Packages via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
+
+Note: The `[REPLACE_EXISTING_APP]` parameter is optional, and can be set to the
+string `replace` to force `dsh --make-app` to make the App even if an App with
+the same name already exists. WARNING: This will remove the original App, so use
+the `[REPLACE_EXISTING_APP]` parameter with care.
 
 In order for the App Package to be able to be made into an App later via dsh --make-app,
 the bash scripts in the App package must be executable.
 
+Note: Issue #111 will make this step unnecessary in future versions of dsh.
 2. Make sure the App Package's scripts are executable:
 
    Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
