@@ -4,14 +4,14 @@
 
 [Installation](#installation)
 1. [Setup Development Tools](#setup-development-tools)
-2. [Installation Example](#installation-example)
+2. [Installation Demo](#installation-demo)
 
 [Getting Started](#getting-started)
 1. [Apps and App Packages](#apps-and-app-packages)
-2. [Hello World Guide](#hello-world-guide)
-3. [Hello World Example](#hello-world-example)
-4. [Single App Website Guide](#single-app-website-guide)
-5. [Single App Website Example](#single-app-website-example)
+2. [Hello World Example](#hello-world-example)
+3. [Hello World Demo](#hello-world-demo)
+4. [Single App Website Example](#single-app-website-example)
+5. [Single App Website Demo](#single-app-website-demo)
 
 
 # About
@@ -40,7 +40,7 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
-[Back to top](#darling-data-management-system) | [Setup Development Tools](#setup-development-tools) | [Installation Example](#installation-example)
+[Back to top](#darling-data-management-system) | [Setup Development Tools](#setup-development-tools) | [Installation Demo](#installation-demo)
 
 The Darling Data Management System can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
@@ -65,7 +65,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
 # Setup development tools
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Example](#installation-example)
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo)
 
 The Darling Data Management System comes with three command line utilities:
 
@@ -89,7 +89,7 @@ If you would like to try dshUnit, add it as well.
 
 ### Add dsh, dshUI, and optionally dshUnit to your `$PATH`
 
-Note: Example uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
+Note: Demo uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
       is not required, vim is awesome, but unrelated to the Darling Data Management
       System. Any text editor will suffice.
 
@@ -113,7 +113,7 @@ production installation of the Darling Data Management System, in fact, for
 security, they should probably not be included in production installation! They
 are intended to be used during development with the Darling Data Management System..
 
-### Installation Example
+### Installation Demo
 
 [Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
 
@@ -121,7 +121,7 @@ are intended to be used during development with the Darling Data Management Syst
 
 # Getting Started
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide) | [Hello World Example](#hello-world-example) | [Installation](#installation)
+[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example) | [Hello World Demo](#hello-world-demo) | [Installation](#installation)
 
 One of the ways the Darling Data Management System helps encourage organization
 is by providing an architecture that allows the development of large applications
@@ -133,7 +133,7 @@ larger applications.
 
 # Apps And App Packages
 
-[Back to top](#darling-data-management-system) | [Hello World Guide](#hello-world-guide) | [Hello World Example](#hello-world-example)
+[Back to top](#darling-data-management-system) | [Hello World Example](#hello-world-example) | [Hello World Demo](#hello-world-demo)
 
 Development with the Darling Data Management System always begins with the
 creation of a new App Package.
@@ -157,9 +157,9 @@ be built to run on many domains.
 To demonstrate, the following is one possible example of how the development of
 a "Hello World" App might begin:
 
-# Hello World Guide
+# Hello World Example
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
+[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Demo](#hello-world-demo)
 
 1. Creatae a new App Package for the HelloWorld App
 
@@ -203,15 +203,15 @@ a "Hello World" App might begin:
    Note: [w3m](https://github.com/acg/w3m) is the browser used in this demo, w3m is awesome, but it is not
          required or related to the Darling Data Management System.
 
-# Hello World Example
+# Hello World Demo
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
+[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Example](#hello-world-example)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-### Single App Website Guide
+### Single App Website Example
 
-[Back to top](#darling-data-management-system) | [Single App Website Example](#single-app-website-example)
+[Back to top](#darling-data-management-system) | [Single App Website Demo](#single-app-website-demo)
 
 PHP is most commonly used to develop websites. The Darling Data Management System
 was designed with this in mind, and though it could be used for other purposes,
@@ -225,7 +225,7 @@ Single App Site Pages:
 1. Homepage: Show a welcome message.
 2. Pictures: Show a simple image gallery that uses javascript for image selection.
 
-# Single App Website Example
+# Single App Website Demo
 
 ![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
