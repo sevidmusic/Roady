@@ -288,7 +288,7 @@ In this example, only one GlobalResponse will be defined.
 
 GlobalResponses are defined via `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
-More information can be obtained about `dsh --new GlobalResponse` via `dsh -h -n GlobalResponse`.
+More information about `dsh --new GlobalResponse` can be obtained via `dsh -h -n GlobalResponse`.
 
 3. Define a GlobalResponse for the HelloWorld App
 
