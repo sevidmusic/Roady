@@ -50,7 +50,7 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 ### Installation Demo
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer) | [Setup Development Tools](#setup-development-tools)
 
 ![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
