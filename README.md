@@ -52,7 +52,7 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 ### Installation Demo
 
-[Back to top](#darling-data-management-system) | [Installation](#installation)
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif)
 
 ![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
@@ -211,7 +211,7 @@ for one or many domains.
 
 ### Hello World Demo
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Guide](#hello-world-guide)
+[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
@@ -410,7 +410,7 @@ from a web browser.
 
 # Single App Website Demo
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Guide](#single-app-website-guide)
+[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) |  [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif) | [Single App Website Guide](#single-app-website-guide)
 
 ![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
