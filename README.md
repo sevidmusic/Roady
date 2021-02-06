@@ -99,7 +99,7 @@ Make sure to at least ADD dsh AND dshUI TO YOUR `$PATH`!
 
 If you would like to try dshUnit, add it as well.
 
-### Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`
+**Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`**
 
 Note: Demo uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
       is not required, vim is awesome, but unrelated to the Darling Data Management
@@ -127,7 +127,13 @@ are intended to be used during development with the Darling Data Management Syst
 
 # Getting Started
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide) | [Hello World Demo](#hello-world-demo) | [Installation](#installation)
+[Back to top](#darling-data-management-system) | [Installation](#installation)
+
+1. [Apps and App Packages](#apps-and-app-packages)
+2. [Hello World Demo](#hello-world-demo)
+3. [Hello World Guide](#hello-world-guide)
+
+### Apps And App Packages
 
 One of the ways the Darling Data Management System helps encourage organization
 is by providing an architecture that allows the development of large applications
@@ -136,10 +142,6 @@ the requirements of one or more larger applications.
 
 This makes reuse and refactoring much easier, and makes it easier to maintain
 larger applications.
-
-### Apps And App Packages
-
-[Back to top](#darling-data-management-system) | [Hello World Guide](#hello-world-guide) | [Hello World Demo](#hello-world-demo)
 
 Development with the Darling Data Management System always begins with the
 creation of a new App Package.
