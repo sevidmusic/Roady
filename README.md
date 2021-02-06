@@ -539,13 +539,134 @@ in the App Package's DynamicOutput directory.
          </div>
 ```
 
-### Making An App From An App Package
+### Create The Homepage.php Dynamic Output File
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
-Note: The `[REPLACE_EXISTING_APP]` parameter is optional, and can be set to the
-string `replace` to force `dsh --make-app` to make the App even if an App with
-the same name already exists. WARNING: This will remove the original App, so use
-the `[REPLACE_EXISTING_APP]` parameter with care.
+The App Package in this example defines a DynamicOutputComponent named Homepage
+which references a dynamic output file named Homepage.html, this file must be created
+in the App Package's DynamicOutput directory.
 
+9. Create Homepage.php:
+
+   Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
+
+   Add:
+```
+        <h1>Welcome</h1>
+        <p>Today is:</p>
+        <p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
+```
+
+### Create The Pictures.html Dynamic Output File
+
+10. Create Pictures.html:
+
+    Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
+
+    Add:
+```
+    <div class="selected-image-container">
+      <img class="selected-image" src="" id="selectedImage">
+    </div>
+
+    <div class="image-selector">
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg1.png" alt="Image1" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg2.png" alt="Image2" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg3.png" alt="Image3" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg4.png" alt="Image4" onclick="selectImage(this);">
+      </div>
+    </div>
+    <script>
+        function selectImage(imageToSelect) {
+            var selectedImage = document.getElementById("selectedImage");
+            selectedImage.src = imageToSelect.src;
+            selectedImage.alt = imageToSelect.alt;
+        }
+    </script>
+```
+
+### Make the SingleAppWebsite App
+
+An instance of an App can be made from an App Package via the dsh --make-app command.
+
+First, dsh --make-app will create a new instance of the App, via an internal call
+to the dsh --new App command.
+
+Then, it will copy the App Package's css, js, and DynamicOutput directories to
+the new App.
+
+Finally, it will run the App Package's Responses.sh, Requests.sh, and OutputComponents.sh
+configuration scripts to create the PHP configuration files for the App's Components via
+the dsh calls defined in the App Package's Responses.sh, Requests.sh, and OutputComponents.sh
+configuration scripts.
+
+11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
+     dsh -m "$HOME/SingleAppWebsite"
+
+### Build The App
+
+Once an App has been made via dsh --make-app, it can be built for one or more
+domains via the dsh --build-app command.
+
+By default dsh --build-app will build an App for the domain defined in the App's
+Components.php file. This domain will have been set by dsh --make-app to the value
+assigned to the domain variable defined in the relevant App Packages config.sh
+configuration script.
+
+It is safe to modify the domain defined in the App's Components.php file after
+the App has been made, however, dsh --build-app takes an optional domain as the
+second parameter, so there is really no need to modify the domain set in App's
+Components.php file, instead just use dsh --build-app [APP_NAME] [DOMAIN] to
+easily build the App for one or more domains.
+
+12. Build the SingleAppWebsite App to run on http://localhost:8080
+     dsh -b SingleAppWebsite "http://localhost:8080"
+
+### Start A Development Server
+
+App's can be built to run on one, or many domains.
+
+While an App is in development it can be useful to be able to run an App on one
+or more local domains.
+
+PHP is a wonderful language, and provides a built in web server that can be used
+as a simple local development server. More information about PHP's built in server
+can be found at:
+    https://www.php.net/manual/en/features.commandline.webserver.php
+
+dsh can be used to start a development server via PHP on a specific port on localhost:
+
+Once started, the server can be reached from a web browser via http://localhost:PORT
+
+7. Start a development server on localhost at port 8080
+
+     dsh -s 8080
+
+Development server will be reachable via http://localhost:8080
+
+
+###
+The following is an overview of the steps taken in this demo:
+
+- The App Package for the SingleAppWebsite App was created via dsh --new AppPackage.
+
+- The appropriate SingleAppWebsite App Package files were configured manually using
+  a text editor.
+
+- The SingleAppWebsite App was made from the SingleAppWebsite App Package via dsh --make-app.
+
+- The SingleAppWebsite App was built via dsh --build-app.
+
+- A development server was started at http://localhost:8080 via dsh --start-development-server.
+
+The new SingleAppWebsite App is now running on http://localhost:8080 and can be accessed
+from a web browser.
 
