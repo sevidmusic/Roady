@@ -162,8 +162,8 @@ creation of a new App Package.
 
 App Packages define the basic configuration of an App.
 
-They are intended to provide a snapshot of an App that can be used
-to make instances of the App over and over again.
+The purpose of an App Package is to provide a snapshot of an App that can be used
+to reproduce an instance of the App for a Darling Data Management System installation.
 
 Developing an App as an App Package makes it easier to maintain, share, develop,
 refactor, release, and reuse different versions of an App.
@@ -206,19 +206,6 @@ Components, Apps, and App Packages.
 
 The Darling Data Management System's development process always starts with the
 creation of an App Package.
-
-App packages define the basic configuration of an App.
-
-The purpose of an App Package is to provide a snapshot of an App that can be used
-to reproduce an instance of the App for a Darling Data Management System installation.
-
-Once an App Package is defined, it can be used to make an instance of an App
-based on the App Package's configuration.
-
-Once an app has been made from an App Package it can be built to run on a domain.
-
-Multiple Apps can be built to run on a single domain, and individual Apps can
-be built to run on many domains.
 
 Step 1. Creatae a new App Package for the HelloWorld App
 
