@@ -27,7 +27,7 @@ The Darling Data Management System requires [PHP](https://github.com/php/php-src
 
 The Darling Data Management System requires [Composer](https://github.com/composer/composer).
 
-A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.0-alpha)
+A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.1-alpha)
 of the Darling Data Management System is available now.
 
 The Darling Data Management System version 1.0.0 will be released in the next few days.
@@ -187,10 +187,10 @@ be built to run on many domains.
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
 
 The following Hello World guide demonstrates one possible implementation of a
-HelloWorld App. The Hello World guide will also demonstrate the use of dsh,
+Hello World App. The Hello World guide will also demonstrate the use of dsh,
 Components, Apps, and App Packages.
 
-1. [Create An App Package For The HelloWorld App](#create-an-app-package-for-the-helloworld-app)
+1. [Create An App Package For The Hello World App](#create-an-app-package-for-the-hello-world-app)
 2. [Make The HelloWorld App Package's Scripts Executable](#make-the-helloworld-app-packages-scripts-executable)
 3. [Define A GlobalResponse For The HelloWorld App](#define-a-globalresponse-for-the-helloworld-app)
 4. [Define An OutputComponent For The HelloWorld App](#define-an-outputcomponent-for-the-helloworld-app)
@@ -200,7 +200,7 @@ Components, Apps, and App Packages.
 8. [View The New HelloWorld App Running On `http://localhost:8080` In A Web Browser](#view-the-new-helloworld-app-running-on-httplocalhost8080-in-a-web-browser)
 9. [Overview Of HelloWorld Guide](#overview-of-helloworld-guide)
 
-### Create An App Package For The HelloWorld App
+### Create An App Package For The Hello World App
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
