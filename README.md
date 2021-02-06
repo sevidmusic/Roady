@@ -195,7 +195,7 @@ Components, Apps, and App Packages.
 3. [Define A GlobalResponse For The HelloWorld App](#define-a-globalresponse-for-the-helloworld-app)
 4. [Define An OutputComponent For The HelloWorld App](#define-an-outputcomponent-for-the-helloworld-app)
 5. [Make The HelloWorld App from The HelloWorld App Package](#make-the-helloworld-app-from-the-helloworld-app-package)
-6. [Build The HelloWorld App To Run On `http://localhost:8080`](#build-the-helloworld-app-to-run-on-localhost8080)
+6. [Build The HelloWorld App To Run On `http://localhost:8080`](#build-the-helloworld-app-to-run-on-httplocalhost8080)
 7. [Start A Development Server On localhost On Port 8080](#start-a-development-server-on-localhost-on-port-8080)
 8. [View The New HelloWorld App Running On `http://localhost:8080` In A Web Browser](#view-the-new-helloworld-app-running-on-httplocalhost8080-in-a-web-browser)
 9. [Overview Of HelloWorld Guide](#overview-of-helloworld-guide)
