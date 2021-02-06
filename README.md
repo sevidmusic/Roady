@@ -36,6 +36,8 @@ For an overview of what needs to be done please see the
 
 A website is being developed for the Darling Data Management System at [darlingdata.tech](http://darlingdata.tech)
 
+[darlingdata.tech](http://darlingdata.tech) is running on the Darling Data Management System.
+
 More thorough documentation is in development, and will continue to be added to
 this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
@@ -79,17 +81,19 @@ and setup via [Composer](https://github.com/composer/composer).
 
 [Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo)
 
+[Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
+
 The Darling Data Management System comes with three command line utilities:
 
 `dsh`     (required): Used frequently for development with the Darling Data Management System.
 
 `dshUI`   (required): Required by dsh, it is the back end of dsh's user interface.
 
-`dshUnit` (optional) : * Optional bash unit testing framework.
+`dshUnit` (optional) : % Optional bash unit testing framework.
 
 dsh and dshUI MUST be in your `$PATH` or they will not work properly.
 
-* dshUnit is not required for development with the Darling Data Management System,
+* % dshUnit is not required for development with the Darling Data Management System,
   or by dsh. dshUnit is a bash unit testing framework that is used to develop and
   test dsh. Unless you are planning on modifying dsh's source code then you don't
   need dshUnit. However, dshUnit can be used on it's own as a bash unit testing
@@ -99,7 +103,7 @@ Make sure to at least ADD dsh AND dshUI TO YOUR `$PATH`!
 
 If you would like to try dshUnit, add it as well.
 
-**Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`**
+### Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`
 
 Note: Demo uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
       is not required, vim is awesome, but unrelated to the Darling Data Management
@@ -126,6 +130,8 @@ security, they should probably not be included in production installation! They
 are intended to be used during development with the Darling Data Management System..
 
 # Getting Started
+
+Apps, App Packages, Components, and dsh
 
 [Back to top](#darling-data-management-system) | [Installation](#installation)
 
