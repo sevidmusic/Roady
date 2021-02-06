@@ -40,7 +40,7 @@ A website is being developed for the Darling Data Management System at [darlingd
 [darlingdata.tech](http://darlingdata.tech) is running on the Darling Data Management System.
 
 More thorough documentation is in development, and will continue to be added to
-this README and [http://darlingdata.tech/](http://darlingdata.tech).
+this README.md and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
@@ -132,7 +132,7 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
 
 Finally, please note that dsh, dshUI, and dshUnit are not required on production
 installation of the Darling Data Management System, in fact, for security, they
-should probably not be included in production installation! They are intended to
+should probably not be included in a production installation! They are intended to
 be used during development with the Darling Data Management System.
 
 # Getting Started
@@ -204,10 +204,11 @@ The `[PATH_TO_APP_PACKAGE]` parameter is also required, it is used to specify th
 path to the directory where the new App Package's directory will be created.
 
 The `[DOMAIN]` parameter is optional, it can be used to specify a default domain
-to build and run the App on. Note: This does not tie the App to the specified
-`[DOMAIN]`, when an App is built a different domain can always be specified. The
-benefit of an App Package is that it can be used to build an instance of an App
-for one or many domains.
+to build and run the App on.
+
+Note: This does not tie the App to the specified `[DOMAIN]`, when an App is built
+a different domain can always be specified. The benefit of an App Package is that
+it can be used to build an instance of an App for one or many domains.
 
 ### Hello World Demo
 
@@ -240,7 +241,7 @@ Components, Apps, and App Packages.
 The Darling Data Management System's development process always starts with the
 creation of an App Package.
 
-Step 1. Creatae a new App Package for the HelloWorld App
+Step 1. Create a new App Package for the HelloWorld App
 
         Run: `dsh -n AppPackage HelloWorld "$HOME"`
 
@@ -632,7 +633,7 @@ For example:
 
 `/path/to/Darling/Data/Management/System/Apps/APP_NAME/DynamicOutput/DYNAMIC_OUTPUT_FILE`
 
-or
+Or
 
 `/path/to/Darling/Data/Management/System/SharedDynamicOutput/DYNAMIC_OUTPUT_FILE`
 
