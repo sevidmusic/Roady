@@ -275,7 +275,7 @@ App's are [made](#making-an-app-from-an-app-package) from App Packages via `dsh 
 In order for the App Package to be able to be made into an App later via dsh --make-app,
 the bash scripts in the App package must be executable.
 
-Note: Issue #111 will make this step unnecessary in future versions of dsh.
+Note: Issue [#111](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/111) will make this step unnecessary in future versions of dsh.
 2. Make sure the App Package's scripts are executable:
 
    Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
