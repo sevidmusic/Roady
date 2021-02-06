@@ -81,7 +81,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
 ### Setup Development Tools
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo)
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo) | [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
 
 [Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
 
