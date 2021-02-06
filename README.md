@@ -495,7 +495,7 @@ parts of the website.
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
-iThe following Component types will be used in this example:
+The following Component types will be used in this example:
 
 
 Request                Represents a url such as `http://DOMAIN/`
