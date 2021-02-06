@@ -85,7 +85,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
 [Back to top](#darling-data-management-system) | [Installation](#installation)
 
-Skip to: [Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
+Skip explanation and go to: [Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
 
 The Darling Data Management System comes with three command line utilities:
 
@@ -111,8 +111,8 @@ If you would like to try dshUnit, add it as well.
 
 [Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
 
-Note: Demo uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
-      is not required, vim is awesome, but unrelated to the Darling Data Management
+Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bash_profile`,
+      this is not required, vim is awesome, but unrelated to the Darling Data Management
       System. Any text editor will suffice.
 
 5. Add dsh, dshUI, and optionally dshUnit to your `$PATH`.
