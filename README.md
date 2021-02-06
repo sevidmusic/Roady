@@ -109,6 +109,8 @@ If you would like to try dshUnit, add it as well.
 
 ### Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`
 
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
+
 Note: Demo uses [vim](https://github.com/vim/vim) to edit `.bash_profile`, this
       is not required, vim is awesome, but unrelated to the Darling Data Management
       System. Any text editor will suffice.
