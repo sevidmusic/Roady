@@ -497,25 +497,25 @@ a css file, styles.css, this css file must be created in the App Package's css d
    Add:
 
 ```
-        body {  background: #000000; color: #ddf1ff; font-family: monospace; }
+body {  background: #000000; color: #ddf1ff; font-family: monospace; }
 
-        .selectable-image-container { float: left; margin: .5em 1.2em; }
+.selectable-image-container { float: left; margin: .5em 1.2em; }
 
-        .selectable-image { opacity: .5; width: 5em; cursor: pointer; border: 2px double #fafaff; }
+.selectable-image { opacity: .5; width: 5em; cursor: pointer; border: 2px double #fafaff; }
 
-        .selectable-image:hover {opacity: 1; width: 5.3em; cursor: pointer; border: 2px solid #fafaff; }
+.selectable-image:hover {opacity: 1; width: 5.3em; cursor: pointer; border: 2px solid #fafaff; }
 
-        ul li { display: inline; }
+ul li { display: inline; }
 
-        a { color: #09b278; text-decoration: none; }
+a { color: #09b278; text-decoration: none; }
 
-        a:hover { color: #fafaff; }
+a:hover { color: #fafaff; }
 
-        .selected-image { margin-left: 3em; width: 25em; }
+.selected-image { margin-left: 3em; width: 25em; }
 
-        h1 { margin-left: 1.4em; }
+h1 { margin-left: 1.4em; }
 
-        p { margin-left: 3em; }
+p { margin-left: 3em; }
 ```
 ### Create The MainMenu.html Dynamic Output File
 
@@ -532,12 +532,12 @@ in the App Package's DynamicOutput directory.
     Add:
 
 ```
-         <div class="main-menu-container">
-             <ul class="main-menu">
-                 <li class="main-menu-item"><a class="main-menu-link" href="index.php">Homepage</a></li>
-                 <li class="main-menu-item"><a class="main-menu-link" href="index.php?Pictures">Pictures</a></li>
-             </ul>
-         </div>
+<div class="main-menu-container">
+    <ul class="main-menu">
+        <li class="main-menu-item"><a class="main-menu-link" href="index.php">Homepage</a></li>
+        <li class="main-menu-item"><a class="main-menu-link" href="index.php?Pictures">Pictures</a></li>
+    </ul>
+</div>
 ```
 
 ### Create The Homepage.php Dynamic Output File
@@ -554,9 +554,9 @@ in the App Package's DynamicOutput directory.
 
    Add:
 ```
-        <h1>Welcome</h1>
-        <p>Today is:</p>
-        <p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
+<h1>Welcome</h1>
+<p>Today is:</p>
+<p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
 ```
 
 ### Create The Pictures.html Dynamic Output File
@@ -569,73 +569,75 @@ in the App Package's DynamicOutput directory.
 
     Add:
 ```
-    <div class="selected-image-container">
-      <img class="selected-image" src="" id="selectedImage">
-    </div>
+<div class="selected-image-container">
+   <img class="selected-image" src="" id="selectedImage">
+</div>
 
-    <div class="image-selector">
-      <div class="selectable-image-container">
+<div class="image-selector">
+    <div class="selectable-image-container">
         <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg1.png" alt="Image1" onclick="selectImage(this);">
-      </div>
-      <div class="selectable-image-container">
-        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg2.png" alt="Image2" onclick="selectImage(this);">
-      </div>
-      <div class="selectable-image-container">
-        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg3.png" alt="Image3" onclick="selectImage(this);">
-      </div>
-      <div class="selectable-image-container">
-        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg4.png" alt="Image4" onclick="selectImage(this);">
-      </div>
     </div>
-    <script>
-        function selectImage(imageToSelect) {
-            var selectedImage = document.getElementById("selectedImage");
-            selectedImage.src = imageToSelect.src;
-            selectedImage.alt = imageToSelect.alt;
-        }
-    </script>
+    <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg2.png" alt="Image2" onclick="selectImage(this);">
+    </div>
+    <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg3.png" alt="Image3" onclick="selectImage(this);">
+    </div>
+    <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg4.png" alt="Image4" onclick="selectImage(this);">
+    </div>
+</div>
+<script>
+    function selectImage(imageToSelect) {
+        var selectedImage = document.getElementById("selectedImage");
+        selectedImage.src = imageToSelect.src;
+        selectedImage.alt = imageToSelect.alt;
+    }
+</script>
 ```
 
 ### Make the SingleAppWebsite App
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
-An instance of an App can be made from an App Package via the dsh --make-app command.
+An instance of an App can be made from an App Package via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
 
-First, dsh --make-app will create a new instance of the App, via an internal call
-to the dsh --new App command.
+First, `dsh --make-app` will create a new instance of the App, via an internal call
+to the `dsh --new App` command.
 
-Then, it will copy the App Package's css, js, and DynamicOutput directories to
+Then, it will copy the App Package's `css`, `js`, and `DynamicOutput` directories to
 the new App.
 
-Finally, it will run the App Package's Responses.sh, Requests.sh, and OutputComponents.sh
+Finally, it will run the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
 configuration scripts to create the PHP configuration files for the App's Components via
-the dsh calls defined in the App Package's Responses.sh, Requests.sh, and OutputComponents.sh
+the dsh calls defined in the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
 configuration scripts.
 
 11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
-     dsh -m "$HOME/SingleAppWebsite"
+
+    Run: `dsh -m "$HOME/SingleAppWebsite"`
 
 ### Build The App
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
-Once an App has been made via dsh --make-app, it can be built for one or more
-domains via the dsh --build-app command.
+Once an App has been made via `dsh --make-app`, it can be built for one or more
+domains via the `dsh --build-app [APP_NAME] [DOMAIN]`.
 
-By default dsh --build-app will build an App for the domain defined in the App's
-Components.php file. This domain will have been set by dsh --make-app to the value
-assigned to the domain variable defined in the relevant App Packages config.sh
+By default `dsh --build-app` will build an App for the domain defined in the App's
+`Components.php` file. This domain will have been set by `dsh --make-app` to the value
+assigned to the domain variable defined in the relevant App Packages `config.sh`
 configuration script.
 
-It is safe to modify the domain defined in the App's Components.php file after
-the App has been made, however, dsh --build-app takes an optional domain as the
+It is safe to modify the domain defined in the App's `Components.php` file after
+the App has been made, however, `dsh --build-app` takes an optional domain as the
 second parameter, so there is really no need to modify the domain set in App's
-Components.php file, instead just use dsh --build-app [APP_NAME] [DOMAIN] to
+`Components.php` file, instead just use `dsh --build-app [APP_NAME] [DOMAIN]` to
 easily build the App for one or more domains.
 
-12. Build the SingleAppWebsite App to run on http://localhost:8080
-     dsh -b SingleAppWebsite "http://localhost:8080"
+12. Build the SingleAppWebsite App to run on `http://localhost:8080`
+
+    Run: `dsh -b SingleAppWebsite "http://localhost:8080"`
 
 ### Start A Development Server
 
@@ -649,17 +651,19 @@ or more local domains.
 PHP is a wonderful language, and provides a built in web server that can be used
 as a simple local development server. More information about PHP's built in server
 can be found at:
-    https://www.php.net/manual/en/features.commandline.webserver.php
 
-dsh can be used to start a development server via PHP on a specific port on localhost:
+    [https://www.php.net/manual/en/features.commandline.webserver.php](https://www.php.net/manual/en/features.commandline.webserver.php)
 
-Once started, the server can be reached from a web browser via http://localhost:PORT
+`dsh --start-development-server [PORT]` can be used to start a development server
+via PHP's built in web server on a specific port on localhost:
+
+Once started, the server can be reached from a web browser via `http://localhost:PORT`
 
 7. Start a development server on localhost at port 8080
 
-     dsh -s 8080
+    Run: `dsh -s 8080`
 
-Development server will be reachable via http://localhost:8080
+The development server will be reachable via `http://localhost:8080`
 
 ### Overview Of SingleAppWebsite Guide
 
@@ -667,17 +671,17 @@ Development server will be reachable via http://localhost:8080
 
 The following is an overview of the steps taken in this demo:
 
-- The App Package for the SingleAppWebsite App was created via dsh --new AppPackage.
+- The App Package for the SingleAppWebsite App was created via `dsh --new AppPackage`.
 
 - The appropriate SingleAppWebsite App Package files were configured manually using
   a text editor.
 
-- The SingleAppWebsite App was made from the SingleAppWebsite App Package via dsh --make-app.
+- The SingleAppWebsite App was made from the SingleAppWebsite App Package via `dsh --make-app`.
 
-- The SingleAppWebsite App was built via dsh --build-app.
+- The SingleAppWebsite App was built via `dsh --build-app`.
 
-- A development server was started at http://localhost:8080 via dsh --start-development-server.
+- A development server was started at `http://localhost:8080` via `dsh --start-development-server`.
 
-The new SingleAppWebsite App is now running on http://localhost:8080 and can be accessed
+The new SingleAppWebsite App is now running on `http://localhost:8080` and can be accessed
 from a web browser.
 
