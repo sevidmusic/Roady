@@ -10,10 +10,10 @@
 
 [Getting Started](#getting-started)
 1. [Apps and App Packages](#apps-and-app-packages)
-2. [Hello World Guide](#hello-world-guide)
-3. [Hello World Demo](#hello-world-demo)
-4. [Single App Website Guide](#single-app-website-guide)
-5. [Single App Website Demo](#single-app-website-demo)
+2. [Hello World Demo](#hello-world-demo)
+3. [Hello World Guide](#hello-world-guide)
+4. [Single App Website Demo](#single-app-website-demo)
+5. [Single App Website Guide](#single-app-website-guide)
 
 
 # About
@@ -44,20 +44,21 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
-[Back to top](#darling-data-management-system) | [Installation Demo](#installation-demo)
+[Back to top](#darling-data-management-system)
 
-1. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
-2. [Setup Development Tools](#setup-development-tools)
+1. [Installation Demo](#installation-demo)
+2. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
+3. [Setup Development Tools](#setup-development-tools)
 
 ### Installation Demo
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer) | [Setup Development Tools](#setup-development-tools)
+[Back to top](#darling-data-management-system) | [Installation](#installation)
 
 ![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
 ### Install From GitHub And Setup Via Composer
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo) | [Setup Development Tools](#setup-development-tools)
+[Back to top](#darling-data-management-system) | [Installation](#installation)
 
 The Darling Data Management System can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
@@ -82,9 +83,9 @@ and setup via [Composer](https://github.com/composer/composer).
 
 ### Setup Development Tools
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo) | [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
+[Back to top](#darling-data-management-system) | [Installation](#installation)
 
-[Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
+Skip to: [Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
 
 The Darling Data Management System comes with three command line utilities:
 
