@@ -137,15 +137,17 @@ are intended to be used during development with the Darling Data Management Syst
 
 # Getting Started
 
-Apps, App Packages, Components, and dsh
-
-[Back to top](#darling-data-management-system) | [Installation](#installation)
+[Back to top](#darling-data-management-system)
 
 1. [Apps and App Packages](#apps-and-app-packages)
 2. [Hello World Demo](#hello-world-demo)
 3. [Hello World Guide](#hello-world-guide)
+4. [Single App Website Demo](#single-app-website-demo)
+5. [Single App Website Guide](#single-app-website-guide)
 
 ### Apps And App Packages
+
+[Back to top](#darling-data-management-system) | [Getting Started](#getting-started)
 
 One of the ways the Darling Data Management System helps encourage organization
 is by providing an architecture that allows the development of large applications
@@ -174,62 +176,28 @@ Once an App has been made from an App Package it can be built to run on a domain
 Multiple Apps can be built to run on a single domain, and individual Apps can
 be built to run on many domains.
 
-To demonstrate, the following is one possible example of how the development of
-a "Hello World" App might begin:
-
-# Hello World Guide
-
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Demo](#hello-world-demo)
-
 ### Hello World Demo
 
-[Back to top](#darling-data-management-system) | [Apps and App Packages](#apps-and-app-packages) | [Hello World Guide](#hello-world-guide)
+[Back to top](#darling-data-management-system) | [Getting Started](#getting-started)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-### Documentation is being revised for this section...
+# Hello World Guide
 
-1. Creatae a new App Package for the HelloWorld App
+[Back to top](#darling-data-management-system) | [Getting Started](#getting-started)
 
-   Run:`dsh -n AppPackage HelloWorld "$HOME"`
+1. [Create An App Package For The HelloWorld App](#create-an-app-package-for-the-helloworld-app)
+2. [Make The HelloWorld App Package's Scripts Executable](#make-the-helloworld-app-packages-scripts-executable)
+3. [Define A GlobalResponse For The HelloWorld App](#define-a-globalresponse-for-the-helloworld-app)
+4. [Define An OutputComponent For The HelloWorld App](#define-an-outputcomponent-for-the-helloworld-app)
+5. [Make The HelloWorld App from The HelloWorld App Package](#make-the-helloworld-app-from-the-helloworld-app-package)
+6. [Build The HelloWorld App To Run On `http://localhost:8080`](#build-the-helloworld-app-to-run-on-localhost8080)
+7. [Start A Development Server On localhost On Port 8080](#start-a-development-server-on-localhost-on-port-8080)
+8. [View The New HelloWorld App Running On `http://localhost:8080` In A Web Browser](#view-the-new-helloworld-app-running-on-httplocalhost8080-in-a-web-browser)
 
-2. Make sure the App Package's scripts are executable
-
-   Run:`chmod -R 0755 $HOME/HelloWorld/*.sh`
-
-3. Define a GlobalResponse for the HelloWorld App
-
-   Run:`vim "$HOME/HelloWorld/Responses.sh"`
-
-   Add: `dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0`
-
-4. Define an OutputComponent for the HelloWorld App
-
-   Run: `vim "$HOME/HelloWorld/OutputComponents.sh"`
-
-   Add: `dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"`
-
-   Add: `dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent`
-
-5. Make the HelloWorld App from the HelloWorld App Package
-
-   Run:`dsh -m "$HOME/HelloWorld"`
-
-6. Build the HelloWorld App to run on http://localhost:8080
-
-   Run:`dsh -b HelloWorld "http://localhost:8080"`
-
-7. Start a development server on local host at port 8080
-   Development server will be reachable via http://localhost:8080
-
-   Run:`dsh -s 8080`
-
-8. View the new HelloWorld App running on http://localhost:8080 in a web browser.
-
-   Run:`w3m http://localhost:8080`
-
-   Note: [w3m](https://github.com/acg/w3m) is the browser used in this demo, w3m is awesome, but it is not
-         required or related to the Darling Data Management System.
+The following Hello World guide demonstrates one possible implementation of a
+HelloWorld App. The Hello World guide will also demonstrate the use of dsh,
+Components, Apps, and App Packages.
 
 # Single App Website Guide
 
