@@ -195,6 +195,20 @@ An App Package has the following structure:
     OutputComponents.sh
 ```
 
+New App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`.
+
+The `[APP_NAME]` parameter is required, it will be used as the name of the App Package
+and the App.
+
+The `[PATH_TO_APP_PACKAGE]` parameter is also required, it is used to specify the
+path to the directory where the new App Package's directory will be created.
+
+The `[DOMAIN]` parameter is optional, it can be used to specify a default domain
+to build and run the App on. Note: This does not tie the App to the specified
+`[DOMAIN]`, when an App is built a different domain can always be specified. The
+benefit of an App Package is that it can be used to build an instance of an App
+for one or many domains.
+
 ### Hello World Demo
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Guide](#hello-world-guide)
