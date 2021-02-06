@@ -56,6 +56,8 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 ### Install From GitHub And Setup Via Composer
 
+[Back to top](#darling-data-management-system) | [Installation](#installation) | [Installation Demo](#installation-demo) | [Setup Development Tools](#setup-development-tools)
+
 The Darling Data Management System can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
 
