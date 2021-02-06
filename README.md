@@ -130,10 +130,10 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
 
    Run: `source "${HOME}/.bash_profile"`
 
-Finally, please note that dsh, dshUI, and dshUnit are not required on
-production installation of the Darling Data Management System, in fact, for
-security, they should probably not be included in production installation! They
-are intended to be used during development with the Darling Data Management System..
+Finally, please note that dsh, dshUI, and dshUnit are not required on production
+installation of the Darling Data Management System, in fact, for security, they
+should probably not be included in production installation! They are intended to
+be used during development with the Darling Data Management System.
 
 # Getting Started
 
@@ -175,6 +175,25 @@ Once an App has been made from an App Package it can be built to run on a domain
 
 Multiple Apps can be built to run on a single domain, and individual Apps can
 be built to run on many domains.
+
+Consequently, multiple Apps can be built to run on many domains all on a single
+installation of the Darling Data Management System.
+
+In the context of web development, this means multiple websites can run on a single
+installation of the Darling Data Management System.
+
+An App Package has the following structure:
+
+```
+/AppPackageName/
+    DynamicOutput/
+    css/
+    js/
+    config.sh
+    Responses.sh
+    Requests.sh
+    OutputComponents.sh
+```
 
 ### Hello World Demo
 
