@@ -210,6 +210,8 @@ Note: This does not tie the App to the specified `[DOMAIN]`, when an App is buil
 a different domain can always be specified. The benefit of an App Package is that
 it can be used to build an instance of an App for one or many domains.
 
+More information about `dsh --new AppPackage` can be obtained via `dsh -h -n AppPackage`
+
 ### Hello World Demo
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
@@ -283,6 +285,10 @@ will help to make the App's larger structure clear before other Components are
 defined.
 
 In this example, only one GlobalResponse will be defined.
+
+GlobalResponses are defined via `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
+
+More information can be obtained about `dsh --new GlobalResponse` via `dsh -h -n GlobalResponse`.
 
 3. Define a GlobalResponse for the HelloWorld App
 
