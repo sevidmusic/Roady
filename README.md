@@ -178,13 +178,17 @@ be built to run on many domains.
 
 ### Hello World Demo
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started)
+[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
 # Hello World Guide
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started)
+
+The following Hello World guide demonstrates one possible implementation of a
+HelloWorld App. The Hello World guide will also demonstrate the use of dsh,
+Components, Apps, and App Packages.
 
 1. [Create An App Package For The HelloWorld App](#create-an-app-package-for-the-helloworld-app)
 2. [Make The HelloWorld App Package's Scripts Executable](#make-the-helloworld-app-packages-scripts-executable)
@@ -195,13 +199,13 @@ be built to run on many domains.
 7. [Start A Development Server On localhost On Port 8080](#start-a-development-server-on-localhost-on-port-8080)
 8. [View The New HelloWorld App Running On `http://localhost:8080` In A Web Browser](#view-the-new-helloworld-app-running-on-httplocalhost8080-in-a-web-browser)
 
-The following Hello World guide demonstrates one possible implementation of a
-HelloWorld App. The Hello World guide will also demonstrate the use of dsh,
-Components, Apps, and App Packages.
-
 # Single App Website Guide
 
 [Back to top](#darling-data-management-system) | [Single App Website Demo](#single-app-website-demo)
+
+The following guide demonstrates one possible implementation of an entire
+website using a single App. This guide will also demonstrate the use of dsh,
+Components, Apps, and App Packages.
 
 1. [Preface](#preface)
 2. [Create A New App Package](#create-a-new-app-package)
