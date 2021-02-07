@@ -289,7 +289,13 @@ In this example, only one GlobalResponse will be defined.
 
 GlobalResponses are defined via [`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`](#dsh---new-globalresponse)
 
-3. Define a GlobalResponse for the HelloWorld App
+3. Define a GlobalResponse for the HelloWorld App.
+
+   Note: Responses and GlobalResponses defined in Responses.sh should always use
+         the `"${app_name}" variable to indicate the `[APP_AME]`. This only applies
+         to calls made to dsh from within an App Package's Responses.sh, always
+         specify the App's actual alphanumeric name when calling dsh from the
+         command line.
 
    Run: `vim "$HOME/HelloWorld/Responses.sh"`
 
