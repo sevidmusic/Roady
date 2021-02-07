@@ -1141,23 +1141,16 @@ The domain assigned to the new App will be `[DOMAIN]` if specified, or
 
 The following will be created for the new App:
 
-A directory for the App at `Apps/[APP_NAME]`
-
-A Components.php configuration file for the App at `Apps/[APP_NAME]/Components.php`
-
-A directory for all of the App's OutputComponent and DynamicOutputComponent
+1. A directory for the App at `Apps/[APP_NAME]`
+2. A Components.php configuration file for the App at `Apps/[APP_NAME]/Components.php`
+3. A directory for all of the App's OutputComponent and DynamicOutputComponent
 configuration files at `Apps/[APP_NAME]/OutputComponents/`
-
-A directory for all of the App's Request configuration files at `Apps/[APP_NAME]/Requests/`
-
-A directory for all of the App's Response and GlobalResponse configuration
+4. A directory for all of the App's Request configuration files at `Apps/[APP_NAME]/Requests/`
+5. A directory for all of the App's Response and GlobalResponse configuration
 files at `Apps/[APP_NAME]/Responses/`
-
-A directory for the App's unique Dynamic Output files at `Apps/DynamicOutput/`
-
-A directory for the App's css at `Apps/[APP_NAME]/css/`
-
-A directory for the App's js files `Apps/[APP_NAME]/js`
+6. A directory for the App's unique Dynamic Output files at `Apps/DynamicOutput/`
+7. A directory for the App's css at `Apps/[APP_NAME]/css/`
+8. A directory for the App's js files `Apps/[APP_NAME]/js`
 
 Shorthand:
 
