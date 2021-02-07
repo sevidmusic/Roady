@@ -90,7 +90,7 @@ Skip explanation and go to: [Add dsh, dshUI, And Optionally dshUnit to your `$PA
 
 The Darling Data Management System comes with three command line utilities:
 
-`dsh`     (required): Used frequently for development with the Darling Data Management System.
+[`dsh`](#dsh)     (required): Used frequently for development with the Darling Data Management System.
 
 `dshUI`   (required): Required by dsh, it is the back end of dsh's user interface.
 
