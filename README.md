@@ -241,6 +241,9 @@ Components, Apps, and App Packages.
 The Darling Data Management System's development process always starts with the
 creation of an App Package.
 
+New App Packages are created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage)
+
+
 Step 1. Create a new App Package for the HelloWorld App
 
         Run: `dsh -n AppPackage HelloWorld "$HOME"`
