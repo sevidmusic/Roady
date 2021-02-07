@@ -104,7 +104,8 @@ dsh and dshUI MUST be in your `$PATH` or they will not work properly.
   need dshUnit. However, dshUnit can be used on it's own as a bash unit testing
   framework. If you write a lot of bash, you may find dshUnit useful.
 
-Make sure to at least add dsh AND dshUI to your `$PATH`!
+Make sure to at least [add dsh, dshUI to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
+ add dsh AND dshUI to your `$PATH`!
 
 If you would like to try dshUnit, add it as well.
 
