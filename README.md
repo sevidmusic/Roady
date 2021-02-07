@@ -1296,13 +1296,13 @@ Shorthand:
 
 Arguments:
 
-[APP_NAME]          The name of the app the Request will be defined for.
+`[APP_NAME]`          The name of the app the Request will be defined for.
 
-[REQUEST_NAME]      An alphanumeric name to assign to the Request.
+`[REQUEST_NAME]`      An alphanumeric name to assign to the Request.
 
-[REQUEST_CONTAINER] The container to assign to the Request.
+`[REQUEST_CONTAINER]` The container to assign to the Request.
 
-[RELATIVE_URL]      The relative url to assign to the Request.
+`[RELATIVE_URL]`      The relative url to assign to the Request.
 
                     This is a string that represents the part of the url
                     following the domain the App was built for.
