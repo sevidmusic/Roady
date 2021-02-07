@@ -906,8 +906,8 @@ from a web browser.
 dsh is a command line utility designed to aide in the development process with the
 Darling Data Management System. The following is an overview of dsh:
 
-1. [dsh --assign-to-response](#dsh---assign-to-response-dsh--a)
-2. [dsh --build-app](#dsh---build-app-dsh--b)
+1. [dsh --assign-to-response](#dsh---assign-to-response--dsh--a)
+2. [dsh --build-app](#dsh---build-app--dsh--b)
 
 ### dsh --assign-to-response | dsh -a
 
