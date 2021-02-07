@@ -287,7 +287,8 @@ defined.
 
 In this example, only one GlobalResponse will be defined.
 
-GlobalResponses are defined via `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
+GlobalResponses are defined via [`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`](#dsh---new-globalresponse)
+
 
 More information about `dsh --new GlobalResponse` can be obtained via `dsh -h -n GlobalResponse`.
 
@@ -1231,7 +1232,7 @@ or
 
 ### dsh --new GlobalResponse
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to HelloWorld Guide](#define-a-globalresponse-for-the-helloworld-app)
 
 `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
