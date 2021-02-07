@@ -908,6 +908,20 @@ Darling Data Management System. The following is an overview of dsh:
 
 1. [dsh --assign-to-response](#dsh---assign-to-response--dsh--a)
 2. [dsh --build-app](#dsh---build-app--dsh--b)
+3. [dsh --help FLAG](#dsh---help-flag)
+4. [dsh --help --help](#dsh---help---help)
+5. [dsh --locate-ddms-directory](#dsh---locate-ddms-directory)
+6. [dsh --new AppPackage](#dsh---new-apppackage)
+7. [dsh --new App](#dsh---new-app)
+8. [dsh --new DynamicOutputComponent](#dsh---new-dynamicoutputcomponent)
+9. [dsh --new GlobalResponse](#dsh---new-globalresponse)
+10. [dsh --new OutputComponent](#dsh---new-outputcomponent)
+11. [dsh --new Request](#dsh---new-request)
+12. [dsh --new Response](#dsh---new-response)
+13. [dsh --new](#dsh---new)
+14. [dsh --query-app-package](#dsh---query-app-package)
+15. [dsh --start-development-server](#dsh---start-development-server)
+
 
 ### dsh --assign-to-response | dsh -a
 
