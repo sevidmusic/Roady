@@ -1304,19 +1304,19 @@ Arguments:
 
 `[RELATIVE_URL]`      The relative url to assign to the Request.
 
-                    This is a string that represents the part of the url
-                    following the domain the App was built for.
+This is a string that represents the part of the url
+following the domain the App was built for.
 
-                    For example, if an App named Foo is built for the domain
-                    `http://localhost:8080` then a `[RELATIVE_URL]` of `index.php`
-                    would assign `http://localhost:8080/index.php` as the
-                    Request's url.
+For example, if an App named Foo is built for the domain
+`http://localhost:8080` then a `[RELATIVE_URL]` of `index.php`
+would assign `http://localhost:8080/index.php` as the
+Request's url.
 
-                    You MUST only specify the relative url, do not include
-                    the domain!
+You MUST only specify the relative url, do not include
+the domain!
 
-                    This will insure that the Request's actual url will be
-                    correct regardless of what domain the App is built for.
+This will insure that the Request's actual url will be
+correct regardless of what domain the App is built for.
 
 Example:
 
