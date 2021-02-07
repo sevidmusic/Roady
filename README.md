@@ -330,7 +330,7 @@ OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-An instance of an App can be made from an App Package via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
+An instance of an App can be made from an App Package via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
 First, `dsh --make-app` will create a new instance of the App, via an internal call
 to the `dsh --new App` command.
@@ -1449,4 +1449,40 @@ Example:
 
 `dsh -s 8420`
 
+### dsh --make-app | dsh -m
+
+Warning: This flag is still being developed. It is working as intended with
+the exception of the `[REPLACE_EXISTING_APP]` argument. This is being addressed
+as part of the completions of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95).
+
+
+`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`
+
+Description:
+
+Makes an instance of an App for the Darling Data Management System from an App
+Package. If an App with the same name already exists, then the App will not be
+made unless the string `replace` is passed to the [REPLACE_EXISTING_APP] parameter.
+
+Shorthand:
+
+`dsh -m [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`
+
+Arguments:
+
+`[PATH_TO_APP_PACKAGE]` The path to the App Package that will be used to make the App.
+
+`[REPLACE_EXISTING_APP]` By default, `dsh --make-app` will not replace an existing
+                         App that shares the same name as the App to be made. To
+                         force dsh to replace an existing App, pass the string
+                         `replace` to the `[REPLACE_EXISTING_APP]` parameter.
+
+Note: `[REPLACE_EXISTING_APP]` has not been properly implemented yet, this is being
+      addressed as part of the completion of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95)
+
+Examples:
+
+`dsh -m "$HOME/Downloads/AppPackages/HelloWorld"
+
+`dsh -m "$HOME/Downloads/AppPackages/HelloWorld" 'replace'
 
