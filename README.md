@@ -198,18 +198,6 @@ AppPackageName/
 
 New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage).
 
-The `[APP_NAME]` parameter is required, it will be used as the name of the App Package
-and the App.
-
-The `[PATH_TO_APP_PACKAGE]` parameter is also required, it is used to specify the
-path to the directory where the new App Package's directory will be created.
-
-The `[DOMAIN]` parameter is optional, it can be used to specify a default domain
-to build and run the App on.
-
-Note: Specifying the `[DOMAIN]` does not tie the App to the specified domain, an
-      App can be built for one, or many domains.
-
 ### Hello World Demo
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
@@ -1148,12 +1136,19 @@ Arguments:
 `[PATH_TO_NEW_APP_PACKAGE]` : The path to where the new App Package will be created.
                             Do not include the App Package's name in the `[PATH_TO_NEW_APP_PACKAGE]`.
                             For example, to create the new App Package at `$HOME/AppPackageName`:
+
                             Correct:
+
                                 `dsh -n AppPackage AppPackageName "${HOME}" "http://default.domain/"`
+
                             Incorrect:
+
                                 `dsh -n AppPackage AppPackageName "${HOME}/AppPackageName" "http://default.domain/"`
 
 `[DOMAIN]` : The domain to assign as the App's default domain.
+
+Note: Specifying the `[DOMAIN]` does not tie the App to the specified domain, an
+      App can be built for one, or many domains.
 
 Example:
 
