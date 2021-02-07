@@ -1134,16 +1134,17 @@ Arguments:
 `[APP_NAME]` : The name of the App this App Package represents.
 
 `[PATH_TO_NEW_APP_PACKAGE]` : The path to where the new App Package will be created.
-                            Do not include the App Package's name in the `[PATH_TO_NEW_APP_PACKAGE]`.
-                            For example, to create the new App Package at `$HOME/AppPackageName`:
 
-                            Correct:
+Note: Do not include the App Package's name in the `[PATH_TO_NEW_APP_PACKAGE]`.
+      For example, to create the new App Package at `$HOME/AppPackageName`:
 
-                                `dsh -n AppPackage AppPackageName "${HOME}" "http://default.domain/"`
+Correct:
 
-                            Incorrect:
+`dsh -n AppPackage AppPackageName "${HOME}" "http://default.domain/"`
 
-                                `dsh -n AppPackage AppPackageName "${HOME}/AppPackageName" "http://default.domain/"`
+Incorrect:
+
+`dsh -n AppPackage AppPackageName "${HOME}/AppPackageName" "http://default.domain/"`
 
 `[DOMAIN]` : The domain to assign as the App's default domain.
 
