@@ -909,40 +909,6 @@ Darling Data Management System. The following is an overview of dsh:
 1. [dsh --assign-to-response](#dsh-assign-to-response)
 2. [dsh --build-app](#dsh-build-app)
 
-### dsh flags ###
-
-The following is a brief summary of all the flags available to dsh.
-
-dsh --new [MODE] [ARGUMENTS...] : The new flag is used to create.
-Shorthand: dsh -n [MODE] [ARGUMENTS...]
-For more information use: dsh -h -n
-
-dsh --build-app [APP_NAME] [DOMAIN] : Build an App for a specified [DOMAIN].
-Shorthand: dsh -b [APP_NAME] [DOMAIN]
-For more information use: dsh -h -b
-
-dsh --start-development-server [PORT] : Start a development server.
-Shorthand: dsh -s [PORT]
-For more information use: dsh -h -s
-
-dsh --assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]
-Assign the component defined for the [APP_NAME] app whose name is [COMPONENT_NAME] and type is [COMPONENT_TYPE]
-to the response defined for the [APP_NAME] app whose name is [RESPONSE_NAME].
-Shorthand: dsh -a [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]
-For more information use: dsh -h -a
-
-dsh --help : Show help information about dsh.
-Shorthand: dsh -h
-For more information use: dsh -h -h
-
-dsh --help flags : Show brief help information about all dsh flags.
-Shorthand: dsh -h flags
-Your are currently viewing the output of dsh --help flags
-
-dsh --help [FLAG] : Show detailed help information about the specified flag.
-Shorthand: dsh -h [FLAG]
-For more information use: dsh -h FLAG
-
 ### dsh --assign-to-response | dsh -a
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
@@ -1024,15 +990,17 @@ WARNING: dsh will not prevent you from building an App multiple times for
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --help [FLAG]
+`dsh --help [FLAG]`
 
 Show detailed help information about the specified flag.
 
 Shorthand:
-dsh -h [FLAG]
+
+`dsh -h [FLAG]`
 
 The following options are possible:
 
+```
 dsh --help --help
 dsh -h -h
 
@@ -1074,252 +1042,257 @@ dsh -h -d
 
 dsh --help --php-unit
 dsh -h -p
+```
 
 # dsh --help --help
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --help --help
+`dsh --help --help`
 
 The following is a brief summary of how to use the --help flag:
 
 To get general information about dsh, use:
 
-    dsh --help
+    `dsh --help`
 
 To get brief information about all flags use:
 
-    dsh --help flags
+    `dsh --help flags`
 
 To get information about a specified flag use:
 
-    dsh --help [FLAG]
+    `dsh --help [FLAG]`
 
     Example:
 
-        dsh --help --new
+        `dsh --help --new`
 
 To get information about a mode of a modal flag use:
 
-    dsh --help [FLAG] [MODE]
+    `dsh --help [FLAG] [MODE]`
 
     Example:
 
-        dsh --help --new AppPackage
+        `dsh --help --new AppPackage`
 
 ### dsh --locate-ddms-directory
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --locate-ddms-directory
+`dsh --locate-ddms-directory`
 
 Description:
+
 Returns the path to the Darling Data Management System installation that dsh is acting on.
 
 Shorthand:
-dsh -l
+
+`dsh -l`
 
 Example:
-dsh -l
+
+`dsh -l`
 
 ### dsh --new AppPackage
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]
+`dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]`
+
+Description:
 
 Creates a new App Package to begin the development of a new Darling Data Management
-System App named [APP_NAME].
+System App named `[APP_NAME]`.
 
 Shorthand:
 
-dsh -n AppPackagpe [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]
+`dsh -n AppPackagpe [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]`
 
 Arguments:
 
-[APP_NAME] : The name of the App this App Package represents.
+`[APP_NAME]` : The name of the App this App Package represents.
 
-[PATH_TO_NEW_APP_PACKAGE] : The path to where the new App Package will be created.
-                            Do not include the App Package's name in the [PATH_TO_NEW_APP_PACKAGE].
-                            For example, to create the new App Package at $HOME/AppPackageName:
+`[PATH_TO_NEW_APP_PACKAGE]` : The path to where the new App Package will be created.
+                            Do not include the App Package's name in the `[PATH_TO_NEW_APP_PACKAGE]`.
+                            For example, to create the new App Package at `$HOME/AppPackageName`:
                             Correct:
-                                dsh -n AppPackage AppPackageName "${HOME}" "http://default.domain/"
+                                `dsh -n AppPackage AppPackageName "${HOME}" "http://default.domain/"`
                             Incorrect:
-                                dsh -n AppPackage AppPackageName "${HOME}/AppPackageName" "http://default.domain/"
+                                `dsh -n AppPackage AppPackageName "${HOME}/AppPackageName" "http://default.domain/"`
 
-[DOMAIN] : The domain to assign as the App's default domain.
+`[DOMAIN]` : The domain to assign as the App's default domain.
 
 Example:
 
-dsh -n AppPackage AppName "${HOME}" "http://localhost:8924"
+`dsh -n AppPackage AppName "${HOME}" "http://localhost:8924"`
 
 
 # dsh --new App
 
-dsh --new App [APP_NAME] [DOMAIN]
+`dsh --new App [APP_NAME] [DOMAIN]`
 
 Description:
 
-Create a new App at Apps/[APP_NAME]
+Create a new App at `Apps/[APP_NAME]`
 
-The domain assigned to the new App will be [DOMAIN] if specified, or
-http://localhost:8080 by default.
+The domain assigned to the new App will be `[DOMAIN]` if specified, or
+`http://localhost:8080` by default.
 
 The following will be created for the new App:
 
-    A directory for the App at Apps/[APP_NAME]
+    A directory for the App at `Apps/[APP_NAME]`
 
-    A Components.php configuration file for the App at Apps/[APP_NAME]/Components.php
+    A Components.php configuration file for the App at `Apps/[APP_NAME]/Components.php`
 
     A directory for all of the App's OutputComponent and DynamicOutputComponent
-    configuration files at Apps/[APP_NAME]/OutputComponents/
+    configuration files at `Apps/[APP_NAME]/OutputComponents/`
 
-    A directory for all of the App's Request configuration files at Apps/[APP_NAME]/Requests/
+    A directory for all of the App's Request configuration files at `Apps/[APP_NAME]/Requests/`
 
     A directory for all of the App's Response and GlobalResponse configuration
-    files at Apps/[APP_NAME]/Responses/
+    files at `Apps/[APP_NAME]/Responses/`
 
-    A directory for the App's unique Dynamic Output files at Apps/DynamicOutput/
+    A directory for the App's unique Dynamic Output files at `Apps/DynamicOutput/`
 
-    A directory for the App's css at Apps/[APP_NAME]/css/
+    A directory for the App's css at `Apps/[APP_NAME]/css/`
 
-    A directory for the App's js files Apps/[APP_NAME]/js
+    A directory for the App's js files `Apps/[APP_NAME]/js`
 
 Shorthand:
 
-dsh -n App [APP_NAME] [DOMAIN]
+`dsh -n App [APP_NAME] [DOMAIN]`
 
 Arguments:
 
-[APP_NAME] The name to assign the new App.
+`[APP_NAME]` The name to assign the new App.
 
-[DOMAIN]   The domain to assign the new App.
+`[DOMAIN]`   The domain to assign the new App.
 
 Example:
 
-dsh -n App AppName http://some.domain
+`dsh -n App AppName http://some.domain`
 
 ### dsh --new DynamicOutputComponent
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER]
-                                 [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]
+`dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER] [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]`
 
 Description:
 
-Creates a new DynamicOutputComponent configuration file at
-Apps/[APP_NAME]/OutputComponents/[DYNAMIC_OUTPUT_COMPONENT_NAME]
+Creates a new DynamicOutputComponent configuration file at:
+
+`Apps/[APP_NAME]/OutputComponents/[DYNAMIC_OUTPUT_COMPONENT_NAME]`
 
 Shorthand:
 
-dsh -n DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER]
-                              [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]
+`dsh -n DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER] [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]`
 
 Arguments:
 
-[APP_NAME]                           The name of the App the DynamicOutputComponent will be defined for.
+`[APP_NAME]`                           The name of the App the DynamicOutputComponent will be defined for.
 
-[DYNAMIC_OUTPUT_COMPONENT_NAME]      An alphanumeric name to assign to the DynamicOutputComponent.
+`[DYNAMIC_OUTPUT_COMPONENT_NAME]`      An alphanumeric name to assign to the DynamicOutputComponent.
 
-[DYNAMIC_OUTPUT_COMPONENT_CONTAINER] The container to assign to the DynamicOutputComponent.
+`[DYNAMIC_OUTPUT_COMPONENT_CONTAINER]` The container to assign to the DynamicOutputComponent.
                                      MUST be alphanumeric.
 
-[DYNAMIC_OUTPUT_COMPONENT_POSITION]  The position to assign to the DynamicOutputComponent.
+`[DYNAMIC_OUTPUT_COMPONENT_POSITION]`  The position to assign to the DynamicOutputComponent.
                                      MUST be an number, whole or decimal.
 
-[DYNAMIC_OUTPUT_FILE_NAME]           The name of the Dynamic Output file to assign to the
+`[DYNAMIC_OUTPUT_FILE_NAME]`           The name of the Dynamic Output file to assign to the
                                      DynamicOutputComponent. This file MUST exist in either:
 
-                                         SharedDynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]
+                                         `DarlingDataManagementSystem/SharedDynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]`
                                      or
-                                         Apps/[APP_NAME]/DynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]
+                                         `DarlingDataManagementSystem/Apps/[APP_NAME]/DynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]`
 
 Example:
 
-dsh -n DynamicOutputComponent AppName DOCName DOCContainer 0 "DOCFile.html"
+`dsh -n DynamicOutputComponent AppName DOCName DOCContainer 0 "DOCFile.html"`
 
-The example above would expect a Dynamic Output file named DOCFile.html exists in either:
+The example above would expect a Dynamic Output file named `DOCFile.html` exists
+in either:
 
-    SharedDynamicOutput/DOCFile.html
+    `DarlingDataManagementSystem/SharedDynamicOutput/DOCFile.html`
 or
-    Apps/[APP_NAME]/DOCFile.html
+    `DarlingDataManagementSystem/Apps/[APP_NAME]/DOCFile.html`
 
 ### dsh --new GlobalResponse
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]
+`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
 Description:
 
-Create a new GlobalResponse configuration at Apps/[APP_NAME]/Responses/[GLOBAL_RESPONSE_NAME].php
+Create a new GlobalResponse configuration at `Apps/[APP_NAME]/Responses/[GLOBAL_RESPONSE_NAME].php`
 
 Shorthand:
 
-dsh -n GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]
+`dsh -n GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
 Arguments:
 
-[APP_NAME]                 The name of the App the new GlobalResponse will be defined for.
+`[APP_NAME]`                 The name of the App the new GlobalResponse will be defined for.
 
-[GLOBAL_RESPONSE_NAME]     An alphanumeric name to assign to the new GlobalResponse
+`[GLOBAL_RESPONSE_NAME]`     An alphanumeric name to assign to the new GlobalResponse
 
-[GLOBAL_RESPONSE_POSITION] A numeric position to assign to the new GlobalResponse.
+`[GLOBAL_RESPONSE_POSITION]` A numeric position to assign to the new GlobalResponse.
 
 Example:
 
-dsh -n GlobalResponse AppName ResponseName 4.2
+`dsh -n GlobalResponse AppName ResponseName 4.2`
 
 
 ### dsh --new OutputComponent
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER]
-                          [OUTPUT_COMPONENT_POSITION] [OUTPUT]
+`dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`
 
 Description:
 
-Creates a new OutputComponent configuration file at
-Apps/[APP_NAME]/OutputComponents/[OUTPUT_COMPONENT_NAME].php
+Creates a new OutputComponent configuration file at:
+
+`Apps/[APP_NAME]/OutputComponents/[OUTPUT_COMPONENT_NAME].php`
 
 Shorthand:
 
-dsh -n OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER]
-                       [OUTPUT_COMPONENT_POSITION] [OUTPUT]
+`dsh -n OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`
 
 Arguments:
 
-[APP_NAME]                   The name of the App the OutputComponent will be defined for.
+`[APP_NAME]`                   The name of the App the OutputComponent will be defined for.
 
-[OUTPUT_COMPONENT_NAME]      An alphanumeric name to assign to the OutputComponent.
+`[OUTPUT_COMPONENT_NAME]`      An alphanumeric name to assign to the OutputComponent.
 
-[OUTPUT_COMPONENT_CONTAINER] The container to assign to the OutputComponent.
+`[OUTPUT_COMPONENT_CONTAINER]` The container to assign to the OutputComponent.
                              MUST be alphanumeric.
 
-[OUTPUT_COMPONENT_POSITION]  The position to assign to the OutputComponent.
+`[OUTPUT_COMPONENT_POSITION]`  The position to assign to the OutputComponent.
                              MUST be a number, whole or decimal.
 
-[OUTPUT]                     The output to assign to the OutputComponent
+`[OUTPUT]`                     The output to assign to the OutputComponent
 
 Example:
 
-    dsh -n OutputComponent AppName OCName OCContainer 2.4 "<p>Hello world</p>"
+`dsh -n OutputComponent AppName OCName OCContainer 2.4 "<p>Hello world</p>"`
 
 ### dsh --new Request
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]
+`dsh --new Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]`
 
 Description:
 
-Creates a new Request configuration file at Apps/[APP_NAME]/Requests/[REQUEST_NAME].php
+Creates a new Request configuration file at `Apps/[APP_NAME]/Requests/[REQUEST_NAME].php`
 
 Shorthand:
 
-dsh -n Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]
+`dsh -n Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]`
 
 Arguments:
 
@@ -1335,8 +1308,8 @@ Arguments:
                     following the domain the App was built for.
 
                     For example, if an App named Foo is built for the domain
-                    http://localhost:8080 then a [RELATIVE_URL] of index.php
-                    would assign http://localhost:8080/index.php as the
+                    `http://localhost:8080` then a `[RELATIVE_URL]` of `index.php`
+                    would assign `http://localhost:8080/index.php` as the
                     Request's url.
 
                     You MUST only specify the relative url, do not include
@@ -1347,51 +1320,52 @@ Arguments:
 
 Example:
 
-    dsh -n Request AppName RequestName RequestContainer index.php?foo=bare
+`dsh -n Request AppName RequestName RequestContainer index.php?foo=bare`
 
 ### dsh --new Response
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new Response [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]
+`dsh --new Response [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]`
 
 Description:
 
-Create a new Response configuration at Apps/[APP_NAME]/Responses/[RESPONSE_NAME].php
+Create a new Response configuration at `Apps/[APP_NAME]/Responses/[RESPONSE_NAME].php`
 
 Shorthand:
 
-dsh -n Responses [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]
+`dsh -n Responses [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]`
 
 Arguments:
 
-[APP_NAME]          The name of the App the Responses will be defined for.
+`[APP_NAME]`          The name of the App the Responses will be defined for.
 
-[RESPONSE_NAME]     An alphanumeric name to assign to the Response.
+`[RESPONSE_NAME]`     An alphanumeric name to assign to the Response.
 
-[RESPONSE_POSITION] The position to assign to the Response.
+`[RESPONSE_POSITION]` The position to assign to the Response.
                     MUST be a number, whole or decimal.
 
 Example:
 
-dsh -n Response AppName ResponseName 0.3
+`dsh -n Response AppName ResponseName 0.3`
 
 
 ### dsh --new
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --new | -n [MODE] [ARGUMENTS...]
+`dsh --new | -n [MODE] [ARGUMENTS...]`
 
 The new flag is used to create.
 
-The new flag is modal, meaning the specified [MODE] determines what is created.
+The new flag is modal, meaning the specified `[MODE]` determines what is created.
 
-Different modes expect different [ARGUMENTS...], and different modes may
-expect different numbers of [ARGUMENTS...].
+Different modes expect different `[ARGUMENTS...]`, and different modes may
+expect different numbers of `[ARGUMENTS...]`.
 
 The following modes are available:
 
+```
 dsh --new App
 dsh --new AppPackage
 dsh --new OutputComponent
@@ -1399,29 +1373,34 @@ dsh --new DynamicOutputComponent
 dsh --new Request
 dsh --new Response
 dsh --new GlobalResponse
+```
 
 For more information on the specific modes use:
 
-dsh --help --new [MODE]
+`dsh --help --new [MODE]`
 
-For example, to get more inforamation about the "App" mode:
+For example, to get more information about the "App" mode:
 
-dsh --help --new App
+`dsh --help --new App`
 
 ### dsh --query-app-package
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
-dsh --query-app-package-config [PATH_TO_APP_PACKAGE] [SETTING_NAME]
+`dsh --query-app-package-config [PATH_TO_APP_PACKAGE] [SETTING_NAME]`
 
 Description:
-Returns the value of the configuration setting named [SETTING_NAME] defined in App Package at [PATH_TO_APP_PACKAGE]
+
+Returns the value of the configuration setting named `[SETTING_NAME]` defined in
+the App Package at `[PATH_TO_APP_PACKAGE]`.
 
 Shorthand:
-dsh -q PATH_TO_APP_PACKAGE] [SETTING_NAME]
+
+`dsh -q PATH_TO_APP_PACKAGE] [SETTING_NAME]`
 
 Example:
-dsh -q /path/to/app/package domain
+
+`dsh -q /path/to/app/package domain`
 
 ### dsh --start-development-server
 
@@ -1433,7 +1412,7 @@ Description:
 
 Start a development server at `http://localhost:[PORT]`.
 
-If [PORT] is not specified start a development server at `http://localhost:8080`.
+If `[PORT]` is not specified start a development server at `http://localhost:8080`.
 
 Shorthand:
 
