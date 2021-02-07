@@ -1150,7 +1150,7 @@ Incorrect:
 
 Note: Specifying the `[DOMAIN]` does not tie the App to the specified domain, an
       App can always be built for a different domain than it's default by specifying
-      an alternative domain when [`dsh --build-app`](#dsh---build-app) is called.
+      an alternative domain when [`dsh --build-app`](#dsh---build-app--dsh--b) is called.
 
 Example:
 
