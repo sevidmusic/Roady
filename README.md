@@ -1124,6 +1124,8 @@ dsh -l
 
 ### dsh --new AppPackage
 
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
 dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]
 
 Creates a new App Package to begin the development of a new Darling Data Management
@@ -1199,6 +1201,8 @@ dsh -n App AppName http://some.domain
 
 ### dsh --new DynamicOutputComponent
 
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
 dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER]
                                  [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]
 
@@ -1243,6 +1247,8 @@ or
 
 ### dsh --new GlobalResponse
 
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
 dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]
 
 Description:
@@ -1267,6 +1273,8 @@ dsh -n GlobalResponse AppName ResponseName 4.2
 
 
 ### dsh --new OutputComponent
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER]
                           [OUTPUT_COMPONENT_POSITION] [OUTPUT]
@@ -1300,6 +1308,8 @@ Example:
     dsh -n OutputComponent AppName OCName OCContainer 2.4 "<p>Hello world</p>"
 
 ### dsh --new Request
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 dsh --new Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]
 
@@ -1341,6 +1351,8 @@ Example:
 
 ### dsh --new Response
 
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
 dsh --new Response [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]
 
 Description:
@@ -1366,6 +1378,8 @@ dsh -n Response AppName ResponseName 0.3
 
 
 ### dsh --new
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 dsh --new | -n [MODE] [ARGUMENTS...]
 
@@ -1396,6 +1410,8 @@ dsh --help --new App
 
 ### dsh --query-app-package
 
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
 dsh --query-app-package-config [PATH_TO_APP_PACKAGE] [SETTING_NAME]
 
 Description:
@@ -1409,17 +1425,19 @@ dsh -q /path/to/app/package domain
 
 ### dsh --start-development-server
 
-dsh --start-development-server [PORT]
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
+`dsh --start-development-server [PORT]`
 
 Description:
 
-Start a development server at http://localhost:[PORT].
+Start a development server at `http://localhost:[PORT]`.
 
-If [PORT] is not specified start a development server at http://localhost:8080.
+If [PORT] is not specified start a development server at `http://localhost:8080`.
 
 Shorthand:
 
-dsh -s [PORT]
+`dsh -s [PORT]`
 
 Arguments:
 
@@ -1427,6 +1445,6 @@ Arguments:
 
 Example:
 
-dsh -s 8420
+`dsh -s 8420`
 
 
