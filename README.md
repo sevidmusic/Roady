@@ -196,7 +196,7 @@ AppPackageName/
     OutputComponents.sh
 ```
 
-New App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`.
+New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage).
 
 The `[APP_NAME]` parameter is required, it will be used as the name of the App Package
 and the App.
@@ -1128,7 +1128,7 @@ Example:
 
 ### dsh --new AppPackage
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app)
+[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to Apps And App Packages](#apps-and-app-packages) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app)
 
 `dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]`
 
