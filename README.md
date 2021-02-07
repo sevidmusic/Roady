@@ -185,7 +185,7 @@ installation of the Darling Data Management System.
 An App Package has the following structure:
 
 ```
-/AppPackageName/
+AppPackageName/
     DynamicOutput/
     css/
     js/
@@ -206,9 +206,8 @@ path to the directory where the new App Package's directory will be created.
 The `[DOMAIN]` parameter is optional, it can be used to specify a default domain
 to build and run the App on.
 
-Note: This does not tie the App to the specified `[DOMAIN]`, when an App is built
-a different domain can always be specified. The benefit of an App Package is that
-it can be used to build an instance of an App for one or many domains.
+Note: Specifying the `[DOMAIN]` does not tie the App to the specified domain, an
+      App can be built for one, or many domains.
 
 More information about `dsh --new AppPackage` can be obtained via `dsh -h -n AppPackage`
 
