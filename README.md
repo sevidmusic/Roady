@@ -291,9 +291,9 @@ GlobalResponses are defined via [`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RE
 
 3. Define a GlobalResponse for the HelloWorld App.
 
-   Note: Responses and GlobalResponses defined in Responses.sh should always use
+   Note: Responses and GlobalResponses defined in `Responses.sh` should always use
          the `"${app_name}"` variable to indicate the `[APP_NAME]`. This only applies
-         to calls made to dsh from within an App Package's Responses.sh, always
+         to calls made to dsh from within an App Package's `Responses.sh`, always
          specify the App's actual alphanumeric name when calling dsh from the
          command line.
 
@@ -325,12 +325,11 @@ OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_
 
 4. Define an OutputComponent for the HelloWorld App
 
-   Note: OutputComponents and DynamicOutputComponents defined in OutputComponents.sh
+   Note: OutputComponents and DynamicOutputComponents defined in `OutputComponents.sh`
          should always use the `"${app_name}"` variable to indicate the `[APP_NAME]`.
          This only applies to calls made to dsh from within an App Package's
-         OutputComponents.sh, always specify the App's actual alphanumeric name
+         `OutputComponents.sh`, always specify the App's actual alphanumeric name
          when calling dsh from the command line.
-
 
    Run: `vim "$HOME/HelloWorld/OutputComponents.sh"`
 
