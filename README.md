@@ -232,7 +232,7 @@ Components, Apps, and App Packages.
 6. [Build The HelloWorld App To Run On `http://localhost:8080`](#build-the-helloworld-app-to-run-on-httplocalhost8080)
 7. [Start A Development Server On localhost On Port 8080](#start-a-development-server-on-localhost-on-port-8080)
 8. [View The New HelloWorld App Running On `http://localhost:8080` In A Web Browser](#view-the-new-helloworld-app-running-on-httplocalhost8080-in-a-web-browser)
-9. [Overview Of HelloWorld Guide](#overview-of-helloworld-guide)
+9. [Hello World Guide Overview](#hello-world-guide-overview)
 
 ### Create An App Package For The HelloWorld App
 
@@ -393,7 +393,7 @@ Once started, the server can be reached from a web browser via `http://localhost
 
 8. To view the HelloWorld App, open a web browser and go to `http://localhost:8080`
 
-### Overview Of HelloWorld Guide
+### Hello World Guide Overview
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
