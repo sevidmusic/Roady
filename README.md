@@ -361,7 +361,7 @@ configuration script.
 
 It is safe to modify the domain defined in the App's `Components.php` file after
 the App has been made, however, `dsh --build-app` takes an optional domain as the
-second parameter, so there is really no need to modify the domain set in App's
+second argument, so there is really no need to modify the domain set in App's
 `Components.php` file, instead just use `dsh --build-app [APP_NAME] [DOMAIN]` to
 easily build the App for one or more domains.
 
@@ -475,11 +475,11 @@ to reproduce an instance of the App for a Darling Data Management System install
 App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`.
 
 Note: Do not specify a name for the new App Package in the `[PATH_TO_APP_PACKAGE]`
-parameter, only specify the path to the directory where the new App Package should
+argument, only specify the path to the directory where the new App Package should
 be created. The name of the App Package's directory will be `[APP_NAME]`.
 
 Note: A default domain to run the App on can optionally be specified via the third
-`[DOMAIN]` parameter. If the `[DOMAIN]` parameter is not specified the default
+`[DOMAIN]` argument. If the `[DOMAIN]` argument is not specified the default
 domain will be `http://localhost:8080`.
 
 Step 1. Create a new App Package for the App that will generate output for
@@ -852,7 +852,7 @@ configuration script.
 
 It is safe to modify the domain defined in the App's `Components.php` file after
 the App has been made, however, `dsh --build-app` takes an optional domain as the
-second parameter, so there is really no need to modify the domain set in App's
+second argument, so there is really no need to modify the domain set in App's
 `Components.php` file, instead just use `dsh --build-app [APP_NAME] [DOMAIN]` to
 easily build the App for one or more domains.
 
@@ -1462,7 +1462,7 @@ Description:
 
 Makes an instance of an App for the Darling Data Management System from an App
 Package. If an App with the same name already exists, then the App will not be
-made unless the string `replace` is passed to the [REPLACE_EXISTING_APP] parameter.
+made unless the string `replace` is passed to the [REPLACE_EXISTING_APP] argument.
 
 Shorthand:
 
@@ -1475,7 +1475,7 @@ Arguments:
 `[REPLACE_EXISTING_APP]` By default, `dsh --make-app` will not replace an existing
                          App that shares the same name as the App to be made. To
                          force dsh to replace an existing App, pass the string
-                         `replace` to the `[REPLACE_EXISTING_APP]` parameter.
+                         `replace` to the `[REPLACE_EXISTING_APP]` argument.
 
 Note: `[REPLACE_EXISTING_APP]` has not been properly implemented yet, this is being
       addressed as part of the completion of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95)
