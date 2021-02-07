@@ -976,7 +976,7 @@ Examples:
 
 ### dsh --build-app | dsh -b
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to dsh --new AppPackage](#dsh---new-apppackage)
 
 `dsh --build-app [APP_NAME] [DOMAIN]`
 
