@@ -1115,6 +1115,9 @@ Example:
 
 [Back to top](#darling-data-management-system) | [dsh](#dsh)
 
+Referenced by:
+1. [Create An App Package For The HelloWorld App](#create-an-app-package-for-the-helloworld-app)
+
 `dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]`
 
 Description:
