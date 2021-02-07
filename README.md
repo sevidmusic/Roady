@@ -41,7 +41,7 @@ A website is being developed for the Darling Data Management System at [darlingd
 [darlingdata.tech](http://darlingdata.tech) is running on the Darling Data Management System.
 
 More thorough documentation is in development, and will continue to be added to
-this README.md and [http://darlingdata.tech/](http://darlingdata.tech).
+this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
