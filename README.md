@@ -909,24 +909,68 @@ Darling Data Management System. The following is an overview of dsh:
 1. [dsh --assign-to-response](#dsh-assign-to-response)
 2. [dsh --build-app](#dsh-build-app)
 
+### dsh flags ###
+
+The following is a brief summary of all the flags available to dsh.
+
+dsh --new [MODE] [ARGUMENTS...] : The new flag is used to create.
+Shorthand: dsh -n [MODE] [ARGUMENTS...]
+For more information use: dsh -h -n
+
+dsh --build-app [APP_NAME] [DOMAIN] : Build an App for a specified [DOMAIN].
+Shorthand: dsh -b [APP_NAME] [DOMAIN]
+For more information use: dsh -h -b
+
+dsh --start-development-server [PORT] : Start a development server.
+Shorthand: dsh -s [PORT]
+For more information use: dsh -h -s
+
+dsh --assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]
+Assign the component defined for the [APP_NAME] app whose name is [COMPONENT_NAME] and type is [COMPONENT_TYPE]
+to the response defined for the [APP_NAME] app whose name is [RESPONSE_NAME].
+Shorthand: dsh -a [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]
+For more information use: dsh -h -a
+
+dsh --help : Show help information about dsh.
+Shorthand: dsh -h
+For more information use: dsh -h -h
+
+dsh --help flags : Show brief help information about all dsh flags.
+Shorthand: dsh -h flags
+Your are currently viewing the output of dsh --help flags
+
+dsh --help [FLAG] : Show detailed help information about the specified flag.
+Shorthand: dsh -h [FLAG]
+For more information use: dsh -h FLAG
+
 ### dsh --assign-to-response | dsh -a
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]`
 
 Description:
+
 Assign the Component named `[COMPONENT_NAME]` whose type is `[COMPONENT_TYPE]` to the
-Response named `[RESPONSE_NAME]`
+Response or GlobalResponse named `[RESPONSE_NAME]`
 
 Shorthand:
+
 `dsh -a [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]`
 
 Arguments:
-`[APP_NAME]`              The name of the App the Response and Component are defined for.
-                        Note: The Response and Component MUST be defined for the same App.
 
-`[RESPONSE_NAME]`         The name of the Response the Component will be assigned to.
+`[APP_NAME]`              The name of the App the Response or GlobalResponse and
+                        Component are defined for.
 
-`[COMPONENT_NAME]`        The name of the Component to assign to the Response.
+                        Note: The Response or GlobalResponse and Component MUST
+                              be defined for the same App.
+
+`[RESPONSE_NAME]`         The name of the Response or GlobalResponse the Component
+                        will be assigned to.
+
+`[COMPONENT_NAME]`        The name of the Component to assign to the Response or
+                        GlobalResponse.
 
 `[COMPONENT_CONTAINER]`   The Component's container.
 
@@ -935,11 +979,17 @@ Arguments:
                         - DynamicOutputComponent
                         - Request
 
-Example:
+Examples:
+
+`dsh -a AppName ResponseName ComponentName ComponentContainer Request`
 
 `dsh -a AppName ResponseName ComponentName ComponentContainer OutputComponent`
 
+`dsh -a AppName ResponseName ComponentName ComponentContainer DynamicOutputComponent`
+
 ### dsh --build-app
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --build-app [APP_NAME] [DOMAIN]`
 
@@ -971,6 +1021,8 @@ WARNING: dsh will not prevent you from building an App multiple times for
          on the App being built.
 
 ### dsh --help [FLAG]
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 dsh --help [FLAG]
 
@@ -1023,6 +1075,10 @@ dsh -h -d
 dsh --help --php-unit
 dsh -h -p
 
+# dsh --help --help
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
+
 dsh --help --help
 
 The following is a brief summary of how to use the --help flag:
@@ -1031,14 +1087,29 @@ To get general information about dsh, use:
 
     dsh --help
 
-To get information about a specified flag use:
-
-    dsh --help [FLAG]
-
 To get brief information about all flags use:
 
     dsh --help flags
 
+To get information about a specified flag use:
+
+    dsh --help [FLAG]
+
+    Example:
+
+        dsh --help --new
+
+To get information about a mode of a modal flag use:
+
+    dsh --help [FLAG] [MODE]
+
+    Example:
+
+        dsh --help --new AppPackage
+
+### dsh --locate-ddms-directory
+
+[Back to top](#darling-data-management-system) | [dsh](#dsh)
 
 dsh --locate-ddms-directory
 
@@ -1050,49 +1121,8 @@ dsh -l
 
 Example:
 dsh -l
-.\" Manpage for dsh.
-.\" Contact sdmwebsdm@gmail.com to submit issues.
-.TH man 1 "01 January 2021" "0.0" "dsh man page"
-.SH NAME
-dsh
-.SH SYNOPSIS
-dsh [OPTION...]
-.SH DESCRIPTION
-dsh is a command line utility designed to aide in development with the Darling Data Management System.
-.SH OPTIONS
-dsh [-h|--help] [-n|--new [MODE]] [-b|--build-app [APP_NAME] [DOMAIN]] [-s|--start-development-server [PORT]] [-a|--assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]]
 
-For information about a specific flag please use dsh --help [FLAG]
-
-For example, to get information about the --new flag:
-
-    dsh --help --new
-
-.B or
-
-    dsh -h -n
-
-.SH SEE ALSO
-dshUI(1)
-.SH BUGS
-.B There are bugs if dsh and dshUI do not exist in PATH!
-.B Please make sure dsh and dshUI are in your PATH.
-.B If both dsh and dshUI are not in your PATH then there will likly be errors related to files
-.B and directories not being found, which may also lead to other errors. This is currently being
-.B addressed.
-
-.B Another important reason to make sure dsh is in your PATH:
-.B    If you have multiple installations of the Darling Data Management System
-.B    installed on your system you want to make sure the dsh that is run is always
-.B    the dsh that came with the installation you are currently developing with,
-.B    or you risk dsh acting on a one of the other installations!
-
-Please contact sdmwebsdm@gmail.com to submit issues. Please include a description of which dsh commands
-were run and in what order. Also, before submitting an issue please make sure dsh and dshUI are in your PATH,
-and if you have multiple installations of the Darling Data Management System make sure your PATH refers to the
-correct installations of dsh and dshUI.
-.SH AUTHOR
-Sevi Donnelly Foreman (sdmwebsdm@gmail.com)
+### dsh --new AppPackage
 
 dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]
 
@@ -1121,6 +1151,8 @@ Example:
 
 dsh -n AppPackage AppName "${HOME}" "http://localhost:8924"
 
+
+# dsh --new App
 
 dsh --new App [APP_NAME] [DOMAIN]
 
@@ -1165,6 +1197,7 @@ Example:
 
 dsh -n App AppName http://some.domain
 
+### dsh --new DynamicOutputComponent
 
 dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER]
                                  [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]
@@ -1208,8 +1241,7 @@ The example above would expect a Dynamic Output file named DOCFile.html exists i
 or
     Apps/[APP_NAME]/DOCFile.html
 
-
-
+### dsh --new GlobalResponse
 
 dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]
 
@@ -1233,6 +1265,8 @@ Example:
 
 dsh -n GlobalResponse AppName ResponseName 4.2
 
+
+### dsh --new OutputComponent
 
 dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER]
                           [OUTPUT_COMPONENT_POSITION] [OUTPUT]
@@ -1264,6 +1298,8 @@ Arguments:
 Example:
 
     dsh -n OutputComponent AppName OCName OCContainer 2.4 "<p>Hello world</p>"
+
+### dsh --new Request
 
 dsh --new Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]
 
@@ -1303,6 +1339,7 @@ Example:
 
     dsh -n Request AppName RequestName RequestContainer index.php?foo=bare
 
+### dsh --new Response
 
 dsh --new Response [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]
 
@@ -1327,6 +1364,9 @@ Example:
 
 dsh -n Response AppName ResponseName 0.3
 
+
+### dsh --new
+
 dsh --new | -n [MODE] [ARGUMENTS...]
 
 The new flag is used to create.
@@ -1347,36 +1387,14 @@ dsh --new Response
 dsh --new GlobalResponse
 
 For more information on the specific modes use:
+
 dsh --help --new [MODE]
 
 For example, to get more inforamation about the "App" mode:
+
 dsh --help --new App
-dsh --php-unit [PHP_UNIT_CONFIG_FILE_PATH]
 
-Description:
-
-Run PHP Unit. If [PHP_UNIT_CONFIG_FILE_PATH] is specified, then the file
-at that path will be passed to PHP Unit as the configiguration file,
-otherwise the Darling Data Management System's php.xml configuration
-file will be used.
-
-Shorthand:
-
-dsh -p [PHP_UNIT_CONFIG_FILE_PATH]
-
-Arguments:
-
-[PHP_UNIT_CONFIG_FILE_PATH] The path to the condiguration file to pass to PHP Unit's -c flag,
-                            the Darling Data Management System's php.xml file will be used
-                            if [PHP_UNIT_CONFIG_FILE_PATH] is not specified.
-
-Example:
-
-dsh -p /path/to/php/unit/configuration/file
-
-WARNING: This flag has not been implemented for dsh yet, it is stil under development.
-         It will not do anything at the moment.
-
+### dsh --query-app-package
 
 dsh --query-app-package-config [PATH_TO_APP_PACKAGE] [SETTING_NAME]
 
@@ -1389,6 +1407,7 @@ dsh -q PATH_TO_APP_PACKAGE] [SETTING_NAME]
 Example:
 dsh -q /path/to/app/package domain
 
+### dsh --start-development-server
 
 dsh --start-development-server [PORT]
 
@@ -1409,49 +1428,5 @@ Arguments:
 Example:
 
 dsh -s 8420
-
-### dsh flags ###
-
-The following is a brief summary of all the flags available to dsh.
-
-dsh --new [MODE] [ARGUMENTS...] : The new flag is used to create.
-Shorthand: dsh -n [MODE] [ARGUMENTS...]
-For more information use: dsh -h -n
-
-dsh --build-app [APP_NAME] [DOMAIN] : Build an App for a specified [DOMAIN].
-Shorthand: dsh -b [APP_NAME] [DOMAIN]
-For more information use: dsh -h -b
-
-dsh --start-development-server [PORT] : Start a development server.
-Shorthand: dsh -s [PORT]
-For more information use: dsh -h -s
-
-dsh --assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]
-Assign the component defined for the [APP_NAME] app whose name is [COMPONENT_NAME] and type is [COMPONENT_TYPE]
-to the response defined for the [APP_NAME] app whose name is [RESPONSE_NAME].
-Shorthand: dsh -a [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]
-For more information use: dsh -h -a
-
-WARNING: dsh --dsh-unit has not been implemented yet! It will not work!
-dsh --dsh-unit [DSH_UNIT_CONFIG_FILE_PATH] [TEST_GROUP_NAME] Run dshUnit tests.
-Shorthand: dsh -d [DSH_UNIT_CONFIG_FILE_PATH] [TEST_GROUP_NAME]
-For more information use: dsh -h -d
-
-WARNING: dsh --php-unit has not been implemented yet! It will not work!
-dsh --php-unit [PHP_UNIT_CONFIG_FILE_PATH] Run PhpUnit tests.
-Shorthand: dsh -p [PHP_UNIT_CONFIG_FILE_PATH]
-For more information use: dsh -h -p
-
-dsh --help : Show help information about dsh.
-Shorthand: dsh -h
-For more information use: dsh -h -h
-
-dsh --help flags : Show brief help information about all dsh flags.
-Shorthand: dsh -h flags
-Your are currently viewing the output of dsh --help flags
-
-dsh --help [FLAG] : Show detailed help information about the specified flag.
-Shorthand: dsh -h [FLAG]
-For more information use: dsh -h FLAG
 
 
