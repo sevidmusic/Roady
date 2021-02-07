@@ -292,7 +292,7 @@ GlobalResponses are defined via [`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RE
 3. Define a GlobalResponse for the HelloWorld App.
 
    Note: Responses and GlobalResponses defined in Responses.sh should always use
-         the `"${app_name}" variable to indicate the `[APP_AME]`. This only applies
+         the `"${app_name}"` variable to indicate the `[APP_AME]`. This only applies
          to calls made to dsh from within an App Package's Responses.sh, always
          specify the App's actual alphanumeric name when calling dsh from the
          command line.
