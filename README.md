@@ -1204,9 +1204,9 @@ Arguments:
 `[DYNAMIC_OUTPUT_FILE_NAME]`           The name of the Dynamic Output file to assign to the
                                      DynamicOutputComponent. This file MUST exist in either:
 
-                                         `DarlingDataManagementSystem/SharedDynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]`
-                                     or
-                                         `DarlingDataManagementSystem/Apps/[APP_NAME]/DynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]`
+`DarlingDataManagementSystem/SharedDynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]`
+or
+`DarlingDataManagementSystem/Apps/[APP_NAME]/DynamicOutput/[DYNAMIC_OUTPUT_FILE_NAME]`
 
 Example:
 
