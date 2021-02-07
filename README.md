@@ -1420,7 +1420,7 @@ Shorthand:
 
 Arguments:
 
-[PORT] A port number, defaults to 8080
+`[PORT]` A port number, defaults to 8080
 
 Example:
 
