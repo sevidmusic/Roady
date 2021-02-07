@@ -919,7 +919,7 @@ from a web browser.
 
 ### dsh
 
-[Back to top](#darling-data-management-system)
+[Back to top](#darling-data-management-system) | [Back to Setup Development Tools(#setup-development-tools)
 
 dsh is a command line utility designed to aide in the development process with the
 Darling Data Management System. The following is an overview of dsh:
