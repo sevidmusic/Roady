@@ -1149,7 +1149,8 @@ Incorrect:
 `[DOMAIN]` : The domain to assign as the App's default domain.
 
 Note: Specifying the `[DOMAIN]` does not tie the App to the specified domain, an
-      App can be built for one, or many domains.
+      App can always be built for a different domain than it's default by specifying
+      an alternative domain when [`dsh --build-app`](#dsh---build-app) is called.
 
 Example:
 
