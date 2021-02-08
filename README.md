@@ -407,7 +407,7 @@ The following is an overview of the steps taken in this demo:
 
 - A development server was started at `http://localhost:8080` via `dsh --start-development-server`.
 
-The new HelloWorld App is now running on `http://localhost:8080` and can be accessed
+The new HelloWorld App is now running on [http://localhost:8080](http://localhost:8080) and can be accessed
 from a web browser.
 
 # Single App Website Demo
