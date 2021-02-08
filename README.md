@@ -118,18 +118,18 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
 
 5. Add dsh, dshUI, and optionally dshUnit to your `$PATH`.
 
-   Run: `vim "${HOME}/.bash_profile"`
+   Run: `vim "$HOME/.bash_profile"`
 
    _Make sure to adjust the paths in the examples below if the Darling Data_
    _Management System is installed in a different location._
 
-   Add: `${HOME}/Downloads/DarlingDataManagementSystem/dsh:`
+   Add: `$HOME/Downloads/DarlingDataManagementSystem/dsh:`
 
-   Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUI:`
+   Add: `$HOME/Downloads/DarlingDataManagementSystem/dshUI:`
 
-   Add: `${HOME}/Downloads/DarlingDataManagementSystem/dshUnit`
+   Add: `$HOME/Downloads/DarlingDataManagementSystem/dshUnit`
 
-   Run: `source "${HOME}/.bash_profile"`
+   Run: `source "$HOME/.bash_profile"`
 
 Your `.bash_profile` should now resemble:
 
@@ -138,7 +138,7 @@ Your `.bash_profile` should now resemble:
 # ~/.bash_profile
 #
 
-PATH="${PATH}:${HOME}/Downloads/DarlingDataManagementSystem/dsh:${HOME}/Downloads/DarlingDataManagementSystem/dshUI:${HOME}/Downloads/DarlingDataManagementSystem/dshUnit"
+PATH="${PATH}:$HOME/Downloads/DarlingDataManagementSystem/dsh:$HOME/Downloads/DarlingDataManagementSystem/dshUI:$HOME/Downloads/DarlingDataManagementSystem/dshUnit"
 
 PS1="\e[44m\e[36m\w\e[0m\e[32m\n\$\e[34m "
 
@@ -693,11 +693,11 @@ For example, to create the new App Package at `$HOME/AppPackageName`:
 
 Correct:
 
-`dsh -n AppPackage AppPackageName "${HOME}" "http://default.domain/"`
+`dsh -n AppPackage AppPackageName "$HOME" "http://default.domain/"`
 
 Incorrect:
 
-`dsh -n AppPackage AppPackageName "${HOME}/AppPackageName" "http://default.domain/"`
+`dsh -n AppPackage AppPackageName "$HOME/AppPackageName" "http://default.domain/"`
 
 `[DOMAIN]` : The domain to assign as the App's default domain.
 
@@ -707,7 +707,7 @@ Note: Specifying the `[DOMAIN]` does not tie the App to the specified domain, an
 
 Example:
 
-`dsh -n AppPackage AppName "${HOME}" "http://localhost:8924"`
+`dsh -n AppPackage AppName "$HOME" "http://localhost:8924"`
 
 
 # dsh --new App
