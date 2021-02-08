@@ -246,7 +246,7 @@ creation of an App Package.
 New App Packages are created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage)
 
 
-Step 1. Create a new App Package for the HelloWorld App
+1. Create a new App Package for the HelloWorld App
 
         Run: `dsh -n AppPackage HelloWorld "$HOME"`
 
