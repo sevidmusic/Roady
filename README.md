@@ -218,7 +218,7 @@ New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_A
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-# Hello World Guide
+### Hello World Guide
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
 
