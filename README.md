@@ -352,7 +352,7 @@ configuration scripts.
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 Once an App has been made via dsh --make-app, it can be built for one or more
-domains via `dsh --build-app [APP_NAME] [DOMAIN]`.
+domains via [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b).
 
 By default `dsh --build-app` will build an App for the domain defined in the App's
 `Components.php` file. This domain will have been set by `dsh --make-app` to the value
