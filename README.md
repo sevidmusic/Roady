@@ -1002,7 +1002,7 @@ Description:
 
 Makes an instance of an App for the Darling Data Management System from an App
 Package. If an App with the same name already exists, then the App will not be
-made unless the string `replace` is passed to the [REPLACE_EXISTING_APP] argument.
+made unless the string `replace` is passed to the `[REPLACE_EXISTING_APP]` argument.
 
 Shorthand:
 
