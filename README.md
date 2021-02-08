@@ -518,7 +518,10 @@ Build an App for a specified `[DOMAIN]` by running the App's
 
 Note: A Components.php file MUST be defined for the App at:
 
-      `Apps/[APP_NAME]/Components.php`
+      `DarlingDataManagementSystem/Apps/[APP_NAME]/Components.php`
+
+      If [`dsh --make-app`](#dsh---make-app--dsh--m) was used to create the App
+      from an App Package then Components.php will have been created by dsh.
 
 Shorthand:
 
