@@ -379,6 +379,7 @@ via PHP on a specific port on localhost:
 Once started, the server can be reached from a web browser via [http://localhost:8080](http://localhost:8080)
 
 7. Start a development server on local host at port `8080`.
+
    Development server will be reachable via [http://localhost:8080](http://localhost:8080)
 
    Run: `dsh -s 8080`
