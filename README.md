@@ -464,14 +464,6 @@ to reproduce an instance of the App for a Darling Data Management System install
 
 App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage).
 
-Note: Do not specify a name for the new App Package in the `[PATH_TO_APP_PACKAGE]`
-argument, only specify the path to the directory where the new App Package should
-be created. The name of the App Package's directory will be `[APP_NAME]`.
-
-Note: A default domain to run the App on can optionally be specified via the third
-`[DOMAIN]` argument. If the `[DOMAIN]` argument is not specified the default
-domain will be `http://localhost:8080`.
-
 Step 1. Create a new App Package for the App that will generate output for
         the website, this App will be named "SingleAppWebsite":
 
