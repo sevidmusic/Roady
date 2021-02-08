@@ -376,10 +376,10 @@ can be found at:
 `dsh --start-development-server [PORT]` can be used to start a development server
 via PHP on a specific port on localhost:
 
-Once started, the server can be reached from a web browser via `http://localhost:PORT`
+Once started, the server can be reached from a web browser via [http://localhost:PORT](http://localhost:8080)
 
 7. Start a development server on local host at port `8080`.
-   Development server will be reachable via `http://localhost:8080`
+   Development server will be reachable via [http://localhost:PORT](http://localhost:8080)
 
    Run: `dsh -s 8080`
 
@@ -387,7 +387,7 @@ Once started, the server can be reached from a web browser via `http://localhost
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-8. To view the HelloWorld App, open a web browser and go to `http://localhost:8080`
+8. To view the HelloWorld App, open a web browser and go to [http://localhost:PORT](http://localhost:8080)
 
 ### Hello World Guide Overview
 
