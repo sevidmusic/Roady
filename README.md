@@ -689,7 +689,7 @@ Arguments:
 
 Note: Do not include the App Package's name in the `[PATH_TO_NEW_APP_PACKAGE]`.
 
-      For example, to create the new App Package at `$HOME/AppPackageName`:
+For example, to create the new App Package at `$HOME/AppPackageName`:
 
 Correct:
 
