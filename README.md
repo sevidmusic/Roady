@@ -1109,7 +1109,8 @@ Example:
 
 ### dsh --new AppPackage
 
-[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Apps And App Packages](#apps-and-app-packages) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Apps And App Packages](#apps-and-app-packages) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app) | [Back to SingleAppWebsite Guide](#create-a-new-app-package)
+
 
 `dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]`
 
