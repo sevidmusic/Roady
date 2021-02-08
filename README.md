@@ -28,7 +28,7 @@ The Darling Data Management System requires [PHP](https://github.com/php/php-src
 
 The Darling Data Management System requires [Composer](https://github.com/composer/composer).
 
-A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.1-alpha)
+A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.2-alpha)
 of the Darling Data Management System is available now.
 
 The Darling Data Management System version 1.0.0 will be released in the next few days.
