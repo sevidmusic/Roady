@@ -684,7 +684,8 @@ Arguments:
 
 `[APP_NAME]` : The name of the App this App Package represents.
 
-`[PATH_TO_NEW_APP_PACKAGE]` : The path to where the new App Package will be created.
+`[PATH_TO_NEW_APP_PACKAGE]` : The path to the directory where the new App Package
+                              will be created.
 
 Note: Do not include the App Package's name in the `[PATH_TO_NEW_APP_PACKAGE]`.
       For example, to create the new App Package at `$HOME/AppPackageName`:
