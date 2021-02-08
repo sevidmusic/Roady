@@ -420,6 +420,10 @@ from a web browser.
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo)
 
+Written documentation for the Single App Website demo is still in development...
+The [Single App Website Demo](#single-app-website-demo) can be followed on it's
+own in the meantime.
+
 ### dsh
 
 [Back To Top](#darling-data-management-system) | [Back to Setup Development Tools](#setup-development-tools)
