@@ -986,6 +986,7 @@ Build an App for a specified `[DOMAIN]` by running the App's
 `Components.php` file via php.
 
 Note: A Components.php file MUST be defined for the App at:
+
       `Apps/[APP_NAME]/Components.php`
 
 Shorthand:
@@ -999,6 +1000,7 @@ Arguments:
 `[DOMAIN]`   The domain to build the App for.
            If `[DOMAIN]` is not specified then the domain defined
            in the App's `Components.php` file will be used.
+
 Example:
 
 `dsh -b AppName http://localhost:8080/`
