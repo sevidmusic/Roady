@@ -354,16 +354,10 @@ configuration scripts.
 Once an App has been made via dsh --make-app, it can be built for one or more
 domains via [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b).
 
-By default `dsh --build-app` will build an App for the domain defined in the App's
-`Components.php` file. This domain will have been set by `dsh --make-app` to the value
-assigned to the domain variable defined in the relevant App Packages `config.sh`
-configuration script.
-
-It is safe to modify the domain defined in the App's `Components.php` file after
-the App has been made, however, `dsh --build-app` takes an optional domain as the
-second argument, so there is really no need to modify the domain set in App's
-`Components.php` file, instead just use `dsh --build-app [APP_NAME] [DOMAIN]` to
-easily build the App for one or more domains.
+If `[DOMAIN]` is not specified, `dsh --build-app` will build an App for the domain
+defined in the App's `Components.php` file. This domain will have been set by
+`dsh --make-app` to the value assigned to the domain variable defined in the
+relevant App Packages `config.sh` configuration script.
 
 6. Build the HelloWorld App to run on `http://localhost:8080`
 
