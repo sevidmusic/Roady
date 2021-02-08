@@ -995,7 +995,7 @@ Warning: This flag is still being developed. It is working as intended with
 the exception of the `[REPLACE_EXISTING_APP]` argument. Apps can be made via
 `dsh --make-app`, but it is not yet possible to force dsh to replace an existing
 App that shares the same name as the App to be made via `dsh --make-app AppPackage replace`
-This is being addressed as part of the completions of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95).
+This is being addressed as part of the completion of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95).
 
 
 `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`
