@@ -462,7 +462,7 @@ is always to create a new App Package for the App to be developed.
 The purpose of an App Package is to provide a snapshot of an App that can be used
 to reproduce an instance of the App for a Darling Data Management System installation.
 
-App Packages can be created via `dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`.
+App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage).
 
 Note: Do not specify a name for the new App Package in the `[PATH_TO_APP_PACKAGE]`
 argument, only specify the path to the directory where the new App Package should
