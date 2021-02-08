@@ -131,6 +131,20 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
 
    Run: `source "${HOME}/.bash_profile"`
 
+Your `.bash_profile` should now resemble:
+
+```
+#
+# ~/.bash_profile
+#
+
+PATH="${PATH}:/var/lib/snapd/snap/bin:${HOME}/.local/bin:${HOME}/Downloads/DarlingDataManagementSystem/dsh:${HOME}/Downloads/DarlingDataManagementSystem/dshUI:${HOME}/Downloads/DarlingDataManagementSystem/dshUnit"
+
+PS1="\e[44m\e[36m\w\e[0m\e[32m\n\$\e[34m "
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+```
+
 Finally, please note that dsh, dshUI, and dshUnit are not required on production
 installation of the Darling Data Management System, in fact, for security, they
 should probably not be included in a production installation! They are intended to
