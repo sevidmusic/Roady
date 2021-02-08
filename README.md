@@ -19,7 +19,7 @@
 
 # About
 
-[Back to top](#darling-data-management-system)
+[Back To Top](#darling-data-management-system)
 
 Welcome to the Darling Data Management System, a tool designed to aide in the
 development of well organized PHP applications.
@@ -45,7 +45,7 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 # Installation
 
-[Back to top](#darling-data-management-system)
+[Back To Top](#darling-data-management-system)
 
 1. [Installation Demo](#installation-demo)
 2. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
@@ -53,13 +53,13 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 ### Installation Demo
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif)
+[Back To Top](#darling-data-management-system) | [Installation](#installation) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif)
 
 ![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
 ### Install From GitHub And Setup Via Composer
 
-[Back to top](#darling-data-management-system) | [Installation](#installation)
+[Back To Top](#darling-data-management-system) | [Installation](#installation)
 
 The Darling Data Management System can be installed from GitHub
 and setup via [Composer](https://github.com/composer/composer).
@@ -84,7 +84,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
 ### Setup Development Tools
 
-[Back to top](#darling-data-management-system) | [Installation](#installation)
+[Back To Top](#darling-data-management-system) | [Installation](#installation)
 
 Skip explanation and go to: [Add dsh, dshUI, And Optionally dshUnit to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
 
@@ -111,7 +111,7 @@ If you would like to try dshUnit, add it as well.
 
 ### Add dsh, dshUI, And Optionally dshUnit To Your `$PATH`
 
-[Back to top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
+[Back To Top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
 
 Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bash_profile`,
       this is not required, vim is awesome, but unrelated to the Darling Data Management
@@ -139,7 +139,7 @@ be used during development with the Darling Data Management System.
 
 # Getting Started
 
-[Back to top](#darling-data-management-system)
+[Back To Top](#darling-data-management-system)
 
 1. [Apps and App Packages](#apps-and-app-packages)
 2. [Hello World Demo](#hello-world-demo)
@@ -149,7 +149,7 @@ be used during development with the Darling Data Management System.
 
 ### Apps And App Packages
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started)
 
 One of the ways the Darling Data Management System helps encourage organization
 is by providing an architecture that allows the development of large applications
@@ -201,13 +201,13 @@ New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_A
 
 ### Hello World Demo
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
 # Hello World Guide
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
 
 The following Hello World guide demonstrates one possible implementation of a
 Hello World App. The Hello World guide will also demonstrate the use of dsh,
@@ -225,7 +225,7 @@ Components, Apps, and App Packages.
 
 ### Create An App Package For The HelloWorld App
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 The Darling Data Management System's development process always starts with the
 creation of an App Package.
@@ -239,7 +239,7 @@ Step 1. Create a new App Package for the HelloWorld App
 
 ### Make The HelloWorld App Package's Scripts Executable
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 App's are made from App Packages via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
@@ -252,7 +252,7 @@ the bash scripts in the App package must be executable.
 
 # Define A GlobalResponse For The HelloWorld App
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 When a user makes a Request to the domain of a website running on the Darling
 Data Management System the first thing that happens is the Darling Data Management
@@ -292,7 +292,7 @@ GlobalResponses are defined via [`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RE
 
 ### Define An OutputComponent For The HelloWorld App
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 The output of an App is defined using OutputComponents and DynamicOutputComponents.
 
@@ -328,7 +328,7 @@ OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_
 
 ### Make The HelloWorld App from The HelloWorld App Package
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 An instance of an App can be made from an App Package via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
@@ -349,7 +349,7 @@ configuration scripts.
 
 ### Build The HelloWorld App To Run On `http://localhost:8080`
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 Once an App has been made via dsh --make-app, it can be built for one or more
 domains via `dsh --build-app [APP_NAME] [DOMAIN]`.
@@ -371,7 +371,7 @@ easily build the App for one or more domains.
 
 ### Start A Development Server On localhost On Port 8080
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 App's can be built to run on one, or many domains.
 
@@ -396,13 +396,13 @@ Once started, the server can be reached from a web browser via `http://localhost
 
 ### View The New HelloWorld App Running On `http://localhost:8080` In A Web Browser
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 8. To view the HelloWorld App, open a web browser and go to `http://localhost:8080`
 
 ### Hello World Guide Overview
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 The following is an overview of the steps taken in this demo:
 
@@ -422,13 +422,13 @@ from a web browser.
 
 # Single App Website Demo
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) |  [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) |  [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif) | [Single App Website Guide](#single-app-website-guide)
 
 ![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
 # Single App Website Guide
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo)
 
 The following guide demonstrates one possible implementation of an entire
 website using a single App. This guide will also demonstrate the use of dsh,
@@ -448,7 +448,7 @@ Components, Apps, and App Packages.
 
 ### Preface
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 PHP is most commonly used to develop websites. The Darling Data Management System
 was designed with this in mind, and though it could be used for other purposes,
@@ -464,7 +464,7 @@ Single App Site Pages:
 
 ### Create A New App Package
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The first step in the development process with the Darling Data Management System
 is always to create a new App Package for the App to be developed.
@@ -489,7 +489,7 @@ Step 1. Create a new App Package for the App that will generate output for
 
 ### Make The New App Package's Scripts Executable
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 App's are [made](#making-an-app-from-an-app-package) from App Packages via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
 
@@ -504,7 +504,7 @@ Note: Issue [#111](https://github.com/sevidmusic/DarlingDataManagementSystem/iss
 
 ### App Data
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The Darling Data Management System's understanding of an App is based on the App's
 data. An App's data consists of the App's source code, and the Darling Data Management
@@ -525,7 +525,7 @@ parts of the website.
 
 ### Components
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The following Component types will be used in this example:
 
@@ -558,7 +558,7 @@ DynamicOutputComponent DynamicOutputComponents are used to define an App's dynam
 
 ### Responses And Global Responses
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 It is usually best to define the App's Responses and GlobalResponses first, this
 will help to make the App's larger structure clear before other Components are
@@ -586,7 +586,7 @@ Baz Position: 0.2
 
 ### Define The App's Responses And Global Responses
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 Responses and GlobalResponses are defined in the App Package's Responses.sh
 configuration script.
@@ -631,7 +631,7 @@ configuration script.
 
 ### Dynamic Output Files
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The next step is to create any dynamic output files referenced by the
 DynamicOutputComponents defined by the App Package.
@@ -664,7 +664,7 @@ will be used.
 
 ### Create The HtmlHead.php Dynamic Output File
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The App Package in this example defines a DynamicOutputComponent named HtmlHead
 which references a dynamic output file named HtmlHead.php, this file must be created
@@ -706,7 +706,7 @@ $pagename = array_pop($getKeys);
 
 ### Create The Css File Referenced By HtmlHead.php
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The HtmlHead.php dynamic output file's content contains a `<link>` tag that references
 a css file, styles.css, this css file must be created in the App Package's css directory.
@@ -740,7 +740,7 @@ p { margin-left: 3em; }
 ```
 ### Create The MainMenu.html Dynamic Output File
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The App Package in this example defines a DynamicOutputComponent named MainMenu
 which references a dynamic output file named MainMenu.html, this file must be created
@@ -763,7 +763,7 @@ in the App Package's DynamicOutput directory.
 
 ### Create The Homepage.php Dynamic Output File
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The App Package in this example defines a DynamicOutputComponent named Homepage
 which references a dynamic output file named Homepage.html, this file must be created
@@ -782,7 +782,7 @@ in the App Package's DynamicOutput directory.
 
 ### Create The Pictures.html Dynamic Output File
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 10. Create Pictures.html:
 
@@ -819,7 +819,7 @@ in the App Package's DynamicOutput directory.
 
 ### Make the SingleAppWebsite App
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 An instance of an App can be made from an App Package via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
 
@@ -840,7 +840,7 @@ configuration scripts.
 
 ### Build The App
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 Once an App has been made via `dsh --make-app`, it can be built for one or more
 domains via the `dsh --build-app [APP_NAME] [DOMAIN]`.
@@ -862,7 +862,7 @@ easily build the App for one or more domains.
 
 ### Start A Development Server
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 App's can be built to run on one, or many domains.
 
@@ -888,7 +888,7 @@ The development server will be reachable via `http://localhost:8080`
 
 ### Overview Of SingleAppWebsite Guide
 
-[Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo) | [Single App Website Guide](#single-app-website-guide)
 
 The following is an overview of the steps taken in this demo:
 
@@ -908,7 +908,7 @@ from a web browser.
 
 ### dsh
 
-[Back to top](#darling-data-management-system) | [Back to Setup Development Tools](#setup-development-tools)
+[Back To Top](#darling-data-management-system) | [Back to Setup Development Tools](#setup-development-tools)
 
 dsh is a command line utility designed to aide in the development process with the
 Darling Data Management System. The following is an overview of dsh:
@@ -932,7 +932,7 @@ Darling Data Management System. The following is an overview of dsh:
 
 ### dsh --assign-to-response | dsh -a
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --assign-to-response [APP_NAME] [RESPONSE_NAME] [COMPONENT_NAME] [COMPONENT_CONTAINER] [COMPONENT_TYPE]`
 
@@ -976,7 +976,7 @@ Examples:
 
 ### dsh --build-app | dsh -b
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to dsh --new AppPackage](#dsh---new-apppackage)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to dsh --new AppPackage](#dsh---new-apppackage)
 
 `dsh --build-app [APP_NAME] [DOMAIN]`
 
@@ -1009,7 +1009,7 @@ WARNING: dsh will not prevent you from building an App multiple times for
 
 ### dsh --help [FLAG]
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --help [FLAG]`
 
@@ -1067,7 +1067,7 @@ dsh -h -p
 
 # dsh --help --help
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --help --help`
 
@@ -1099,7 +1099,7 @@ To get information about a mode of a modal flag use:
 
 ### dsh --locate-ddms-directory
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --locate-ddms-directory`
 
@@ -1117,7 +1117,7 @@ Example:
 
 ### dsh --new AppPackage
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to Apps And App Packages](#apps-and-app-packages) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Apps And App Packages](#apps-and-app-packages) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app)
 
 `dsh --new AppPackage [APP_NAME] [PATH_TO_NEW_APP_PACKAGE] [DOMAIN]`
 
@@ -1198,7 +1198,7 @@ Example:
 
 ### dsh --new DynamicOutputComponent
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER] [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE_NAME]`
 
@@ -1244,7 +1244,7 @@ or
 
 ### dsh --new GlobalResponse
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide](#define-a-globalresponse-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide](#define-a-globalresponse-for-the-helloworld-app)
 
 `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
@@ -1271,7 +1271,7 @@ Example:
 
 ### dsh --new OutputComponent
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide](#define-an-outputcomponent-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide](#define-an-outputcomponent-for-the-helloworld-app)
 
 `dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`
 
@@ -1305,7 +1305,7 @@ Example:
 
 ### dsh --new Request
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --new Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]`
 
@@ -1347,7 +1347,7 @@ Example:
 
 ### dsh --new Response
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --new Response [APP_NAME] [RESPONSE_NAME] [RESPONSE_POSITION]`
 
@@ -1375,7 +1375,7 @@ Example:
 
 ### dsh --new
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --new | -n [MODE] [ARGUMENTS...]`
 
@@ -1408,7 +1408,7 @@ For example, to get more information about the "App" mode:
 
 ### dsh --query-app-package
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --query-app-package-config [PATH_TO_APP_PACKAGE] [SETTING_NAME]`
 
@@ -1427,7 +1427,7 @@ Example:
 
 ### dsh --start-development-server
 
-[Back to top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
 `dsh --start-development-server [PORT]`
 
@@ -1450,6 +1450,8 @@ Example:
 `dsh -s 8420`
 
 ### dsh --make-app | dsh -m
+
+[Back To Top]() | [Back to Hello World Guide](#make-the-helloworld-app-packages-scripts-executable)
 
 Warning: This flag is still being developed. It is working as intended with
 the exception of the `[REPLACE_EXISTING_APP]` argument. This is being addressed
