@@ -250,6 +250,19 @@ New App Packages are created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_
 
    Run: `dsh -n AppPackage HelloWorld "$HOME"`
 
+If the HelloWorld App package was created successfully the output of `ls "$HOME/HelloWorld"`
+should be:
+
+```
+config.sh
+css
+DynamicOutput
+js
+OutputComponents.sh
+Requests.sh
+Responses.sh
+```
+
 ### Make The HelloWorld App Package's Scripts Executable
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
