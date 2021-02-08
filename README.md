@@ -138,7 +138,7 @@ Your `.bash_profile` should now resemble:
 # ~/.bash_profile
 #
 
-PATH="${PATH}:/var/lib/snapd/snap/bin:${HOME}/.local/bin:${HOME}/Downloads/DarlingDataManagementSystem/dsh:${HOME}/Downloads/DarlingDataManagementSystem/dshUI:${HOME}/Downloads/DarlingDataManagementSystem/dshUnit"
+PATH="${PATH}:${HOME}/Downloads/DarlingDataManagementSystem/dsh:${HOME}/Downloads/DarlingDataManagementSystem/dshUI:${HOME}/Downloads/DarlingDataManagementSystem/dshUnit"
 
 PS1="\e[44m\e[36m\w\e[0m\e[32m\n\$\e[34m "
 
