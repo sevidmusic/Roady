@@ -241,7 +241,7 @@ Step 1. Create a new App Package for the HelloWorld App
 
 [Back to top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-App's are made from App Packages via `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`.
+App's are made from App Packages via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
 In order for the App Package to be able to be made into an App later via `dsh --make-app`,
 the bash scripts in the App package must be executable.
