@@ -258,7 +258,7 @@ dependencies     Associative array of dependencies, whose indexes are App names,
 
 description      A plain text description of the App the App Package represents.
 
-developers       Array of he names of the developers of the App.
+developers       Array of the names of the developers of the App.
 
 development_port The default port to use when running the App on http://localhost:PORT
 
@@ -303,7 +303,7 @@ description="The HelloWorld App was developed for the Darling Data Management Sy
 
 developers=("Sevi Donnelly Foreman")
 
-development_port="PORT"
+development_port="8080"
 
 documentation="self-documented"
 
@@ -347,7 +347,7 @@ description="The HelloWorld App was developed for the Darling Data Management Sy
 
 developers=("Sevi Donnelly Foreman")
 
-development_port="PORT"
+development_port="8080"
 
 documentation="self-documented"
 
@@ -367,7 +367,7 @@ pictures_response_name="Pictures"
 ```
 
 Any variables defined in `config.sh` can be referenced within `Responses.sh`, `Requests.sh`,
-and `OutputComponents.sh`.
+or `OutputComponents.sh`.
 
 Always make sure that an App Package's configuration scripts are executable or
 `dsh --make-app` will fail when it is called to make the App.
