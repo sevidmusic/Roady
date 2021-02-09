@@ -134,6 +134,8 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
 
    Run: `source "$HOME/.bash_profile"`
 
+Example `.bash_profile`
+
 Your `.bash_profile` should now resemble:
 
 ```
