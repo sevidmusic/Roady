@@ -244,8 +244,8 @@ bug_contact      A reference to where bugs can be submitted, this should be an e
                  or a url to a online resource where bugs can be submitted.
 
 config_locked    The use of this variable has not been implemented yet, but in the
-                 future it will be used to prevent dsh from modyfing an App Package's
-                 config.sh.
+                future it will be used to prevent dsh from modyfing an App Package's
+                config.sh.
 
 dependencies     Associative array of dependencies, whose indexes are App names,
                  and values are version numbers.
