@@ -120,7 +120,7 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
       System. Any text editor will suffice.
 
 5. Add dsh, dshUI, and optionally dshUnit to your `$PATH`.
-   Go to example [`.bash_profile`](#example--bash-profile)
+   Go to example [`.bash_profile`](#example-bash_profile)
 
    Run: `vim "$HOME/.bash_profile"`
 
