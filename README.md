@@ -126,11 +126,11 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bas
    _Make sure to adjust the paths in the examples below if the Darling Data_
    _Management System is installed in a different location._
 
-   Add: `$HOME/Downloads/DarlingDataManagementSystem/dsh:`
+   Add to `$PATH`: `$HOME/Downloads/DarlingDataManagementSystem/dsh:`
 
-   Add: `$HOME/Downloads/DarlingDataManagementSystem/dshUI:`
+   Add to `$PATH`: `$HOME/Downloads/DarlingDataManagementSystem/dshUI:`
 
-   Add: `$HOME/Downloads/DarlingDataManagementSystem/dshUnit`
+   Add to `$PATH`: `$HOME/Downloads/DarlingDataManagementSystem/dshUnit`
 
    Run: `source "$HOME/.bash_profile"`
 
