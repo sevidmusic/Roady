@@ -221,6 +221,18 @@ AppPackageName/
 
 New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage).
 
+The Darling Data Management System's understanding of an App is based on the App's
+data. An App's data consists of the App's source code, and the Darling Data Management
+System Components that the App defines.
+
+The Darling Data Management System provides a number of Components that can be used
+to to implement an App. Components are objects that conform to niche interfaces
+that represent the various parts of an application.
+
+Legos are a good analogy for Components, like Legos, individual Components are
+used together to implement a larger design. Also, like Legos, Components can be
+reused in various contexts to implement a variety of designs.
+
 An App's Components are defined in the relevant App Packages configuration scripts.
 These configuration scripts are just bash scripts that make appropriate calls to
 dsh that will be executed whenever `dsh --make-app` is run.
