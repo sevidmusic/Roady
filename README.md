@@ -342,7 +342,7 @@ developers=("Sevi Donnelly Foreman")
 
 development_port="PORT"
 
-documentation="DOCUMENTATION_SOURCE"
+documentation="self-documented"
 
 domain="http://localhost:8080"
 
