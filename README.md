@@ -221,14 +221,14 @@ dsh that will be executed whenever `dsh --make-app` is run.
 
 An App Package will always have at least four configuration scripts:
 
-1. Responses.sh:
+1. `Responses.sh`:
    This file is where an App's Responses and GlobalResponse are defined.
 
-2. Requests.sh:
+2. `Requests.sh`:
    This file is where an App's Requests are defined and assigned to
    appropriate Responses.
 
-3. OutputComponents.sh:
+3. `OutputComponents.sh`:
    This file is where an App's OutputComponents and DynamicOutputComponents are
    defined and assigned to the appropriate Responses and GlobalResponses.
 
@@ -311,11 +311,12 @@ version_date="Tue Feb  9 12:12:53 AM EST 2021"
 ```
 
 Additional variables may also be defined in config.sh, though they will not be
-used by dsh. An practical example of defining additional variables could be to
-define a variable for the name of a Response that is going to have many Requests,
-OutputComponents, and DynamicOutputComponents assigned to it.
+used by dsh. A practical example of defining additional variables could be to
+define variables for the names of Responses that are going to have many Requests,
+OutputComponents, and DynamicOutputComponents assigned to them.
 
 For example:
+
 ```
 #!/bin/bash
 # HelloWorld | config.sh
@@ -359,8 +360,8 @@ homepage_response_name="Homepage"
 pictures_response_name="Pictures"
 ```
 
-Any variables defined in config.sh can be referenced within Responses.sh, Requests.sh,
-and OutputComponents.sh.
+Any variables defined in config.sh can be referenced within `Responses.sh`, `Requests.sh`,
+and `OutputComponents.sh`.
 
 Always make sure that an App Package's configuration scripts are executable or
 `dsh --make-app` will fail when it is called to make the App.
