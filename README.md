@@ -369,6 +369,21 @@ pictures_response_name="Pictures"
 Any variables defined in `config.sh` can be referenced within `Responses.sh`, `Requests.sh`,
 or `OutputComponents.sh`.
 
+For example, the Custom Variables in the example `config.sh` above could be
+referenced in an App Package's Responses.sh as follows:
+
+```
+#!/bin/bash
+# Responses.sh
+
+# ...
+
+dsh -n GlobalResponse "${app_name}" "${homepage_response_name}" 0
+
+dsh -n GlobalResponse "${app_name}" "${pictures_response_name}" 0
+
+```
+
 Always make sure that an App Package's configuration scripts are executable or
 `dsh --make-app` will fail when it is called to make the App.
 
