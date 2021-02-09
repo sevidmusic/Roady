@@ -639,7 +639,16 @@ from a web browser.
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo)
 
-Written documentation for the Single App Website demo is still in development...
+PHP is most commonly used to develop websites. The Darling Data Management System was designed with this in mind, and though it could be used for other purposes, the most likely use case is web development.
+
+The following example will demonstrate how to use a single App to generate an entire website. This website will be very simple, just two unique pages, some css styles, some javascript, and appropriate links to navigate the site.
+
+Single App Site Pages:
+
+    Homepage: Show a welcome message.
+    Pictures: Show a simple image gallery that uses javascript for image selection.
+
+Note: Written documentation for the Single App Website demo is still in development...
 The [Single App Website Demo](#single-app-website-demo) can be followed on it's
 own in the meantime.
 
