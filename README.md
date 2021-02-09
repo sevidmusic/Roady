@@ -372,6 +372,15 @@ or `OutputComponents.sh`.
 Always make sure that an App Package's configuration scripts are executable or
 `dsh --make-app` will fail when it is called to make the App.
 
+It is good practice to set the App Package's script's permissions immediately
+after creating a new App Package.
+
+For example:
+
+Run: `dsh -n AppPackage HelloWorld $HOME`
+
+Then run: `chmod -R 0755 $HOME/HelloWorld/*.sh`
+
 ### Hello World Demo
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
