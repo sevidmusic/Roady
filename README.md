@@ -232,9 +232,9 @@ An App Package will always have at least four configuration scripts:
    This file is where an App's OutputComponents and DynamicOutputComponents are
    defined and assigned to the appropriate Responses and GlobalResponses.
 
-4. config.sh:
+4. `config.sh`:
    This file is where an App Package's configuration variables are defined.
-   All config.sh configuration scripts must have at least the following variables
+   All `config.sh` configuration scripts must have at least the following variables
    defined:
 
 ```
@@ -245,7 +245,7 @@ bug_contact      A reference to where bugs can be submitted, this should be an e
 
 config_locked     The use of this variable has not been implemented yet, but in the
                  future it will be used to prevent dsh from modyfing an App Package's
-                 config.sh.
+                 `config.sh`.
 
 dependencies     Associative array of dependencies, whose indexes are App names,
                  and values are version numbers.
@@ -271,7 +271,7 @@ version_date     The date this version of the App was released.
 
 ```
 
-The following is an example of a config.sh configuration script:
+The following is an example of a `config.sh` configuration script:
 
 ```
 #!/bin/bash
@@ -310,7 +310,7 @@ version="0.9.17"
 version_date="Tue Feb  9 12:12:53 AM EST 2021"
 ```
 
-Additional variables may also be defined in config.sh, though they will not be
+Additional variables may also be defined in `config.sh`, though they will not be
 used by dsh. A practical example of defining additional variables could be to
 define variables for the names of Responses that are going to have many Requests,
 OutputComponents, and DynamicOutputComponents assigned to them.
@@ -360,7 +360,7 @@ homepage_response_name="Homepage"
 pictures_response_name="Pictures"
 ```
 
-Any variables defined in config.sh can be referenced within `Responses.sh`, `Requests.sh`,
+Any variables defined in `config.sh` can be referenced within `Responses.sh`, `Requests.sh`,
 and `OutputComponents.sh`.
 
 Always make sure that an App Package's configuration scripts are executable or
