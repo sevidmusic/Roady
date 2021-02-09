@@ -223,9 +223,9 @@ New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_A
 
 The Darling Data Management System's understanding of an App is based on the App's
 data. An App's data consists of the App's source code, and the Darling Data Management
-System Components that the App defines.
+System [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that the App defines.
 
-The Darling Data Management System provides a number of Components that can be used
+The Darling Data Management System provides a number of [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that can be used
 to to implement an App. Components are objects that conform to niche interfaces
 that represent the various parts of an application.
 
