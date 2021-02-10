@@ -1024,7 +1024,7 @@ or
 
 ### dsh --new GlobalResponse
 
-[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to [Hello World Guide](#hello-world-guide)](#define-a-globalresponse-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide Define A GlobalResponse](#define-a-globalresponse-for-the-helloworld-app)
 
 `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
