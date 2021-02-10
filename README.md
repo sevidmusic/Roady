@@ -5,16 +5,18 @@
 [Installation](#installation)
 
 1. [Installation Demo](#installation-demo)
-2. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
-3. [Setup Development Tools](#setup-development-tools)
+2. [Installation Demo Command Summary](#installation-demo-command-summary)
+3. [Install From GitHub And Setup Via Composer](#install-from-github-and-setup-via-composer)
+4. [Setup Development Tools](#setup-development-tools)
 
 [Getting Started](#getting-started)
 1. [Apps and App Packages](#apps-and-app-packages)
 2. [Hello World Demo](#hello-world-demo)
-3. [Hello World Guide](#hello-world-guide)
-4. [Single App Website Demo](#single-app-website-demo)
-5. [Single App Website Guide](#single-app-website-guide)
-6. [dsh](#dsh)
+3. [Hello World Demo Command Summary](#hello-world-demo-command-summary)
+4. [Hello World Guide](#hello-world-guide)
+5. [Single App Website Demo](#single-app-website-demo)
+6. [Single App Website Guide](#single-app-website-guide)
+7. [dsh](#dsh)
 
 
 # About
