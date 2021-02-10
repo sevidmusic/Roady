@@ -747,7 +747,7 @@ from a web browser.
 
    Run: `echo 'dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: `echo 'dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
+   Run: `echo 'dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 \'<body>\'' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
    Run: `echo 'dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
@@ -763,7 +763,7 @@ from a web browser.
 
    Run: `echo 'dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: `echo 'dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
+   Run: `echo 'dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 \'</body></html>\'' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
    Run: `echo 'dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
