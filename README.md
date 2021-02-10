@@ -425,8 +425,10 @@ Then run: `chmod -R 0755 $HOME/HelloWorld/*.sh`
 ### Hello World Demo Command Summary
 
 Note: For brevity, `echo 'command' >> "path/to/AppPackage/FILE.sh"` is used in
-      place of vim to write to files in the HelloWorld Demo Command Summary. Demo
-      uses vim so relevant files can be seen in demo.
+      place of vim to write to files in the HelloWorld Demo Command Summary.
+      The Hello World Demo uses vim so relevant files can be seen in demo. As
+      long as the App Package's files are written correctly, and have the correct
+      permissions, how they are written really does not matter.
 
 Commands:
 
