@@ -542,9 +542,8 @@ In this example, only one GlobalResponse will be defined.
 
 GlobalResponses can be created for an App via [`dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`](#dsh---new-globalresponse)
 
-Responses and GlobalResponses are defined in an App Package by placing calls to
-[`dsh --new GlobalResponse`](#dsh---new-globalresponse) in the App Package's
-`Responses.sh` script.
+GlobalResponses are defined in an App Package by placing calls to [`dsh --new GlobalResponse`](#dsh---new-globalresponse)
+in the App Package's `Responses.sh` script.
 
 3. Define a GlobalResponse for the HelloWorld App.
 
