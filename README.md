@@ -631,7 +631,7 @@ can be found at:
 
 [https://www.php.net/manual/en/features.commandline.webserver.php](https://www.php.net/manual/en/features.commandline.webserver.php)
 
-`dsh --start-development-server [PORT]` can be used to start a development server
+[`dsh --start-development-server [PORT]`](#dsh---start-development-server) can be used to start a development server
 via PHP on a specific port on localhost:
 
 Once started, the server can be reached from a web browser via `http://localhost:[PORT]`.
