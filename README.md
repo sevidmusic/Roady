@@ -697,22 +697,815 @@ from a web browser.
 
 ![DDMSSingleAppWebsiteDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSSingleAppWebsiteDemo.gif?raw=true)
 
+### Single App Website Demo Command Summary
+
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo)
+
+1. Create an App Package for the Single App Website.
+   Run: `dsh -n AppPackage SingleAppWebsite "$HOME"`
+
+2. Make sure the App Package's scripts are executable.
+   Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
+
+ 3. Define the App's Responses and GlobalResponses:
+
+    Run: `echo 'dsh -n GlobalResponse "${app_name}" OpeningHtml 0' >> "$HOME/SingleAppWebsite/Responses.sh"`
+
+    Run: `echo 'dsh -n GlobalResponse "${app_name}" MainMenu 1' >> "$HOME/SingleAppWebsite/Responses.sh"`
+
+    Run: `echo 'dsh -n GlobalResponse "${app_name}" ClosingHtml 999999999999999' >> "$HOME/SingleAppWebsite/Responses.sh"`
+
+    Run: `echo 'dsh -n Response "${app_name}" Homepage 2' >> "$HOME/SingleAppWebsite/Responses.sh"`
+
+    Run: `echo 'dsh -n Response "${app_name}" Pictures 2' >> "$HOME/SingleAppWebsite/Responses.sh"`
+
+4. Define the App's Requests and assign them to the appropriate Responses and GlobalResponses:
+
+   Run: echo 'dsh -n Request "${app_name}" HomepageRoot HomepageRequests "\/"' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -a "${app_name}" Homepage HomepageRoot HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -n Request "${app_name}" HomepageIndex HomepageRequests "index.php"' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -a "${app_name}" Homepage HomepageIndex HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -n Request "${app_name}" Homepage HomepageRequests "index.php?Hompeage"' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -a "${app_name}" Homepage Homepage HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -n Request "${app_name}" Pictures PicturesRequests "index.php?Pictures"' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+   Run: echo 'dsh -a "${app_name}" Pictures Pictures PicturesRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+
+5. Define the App's OutputComponents and assign them to the appropriate Responses:
+
+   Run: echo 'dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+   Run: echo 'dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+
+6. Create Dynamic Output file: "$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"
+
+   File content should be:
+
+```
+<?php
+require str_replace('/Apps/SingleAppWebsite/DynamicOutput','',__DIR__) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+$currentRequest = new Request(
+    new Storable(
+        'CurrentRequest',
+        'AppRequests',
+        'CurrentRequests'
+    ),
+    new Switchable()
+);
+$getKeys = array_flip($currentRequest->getGet());
+$pagename = array_pop($getKeys);
+?>
+<head>
+    <title><?php echo (!empty($pagename) ? $pagename : 'Homepage'); ?>  | Single App Website Demo | <?php echo date('m/d/Y h:m A'); ?></title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Darling Data Management System">
+    <meta name="keywords" content="Darling Data Management System, dsh">
+    <meta name="author" content="Sevi Donnelly Foreman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./Apps/SingleAppWebsite/css/styles.css" rel="stylesheet">
+</head>
+```
+
+7. Create referenced css file "$HOME/SingleAppWebsite/css/styles.css"
+
+   File content should be:
+
+```
+body {  background: #000000; color: #ddf1ff; font-family: monospace; }
+
+.selectable-image-container { float: left; margin: .5em 1.2em; }
+
+.selectable-image { opacity: .5; width: 5em; cursor: pointer; border: 2px double #fafaff; }
+
+.selectable-image:hover {opacity: 1; width: 5.3em; cursor: pointer; border: 2px solid #fafaff; }
+
+ul li { display: inline; }
+
+a { color: #09b278; text-decoration: none; }
+
+a:hover { color: #fafaff; }
+
+.selected-image { margin-left: 3em; width: 25em; }
+
+h1 { margin-left: 1.4em; }
+
+p { margin-left: 3em; }
+```
+
+8. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
+
+   File content should be:
+
+```
+<div class="main-menu-container">
+<ul class="main-menu">
+    <li class="main-menu-item"><a class="main-menu-link" href="index.php">Homepage</a></li>
+    <li class="main-menu-item"><a class="main-menu-link" href="index.php?Pictures">Pictures</a></li>
+</ul>
+</div>
+```
+
+9. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
+
+   File content should be:
+
+```
+<h1>Welcome</h1>
+<p>Today is:</p>
+<p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
+```
+
+10. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
+
+   File content should be:
+
+```
+    <div class="selected-image-container">
+      <img class="selected-image" src="" id="selectedImage">
+    </div>
+
+    <div class="image-selector">
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg1.png" alt="Image1" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg2.png" alt="Image2" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg3.png" alt="Image3" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg4.png" alt="Image4" onclick="selectImage(this);">
+      </div>
+    </div>
+    <script>
+        function selectImage(imageToSelect) {
+            var selectedImage = document.getElementById("selectedImage");
+            selectedImage.src = imageToSelect.src;
+            selectedImage.alt = imageToSelect.alt;
+        }
+    </script>
+```
+
+11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
+
+    Run: dsh -m "$HOME/SingleAppWebsite"
+
+12. Build the SingleAppWebsite App to run on http://localhost:8080
+
+    Run: dsh -b SingleAppWebsite "http://localhost:8080"
+
+7. Start a development server on localhost at port `8080`
+
+    Run: `dsh -s 8080`
+
 # Single App Website Guide
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Single App Website Demo](#single-app-website-demo)
 
-PHP is most commonly used to develop websites. The Darling Data Management System was designed with this in mind, and though it could be used for other purposes, the most likely use case is web development.
+1. [Preface](#preface)
+2. [Make An App Package For The SingleAppWebsite App](make-an-app-package-for-the-singleAppWebsite-app)
+3. [Make The SingleAppWebsite App Package's Scripts Executable](#make-the-singleappwebsite-app-packages-scripts-executable)
+4. [App Data](#app-data)
+5. [Components](#components)
+6. [Define Responses And GlobalResponses For The SingleAppWebsite](#define-responses-and-globalresponses-for-the-singleappwebsite-app)
+7. [Define The SingleAppWebsite's Requests And Assign Them To Appropriate Responses](#define-the-singleAppWebsites-requests-and-assign-them-to-appropriate-responses)
+8. [Define OutputComponents And DynamicOutputComponents For The SingleAppWebsite](#define-outputComponents-and-dynamicoutputcomponents-for-the-singleAppWebsite)
+9. [Dynamic Output Files](#dynamic-output-files)
+10. [Create The HtmlHead.php DynamicOutput File](#create-the-htmlheadphp-dynamic-output-file)
+11. [File References In Dynamic Output Files](#file-references-in-dynamic-output-files)
+12. [Create The Css File Referenced By The HtmlHead.php Dynamic Output File](#create-the-css-file-referenced-by-the-htmlheadphp-dynamic-output-file)
+13. [Create the MainMenu.html Dynamic Output File](#create-the-mainMenuhtml-dynamic-output-file)
+14. [Create the Homepage.php Dynamic Output File](#create-the-homepagephp-dynamic-output-file)
+15. [Create the Pictures.html Dynamic Output File](#create-the-pictureshtml-dynamic-output-file)
+16. [Make the SingleAppWebsite App From The SingleAppWebsite App Package](#make-the-singleappwebsite-app-from-the-singleappwebsite-app-package)
+17. [Build The SingleAppWebsite To Run On The Domain `http://localhost:8080`](#build-the-singleappwebsite-to-run-on-the-domain-httplocalhost8080)
+18. [Start A Development Server At `http://localhost:8080`](#start-a-development-server-at=htttplocalhost8080)
+19. [SingleAppWebsite Guide Overview](#singleappwebsite-guide-overview)
 
-The following example will demonstrate how to use a single App to generate an entire website. This website will be very simple, just two unique pages, some css styles, some javascript, and appropriate links to navigate the site.
+### Preface
 
-Single App Site Pages:
+PHP is most commonly used to develop websites. The Darling Data Management System
+was designed with this in mind, and though it could be used for other purposes,
+the most likely use case is web development.
 
-    Homepage: Show a welcome message.
-    Pictures: Show a simple image gallery that uses javascript for image selection.
+The following example will demonstrate how to use a single App to generate an
+entire website. This website will be very simple, just two unique pages, some
+css styles, some javascript, and appropriate links to navigate the site.
 
-Note: Written documentation for the Single App Website demo is still in development...
-The [Single App Website Demo](#single-app-website-demo) can be followed on it's
-own in the meantime.
+SingleAppWebsite App Pages:
+
+1. Homepage: Show a welcome message.
+2. Pictures: Show a simple image gallery that uses javascript for image selection.
+
+### Make An App Package For The SingleAppWebsite App
+
+The first step in the development process with the Darling Data Management System
+is always to create a new App Package for the App to be developed.
+
+The purpose of an App Package is to provide a snapshot of an App that can be used
+to reproduce an instance of the App for a Darling Data Management System installation.
+
+New App Packages can be created via [`dsh --new AppPackage [APP_NAME] [PATH_TO_APP_PACKAGE] [DOMAIN]`](#dsh---new-apppackage).
+
+1. Create a new App Package for the App that will generate output for
+   the website, this App will be named "SingleAppWebsite":
+
+   Run: `dsh -n AppPackage SingleAppWebsite "$HOME"`
+
+### Make The SingleAppWebsite App Package's Scripts Executable
+
+App's are made from App Packages via [`dsh --make-app`](#dsh---make-app--dsh--m).
+
+In order for the App Package to be able to be made into an App later via [`dsh --make-app`](#dsh---make-app--dsh--m),
+the bash scripts in the App package must be executable.
+
+2. Make sure the App Package's scripts are executable:
+
+   Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
+
+### App Data
+
+The Darling Data Management System's understanding of an App is based on the App's
+data. An App's data consists of the App's source code, and the Darling Data Management
+System [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that the App defines.
+
+The Darling Data Management System provides a number of [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that can be used
+to to implement an App. [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) are objects that conform to niche interfaces
+that represent the various parts of an application.
+
+Legos are a good analogy for [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component), like Legos, individual [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) are
+used together to implement a larger design. Also, like Legos, [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) can be
+reused in various contexts to implement a variety of designs.
+
+In this example a single App is going to generate a website.
+
+To do this the App needs to define appropriate [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) to represent the various
+parts of the website.
+
+### [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component)
+
+The following Component types will be used in this example:
+
+**Request**
+
+Represents a url such as `http://DOMAIN/`
+
+Note: Requests can be used to represent any url, not just urls relative to the
+      domain the App is running on.
+
+**Response**
+
+Responses are used to group OutputComponents and DynamicOutputComponents together
+whose output is intended to be shown in response to a specific Request to the
+domain the App is running on.
+
+**GlobalResponse**
+
+GlobalResponses are used to group OutputComponents and DynamicOutputComponents
+together whose output is intended to be shown in response to a all Requests to
+the domain the App is running on.
+
+**OutputComponent**
+
+OutputComponents are used to define an App's static output.
+
+**DynamicOutputComponent**
+
+DynamicOutputComponents are used to define an App's Dynamic Output, this is output
+generated by interpreting an assigned file that exists in either the Darling Data
+Management System's `SharedDynamicOutput` directory, or the App's `DynamicOutput`
+directory.
+
+This file can be a plain text file, a PHP file, an html file, a json file, etc.
+
+Note: Files that have the `.php` file extension will be interpreted as executable
+      PHP code, all other file types will be interpreted as plain text.
+
+### Define Responses And GlobalResponses For The SingleAppWebsite App
+
+It is usually best to define the App's Responses and GlobalResponses first, this
+will help to make the App's larger structure clear before other [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) are
+defined.
+
+Responses are used to group together OutputComponents and DynamicOutputComponents
+whose output should be displayed in response to a specific Request to the domain
+the App is running on.
+
+GlobalResponses are Responses, but instead of responding to specific Requests,
+a GlobalResponse will respond to all Requests.
+
+Responses and GlobalResponses are organized relative to each other by their positions.
+
+If multiple Responses and GlobalResponses are assigned to the same position, they
+will be served in the order that they are loaded from storage.
+
+For example, if Responses Foo, Bar, and Baz are all assigned to position `0`, and
+Foo is loaded first, Bar is loaded second, and  Baz loaded third, then the
+positions will be adjusted as follows:
+
+Foo Position: `0`
+Bar Position: `0.1`
+Baz Position: `0.2`
+
+Responses and GlobalResponses are defined in the App Package's `Responses.sh`
+configuration script.
+
+In this example, two Responses will be defined, one for the Homepage, and one for
+the Pictures page. Also, three GlobalResponses will be defined, one for the opening
+html, one for the main menu, and one for the closing html.
+
+3. Define the App's Responses and GlobalResponses:
+
+   Run: `vim "$HOME/SingleAppWebsite/Responses.sh"`
+
+   Add: `dsh -n GlobalResponse "${app_name}" OpeningHtml 0`
+
+   Add: `dsh -n GlobalResponse "${app_name}" MainMenu 1`
+
+   Add: `dsh -n GlobalResponse "${app_name}" ClosingHtml 999999999999999`
+
+   Add: `dsh -n Response "${app_name}" Homepage 2`
+
+   Add: `dsh -n Response "${app_name}" Pictures 2`
+
+Note: The position of the ClosingHtml GlobalResponse is set to high value to
+      try and insure that it will always be served last, though this App is
+      small now, it may grow, and it is also possible that other App's may
+      be run on the same domain in the future. Setting a high value for Responses
+      and GlobalResponse that should always be served last is good practice.
+
+### Define The SingleAppWebsite's Requests And Assign Them To Appropriate Responses
+
+Requests represent urls. Requests are assigned to Responses that are meant to respond
+to the url the Request represents.
+
+In this example, three Requests will be defined for the Homepage, this is to reflect
+that the Homepage should be accessible at the following urls:
+
+1. `http://APP_DOMAIN/`
+2. `http://APP_DOMAIN/index.php`
+3. `http://APP_DOMAIN/index.php?Homepage`
+
+The Pictures page only requires one Request so it is accessible at:
+
+`http://APP_DOMAIN/index.php?Pictures`
+
+Requests are created for an App via [`dsh --new Request [APP_NAME] [REQUEST_NAME] [REQUEST_CONTAINER] [RELATIVE_URL]`](#dsh---new-request)
+
+Requests are defined for an App Package in the App Package's `Requests.sh`
+configuration script.
+
+4. Define the App's Requests and assign them to the appropriate Responses and GlobalResponses:
+
+   Run: `vim "$HOME/SingleAppWebsite/Requests.sh"`
+
+   Add: `dsh -n Request "${app_name}" HomepageRoot HomepageRequests "\/"`
+
+   Add: `dsh -a "${app_name}" Homepage HomepageRoot HomepageRequests Request`
+
+   Add: `dsh -n Request "${app_name}" HomepageIndex HomepageRequests "index.php"`
+
+   Add: `dsh -a "${app_name}" Homepage HomepageIndex HomepageRequests Request`
+
+   Add: `dsh -n Request "${app_name}" Homepage HomepageRequests "index.php?Hompeage"`
+
+   Add: `dsh -a "${app_name}" Homepage Homepage HomepageRequests Request`
+
+   Add: `dsh -n Request "${app_name}" Pictures PicturesRequests "index.php?Pictures"`
+
+   Add: `dsh -a "${app_name}" Pictures Pictures PicturesRequests Request`
+
+### Define OutputComponents And DynamicOutputComponents For The SingleAppWebsite
+### And Assign Them To The Appropriate Responses And GlobalResponse
+
+Next, define the OutputComponents and DynamicOutputComponents for the website.
+
+Before doing this it is important to understand how an App's output is served to
+a user by the Darling Data Management System.
+
+When a user makes a Request to the domain of a website running on the Darling
+Data Management System the first thing that happens is a Router Component is used
+to determine which Responses and GlobalResponses respond to the current Request.
+These Responses and GlobalResponses may be defined by one, or many Apps running
+on the same domain.
+
+Then, the collective output of the OutputComponents and DynamicOutputComponents
+assigned to each of the Responses and GlobalResponses that respond to the current
+Request is shown to the user.
+
+To put it very simply, the Darling Data Management System takes all of the output
+from the relevant OutputComponents and DynamicOutputComponents and constructs a
+string that is served to the user via the Darling Data Management System's index.php
+
+OutputComponents and DynamicOutputComponents are defined in the App Package's
+`OutputComponents.sh` configuration script.
+
+The App in this example is going to generate a website, so the App's App Package
+will need to define OutputComponents and DynamicOutputComponents for the site's
+PHP, html, css, and javascript.
+
+In order for these OutputComponents and DynamicOutputComponents to be served to a
+user in response to an appropriate Request, they must be assigned to either a
+Response that is assigned the relevant Request, or to a GlobalResponse.
+
+It is important to understand that Responses and GlobalResponses are sorted
+relative to each other by their assigned positions. Likewise, OutputComponents
+and DynamicOutputComponents are also sorted relative to each other by their assigned
+position within the context of the Response or GlobalResponse they are assigned to.
+
+For example, say a single App is running on a domain, and it defines two GlobalResponses,
+and 3 OutputComponents:
+
+  GlobalResponse `Foo` at position `1` assigned two OutputComponents:
+
+    `Baz` at position `0` with output `BazOutput`
+
+    `Bazzer` at position `5` with output `--BazzerOutput--`
+
+  GlobalResponse `Bar` at position `0` assigned one OutputComponent:
+
+    `Bazbiz` at position `7` with output `<p>BazBizOutput<p>`
+
+Then any Request to the domain the App is running on will produce
+the following output to be interpreted by the web browser:
+
+    `<p>BazBizOutput</p>BazOutput--BazzerOutput--`
+
+OutputComponents can be created for an App via:
+
+[`dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`](#dsh---new-outputcomponent),
+
+DynamicOutputComponents can be created for an App via:
+
+[`dsh --new DynamicOutputComponent [APP_NAME] [DYNAMIC_OUTPUT_COMPONENT_NAME] [DYNAMIC_OUTPUT_COMPONENT_CONTAINER] [DYNAMIC_OUTPUT_COMPONENT_POSITION] [DYNAMIC_OUTPUT_FILE]`](#dsh---new-dynamicoutputcomponent),
+
+OutputComponents and DynamicOutputComponents are defined in an App Package's
+`OutputComponents.sh` configuration script.
+
+5. Define the App's OutputComponents and assign them to the appropriate Responses:
+
+   Run: `vim "$HOME/SingleAppWebsite/OutputComponents.sh"`
+
+   Add: `dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">'`
+
+   Add: `dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponent`
+
+   Add: `dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php"`
+
+   Add: `dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponent`
+
+   Add: `dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>'`
+
+   Add: `dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponent`
+
+   Add: `dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html"`
+
+   Add: `dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponent`
+
+   Add: `dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php"`
+
+   Add: `dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponent`
+
+   Add: `dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html"`
+
+   Add: `dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponent`
+
+   Add: `dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>'`
+
+   Add: `dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent`
+
+### Dynamic Output Files
+
+The next step is to create any Dynamic Output files referenced by the
+DynamicOutputComponents defined by the App Package's `OutputComponents.sh`
+configuration script.
+
+The Darling Data Management System expects Dynamic Output files to exist
+in either the relevant App's `DynamicOutput` directory, or the Darling Data
+Management System's `SharedDynamicOutput` directory.
+
+For example:
+
+`/path/to/Darling/Data/Management/System/Apps/APP_NAME/DynamicOutput/DYNAMIC_OUTPUT_FILE`
+
+or
+
+`/path/to/Darling/Data/Management/System/SharedDynamicOutput/DYNAMIC_OUTPUT_FILE`
+
+Dynamic output files that are used by a single App should be defined in the
+relevant App Package's `DynamicOutput` directory so that dsh can copy them to the
+App's `DynamicOutput` directory whenever an instance of the App is made from the
+App Package via [`dsh --make-app`](#dsh---make-app).
+
+Dynamic output files that are used by multiple App's should be placed in the Darling
+Data Management System's `SharedDynamicOutput` directory. These Dynamic Output files
+must be created and maintained manually since they are not related to a specific
+App.
+
+If an App defines a Dynamic Output file that shares a name with a Dynamic Output
+file defined in the `SharedDynamicOutput` directory, the  App's Dynamic Output file
+will be used.
+
+The App Package in this example will define the following Dynamic Output files:
+
+```
+HtmlHead.php
+MainMenu.html
+Homepage.php
+Pictures.html
+```
+
+These files need to be created in the App Package's `DynamicOutput` directory.
+
+### Create The HtmlHead.php Dynamic Output Files
+
+The App Package in this example defines a DynamicOutputComponent named HtmlHead
+which references a Dynamic Output file named `HetmlHead.php`, this file must be created
+in the App Package's `DynamicOutput` directory.
+
+6. Create `$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php`:
+
+   Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"`
+
+   Add:
+
+```
+<?php
+require str_replace('/Apps/SingleAppWebsite/DynamicOutput','',__DIR__) . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\primary\Storable;
+use DarlingDataManagementSystem\classes\primary\Switchable;
+$currentRequest = new Request(
+    new Storable(
+        'CurrentRequest',
+        'AppRequests',
+        'CurrentRequests'
+    ),
+    new Switchable()
+);
+$getKeys = array_flip($currentRequest->getGet());
+$pagename = array_pop($getKeys);
+?>
+        <head>
+            <title><?php echo (!empty($pagename) ? $pagename : 'Homepage'); ?>  | SingleAppWebsite Demo | <?php echo date('m/d/Y h:m A'); ?></title>
+            <meta charset="UTF-8">
+            <meta name="description" content="Darling Data Management System">
+            <meta name="keywords" content="Darling Data Management System, dsh">
+            <meta name="author" content="Sevi Donnelly Foreman">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="./Apps/SingleAppWebsite/css/styles.css" rel="stylesheet">
+        </head>
+```
+
+### File References In Dynamic Output Files
+
+Important note about file references within Dynamic Output files:
+
+Sometimes is may be necessary to reference a file from within a Dynamic Output
+file, for example, an image, or a javascript file, or a css file etc. Always make
+sure those files exist and are accessible at the locations referenced in the Dynamic
+Output file.
+
+Local css and javascript files referenced within a Dynamic Output file should be
+placed in the App Package's css and javascript directories, respectively, so that
+[dsh](#dsh) knows to include them with the files copied from the App Package to
+the App whenever an instance of the App is made via [`dsh --make-app`](#dsh---make-app).
+The one exception to this is if the referenced css or javascript files are served
+form a CDN or other location outside of the Darling Data Management System.
+
+The App Package in this example will define the following css file in the App
+Package's css directory. This file will be referenced from a `<link>` tag defined
+in the `HetmlHead.php` Dynamic Output file's content:
+
+`styles.css`
+
+This file must be created manually in the App Package's `css` directory.
+
+### Create The Css File Referenced By The HtmlHead.php Dynamic Output File
+
+The `HtmlHead.php` Dynamic Output file's content contains a `<link>` tag that references
+a css file, styles.css, this css file must be created in the App Package's css directory.
+
+7. Create `$HOME/SingleAppWebsite/css/styles.css`:
+
+   Run: `vim "$HOME/SingleAppWebsite/css/styles.css"`
+
+   Add:
+
+```
+body {  background: #000000; color: #ddf1ff; font-family: monospace; }
+
+.selectable-image-container { float: left; margin: .5em 1.2em; }
+
+.selectable-image { opacity: .5; width: 5em; cursor: pointer; border: 2px double #fafaff; }
+
+.selectable-image:hover {opacity: 1; width: 5.3em; cursor: pointer; border: 2px solid #fafaff; }
+
+ul li { display: inline; }
+
+a { color: #09b278; text-decoration: none; }
+
+a:hover { color: #fafaff; }
+
+.selected-image { margin-left: 3em; width: 25em; }
+
+h1 { margin-left: 1.4em; }
+
+p { margin-left: 3em; }
+```
+
+### Create the MainMenu.html Dynamic Output File
+
+The App Package in this example defines a DynamicOutputComponent named MainMenu
+which references a Dynamic Output file named MainMenu.html, this file must be created
+in the App Package's `DynamicOutput` directory.
+
+8. Create MainMenu.html:
+
+    Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
+
+    Add:
+
+```
+<div class="main-menu-container">
+<ul class="main-menu">
+    <li class="main-menu-item"><a class="main-menu-link" href="index.php">Homepage</a></li>
+    <li class="main-menu-item"><a class="main-menu-link" href="index.php?Pictures">Pictures</a></li>
+</ul>
+</div>
+```
+
+### Create The Homepage.php Dynamic Output File
+
+The App Package in this example defines a DynamicOutputComponent named Homepage
+which references a Dynamic Output file named Homepage.php, this file must be created
+in the App Package's `DynamicOutput` directory.
+
+9. Create Homepage.php:
+
+   Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
+
+   Add:
+
+```
+<h1>Welcome</h1>
+<p>Today is:</p>
+<p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
+```
+
+### Create The Pictures.html Dynamic Output File
+
+The App Package in this example defines a DynamicOutputComponent named Pictures
+which references a Dynamic Output file named Pictures.html, this file must be created
+in the App Package's `DynamicOutput` directory.
+
+10. Create Pictures.html:
+
+    Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
+
+    Add:
+
+```
+    <div class="selected-image-container">
+      <img class="selected-image" src="" id="selectedImage">
+    </div>
+
+    <div class="image-selector">
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg1.png" alt="Image1" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg2.png" alt="Image2" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg3.png" alt="Image3" onclick="selectImage(this);">
+      </div>
+      <div class="selectable-image-container">
+        <img class="selectable-image" src="https://ddmsmedia.us-east-1.linodeobjects.com/DDMSDemoImg4.png" alt="Image4" onclick="selectImage(this);">
+      </div>
+    </div>
+    <script>
+        function selectImage(imageToSelect) {
+            var selectedImage = document.getElementById("selectedImage");
+            selectedImage.src = imageToSelect.src;
+            selectedImage.alt = imageToSelect.alt;
+        }
+    </script>
+```
+
+### Make the SingleAppWebsite App From The SingleAppWebsite App Package
+
+An instance of an App can be made from an App Package via the [`dsh --make-app`](#dsh---make-app) command.
+
+First, [`dsh --make-app`](#dsh---make-app) will create a new instance of the App, via an internal call
+to the dsh --new App command.
+
+Then, it will copy the App Package's css, js, and DynamicOutput directories to
+the new App.
+
+Finally, it will run the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
+configuration scripts to create the PHP configuration files for the App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) via
+the dsh calls defined in the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
+configuration scripts.
+
+11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
+
+     dsh -m "$HOME/SingleAppWebsite"
+
+### Build The SingleAppWebsite To Run On The Domain `http://localhost:8080`
+
+Once an App has been made via [`dsh --make-app`](#dsh---make-app), it can be built for one or more
+domains via the [`dsh --build-app`](#dsh---build-app) command.
+
+By default [`dsh --build-app`](#dsh---build-app) will build an App for the domain defined in the App's
+Components.php file. This domain will have been set by [`dsh --make-app`](#dsh---make-app) to the value
+assigned to the domain variable defined in the relevant App Packages config.sh
+configuration script.
+
+It is safe to modify the domain defined in the App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component).php file after
+the App has been made, however, [`dsh --build-app`](#dsh---build-app) takes an optional domain as the
+second parameter, so there is really no need to modify the domain set in App's
+Components.php file, instead just use [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app) to
+easily build the App for one or more domains.
+
+12. Build the SingleAppWebsite App to run on http://localhost:8080
+
+    Run: dsh -b SingleAppWebsite "http://localhost:8080"
+
+App's can be built to run on one, or many domains.
+
+### Start A Development Server At [`http://localhost:8080`](http://localhost:8080)
+
+While an App is in development it can be useful to be able to run an App on one
+or more local domains.
+
+PHP is a wonderful language, and provides a built in web server that can be used
+as a simple local development server. More information about PHP's built in server
+can be found at:
+
+    `https://www.php.net/manual/en/features.commandline.webserver.php`
+
+dsh can be used to start a development server via PHP on a specific port on localhost:
+
+Once started, the server can be reached from a web browser via `http://localhost:PORT`
+
+13. Start a development server on localhost at port `8080`
+
+    Run: dsh -`s 8080`
+
+Development server will be reachable via http://localhost:8080
+
+### SingleAppWebsite Guide Overview
+
+The following is an overview of the steps taken in this demo:
+
+- The App Package for the SingleAppWebsite App was created via dsh --new AppPackage.
+
+- The appropriate SingleAppWebsite App Package files were configured manually using
+  a text editor.
+
+- The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app).
+
+- The SingleAppWebsite App was built via [`dsh --build-app`](#dsh---build-app).
+
+- A development server was started at http://localhost:8080 via dsh --start-development-server.
+
+The new SingleAppWebsite App is now running on http://localhost:8080 and can be accessed
+from a web browser.
 
 ### dsh
 
