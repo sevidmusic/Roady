@@ -433,8 +433,8 @@ Commands:
 1. `dsh -n AppPackage HelloWorld "$HOME"`
 2. `chmod -R 0755 $HOME/HelloWorld/*.sh`
 3. `echo 'dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0' >> "$HOME/HelloWorld/Responses.sh"`
-4. `echo '`dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"`' >> "$HOME/HelloWorld/OutputComponents.sh"`
-5. `echo '`dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent`' >> "$HOME/HelloWorld/OutputComponents.sh"`
+4. `echo 'dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"' >> "$HOME/HelloWorld/OutputComponents.sh"`
+5. `echo 'dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent' >> "$HOME/HelloWorld/OutputComponents.sh"`
 6. `dsh -m "$HOME/HelloWorld"`
 7. `dsh -b HelloWorld "http://localhost:8080"`
 8. `dsh -s 8080`
