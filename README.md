@@ -721,51 +721,51 @@ from a web browser.
 
 4. Define the App's Requests and assign them to the appropriate Responses and GlobalResponses:
 
-   Run: echo 'dsh -n Request "${app_name}" HomepageRoot HomepageRequests "\/"' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -n Request "${app_name}" HomepageRoot HomepageRequests "\/"' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -a "${app_name}" Homepage HomepageRoot HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -a "${app_name}" Homepage HomepageRoot HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -n Request "${app_name}" HomepageIndex HomepageRequests "index.php"' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -n Request "${app_name}" HomepageIndex HomepageRequests "index.php"' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -a "${app_name}" Homepage HomepageIndex HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -a "${app_name}" Homepage HomepageIndex HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -n Request "${app_name}" Homepage HomepageRequests "index.php?Hompeage"' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -n Request "${app_name}" Homepage HomepageRequests "index.php?Hompeage"' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -a "${app_name}" Homepage Homepage HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -a "${app_name}" Homepage Homepage HomepageRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -n Request "${app_name}" Pictures PicturesRequests "index.php?Pictures"' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -n Request "${app_name}" Pictures PicturesRequests "index.php?Pictures"' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
-   Run: echo 'dsh -a "${app_name}" Pictures Pictures PicturesRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"
+   Run: echo 'dsh -a "${app_name}" Pictures Pictures PicturesRequests Request' >> "$HOME/SingleAppWebsite/Requests.sh"`
 
 5. Define the App's OutputComponents and assign them to the appropriate Responses:
 
-   Run: echo 'dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: echo 'dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"
+   Run: echo 'dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponen' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
 6. Create Dynamic Output file: "$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"
 
