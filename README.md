@@ -239,7 +239,7 @@ data. An App's data consists of the App's source code, and the Darling Data Mana
 System [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that the App defines.
 
 The Darling Data Management System provides a number of [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that can be used
-to to implement an App. Components are objects that conform to niche interfaces
+to implement an App. Components are objects that conform to niche interfaces
 that represent the various parts of an application.
 
 Legos are a good analogy for Components, like Legos, individual Components are
@@ -275,7 +275,7 @@ bug_contact      A reference to where bugs can be submitted, this should be an e
                  or a url to a online resource where bugs can be submitted.
 
 config_locked     The use of this variable has not been implemented yet, but in the
-                 future it will be used to prevent dsh from modyfing an App Package's
+                 future it will be used to prevent dsh from modifying an App Package's
                  `config.sh`.
 
 dependencies     Associative array of dependencies, whose indexes are App names,
