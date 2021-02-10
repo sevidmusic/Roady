@@ -61,6 +61,8 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 ### Installation Demo Command Summary
 
+[Back To Top](#darling-data-management-system) | [Installation](#installation)
+
 1. `cd "$HOME/Downloads"`
 2. `git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git`
 3. `cd DarlingDataManagementSystem`
@@ -426,13 +428,15 @@ Run: `dsh -n AppPackage HelloWorld $HOME`
 
 Then run: `chmod -R 0755 $HOME/HelloWorld/*.sh`
 
-### [Hello World Demo](#hello-world-demo)
+### Hello World Demo
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Demo Command Summary](#hello-world-demo-command-summary) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-### [Hello World Demo](#hello-world-demo) Command Summary
+### Hello World Demo Command Summary
+
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 Note: For brevity, `echo 'command' >> "path/to/AppPackage/FILE.sh"` is used in
       place of vim to write to files in the [Hello World Demo Command Summary](#hello-world-demo-command-summary).
@@ -451,7 +455,7 @@ Commands:
 7. `dsh -b HelloWorld "http://localhost:8080"`
 8. `dsh -s 8080`
 
-### [Hello World Guide](#hello-world-guide)
+### Hello World Guide
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
 
@@ -645,7 +649,7 @@ Once started, the server can be reached from a web browser via [http://localhost
 
 8. To view the HelloWorld App, open a web browser and go to [http://localhost:8080](http://localhost:8080)
 
-### [Hello World Guide](#hello-world-guide) Overview
+### Hello World Guide Overview
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
