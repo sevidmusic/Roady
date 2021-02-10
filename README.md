@@ -472,7 +472,7 @@ Responses.sh
 
 App's are made from App Packages via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
-In order for the App Package to be able to be made into an App later via `dsh --make-app`,
+In order for the App Package to be able to be made into an App later via [`dsh --make-app`](#dsh---make-app--dsh--m),
 the bash scripts in the App package must be executable.
 
 2. Make sure the App Package's scripts are executable
@@ -626,7 +626,7 @@ The following is an overview of the steps taken in this demo:
 - The appropriate HelloWorld App Package files were configured manually using
   a text editor.
 
-- The HelloWorld App was made from the HelloWorld App Package via `dsh --make-app`.
+- The HelloWorld App was made from the HelloWorld App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
 - The HelloWorld App was built via `dsh --build-app`.
 
