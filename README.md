@@ -127,8 +127,8 @@ If you would like to try dshUnit, add it as well.
 
 [Back To Top](#darling-data-management-system) | [Installation](#installation) | [Setup Development Tools](#setup-development-tools)
 
-Note: The following example uses [vim](https://github.com/vim/vim) to edit `.bash_profile`,
-      this is not required, vim is awesome, but unrelated to the Darling Data Management
+Note: The following example uses [vim](https://github.com/vim/vim) to edit [`.bash_profile`](#example-bash_profile),
+      vim is not required, vim is awesome, but unrelated to the Darling Data Management
       System. Any text editor will suffice.
 
 5. Add dsh, dshUI, and optionally dshUnit to your `$PATH`.
@@ -629,7 +629,7 @@ can be found at:
 `dsh --start-development-server [PORT]` can be used to start a development server
 via PHP on a specific port on localhost:
 
-Once started, the server can be reached from a web browser via [http://localhost:8080](http://localhost:8080)
+Once started, the server can be reached from a web browser via `http://localhost:[PORT]`.
 
 7. Start a development server on local host at port `8080`.
 
