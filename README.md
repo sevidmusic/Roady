@@ -587,7 +587,7 @@ OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_
 An instance of an App can be made from an App Package via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
 First, [`dsh --make-app`](#dsh---make-app--dsh--m) will create a new instance of the App, via an internal call
-to the `dsh --new App` command.
+to [`dsh --new App`](#dsh---new-app).
 
 Then, it will copy the App Package's `css`, `js`, and `DynamicOutput` directories to
 the new App.
@@ -971,6 +971,8 @@ Example:
 
 
 # dsh --new App
+
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Apps And App Packages](#apps-and-app-packages) | [Back to HelloWorld Guide](#create-an-app-package-for-the-helloworld-app)
 
 `dsh --new App [APP_NAME] [DOMAIN]`
 
