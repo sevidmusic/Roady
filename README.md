@@ -573,12 +573,6 @@ OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_
 
 4. Define an OutputComponent for the HelloWorld App
 
-   Note: OutputComponents and DynamicOutputComponents defined in `OutputComponents.sh`
-         should always use the `"${app_name}"` variable to indicate the `[APP_NAME]`.
-         This only applies to calls made to dsh from within an App Package's
-         `OutputComponents.sh`, always specify the App's actual alphanumeric name
-         when calling dsh from the command line.
-
    Run: `vim "$HOME/HelloWorld/OutputComponents.sh"`
 
    Add: `dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"`
