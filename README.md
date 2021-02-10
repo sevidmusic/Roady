@@ -882,11 +882,11 @@ p { margin-left: 3em; }
 
 11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
 
-    Run: dsh -m "$HOME/SingleAppWebsite"
+    Run: `dsh -m "$HOME/SingleAppWebsite"`
 
 12. Build the SingleAppWebsite App to run on http://localhost:8080
 
-    Run: dsh -b SingleAppWebsite "http://localhost:8080"
+    Run: `dsh -b SingleAppWebsite "http://localhost:8080"`
 
 7. Start a development server on localhost at port `8080`
 
