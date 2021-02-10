@@ -104,15 +104,15 @@ The Darling Data Management System comes with three command line utilities:
 
 [`dsh`](#dsh)     (required): Used frequently for development with the Darling Data Management System.
 
-`dshUI`   (required): Required by dsh, it is the back end of dsh's user interface.
+`dshUI`   (required): Required by [dsh](#dsh), it is the back end of [dsh](#dsh)'s user interface.
 
 `dshUnit` (optional) : % Optional bash unit testing framework.
 
-dsh and dshUI MUST be in your `$PATH` or they will not work properly.
+[dsh](#dsh) and dshUI MUST be in your `$PATH` or they will not work properly.
 
 * % dshUnit is not required for development with the Darling Data Management System,
-  or by dsh. dshUnit is a bash unit testing framework that is used to develop and
-  test dsh. Unless you are planning on modifying dsh's source code then you don't
+  or by [dsh](#dsh). dshUnit is a bash unit testing framework that is used to develop and
+  test [dsh](#dsh). Unless you are planning on modifying [dsh](#dsh)'s source code then you don't
   need dshUnit. However, dshUnit can be used on it's own as a bash unit testing
   framework. If you write a lot of bash, you may find dshUnit useful.
 
@@ -131,7 +131,7 @@ Note: The following example uses [vim](https://github.com/vim/vim) to edit [`.ba
       vim is not required, vim is awesome, but unrelated to the Darling Data Management
       System. Any text editor will suffice.
 
-5. Add dsh, dshUI, and optionally dshUnit to your `$PATH`.
+5. Add [dsh](#dsh), dshUI, and optionally dshUnit to your `$PATH`.
 
    Go to example [`.bash_profile`](#example-bash_profile)
 
@@ -166,7 +166,7 @@ PS1="\e[44m\e[36m\w\e[0m\e[32m\n\$\e[34m "
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 ```
 
-Finally, please note that dsh, dshUI, and dshUnit are not required on production
+Finally, please note that [dsh](#dsh), dshUI, and dshUnit are not required on production
 installation of the Darling Data Management System, in fact, for security, they
 should probably not be included in a production installation! They are intended to
 be used during development with the Darling Data Management System.
@@ -342,7 +342,7 @@ version_date="Tue Feb  9 12:12:53 AM EST 2021"
 ```
 
 Additional variables may also be defined in `config.sh`, though they will not be
-used by dsh. A practical example of defining additional variables could be to
+used by [dsh](#dsh). A practical example of defining additional variables could be to
 define variables for the names of Responses that are going to have many Requests,
 OutputComponents, and DynamicOutputComponents assigned to them.
 
@@ -461,7 +461,7 @@ Commands:
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
 
 The following Hello World guide demonstrates one possible implementation of a
-Hello World App. The Hello World guide will also demonstrate the use of dsh,
+Hello World App. The Hello World guide will also demonstrate the use of [dsh](#dsh),
 Components, Apps, and App Packages.
 
 1. [Create An App Package For The HelloWorld App](#create-an-app-package-for-the-helloworld-app)
@@ -594,7 +594,7 @@ the new App.
 
 Finally, it will run the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
 configuration scripts to create the PHP configuration files for the App's Components via
-the dsh calls defined in the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
+the [dsh](#dsh) calls defined in the App Package's `Responses.sh`, `Requests.sh`, and `OutputComponents.sh`
 configuration scripts.
 
 5. Make the HelloWorld App from the HelloWorld App Package
@@ -605,7 +605,7 @@ configuration scripts.
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-Once an App has been made via dsh --make-app, it can be built for one or more
+Once an App has been made via [dsh](#dsh) --make-app, it can be built for one or more
 domains via [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b).
 
 6. Build the HelloWorld App to run on `http://localhost:8080`
@@ -714,8 +714,8 @@ own in the meantime.
 
 [Back To Top](#darling-data-management-system) | [Back to Setup Development Tools](#setup-development-tools)
 
-dsh is a command line utility designed to aide in the development process with the
-Darling Data Management System. The following is an overview of dsh:
+[dsh](#dsh) is a command line utility designed to aide in the development process with the
+Darling Data Management System. The following is an overview of [dsh](#dsh):
 
 1. [dsh --assign-to-response](#dsh---assign-to-response--dsh--a)
 2. [dsh --build-app](#dsh---build-app--dsh--b)
@@ -794,7 +794,7 @@ Note: A Components.php file MUST be defined for the App at:
 `DarlingDataManagementSystem/Apps/[APP_NAME]/Components.php`
 
 If [`dsh --make-app`](#dsh---make-app--dsh--m) was used to create the App
-from an App Package then Components.php will have been created by dsh.
+from an App Package then Components.php will have been created by [dsh](#dsh).
 
 Shorthand:
 
@@ -812,7 +812,7 @@ Example:
 
 `dsh -b AppName http://localhost:8080/`
 
-WARNING: dsh will not prevent you from building an App multiple times for
+WARNING: [dsh](#dsh) will not prevent you from building an App multiple times for
          the same `[DOMAIN]`, whether or not this is problematic depends
          on the App being built.
 
@@ -882,7 +882,7 @@ dsh -h -p
 
 The following is a brief summary of how to use the --help flag:
 
-To get general information about dsh, use:
+To get general information about [dsh](#dsh), use:
 
     `dsh --help`
 
@@ -914,7 +914,7 @@ To get information about a mode of a modal flag use:
 
 Description:
 
-Returns the path to the Darling Data Management System installation that dsh is acting on.
+Returns the path to the Darling Data Management System installation that [dsh](#dsh) is acting on.
 
 Shorthand:
 
@@ -1268,7 +1268,7 @@ Example:
 
 Warning: This flag is still being developed. It is working as intended with
 the exception of the `[REPLACE_EXISTING_APP]` argument. Apps can be made via
-`dsh --make-app`, but it is not yet possible to force dsh to replace an existing
+`dsh --make-app`, but it is not yet possible to force [dsh](#dsh) to replace an existing
 App that shares the same name as the App to be made via `dsh --make-app AppPackage replace`
 This is being addressed as part of the completion of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95).
 
@@ -1291,7 +1291,7 @@ Arguments:
 
 `[REPLACE_EXISTING_APP]` By default, [`dsh --make-app`](#dsh---make-app--dsh--m) will not replace an existing
                          App that shares the same name as the App to be made. To
-                         force dsh to replace an existing App, pass the string
+                         force [dsh](#dsh) to replace an existing App, pass the string
                          `replace` to the `[REPLACE_EXISTING_APP]` argument.
 
 Note: `[REPLACE_EXISTING_APP]` has not been properly implemented yet, this is being
