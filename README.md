@@ -422,7 +422,7 @@ Then run: `chmod -R 0755 $HOME/HelloWorld/*.sh`
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
-###Hello World Demo Command Summary
+### Hello World Demo Command Summary
 
 Note: For brevity, `echo 'command' >> "path/to/AppPackage/FILE.sh"` is used in
       place of vim to write to files in the HelloWorld Demo Command Summary. Demo
