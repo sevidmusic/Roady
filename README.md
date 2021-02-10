@@ -412,12 +412,13 @@ dsh -n GlobalResponse "${app_name}" "${pictures_response_name}" 0
 Also note the use of the `"${app_name}"` variable, it is good practice to use the
 `"${app_name}"` variable to reference the name of the App the App Package represents
 in the App Package's configuration scripts, this will help avoid typos that could
-cause [`dsh --make-app`](#dsh---make-app--dsh--m) to fail. In general use variables defined in `config.sh`
-whenever it is appropriate to reduce the risk of introducing bugs into an App
-Package.
+cause [`dsh --make-app`](#dsh---make-app--dsh--m) to fail.
+
+In general use variables defined in `config.sh` whenever it is appropriate to reduce
+the risk of introducing bugs into an App Package.
 
 Always make sure that an App Package's configuration scripts are executable or
-`dsh --make-app` will fail when it is called to make the App.
+ [`dsh --make-app`](#dsh---make-app--dsh--m) will fail when it is called to make the App.
 
 It is good practice to set the App Package's script's permissions immediately
 after creating a new App Package.
