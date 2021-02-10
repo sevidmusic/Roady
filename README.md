@@ -874,7 +874,7 @@ dsh --help --php-unit
 dsh -h -p
 ```
 
-# dsh --help --help
+### dsh --help --help
 
 [Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
@@ -970,7 +970,7 @@ Example:
 `dsh -n AppPackage AppName "$HOME" "http://localhost:8924"`
 
 
-# dsh --new App
+### dsh --new App
 
 [Back To Top](#darling-data-management-system) | [dsh](#dsh)
 
