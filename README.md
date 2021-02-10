@@ -441,7 +441,7 @@ Commands:
 7. `dsh -b HelloWorld "http://localhost:8080"`
 8. `dsh -s 8080`
 
-### Hello World Guide
+### [Hello World Guide](#hello-world-guide)
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo)
 
@@ -635,11 +635,11 @@ Once started, the server can be reached from a web browser via [http://localhost
 
 8. To view the HelloWorld App, open a web browser and go to [http://localhost:8080](http://localhost:8080)
 
-### Hello World Guide Overview
+### [Hello World Guide](#hello-world-guide) Overview
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-The following is an overview of the steps taken in this demo:
+The following is an overview of the steps taken in the [Hello World Guide](#hello-world-guide):
 
 - The App Package for the HelloWorld App was created via `dsh --new AppPackage`.
 
@@ -1024,7 +1024,7 @@ or
 
 ### dsh --new GlobalResponse
 
-[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide](#define-a-globalresponse-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to [Hello World Guide](#hello-world-guide)](#define-a-globalresponse-for-the-helloworld-app)
 
 `dsh --new GlobalResponse [APP_NAME] [GLOBAL_RESPONSE_NAME] [GLOBAL_RESPONSE_POSITION]`
 
@@ -1051,7 +1051,7 @@ Example:
 
 ### dsh --new OutputComponent
 
-[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide](#define-an-outputcomponent-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to [Hello World Guide](#hello-world-guide)](#define-an-outputcomponent-for-the-helloworld-app)
 
 `dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`
 
@@ -1231,7 +1231,7 @@ Example:
 
 ### dsh --make-app | dsh -m
 
-[Back To Top]() | [Back to Hello World Guide Make Executable](#make-the-helloworld-app-packages-scripts-executable) | [Back to Hello World Guide Make App](#make-the-helloworld-app-from-the-helloworld-app-package)
+[Back To Top]() | [Back to [Hello World Guide](#hello-world-guide) Make Executable](#make-the-helloworld-app-packages-scripts-executable) | [Back to [Hello World Guide](#hello-world-guide) Make App](#make-the-helloworld-app-from-the-helloworld-app-package)
 
 
 Warning: This flag is still being developed. It is working as intended with
