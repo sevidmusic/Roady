@@ -511,15 +511,9 @@ Responses and GlobalResponses are defined in the App Package's `Responses.sh` sc
 
 3. Define a GlobalResponse for the HelloWorld App.
 
-   Note: Responses and GlobalResponses defined in `Responses.sh` should always use
-         the `"${app_name}"` variable to indicate the `[APP_NAME]`. This only applies
-         to calls made to dsh from within an App Package's `Responses.sh`, always
-         specify the App's actual alphanumeric name when calling dsh from the
-         command line.
-
    Run: `vim "$HOME/HelloWorld/Responses.sh"`
 
-uu   Add: `dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0`
+   Add: `dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0`
 
 ### Define An OutputComponent For The HelloWorld App
 
