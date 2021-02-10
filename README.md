@@ -418,14 +418,14 @@ Then run: `chmod -R 0755 $HOME/HelloWorld/*.sh`
 
 ### [Hello World Demo](#hello-world-demo)
 
-[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Guide](#hello-world-guide)
+[Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [View Full Size Demo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif) | [Hello World Demo Command Summary](#hello-world-demo-command-summary) | [Hello World Guide](#hello-world-guide)
 
 ![DDMSHelloWorldDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSHelloWorldAppDemo.gif?raw=true)
 
 ### [Hello World Demo](#hello-world-demo) Command Summary
 
 Note: For brevity, `echo 'command' >> "path/to/AppPackage/FILE.sh"` is used in
-      place of vim to write to files in the [Hello World Demo](#hello-world-demo-command-summary).
+      place of vim to write to files in the [Hello World Demo Command Summary](#hello-world-demo-command-summary).
       The [Hello World Demo](#hello-world-demo) uses vim so relevant files can be seen in demo. As
       long as the App Package's files are written correctly, and have the correct
       permissions, how they are written really does not matter.
