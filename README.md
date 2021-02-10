@@ -1051,7 +1051,7 @@ Example:
 
 ### dsh --new OutputComponent
 
-[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to [Hello World Guide](#hello-world-guide)](#define-an-outputcomponent-for-the-helloworld-app)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back to Hello World Guide Define An OutputComponent](#define-an-outputcomponent-for-the-helloworld-app)
 
 `dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`
 
@@ -1267,7 +1267,7 @@ Note: `[REPLACE_EXISTING_APP]` has not been properly implemented yet, this is be
 
 Examples:
 
-`dsh -m "$HOME/Downloads/AppPackages/HelloWorld"
+`dsh -m "$HOME/Downloads/AppPackages/HelloWorld"`
 
-`dsh -m "$HOME/Downloads/AppPackages/HelloWorld" 'replace'
+`dsh -m "$HOME/Downloads/AppPackages/HelloWorld" 'replace'`
 
