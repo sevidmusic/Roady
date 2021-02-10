@@ -57,6 +57,14 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 
 ![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/DDMSInstallationDemo.gif?raw=true)
 
+### Installation Demo Command Summary
+
+1. `cd "$HOME/Downloads"`
+2. `git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git`
+3. `cd DarlingDataManagementSystem`
+4. `composer update && composer upgrade`
+5. [Add dsh, and dshUI to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
+
 ### Install From GitHub And Setup Via Composer
 
 [Back To Top](#darling-data-management-system) | [Installation](#installation)
