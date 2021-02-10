@@ -654,17 +654,40 @@ Once started, the server can be reached from a web browser via [http://localhost
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
 The following is an overview of the steps taken in the [Hello World Guide](#hello-world-guide):
+1. A new App Package was created for the HelloWorld App.
 
-- The App Package for the HelloWorld App was created via `dsh --new AppPackage`.
+`dsh -n AppPackage HelloWorld "$HOME"`
 
-- The appropriate HelloWorld App Package files were configured manually using
-  a text editor.
+2. The App Package's scripts were made executable, specifically `read` `write`
+   `execute` for owner, and `read` `execute` for everyone else.
 
-- The HelloWorld App was made from the HelloWorld App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
+`chmod -R 0755 $HOME/HelloWorld/*.sh`
 
-- The HelloWorld App was built via `dsh --build-app`.
+3. A GlobalResponse was defined for the HelloWorld App in the App Package's
+   `Responses.sh` configuration file.
 
-- A development server was started at `http://localhost:8080` via `dsh --start-development-server`.
+`echo 'dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0' >> "$HOME/HelloWorld/Responses.sh"`
+
+4. A OutputComponent was defined for the HelloWorld App in the App Package's
+   `OutputComponents.sh` configuration file.
+
+`echo 'dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"' >> "$HOME/HelloWorld/OutputComponents.sh"`
+
+5. The OutputComponent was assigned to the GlobalResponse.
+
+`echo 'dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent' >> "$HOME/HelloWorld/OutputComponents.sh"`
+
+6. An instance of the HelloWorld App was made from the App Package.
+
+`dsh -m "$HOME/HelloWorld"`
+
+7. The HelloWorld App was built to run on the domain: `http://localhost:8080`
+
+`dsh -b HelloWorld "http://localhost:8080"`
+
+8. A development server was started at `localhost` on port `8080`.
+
+`dsh -s 8080`
 
 The new HelloWorld App is now running on [http://localhost:8080](http://localhost:8080) and can be accessed
 from a web browser.
