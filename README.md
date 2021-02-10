@@ -566,12 +566,15 @@ directory.
 
 This file can be a plain text file, a PHP file, an html file, a json file, etc.
 
-Note: Files that have the .php file extension will be interpreted as executable
+Note: Files that have the `.php` file extension will be interpreted as executable
 PHP code, all other file types will be interpreted as plain text.
 
 In this example one OutputComponent will be defined whose output will be "Hello World".
 
-OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`](#dsh---new-outputcomponent)
+OutputComponents can be created for an App via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_COMPONENT_NAME] [OUTPUT_COMPONENT_CONTAINER] [OUTPUT_COMPONENT_POSITION] [OUTPUT]`](#dsh---new-outputcomponent)
+
+OutputComponents are defined in an App Package by placing calls to [`dsh --new OutputComponent`](#dsh---new-outputcomponent)
+in the App Package's `OutputComponents.sh` script.
 
 4. Define an OutputComponent for the HelloWorld App
 
