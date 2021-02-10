@@ -976,7 +976,7 @@ Example:
 
 ### dsh --new App
 
-[Back To Top](#darling-data-management-system) | [dsh](#dsh)
+[Back To Top](#darling-data-management-system) | [dsh](#dsh) | [Back To Make The Hello World App](#make-the-helloworld-app-from-the-helloworld-app-package)
 
 `dsh --new App [APP_NAME] [DOMAIN]`
 
