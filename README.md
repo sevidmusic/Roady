@@ -235,7 +235,7 @@ reused in various contexts to implement a variety of designs.
 
 An App's Components are defined in the relevant App Packages configuration scripts.
 These configuration scripts are just bash scripts that make appropriate calls to
-dsh that will be executed whenever `dsh --make-app` is run.
+dsh that will be executed whenever [`dsh --make-app`](#dsh---make-app--dsh--m) is run.
 
 An App Package will always have at least four configuration scripts:
 
@@ -399,7 +399,7 @@ dsh -n GlobalResponse "${app_name}" "${pictures_response_name}" 0
 Also note the use of the `"${app_name}"` variable, it is good practice to use the
 `"${app_name}"` variable to reference the name of the App the App Package represents
 in the App Package's configuration scripts, this will help avoid typos that could
-cause `dsh --make-app` to fail. In general use variables defined in `config.sh`
+cause [`dsh --make-app`](#dsh---make-app--dsh--m) to fail. In general use variables defined in `config.sh`
 whenever it is appropriate to reduce the risk of introducing bugs into an App
 Package.
 
@@ -557,7 +557,7 @@ OutputComponents are defined via [`dsh --new OutputComponent [APP_NAME] [OUTPUT_
 
 An instance of an App can be made from an App Package via [`dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`](#dsh---make-app--dsh--m).
 
-First, `dsh --make-app` will create a new instance of the App, via an internal call
+First, [`dsh --make-app`](#dsh---make-app--dsh--m) will create a new instance of the App, via an internal call
 to the `dsh --new App` command.
 
 Then, it will copy the App Package's `css`, `js`, and `DynamicOutput` directories to
@@ -1237,7 +1237,7 @@ Arguments:
 
 `[PATH_TO_APP_PACKAGE]` The path to the App Package that will be used to make the App.
 
-`[REPLACE_EXISTING_APP]` By default, `dsh --make-app` will not replace an existing
+`[REPLACE_EXISTING_APP]` By default, [`dsh --make-app`](#dsh---make-app--dsh--m) will not replace an existing
                          App that shares the same name as the App to be made. To
                          force dsh to replace an existing App, pass the string
                          `replace` to the `[REPLACE_EXISTING_APP]` argument.
