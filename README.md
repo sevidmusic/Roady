@@ -241,14 +241,14 @@ data. An App's data consists of the App's source code, and the Darling Data Mana
 System [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that the App defines.
 
 The Darling Data Management System provides a number of [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) that can be used
-to implement an App. Components are objects that conform to niche interfaces
+to implement an App. [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component) are objects that conform to niche interfaces
 that represent the various parts of an application.
 
-Legos are a good analogy for Components, like Legos, individual Components are
-used together to implement a larger design. Also, like Legos, Components can be
+Legos are a good analogy for [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component), like Legos, individual [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) are
+used together to implement a larger design. Also, like Legos, [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) can be
 reused in various contexts to implement a variety of designs.
 
-An App's Components are defined in the relevant App Packages configuration scripts.
+An App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) are defined in the relevant App Packages configuration scripts.
 These configuration scripts are just bash scripts that make appropriate calls to
 dsh that will be executed whenever [`dsh --make-app`](#dsh---make-app--dsh--m) is run.
 
