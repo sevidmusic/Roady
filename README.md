@@ -15,8 +15,9 @@
 3. [Hello World Demo Command Summary](#hello-world-demo-command-summary)
 4. [Hello World Guide](#hello-world-guide)
 5. [Single App Website Demo](#single-app-website-demo)
-6. [Single App Website Guide](#single-app-website-guide)
-7. [dsh](#dsh)
+6. [Single App Website Demo Command Summary](#single-app-website-demo-command-summary)
+7. [Single App Website Guide](#single-app-website-guide)
+8. [dsh](#dsh)
 
 
 # About
