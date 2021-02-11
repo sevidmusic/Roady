@@ -181,7 +181,8 @@ be used during development with the Darling Data Management System.
 3. [Hello World Demo Command Summary](#hello-world-demo-command-summary)
 3. [Hello World Guide](#hello-world-guide)
 4. [Single App Website Demo](#single-app-website-demo)
-5. [Single App Website Guide](#single-app-website-guide)
+5. [Single App Website Demo Command Summary](#single-app-website-demo-command-summary)
+6. [Single App Website Guide](#single-app-website-guide)
 
 ### Apps And App Packages
 
