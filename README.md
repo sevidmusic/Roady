@@ -743,7 +743,7 @@ from a web browser.
 
    Run: `echo 'dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
+   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php"' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
    Run: `echo 'dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
@@ -751,15 +751,15 @@ from a web browser.
 
    Run: `echo 'dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
+   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html"' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
    Run: `echo 'dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
+   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php"' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
    Run: `echo 'dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
+   Run: `echo 'dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html"' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
    Run: `echo 'dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
