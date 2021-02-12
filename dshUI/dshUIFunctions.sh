@@ -30,6 +30,7 @@ animatedPrint() {
 }
 
 showLoadingBar() {
+  [[ "${DISABLE_ANIMATION}" == 1 ]] && printf "\n\e[0m\e[103m%s\e[0m | \e[102m%s\e[0m\n" "Animations Disabled" "${1:0:57}" && return
   local _slb_inc _slb_windowWidth _slb_numChars _slb_adjustedNumChars _slb_loadingBarLimit
   printf "\n"
   animatedPrint "${1}" .00242
@@ -55,6 +56,7 @@ exitOrContinue() {
 }
 
 notifyUser() {
+  [[ "${DISABLE_ANIMATION}" == 1 ]] && printf "\n\e[0m\e[103m%s\e[0m | \e[102m%s\e[0m\n" "Animations Disabled" "${1:0:57}" && return
   [[ "${4}" != 'no_newline' ]] && printf "\n"
   printf "%s" "${NOTIFY_COLOR}"
   animatedPrint "${1}" 0.009
