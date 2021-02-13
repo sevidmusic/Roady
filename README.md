@@ -1395,10 +1395,10 @@ created in the App Package's `DynamicOutput` directory.
 ### Create The Homepage.php Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named Homepage
-which references a Dynamic Output file named Homepage.php, this file must be created
+which references a Dynamic Output file named `Homepage.php`, this file must be created
 in the App Package's `DynamicOutput` directory.
 
-9. Create Homepage.php:
+9. Create `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`:
 
    Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
 
@@ -1413,10 +1413,10 @@ in the App Package's `DynamicOutput` directory.
 ### Create The Pictures.html Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named Pictures
-which references a Dynamic Output file named Pictures.html, this file must be created
+which references a Dynamic Output file named `Pictures.html`, this file must be created
 in the App Package's `DynamicOutput` directory.
 
-10. Create Pictures.html:
+10. Create `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`:
 
     Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
 
