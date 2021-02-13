@@ -1133,7 +1133,7 @@ configuration script.
    Add: `dsh -a "${app_name}" Pictures Pictures PicturesRequests Request`
 
 ### Define OutputComponents And DynamicOutputComponents For The SingleAppWebsite
-### And Assign Them To The Appropriate Responses And GlobalResponse
+**And Assign Them To The Appropriate Responses And GlobalResponse**
 
 Next, define the OutputComponents and DynamicOutputComponents for the website.
 
