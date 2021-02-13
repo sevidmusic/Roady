@@ -669,7 +669,7 @@ The following is an overview of the steps taken in the [Hello World Guide](#hell
 2. The App Package's scripts were made executable, specifically `read` `write`
    `execute` for owner, and `read` `execute` for everyone else.
 
-`chmod -R 0755 $HOME/HelloWorld/*.sh`
+   `chmod -R 0755 $HOME/HelloWorld/*.sh`
 
 3. A GlobalResponse was defined for the HelloWorld App in the App Package's
    `Responses.sh` configuration file.
