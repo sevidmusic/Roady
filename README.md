@@ -1500,7 +1500,7 @@ PHP is a wonderful language, and provides a built in web server that can be used
 as a simple local development server. More information about PHP's built in server
 can be found at:
 
-    `https://www.php.net/manual/en/features.commandline.webserver.php`
+[https://www.php.net/manual/en/features.commandline.webserver.php](https://www.php.net/manual/en/features.commandline.webserver.php)
 
 dsh can be used to start a development server via PHP on a specific port on localhost:
 
