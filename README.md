@@ -1508,7 +1508,7 @@ Once started, the server can be reached from a web browser via `http://localhost
 
 13. Start a development server on localhost at port `8080`
 
-    Run: dsh -`s 8080`
+    Run: `dsh -s 8080`
 
 Development server will be reachable via http://localhost:8080
 
