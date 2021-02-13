@@ -1487,7 +1487,7 @@ easily build the App for one or more domains.
 
 12. Build the SingleAppWebsite App to run on http://localhost:8080
 
-    Run: dsh -b SingleAppWebsite "http://localhost:8080"
+    Run: `dsh -b SingleAppWebsite "http://localhost:8080"`
 
 App's can be built to run on one, or many domains.
 
