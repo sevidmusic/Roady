@@ -248,7 +248,7 @@ Legos are a good analogy for [Components](https://github.com/sevidmusic/DarlingD
 used together to implement a larger design. Also, like Legos, [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) can be
 reused in various contexts to implement a variety of designs.
 
-An App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) are defined in the relevant App Packages configuration scripts.
+An App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) are defined in the relevant App Package's configuration scripts.
 These configuration scripts are just bash scripts that make appropriate calls to
 dsh that will be executed whenever [`dsh --make-app`](#dsh---make-app--dsh--m) is run.
 
