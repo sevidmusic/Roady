@@ -248,7 +248,7 @@ Legos are a good analogy for [Components](https://github.com/sevidmusic/DarlingD
 used together to implement a larger design. Also, like Legos, [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) can be
 reused in various contexts to implement a variety of designs.
 
-An App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) are defined in the relevant App Packages configuration scripts.
+An App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagemntSystem-0.0.1/core/interfaces/component) are defined in the relevant App Package's configuration scripts.
 These configuration scripts are just bash scripts that make appropriate calls to
 dsh that will be executed whenever [`dsh --make-app`](#dsh---make-app--dsh--m) is run.
 
@@ -274,7 +274,7 @@ An App Package will always have at least four configuration scripts:
 app_name         The name of the App
 
 bug_contact      A reference to where bugs can be submitted, this should be an email,
-                 or a url to a online resource where bugs can be submitted.
+                 or a url to an online resource where bugs can be submitted.
 
 config_locked     The use of this variable has not been implemented yet, but in the
                  future it will be used to prevent dsh from modifying an App Package's
@@ -419,6 +419,11 @@ cause [`dsh --make-app`](#dsh---make-app--dsh--m) to fail.
 In general use variables defined in `config.sh` whenever it is appropriate to reduce
 the risk of introducing bugs into an App Package.
 
+_Hint: Checkout the [DarlingAppPackages](https://github.com/sevidmusic/DarlingAppPackages) GitHub Repository for examples of App Packages_
+      _being developed for the Darling Data Managment System._
+
+_Hint: A good example of a `config.sh` can be found [here](https://github.com/sevidmusic/DarlingAppPackages/blob/main/DDMSDocs/config.sh)_
+
 Always make sure that an App Package's configuration scripts are executable or
  [`dsh --make-app`](#dsh---make-app--dsh--m) will fail when it is called to make the App.
 
@@ -430,6 +435,8 @@ For example:
 Run: `dsh -n AppPackage HelloWorld $HOME`
 
 Then run: `chmod -R 0755 $HOME/HelloWorld/*.sh`
+
+Note: In the future this will not be necessary. See issue [#111](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/111).
 
 ### Hello World Demo
 
@@ -611,7 +618,7 @@ configuration scripts.
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-Once an App has been made via [dsh --make-app](#dsh---make-app), it can be built for one or more
+Once an App has been made via [dsh --make-app](#dsh---make-app--dsh--m), it can be built for one or more
 domains via [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b).
 
 6. Build the HelloWorld App to run on `http://localhost:8080`
@@ -657,38 +664,54 @@ Once started, the server can be reached from a web browser via `http://localhost
 The following is an overview of the steps taken in the [Hello World Guide](#hello-world-guide):
 1. A new App Package was created for the HelloWorld App.
 
-       `dsh -n AppPackage HelloWorld "$HOME"`
+```
+dsh -n AppPackage HelloWorld "$HOME"
+```
 
 2. The App Package's scripts were made executable, specifically `read` `write`
    `execute` for owner, and `read` `execute` for everyone else.
 
-       `chmod -R 0755 $HOME/HelloWorld/*.sh`
+```
+chmod -R 0755 $HOME/HelloWorld/*.sh
+```
 
 3. A GlobalResponse was defined for the HelloWorld App in the App Package's
    `Responses.sh` configuration file.
 
-       `echo 'dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0' >> "$HOME/HelloWorld/Responses.sh"`
+```
+echo 'dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0' >> "$HOME/HelloWorld/Responses.sh"
+```
 
 4. A OutputComponent was defined for the HelloWorld App in the App Package's
    `OutputComponents.sh` configuration file.
 
-       `echo 'dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"' >> "$HOME/HelloWorld/OutputComponents.sh"`
+```
+echo 'dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"' >> "$HOME/HelloWorld/OutputComponents.sh"
+```
 
 5. The OutputComponent was assigned to the GlobalResponse.
 
-       `echo 'dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent' >> "$HOME/HelloWorld/OutputComponents.sh"`
+```
+echo 'dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent' >> "$HOME/HelloWorld/OutputComponents.sh"
+```
 
 6. An instance of the HelloWorld App was made from the App Package.
 
-       `dsh -m "$HOME/HelloWorld"`
+```
+dsh -m "$HOME/HelloWorld"
+```
 
 7. The HelloWorld App was built to run on the domain: `http://localhost:8080`
 
-       `dsh -b HelloWorld "http://localhost:8080"`
+```
+dsh -b HelloWorld "http://localhost:8080"
+```
 
 8. A development server was started at `localhost` on port `8080`.
 
-       `dsh -s 8080`
+```
+dsh -s 8080
+```
 
 The new HelloWorld App is now running on [http://localhost:8080](http://localhost:8080) and can be accessed
 from a web browser.
@@ -769,7 +792,9 @@ from a web browser.
 
    Run: `echo 'dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-6. Create Dynamic Output file: "$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"
+6. Create Dynamic Output file using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"`
 
    File content should be:
 
@@ -801,7 +826,9 @@ $pagename = array_pop($getKeys);
 </head>
 ```
 
-7. Create referenced css file "$HOME/SingleAppWebsite/css/styles.css"
+7. Create referenced css file using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/css/styles.css"`
 
    File content should be:
 
@@ -827,7 +854,9 @@ h1 { margin-left: 1.4em; }
 p { margin-left: 3em; }
 ```
 
-8. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
+8. Create Dynamic Output File using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
 
    File content should be:
 
@@ -840,7 +869,9 @@ p { margin-left: 3em; }
 </div>
 ```
 
-9. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
+9. Create Dynamic Output File using preferred text editor at:
+
+    `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
 
    File content should be:
 
@@ -850,7 +881,9 @@ p { margin-left: 3em; }
 <p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
 ```
 
-10. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
+10. Create Dynamic Output File using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
 
    File content should be:
 
@@ -959,6 +992,8 @@ the bash scripts in the App package must be executable.
 
    Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
 
+Note: This will not be necessary in the future, see issue [#111](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/111).
+
 ### App Data
 
 The Darling Data Management System's understanding of an App is based on the App's
@@ -982,30 +1017,30 @@ parts of the website.
 
 The following Component types will be used in this example:
 
-**Request**
+**[Request](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/Web/Routing/Request.php)**
 
 Represents a url such as `http://DOMAIN/`
 
 Note: Requests can be used to represent any url, not just urls relative to the
       domain the App is running on.
 
-**Response**
+**[Response](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/Web/Routing/Response.php)**
 
 Responses are used to group OutputComponents and DynamicOutputComponents together
 whose output is intended to be shown in response to a specific Request to the
 domain the App is running on.
 
-**GlobalResponse**
+**[GlobalResponse](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/Web/Routing/GlobalResponse.php)**
 
 GlobalResponses are used to group OutputComponents and DynamicOutputComponents
 together whose output is intended to be shown in response to a all Requests to
 the domain the App is running on.
 
-**OutputComponent**
+**[OutputComponent](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/OutputComponent.php)**
 
 OutputComponents are used to define an App's static output.
 
-**DynamicOutputComponent**
+**[DynamicOutputComponent](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/DynamicOutputComponent.php)**
 
 DynamicOutputComponents are used to define an App's Dynamic Output, this is output
 generated by interpreting an assigned file that exists in either the Darling Data
@@ -1040,7 +1075,9 @@ Foo is loaded first, Bar is loaded second, and  Baz loaded third, then the
 positions will be adjusted as follows:
 
 Foo Position: `0`
+
 Bar Position: `0.1`
+
 Baz Position: `0.2`
 
 Responses and GlobalResponses are defined in the App Package's `Responses.sh`
@@ -1112,7 +1149,7 @@ configuration script.
    Add: `dsh -a "${app_name}" Pictures Pictures PicturesRequests Request`
 
 ### Define OutputComponents And DynamicOutputComponents For The SingleAppWebsite
-### And Assign Them To The Appropriate Responses And GlobalResponse
+**And Assign Them To The Appropriate Responses And GlobalResponse**
 
 Next, define the OutputComponents and DynamicOutputComponents for the website.
 
@@ -1120,7 +1157,7 @@ Before doing this it is important to understand how an App's output is served to
 a user by the Darling Data Management System.
 
 When a user makes a Request to the domain of a website running on the Darling
-Data Management System the first thing that happens is a Router Component is used
+Data Management System the first thing that happens is a [Router](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/Web/Routing/Router.php) Component is used
 to determine which Responses and GlobalResponses respond to the current Request.
 These Responses and GlobalResponses may be defined by one, or many Apps running
 on the same domain.
@@ -1131,7 +1168,7 @@ Request is shown to the user.
 
 To put it very simply, the Darling Data Management System takes all of the output
 from the relevant OutputComponents and DynamicOutputComponents and constructs a
-string that is served to the user via the Darling Data Management System's index.php
+string that is served to the user via the Darling Data Management System's [`index.php`](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/index.php)
 
 OutputComponents and DynamicOutputComponents are defined in the App Package's
 `OutputComponents.sh` configuration script.
@@ -1154,13 +1191,13 @@ and 3 OutputComponents:
 
   GlobalResponse `Foo` at position `1` assigned two OutputComponents:
 
-    `Baz` at position `0` with output `BazOutput`
+  `Baz` at position `0` with output `BazOutput`
 
-    `Bazzer` at position `5` with output `--BazzerOutput--`
+  `Bazzer` at position `5` with output `--BazzerOutput--`
 
   GlobalResponse `Bar` at position `0` assigned one OutputComponent:
 
-    `Bazbiz` at position `7` with output `<p>BazBizOutput<p>`
+  `Bazbiz` at position `7` with output `<p>BazBizOutput<p>`
 
 Then any Request to the domain the App is running on will produce
 the following output to be interpreted by the web browser:
@@ -1231,7 +1268,7 @@ or
 Dynamic output files that are used by a single App should be defined in the
 relevant App Package's `DynamicOutput` directory so that dsh can copy them to the
 App's `DynamicOutput` directory whenever an instance of the App is made from the
-App Package via [`dsh --make-app`](#dsh---make-app).
+App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
 Dynamic output files that are used by multiple App's should be placed in the Darling
 Data Management System's `SharedDynamicOutput` directory. These Dynamic Output files
@@ -1305,7 +1342,7 @@ Output file.
 Local css and javascript files referenced within a Dynamic Output file should be
 placed in the App Package's css and javascript directories, respectively, so that
 [dsh](#dsh) knows to include them with the files copied from the App Package to
-the App whenever an instance of the App is made via [`dsh --make-app`](#dsh---make-app).
+the App whenever an instance of the App is made via [`dsh --make-app`](#dsh---make-app--dsh--m).
 The one exception to this is if the referenced css or javascript files are served
 form a CDN or other location outside of the Darling Data Management System.
 
@@ -1353,10 +1390,10 @@ p { margin-left: 3em; }
 ### Create the MainMenu.html Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named MainMenu
-which references a Dynamic Output file named MainMenu.html, this file must be created
-in the App Package's `DynamicOutput` directory.
+which references a Dynamic Output file named `MainMenu.html`, this file must be
+created in the App Package's `DynamicOutput` directory.
 
-8. Create MainMenu.html:
+8. Create `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`:
 
     Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
 
@@ -1374,10 +1411,10 @@ in the App Package's `DynamicOutput` directory.
 ### Create The Homepage.php Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named Homepage
-which references a Dynamic Output file named Homepage.php, this file must be created
+which references a Dynamic Output file named `Homepage.php`, this file must be created
 in the App Package's `DynamicOutput` directory.
 
-9. Create Homepage.php:
+9. Create `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`:
 
    Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
 
@@ -1392,10 +1429,10 @@ in the App Package's `DynamicOutput` directory.
 ### Create The Pictures.html Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named Pictures
-which references a Dynamic Output file named Pictures.html, this file must be created
+which references a Dynamic Output file named `Pictures.html`, this file must be created
 in the App Package's `DynamicOutput` directory.
 
-10. Create Pictures.html:
+10. Create `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`:
 
     Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
 
@@ -1431,10 +1468,10 @@ in the App Package's `DynamicOutput` directory.
 
 ### Make the SingleAppWebsite App From The SingleAppWebsite App Package
 
-An instance of an App can be made from an App Package via the [`dsh --make-app`](#dsh---make-app) command.
+An instance of an App can be made from an App Package via the [`dsh --make-app`](#dsh---make-app--dsh--m) command.
 
-First, [`dsh --make-app`](#dsh---make-app) will create a new instance of the App, via an internal call
-to the dsh --new App command.
+First, [`dsh --make-app`](#dsh---make-app--dsh--m) will create a new instance of the App, via an internal call
+to [`dsh --new App`](#dsh---new-app).
 
 Then, it will copy the App Package's css, js, and DynamicOutput directories to
 the new App.
@@ -1446,27 +1483,27 @@ configuration scripts.
 
 11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
 
-     dsh -m "$HOME/SingleAppWebsite"
+    Run: `dsh -m "$HOME/SingleAppWebsite"`
 
 ### Build The SingleAppWebsite To Run On The Domain `http://localhost:8080`
 
-Once an App has been made via [`dsh --make-app`](#dsh---make-app), it can be built for one or more
-domains via the [`dsh --build-app`](#dsh---build-app) command.
+Once an App has been made via [`dsh --make-app`](#dsh---make-app--dsh--m), it can be built for one or more
+domains via the [`dsh --build-app`](#dsh---build-app--dsh--b) command.
 
-By default [`dsh --build-app`](#dsh---build-app) will build an App for the domain defined in the App's
-Components.php file. This domain will have been set by [`dsh --make-app`](#dsh---make-app) to the value
-assigned to the domain variable defined in the relevant App Packages config.sh
+By default [`dsh --build-app`](#dsh---build-app--dsh--b) will build an App for the domain defined in the App's
+`Components.php` file. This domain will have been set by [`dsh --make-app`](#dsh---make-app--dsh--m) to the value
+assigned to the `domain` variable defined in the relevant App Packages `config.sh`
 configuration script.
 
-It is safe to modify the domain defined in the App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component).php file after
-the App has been made, however, [`dsh --build-app`](#dsh---build-app) takes an optional domain as the
+It is safe to modify the domain defined in the App's `Components.php` file after
+the App has been made, however, [`dsh --build-app`](#dsh---build-app--dsh--b) takes an optional domain as the
 second parameter, so there is really no need to modify the domain set in App's
-Components.php file, instead just use [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app) to
+`Components.php` file, instead just use [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b) to
 easily build the App for one or more domains.
 
 12. Build the SingleAppWebsite App to run on http://localhost:8080
 
-    Run: dsh -b SingleAppWebsite "http://localhost:8080"
+    Run: `dsh -b SingleAppWebsite "http://localhost:8080"`
 
 App's can be built to run on one, or many domains.
 
@@ -1479,7 +1516,7 @@ PHP is a wonderful language, and provides a built in web server that can be used
 as a simple local development server. More information about PHP's built in server
 can be found at:
 
-    `https://www.php.net/manual/en/features.commandline.webserver.php`
+[https://www.php.net/manual/en/features.commandline.webserver.php](https://www.php.net/manual/en/features.commandline.webserver.php)
 
 dsh can be used to start a development server via PHP on a specific port on localhost:
 
@@ -1487,7 +1524,7 @@ Once started, the server can be reached from a web browser via `http://localhost
 
 13. Start a development server on localhost at port `8080`
 
-    Run: dsh -`s 8080`
+    Run: `dsh -s 8080`
 
 Development server will be reachable via http://localhost:8080
 
@@ -1495,14 +1532,14 @@ Development server will be reachable via http://localhost:8080
 
 The following is an overview of the steps taken in this demo:
 
-- The App Package for the SingleAppWebsite App was created via dsh --new AppPackage.
+- The App Package for the SingleAppWebsite App was created via [`dsh --new AppPackage`](#dsh---new-apppackage).
 
-- The appropriate SingleAppWebsite App Package files were configured manually using
-  a text editor.
+- The appropriate SingleAppWebsite App Package files were created and configured
+  manually using a text editor.
 
-- The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app).
+- The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
-- The SingleAppWebsite App was built via [`dsh --build-app`](#dsh---build-app).
+- The SingleAppWebsite App was built via [`dsh --build-app`](#dsh---build-app--dsh--b).
 
 - A development server was started at http://localhost:8080 via dsh --start-development-server.
 
@@ -2071,7 +2108,7 @@ Warning: This flag is still being developed. It is working as intended with
 the exception of the `[REPLACE_EXISTING_APP]` argument. Apps can be made via
 `dsh --make-app`, but it is not yet possible to force [dsh](#dsh) to replace an existing
 App that shares the same name as the App to be made via `dsh --make-app AppPackage replace`
-This is being addressed as part of the completion of [issue #95](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/95).
+This is being addressed as part of the completion of [issue #123](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/123).
 
 
 `dsh --make-app [PATH_TO_APP_PACKAGE] [REPLACE_EXISTING_APP]`
