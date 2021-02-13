@@ -1175,13 +1175,13 @@ and 3 OutputComponents:
 
   GlobalResponse `Foo` at position `1` assigned two OutputComponents:
 
-    `Baz` at position `0` with output `BazOutput`
+  `Baz` at position `0` with output `BazOutput`
 
-    `Bazzer` at position `5` with output `--BazzerOutput--`
+  `Bazzer` at position `5` with output `--BazzerOutput--`
 
   GlobalResponse `Bar` at position `0` assigned one OutputComponent:
 
-    `Bazbiz` at position `7` with output `<p>BazBizOutput<p>`
+  `Bazbiz` at position `7` with output `<p>BazBizOutput<p>`
 
 Then any Request to the domain the App is running on will produce
 the following output to be interpreted by the web browser:
