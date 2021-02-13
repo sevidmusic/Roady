@@ -1377,7 +1377,7 @@ The App Package in this example defines a DynamicOutputComponent named MainMenu
 which references a Dynamic Output file named `MainMenu.html`, this file must be
 created in the App Package's `DynamicOutput` directory.
 
-8. Create MainMenu.html:
+8. Create `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`:
 
     Run: `vim "$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
 
