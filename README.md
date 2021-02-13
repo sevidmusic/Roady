@@ -838,7 +838,9 @@ h1 { margin-left: 1.4em; }
 p { margin-left: 3em; }
 ```
 
-8. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
+8. Create Dynamic Output File using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/DynamicOutput/MainMenu.html"`
 
    File content should be:
 
