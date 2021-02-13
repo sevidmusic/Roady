@@ -419,10 +419,10 @@ cause [`dsh --make-app`](#dsh---make-app--dsh--m) to fail.
 In general use variables defined in `config.sh` whenever it is appropriate to reduce
 the risk of introducing bugs into an App Package.
 
-Hint: Checkout the [DarlingAppPackages](https://github.com/sevidmusic/DarlingAppPackages) GitHub Repository for examples of App Packages
-      being developed for the Darling Data Managment System.
+__Hint: Checkout the [DarlingAppPackages](https://github.com/sevidmusic/DarlingAppPackages) GitHub Repository for examples of App Packages__
+      __being developed for the Darling Data Managment System.__
 
-Hint: A good example of a `config.sh` can be found [here](https://github.com/sevidmusic/DarlingAppPackages/blob/main/DDMSDocs/config.sh)
+__Hint: A good example of a `config.sh` can be found [here](https://github.com/sevidmusic/DarlingAppPackages/blob/main/DDMSDocs/config.sh)__
 
 Always make sure that an App Package's configuration scripts are executable or
  [`dsh --make-app`](#dsh---make-app--dsh--m) will fail when it is called to make the App.
