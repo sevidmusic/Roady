@@ -1452,7 +1452,7 @@ in the App Package's `DynamicOutput` directory.
 
 ### Make the SingleAppWebsite App From The SingleAppWebsite App Package
 
-An instance of an App can be made from an App Package via the [`dsh --make-app`](#dsh---make-app) command.
+An instance of an App can be made from an App Package via the [`dsh --make-app`](#dsh---make-app--dsh--m) command.
 
 First, [`dsh --make-app`](#dsh---make-app--dsh--m) will create a new instance of the App, via an internal call
 to [`dsh --new App`](#dsh---new-app).
