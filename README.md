@@ -776,7 +776,9 @@ from a web browser.
 
    Run: `echo 'dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent' >> "$HOME/SingleAppWebsite/OutputComponents.sh"`
 
-6. Create Dynamic Output file: `"$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"`
+6. Create Dynamic Output file using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/DynamicOutput/HtmlHead.php"`
 
    File content should be:
 
