@@ -422,6 +422,8 @@ the risk of introducing bugs into an App Package.
 Hint: Checkout the [DarlingAppPackages](https://github.com/sevidmusic/DarlingAppPackages) GitHub Repository for examples of App Packages
       being developed for the Darling Data Managment System.
 
+Hint: A good example of a `config.sh` can be found [here](https://github.com/sevidmusic/DarlingAppPackages/blob/main/DDMSDocs/config.sh)
+
 Always make sure that an App Package's configuration scripts are executable or
  [`dsh --make-app`](#dsh---make-app--dsh--m) will fail when it is called to make the App.
 
