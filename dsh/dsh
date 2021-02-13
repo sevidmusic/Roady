@@ -433,7 +433,13 @@ makeApp() {
     exit 0
 }
 
-loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
+
+if [[ "${NO_ANIMATION}" == 1 ]]; then
+    loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh --disable-animation"
+else
+    loadLibrary "$(determineDshDirectoryPath | sed 's/\/dsh//g')/dshUI/dshUI" "--theme dsh.sh"
+fi
+
 
 while test $# -gt 0; do
   case "${1}" in
@@ -504,6 +510,4 @@ while test $# -gt 0; do
     ;;
   esac
 done
-
-notifyUser "dsh is still under development. It is not ready for use." 0 'dontClear'
 
