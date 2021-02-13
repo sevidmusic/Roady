@@ -853,7 +853,9 @@ p { margin-left: 3em; }
 </div>
 ```
 
-9. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
+9. Create Dynamic Output File using preferred text editor at:
+
+    `"$HOME/SingleAppWebsite/DynamicOutput/Homepage.php"`
 
    File content should be:
 
