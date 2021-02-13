@@ -1059,7 +1059,9 @@ Foo is loaded first, Bar is loaded second, and  Baz loaded third, then the
 positions will be adjusted as follows:
 
 Foo Position: `0`
+
 Bar Position: `0.1`
+
 Baz Position: `0.2`
 
 Responses and GlobalResponses are defined in the App Package's `Responses.sh`
