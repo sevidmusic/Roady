@@ -976,6 +976,8 @@ the bash scripts in the App package must be executable.
 
    Run: `chmod -R 0755 $HOME/SingleAppWebsite/*.sh`
 
+Note: This will not be necessary in the future, see issue [#111](https://github.com/sevidmusic/DarlingDataManagementSystem/issues/111).
+
 ### App Data
 
 The Darling Data Management System's understanding of an App is based on the App's
