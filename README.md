@@ -810,7 +810,9 @@ $pagename = array_pop($getKeys);
 </head>
 ```
 
-7. Create referenced css file "$HOME/SingleAppWebsite/css/styles.css"
+7. Create referenced css file using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/css/styles.css"`
 
    File content should be:
 
