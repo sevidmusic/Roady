@@ -1472,17 +1472,17 @@ configuration scripts.
 ### Build The SingleAppWebsite To Run On The Domain `http://localhost:8080`
 
 Once an App has been made via [`dsh --make-app`](#dsh---make-app--dsh--m), it can be built for one or more
-domains via the [`dsh --build-app`](#dsh---build-app) command.
+domains via the [`dsh --build-app`](#dsh---build-app--dsh--b) command.
 
-By default [`dsh --build-app`](#dsh---build-app) will build an App for the domain defined in the App's
+By default [`dsh --build-app`](#dsh---build-app--dsh--b) will build an App for the domain defined in the App's
 Components.php file. This domain will have been set by [`dsh --make-app`](#dsh---make-app--dsh--m) to the value
 assigned to the domain variable defined in the relevant App Packages config.sh
 configuration script.
 
 It is safe to modify the domain defined in the App's [Components](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/core/interfaces/component).php file after
-the App has been made, however, [`dsh --build-app`](#dsh---build-app) takes an optional domain as the
+the App has been made, however, [`dsh --build-app`](#dsh---build-app--dsh--b) takes an optional domain as the
 second parameter, so there is really no need to modify the domain set in App's
-Components.php file, instead just use [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app) to
+Components.php file, instead just use [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b) to
 easily build the App for one or more domains.
 
 12. Build the SingleAppWebsite App to run on http://localhost:8080
@@ -1523,7 +1523,7 @@ The following is an overview of the steps taken in this demo:
 
 - The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
-- The SingleAppWebsite App was built via [`dsh --build-app`](#dsh---build-app).
+- The SingleAppWebsite App was built via [`dsh --build-app`](#dsh---build-app--dsh--b).
 
 - A development server was started at http://localhost:8080 via dsh --start-development-server.
 
