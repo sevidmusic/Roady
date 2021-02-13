@@ -865,7 +865,9 @@ p { margin-left: 3em; }
 <p><?php echo date('l jS \of F Y h:i:s A'); ?></p>
 ```
 
-10. Create Dynamic Output File `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
+10. Create Dynamic Output File using preferred text editor at:
+
+   `"$HOME/SingleAppWebsite/DynamicOutput/Pictures.html"`
 
    File content should be:
 
