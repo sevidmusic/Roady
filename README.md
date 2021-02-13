@@ -1374,8 +1374,8 @@ p { margin-left: 3em; }
 ### Create the MainMenu.html Dynamic Output File
 
 The App Package in this example defines a DynamicOutputComponent named MainMenu
-which references a Dynamic Output file named MainMenu.html, this file must be created
-in the App Package's `DynamicOutput` directory.
+which references a Dynamic Output file named `MainMenu.html`, this file must be
+created in the App Package's `DynamicOutput` directory.
 
 8. Create MainMenu.html:
 
