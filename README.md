@@ -1516,10 +1516,10 @@ Development server will be reachable via http://localhost:8080
 
 The following is an overview of the steps taken in this demo:
 
-- The App Package for the SingleAppWebsite App was created via dsh --new AppPackage.
+- The App Package for the SingleAppWebsite App was created via [`dsh --new AppPackage`](#dsh---new-apppackage).
 
-- The appropriate SingleAppWebsite App Package files were configured manually using
-  a text editor.
+- The appropriate SingleAppWebsite App Package files were created and configured
+  manually using a text editor.
 
 - The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
