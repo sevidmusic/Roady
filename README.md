@@ -1479,7 +1479,7 @@ By default [`dsh --build-app`](#dsh---build-app--dsh--b) will build an App for t
 assigned to the `domain` variable defined in the relevant App Packages `config.sh`
 configuration script.
 
-It is safe to modify the domain defined in the App's [Components.php](https://github.com/sevidmusic/DarlingDataManagementSystem/tree/DarlingDataManagementSystem-0.0.1/Apps/starterApp/Components.php) file after
+It is safe to modify the domain defined in the App's `Components.php` file after
 the App has been made, however, [`dsh --build-app`](#dsh---build-app--dsh--b) takes an optional domain as the
 second parameter, so there is really no need to modify the domain set in App's
 Components.php file, instead just use [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b) to
