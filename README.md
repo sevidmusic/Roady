@@ -618,7 +618,7 @@ configuration scripts.
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
 
-Once an App has been made via [dsh --make-app](#dsh---make-app), it can be built for one or more
+Once an App has been made via [dsh --make-app](#dsh---make-app--dsh--m), it can be built for one or more
 domains via [`dsh --build-app [APP_NAME] [DOMAIN]`](#dsh---build-app--dsh--b).
 
 6. Build the HelloWorld App to run on `http://localhost:8080`
@@ -1252,7 +1252,7 @@ or
 Dynamic output files that are used by a single App should be defined in the
 relevant App Package's `DynamicOutput` directory so that dsh can copy them to the
 App's `DynamicOutput` directory whenever an instance of the App is made from the
-App Package via [`dsh --make-app`](#dsh---make-app).
+App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
 Dynamic output files that are used by multiple App's should be placed in the Darling
 Data Management System's `SharedDynamicOutput` directory. These Dynamic Output files
@@ -1326,7 +1326,7 @@ Output file.
 Local css and javascript files referenced within a Dynamic Output file should be
 placed in the App Package's css and javascript directories, respectively, so that
 [dsh](#dsh) knows to include them with the files copied from the App Package to
-the App whenever an instance of the App is made via [`dsh --make-app`](#dsh---make-app).
+the App whenever an instance of the App is made via [`dsh --make-app`](#dsh---make-app--dsh--m).
 The one exception to this is if the referenced css or javascript files are served
 form a CDN or other location outside of the Darling Data Management System.
 
@@ -1471,11 +1471,11 @@ configuration scripts.
 
 ### Build The SingleAppWebsite To Run On The Domain `http://localhost:8080`
 
-Once an App has been made via [`dsh --make-app`](#dsh---make-app), it can be built for one or more
+Once an App has been made via [`dsh --make-app`](#dsh---make-app--dsh--m), it can be built for one or more
 domains via the [`dsh --build-app`](#dsh---build-app) command.
 
 By default [`dsh --build-app`](#dsh---build-app) will build an App for the domain defined in the App's
-Components.php file. This domain will have been set by [`dsh --make-app`](#dsh---make-app) to the value
+Components.php file. This domain will have been set by [`dsh --make-app`](#dsh---make-app--dsh--m) to the value
 assigned to the domain variable defined in the relevant App Packages config.sh
 configuration script.
 
@@ -1521,7 +1521,7 @@ The following is an overview of the steps taken in this demo:
 - The appropriate SingleAppWebsite App Package files were configured manually using
   a text editor.
 
-- The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app).
+- The SingleAppWebsite App was made from the SingleAppWebsite App Package via [`dsh --make-app`](#dsh---make-app--dsh--m).
 
 - The SingleAppWebsite App was built via [`dsh --build-app`](#dsh---build-app).
 
