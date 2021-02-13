@@ -1467,7 +1467,7 @@ configuration scripts.
 
 11. Make the SingleAppWebsite App from the SingleAppWebsite App Package
 
-     dsh -m "$HOME/SingleAppWebsite"
+    Run: `dsh -m "$HOME/SingleAppWebsite"`
 
 ### Build The SingleAppWebsite To Run On The Domain `http://localhost:8080`
 
