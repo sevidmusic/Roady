@@ -1141,7 +1141,7 @@ Before doing this it is important to understand how an App's output is served to
 a user by the Darling Data Management System.
 
 When a user makes a Request to the domain of a website running on the Darling
-Data Management System the first thing that happens is a Router Component is used
+Data Management System the first thing that happens is a [Router](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/core/interfaces/component/Web/Routing/Router.php) Component is used
 to determine which Responses and GlobalResponses respond to the current Request.
 These Responses and GlobalResponses may be defined by one, or many Apps running
 on the same domain.
