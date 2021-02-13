@@ -274,7 +274,7 @@ An App Package will always have at least four configuration scripts:
 app_name         The name of the App
 
 bug_contact      A reference to where bugs can be submitted, this should be an email,
-                 or a url to a online resource where bugs can be submitted.
+                 or a url to an online resource where bugs can be submitted.
 
 config_locked     The use of this variable has not been implemented yet, but in the
                  future it will be used to prevent dsh from modifying an App Package's
