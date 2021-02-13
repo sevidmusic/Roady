@@ -560,6 +560,32 @@ in the App Package's `Responses.sh` script.
 
    Add: `dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0`
 
+`"$HOME/HelloWorld/Responses.sh"` should now resemble:
+
+```
+#!/bin/bash
+# Responses.sh
+
+
+# This file is where Responses, and GlobalResponses are defined.
+#
+# Example Response
+# dsh -n Response "${app_name}" ResponseName 0
+#
+# Example GlobalResponse
+# dsh -n GlobalResponse "${app_name}" GlobalResponseName 0
+#
+# For more information about the dsh --assign-to-response flag use: dsh -h -a
+
+########################## DO NOT MODIFY THE FOLLOWING LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+set -o posix; logErrorMsg() { printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr; }; logErrorMsgAndExit1() { logErrorMsg "${1}"; exit 1; }; determineDirectoryPath() { local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH; CURRENT_FILE_PATH="${BASH_SOURCE[0]}"; while [ -h "$CURRENT_FILE_PATH" ]; do CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"; [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH"; done; printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; }; loadLibrary() { [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."; . ${1} ${2}; }; loadLibrary "$(determineDirectoryPath)/config.sh";
+
+########################################## Please place all dsh calls after this line ####################################
+
+dsh -n GlobalResponse "${app_name}" HelloWorldResponse 0
+
+```
+
 ### Define An OutputComponent For The HelloWorld App
 
 [Back To Top](#darling-data-management-system) | [Getting Started](#getting-started) | [Hello World Demo](#hello-world-demo) | [Hello World Guide](#hello-world-guide)
@@ -592,6 +618,42 @@ in the App Package's `OutputComponents.sh` script.
    Add: `dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"`
 
    Add: `dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent`
+
+`"$HOME/HelloWorld/OutputComponents.sh"` should now resemble:
+
+```
+#!/bin/bash
+# OutputComponents.sh
+
+# This file is where OutputComponents, and DynamicOutputComponents are defined.
+#
+# Example OutputComponent
+# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
+#
+# Example DynamicOutputComponent
+# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
+#
+# Once defined, make sure to asssign each OutputComponent and each DynamicOutputComponent
+# to one of the Responses or GlobalResponses defined in Responses.sh or else it will not
+# be visible in the App's user interface.
+#
+# Elaborating on the examples above:
+# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
+# dsh -a "${app_name}" ResponseName OCName OCContainer OutputComponent
+#
+# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
+# dsh -a "${app_name}" ResponseName DOCName DOCContainer DynamicOutputComponent
+#
+# For more information about the dsh --assign-to-response flag use: dsh -h -a
+
+########################## DO NOT MODIFY THE FOLLOWING LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+set -o posix; logErrorMsg() { printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr; }; logErrorMsgAndExit1() { logErrorMsg "${1}"; exit 1; }; determineDirectoryPath() { local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH; CURRENT_FILE_PATH="${BASH_SOURCE[0]}"; while [ -h "$CURRENT_FILE_PATH" ]; do CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"; [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH"; done; printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; }; loadLibrary() { [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."; . ${1} ${2}; }; loadLibrary "$(determineDirectoryPath)/config.sh";
+
+########################################## Please place all dsh calls after this line ####################################
+
+dsh -n OutputComponent "${app_name}" HelloWorld OutputContainer 0 "Hello World"
+dsh -a "${app_name}" HelloWorldResponse HelloWorld OutputContainer OutputComponent
+```
 
 ### Make The HelloWorld App from The HelloWorld App Package
 
@@ -1101,6 +1163,40 @@ html, one for the main menu, and one for the closing html.
 
    Add: `dsh -n Response "${app_name}" Pictures 2`
 
+`"$HOME/SingleAppWebsite/Responses.sh"` should now resemble:
+
+```
+#!/bin/bash
+# Responses.sh
+
+
+# This file is where Responses, and GlobalResponses are defined.
+#
+# Example Response
+# dsh -n Response "${app_name}" ResponseName 0
+#
+# Example GlobalResponse
+# dsh -n GlobalResponse "${app_name}" GlobalResponseName 0
+#
+# For more information about the dsh --assign-to-response flag use: dsh -h -a
+
+########################## DO NOT MODIFY THE FOLLOWING LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+set -o posix; logErrorMsg() { printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr; }; logErrorMsgAndExit1() { logErrorMsg "${1}"; exit 1; }; determineDirectoryPath() { local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH; CURRENT_FILE_PATH="${BASH_SOURCE[0]}"; while [ -h "$CURRENT_FILE_PATH" ]; do CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"; [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH"; done; printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; }; loadLibrary() { [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."; . ${1} ${2}; }; loadLibrary "$(determineDirectoryPath)/config.sh";
+
+########################################## Please place all dsh calls after this line ####################################
+
+dsh -n GlobalResponse "${app_name}" OpeningHtml 0
+
+dsh -n GlobalResponse "${app_name}" MainMenu 1
+
+dsh -n GlobalResponse "${app_name}" ClosingHtml 999999999999999
+
+dsh -n Response "${app_name}" Homepage 2
+
+dsh -n Response "${app_name}" Pictures 2
+
+```
+
 Note: The position of the ClosingHtml GlobalResponse is set to high value to
       try and insure that it will always be served last, though this App is
       small now, it may grow, and it is also possible that other App's may
@@ -1147,6 +1243,46 @@ configuration script.
    Add: `dsh -n Request "${app_name}" Pictures PicturesRequests "index.php?Pictures"`
 
    Add: `dsh -a "${app_name}" Pictures Pictures PicturesRequests Request`
+
+`"$HOME/SingleAppWebsite/Requests.sh"` should now resemble:
+
+```
+#!/bin/bash
+# Requests.sh
+
+# This file is where Requests are defined.
+#
+# Example Request
+# dsh -n Request "${app_name}" REQName REQContainer "index.php?foo=bar"
+#
+# Once defined, make sure to asssign each Request to one of the Responses or
+# GlobalResponses defined in Responses.sh or else it will not be visible in
+# the App's user interface.
+#
+# Elaborating on the examples above:
+# dsh -n Request "${app_name}" REQName REQContainer "index.php?foo=bar"
+# dsh -a "${app_name}" ResponseName OCName OCContainer Request
+#
+# For more information about the dsh --assign-to-response flag use: dsh -h -a
+
+########################## DO NOT MODIFY THE FOLLOWING LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+set -o posix; logErrorMsg() { printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr; }; logErrorMsgAndExit1() { logErrorMsg "${1}"; exit 1; }; determineDirectoryPath() { local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH; CURRENT_FILE_PATH="${BASH_SOURCE[0]}"; while [ -h "$CURRENT_FILE_PATH" ]; do CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"; [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH"; done; printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; }; loadLibrary() { [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."; . ${1} ${2}; }; loadLibrary "$(determineDirectoryPath)/config.sh";
+
+########################################## Please place all dsh calls after this line ####################################
+
+dsh -n Request "${app_name}" HomepageRoot HomepageRequests "\/"
+dsh -a "${app_name}" Homepage HomepageRoot HomepageRequests Request
+
+dsh -n Request "${app_name}" HomepageIndex HomepageRequests "index.php"
+dsh -a "${app_name}" Homepage HomepageIndex HomepageRequests Request
+
+dsh -n Request "${app_name}" Homepage HomepageRequests "index.php?Hompeage"
+dsh -a "${app_name}" Homepage Homepage HomepageRequests Request
+
+dsh -n Request "${app_name}" Pictures PicturesRequests "index.php?Pictures"
+dsh -a "${app_name}" Pictures Pictures PicturesRequests Request
+```
+
 
 ### Define OutputComponents And DynamicOutputComponents For The SingleAppWebsite
 **And Assign Them To The Appropriate Responses And GlobalResponse**
@@ -1246,6 +1382,65 @@ OutputComponents and DynamicOutputComponents are defined in an App Package's
    Add: `dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>'`
 
    Add: `dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent`
+
+`"$HOME/SingleAppWebsite/OutputComponents.sh"` should now resemble:
+
+```
+#!/bin/bash
+# OutputComponents.sh
+
+# This file is where OutputComponents, and DynamicOutputComponents are defined.
+#
+# Example OutputComponent
+# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
+#
+# Example DynamicOutputComponent
+# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
+#
+# Once defined, make sure to asssign each OutputComponent and each DynamicOutputComponent
+# to one of the Responses or GlobalResponses defined in Responses.sh or else it will not
+# be visible in the App's user interface.
+#
+# Elaborating on the examples above:
+# dsh -n OutputComponent "${app_name}" OCName OCContainer 0 "Output ..."
+# dsh -a "${app_name}" ResponseName OCName OCContainer OutputComponent
+#
+# dsh -n DynamicOutputComponent "${app_name}" DOCName DOCContainer 0 "DOCFile.php"
+# dsh -a "${app_name}" ResponseName DOCName DOCContainer DynamicOutputComponent
+#
+# For more information about the dsh --assign-to-response flag use: dsh -h -a
+
+########################## DO NOT MODIFY THE FOLLOWING LINE UNLESS YOU KNOW WHAT YOU ARE DOING! ##########################
+set -o posix; logErrorMsg() { printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr; }; logErrorMsgAndExit1() { logErrorMsg "${1}"; exit 1; }; determineDirectoryPath() { local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH; CURRENT_FILE_PATH="${BASH_SOURCE[0]}"; while [ -h "$CURRENT_FILE_PATH" ]; do CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"; [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH"; done; printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"; }; loadLibrary() { [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."; . ${1} ${2}; }; loadLibrary "$(determineDirectoryPath)/config.sh";
+
+########################################## Please place all dsh calls after this line ####################################
+
+dsh -n OutputComponent "${app_name}" DoctypeOpenHtmlTag StaticHtml 0 '<!DOCTYPE html><html lang="en">'
+dsh -a "${app_name}" OpeningHtml DoctypeOpenHtmlTag StaticHtml OutputComponent
+
+dsh -n DynamicOutputComponent "${app_name}" HtmlHead DynamicOutput 0.1 "HtmlHead.php"
+dsh -a "${app_name}" OpeningHtml HtmlHead DynamicOutput DynamicOutputComponent
+
+dsh -n OutputComponent "${app_name}" OpenBodyTag StaticHtml 0.2 '<body>'
+dsh -a "${app_name}" OpeningHtml OpenBodyTag StaticHtml OutputComponent
+
+dsh -n DynamicOutputComponent "${app_name}" MainMenu DynamicOutput 0.3 "MainMenu.html"
+dsh -a "${app_name}" MainMenu MainMenu DynamicOutput DynamicOutputComponent
+
+dsh -n DynamicOutputComponent "${app_name}" Homepage DynamicOutput 0 "Homepage.php"
+dsh -a "${app_name}" Homepage Homepage DynamicOutput DynamicOutputComponent
+
+dsh -n DynamicOutputComponent "${app_name}" Pictures DynamicOutput 0 "Pictures.html"
+dsh -a "${app_name}" Pictures Pictures DynamicOutput DynamicOutputComponent
+
+dsh -n OutputComponent "${app_name}" FinalHtml StaticHtml 0 '</body></html>'
+dsh -a "${app_name}" ClosingHtml FinalHtml StaticHtml OutputComponent
+
+
+
+```
+
+
 
 ### Dynamic Output Files
 
