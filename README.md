@@ -1152,7 +1152,7 @@ Request is shown to the user.
 
 To put it very simply, the Darling Data Management System takes all of the output
 from the relevant OutputComponents and DynamicOutputComponents and constructs a
-string that is served to the user via the Darling Data Management System's index.php
+string that is served to the user via the Darling Data Management System's [`index.php`](https://github.com/sevidmusic/DarlingDataManagementSystem/blob/DarlingDataManagementSystem-0.0.1/index.php)
 
 OutputComponents and DynamicOutputComponents are defined in the App Package's
 `OutputComponents.sh` configuration script.
