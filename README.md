@@ -34,8 +34,6 @@ The Darling Data Management System requires [Composer](https://github.com/compos
 A [pre-release](https://github.com/sevidmusic/DarlingDataManagementSystem/releases/tag/v0.0.2-alpha)
 of the Darling Data Management System is available now.
 
-The Darling Data Management System version 1.0.0 will be released in the next few days.
-
 For an overview of what needs to be done please see the
 [open issues](https://github.com/sevidmusic/DarlingDataManagementSystem/issues).
 
