@@ -23,7 +23,7 @@
 
 
 ### README Demo
-![DDMSInstallationDemo](https://ddmsmedia.us-east-1.linodeobjects.com/READMEDemo.gif)
+![DDMSInstallationDemo](https://github.com/sevidmusic/DDMSDocsAndDemos/blob/main/DDMSDemoGifs/READMEDemo.gif?raw=true)
 
 # About
 
