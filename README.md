@@ -1,5 +1,7 @@
 # Darling Data Management System
 
+[README Demo](#readme-demo)
+
 [About](#about)
 
 [Installation](#installation)
@@ -19,6 +21,9 @@
 7. [Single App Website Guide](#single-app-website-guide)
 8. [dsh](#dsh)
 
+
+### README Demo
+![DDMSInstallationDemo](https://ddmsmedia.us-east-1.linodeobjects.com/READMEDemo.gif)
 
 # About
 
