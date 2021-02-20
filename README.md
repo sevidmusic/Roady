@@ -65,7 +65,7 @@ this README and [http://darlingdata.tech/](http://darlingdata.tech).
 1. `cd "$HOME/Downloads"`
 2. `git clone https://github.com/sevidmusic/DarlingDataManagementSystem.git`
 3. `cd DarlingDataManagementSystem`
-4. `composer update && composer upgrade`
+4. `composer update`
 5. [Add dsh, and dshUI to your `$PATH`](#add-dsh-dshui-and-optionally-dshunit-to-your-path)
 
 ### Install From GitHub And Setup Via Composer
@@ -91,7 +91,7 @@ and setup via [Composer](https://github.com/composer/composer).
 
 4. Run composer to set everything up:
 
-   Run: `composer update && composer upgrade`
+   Run: `composer update`
 
 ### Setup Development Tools
 
