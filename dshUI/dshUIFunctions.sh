@@ -5,11 +5,11 @@ set -o posix
 showBanner() {
   [[ ! "${2}" == 'dontClear' ]] && clear
   if [ -n "$(command -v figlet)" ]; then
-      figlet DSH
+      figlet "${3:-dshUI}"
   else
-      printf "\n%sD S H%s" "${HIGHLIGHTCOLOR}" "${CLEAR_ALL_STYLES}"
+      printf "\n%s %s %s\n" "${HIGHLIGHTCOLOR}" "${3:-dshUI}" "${CLEAR_ALL_STYLES}"
   fi
-  [[ -n "${1}" ]] && notifyUser "${HIGHLIGHTCOLOR}${1}" 0 'dontClear'
+  [[ -n "${1}" ]] && notifyUser "  ${HIGHLIGHTCOLOR}${1}" 0 'dontClear'
 }
 
 animatedPrint() {
@@ -30,7 +30,7 @@ animatedPrint() {
 }
 
 showLoadingBar() {
-  [[ "${DISABLE_ANIMATION}" == 1 ]] && printf "\n\e[0m\e[103m%s\e[0m | \e[102m%s\e[0m\n" "Animations Disabled" "${1:0:57}" && return
+  [[ "${DISABLE_ANIMATION}" == 1 ]] && printf "\n\e[0m\e[105m\e[30m%s\e[0m | \e[92m%s\e[0m | \e[101m\e[30m%s\e[0m\n" "Animations Disabled" "(processing)" "${1:0:67}..." && return
   local _slb_inc _slb_windowWidth _slb_numChars _slb_adjustedNumChars _slb_loadingBarLimit
   printf "\n"
   animatedPrint "${1}" .00242
@@ -56,7 +56,7 @@ exitOrContinue() {
 }
 
 notifyUser() {
-  [[ "${DISABLE_ANIMATION}" == 1 ]] && printf "\n\e[0m\e[103m%s\e[0m | \e[102m%s\e[0m\n" "Animations Disabled" "${1:0:57}" && return
+  [[ "${DISABLE_ANIMATION}" == 1 ]] && printf "\n\e[0m\e[105m\e[30m%s\e[0m | \e[92m%s\e[0m | \e[101m\e[30m%s\e[0m\n" "Animations Disabled" "(notice)" "${1:0:67}..." && return
   [[ "${4}" != 'no_newline' ]] && printf "\n"
   printf "%s" "${NOTIFY_COLOR}"
   animatedPrint "${1}" 0.009
