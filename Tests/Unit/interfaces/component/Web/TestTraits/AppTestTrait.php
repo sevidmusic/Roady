@@ -116,13 +116,26 @@ trait AppTestTrait
         );
     }
 
-    public function testNameAndLocationWereSetUsingDeriveAppNameLocationFromRequestMethod(): void
+    public function testLocationWasSetUsingDeriveAppNameLocationFromRequestMethod(): void
+    {
+        $expectedNameLocation = CoreApp::deriveNameLocationFromRequest($this->getMockRequest());
+        $this->assertEquals($expectedNameLocation, $this->getApp()->getLocation());
+        $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getLocation());
+    }
+
+    public function testNameWasSetUsingDeriveAppNameLocationFromRequestMethodIfNameWasNotSpecified(): void
     {
         $expectedNameLocation = CoreApp::deriveNameLocationFromRequest($this->getMockRequest());
         $this->assertEquals($expectedNameLocation, $this->getApp()->getName());
-        $this->assertEquals($expectedNameLocation, $this->getApp()->getLocation());
         $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getName());
-        $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getLocation());
+    }
+
+    public function testNameWasSetToSpecifiedNameIfNameWasSpecified(): void
+    {
+        $expectedName = "HelloWorld";
+        $namedApp = new CoreApp($this->getMockRequest(), new CoreSwitchable(), $expectedName);
+        $this->assertEquals($expectedName, $namedApp->getName());
+        $this->assertEquals($expectedName, $namedApp->export()['storable']->getName());
     }
 
 
