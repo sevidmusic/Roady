@@ -17,10 +17,15 @@ abstract class App extends SwitchableComponentBase implements AppInterface
     public const APP_CONTAINER = "APP";
     private ?RequestInterface $domain;
 
-    public function __construct(RequestInterface $request, SwitchableInterface $switchable)
+    public function __construct(RequestInterface $request, SwitchableInterface $switchable, string $appName = '')
     {
+###
+        if(!empty($appName)) {
+            $actualName = preg_replace("/[^A-Za-z0-9]/", '', $appName);
+        }
+###
         $storable = new CoreStorable(
-            self::deriveNameLocationFromRequest($request),
+            ($actualName ?? self::deriveNameLocationFromRequest($request)),
             self::deriveNameLocationFromRequest($request),
             self::APP_CONTAINER
         );

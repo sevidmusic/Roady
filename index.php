@@ -71,7 +71,8 @@ try {
     <h1>404 Not Found</h1>
     <p>Sorry, the you request you made is not valid. Please try again later.</p>
     <ul>
-        <li>App Name: <?php echo App::deriveNameLocationFromRequest($currentRequest); ?></li>
+        <li>App Name: <?php echo $app->getName(); ?></li>
+        <li>Request: <?php echo $currentRequest->getUrl(); ?></li>
         <li class="error">Error Message: <?php echo $runtimeException->getMessage(); ?></li>
     </ul>
     </body>
