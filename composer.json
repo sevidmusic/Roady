@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "ext-json": "*",
-        "ext-pdo": "*"
+        "symfony/process": "^5.2"
     },
     "autoload": {
         "psr-4": {

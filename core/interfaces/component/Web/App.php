@@ -11,8 +11,6 @@ interface App extends CoreSwitchableComponent
 
     public static function deriveNameLocationFromRequest(RequestInterface $request): string;
 
-    public static function getRequestedApp(RequestInterface $request, ComponentCrudInterface $componentCrud): App;
-
     public function getAppDomain(): RequestInterface;
 
 }

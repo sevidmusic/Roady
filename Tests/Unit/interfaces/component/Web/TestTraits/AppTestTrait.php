@@ -125,12 +125,6 @@ trait AppTestTrait
         $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getLocation());
     }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAppIsNotInstalled(): void
-    {
-        $this->purgeAppStorage();
-        $this->expectException(RuntimeException::class);
-        CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
     private function purgeAppStorage(): void
     {
@@ -155,108 +149,14 @@ trait AppTestTrait
         );
     }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAppDataIsCorrupted(): void
-    {
-        $this->purgeAppStorage();
-        $component = new CoreComponent(
-            new CoreStorable(
-                CoreApp::deriveNameLocationFromRequest($this->getMockRequest()),
-                CoreApp::deriveNameLocationFromRequest($this->getMockRequest()),
-                CoreApp::APP_CONTAINER
-            )
-        );
-        $this->getMockCrud()->create($component);
-        $this->expectException(RuntimeException::class);
-        CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAppStateIsFalse(): void
-    {
-        $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
-        if ($app->getState() === true) {
-            $app->switchState();
-        }
-        $this->getMockCrud()->create($app);
-        $this->expectException(RuntimeException::class);
-        CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAppIsNotInstalled(): void
-    {
-        $this->purgeAppStorage();
-        $this->expectException(RuntimeException::class);
-        $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAppDataIsCorrupted(): void
-    {
-        $this->purgeAppStorage();
-        $component = new CoreComponent(
-            new CoreStorable(
-                $this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()),
-                $this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()),
-                $this->getApp()::APP_CONTAINER
-            )
-        );
-        $this->getMockCrud()->create($component);
-        $this->expectException(RuntimeException::class);
-        $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAppStateIsFalse(): void
-    {
-        $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
-        if ($app->getState() === true) {
-            $app->switchState();
-        }
-        $this->getMockCrud()->create($app);
-        $this->expectException(RuntimeException::class);
-        $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnStaticCallIfAnAppCantBeFoundInStorageWhoseNameMatchesTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethod(): void
-    {
-        $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
-        $app->import(['storable' => new CoreStorable('BadImportedName', $app->getLocation(), $app->getContainer())]);
-        $this->getMockCrud()->create($app);
-        $this->expectException(RuntimeException::class);
-        CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppReturnsAppOnStaticCallWhoseNameAndLocationMatchTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethodAndWhoseContainerMatchesTheValueOfTheAppAPP_CONTAINERConstant(): void
-    {
-        $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
-        $this->getMockCrud()->create($app);
-        $requestedApp = CoreApp::getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-        $this->assertEquals(CoreApp::deriveNameLocationFromRequest($this->getMockRequest()), $requestedApp->getName());
-        $this->assertEquals(CoreApp::deriveNameLocationFromRequest($this->getMockRequest()), $requestedApp->getLocation());
-        $this->assertEquals(CoreApp::APP_CONTAINER, $requestedApp->getContainer());
-    }
 
-    public function testGetRequestedAppThrowsRuntimeExceptionOnInstanceCallIfAnAppCantBeFoundInStorageWhoseNameMatchesTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethod(): void
-    {
-        $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
-        $app->import(['storable' => new CoreStorable('BadImportedName', $app->getLocation(), $app->getContainer())]);
-        $this->getMockCrud()->create($app);
-        $this->expectException(RuntimeException::class);
-        $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-    }
 
-    public function testGetRequestedAppReturnsAppOnInstanceCallWhoseNameAndLocationMatchTheValueReturnedByPassingSuppliedRequestToAppDeriveNameLocationFromRequestMethodAndWhoseContainerMatchesTheValueOfTheAppAPP_CONTAINERConstant(): void
-    {
-        $this->purgeAppStorage();
-        $app = new CoreApp($this->getMockRequest(), new CoreSwitchable());
-        $this->getMockCrud()->create($app);
-        $requestedApp = $this->getApp()->getRequestedApp($this->getMockRequest(), $this->getMockCrud());
-        $this->assertEquals($this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()), $requestedApp->getName());
-        $this->assertEquals($this->getApp()->deriveNameLocationFromRequest($this->getMockRequest()), $requestedApp->getLocation());
-        $this->assertEquals($this->getApp()::APP_CONTAINER, $requestedApp->getContainer());
-    }
 
     protected function setAppParentTestInstances(): void
     {
