@@ -69,6 +69,8 @@ class DDMSCommandFactory
 
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
+    public function __construct(DDMSCommandFactory $ddmsCommandFactory) {}
+
     private function determineDDMSCommandName(array $argv)
     {
         foreach($argv as $argument) {
@@ -111,7 +113,7 @@ class DDMSHelp extends DDMSCommandBase implements DDMSCommandInterface {
     }
 }
 
-$ddms = new DDMS();
+$ddms = new DDMS(new DDMSCommandFactory());
 $ddms->run($argv);
 
 
