@@ -1,5 +1,61 @@
 <?php
 
+
+interface ddms {
+    /**
+     * Process $argv, and construct a mutlidimensional array of OPTIONS, --flags,
+     * and values passed to --flags. For example, the following hypothetical
+     * pseudo command:
+     *
+     *     `ddms OPTION1 OPTION2 OPTION3 --standAloneFlag1 --multiArgFlag1 value1 value2 --standAloneFlag2 --standAloneFlag3 --multiArgFlag2 foo bar bazzer`
+     *
+     * MUST result in $ddms->getArguments() returning the following array:
+     *
+     * array(2) {
+     *   ["FLAGS"]=>
+     *   array(5) {
+     *     ["standAloneFlag1"]=>
+     *     array(0) {
+     *     }
+     *     ["multiArgFlag1"]=>
+     *     array(2) {
+     *       [0]=>
+     *       string(6) "value1"
+     *       [1]=>
+     *       string(6) "value2"
+     *     }
+     *     ["standAloneFlag2"]=>
+     *     array(0) {
+     *     }
+     *     ["standAloneFlag3"]=>
+     *     array(0) {
+     *     }
+     *     ["multiArgFlag2"]=>
+     *     array(3) {
+     *       [0]=>
+     *       string(3) "foo"
+     *       [1]=>
+     *       string(3) "bar"
+     *       [2]=>
+     *       string(6) "bazzer"
+     *     }
+     *   }
+     *   ["OPTIONS"]=>
+     *   array(4) {
+     *     [0]=>
+     *     string(65) "/home/darling/Downloads/DarlingDataManagementSystem/ddms/ddms.php"
+     *     [1]=>
+     *     string(7) "OPTION1"
+     *     [2]=>
+     *     string(7) "OPTION2"
+     *     [3]=>
+     *     string(7) "OPTION3"
+     *   }
+     * }
+     */
+    public function getArguments(): array;
+}
+
 interface ddmsCommandException {
 
 }
