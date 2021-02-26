@@ -52,17 +52,45 @@ abstract class DDMSCommandBase implements DDMSCommandInterface
 
 }
 
+class DDMSCommandFactory
+{
+    public const DDMSDevCommand = 'DDMSDevCommand';
+
+    public function getCommandInstance(string $commandName): DDMSCommandInterface
+    {
+        switch($commandName) {
+            case self::DDMSDevCommand:
+                return new DDMSDevCommand();
+        }
+        return new DDMSHelp();
+    }
+
+}
+
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
-    public function run(array $argv):bool {
-        if(in_array('--dev-command', $argv, true)) {
-            return $this->runCommand(new DDMSDevCommand(), $argv);
+    private function determineDDMSCommandName(array $argv)
+    {
+        foreach($argv as $argument) {
+            if(substr($argument, 0, 2) === '--') {
+                return $this->convertFlagToCommandName($argument);
+            }
         }
-        return false;
+        return 'DDMSHelp';
+    }
+
+    public function run(array $argv):bool {
+        $commandName = $this->determineDDMSCommandName($argv);
+        return $this->runCommand(new $commandName(), $argv);
     }
 
     public function runCommand(DDMSCommandInterface $command, array $argv): bool {
         return $command->run($argv);
+    }
+
+    private function convertFlagToCommandName($string)
+    {
+        return 'DDMS' . str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
     }
 
 }
@@ -70,7 +98,15 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        var_dump($this->prepareArguments($argv));
+        var_dump('DDMS Dev Command', $this->prepareArguments($argv));
+        return true;
+    }
+}
+
+class DDMSHelp extends DDMSCommandBase implements DDMSCommandInterface {
+
+    public function run(array $argv):bool {
+        var_dump('DDMS HELP', $this->prepareArguments($argv));
         return true;
     }
 }
