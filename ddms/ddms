@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# ddms
+#
+# This script just serves ddms.php, the ddms command line utilities actual logic
+# is implemented in ddms.php
+#
+
+set -o posix
+
+logErrorMsg() {
+    printf "\n\e[43m\e[30m%s\n\e[0m" "${1}" >> /dev/stderr
+}
+
+logErrorMsgAndExit1() {
+    logErrorMsg "${1}"
+    exit 1
+}
+
+determineDDMSDirectoryPath() {
+    local CURRENT_FILE_PATH CURRENT_DIRECTORY_PATH
+    CURRENT_FILE_PATH="${BASH_SOURCE[0]}"
+    while [ -h "$CURRENT_FILE_PATH" ]; do # resolve $CURRENT_FILE_PATH until the file is no longer a symlink | -h is true if file exists and is a symlink
+      CURRENT_DIRECTORY_PATH="$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+      CURRENT_FILE_PATH="$(readlink "$CURRENT_FILE_PATH")"
+      [[ $CURRENT_FILE_PATH != /* ]] && CURRENT_FILE_PATH="$CURRENT_DIRECTORY_PATH/$CURRENT_FILE_PATH" # if $CURRENT_FILE_PATH was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    printf "%s" "$(cd -P "$(dirname "$CURRENT_FILE_PATH")" >/dev/null 2>&1 && pwd)"
+}
+
+loadLibrary() {
+    # use of -x instead of -f is intentinal, the file MUST exist and be executable
+    # @seehttps://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Conditional-Expressions
+    [[ ! -x "${1}" ]] && logErrorMsg "Error! Failed to load ${1}!" && logErrorMsgAndExit1 "The script either does not exist, or is not executable."
+    . ${1} ${2}
+}
+
+
+[[ -z "$(command -v php)" ]] && logErrorMsgAndExit1 "php is not available!"
+
+"$(command -v php)" "$(determineDDMSDirectoryPath)/ddms.php" $@
