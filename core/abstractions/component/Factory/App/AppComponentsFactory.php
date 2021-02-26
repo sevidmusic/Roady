@@ -30,6 +30,7 @@ use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\Stan
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
 
 abstract class AppComponentsFactory extends StoredComponentFactoryBase implements AppComponentsFactoryInterface
 {
@@ -194,18 +195,18 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         );
     }
 
-    public static function buildConstructorArgs(RequestInterface $domain): array
+    public static function buildConstructorArgs(RequestInterface $domain, AppInterface|null $app = null): array
     {
         return [
-            self::buildPrimaryFactory($domain),
+            self::buildPrimaryFactory($domain, $app),
             self::buildComponentCrud($domain),
             self::buildStoredComponentRegistry($domain)
         ];
     }
 
-    private static function buildPrimaryFactory(RequestInterface $domain): PrimaryFactoryInterface
+    private static function buildPrimaryFactory(RequestInterface $domain, AppInterface|null $app = null): PrimaryFactoryInterface
     {
-        return new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable()));
+        return (isset($app) ?  new CorePrimaryFactory($app) : new CorePrimaryFactory(new CoreApp($domain, new CoreSwitchable())) );
     }
 
     private static function buildComponentCrud(RequestInterface $domain/* @todo , $storageDriver = null */): ComponentCrudInterface

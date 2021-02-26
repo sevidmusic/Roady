@@ -3,6 +3,8 @@
 /** Apps/<APP_NAME>/Components.php */
 
 use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
+use DarlingDataManagementSystem\classes\component\Web\App;
+use DarlingDataManagementSystem\classes\primary\Switchable;
 
 ini_set('display_errors', true);
 
@@ -22,10 +24,14 @@ function loadComponentConfigFiles(string $configurationDirectoryName, AppCompone
         require $configurationDirectoryPath . $file;
     }
 }
+$domain = AppComponentsFactory::buildDomain('http://localhost:8080');
+
+$app = new App($domain, new Switchable(), 'starterApp');
 
 $appComponentsFactory = new AppComponentsFactory(
     ...AppComponentsFactory::buildConstructorArgs(
-    AppComponentsFactory::buildDomain('http://localhost:8080')
+    $domain,
+    $app
     )
 );
 

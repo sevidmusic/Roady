@@ -2,6 +2,8 @@
 
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
@@ -135,6 +137,24 @@ trait AppComponentsFactoryTestTrait
                 )[0]
             )
         );
+    }
+
+    public function testBuildConstructorArgsReturnsAnArrayAssignedAPrimaryFactoryImplementationInstanceAtIndex0WhoseAssignedAppMatchesTheSpecifiedAppIfAnAppInstanceIsSpecified()
+    {
+        $request = new CoreRequest(
+            new CoreStorable(
+                'AppDomain',
+                'Requests',
+                'TestComponents'
+            ),
+            new CoreSwitchable()
+        );
+        $app = new CoreApp($request, new CoreSwitchable());
+        $ctor_args = $this->getAppComponentsFactory()::buildConstructorArgs(
+           $this->getTestDomain(),
+           $app
+        );
+        $this->assertEquals($app, $ctor_args[0]->export()['app']);
     }
 
     public function testBuildConstructorArgsReturnsAnArrayAssignedAComponentCrudImplementationInstanceAtIndex1(): void
