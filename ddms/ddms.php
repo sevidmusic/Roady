@@ -69,7 +69,11 @@ class DDMSCommandFactory
 
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
-    public function __construct(DDMSCommandFactory $ddmsCommandFactory) {}
+    private $ddmsCommandFactory;
+
+    public function __construct(DDMSCommandFactory $ddmsCommandFactory) {
+        $this->ddmsCommandFactory = $ddmsCommandFactory;
+    }
 
     private function determineDDMSCommandName(array $argv)
     {
@@ -83,7 +87,7 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
         $commandName = $this->determineDDMSCommandName($argv);
-        return $this->runCommand(new $commandName(), $argv);
+        return $this->runCommand($this->ddmsCommandFactory->getCommandInstance($commandName), $argv);
     }
 
     public function runCommand(DDMSCommandInterface $command, array $argv): bool {
