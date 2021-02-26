@@ -59,6 +59,10 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
         return true;
     }
 
+    public function runCommand(DDMSCommandInterface $command, array $argv): bool {
+        return $command->run($argv);
+    }
+
 }
 
 class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
@@ -69,12 +73,10 @@ class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
     }
 }
 
+$ddmsDevCommand = new DDMSDevCommand();
 $ddms = new DDMS();
 $ddms->run($argv);
-
-$ddmsDevCommand = new DDMSDevCommand();
-$ddmsDevCommand->run($argv);
-
+$ddms->runCommand($ddmsDevCommand, $argv);
 
 
 
