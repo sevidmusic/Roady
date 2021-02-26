@@ -55,8 +55,10 @@ abstract class DDMSCommandBase implements DDMSCommandInterface
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        var_dump($argv);
-        return true;
+        if(in_array('--dev-command', $argv, true)) {
+            return $this->runCommand(new DDMSDevCommand(), $argv);
+        }
+        return false;
     }
 
     public function runCommand(DDMSCommandInterface $command, array $argv): bool {
@@ -73,10 +75,8 @@ class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
     }
 }
 
-$ddmsDevCommand = new DDMSDevCommand();
 $ddms = new DDMS();
 $ddms->run($argv);
-$ddms->runCommand($ddmsDevCommand, $argv);
 
 
 
