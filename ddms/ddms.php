@@ -12,7 +12,7 @@ class DDMSUserInterface {
     const SUCCESS = 'success';
     const WARNING = 'warning';
 
-    public function notify(string $message, string $noticdType = self::NOTICE)
+    public function notify(string $message, string $noticeType = self::NOTICE)
     {
         echo PHP_EOL . $message . PHP_EOL;
     }
