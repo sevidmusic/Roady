@@ -12,9 +12,10 @@ class DDMSUserInterface {
     const SUCCESS = 'success';
     const WARNING = 'warning';
 
-    public function notify(string $message, string $noticeType = self::NOTICE)
+    public function notify(string $message, string $noticeType = self::NOTICE): void
     {
-        echo PHP_EOL . $message . PHP_EOL;
+        $message = sprintf('%s    %s    %s', PHP_EOL, "\e[0m\e[102m" . $message . "\e[0m", PHP_EOL . PHP_EOL);
+        echo $message;
     }
 
 }
@@ -117,9 +118,7 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        foreach($this->prepareArguments($argv) as $flag => $arg) {
-            $this->ddmsUserInterface->notify((is_array($arg) ? $flag : $arg));
-        }
+        var_dump('DDMS HELP', $this->prepareArguments($argv));
         return true;
     }
 }
@@ -127,7 +126,7 @@ class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
 class DDMSHelp extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        var_dump('DDMS HELP', $this->prepareArguments($argv));
+        $this->ddmsUserInterface->notify('ddms is still under development.');
         return true;
     }
 }
