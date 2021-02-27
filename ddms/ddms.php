@@ -69,11 +69,7 @@ class DDMSCommandFactory
 
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
-    private $ddmsCommandFactory;
-
-    public function __construct(DDMSCommandFactory $ddmsCommandFactory) {
-        $this->ddmsCommandFactory = $ddmsCommandFactory;
-    }
+    public function __construct(private DDMSCommandFactory $ddmsCommandFactory) {}
 
     private function determineDDMSCommandName(array $argv)
     {
