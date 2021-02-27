@@ -5,6 +5,15 @@ require str_replace('ddms', '', __DIR__) . DIRECTORY_SEPARATOR . 'vendor/autoloa
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
+class DDMSUserInterface {
+
+    public function notify(string $message)
+    {
+        echo PHP_EOL . $message . PHP_EOL;
+    }
+
+}
+
 interface DDMSCommandInterface
 {
     public function run(array $argv): bool;
@@ -15,6 +24,9 @@ interface DDMSCommandInterface
 
 abstract class DDMSCommandBase implements DDMSCommandInterface
 {
+
+    public function __construct(private DDMSUserInterface $ddmsUserInterface) {}
+
     public function prepareArguments(array $argv): array
     {
         $args = ['FLAGS' => [], 'OPTIONS' => []];
@@ -56,20 +68,20 @@ class DDMSCommandFactory
 {
     public const DDMSDevCommand = 'DDMSDevCommand';
 
-    public function getCommandInstance(string $commandName): DDMSCommandInterface
+    public function getCommandInstance(string $commandName, DDMSUserInterface $ddmsUserInterface): DDMSCommandInterface
     {
         switch($commandName) {
             case self::DDMSDevCommand:
-                return new DDMSDevCommand();
+                return new DDMSDevCommand($ddmsUserInterface);
         }
-        return new DDMSHelp();
+        return new DDMSHelp($ddmsUserInterface);
     }
 
 }
 
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
-    public function __construct(private DDMSCommandFactory $ddmsCommandFactory) {}
+    public function __construct(private DDMSUserInterface $ddmsUserInterface, private DDMSCommandFactory $ddmsCommandFactory) {}
 
     private function determineDDMSCommandName(array $argv)
     {
@@ -83,7 +95,7 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
         $commandName = $this->determineDDMSCommandName($argv);
-        return $this->runCommand($this->ddmsCommandFactory->getCommandInstance($commandName), $argv);
+        return $this->runCommand($this->ddmsCommandFactory->getCommandInstance($commandName, $this->ddmsUserInterface), $argv);
     }
 
     public function runCommand(DDMSCommandInterface $command, array $argv): bool {
@@ -113,24 +125,6 @@ class DDMSHelp extends DDMSCommandBase implements DDMSCommandInterface {
     }
 }
 
-$ddms = new DDMS(new DDMSCommandFactory());
+$ddms = new DDMS(new DDMSUserInterface(), new DDMSCommandFactory());
 $ddms->run($argv);
-
-
-
-
-
-
-
-
-
-
-$process = new Process(['printf', '\n\n\e[0m\e[102m\e[30m%s\e[0m\n\n', 'The ddms command line utility is still in development.']);
-$process->run();
-// executes after the command finishes
-if (!$process->isSuccessful()) {
-    throw new ProcessFailedException($process);
-}
-
-        echo $process->getOutput();
 
