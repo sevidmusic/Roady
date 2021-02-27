@@ -4,8 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "204410e6ea8711cdd0cd7792ca6737ad",
-    "packages": [],
+    "content-hash": "2caf8e2a5756e29c276d32d00ab9b570",
+    "packages": [
+        {
+            "name": "darling/ddms",
+            "version": "v0.0.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sevidmusic/ddms.git",
+                "reference": "22aac46ac55e50f73651229edfdbb0eacd9d6da1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/22aac46ac55e50f73651229edfdbb0eacd9d6da1",
+                "reference": "22aac46ac55e50f73651229edfdbb0eacd9d6da1",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.79",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "command-line-utility",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sevidmusic",
+                    "email": "sdmwwebsdm@gmail.com"
+                }
+            ],
+            "description": "Command line utility designed to aide in development with the Darling Data Management System",
+            "support": {
+                "issues": "https://github.com/sevidmusic/ddms/issues",
+                "source": "https://github.com/sevidmusic/ddms/tree/v0.0.0-alpha"
+            },
+            "time": "2021-02-27T15:09:14+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -2156,7 +2193,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "darling/ddms": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
