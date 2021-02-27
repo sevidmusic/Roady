@@ -30,7 +30,7 @@ interface DDMSCommandInterface
 abstract class DDMSCommandBase implements DDMSCommandInterface
 {
 
-    public function __construct(private DDMSUserInterface $ddmsUserInterface) {}
+    public function __construct(protected DDMSUserInterface $ddmsUserInterface) {}
 
     public function prepareArguments(array $argv): array
     {
@@ -86,7 +86,7 @@ class DDMSCommandFactory
 
 class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 
-    public function __construct(private DDMSUserInterface $ddmsUserInterface, private DDMSCommandFactory $ddmsCommandFactory) {}
+    public function __construct(protected DDMSUserInterface $ddmsUserInterface, private DDMSCommandFactory $ddmsCommandFactory) {}
 
     private function determineDDMSCommandName(array $argv)
     {
@@ -117,7 +117,9 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        var_dump('DDMS Dev Command', $this->prepareArguments($argv));
+        foreach($this->prepareArguments($argv) as $flag => $arg) {
+            $this->ddmsUserInterface->notify((is_array($arg) ? $flag : $arg));
+        }
         return true;
     }
 }
