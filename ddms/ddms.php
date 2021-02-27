@@ -7,7 +7,12 @@ use Symfony\Component\Process\Process;
 
 class DDMSUserInterface {
 
-    public function notify(string $message)
+    const ERROR = 'error';
+    const NOTICE = 'notice';
+    const SUCCESS = 'success';
+    const WARNING = 'warning';
+
+    public function notify(string $message, string $noticdType = self::NOTICE)
     {
         echo PHP_EOL . $message . PHP_EOL;
     }
