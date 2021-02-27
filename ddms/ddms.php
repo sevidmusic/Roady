@@ -14,7 +14,21 @@ class DDMSUserInterface {
 
     public function notify(string $message, string $noticeType = self::NOTICE): void
     {
-        $message = sprintf('%s    %s    %s', PHP_EOL, "\e[0m\e[102m" . $message . "\e[0m", PHP_EOL . PHP_EOL);
+        switch($noticeType) {
+            case self::ERROR:
+                $message = sprintf('%s    %s    %s', PHP_EOL, "\e[0m\e[102m\e[30m" . $message . "\e[0m", PHP_EOL . PHP_EOL);
+                break;
+            case self::SUCCESS:
+                $message = sprintf('%s    %s    %s', PHP_EOL, "\e[0m\e[104m\e[30m" . $message . "\e[0m", PHP_EOL . PHP_EOL);
+                break;
+            case self::WARNING:
+                $message = sprintf('%s    %s    %s', PHP_EOL, "\e[0m\e[103m\e[30m" . $message . "\e[0m", PHP_EOL . PHP_EOL);
+                break;
+            /** NOTICE */
+            default:
+                $message = sprintf('%s    %s    %s', PHP_EOL, "\e[0m\e[101m\e[30m" . $message . "\e[0m", PHP_EOL . PHP_EOL);
+                break;
+        }
         echo $message;
     }
 
@@ -126,7 +140,10 @@ class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
 class DDMSHelp extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        $this->ddmsUserInterface->notify('ddms is still under development.');
+        $this->ddmsUserInterface->notify('ddms is still under development.', DDMSUserInterface::NOTICE);
+        $this->ddmsUserInterface->notify('ERROR COLOR', DDMSUserInterface::ERROR);
+        $this->ddmsUserInterface->notify('WARNING COLOR', DDMSUserInterface::WARNING);
+        $this->ddmsUserInterface->notify('SUCCESS COLOR', DDMSUserInterface::SUCCESS);
         return true;
     }
 }
