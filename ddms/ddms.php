@@ -132,7 +132,7 @@ class DDMS extends DDMSCommandBase implements DDMSCommandInterface {
 class DDMSDevCommand extends DDMSCommandBase implements DDMSCommandInterface {
 
     public function run(array $argv):bool {
-        var_dump('DDMS HELP', $this->prepareArguments($argv));
+        $this->ddmsUserInterface->notify('ddms is still under development.', DDMSUserInterface::NOTICE);
         return true;
     }
 }
