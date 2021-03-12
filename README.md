@@ -1,5 +1,22 @@
 # Darling Data Management System
 
+# Note:
+
+Currently doing a lot of refactoring. First major refactor is the development
+of `ddms`, which will replace `dsh`.
+
+The ddms repo can be found here:
+
+https://github.com/sevidmusic/ddms
+
+Until `ddms` is complete I wont be doing much here.
+
+The implementation of `ddms` is also going to completely change how Apps are developed
+with the Darling Data Management System, the documentation below will work for `dsh`,
+but will be changing drastically soon.
+
+### Original Documentation (This is going to change)
+
 [README Demo](#readme-demo)
 
 [About](#about)
