@@ -47,7 +47,7 @@ function getOutputComponentInfo(ResponseInterface $response, ComponentCrud $crud
         $outputComponent = $crud->read($storable);
         $info .= '
                 <tr>
-                    <td class="component-info-table-cell component-info-table-cell-odd"><a href="./index.php?outputComponentOverview#' . $outputComponent->getUniqueId() . '">' . $outputComponent->getName() . '</a></td>
+                    <td class="component-info-table-cell component-info-table-cell-odd"><a href="./index.php?page=OutputComponentOverview#' . $outputComponent->getUniqueId() . '">' . $outputComponent->getName() . '</a></td>
                     <td class="component-info-table-cell component-info-table-cell-even">' . $outputComponent->getType() . '</td>
                     <td class="component-info-table-cell component-info-table-cell-even">' . $outputComponent->getPosition() . '</td>
                 </tr>
