@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "ext-json": "*",
-        "darling/ddms": "0.0.3-beta"
+        "darling/ddms": "0.0.4-beta"
     },
     "autoload": {
         "psr-4": {
