@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74d34afc9cc29f75236236d03ecf8044",
+    "content-hash": "b01d50731ce15756010f5b2675196452",
     "packages": [
         {
             "name": "darling/ddms",
-            "version": "v0.0.5-beta",
+            "version": "v0.0.6-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/ddms.git",
-                "reference": "bc970d567d7f093b857349cf586014103a72d8ec"
+                "reference": "29f7941844a29c41115aa22ec1aa87e0ed76765b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/bc970d567d7f093b857349cf586014103a72d8ec",
-                "reference": "bc970d567d7f093b857349cf586014103a72d8ec",
+                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/29f7941844a29c41115aa22ec1aa87e0ed76765b",
+                "reference": "29f7941844a29c41115aa22ec1aa87e0ed76765b",
                 "shasum": ""
             },
             "require-dev": {
@@ -44,9 +44,9 @@
             "description": "Command line utility designed to aide in development with the Darling Data Management System",
             "support": {
                 "issues": "https://github.com/sevidmusic/ddms/issues",
-                "source": "https://github.com/sevidmusic/ddms/tree/v0.0.5-beta"
+                "source": "https://github.com/sevidmusic/ddms/tree/v0.0.6-beta"
             },
-            "time": "2021-04-13T05:57:13+00:00"
+            "time": "2021-04-17T02:42:53+00:00"
         }
     ],
     "packages-dev": [
