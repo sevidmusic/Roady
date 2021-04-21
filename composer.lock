@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b01d50731ce15756010f5b2675196452",
+    "content-hash": "69f249915d2502f11fe6137f6db19e51",
     "packages": [
         {
             "name": "darling/ddms",
@@ -47,6 +47,38 @@
                 "source": "https://github.com/sevidmusic/ddms/tree/v0.0.6-beta"
             },
             "time": "2021-04-17T02:42:53+00:00"
+        },
+        {
+            "name": "darling/ddms-app-packages",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sevidmusic/ddmsAppPackages.git",
+                "reference": "45719a64c222bb72daba2ecf877ab8f05cdd1a19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sevidmusic/ddmsAppPackages/zipball/45719a64c222bb72daba2ecf877ab8f05cdd1a19",
+                "reference": "45719a64c222bb72daba2ecf877ab8f05cdd1a19",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sevi Donnelly Foreman",
+                    "email": "sdmwebsdm@gmail.com"
+                }
+            ],
+            "description": "A collection of App Packages that create Darling Data Management System Apps",
+            "support": {
+                "issues": "https://github.com/sevidmusic/ddmsAppPackages/issues",
+                "source": "https://github.com/sevidmusic/ddmsAppPackages/tree/v1.0.0"
+            },
+            "time": "2021-04-20T23:58:49+00:00"
         }
     ],
     "packages-dev": [
