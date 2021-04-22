@@ -50,16 +50,16 @@
         },
         {
             "name": "darling/ddms-app-packages",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/ddmsAppPackages.git",
-                "reference": "2a9dd9294f873de5ac2303ae8b9e51b5ddcf4ff5"
+                "reference": "6b8457f37a633267f06cad15305df33563612772"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/ddmsAppPackages/zipball/2a9dd9294f873de5ac2303ae8b9e51b5ddcf4ff5",
-                "reference": "2a9dd9294f873de5ac2303ae8b9e51b5ddcf4ff5",
+                "url": "https://api.github.com/repos/sevidmusic/ddmsAppPackages/zipball/6b8457f37a633267f06cad15305df33563612772",
+                "reference": "6b8457f37a633267f06cad15305df33563612772",
                 "shasum": ""
             },
             "type": "library",
@@ -76,9 +76,9 @@
             "description": "A collection of App Packages that create Darling Data Management System Apps",
             "support": {
                 "issues": "https://github.com/sevidmusic/ddmsAppPackages/issues",
-                "source": "https://github.com/sevidmusic/ddmsAppPackages/tree/v1.0.1"
+                "source": "https://github.com/sevidmusic/ddmsAppPackages/tree/v1.0.2"
             },
-            "time": "2021-04-22T03:54:35+00:00"
+            "time": "2021-04-22T05:06:24+00:00"
         }
     ],
     "packages-dev": [
