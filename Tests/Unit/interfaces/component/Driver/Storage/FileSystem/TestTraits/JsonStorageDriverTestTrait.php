@@ -21,7 +21,8 @@ trait JsonStorageDriverTestTrait
     private static function removeDirectory(string $dir): void
     {
         if (is_dir($dir)) {
-            $contents = scandir($dir);
+            $ls = scandir($dir);
+            $contents = (is_array($ls) ? $ls : []);
             foreach ($contents as $item) {
                 if ($item != "." && $item != "..") {
                     $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
@@ -70,11 +71,15 @@ trait JsonStorageDriverTestTrait
         $this->jsonStorageDriver = $jsonStorageDriver;
     }
 
+    private function fileGetContents(string $path): string {
+        return strval(file_get_contents($path));
+    }
+
     public function testWriteAddsComponentsStorableToStorageIndex(): void
     {
         $this->turnJsonOn();
         $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
-        $storageIndex = json_decode(file_get_contents($this->getExpectedStorageIndexPath()), true);
+        $storageIndex = json_decode($this->fileGetContents($this->getExpectedStorageIndexPath()), true);
         $this->assertTrue(
             isset(
                 $storageIndex[$this->getJsonStorageDriver()->getLocation()][$this->getJsonStorageDriver()->getContainer()][$this->getJsonStorageDriver()->getUniqueId()]
@@ -123,7 +128,7 @@ trait JsonStorageDriverTestTrait
         $this->turnJsonOn();
         $this->getJsonStorageDriver()->write($this->getJsonStorageDriver());
         $this->getJsonStorageDriver()->delete($this->getJsonStorageDriver()->export()['storable']);
-        $storageIndex = json_decode(file_get_contents($this->getExpectedStorageIndexPath()), true);
+        $storageIndex = json_decode($this->fileGetContents($this->getExpectedStorageIndexPath()), true);
         $this->assertFalse(
             isset(
                 $storageIndex[$this->getJsonStorageDriver()->getLocation()][$this->getJsonStorageDriver()->getContainer()][$this->getJsonStorageDriver()->getUniqueId()]
