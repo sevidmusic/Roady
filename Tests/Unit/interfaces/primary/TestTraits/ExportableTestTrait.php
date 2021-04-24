@@ -4,20 +4,18 @@ namespace UnitTests\interfaces\primary\TestTraits;
 
 use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
 use UnitTests\classes\utility\ReflectionUtilityTest as ReflectionUtilityTestInterface;
-use UnitTests\TestTraits\ArrayTester;
 use UnitTests\TestTraits\ReflectionUtilityInstance;
 
 trait ExportableTestTrait
 {
 
-    use ArrayTester;
     use ReflectionUtilityInstance;
 
     private ExportableInterface $exportable;
 
     public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
     {
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getReflectionUtility()->getClassPropertyValues($this->getExportable()),
             $this->getExportable()->export()
         );
