@@ -15,13 +15,11 @@ use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
 use ReflectionParameter;
-use UnitTests\TestTraits\ArrayTester;
 use UnitTests\TestTraits\StringTester;
 
 trait ReflectionUtilityTestTrait
 {
 
-    use ArrayTester;
     use StringTester;
     use Logger;
 
@@ -115,7 +113,7 @@ EOD;
 
     public function testGetClassPropertyNamesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyNames(): void
     {
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getClassPropertyNames($this->getClassToReflect()),
             $this->getReflectionUtility()->getClassPropertyNames($this->getClassToReflect())
         );
@@ -201,7 +199,7 @@ EOD;
 
     public function testGetClassPropertyTypesReturnsArrayWhoseValuesAreSpecifiedClassesExpectedPropertyTypes(): void
     {
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getClassPropertyTypes($this->getClassToReflect()),
             $this->getReflectionUtility()->getClassPropertyTypes($this->getClassToReflect())
         );
@@ -351,7 +349,7 @@ EOD;
     public function testGetClassPropertyValuesReturnsInstancesPropertyValues(): void
     {
         $instance = $this->getClassInstance($this->getClassToReflect());
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getClassPropertyValues($instance),
             $this->getReflectionUtility()->getClassPropertyValues($instance)
         );
@@ -397,7 +395,7 @@ EOD;
         foreach ($this->getReflectionUtility()->generateMockClassMethodArguments($this->getClassToReflect(), $this->constructMethod) as $argumentValue) {
             array_push($generatedTypes, $this->getRealType($argumentValue));
         }
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getClassMethodParameterTypes($this->getClassToReflect(), $this->constructMethod),
             $generatedTypes
         );
@@ -413,7 +411,7 @@ EOD;
 
     public function testGetClassMethodParameterNamesReturnsArrayWhoseValuesAreSpecifiedClassMethodsParameterNames(): void
     {
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getClassMethodParameterNames($this->getClassToReflect(), $this->constructMethod),
             $this->getReflectionUtility()->getClassMethodParameterNames($this->getClassToReflect(), $this->constructMethod)
         );
@@ -434,7 +432,7 @@ EOD;
 
     public function testGetClassMethodParameterTypesReturnsArrayWhoseValuesAreSpecifiedClassMethodsExpectedParameterTypes(): void
     {
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $this->getClassMethodParameterTypes($this->getClassToReflect(), $this->constructMethod),
             $this->getReflectionUtility()->getClassMethodParameterTypes($this->getClassToReflect(), $this->constructMethod)
         );

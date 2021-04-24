@@ -12,7 +12,7 @@ trait RequestTestTrait
     public function testGetGetReturnsGetArray(): void
     {
         $this->turnRequestOn();
-        $this->getArrayTestUtility()->arraysAreEqual(
+        $this->assertEquals(
             $_GET,
             $this->getRequest()->getGet()
         );
@@ -38,7 +38,7 @@ trait RequestTestTrait
     public function testGetPostReturnsPostArray(): void
     {
         $this->turnRequestOn();
-        $this->getArrayTestUtility()->arraysAreEqual($_POST, $this->getRequest()->getPost());
+        $this->assertEquals($_POST, $this->getRequest()->getPost());
     }
 
     public function testCanGetUrl(): void

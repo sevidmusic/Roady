@@ -17,7 +17,7 @@ trait ReflectionUtilityInstance
         $this->setReflectionUtility(new CoreReflectionUtility());
     }
 
-    private function setReflectionUtility(CoreReflectionUtility $reflectionUtility)
+    private function setReflectionUtility(CoreReflectionUtility $reflectionUtility) : void
     {
         if (!isset($this->reflectionUtility)) {
             $this->reflectionUtility = $reflectionUtility;
