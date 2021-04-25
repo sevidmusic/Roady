@@ -12,10 +12,11 @@ trait FactoryTestTrait
 
     public function testAppPropertyIsAssignedAppImplementationInstancePostInstantiation(): void
     {
+        $classImplements = class_implements($this->getFactory()->export()['app']);
         $this->assertTrue(
             in_array(
                 AppInterface::class,
-                class_implements($this->getFactory()->export()['app'])
+                (is_array($classImplements) ? $classImplements : [])
             )
         );
     }
@@ -25,7 +26,7 @@ trait FactoryTestTrait
         return $this->factory;
     }
 
-    public function setFactory(FactoryInterface $factory)
+    public function setFactory(FactoryInterface $factory): void
     {
         $this->factory = $factory;
     }

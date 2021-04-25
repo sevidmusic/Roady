@@ -264,6 +264,9 @@ trait JsonStorageDriverTestTrait
         );
     }
 
+    /**
+     * @return array<mixed>
+     */
     protected function getTestInstanceArgs(): array
     {
         return [

@@ -8,6 +8,7 @@ use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as 
 use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
 
 interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputComponentFactoryInterface, StandardUITemplateFactoryInterface, RequestFactoryInterface, ResponseFactoryInterface
 {
@@ -15,7 +16,7 @@ interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputCo
     public const SHOW_LOG = 2;
     public const SAVE_LOG = 4;
 
-    public static function buildConstructorArgs(RequestInterface $domain): array;
+    public static function buildConstructorArgs(RequestInterface $domain, AppInterface|null $app = null): array;
 
     public static function buildDomain(string $url): RequestInterface;
 

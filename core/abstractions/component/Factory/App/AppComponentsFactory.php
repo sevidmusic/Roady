@@ -358,7 +358,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
             );
             if ($flags & self::SHOW_LOG) {
                 echo $message;
-                usleep(250000);
             }
             $buildLog .= $message;
         }
@@ -372,7 +371,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
                 PHP_EOL,
                 "\033[1;34m" . $this->expectedBuildLogPath() . "\033[0m" . PHP_EOL
             );
-            sleep(1);
         }
         return $buildLog;
     }

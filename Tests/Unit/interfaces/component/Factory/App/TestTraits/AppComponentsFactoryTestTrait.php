@@ -33,9 +33,7 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function appComponentsFactoryImplementsExpectedInterface(
-        string $expectedInterface
-    ): bool
+    public function appComponentsFactoryImplementsExpectedInterface(string $expectedInterface): bool
     {
         return $this->isProperImplementation(
             $expectedInterface,
@@ -139,7 +137,7 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    public function testBuildConstructorArgsReturnsAnArrayAssignedAPrimaryFactoryImplementationInstanceAtIndex0WhoseAssignedAppMatchesTheSpecifiedAppIfAnAppInstanceIsSpecified()
+    public function testBuildConstructorArgsReturnsAnArrayAssignedAPrimaryFactoryImplementationInstanceAtIndex0WhoseAssignedAppMatchesTheSpecifiedAppIfAnAppInstanceIsSpecified(): void
     {
         $request = new CoreRequest(
             new CoreStorable(
@@ -348,6 +346,9 @@ trait AppComponentsFactoryTestTrait
         $this->setStoredComponentFactoryParentTestInstances();
     }
 
+    /**
+     * @return array{0: PrimaryFactoryInterface, 1: ComponentCrudInterface, 2: StoredComponentRegistryInterface}
+     */
     protected function getTestInstanceArgs(): array
     {
         return [
