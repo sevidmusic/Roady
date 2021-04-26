@@ -31,6 +31,9 @@ trait OutputComponentFactoryTestTrait
         DynamicOutputComponentTestTrait::tearDownAfterClass();
     }
 
+    /**
+     * @return array{0: PrimaryFactoryInterface, 1: ComponentCrudInterface, 2: StoredComponentRegistryInterface}
+     */
     protected function getOutputComponentFactoryTestArgs(): array
     {
         return array(
@@ -212,7 +215,6 @@ trait OutputComponentFactoryTestTrait
         $doc = new CoreDynamicOutputComponent(
             $this->getMockPrimaryFactory()->buildStorable(
                 'Name',
-                'Location',
                 'Container'
             ),
             $this->getMockPrimaryFactory()->buildSwitchable(),
