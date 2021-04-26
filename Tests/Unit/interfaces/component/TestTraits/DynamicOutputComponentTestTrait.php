@@ -403,12 +403,14 @@ trait DynamicOutputComponentTestTrait
     {
         ob_start();
         require $pathToFile;
-        return ob_get_clean();
+        $output = ob_get_clean();
+        return (is_string($output) ? $output : '');
     }
 
     private function getFileContentsAsPlainText(string $pathToFile): string
     {
-        return file_get_contents($pathToFile);
+        $contents = file_get_contents($pathToFile);
+        return (is_string($contents) ? $contents : '');
     }
 
     public function testGetOutputReturnsStringConstructedByGettingContentsOfDynamicOutputFileAsPlainTextIfDynamicOutputFileDoesNotHaveThePhpExtension(): void
