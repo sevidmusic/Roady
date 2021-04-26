@@ -23,7 +23,7 @@ trait StoredComponentRegistryTestTrait
         return $this->storedComponentRegistry;
     }
 
-    public function setStoredComponentRegistry(StoredComponentRegistryInterface $storedComponentRegistry)
+    public function setStoredComponentRegistry(StoredComponentRegistryInterface $storedComponentRegistry): void
     {
         $this->storedComponentRegistry = $storedComponentRegistry;
     }
@@ -35,10 +35,18 @@ trait StoredComponentRegistryTestTrait
             ||
             in_array(
                 ComponentInterface::class,
-                class_implements($this->getStoredComponentRegistry()->export()['acceptedImplementation']),
+                $this->classImplements($this->getStoredComponentRegistry()->export()['acceptedImplementation']),
                 true
             )
         );
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function classImplements(string|object $class): array {
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
     }
 
     public function testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostInstantiation(): void
@@ -46,7 +54,7 @@ trait StoredComponentRegistryTestTrait
         $this->assertTrue(
             in_array(
                 ComponentCrudInterface::class,
-                class_implements($this->getStoredComponentRegistry()->export()['componentCrud'])
+                $this->classImplements($this->getStoredComponentRegistry()->export()['componentCrud'])
             )
         );
     }
@@ -167,7 +175,7 @@ trait StoredComponentRegistryTestTrait
         $this->getStoredComponentRegistry()->export()['componentCrud']->delete($this->getStoredComponentRegistry());
     }
 
-    public function testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray()
+    public function testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
     {
         $this->getStoredComponentRegistry()->export()['componentCrud']->create($this->getStoredComponentRegistry());
         $this->getStoredComponentRegistry()->registerComponent($this->getStoredComponentRegistry());
