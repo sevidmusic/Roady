@@ -2,6 +2,7 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
@@ -70,6 +71,9 @@ trait ResponseUITestTrait
         self::getComponentCrud()->create(self::generateTestResponse());
     }
 
+    /**
+     * @return array<ComponentInterface>
+     */
     private static function readAllFromContainer(string $container): array
     {
         return self::getComponentCrud()->readAll(self::expectedAppLocation(), self::getTestComponentContainer());
