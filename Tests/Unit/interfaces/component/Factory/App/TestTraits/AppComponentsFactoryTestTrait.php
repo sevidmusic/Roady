@@ -335,7 +335,7 @@ trait AppComponentsFactoryTestTrait
         return $this->getAppComponentsFactory();
     }
 
-    public function getResponseFactory(): RequestFactoryInterface
+    public function getResponseFactory(): ResponseFactoryInterface
     {
         return $this->getAppComponentsFactory();
     }
