@@ -16,14 +16,15 @@ trait ComponentTestTrait
         return $this->component;
     }
 
-    public function setComponent(ComponentInterface $component)
+    public function setComponent(ComponentInterface $component): void
     {
         $this->component = $component;
     }
 
-    protected function isProperImplementation(string $expectedImplementation, $class): bool
+    protected function isProperImplementation(string $expectedImplementation, string|object $class): bool
     {
-        return in_array($expectedImplementation, class_implements($class));
+        $classImplements = class_implements($class);
+        return in_array($expectedImplementation, (is_array($classImplements) ? $classImplements : []));
     }
 
 }
