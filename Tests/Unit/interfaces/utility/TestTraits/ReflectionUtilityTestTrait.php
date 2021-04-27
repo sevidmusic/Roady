@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
+<?php
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
@@ -64,7 +64,7 @@ EOD;
     private ReflectionUtilityInterface $reflectionUtility;
 
     /**
-     * @var ReflectionUtilityTestClass|string
+     * @var class-string<object>|object|string
      */
     private $classToReflect;
     private string  $booleanType = 'boolean';
@@ -79,11 +79,14 @@ EOD;
     /**
      * @before
      */
-    public function initializeClassToReflect()
+    public function initializeClassToReflect(): void
     {
         $this->classToReflect = $this->getRandomClassInstanceOrFullyQualifiedClassname();
     }
 
+    /**
+     * @return class-string<object>|object|string
+     */
     private function getRandomClassInstanceOrFullyQualifiedClassname()
     {
         $testClasses = array(
@@ -119,6 +122,11 @@ EOD;
         );
     }
 
+
+    /**
+     * @param class-string<object>|object|string $class
+     * @return array<string>
+     */
     public function getClassPropertyNames($class): array
     {
         $propertyNames = array();
@@ -128,12 +136,20 @@ EOD;
         return array_unique($propertyNames);
     }
 
-    /** @noinspection DuplicatedCode */
+
+    /**
+     * @param class-string<object>|object|string $class
+     * @return array<mixed>
+     *
+     */
     private function getClassPropertyReflections($class): array
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return array();
         }
+        /**
+         * @var class-string<object>|object $class
+         */
         $selfReflection = $this->getClassReflection($class);
         if ($selfReflection->getParentClass() === false) {
             return $selfReflection->getProperties();
@@ -146,7 +162,11 @@ EOD;
         return $propertyReflections;
     }
 
-    private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool
+    /**
+     * @param mixed $class
+     * @return bool
+     */
+    private function classParameterIsValidClassNameOrClassInstance(mixed $class, string $caller): bool
     {
         if (is_string($class) === false && is_object($class) === false) {
             $this->log(
@@ -159,6 +179,10 @@ EOD;
         return true;
     }
 
+    /**
+     * @param class-string<object>|object $class
+     * @return ReflectionClass<object>
+     */
     public function getClassReflection($class): ReflectionClass
     {
         try {
@@ -177,11 +201,17 @@ EOD;
         }
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     */
     private function getClass($class): string
     {
         return (is_string($class) ? $class : get_class($class));
     }
 
+    /**
+     * @return class-string<object>|object|string
+     */
     private function getClassToReflect()
     {
         return $this->classToReflect;
@@ -205,6 +235,10 @@ EOD;
         );
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     * @return array<int|string, string>
+     */
     public function getClassPropertyTypes($class): array
     {
         $propertyTypes = array();
@@ -217,11 +251,19 @@ EOD;
         return $propertyTypes;
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     * @param array<mixed> $constructorArguments
+     * @return ReflectionClass<object>|object
+     */
     public function getClassInstance($class, array $constructorArguments = array())
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return (object)[];
         }
+        /**
+         * @var class-string<object>|object $class
+         */
         if (method_exists($class, $this->constructMethod) === false) {
             return $this->getClassReflection($class)->newInstanceArgs([]);
         }
@@ -231,6 +273,10 @@ EOD;
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     * @return array<mixed>
+     */
     public function generateMockClassMethodArguments($class, string $method): array
     {
         $defaults = array();
@@ -265,6 +311,10 @@ EOD;
         return $defaults;
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     * @return array<int, string>
+     */
     public function getClassMethodParameterTypes($class, string $method): array
     {
         $parameterTypes = array();
@@ -278,7 +328,11 @@ EOD;
         return $parameterTypes;
     }
 
-    private function getClassMethodReflection($class, string $methodName)
+    /**
+     * @param class-string<object>|object|string $class
+     * @return null|ReflectionMethod
+     */
+    private function getClassMethodReflection($class, string $methodName): null|ReflectionMethod
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return null;
@@ -290,6 +344,10 @@ EOD;
         return $this->getMethodReflection($class, $methodName);
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     * @return ReflectionMethod
+     */
     private function getMethodReflection($class, string $methodName): ReflectionMethod
     {
         try {
@@ -315,14 +373,15 @@ EOD;
 
     private function getParameterType(ReflectionParameter $reflectionParameter): string
     {
-        if (is_null($reflectionParameter->getType()) === true) {
+        $type = $reflectionParameter->getType();
+        if (is_null($type) === true) {
             return $this->nullType;
         }
-        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-        return $this->convertReflectionTypeStringToGettypeString($reflectionParameter->getType()->getName());
+        $name = (method_exists($type, 'getName') ? $type->getName() : $this->nullType);
+        return $this->convertReflectionTypeStringToGettypeString($name);
     }
 
-    private function convertReflectionTypeStringToGettypeString(string $type)
+    private function convertReflectionTypeStringToGettypeString(string $type): string
     {
         if ($type === 'bool') {
             return $this->booleanType;
@@ -339,7 +398,8 @@ EOD;
     private function generateRandomAlphaNumString(): string
     {
         try {
-            return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
+            $randomString = preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
+            return ($randomString ?? strval(rand(PHP_INT_MIN, PHP_INT_MAX)));
         } catch (Exception $e) {
             $this->log($this->errRandomBytesFailed);
             return str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz');
@@ -355,6 +415,10 @@ EOD;
         );
     }
 
+    /**
+     * @param class-string<object>|object $class
+     * @return array<mixed>
+     */
     public function getClassPropertyValues($class): array
     {
         $propertyValues = array();
@@ -381,7 +445,10 @@ EOD;
         );
     }
 
-    private function getFullyQualifiedClassname($class)
+    /**
+     * @param class-string<object>|object|string $class
+     */
+    private function getFullyQualifiedClassname($class): string
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return '\\' . get_class((object)[]);
@@ -401,6 +468,9 @@ EOD;
         );
     }
 
+    /**
+     * @param mixed $var
+     */
     private function getRealType($var): string
     {
         if (gettype($var) === $this->objectType) {
@@ -417,6 +487,10 @@ EOD;
         );
     }
 
+    /**
+     * @param class-string<object>|object|string $class
+     * @return array<int, string>
+     */
     public function getClassMethodParameterNames($class, string $method): array
     {
         $parameterNames = array();
@@ -459,6 +533,9 @@ interface ReflectionUtilityTestClass
 
 class Baz implements ReflectionUtilityTestClass
 {
+    /**
+     * @var array<mixed>
+     */
     public array $fooBarBaz = array();
 
     public function isTestClass(): bool
@@ -466,6 +543,9 @@ class Baz implements ReflectionUtilityTestClass
         return true;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getFooBarBaz(): array
     {
         return $this->fooBarBaz;
@@ -489,9 +569,19 @@ class Foo extends Bazzer implements ReflectionUtilityTestClass
     protected string $str;
     protected ReflectionUtilityTestClass $bar;
     private int $int;
+    /**
+     * @var array<mixed>
+     */
     private array $arr;
+    /**
+     * @var null
+     */
     private $null;
 
+    /**
+     * @param array<mixed> $arr
+     * @param null $null
+     */
     public function __construct(bool $bool, int $int, float $float, string $str, array $arr, Bar $bar, $null = null)
     {
         $this->bool = $bool;

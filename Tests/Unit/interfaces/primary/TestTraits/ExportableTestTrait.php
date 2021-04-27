@@ -13,7 +13,7 @@ trait ExportableTestTrait
 
     private ExportableInterface $exportable;
 
-    public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues()
+    public function testExportReturnsArrayWhoseValuesAreInstancesPropertyValues(): void
     {
         $this->assertEquals(
             $this->getReflectionUtility()->getClassPropertyValues($this->getExportable()),
@@ -26,12 +26,12 @@ trait ExportableTestTrait
         return $this->exportable;
     }
 
-    protected function setExportable(ExportableInterface $exportable)
+    protected function setExportable(ExportableInterface $exportable): void
     {
         $this->exportable = $exportable;
     }
 
-    public function testPropertiesMatchImportedPropertiesPostImport()
+    public function testPropertiesMatchImportedPropertiesPostImport(): void
     {
         $originalValues = $this->getReflectionUtility()->getClassPropertyValues($this->getExportable());
         $this->getExportable()->import(['reflectionUtility' => new ReflectionUtilityTestInterface()]);

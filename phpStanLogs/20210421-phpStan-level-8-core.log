@@ -1,20 +1,20 @@
-[H[J ------ ------------------------------------------------------------------------------------------------------------------------------------------ 
-  Line   Tests/Unit/interfaces/primary/TestTraits/ClassifiableTestTrait.php (in context of class UnitTests\abstractions\primary\ClassifiableTest)  
- ------ ------------------------------------------------------------------------------------------------------------------------------------------ 
-  14     Method UnitTests\abstractions\primary\ClassifiableTest::testGetTypeReturnsNonEmptyString() has no return typehint specified.              
-  29     Method UnitTests\abstractions\primary\ClassifiableTest::testGetTypeReturnsInstancesFullyQualifiedClassName() has no return typehint       
-         specified.                                                                                                                                
- ------ ------------------------------------------------------------------------------------------------------------------------------------------ 
+[H[J ------ --------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   core/abstractions/component/Crud/ComponentCrud.php                                                                                           
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------- 
+  78     Method DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud::readAll() return type has no value type specified in iterable  
+         type array.                                                                                                                                  
+         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                     
+  96     Unreachable statement - code above always terminates.                                                                                        
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------- 
 
- ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   Tests/Unit/interfaces/primary/TestTraits/ExportableTestTrait.php (in context of class UnitTests\abstractions\primary\ExportableTest)        
- ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
-  16     Method UnitTests\abstractions\primary\ExportableTest::testExportReturnsArrayWhoseValuesAreInstancesPropertyValues() has no return typehint  
-         specified.                                                                                                                                  
-  29     Method UnitTests\abstractions\primary\ExportableTest::setExportable() has no return typehint specified.                                     
-  34     Method UnitTests\abstractions\primary\ExportableTest::testPropertiesMatchImportedPropertiesPostImport() has no return typehint specified.   
- ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
-
- ------ --------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   Tests/Unit/interfaces/primary/TestTraits/ExportableTestTrait.php (in context of class UnitTests\classes\primary\ExportableTest)        
- ------ --------------------------------------------------------------------------------------------------------------------------------------- 
+ ------ ----------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   core/abstractions/component/Driver/Storage/FileSystem/JsonStorageDriver.php                                                                    
+ ------ ----------------------------------------------------------------------------------------------------------------------------------------------- 
+  31     Parameter #3 $recursive of function mkdir expects bool, int given.                                                                             
+  96     Method DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver::pack() should return string but         
+         returns string|false.                                                                                                                          
+  99     Method DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver::packObjectsInArray() has parameter      
+         $array with no value type specified in iterable type array.                                                                                    
+         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                       
+  99     Method DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver::packObjectsInArray() return type has    
+         no value type specified in iterable type array.                                                                                                

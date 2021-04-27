@@ -11,7 +11,7 @@ trait ClassifiableTestTrait
 
     private ClassifiableInterface $classifiable;
 
-    public function testGetTypeReturnsNonEmptyString()
+    public function testGetTypeReturnsNonEmptyString(): void
     {
         $this->getStringTestUtility()->stringIsNotEmpty($this->getClassifiable()->getType());
     }
@@ -26,7 +26,7 @@ trait ClassifiableTestTrait
         $this->classifiable = $classifiable;
     }
 
-    public function testGetTypeReturnsInstancesFullyQualifiedClassName()
+    public function testGetTypeReturnsInstancesFullyQualifiedClassName(): void
     {
         $this->getStringTestUtility()->stringsMatch(
             $this->getClassifiable()->getType(),
