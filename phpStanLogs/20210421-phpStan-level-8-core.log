@@ -1,20 +1,20 @@
-[H[J ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   Tests/Unit/interfaces/component/Factory/TestTraits/ResponseFactoryTestTrait.php (in context of class UnitTests\abstractions\component\Factory\App\AppComponentsFactoryTest)      
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  43     Call to an undefined method DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory::buildResponse().                                                            
-  58     Method UnitTests\abstractions\component\Factory\App\AppComponentsFactoryTest::buildBuildResponseTestArguments() return type has no value type specified in iterable type array.  
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                         
-  318    Call to an undefined method DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory::buildGlobalResponse().                                                      
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+[H[J ------ ------------------------------------------------------------------------------------------------------------------------------------------ 
+  Line   Tests/Unit/interfaces/primary/TestTraits/ClassifiableTestTrait.php (in context of class UnitTests\abstractions\primary\ClassifiableTest)  
+ ------ ------------------------------------------------------------------------------------------------------------------------------------------ 
+  14     Method UnitTests\abstractions\primary\ClassifiableTest::testGetTypeReturnsNonEmptyString() has no return typehint specified.              
+  29     Method UnitTests\abstractions\primary\ClassifiableTest::testGetTypeReturnsInstancesFullyQualifiedClassName() has no return typehint       
+         specified.                                                                                                                                
+ ------ ------------------------------------------------------------------------------------------------------------------------------------------ 
 
- ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-  Line   Tests/Unit/interfaces/component/Factory/TestTraits/ResponseFactoryTestTrait.php (in context of class UnitTests\abstractions\component\Factory\ResponseFactoryTest)      
- ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-  58     Method UnitTests\abstractions\component\Factory\ResponseFactoryTest::buildBuildResponseTestArguments() return type has no value type specified in iterable type array.  
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                
- ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   Tests/Unit/interfaces/primary/TestTraits/ExportableTestTrait.php (in context of class UnitTests\abstractions\primary\ExportableTest)        
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
+  16     Method UnitTests\abstractions\primary\ExportableTest::testExportReturnsArrayWhoseValuesAreInstancesPropertyValues() has no return typehint  
+         specified.                                                                                                                                  
+  29     Method UnitTests\abstractions\primary\ExportableTest::setExportable() has no return typehint specified.                                     
+  34     Method UnitTests\abstractions\primary\ExportableTest::testPropertiesMatchImportedPropertiesPostImport() has no return typehint specified.   
+ ------ -------------------------------------------------------------------------------------------------------------------------------------------- 
 
- ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   Tests/Unit/interfaces/component/Registry/Storage/TestTraits/StoredComponentRegistryTestTrait.php (in context of class UnitTests\abstractions\component\Registry\Storage\StoredComponentRegistryTest)      
- ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  26     Method UnitTests\abstractions\component\Registry\Storage\StoredComponentRegistryTest::setStoredComponentRegistry() has no return typehint specified.                                                      
+ ------ --------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   Tests/Unit/interfaces/primary/TestTraits/ExportableTestTrait.php (in context of class UnitTests\classes\primary\ExportableTest)        
+ ------ --------------------------------------------------------------------------------------------------------------------------------------- 

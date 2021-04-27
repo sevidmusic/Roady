@@ -225,7 +225,7 @@ trait DynamicOutputComponentTestTrait
     }
 
     /**
-     * @return array{0: CoreStorable, 1: CoreSwitchable, 2: CorePositionable, 3: string}
+     * @return array{0: CoreStorable, 1: CoreSwitchable, 2: CorePositionable, 3: string, 4: string}
      */
     public function getDynamicOutputComponentTestArgs(): array
     {

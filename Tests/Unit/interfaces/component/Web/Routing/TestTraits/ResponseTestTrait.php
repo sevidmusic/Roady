@@ -22,10 +22,11 @@ trait ResponseTestTrait
 
     public function testPositionablePropertyIsAssignedAPositionableImplementationInstancePostInstantiation(): void
     {
+        $classImplements = class_implements($this->getResponse()->export()['positionable']);
         $this->assertTrue(
             in_array(
                 PositionableInterface::class,
-                class_implements($this->getResponse()->export()['positionable'])
+                (is_array($classImplements) ? $classImplements : [])
             )
         );
     }
@@ -178,7 +179,7 @@ trait ResponseTestTrait
         );
     }
 
-    public function testGetRequestStorageInfoReturnsArrayOfStorableInstancesForAssignedRequests()
+    public function testGetRequestStorageInfoReturnsArrayOfStorableInstancesForAssignedRequests(): void
     {
         $this->turnSwitchableComponentOn($this->getResponse());
         $request = $this->getMockRequest();
@@ -190,7 +191,7 @@ trait ResponseTestTrait
         );
     }
 
-    public function testGetOutputComponentStorageInfoReturnsArrayOfStorableInstancesForAssignedOutputComponents()
+    public function testGetOutputComponentStorageInfoReturnsArrayOfStorableInstancesForAssignedOutputComponents(): void
     {
         $this->turnSwitchableComponentOn($this->getResponse());
         $outputComponent = $this->getMockOutputComponent();
@@ -268,7 +269,7 @@ trait ResponseTestTrait
         );
     }
 
-    public function testGetTemplateStorageInfoReturnsArrayOfStorableInstancesForAssignedTemplates()
+    public function testGetTemplateStorageInfoReturnsArrayOfStorableInstancesForAssignedTemplates(): void
     {
         $this->turnSwitchableComponentOn($this->getResponse());
         $template = $this->getMockTemplate();

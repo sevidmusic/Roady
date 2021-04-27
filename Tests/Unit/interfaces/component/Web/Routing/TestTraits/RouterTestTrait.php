@@ -43,12 +43,20 @@ trait RouterTestTrait
         );
     }
 
+    /**
+     * @return array<string, string>
+     */
+    private function classImplements(string|object $class): array {
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
+    }
+
     private function objectInstanceIsSetAndCorrectType(string $propertyName, string $type): bool
     {
         return (
         in_array(
             $type,
-            class_implements(
+            $this->classImplements(
                 $this->getRouter()->export()[$propertyName]
             )
         )
@@ -75,7 +83,8 @@ trait RouterTestTrait
     private function removeDirectory(string $dir): void
     {
         if (is_dir($dir)) {
-            $contents = scandir($dir);
+            $ls = scandir($dir);
+            $contents = (is_array($ls) ? $ls : []);
             foreach ($contents as $item) {
                 if ($item != "." && $item != "..") {
                     $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
@@ -121,7 +130,7 @@ trait RouterTestTrait
         );
         foreach ($this->getRouter()->getResponses($response->getLocation(), $response->getContainer()) as $response) {
             $this->assertTrue(
-                in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Response', class_implements($response)),
+                in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Response', $this->classImplements($response)),
                 'The response data was corrupted between the time it was created via the Crud and returned by the Router. Check the Storage Driver being used by the Crud'
             );
         }
