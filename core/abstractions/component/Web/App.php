@@ -14,7 +14,6 @@ use RuntimeException as PHPRuntimeException;
 
 abstract class App extends SwitchableComponentBase implements AppInterface
 {
-    public const APP_CONTAINER = "APP";
     private ?RequestInterface $domain;
 
     public function __construct(RequestInterface $request, SwitchableInterface $switchable, string $appName = '')

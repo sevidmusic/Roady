@@ -12,9 +12,9 @@ use RuntimeException;
 trait DynamicOutputComponentTestTrait
 {
 
-    private $dynamicOutputComponent;
+    private DynamicOutputComponentInterface $dynamicOutputComponent;
 
-    private function getExitingAppName(): string
+    private function getExistingAppName(): string
     {
         return self::tempAppDirectoryName();
     }
@@ -216,7 +216,7 @@ trait DynamicOutputComponentTestTrait
 
     private function defaultAppName(): string
     {
-        return $this->getExitingAppName();
+        return $this->getExistingAppName();
     }
 
     private function defaultDynamicFileName(): string
@@ -224,6 +224,9 @@ trait DynamicOutputComponentTestTrait
         return self::getExistingAppDynamicPhpFileName();
     }
 
+    /**
+     * @return array{0: CoreStorable, 1: CoreSwitchable, 2: CorePositionable, 3: string, 4: string}
+     */
     public function getDynamicOutputComponentTestArgs(): array
     {
         return [
@@ -367,7 +370,7 @@ trait DynamicOutputComponentTestTrait
     public function testGetDynamicFilePathReturnsAppDynamicFilePathIfDynamicFileExistsInBothAppDynamicOutputDirectoryAndSharedDynamicOutputDirectory(): void
     {
         $doc = $this->buildCoreDynamicOutputComponent(
-            $this->getExitingAppName(),
+            $this->getExistingAppName(),
             self::getDuplicateDynamicPhpFileName()
         );
         $this->assertEquals(
@@ -379,7 +382,7 @@ trait DynamicOutputComponentTestTrait
     public function testGetDynamicFilePathReturnsSharedDynamicFilePathIfDynamicFileDoesNotExistInAppDynamicOutputDirectory(): void
     {
         $doc = $this->buildCoreDynamicOutputComponent(
-            $this->getExitingAppName(),
+            $this->getExistingAppName(),
             self::getUniqueSharedDynamicPhpFileName()
         );
         $this->assertEquals(
@@ -400,18 +403,20 @@ trait DynamicOutputComponentTestTrait
     {
         ob_start();
         require $pathToFile;
-        return ob_get_clean();
+        $output = ob_get_clean();
+        return (is_string($output) ? $output : '');
     }
 
     private function getFileContentsAsPlainText(string $pathToFile): string
     {
-        return file_get_contents($pathToFile);
+        $contents = file_get_contents($pathToFile);
+        return (is_string($contents) ? $contents : '');
     }
 
     public function testGetOutputReturnsStringConstructedByGettingContentsOfDynamicOutputFileAsPlainTextIfDynamicOutputFileDoesNotHaveThePhpExtension(): void
     {
         $doc = $this->buildCoreDynamicOutputComponent(
-            $this->getExitingAppName(),
+            $this->getExistingAppName(),
             self::getDuplicateDynamicTxtFileName()
         );
         $this->assertEquals(
@@ -425,7 +430,7 @@ trait DynamicOutputComponentTestTrait
     public function testGetOutputReturnsStringConstructedByExecutingDynamicOutputFileIfDynamicOutputFileIsAPhpFile(): void
     {
         $doc = $this->buildCoreDynamicOutputComponent(
-            $this->getExitingAppName(),
+            $this->getExistingAppName(),
             self::getDuplicateDynamicPhpFileName()
         );
         $this->assertEquals(

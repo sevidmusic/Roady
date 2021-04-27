@@ -20,7 +20,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 IdentifiableInterface::class,
-                class_implements($this->getPrimaryFactory()->buildIdentifiable('AssignedName'))
+                $this->classImplements($this->getPrimaryFactory()->buildIdentifiable('AssignedName'))
             )
         );
     }
@@ -30,7 +30,7 @@ trait PrimaryFactoryTestTrait
         return $this->primaryFactory;
     }
 
-    public function setPrimaryFactory(PrimaryFactoryInterface $primaryFactory)
+    public function setPrimaryFactory(PrimaryFactoryInterface $primaryFactory): void
     {
         $this->primaryFactory = $primaryFactory;
     }
@@ -47,7 +47,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 StorableInterface::class,
-                class_implements(
+                $this->classImplements(
                     $this->getPrimaryFactory()->buildStorable(
                         'AssignedName',
                         'AssignedContainer'
@@ -91,7 +91,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 ClassifiableInterface::class,
-                class_implements($this->getPrimaryFactory()->buildClassifiable())
+                $this->classImplements($this->getPrimaryFactory()->buildClassifiable())
             )
         );
     }
@@ -101,7 +101,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 ExportableInterface::class,
-                class_implements($this->getPrimaryFactory()->buildExportable())
+                $this->classImplements($this->getPrimaryFactory()->buildExportable())
             )
         );
     }
@@ -111,7 +111,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 SwitchableInterface::class,
-                class_implements($this->getPrimaryFactory()->buildSwitchable())
+                $this->classImplements($this->getPrimaryFactory()->buildSwitchable())
             )
         );
     }
@@ -121,9 +121,17 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 PositionableInterface::class,
-                class_implements($this->getPrimaryFactory()->buildPositionable(rand(0, 1000)))
+                $this->classImplements($this->getPrimaryFactory()->buildPositionable(rand(0, 1000)))
             )
         );
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function classImplements(string|object $class): array {
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
     }
 
     public function testBuildPositionableReturnsPositionableImplementationInstanceWhoseAssignedPositionMatchesSpecifiedPosition(): void

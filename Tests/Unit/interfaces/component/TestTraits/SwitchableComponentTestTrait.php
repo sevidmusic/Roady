@@ -22,7 +22,7 @@ trait SwitchableComponentTestTrait
         return $this->switchableComponent;
     }
 
-    public function setSwitchableComponent(SwitchableComponentInterface $switchableComponent)
+    public function setSwitchableComponent(SwitchableComponentInterface $switchableComponent): void
     {
         $this->switchableComponent = $switchableComponent;
     }

@@ -1,20 +1,20 @@
-[H[J ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   Tests/Unit/interfaces/component/Crud/TestTraits/ComponentCrudTestTrait.php (in context of class UnitTests\abstractions\component\Crud\ComponentCrudTest)  
- ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  21     Parameter #2 $haystack of function in_array expects array, array<string, string>|false given.                                                             
-  245    Method                                                                                                                                                    
-         UnitTests\abstractions\component\Crud\ComponentCrudTest::testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIs            
-         NotFound() has no return typehint specified.                                                                                                              
- ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+[H[J ------ --------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   core/abstractions/component/Crud/ComponentCrud.php                                                                                           
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------- 
+  78     Method DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud::readAll() return type has no value type specified in iterable  
+         type array.                                                                                                                                  
+         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                     
+  96     Unreachable statement - code above always terminates.                                                                                        
+ ------ --------------------------------------------------------------------------------------------------------------------------------------------- 
 
- ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-  Line   Tests/Unit/interfaces/component/Driver/Storage/FileSystem/TestTraits/JsonStorageDriverTestTrait.php (in context of class UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriverTest)  
- ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-  25     Argument of an invalid type array<int, string>|false supplied for foreach, only iterables are supported.                                                                                                    
-  77     Parameter #1 $json of function json_decode expects string, string|false given.                                                                                                                              
-  126    Parameter #1 $json of function json_decode expects string, string|false given.                                                                                                                              
-  262    Method UnitTests\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriverTest::getTestInstanceArgs() return type has no value type                                                                
-         specified in iterable type array.                                                                                                                                                                           
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                                                    
- ------ ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ 
-
+ ------ ----------------------------------------------------------------------------------------------------------------------------------------------- 
+  Line   core/abstractions/component/Driver/Storage/FileSystem/JsonStorageDriver.php                                                                    
+ ------ ----------------------------------------------------------------------------------------------------------------------------------------------- 
+  31     Parameter #3 $recursive of function mkdir expects bool, int given.                                                                             
+  96     Method DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver::pack() should return string but         
+         returns string|false.                                                                                                                          
+  99     Method DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver::packObjectsInArray() has parameter      
+         $array with no value type specified in iterable type array.                                                                                    
+         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                       
+  99     Method DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver::packObjectsInArray() return type has    
+         no value type specified in iterable type array.                                                                                                

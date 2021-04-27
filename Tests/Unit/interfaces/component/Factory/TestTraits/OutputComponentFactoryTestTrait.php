@@ -4,16 +4,22 @@ namespace UnitTests\interfaces\component\Factory\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use UnitTests\interfaces\component\TestTraits\DynamicOutputComponentTestTrait;
 
 trait OutputComponentFactoryTestTrait
 {
 
     private OutputComponentFactoryInterface $outputComponentFactory;
+
+    abstract protected function getMockPrimaryFactory(): PrimaryFactoryInterface;
+
+    abstract protected function getMockCrud(): ComponentCrudInterface;
 
     public static function setUpBeforeClass(): void
     {
@@ -25,6 +31,9 @@ trait OutputComponentFactoryTestTrait
         DynamicOutputComponentTestTrait::tearDownAfterClass();
     }
 
+    /**
+     * @return array{0: PrimaryFactoryInterface, 1: ComponentCrudInterface, 2: StoredComponentRegistryInterface}
+     */
     protected function getOutputComponentFactoryTestArgs(): array
     {
         return array(
@@ -206,7 +215,6 @@ trait OutputComponentFactoryTestTrait
         $doc = new CoreDynamicOutputComponent(
             $this->getMockPrimaryFactory()->buildStorable(
                 'Name',
-                'Location',
                 'Container'
             ),
             $this->getMockPrimaryFactory()->buildSwitchable(),

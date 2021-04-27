@@ -9,6 +9,8 @@ use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as Requ
 interface App extends CoreSwitchableComponent
 {
 
+    public const APP_CONTAINER = "APP";
+
     public static function deriveNameLocationFromRequest(RequestInterface $request): string;
 
     public function getAppDomain(): RequestInterface;

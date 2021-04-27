@@ -55,6 +55,9 @@ trait ResponseFactoryTestTrait
         $this->responseFactory = $responseFactory;
     }
 
+    /**
+     * @return array<mixed>
+     */
     private function buildBuildResponseTestArguments(): array
     {
         $args = [

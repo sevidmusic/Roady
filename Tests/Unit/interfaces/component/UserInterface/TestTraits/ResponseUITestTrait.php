@@ -2,12 +2,15 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
@@ -24,6 +27,8 @@ use RuntimeException as PHPRuntimeException;
 
 trait ResponseUITestTrait
 {
+
+    private ResponseUIInterface $responseUI;
 
     public static function generateTestOutputComponent(): OutputComponentInterface
     {
@@ -70,6 +75,9 @@ trait ResponseUITestTrait
         self::getComponentCrud()->create(self::generateTestResponse());
     }
 
+    /**
+     * @return array<ComponentInterface>
+     */
     private static function readAllFromContainer(string $container): array
     {
         return self::getComponentCrud()->readAll(self::expectedAppLocation(), self::getTestComponentContainer());
@@ -89,8 +97,6 @@ trait ResponseUITestTrait
         self::deleteAllInContainer(ResponseInterface::RESPONSE_CONTAINER);
     }
 
-    private $responseUI;
-
     protected function setResponseUIParentTestInstances(): void
     {
         $this->setOutputComponent($this->getResponseUI());
@@ -107,6 +113,9 @@ trait ResponseUITestTrait
         $this->responseUI = $responseUI;
     }
 
+    /**
+     * @return array{0: StorableInterface, 1: SwitchableInterface, 2: PositionableInterface, 3: RouterInterface}
+     */
     public function getResponseUITestArgs(): array
     {
         return [
@@ -215,6 +224,9 @@ trait ResponseUITestTrait
         );
     }
 
+    /**
+     * @return array<ResponseInterface>
+     */
     private function expectedResponses(): array
     {
         return $this->getResponseUI()->export()['router']->getResponses(
@@ -223,6 +235,9 @@ trait ResponseUITestTrait
         );
     }
 
+    /**
+     * @return array<PositionableInterface>
+     */
     private function sortPositionables(PositionableInterface ...$postionables): array
     {
         $sorted = [];
@@ -247,11 +262,17 @@ trait ResponseUITestTrait
         $expectedOutput = '';
         $expectedResponses = $this->expectedResponses();
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        /**
+         * @var ResponseInterface $response
+         */
         foreach($sortedResponses as $response)
         {
             $outputComponents = [];
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
+                /**
+                 * @var OutputComponentInterface $component
+                 */
                 $component = $this->getRoutersCompoenentCrud()->read($storable);
                 if($this->isProperImplementation(OutputComponentInterface::class, $component))
                 {
@@ -259,6 +280,9 @@ trait ResponseUITestTrait
                 }
             }
             $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            /**
+             * @var OutputComponentInterface $outputComponent
+             */
             foreach($sortedOutputComponents as $outputComponent)
             {
                 $expectedOutput .= $outputComponent->getOutput();

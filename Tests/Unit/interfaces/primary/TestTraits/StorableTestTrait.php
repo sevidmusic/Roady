@@ -22,7 +22,7 @@ trait StorableTestTrait
         return $this->storable;
     }
 
-    protected function setStorable(StorableInterface $storable)
+    protected function setStorable(StorableInterface $storable): void
     {
         $this->storable = $storable;
     }

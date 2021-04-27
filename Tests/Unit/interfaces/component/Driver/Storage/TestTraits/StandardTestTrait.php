@@ -53,9 +53,10 @@ trait StandardTestTrait
         return $this->standardStorageDriver;
     }
 
-    private function storageDriverImplements(string $interface, StorageDriverInterface $storageDriver)
+    private function storageDriverImplements(string $interface, StorageDriverInterface $storageDriver): bool
     {
-        return in_array($interface, class_implements($storageDriver));
+        $classImplements = class_implements($storageDriver);
+        return in_array($interface, (is_array($classImplements) ? $classImplements : []));
     }
 
 }

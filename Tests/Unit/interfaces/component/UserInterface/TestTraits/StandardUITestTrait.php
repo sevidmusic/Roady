@@ -1,10 +1,4 @@
-<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-/** @noinspection PhpPossiblePolymorphicInvocationInspection */
-/** @noinspection PhpPossiblePolymorphicInvocationInspection */
-/** @noinspection PhpPossiblePolymorphicInvocationInspection */
-/** @noinspection PhpPossiblePolymorphicInvocationInspection */
-
-/** @noinspection PhpPossiblePolymorphicInvocationInspection */
+<?php
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
@@ -20,7 +14,11 @@ use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRout
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
@@ -169,6 +167,9 @@ trait StandardUITestTrait
         }
     }
 
+    /**
+     * @return array<ComponentInterface>
+     */
     protected function getStoredComponents(string $container): array
     {
         return $this->getRouter()->getCrud()->readAll(
@@ -192,24 +193,34 @@ trait StandardUITestTrait
         return ResponseInterface::RESPONSE_CONTAINER;
     }
 
+    /**
+     * @param string|object $class
+     * @return array<string, string>
+     */
+    private function classImplements(string|object $class) {
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
+    }
+
     public function testRouterPropertyIsAssignedARouterImplementationInstancePostInstantiation(): void
     {
+        $classImplements = $this->classImplements($this->getStandardUI()->export()['router']);
         $this->assertTrue(
             in_array(
                 RouterInterface::class,
-                class_implements($this->getStandardUI()->export()['router'])
+                $classImplements
             )
         );
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings()
+    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings(): void
     {
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $responseTemplates) {
             $this->assertTrue(is_numeric($index));
         }
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreNumericStrings()
+    public function testGetTemplatesAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreNumericStrings(): void
     {
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $responseTemplates) {
             foreach ($responseTemplates as $index => $template) {
@@ -218,7 +229,7 @@ trait StandardUITestTrait
         }
     }
 
-    public function testGetTemplatesAssignedToResponsesReturnsMultiDimensionalArrayOfArrays()
+    public function testGetTemplatesAssignedToResponsesReturnsMultiDimensionalArrayOfArrays(): void
     {
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $index => $responseTemplates) {
             $this->assertTrue(is_array($responseTemplates));
@@ -229,7 +240,7 @@ trait StandardUITestTrait
     {
         foreach ($this->getStandardUI()->getTemplatesAssignedToResponses() as $responseTemplates) {
             foreach ($responseTemplates as $template) {
-                $this->assertTrue(in_array('DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate', class_implements($template)));
+                $this->assertTrue(in_array('DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate', $this->classImplements($template)));
             }
         }
     }
@@ -242,6 +253,9 @@ trait StandardUITestTrait
         );
     }
 
+    /**
+     * @return array<string, array<string, StandardUITemplateInterface>>
+     */
     private function getTemplatesForCurrentRequest(): array
     {
         $templates = [];
@@ -250,6 +264,9 @@ trait StandardUITestTrait
                 $response->increasePosition();
             }
             foreach ($response->getTemplateStorageInfo() as $storable) {
+               /**
+                * @var StandardUITemplateInterface $template
+                */
                 $template = $this->getRouter()->getCrud()->read($storable);
                 while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
                     $template->increasePosition();
@@ -260,6 +277,10 @@ trait StandardUITestTrait
         return $templates;
     }
 
+
+    /**
+     * @return array <ResponseInterface>
+     */
     private function getResponsesToCurrentRequest(): array
     {
         $responses = [];
@@ -269,7 +290,7 @@ trait StandardUITestTrait
         return $responses;
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayOfOutputComponents(): void
     {
         foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $responseOutputComponents) {
             foreach ($responseOutputComponents as $outputComponentTypes) {
@@ -277,7 +298,7 @@ trait StandardUITestTrait
                     $this->assertTrue(
                         in_array(
                             'DarlingDataManagementSystem\interfaces\component\OutputComponent',
-                            class_implements($outputComponent)
+                            $this->classImplements($outputComponent)
                         )
                     );
                 }
@@ -285,21 +306,21 @@ trait StandardUITestTrait
         }
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreValidOutputComponentTypes()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseSecondLevelIndexesAreValidOutputComponentTypes(): void
     {
         foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $responseOutputComponents) {
             foreach ($responseOutputComponents as $outputComponentType => $outputComponents) {
                 $this->assertTrue(
                     in_array(
                         'DarlingDataManagementSystem\interfaces\component\OutputComponent',
-                        class_implements($outputComponentType)
+                        $this->classImplements($outputComponentType)
                     )
                 );
             }
         }
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseTopLevelIndexesAreNumericStrings(): void
     {
         foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $index => $outputComponentTypes) {
             $this->assertTrue(
@@ -308,7 +329,7 @@ trait StandardUITestTrait
         }
     }
 
-    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseThirdLevelIndexesAreNumericStrings()
+    public function testGetOutputComponentsAssignedToResponsesReturnsArrayWhoseThirdLevelIndexesAreNumericStrings(): void
     {
         foreach ($this->getStandardUI()->getOutputComponentsAssignedToResponses() as $responseOutputComponents) {
             foreach ($responseOutputComponents as $outputComponentTypes) {
@@ -329,6 +350,9 @@ trait StandardUITestTrait
                 $response->increasePosition();
             }
             foreach ($response->getOutputComponentStorageInfo() as $storable) {
+                /**
+                 * @var OutputComponentInterface $outputComponent
+                 */
                 $outputComponent = $this->getRouter()->getCrud()->read($storable);
                 while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
                     $outputComponent->increasePosition();
@@ -342,7 +366,7 @@ trait StandardUITestTrait
         );
     }
 
-    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByResponsePositionThenTemplatePositionThenTemplateOCTypeThenOutputComponentPosition()
+    public function testGetOutputReturnsCollectiveOutputFromOutputComponentsOrganizedByResponsePositionThenTemplatePositionThenTemplateOCTypeThenOutputComponentPosition(): void
     {
         $expectedOutput = '';
         $assignedTemplates = $this->getStandardUI()->getTemplatesAssignedToResponses();
@@ -363,7 +387,7 @@ trait StandardUITestTrait
         $this->assertEquals($expectedOutput, $this->getStandardUI()->getOutput());
     }
 
-    protected function generateStoredTestComponents()
+    protected function generateStoredTestComponents(): void
     {
         // @devNote: The generateStoredOutputComponent() and generateStandardUITemplate() methods are call from with generateStoredResponse()
         $this->generateComponentCalls++;
@@ -472,6 +496,9 @@ trait StandardUITestTrait
         $this->setOutputComponentParentTestInstances();
     }
 
+    /**
+     * @return array{0: StorableInterface, 1: SwitchableInterface, 2: PositionableInterface, 3: RouterInterface}
+     */
     protected function getTestInstanceArgs(): array
     {
         return [

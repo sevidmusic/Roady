@@ -15,10 +15,11 @@ trait ComponentCrudTestTrait
 
     public function testStorageDriverIsSetAndIsAStorageDriverPostInstantiation(): void
     {
+        $classImplements = class_implements($this->getComponentCrudStorageDriver());
         $this->assertTrue(
             in_array(
                 'DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver',
-                class_implements($this->getComponentCrudStorageDriver())
+                (is_array($classImplements) ? $classImplements : [])
             )
         );
     }
@@ -242,7 +243,7 @@ trait ComponentCrudTestTrait
     }
 
 
-    public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound()
+    public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound(): void
     {
         $this->expectException(RuntimeException::class);
         $component = $this->getComponentCrud()->readByNameAndType(
