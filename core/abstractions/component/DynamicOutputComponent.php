@@ -99,12 +99,14 @@ abstract class DynamicOutputComponent extends OutputCompoenentBase implements Dy
     {
         ob_start();
         require $this->getDynamicFilePath();
-        return ob_get_clean();
+        $output = ob_get_clean();
+        return (is_string($output) ? $output : '');
     }
 
     private function getDynamicFileContentsAsPlainText(): string
     {
-        return file_get_contents($this->getDynamicFilePath());
+        $content = file_get_contents($this->getDynamicFilePath());
+        return (is_string($content) ? $content : '');
     }
 
     public function getOutput(): string

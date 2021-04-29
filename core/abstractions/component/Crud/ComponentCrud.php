@@ -75,6 +75,9 @@ abstract class ComponentCrud extends SwitchableComponentBase implements Componen
         );
     }
 
+    /**
+     * @return array<ComponentInterface>
+     */
     public function readAll(string $location, string $container): array
     {
         return ($this->getState() === false
@@ -92,8 +95,7 @@ abstract class ComponentCrud extends SwitchableComponentBase implements Componen
                 return $component;
             }
         }
-        throw new RuntimeException("A component named $name of type $type does not exist in the $container container in the $location location: Using defualt Component of type " . $this->getDefaultComponent()->getType());
-        return $this->getDefaultComponent();
+        throw new RuntimeException("A component named $name of type $type does not exist in the $container container in the $location location");
     }
 
 }

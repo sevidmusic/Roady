@@ -229,22 +229,22 @@ trait JsonStorageDriverTestTrait
         $this->assertNotEquals(
             $this->getJsonStorageDriver()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId(),
-            'read() must return a __MOCK__COMPONENT__ if state is false.'
+            'read() must not return the specified Component if specified Component\'s state is false, and should instead return a new Component instance whose name is "DefaultComponent", location is "DefaultComponent", and container is "DefaultComponent".'
         );
         $this->assertEquals(
-            '__MOCK_COMPONENT__',
+            'DefaultComponent',
             $this->getStoredComponent()->getName(),
-            'read() must return a __MOCK_COMPONENT__ whose name is __MOCK_COMPONENT__ if state is false.'
+            'read() must return a Component whose name is DefaultComponent if state is false.'
         );
         $this->assertEquals(
-            '__MOCK_COMPONENT__',
+            'DefaultComponent',
             $this->getStoredComponent()->getLocation(),
-            'read() must return a __MOCK_COMPONENT__ whose location is __MOCK_COMPONENT__ if state is false.'
+            'read() must return a Component whose location is DefaultComponent if state is false.'
         );
         $this->assertEquals(
-            '__MOCK_COMPONENT__',
+            'DefaultComponent',
             $this->getStoredComponent()->getContainer(),
-            'read() must return a __MOCK_COMPONENT__ whose container is __MOCK_COMPONENT__ if state is false.'
+            'read() must return a Component whose container is DefaultComponent if state is false.'
         );
     }
 
