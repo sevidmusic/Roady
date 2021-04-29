@@ -1,12 +1,3 @@
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/component/UserInterface/ResponseUI.php                                                                                                                                                            
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  28     Method DarlingDataManagementSystem\abstractions\component\UserInterface\ResponseUI::sortPositionables() return type has no value type specified in iterable type array.                                        
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                                                       
-  69     Parameter #1 ...$postionables of method DarlingDataManagementSystem\abstractions\component\UserInterface\ResponseUI::sortPositionables() expects DarlingDataManagementSystem\interfaces\primary\Positionable,  
-         DarlingDataManagementSystem\interfaces\component\Component given.                                                                                                                                              
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
   Line   abstractions/component/UserInterface/StandardUI.php                                                                                                                                           
  ------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
@@ -279,5 +270,5 @@
          💡 You can turn this off by setting checkGenericClassInNonGenericObjectType: false in your phpstan.neon.                                                                               
  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 102 errors                                                                                               
+ [ERROR] Found 100 errors                                                                                               
 

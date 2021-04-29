@@ -25,6 +25,9 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
         $this->router = $router;
     }
 
+    /**
+     * @return array<string, PositionableInterface>
+     */
     private function sortPositionables(PositionableInterface ...$postionables): array
     {
         $sorted = [];
@@ -53,6 +56,9 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
             ResponseInterface::RESPONSE_CONTAINER
         );
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        /**
+         * @var ResponseInterface $response
+         */
         foreach($sortedResponses as $response)
         {
             $outputComponents = [];
@@ -63,10 +69,16 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
                 $isAnOutputComponent = (is_array($classImplements) ? in_array(OutputComponentInterface::class, $classImplements) : false);
                 if($isAnOutputComponent === true)
                 {
+                    /**
+                     * @var OutputComponentInterface $component
+                     */
                     array_push($outputComponents, $component);
                 }
             }
             $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            /**
+             * @var OutputComponentInterface $outputComponent
+             */
             foreach($sortedOutputComponents as $outputComponent)
             {
                 $expectedOutput .= $outputComponent->getOutput();
