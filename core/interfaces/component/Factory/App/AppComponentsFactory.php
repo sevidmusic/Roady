@@ -20,6 +20,6 @@ interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputCo
 
     public static function buildDomain(string $url): RequestInterface;
 
-    public function buildLog($flags = 0): string;
+    public function buildLog(int $flags = 0): string;
 
 }
