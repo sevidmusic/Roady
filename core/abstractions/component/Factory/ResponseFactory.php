@@ -35,7 +35,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
     public function buildResponse(
         string $name,
         float $position,
-        ComponentInterface ...$requestsOutputComponentsStandardUITemplates
+        ComponentInterface ...$componentsToAssign
     ): ResponseInterface
     {
         $response = new CoreResponse(
@@ -46,7 +46,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)
         );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
+        foreach ($componentsToAssign as $component) {
             self::ifRequestAddStorageInfo($response, $component);
             self::ifStandardUITemplateAddStorageInfo($response, $component);
             self::ifOutputComponentAddStorageInfo($response, $component);
@@ -106,7 +106,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
     public function buildGlobalResponse(
         string $name,
         float $position,
-        ComponentInterface ...$requestsOutputComponentsStandardUITemplates
+        ComponentInterface ...$componentsToAssign
     ): GlobalResponseInterface
     {
         $globalResponse = new CoreGlobalResponse(
@@ -122,7 +122,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
                 )
             ]
         );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
+        foreach ($componentsToAssign as $component) {
             self::ifRequestAddStorageInfo($globalResponse, $component);
             self::ifStandardUITemplateAddStorageInfo($globalResponse, $component);
             self::ifOutputComponentAddStorageInfo($globalResponse, $component);

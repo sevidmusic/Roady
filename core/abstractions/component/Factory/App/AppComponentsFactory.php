@@ -195,6 +195,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         );
     }
 
+    /**
+     * @return array{0: PrimaryFactoryInterface, 1: ComponentCrudInterface, 2: StoredComponentRegistryInterface}
+     */
     public static function buildConstructorArgs(RequestInterface $domain, AppInterface|null $app = null): array
     {
         return [
@@ -298,23 +301,23 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $request;
     }
 
-    public function buildResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): ResponseInterface // @todo As soon as Php 8 is in use, refactor to union type declaration: i.e Response | GlobalResponse
+    public function buildResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): ResponseInterface
     {
         $response = $this->responseFactory->buildResponse($name, $position);
-        return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
+        return $this->configureResponse($response, $componentsToAssign);
     }
 
     /**
      * @param ResponseInterface $response
-     * @param array $requestsOutputComponentsStandardUITemplates
+     * @param array<int, ComponentInterface> $componentsToAssign
      * @return ResponseInterface|GlobalResponseInterface
      */
-    private function configureResponse(ResponseInterface $response, array $requestsOutputComponentsStandardUITemplates = [])
+    private function configureResponse(ResponseInterface $response, array $componentsToAssign = [])
     {
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
             $response
         );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
+        foreach ($componentsToAssign as $component) {
             CoreResponseFactory::ifRequestAddStorageInfo($response, $component);
             CoreResponseFactory::ifStandardUITemplateAddStorageInfo($response, $component);
             CoreResponseFactory::ifOutputComponentAddStorageInfo($response, $component);
@@ -325,10 +328,10 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $response;
     }
 
-    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): GlobalResponseInterface
+    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): GlobalResponseInterface
     {
         $globalResponse = $this->responseFactory->buildGlobalResponse($name, $position);
-        return $this->configureResponse($globalResponse, $requestsOutputComponentsStandardUITemplates);
+        return $this->configureResponse($globalResponse, $componentsToAssign);
     }
 
     public function buildLog($flags = 0): string
