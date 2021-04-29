@@ -14,22 +14,20 @@ use RuntimeException as PHPRuntimeException;
 
 abstract class App extends SwitchableComponentBase implements AppInterface
 {
-    private ?RequestInterface $domain;
+    private RequestInterface $domain;
 
     public function __construct(RequestInterface $request, SwitchableInterface $switchable, string $appName = '')
     {
-###
+        $this->domain = $request;
         if(!empty($appName)) {
             $actualName = preg_replace("/[^A-Za-z0-9]/", '', $appName);
         }
-###
         $storable = new CoreStorable(
             ($actualName ?? self::deriveNameLocationFromRequest($request)),
             self::deriveNameLocationFromRequest($request),
             self::APP_CONTAINER
         );
         parent::__construct($storable, $switchable);
-        $this->domain = $request;
     }
 
     public static function deriveNameLocationFromRequest(RequestInterface $request): string
@@ -44,8 +42,12 @@ abstract class App extends SwitchableComponentBase implements AppInterface
 
     private static function isAnApp(ComponentInterface $component): bool
     {
+        $classImplements = class_implements($component);
         return (
-        in_array('DarlingDataManagementSystem\interfaces\component\Web\App', class_implements($component))
+            in_array(
+                AppInterface::class,
+                (is_array($classImplements) ? $classImplements : [])
+            )
             ? true
             : false
         );
