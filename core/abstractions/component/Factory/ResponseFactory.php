@@ -56,6 +56,16 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
     }
 
     /**
+     * @param string|object $class
+     * @return array<string,string>
+     */
+    private static function classImplements(string|object $class): array
+    {
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
+    }
+
+    /**
      * @param ResponseInterface $response
      * @param ComponentInterface|RequestInterface $component
      */
@@ -64,9 +74,12 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         if (
             in_array(
                 RequestInterface::class,
-                class_implements($component)
+                self::classImplements($component)
             ) === true
         ) {
+            /**
+             * @var RequestInterface $component
+             */
             $response->addRequestStorageInfo($component);
         }
     }
@@ -80,9 +93,12 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         if (
             in_array(
                 StandardUITemplateInterface::class,
-                class_implements($component)
+                self::classImplements($component)
             ) === true
         ) {
+            /**
+             * @var StandardUITemplateInterface $component
+             */
             $response->addTemplateStorageInfo($component);
         }
     }
@@ -96,9 +112,12 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         if (
             in_array(
                 OutputComponentInterface::class,
-                class_implements($component)
+                self::classImplements($component)
             ) === true
         ) {
+            /**
+             * @var OutputComponentInterface $component
+             */
             $response->addOutputComponentStorageInfo($component);
         }
     }
