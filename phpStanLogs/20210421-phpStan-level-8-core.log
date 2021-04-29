@@ -1,18 +1,3 @@
- ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/component/Registry/Storage/StoredComponentRegistry.php                                                                                                                            
- ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  16     Property DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry::$registry type has no value type specified in iterable type array.                       
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                                       
-  64     Parameter #2 $haystack of function in_array expects array, array<string, string>|false given.                                                                                                  
-  73     Parameter #1 $component of method DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry::getStorableFromComponent() expects                              
-         DarlingDataManagementSystem\interfaces\component\Component, DarlingDataManagementSystem\interfaces\primary\Storable given.                                                                     
-  85     Parameter #2 $haystack of function in_array expects array, array<string, string>|false given.                                                                                                  
-  93     Method DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry::getRegisteredComponents() return type has no value type specified in iterable type array.  
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                                       
-  102    Method DarlingDataManagementSystem\abstractions\component\Registry\Storage\StoredComponentRegistry::getRegistry() return type has no value type specified in iterable type array.              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                                       
- ------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
  ------ ---------------------------------------------------------------------------------------------------------------------------------- 
   Line   abstractions/component/SwitchableComponent.php                                                                                    
  ------ ---------------------------------------------------------------------------------------------------------------------------------- 
@@ -309,5 +294,5 @@
          💡 You can turn this off by setting checkGenericClassInNonGenericObjectType: false in your phpstan.neon.                                                                               
  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 111 errors                                                                                               
+ [ERROR] Found 105 errors                                                                                               
 

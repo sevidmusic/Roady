@@ -13,6 +13,9 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
 
     private string $acceptedImplementation = ComponentInterface::class;
     private ComponentCrudInterface $componentCrud;
+    /**
+     * @var array<int, StorableInterface> $registry
+     */
     private array $registry = [];
 
     public function __construct(StorableInterface $storable, ComponentCrudInterface $componentCrud)
@@ -61,18 +64,13 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
     {
         return in_array(
             $this->acceptedImplementation,
-            class_implements($component)
+            $this->classImplements($component)
         );
     }
 
     public function unRegisterComponent(StorableInterface $storable): bool
     {
-        /** @noinspection PhpParamsInspection */
-        $actualStorable = (
-        $this->storableIsAComponent($storable) === true
-            ? $this->getStorableFromComponent($storable)
-            : $storable
-        );
+        $actualStorable = $this->getActualStorable($storable);
         if (!in_array($actualStorable, $this->registry) === true) {
             return false;
         }
@@ -82,14 +80,33 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
 
     private function storableIsAComponent(StorableInterface $storable): bool
     {
-        return in_array(ComponentInterface::class, class_implements($storable));
+        return in_array(ComponentInterface::class, $this->classImplements($storable));
     }
 
-    private function getStorableFromComponent(ComponentInterface $component): StorableInterface
+    /**
+     * @param string|object $class
+     * @return array<string, string>
+     */
+    private function classImplements(string|object $class): array
     {
-        return $component->export()['storable'];
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
     }
 
+    private function getActualStorable(StorableInterface|ComponentInterface $storable): StorableInterface
+    {
+        if($this->storableIsAComponent($storable) === true) {
+            /**
+             * @var ComponentInterface $storable
+             */
+            return $storable->export()['storable'];
+        }
+        return $storable;
+    }
+
+    /**
+     * @return array<int, ComponentInterface>
+     */
     public function getRegisteredComponents(): array
     {
         $components = [];
@@ -99,6 +116,9 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
         return $components;
     }
 
+    /**
+     * @return array<int, StorableInterface> $registry
+     */
     public function getRegistry(): array
     {
         return $this->registry;
