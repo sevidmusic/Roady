@@ -10,7 +10,15 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 abstract class Request extends SwitchableComponentBase implements RequestInterface
 {
     private string $url = '';
+
+    /**
+     * @var array<mixed> $get
+     */
     private array $get;
+
+    /**
+     * @var array<mixed> $post
+     */
     private array $post;
 
     public function __construct(StorableInterface $storable, SwitchableInterface $switchable)
@@ -38,11 +46,17 @@ abstract class Request extends SwitchableComponentBase implements RequestInterfa
             );
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getGet(): array
     {
         return ($this->getState() === false ? [] : $this->get);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getPost(): array
     {
         return ($this->getState() === false ? [] : $this->post);
