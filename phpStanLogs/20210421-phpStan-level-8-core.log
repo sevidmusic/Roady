@@ -1,18 +1,3 @@
- ------ ---------------------------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/component/SwitchableComponent.php                                                                                    
- ------ ---------------------------------------------------------------------------------------------------------------------------------- 
-  23     Method DarlingDataManagementSystem\abstractions\component\SwitchableComponent::setSwitchable() has no return typehint specified.  
- ------ ---------------------------------------------------------------------------------------------------------------------------------- 
-
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/component/Template/UserInterface/StandardUITemplate.php                                                                                                             
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-  15     Property DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate::$types type has no value type specified in iterable type array.           
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                         
-  42     Method DarlingDataManagementSystem\abstractions\component\Template\UserInterface\StandardUITemplate::getTypes() return type has no value type specified in iterable type array.  
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                                                                                         
- ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-
  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
   Line   abstractions/component/UserInterface/ResponseUI.php                                                                                                                                                            
  ------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
@@ -294,5 +279,5 @@
          💡 You can turn this off by setting checkGenericClassInNonGenericObjectType: false in your phpstan.neon.                                                                               
  ------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 105 errors                                                                                               
+ [ERROR] Found 102 errors                                                                                               
 

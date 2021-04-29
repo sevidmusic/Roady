@@ -20,7 +20,7 @@ abstract class SwitchableComponent extends Component implements SwitchableCompon
         }
     }
 
-    private function setSwitchable(SwitchableInterface $switchable)
+    private function setSwitchable(SwitchableInterface $switchable): void
     {
         $this->switchable = $switchable;
     }

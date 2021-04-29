@@ -12,6 +12,9 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 abstract class StandardUITemplate extends SwitchableComponentBase implements StandardUITemplateInterface
 {
 
+    /**
+     * @var array<string, string> $types
+     */
     private array $types = [];
     private PositionableInterface $positionable;
 
@@ -39,6 +42,9 @@ abstract class StandardUITemplate extends SwitchableComponentBase implements Sta
         }
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getTypes(): array
     {
         return ($this->getState() === false ? [] : $this->types);
