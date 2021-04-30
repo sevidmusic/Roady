@@ -195,6 +195,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         );
     }
 
+    /**
+     * @return array{0: PrimaryFactoryInterface, 1: ComponentCrudInterface, 2: StoredComponentRegistryInterface}
+     */
     public static function buildConstructorArgs(RequestInterface $domain, AppInterface|null $app = null): array
     {
         return [
@@ -257,6 +260,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         float $position
     ): OutputComponentInterface
     {
+        if(is_null($this->outputComponentFactory)) {
+            throw new \RuntimeException(self::class . 'Error: outputComponentFactory was not initialized!');
+        }
         $oc = $this->outputComponentFactory->buildOutputComponent(
             $name,
             $container,
@@ -274,6 +280,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         OutputComponentInterface ...$types
     ): StandardUITemplateInterface
     {
+        if(is_null($this->standardUITemplateFactory)) {
+            throw new \RuntimeException(self::class . 'Error: standardUITemplateFactory was not initialized!');
+        }
         $suit = $this->standardUITemplateFactory->buildStandardUITemplate(
             $name,
             $container,
@@ -293,28 +302,37 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
 
     public function buildRequest(string $name, string $container, string $url): RequestInterface
     {
+        if(is_null($this->requestFactory)) {
+            throw new \RuntimeException(self::class . 'Error: requestFactory was not initialized!');
+        }
         $request = $this->requestFactory->buildRequest($name, $container, $url);
         $this->getStoredComponentRegistry()->registerComponent($request);
         return $request;
     }
 
-    public function buildResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): ResponseInterface // @todo As soon as Php 8 is in use, refactor to union type declaration: i.e Response | GlobalResponse
+    public function buildResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): ResponseInterface
     {
+        if(is_null($this->responseFactory)) {
+            throw new \RuntimeException(self::class . 'Error: responseFactory was not initialized!');
+        }
         $response = $this->responseFactory->buildResponse($name, $position);
-        return $this->configureResponse($response, $requestsOutputComponentsStandardUITemplates);
+        return $this->configureResponse($response, $componentsToAssign);
     }
 
     /**
      * @param ResponseInterface $response
-     * @param array $requestsOutputComponentsStandardUITemplates
+     * @param array<int, ComponentInterface> $componentsToAssign
      * @return ResponseInterface|GlobalResponseInterface
      */
-    private function configureResponse(ResponseInterface $response, array $requestsOutputComponentsStandardUITemplates = [])
+    private function configureResponse(ResponseInterface $response, array $componentsToAssign = []): ResponseInterface|GlobalResponseInterface
     {
+        if(is_null($this->responseFactory)) {
+            throw new \RuntimeException(self::class . 'Error: responseFactory was not initialized!');
+        }
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
             $response
         );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
+        foreach ($componentsToAssign as $component) {
             CoreResponseFactory::ifRequestAddStorageInfo($response, $component);
             CoreResponseFactory::ifStandardUITemplateAddStorageInfo($response, $component);
             CoreResponseFactory::ifOutputComponentAddStorageInfo($response, $component);
@@ -325,13 +343,19 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $response;
     }
 
-    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): GlobalResponseInterface
+    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): GlobalResponseInterface
     {
-        $globalResponse = $this->responseFactory->buildGlobalResponse($name, $position);
-        return $this->configureResponse($globalResponse, $requestsOutputComponentsStandardUITemplates);
+        if(is_null($this->responseFactory)) {
+            throw new \RuntimeException(self::class . 'Error: responseFactory was not initialized!');
+        }
+        /**
+         * @var GlobalResponseInterface $globalResponse
+         */
+        $globalResponse = $this->configureResponse($this->responseFactory->buildGlobalResponse($name, $position), $componentsToAssign);
+        return $globalResponse;
     }
 
-    public function buildLog($flags = 0): string
+    public function buildLog(int $flags = 0): string
     {
         $buildLog = "";
         foreach (
@@ -394,6 +418,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
 
     public function buildDynamicOutputComponent(string $name, string $container, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
     {
+        if(is_null($this->outputComponentFactory)) {
+            throw new \RuntimeException(self::class . 'Error: outputComponentFactory was not initialized!');
+        }
         $doc = $this->outputComponentFactory->buildDynamicOutputComponent(
             $name,
             $container,

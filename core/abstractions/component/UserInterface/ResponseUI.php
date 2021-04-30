@@ -5,6 +5,7 @@ namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
@@ -24,6 +25,9 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
         $this->router = $router;
     }
 
+    /**
+     * @return array<string, PositionableInterface>
+     */
     private function sortPositionables(PositionableInterface ...$postionables): array
     {
         $sorted = [];
@@ -52,18 +56,29 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
             ResponseInterface::RESPONSE_CONTAINER
         );
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        /**
+         * @var ResponseInterface $response
+         */
         foreach($sortedResponses as $response)
         {
             $outputComponents = [];
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
                 $component = $this->getRoutersComponentCrud()->read($storable);
-                if($component->getName() !== 'CoreComponent')
+                $classImplements = class_implements($component);
+                $isAnOutputComponent = (is_array($classImplements) ? in_array(OutputComponentInterface::class, $classImplements) : false);
+                if($isAnOutputComponent === true)
                 {
+                    /**
+                     * @var OutputComponentInterface $component
+                     */
                     array_push($outputComponents, $component);
                 }
             }
             $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            /**
+             * @var OutputComponentInterface $outputComponent
+             */
             foreach($sortedOutputComponents as $outputComponent)
             {
                 $expectedOutput .= $outputComponent->getOutput();

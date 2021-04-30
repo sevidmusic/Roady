@@ -12,5 +12,8 @@ interface StandardUITemplate extends SwitchableComponentInterface, PositionableI
 
     public function removeType(string $type): void;
 
+    /**
+     * @return array<string, string> $types
+     */
     public function getTypes(): array;
 }

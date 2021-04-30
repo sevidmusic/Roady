@@ -7,7 +7,7 @@ use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableI
 abstract class Classifiable implements ClassifiableInterface
 {
 
-    private $type;
+    private string $type;
 
     public function __construct()
     {

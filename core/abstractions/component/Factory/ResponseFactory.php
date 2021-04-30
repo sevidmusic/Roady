@@ -35,7 +35,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
     public function buildResponse(
         string $name,
         float $position,
-        ComponentInterface ...$requestsOutputComponentsStandardUITemplates
+        ComponentInterface ...$componentsToAssign
     ): ResponseInterface
     {
         $response = new CoreResponse(
@@ -46,13 +46,23 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)
         );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
+        foreach ($componentsToAssign as $component) {
             self::ifRequestAddStorageInfo($response, $component);
             self::ifStandardUITemplateAddStorageInfo($response, $component);
             self::ifOutputComponentAddStorageInfo($response, $component);
         }
         $this->storeAndRegister($response);
         return $response;
+    }
+
+    /**
+     * @param string|object $class
+     * @return array<string,string>
+     */
+    private static function classImplements(string|object $class): array
+    {
+        $classImplements = class_implements($class);
+        return (is_array($classImplements) ? $classImplements : []);
     }
 
     /**
@@ -64,9 +74,12 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         if (
             in_array(
                 RequestInterface::class,
-                class_implements($component)
+                self::classImplements($component)
             ) === true
         ) {
+            /**
+             * @var RequestInterface $component
+             */
             $response->addRequestStorageInfo($component);
         }
     }
@@ -80,9 +93,12 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         if (
             in_array(
                 StandardUITemplateInterface::class,
-                class_implements($component)
+                self::classImplements($component)
             ) === true
         ) {
+            /**
+             * @var StandardUITemplateInterface $component
+             */
             $response->addTemplateStorageInfo($component);
         }
     }
@@ -96,9 +112,12 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         if (
             in_array(
                 OutputComponentInterface::class,
-                class_implements($component)
+                self::classImplements($component)
             ) === true
         ) {
+            /**
+             * @var OutputComponentInterface $component
+             */
             $response->addOutputComponentStorageInfo($component);
         }
     }
@@ -106,7 +125,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
     public function buildGlobalResponse(
         string $name,
         float $position,
-        ComponentInterface ...$requestsOutputComponentsStandardUITemplates
+        ComponentInterface ...$componentsToAssign
     ): GlobalResponseInterface
     {
         $globalResponse = new CoreGlobalResponse(
@@ -122,7 +141,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
                 )
             ]
         );
-        foreach ($requestsOutputComponentsStandardUITemplates as $component) {
+        foreach ($componentsToAssign as $component) {
             self::ifRequestAddStorageInfo($globalResponse, $component);
             self::ifStandardUITemplateAddStorageInfo($globalResponse, $component);
             self::ifOutputComponentAddStorageInfo($globalResponse, $component);

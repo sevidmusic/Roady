@@ -28,7 +28,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
 
     private function mkdir(string $path): bool
     {
-        return $this->pathIsAvailable($path) ? mkdir($path, 0744, LOCK_SH) : false;
+        return $this->pathIsAvailable($path) ? mkdir($path, 0750, true) : false;
     }
 
     private function pathIsAvailable(string $path): bool
@@ -93,9 +93,15 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
     private function pack(ComponentInterface $component): string
     {
         $data = $component->export();
-        return json_encode($this->packObjectsInArray($data));
+        $jsonData = json_encode($this->packObjectsInArray($data));
+        return (is_string($jsonData) ? $jsonData : '[]');
     }
 
+    /**
+     * Recursively base64_encode() all objects in the $array.
+     * @param array<mixed> $array
+     * @return array<mixed>
+     */
     private function packObjectsInArray(array $array): array
     {
         foreach ($array as $key => $value) {
@@ -122,10 +128,14 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
             ) > 0);
     }
 
+    /**
+     * @return array<string, array<string, array<string, string>>>
+     */
     private function getStorageIndex(): array
     {
+        $data = file_get_contents($this->getStorageIndexFilePath());
         $storageIndex = json_decode(
-            file_get_contents($this->getStorageIndexFilePath()),
+            (is_string($data) ? $data : '[]'),
             true
         );
         return ((is_array($storageIndex) === true) ? $storageIndex : []);
@@ -161,6 +171,9 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
             ) > 0);
     }
 
+    /**
+     * @return array<ComponentInterface>
+     */
     public function readAll(string $location, string $container): array
     {
         $components = [];
@@ -177,13 +190,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
     public function read(StorableInterface $storable): ComponentInterface
     {
         if ($this->getState() === false) {
-            return new CoreComponent(
-                new CoreStorable(
-                    '__MOCK_COMPONENT__',
-                    '__MOCK_COMPONENT__',
-                    '__MOCK_COMPONENT__'
-                )
-            );
+            return $this->getStandardComponent();
         }
         if ($this->notStored($storable)) {
             return $this->getStandardComponent();
@@ -195,14 +202,19 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         $clone = $this->getClone($data['type']);
         $clone->import($this->unpack($data));
         /**
-         * !IMPORTANT: Clone's storable must match supplied storable.
-         * This MUST be the last thing done before returning!!!
-         * Note, since Components are StorableInterface, export MUST
-         * be used when handling actual components or the
-         * ComponentInterface passed to read as the StorableInterface will
-         * be assigned in it's entirety to the returned
-         * ComponentInterface's storable, which may not break the
-         * returned ComponentInterface, but will corrupt it's data.
+         * !IMPORTANT: Clone's storable must match supplied storable. This MUST
+         * be the last thing done before returning!!!
+         *
+         * Note: Since Components are Storables, Component->export()['stroable']
+         * MUST be used when handling actual Components or the Component passed
+         * as the $storabale parameter to read  will be assigned in it's entirety
+         * to the returned Component's storable, which may not break the returned
+         * Component, but will corrupt it's data.
+         *
+         * Put simply, if $storable is a Component, we dont want to assign it
+         * as the clone's $storable, we just want it's Storable.
+         *
+         * If $storable is just a Storable, than assign it to the clone as is.
          */
         switch ($this->isAComponent($storable)) {
             case true:
@@ -222,22 +234,41 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
     {
         return new CoreComponent(
             new CoreStorable(
-                'CoreComponent',
-                'StandardComponentLocation',
-                'StandardComponentContainer'
+                'DefaultComponent',
+                'DefaultComponent',
+                'DefaultComponent'
             )
         );
 
     }
 
-    private function getStoredData(StorableInterface $storable)
+    /**
+     * @param StorableInterface $storable
+     * @return array<mixed>
+     */
+    private function getStoredData(StorableInterface $storable): array
     {
-        return json_decode(file_get_contents($this->getStoragePath($storable)), true);
+        $storedData = file_get_contents($this->getStoragePath($storable));
+        $data = json_decode((is_string($storedData) ? $storedData : '[]'), true);
+        return (is_array($data) ? $data : []);
     }
 
-    private function dataIsCorrupted($data): bool
+    /**
+     * Determine if the $data is corrupted. The data will be determined to be
+     * corruted if either of the following is true:
+     *     1. $data['type'] is not set
+     *     2. $data['type'] does not implement the ComponentInterface
+     * @param array<mixed> $data
+     */
+    private function dataIsCorrupted(array $data): bool
     {
-        return (is_array($data) === false);
+        if(isset($data['type'])) {
+            $classImplements = class_implements($data['type']);
+            if(is_array($classImplements) && in_array(ComponentInterface::class, $classImplements)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private function getClone(string $type): ComponentInterface
@@ -252,11 +283,20 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         );
     }
 
+    /**
+     * @param array<mixed> $data
+     * @return array<mixed>
+     */
     private function unpack(array $data): array
     {
         return $this->unPackObjectsInArray($data);
     }
 
+    /**
+     * Recursivly base64 decode base64 encoded data in the $array.
+     * @param array<mixed> $array
+     * @return array<mixed>
+     */
     private function unPackObjectsInArray(array $array): array
     {
         foreach ($array as $key => $value) {
@@ -284,7 +324,8 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
 
     private function isAComponent(StorableInterface $storable): bool
     {
-        return in_array(ComponentInterface::class, class_implements($storable));
+        $classImplements = class_implements($storable);
+        return in_array(ComponentInterface::class, (is_array($classImplements) ? $classImplements : []));
     }
 
 }

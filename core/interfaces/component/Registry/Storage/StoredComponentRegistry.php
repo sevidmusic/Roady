@@ -17,8 +17,14 @@ interface StoredComponentRegistry extends ComponentInterface
 
     public function unRegisterComponent(StorableInterface $storable): bool;
 
+    /**
+     * @return array <int, ComponentInterface>
+     */
     public function getRegisteredComponents(): array;
 
+    /**
+     * @return array<int, StorableInterface>
+     */
     public function getRegistry(): array;
 
     public function emptyRegistry(): void;

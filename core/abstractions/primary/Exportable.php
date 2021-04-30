@@ -38,11 +38,14 @@ EOD;
         $this->setReflectionUtility(new CoreReflectionUtility());
     }
 
-    private function setReflectionUtility(ReflectionUtilityInterface $reflectionUtility)
+    private function setReflectionUtility(ReflectionUtilityInterface $reflectionUtility): void
     {
         $this->reflectionUtility = $reflectionUtility;
     }
 
+    /**
+     * @param array<mixed> $export
+     */
     public function import(array $export): bool
     {
         foreach ($export as $propertyName => $propertyValue) {
@@ -56,6 +59,11 @@ EOD;
         return ($export === $this->export());
     }
 
+    /**
+     * @param ReflectionClass<object> $reflection
+     * @param string $propertyName
+     * @return ReflectionProperty
+     */
     private function getReflectedProperty(ReflectionClass $reflection, string $propertyName): ReflectionProperty
     {
         try {
@@ -92,6 +100,9 @@ EOD;
         return $this->reflectionUtility;
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function export(): array
     {
         return $this->getReflectionUtility()->getClassPropertyValues($this);

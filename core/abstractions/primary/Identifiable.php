@@ -31,7 +31,8 @@ EOD;
     private function generateUniqueId(): string
     {
         try {
-            return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(512));
+            $uid = preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(512));
+            return (is_string($uid) ? $uid : str_shuffle(strval(rand(PHP_INT_MIN, PHP_INT_MAX))));
         } catch (Exception $e) {
             $this->log(self::RANDOM_BYTES_FAILED);
         }

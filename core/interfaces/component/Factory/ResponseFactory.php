@@ -10,8 +10,8 @@ use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as Res
 interface ResponseFactory extends StoredComponentFactoryInterface
 {
 
-    public function buildResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): ResponseInterface;
+    public function buildResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): ResponseInterface;
 
-    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$requestsOutputComponentsStandardUITemplates): GlobalResponseInterface;
+    public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): GlobalResponseInterface;
 
 }

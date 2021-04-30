@@ -8,7 +8,7 @@ trait Logger
 {
     private bool $logging = false;
 
-    protected function log($sprintFormattedMessage, string ...$sprints)
+    protected function log(string $sprintFormattedMessage, string ...$sprints): void
     {
         if ($this->logging === true) {
             $msgArr = [$sprintFormattedMessage];

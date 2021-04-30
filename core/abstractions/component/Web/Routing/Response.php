@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+<?php
 
 namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 
@@ -18,8 +18,19 @@ use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInter
 abstract class Response extends SwitchableComponentBase implements ResponseInterface
 {
 
+    /**
+     * @var array<int, StorableInterface> $outputComponentStorageInfo
+     */
     private array $outputComponentStorageInfo = array();
+
+    /**
+     * @var array<int, StorableInterface> $templateStorageInfo
+     */
     private array  $templateStorageInfo = array();
+
+    /**
+     * @var array<int, StorableInterface> $requestStorageInfo
+     */
     private array  $requestStorageInfo = array();
     private PositionableInterface  $positionable;
 
@@ -41,6 +52,9 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
             if ($this->isARequest($storedRequest) === false) {
                 continue;
             }
+            /**
+             * @var RequestInterface $storedRequest
+             */
             if ($request->getUrl() === $storedRequest->getUrl()) {
                 return true;
             }
@@ -48,6 +62,9 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         return false;
     }
 
+    /**
+     * @return array<int, StorableInterface>
+     */
     public function getRequestStorageInfo(): array
     {
         return ($this->getState() === false ? [] : $this->requestStorageInfo);
@@ -55,8 +72,12 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
 
     private function isARequest(ComponentInterface $component): bool
     {
+        $classImplements = class_implements($component);
         return (
-        in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Request', class_implements($component)) === false
+            in_array(
+                'DarlingDataManagementSystem\interfaces\component\Web\Routing\Request',
+                (is_array($classImplements) ? $classImplements : [])
+            ) === false
             ? false
             : true
         );
@@ -91,6 +112,9 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         return (count($this->requestStorageInfo) > $initialCount);
     }
 
+    /**
+     * @return array<int, StorableInterface>
+     */
     public function getOutputComponentStorageInfo(): array
     {
         return ($this->getState() === false ? [] : $this->outputComponentStorageInfo);
@@ -129,6 +153,9 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
 
     }
 
+    /**
+     * @return array<int, StorableInterface>
+     */
     public function getTemplateStorageInfo(): array
     {
         return ($this->getState() === false ? [] : $this->templateStorageInfo);

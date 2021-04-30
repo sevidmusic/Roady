@@ -2,6 +2,8 @@
 
 namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI as StandardUIInterface;
@@ -15,7 +17,13 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
 {
 
     private RouterInterface $router;
+    /**
+     * @var array<string, array<string, StandardUITemplateInterface>> $templates
+     */
     private array $templates = [];
+    /**
+     * @var array<string, array<string, array<string, OutputComponentInterface>>> $outputComponents
+     */
     private array $outputComponents = [];
     private string $appLocation;
 
@@ -50,6 +58,9 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
         return parent::getOutput();
     }
 
+    /**
+     * @return array<string, array<string, StandardUITemplateInterface>>
+     */
     public function getTemplatesAssignedToResponses(): array
     {
         if (empty($this->templates) === true) {
@@ -59,13 +70,14 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
                     $response->increasePosition();
                 }
                 foreach ($response->getTemplateStorageInfo() as $templateStorable) {
+                    /**
+                     * @var StandardUITemplateInterface $template
+                     */
                     $template = $this->router->getCrud()->read($templateStorable);
-                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     while (isset($templates[strval($response->getPosition())][strval($template->getPosition())]) === true) {
                         /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                         $template->increasePosition();
                     }
-                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     $templates[strval($response->getPosition())][strval($template->getPosition())] = $template;
                 }
             }
@@ -74,6 +86,10 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
         return $this->templates;
     }
 
+
+    /**
+     * @return array<string, array<string, array<string, OutputComponentInterface>>>
+     */
     public function getOutputComponentsAssignedToResponses(): array
     {
         if (empty($this->outputComponents) === true) {
@@ -83,13 +99,13 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
                     $response->increasePosition();
                 }
                 foreach ($response->getOutputComponentStorageInfo() as $outputComponentStorable) {
+                    /**
+                     * @var OutputComponentInterface $outputComponent
+                     */
                     $outputComponent = $this->router->getCrud()->read($outputComponentStorable);
-                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     while (isset($outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())]) === true) {
-                        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                         $outputComponent->increasePosition();
                     }
-                    /** @noinspection PhpPossiblePolymorphicInvocationInspection */
                     $outputComponents[strval($response->getPosition())][$outputComponent->getType()][strval($outputComponent->getPosition())] = $outputComponent;
                     ksort($outputComponents[strval($response->getPosition())][$outputComponent->getType()]);
                 }

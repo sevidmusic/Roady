@@ -6,19 +6,53 @@ use ReflectionClass;
 
 interface ReflectionUtility
 {
-    public function getClassPropertyNames($class): array;
+    /**
+     * @param class-string<object>|object $class
+     * @return array<int, string>
+     */
+    public function getClassPropertyNames(string|object $class): array;
 
-    public function getClassPropertyTypes($class): array;
+    /**
+     * @param class-string<object>|object $class
+     * @return array<int|string, string>
+     */
+    public function getClassPropertyTypes(string|object $class): array;
 
-    public function getClassPropertyValues($class): array;
+    /**
+     * @param class-string<object>|object $class
+     * @return array<mixed>
+     */
+    public function getClassPropertyValues(string|object $class): array;
 
-    public function getClassInstance($class, array $constructorArguments = array());
+    /**
+     * @param class-string<object>|object $class
+     * @param array<mixed> $constructorArguments
+     * @return object
+     */
+    public function getClassInstance(string|object $class, array $constructorArguments = array());
 
-    public function getClassMethodParameterNames($class, string $method): array;
+    /**
+     * @param class-string<object>|object $class
+     * @return array<int, string>
+     */
+    public function getClassMethodParameterNames(string|object $class, string $method): array;
 
-    public function getClassMethodParameterTypes($class, string $method): array;
+    /**
+     * @param class-string<object>|object $class
+     * @return array<int, string>
+     */
+    public function getClassMethodParameterTypes(string|object $class, string $method): array;
 
-    public function generateMockClassMethodArguments($class, string $method): array;
+    /**
+     * @param class-string<object>|object $class
+     * @param string $method
+     * @return array<mixed>
+     */
+    public function generateMockClassMethodArguments(string|object $class, string $method): array;
 
-    public function getClassReflection($class): ReflectionClass;
+    /**
+     * @param class-string<object>|object $class
+     * @return ReflectionClass<object>
+     */
+    public function getClassReflection(string|object $class): ReflectionClass;
 }
