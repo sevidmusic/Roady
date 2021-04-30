@@ -1,40 +1,4 @@
  ------ ---------------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/utility/ReflectionUtility.php                                                                            
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  147    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance() has parameter           
-         $constructorArguments with no value type specified in iterable type array.                                            
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  147    PHPDoc tag @param has invalid value (array<mixed>): Unexpected token "\n     ", expected variable at offset 79        
-  158    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateMockClassMethodArguments() return  
-         type has no value type specified in iterable type array.                                                              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  188    Parameter #1 $class of method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance()  
-         expects class-string<object>|object, string given.                                                                    
-  193    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterTypes() return      
-         type has no value type specified in iterable type array.                                                              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  206    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodReflection() has no return   
-         typehint specified.                                                                                                   
-  246    Call to an undefined method ReflectionType::getName().                                                                
-  249    Method                                                                                                                
-         DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::convertReflectionTypeStringToGettypeString() has  
-         no return typehint specified.                                                                                         
-  266    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateRandomAlphaNumString() should      
-         return string but returns string|null.                                                                                
-  274    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyValues() return type has   
-         no value type specified in iterable type array.                                                                       
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  277    Parameter #1 $class of method                                                                                         
-         DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyReflections() expects             
-         class-string<object>|object, object|string given.                                                                     
-  281    Parameter #1 $class of method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance()  
-         expects class-string<object>|object, string given.                                                                    
-  288    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterNames() return      
-         type has no value type specified in iterable type array.                                                              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-
- ------ ---------------------------------------------------------------------------------------------------------------------- 
   Line   dev/traits/Logger.php (in context of class DarlingDataManagementSystem\abstractions\primary\Exportable)               
  ------ ---------------------------------------------------------------------------------------------------------------------- 
   11     Method DarlingDataManagementSystem\abstractions\primary\Exportable::log() has no return typehint specified.           
@@ -190,5 +154,5 @@
          phpstan.neon.                                                                                                         
  ------ ---------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 44 errors                                                                                                
+ [ERROR] Found 31 errors                                                                                                
 
