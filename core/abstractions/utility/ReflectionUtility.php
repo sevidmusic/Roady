@@ -9,6 +9,7 @@ use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
 use ReflectionParameter;
+use ReflectionNamedType;
 
 abstract class ReflectionUtility implements ReflectionUtilityInterface
 {
@@ -142,7 +143,8 @@ EOD;
     }
     /**
      * @param class-string<object>|object $class
-     * @param array<mixed>
+     * @param array<mixed> $constructorArguments
+     * @return object
      */
     public function getClassInstance(string|object $class, array $constructorArguments = array()): object
     {
@@ -155,6 +157,11 @@ EOD;
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
     }
 
+    /**
+     * @param class-string<object>|object $class
+     * @param string $method
+     * @return array<mixed>
+     */
     public function generateMockClassMethodArguments(string|object $class, string $method): array
     {
         $defaults = array();
@@ -183,13 +190,19 @@ EOD;
                 array_push($defaults, null);
                 continue;
             }
-            /** For unknown types assume class instance. */
-            $type = str_replace(['DarlingDataManagementSystem\interfaces'], ['DarlingDataManagementSystem\classes'], $type);
-            array_push($defaults, $this->getClassInstance('\\' . $type));
+            /**
+             * For unknown types assume class instance.
+             * @var class-string<object>|object $type
+             */
+            $type = '\\' . str_replace(['DarlingDataManagementSystem\interfaces'], ['DarlingDataManagementSystem\classes'], $type);
+            array_push($defaults, $this->getClassInstance($type));
         }
         return $defaults;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getClassMethodParameterTypes(string|object $class, string $method): array
     {
         $parameterTypes = array();
@@ -203,7 +216,7 @@ EOD;
         return $parameterTypes;
     }
 
-    private function getClassMethodReflection(string|object $class, string $methodName)
+    private function getClassMethodReflection(string|object $class, string $methodName): ReflectionMethod|null
     {
         if (method_exists($class, $methodName) === false) {
             $this->log(self::METHOD_DOES_NOT_EXIST,
@@ -242,11 +255,20 @@ EOD;
         if (is_null($reflectionParameter->getType()) === true) {
             return self::NULL;
         }
-        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-        return $this->convertReflectionTypeStringToGettypeString($reflectionParameter->getType()->getName());
+        $type = $reflectionParameter->getType();
+        /**
+         * @var ReflectionNamedType $type
+         * Note:
+         *   ReflectionType::__toString() was deprecated in PHP 7.1.0,
+         *   ReflectionParameter::getType() now returns an instance of
+         *   ReflectionNamedType.
+         *   @see https://www.php.net/manual/en/class.reflectionnamedtype.php.
+         *   @see https://www.php.net/manual/en/class.reflectionnamedtype.php
+         */
+        return $this->convertReflectionTypeStringToGettypeString($type->getName());
     }
 
-    private function convertReflectionTypeStringToGettypeString(string $type)
+    private function convertReflectionTypeStringToGettypeString(string $type): string
     {
         if ($type === 'bool') {
             return self::BOOLEAN;
@@ -263,7 +285,15 @@ EOD;
     private function generateRandomAlphaNumString(): string
     {
         try {
-            return preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
+            $randomAplhaNumChars = preg_replace("/[^a-zA-Z0-9]+/", "", random_bytes(12));
+            return (
+                is_string($randomAplhaNumChars)
+                ? $randomAplhaNumChars
+                : str_shuffle(
+                    'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz' .
+                    strval(rand(PHP_INT_MIN, PHP_INT_MAX))
+                )
+            );
         } catch (Exception $e) {
             $this->log(self::RANDOM_BYTES_FAILED
             );
@@ -271,6 +301,10 @@ EOD;
         }
     }
 
+    /**
+     * @param class-string<object>|object $class
+     * @return array<mixed>
+     */
     public function getClassPropertyValues(string|object $class): array
     {
         $propertyValues = array();
@@ -285,6 +319,9 @@ EOD;
         return $propertyValues;
     }
 
+    /**
+     * @return array<int, string>
+     */
     public function getClassMethodParameterNames(string|object $class, string $method): array
     {
         $parameterNames = array();
