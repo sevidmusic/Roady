@@ -64,7 +64,11 @@ EOD;
     const ARRAY1 = 'array';
     const NULL = 'NULL';
 
-    public function getClassPropertyNames($class): array
+    /**
+     * @param class-string<object>|object $class
+     * @return array<int, string>
+     */
+    public function getClassPropertyNames(string|object $class): array
     {
         $propertyNames = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
@@ -73,12 +77,12 @@ EOD;
         return array_unique($propertyNames);
     }
 
-    /** @noinspection DuplicatedCode */
-    private function getClassPropertyReflections($class): array
+    /**
+     * @param class-string<object>|object $class
+     * @return array<mixed>
+     */
+    private function getClassPropertyReflections(string|object $class): array
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
-            return array();
-        }
         $selfReflection = $this->getClassReflection($class);
         if ($selfReflection->getParentClass() === false) {
             return $selfReflection->getProperties();
@@ -91,20 +95,11 @@ EOD;
         return $propertyReflections;
     }
 
-    private function classParameterIsValidClassNameOrClassInstance($class, string $caller): bool
-    {
-        if (is_string($class) === false && is_object($class) === false) {
-            $this->log(
-                self::INVALID_CLASS_PARAMETER,
-                gettype($class),
-                $caller
-            );
-            return false;
-        }
-        return true;
-    }
-
-    public function getClassReflection($class): ReflectionClass
+    /**
+     * @param class-string<object>|object $class
+     * @return ReflectionClass<object>
+     */
+    public function getClassReflection(string|object $class): ReflectionClass
     {
         try {
             return new ReflectionClass($class);
@@ -125,12 +120,16 @@ EOD;
         }
     }
 
-    private function getClass($class): string
+    private function getClass(string|object $class): string
     {
         return (is_string($class) ? $class : get_class($class));
     }
 
-    public function getClassPropertyTypes($class): array
+    /**
+     * @param class-string<object>|object $class
+     * @return array<int|string, string>
+     */
+    public function getClassPropertyTypes(string|object $class): array
     {
         $propertyTypes = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
@@ -141,12 +140,12 @@ EOD;
         }
         return $propertyTypes;
     }
-
-    public function getClassInstance($class, array $constructorArguments = array())
+    /**
+     * @param class-string<object>|object $class
+     * @param array<mixed>
+     */
+    public function getClassInstance(string|object $class, array $constructorArguments = array()): object
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
-            return (object)[];
-        }
         if (method_exists($class, self::CONSTRUCT) === false) {
             return $this->getClassReflection($class)->newInstanceArgs([]);
         }
@@ -156,7 +155,7 @@ EOD;
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
     }
 
-    public function generateMockClassMethodArguments($class, string $method): array
+    public function generateMockClassMethodArguments(string|object $class, string $method): array
     {
         $defaults = array();
         foreach ($this->getClassMethodParameterTypes($class, $method) as $type) {
@@ -191,7 +190,7 @@ EOD;
         return $defaults;
     }
 
-    public function getClassMethodParameterTypes($class, string $method): array
+    public function getClassMethodParameterTypes(string|object $class, string $method): array
     {
         $parameterTypes = array();
         $methodReflection = $this->getClassMethodReflection($class, $method);
@@ -204,11 +203,8 @@ EOD;
         return $parameterTypes;
     }
 
-    private function getClassMethodReflection($class, string $methodName)
+    private function getClassMethodReflection(string|object $class, string $methodName)
     {
-        if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
-            return null;
-        }
         if (method_exists($class, $methodName) === false) {
             $this->log(self::METHOD_DOES_NOT_EXIST,
                 $methodName,
@@ -219,7 +215,7 @@ EOD;
         return $this->getMethodReflection($class, $methodName);
     }
 
-    private function getMethodReflection($class, string $methodName): ReflectionMethod
+    private function getMethodReflection(string|object $class, string $methodName): ReflectionMethod
     {
         try {
             return new ReflectionMethod($this->getClass($class), $methodName);
@@ -275,7 +271,7 @@ EOD;
         }
     }
 
-    public function getClassPropertyValues($class): array
+    public function getClassPropertyValues(string|object $class): array
     {
         $propertyValues = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
@@ -289,7 +285,7 @@ EOD;
         return $propertyValues;
     }
 
-    public function getClassMethodParameterNames($class, string $method): array
+    public function getClassMethodParameterNames(string|object $class, string $method): array
     {
         $parameterNames = array();
         $methodReflection = $this->getClassMethodReflection($class, $method);

@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+<?php
 
 namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
 

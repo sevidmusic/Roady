@@ -4,10 +4,9 @@ namespace DarlingDataManagementSystem\abstractions\primary;
 
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
-// @todo Need to define test that tests that position property's value is an int/whole number after instantiation
 abstract class Positionable implements PositionableInterface
 {
-    private $position;
+    private int|float $position;
 
     public function __construct(float $initialPosition = 0)
     {

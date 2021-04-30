@@ -116,6 +116,9 @@ trait StoredComponentFactoryTestTrait
     public function testStoreAndRegisterReturnsTrueIfComponentWasStored(): void
     {
         $reflectionUtility = new CoreReflectionUtility();
+        /**
+         * @var class-string<object>|object $class
+         */
         $class = str_replace('interfaces', 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
         /**
          *
@@ -168,6 +171,9 @@ trait StoredComponentFactoryTestTrait
     public function testStoreAndRegisterReturnsTrueIfComponentWasRegistered(): void
     {
         $reflectionUtility = new CoreReflectionUtility();
+        /**
+         * @var class-string<object>|object $class
+         */
         $class = str_replace('interfaces', 'classes', $this->getMockStoredComponentRegistry()->getAcceptedImplementation());
         /**
          * @var ComponentInterface $mockInstance

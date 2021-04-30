@@ -1,82 +1,35 @@
- ------ ------------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/primary/Identifiable.php                                                                              
- ------ ------------------------------------------------------------------------------------------------------------------- 
-  34     Method DarlingDataManagementSystem\abstractions\primary\Identifiable::generateUniqueId() should return string but  
-         returns string|null.                                                                                               
- ------ ------------------------------------------------------------------------------------------------------------------- 
-
- ------ -------------------------------------------------------------------------------------------------------------- 
-  Line   abstractions/primary/Positionable.php                                                                         
- ------ -------------------------------------------------------------------------------------------------------------- 
-  10     Property DarlingDataManagementSystem\abstractions\primary\Positionable::$position has no typehint specified.  
- ------ -------------------------------------------------------------------------------------------------------------- 
-
  ------ ---------------------------------------------------------------------------------------------------------------------- 
   Line   abstractions/utility/ReflectionUtility.php                                                                            
  ------ ---------------------------------------------------------------------------------------------------------------------- 
-  67     Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyNames() has parameter      
-         $class with no typehint specified.                                                                                    
-  67     Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyNames() return type has    
-         no value type specified in iterable type array.                                                                       
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  77     Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyReflections() has          
-         parameter $class with no typehint specified.                                                                          
-  77     Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyReflections() return type  
-         has no value type specified in iterable type array.                                                                   
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  94     Method                                                                                                                
-         DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::classParameterIsValidClassNameOrClassInstance()   
-         has parameter $class with no typehint specified.                                                                      
-  107    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassReflection() has parameter $class  
-         with no typehint specified.                                                                                           
-  107    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassReflection() return type with      
-         generic class ReflectionClass does not specify its types: T                                                           
-         💡 You can turn this off by setting checkGenericClassInNonGenericObjectType: false in your                             
-         phpstan.neon.                                                                                                         
-  128    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClass() has parameter $class with no    
-         typehint specified.                                                                                                   
-  133    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyTypes() has parameter      
-         $class with no typehint specified.                                                                                    
-  133    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyTypes() return type has    
-         no value type specified in iterable type array.                                                                       
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  145    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance() has no return typehint  
-         specified.                                                                                                            
-  145    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance() has parameter $class    
-         with no typehint specified.                                                                                           
-  145    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance() has parameter           
+  147    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance() has parameter           
          $constructorArguments with no value type specified in iterable type array.                                            
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  159    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateMockClassMethodArguments() has     
-         parameter $class with no typehint specified.                                                                          
-  159    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateMockClassMethodArguments() return  
+  147    PHPDoc tag @param has invalid value (array<mixed>): Unexpected token "\n     ", expected variable at offset 79        
+  158    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateMockClassMethodArguments() return  
          type has no value type specified in iterable type array.                                                              
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  194    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterTypes() has         
-         parameter $class with no typehint specified.                                                                          
-  194    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterTypes() return      
+  188    Parameter #1 $class of method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance()  
+         expects class-string<object>|object, string given.                                                                    
+  193    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterTypes() return      
          type has no value type specified in iterable type array.                                                              
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  207    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodReflection() has no return   
+  206    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodReflection() has no return   
          typehint specified.                                                                                                   
-  207    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodReflection() has parameter   
-         $class with no typehint specified.                                                                                    
-  222    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getMethodReflection() has parameter        
-         $class with no typehint specified.                                                                                    
-  250    Call to an undefined method ReflectionType::getName().                                                                
-  253    Method                                                                                                                
+  246    Call to an undefined method ReflectionType::getName().                                                                
+  249    Method                                                                                                                
          DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::convertReflectionTypeStringToGettypeString() has  
          no return typehint specified.                                                                                         
-  270    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateRandomAlphaNumString() should      
+  266    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::generateRandomAlphaNumString() should      
          return string but returns string|null.                                                                                
-  278    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyValues() has parameter     
-         $class with no typehint specified.                                                                                    
-  278    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyValues() return type has   
+  274    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyValues() return type has   
          no value type specified in iterable type array.                                                                       
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  292    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterNames() has         
-         parameter $class with no typehint specified.                                                                          
-  292    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterNames() return      
+  277    Parameter #1 $class of method                                                                                         
+         DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassPropertyReflections() expects             
+         class-string<object>|object, object|string given.                                                                     
+  281    Parameter #1 $class of method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassInstance()  
+         expects class-string<object>|object, string given.                                                                    
+  288    Method DarlingDataManagementSystem\abstractions\utility\ReflectionUtility::getClassMethodParameterNames() return      
          type has no value type specified in iterable type array.                                                              
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
  ------ ---------------------------------------------------------------------------------------------------------------------- 
@@ -208,50 +161,34 @@
  ------ ---------------------------------------------------------------------------------------------------------------------- 
   Line   interfaces/utility/ReflectionUtility.php                                                                              
  ------ ---------------------------------------------------------------------------------------------------------------------- 
-  9      Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyNames() has parameter        
-         $class with no typehint specified.                                                                                    
   9      Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyNames() return type has no   
          value type specified in iterable type array.                                                                          
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  11     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyTypes() has parameter        
-         $class with no typehint specified.                                                                                    
   11     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyTypes() return type has no   
          value type specified in iterable type array.                                                                          
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  13     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyValues() has parameter       
-         $class with no typehint specified.                                                                                    
   13     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyValues() return type has no  
          value type specified in iterable type array.                                                                          
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
   15     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassInstance() has no return typehint    
          specified.                                                                                                            
-  15     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassInstance() has parameter $class      
-         with no typehint specified.                                                                                           
   15     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassInstance() has parameter             
          $constructorArguments with no value type specified in iterable type array.                                            
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  17     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassMethodParameterNames() has           
-         parameter $class with no typehint specified.                                                                          
   17     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassMethodParameterNames() return type   
          has no value type specified in iterable type array.                                                                   
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  19     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassMethodParameterTypes() has           
-         parameter $class with no typehint specified.                                                                          
   19     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassMethodParameterTypes() return type   
          has no value type specified in iterable type array.                                                                   
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  21     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::generateMockClassMethodArguments() has       
-         parameter $class with no typehint specified.                                                                          
   21     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::generateMockClassMethodArguments() return    
          type has no value type specified in iterable type array.                                                              
          💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  23     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassReflection() has parameter $class    
-         with no typehint specified.                                                                                           
   23     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassReflection() return type with        
          generic class ReflectionClass does not specify its types: T                                                           
          💡 You can turn this off by setting checkGenericClassInNonGenericObjectType: false in your                             
          phpstan.neon.                                                                                                         
  ------ ---------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 68 errors                                                                                                
+ [ERROR] Found 44 errors                                                                                                
 
