@@ -14,6 +14,9 @@ interface StorageDriver extends SwitchableComponentInterface
 
     public function delete(StorableInterface $storable): bool;
 
+    /**
+     * @return array<ComponentInterface>
+     */
     public function readAll(string $location, string $container): array;
 
 }

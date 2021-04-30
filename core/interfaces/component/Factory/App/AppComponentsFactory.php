@@ -16,6 +16,9 @@ interface AppComponentsFactory extends StoredComponentFactoryInterface, OutputCo
     public const SHOW_LOG = 2;
     public const SAVE_LOG = 4;
 
+    /**
+     * @return array<mixed>
+     */
     public static function buildConstructorArgs(RequestInterface $domain, AppInterface|null $app = null): array;
 
     public static function buildDomain(string $url): RequestInterface;

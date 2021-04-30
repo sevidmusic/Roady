@@ -17,6 +17,9 @@ interface ComponentCrud extends SwitchableComponentInterface
 
     public function delete(StorableInterface $storable): bool;
 
+    /**
+     * @return array<ComponentInterface>
+     */
     public function readAll(string $location, string $container): array;
 
     public function readByNameAndType(string $name, string $type, string $location, string $container): ComponentInterface;
