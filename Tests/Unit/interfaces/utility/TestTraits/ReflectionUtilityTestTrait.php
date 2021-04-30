@@ -64,7 +64,7 @@ EOD;
     private ReflectionUtilityInterface $reflectionUtility;
 
     /**
-     * @var class-string<object>|object|string
+     * @var class-string<object>|object
      */
     private $classToReflect;
     private string  $booleanType = 'boolean';
@@ -85,10 +85,13 @@ EOD;
     }
 
     /**
-     * @return class-string<object>|object|string
+     * @return class-string<object>|object
      */
-    private function getRandomClassInstanceOrFullyQualifiedClassname()
+    private function getRandomClassInstanceOrFullyQualifiedClassname():string|object
     {
+        /**
+         * @var array<int, class-string<object>|object> $testClasses
+         */
         $testClasses = array(
             new Baz(),
             new Bazzer(),
@@ -124,7 +127,7 @@ EOD;
 
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return array<string>
      */
     public function getClassPropertyNames($class): array
@@ -138,7 +141,7 @@ EOD;
 
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return array<mixed>
      *
      */
@@ -202,7 +205,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      */
     private function getClass($class): string
     {
@@ -210,7 +213,7 @@ EOD;
     }
 
     /**
-     * @return class-string<object>|object|string
+     * @return class-string<object>|object
      */
     private function getClassToReflect()
     {
@@ -236,7 +239,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return array<int|string, string>
      */
     public function getClassPropertyTypes($class): array
@@ -252,7 +255,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @param array<mixed> $constructorArguments
      * @return ReflectionClass<object>|object
      */
@@ -274,7 +277,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return array<mixed>
      */
     public function generateMockClassMethodArguments($class, string $method): array
@@ -305,14 +308,18 @@ EOD;
                 array_push($defaults, null);
                 continue;
             }
+            /**
+             * @var class-string<object> $type
+             */
+            $type = '\\' . $type;
             /** For unknown types assume class instance. */
-            array_push($defaults, $this->getClassInstance('\\' . $type));
+            array_push($defaults, $this->getClassInstance($type));
         }
         return $defaults;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return array<int, string>
      */
     public function getClassMethodParameterTypes($class, string $method): array
@@ -329,7 +336,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return null|ReflectionMethod
      */
     private function getClassMethodReflection($class, string $methodName): null|ReflectionMethod
@@ -345,7 +352,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return ReflectionMethod
      */
     private function getMethodReflection($class, string $methodName): ReflectionMethod
@@ -446,7 +453,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      */
     private function getFullyQualifiedClassname($class): string
     {
@@ -488,7 +495,7 @@ EOD;
     }
 
     /**
-     * @param class-string<object>|object|string $class
+     * @param class-string<object>|object $class
      * @return array<int, string>
      */
     public function getClassMethodParameterNames($class, string $method): array

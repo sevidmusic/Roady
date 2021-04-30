@@ -1,34 +1,3 @@
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  Line   interfaces/utility/ReflectionUtility.php                                                                              
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  9      Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyNames() return type has no   
-         value type specified in iterable type array.                                                                          
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  11     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyTypes() return type has no   
-         value type specified in iterable type array.                                                                          
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  13     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassPropertyValues() return type has no  
-         value type specified in iterable type array.                                                                          
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  15     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassInstance() has no return typehint    
-         specified.                                                                                                            
-  15     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassInstance() has parameter             
-         $constructorArguments with no value type specified in iterable type array.                                            
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  17     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassMethodParameterNames() return type   
-         has no value type specified in iterable type array.                                                                   
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  19     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassMethodParameterTypes() return type   
-         has no value type specified in iterable type array.                                                                   
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  21     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::generateMockClassMethodArguments() return    
-         type has no value type specified in iterable type array.                                                              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  23     Method DarlingDataManagementSystem\interfaces\utility\ReflectionUtility::getClassReflection() return type with        
-         generic class ReflectionClass does not specify its types: T                                                           
-         💡 You can turn this off by setting checkGenericClassInNonGenericObjectType: false in your                             
-         phpstan.neon.                                                                                                         
- ------ ---------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 9 errors                                                                                                 
+ [OK] No errors                                                                                                         
 
