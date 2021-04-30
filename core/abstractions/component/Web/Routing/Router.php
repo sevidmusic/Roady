@@ -31,6 +31,9 @@ abstract class Router extends SwitchableComponentBase implements RouterInterface
         return ResponseInterface::RESPONSE_CONTAINER;
     }
 
+    /**
+     * @return array<int, ResponseInterface>
+     */
     public function getResponses(string $location, string $container): array
     {
         if ($this->getState() === false) {
@@ -53,14 +56,15 @@ abstract class Router extends SwitchableComponentBase implements RouterInterface
         return $this->crud;
     }
 
-    private function isValidResponse($response): bool
+    private function isValidResponse(mixed $response): bool
     {
+        $classImplements = class_implements($response);
         return (
             is_object($response)
             &&
             in_array(
                 'DarlingDataManagementSystem\interfaces\component\Web\Routing\Response',
-                class_implements($response)
+                (is_array($classImplements) ? $classImplements : [])
             )
         );
     }
