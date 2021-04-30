@@ -1,59 +1,3 @@
- ------ --------------------------------------------------------------------------------------------------------------------- 
-  Line   interfaces/component/UserInterface/StandardUI.php                                                                    
- ------ --------------------------------------------------------------------------------------------------------------------- 
-  10     Method DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI::getTemplatesAssignedToResponses()  
-         return type has no value type specified in iterable type array.                                                      
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                             
-  12     Method                                                                                                               
-         DarlingDataManagementSystem\interfaces\component\UserInterface\StandardUI::getOutputComponentsAssignedToResponses()  
-         return type has no value type specified in iterable type array.                                                      
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                             
- ------ --------------------------------------------------------------------------------------------------------------------- 
-
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  Line   interfaces/component/Web/Routing/Request.php                                                                          
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  10     Method DarlingDataManagementSystem\interfaces\component\Web\Routing\Request::getGet() return type has no value type   
-         specified in iterable type array.                                                                                     
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  12     Method DarlingDataManagementSystem\interfaces\component\Web\Routing\Request::getPost() return type has no value type  
-         specified in iterable type array.                                                                                     
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  Line   interfaces/component/Web/Routing/Response.php                                                                         
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-  19     Method DarlingDataManagementSystem\interfaces\component\Web\Routing\Response::getRequestStorageInfo() return type     
-         has no value type specified in iterable type array.                                                                   
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  27     Method DarlingDataManagementSystem\interfaces\component\Web\Routing\Response::getOutputComponentStorageInfo() return  
-         type has no value type specified in iterable type array.                                                              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
-  33     Method DarlingDataManagementSystem\interfaces\component\Web\Routing\Response::getTemplateStorageInfo() return type    
-         has no value type specified in iterable type array.                                                                   
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                              
- ------ ---------------------------------------------------------------------------------------------------------------------- 
-
- ------ --------------------------------------------------------------------------------------------------------------------- 
-  Line   interfaces/component/Web/Routing/Router.php                                                                          
- ------ --------------------------------------------------------------------------------------------------------------------- 
-  18     Method DarlingDataManagementSystem\interfaces\component\Web\Routing\Router::getResponses() return type has no value  
-         type specified in iterable type array.                                                                               
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                             
- ------ --------------------------------------------------------------------------------------------------------------------- 
-
- ------ --------------------------------------------------------------------------------------------------------------------- 
-  Line   interfaces/primary/Exportable.php                                                                                    
- ------ --------------------------------------------------------------------------------------------------------------------- 
-  8      Method DarlingDataManagementSystem\interfaces\primary\Exportable::export() return type has no value type specified   
-         in iterable type array.                                                                                              
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                             
-  10     Method DarlingDataManagementSystem\interfaces\primary\Exportable::import() has parameter $export with no value type  
-         specified in iterable type array.                                                                                    
-         💡 See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type                             
- ------ --------------------------------------------------------------------------------------------------------------------- 
-
  ------ ---------------------------------------------------------------------------------------------------------------------- 
   Line   interfaces/utility/ReflectionUtility.php                                                                              
  ------ ---------------------------------------------------------------------------------------------------------------------- 
@@ -86,5 +30,5 @@
          phpstan.neon.                                                                                                         
  ------ ---------------------------------------------------------------------------------------------------------------------- 
 
- [ERROR] Found 19 errors                                                                                                
+ [ERROR] Found 9 errors                                                                                                 
 
