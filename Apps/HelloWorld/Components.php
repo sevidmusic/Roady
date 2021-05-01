@@ -34,6 +34,14 @@ class AppBuilder {
         }
     }
 
+    /**
+     * Either create and return a new AppComponentsFactory for the App, or return
+     * the existing AppComponentsFactory from storage.
+     *
+     * @param string $appName The name of the App the factory belongs to.
+     * @param string $specifiedDomain The App's domain, example: http://localhost:8080
+     * @return AppComponentsFactoryInterface
+     */
     public static function getAppsAppComponentsFactory(string $appName, string $specifiedDomain): AppComponentsFactoryInterface {
         if(filter_var($specifiedDomain, FILTER_VALIDATE_URL)) {
             $useDomain = $specifiedDomain;
@@ -45,7 +53,6 @@ class AppBuilder {
                 new CoreApp($actualDomain, new CoreSwitchable(), $appName)
             )
         );
-        var_dump($appComponentsFactory->getUniqueId());
         try {
             /**
              * @var AppComponentsFactoryInterface $appComponentsFactory
@@ -57,18 +64,36 @@ class AppBuilder {
                 AppComponentsFactory::CONTAINER
             );
         } catch(Exception $e) {
-            var_dump('Created Factory', $appComponentsFactory->getComponentCrud()->create($appComponentsFactory));
+            $appComponentsFactory->getComponentCrud()->create($appComponentsFactory);
         }
-        var_dump($appComponentsFactory->getUniqueId());
         return $appComponentsFactory;
     }
 
     public static function buildApp(string $appName, string $specifiedDomain): void {
+# get original factory or create new factory
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
-        AppBuilder::loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
-        AppBuilder::loadComponentConfigFiles('Requests', $appComponentsFactory);
-        AppBuilder::loadComponentConfigFiles('Responses', $appComponentsFactory);
-        $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
+# remove and unregister any registerd comps
+        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
+            var_dump(
+                'Deleted:' . $registeredComponent->getType() . ' | ' .  $registeredComponent->getName(),
+                $appComponentsFactory->getComponentCrud()->delete($registeredComponent),
+                $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent)
+            );
+        }
+# remove the app factory frmo storage | even if newly created, insrues clean slate before build
+        var_dump(
+            'Deleted:' . $appComponentsFactory->getType() . ' | ' .  $appComponentsFactory->getName(),
+            $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory),
+        );
+# create new app factory for new build
+        $newAppComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
+# build app
+        AppBuilder::loadComponentConfigFiles('OutputComponents', $newAppComponentsFactory);
+        AppBuilder::loadComponentConfigFiles('Requests', $newAppComponentsFactory);
+        AppBuilder::loadComponentConfigFiles('Responses', $newAppComponentsFactory);
+# update stored factory | IMPORTANT OR REGISTRY WILL BE LOST!
+        $newAppComponentsFactory->getComponentCrud()->update($newAppComponentsFactory, $newAppComponentsFactory);
+        $newAppComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
 }
 
