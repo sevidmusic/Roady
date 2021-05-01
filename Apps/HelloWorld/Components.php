@@ -75,6 +75,11 @@ class AppBuilder {
             $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
             $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
         }
+        foreach($appComponentsFactory->getComponentCrud()->readAll('localhost8080', 'APP') as $r) {
+            if($r->getName() === $appName) {
+                $appComponentsFactory->getComponentCrud()->delete($r);
+            }
+        }
         $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory);
         $newAppComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
         AppBuilder::loadComponentConfigFiles('OutputComponents', $newAppComponentsFactory);
@@ -89,4 +94,3 @@ $appName = 'HelloWorld';
 $domain = (escapeshellarg($argv[1] ?? ''));
 AppBuilder::buildApp($appName, $domain);
 
-var_dump(AppBuilder::getAppsAppComponentsFactory($appName, $domain)->getStoredComponentRegistry()->getRegistry());
