@@ -22,7 +22,7 @@ abstract class StoredComponentFactory extends CoreSwitchableComponent implements
     {
         parent::__construct(
             $primaryFactory->buildStorable(
-                'StoredComponentFactory',
+                $primaryFactory->getApp()->getName(),
                 $primaryFactory::CONTAINER
             ),
             $componentCrud
