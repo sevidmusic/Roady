@@ -25,6 +25,15 @@ trait StoredComponentFactoryTestTrait
     private StoredComponentFactoryInterface $storedComponentFactory;
     private AppInterface $app;
 
+    public function testGetNameReturnsNameThatMatchesAssignedAppsName(): void
+    {
+        $this->assertEquals(
+            $this->getStoredComponentFactory()->export()['app']->getName(),
+            $this->getStoredComponentFactory()->getName()
+        );
+
+    }
+
     public function testPrimaryFactoryPropertyIsAssignedPrimaryFactoryImplementationInstancePostInstantiation(): void
     {
         $this->assertTrue(
