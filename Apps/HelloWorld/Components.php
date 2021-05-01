@@ -80,6 +80,9 @@ class AppBuilder {
                 $appComponentsFactory->getComponentCrud()->delete($r);
             }
         }
+        foreach($appComponentsFactory->getComponentCrud()->readAll('DEFAULT', 'APP') as $r) {
+            $appComponentsFactory->getComponentCrud()->delete($r);
+        }
         $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory);
         $newAppComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
         AppBuilder::loadComponentConfigFiles('OutputComponents', $newAppComponentsFactory);
