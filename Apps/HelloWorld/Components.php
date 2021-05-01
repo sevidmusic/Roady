@@ -70,28 +70,16 @@ class AppBuilder {
     }
 
     public static function buildApp(string $appName, string $specifiedDomain): void {
-# get original factory or create new factory
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
-# remove and unregister any registerd comps
         foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
-            var_dump(
-                'Deleted:' . $registeredComponent->getType() . ' | ' .  $registeredComponent->getName(),
-                $appComponentsFactory->getComponentCrud()->delete($registeredComponent),
-                $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent)
-            );
+            $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
+            $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
         }
-# remove the app factory frmo storage | even if newly created, insrues clean slate before build
-        var_dump(
-            'Deleted:' . $appComponentsFactory->getType() . ' | ' .  $appComponentsFactory->getName(),
-            $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory),
-        );
-# create new app factory for new build
+        $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory);
         $newAppComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
-# build app
         AppBuilder::loadComponentConfigFiles('OutputComponents', $newAppComponentsFactory);
         AppBuilder::loadComponentConfigFiles('Requests', $newAppComponentsFactory);
         AppBuilder::loadComponentConfigFiles('Responses', $newAppComponentsFactory);
-# update stored factory | IMPORTANT OR REGISTRY WILL BE LOST!
         $newAppComponentsFactory->getComponentCrud()->update($newAppComponentsFactory, $newAppComponentsFactory);
         $newAppComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
@@ -101,3 +89,4 @@ $appName = 'HelloWorld';
 $domain = (escapeshellarg($argv[1] ?? ''));
 AppBuilder::buildApp($appName, $domain);
 
+var_dump(AppBuilder::getAppsAppComponentsFactory($appName, $domain)->getStoredComponentRegistry()->getRegistry());
