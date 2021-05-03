@@ -71,7 +71,7 @@ class AppManager {
 
     private static function cleanUpDEFAULTApps(string $appName, string $specifiedDomain): void
     {
-        $appComponentsFactory = AppManager::getAppsAppComponentsFactory($appName, $specifiedDomain);
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $specifiedDomain);
         foreach($appComponentsFactory->getComponentCrud()->readAll('DEFAULT', 'APP') as $r) {
             $appComponentsFactory->getComponentCrud()->delete($r);
         }
@@ -79,7 +79,7 @@ class AppManager {
 
     private static function cleanUpDuplicateApps(string $appName, string $specifiedDomain): void
     {
-        $appComponentsFactory = AppManager::getAppsAppComponentsFactory($appName, $specifiedDomain);
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $specifiedDomain);
         foreach($appComponentsFactory->getComponentCrud()->readAll('localhost8080', 'APP') as $r) {
             if($r->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()) {
                 $appComponentsFactory->getComponentCrud()->delete($r);
@@ -87,8 +87,8 @@ class AppManager {
         }
     }
 
-    public static function buildApp(string $appName, string $specifiedDomain): void {
-        $appComponentsFactory = AppManager::getAppsAppComponentsFactory($appName, $specifiedDomain);
+    private static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
         foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
             if($registeredComponent->getType() !== CoreApp::class && $registeredComponent->getLocation() !== 'APP') {
                 $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
@@ -96,11 +96,18 @@ class AppManager {
             }
         }
         $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
-        AppManager::cleanUpDuplicateApps($appName, $specifiedDomain);
-        AppManager::cleanUpDEFAULTApps($appName, $specifiedDomain);
-        AppManager::loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
-        AppManager::loadComponentConfigFiles('Requests', $appComponentsFactory);
-        AppManager::loadComponentConfigFiles('Responses', $appComponentsFactory);
+    }
+
+    public static function buildApp(string $appName, string $specifiedDomain): void {
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $specifiedDomain);
+        self::removeRegisteredComponents($appComponentsFactory);
+        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
+        self::cleanUpDuplicateApps($appName, $specifiedDomain);
+        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
+        self::cleanUpDEFAULTApps($appName, $specifiedDomain);
+        self::loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
+        self::loadComponentConfigFiles('Requests', $appComponentsFactory);
+        self::loadComponentConfigFiles('Responses', $appComponentsFactory);
         $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
         $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
