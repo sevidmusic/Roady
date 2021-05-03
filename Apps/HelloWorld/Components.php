@@ -27,10 +27,15 @@ class AppManager {
 
     public static function loadComponentConfigFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
         $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
-        $scan = scandir($configurationDirectoryPath);
-        $ls = (is_array($scan) ? $scan : []);
-        foreach(array_diff($ls, array('.', '..')) as $file) {
-            require $configurationDirectoryPath . $file;
+        if(file_exists($configurationDirectoryPath) && is_dir($configurationDirectoryPath)) {
+            $scan = scandir($configurationDirectoryPath);
+            $ls = (is_array($scan) ? $scan : []);
+            foreach(array_diff($ls, array('.', '..')) as $file) {
+                $expectedFilePath = $configurationDirectoryPath . $file;
+                if(substr($file, -4, 4) === '.php' && file_exists($expectedFilePath) && is_file($expectedFilePath)) {
+                    require realpath($expectedFilePath);
+                }
+            }
         }
     }
 
