@@ -23,7 +23,7 @@ require(
     )
 );
 
-class AppBuilder {
+class AppManager {
 
     public static function loadComponentConfigFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
         $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
@@ -69,31 +69,44 @@ class AppBuilder {
         return $appComponentsFactory;
     }
 
-    public static function buildApp(string $appName, string $specifiedDomain): void {
-        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
-        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
-            $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
-            $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
-        }
-        foreach($appComponentsFactory->getComponentCrud()->readAll('localhost8080', 'APP') as $r) {
-            if($r->getName() === $appName) {
-                $appComponentsFactory->getComponentCrud()->delete($r);
-            }
-        }
+    private static function cleanUpDEFAULTApps(string $appName, string $specifiedDomain): void
+    {
+        $appComponentsFactory = AppManager::getAppsAppComponentsFactory($appName, $specifiedDomain);
         foreach($appComponentsFactory->getComponentCrud()->readAll('DEFAULT', 'APP') as $r) {
             $appComponentsFactory->getComponentCrud()->delete($r);
         }
-        $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory);
-        $newAppComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $specifiedDomain);
-        AppBuilder::loadComponentConfigFiles('OutputComponents', $newAppComponentsFactory);
-        AppBuilder::loadComponentConfigFiles('Requests', $newAppComponentsFactory);
-        AppBuilder::loadComponentConfigFiles('Responses', $newAppComponentsFactory);
-        $newAppComponentsFactory->getComponentCrud()->update($newAppComponentsFactory, $newAppComponentsFactory);
-        $newAppComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
+    }
+
+    private static function cleanUpDuplicateApps(string $appName, string $specifiedDomain): void
+    {
+        $appComponentsFactory = AppManager::getAppsAppComponentsFactory($appName, $specifiedDomain);
+        foreach($appComponentsFactory->getComponentCrud()->readAll('localhost8080', 'APP') as $r) {
+            if($r->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()) {
+                $appComponentsFactory->getComponentCrud()->delete($r);
+            }
+        }
+    }
+
+    public static function buildApp(string $appName, string $specifiedDomain): void {
+        $appComponentsFactory = AppManager::getAppsAppComponentsFactory($appName, $specifiedDomain);
+        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
+            if($registeredComponent->getType() !== CoreApp::class && $registeredComponent->getLocation() !== 'APP') {
+                $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
+                $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
+            }
+        }
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
+        AppManager::cleanUpDuplicateApps($appName, $specifiedDomain);
+        AppManager::cleanUpDEFAULTApps($appName, $specifiedDomain);
+        AppManager::loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
+        AppManager::loadComponentConfigFiles('Requests', $appComponentsFactory);
+        AppManager::loadComponentConfigFiles('Responses', $appComponentsFactory);
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
+        $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
 }
 
 $appName = 'HelloWorld';
 $domain = (escapeshellarg($argv[1] ?? ''));
-AppBuilder::buildApp($appName, $domain);
+AppManager::buildApp($appName, $domain);
 
