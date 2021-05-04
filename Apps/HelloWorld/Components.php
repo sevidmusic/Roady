@@ -5,6 +5,7 @@
  */
 
 use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
@@ -33,10 +34,39 @@ class AppManager {
             foreach(array_diff($ls, array('.', '..')) as $file) {
                 $expectedFilePath = $configurationDirectoryPath . $file;
                 if(substr($file, -4, 4) === '.php' && file_exists($expectedFilePath) && is_file($expectedFilePath)) {
-                    require realpath($expectedFilePath);
+                    $realPath = strval(realpath($expectedFilePath));
+                    $fileContents = strval(file_get_contents($realPath));
+                    if(str_contains($fileContents, '$appComponentsFactory->build')) {
+                        require $realPath;
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Return an appropritate Request to be used as the App's domain.
+     * If $domain is a valid url, it will be used, if it
+     * is not a valid url, http://localhost:8080 will be used.
+     * @param string $domain The App's domain.
+     * @return RequestInterface A Request instance that represents the App's domain.
+     */
+    private static function buildAppDomain(string $domain): RequestInterface
+    {
+        if(filter_var($domain, FILTER_VALIDATE_URL)) {
+            $useDomain = $domain;
+        }
+        return AppComponentsFactory::buildDomain(($useDomain ?? 'http://localhost:8080'));
+    }
+
+    private static function newAppComponentsFactory(string $appName, RequestInterface $domain): AppComponentsFactoryInterface
+    {
+        return new AppComponentsFactory(
+            ...AppComponentsFactory::buildConstructorArgs(
+                $domain,
+                new CoreApp($domain, new CoreSwitchable(), $appName)
+            )
+        );
     }
 
     /**
@@ -44,20 +74,12 @@ class AppManager {
      * the existing AppComponentsFactory from storage.
      *
      * @param string $appName The name of the App the factory belongs to.
-     * @param string $specifiedDomain The App's domain, example: http://localhost:8080
+     * @param string $domain The App's domain, example: http://localhost:8080
      * @return AppComponentsFactoryInterface
      */
-    public static function getAppsAppComponentsFactory(string $appName, string $specifiedDomain): AppComponentsFactoryInterface {
-        if(filter_var($specifiedDomain, FILTER_VALIDATE_URL)) {
-            $useDomain = $specifiedDomain;
-        }
-        $actualDomain = AppComponentsFactory::buildDomain(($useDomain ?? 'http://localhost:8080/'));
-        $appComponentsFactory = new AppComponentsFactory(
-            ...AppComponentsFactory::buildConstructorArgs(
-                $actualDomain,
-                new CoreApp($actualDomain, new CoreSwitchable(), $appName)
-            )
-        );
+    public static function getAppsAppComponentsFactory(string $appName, string $domain): AppComponentsFactoryInterface {
+        $domainRequest = self::buildAppDomain($domain);
+        $appComponentsFactory = self::newAppComponentsFactory($appName, $domainRequest);
         try {
             /**
              * @var AppComponentsFactoryInterface $appComponentsFactory
@@ -65,7 +87,7 @@ class AppManager {
             $appComponentsFactory = $appComponentsFactory->getComponentCrud()->readByNameAndType(
                 $appComponentsFactory->getName(),
                 $appComponentsFactory->getType(),
-                CoreApp::deriveNameLocationFromRequest($actualDomain),
+                CoreApp::deriveNameLocationFromRequest($domainRequest),
                 AppComponentsFactory::CONTAINER
             );
         } catch(Exception $e) {
@@ -74,20 +96,23 @@ class AppManager {
         return $appComponentsFactory;
     }
 
-    private static function cleanUpDEFAULTApps(string $appName, string $specifiedDomain): void
+    private static function cleanUpDEFAULTApps(string $appName, string $domain): void
     {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $specifiedDomain);
-        foreach($appComponentsFactory->getComponentCrud()->readAll('DEFAULT', 'APP') as $r) {
-            $appComponentsFactory->getComponentCrud()->delete($r);
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
+        foreach($appComponentsFactory->getComponentCrud()->readAll('DEFAULT', 'APP') as $component) {
+            $appComponentsFactory->getComponentCrud()->delete($component);
         }
     }
 
-    private static function cleanUpDuplicateApps(string $appName, string $specifiedDomain): void
+    private static function cleanUpDuplicateApps(string $appName, string $domain): void
     {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $specifiedDomain);
-        foreach($appComponentsFactory->getComponentCrud()->readAll('localhost8080', 'APP') as $r) {
-            if($r->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()) {
-                $appComponentsFactory->getComponentCrud()->delete($r);
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
+        foreach($appComponentsFactory->getComponentCrud()->readAll(
+            $appComponentsFactory->getApp()->getLocation(),
+            $appComponentsFactory->getApp()->getContainer()
+        ) as $component) {
+            if($component->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()) {
+                $appComponentsFactory->getComponentCrud()->delete($component);
             }
         }
     }
@@ -103,13 +128,15 @@ class AppManager {
         $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
     }
 
-    public static function buildApp(string $appName, string $specifiedDomain): void {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $specifiedDomain);
+    public static function buildApp(string $appName, string $domain): void {
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
         self::removeRegisteredComponents($appComponentsFactory);
+#########
         /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDuplicateApps($appName, $specifiedDomain);
+        self::cleanUpDuplicateApps($appName, $domain);
         /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDEFAULTApps($appName, $specifiedDomain);
+        self::cleanUpDEFAULTApps($appName, $domain);
+#########
         self::loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
         self::loadComponentConfigFiles('Requests', $appComponentsFactory);
         self::loadComponentConfigFiles('Responses', $appComponentsFactory);
