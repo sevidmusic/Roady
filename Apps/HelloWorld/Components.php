@@ -71,6 +71,7 @@ class AppManager implements AppManagerInterface {
                 }
             }
         }
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
     }
 
     public static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
@@ -96,7 +97,6 @@ class AppManager implements AppManagerInterface {
         self::requireComponentConfigurationFiles('OutputComponents', $appComponentsFactory);
         self::requireComponentConfigurationFiles('Requests', $appComponentsFactory);
         self::requireComponentConfigurationFiles('Responses', $appComponentsFactory);
-        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
         $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
 
