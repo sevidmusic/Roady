@@ -24,9 +24,38 @@ require(
     )
 );
 
-class AppManager {
+interface AppManagerInterface {
 
-    public static function loadComponentConfigFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
+    /**
+     * Require the Component configuration files found in the specified directory.
+     * Note: Directory MUST exist in the relevant App's directory, for example:
+     *       APP_NAME/$configurationDirectoryName
+     * @param string $configurationDirectoryName The name of the configuration directory
+     *                                           that contains the Component configuration
+     *                                           files.
+     * @param AppComponentsFactoryInterface $appComponentsFactory The rlevant App's AppComponentsFactory.
+     */
+    public static function requireComponentConfigurationFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void;
+
+    /**
+     * Either create and return a new AppComponentsFactory for the App, or return
+     * the existing AppComponentsFactory from storage.
+     *
+     * @param string $appName The name of the App the factory belongs to.
+     * @param string $domain The App's domain, example: http://localhost:8080
+     * @return AppComponentsFactoryInterface
+     */
+    public static function getAppsAppComponentsFactory(string $appName, string $domain): AppComponentsFactoryInterface;
+
+    public static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void;
+
+    public static function buildApp(string $appName, string $domain): void;
+
+}
+
+class AppManager implements AppManagerInterface {
+
+    public static function requireComponentConfigurationFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
         $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
         if(file_exists($configurationDirectoryPath) && is_dir($configurationDirectoryPath)) {
             $scan = scandir($configurationDirectoryPath);
@@ -44,6 +73,33 @@ class AppManager {
         }
     }
 
+    public static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
+        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
+            if($registeredComponent->getType() !== CoreApp::class && $registeredComponent->getLocation() !== 'APP') {
+                $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
+                $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
+            }
+        }
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
+    }
+
+    public static function buildApp(string $appName, string $domain): void {
+        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
+        self::removeRegisteredComponents($appComponentsFactory);
+#########
+        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
+        self::cleanUpDuplicateApps($appName, $domain);
+        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
+        self::cleanUpDEFAULTApps($appName, $domain);
+#########
+        self::requireComponentConfigurationFiles('OutputComponents', $appComponentsFactory);
+        self::requireComponentConfigurationFiles('Requests', $appComponentsFactory);
+        self::requireComponentConfigurationFiles('Responses', $appComponentsFactory);
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
+        $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
+    }
+
     /**
      * Return an appropritate Request to be used as the App's domain.
      * If $domain is a valid url, it will be used, if it
@@ -59,6 +115,12 @@ class AppManager {
         return AppComponentsFactory::buildDomain(($useDomain ?? 'http://localhost:8080'));
     }
 
+    /**
+     * Return a new instance of an AppComponentsFactory for an App.
+     * @param string $appName The name of the App to create a new AppComponentsFactory instance for.
+     * @param RequestInterface $domain  The App's domain.
+     * @return AppComponentsFactoryInterface A new AppComponentsFactory instance.
+     */
     private static function newAppComponentsFactory(string $appName, RequestInterface $domain): AppComponentsFactoryInterface
     {
         return new AppComponentsFactory(
@@ -70,8 +132,8 @@ class AppManager {
     }
 
     /**
-     * Either create and return a new AppComponentsFactory for the App, or return
-     * the existing AppComponentsFactory from storage.
+     * Either create, store, and return a new AppComponentsFactory for the App,
+     * or return the App's existing AppComponentsFactory from storage.
      *
      * @param string $appName The name of the App the factory belongs to.
      * @param string $domain The App's domain, example: http://localhost:8080
@@ -115,33 +177,6 @@ class AppManager {
                 $appComponentsFactory->getComponentCrud()->delete($component);
             }
         }
-    }
-
-    private static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
-    {
-        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
-            if($registeredComponent->getType() !== CoreApp::class && $registeredComponent->getLocation() !== 'APP') {
-                $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
-                $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
-            }
-        }
-        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
-    }
-
-    public static function buildApp(string $appName, string $domain): void {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
-        self::removeRegisteredComponents($appComponentsFactory);
-#########
-        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDuplicateApps($appName, $domain);
-        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDEFAULTApps($appName, $domain);
-#########
-        self::loadComponentConfigFiles('OutputComponents', $appComponentsFactory);
-        self::loadComponentConfigFiles('Requests', $appComponentsFactory);
-        self::loadComponentConfigFiles('Responses', $appComponentsFactory);
-        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
-        $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
 }
 
