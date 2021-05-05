@@ -27,35 +27,66 @@ require(
 interface AppManagerInterface {
 
     /**
-     * Require the Component configuration files found in the specified directory.
-     * Note: Directory MUST exist in the relevant App's directory, for example:
-     *       APP_NAME/$configurationDirectoryName
-     * @param string $configurationDirectoryName The name of the configuration directory
-     *                                           that contains the Component configuration
-     *                                           files.
-     * @param AppComponentsFactoryInterface $appComponentsFactory The rlevant App's AppComponentsFactory.
-     */
-    public static function requireComponentConfigurationFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void;
-
-    /**
-     * Either create and return a new AppComponentsFactory for the App, or return
-     * the existing AppComponentsFactory from storage.
+     * Either create, store, and return a new AppComponentsFactory instance for
+     * the App, or return the App's existing AppComponentsFactory from storage.
+     * This AppComponentsFactory instance can be used to build Components for
+     * the App for the specified domain.
      *
-     * @param string $appName The name of the App the factory belongs to.
-     * @param string $domain The App's domain, example: http://localhost:8080
+     * @param string $appName The name of the App to return a AppComponentsFactory
+     *                        instance for.
+     *
+     * @param string $domain The domain the AppComponentsFactory will build the
+     *                       App's Components for. For example: http://localhost:8080
+     *
      * @return AppComponentsFactoryInterface
      */
     public static function getAppsAppComponentsFactory(string $appName, string $domain): AppComponentsFactoryInterface;
 
+    /**
+     * Build the Components configured for the App by requiring the Component
+     * configuration files found in the specified directory in the relevant App's
+     * directory.
+     *
+     * Note: The directory must exist in the App directory that corresponds to the
+     *       App assigned to the provided AppComponentsFactory.
+     *       For example, if $appComponentsFactory->getApp()->getName() returns
+     *       "HelloWorld" then the directory should exist at:
+     *          HelloWorld/$configurationDirectoryName
+     *
+     * @param string $configurationDirectoryName The name of the configuration directory
+     *                                           that contains the Component configuration
+     *                                           files that define the Components to build.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory to
+     *                                                            use to build the configured
+     *                                                            Components.
+     *
+     */
+    public static function buildAppsConfiguredComponents(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void;
+
+    /**
+     * Remove all the Components registered by the provided AppComponentsFactory
+     * from storage.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory whose regiseterd
+     *                                                            Components should be removed.
+     */
     public static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void;
 
-    public static function buildApp(string $appName, string $domain): void;
+    /**
+     * Build the App assigned to the provided AppComponentsFactory instance.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory instance to use to build the App.
+     *
+     */
+    public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void;
 
 }
 
 class AppManager implements AppManagerInterface {
 
-    public static function requireComponentConfigurationFiles(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
+    public static function buildAppsConfiguredComponents(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
+        # Once implemented in core, use $appComponentsFactory->getApp()->getName() to determine App's directory name
         $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
         if(file_exists($configurationDirectoryPath) && is_dir($configurationDirectoryPath)) {
             $scan = scandir($configurationDirectoryPath);
@@ -85,18 +116,22 @@ class AppManager implements AppManagerInterface {
         $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
     }
 
-    public static function buildApp(string $appName, string $domain): void {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
+    private static function temporaryBugFixes(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
+#########
+        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
+        self::cleanUpDuplicateApps($appComponentsFactory->getApp()->getName(), $appComponentsFactory->getApp()->getAppDomain()->getUrl());
+        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
+        self::cleanUpDEFAULTApps($appComponentsFactory->getApp()->getName(), $appComponentsFactory->getApp()->getAppDomain()->getUrl());
+#########
+    }
+
+    public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void {
         self::removeRegisteredComponents($appComponentsFactory);
-#########
-        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDuplicateApps($appName, $domain);
-        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDEFAULTApps($appName, $domain);
-#########
-        self::requireComponentConfigurationFiles('OutputComponents', $appComponentsFactory);
-        self::requireComponentConfigurationFiles('Requests', $appComponentsFactory);
-        self::requireComponentConfigurationFiles('Responses', $appComponentsFactory);
+        self::temporaryBugFixes($appComponentsFactory);
+        self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
+        self::buildAppsConfiguredComponents('Requests', $appComponentsFactory);
+        self::buildAppsConfiguredComponents('Responses', $appComponentsFactory);
         $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
     }
 
@@ -182,5 +217,5 @@ class AppManager implements AppManagerInterface {
 
 $appName = 'HelloWorld';
 $domain = (escapeshellarg($argv[1] ?? ''));
-AppManager::buildApp($appName, $domain);
+AppManager::buildApp(AppManager::getAppsAppComponentsFactory($appName, $domain));
 
