@@ -215,7 +215,5 @@ class AppManager implements AppManagerInterface {
     }
 }
 
-$appName = 'HelloWorld';
-$domain = (escapeshellarg($argv[1] ?? ''));
-AppManager::buildApp(AppManager::getAppsAppComponentsFactory($appName, $domain));
+AppManager::buildApp(AppManager::getAppsAppComponentsFactory('HelloWorld', (escapeshellarg($argv[1] ?? ''))));
 
