@@ -142,6 +142,7 @@ class AppBuilder implements AppBuilderInterface {
      */
     private static function buildAppDomain(string $domain): RequestInterface
     {
+        $domain = str_replace(["'"], [''], $domain);
         if(filter_var($domain, FILTER_VALIDATE_URL)) {
             $useDomain = $domain;
         }
