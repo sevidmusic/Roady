@@ -8,13 +8,29 @@ use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as Requ
 use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use \Exception;
 
 abstract class AppBuilder implements AppBuilderInterface
 {
 
     public static function getAppsAppComponentsFactory(string $appName, string $domain): AppComponentsFactoryInterface
     {
-        return self::newAppComponentsFactory($appName, self::buildAppDomain($domain));
+        $domainRequest = self::buildAppDomain($domain);
+        $appComponentsFactory = self::newAppComponentsFactory($appName, $domainRequest);
+        try {
+            /**
+             * @var AppComponentsFactoryInterface $appComponentsFactory
+             */
+            $appComponentsFactory = $appComponentsFactory->getComponentCrud()->readByNameAndType(
+                $appComponentsFactory->getName(),
+                $appComponentsFactory->getType(),
+                CoreApp::deriveNameLocationFromRequest($domainRequest),
+                AppComponentsFactory::CONTAINER
+            );
+        } catch(Exception $e) {
+            $appComponentsFactory->getComponentCrud()->create($appComponentsFactory);
+        }
+        return $appComponentsFactory;
     }
 
     public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void
