@@ -24,7 +24,7 @@ require(
     )
 );
 
-interface AppManagerInterface {
+interface AppBuilderInterface {
 
     /**
      * Either create, store, and return a new AppComponentsFactory instance for
@@ -38,9 +38,23 @@ interface AppManagerInterface {
      * @param string $domain The domain the AppComponentsFactory will build the
      *                       App's Components for. For example: http://localhost:8080
      *
-     * @return AppComponentsFactoryInterface
+     * @return AppComponentsFactoryInterface The App's AppComponentsFactory.
      */
     public static function getAppsAppComponentsFactory(string $appName, string $domain): AppComponentsFactoryInterface;
+
+    /**
+     * Build the App assigned to the provided AppComponentsFactory instance.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory instance
+     *                                                            to use to build the App's configured
+     *                                                            Components.
+     *
+     */
+    public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void;
+
+}
+
+class AppBuilder implements AppBuilderInterface {
 
     /**
      * Build the Components configured for the App by requiring the Component
@@ -62,30 +76,7 @@ interface AppManagerInterface {
      *                                                            Components.
      *
      */
-    public static function buildAppsConfiguredComponents(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void;
-
-    /**
-     * Remove all the Components registered by the provided AppComponentsFactory
-     * from storage.
-     *
-     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory whose regiseterd
-     *                                                            Components should be removed.
-     */
-    public static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void;
-
-    /**
-     * Build the App assigned to the provided AppComponentsFactory instance.
-     *
-     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory instance to use to build the App.
-     *
-     */
-    public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void;
-
-}
-
-class AppManager implements AppManagerInterface {
-
-    public static function buildAppsConfiguredComponents(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
+    private static function buildAppsConfiguredComponents(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
         # Once implemented in core, use $appComponentsFactory->getApp()->getName() to determine App's directory name
         $configurationDirectoryPath = __DIR__ . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR;
         if(file_exists($configurationDirectoryPath) && is_dir($configurationDirectoryPath)) {
@@ -105,7 +96,14 @@ class AppManager implements AppManagerInterface {
         $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
     }
 
-    public static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
+    /**
+     * Remove all the Components registered by the provided AppComponentsFactory
+     * from storage.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory whose regiseterd
+     *                                                            Components should be removed.
+     */
+    private static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
     {
         foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
             if($registeredComponent->getType() !== CoreApp::class && $registeredComponent->getLocation() !== 'APP') {
@@ -215,5 +213,5 @@ class AppManager implements AppManagerInterface {
     }
 }
 
-AppManager::buildApp(AppManager::getAppsAppComponentsFactory('HelloWorld', (escapeshellarg($argv[1] ?? ''))));
+AppBuilder::buildApp(AppBuilder::getAppsAppComponentsFactory('HelloWorld', (escapeshellarg($argv[1] ?? ''))));
 
