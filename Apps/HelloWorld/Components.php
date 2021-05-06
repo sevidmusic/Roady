@@ -213,5 +213,5 @@ class AppBuilder implements AppBuilderInterface {
     }
 }
 
-AppBuilder::buildApp(AppBuilder::getAppsAppComponentsFactory('HelloWorld', (escapeshellarg($argv[1] ?? ''))));
+AppBuilder::buildApp(AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), (escapeshellarg($argv[1] ?? ''))));
 
