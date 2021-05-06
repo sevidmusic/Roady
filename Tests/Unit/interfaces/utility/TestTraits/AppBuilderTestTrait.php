@@ -36,13 +36,28 @@ trait AppBuilderTestTrait
     {
         $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
         $domain = 'http://localhost:' . strval(rand(8000,8999));
-        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
-        $storedAppComponentsFactory = $appComponentsFactory->getComponentCrud()->read($appComponentsFactory);
+        $appComponentsFactoryFirstInstance = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $appComponentsFactoryStoredInstance = $appComponentsFactoryFirstInstance->getComponentCrud()->read($appComponentsFactoryFirstInstance);
+        $appComponentsFactorySecondInstance = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        /** Test stored instance matches first instance! **/
         $this->assertEquals(
-            $appComponentsFactory->getUniqueId(),
-            $storedAppComponentsFactory->getUniqueId(),
+            $appComponentsFactoryFirstInstance,
+            $appComponentsFactoryStoredInstance,
             'getAppsAppComponentsFactory() MUST return a AppComponentsFactory that matches the App\'s stored AppComponentsFactory. If the App\'s stored AppComponentsFactory does not exist, getAppsAppComponentsFactory() MUST create it.'
         );
+        /** Test second instance matches first instance! **/
+        $this->assertEquals(
+            $appComponentsFactoryFirstInstance,
+            $appComponentsFactorySecondInstance,
+            'getAppsAppComponentsFactory() MUST return a AppComponentsFactory that matches the App\'s stored AppComponentsFactory. If the App\'s stored AppComponentsFactory does not exist, getAppsAppComponentsFactory() MUST create it.'
+        );
+        /** Test second instance matches stored instance! **/
+        $this->assertEquals(
+            $appComponentsFactoryStoredInstance,
+            $appComponentsFactorySecondInstance,
+            'getAppsAppComponentsFactory() MUST return a AppComponentsFactory that matches the App\'s stored AppComponentsFactory. If the App\'s stored AppComponentsFactory does not exist, getAppsAppComponentsFactory() MUST create it.'
+        );
+
     }
 
 }
