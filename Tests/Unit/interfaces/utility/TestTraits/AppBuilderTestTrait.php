@@ -72,8 +72,8 @@ trait AppBuilderTestTrait
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
         $this->createTestAppsOutputComponents($appName, $domain);
-        $this->createTestAppsRequests($appName, $domain);
-        $this->createTestAppsResponses($appName, $domain);
+#        $this->createTestAppsRequests($appName, $domain);
+#        $this->createTestAppsResponses($appName, $domain);
         $preBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
         AppBuilder::buildApp($appComponentsFactory);
         $postBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
@@ -81,8 +81,13 @@ trait AppBuilderTestTrait
             $preBuildStoredComponentCount < $postBuildStoredComponentCount,
             'AppBuilder::buildApp() did not store any Components even though Components were defined by the ' . $appName . ' App.'
         );
+        $this->assertEquals(
+            AppBuilder::getAppsAppComponentsFactory($appName, $domain)->getStoredComponentRegistry()->getRegistry(),
+            $appComponentsFactory->getStoredComponentRegistry()->getRegistry(),
+            'AppBuilder::buildApp() MUST update the AppComponentsFactory in storage to reflect that the App, and the App\'s Components were built.'
+        );
         $this->verifyExpectedOutputComponentsExist($appComponentsFactory);
-        $this->removeTestApp($appName);
+        $this->removeTestApp($appComponentsFactory);
     }
 
     private function verifyExpectedOutputComponentsExist(AppComponentsFactoryInterface $appComponentsFactory): void
@@ -121,8 +126,12 @@ trait AppBuilderTestTrait
         );
     }
 
-    private function removeTestApp(string $appName): void
+    private function removeTestApp(AppComponentsFactoryInterface $appComponentsFactory): void
     {
+        $appName = $appComponentsFactory->getApp()->getName();
+        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $component) {
+            $appComponentsFactory->getComponentCrud()->delete($component);
+        }
         $pathToTestApp = $this->determinePathToTestApp($appName);
         self::removeDirectory($pathToTestApp);
     }
