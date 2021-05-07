@@ -65,15 +65,13 @@ trait AppBuilderTestTrait
 
     }
 
-    public function testBuildAppCreatesAppsConfiguredComponents(): void
+    public function testBuildAppIncreasesNumberOfStoredComponentsIfAppDefinesComponents(): void
     {
         $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
         $domain = 'http://localhost:' . strval(rand(8000,8999));
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
         $this->createTestAppsOutputComponents($appName, $domain);
-#        $this->createTestAppsRequests($appName, $domain);
-#        $this->createTestAppsResponses($appName, $domain);
         $preBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
         AppBuilder::buildApp($appComponentsFactory);
         $postBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
@@ -81,12 +79,41 @@ trait AppBuilderTestTrait
             $preBuildStoredComponentCount < $postBuildStoredComponentCount,
             'AppBuilder::buildApp() did not store any Components even though Components were defined by the ' . $appName . ' App.'
         );
+        $this->removeTestApp($appComponentsFactory);
+    }
+
+    public function testBuildAppUpdatesAppsStoredAppComponentsFactory(): void
+    {
+        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
+        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $this->createTestApp($appName, $domain);
+        $this->createTestAppsOutputComponents($appName, $domain);
+        AppBuilder::buildApp($appComponentsFactory);
         $this->assertEquals(
-            AppBuilder::getAppsAppComponentsFactory($appName, $domain)->getStoredComponentRegistry()->getRegistry(),
-            $appComponentsFactory->getStoredComponentRegistry()->getRegistry(),
-            'AppBuilder::buildApp() MUST update the AppComponentsFactory in storage to reflect that the App, and the App\'s Components were built.'
+            $appComponentsFactory,
+            AppBuilder::getAppsAppComponentsFactory($appName, $domain),
+            'AppBuilder::buildApp() MUST update the App\'s AppComponentsFactory in storage to reflect any changes made to the App\'s AppComponentsFactory on call to AppBuilder::buildApp().'
         );
-        $this->verifyExpectedOutputComponentsExist($appComponentsFactory);
+        $this->removeTestApp($appComponentsFactory);
+    }
+
+    public function testCallingBuildAppTwiceOnSameAppWithNoChangesToAppResultsInEqualNumberOfStoredComponents(): void
+    {
+        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
+        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $this->createTestApp($appName, $domain);
+        $this->createTestAppsOutputComponents($appName, $domain);
+        AppBuilder::buildApp($appComponentsFactory);
+        $firstBuildCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
+        AppBuilder::buildApp($appComponentsFactory);
+        $secondBuildCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
+        $this->assertEquals(
+            $firstBuildCount,
+            $secondBuildCount,
+            'Calling buildApp() twice on App ' . $appName . ' should result in equal number of stored Components since the ' . $appName . ' App has not changed.'
+        );
         $this->removeTestApp($appComponentsFactory);
     }
 
@@ -265,3 +292,34 @@ trait AppBuilderTestTrait
     }
 
 }
+
+
+/*
+    public function testBuildAppCreatesAppsConfiguredComponents(): void
+    {
+        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
+        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $this->createTestApp($appName, $domain);
+        $this->createTestAppsOutputComponents($appName, $domain);
+#        $this->createTestAppsRequests($appName, $domain);
+#        $this->createTestAppsResponses($appName, $domain);
+        $preBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
+        AppBuilder::buildApp($appComponentsFactory);
+        $postBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
+        # Test Storge Count Increases
+        $this->assertTrue(
+            $preBuildStoredComponentCount < $postBuildStoredComponentCount,
+            'AppBuilder::buildApp() did not store any Components even though Components were defined by the ' . $appName . ' App.'
+        );
+        # Test AppComponentsFactory was updated
+        $this->assertEquals(
+            AppBuilder::getAppsAppComponentsFactory($appName, $domain)->getStoredComponentRegistry()->getRegistry(),
+            $appComponentsFactory->getStoredComponentRegistry()->getRegistry(),
+            'AppBuilder::buildApp() MUST update the AppComponentsFactory in storage to reflect that the App, and the App\'s Components were built.'
+        );
+        # Test expected OutputComponents exist
+        $this->verifyExpectedOutputComponentsExist($appComponentsFactory);
+        $this->removeTestApp($appComponentsFactory);
+    }
+*/

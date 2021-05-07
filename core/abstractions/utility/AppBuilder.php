@@ -80,7 +80,26 @@ abstract class AppBuilder implements AppBuilderInterface
 
     public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void
     {
+        self::removeRegisteredComponents($appComponentsFactory);
         self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
+    }
+
+    /**
+     * Remove all the Components registered by the provided AppComponentsFactory
+     * from storage.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory whose regiseterd
+     *                                                            Components should be removed.
+     */
+    private static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
+        foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $registeredComponent) {
+            if($registeredComponent->getType() !== CoreApp::class && $registeredComponent->getLocation() !== 'APP') {
+                $appComponentsFactory->getComponentCrud()->delete($registeredComponent);
+                $appComponentsFactory->getStoredComponentRegistry()->unRegisterComponent($registeredComponent);
+            }
+        }
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
     }
 
     /**
