@@ -33,8 +33,54 @@ abstract class AppBuilder implements AppBuilderInterface
         return $appComponentsFactory;
     }
 
+    /**
+     * Build the Components configured for the App by requiring the Component
+     * configuration files found in the specified directory in the relevant App's
+     * directory.
+     *
+     * Note: The directory must exist in the App directory that corresponds to the
+     *       App assigned to the provided AppComponentsFactory.
+     *       For example, if $appComponentsFactory->getApp()->getName() returns
+     *       "HelloWorld" then the directory should exist at:
+     *          HelloWorld/$configurationDirectoryName
+     *
+     * @param string $configurationDirectoryName The name of the configuration directory
+     *                                           that contains the Component configuration
+     *                                           files that define the Components to build.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory to
+     *                                                            use to build the configured
+     *                                                            Components.
+     *
+     */
+    private static function buildAppsConfiguredComponents(string $configurationDirectoryName, AppComponentsFactoryInterface $appComponentsFactory): void {
+        # Once implemented in core, use $appComponentsFactory->getApp()->getName() to determine App's directory name
+        $appName = $appComponentsFactory->getApp()->getName();
+        $configurationDirectoryPath = str_replace(
+            'core' . DIRECTORY_SEPARATOR . 'abstractions' . DIRECTORY_SEPARATOR . 'utility',
+            'Apps' . DIRECTORY_SEPARATOR . $appName . DIRECTORY_SEPARATOR . $configurationDirectoryName . DIRECTORY_SEPARATOR,
+            __DIR__
+        );
+        if(file_exists($configurationDirectoryPath) && is_dir($configurationDirectoryPath)) {
+            $scan = scandir($configurationDirectoryPath);
+            $ls = (is_array($scan) ? $scan : []);
+            foreach(array_diff($ls, array('.', '..')) as $file) {
+                $expectedFilePath = $configurationDirectoryPath . $file;
+                if(substr($file, -4, 4) === '.php' && file_exists($expectedFilePath) && is_file($expectedFilePath)) {
+                    $realPath = strval(realpath($expectedFilePath));
+                    $fileContents = strval(file_get_contents($realPath));
+                    if(str_contains($fileContents, '$appComponentsFactory->build')) {
+                        require $realPath;
+                    }
+                }
+            }
+        }
+        $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
+    }
+
     public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void
     {
+        self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
     }
 
     /**
