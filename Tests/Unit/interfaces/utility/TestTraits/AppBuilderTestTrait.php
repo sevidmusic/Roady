@@ -27,14 +27,28 @@ trait AppBuilderTestTrait
      * @var array<string, int|float> $expectedResponseNamesAndPositions
      */
     private array $expectedResponseNamesAndPositions = [];
+    /**
+     * @var array<string, int|float> $expectedGlobalResponseNamesAndPositions
+     */
+    private array $expectedGlobalResponseNamesAndPositions = [];
     private string $outputComponentContainer = 'TestOutput';
     private string $requestContainer = 'TestRequests';
     # @devnote: Response container is Response::RESPONSE_CONTAINER
 
+    private function getRandomName(string $type): string
+    {
+        return 'Test' . $type . strval(rand(0, PHP_INT_MAX));
+    }
+
+    private function getRandomDomain(): string
+    {
+        return 'http://localhost:' . strval(rand(8000,8999));
+    }
+
     public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedAppsNameMatchesTheSpecifiedAppName(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->assertEquals(
             $appName,
@@ -45,8 +59,8 @@ trait AppBuilderTestTrait
 
     public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedDomiansUrlMatchesTheSpecifiedDomain(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->assertEquals(
             $domain,
@@ -57,8 +71,8 @@ trait AppBuilderTestTrait
 
     public function testGetAppsAppComponentsFactoryReturnsAppComponentsFactoryThatMatchesAppsStoredAppComponentsFactoryInstance(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactoryFirstInstance = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $appComponentsFactoryStoredInstance = $appComponentsFactoryFirstInstance->getComponentCrud()->read($appComponentsFactoryFirstInstance);
         $appComponentsFactorySecondInstance = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
@@ -85,13 +99,14 @@ trait AppBuilderTestTrait
 
     public function testBuildAppIncreasesNumberOfStoredComponentsIfAppDefinesComponents(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
-        $this->createTestAppsOutputComponents($appName, $domain);
-        $this->createTestAppsRequests($appName, $domain);
-        $this->createTestAppsResponses($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestRequest($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
         $preBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
         AppBuilder::buildApp($appComponentsFactory);
         $postBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
@@ -104,11 +119,11 @@ trait AppBuilderTestTrait
 
     public function testBuildAppUpdatesAppsStoredAppComponentsFactory(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
-        $this->createTestAppsOutputComponents($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
         AppBuilder::buildApp($appComponentsFactory);
         $this->assertEquals(
             $appComponentsFactory,
@@ -120,13 +135,14 @@ trait AppBuilderTestTrait
 
     public function testCallingBuildAppTwiceOnSameAppWithNoChangeToNumberOfConfiguredComponentsResultsInEqualNumberOfStoredComponents(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
-        $this->createTestAppsOutputComponents($appName, $domain);
-        $this->createTestAppsRequests($appName, $domain);
-        $this->createTestAppsResponses($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestRequest($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
         AppBuilder::buildApp($appComponentsFactory);
         $firstBuildCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
         AppBuilder::buildApp($appComponentsFactory);
@@ -141,11 +157,16 @@ trait AppBuilderTestTrait
 
     public function testBuildAppStoresAppsConfiguredOutputComponents(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
-        $this->createTestAppsOutputComponents($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
+        $this->createTestOutputComponent($appName, $domain);
         AppBuilder::buildApp($appComponentsFactory);
         $this->verifyExpectedOutputComponentsExist($appComponentsFactory);
         $this->removeTestApp($appComponentsFactory);
@@ -182,11 +203,20 @@ trait AppBuilderTestTrait
 
     public function testBuildAppStoresAppsConfiguredResponses(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
-        $this->createTestAppsResponses($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
+        $this->createTestGlobalResponse($appName, $domain);
         AppBuilder::buildApp($appComponentsFactory);
         $this->verifyExpectedResponsesExist($appComponentsFactory);
         $this->removeTestApp($appComponentsFactory);
@@ -225,11 +255,13 @@ trait AppBuilderTestTrait
 
     public function testBuildAppStoresAppsConfiguredRequests(): void
     {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appName = $this->getRandomName('App');
+        $domain = $this->getRandomDomain();
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
-        $this->createTestAppsRequests($appName, $domain);
+        $this->createTestRequest($appName, $domain);
+        $this->createTestRequest($appName, $domain);
+        $this->createTestRequest($appName, $domain);
         AppBuilder::buildApp($appComponentsFactory);
         $this->verifyExpectedRequestsExist($appComponentsFactory);
         $this->removeTestApp($appComponentsFactory);
@@ -328,10 +360,10 @@ trait AppBuilderTestTrait
 
     }
 
-    private function createTestAppsOutputComponents(string $appName, string $domain): void
+    private function createTestOutputComponent(string $appName, string $domain): void
     {
         $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
-        $ocName = 'TestOutputComponent' . strval(rand(0, PHP_INT_MAX));
+        $ocName = $this->getRandomName('OutputComponent');
         $output = "$ocName Test App Output";
         $this->assertTrue(
             file_exists($ddmsExecutable),
@@ -355,10 +387,10 @@ trait AppBuilderTestTrait
         $this->expectedOutputComponentNamesAndOutput[$name] = $output;
     }
 
-    private function createTestAppsRequests(string $appName, string $domain): void
+    private function createTestRequest(string $appName, string $domain): void
     {
         $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
-        $requestName = 'TestRequest' . strval(rand(0, PHP_INT_MAX));
+        $requestName = $this->getRandomName('Request');
         $relativeUrl = 'index.php';
         $this->assertTrue(
             file_exists($ddmsExecutable),
@@ -382,10 +414,10 @@ trait AppBuilderTestTrait
         $this->expectedRequestNamesAndUrls[$name] = $relativeUrl;
     }
 
-    private function createTestAppsResponses(string $appName, string $domain): void
+    private function createTestResponse(string $appName, string $domain): void
     {
         $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
-        $responseName = 'TestResponse' . strval(rand(0, PHP_INT_MAX));
+        $responseName = $this->getRandomName('Response');
         $position = 4.2017;
         $this->assertTrue(
             file_exists($ddmsExecutable),
@@ -404,9 +436,36 @@ trait AppBuilderTestTrait
 
     }
 
+    private function createTestGlobalResponse(string $appName, string $domain): void
+    {
+        $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
+        $responseName = $this->getRandomName('GlobalResponse');
+        $position = 4.2017;
+        $this->assertTrue(
+            file_exists($ddmsExecutable),
+            'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
+        );
+        $this->assertTrue(
+            is_executable($ddmsExecutable),
+            'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' is not executable'
+        );
+        try {
+            exec($ddmsExecutable . ' --new-global-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
+            $this->registerExpectedGlobalResponse($responseName, $position);
+        } catch (\Exception $e) {
+            $this->assertFalse(true, 'Failed to create Test App\'s Responses because ddms --new-response failed.');
+        }
+
+    }
+
     private function registerExpectedResponse(string $name, int|float $position): void
     {
         $this->expectedResponseNamesAndPositions[$name] = $position;
+    }
+
+    private function registerExpectedGlobalResponse(string $name, int|float $position): void
+    {
+        $this->expectedGlobalResponseNamesAndPositions[$name] = $position;
     }
 
     private function determinePathToDdmsExecutable(): string
