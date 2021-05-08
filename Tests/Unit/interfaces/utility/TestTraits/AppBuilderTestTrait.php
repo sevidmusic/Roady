@@ -117,6 +117,18 @@ trait AppBuilderTestTrait
         $this->removeTestApp($appComponentsFactory);
     }
 
+    public function testBuildAppStoresAppsConfiguredOutputComponents(): void
+    {
+        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
+        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $this->createTestApp($appName, $domain);
+        $this->createTestAppsOutputComponents($appName, $domain);
+        AppBuilder::buildApp($appComponentsFactory);
+        $this->verifyExpectedOutputComponentsExist($appComponentsFactory);
+        $this->removeTestApp($appComponentsFactory);
+    }
+
     private function verifyExpectedOutputComponentsExist(AppComponentsFactoryInterface $appComponentsFactory): void
     {
         $appName = $appComponentsFactory->getApp()->getName();
