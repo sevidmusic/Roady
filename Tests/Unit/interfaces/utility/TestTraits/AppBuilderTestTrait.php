@@ -5,13 +5,24 @@ namespace UnitTests\interfaces\utility\TestTraits;
 use DarlingDataManagementSystem\interfaces\utility\AppBuilder as AppBuilderInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\classes\utility\AppBuilder;
 use DarlingDataManagementSystem\classes\component\OutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 
 trait AppBuilderTestTrait
 {
 
+    /**
+     * @var array<string, string> $expectedOutputComponentNamesAndOutput
+     */
+    private array $expectedOutputComponentNamesAndOutput = [];
+    /**
+     * @var array<string, string> $expectedRequestNamesAndUrls
+     */
+    private array $expectedRequestNamesAndUrls = [];
     private string $outputComponentContainer = 'TestOutput';
+    private string $requestContainer = 'TestRequests';
 
     public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedAppsNameMatchesTheSpecifiedAppName(): void
     {
@@ -158,6 +169,52 @@ trait AppBuilderTestTrait
 
     }
 
+#####
+
+    public function testBuildAppStoresAppsConfiguredRequests(): void
+    {
+        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
+        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $this->createTestApp($appName, $domain);
+        $this->createTestAppsRequests($appName, $domain);
+        AppBuilder::buildApp($appComponentsFactory);
+        $this->verifyExpectedRequestsExist($appComponentsFactory);
+        $this->removeTestApp($appComponentsFactory);
+    }
+
+    private function verifyExpectedRequestsExist(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
+        $appName = $appComponentsFactory->getApp()->getName();
+        $appLocation = $this->determinAppsLocation($appComponentsFactory);
+        foreach($this->expectedRequestNamesAndUrls as $name => $relativeUrl) {
+            try {
+                /**
+                 * @var RequestInterface $request
+                 */
+                $request = $appComponentsFactory->getComponentCrud()->readByNameAndType(
+                    $name,
+                    Request::class,
+                    $appLocation,
+                    $this->requestContainer
+                );
+                $this->assertEquals(
+                    $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/' . $relativeUrl,
+                    $request->getUrl()
+                );
+            } catch (\Exception $e) {
+                $this->assertTrue(
+                    false,
+                    'An Request named ' . $name . ' was defined by the ' .
+                    $appName . ' App but was not stored in the ' . $this->requestContainer .
+                    ' container at the expected location, ' . $appLocation .
+                    ', on call to AppBuilder::buildApp(...)'
+                );
+            }
+        }
+    }
+
+#####
     private function determinAppsLocation(AppComponentsFactoryInterface $appComponentsFactory): string
     {
         return $appComponentsFactory->getApp()->deriveNameLocationFromRequest(
@@ -220,11 +277,6 @@ trait AppBuilderTestTrait
 
     }
 
-    /**
-     * @var array<string, string> $expectedOutputComponentNamesAndOutput
-     */
-    private array $expectedOutputComponentNamesAndOutput = [];
-
     private function createTestAppsOutputComponents(string $appName, string $domain): void
     {
         $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
@@ -266,11 +318,17 @@ trait AppBuilderTestTrait
             'Could not create Test App\'s Requests because the ddms binary at ' . $ddmsExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-request --for-app ' . $appName . ' --name ' . $requestName . ' --relative-url ' . '"' . $relativeUrl . '"');
+            exec($ddmsExecutable . ' --new-request --for-app ' . $appName . ' --name ' . $requestName . ' --relative-url ' . '"' . $relativeUrl . '"' . ' --container ' . $this->requestContainer);
+            $this->registerExpectedRequest($requestName, $relativeUrl);
         } catch (\Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App\'s Requests because ddms --new-request failed.');
         }
 
+    }
+
+    private function registerExpectedRequest(string $name, string $relativeUrl): void
+    {
+        $this->expectedRequestNamesAndUrls[$name] = $relativeUrl;
     }
 
     private function createTestAppsResponses(string $appName, string $domain): void

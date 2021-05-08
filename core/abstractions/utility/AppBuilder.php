@@ -33,6 +33,13 @@ abstract class AppBuilder implements AppBuilderInterface
         return $appComponentsFactory;
     }
 
+    public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
+        self::removeRegisteredComponents($appComponentsFactory);
+        self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
+        self::buildAppsConfiguredComponents('Requests', $appComponentsFactory);
+    }
+
     /**
      * Build the Components configured for the App by requiring the Component
      * configuration files found in the specified directory in the relevant App's
@@ -76,12 +83,6 @@ abstract class AppBuilder implements AppBuilderInterface
             }
         }
         $appComponentsFactory->getComponentCrud()->update($appComponentsFactory, $appComponentsFactory);
-    }
-
-    public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void
-    {
-        self::removeRegisteredComponents($appComponentsFactory);
-        self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
     }
 
     /**
