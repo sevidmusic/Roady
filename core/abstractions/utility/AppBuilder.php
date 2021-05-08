@@ -164,11 +164,14 @@ abstract class AppBuilder implements AppBuilderInterface
             $appComponentsFactory->getApp()->getLocation(),
             $appComponentsFactory->getApp()->getContainer()
         ) as $component) {
-            if($component->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()) {
+            if(
+                $component->getName() === $appComponentsFactory->getApp()->getName()
+                &&
+                $component->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()
+            ) {
                 $appComponentsFactory->getComponentCrud()->delete($component);
             }
         }
     }
 
-#########
 }
