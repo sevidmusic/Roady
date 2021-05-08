@@ -6,9 +6,11 @@ use DarlingDataManagementSystem\interfaces\utility\AppBuilder as AppBuilderInter
 use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\classes\utility\AppBuilder;
 use DarlingDataManagementSystem\classes\component\OutputComponent;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Response;
 
 trait AppBuilderTestTrait
 {
@@ -21,8 +23,13 @@ trait AppBuilderTestTrait
      * @var array<string, string> $expectedRequestNamesAndUrls
      */
     private array $expectedRequestNamesAndUrls = [];
+    /**
+     * @var array<string, int|float> $expectedResponseNamesAndPositions
+     */
+    private array $expectedResponseNamesAndPositions = [];
     private string $outputComponentContainer = 'TestOutput';
     private string $requestContainer = 'TestRequests';
+    # @devnote: Response container is Response::RESPONSE_CONTAINER
 
     public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedAppsNameMatchesTheSpecifiedAppName(): void
     {
@@ -36,7 +43,7 @@ trait AppBuilderTestTrait
         );
     }
 
-    public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedDomiansUrlMatchesTheSpecifiedDomainUrl(): void
+    public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedDomiansUrlMatchesTheSpecifiedDomain(): void
     {
         $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
         $domain = 'http://localhost:' . strval(rand(8000,8999));
@@ -48,7 +55,7 @@ trait AppBuilderTestTrait
         );
     }
 
-    public function testGetAppsAppComponentsFactoryCreatesStoresAndReturnsAppComponentsFactoryInstance(): void
+    public function testGetAppsAppComponentsFactoryReturnsAppComponentsFactoryThatMatchesAppsStoredAppComponentsFactoryInstance(): void
     {
         $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
         $domain = 'http://localhost:' . strval(rand(8000,8999));
@@ -83,6 +90,8 @@ trait AppBuilderTestTrait
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
         $this->createTestAppsOutputComponents($appName, $domain);
+        $this->createTestAppsRequests($appName, $domain);
+        $this->createTestAppsResponses($appName, $domain);
         $preBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
         AppBuilder::buildApp($appComponentsFactory);
         $postBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
@@ -109,13 +118,15 @@ trait AppBuilderTestTrait
         $this->removeTestApp($appComponentsFactory);
     }
 
-    public function testCallingBuildAppTwiceOnSameAppWithNoChangesToAppResultsInEqualNumberOfStoredComponents(): void
+    public function testCallingBuildAppTwiceOnSameAppWithNoChangeToNumberOfConfiguredComponentsResultsInEqualNumberOfStoredComponents(): void
     {
         $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
         $domain = 'http://localhost:' . strval(rand(8000,8999));
         $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
         $this->createTestApp($appName, $domain);
         $this->createTestAppsOutputComponents($appName, $domain);
+        $this->createTestAppsRequests($appName, $domain);
+        $this->createTestAppsResponses($appName, $domain);
         AppBuilder::buildApp($appComponentsFactory);
         $firstBuildCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
         AppBuilder::buildApp($appComponentsFactory);
@@ -123,7 +134,7 @@ trait AppBuilderTestTrait
         $this->assertEquals(
             $firstBuildCount,
             $secondBuildCount,
-            'Calling buildApp() twice on App ' . $appName . ' should result in equal number of stored Components since the ' . $appName . ' App has not changed.'
+            'Calling buildApp() twice on App ' . $appName . ' should result in equal number of stored Components since the ' . $appName . ' App still defines the same number of configured Components.'
         );
         $this->removeTestApp($appComponentsFactory);
     }
@@ -169,7 +180,48 @@ trait AppBuilderTestTrait
 
     }
 
-#####
+    public function testBuildAppStoresAppsConfiguredResponses(): void
+    {
+        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
+        $domain = 'http://localhost:' . strval(rand(8000,8999));
+        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
+        $this->createTestApp($appName, $domain);
+        $this->createTestAppsResponses($appName, $domain);
+        AppBuilder::buildApp($appComponentsFactory);
+        $this->verifyExpectedResponsesExist($appComponentsFactory);
+        $this->removeTestApp($appComponentsFactory);
+    }
+
+    private function verifyExpectedResponsesExist(AppComponentsFactoryInterface $appComponentsFactory): void
+    {
+        $appName = $appComponentsFactory->getApp()->getName();
+        $appLocation = $this->determinAppsLocation($appComponentsFactory);
+        foreach($this->expectedResponseNamesAndPositions as $name => $position) {
+            try {
+                /**
+                 * @var ResponseInterface $response
+                 */
+                $response = $appComponentsFactory->getComponentCrud()->readByNameAndType(
+                    $name,
+                    Response::class,
+                    $appLocation,
+                    Response::RESPONSE_CONTAINER
+                );
+                $this->assertEquals(
+                    $position,
+                    $response->getPosition()
+                );
+            } catch (\Exception $e) {
+                $this->assertTrue(
+                    false,
+                    'A Response named ' . $name . ' was defined by the ' .
+                    $appName . ' App but was not stored in the ' . Response::RESPONSE_CONTAINER .
+                    ' container at the expected location, ' . $appLocation .
+                    ', on call to AppBuilder::buildApp(...)'
+                );
+            }
+        }
+    }
 
     public function testBuildAppStoresAppsConfiguredRequests(): void
     {
@@ -205,7 +257,7 @@ trait AppBuilderTestTrait
             } catch (\Exception $e) {
                 $this->assertTrue(
                     false,
-                    'An Request named ' . $name . ' was defined by the ' .
+                    'A Request named ' . $name . ' was defined by the ' .
                     $appName . ' App but was not stored in the ' . $this->requestContainer .
                     ' container at the expected location, ' . $appLocation .
                     ', on call to AppBuilder::buildApp(...)'
@@ -214,7 +266,6 @@ trait AppBuilderTestTrait
         }
     }
 
-#####
     private function determinAppsLocation(AppComponentsFactoryInterface $appComponentsFactory): string
     {
         return $appComponentsFactory->getApp()->deriveNameLocationFromRequest(
@@ -335,7 +386,7 @@ trait AppBuilderTestTrait
     {
         $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
         $responseName = 'TestResponse' . strval(rand(0, PHP_INT_MAX));
-        $relativeUrl = 'index.php';
+        $position = 4.2017;
         $this->assertTrue(
             file_exists($ddmsExecutable),
             'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
@@ -345,11 +396,17 @@ trait AppBuilderTestTrait
             'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-response --for-app ' . $appName . ' --name ' . $responseName);
+            exec($ddmsExecutable . ' --new-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
+            $this->registerExpectedResponse($responseName, $position);
         } catch (\Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App\'s Responses because ddms --new-response failed.');
         }
 
+    }
+
+    private function registerExpectedResponse(string $name, int|float $position): void
+    {
+        $this->expectedResponseNamesAndPositions[$name] = $position;
     }
 
     private function determinePathToDdmsExecutable(): string
@@ -363,33 +420,3 @@ trait AppBuilderTestTrait
 
 }
 
-
-/*
-    public function testBuildAppCreatesAppsConfiguredComponents(): void
-    {
-        $appName = 'TestApp' . strval(rand(0, PHP_INT_MAX));
-        $domain = 'http://localhost:' . strval(rand(8000,8999));
-        $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory($appName, $domain);
-        $this->createTestApp($appName, $domain);
-        $this->createTestAppsOutputComponents($appName, $domain);
-#        $this->createTestAppsRequests($appName, $domain);
-#        $this->createTestAppsResponses($appName, $domain);
-        $preBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
-        AppBuilder::buildApp($appComponentsFactory);
-        $postBuildStoredComponentCount = count($appComponentsFactory->getStoredComponentRegistry()->getRegistry());
-        # Test Storge Count Increases
-        $this->assertTrue(
-            $preBuildStoredComponentCount < $postBuildStoredComponentCount,
-            'AppBuilder::buildApp() did not store any Components even though Components were defined by the ' . $appName . ' App.'
-        );
-        # Test AppComponentsFactory was updated
-        $this->assertEquals(
-            AppBuilder::getAppsAppComponentsFactory($appName, $domain)->getStoredComponentRegistry()->getRegistry(),
-            $appComponentsFactory->getStoredComponentRegistry()->getRegistry(),
-            'AppBuilder::buildApp() MUST update the AppComponentsFactory in storage to reflect that the App, and the App\'s Components were built.'
-        );
-        # Test expected OutputComponents exist
-        $this->verifyExpectedOutputComponentsExist($appComponentsFactory);
-        $this->removeTestApp($appComponentsFactory);
-    }
-*/

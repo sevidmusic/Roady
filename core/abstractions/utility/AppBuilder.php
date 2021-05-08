@@ -38,6 +38,7 @@ abstract class AppBuilder implements AppBuilderInterface
         self::removeRegisteredComponents($appComponentsFactory);
         self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
         self::buildAppsConfiguredComponents('Requests', $appComponentsFactory);
+        self::buildAppsConfiguredComponents('Responses', $appComponentsFactory);
     }
 
     /**
