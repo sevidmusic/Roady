@@ -1,0 +1,610 @@
+PHPUnit 9.5.4 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.0.6
+Configuration: ./php.xml
+
+.............................................................   61 / 1591 (  3%)
+.............................................................  122 / 1591 (  7%)
+.............................................................  183 / 1591 ( 11%)
+.............................................................  244 / 1591 ( 15%)
+.............................................................  305 / 1591 ( 19%)
+.............................................................  366 / 1591 ( 23%)
+.............................................................  427 / 1591 ( 26%)
+.............................................................  488 / 1591 ( 30%)
+.............................................................  549 / 1591 ( 34%)
+.............................................................  610 / 1591 ( 38%)
+.............................................................  671 / 1591 ( 42%)
+.............................................................  732 / 1591 ( 46%)
+.....................................................
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp5390643195630186869[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8062[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mtVx896yuUdY6bM7VSzvqTMyfkTiiVaPKHqaxFE0LPfHYrbfOm9GOt1vqLXRrhZGoCTZ7C3MeiavoEefBCw0QpV6dqcxDZKACxOxtNFYhKKmU7f28ZCtQ59GN40zaaRXmc5F4fr[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent8815410769607457859[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8062[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46muy42NWytH7UEa07iv3P7BHLhzzfKYdvv3uG6uKk2aa65SxUg5NgVTB1vwa2t2yRX44GXEoWst88NFkwLlwCYhkTYNHXqa5RJQJHKsHxepsZ5NcqdSJVSFCm[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest8333799032688320318[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8062[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46msOw7que89vMSLFaXhkFy9R45MlO0EfbCWR4eoDRGpMXUzEW4STe7SHoTrdc6bd05DAYwWNgP3TMzjG2SkRJFXEixwzYpqrCEKyXphDjb8vxCvhtS23ao9KQkO1oTt[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse5790078850878746681[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8062[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46m4Kvhj5fYMRCsyUZ7iH6mbvLIZPaVuCdauwXLz1wiBu6RCW6CfDL3AKHf4bKgAZq69LZFXzMrN6fKviGj7tQJZnIQB6g3VF38j0peFxnQd2iJn29CdhLos6[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse2615605842042695823[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8062[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mRZC2j7Ep2FpK7jfM9r1lpVCLTLaI9YQqvZevI6gyUIHOWct7riRZYyZMdIaJqwtQaKCsGOVRuc0pUfNdHwRwVlJEj8WtKcgylLQ1A1Gblmyovnt3i03eA8qqi5NhRebKX8y[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp5390643195630186869[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp1032799655277970031[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8078[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mDntoozapf9kN50h9V22AenD4EQyIvfzoi9Hr6t0KLNN0wckdUFVySkqZsSwkXv1AgtCgyIFYFjPAveIjYW87woTyr2M8WxMh25P7D5pMouibnMm[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent8421928054052672069[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8078[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mUzoA3Phz05IZICNntpe2cbAk3fGjKhRmeyQlJEGGw1HuEJQUGjoGLYonjGFt06XT5ysLJ1hyrl7a4GKyULpTrLyrEecQy8RwgIN6Hn8Hxshhslc[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp1032799655277970031[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp7047450402733510144[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46m1NCIhlTqdZORuIkN25zFlYZyQ00TqYOExvSryCGygUAZC1uI9NjCyfBjCV3ADejReDCJ7AXNfxu27xf2IrT7RAqFikh0r0NyXIjeYkLjgpglaXNz[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent3489873379822336533[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mBVwotus7tbLxYphRMn7CfC4mimiatG2wpWAzJX5WXyhQkNmF6JtD7IpqtrtNFMHritA1BPSHB2CkhsRZhLHe3jxptxb19FJwl2GDRDx6nynLBtjB7seCed[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest4747925936504623912[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mLkrRvP8w9gSfJByzQmNjAAQqZkIiwUEDxIq5ztNM5fSniOe4x7PF1zTJ2OEeYqc9oHYUd9yeEUuj1oknU88fPuEubHaolV6uNZlvg[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse1680095575056026951[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mVOMWgdJZ04OQ0PZB0Wz9ITT2cdBx5yy9PizgST96Vkh94sqSCYKQY2gP4g9uW6aWoUSWgXztCY5SLs7anls9VOUmeUAQvTFDFl0p3m8pQDWpuQYA7Rpf[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse1733539900580785599[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mAYny0olZNz0XjMqNj69ZbladEt0gLm6BRL32jDhmxjOJrgpgd46aT04Tsfj0SSvvZ62qLxR1SXJ1cDdywAGe9rpNvU7mc4G8uwfxyjD03uTGUIXkirBrsV6HR0YLLvh46wOstuNiNbk4s[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp7047450402733510144[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp7047450402733510144[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46m1NCIhlTqdZORuIkN25zFlYZyQ00TqYOExvSryCGygUAZC1uI9NjCyfBjCV3ADejReDCJ7AXNfxu27xf2IrT7RAqFikh0r0NyXIjeYkLjgpglaXNz[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent3489873379822336533[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mVrCjqrEmb6FKZF3G3WG1zMhVf4H53wRmml0eQlSyWVgdENXLROQi1Pz8HqmOv8Jalcuq6DqGbOSKN7Iqr2V04BGCtGyAQXwY7Jqo0KdQdI87D77M2B4TAGaDMMX8DPGygg8Ikixo[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest4747925936504623912[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mBt5qWxo6DcEnW9nfTvoV7RbJFb2ISpLfoXTBdQ36FPYWJviWt5nJsfrxXAHVl2syfQchGiMbU0cZFaSaq6VMnRfOmAl63AnH5f6JUoQotBeuf6v4sUUfVM0k5ZhKqK[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse1680095575056026951[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mvhXGpEdIJuUpI9EZM8sU3DiLuCAzkaqirEgtCVW3idcnZsfbCvUohlNSlIrA29ST9soXgg2EGfd5I8aewzvfNg48PirOoFAyo6meWKmTXKBgb3bIXZrBHocNrY[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse1733539900580785599[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8180[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mk9V9kLFqAwWW9acoxjM7rkTgQHXkLeoFj2iZB8UINoduEZrgZ5maDsQyMH3Flzh0cq0jeAhg8805ZQ4mTPToM3PHb68Mc62sfFn9nZJZGKjSpu5Oz0lOcyBabckkSb9Zm[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp7047450402733510144[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp5560293503548166616[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46m0mxgUbKu3PtqEo47ufRJywHSOrnEyIFATFSdiPbJYzcHoiZLxQ4vH5oYbJNAqmYT2VopQ4pBgQMjfhuj5M2rWJ9RseTHNgaqlWg9bukuTlulaolhi3F6XicZaQwIiY42v7G[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent1133454803756747592[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mw7kg4s226boMhFB8l4EIosZjia8hTxdWOel8MrcPYu6OysTcBpzyUmZfnd3AQCioFKToatP8sz5DeN2B8KUb6r1PzFaAGE4GX3PK[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent2106994555749612163[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46m3AnUeDIXO2Iwah7lFkhcQ7DBjCFkDAeIIX9YH3yqV8XJBJSsWD2p9WUz5OCuteFC8Cz62cpdO5FCcDohbfbE8xRzh4cRjw1EIdVl07KJcogDEFprPyQpw32QB31Eb[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent333788400422892899[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mOPgmYvKAZEn2VKFEnpYwWedhkxYQneOSraOZNVW3ZEhxlMfroGW1jyFaMmPWAGSMUGaLaygLuBNBP8TgtSwwLZkOhzsK90EA2HLwXoI9Hkwupvmt3Exnvr7[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent4630253596576049488[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mpv71sttl4YXHRMydbPQ8KmatQJrxttxHx4H6fZ1vBBH7vlg1hK6fk8W1PjjeNcXXQnkdGOAsYY50NbGaLCD2bsXG2m0YYFkUKIKVjHHY0EJANRBS7DGZHgu6vkKER4gNvUdR2xIsFQs[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent8642978088654156130[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mtIpFzkYxZM78Ct0sEUomrflLZp20e3C7GrTmSitGXeARgKtW8H7Kj1cALooQg8xLsRNEj14kpNWZWkgFLTcHWo7bQBBFfmuViwNYv4HzDOyDVwPfHN1t[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent9068913364166194018[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8100[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mJQMUgwLYw6eI0GPoLinYjp4uERL3y0kyYo1WebycNviTACv3TJSJ1d19uuFg7dHqwJwYNcGoVtuEzuJkYQXH6HGTaL8Zgl3G3190YIQFQMYn0jXxC[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp5560293503548166616[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp8536709079064430687[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mUqG98NOEVEUTZnHFJ5YtzqL8oLdZnCZQGJpTETtqe6Wc5z9zHn6h40fUQxwAR5ucbhyE6wlMAvmcuLcjvTyFJ7TkEtPR3S6v50Lgi7XJ2PuMO70r9[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse162642422819923976[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46meS0eCi0zIHoeuOYKtDoJRMRYoiTRInkWU04twGB6AKixSjaddVwQvCo4W2PFbhmCqASTQqzPEGh06uLdOXa6ZXXwU65l1X6HMhDUxsCBHxWhwrr35OlF3CIZaN6f[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse2293501461412956721[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mawnNPy3h5r9SB02ZVwbanneIOdSUDijynG6aV7JQ43t3Wtgvm63p6f1mv43r3lqqbhj5Wu6e2HA576Ae5Pnuiew9cgtTBeRCUZCOttMKG8hsdCQuEowKAlc4Yanva0h80fNLktx4jEnhO[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse3325787953165471527[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mLZgkDWwmhble3YeEja7EqSfvx4d6SPbe8n9DFyLyMxhkPRbcHyM4cV3enYorvITFJE1hcIPXhvvYuEFhOZpQdz9ybONUOAfqnpOIcf8xp49ng8x5HID7GDIptWbJUMx21yGAuYjN[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse7319681505675211607[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mjvKKsZq8lR0J4rwXt6VxXVraMyrTqGawm1ngGO0ZgSYbfVYN69LgcQh91PXHy5s7g1mfrZt3M1QzeQWpWcFdzfYCninCwdTcWXIIT4izszAOkLwfA7f8cE9Z5iqzlzipi[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse8019509086429302061[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mSVpIjMtfeUwlrRrjhjsmNRQIV1np86FzJxDQa3MTHwNZdGvetNZjSVfFpc32Lh1JIEtt5kT4sybDgEltugxPUegtgENO9np[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse1420978864714327484[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46m5VOUiXPGI4HdnLqUPHOP0CkggD4PXRFDphf2bdOIBWgnsiHfkzJlNVGMf8sTEI0YSzNPEPGEixk8uUNeSbUOBvgrxSt5sJB1q5E6ZJZhWIDrTB5yvJRbyJ7mCuydh[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse2678259142448426225[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mIKJJhJInsr8rAu8bgN8MA2WixifecRR05b9fBHG4B208dr4SQWyjAV7CgR1SjUl1hbqxfsylsLnmCUJ2weUuiey15VKWK8chDyAfZQ953LugZL9dJBKxKSy7[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse6491447473311613483[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mTbNoL6UpqGlAjidklMrC7O0RZcBxbA5ANnTi7JTupY9l3VGfVst8UErG3TBApuIg8maAR92giZmVB7W64nUx0dFtzx377pKqqbHQQOuWhCEWGAd6DSbUkEpMVFkLvke98X[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse7128257960784236050[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mhFFEfWoJpCFxLcKf6Jpuoj8Ov6abHlTalFHRGxZ5HqFodWM9h1sSto8pJgcTREqJ9Md2FXX1gdcz7b71boLHuqxTJZ3BQnXFvTNwOoF7PoBd7g33ZN5Ydr8Q591EJRIztrnJZES[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse7407746343328933337[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8324[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46msZSDv29KsupIIGp05iU2gORbfC53OVevX0EO1FVtSlgNJqXKbd9urztCXlktCtbIm3XNfUc8NFIFPLyHnEavzo9asxHlVxQAIN0oyjIp9VbFw8oX[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp8536709079064430687[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp6525817468717993812[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8765[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mVsz392YpvTyTU7MDwmJS2BCOUBKg7LelB72UaErUQBXD0ZLG3ca0ESeFTwr6HAyU3LsU7EUhAypxFK8vzeeLllY5gmUqMqoukl5SwtxDV5dqDebfE3K[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest2698308565183073213[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8765[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46moPPcEDaRfufUrdOIPzLOAy0Z8yE1NtPLDtBzZVrhn1iYKcPveJYWI4MbM8bhlZ7mHC0nbSOyhQWXtBGLSsIBsU8GQgU5OwAJcNKiunkt20f5nSgyA1n[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest6333619388751573044[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8765[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mpuSgpdxNeEA49xNjOVJvU15NPrcTMCnsxmKrec2hQqBjjj0ELMSnFZXgE64hkoNaqb6nXCk9Jr0JGgQ73UDeMrCoC3ixy6jq4nw3pmKItogHD9LqFo2[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest7904416257357885732[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8765[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mTnVws2xFXoxgzQqyp1mL4zvLq4QEwqbd9sjdRmQtRLZQ7Fft1rpzx4h6be8k9Rtp8mwkJtkeaUTYrNIgEEbujkIRrf99KgiUuFkxibEwdCHudoISqQ6DzCFDyZ[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp6525817468717993812[0m
+...  793 / 1591 ( 49%)
+.............................................................  854 / 1591 ( 53%)
+.............................................................  915 / 1591 ( 57%)
+.............................................................  976 / 1591 ( 61%)
+............................................................. 1037 / 1591 ( 65%)
+............................................................. 1098 / 1591 ( 69%)
+............................................................. 1159 / 1591 ( 72%)
+............................................................. 1220 / 1591 ( 76%)
+............................................................. 1281 / 1591 ( 80%)
+............................................................. 1342 / 1591 ( 84%)
+............................................................. 1403 / 1591 ( 88%)
+............................................................. 1464 / 1591 ( 92%)
+............................................................. 1525 / 1591 ( 95%)
+.....................................................
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp5113146375250442872[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8190[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mMhutmrhsM4jUa45f1k8uA0VHZ5sjkr1t9C0OBUxPdJx84kjinmoTE0F6URctUHQH0bYtIO4u29szMnZnMLfR6MlnTmRQ30djAPQcvGKehuEmUAjQGCJnXlaziS1p3Jpo[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent6698978839553055939[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8190[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mccSRxhaYEAMNww5jLC7PE12N58fssiXwDPNunR8aWEAjjXCMqeWsDdnbOSdVPMH7oq24dJCxZ5N1IljYUFUryxOQ7eoPebxRqpzUD8w4e9tPez[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest7523980360534896732[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8190[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mWB4T4TyUsl2ByY4AwnnAQgdYWMFGzt7yEVho5Vo5url0BsSoImKPteuYLm0UP7UIPAFfjRKU8lvrKOzoBmrbg6k4AN9MFuURDtPpwKGDSN3ZIlNgoi[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse8231004516186329536[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8190[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mFKGFlxz43p2LMbF1e6sm7Mqg9Wf2MmZ2SjPKtIk2iy6zzNq19mtUYDl3AH02mjuBjvee3wMYRufVl3EyqKw5Jiq2sXh0Cjq6cQ85l4HuVabopLADBw8AyNfQCkoMHMIWmHqROTXbzm07J[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse6040909202430164621[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8190[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mwVf75njyl2dBcRw6fqv13iEOODv6GlNL7zVUbMbwDV9g460MAZPQfP2KtjqygU2keYCtH9wC0ireboyOPqgn65jIgsRUw8dlmIY24h3fjeTbHqiywgQxLwgBzSRZO632g20s[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp5113146375250442872[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp4746933766662292205[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8123[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mBreW39dbAawLN86rDrsUV5F4BctnosjiHS3p36BAZhZU0VSUwO6ZOUASp9b0EICLnMUPCWejsPbX9ixMuufPS0ggLLn90kyMK3OGPd5Pl[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent901961590330178086[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8123[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mDADHZQM41r1fUdpue1kD6xRlGJlFLTBSvvgiux5ugUlynSaJ0kxfgPWY6CKWJ6JoboWEBRnyjtqpeCRi4wNp2czH5oq0GZAC98knJOr0iPxXzg2mshNlFEy2L28c8jV[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp4746933766662292205[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp1186932174068213739[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mnEzAvrVSDndObpiPQYEQ1IiSWBCZfqzd3nslzi8FTtrvaho2DS8EaWIE3LMXPTEpdTr0a9ecfvjVS20u7cTV8TYV7kjQ7nEG6ZQN0ePm9Qw8Ss2vSkmQQXbs6feagYCzCPhTRA5[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent6844037368127429889[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mCEgqUwkBSjkQ0BwJilJYhu2JmcBm0yDuNBdDNZPsCwL32RBCNnJykys1aZjLL9RcyRDufZWgC1R19P26d3QYuAUpYCN3F1QQrsX1qPcLlwO8VF5xaend[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest4161453609737288709[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mEerQWaop64K3CUXiKm93dnzxiQvMA1QSY66dl7ZUTWyp9QMBv5ZW0TFTMbFmw2ku4B9VX0FtcRHjPTFznN102C8gK0IM8Z0FjjThAFjffQrtjnzc8mp6gFZXZ8Gg[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse8236173538768656760[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mKD9TYE6DjoJeigF3ngD9VSmdWgt0ivVtmXs0xJMHufvLKRr8AvHnpfh61zCpXzkRq8npDpgjdLvOxjXZfJbtOXCloeMdsoGPvFMNVQ0IFTX5SYHSduXXInqhEd[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse7039879846819325884[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mi1IkR6m2HTGPYBlEEO2SCRW6kbCuy0mlUZw68YUTJTcgMUeNRGY5sppWYGoy0KHFrQJWWZUKAydtWeOxLTMEP0tEytf4gCGAY4qEJjkWHs[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp1186932174068213739[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp1186932174068213739[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mnEzAvrVSDndObpiPQYEQ1IiSWBCZfqzd3nslzi8FTtrvaho2DS8EaWIE3LMXPTEpdTr0a9ecfvjVS20u7cTV8TYV7kjQ7nEG6ZQN0ePm9Qw8Ss2vSkmQQXbs6feagYCzCPhTRA5[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent6844037368127429889[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46muo8wdfb5DEqt3iCzuO1x6ysAWFteF1TAvRVWpeYshoUUfRqKPrAIZjGaZFZronRs6rDxyRbwJ3mBuNfif8e08nLlsZajsmJlSYwQqXBHNeFV4NfH4HIOnNhYRuOn9TRqmfitk[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest4161453609737288709[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46m7A9izN37jYH15FgtJUmFMjMEoyyknsmufIP2NISPhUusLNOsblCvbyRibIDrOz752wgOn9rJxSBh20QLfKi7cX9R2wGXvQaCnwiHgQCPO0dGZuev9M[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse8236173538768656760[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mDmHzrTxeOe7zbxSUWarmic1gPZcXLzLO7PY8aj0MqYlJ6FtJ9tU6uMelzjox4iMemoY12pR6HvGObvGZwPME8s3zLF8O9kAGqlWylX09oiRb2d88Pdz4SfHWV31DlRFgJTFD74UjB8JD[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse7039879846819325884[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8628[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46maAzkHjV9JXX9M2Bxvo6mk6GpOQwKuZSoDgHF4E2TDrAMA6NWZHopdGqGpdIfUvngOGkSzxTfbIP6czVyaZHf5J19yJc7Sr9dX3PQKDNLJk2h2BqxTRKSszCd[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp1186932174068213739[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp3330958270224915621[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mJRWoL0N6yjGKgoT23LZafDOwHCglgfWDhbkAKeCLFedlCRTOS72JGaj0ZUFi6jOcZWbraB6TZgcKOVGPmHd5lo0pnsGLRWb15QdrOfMQNvZ5ddUtat[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent1210876023522849857[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mNyuEu9xSXvvc5YJHOSD19r4QHERxH8Pk8rn29r2TLfsWnpZM9H5ZMgN2na50kCOg51T26gWZ8xNF8GR0QTymq4VS6XEfHv1flcuHiXo3l8ZVNIeIbg3ZH[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent2165080724208252504[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mJE1EjQf6aCDIzOjEHymFXpP0kl1HOHd3PLuGFgV4Fis9rKEnIgRTZLx2a5cDcf2mD3CoQ3Mr6amAqxvBBULMRwWrwUdujSfSGd932ULbdSriGZJP4vyEv[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent3029590669610592206[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mWOy58HJiScoHuAneG3rY07ngkPl3DD2fOxdXM11GAvxHzLe1Cfh74GqAq730m6jvJ6yONVdZRPuroyG6bk7D083fYN6DM8obek6PR7PvZCuYok0FVzAHJZFG1prKYJDVFh[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent4269485092705553104[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mzaTWfN0SsktFtuH844YhcuHPNyvWF1QT7XyyTPtuOBOS7ZOgpqhuqu0O3S6FJCJi3tws51SSm9VJBFbc1BNU76gMMCK0aoq8KEc7xVIOe2i8hFvr7YbZSAqEKnF5jcqWNXTiTYT[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent5035461732722782558[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46m540VT8l2JCM5AXxsjjXH2ugGV0hFWZ7HTr71WTz1NPaEueDwRrwxULuG2tK7WbiXpiMssOVu63kMZakCqixrFXIOTRMliHLuD9ptW2kI0X0jpeoSTZ[0m
+
+Built DarlingDataManagementSystem\classes\component\OutputComponent:
+    Name: [42mTestOutputComponent6993075920113616707[0m
+    Container: [1;32mTestOutput[0m
+    Location: [44mlocalhost8849[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\OutputComponent[0m
+    UniqueId: [46mGQ9QMilRY5PSKG7GcIACQbuIJUkKrxzt9FQHhX9SrlyF0qooRccbQrm3kpkNREwttQBdpMRwCgt6stzKRdgPdaPMmgW6uRekIzdvCXEEsNSEwXBSrltYJjhMvlT3cAC[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp3330958270224915621[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp1211540406866540061[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mW1rNFnlLy3IS5teIkvZ66gbwU9DP1PPg5JLFZN2hm7DTMUTv2pgiYMytAjAqo7EDvLat7RZKL3AsuwodZsl5Jy9SQJtytL7cgBcpppVhVEz0p[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse5042926116085684846[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mLUkpqt0lWItyq5ZjEgvFSWCSygHjVETKsXHr9M0ltWLmTLtB85uPtsvj6pN4QKUib9Nmw23rWvDY8FY93ggOqGafJlwivVuip4oJGf9ORwd4sZvyevpu1SiZTyitE[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse558659341883756699[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46m81lJqrkaayuYd4fJY2V2Y8m9Qpkdo0xI3mE1qaq8orFb0EsxgemG4cGiVHCWk3GDt50SJxDKgL1ipFZppndrxSzcabaRlM0o2zUgZlWuL8X1vlRzrdZb1m13oHXsYiS[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse5679284245507552231[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46myK25FJRhVnnSPNlV8bV91V9GKXmhLg0o3Fh8h5spUewJBP0t3XFfZEY9BQ06GsWznZRLz3d9YNTqpogKu0HkJeXWBRWntqhZPcZRdyCDaUMz2XRM70Kn7XUbnTyG6ItigWXv[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse6300547615275655758[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46maU5N3xDugT0gAFvdWCOnfjtHJiu4Vq1wjqadEUgNRiUJo1eqqyyV8mhpdx74yGfh3HASmAxDFhwtUJgRq9mq2XsaHWa1VA2y5FnBmajQDUNRN2KjV[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse:
+    Name: [42mTestGlobalResponse6424759414585777155[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse[0m
+    UniqueId: [46mizj1RqKykyh9OYKfiT0tE79aQDqQ0urwBZCYzNxFyX8XX8b3gKpSU2jXQqEqZfsRhhm4N1OHgK6tkrnDowEl2obzN51T6JVIrCmrXERZLuBC2X[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse325570951157979718[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mhIGb77gucudbFXmE0zBcuJQG9l3IyNhXVWQ9dgzCAHOdoueWZ2ostBD3RmNfbCWKuRQOfzbH7g0ew3pbZmWOB85m9spRFDJSbvR68SApF[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse4948137973754711575[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46ma89e0VkayrfXeqN9iyv46QgJNKzI5v8O59B9boCX45q0oYMHQ41QBPowky3cfN3ZKL7Z8TYHLAT8jfwg6p2BGxOHoR04lftLYPr1fFq056Mp1QJ3G0nPvM3h6rsrm[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse7765683792775050947[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mCBKRMboWKeLNfl5neSFaVCLi72DhkbKMSHCDMdTwUoOO0VngP0ABcj8yT2hyv0ehu0EDMQEw294kOYv2bB2TxgvAhDDNWfJq[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse8543783920969391236[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mU3bAwtvJV5bmen9tlgfFr6mhKO4xFtc5AHBo0x3iAA9EJEGOgLJLx7DAnSafP1HNCCyteeDU3KtRtwAfMicon4t0Wwk6QnhpvEC9QgMvGF7YW9f0TeO0i2vEVdqXLKGJz[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Response:
+    Name: [42mTestResponse8568048786450842450[0m
+    Container: [1;32mRESPONSES[0m
+    Location: [44mlocalhost8077[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Response[0m
+    UniqueId: [46mVqYnlmr9KRCBBAxm4VlwB6qGKmpa77fLSFCtq94zn6dqoL2fEKLsPsaDTZItwnfvtcINVORP3NOcCSIN4kchgMEOwGvp1XoFGrfT5V7mK[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp1211540406866540061[0m
+.
+Built DarlingDataManagementSystem\classes\component\Web\App:
+    Name: [42mTestApp6670119540760766901[0m
+    Container: [1;32mAPP[0m
+    Location: [44mlocalhost8272[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\App[0m
+    UniqueId: [46mgesEvXMGwnAaUkWqhevqZlwI9YIpCfHJPxFqIrIa1svoQD2hVgyPtGmStsSilDV5fQPJl8LMMhHJERfjDK3DmBQQVc0rBC5Rq3A0EjkiU0IDtOoXql964hRzoPUmgAxcvk[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest3210864316127770831[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8272[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46motP0FAd0Vrl0lGusXr0lWxScTY0N3O1r8uMSG71Si6qHIOURFAm48Wx3TCDW83iqS92aqQX9wt2gc3tDqeg33UFlmCKeIEqiYBwyeBlpQq7kokjfQeHDF5hax03k1[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest352405918069832859[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8272[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mX0GnHfCqjuZXTmi2OhIDzSxNrJlIGFZjFxa97q0iNxObUKFhlfdEAAlr8QcksB3XwD7L7aC3KX7wUyvHGuF6USwv5uxHfaYpOXQRbl75VpHMHz1n88UoZJ6dhRpukfV[0m
+
+Built DarlingDataManagementSystem\classes\component\Web\Routing\Request:
+    Name: [42mTestRequest5281718358164825026[0m
+    Container: [1;32mTestRequests[0m
+    Location: [44mlocalhost8272[0m
+    Type: [1;34mDarlingDataManagementSystem\classes\component\Web\Routing\Request[0m
+    UniqueId: [46mqq8UXy1wNt6GeHPcevlxZDIMOYJMLx5AHUHUHwQbZlC2Z6PrMzPqSqoST3Xf88NBQlEEOZo0VZW6efF3w88j2NDSImBaKBxYSPkoHGiz0glYq5lBwEaK[0m
+
+Saved build log to: [1;34m/home/darling/Downloads/DarlingDataManagementSystem/Apps/.buildLogs/TestApp6670119540760766901[0m
+... 1586 / 1591 ( 99%)
+.....                                                         1591 / 1591 (100%)
+
+Time: 00:08.938, Memory: 36.00 MB
+
+OK (1591 tests, 2073 assertions)
