@@ -15,11 +15,6 @@
             <directory>Tests</directory>
         </testsuite>
 
-
-        <testsuite name="Extensions">
-            <directory>Extensions</directory>
-        </testsuite>
-
     </testsuites>
 
 </phpunit>
