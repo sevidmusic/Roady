@@ -1,6 +1,5 @@
 <?php
 
-ini_set('display_errors', true);
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
@@ -12,43 +11,23 @@ use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
+use DarlingDataManagementSystem\classes\utility\AppBuilder;
 
-$currentRequest = new Request(
-    new Storable(
-        'CurrentRequest',
-        'Requests',
-        'Index'
-    ),
-    new Switchable()
-);
+$currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'), new Switchable());
+$appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
 
-$app = new App($currentRequest, new Switchable());
-
-$primaryFactory = new PrimaryFactory($app);
-
-$crud = new ComponentCrud(
-    $primaryFactory->buildStorable('AppCrud', 'Index'),
-    $primaryFactory->buildSwitchable(),
-    new JsonStorageDriver(
-        $primaryFactory->buildStorable('AppStorageDriver', 'Index'),
-        $primaryFactory->buildSwitchable()
-    )
-);
-
-$router = new Router(
-    $primaryFactory->buildStorable('AppRouter', 'Index'),
-    $primaryFactory->buildSwitchable(),
-    $currentRequest, // @todo This should be passed App
-    $crud
-);
 try {
     $userInterface = new ResponseUI(
-        $primaryFactory->buildStorable('AppUI', 'Index'),
-        $primaryFactory->buildSwitchable(),
-        $primaryFactory->buildPositionable(0),
-        $router,
+        $appComonentsFactory->getPrimaryFactory()->buildStorable('AppUI', 'Index'),
+        $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
+        $appComonentsFactory->getPrimaryFactory()->buildPositionable(0),
+        new Router(
+            $appComonentsFactory->getPrimaryFactory()->buildStorable('AppRouter', 'Index'),
+            $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
+            $currentRequest,
+            $appComonentsFactory->getComponentCrud()
+        )
     );
-
     echo $userInterface->getOutput();
 } catch (RuntimeException $runtimeException) {
     ?>
@@ -71,7 +50,7 @@ try {
     <h1>404 Not Found</h1>
     <p>Sorry, the you request you made is not valid. Please try again later.</p>
     <ul>
-        <li>App Name: <?php echo $app->getName(); ?></li>
+        <li>App Name: <?php echo $appComonentsFactory->getApp()->getName(); ?></li>
         <li>Request: <?php echo $currentRequest->getUrl(); ?></li>
         <li class="error">Error Message: <?php echo $runtimeException->getMessage(); ?></li>
     </ul>
@@ -81,4 +60,3 @@ try {
 }
 ?>
 <!-- Powered by the Darling Cms | Currently Running App: <?php echo App::deriveNameLocationFromRequest($currentRequest); ?> -->
-
