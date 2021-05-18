@@ -12,9 +12,12 @@ use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
 use DarlingDataManagementSystem\classes\utility\AppBuilder;
+use DarlingDataManagementSystem\classes\utility\HtmlStructure;
 
 $currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'), new Switchable());
 $appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
+
+HtmlStructure::enableHtmlStructure();
 
 try {
     $userInterface = new ResponseUI(
