@@ -2,6 +2,12 @@
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
@@ -12,40 +18,29 @@ use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
 use DarlingDataManagementSystem\classes\primary\Storable;
 use DarlingDataManagementSystem\classes\primary\Switchable;
 use DarlingDataManagementSystem\classes\utility\AppBuilder;
-
-
-##################################################################################################
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-
-
 use DarlingDataManagementSystem\classes\component\OutputComponent;
 use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse;
 
 class HtmlStructure {
 
     private const DARLING_DATA_MANAMENT_SYSTEM = 'HtmlStructure';
-    public static function getCurrentRequest(): RequestInterface {
+    private static function getCurrentRequest(): RequestInterface {
         return new Request(new Storable('CurrentRequest', 'Requests', self::DARLING_DATA_MANAMENT_SYSTEM), new Switchable());
     }
 
-    public static function getAppComponentsFactory(): AppComponentsFactoryInterface {
+    private static function getAppComponentsFactory(): AppComponentsFactoryInterface {
         return AppBuilder::getAppsAppComponentsFactory(self::DARLING_DATA_MANAMENT_SYSTEM, self::getCurrentRequest()->getUrl());
     }
 
-    public static function getComponentCrud(): ComponentCrudInterface {
+    private static function getComponentCrud(): ComponentCrudInterface {
         return self::getAppComponentsFactory()->getComponentCrud();
     }
 
-    public static function getPrimaryFactory(): PrimaryFactoryInterface {
+    private static function getPrimaryFactory(): PrimaryFactoryInterface {
         return self::getAppComponentsFactory()->getPrimaryFactory();
     }
 
-    public static function createOrUpdateOutputComponent(string $name, string $container, float $position, string $output): OutputComponentInterface {
+    private static function createOrUpdateOutputComponent(string $name, string $container, float $position, string $output): OutputComponentInterface {
         try {
             # OC exists, read from storage, and update position and output to match specified
             /**
@@ -70,7 +65,7 @@ class HtmlStructure {
         return $outputComponent;
     }
 
-    public static function createOrUpdateGlobalResponse(string $name, float $position, OutputComponentInterface ...$outputComponents): GlobalResponseInterface {
+    private static function createOrUpdateGlobalResponse(string $name, float $position, OutputComponentInterface ...$outputComponents): GlobalResponseInterface {
         try {
             # OC exists, read from storage, and update position and output to match specified
             /**
@@ -120,13 +115,6 @@ class HtmlStructure {
 }
 
 HtmlStructure::enableHtmlStructure();
-
-
-##################################################################################################
-
-
-
-
 
 $currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'), new Switchable());
 $appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
