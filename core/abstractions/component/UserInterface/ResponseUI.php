@@ -17,7 +17,7 @@ use RuntimeException as PHPRuntimeException;
 abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInterface
 {
 
-    private RouterInterface $router;
+    protected RouterInterface $router;
 
     public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, RouterInterface $router)
     {
@@ -28,7 +28,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     /**
      * @return array<string, PositionableInterface>
      */
-    private function sortPositionables(PositionableInterface ...$postionables): array
+    protected function sortPositionables(PositionableInterface ...$postionables): array
     {
         $sorted = [];
         foreach($postionables as $postionable) {
@@ -43,7 +43,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     }
 
 
-    private function getRoutersComponentCrud(): ComponentCrudInterface
+    protected function getRoutersComponentCrud(): ComponentCrudInterface
     {
         return $this->router->export()['crud'];
     }
