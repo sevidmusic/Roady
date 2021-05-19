@@ -47,7 +47,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     {
         return $this->router->export()['crud'];
     }
-
+    private const OPENING_HTML = '<!DOCTYPE html><html lang="en"><head>';
     private function buildOutput(): string
     {
         $expectedOutput = '';
@@ -61,10 +61,18 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
          */
         foreach($sortedResponses as $response)
         {
+            if(!str_contains($expectedOutput, self::OPENING_HTML)) {
+                $expectedOutput .= self::OPENING_HTML;
+            }
+            if($response->getPosition() >= 0 && !str_contains($expectedOutput, '</head>')) {
+                $expectedOutput .= '</head><body>';
+            }
             $outputComponents = [];
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
+###
                 $component = $this->getRoutersComponentCrud()->read($storable);
+###
                 $classImplements = class_implements($component);
                 $isAnOutputComponent = (is_array($classImplements) ? in_array(OutputComponentInterface::class, $classImplements) : false);
                 if($isAnOutputComponent === true)
@@ -88,7 +96,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
         {
             throw new PHPRuntimeException('There is nothing to show for this request.');
         }
-        return $expectedOutput;
+        return $expectedOutput . PHP_EOL . '<</body></html>>';
     }
 
     public function getOutput(): string
