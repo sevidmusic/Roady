@@ -13,11 +13,20 @@ use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use RuntimeException as PHPRuntimeException;
+use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 
 trait WebUITestTrait
 {
 
     private WebUIInterface $webUI;
+    private string $doctype = '<!DOCTYPE html>' . PHP_EOL;
+    private string $openHtml = '<html lang="en">' . PHP_EOL;
+    private string $openHead = '<head>' . PHP_EOL;
+    private string $closeHead = '</head>' . PHP_EOL;
+    private string $openBody = '<body>' . PHP_EOL;
+    private string $closeBody = '</body>' . PHP_EOL;
+    private string $closeHtml = '</html>' . PHP_EOL;
+
 
     protected function setWebUIParentTestInstances(): void
     {
@@ -54,6 +63,38 @@ trait WebUITestTrait
 
     protected function expectedOutput(): string
     {
-        return parent::expectedOutput();;
+        $expectedOutput = $this->doctype . $this->openHtml . $this->openHead;
+        $expectedResponses = $this->expectedResponses();
+        $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        /**
+         * @var ResponseInterface $response
+         */
+        foreach($sortedResponses as $response)
+        {
+            if($response->getPosition() >= 0 && !str_contains($expectedOutput, $this->closeHead . $this->openBody)) {
+                $expectedOutput .= $this->closeHead . $this->openBody;
+            }
+            $outputComponents = [];
+            foreach($response->getOutputComponentStorageInfo() as $storable)
+            {
+                /**
+                 * @var OutputComponentInterface $component
+                 */
+                $component = $this->getRoutersCompoenentCrud()->read($storable);
+                if($this->isProperImplementation(OutputComponentInterface::class, $component))
+                {
+                    array_push($outputComponents, $component);
+                }
+            }
+            $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            /**
+             * @var OutputComponentInterface $outputComponent
+             */
+            foreach($sortedOutputComponents as $outputComponent)
+            {
+                $expectedOutput .= $outputComponent->getOutput();
+            }
+        }
+        return $expectedOutput . $this->closeBody . $this->closeHtml;
     }
 }
