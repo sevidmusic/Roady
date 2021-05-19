@@ -5,7 +5,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
-use DarlingDataManagementSystem\classes\component\UserInterface\ResponseUI;
+use DarlingDataManagementSystem\classes\component\UserInterface\WebUI;
 use DarlingDataManagementSystem\classes\component\Web\App;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
@@ -17,7 +17,7 @@ $currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'
 $appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
 
 try {
-    $userInterface = new ResponseUI(
+    $userInterface = new WebUI(
         $appComonentsFactory->getPrimaryFactory()->buildStorable('AppUI', 'Index'),
         $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
         $appComonentsFactory->getPrimaryFactory()->buildPositionable(0),

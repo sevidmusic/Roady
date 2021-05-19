@@ -28,7 +28,7 @@ use RuntimeException as PHPRuntimeException;
 trait ResponseUITestTrait
 {
 
-    private ResponseUIInterface $responseUI;
+    protected ResponseUIInterface $responseUI;
 
     public static function generateTestOutputComponent(): OutputComponentInterface
     {
@@ -78,12 +78,12 @@ trait ResponseUITestTrait
     /**
      * @return array<ComponentInterface>
      */
-    private static function readAllFromContainer(string $container): array
+    protected static function readAllFromContainer(string $container): array
     {
         return self::getComponentCrud()->readAll(self::expectedAppLocation(), self::getTestComponentContainer());
     }
 
-    private static function deleteAllInContainer(string $container): void
+    protected static function deleteAllInContainer(string $container): void
     {
         foreach(self::getComponentCrud()->readAll(self::expectedAppLocation(), $container) as $storable)
         {
@@ -189,7 +189,7 @@ trait ResponseUITestTrait
         );
     }
 
-    private static function getComponentCrud(): ComponentCrudInterface
+    protected static function getComponentCrud(): ComponentCrudInterface
     {
         return new CoreComponentCrud(
             new CoreStorable(
@@ -202,7 +202,7 @@ trait ResponseUITestTrait
         );
     }
 
-    private static function getStandardStorageDriver(): StorageDriverInterface
+    protected static function getStandardStorageDriver(): StorageDriverInterface
     {
         return new CoreStorageDriver(
             new CoreStorable(
@@ -227,7 +227,7 @@ trait ResponseUITestTrait
     /**
      * @return array<ResponseInterface>
      */
-    private function expectedResponses(): array
+    protected function expectedResponses(): array
     {
         return $this->getResponseUI()->export()['router']->getResponses(
             self::expectedAppLocation(),
@@ -238,7 +238,7 @@ trait ResponseUITestTrait
     /**
      * @return array<PositionableInterface>
      */
-    private function sortPositionables(PositionableInterface ...$postionables): array
+    protected function sortPositionables(PositionableInterface ...$postionables): array
     {
         $sorted = [];
         foreach($postionables as $postionable) {
@@ -252,12 +252,12 @@ trait ResponseUITestTrait
         return $sorted;
     }
 
-    private function getRoutersCompoenentCrud(): ComponentCrudInterface
+    protected function getRoutersCompoenentCrud(): ComponentCrudInterface
     {
          return $this->getResponseUI()->export()['router']->export()['crud'];
     }
 
-    private function expectedOutput(): string
+    protected function expectedOutput(): string
     {
         $expectedOutput = '';
         $expectedResponses = $this->expectedResponses();
