@@ -96,7 +96,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
         {
             throw new PHPRuntimeException('There is nothing to show for this request.');
         }
-        return $expectedOutput . PHP_EOL . '<</body></html>>';
+        return $expectedOutput . PHP_EOL . '</body></html>';
     }
 
     public function getOutput(): string
