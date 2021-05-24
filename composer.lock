@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "574a28c995ec632c4cfb1d611c1b4326",
+    "content-hash": "d82978db273d7661e4fe7e3642adb382",
     "packages": [
         {
             "name": "darling/ddms",
-            "version": "v0.0.9-beta",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/ddms.git",
-                "reference": "2ba3d8fe1d4a5a5e015d33a4909b6d375e0834e8"
+                "reference": "26b651beffa6cbc47f580a8d1ecba29bb876a746"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/2ba3d8fe1d4a5a5e015d33a4909b6d375e0834e8",
-                "reference": "2ba3d8fe1d4a5a5e015d33a4909b6d375e0834e8",
+                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/26b651beffa6cbc47f580a8d1ecba29bb876a746",
+                "reference": "26b651beffa6cbc47f580a8d1ecba29bb876a746",
                 "shasum": ""
             },
             "require-dev": {
@@ -44,9 +44,9 @@
             "description": "Command line utility designed to aide in development with the Darling Data Management System",
             "support": {
                 "issues": "https://github.com/sevidmusic/ddms/issues",
-                "source": "https://github.com/sevidmusic/ddms/tree/v0.0.9-beta"
+                "source": "https://github.com/sevidmusic/ddms/tree/v1.0.0"
             },
-            "time": "2021-05-08T17:34:05+00:00"
+            "time": "2021-05-24T18:06:42+00:00"
         },
         {
             "name": "darling/ddms-app-packages",
@@ -2236,9 +2236,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "darling/ddms": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
