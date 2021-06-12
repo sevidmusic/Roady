@@ -15,6 +15,6 @@ For now:
 5. Run `ddms --start-server`.
 6. Open `http://localhost:8080` in a web browser.
 
-![Hello World Demo](https://github.com/sevidmusic/ddmsDemos/blob/main/gifs/HelloWorld_1.gif)
+![Hello World Demo](https://github.com/sevidmusic/ddmsDemos/blob/main/gifs/HelloWorld_ForReadme.gif)
 
 
