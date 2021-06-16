@@ -18,9 +18,8 @@
     "autoload": {
         "psr-4": {
             "DarlingDataManagementSystem\\": "core/",
-            "Apps\\": "apps/",
-            "UnitTests\\": "Tests/Unit/",
-            "Extensions\\": "Extensions/"
+            "Apps\\": "Apps/",
+            "UnitTests\\": "Tests/Unit/"
         }
     },
     "require-dev": {
