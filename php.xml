@@ -15,6 +15,10 @@
             <directory>Tests</directory>
         </testsuite>
 
+        <testsuite name="Apps">
+            <directory>Apps</directory>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>
