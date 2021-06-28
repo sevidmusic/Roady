@@ -18,13 +18,13 @@ trait GlobalResponseTestTrait
     private function insteadTestRespondsToRequestReturnsTrueIfValueReturnedByPassingSuppliedRequestToAnAppImplementationsDeriveNameLocationFromRequestMethodMatchesResponsesLocation(): void
     {
         $request = $this->getMockRequest();
-        if ($this->getGlobalResponse()->getLocation() === CoreApp::deriveNameLocationFromRequest($request)) {
+        if ($this->getGlobalResponse()->getLocation() === CoreApp::deriveAppLocationFromRequest($request)) {
             $this->assertTrue(
                 $this->getGlobalResponse()->respondsToRequest(
                     $request,
                     $this->getMockCrud()
                 ),
-                'respondsToRequest() must return true for any Request made to the App the GlobalResponse belongs to, i.e. if the return value of App::deriveNameLocationFromRequest(Request) is equal to Response->getLocation() then Response->respondsToRequest(Request) MUST return true.'
+                'respondsToRequest() must return true for any Request made to the App the GlobalResponse belongs to, i.e. if the return value of App::deriveAppLocationFromRequest(Request) is equal to Response->getLocation() then Response->respondsToRequest(Request) MUST return true.'
             );
         }
     }
@@ -53,7 +53,7 @@ trait GlobalResponseTestTrait
                 $request,
                 $this->getMockCrud()
             ),
-            'respondsToRequest() must return false for any Request made to an App other than the App the GlobalResponse belongs to, i.e. if the return value of App::deriveNameLocationFromRequest(Request) is NOT equal to Response->getLocation() then Response->respondsToRequest(Request) MUST return false'
+            'respondsToRequest() must return false for any Request made to an App other than the App the GlobalResponse belongs to, i.e. if the return value of App::deriveAppLocationFromRequest(Request) is NOT equal to Response->getLocation() then Response->respondsToRequest(Request) MUST return false'
         );
     }
 

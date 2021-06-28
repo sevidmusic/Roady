@@ -24,7 +24,7 @@ abstract class AppBuilder implements AppBuilderInterface
             $appComponentsFactory = $appComponentsFactory->getComponentCrud()->readByNameAndType(
                 $appComponentsFactory->getName(),
                 $appComponentsFactory->getType(),
-                CoreApp::deriveNameLocationFromRequest($domainRequest),
+                CoreApp::deriveAppLocationFromRequest($domainRequest),
                 AppComponentsFactory::CONTAINER
             );
         } catch(Exception $e) {

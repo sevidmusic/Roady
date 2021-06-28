@@ -241,9 +241,9 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         );
         $domain->import(['url' => $url]);
         $actualStorable = new CoreStorable(
-            CoreApp::deriveNameLocationFromRequest($domain),
-            CoreApp::deriveNameLocationFromRequest($domain),
-            CoreApp::deriveNameLocationFromRequest($domain),
+            CoreApp::deriveAppLocationFromRequest($domain),
+            CoreApp::deriveAppLocationFromRequest($domain),
+            CoreApp::deriveAppLocationFromRequest($domain),
         );
         $domain->import(['storable' => $actualStorable]);
         return $domain;

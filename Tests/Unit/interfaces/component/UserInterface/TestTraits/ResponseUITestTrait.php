@@ -156,7 +156,7 @@ trait ResponseUITestTrait
 
     protected static function expectedAppLocation(): string
     {
-        return CoreApp::deriveNameLocationFromRequest(self::getIndependantTestRequest());
+        return CoreApp::deriveAppLocationFromRequest(self::getIndependantTestRequest());
     }
 
     protected static function getTestComponentContainer(): string

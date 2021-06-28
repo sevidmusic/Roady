@@ -23,14 +23,14 @@ abstract class App extends SwitchableComponentBase implements AppInterface
             $actualName = preg_replace("/[^A-Za-z0-9]/", '', $appName);
         }
         $storable = new CoreStorable(
-            ($actualName ?? self::deriveNameLocationFromRequest($request)),
-            self::deriveNameLocationFromRequest($request),
+            ($actualName ?? self::deriveAppLocationFromRequest($request)),
+            self::deriveAppLocationFromRequest($request),
             self::APP_CONTAINER
         );
         parent::__construct($storable, $switchable);
     }
 
-    public static function deriveNameLocationFromRequest(RequestInterface $request): string
+    public static function deriveAppLocationFromRequest(RequestInterface $request): string
     {
         $nameLocation = preg_replace(
             "/[^A-Za-z0-9]/",

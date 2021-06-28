@@ -11,7 +11,7 @@ interface App extends CoreSwitchableComponent
 
     public const APP_CONTAINER = "APP";
 
-    public static function deriveNameLocationFromRequest(RequestInterface $request): string;
+    public static function deriveAppLocationFromRequest(RequestInterface $request): string;
 
     public function getAppDomain(): RequestInterface;
 

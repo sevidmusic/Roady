@@ -182,7 +182,7 @@ trait AppComponentsFactoryTestTrait
     public function testBuildDomainReturnsRequestWhoseNameMatchesExpectedAppNameLocation(): void
     {
         $this->assertEquals(
-            CoreApp::deriveNameLocationFromRequest($this->getTestDomain()),
+            CoreApp::deriveAppLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getName()
@@ -192,7 +192,7 @@ trait AppComponentsFactoryTestTrait
     public function testBuildDomainReturnsRequestWhoseLocationMatchesExpectedAppNameLocation(): void
     {
         $this->assertEquals(
-            CoreApp::deriveNameLocationFromRequest($this->getTestDomain()),
+            CoreApp::deriveAppLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getLocation()
@@ -202,7 +202,7 @@ trait AppComponentsFactoryTestTrait
     public function testBuildDomainReturnsRequestWhoseContainerMatchesExpectedAppNameLocation(): void
     {
         $this->assertEquals(
-            CoreApp::deriveNameLocationFromRequest($this->getTestDomain()),
+            CoreApp::deriveAppLocationFromRequest($this->getTestDomain()),
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getContainer()
