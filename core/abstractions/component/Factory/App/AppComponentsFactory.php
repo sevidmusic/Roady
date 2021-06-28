@@ -81,10 +81,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
                     ComponentInterface::class
             ]
         );
-        $this->getComponentCrud()->create($primaryFactory->export()['app']);
-        $this->getStoredComponentRegistry()->registerComponent(
-            $primaryFactory->export()['app']
-        );
     }
 
     private function prepareOutputComponentFactory(

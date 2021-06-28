@@ -2,10 +2,10 @@
 
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
+use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
+use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
@@ -216,23 +216,6 @@ trait AppComponentsFactoryTestTrait
             $this->getAppComponentsFactory()::buildDomain(
                 $this->getTestDomain()->getUrl(),
             )->getUrl()
-        );
-    }
-
-    public function testAppAssignedToPrimaryFactoryIsStoredAndRegisteredOnInstantiation(): void
-    {
-        $this->wasStoredAndRegistered(
-            $this->getAppComponentsFactory()->getPrimaryFactory()->export()['app']
-        );
-    }
-
-    private function wasStoredAndRegistered(ComponentInterface $component): void
-    {
-        $this->assertEquals(
-            $component,
-            $this->getAppComponentsFactory()->getComponentCrud()->read(
-                $component
-            )
         );
     }
 
