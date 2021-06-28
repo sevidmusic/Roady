@@ -112,20 +112,20 @@ trait AppTestTrait
         }
         $this->assertEquals(
             $expectedNameLocation,
-            $this->getApp()::deriveNameLocationFromRequest($this->getMockRequest())
+            $this->getApp()::deriveAppLocationFromRequest($this->getMockRequest())
         );
     }
 
     public function testLocationWasSetUsingDeriveAppNameLocationFromRequestMethod(): void
     {
-        $expectedNameLocation = CoreApp::deriveNameLocationFromRequest($this->getMockRequest());
+        $expectedNameLocation = CoreApp::deriveAppLocationFromRequest($this->getMockRequest());
         $this->assertEquals($expectedNameLocation, $this->getApp()->getLocation());
         $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getLocation());
     }
 
     public function testNameWasSetUsingDeriveAppNameLocationFromRequestMethodIfNameWasNotSpecified(): void
     {
-        $expectedNameLocation = CoreApp::deriveNameLocationFromRequest($this->getMockRequest());
+        $expectedNameLocation = CoreApp::deriveAppLocationFromRequest($this->getMockRequest());
         $this->assertEquals($expectedNameLocation, $this->getApp()->getName());
         $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getName());
     }
@@ -142,7 +142,7 @@ trait AppTestTrait
     private function purgeAppStorage(): void
     {
         $installedApps = $this->getMockCrud()->readAll(
-            CoreApp::deriveNameLocationFromRequest($this->getMockRequest()),
+            CoreApp::deriveAppLocationFromRequest($this->getMockRequest()),
             CoreApp::APP_CONTAINER
         );
         foreach ($installedApps as $storable) {

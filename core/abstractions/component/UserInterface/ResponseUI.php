@@ -52,7 +52,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     {
         $expectedOutput = '';
         $expectedResponses = $this->router->getResponses(
-            CoreApp::deriveNameLocationFromRequest($this->router->getRequest()),
+            CoreApp::deriveAppLocationFromRequest($this->router->getRequest()),
             ResponseInterface::RESPONSE_CONTAINER
         );
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;

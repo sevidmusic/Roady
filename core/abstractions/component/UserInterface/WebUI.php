@@ -27,7 +27,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         $expectedOutput = self::DOCTYPE . self::OPENHTML . self::OPENHEAD;
         $actualOutput = '';
         $expectedResponses = $this->router->getResponses(
-            CoreApp::deriveNameLocationFromRequest($this->router->getRequest()),
+            CoreApp::deriveAppLocationFromRequest($this->router->getRequest()),
             ResponseInterface::RESPONSE_CONTAINER
         );
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;

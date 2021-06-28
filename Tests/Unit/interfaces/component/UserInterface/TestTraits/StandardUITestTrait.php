@@ -40,7 +40,7 @@ trait StandardUITestTrait
     public function testAppLocationPropertyMatchesAppLocationDerivedFromRoutersRequest(): void
     {
         $this->assertEquals(
-            App::deriveNameLocationFromRequest($this->getRouter()->getRequest()),
+            App::deriveAppLocationFromRequest($this->getRouter()->getRequest()),
             $this->getStandardUI()->export()['appLocation']
         );
     }

@@ -31,7 +31,7 @@ abstract class StandardUI extends OutputComponentBase implements StandardUIInter
     {
         parent::__construct($storable, $switchable, $positionable);
         $this->router = $router;
-        $this->appLocation = CoreApp::deriveNameLocationFromRequest($router->getRequest());
+        $this->appLocation = CoreApp::deriveAppLocationFromRequest($router->getRequest());
     }
 
     public function getOutput(): string

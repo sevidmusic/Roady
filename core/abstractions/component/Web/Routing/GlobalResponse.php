@@ -24,7 +24,7 @@ abstract class GlobalResponse extends CoreResponse implements GlobalResponseInte
 
     public function respondsToRequest(RequestInterface $request, ComponentCrudInterface $componentCrud): bool
     {
-        if (CoreApp::deriveNameLocationFromRequest($request) === $this->getLocation()) {
+        if (CoreApp::deriveAppLocationFromRequest($request) === $this->getLocation()) {
             return true;
         }
         return false;

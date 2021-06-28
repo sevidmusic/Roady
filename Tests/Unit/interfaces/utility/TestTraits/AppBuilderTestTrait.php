@@ -300,7 +300,7 @@ trait AppBuilderTestTrait
 
     private function determinAppsLocation(AppComponentsFactoryInterface $appComponentsFactory): string
     {
-        return $appComponentsFactory->getApp()->deriveNameLocationFromRequest(
+        return $appComponentsFactory->getApp()->deriveAppLocationFromRequest(
             $appComponentsFactory->getApp()->getAppDomain()
         );
     }
