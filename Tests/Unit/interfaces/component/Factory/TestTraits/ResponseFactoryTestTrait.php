@@ -218,6 +218,26 @@ trait ResponseFactoryTestTrait
         );
     }
 
+
+    public function testIfOutputComponentAddStorageInfoIgnoresComponentsThatAreNotOutputComponents(): void
+    {
+        $components = [
+            $this->buildTestRequest(),
+        ];
+        $response = $this->callBuildResponse();
+        $component = $components[array_rand($components)];
+        CoreResponseFactory::ifOutputComponentAddStorageInfo(
+            $response,
+            $component
+        );
+        $this->assertFalse(
+            in_array(
+                $component->export()['storable'],
+                $response->getOutputComponentStorageInfo()
+            )
+        );
+    }
+
     public function testBuildGlobalResponseReturnsAGlobalResponseImplementationInstance(): void
     {
         $this->assertTrue(
