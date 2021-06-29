@@ -144,7 +144,7 @@ trait ResponseUITestTrait
     {
         return new CoreRouter(
             new CoreStorable(
-                'StandardUITestRouter' . strval(rand(0, 999)),
+                'ResponseUITestRouter' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
@@ -168,7 +168,7 @@ trait ResponseUITestTrait
     {
         $request =  new CoreRequest(
             new CoreStorable(
-                'StandardUICurrentRequest' . strval(rand(0, 999)),
+                'ResponseUICurrentRequest' . strval(rand(0, 999)),
                 'TestUrls',
                 self::getTestComponentContainer()
             ),
@@ -181,7 +181,7 @@ trait ResponseUITestTrait
     {
         return new CoreRequest(
             new CoreStorable(
-                'StandardUICurrentRequest' . strval(rand(0, 999)),
+                'ResponseUICurrentRequest' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
@@ -193,7 +193,7 @@ trait ResponseUITestTrait
     {
         return new CoreComponentCrud(
             new CoreStorable(
-                'StandardUITestComponentCrudForStandardUITestRouter' . strval(rand(0, 999)),
+                'ResponseUITestComponentCrudForResponseUITestRouter' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
@@ -206,7 +206,7 @@ trait ResponseUITestTrait
     {
         return new CoreStorageDriver(
             new CoreStorable(
-                'StandardUITestStorageDriver' . strval(rand(0, 999)),
+                'ResponseUITestStorageDriver' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),

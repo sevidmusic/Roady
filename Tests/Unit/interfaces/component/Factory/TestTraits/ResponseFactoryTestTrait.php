@@ -5,14 +5,12 @@ namespace UnitTests\interfaces\component\Factory\TestTraits;
 use DarlingDataManagementSystem\classes\component\Action as CoreAction;
 use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
 use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
@@ -24,7 +22,6 @@ trait ResponseFactoryTestTrait
     private string $expectedResponseName = 'ExpectedResponseName';
     private float $expectedPosition = 420.87;
     private int $expectedNumberOfRequests = 29;
-    private int $expectedNumberOfStandardUITemplates = 23;
     private int $expectedNumberOfOutputComponents = 27;
     private int $expectedNumberOfActions = 42;
 
@@ -67,9 +64,6 @@ trait ResponseFactoryTestTrait
         for ($i = 0; $i < $this->expectedNumberOfRequests; $i++) {
             array_push($args, $this->buildTestRequest());
         }
-        for ($i = 0; $i < $this->expectedNumberOfStandardUITemplates; $i++) {
-            array_push($args, $this->buildTestStandardUITemplate());
-        }
         for ($i = 0; $i < $this->expectedNumberOfOutputComponents; $i++) {
             array_push($args, $this->buildTestOutputComponent());
         }
@@ -88,21 +82,6 @@ trait ResponseFactoryTestTrait
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable()
         );
-    }
-
-    private function buildTestStandardUITemplate(): StandardUITemplateInterface
-    {
-        $suit = new CoreStandardUITemplate(
-            $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
-                'TestStandardUITemplate',
-                'TestTemplates'
-            ),
-            $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
-            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
-        );
-        $suit->addType($this->buildTestOutputComponent());
-        $suit->addType($this->buildTestAction());
-        return $suit;
     }
 
     private function buildTestOutputComponent(): OutputComponentInterface
@@ -177,15 +156,6 @@ trait ResponseFactoryTestTrait
         );
     }
 
-    public function testBuildResponseReturnsResponseWhoseAssignedStandardUITemplateCountMatchesExpectedStandardUITemplateCount(): void
-    {
-        $response = $this->callBuildResponse();
-        $this->assertEquals(
-            $this->expectedNumberOfStandardUITemplates,
-            count($response->getTemplateStorageInfo())
-        );
-    }
-
     public function testBuildResponseReturnsResponseWhoseAssignedOutputComponentCountMatchesExpectedOutputComponentCount(): void
     {
         $response = $this->callBuildResponse();
@@ -214,7 +184,6 @@ trait ResponseFactoryTestTrait
     public function testIfRequestAddStorageInfoIgnoresComponentsThatAreNotRequests(): void
     {
         $components = [
-            $this->buildTestStandardUITemplate(),
             $this->buildTestOutputComponent(),
             $this->buildTestAction()
         ];
@@ -228,43 +197,6 @@ trait ResponseFactoryTestTrait
             in_array(
                 $component->export()['storable'],
                 $response->getRequestStorageInfo()
-            )
-        );
-    }
-
-    public function testIfStandardUITemplateAddStorageInfoAddsStandardUITemplatesStorableToResponse(): void
-    {
-        $response = $this->callBuildResponse();
-        $standardUITemplate = $this->buildTestStandardUITemplate();
-        CoreResponseFactory::ifStandardUITemplateAddStorageInfo(
-            $response,
-            $standardUITemplate
-        );
-        $this->assertTrue(
-            in_array(
-                $standardUITemplate->export()['storable'],
-                $response->getTemplateStorageInfo()
-            )
-        );
-    }
-
-    public function testIfStandardUITemplateAddStorageInfoIgnoresComponentsThatAreNotStandardUITemplates(): void
-    {
-        $components = [
-            $this->buildTestRequest(),
-            $this->buildTestOutputComponent(),
-            $this->buildTestAction()
-        ];
-        $response = $this->callBuildResponse();
-        $component = $components[array_rand($components)];
-        CoreResponseFactory::ifStandardUITemplateAddStorageInfo(
-            $response,
-            $component
-        );
-        $this->assertFalse(
-            in_array(
-                $component->export()['storable'],
-                $response->getTemplateStorageInfo()
             )
         );
     }
@@ -286,11 +218,11 @@ trait ResponseFactoryTestTrait
         );
     }
 
+
     public function testIfOutputComponentAddStorageInfoIgnoresComponentsThatAreNotOutputComponents(): void
     {
         $components = [
             $this->buildTestRequest(),
-            $this->buildTestStandardUITemplate(),
         ];
         $response = $this->callBuildResponse();
         $component = $components[array_rand($components)];
@@ -359,15 +291,6 @@ trait ResponseFactoryTestTrait
         $this->assertEquals(
             $this->expectedResponseName,
             $response->getName(),
-        );
-    }
-
-    public function testBuildGlobalResponseReturnsResponseWhoseAssignedStandardUITemplateCountMatchesExpectedStandardUITemplateCount(): void
-    {
-        $response = $this->callBuildGlobalResponse();
-        $this->assertEquals(
-            $this->expectedNumberOfStandardUITemplates,
-            count($response->getTemplateStorageInfo())
         );
     }
 

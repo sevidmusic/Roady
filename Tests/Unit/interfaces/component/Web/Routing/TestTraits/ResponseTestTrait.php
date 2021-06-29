@@ -5,7 +5,6 @@ namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Template\UserInterface\StandardUITemplate as CoreStandardUITemplate;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
@@ -212,84 +211,6 @@ trait ResponseTestTrait
         $this->assertEmpty(
             $this->getResponse()->getOutputComponentStorageInfo(),
             'getOutputComponentStorageInfo() must return an empty array if state is false.'
-        );
-    }
-
-    public function testAddTemplateStorageInfoAddsSpecifiedTemplateStorableInstance(): void
-    {
-        $initialCount = count(
-            $this->getResponse()->export()['templateStorageInfo']
-        );
-        $this->getResponse()->addTemplateStorageInfo($this->getMockTemplate());
-        $this->assertTrue(
-            (
-                count($this->getResponse()->export()['templateStorageInfo'])
-                >
-                $initialCount
-            ),
-            'addOutput() failed to add output component\'s storable instance.'
-        );
-    }
-
-    private function getMockTemplate(): CoreStandardUITemplate
-    {
-        return new CoreStandardUITemplate(
-            $this->getMockStorable(),
-            $this->getMockSwitchable(),
-            new CorePositionable()
-        );
-    }
-
-    public function testRemoveTemplateStorageInfoRemovesSpecifiedTemplatesStorableInstance(): void
-    {
-        $template = $this->getMockTemplate();
-        $this->getResponse()->addTemplateStorageInfo($template);
-        $count = count($this->getResponse()->export()['templateStorageInfo']);
-        $this->getResponse()->removeTemplateStorageInfo($template->getName());
-        $this->assertTrue(
-            (
-                count($this->getResponse()->export()['templateStorageInfo'])
-                <
-                $count
-            ),
-            'Failed removing template storage info by name.'
-        );
-        $this->getResponse()->addTemplateStorageInfo($template);
-        $count = count($this->getResponse()->export()['templateStorageInfo']);
-        $this->getResponse()->removeTemplateStorageInfo(
-            $template->getUniqueId()
-        );
-        $this->assertTrue(
-            (
-                count($this->getResponse()->export()['templateStorageInfo'])
-                <
-                $count
-            ),
-            'Failed removing template storage info by id.'
-        );
-    }
-
-    public function testGetTemplateStorageInfoReturnsArrayOfStorableInstancesForAssignedTemplates(): void
-    {
-        $this->turnSwitchableComponentOn($this->getResponse());
-        $template = $this->getMockTemplate();
-        $this->getResponse()->addTemplateStorageInfo($template);
-        $this->assertEquals(
-            [$template->export()['storable']],
-            $this->getResponse()->getTemplateStorageInfo(),
-            'getTemplateStorageInfo() did not return array of storable instances for assigned output components.'
-        );
-    }
-
-    public function testGetTemplateStorageInfoReturnsEmptyArrayIfStateIsFalse(): void
-    {
-        $this->turnSwitchableComponentOff($this->getResponse());
-        $this->getResponse()->addTemplateStorageInfo(
-            $this->getMockTemplate()
-        );
-        $this->assertEmpty(
-            $this->getResponse()->getTemplateStorageInfo(),
-            'getTemplateStorageInfo() must return an empty array if state is false.'
         );
     }
 

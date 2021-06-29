@@ -8,7 +8,6 @@ use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
@@ -120,26 +119,6 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         return ($this->getState() === false ? [] : $this->outputComponentStorageInfo);
     }
 
-    public function addTemplateStorageInfo(StandardUITemplateInterface $template): bool
-    {
-        $initialCount = count($this->templateStorageInfo);
-        array_push($this->templateStorageInfo, $template->export()['storable']);
-        return (count($this->templateStorageInfo) > $initialCount);
-    }
-
-    public function removeTemplateStorageInfo(string $nameOrId): bool
-    {
-        $initialCount = count($this->templateStorageInfo);
-        foreach ($this->templateStorageInfo as $key => $storable) {
-            if ($storable->getUniqueId() === $nameOrId || $storable->getName() === $nameOrId) {
-                unset($this->templateStorageInfo[$key]);
-                return (count($this->templateStorageInfo) < $initialCount);
-            }
-        }
-        return false;
-
-    }
-
     public function removeRequestStorageInfo(string $nameOrId): bool
     {
         $initialCount = count($this->requestStorageInfo);
@@ -151,14 +130,6 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         }
         return false;
 
-    }
-
-    /**
-     * @return array<int, StorableInterface>
-     */
-    public function getTemplateStorageInfo(): array
-    {
-        return ($this->getState() === false ? [] : $this->templateStorageInfo);
     }
 
     public function increasePosition(): bool

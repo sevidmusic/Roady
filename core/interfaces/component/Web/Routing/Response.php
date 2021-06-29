@@ -6,7 +6,6 @@ use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as Compo
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
 
 interface Response extends SwitchableComponentInterface, PositionableInterface
@@ -33,12 +32,4 @@ interface Response extends SwitchableComponentInterface, PositionableInterface
      */
     public function getOutputComponentStorageInfo(): array;
 
-    public function addTemplateStorageInfo(StandardUITemplateInterface $template): bool;
-
-    public function removeTemplateStorageInfo(string $nameOrId): bool;
-
-    /**
-     * @return array<int, StorableInterface>
-     */
-    public function getTemplateStorageInfo(): array;
 }
