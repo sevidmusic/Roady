@@ -13,7 +13,6 @@ use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFact
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
@@ -65,15 +64,6 @@ trait AppComponentsFactoryTestTrait
         $this->assertTrue(
             $this->appComponentsFactoryImplementsExpectedInterface(
                 StoredComponentFactoryInterface::class
-            )
-        );
-    }
-
-    public function testAppComponentsFactoryImplementsStandardUITemplateFactoryInterface(): void
-    {
-        $this->assertTrue(
-            $this->appComponentsFactoryImplementsExpectedInterface(
-                StandardUITemplateFactoryInterface::class
             )
         );
     }
@@ -304,11 +294,6 @@ trait AppComponentsFactoryTestTrait
     }
 
     public function getOutputComponentFactory(): OutputComponentFactoryInterface
-    {
-        return $this->getAppComponentsFactory();
-    }
-
-    public function getStandardUITemplateFactory(): StandardUITemplateFactoryInterface
     {
         return $this->getAppComponentsFactory();
     }

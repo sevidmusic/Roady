@@ -9,7 +9,6 @@ use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory
 use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
 use DarlingDataManagementSystem\classes\component\Factory\RequestFactory as CoreRequestFactory;
 use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingDataManagementSystem\classes\component\Factory\StandardUITemplateFactory as CoreStandardUITemplateFactory;
 use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
@@ -22,11 +21,9 @@ use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFact
 use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\StandardUITemplateFactory as StandardUITemplateFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\component\Template\UserInterface\StandardUITemplate as StandardUITemplateInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
@@ -39,7 +36,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     private const ACCEPTED_IMPLEMENTATION = 'acceptedImplementation';
     private const CONSTRUCT = '__construct';
     private ?OutputComponentFactoryInterface $outputComponentFactory = null;
-    private ?StandardUITemplateFactoryInterface $standardUITemplateFactory = null;
     private ?RequestFactoryInterface $requestFactory = null;
     private ?ResponseFactoryInterface $responseFactory = null;
 
@@ -55,11 +51,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
             $storedComponentRegistry
         );
         $this->prepareOutputComponentFactory(
-            $primaryFactory,
-            $componentCrud,
-            $storedComponentRegistry
-        );
-        $this->prepareStandardUITemplateFactory(
             $primaryFactory,
             $componentCrud,
             $storedComponentRegistry
@@ -104,33 +95,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
             ]
         );
         $this->outputComponentFactory = new CoreOutputComponentFactory(
-            $primaryFactory,
-            $componentCrud,
-            $registry
-        );
-    }
-
-    private function prepareStandardUITemplateFactory(
-        PrimaryFactoryInterface $primaryFactory,
-        ComponentCrudInterface $componentCrud,
-        StoredComponentRegistryInterface $storedComponentRegistry
-    ): void
-    {
-        $registry = $this->export()[self::REFLECTION_UTILITY]->getClassInstance(
-            $storedComponentRegistry->getType(),
-            $this->export()[self::REFLECTION_UTILITY]->generateMockClassMethodArguments(
-                $storedComponentRegistry->getType(),
-                self::CONSTRUCT
-            )
-        );
-        $registry->import(
-            [
-                self::ACCEPTED_IMPLEMENTATION
-                =>
-                    StandardUITemplateInterface::class
-            ]
-        );
-        $this->standardUITemplateFactory = new CoreStandardUITemplateFactory(
             $primaryFactory,
             $componentCrud,
             $registry
@@ -269,33 +233,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         return $oc;
     }
 
-    public function buildStandardUITemplate(
-        string $name,
-        string $container,
-        float $position,
-        OutputComponentInterface ...$types
-    ): StandardUITemplateInterface
-    {
-        if(is_null($this->standardUITemplateFactory)) {
-            throw new \RuntimeException(self::class . 'Error: standardUITemplateFactory was not initialized!');
-        }
-        $suit = $this->standardUITemplateFactory->buildStandardUITemplate(
-            $name,
-            $container,
-            $position,
-        );
-        $this->standardUITemplateFactory->getStoredComponentRegistry()->unregisterComponent(
-            $suit
-        );
-        foreach ($types as $type) {
-            $suit->addType($type);
-        }
-        $this->standardUITemplateFactory->getComponentCrud()->update($suit, $suit);
-        $this->standardUITemplateFactory->getStoredComponentRegistry()->registerComponent($suit);
-        $this->getStoredComponentRegistry()->registerComponent($suit);
-        return $suit;
-    }
-
     public function buildRequest(string $name, string $container, string $url): RequestInterface
     {
         if(is_null($this->requestFactory)) {
@@ -330,7 +267,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
         );
         foreach ($componentsToAssign as $component) {
             CoreResponseFactory::ifRequestAddStorageInfo($response, $component);
-            CoreResponseFactory::ifStandardUITemplateAddStorageInfo($response, $component);
             CoreResponseFactory::ifOutputComponentAddStorageInfo($response, $component);
         }
         $this->responseFactory->getComponentCrud()->update($response, $response);
