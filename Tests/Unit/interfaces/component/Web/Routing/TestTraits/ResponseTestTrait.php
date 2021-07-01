@@ -5,6 +5,7 @@ namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
 use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
@@ -51,6 +52,19 @@ trait ResponseTestTrait
                 $this->getMockCrud()
             ),
             'respondsToRequest() must return true for assigned request.'
+        );
+    }
+
+    public function testRespondsToRequestReturnsTrueForAnyRequestWhoseAssignedUrlContainsAGetParameterNamed_request_WhoseAssignedValueMatchesRespectiveResponsesName(): void
+    {
+        $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName = $this->getMockRequest();
+        $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName->import(['url' => 'http://DEFAULT/index.php?request=' . $this->getResponse()->getName()]);
+        $this->assertTrue(
+            $this->getResponse()->respondsToRequest(
+                $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName,
+                $this->getMockCrud()
+            ),
+            'respondsToRequest() must return true for any Request that defines a GET parameter named \'request\' whose assigned value matches the respective Response\'s name.'
         );
     }
 
