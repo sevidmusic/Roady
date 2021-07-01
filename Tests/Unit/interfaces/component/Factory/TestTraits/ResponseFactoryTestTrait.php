@@ -2,13 +2,11 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Action as CoreAction;
 use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
 use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
 use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\interfaces\component\Action as ActionInterface;
 use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
@@ -23,7 +21,6 @@ trait ResponseFactoryTestTrait
     private float $expectedPosition = 420.87;
     private int $expectedNumberOfRequests = 29;
     private int $expectedNumberOfOutputComponents = 27;
-    private int $expectedNumberOfActions = 42;
 
     public function testBuildResponseReturnsAResponseImplementationInstance(): void
     {
@@ -67,9 +64,6 @@ trait ResponseFactoryTestTrait
         for ($i = 0; $i < $this->expectedNumberOfOutputComponents; $i++) {
             array_push($args, $this->buildTestOutputComponent());
         }
-        for ($i = 0; $i < $this->expectedNumberOfActions; $i++) {
-            array_push($args, $this->buildTestAction());
-        }
         return $args;
     }
 
@@ -90,18 +84,6 @@ trait ResponseFactoryTestTrait
             $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
                 'TestOutputComponent',
                 'TestOutputComponents'
-            ),
-            $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
-            $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
-        );
-    }
-
-    private function buildTestAction(): ActionInterface
-    {
-        return new CoreAction(
-            $this->getResponseFactory()->getPrimaryFactory()->buildStorable(
-                'ResponseFactoryTestAction',
-                'TestActions'
             ),
             $this->getResponseFactory()->getPrimaryFactory()->buildSwitchable(),
             $this->getResponseFactory()->getPrimaryFactory()->buildPositionable($this->expectedPosition)
@@ -160,7 +142,7 @@ trait ResponseFactoryTestTrait
     {
         $response = $this->callBuildResponse();
         $this->assertEquals(
-            ($this->expectedNumberOfOutputComponents + $this->expectedNumberOfActions),
+            ($this->expectedNumberOfOutputComponents),
             count($response->getOutputComponentStorageInfo())
         );
     }
@@ -185,7 +167,6 @@ trait ResponseFactoryTestTrait
     {
         $components = [
             $this->buildTestOutputComponent(),
-            $this->buildTestAction()
         ];
         $response = $this->callBuildResponse();
         $component = $components[array_rand($components)];
@@ -204,7 +185,7 @@ trait ResponseFactoryTestTrait
     public function testIfOutputComponentAddStorageInfoAddsOutputComponentsStorableToResponse(): void
     {
         $response = $this->callBuildResponse();
-        $outputComponents = [$this->buildTestOutputComponent(), $this->buildTestAction()];
+        $outputComponents = [$this->buildTestOutputComponent()];
         $outputComponent = $outputComponents[array_rand($outputComponents)];
         CoreResponseFactory::ifOutputComponentAddStorageInfo(
             $response,
@@ -298,7 +279,7 @@ trait ResponseFactoryTestTrait
     {
         $response = $this->callBuildGlobalResponse();
         $this->assertEquals(
-            ($this->expectedNumberOfOutputComponents + $this->expectedNumberOfActions),
+            ($this->expectedNumberOfOutputComponents),
             count($response->getOutputComponentStorageInfo())
         );
     }
