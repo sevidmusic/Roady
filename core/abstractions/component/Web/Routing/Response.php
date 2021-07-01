@@ -44,8 +44,19 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         parent::__construct($st, $switchable);
     }
 
+    private function responseWasRequestedByName(RequestInterface $request) : bool
+    {
+        if(str_contains($request->getUrl(), '?request=' . $this->getName()) || str_contains($request->getUrl(), '&request=' . $this->getName())) {
+            return true;
+        }
+        return false;
+    }
+
     public function respondsToRequest(RequestInterface $request, ComponentCrudInterface $crud): bool
     {
+        if($this->responseWasRequestedByName($request)) {
+            return true;
+        }
         foreach ($this->getRequestStorageInfo() as $storable) {
             $storedRequest = $crud->read($storable);
             if ($this->isARequest($storedRequest) === false) {
