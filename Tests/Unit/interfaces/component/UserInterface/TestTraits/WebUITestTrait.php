@@ -74,30 +74,30 @@ trait WebUITestTrait
 
     private function expectHtmlLinkTagsForGlobalCssFilesDefinedByRunningApps(): void
     {
-        /** @var string $appToIgnore
+        /** @var string $appThatWasNotBuilt
          * This App is used to test that only Running Apps have links for there
          * global css files incorporated into the output. It is created, and a
          * global css file is defined for it, but it will not be built, therefore,
          * a link for it's global css file should not be incorporated into the output,
          * if it is, then the WebUI::getOutput() method is not properly implemented.
          */
-        $appToIgnore = 'IgnoredWebUITestApp' . strval(rand(100, PHP_INT_MAX));
-        $this->createTestApp($appToIgnore);
-        $this->createGlobalCssFileForApp($appToIgnore);
-        $firstAppToBuild = 'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX));;
-        $this->createTestApp($firstAppToBuild);
-        $this->createGlobalCssFileForApp($firstAppToBuild);
-        $this->buildApp($firstAppToBuild);
-        $secondAppToBuild = 'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX));;
-        $this->createTestApp($secondAppToBuild);
-        $this->createGlobalCssFileForApp($secondAppToBuild);
-        $this->buildApp($secondAppToBuild);
-        /** There should only be links incorporated into the output for the Apps that were built */
-        $this->expectGlobalCssLinksForApp($firstAppToBuild);
-        $this->expectGlobalCssLinksForApp($secondAppToBuild);
-        self::removeDirectory($this->determinePathToApp($firstAppToBuild));
-        self::removeDirectory($this->determinePathToApp($secondAppToBuild));
-        self::removeDirectory($this->determinePathToApp($appToIgnore));
+        $appThatWasNotBuilt = 'IgnoredWebUITestApp' . strval(rand(100, PHP_INT_MAX));
+        $this->createTestApp($appThatWasNotBuilt);
+        $this->createGlobalCssFileForApp($appThatWasNotBuilt);
+        $firstAppBuilt = 'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX));;
+        $this->createTestApp($firstAppBuilt);
+        $this->createGlobalCssFileForApp($firstAppBuilt);
+        $this->buildApp($firstAppBuilt);
+        $secondAppBuilt = 'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX));;
+        $this->createTestApp($secondAppBuilt);
+        $this->createGlobalCssFileForApp($secondAppBuilt);
+        $this->buildApp($secondAppBuilt);
+        /** There should only be links for global css files incorporated into the output for Apps that were built */
+        $this->expectGlobalCssLinksForApp($firstAppBuilt);
+        $this->expectGlobalCssLinksForApp($secondAppBuilt);
+        self::removeDirectory($this->determinePathToApp($firstAppBuilt));
+        self::removeDirectory($this->determinePathToApp($secondAppBuilt));
+        self::removeDirectory($this->determinePathToApp($appThatWasNotBuilt));
     }
 
     private function expectGlobalCssLinksForApp(string $appName): void

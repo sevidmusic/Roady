@@ -68,6 +68,11 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     private function loadGlobalStylesheetsDefinedByRunningApps(): void
     {
         $this->webUIOutput .= '<link rel="stylesheet" href="Apps/BuiltWebUITestApp/css/test-global-css-file.css">';
+        // foreach ($this->determineRunningAppNames as appName) {
+        //     foreach($determineAppsGlobalStylesheetNames() as $globalStylesheetName) {
+        //         $this->webUIOutput .= '<link rel="stylesheet" href="Apps/' . $appName  . '/css/' . $globalStylesheetName . '">';
+        //     }
+        // }
     }
 
     private function buildOutputWithHtmlStructure(): string
