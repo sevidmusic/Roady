@@ -54,7 +54,7 @@ trait WebUITestTrait
 
     private function getCurrentRequest(): RequestInterface
     {
-        return $this->getWebUI()->export()['router']->getRequest();
+        return $this->getWebUI()->getRouter()->getRequest();
     }
 
     /**
