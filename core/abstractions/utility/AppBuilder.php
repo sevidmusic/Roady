@@ -36,7 +36,6 @@ abstract class AppBuilder implements AppBuilderInterface
     public static function buildApp(AppComponentsFactoryInterface $appComponentsFactory): void
     {
         self::removeRegisteredComponents($appComponentsFactory);
-        self::temporaryBugFixes($appComponentsFactory);
         self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
         self::buildAppsConfiguredComponents('Requests', $appComponentsFactory);
         self::buildAppsConfiguredComponents('Responses', $appComponentsFactory);
@@ -136,42 +135,6 @@ abstract class AppBuilder implements AppBuilderInterface
             $useDomain = $domain;
         }
         return AppComponentsFactory::buildDomain(($useDomain ?? 'http://localhost:8080'));
-    }
-
-    /** The following are temporary bug fixes */
-
-#########
-    private static function temporaryBugFixes(AppComponentsFactoryInterface $appComponentsFactory): void
-    {
-        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDuplicateApps($appComponentsFactory->getApp()->getName(), $appComponentsFactory->getApp()->getAppDomain()->getUrl());
-        /** !BUG This should not be neccessary! Fix duplicate Apps of same name type location container...*/
-        self::cleanUpDEFAULTApps($appComponentsFactory->getApp()->getName(), $appComponentsFactory->getApp()->getAppDomain()->getUrl());
-    }
-
-    private static function cleanUpDEFAULTApps(string $appName, string $domain): void
-    {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
-        foreach($appComponentsFactory->getComponentCrud()->readAll('DEFAULT', 'APP') as $component) {
-            $appComponentsFactory->getComponentCrud()->delete($component);
-        }
-    }
-
-    private static function cleanUpDuplicateApps(string $appName, string $domain): void
-    {
-        $appComponentsFactory = self::getAppsAppComponentsFactory($appName, $domain);
-        foreach($appComponentsFactory->getComponentCrud()->readAll(
-            $appComponentsFactory->getApp()->getLocation(),
-            $appComponentsFactory->getApp()->getContainer()
-        ) as $component) {
-            if(
-                $component->getName() === $appComponentsFactory->getApp()->getName()
-                &&
-                $component->getUniqueId() !== $appComponentsFactory->getApp()->getUniqueId()
-            ) {
-                $appComponentsFactory->getComponentCrud()->delete($component);
-            }
-        }
     }
 
 }
