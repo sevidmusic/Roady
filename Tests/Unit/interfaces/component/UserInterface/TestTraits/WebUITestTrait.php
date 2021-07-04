@@ -30,6 +30,11 @@ trait WebUITestTrait
     private string $closeBody = '</body>' . PHP_EOL;
     private string $closeHtml = '</html>' . PHP_EOL;
     private string $expectedOutput = '';
+    private string $globalCssFileName = 'test-global-css-file.css';
+    /**
+     * @var array<int, string> $builtAppNames
+     */
+    private array $builtAppNames = [];
 
     /**
      * @devNote:
@@ -39,7 +44,7 @@ trait WebUITestTrait
     protected function expectedOutput(): string
     {
         $this->expectDoctypeOpeningHtmlAndOpeningHeadTags();
-        // HERE $this->expectHtmlLinkTagsForGlobalCssFilesDefinedByRunningApps();
+        $this->expectHtmlLinkTagsForGlobalCssFilesDefinedByRunningApps();
         /**
          * @var ResponseInterface $response
          */
@@ -69,12 +74,41 @@ trait WebUITestTrait
 
     private function expectHtmlLinkTagsForGlobalCssFilesDefinedByRunningApps(): void
     {
-        $appName = 'WebUITestApp';
-        $this->createTestApp($appName);
-        $this->createGlobalCssFileForApp($appName);
+        /** @var string $appToIgnore
+         * This App is used to test that only Running Apps have links for there
+         * global css files incorporated into the output. It is created, and a
+         * global css file is defined for it, but it will not be built, therefore,
+         * a link for it's global css file should not be incorporated into the output,
+         * if it is, then the WebUI::getOutput() method is not properly implemented.
+         */
+        $appToIgnore = 'IgnoredWebUITestApp' . strval(rand(100, PHP_INT_MAX));
+        $this->createTestApp($appToIgnore);
+        $this->createGlobalCssFileForApp($appToIgnore);
+        $firstAppToBuild = 'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX));;
+        $this->createTestApp($firstAppToBuild);
+        $this->createGlobalCssFileForApp($firstAppToBuild);
+        $this->buildApp($firstAppToBuild);
+        $secondAppToBuild = 'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX));;
+        $this->createTestApp($secondAppToBuild);
+        $this->createGlobalCssFileForApp($secondAppToBuild);
+        $this->buildApp($secondAppToBuild);
+        /** There should only be links incorporated into the output for the Apps that were built */
+        $this->expectGlobalCssLinksForApp($firstAppToBuild);
+        $this->expectGlobalCssLinksForApp($secondAppToBuild);
+        self::removeDirectory($this->determinePathToApp($firstAppToBuild));
+        self::removeDirectory($this->determinePathToApp($secondAppToBuild));
+        self::removeDirectory($this->determinePathToApp($appToIgnore));
+    }
+
+    private function expectGlobalCssLinksForApp(string $appName): void
+    {
+        $this->expectedOutput .= '<link rel="stylesheet" href="Apps/' . $appName . '/css/' . $this->globalCssFileName . '">';
+    }
+
+    private function buildApp(string $appName): void
+    {
         exec(PHP_BINARY . ' ' . escapeshellarg($this->determinePathToAppsComponentsPhp($appName)));
-        $this->expectedOutput .= '<link rel="stylesheet" href="Apps/' . $appName . '/css/test-global-css-file.css">';
-        self::removeDirectory($this->determinePathToApp($appName));
+        array_push($this->builtAppNames, $appName);
     }
 
     protected function setWebUIParentTestInstances(): void
@@ -123,11 +157,6 @@ trait WebUITestTrait
         }
     }
 
-    /**
-     * @var array<int, string> $createdApps Array of the names of the Apps created by tests/expectations.
-     */
-    private array $createdApps = [];
-
     private function createTestApp(string $appName): void
     {
         $configureAppOutput = new ConfigureAppOutput();
@@ -144,7 +173,6 @@ trait WebUITestTrait
                 ]
             )
         );
-        array_push($this->createdApps, $appName);
     }
 
     private function determinePathToApp(string $appName): string
@@ -168,7 +196,7 @@ trait WebUITestTrait
         if(!is_dir($this->determinePathToAppsCssDir($appName))) {
             mkdir($this->determinePathToAppsCssDir($appName));
         }
-        file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . 'test-global-css-file.css', ' body { background: #020203; color: aqua; font-family: monospace; }');
+        file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $this->globalCssFileName, ' body { background: #020203; color: aqua; font-family: monospace; }');
     }
 
     private static function removeDirectory(string $dir): void
