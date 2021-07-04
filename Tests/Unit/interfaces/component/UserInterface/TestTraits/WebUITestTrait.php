@@ -26,6 +26,7 @@ trait WebUITestTrait
     private string $openBody = '<body>' . PHP_EOL;
     private string $closeBody = '</body>' . PHP_EOL;
     private string $closeHtml = '</html>' . PHP_EOL;
+    private string $expectedOutput = '';
 
 
     protected function setWebUIParentTestInstances(): void
@@ -61,40 +62,69 @@ trait WebUITestTrait
         ];
     }
 
+    private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
+    {
+        $this->expectedOutput = $this->doctype . $this->openHtml . $this->openHead;
+    }
+
+
+    private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(ResponseInterface $response): void
+    {
+        if($response->getPosition() >= 0 && !str_contains($this->expectedOutput, $this->closeHead . $this->openBody)) {
+            $this->expectedOutput .= $this->closeHead . $this->openBody;
+        }
+    }
+
+    /**
+     * @devNote:
+     * This overwrites the ResponseUITestTrait::expectedOutput() method.
+     * @see Tests/Unit/abstractions/component/UserInterface/WebUITest.php
+     */
     protected function expectedOutput(): string
     {
-        $expectedOutput = $this->doctype . $this->openHtml . $this->openHead;
         $expectedResponses = $this->expectedResponses();
         $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        /** Expectations */
+        $this->expectDoctypeOpeningHtmlAndOpeningHeadTags();
         /**
          * @var ResponseInterface $response
          */
         foreach($sortedResponses as $response)
         {
-            if($response->getPosition() >= 0 && !str_contains($expectedOutput, $this->closeHead . $this->openBody)) {
-                $expectedOutput .= $this->closeHead . $this->openBody;
-            }
-            $outputComponents = [];
-            foreach($response->getOutputComponentStorageInfo() as $storable)
-            {
-                /**
-                 * @var OutputComponentInterface $component
-                 */
-                $component = $this->getRoutersCompoenentCrud()->read($storable);
-                if($this->isProperImplementation(OutputComponentInterface::class, $component))
-                {
-                    array_push($outputComponents, $component);
-                }
-            }
-            $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            $this->expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened($response);
+            $this->expectResponseOutput($response);
+        }
+        $this->expectClosingBodyAndClosingHtmlTags();
+        return $this->expectedOutput;
+    }
+
+    private function expectClosingBodyAndClosingHtmlTags(): void
+    {
+        $this->expectedOutput .= $this->closeBody . $this->closeHtml;
+    }
+
+    private function expectResponseOutput(ResponseInterface $response): void
+    {
+        /** @var array<int, OutputComponentInterface> $outputComponents */
+        $outputComponents = [];
+        foreach($response->getOutputComponentStorageInfo() as $storable)
+        {
             /**
-             * @var OutputComponentInterface $outputComponent
+             * @var OutputComponentInterface $component
              */
-            foreach($sortedOutputComponents as $outputComponent)
+            $component = $this->getRoutersCompoenentCrud()->read($storable);
+            if($this->isProperImplementation(OutputComponentInterface::class, $component))
             {
-                $expectedOutput .= $outputComponent->getOutput();
+                array_push($outputComponents, $component);
             }
         }
-        return $expectedOutput . $this->closeBody . $this->closeHtml;
+        $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+        /**
+         * @var OutputComponentInterface $outputComponent
+         */
+        foreach($sortedOutputComponents as $outputComponent)
+        {
+            $this->expectedOutput .= $outputComponent->getOutput();
+        }
     }
 }

@@ -60,7 +60,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         $this->webUIOutput .= self::CLOSEHEAD . self::OPENBODY;
     }
 
-    private function responsePositionIsLessThanZeroAndHeadWasNotClosedAndBodyNotOpened(ResponseInterface $response): bool
+    private function responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened(ResponseInterface $response): bool
     {
         return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSEHEAD . self::OPENBODY));
     }
@@ -75,7 +75,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
          */
         foreach($this->getSortedResponsesToCurrentRequest() as $response)
         {
-            if($this->responsePositionIsLessThanZeroAndHeadWasNotClosedAndBodyNotOpened($response)) {
+            if($this->responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened($response)) {
                 $this->closeHeadOpenBody();
             }
             $this->addResponseOutputToWebUIOutput($response);
