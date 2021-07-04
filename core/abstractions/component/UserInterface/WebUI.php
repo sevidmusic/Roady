@@ -65,11 +65,17 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSEHEAD . self::OPENBODY));
     }
 
+    private function loadGlobalStylesheetsDefinedByRunningApps(): void
+    {
+        $this->webUIOutput .= '<link rel="stylesheet" href="Apps/WebUITestApp/css/test-global-css-file.css">';
+    }
+
     private function buildOutputWithHtmlStructure(): string
     {
         /** @devNote: Always reset $this->collectiveResponseOutput when $this->buildOutputWithHtmlStructure() is called. */
         $this->collectiveResponseOutput = '';
         $this->openHtml();
+        // HERE $this->loadGlobalStylesheetsDefinedByRunningApps();
         /**
          * @var ResponseInterface $response
          */
