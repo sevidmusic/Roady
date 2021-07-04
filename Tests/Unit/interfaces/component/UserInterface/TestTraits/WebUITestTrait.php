@@ -93,8 +93,8 @@ trait WebUITestTrait
         $this->createGlobalCssFileForApp($secondAppBuilt);
         $this->buildApp($secondAppBuilt);
         /** There should only be links for global css files incorporated into the output for Apps that were built */
-        $this->expectGlobalCssLinksForApp($firstAppBuilt);
-        $this->expectGlobalCssLinksForApp($secondAppBuilt);
+// HERE        $this->expectGlobalCssLinksForApp($firstAppBuilt);
+// HERE        $this->expectGlobalCssLinksForApp($secondAppBuilt);
         self::removeDirectory($this->determinePathToApp($firstAppBuilt));
         self::removeDirectory($this->determinePathToApp($secondAppBuilt));
         self::removeDirectory($this->determinePathToApp($appThatWasNotBuilt));
@@ -230,7 +230,7 @@ trait WebUITestTrait
             /**
              * @var OutputComponentInterface $component
              */
-            $component = $this->getRoutersCompoenentCrud()->read($storable);
+            $component = $this->getRoutersComponentCrud()->read($storable);
             if($this->isProperImplementation(OutputComponentInterface::class, $component))
             {
                 array_push($outputComponents, $component);
