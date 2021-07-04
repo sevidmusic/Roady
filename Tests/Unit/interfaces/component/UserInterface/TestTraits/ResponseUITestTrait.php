@@ -306,4 +306,11 @@ trait ResponseUITestTrait
         $this->getResponseUI()->getOutput();
     }
 
+    public function testGetRouterReturnsAssignedRouter(): void
+    {
+        $this->assertEquals(
+            $this->getResponseUI()->export()['router'],
+            $this->getResponseUI()->getRouter()
+        );
+    }
 }

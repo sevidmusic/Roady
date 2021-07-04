@@ -96,4 +96,9 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
         $this->import(['output' => $this->buildOutput()]);
         return parent::getOutput();
     }
+
+    public function getRouter(): RouterInterface
+    {
+        return $this->router;
+    }
 }
