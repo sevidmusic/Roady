@@ -26,7 +26,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     }
 
     /**
-     * @return array<string, PositionableInterface>
+     * @return array<PositionableInterface>
      */
     protected function sortPositionables(PositionableInterface ...$postionables): array
     {
