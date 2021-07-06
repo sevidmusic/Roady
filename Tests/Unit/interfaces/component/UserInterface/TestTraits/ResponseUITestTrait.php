@@ -252,7 +252,7 @@ trait ResponseUITestTrait
         return $sorted;
     }
 
-    protected function getRoutersCompoenentCrud(): ComponentCrudInterface
+    protected function getRoutersComponentCrud(): ComponentCrudInterface
     {
          return $this->getResponseUI()->export()['router']->export()['crud'];
     }
@@ -273,7 +273,7 @@ trait ResponseUITestTrait
                 /**
                  * @var OutputComponentInterface $component
                  */
-                $component = $this->getRoutersCompoenentCrud()->read($storable);
+                $component = $this->getRoutersComponentCrud()->read($storable);
                 if($this->isProperImplementation(OutputComponentInterface::class, $component))
                 {
                     array_push($outputComponents, $component);

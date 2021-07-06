@@ -262,7 +262,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
      */
     private function dataIsCorrupted(array $data): bool
     {
-        if(isset($data['type'])) {
+        if(isset($data['type']) && class_exists($data['type'])) {
             $classImplements = class_implements($data['type']);
             if(is_array($classImplements) && in_array(ComponentInterface::class, $classImplements)) {
                 return false;
