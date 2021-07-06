@@ -117,6 +117,11 @@ trait WebUITestTrait
         );
         /** There should only be links for global css files incorporated into the output for Apps that were built */
         $this->expectLinksForStylesheetsDefinedByBuiltApps();
+    }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
         foreach($this->createdApps as $appName) {
             self::removeDirectory($this->determinePathToApp($appName));
         }
@@ -287,7 +292,7 @@ trait WebUITestTrait
         if(!is_dir($this->determinePathToAppsCssDir($appName))) {
             mkdir($this->determinePathToAppsCssDir($appName));
         }
-        file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $requestName, ' body { font-family: monospace; }');
+        file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $requestName, ' body { font-family: monospace; }', LOCK_SH);
     }
 
     private static function removeDirectory(string $dir): void

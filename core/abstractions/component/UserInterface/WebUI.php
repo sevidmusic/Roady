@@ -35,77 +35,10 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
      */
     private string $collectiveResponseOutput = '';
 
-    private function openHtml(): void
+    public function getOutput(): string
     {
-        /** @devNote:
-         * Always reset the $this->webUIOutput when $this->openHtml() is called,
-         * i.e., use "=" not ".=" for assignment.
-         */
-        $this->webUIOutput = self::DOCTYPE . self::OPENHTML . self::OPENHEAD;
-    }
-
-    /**
-     * @return array<string, ResponseInterface> Sorted array of Responses to the current Request indexed by Response position.
-     */
-    private function getSortedResponsesToCurrentRequest(): array
-    {
-        $responsesToCurrentRequest = $this->router->getResponses(
-            CoreApp::deriveAppLocationFromRequest($this->router->getRequest()),
-            ResponseInterface::RESPONSE_CONTAINER
-        );
-        /** @var array <string, ResponseInterface> $sortedResponses */
-        $sortedResponses = $this->sortPositionables(...$responsesToCurrentRequest);;
-        return $sortedResponses;
-    }
-
-    private function closeHeadOpenBody(): void
-    {
-        $this->webUIOutput .= self::CLOSEHEAD . self::OPENBODY;
-    }
-
-    private function responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened(ResponseInterface $response): bool
-    {
-        return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSEHEAD . self::OPENBODY));
-    }
-
-    private function loadGlobalStylesheetsDefinedByBuiltApps(): void
-    {
-        foreach ($this->determineBuiltAppNames() as $appName) {
-        //     foreach($determineAppsGlobalStylesheetNames() as $globalStylesheetName) {
-                   $globalStylesheetName = 'foobarbaz.css';
-                   $this->webUIOutput .= '<link rel="stylesheet" href="Apps/' . $appName  . '/css/' . $globalStylesheetName . '">';
-        //     }
-        }
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    private function determineBuiltAppNames(): array
-    {
-        $builtAppNames = [];
-        $factories = $this->getRoutersComponentCrud()->readAll(
-            CoreApp::deriveAppLocationFromRequest($this->getRouter()->getRequest()),
-            AppComponentsFactoryInterface::CONTAINER
-        );
-        /**
-         * @var FactoryInterface $factory
-         */
-        foreach($factories as $factory) {
-            if($this->isAAppComponentsFactory($factory)) {
-                /** @var AppComponentsFactoryInterface $factory */
-                array_push($builtAppNames, $factory->getApp()->getName());
-            }
-        }
-        return $builtAppNames;
-    }
-
-    private function isAAppComponentsFactory(ComponentInterface $component): bool {
-        $implements = class_implements($component);
-        if(is_array($implements)) {
-            return in_array(AppComponentsFactoryInterface::class, $implements);
-        }
-        return false;
+        $this->import(['output' => $this->buildOutputWithHtmlStructure()]);
+        return ($this->getState() === true ? $this->export()['output'] : '');
     }
 
     private function buildOutputWithHtmlStructure(): string
@@ -113,7 +46,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         /** @devNote: Always reset $this->collectiveResponseOutput when $this->buildOutputWithHtmlStructure() is called. */
         $this->collectiveResponseOutput = '';
         $this->openHtml();
-// HERE        $this->loadGlobalStylesheetsDefinedByBuiltApps();
+        $this->loadStylesheetsDefinedByBuiltApps();
         /**
          * @var ResponseInterface $response
          */
@@ -132,9 +65,46 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return $this->webUIOutput;
     }
 
-    private function closeBodyCloseHtml(): void
+    private function openHtml(): void
     {
-        $this->webUIOutput .= self::CLOSEBODY . self::CLOSEHTML;
+        /** @devNote:
+         * Always reset the $this->webUIOutput when $this->openHtml() is called,
+         * i.e., use "=" not ".=" for assignment.
+         */
+        $this->webUIOutput = self::DOCTYPE . self::OPENHTML . self::OPENHEAD;
+    }
+
+    private function loadStylesheetsDefinedByBuiltApps(): void
+    {
+        foreach ($this->determineBuiltAppNames() as $appName) {
+            foreach($this->determineNamesOfStylesheetsThatShouldLoadForApp($appName) as $stylesheetName) {
+                $this->webUIOutput .= '<link rel="stylesheet" href="Apps/' . $appName  . '/css/' . $stylesheetName . '">';
+            }
+        }
+    }
+
+    /**
+     * @return array<string, ResponseInterface> Sorted array of Responses to the current Request indexed by Response position.
+     */
+    private function getSortedResponsesToCurrentRequest(): array
+    {
+        $responsesToCurrentRequest = $this->router->getResponses(
+            CoreApp::deriveAppLocationFromRequest($this->router->getRequest()),
+            ResponseInterface::RESPONSE_CONTAINER
+        );
+        /** @var array <string, ResponseInterface> $sortedResponses */
+        $sortedResponses = $this->sortPositionables(...$responsesToCurrentRequest);;
+        return $sortedResponses;
+    }
+
+    private function responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened(ResponseInterface $response): bool
+    {
+        return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSEHEAD . self::OPENBODY));
+    }
+
+    private function closeHeadOpenBody(): void
+    {
+        $this->webUIOutput .= self::CLOSEHEAD . self::OPENBODY;
     }
 
     private function addResponseOutputToWebUIOutput(ResponseInterface $response): void
@@ -164,10 +134,79 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         }
     }
 
-    public function getOutput(): string
+    private function closeBodyCloseHtml(): void
     {
-        $this->import(['output' => $this->buildOutputWithHtmlStructure()]);
-        return ($this->getState() === true ? $this->export()['output'] : '');
+        $this->webUIOutput .= self::CLOSEBODY . self::CLOSEHTML;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function determineBuiltAppNames(): array
+    {
+        $builtAppNames = [];
+        $factories = $this->getRoutersComponentCrud()->readAll(
+            CoreApp::deriveAppLocationFromRequest($this->getRouter()->getRequest()),
+            AppComponentsFactoryInterface::CONTAINER
+        );
+        /**
+         * @var FactoryInterface $factory
+         */
+        foreach($factories as $factory) {
+            if($this->isAAppComponentsFactory($factory)) {
+                /** @var AppComponentsFactoryInterface $factory */
+                array_push($builtAppNames, $factory->getApp()->getName());
+            }
+        }
+        return $builtAppNames;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function determineNamesOfStylesheetsThatShouldLoadForApp(string $appName): array
+    {
+        $stylesheetsToLoad = [];
+        foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
+            if(pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css' && file_exists($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName) && str_contains($stylesheetName, 'global')) {
+                array_push($stylesheetsToLoad, $stylesheetName);
+            }
+        }
+        var_dump($stylesheetsToLoad);
+        return $stylesheetsToLoad;
+    }
+
+    /**
+     * Returns an array of the names of all of the stylesheets defined by the specified App.
+     * @param string $appName The name of the App that defines the stylesheets.
+     * @return array<int, string> Array of the names of the stylesheets defined by the specified App.
+     */
+    private function determineAppsDefinedStylesheetNames(string $appName) {
+        if(is_dir($this->determinePathToAppsCssDir($appName))) {
+            $ls = scandir($this->determinePathToAppsCssDir($appName));
+            $definedStylesheets = array_diff((is_array($ls) ? $ls : []), ['.', '..']);
+        }
+        return ($definedStylesheets ?? []);
+    }
+
+    private function determinePathToApp(string $appName): string
+    {
+        $replace = 'core' . DIRECTORY_SEPARATOR . 'abstractions' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'UserInterface';
+        $path = strval(str_replace($replace, 'Apps' . DIRECTORY_SEPARATOR . $appName, strval(realpath(__DIR__))));
+        return $path;
+    }
+
+    private function determinePathToAppsCssDir(string $appName): string
+    {
+        return $this->determinePathToApp($appName) . DIRECTORY_SEPARATOR . 'css';
+    }
+
+    private function isAAppComponentsFactory(ComponentInterface $component): bool {
+        $implements = class_implements($component);
+        if(is_array($implements)) {
+            return in_array(AppComponentsFactoryInterface::class, $implements);
+        }
+        return false;
     }
 
 }
