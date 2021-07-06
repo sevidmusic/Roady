@@ -3,6 +3,7 @@
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
 use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
 use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
 use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
@@ -164,6 +165,7 @@ trait WebUITestTrait
 
     private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
     {
+        var_dump($this->getWebUI()->getRouter()->getRequest()->getUrl());
         return false;
     }
 
@@ -362,6 +364,20 @@ trait WebUITestTrait
         {
             $this->expectedOutput .= $outputComponent->getOutput();
         }
+    }
+
+    public static function getRequest(): RequestInterface
+    {
+        $request = new CoreRequest(
+            new CoreStorable(
+                'ResponseUICurrentRequest' . strval(rand(0, 999)),
+                self::expectedAppLocation(),
+                self::getTestComponentContainer()
+            ),
+            new CoreSwitchable()
+        );
+        $request->import(['url' => './?request=foo']);
+        return $request;
     }
 
 }

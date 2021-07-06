@@ -11,6 +11,7 @@ class WebUITest extends ResponseUITestBase
 {
     use ResponseUITestInterface, WebUITestInterface {
         WebUITestInterface::expectedOutput insteadof ResponseUITestInterface;
+        WebUITestInterface::getRequest insteadof ResponseUITestInterface;
     }
 
     public function setUp(): void
