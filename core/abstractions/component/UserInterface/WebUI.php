@@ -168,11 +168,37 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     {
         $stylesheetsToLoad = [];
         foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
-            if(pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css' && file_exists($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName) && str_contains($stylesheetName, 'global')) {
-                array_push($stylesheetsToLoad, $stylesheetName);
+            if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
+                if($this->isAGlobalStylesheet($stylesheetName) || $this->stylesheetNameMathesARequestQueryStringValue($stylesheetName)) {
+                    array_push($stylesheetsToLoad, $stylesheetName);
+                }
             }
         }
         return $stylesheetsToLoad;
+    }
+
+    private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
+    {
+        $nameWithoutExtension = str_replace('.css', '', $stylesheetName);
+        if(str_contains(strval(parse_url($this->getRouter()->getRequest()->getUrl(), PHP_URL_QUERY)), $nameWithoutExtension)) {
+            return true;
+        }
+        return false;
+    }
+
+    private function isAGlobalStylesheet(string $stylesheetName): bool
+    {
+        return str_contains($stylesheetName, 'global');
+    }
+
+    private function determineStylesheetPath(string $appName, string $stylesheetName): string
+    {
+        return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
+    }
+
+    private function hasCssFileExtension(string $stylesheetName): bool
+    {
+        return (pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css');
     }
 
     /**
