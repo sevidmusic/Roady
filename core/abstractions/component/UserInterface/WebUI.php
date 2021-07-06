@@ -172,7 +172,6 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
                 array_push($stylesheetsToLoad, $stylesheetName);
             }
         }
-        var_dump($stylesheetsToLoad);
         return $stylesheetsToLoad;
     }
 

@@ -119,7 +119,7 @@ trait WebUITestTrait
         $this->expectLinksForStylesheetsDefinedByBuiltApps();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
         foreach($this->createdApps as $appName) {
@@ -148,18 +148,40 @@ trait WebUITestTrait
     {
         $stylesheetsToLoad = [];
         foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
-            if(pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css' && file_exists($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName) && str_contains($stylesheetName, 'global')) {
-                array_push($stylesheetsToLoad, $stylesheetName);
+            if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
+                if($this->stylesheetNameMathesARequestQueryStringValue($stylesheetName) || $this->isAGlobalStylesheet($stylesheetName)) {
+                    array_push($stylesheetsToLoad, $stylesheetName);
+                }
             }
         }
         return ($stylesheetsToLoad ?? []);
+    }
+
+    private function isAGlobalStylesheet(string $stylesheetName): bool
+    {
+        return str_contains($stylesheetName, 'global');
+    }
+
+    private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
+    {
+        return false;
+    }
+
+    private function determineStylesheetPath(string $appName, string $stylesheetName): string
+    {
+        return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
+    }
+
+    private function hasCssFileExtension(string $stylesheetName): bool
+    {
+        return (pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css');
     }
 
     private function expectLinksForStylesheetsDefinedByBuiltApps(): void
     {
         foreach($this->determineBuiltAppNames() as $appName) {
             foreach($this->determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem($appName) as $stylesheetName) {
-                $this->expectGlobalCssLinksForApp($appName, $stylesheetName);
+                $this->expectCssLinkForApp($appName, $stylesheetName);
             }
         }
     }
@@ -194,7 +216,7 @@ trait WebUITestTrait
         return false;
     }
 
-    private function expectGlobalCssLinksForApp(string $appName, string $cssFileName): void
+    private function expectCssLinkForApp(string $appName, string $cssFileName): void
     {
         $this->expectedOutput .= '<link rel="stylesheet" href="Apps/' . $appName . '/css/' . $cssFileName . '">';
     }
