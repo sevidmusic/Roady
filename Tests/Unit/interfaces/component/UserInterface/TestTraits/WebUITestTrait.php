@@ -38,6 +38,8 @@ trait WebUITestTrait
     private string $globalCssFileName = 'test-global-css-file.css';
     /** @var array<int, string> $createdApps Array of the names of the Apps that were created for WebUI tests. */
     private array $createdApps = [];
+    private static string $requestedStylesheetNameA = 'requestedStylesheetNameA';
+    private static string $requestedStylesheetNameB = 'requestedStylesheetNameB';
 
     /**
      * @devNote:
@@ -103,17 +105,17 @@ trait WebUITestTrait
          */
         $this->createTestAppWithCssFiles(
             'IgnoredWebUITestApp' . strval(rand(100, PHP_INT_MAX)),
-            ['should-NOT-LOAD-since-app-was-NOT-built-and-also-does-NOT-match-current-request.css', 'global-should-NOT-LOAD-since-app-was-NOT-built.css'],
+            ['should-NOT-LOAD-since-app-was-NOT-built-and-also-does-NOT-match-current-request.css', self::$requestedStylesheetNameA . '.css', self::$requestedStylesheetNameB . '.css', 'global-should-NOT-LOAD-since-app-was-NOT-built.css'],
             false
         );
         $this->createTestAppWithCssFiles(
             'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX)),
-            ['global-SHOULD-LOAD-since-app-was-built.css','should-NOT-LOAD-since-does-NOT-match-current-request.css'],
+            ['global-SHOULD-LOAD-since-app-was-built.css', self::$requestedStylesheetNameA . '.css', 'should-NOT-LOAD-since-does-NOT-match-current-request.css'],
             true
         );
         $this->createTestAppWithCssFiles(
             'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX)),
-            ['global-styles-SHOULD-LOAD-since-app-was-built.css', 'global-in-name-but-should-NOT-LOAD-because-extension-is-NOT-css'],
+            ['global-styles-SHOULD-LOAD-since-app-was-built.css', self::$requestedStylesheetNameA . '.css', self::$requestedStylesheetNameB . '.css', 'global-in-name-but-should-NOT-LOAD-because-extension-is-NOT-css'],
             true
         );
         /** There should only be links for global css files incorporated into the output for Apps that were built */
@@ -165,7 +167,10 @@ trait WebUITestTrait
 
     private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
     {
-        var_dump($this->getWebUI()->getRouter()->getRequest()->getUrl());
+        $nameWithoutExtension = str_replace('.css', '', $stylesheetName);
+        if(str_contains(strval(parse_url($this->getWebUI()->getRouter()->getRequest()->getUrl(), PHP_URL_QUERY)), $nameWithoutExtension)) {
+            return true;
+        }
         return false;
     }
 
@@ -376,7 +381,7 @@ trait WebUITestTrait
             ),
             new CoreSwitchable()
         );
-        $request->import(['url' => './?request=foo']);
+        $request->import(['url' => './?request=' . self::$requestedStylesheetNameA . '&request=' . self::$requestedStylesheetNameB]);
         return $request;
     }
 
