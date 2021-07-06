@@ -4,11 +4,12 @@ namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
 
 use DarlingDataManagementSystem\abstractions\component\UserInterface\ResponseUI as ResponseUIInterface;
 use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
+use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
 use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
 use DarlingDataManagementSystem\interfaces\component\UserInterface\WebUI as WebUIInterface;
 use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 use RuntimeException as PHPRuntimeException;
 
 abstract class WebUI extends ResponseUIInterface implements WebUIInterface
@@ -67,10 +68,9 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSEHEAD . self::OPENBODY));
     }
 
-    private function loadGlobalStylesheetsDefinedByRunningApps(): void
+    private function loadGlobalStylesheetsDefinedByBuiltApps(): void
     {
-        foreach ($this->determineRunningAppNames() as $appName) {
-        // REF ONLY DOES NOT GO HERE: $this->webUIOutput .= '<link rel="stylesheet" href="Apps/BuiltWebUITestApp/css/test-global-css-file.css">';
+        foreach ($this->determineBuiltAppNames() as $appName) {
         //     foreach($determineAppsGlobalStylesheetNames() as $globalStylesheetName) {
                    $globalStylesheetName = 'foobarbaz.css';
                    $this->webUIOutput .= '<link rel="stylesheet" href="Apps/' . $appName  . '/css/' . $globalStylesheetName . '">';
@@ -81,20 +81,31 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     /**
      * @return array<int, string>
      */
-    private function determineRunningAppNames(): array
+    private function determineBuiltAppNames(): array
     {
-        $runningAppNames = [];
+        $builtAppNames = [];
         $factories = $this->getRoutersComponentCrud()->readAll(
             CoreApp::deriveAppLocationFromRequest($this->getRouter()->getRequest()),
-            StoredComponentFactoryInterface::CONTAINER
+            AppComponentsFactoryInterface::CONTAINER
         );
         /**
          * @var FactoryInterface $factory
          */
         foreach($factories as $factory) {
-            array_push($runningAppNames, $factory->getApp()->getName());
+            if($this->isAAppComponentsFactory($factory)) {
+                /** @var AppComponentsFactoryInterface $factory */
+                array_push($builtAppNames, $factory->getApp()->getName());
+            }
         }
-        return $runningAppNames;
+        return $builtAppNames;
+    }
+
+    private function isAAppComponentsFactory(ComponentInterface $component): bool {
+        $implements = class_implements($component);
+        if(is_array($implements)) {
+            return in_array(AppComponentsFactoryInterface::class, $implements);
+        }
+        return false;
     }
 
     private function buildOutputWithHtmlStructure(): string
@@ -102,7 +113,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         /** @devNote: Always reset $this->collectiveResponseOutput when $this->buildOutputWithHtmlStructure() is called. */
         $this->collectiveResponseOutput = '';
         $this->openHtml();
-// HERE        $this->loadGlobalStylesheetsDefinedByRunningApps();
+// HERE        $this->loadGlobalStylesheetsDefinedByBuiltApps();
         /**
          * @var ResponseInterface $response
          */
