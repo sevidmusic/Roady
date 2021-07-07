@@ -26,7 +26,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     }
 
     /**
-     * @return array<PositionableInterface>
+     * @return array<string, PositionableInterface>
      */
     protected function sortPositionables(PositionableInterface ...$postionables): array
     {
@@ -39,6 +39,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
             $sorted[strval($postionable->getPosition())] = $postionable;
         }
         ksort($sorted, SORT_NUMERIC);
+        /** @var array<string, PositionableInterface> $sorted */
         return $sorted;
     }
 
