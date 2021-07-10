@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "darling/ddms",
-            "version": "v1.0.4",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/ddms.git",
-                "reference": "1050c8cdcef2851af62abeae888e6ab55e66c85b"
+                "reference": "a6ec4deffd1f1addf4a86f2f8348e54bcb2cf7d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/1050c8cdcef2851af62abeae888e6ab55e66c85b",
-                "reference": "1050c8cdcef2851af62abeae888e6ab55e66c85b",
+                "url": "https://api.github.com/repos/sevidmusic/ddms/zipball/a6ec4deffd1f1addf4a86f2f8348e54bcb2cf7d6",
+                "reference": "a6ec4deffd1f1addf4a86f2f8348e54bcb2cf7d6",
                 "shasum": ""
             },
             "require-dev": {
@@ -44,9 +44,9 @@
             "description": "Command line utility designed to aide in development with the Darling Data Management System",
             "support": {
                 "issues": "https://github.com/sevidmusic/ddms/issues",
-                "source": "https://github.com/sevidmusic/ddms/tree/v1.0.4"
+                "source": "https://github.com/sevidmusic/ddms/tree/v1.0.6"
             },
-            "time": "2021-07-09T20:54:40+00:00"
+            "time": "2021-07-10T18:03:31+00:00"
         },
         {
             "name": "darling/ddms-app-packages",
