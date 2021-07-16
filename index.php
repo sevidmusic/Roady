@@ -59,4 +59,4 @@ try {
     <?php
 }
 ?>
-<!-- Powered by the Darling Cms  | https://github.com/sevidmusic/DarlingDataManagementSystem | https://darlingdata.tech -->
+<!-- Powered by the Darling Data Management System  | https://github.com/sevidmusic/DarlingDataManagementSystem | https://darlingdata.tech -->
