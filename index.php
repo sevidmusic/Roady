@@ -59,4 +59,4 @@ try {
     <?php
 }
 ?>
-<!-- Powered by the Darling Cms | Currently Running App: <?php echo App::deriveNameLocationFromRequest($currentRequest); ?> -->
+<!-- Powered by the Darling Cms  | https://github.com/sevidmusic/DarlingDataManagementSystem | https://darlingdata.tech -->
