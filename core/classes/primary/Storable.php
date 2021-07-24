@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\primary;
+namespace roady\classes\primary;
 
-use DarlingDataManagementSystem\abstractions\primary\Storable as StorableBase;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\abstractions\primary\Storable as StorableBase;
+use roady\interfaces\primary\Storable as StorableInterface;
 
 class Storable extends StorableBase implements StorableInterface
 {

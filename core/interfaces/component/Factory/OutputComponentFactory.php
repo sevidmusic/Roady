@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Factory;
+namespace roady\interfaces\component\Factory;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use roady\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 
 interface OutputComponentFactory extends StoredComponentFactoryInterface
 {

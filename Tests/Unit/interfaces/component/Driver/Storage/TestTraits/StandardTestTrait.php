@@ -2,12 +2,12 @@
 
 namespace UnitTests\interfaces\component\Driver\Storage\TestTraits;
 
-use DarlingDataManagementSystem\abstractions\component\Driver\Storage\StorageDriver as StorageDriverBase;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
+use roady\abstractions\component\Driver\Storage\StorageDriver as StorageDriverBase;
+use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
+use roady\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
 use UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits\JsonStorageDriverTestTrait;
 
 trait StandardTestTrait

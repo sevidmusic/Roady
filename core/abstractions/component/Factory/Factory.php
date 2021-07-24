@@ -1,12 +1,12 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Factory;
+namespace roady\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Component as ComponentBase;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\abstractions\component\Component as ComponentBase;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\interfaces\component\Factory\Factory as FactoryInterface;
+use roady\interfaces\component\Web\App as AppInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 abstract class Factory extends ComponentBase implements FactoryInterface
 {

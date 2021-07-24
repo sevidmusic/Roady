@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\utility;
+namespace roady\interfaces\utility;
 
 use ReflectionClass;
 

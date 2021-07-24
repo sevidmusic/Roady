@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\Crud;
+namespace roady\classes\component\Crud;
 
-use DarlingDataManagementSystem\abstractions\component\Crud\ComponentCrud as ComponentCrudBase;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\abstractions\component\Crud\ComponentCrud as ComponentCrudBase;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 
 class ComponentCrud extends ComponentCrudBase implements ComponentCrudInterface
 {

@@ -1,17 +1,17 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
+namespace roady\abstractions\component\UserInterface;
 
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\abstractions\component\OutputComponent as CoreOutputComponent;
+use roady\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
+use roady\classes\component\Web\App as CoreApp;
+use roady\interfaces\component\Web\Routing\Router as RouterInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use RuntimeException as PHPRuntimeException;
 
 abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInterface

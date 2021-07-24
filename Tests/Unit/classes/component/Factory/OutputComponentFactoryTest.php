@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\Factory;
 
-use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory;
+use roady\classes\component\Factory\OutputComponentFactory;
 use UnitTests\abstractions\component\Factory\OutputComponentFactoryTest as CoreOutputComponentFactoryTest;
 
 class OutputComponentFactoryTest extends CoreOutputComponentFactoryTest

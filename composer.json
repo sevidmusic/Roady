@@ -1,5 +1,5 @@
 {
-    "name": "darling/darlingdatamanagementsystem",
+    "name": "darling/roadysystem",
     "description": "A data driven tool for developing Web applications.",
     "type": "project",
     "license": "MIT",
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DarlingDataManagementSystem\\": "core/",
+            "roady\\": "core/",
             "Apps\\": "Apps/",
             "UnitTests\\": "Tests/Unit/"
         }

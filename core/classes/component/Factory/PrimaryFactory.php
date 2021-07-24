@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\Factory;
+namespace roady\classes\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\PrimaryFactory as PrimaryFactoryBase;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\abstractions\component\Factory\PrimaryFactory as PrimaryFactoryBase;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
 
 class PrimaryFactory extends PrimaryFactoryBase implements PrimaryFactoryInterface
 {

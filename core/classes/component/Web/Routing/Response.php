@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\Web\Routing;
+namespace roady\classes\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\Web\Routing\Response as ResponseBase;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\abstractions\component\Web\Routing\Response as ResponseBase;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 
 class Response extends ResponseBase implements ResponseInterface
 {

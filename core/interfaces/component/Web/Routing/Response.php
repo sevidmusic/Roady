@@ -1,12 +1,12 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
+namespace roady\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
 
 interface Response extends SwitchableComponentInterface, PositionableInterface
 {

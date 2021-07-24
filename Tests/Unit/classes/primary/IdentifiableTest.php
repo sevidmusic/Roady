@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingDataManagementSystem\classes\primary\Identifiable;
+use roady\classes\primary\Identifiable;
 use UnitTests\abstractions\primary\IdentifiableTest as AbstractIdentifiableTest;
 
 class IdentifiableTest extends AbstractIdentifiableTest

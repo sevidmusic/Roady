@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component;
+namespace roady\classes\component;
 
-use DarlingDataManagementSystem\abstractions\component\Component as ComponentBase;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
+use roady\abstractions\component\Component as ComponentBase;
+use roady\interfaces\component\Component as ComponentInterface;
 
 class Component extends ComponentBase implements ComponentInterface
 {

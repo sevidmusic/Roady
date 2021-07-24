@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
 
 trait PositionableTestTrait
 {

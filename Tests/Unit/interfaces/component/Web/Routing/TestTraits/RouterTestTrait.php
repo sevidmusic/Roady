@@ -2,13 +2,13 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use roady\classes\component\Web\Routing\Response as CoreResponse;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Crud\ComponentCrud;
+use roady\interfaces\component\Web\Routing\Request;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\component\Web\Routing\Router as RouterInterface;
 
 trait RouterTestTrait
 {
@@ -130,7 +130,7 @@ trait RouterTestTrait
         );
         foreach ($this->getRouter()->getResponses($response->getLocation(), $response->getContainer()) as $response) {
             $this->assertTrue(
-                in_array('DarlingDataManagementSystem\interfaces\component\Web\Routing\Response', $this->classImplements($response)),
+                in_array('roady\interfaces\component\Web\Routing\Response', $this->classImplements($response)),
                 'The response data was corrupted between the time it was created via the Crud and returned by the Router. Check the Storage Driver being used by the Crud'
             );
         }

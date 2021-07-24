@@ -12,7 +12,7 @@ class StorableTest extends IdentifiableTest
     {
         $this->setStorable(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\primary\Storable',
+                '\roady\abstractions\primary\Storable',
                 ['MockName', 'MockLocation', 'MockContainer']
             )
         );

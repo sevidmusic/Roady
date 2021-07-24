@@ -1,12 +1,12 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component;
+namespace roady\abstractions\component;
 
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputCompoenentBase;
-use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\abstractions\component\OutputComponent as OutputCompoenentBase;
+use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use RuntimeException;
 
 abstract class DynamicOutputComponent extends OutputCompoenentBase implements DynamicOutputComponentInterface

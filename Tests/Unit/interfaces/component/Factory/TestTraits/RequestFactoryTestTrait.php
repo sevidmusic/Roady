@@ -2,8 +2,8 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait RequestFactoryTestTrait
 {

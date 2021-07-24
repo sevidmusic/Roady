@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use roady\interfaces\primary\Exportable as ExportableInterface;
 use UnitTests\classes\utility\ReflectionUtilityTest as ReflectionUtilityTestInterface;
 use UnitTests\TestTraits\ReflectionUtilityInstance;
 

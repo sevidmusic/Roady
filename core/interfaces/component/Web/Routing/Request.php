@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
+namespace roady\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use roady\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 
 interface Request extends SwitchableComponentInterface
 {

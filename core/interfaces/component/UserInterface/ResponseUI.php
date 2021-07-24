@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\UserInterface;
+namespace roady\interfaces\component\UserInterface;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
+use roady\interfaces\component\OutputComponent as CoreOutputComponent;
+use roady\interfaces\component\Web\Routing\Router as RouterInterface;
 
 interface ResponseUI extends CoreOutputComponent
 {

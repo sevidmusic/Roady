@@ -3,7 +3,7 @@
 namespace UnitTests\abstractions\component;
 
 use UnitTests\abstractions\component\OutputComponentTest as OutputComponentBaseTest;
-use DarlingDataManagementSystem\abstractions\component\DynamicOutputComponent as DynamicOutputComponentBase;
+use roady\abstractions\component\DynamicOutputComponent as DynamicOutputComponentBase;
 use UnitTests\interfaces\component\TestTraits\DynamicOutputComponentTestTrait as DynamicOutputComponentTests;
 
 class DynamicOutputComponentTest extends OutputComponentBaseTest

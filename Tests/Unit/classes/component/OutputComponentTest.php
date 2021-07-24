@@ -2,10 +2,10 @@
 
 namespace UnitTests\classes\component;
 
-use DarlingDataManagementSystem\classes\component\OutputComponent;
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\component\OutputComponent;
+use roady\classes\primary\Positionable;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\component\OutputComponentTest as AbstractOutputComponentTest;
 
 class OutputComponentTest extends AbstractOutputComponentTest

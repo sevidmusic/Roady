@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Factory;
+namespace roady\classes\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
-use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use roady\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
+use roady\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
 
 class StoredComponentFactory extends StoredComponentFactoryBase implements StoredComponentFactoryInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component;
+namespace roady\classes\component;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use roady\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use roady\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
 
 class SwitchableComponent extends SwitchableComponentBase implements SwitchableComponentInterface
 {

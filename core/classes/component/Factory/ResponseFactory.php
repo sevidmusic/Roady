@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Factory;
+namespace roady\classes\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use roady\abstractions\component\Factory\ResponseFactory as CoreResponseFactory;
+use roady\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
 
 class ResponseFactory extends CoreResponseFactory implements ResponseFactoryInterface
 {

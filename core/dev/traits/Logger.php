@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\dev\traits;
+namespace roady\dev\traits;
 
 
 trait Logger

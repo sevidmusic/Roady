@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Registry\Storage;
+namespace roady\interfaces\component\Registry\Storage;
 
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
 
 interface StoredComponentRegistry extends ComponentInterface
 {

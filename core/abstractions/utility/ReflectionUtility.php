@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\utility;
+namespace roady\abstractions\utility;
 
-use DarlingDataManagementSystem\dev\traits\Logger;
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use roady\dev\traits\Logger;
+use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
@@ -194,7 +194,7 @@ EOD;
              * For unknown types assume class instance.
              * @var class-string<object>|object $type
              */
-            $type = '\\' . str_replace(['DarlingDataManagementSystem\interfaces'], ['DarlingDataManagementSystem\classes'], $type);
+            $type = '\\' . str_replace(['roady\interfaces'], ['roady\classes'], $type);
             array_push($defaults, $this->getClassInstance($type));
         }
         return $defaults;

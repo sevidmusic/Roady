@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component;
+namespace roady\classes\component;
 
-use DarlingDataManagementSystem\abstractions\component\DynamicOutputComponent as DynamicOutputComponentBase;
-use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use roady\abstractions\component\DynamicOutputComponent as DynamicOutputComponentBase;
+use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 
 class DynamicOutputComponent extends DynamicOutputComponentBase implements DynamicOutputComponentInterface
 {

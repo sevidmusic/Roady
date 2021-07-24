@@ -13,7 +13,7 @@ class PositionableTest extends TestCase
     {
         $this->setPositionable(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\primary\Positionable'
+                '\roady\abstractions\primary\Positionable'
             )
         );
     }

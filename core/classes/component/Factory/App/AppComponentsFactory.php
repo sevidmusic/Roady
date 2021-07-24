@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Factory\App;
+namespace roady\classes\component\Factory\App;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory as CoreAppComponentsFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use roady\abstractions\component\Factory\App\AppComponentsFactory as CoreAppComponentsFactory;
+use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 
 class AppComponentsFactory extends CoreAppComponentsFactory implements AppComponentsFactoryInterface
 {

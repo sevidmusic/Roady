@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Web;
+namespace roady\interfaces\component\Web;
 
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\SwitchableComponent as CoreSwitchableComponent;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 interface App extends CoreSwitchableComponent
 {

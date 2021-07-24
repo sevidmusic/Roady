@@ -15,7 +15,7 @@ class StoredComponentFactoryTest extends CoreSwitchableComponentTest
     public function setUp(): void
     {
         $storedComponentFactory = $this->getMockForAbstractClass(
-            '\DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory',
+            '\roady\abstractions\component\Factory\StoredComponentFactory',
             [
                 $this->getMockPrimaryFactory(),
                 $this->getMockCrud(),

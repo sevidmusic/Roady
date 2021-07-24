@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\primary;
+namespace roady\classes\primary;
 
-use DarlingDataManagementSystem\abstractions\primary\Identifiable as IdentifiableBase;
-use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
+use roady\abstractions\primary\Identifiable as IdentifiableBase;
+use roady\interfaces\primary\Identifiable as IdentifiableInterface;
 
 class Identifiable extends IdentifiableBase implements IdentifiableInterface
 {

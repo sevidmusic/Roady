@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\Web\Routing;
+namespace roady\classes\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\Web\Routing\Request as RequestBase;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\abstractions\component\Web\Routing\Request as RequestBase;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 class Request extends RequestBase implements RequestInterface
 {

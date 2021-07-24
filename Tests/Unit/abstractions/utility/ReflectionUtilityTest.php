@@ -2,7 +2,7 @@
 
 namespace UnitTests\abstractions\utility;
 
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use PHPUnit\Framework\TestCase;
 use UnitTests\interfaces\utility\TestTraits\ReflectionUtilityTestTrait;
 
@@ -14,7 +14,7 @@ class ReflectionUtilityTest extends TestCase implements ReflectionUtilityInterfa
     {
         $this->setReflectionUtility(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\utility\ReflectionUtility'
+                '\roady\abstractions\utility\ReflectionUtility'
             )
         );
     }

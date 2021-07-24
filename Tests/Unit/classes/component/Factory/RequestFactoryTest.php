@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\Factory;
 
-use DarlingDataManagementSystem\classes\component\Factory\RequestFactory;
+use roady\classes\component\Factory\RequestFactory;
 use UnitTests\abstractions\component\Factory\RequestFactoryTest as CoreRequestFactoryTest;
 
 class RequestFactoryTest extends CoreRequestFactoryTest

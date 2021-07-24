@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\primary;
+namespace roady\abstractions\primary;
 
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility as CoreReflectionUtility;
-use DarlingDataManagementSystem\dev\traits\Logger;
-use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use roady\classes\utility\ReflectionUtility as CoreReflectionUtility;
+use roady\dev\traits\Logger;
+use roady\interfaces\primary\Exportable as ExportableInterface;
+use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;

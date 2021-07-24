@@ -2,9 +2,9 @@ name: phpunit
 
 on:
   push:
-    branches: [ DarlingDataManagementSystem ]
+    branches: [ roady ]
   pull_request:
-    branches: [ DarlingDataManagementSystem ]
+    branches: [ roady ]
 
 jobs:
   build:

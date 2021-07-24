@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb9b5f630426a8f6360c4bbf99870e04",
+    "content-hash": "1c4b8be8cd919a5ae7312d439eb764fa",
     "packages": [
         {
             "name": "darling/ddms-app-packages",

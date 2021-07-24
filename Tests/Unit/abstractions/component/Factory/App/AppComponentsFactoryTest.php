@@ -20,7 +20,7 @@ class AppComponentsFactoryTest extends CoreStoredComponentFactoryTest
     {
         $this->setAppComponentsFactory(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\component\Factory\App\AppComponentsFactory',
+                '\roady\abstractions\component\Factory\App\AppComponentsFactory',
                 $this->getTestInstanceArgs()
             )
         );
