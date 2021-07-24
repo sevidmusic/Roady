@@ -1,6 +1,6 @@
 {
-    "name": "darling/roadysystem",
-    "description": "A data driven tool for developing Web applications.",
+    "name": "darling/roady",
+    "description": "A tool designed to aide in the development of web applications.",
     "type": "project",
     "license": "MIT",
     "authors": [
