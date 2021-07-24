@@ -2,8 +2,8 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use roady\classes\component\Web\App as CoreApp;
+use roady\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 
 trait GlobalResponseTestTrait
 {

@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\primary\SwitchableTest as AbstractSwitchableTest;
 
 class SwitchableTest extends AbstractSwitchableTest

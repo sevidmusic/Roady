@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component;
+namespace roady\interfaces\component;
 
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 interface SwitchableComponent extends SwitchableInterface, ComponentInterface
 {

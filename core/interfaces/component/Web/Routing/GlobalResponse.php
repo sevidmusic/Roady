@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
+namespace roady\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as CoreResponse;
+use roady\interfaces\component\Web\Routing\Response as CoreResponse;
 
 interface GlobalResponse extends CoreResponse
 {

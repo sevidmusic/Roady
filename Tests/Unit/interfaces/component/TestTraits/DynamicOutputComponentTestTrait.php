@@ -2,11 +2,11 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
-use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
+use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use roady\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\classes\primary\Positionable as CorePositionable;
 use RuntimeException;
 
 trait DynamicOutputComponentTestTrait

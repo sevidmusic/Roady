@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\primary;
+namespace roady\classes\primary;
 
-use DarlingDataManagementSystem\abstractions\primary\Exportable as ExportableBase;
-use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
+use roady\abstractions\primary\Exportable as ExportableBase;
+use roady\interfaces\primary\Exportable as ExportableInterface;
 
 class Exportable extends ExportableBase implements ExportableInterface
 {

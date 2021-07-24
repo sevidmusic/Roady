@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem;
+namespace roady\classes\component\Driver\Storage\FileSystem;
 
-use DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonBase;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonInterface;
+use roady\abstractions\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonBase;
+use roady\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonInterface;
 
 class JsonStorageDriver extends JsonBase implements JsonInterface
 {

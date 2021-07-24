@@ -2,14 +2,14 @@
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
-use DarlingDataManagementSystem\classes\primary\Classifiable as CoreClassifiable;
-use DarlingDataManagementSystem\classes\primary\Exportable as CoreExportable;
-use DarlingDataManagementSystem\classes\primary\Identifiable as CoreIdentifiable;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility as CoreReflectionUtility;
-use DarlingDataManagementSystem\dev\traits\Logger;
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use roady\classes\primary\Classifiable as CoreClassifiable;
+use roady\classes\primary\Exportable as CoreExportable;
+use roady\classes\primary\Identifiable as CoreIdentifiable;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\classes\utility\ReflectionUtility as CoreReflectionUtility;
+use roady\dev\traits\Logger;
+use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use Exception;
 use ReflectionClass;
 use ReflectionException;
@@ -531,7 +531,7 @@ EOD;
 
 /**
  * The following classes are used by the ReflectionUtilityTestTrait to test the
- * \DarlingDataManagementSystem\abstractions\utility\ReflectionUtility class's methods.
+ * \roady\abstractions\utility\ReflectionUtility class's methods.
  */
 interface ReflectionUtilityTestClass
 {

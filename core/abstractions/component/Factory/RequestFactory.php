@@ -1,14 +1,14 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Factory;
+namespace roady\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 abstract class RequestFactory extends StoredComponentFactoryBase implements RequestFactoryInterface
 {

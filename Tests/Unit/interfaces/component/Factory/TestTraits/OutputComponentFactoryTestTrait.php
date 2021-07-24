@@ -2,14 +2,14 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
-use DarlingDataManagementSystem\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
+use roady\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use roady\classes\component\DynamicOutputComponent as CoreDynamicOutputComponent;
+use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use UnitTests\interfaces\component\TestTraits\DynamicOutputComponentTestTrait;
 
 trait OutputComponentFactoryTestTrait

@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\utility;
+namespace roady\interfaces\utility;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 
 interface AppBuilder {
 

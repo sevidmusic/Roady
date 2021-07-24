@@ -2,27 +2,27 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router as CoreRouter;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver as CoreStorageDriver;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
+use roady\interfaces\component\Web\Routing\Router as RouterInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Driver\Storage\StorageDriver as StorageDriverInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\classes\component\Web\Routing\Router as CoreRouter;
+use roady\classes\component\Web\Routing\Response as CoreResponse;
+use roady\classes\component\Driver\Storage\StorageDriver as CoreStorageDriver;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\classes\primary\Positionable as CorePositionable;
+use roady\classes\component\Web\App as CoreApp;
+use roady\classes\component\OutputComponent as CoreOutputComponent;
 use RuntimeException as PHPRuntimeException;
 
 trait ResponseUITestTrait

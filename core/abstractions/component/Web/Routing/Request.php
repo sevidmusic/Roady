@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
+namespace roady\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class Request extends SwitchableComponentBase implements RequestInterface
 {

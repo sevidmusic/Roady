@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Driver\Storage;
+namespace roady\classes\component\Driver\Storage;
 
-use DarlingDataManagementSystem\abstractions\component\Driver\Storage\StorageDriver as StandardStorageDriverBase;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
+use roady\abstractions\component\Driver\Storage\StorageDriver as StandardStorageDriverBase;
+use roady\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 
 /**
  * WARNING: This implementation of the StorageDriver interface is intended to be used
- *          internally by the DarlingDataManagementSystem, and SHOULD NOT be used directly!
+ *          internally by the roady, and SHOULD NOT be used directly!
  *
  * @devNote: In my attempt to deprecate this class, and it's parent abstraction, I was
  *           reminded by failing tests that I defined this class and it's parent

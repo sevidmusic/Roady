@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component;
+namespace roady\abstractions\component;
 
-use DarlingDataManagementSystem\abstractions\primary\Exportable as ExportableBase;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\abstractions\primary\Exportable as ExportableBase;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
 
 abstract class Component extends ExportableBase implements ComponentInterface
 {

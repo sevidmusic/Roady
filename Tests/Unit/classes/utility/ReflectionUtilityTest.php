@@ -2,8 +2,8 @@
 
 namespace UnitTests\classes\utility;
 
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility;
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use roady\classes\utility\ReflectionUtility;
+use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use UnitTests\abstractions\utility\ReflectionUtilityTest as AbstractReflectionUtilityTest;
 
 class ReflectionUtilityTest extends AbstractReflectionUtilityTest implements ReflectionUtilityInterface

@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Factory;
+namespace roady\interfaces\component\Factory;
 
-use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\primary\Classifiable as ClassifiableInterface;
+use roady\interfaces\primary\Exportable as ExportableInterface;
+use roady\interfaces\primary\Identifiable as IdentifiableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 interface PrimaryFactory extends Factory
 {

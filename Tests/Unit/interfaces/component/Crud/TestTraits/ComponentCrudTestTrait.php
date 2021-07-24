@@ -2,10 +2,10 @@
 
 namespace UnitTests\interfaces\component\Crud\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
 use \RuntimeException;
 
 trait ComponentCrudTestTrait
@@ -18,7 +18,7 @@ trait ComponentCrudTestTrait
         $classImplements = class_implements($this->getComponentCrudStorageDriver());
         $this->assertTrue(
             in_array(
-                'DarlingDataManagementSystem\interfaces\component\Driver\Storage\StorageDriver',
+                'roady\interfaces\component\Driver\Storage\StorageDriver',
                 (is_array($classImplements) ? $classImplements : [])
             )
         );

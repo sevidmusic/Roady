@@ -1,33 +1,33 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Factory\App;
+namespace roady\abstractions\component\Factory\App;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use DarlingDataManagementSystem\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
-use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
-use DarlingDataManagementSystem\classes\component\Factory\RequestFactory as CoreRequestFactory;
-use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use roady\abstractions\component\Factory\StoredComponentFactory as StoredComponentFactoryBase;
+use roady\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
+use roady\classes\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
+use roady\classes\component\Factory\PrimaryFactory as CorePrimaryFactory;
+use roady\classes\component\Factory\RequestFactory as CoreRequestFactory;
+use roady\classes\component\Factory\ResponseFactory as CoreResponseFactory;
+use roady\classes\component\Registry\Storage\StoredComponentRegistry as CoreStoredComponentRegistry;
+use roady\classes\component\Web\App as CoreApp;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use roady\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use roady\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
+use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use roady\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\component\Web\App as AppInterface;
 
 abstract class AppComponentsFactory extends StoredComponentFactoryBase implements AppComponentsFactoryInterface
 {

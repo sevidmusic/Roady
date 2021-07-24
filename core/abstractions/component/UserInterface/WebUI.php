@@ -1,15 +1,15 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\UserInterface;
+namespace roady\abstractions\component\UserInterface;
 
-use DarlingDataManagementSystem\abstractions\component\UserInterface\ResponseUI as ResponseUIInterface;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\WebUI as WebUIInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\abstractions\component\UserInterface\ResponseUI as ResponseUIInterface;
+use roady\classes\component\Web\App as CoreApp;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use roady\interfaces\component\Factory\Factory as FactoryInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\UserInterface\WebUI as WebUIInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 use RuntimeException as PHPRuntimeException;
 
 abstract class WebUI extends ResponseUIInterface implements WebUIInterface

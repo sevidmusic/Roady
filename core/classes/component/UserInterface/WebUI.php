@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\UserInterface;
+namespace roady\classes\component\UserInterface;
 
-use DarlingDataManagementSystem\abstractions\component\UserInterface\WebUI as WebUIBase;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\WebUI as WebUIInterface;
+use roady\abstractions\component\UserInterface\WebUI as WebUIBase;
+use roady\interfaces\component\UserInterface\WebUI as WebUIInterface;
 
 class WebUI extends WebUIBase implements WebUIInterface
 {

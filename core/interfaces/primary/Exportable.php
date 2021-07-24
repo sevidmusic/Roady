@@ -1,6 +1,6 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\primary;
+namespace roady\interfaces\primary;
 
 interface Exportable extends Classifiable
 {

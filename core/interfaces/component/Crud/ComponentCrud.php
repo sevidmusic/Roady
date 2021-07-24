@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Crud;
+namespace roady\interfaces\component\Crud;
 
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
 
 interface ComponentCrud extends SwitchableComponentInterface
 {

@@ -2,11 +2,11 @@
 
 namespace UnitTests\classes\component\Registry\Storage;
 
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use DarlingDataManagementSystem\classes\component\Registry\Storage\StoredComponentRegistry;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\component\Crud\ComponentCrud;
+use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
+use roady\classes\component\Registry\Storage\StoredComponentRegistry;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\component\Registry\Storage\StoredComponentRegistryTest as AbstractStoredComponentRegistryTest;
 
 class StoredComponentRegistryTest extends AbstractStoredComponentRegistryTest

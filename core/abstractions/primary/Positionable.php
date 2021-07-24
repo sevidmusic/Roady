@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\primary;
+namespace roady\abstractions\primary;
 
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
 
 abstract class Positionable implements PositionableInterface
 {

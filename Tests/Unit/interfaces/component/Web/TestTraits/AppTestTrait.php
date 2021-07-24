@@ -2,16 +2,16 @@
 
 namespace UnitTests\interfaces\component\Web\TestTraits;
 
-use DarlingDataManagementSystem\abstractions\component\Web\App as AppBase;
-use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\abstractions\component\Web\App as AppBase;
+use roady\classes\component\Component as CoreComponent;
+use roady\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
+use roady\classes\component\Web\App as CoreApp;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Web\App as AppInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 use RuntimeException;
 
 trait AppTestTrait

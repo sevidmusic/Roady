@@ -2,9 +2,9 @@
 
 namespace UnitTests\classes\component\Driver\Storage;
 
-use DarlingDataManagementSystem\classes\component\Driver\Storage\StorageDriver;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\component\Driver\Storage\StorageDriver;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\component\Driver\Storage\StorageDriverTest as AbstractStandardTest;
 
 class StorageDriverTest extends AbstractStandardTest

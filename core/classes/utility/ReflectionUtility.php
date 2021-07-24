@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\utility;
+namespace roady\classes\utility;
 
-use DarlingDataManagementSystem\abstractions\utility\ReflectionUtility as ReflectionUtilityAbstraction;
-use DarlingDataManagementSystem\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
+use roady\abstractions\utility\ReflectionUtility as ReflectionUtilityAbstraction;
+use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 
 class ReflectionUtility extends ReflectionUtilityAbstraction implements ReflectionUtilityInterface
 {

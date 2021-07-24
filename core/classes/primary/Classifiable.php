@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\primary;
+namespace roady\classes\primary;
 
-use DarlingDataManagementSystem\abstractions\primary\Classifiable as ClassifiableBase;
-use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
+use roady\abstractions\primary\Classifiable as ClassifiableBase;
+use roady\interfaces\primary\Classifiable as ClassifiableInterface;
 
 class Classifiable extends ClassifiableBase implements ClassifiableInterface
 {

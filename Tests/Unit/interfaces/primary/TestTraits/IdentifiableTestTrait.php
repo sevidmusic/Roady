@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
+use roady\interfaces\primary\Identifiable as IdentifiableInterface;
 use UnitTests\TestTraits\StringTester;
 
 trait IdentifiableTestTrait

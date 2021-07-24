@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\primary\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 trait SwitchableTestTrait
 {

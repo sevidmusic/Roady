@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\primary;
+namespace roady\abstractions\primary;
 
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
 
 abstract class Storable extends Identifiable implements StorableInterface
 {

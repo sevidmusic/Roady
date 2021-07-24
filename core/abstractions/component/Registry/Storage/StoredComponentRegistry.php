@@ -1,12 +1,12 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Registry\Storage;
+namespace roady\abstractions\component\Registry\Storage;
 
-use DarlingDataManagementSystem\abstractions\component\Component as AbstractComponent;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
+use roady\abstractions\component\Component as AbstractComponent;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
 
 abstract class StoredComponentRegistry extends AbstractComponent implements StoredComponentRegistryInterface
 {

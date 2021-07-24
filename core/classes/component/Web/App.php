@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Web;
+namespace roady\classes\component\Web;
 
-use DarlingDataManagementSystem\abstractions\component\Web\App as AppBase;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use roady\abstractions\component\Web\App as AppBase;
+use roady\interfaces\component\Web\App as AppInterface;
 
 class App extends AppBase implements AppInterface
 {

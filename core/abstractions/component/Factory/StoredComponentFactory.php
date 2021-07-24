@@ -1,15 +1,15 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Factory;
+namespace roady\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterfaces;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\abstractions\component\SwitchableComponent as CoreSwitchableComponent;
+use roady\interfaces\component\Component as ComponentInterfaces;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use roady\interfaces\component\Web\App as AppInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 abstract class StoredComponentFactory extends CoreSwitchableComponent implements StoredComponentFactoryInterface
 {

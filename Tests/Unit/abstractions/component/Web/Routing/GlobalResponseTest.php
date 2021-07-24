@@ -2,8 +2,8 @@
 
 namespace UnitTests\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\classes\component\Web\App;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\component\Web\App;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\component\Web\Routing\ResponseTest as CoreResponseTest;
 use UnitTests\interfaces\component\Web\Routing\TestTraits\GlobalResponseTestTrait;
 
@@ -15,7 +15,7 @@ class GlobalResponseTest extends CoreResponseTest
     {
         $this->setGlobalResponse(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse',
+                '\roady\abstractions\component\Web\Routing\GlobalResponse',
                 [
                     new App(
                         $this->getMockRequest(),

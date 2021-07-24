@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\primary;
+namespace roady\abstractions\primary;
 
-use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
+use roady\interfaces\primary\Classifiable as ClassifiableInterface;
 
 abstract class Classifiable implements ClassifiableInterface
 {

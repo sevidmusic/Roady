@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\UserInterface;
 
-use DarlingDataManagementSystem\classes\component\UserInterface\WebUI as CoreWebUI;
+use roady\classes\component\UserInterface\WebUI as CoreWebUI;
 use UnitTests\abstractions\component\UserInterface\WebUITest as WebUITestBase;
 
 class WebUITest extends WebUITestBase

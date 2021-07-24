@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\primary;
+namespace roady\abstractions\primary;
 
-use DarlingDataManagementSystem\dev\traits\Logger;
-use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
+use roady\dev\traits\Logger;
+use roady\interfaces\primary\Identifiable as IdentifiableInterface;
 use Exception;
 
 abstract class Identifiable implements IdentifiableInterface

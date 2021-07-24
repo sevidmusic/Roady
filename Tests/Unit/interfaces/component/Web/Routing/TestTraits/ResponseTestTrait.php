@@ -2,18 +2,18 @@
 
 namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud as CoreComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
-use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
+use roady\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver as CoreJsonStorageDriver;
+use roady\classes\component\OutputComponent as CoreOutputComponent;
+use roady\classes\component\Web\App as CoreApp;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\classes\component\Web\Routing\Response as CoreResponse;
+use roady\classes\primary\Positionable as CorePositionable;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
 
 trait ResponseTestTrait
 {

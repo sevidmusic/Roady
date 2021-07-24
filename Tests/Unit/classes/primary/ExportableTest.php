@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingDataManagementSystem\classes\primary\Exportable;
+use roady\classes\primary\Exportable;
 use UnitTests\abstractions\primary\ExportableTest as AbstractExportableTest;
 use UnitTests\interfaces\primary\TestTraits\ExportableTestTrait;
 

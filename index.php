@@ -2,16 +2,16 @@
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-use DarlingDataManagementSystem\classes\component\Crud\ComponentCrud;
-use DarlingDataManagementSystem\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use DarlingDataManagementSystem\classes\component\Factory\PrimaryFactory;
-use DarlingDataManagementSystem\classes\component\UserInterface\WebUI;
-use DarlingDataManagementSystem\classes\component\Web\App;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Router;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
-use DarlingDataManagementSystem\classes\utility\AppBuilder;
+use roady\classes\component\Crud\ComponentCrud;
+use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
+use roady\classes\component\Factory\PrimaryFactory;
+use roady\classes\component\UserInterface\WebUI;
+use roady\classes\component\Web\App;
+use roady\classes\component\Web\Routing\Request;
+use roady\classes\component\Web\Routing\Router;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
+use roady\classes\utility\AppBuilder;
 
 $currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'), new Switchable());
 $appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
@@ -59,4 +59,4 @@ try {
     <?php
 }
 ?>
-<!-- Powered by the Darling Data Management System  | https://github.com/sevidmusic/DarlingDataManagementSystem | https://darlingdata.tech -->
+<!-- Powered by Roady  | https://github.com/sevidmusic/roady | https://darlingdata.tech -->

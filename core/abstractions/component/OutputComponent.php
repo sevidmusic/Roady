@@ -1,11 +1,11 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component;
+namespace roady\abstractions\component;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class OutputComponent extends SwitchableComponent implements OutputComponentInterface
 {

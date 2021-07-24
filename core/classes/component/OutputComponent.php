@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component;
+namespace roady\classes\component;
 
-use DarlingDataManagementSystem\abstractions\component\OutputComponent as OutputComponentBase;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\abstractions\component\OutputComponent as OutputComponentBase;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
 
 class OutputComponent extends OutputComponentBase implements OutputComponentInterface
 {

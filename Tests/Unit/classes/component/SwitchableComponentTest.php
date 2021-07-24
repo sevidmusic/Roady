@@ -2,9 +2,9 @@
 
 namespace UnitTests\classes\component;
 
-use DarlingDataManagementSystem\classes\component\SwitchableComponent;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\component\SwitchableComponent;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\component\SwitchableComponentTest as AbstractSwitchableComponentTest;
 
 class SwitchableComponentTest extends AbstractSwitchableComponentTest

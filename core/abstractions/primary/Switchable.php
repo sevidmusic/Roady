@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\primary;
+namespace roady\abstractions\primary;
 
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class Switchable implements SwitchableInterface
 {

@@ -2,8 +2,8 @@
 
 namespace UnitTests\classes\component\Web;
 
-use DarlingDataManagementSystem\classes\component\Web\App;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\component\Web\App;
+use roady\classes\primary\Switchable;
 use UnitTests\abstractions\component\Web\AppTest as AbstractAppTest;
 
 class AppTest extends AbstractAppTest

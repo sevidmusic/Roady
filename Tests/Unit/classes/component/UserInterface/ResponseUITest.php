@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\component\UserInterface;
 
-use DarlingDataManagementSystem\classes\component\UserInterface\ResponseUI as CoreResponseUI;
+use roady\classes\component\UserInterface\ResponseUI as CoreResponseUI;
 use UnitTests\abstractions\component\UserInterface\ResponseUITest as ResponseUITestBase;
 
 class ResponseUITest extends ResponseUITestBase

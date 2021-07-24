@@ -3,7 +3,7 @@
 namespace UnitTests\abstractions\component\UserInterface;
 
 use UnitTests\abstractions\component\OutputComponentTest as OutputComponentTestBase;
-use DarlingDataManagementSystem\abstractions\component\UserInterface\ResponseUI as ResponseUIBase;
+use roady\abstractions\component\UserInterface\ResponseUI as ResponseUIBase;
 use UnitTests\interfaces\component\UserInterface\TestTraits\ResponseUITestTrait as ResponseUITestInterface;
 
 class ResponseUITest extends OutputComponentTestBase

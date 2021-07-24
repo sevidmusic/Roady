@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Factory;
+namespace roady\classes\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use roady\abstractions\component\Factory\OutputComponentFactory as CoreOutputComponentFactory;
+use roady\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
 
 class OutputComponentFactory extends CoreOutputComponentFactory implements OutputComponentFactoryInterface
 {

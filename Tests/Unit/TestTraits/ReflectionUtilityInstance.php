@@ -2,7 +2,7 @@
 
 namespace UnitTests\TestTraits;
 
-use DarlingDataManagementSystem\classes\utility\ReflectionUtility as CoreReflectionUtility;
+use roady\classes\utility\ReflectionUtility as CoreReflectionUtility;
 
 trait ReflectionUtilityInstance
 {

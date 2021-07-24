@@ -1,1 +1,1 @@
-This directory is where Darling Data Management Apps that are in use should be placed.
+This directory is where Roady Apps that are in use should be placed.

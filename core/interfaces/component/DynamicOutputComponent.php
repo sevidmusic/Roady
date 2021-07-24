@@ -1,8 +1,8 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component;
+namespace roady\interfaces\component;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
 
 interface DynamicOutputComponent extends OutputComponentInterface
 {

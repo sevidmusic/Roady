@@ -2,9 +2,9 @@
 
 namespace UnitTests\abstractions\component;
 
-use DarlingDataManagementSystem\classes\primary\Positionable;
-use DarlingDataManagementSystem\classes\primary\Storable;
-use DarlingDataManagementSystem\classes\primary\Switchable;
+use roady\classes\primary\Positionable;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
 use UnitTests\interfaces\component\TestTraits\OutputComponentTestTrait;
 use UnitTests\interfaces\primary\TestTraits\PositionableTestTrait;
 
@@ -21,7 +21,7 @@ class OutputComponentTest extends SwitchableComponentTest
     {
         $this->setOutputComponent(
             $this->getMockForAbstractClass(
-                '\DarlingDataManagementSystem\abstractions\component\OutputComponent',
+                '\roady\abstractions\component\OutputComponent',
                 [
                     new Storable(
                         'MockOutputComponentName',

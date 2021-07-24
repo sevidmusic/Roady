@@ -1,14 +1,14 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Driver\Storage\FileSystem;
+namespace roady\abstractions\component\Driver\Storage\FileSystem;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingDataManagementSystem\classes\component\Component as CoreComponent;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use roady\classes\component\Component as CoreComponent;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class JsonStorageDriver extends SwitchableComponentBase implements JsonStorageDriverInterface
 {
@@ -39,7 +39,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
     public function getStorageDirectoryPath(): string
     {
         $namespacePath = str_replace(
-            ['DarlingDataManagementSystem', '\\'],
+            ['roady', '\\'],
             ['core', DIRECTORY_SEPARATOR],
             __NAMESPACE__
         );

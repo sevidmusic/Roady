@@ -1,9 +1,9 @@
 <?php
 
-namespace DarlingDataManagementSystem\classes\component\Web\Routing;
+namespace roady\classes\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\Web\Routing\GlobalResponse as GlobalResponseBase;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use roady\abstractions\component\Web\Routing\GlobalResponse as GlobalResponseBase;
+use roady\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
 
 class GlobalResponse extends GlobalResponseBase implements GlobalResponseInterface
 {

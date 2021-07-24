@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\Factory;
+namespace roady\classes\component\Factory;
 
-use DarlingDataManagementSystem\abstractions\component\Factory\Factory as FactoryBase;
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
+use roady\abstractions\component\Factory\Factory as FactoryBase;
+use roady\interfaces\component\Factory\Factory as FactoryInterface;
 
 class Factory extends FactoryBase implements FactoryInterface
 {

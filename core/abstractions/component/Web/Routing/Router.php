@@ -1,14 +1,14 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
+namespace roady\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Router as RouterInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\component\Web\Routing\Router as RouterInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class Router extends SwitchableComponentBase implements RouterInterface
 {
@@ -66,7 +66,7 @@ abstract class Router extends SwitchableComponentBase implements RouterInterface
             is_object($response)
             &&
             in_array(
-                'DarlingDataManagementSystem\interfaces\component\Web\Routing\Response',
+                'roady\interfaces\component\Web\Routing\Response',
                 (is_array($classImplements) ? $classImplements : [])
             )
         );

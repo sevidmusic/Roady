@@ -1,10 +1,10 @@
 <?php
 
 
-namespace DarlingDataManagementSystem\classes\component\UserInterface;
+namespace roady\classes\component\UserInterface;
 
-use DarlingDataManagementSystem\abstractions\component\UserInterface\ResponseUI as ResponseUIBase;
-use DarlingDataManagementSystem\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
+use roady\abstractions\component\UserInterface\ResponseUI as ResponseUIBase;
+use roady\interfaces\component\UserInterface\ResponseUI as ResponseUIInterface;
 
 class ResponseUI extends ResponseUIBase implements ResponseUIInterface
 {

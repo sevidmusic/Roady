@@ -2,20 +2,20 @@
 
 namespace UnitTests\interfaces\component\Factory\App\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\classes\component\Web\App as CoreApp;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use roady\interfaces\component\Factory\OutputComponentFactory as OutputComponentFactoryInterface;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\interfaces\component\Factory\RequestFactory as RequestFactoryInterface;
+use roady\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use roady\interfaces\component\Factory\StoredComponentFactory as StoredComponentFactoryInterface;
+use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 trait AppComponentsFactoryTestTrait
 {

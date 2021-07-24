@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Web\Routing;
+namespace roady\interfaces\component\Web\Routing;
 
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 
 interface Router extends SwitchableComponentInterface
 {

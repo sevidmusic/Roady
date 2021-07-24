@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingDataManagementSystem\classes\primary\Positionable;
+use roady\classes\primary\Positionable;
 use UnitTests\abstractions\primary\PositionableTest as AbstractPositionableTest;
 
 class PositionableTest extends AbstractPositionableTest

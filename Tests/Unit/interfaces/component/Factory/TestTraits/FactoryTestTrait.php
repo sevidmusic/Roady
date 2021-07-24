@@ -2,8 +2,8 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\Factory\Factory as FactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
+use roady\interfaces\component\Factory\Factory as FactoryInterface;
+use roady\interfaces\component\Web\App as AppInterface;
 
 trait FactoryTestTrait
 {

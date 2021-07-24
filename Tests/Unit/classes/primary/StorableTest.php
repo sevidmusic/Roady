@@ -2,7 +2,7 @@
 
 namespace UnitTests\classes\primary;
 
-use DarlingDataManagementSystem\classes\primary\Storable;
+use roady\classes\primary\Storable;
 use UnitTests\abstractions\primary\StorableTest as AbstractStorableTest;
 
 class StorableTest extends AbstractStorableTest

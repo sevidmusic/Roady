@@ -1,10 +1,10 @@
 <?php
 
-namespace DarlingDataManagementSystem\interfaces\component\Factory;
+namespace roady\interfaces\component\Factory;
 
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Web\App as AppInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 
 interface Factory extends ComponentInterface
 {

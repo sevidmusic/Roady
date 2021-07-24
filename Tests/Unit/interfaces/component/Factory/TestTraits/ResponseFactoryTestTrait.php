@@ -2,16 +2,16 @@
 
 namespace UnitTests\interfaces\component\Factory\TestTraits;
 
-use DarlingDataManagementSystem\classes\component\Factory\ResponseFactory as CoreResponseFactory;
-use DarlingDataManagementSystem\classes\component\OutputComponent as CoreOutputComponent;
-use DarlingDataManagementSystem\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Request as CoreRequest;
-use DarlingDataManagementSystem\classes\component\Web\Routing\Response as CoreResponse;
-use DarlingDataManagementSystem\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\classes\component\Factory\ResponseFactory as CoreResponseFactory;
+use roady\classes\component\OutputComponent as CoreOutputComponent;
+use roady\classes\component\Web\Routing\GlobalResponse as CoreGlobalResponse;
+use roady\classes\component\Web\Routing\Request as CoreRequest;
+use roady\classes\component\Web\Routing\Response as CoreResponse;
+use roady\interfaces\component\Factory\ResponseFactory as ResponseFactoryInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 
 trait ResponseFactoryTestTrait
 {

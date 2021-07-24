@@ -1,13 +1,13 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\utility;
+namespace roady\abstractions\utility;
 
-use DarlingDataManagementSystem\interfaces\utility\AppBuilder as AppBuilderInterface;
-use DarlingDataManagementSystem\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\classes\component\Factory\App\AppComponentsFactory;
-use DarlingDataManagementSystem\classes\component\Web\App as CoreApp;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\utility\AppBuilder as AppBuilderInterface;
+use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\classes\component\Factory\App\AppComponentsFactory;
+use roady\classes\component\Web\App as CoreApp;
+use roady\classes\primary\Switchable as CoreSwitchable;
 use \Exception;
 
 abstract class AppBuilder implements AppBuilderInterface

@@ -2,7 +2,7 @@
 
 namespace UnitTests\interfaces\component\TestTraits;
 
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
 
 trait OutputComponentTestTrait
 {

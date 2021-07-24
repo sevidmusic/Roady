@@ -1,21 +1,21 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Factory;
+namespace roady\abstractions\component\Factory;
 
-use DarlingDataManagementSystem\classes\primary\Classifiable as CoreClassifiable;
-use DarlingDataManagementSystem\classes\primary\Exportable as CoreExportable;
-use DarlingDataManagementSystem\classes\primary\Identifiable as CoreIdentifiable;
-use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\classes\primary\Switchable as CoreSwitchable;
-use DarlingDataManagementSystem\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\App as AppInterface;
-use DarlingDataManagementSystem\interfaces\primary\Classifiable as ClassifiableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Exportable as ExportableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Identifiable as IdentifiableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\classes\primary\Classifiable as CoreClassifiable;
+use roady\classes\primary\Exportable as CoreExportable;
+use roady\classes\primary\Identifiable as CoreIdentifiable;
+use roady\classes\primary\Positionable as CorePositionable;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Factory\PrimaryFactory as PrimaryFactoryInterface;
+use roady\interfaces\component\Web\App as AppInterface;
+use roady\interfaces\primary\Classifiable as ClassifiableInterface;
+use roady\interfaces\primary\Exportable as ExportableInterface;
+use roady\interfaces\primary\Identifiable as IdentifiableInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class PrimaryFactory extends Factory implements PrimaryFactoryInterface
 {

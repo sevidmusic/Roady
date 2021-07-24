@@ -1,18 +1,18 @@
 <?php
 
-namespace DarlingDataManagementSystem\abstractions\component\Web\Routing;
+namespace roady\abstractions\component\Web\Routing;
 
-use DarlingDataManagementSystem\abstractions\component\SwitchableComponent as SwitchableComponentBase;
-use DarlingDataManagementSystem\classes\primary\Positionable as CorePositionable;
-use DarlingDataManagementSystem\classes\primary\Storable as CoreStorable;
-use DarlingDataManagementSystem\interfaces\component\Component as ComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use DarlingDataManagementSystem\interfaces\component\OutputComponent as OutputComponentInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Request as RequestInterface;
-use DarlingDataManagementSystem\interfaces\component\Web\Routing\Response as ResponseInterface;
-use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
-use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
+use roady\abstractions\component\SwitchableComponent as SwitchableComponentBase;
+use roady\classes\primary\Positionable as CorePositionable;
+use roady\classes\primary\Storable as CoreStorable;
+use roady\interfaces\component\Component as ComponentInterface;
+use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
+use roady\interfaces\component\OutputComponent as OutputComponentInterface;
+use roady\interfaces\component\Web\Routing\Request as RequestInterface;
+use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 abstract class Response extends SwitchableComponentBase implements ResponseInterface
 {
@@ -85,7 +85,7 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         $classImplements = class_implements($component);
         return (
             in_array(
-                'DarlingDataManagementSystem\interfaces\component\Web\Routing\Request',
+                'roady\interfaces\component\Web\Routing\Request',
                 (is_array($classImplements) ? $classImplements : [])
             ) === false
             ? false
