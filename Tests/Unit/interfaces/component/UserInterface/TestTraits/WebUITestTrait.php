@@ -20,8 +20,8 @@ use DarlingDataManagementSystem\interfaces\primary\Positionable as PositionableI
 use DarlingDataManagementSystem\interfaces\primary\Storable as StorableInterface;
 use DarlingDataManagementSystem\interfaces\primary\Switchable as SwitchableInterface;
 use RuntimeException as PHPRuntimeException;
-use ddms\classes\command\ConfigureAppOutput;
-use ddms\classes\ui\CommandLineUI;
+use rig\classes\command\ConfigureAppOutput;
+use rig\classes\ui\CommandLineUI;
 
 trait WebUITestTrait
 {

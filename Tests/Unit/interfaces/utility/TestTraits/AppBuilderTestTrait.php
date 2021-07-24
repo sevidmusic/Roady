@@ -343,41 +343,41 @@ trait AppBuilderTestTrait
 
     private function createTestApp(string $appName, string $domain): void
     {
-        $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
+        $rigExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
         $this->assertTrue(
-            file_exists($ddmsExecutable),
-            'Could not create Test App because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
+            file_exists($rigExecutable),
+            'Could not create Test App because the rig binary at ' . $rigExecutable . ' does not exist. Make sure composer.json requires the most recent version of rig.'
         );
         $this->assertTrue(
-            is_executable($ddmsExecutable),
-            'Could not create Test App because the ddms binary at ' . $ddmsExecutable . ' is not executable'
+            is_executable($rigExecutable),
+            'Could not create Test App because the rig binary at ' . $rigExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-app --name ' . $appName . ' --domain ' . $domain);
+            exec($rigExecutable . ' --new-app --name ' . $appName . ' --domain ' . $domain);
         } catch (\Exception $e) {
-            $this->assertFalse(true, 'Failed to create Test App because ddms --new-app failed.');
+            $this->assertFalse(true, 'Failed to create Test App because rig --new-app failed.');
         }
 
     }
 
     private function createTestOutputComponent(string $appName, string $domain): void
     {
-        $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
+        $rigExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
         $ocName = $this->getRandomName('OutputComponent');
         $output = "$ocName Test App Output";
         $this->assertTrue(
-            file_exists($ddmsExecutable),
-            'Could not create Test App\'s OutputComponents because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
+            file_exists($rigExecutable),
+            'Could not create Test App\'s OutputComponents because the rig binary at ' . $rigExecutable . ' does not exist. Make sure composer.json requires the most recent version of rig.'
         );
         $this->assertTrue(
-            is_executable($ddmsExecutable),
-            'Could not create Test App\'s OutputComponents because the ddms binary at ' . $ddmsExecutable . ' is not executable'
+            is_executable($rigExecutable),
+            'Could not create Test App\'s OutputComponents because the rig binary at ' . $rigExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-output-component --for-app ' . $appName . ' --name ' . $ocName . ' --output ' . $output . ' --container ' . $this->outputComponentContainer);
+            exec($rigExecutable . ' --new-output-component --for-app ' . $appName . ' --name ' . $ocName . ' --output ' . $output . ' --container ' . $this->outputComponentContainer);
             $this->registerExpectedOutputComponent($ocName, $output);
         } catch (\Exception $e) {
-            $this->assertFalse(true, 'Failed to create Test App\'s OutputComponents because ddms --new-output-component failed.');
+            $this->assertFalse(true, 'Failed to create Test App\'s OutputComponents because rig --new-output-component failed.');
         }
 
     }
@@ -389,22 +389,22 @@ trait AppBuilderTestTrait
 
     private function createTestRequest(string $appName, string $domain): void
     {
-        $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
+        $rigExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
         $requestName = $this->getRandomName('Request');
         $relativeUrl = 'index.php';
         $this->assertTrue(
-            file_exists($ddmsExecutable),
-            'Could not create Test App\'s Requests because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
+            file_exists($rigExecutable),
+            'Could not create Test App\'s Requests because the rig binary at ' . $rigExecutable . ' does not exist. Make sure composer.json requires the most recent version of rig.'
         );
         $this->assertTrue(
-            is_executable($ddmsExecutable),
-            'Could not create Test App\'s Requests because the ddms binary at ' . $ddmsExecutable . ' is not executable'
+            is_executable($rigExecutable),
+            'Could not create Test App\'s Requests because the rig binary at ' . $rigExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-request --for-app ' . $appName . ' --name ' . $requestName . ' --relative-url ' . '"' . $relativeUrl . '"' . ' --container ' . $this->requestContainer);
+            exec($rigExecutable . ' --new-request --for-app ' . $appName . ' --name ' . $requestName . ' --relative-url ' . '"' . $relativeUrl . '"' . ' --container ' . $this->requestContainer);
             $this->registerExpectedRequest($requestName, $relativeUrl);
         } catch (\Exception $e) {
-            $this->assertFalse(true, 'Failed to create Test App\'s Requests because ddms --new-request failed.');
+            $this->assertFalse(true, 'Failed to create Test App\'s Requests because rig --new-request failed.');
         }
 
     }
@@ -416,44 +416,44 @@ trait AppBuilderTestTrait
 
     private function createTestResponse(string $appName, string $domain): void
     {
-        $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
+        $rigExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
         $responseName = $this->getRandomName('Response');
         $position = 4.2017;
         $this->assertTrue(
-            file_exists($ddmsExecutable),
-            'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
+            file_exists($rigExecutable),
+            'Could not create Test App\'s Responses because the rig binary at ' . $rigExecutable . ' does not exist. Make sure composer.json requires the most recent version of rig.'
         );
         $this->assertTrue(
-            is_executable($ddmsExecutable),
-            'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' is not executable'
+            is_executable($rigExecutable),
+            'Could not create Test App\'s Responses because the rig binary at ' . $rigExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
+            exec($rigExecutable . ' --new-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
             $this->registerExpectedResponse($responseName, $position);
         } catch (\Exception $e) {
-            $this->assertFalse(true, 'Failed to create Test App\'s Responses because ddms --new-response failed.');
+            $this->assertFalse(true, 'Failed to create Test App\'s Responses because rig --new-response failed.');
         }
 
     }
 
     private function createTestGlobalResponse(string $appName, string $domain): void
     {
-        $ddmsExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
+        $rigExecutable = strval(realpath($this->determinePathToDdmsExecutable()));
         $responseName = $this->getRandomName('GlobalResponse');
         $position = 4.2017;
         $this->assertTrue(
-            file_exists($ddmsExecutable),
-            'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' does not exist. Make sure composer.json requires the most recent version of ddms.'
+            file_exists($rigExecutable),
+            'Could not create Test App\'s Responses because the rig binary at ' . $rigExecutable . ' does not exist. Make sure composer.json requires the most recent version of rig.'
         );
         $this->assertTrue(
-            is_executable($ddmsExecutable),
-            'Could not create Test App\'s Responses because the ddms binary at ' . $ddmsExecutable . ' is not executable'
+            is_executable($rigExecutable),
+            'Could not create Test App\'s Responses because the rig binary at ' . $rigExecutable . ' is not executable'
         );
         try {
-            exec($ddmsExecutable . ' --new-global-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
+            exec($rigExecutable . ' --new-global-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
             $this->registerExpectedGlobalResponse($responseName, $position);
         } catch (\Exception $e) {
-            $this->assertFalse(true, 'Failed to create Test App\'s Responses because ddms --new-response failed.');
+            $this->assertFalse(true, 'Failed to create Test App\'s Responses because rig --new-response failed.');
         }
 
     }
@@ -472,7 +472,7 @@ trait AppBuilderTestTrait
     {
         return str_replace(
             'Tests' . DIRECTORY_SEPARATOR . 'Unit' . DIRECTORY_SEPARATOR . 'interfaces' . DIRECTORY_SEPARATOR . 'utility' . DIRECTORY_SEPARATOR . 'TestTraits',
-            'vendor' . DIRECTORY_SEPARATOR . 'darling' . DIRECTORY_SEPARATOR . 'ddms' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'ddms',
+            'vendor' . DIRECTORY_SEPARATOR . 'darling' . DIRECTORY_SEPARATOR . 'rig' . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'rig',
             __DIR__
         );
     }

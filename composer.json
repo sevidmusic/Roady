@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "ext-json": "*",
-        "darling/ddms": "^1.0",
+        "darling/rig": "^1.0",
         "darling/ddms-app-packages": "^1.0"
     },
     "autoload": {
