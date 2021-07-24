@@ -40,16 +40,16 @@
         },
         {
             "name": "darling/rig",
-            "version": "v1.1.9",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/rig.git",
-                "reference": "a661c14636cb7fcc3a73dce3f5bdbd8d03ece6a6"
+                "reference": "1d4ce4fbbf4748b8d85f991c49061b3cb8d764b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/rig/zipball/a661c14636cb7fcc3a73dce3f5bdbd8d03ece6a6",
-                "reference": "a661c14636cb7fcc3a73dce3f5bdbd8d03ece6a6",
+                "url": "https://api.github.com/repos/sevidmusic/rig/zipball/1d4ce4fbbf4748b8d85f991c49061b3cb8d764b2",
+                "reference": "1d4ce4fbbf4748b8d85f991c49061b3cb8d764b2",
                 "shasum": ""
             },
             "require-dev": {
@@ -73,12 +73,12 @@
                     "email": "sdmwwebsdm@gmail.com"
                 }
             ],
-            "description": "Command line utility designed to aide in development with the Darling Data Management System",
+            "description": "Command line utility designed to aide in development with Roady",
             "support": {
                 "issues": "https://github.com/sevidmusic/rig/issues",
-                "source": "https://github.com/sevidmusic/rig/tree/v1.1.9"
+                "source": "https://github.com/sevidmusic/rig/tree/v1.2.0"
             },
-            "time": "2021-07-23T22:47:29+00:00"
+            "time": "2021-07-24T02:53:55+00:00"
         }
     ],
     "packages-dev": [
