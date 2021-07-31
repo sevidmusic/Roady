@@ -4,7 +4,12 @@ New documentation is being added to [https://roady.tech](https://roady.tech) reg
 
 Version 1.0 will be out soon.
 
+# Installation, setup, and Hello World
+
 ![Installation And Hello World Demo](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/roadyInstallAndHelloWorld.gif)
+
+
+### Install & Setup
 
 ```
 cd ~/
@@ -19,13 +24,31 @@ export PATH="${PATH}:${HOME}/roady/vendor/darling/rig/bin"
 
 rig --help | more
 
+```
+
+### Create a Hello World App and build it for the domain `http://localhost:8080`
+
+```
+
 rig --configure-app-output --for-app HelloWorld --name HelloWorld --output '<p>Hello World</p>' --relative-urls '/'
 
 php ./Apps/HelloWorld/Components.php 'http://localhost:8080'
 
+```
+
+### Start a development server 
+
+```
+
 rig --start-server --port 8080 --open-in-browser
 
+```
+
+# Edit Hello World's output
+
+```
 vim ./Apps/HelloWorld/DynamicOutput/HelloWorld.php
+
 ```
 
 ### HelloWorld/DynamicOutput/HelloWorld.php
@@ -62,6 +85,8 @@ vim ./Apps/HelloWorld/DynamicOutput/HelloWorld.php
 
 </div>
 ```
+
+# Add some style
 
 ```
 vim ./Apps/HelloWorld/css/hw-global-styles.css
