@@ -1,5 +1,15 @@
 # Roady
 
+Roady is a tool designed to aid in the development of websites.
+
+Its design allows the features of a website to be implemented as smaller niche applications called Apps.
+
+Roady Apps are responsible for implementing one or more related features.
+
+The features an App provides can be made available to multiple websites running on a single installation of Roady.
+
+Apps can configure output to show up in response to appropriate requests to a website, and can also provide stylesheets, scripts, and other resources necessary to implement the specific features they provide. 
+
 New documentation is being added to [https://roady.tech](https://roady.tech) regularly.
 
 Version 1.0 will be out soon.
