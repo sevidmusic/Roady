@@ -19,7 +19,7 @@ export PATH="${PATH}:${HOME}/roady/vendor/darling/rig/bin"
 
 rig --help | more
 
-rig --configure-app-output --for-app HelloWorld --name HelloWorld --output '<h1>Hello World</h1>' --relative-urls '/'
+rig --configure-app-output --for-app HelloWorld --name HelloWorld --output '<p>Hello World</p>' --relative-urls '/'
 
 php ./Apps/HelloWorld/Components.php 'http://localhost:8080'
 
