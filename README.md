@@ -4,7 +4,7 @@ New documentation is being added to [https://roady.tech](https://roady.tech) reg
 
 Version 1.0 will be out soon.
 
-![Installation And Hello World Demo](https://roadydemos.us-east-1.linodeobjects.com/roadyInstallAndHelloWorld.gif)
+![Installation And Hello World Demo](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/roadyInstallAndHelloWorld.gif)
 
 ```
 cd ~/
