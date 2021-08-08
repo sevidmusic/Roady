@@ -50,16 +50,16 @@
         },
         {
             "name": "darling/roady-app-packages",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/roadyAppPackages.git",
-                "reference": "e41bd90f51145704b0003efeddf0cbe1bc38d4a1"
+                "reference": "47f8417a3cef93858868d4b2e5382e2a1582d4f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/e41bd90f51145704b0003efeddf0cbe1bc38d4a1",
-                "reference": "e41bd90f51145704b0003efeddf0cbe1bc38d4a1",
+                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/47f8417a3cef93858868d4b2e5382e2a1582d4f9",
+                "reference": "47f8417a3cef93858868d4b2e5382e2a1582d4f9",
                 "shasum": ""
             },
             "type": "library",
@@ -70,9 +70,9 @@
             "description": "A collection of App packages that can be made into Roady Apps.",
             "support": {
                 "issues": "https://github.com/sevidmusic/roadyAppPackages/issues",
-                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.0.4"
+                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.0.5"
             },
-            "time": "2021-08-07T16:04:06+00:00"
+            "time": "2021-08-08T17:59:12+00:00"
         }
     ],
     "packages-dev": [
