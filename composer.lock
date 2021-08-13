@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "darling/rig",
-            "version": "v1.2.5",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/rig.git",
@@ -44,22 +44,22 @@
             "description": "Command line utility designed to aide in development with Roady",
             "support": {
                 "issues": "https://github.com/sevidmusic/rig/issues",
-                "source": "https://github.com/sevidmusic/rig/tree/v1.2.5"
+                "source": "https://github.com/sevidmusic/rig/tree/v1.2.6"
             },
             "time": "2021-08-12T18:37:21+00:00"
         },
         {
             "name": "darling/roady-app-packages",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/roadyAppPackages.git",
-                "reference": "5072f97cdc26455757aac0f81cc8885eaaf5a33f"
+                "reference": "251a3ecf8f0d6d223ecce24c21dc6c2846e5308b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/5072f97cdc26455757aac0f81cc8885eaaf5a33f",
-                "reference": "5072f97cdc26455757aac0f81cc8885eaaf5a33f",
+                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/251a3ecf8f0d6d223ecce24c21dc6c2846e5308b",
+                "reference": "251a3ecf8f0d6d223ecce24c21dc6c2846e5308b",
                 "shasum": ""
             },
             "type": "library",
@@ -70,9 +70,9 @@
             "description": "A collection of App packages that can be made into Roady Apps.",
             "support": {
                 "issues": "https://github.com/sevidmusic/roadyAppPackages/issues",
-                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.1.1"
+                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.1.2"
             },
-            "time": "2021-08-12T18:38:01+00:00"
+            "time": "2021-08-13T05:43:46+00:00"
         }
     ],
     "packages-dev": [
