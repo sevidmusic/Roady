@@ -64,22 +64,29 @@
      --for-app HelloWorld \
      --name HelloWorld \
      --output '<p>Hello World</p>' \
-     --relative-urls '/'```
+     --relative-urls '/'
+   ```
 
   2. Build the `HelloWorld` App for the domain `http://localhost:8080`:
 
 
-  ```php ./Apps/HelloWorld/Components.php 'http://localhost:8080'```
+  ```
+  php ./Apps/HelloWorld/Components.php 'http://localhost:8080'
+  ```
 
   3. Use rig to start a development server:
 
 
-  ```rig --start-server --port 8080 --open-in-browser```
+  ```
+  rig --start-server --port 8080 --open-in-browser
+  ```
 
   4. Use a text editor or IDE to edit `HelloWorld`'s output:
 
 
-  ```vim ./Apps/HelloWorld/DynamicOutput/HelloWorld.php```
+  ```
+  vim ./Apps/HelloWorld/DynamicOutput/HelloWorld.php
+  ```
 
   NOTE: `HelloWorld/DynamicOutput/HelloWorld.php`'s content should now be:
 
