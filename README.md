@@ -32,27 +32,27 @@
 
   1. Move into the directory where you wish to install roady and rig:
 
-         `cd ~/`
+         cd ~/
 
   2. Clone roady from https://github.com/sevidmusic/roady.git:
 
-         `git clone https://github.com/sevidmusic/roady.git`
+         git clone https://github.com/sevidmusic/roady.git
 
   3. Move into roady's directory:
 
-         `cd ~/roady`
+         cd ~/roady
 
   4. Update `composer`, this will install rig in `./vendor/darling/rig`:
 
-         `composer update`
+         composer update
 
   5. Add rig to your path:
 
-         `export PATH="${PATH}:${HOME}/roady/vendor/darling/rig/bin"`
+         export PATH="${PATH}:${HOME}/roady/vendor/darling/rig/bin"
 
   6. Make sure rig is working:
 
-         `rig --help | more`
+         rig --help | more
 
 
   # Hello World
@@ -177,5 +177,5 @@
 
   And can be made into an App for a Roady installation via:
 
-  `rig --make-app-package`
+      rig --make-app-package
 
