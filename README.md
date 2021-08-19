@@ -32,7 +32,7 @@
 
   1. Move into the directory where you wish to install roady and rig:
 
-         `cd /`
+         `cd ~/`
 
   2. Clone roady from https://github.com/sevidmusic/roady.git:
 
@@ -40,7 +40,7 @@
 
   3. Move into roady's directory:
 
-         `cd /roady`
+         `cd ~/roady`
 
   4. Update `composer`, this will install rig in `./vendor/darling/rig`:
 
