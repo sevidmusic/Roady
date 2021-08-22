@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "darling/rig",
-            "version": "v1.3.5",
+            "version": "v1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/rig.git",
-                "reference": "604bee84de69a786152781ccb2866475936e89e1"
+                "reference": "0c036d1b5b998b255f55da0455c3008a3bed8d8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/rig/zipball/604bee84de69a786152781ccb2866475936e89e1",
-                "reference": "604bee84de69a786152781ccb2866475936e89e1",
+                "url": "https://api.github.com/repos/sevidmusic/rig/zipball/0c036d1b5b998b255f55da0455c3008a3bed8d8e",
+                "reference": "0c036d1b5b998b255f55da0455c3008a3bed8d8e",
                 "shasum": ""
             },
             "require-dev": {
@@ -44,22 +44,22 @@
             "description": "Command line utility designed to aide in development with Roady",
             "support": {
                 "issues": "https://github.com/sevidmusic/rig/issues",
-                "source": "https://github.com/sevidmusic/rig/tree/v1.3.5"
+                "source": "https://github.com/sevidmusic/rig/tree/v1.3.6"
             },
-            "time": "2021-08-20T06:52:32+00:00"
+            "time": "2021-08-22T01:08:36+00:00"
         },
         {
             "name": "darling/roady-app-packages",
-            "version": "v1.1.9",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/roadyAppPackages.git",
-                "reference": "366fbb5d1034e81d9f1482c62661c17543de5704"
+                "reference": "cd7b7c51dbd2ca844b7e6dd22618ad120f624968"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/366fbb5d1034e81d9f1482c62661c17543de5704",
-                "reference": "366fbb5d1034e81d9f1482c62661c17543de5704",
+                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/cd7b7c51dbd2ca844b7e6dd22618ad120f624968",
+                "reference": "cd7b7c51dbd2ca844b7e6dd22618ad120f624968",
                 "shasum": ""
             },
             "type": "library",
@@ -70,9 +70,9 @@
             "description": "A collection of App packages that can be made into Roady Apps.",
             "support": {
                 "issues": "https://github.com/sevidmusic/roadyAppPackages/issues",
-                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.1.9"
+                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.2.0"
             },
-            "time": "2021-08-19T23:10:50+00:00"
+            "time": "2021-08-22T00:56:37+00:00"
         }
     ],
     "packages-dev": [
@@ -597,16 +597,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.94",
+            "version": "0.12.96",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "3d0ba4c198a24e3c3fc489f3ec6ac9612c4be5d6"
+                "reference": "a98bdc51318f20fcae8c953d266f81a70254917f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3d0ba4c198a24e3c3fc489f3ec6ac9612c4be5d6",
-                "reference": "3d0ba4c198a24e3c3fc489f3ec6ac9612c4be5d6",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a98bdc51318f20fcae8c953d266f81a70254917f",
+                "reference": "a98bdc51318f20fcae8c953d266f81a70254917f",
                 "shasum": ""
             },
             "require": {
@@ -637,7 +637,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/0.12.94"
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.96"
             },
             "funding": [
                 {
@@ -657,7 +657,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-30T09:05:27+00:00"
+            "time": "2021-08-21T11:55:13+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
