@@ -203,9 +203,9 @@ If, in this example, the HelloWorld App also defined a stylesheet named
 `homepage.css`, then `homepage.css` would only be loaded in response to
 the requests that have the name `homepage`:
 
-    [http://localhost:8080?request=homepage](http://localhost:8080?request=homepage)
+[http://localhost:8080?request=homepage](http://localhost:8080?request=homepage)
 
-    [http://localhost:8080/index.php?request=homepage](http://localhost:8080/index.php?request=homepage)
+[http://localhost:8080/index.php?request=homepage](http://localhost:8080/index.php?request=homepage)
 
 ```
 vim ~/roady/Apps/HelloWorld/css/hw-global-styles.css
@@ -266,7 +266,7 @@ is run after installing roady.
 If roady is installed in the user's home directory, the HelloWorld App's App
 Package will be located at the following path:
 
-    `~/roady/vendor/darling/roady-app-packages/HelloWorld`
+`~/roady/vendor/darling/roady-app-packages/HelloWorld`
 
 Note: The examples assume roady is installed in the user's home directory,
 if roady is installed somewhere else make sure to adjust the paths used
@@ -274,14 +274,14 @@ in the examples appropriately.
 
 To make the HelloWorld App from the HelloWorld App Package, run:
 
-    ```
-    rig --make-app-package \
-    --path ~/roady/vendor/darling/roady-app-packages/HelloWorld
-    ```
+```
+rig --make-app-package \
+--path ~/roady/vendor/darling/roady-app-packages/HelloWorld
+```
 
 The newly made HelloWorld App will be located at the following path:
 
-    `~/roady/Apps/HelloWorld`
+`~/roady/Apps/HelloWorld`
 
 Warning: Be careful with `--make-app-package`, it will overwrite any directory
 whose name matches the name of the App to be made with the newly made App.
@@ -292,15 +292,15 @@ HelloWorld App with the HelloWorld App made from the HelloWorld App Package.
 
 To build the newly made HelloWorld App, run:
 
-    ```
-    php ~/roady/Apps/HelloWorld/Components.php 'http://localhost:8080'
-    ```
+```
+php ~/roady/Apps/HelloWorld/Components.php 'http://localhost:8080'
+```
 
 And if one is not already running, start a development server:
 
-    ```
-    rig --start-server --port 8080 --open-in-browser
-    ```
+```
+rig --start-server --port 8080 --open-in-browser
+```
 
 Note: `rig --view-active-servers` can be used to get a list of the
 active php built in server instances started via `rig --start-server`.
@@ -308,7 +308,7 @@ active php built in server instances started via `rig --start-server`.
 The HelloWorld App's output should now be accessible from a web browser at
 the following url:
 
-    [http://localhost:8080](http://localhost:8080)
+[http://localhost:8080](http://localhost:8080)
 
 ### The AppPackager
 
@@ -317,31 +317,31 @@ also provided by the roadyAppPackages library. The AppPackager is an App that
 can be used to convert existing Apps into AppPackages. To use it, first
 make the AppPackager App Package into an App:
 
-    ```
-    rig --make-app-package \
-    --path ~/roady/vendor/darling/roady-app-packages/AppPackager
-    ```
+```
+rig --make-app-package \
+--path ~/roady/vendor/darling/roady-app-packages/AppPackager
+```
 
 Then build the AppPackager App for the domain http://localhost:8080
 
-    ```
-    php ~/roady/Apps/AppPackager/Components.php 'http://localhost:8080'
-    ```
+```
+php ~/roady/Apps/AppPackager/Components.php 'http://localhost:8080'
+```
 
 If you haven't already, start a development server:
 
-    `rig --start-server --port 8080`
+`rig --start-server --port 8080`
 
 Then visit the following url in a web browser:
 
-    [http://localhost:8080/index.php?page=AppPackager](http://localhost:8080/index.php?page=AppPackager)
+[http://localhost:8080/index.php?page=AppPackager](http://localhost:8080/index.php?page=AppPackager)
 
 Use the select form provided to select an App to package, for example, select
 the AppPackager, and click submit.
 
 This will create an App Package for the AppPackager App at the following path:
 
-    `~/roady/Apps/AppPackager/resources/AppPackages/AppPackager`
+`~/roady/Apps/AppPackager/resources/AppPackages/AppPackager`
 
 This App Package can be shared, used as a backup, used as a base for a new
 version of the App, or used to re-make the AppPackager App in the future.
