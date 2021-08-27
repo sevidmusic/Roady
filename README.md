@@ -49,10 +49,10 @@ if you install roady at a different path:
 1. Move into the directory where you wish to install roady and rig:
 
 ```
-cd /
+cd ~/
 ```
 
-Note: `/` is shorthand for the path to the current users `home`
+Note: `~/` is shorthand for the path to the current users `home`
 directory.
 
 2. Clone roady from [https://github.com/sevidmusic/roady.git](https://github.com/sevidmusic/roady.git):
@@ -64,10 +64,10 @@ git clone https://github.com/sevidmusic/roady.git
 3. Move into roady's directory:
 
 ```
-cd /roady
+cd ~/roady
 ```
 
-4. Update `composer`, this will install rig at `/roady/vendor/darling/rig`:
+4. Update `composer`, this will install rig at `~/roady/vendor/darling/rig`:
 
 ```
 composer update
@@ -78,7 +78,7 @@ collection of roady App Packages that can be made into roady Apps via
 `rig --make-app-package`. In this example, the roadyAppPackages library
 will be installed at:
 
-`/roady/vendor/darling/roady-app-packages`
+`~/roady/vendor/darling/roady-app-packages`
 
 5. Add rig to your path:
 
@@ -118,7 +118,7 @@ rig --configure-app-output \
 2. Build the `HelloWorld` App for the domain `http://localhost:8080`:
 
 ```
-php /roady/Apps/HelloWorld/Components.php 'http://localhost:8080'
+php ~/roady/Apps/HelloWorld/Components.php 'http://localhost:8080'
 ```
 
 3. Use rig to start a development server:
@@ -142,10 +142,10 @@ rig, more information about the `xdg-open` command can be found at:
 4. Use a text editor or IDE to edit `HelloWorld`'s DynamicOutput file:
 
 ```
-vim /roady/Apps/HelloWorld/DynamicOutput/HelloWorld.php
+vim ~/roady/Apps/HelloWorld/DynamicOutput/HelloWorld.php
 ```
 
-And revise `/roady/Apps/HelloWorld/DynamicOutput/HelloWorld.php`'s content to be:
+And revise `~/roady/Apps/HelloWorld/DynamicOutput/HelloWorld.php`'s content to be:
 
 ```
 <div class="container">
@@ -208,10 +208,10 @@ the requests that have the name `homepage`:
     [http://localhost:8080/index.php?request=homepage](http://localhost:8080/index.php?request=homepage)
 
 ```
-vim /roady/Apps/HelloWorld/css/hw-global-styles.css
+vim ~/roady/Apps/HelloWorld/css/hw-global-styles.css
 ```
 
-Define the following styles in `vim /roady/Apps/HelloWorld/css/hw-global-styles.css`:
+Define the following styles in `vim ~/roady/Apps/HelloWorld/css/hw-global-styles.css`:
 
 ```
 body {
@@ -266,7 +266,7 @@ is run after installing roady.
 If roady is installed in the user's home directory, the HelloWorld App's App
 Package will be located at the following path:
 
-    `/roady/vendor/darling/roady-app-packages/HelloWorld`
+    `~/roady/vendor/darling/roady-app-packages/HelloWorld`
 
 Note: The examples assume roady is installed in the user's home directory,
 if roady is installed somewhere else make sure to adjust the paths used
@@ -276,24 +276,24 @@ To make the HelloWorld App from the HelloWorld App Package, run:
 
     ```
     rig --make-app-package \
-    --path /roady/vendor/darling/roady-app-packages/HelloWorld
+    --path ~/roady/vendor/darling/roady-app-packages/HelloWorld
     ```
 
 The newly made HelloWorld App will be located at the following path:
 
-    `/roady/Apps/HelloWorld`
+    `~/roady/Apps/HelloWorld`
 
 Warning: Be careful with `--make-app-package`, it will overwrite any directory
 whose name matches the name of the App to be made with the newly made App.
 For example, if you followed the getting-started documentation and created
 a HelloWorld App, running `rig --make-app-package --path
-/roady/vendor/darling/roady-app-packages/HelloWorld` will replace the original
+~/roady/vendor/darling/roady-app-packages/HelloWorld` will replace the original
 HelloWorld App with the HelloWorld App made from the HelloWorld App Package.
 
 To build the newly made HelloWorld App, run:
 
     ```
-    php /roady/Apps/HelloWorld/Components.php 'http://localhost:8080'
+    php ~/roady/Apps/HelloWorld/Components.php 'http://localhost:8080'
     ```
 
 And if one is not already running, start a development server:
@@ -319,13 +319,13 @@ make the AppPackager App Package into an App:
 
     ```
     rig --make-app-package \
-    --path /roady/vendor/darling/roady-app-packages/AppPackager
+    --path ~/roady/vendor/darling/roady-app-packages/AppPackager
     ```
 
 Then build the AppPackager App for the domain http://localhost:8080
 
     ```
-    php /roady/Apps/AppPackager/Components.php 'http://localhost:8080'
+    php ~/roady/Apps/AppPackager/Components.php 'http://localhost:8080'
     ```
 
 If you haven't already, start a development server:
@@ -341,7 +341,7 @@ the AppPackager, and click submit.
 
 This will create an App Package for the AppPackager App at the following path:
 
-    `/roady/Apps/AppPackager/resources/AppPackages/AppPackager`
+    `~/roady/Apps/AppPackager/resources/AppPackages/AppPackager`
 
 This App Package can be shared, used as a backup, used as a base for a new
 version of the App, or used to re-make the AppPackager App in the future.
