@@ -41,7 +41,7 @@ if you install roady at a different path:
 
 ### Installation, Setup, and Hello World Demo
 
-[Installation, Setup, and HelloWorld](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif)
+![Installation, Setup, and HelloWorld](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif)
 
 
 ### Installation & Setup Steps
