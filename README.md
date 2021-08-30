@@ -29,7 +29,7 @@ https://github.com/sevidmusic/roady.git
 
 ### Installation, Setup, and Hello World Demo
 
-![https://roadydemos.us-east-1.linodeobjects.com/getting-started-2021-08-22_03.31.22.webm](https://roadydemos.us-east-1.linodeobjects.com/getting-started-2021-08-22_03.31.22.webm)
+![https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif)
 
 # Getting Started
 
