@@ -21,12 +21,6 @@ https://roady.tech/index.php?request=getting-started
 Note: The documentation is still being written, and some sections are not
 complete. New documentation will continue to be added regularly.
 
-
-Note: roady is available on github at:
-
-https://github.com/sevidmusic/roady.git
-
-
 ### Installation, Setup, and Hello World Demo
 
 ![https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif)
@@ -39,12 +33,6 @@ how to build a HelloWorld App.
 Note: In the following examples roady is installed in the user's `home`
 directory. Make sure to adjust the paths used in the following examples
 if you install roady at a different path:
-
-
-### Installation, Setup, and Hello World Demo
-
-https://roadydemos.us-east-1.linodeobjects.com/getting-started-2021-08-22_03.31.22.webm
-
 
 ### Installation & Setup Steps
 
