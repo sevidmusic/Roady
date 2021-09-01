@@ -23,7 +23,7 @@ complete. New documentation will continue to be added regularly.
 
 ### Installation, Setup, and Hello World Demo
 
-![https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started-2021-08-22_03.31.22.gif)
+![https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started.gif](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started.gif)
 
 # Getting Started
 
