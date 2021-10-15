@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "darling/rig",
-            "version": "v1.5.8",
+            "version": "v1.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/rig.git",
-                "reference": "5c4d80ddadd42ca4b7d8f05d572e328030d5d55f"
+                "reference": "ab2e74d3bd2ce76c6a76653e1a742f92fa71d084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/rig/zipball/5c4d80ddadd42ca4b7d8f05d572e328030d5d55f",
-                "reference": "5c4d80ddadd42ca4b7d8f05d572e328030d5d55f",
+                "url": "https://api.github.com/repos/sevidmusic/rig/zipball/ab2e74d3bd2ce76c6a76653e1a742f92fa71d084",
+                "reference": "ab2e74d3bd2ce76c6a76653e1a742f92fa71d084",
                 "shasum": ""
             },
             "require-dev": {
@@ -44,9 +44,9 @@
             "description": "Command line utility designed to aide in development with Roady",
             "support": {
                 "issues": "https://github.com/sevidmusic/rig/issues",
-                "source": "https://github.com/sevidmusic/rig/tree/v1.5.8"
+                "source": "https://github.com/sevidmusic/rig/tree/v1.5.9"
             },
-            "time": "2021-10-15T01:42:44+00:00"
+            "time": "2021-10-15T17:22:11+00:00"
         },
         {
             "name": "darling/roady-app-packages",
