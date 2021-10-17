@@ -27,6 +27,7 @@ https://roady.tech/index.php?request=getting-started
 
 https://roadydemos.us-east-1.linodeobjects.com/QuickInstallSetupHelloWorldFinal.webm
 
+![https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started.gif](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/QuickInstallSetupHelloWorld.gif)
 
 # Quick Installation, Setup, & Hello World Example
 
@@ -180,8 +181,10 @@ following examples if you install roady at a different path.
 
 
 ### Getting Started Video Tutorial
+
 https://roadydemos.us-east-1.linodeobjects.com/GettingStarted.webm
 
+![https://github.com/sevidmusic/roadyAndRigDemos/blob/main/getting-started.gif](https://github.com/sevidmusic/roadyAndRigDemos/blob/main/GettingStarted.gif)
 
 # Installation & Setup
 
