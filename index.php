@@ -2,11 +2,7 @@
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-use roady\classes\component\Crud\ComponentCrud;
-use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use roady\classes\component\Factory\PrimaryFactory;
 use roady\classes\component\UserInterface\WebUI;
-use roady\classes\component\Web\App;
 use roady\classes\component\Web\Routing\Request;
 use roady\classes\component\Web\Routing\Router;
 use roady\classes\primary\Storable;
@@ -14,18 +10,18 @@ use roady\classes\primary\Switchable;
 use roady\classes\utility\AppBuilder;
 
 $currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'), new Switchable());
-$appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
+$appComponentsFactory = AppBuilder::getAppsAppComponentsFactory(basename(__DIR__), $currentRequest->getUrl());
 
 try {
     $userInterface = new WebUI(
-        $appComonentsFactory->getPrimaryFactory()->buildStorable('AppUI', 'Index'),
-        $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
-        $appComonentsFactory->getPrimaryFactory()->buildPositionable(0),
+        $appComponentsFactory->getPrimaryFactory()->buildStorable('AppUI', 'Index'),
+        $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
+        $appComponentsFactory->getPrimaryFactory()->buildPositionable(0),
         new Router(
-            $appComonentsFactory->getPrimaryFactory()->buildStorable('AppRouter', 'Index'),
-            $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
+            $appComponentsFactory->getPrimaryFactory()->buildStorable('AppRouter', 'Index'),
+            $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
             $currentRequest,
-            $appComonentsFactory->getComponentCrud()
+            $appComponentsFactory->getComponentCrud()
         )
     );
     echo $userInterface->getOutput();
@@ -50,7 +46,7 @@ try {
     <h1>404 Not Found</h1>
     <p>Sorry, the you request you made is not valid. Please try again later.</p>
     <ul>
-        <li>App Name: <?php echo $appComonentsFactory->getApp()->getName(); ?></li>
+        <li>App Name: <?php echo $appComponentsFactory->getApp()->getName(); ?></li>
         <li>Request: <?php echo $currentRequest->getUrl(); ?></li>
         <li class="error">Error Message: <?php echo $runtimeException->getMessage(); ?></li>
     </ul>
