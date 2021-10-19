@@ -53,6 +53,7 @@ try {
                 color: var(--text-color);
                 font-family: var(--font-family);
                 font-size: var(--font-size);
+                line-height: 2.1rem;
             }
 
             .roady-error {
