@@ -60,7 +60,7 @@ try {
             }
 
             .roady-container {
-                background-image: url('https://roady.tech/roadyLogo.png');
+                background-image: url('roadyLogo.png');
                 background-repeat: no-repeat;
                 background-position: center center;
                 margin: 9rem auto;
