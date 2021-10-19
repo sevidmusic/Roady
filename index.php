@@ -2,11 +2,7 @@
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
-use roady\classes\component\Crud\ComponentCrud;
-use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use roady\classes\component\Factory\PrimaryFactory;
 use roady\classes\component\UserInterface\WebUI;
-use roady\classes\component\Web\App;
 use roady\classes\component\Web\Routing\Request;
 use roady\classes\component\Web\Routing\Router;
 use roady\classes\primary\Storable;
@@ -14,18 +10,18 @@ use roady\classes\primary\Switchable;
 use roady\classes\utility\AppBuilder;
 
 $currentRequest = new Request(new Storable('CurrentRequest', 'Requests', 'Index'), new Switchable());
-$appComonentsFactory = AppBuilder::getAppsAppComponentsFactory(strval(basename(__DIR__)), $currentRequest->getUrl());
+$appComponentsFactory = AppBuilder::getAppsAppComponentsFactory(basename(__DIR__), $currentRequest->getUrl());
 
 try {
     $userInterface = new WebUI(
-        $appComonentsFactory->getPrimaryFactory()->buildStorable('AppUI', 'Index'),
-        $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
-        $appComonentsFactory->getPrimaryFactory()->buildPositionable(0),
+        $appComponentsFactory->getPrimaryFactory()->buildStorable('AppUI', 'Index'),
+        $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
+        $appComponentsFactory->getPrimaryFactory()->buildPositionable(0),
         new Router(
-            $appComonentsFactory->getPrimaryFactory()->buildStorable('AppRouter', 'Index'),
-            $appComonentsFactory->getPrimaryFactory()->buildSwitchable(),
+            $appComponentsFactory->getPrimaryFactory()->buildStorable('AppRouter', 'Index'),
+            $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
             $currentRequest,
-            $appComonentsFactory->getComponentCrud()
+            $appComponentsFactory->getComponentCrud()
         )
     );
     echo $userInterface->getOutput();
@@ -36,27 +32,91 @@ try {
     <head>
         <title>Your request could not be processed.</title>
         <style>
-            body {
-                background: #0a0800;
-                color: #a68159;
+
+            @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+            :root {
+                --body-bg-color: #020203;
+                --text-color: #00bbff;
+                --link-active-color: #00ffc3;
+                --link-color: #86dfff;
+                --link-default-text-decoration: none;
+                --link-hover-color: #33c9ff;
+                --link-visited-color: #b9ecff;
+                --font-family: 'Bebas Neue', cursive;
+                --font-size: 1.02rem;
+                --error-text-color: #ff4400;
             }
 
-            .error {
-                color: #732b3f;
+            body {
+                background: var(--body-bg-color);
+                color: var(--text-color);
+                font-family: var(--font-family);
+                font-size: var(--font-size);
             }
+
+            .roady-error {
+                color: var(--error-text-color);
+            }
+
+            .roady-container {
+                background-image: url('https://roady.tech/roadyLogo.png');
+                background-repeat: no-repeat;
+                background-position: center center;
+                margin: 9rem auto;
+                min-height: 25rem;
+                text-align: center;
+            }
+
+            .roady-content {
+                background: black;
+                opacity: .9;
+                width: 30%;
+                margin: 5rem auto;
+                padding: 4rem;
+            }
+
+            .roady-container a {
+                color: var(--link-color);
+                text-decoration: var(--link-default-text-decoration);
+            }
+
+            .roady-container a:link {
+                color: var(--link-color);
+                text-decoration: var(--link-default-text-decoration);
+            }
+
+            .roady-container a:visited {
+                color: var(--link-visited-color);
+            }
+
+            .roady-container a:hover {
+                color: var(--link-hover-color);
+                text-shadow: 2px 2px var(--body-bg-color);
+            }
+
+            .roady-container a:active {
+                color: var(--link-active-color);
+            }
+
+            .roady-container h1 {
+                text-shadow: -1px 1px #4bd5e7;
+            }
+
         </style>
     </head>
     <body>
-    <h1>404 Not Found</h1>
-    <p>Sorry, the you request you made is not valid. Please try again later.</p>
-    <ul>
-        <li>App Name: <?php echo $appComonentsFactory->getApp()->getName(); ?></li>
-        <li>Request: <?php echo $currentRequest->getUrl(); ?></li>
-        <li class="error">Error Message: <?php echo $runtimeException->getMessage(); ?></li>
-    </ul>
+    <div class="roady-container">
+        <div class="roady-content">
+            <h1 class="roady-error">Invalid Request</h1>
+            <p>Sorry, the you request you made is not valid.</p>
+            <p>Request: <a href="<?php echo $currentRequest->getUrl(); ?>"><?php echo $currentRequest->getUrl(); ?></a></p>
+            <p class="roady-error">Error Message: <?php echo $runtimeException->getMessage(); ?></p>
+        </div>
+    </div>
     </body>
     </html>
     <?php
 }
 ?>
-<!-- Powered by Roady  | https://github.com/sevidmusic/roady | https://darlingdata.tech -->
+<!-- Powered by Roady  | https://github.com/sevidmusic/roady | https://roady.tech -->
