@@ -53,6 +53,7 @@ try {
                 color: var(--text-color);
                 font-family: var(--font-family);
                 font-size: var(--font-size);
+                line-height: 2.1rem;
             }
 
             .roady-error {
@@ -60,7 +61,7 @@ try {
             }
 
             .roady-container {
-                background-image: url('https://roady.tech/roadyLogo.png');
+                background-image: url('roadyLogo.png');
                 background-repeat: no-repeat;
                 background-position: center center;
                 margin: 9rem auto;
