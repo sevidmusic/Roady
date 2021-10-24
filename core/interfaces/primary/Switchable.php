@@ -2,11 +2,24 @@
 
 namespace roady\interfaces\primary;
 
+/**
+ * This interface defines an object that has a switchable
+ * boolean state.
+ */
 interface Switchable
 {
 
+    /**
+     * @return bool The currently assigned boolean state.
+     */
     public function getState(): bool;
 
+    /**
+     * Switch the currently assigned boolean state, either from
+     * true to false, or from false to true.
+     *
+     * @return bool True if the state was switched, false otherwise.
+     */
     public function switchState(): bool;
 
 }
