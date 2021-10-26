@@ -225,7 +225,6 @@ trait AppComponentsFactoryTestTrait
         );
     }
 
-    /** @noinspection DuplicatedCode */
     private function expectedBuildLog(): string
     {
         $buildLog = "";

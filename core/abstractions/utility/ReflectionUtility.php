@@ -65,10 +65,6 @@ EOD;
     const ARRAY1 = 'array';
     const NULL = 'NULL';
 
-    /**
-     * @param class-string<object>|object $class
-     * @return array<int, string>
-     */
     public function getClassPropertyNames(string|object $class): array
     {
         $propertyNames = array();
@@ -96,10 +92,6 @@ EOD;
         return $propertyReflections;
     }
 
-    /**
-     * @param class-string<object>|object $class
-     * @return ReflectionClass<object>
-     */
     public function getClassReflection(string|object $class): ReflectionClass
     {
         try {
@@ -126,26 +118,18 @@ EOD;
         return (is_string($class) ? $class : get_class($class));
     }
 
-    /**
-     * @param class-string<object>|object $class
-     * @return array<int|string, string>
-     */
     public function getClassPropertyTypes(string|object $class): array
     {
         $propertyTypes = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
             $reflectionProperty->setAccessible(true);
-            $propertyTypes[$reflectionProperty->getName()] = gettype(
+            $propertyTypes[strval($reflectionProperty->getName())] = gettype(
                 $reflectionProperty->getValue($this->getClassInstance($class))
             );
         }
         return $propertyTypes;
     }
-    /**
-     * @param class-string<object>|object $class
-     * @param array<mixed> $constructorArguments
-     * @return object
-     */
+
     public function getClassInstance(string|object $class, array $constructorArguments = array()): object
     {
         if (method_exists($class, self::CONSTRUCT) === false) {
@@ -157,11 +141,6 @@ EOD;
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
     }
 
-    /**
-     * @param class-string<object>|object $class
-     * @param string $method
-     * @return array<mixed>
-     */
     public function generateMockClassMethodArguments(string|object $class, string $method): array
     {
         $defaults = array();
@@ -200,9 +179,6 @@ EOD;
         return $defaults;
     }
 
-    /**
-     * @return array<int, string>
-     */
     public function getClassMethodParameterTypes(string|object $class, string $method): array
     {
         $parameterTypes = array();
@@ -301,16 +277,12 @@ EOD;
         }
     }
 
-    /**
-     * @param class-string<object>|object $class
-     * @return array<mixed>
-     */
     public function getClassPropertyValues(string|object $class): array
     {
         $propertyValues = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
             $reflectionProperty->setAccessible(true);
-            $propertyValues[$reflectionProperty->getName()] = (
+            $propertyValues[strval($reflectionProperty->getName())] = (
             is_string($class) === true
                 ? $reflectionProperty->getValue($this->getClassInstance($class))
                 : $reflectionProperty->getValue($class)
@@ -319,9 +291,6 @@ EOD;
         return $propertyValues;
     }
 
-    /**
-     * @return array<int, string>
-     */
     public function getClassMethodParameterNames(string|object $class, string $method): array
     {
         $parameterNames = array();
