@@ -295,7 +295,6 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
             as
             $storable
         ) {
-            /** @noinspection DuplicatedCode */
             $message = sprintf(
                 '%sBuilt %s:%s    Name: %s%s    Container: %s%s    Location: %s%s    Type: %s%s    UniqueId: %s%s',
                 PHP_EOL,

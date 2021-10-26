@@ -259,7 +259,7 @@ EOD;
      * @param array<mixed> $constructorArguments
      * @return ReflectionClass<object>|object
      */
-    public function getClassInstance($class, array $constructorArguments = array())
+    public function getClassInstance($class, array $constructorArguments = array()): object
     {
         if ($this->classParameterIsValidClassNameOrClassInstance($class, __METHOD__) === false) {
             return (object)[];

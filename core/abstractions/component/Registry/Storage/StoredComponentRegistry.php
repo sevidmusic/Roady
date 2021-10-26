@@ -56,7 +56,6 @@ abstract class StoredComponentRegistry extends AbstractComponent implements Stor
 
     private function isStored(ComponentInterface $component): bool
     {
-        /** @noinspection PhpNonStrictObjectEqualityInspection */
         return ($this->componentCrud->read($component) == $component);
     }
 
