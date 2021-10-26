@@ -16,43 +16,43 @@ abstract class ReflectionUtility implements ReflectionUtilityInterface
     use Logger;
 
     const FAILED_TO_REFLECT_MOCK_STD_METHOD = <<<EOD
-ReflectionUtilityTestTrait Fatal Error:
+ReflectionUtility Fatal Error:
 The specified method %s() could not be reflected for class %s,
 and also failed to default to an empty instance of stdClass().
 EOD;
 
     const FAILED_TO_REFLECT_CLASS_METHOD = <<<EOD
-ReflectionUtilityTestTrait Error:
+ReflectionUtility Error:
 The specified method %s() could not be reflected for class %s.
 Defaulting to stdClass().
 EOD;
 
     const METHOD_DOES_NOT_EXIST = <<<EOD
-ReflectionUtilityTestTrait Warning:
+ReflectionUtility Warning:
 The specified method %s() is not defined in class %s.
 You may safely ignore this warning if this is expected.
 EOD;
 
     const RANDOM_BYTES_FAILED = <<<EOD
-ReflectionUtilityTestTrait Warning:
+ReflectionUtility Warning:
 Failed to generate alpha-numeric string using random_bytes(),
 defaulting to str_shuffle(). You can safely ignore this warning
 if the generated string does not need to be cryptographically secure.
 EOD;
 
     const INVALID_CLASS_PARAMETER = <<<EOD
-'ReflectionUtilityTestTrait Error:
+'ReflectionUtility Error:
 Invalid type %s passed to %s'
 EOD;
 
     const FAILED_TO_REFLECT_CLASS = <<<EOD
-ReflectionUtilityTestTrait Error:
+ReflectionUtility Error:
 Failed to reflect class %s. Defaulting to reflect empty
 stdClass() instance.
 EOD;
 
     const FAILED_TO_REFLECT_MOCK_STD = <<<EOD
-ReflectionUtilityTestTrait Fatal Error:
+ReflectionUtility Fatal Error:
 Failed to reflect class %s, and also failed to reflect empty
 stdClass() by default.
 EOD;
