@@ -270,7 +270,18 @@ trait WebUITestTrait
 
     private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
     {
-        $this->expectedOutput = $this->doctype . $this->openHtml . $this->openHead;
+        $this->expectedOutput =
+            $this->doctype .
+            $this->openHtml .
+            $this->openHead .
+            '<title>' .
+            (
+                $this->getWebUI()->getRouter()->getRequest()->getGet()['request']
+                ??
+                $this->getRouter()->getRequest()->getUrl()
+            ) .
+            '</title>'
+        ;
     }
 
 
