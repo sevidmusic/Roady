@@ -232,7 +232,7 @@ trait WebUITestTrait
     {
         try {
             exec(PHP_BINARY . ' ' . escapeshellarg($this->determinePathToAppsComponentsPhp($appName)) . ' http://DEFAULT');
-        } catch(\RuntimeException $e) { /** Failed to build App */ }
+        } catch(PHPRuntimeException $e) { /** Failed to build App */ }
     }
 
     protected function setWebUIParentTestInstances(): void

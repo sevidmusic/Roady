@@ -2,6 +2,7 @@
 
 namespace UnitTests\interfaces\utility\TestTraits;
 
+use Exception;
 use roady\interfaces\utility\AppBuilder as AppBuilderInterface;
 use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 use roady\interfaces\component\OutputComponent as OutputComponentInterface;
@@ -188,7 +189,7 @@ trait AppBuilderTestTrait
                     $this->outputComponentContainer
                 );
                 $this->assertEquals($output, $outputComponent->getOutput());
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->assertTrue(
                     false,
                     'An OutputComponent named ' . $name . ' was defined by the ' .
@@ -241,7 +242,7 @@ trait AppBuilderTestTrait
                     $position,
                     $response->getPosition()
                 );
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->assertTrue(
                     false,
                     'A Response named ' . $name . ' was defined by the ' .
@@ -286,7 +287,7 @@ trait AppBuilderTestTrait
                     $appComponentsFactory->getApp()->getAppDomain()->getUrl() . '/' . $relativeUrl,
                     $request->getUrl()
                 );
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->assertTrue(
                     false,
                     'A Request named ' . $name . ' was defined by the ' .
@@ -354,7 +355,7 @@ trait AppBuilderTestTrait
         );
         try {
             exec($rigExecutable . ' --new-app --name ' . $appName . ' --domain ' . $domain);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App because rig --new-app failed.');
         }
 
@@ -376,7 +377,7 @@ trait AppBuilderTestTrait
         try {
             exec($rigExecutable . ' --new-output-component --for-app ' . $appName . ' --name ' . $ocName . ' --output ' . $output . ' --container ' . $this->outputComponentContainer);
             $this->registerExpectedOutputComponent($ocName, $output);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App\'s OutputComponents because rig --new-output-component failed.');
         }
 
@@ -403,7 +404,7 @@ trait AppBuilderTestTrait
         try {
             exec($rigExecutable . ' --new-request --for-app ' . $appName . ' --name ' . $requestName . ' --relative-url ' . '"' . $relativeUrl . '"' . ' --container ' . $this->requestContainer);
             $this->registerExpectedRequest($requestName, $relativeUrl);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App\'s Requests because rig --new-request failed.');
         }
 
@@ -430,7 +431,7 @@ trait AppBuilderTestTrait
         try {
             exec($rigExecutable . ' --new-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
             $this->registerExpectedResponse($responseName, $position);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App\'s Responses because rig --new-response failed.');
         }
 
@@ -452,7 +453,7 @@ trait AppBuilderTestTrait
         try {
             exec($rigExecutable . ' --new-global-response --for-app ' . $appName . ' --name ' . $responseName . ' --position ' . strval($position));
             $this->registerExpectedGlobalResponse($responseName, $position);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->assertFalse(true, 'Failed to create Test App\'s Responses because rig --new-response failed.');
         }
 

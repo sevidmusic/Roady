@@ -56,7 +56,7 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
             CoreApp::deriveAppLocationFromRequest($this->router->getRequest()),
             ResponseInterface::RESPONSE_CONTAINER
         );
-        $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        $sortedResponses = $this->sortPositionables(...$expectedResponses);
         /**
          * @var ResponseInterface $response
          */

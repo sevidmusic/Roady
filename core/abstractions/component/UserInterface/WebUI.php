@@ -93,7 +93,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
             ResponseInterface::RESPONSE_CONTAINER
         );
         /** @var array <string, ResponseInterface> $sortedResponses */
-        $sortedResponses = $this->sortPositionables(...$responsesToCurrentRequest);;
+        $sortedResponses = $this->sortPositionables(...$responsesToCurrentRequest);
         return $sortedResponses;
     }
 

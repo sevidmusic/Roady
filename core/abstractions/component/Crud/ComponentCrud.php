@@ -10,7 +10,7 @@ use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use roady\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 use roady\interfaces\primary\Storable as StorableInterface;
 use roady\interfaces\primary\Switchable as SwitchableInterface;
-use \RuntimeException;
+use RuntimeException;
 
 abstract class ComponentCrud extends SwitchableComponentBase implements ComponentCrudInterface
 {

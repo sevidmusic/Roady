@@ -8,7 +8,7 @@ use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 use roady\classes\component\Factory\App\AppComponentsFactory;
 use roady\classes\component\Web\App as CoreApp;
 use roady\classes\primary\Switchable as CoreSwitchable;
-use \Exception;
+use Exception;
 
 abstract class AppBuilder implements AppBuilderInterface
 {
