@@ -3,20 +3,20 @@
 namespace roady\interfaces\primary;
 
 /**
- * This interface defines an object that can be stored in a specific
- * container at a specific location.
+ * A Storable can be stored in a specific container at a specific 
+ * location.
  */
 interface Storable extends Identifiable
 {
     /**
-     * @return string The alpha-numeric name of the location where this
-     * object's container should be located.
+     * @return string The alpha-numeric name of this Storable's 
+     * location.
      */
     public function getLocation(): string;
 
     /**
-     * @return string The alpha-numeric name of the container this
-     * object should be stored in.
+     * @return string The alpha-numeric name of this Storable's 
+     * container. 
      */
     public function getContainer(): string;
 }

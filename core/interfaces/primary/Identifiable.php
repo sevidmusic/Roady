@@ -3,8 +3,8 @@
 namespace roady\interfaces\primary;
 
 /**
- * This interface defines an object that can be identified
- * by an alpha-numeric name, and a unique alpha-numeric id.
+ * A Identifiable can be identified by an alpha-numeric name, 
+ * and a unique alpha-numeric id.
  */
 interface Identifiable
 {
