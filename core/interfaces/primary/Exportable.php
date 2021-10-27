@@ -3,8 +3,8 @@
 namespace roady\interfaces\primary;
 
 /**
- * A Exportable can export it's properties as an array of values
- * that are indexed by property name, or can have it's properties
+ * A Exportable can export its properties as an array of values
+ * that are indexed by property name, or can have its properties
  * set by importing an array of values that are indexed by property 
  * name. 
  */

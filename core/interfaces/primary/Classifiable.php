@@ -3,7 +3,7 @@
 namespace roady\interfaces\primary;
 
 /**
- * A Classifiable can articulate it's own type in a manner equal 
+ * A Classifiable can articulate its own type in a manner equal
  * to calling `get_class($this)`.
  */
 interface Classifiable

@@ -9,14 +9,14 @@ namespace roady\interfaces\primary;
 interface Storable extends Identifiable
 {
     /**
-     * @return string The alpha-numeric name of this Storable's 
-     * location.
+     * @return string The alpha-numeric name of the location
+     *                the Storable can be stored at.
      */
     public function getLocation(): string;
 
     /**
-     * @return string The alpha-numeric name of this Storable's 
-     * container. 
+     * @return string The alpha-numeric name of the container
+     *                the Storable can be stored in.
      */
     public function getContainer(): string;
 }
