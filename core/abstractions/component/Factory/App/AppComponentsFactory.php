@@ -28,6 +28,7 @@ use roady\interfaces\component\Web\Routing\GlobalResponse as GlobalResponseInter
 use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 use roady\interfaces\component\Web\App as AppInterface;
+use RuntimeException;
 
 abstract class AppComponentsFactory extends StoredComponentFactoryBase implements AppComponentsFactoryInterface
 {
@@ -221,7 +222,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     ): OutputComponentInterface
     {
         if(is_null($this->outputComponentFactory)) {
-            throw new \RuntimeException(self::class . 'Error: outputComponentFactory was not initialized!');
+            throw new RuntimeException(self::class . 'Error: outputComponentFactory was not initialized!');
         }
         $oc = $this->outputComponentFactory->buildOutputComponent(
             $name,
@@ -236,7 +237,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     public function buildRequest(string $name, string $container, string $url): RequestInterface
     {
         if(is_null($this->requestFactory)) {
-            throw new \RuntimeException(self::class . 'Error: requestFactory was not initialized!');
+            throw new RuntimeException(self::class . 'Error: requestFactory was not initialized!');
         }
         $request = $this->requestFactory->buildRequest($name, $container, $url);
         $this->getStoredComponentRegistry()->registerComponent($request);
@@ -246,7 +247,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     public function buildResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): ResponseInterface
     {
         if(is_null($this->responseFactory)) {
-            throw new \RuntimeException(self::class . 'Error: responseFactory was not initialized!');
+            throw new RuntimeException(self::class . 'Error: responseFactory was not initialized!');
         }
         $response = $this->responseFactory->buildResponse($name, $position);
         return $this->configureResponse($response, $componentsToAssign);
@@ -260,7 +261,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     private function configureResponse(ResponseInterface $response, array $componentsToAssign = []): ResponseInterface|GlobalResponseInterface
     {
         if(is_null($this->responseFactory)) {
-            throw new \RuntimeException(self::class . 'Error: responseFactory was not initialized!');
+            throw new RuntimeException(self::class . 'Error: responseFactory was not initialized!');
         }
         $this->responseFactory->getStoredComponentRegistry()->unregisterComponent(
             $response
@@ -278,7 +279,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     public function buildGlobalResponse(string $name, float $position, ComponentInterface ...$componentsToAssign): GlobalResponseInterface
     {
         if(is_null($this->responseFactory)) {
-            throw new \RuntimeException(self::class . 'Error: responseFactory was not initialized!');
+            throw new RuntimeException(self::class . 'Error: responseFactory was not initialized!');
         }
         /**
          * @var GlobalResponseInterface $globalResponse
@@ -350,7 +351,7 @@ abstract class AppComponentsFactory extends StoredComponentFactoryBase implement
     public function buildDynamicOutputComponent(string $name, string $container, float $position, string $appDirectoryName, string $dynamicFileName): DynamicOutputComponentInterface
     {
         if(is_null($this->outputComponentFactory)) {
-            throw new \RuntimeException(self::class . 'Error: outputComponentFactory was not initialized!');
+            throw new RuntimeException(self::class . 'Error: outputComponentFactory was not initialized!');
         }
         $doc = $this->outputComponentFactory->buildDynamicOutputComponent(
             $name,

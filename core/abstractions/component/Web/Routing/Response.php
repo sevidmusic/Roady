@@ -83,14 +83,10 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
     private function isARequest(ComponentInterface $component): bool
     {
         $classImplements = class_implements($component);
-        return (
-            in_array(
+        return !(in_array(
                 'roady\interfaces\component\Web\Routing\Request',
                 (is_array($classImplements) ? $classImplements : [])
-            ) === false
-            ? false
-            : true
-        );
+            ) === false);
     }
 
     public function addOutputComponentStorageInfo(OutputComponentInterface $outputComponent): bool

@@ -43,13 +43,9 @@ abstract class App extends SwitchableComponentBase implements AppInterface
     private static function isAnApp(ComponentInterface $component): bool
     {
         $classImplements = class_implements($component);
-        return (
-            in_array(
-                AppInterface::class,
-                (is_array($classImplements) ? $classImplements : [])
-            )
-            ? true
-            : false
+        return in_array(
+            AppInterface::class,
+            (is_array($classImplements) ? $classImplements : [])
         );
     }
 

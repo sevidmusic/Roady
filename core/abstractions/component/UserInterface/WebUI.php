@@ -24,8 +24,8 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     private const OPENHTML = '<html lang="en">' . PHP_EOL;
 
     /**
-     * @var string $webUIOutput The collective ouput of all Responses to the
-     * current request, with html structure added..
+     * @var string $webUIOutput The collective output of all Responses to the
+     * current request, with html structure added...
      */
     private string $webUIOutput = '';
 
@@ -71,7 +71,18 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
          * Always reset the $this->webUIOutput when $this->openHtml() is called,
          * i.e., use "=" not ".=" for assignment.
          */
-        $this->webUIOutput = self::DOCTYPE . self::OPENHTML . self::OPENHEAD;
+        $this->webUIOutput =
+            self::DOCTYPE .
+            self::OPENHTML .
+            self::OPENHEAD .
+            '<title>' .
+            (
+                $this->getRouter()->getRequest()->getGet()['request']
+                ??
+                $this->getRouter()->getRequest()->getUrl()
+            ) .
+            '</title>'
+        ;
     }
 
     private function loadStylesheetsDefinedByBuiltApps(): void
@@ -93,7 +104,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
             ResponseInterface::RESPONSE_CONTAINER
         );
         /** @var array <string, ResponseInterface> $sortedResponses */
-        $sortedResponses = $this->sortPositionables(...$responsesToCurrentRequest);;
+        $sortedResponses = $this->sortPositionables(...$responsesToCurrentRequest);
         return $sortedResponses;
     }
 
@@ -114,7 +125,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         {
             $component = $this->getRoutersComponentCrud()->read($storable);
             $classImplements = class_implements($component);
-            $isAnOutputComponent = (is_array($classImplements) ? in_array(OutputComponentInterface::class, $classImplements) : false);
+            $isAnOutputComponent = (is_array($classImplements) && in_array(OutputComponentInterface::class, $classImplements));
             if($isAnOutputComponent === true)
             {
                 /**
@@ -147,7 +158,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         $builtAppNames = [];
         $factories = $this->getRoutersComponentCrud()->readAll(
             CoreApp::deriveAppLocationFromRequest($this->getRouter()->getRequest()),
-            AppComponentsFactoryInterface::CONTAINER
+            FactoryInterface::CONTAINER
         );
         /**
          * @var FactoryInterface $factory

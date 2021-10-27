@@ -43,9 +43,6 @@ EOD;
         $this->reflectionUtility = $reflectionUtility;
     }
 
-    /**
-     * @param array<mixed> $export
-     */
     public function import(array $export): bool
     {
         foreach ($export as $propertyName => $propertyValue) {
@@ -100,9 +97,6 @@ EOD;
         return $this->reflectionUtility;
     }
 
-    /**
-     * @return array<mixed>
-     */
     public function export(): array
     {
         return $this->getReflectionUtility()->getClassPropertyValues($this);

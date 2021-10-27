@@ -261,7 +261,7 @@ trait ResponseUITestTrait
     {
         $expectedOutput = '';
         $expectedResponses = $this->expectedResponses();
-        $sortedResponses = $this->sortPositionables(...$expectedResponses);;
+        $sortedResponses = $this->sortPositionables(...$expectedResponses);
         /**
          * @var ResponseInterface $response
          */

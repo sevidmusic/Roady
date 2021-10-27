@@ -22,9 +22,9 @@ abstract class GlobalResponse extends CoreResponse implements GlobalResponseInte
         parent::__construct($app, $switchable, $positionable);
     }
 
-    public function respondsToRequest(RequestInterface $request, ComponentCrudInterface $componentCrud): bool
+    public function respondsToRequest(RequestInterface $request, ComponentCrudInterface $crud): bool
     {
-        if(parent::respondsToRequest($request, $componentCrud) === true) {
+        if(parent::respondsToRequest($request, $crud) === true) {
             return true;
         }
         if (CoreApp::deriveAppLocationFromRequest($request) === $this->getLocation()) {

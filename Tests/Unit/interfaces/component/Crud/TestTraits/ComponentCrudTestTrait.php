@@ -6,7 +6,7 @@ use roady\interfaces\component\Component as ComponentInterface;
 use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use roady\interfaces\component\Driver\Storage\StorageDriver as StandardStorageDriverInterface;
 use roady\interfaces\primary\Storable as StorableInterface;
-use \RuntimeException;
+use RuntimeException;
 
 trait ComponentCrudTestTrait
 {

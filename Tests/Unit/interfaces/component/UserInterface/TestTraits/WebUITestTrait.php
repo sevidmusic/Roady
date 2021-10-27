@@ -201,7 +201,7 @@ trait WebUITestTrait
         $builtAppNames = [];
         $factories = $this->getRoutersComponentCrud()->readAll(
             CoreApp::deriveAppLocationFromRequest($this->getWebUI()->getRouter()->getRequest()),
-            AppComponentsFactoryInterface::CONTAINER
+            FactoryInterface::CONTAINER
         );
         /**
          * @var FactoryInterface $factory
@@ -232,7 +232,7 @@ trait WebUITestTrait
     {
         try {
             exec(PHP_BINARY . ' ' . escapeshellarg($this->determinePathToAppsComponentsPhp($appName)) . ' http://DEFAULT');
-        } catch(\RuntimeException $e) { /** Failed to build App */ }
+        } catch(PHPRuntimeException $e) { /** Failed to build App */ }
     }
 
     protected function setWebUIParentTestInstances(): void
@@ -270,7 +270,18 @@ trait WebUITestTrait
 
     private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
     {
-        $this->expectedOutput = $this->doctype . $this->openHtml . $this->openHead;
+        $this->expectedOutput =
+            $this->doctype .
+            $this->openHtml .
+            $this->openHead .
+            '<title>' .
+            (
+                $this->getWebUI()->getRouter()->getRequest()->getGet()['request']
+                ??
+                $this->getRouter()->getRequest()->getUrl()
+            ) .
+            '</title>'
+        ;
     }
 
 

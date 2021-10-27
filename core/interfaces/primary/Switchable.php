@@ -3,8 +3,7 @@
 namespace roady\interfaces\primary;
 
 /**
- * This interface defines an object that has a switchable
- * boolean state.
+ * A Switchable has a switchable boolean state.
  */
 interface Switchable
 {

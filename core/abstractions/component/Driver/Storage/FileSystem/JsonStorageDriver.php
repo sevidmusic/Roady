@@ -26,9 +26,9 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         }
     }
 
-    private function mkdir(string $path): bool
+    private function mkdir(string $path): void
     {
-        return $this->pathIsAvailable($path) ? mkdir($path, 0750, true) : false;
+        $this->pathIsAvailable($path) && mkdir($path, 0750, true);
     }
 
     private function pathIsAvailable(string $path): bool
@@ -157,18 +157,17 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
         return (file_exists($this->getStoragePath($storable)) === false);
     }
 
-    private function removeFromStorageIndex(StorableInterface $storable): bool
+    private function removeFromStorageIndex(StorableInterface $storable): void
     {
         $storageIndex = $this->getStorageIndex();
         unset(
             $storageIndex[$storable->getLocation()][$storable->getContainer()][$storable->getUniqueId()]
         );
-        return (
-            file_put_contents(
-                $this->getStorageIndexFilePath(),
-                json_encode($storageIndex),
-                LOCK_SH
-            ) > 0);
+        file_put_contents(
+            $this->getStorageIndexFilePath(),
+            json_encode($storageIndex),
+            LOCK_SH
+        ) > 0;
     }
 
     /**

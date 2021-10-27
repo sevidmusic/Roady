@@ -115,7 +115,7 @@ trait ResponseFactoryTestTrait
     {
         $response = $this->callBuildResponse();
         $this->assertEquals(
-            CoreResponse::RESPONSE_CONTAINER,
+            ResponseInterface::RESPONSE_CONTAINER,
             $response->getContainer(),
         );
     }
@@ -252,7 +252,7 @@ trait ResponseFactoryTestTrait
     {
         $response = $this->callBuildGlobalResponse();
         $this->assertEquals(
-            CoreGlobalResponse::RESPONSE_CONTAINER,
+            ResponseInterface::RESPONSE_CONTAINER,
             $response->getContainer(),
         );
     }

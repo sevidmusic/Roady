@@ -40,7 +40,7 @@ abstract class ResponseFactory extends StoredComponentFactoryBase implements Res
         $response = new CoreResponse(
             $this->getPrimaryFactory()->buildStorable(
                 $name,
-                CoreResponse::RESPONSE_CONTAINER,
+                ResponseInterface::RESPONSE_CONTAINER,
             ),
             $this->getPrimaryFactory()->buildSwitchable(),
             $this->getPrimaryFactory()->buildPositionable($position)

@@ -3,20 +3,23 @@
 namespace roady\interfaces\primary;
 
 /**
- * This interface defines an object that can articulate it's
- * own type in a manner equal to calling `get_class($this)`.
+ * A Classifiable can articulate its own type in a manner equal
+ * to calling `get_class($this)`.
  */
 interface Classifiable
 {
 
     /**
-     * @return string The objects type. This must be equal to
-     * calling `get_class($this)`, and may or may not be equal
-     * to calling `Object::class`.
+     * Returns the objects type.
      *
-     * Note: For a good explanation of the difference between
-     * `get_class()` and `::class`:
+     * Note: The return value will match the value returned by 
+     * calling `get_class($this)`, but will not necessarily match 
+     * the value of `CLASSNAME::class`. 
+     *
+     * @return string The objects type. 
+     *
      * @see https://stackoverflow.com/questions/34118725/difference-between-class-and-get-class
+     * @see https://www.php.net/manual/en/function.get-class.php
      */
     public function getType(): string;
 
