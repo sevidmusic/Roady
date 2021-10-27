@@ -12,7 +12,7 @@ abstract class Switchable implements SwitchableInterface
     public function switchState(): bool
     {
         $initialState = $this->getState();
-        $this->state = ($this->state === true ? false : true);
+        $this->state = !($this->state === true);
         return ($this->getState() !== $initialState);
     }
 

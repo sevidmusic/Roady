@@ -39,7 +39,7 @@ abstract class StoredComponentFactory extends CoreSwitchableComponent implements
 
     public function storeAndRegister(ComponentInterfaces $component): bool
     {
-        return ($this->getComponentCrud()->create($component) === true ? $this->getStoredComponentRegistry()->registerComponent($component) : false);
+        return ($this->getComponentCrud()->create($component) === true && $this->getStoredComponentRegistry()->registerComponent($component));
     }
 
     public function getComponentCrud(): ComponentCrudInterface

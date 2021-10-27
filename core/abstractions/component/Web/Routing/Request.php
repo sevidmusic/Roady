@@ -36,13 +36,9 @@ abstract class Request extends SwitchableComponentBase implements RequestInterfa
                 ? 'https'
                 : 'http'
             ) . '://' . (
-            isset($_SERVER['HTTP_HOST'])
-                ? $_SERVER['HTTP_HOST']
-                : ''
+                $_SERVER['HTTP_HOST'] ?? ''
             ) . (
-            isset($_SERVER['REQUEST_URI'])
-                ? $_SERVER['REQUEST_URI']
-                : ''
+                $_SERVER['REQUEST_URI'] ?? ''
             );
     }
 

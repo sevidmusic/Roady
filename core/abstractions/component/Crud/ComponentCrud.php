@@ -61,17 +61,13 @@ abstract class ComponentCrud extends SwitchableComponentBase implements Componen
 
     public function delete(StorableInterface $storable): bool
     {
-        return ($this->getState() === false
-            ? false
-            : $this->getStorageDriver()->delete($storable)
+        return (!($this->getState() === false) && $this->getStorageDriver()->delete($storable)
         );
     }
 
     public function create(ComponentInterface $component): bool
     {
-        return ($this->getState() === false
-            ? false
-            : $this->getStorageDriver()->write($component)
+        return (!($this->getState() === false) && $this->getStorageDriver()->write($component)
         );
     }
 

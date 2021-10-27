@@ -23,8 +23,8 @@ trait AppTestTrait
 
     public function testAPP_CONTAINERConstantIsSetToStringAPP(): void
     {
-        $this->assertEquals($this->expectedAppContainer, AppBase::APP_CONTAINER);
-        $this->assertEquals($this->expectedAppContainer, CoreApp::APP_CONTAINER);
+        $this->assertEquals($this->expectedAppContainer, AppInterface::APP_CONTAINER);
+        $this->assertEquals($this->expectedAppContainer, AppInterface::APP_CONTAINER);
         $this->assertEquals($this->expectedAppContainer, $this->getApp()::APP_CONTAINER);
     }
 
@@ -143,7 +143,7 @@ trait AppTestTrait
     {
         $installedApps = $this->getMockCrud()->readAll(
             CoreApp::deriveAppLocationFromRequest($this->getMockRequest()),
-            CoreApp::APP_CONTAINER
+            AppInterface::APP_CONTAINER
         );
         foreach ($installedApps as $storable) {
             $this->getMockCrud()->delete($storable);

@@ -2,6 +2,7 @@
 
 namespace roady\abstractions\utility;
 
+use roady\interfaces\component\Factory\Factory;
 use roady\interfaces\utility\AppBuilder as AppBuilderInterface;
 use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 use roady\interfaces\component\Web\Routing\Request as RequestInterface;
@@ -25,7 +26,7 @@ abstract class AppBuilder implements AppBuilderInterface
                 $appComponentsFactory->getName(),
                 $appComponentsFactory->getType(),
                 CoreApp::deriveAppLocationFromRequest($domainRequest),
-                AppComponentsFactory::CONTAINER
+                Factory::CONTAINER
             );
         } catch(Exception $e) {
             $appComponentsFactory->getComponentCrud()->create($appComponentsFactory);
@@ -39,7 +40,7 @@ abstract class AppBuilder implements AppBuilderInterface
         self::buildAppsConfiguredComponents('OutputComponents', $appComponentsFactory);
         self::buildAppsConfiguredComponents('Requests', $appComponentsFactory);
         self::buildAppsConfiguredComponents('Responses', $appComponentsFactory);
-        $appComponentsFactory->buildLog(AppComponentsFactory::SHOW_LOG | AppComponentsFactory::SAVE_LOG);
+        $appComponentsFactory->buildLog(AppComponentsFactoryInterface::SHOW_LOG | AppComponentsFactoryInterface::SAVE_LOG);
     }
 
     /**

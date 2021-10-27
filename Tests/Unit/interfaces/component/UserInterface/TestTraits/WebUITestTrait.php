@@ -201,7 +201,7 @@ trait WebUITestTrait
         $builtAppNames = [];
         $factories = $this->getRoutersComponentCrud()->readAll(
             CoreApp::deriveAppLocationFromRequest($this->getWebUI()->getRouter()->getRequest()),
-            AppComponentsFactoryInterface::CONTAINER
+            FactoryInterface::CONTAINER
         );
         /**
          * @var FactoryInterface $factory

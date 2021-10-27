@@ -276,7 +276,7 @@ trait ResponseTestTrait
     public function testRESPONSE_CONTAINERConstantIsAssignedStringRESPONSES(): void
     {
         $this->assertEquals("RESPONSES", $this->getResponse()::RESPONSE_CONTAINER);
-        $this->assertEquals("RESPONSES", CoreResponse::RESPONSE_CONTAINER);
+        $this->assertEquals("RESPONSES", ResponseInterface::RESPONSE_CONTAINER);
     }
 
     public function testGetContainerReturnsValueOfRESPONSE_CONTAINERConstant(): void

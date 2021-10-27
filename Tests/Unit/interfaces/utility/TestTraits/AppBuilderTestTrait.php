@@ -236,7 +236,7 @@ trait AppBuilderTestTrait
                     $name,
                     Response::class,
                     $appLocation,
-                    Response::RESPONSE_CONTAINER
+                    ResponseInterface::RESPONSE_CONTAINER
                 );
                 $this->assertEquals(
                     $position,
@@ -246,7 +246,7 @@ trait AppBuilderTestTrait
                 $this->assertTrue(
                     false,
                     'A Response named ' . $name . ' was defined by the ' .
-                    $appName . ' App but was not stored in the ' . Response::RESPONSE_CONTAINER .
+                    $appName . ' App but was not stored in the ' . ResponseInterface::RESPONSE_CONTAINER .
                     ' container at the expected location, ' . $appLocation .
                     ', on call to AppBuilder::buildApp(...)'
                 );
