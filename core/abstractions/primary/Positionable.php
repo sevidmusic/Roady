@@ -20,7 +20,7 @@ abstract class Positionable implements PositionableInterface
         return $initialPosition < $this->getPosition();
     }
 
-    public function getPosition(): float
+    public function getPosition(): float|int
     {
         return ($this->position === 0) ? 0.0 : $this->position / 100;
     }

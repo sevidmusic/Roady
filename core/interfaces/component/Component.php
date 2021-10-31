@@ -14,6 +14,17 @@ use roady\interfaces\primary\Storable as StorableInterface;
  * values that are indexed by property name, and can have its
  * properties set by importing an array of values that are indexed
  * by property name.
+ *
+ * Methods:
+ *
+ *  public function getName(): string;
+ *  public function getUniqueId(): string;
+ *  public function getType(): string;
+ *  public function getLocation(): string;
+ *  public function getContainer(): string;
+ *  public function export(): array;
+ *  public function import(array $export): bool;
+ *
  */
 interface Component extends IdentifiableInterface, ClassifiableInterface, StorableInterface, ExportableInterface
 {
