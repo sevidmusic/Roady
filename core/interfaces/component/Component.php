@@ -2,10 +2,10 @@
 
 namespace roady\interfaces\component;
 
-use roady\interfaces\primary\Classifiable as ClassifiableInterface;
-use roady\interfaces\primary\Exportable as ExportableInterface;
-use roady\interfaces\primary\Identifiable as IdentifiableInterface;
-use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\primary\Classifiable;
+use roady\interfaces\primary\Exportable;
+use roady\interfaces\primary\Identifiable;
+use roady\interfaces\primary\Storable;
 
 /**
  * A Component has an alpha-numeric name, a unique alpha-numeric id,
@@ -17,16 +17,15 @@ use roady\interfaces\primary\Storable as StorableInterface;
  *
  * Methods:
  *
- *  public function getName(): string;
- *  public function getUniqueId(): string;
- *  public function getType(): string;
- *  public function getLocation(): string;
- *  public function getContainer(): string;
- *  public function export(): array;
- *  public function import(array $export): bool;
- *
+ * public function getType(): string;
+ * public function export(): array<string, mixed>;
+ * public function import(array $export): bool;
+ * public function getName(): string;
+ * public function getUniqueId(): string;
+ * public function getLocation(): string;
+ * public function getContainer(): string;
  */
-interface Component extends IdentifiableInterface, ClassifiableInterface, StorableInterface, ExportableInterface
+interface Component extends Classifiable, Exportable, Identifiable, Storable
 {
 
 }

@@ -3,10 +3,11 @@
 namespace roady\interfaces\primary;
 
 /**
- * An Exportable can export its properties as an array of values
- * that are indexed by property name, or can have its properties
- * set by importing an array of values that are indexed by property 
- * name. 
+ * An Exportable can articulate its own type in a manner equal
+ * to calling `get_class($this)`, can export its properties as 
+ * an array of values that are indexed by property name, and can 
+ * have its properties set by importing an array of values that 
+ * are indexed by property name. 
  * 
  * Methods:
  *
@@ -21,8 +22,8 @@ interface Exportable extends Classifiable
      * Returns an array of the object's property values indexed by
      * property name.
      *
-     * This array can be passed to the import() method of another
-     * Exportable object of the same type.
+     * Note: This array can be passed to the import() method of 
+     * another Exportable object of the same type.
      *
      * @return array<string, mixed> An array of the object's property 
      *                              values indexed by property name.
