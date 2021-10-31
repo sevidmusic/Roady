@@ -4,6 +4,12 @@ namespace roady\interfaces\primary;
 
 /**
  * A Switchable has a switchable boolean state.
+ *
+ * Methods:
+ *
+ * public function getState(): bool;
+ * public function switchState(): bool;
+ *
  */
 interface Switchable
 {

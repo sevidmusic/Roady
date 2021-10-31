@@ -5,6 +5,13 @@ namespace roady\interfaces\primary;
 /**
  * A Positionable has a numeric position that can be incremented or 
  * decremented.
+ *
+ * Methods:
+ *
+ * public function increasePosition(): bool;
+ * public function decreasePosition(): bool;
+ * public function getPosition(): float;
+ *
  */
 interface Positionable
 {
@@ -25,9 +32,9 @@ interface Positionable
     public function decreasePosition(): bool;
 
     /**
-     * Get the currently assigned position as a float.
+     * Get the currently assigned numeric position. 
      *
-     * @return float The currently assigned position.
+     * @return float|int The currently assigned numeric position.
      */
-    public function getPosition(): float;
+    public function getPosition(): float|int;
 }

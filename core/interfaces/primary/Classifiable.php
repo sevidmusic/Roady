@@ -5,6 +5,11 @@ namespace roady\interfaces\primary;
 /**
  * A Classifiable can articulate its own type in a manner equal
  * to calling `get_class($this)`.
+ *
+ * Methods:
+ *
+ * public function getType(): string;
+ *
  */
 interface Classifiable
 {
@@ -18,8 +23,8 @@ interface Classifiable
      *
      * @return string The objects type. 
      *
-     * @see https://stackoverflow.com/questions/34118725/difference-between-class-and-get-class
      * @see https://www.php.net/manual/en/function.get-class.php
+     * @see https://stackoverflow.com/questions/34118725/difference-between-class-and-get-class
      */
     public function getType(): string;
 
