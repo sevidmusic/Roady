@@ -14,6 +14,7 @@ namespace roady\interfaces\primary;
  * public function getType(): string;
  * public function export(): array<string, mixed>;
  * public function import(array $export): bool;
+ *
  */
 interface Exportable extends Classifiable
 {

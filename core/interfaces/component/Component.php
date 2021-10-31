@@ -25,6 +25,7 @@ use roady\interfaces\primary\Storable;
  * public function getUniqueId(): string;
  * public function getLocation(): string;
  * public function getContainer(): string;
+ *
  */
 interface Component extends Classifiable, Exportable, Identifiable, Storable
 {

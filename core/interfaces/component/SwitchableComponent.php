@@ -2,14 +2,14 @@
 
 namespace roady\interfaces\component;
 
-use roady\interfaces\component\Component as ComponentInterface;
-use roady\interfaces\primary\Switchable as SwitchableInterface;
+use roady\interfaces\component\Component;
+use roady\interfaces\primary\Switchable;
 
 /**
  * A SwitchableComponent is a Component that has a switchable 
  * boolean state.
  *
- *  Methods:
+ * Methods:
  *
  * public function getState(): bool;
  * public function switchState(): bool;
@@ -22,7 +22,7 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * public function getContainer(): string;
  *
  */
-interface SwitchableComponent extends SwitchableInterface, ComponentInterface
+interface SwitchableComponent extends Switchable, Component
 {
 
 }

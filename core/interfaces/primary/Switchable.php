@@ -9,6 +9,7 @@ namespace roady\interfaces\primary;
  *
  * public function getState(): bool;
  * public function switchState(): bool;
+ *
  */
 interface Switchable
 {

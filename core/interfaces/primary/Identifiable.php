@@ -10,6 +10,7 @@ namespace roady\interfaces\primary;
  *
  * public function getName(): string;
  * public function getUniqueId(): string;
+ *
  */
 interface Identifiable
 {

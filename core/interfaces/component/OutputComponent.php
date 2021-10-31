@@ -2,8 +2,8 @@
 
 namespace roady\interfaces\component;
 
-use roady\interfaces\component\SwitchableComponent as SwitchableComponentInterface;
-use roady\interfaces\primary\Positionable as PositionableInterface;
+use roady\interfaces\component\SwitchableComponent; 
+use roady\interfaces\primary\Positionable; 
 
 /**
  * An OutputComponent is a SwitchableComponent that can generate 
@@ -27,7 +27,7 @@ use roady\interfaces\primary\Positionable as PositionableInterface;
  * public function getPosition(): float;
  *
  */
-interface OutputComponent extends SwitchableComponentInterface, PositionableInterface
+interface OutputComponent extends SwitchableComponent, Positionable
 {
 
     /**

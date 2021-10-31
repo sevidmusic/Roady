@@ -11,6 +11,7 @@ namespace roady\interfaces\primary;
  * public function increasePosition(): bool;
  * public function decreasePosition(): bool;
  * public function getPosition(): float;
+ *
  */
 interface Positionable
 {
