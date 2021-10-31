@@ -8,12 +8,13 @@ use roady\interfaces\primary\Identifiable;
 use roady\interfaces\primary\Storable;
 
 /**
- * A Component has an alpha-numeric name, a unique alpha-numeric id,
- * can articulate its own type, can be stored in a specific container
- * at a specific location, can export its properties as an array of
- * values that are indexed by property name, and can have its
- * properties set by importing an array of values that are indexed
- * by property name.
+ * A Component can articulate its own type in a manner equal to 
+ * calling `get_class($this)`, can export its properties as an 
+ * array of values that are indexed by property name, can have its 
+ * properties set by importing an array of values that are indexed 
+ * by property name, can be identified by an alpha-numeric name, 
+ * can be identified by a unique alpha-numeric id, and can be 
+ * stored in a specific container at a specific location.
  *
  * Methods:
  *
