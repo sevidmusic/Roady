@@ -28,17 +28,23 @@ interface Request extends SwitchableComponentInterface
 {
 
     /**
-     * @return array<mixed>
+     * Return the $_GET array for this Request. 
+     *
+     * @return array<mixed> Return the $_GET array for this Request. 
      */
     public function getGet(): array;
 
     /**
-     * @return array<mixed>
+     * Return the $_POST array for this Request. 
+     *
+     * @return array<mixed> The $_POST array for this Request. 
      */
     public function getPost(): array;
 
     /**
-     * @return string
+     * Return the url associated with this Request.
+     *
+     * @return string The url associated with this Request.
      */
     public function getUrl(): string;
 

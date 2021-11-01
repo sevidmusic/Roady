@@ -40,14 +40,14 @@ interface Exportable extends Classifiable
      * property named $bar whose type was string, then $bar could
      * be set via:
      *
-     * `$foo->import(['bar' => "bar's new value"]);`
+     * `$foo->import(["bar" => "bar's new value"]);`
      *
      * Note: The type of each property value must match the type
      * expected by the property being set. For example, a property
      * that expects a string cannot be assigned a boolean.
      *
      * Note: It is not necessary to provide values for all 
-     * property's, only those that are intended to be set.
+     * properties, only those that are intended to be set.
      *
      * Note: This method can be used to set properties of any scope.
      *
