@@ -18,7 +18,7 @@ use roady\interfaces\primary\Positionable;
  * Requests assigned to the Response.
  *
  * A Response may also respond to requests to a domain that 
- * define a $_GET parameter named `request` whose assigned
+ * defines a $_GET parameter named `request` whose assigned
  * value matches the name of the Response.
  *
  * Constants:
