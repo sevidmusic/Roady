@@ -9,13 +9,17 @@ use roady\interfaces\primary\Storable;
 use roady\interfaces\primary\Positionable; 
 
 /**
- * A Response is a SwitchableComponent that can be used to 
- * associate one more more stored OutputComponents with specific 
- * stored Requests.
+ * A Response is a SwitchableComponent that represents a
+ * response to a request to a domain, and can be used to 
+ * associate stored OutputComponents with stored Requests.
  *
- * Note: All implementations of the Response interface must return
- * the value of the RESPONSE_CONTAINER constant from their respective
- * implementation of the getContainer() method.
+ * A Response may respond to requests to a domain that are 
+ * represented by a Request that matches one of the stored 
+ * Requests assigned to the Response.
+ *
+ * A Response may also respond to requests to a domain that 
+ * define a $_GET parameter named `request` whose assigned
+ * value matches the name of the Response.
  *
  * Constants:
  * 
@@ -55,6 +59,13 @@ interface Response extends SwitchableComponent, Positionable
     /**
      * Return the value assigned to the RESPONSE_CONTAINER constant. 
      *
+     * Note: All implementations of the Response interface must 
+     * return the value of the RESPONSE_CONTAINER constant from 
+     * their respective implementations of the getContainer() 
+     * method. This insures the name of the container Responses 
+     * are stored in is always predictable regardless of the 
+     * location they are stored at.
+     *
      * @return string The value assigned to the RESPONSE_CONTAINER
      *                constant.
      */
@@ -62,7 +73,10 @@ interface Response extends SwitchableComponent, Positionable
 
     /**
      * Returns true if this Response is assigned a stored Request 
-     * that matches the specified $request.
+     * that matches the specified $request, false otherwise.
+     *
+     * Note: The Request must match a Request that exists in
+     * storage that is accessible to the specified ComponentCrud.
      *
      * @param Request $request The Request to check.
      *
@@ -70,11 +84,18 @@ interface Response extends SwitchableComponent, Positionable
      *                            stored Requests from storage.
      *                      
      *
-     * @return bool True if this Response is assigned a Request that
-     *              matches the specified $request.
+     * @return bool True if this Response is assigned a stored 
+     *              Request that matches the specified $request, 
+     *              false otherwise.
+     *
      */
     public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
 
+    /**
+     * Add the specified Request's Storable to this Response's
+     * assigned Request Storables. 
+     * 
+     */
     public function addRequestStorageInfo(Request $request): bool;
 
     /**

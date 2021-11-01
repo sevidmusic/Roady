@@ -44,6 +44,11 @@ abstract class Response extends SwitchableComponentBase implements ResponseInter
         parent::__construct($st, $switchable);
     }
 
+    final public function getContainer(): string
+    {
+        return self::RESPONSE_CONTAINER;
+    }
+
     private function responseWasRequestedByName(RequestInterface $request) : bool
     {
         if(str_contains($request->getUrl(), '?request=' . $this->getName()) || str_contains($request->getUrl(), '&request=' . $this->getName())) {
