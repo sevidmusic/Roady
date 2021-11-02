@@ -10,15 +10,17 @@ use roady\interfaces\primary\Positionable;
 
 /**
  * A Response is a SwitchableComponent that represents a
- * response to a request to a domain, and can be used to 
- * associate stored OutputComponents with stored Requests.
+ * response to a request to a domain.
+ * 
+ * A Response can be used to associate stored OutputComponents 
+ * with stored Requests.
  *
- * A Response may respond to requests to a domain that are 
- * represented by a Request that matches one of the stored 
- * Requests assigned to the Response.
+ * A Response will respond to any requests to a domain that 
+ * are represented by a Request that matches one of the stored 
+ * Requests that are assigned to the Response.
  *
- * A Response may also respond to requests to a domain that 
- * defines a $_GET parameter named `request` whose assigned
+ * A Response will also respond to requests to a domain that 
+ * define a $_GET parameter named `request` whose assigned
  * value matches the name of the Response.
  *
  * Constants:
@@ -73,7 +75,9 @@ interface Response extends SwitchableComponent, Positionable
 
     /**
      * Returns true if this Response is assigned a stored Request 
-     * that matches the specified $request, false otherwise.
+     * that matches the specified $request, or if the specified
+     * Request defines a $_GET parameter whose value matches
+     * the name of the Response, false otherwise.
      *
      * Note: The Request must match a Request that exists in
      * storage that is accessible to the specified ComponentCrud.
