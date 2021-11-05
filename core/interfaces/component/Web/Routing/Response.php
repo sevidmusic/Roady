@@ -41,11 +41,11 @@ use roady\interfaces\primary\Positionable;
  * public function getContainer(): string;
  * public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
  * public function addRequestStorageInfo(Request $request): bool;
- * public function getRequestStorageInfo(): array;
+ * public function getRequestStorageInfo(): array<int, Storable>;
  * public function removeRequestStorageInfo(string $nameOrId): bool;
  * public function addOutputComponentStorageInfo(OutputComponent $outputComponent): bool;
  * public function removeOutputComponentStorageInfo(string $nameOrId): bool;
- * public function getOutputComponentStorageInfo(): array;
+ * public function getOutputComponentStorageInfo(): array<int, Storable>;
  *
  */
 interface Response extends SwitchableComponent, Positionable
@@ -139,6 +139,9 @@ interface Response extends SwitchableComponent, Positionable
      * @return bool True if the Request's storable was removed from
      *              the Request Storables assigned to this Response,
      *              false otherwise.
+     * 
+     * @see https://github.com/sevidmusic/Roady/issues/268
+     *
      */
     public function removeRequestStorageInfo(string $nameOrId): bool;
 
@@ -151,8 +154,8 @@ interface Response extends SwitchableComponent, Positionable
      *                                         to add.
      *
      * @return bool True if the OutputComponent's Storable was added 
-     *         to this Response's assigned OutputComponent Storables, 
-     *         false otherwise.
+     *              to this Response's assigned OutputComponent 
+     *              Storables, false otherwise.
      */
     public function addOutputComponentStorageInfo(OutputComponent $outputComponent): bool;
 
@@ -184,6 +187,9 @@ interface Response extends SwitchableComponent, Positionable
      * @return array<int, Storable> A numerically indexed array of 
      *                              the OutputComponent Storables 
      *                              assigned to this Response.
+     *
+     * @see https://github.com/sevidmusic/Roady/issues/268
+     *
      */
     public function getOutputComponentStorageInfo(): array;
 
