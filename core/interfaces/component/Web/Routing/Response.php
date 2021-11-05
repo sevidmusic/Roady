@@ -22,7 +22,7 @@ use roady\interfaces\primary\Positionable;
  *
  * A Response will also respond to requests to a domain that 
  * define a $_GET parameter named `request` whose assigned
- * value matches the name of the Response.
+ * value matches the name of this Response.
  *
  * Constants:
  * 
@@ -81,7 +81,7 @@ interface Response extends SwitchableComponent, Positionable
      * Returns true if this Response is assigned a stored Request 
      * whose url matches the specified Request's url, or if the 
      * specified Request defines a $_GET parameter named 'request' 
-     * whose assigned value matches the name of the Response, false 
+     * whose assigned value matches the name of this Response, false 
      * otherwise.
      *
      * @param Request $request The Request to check.
@@ -101,7 +101,7 @@ interface Response extends SwitchableComponent, Positionable
     public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
 
     /**
-     * Assign a Request to this Response by adding it's storable
+     * Assign a Request to this Response by adding it's Storable
      * to this Response's assigned Request Storables.
      *
      * @param Request $request The Request to add.
@@ -136,7 +136,7 @@ interface Response extends SwitchableComponent, Positionable
      * @param string $nameOrId The name, or unique id of the Request
      *                         to remove.
      *
-     * @return bool True if the Request's storable was removed from
+     * @return bool True if the Request's Storable was removed from
      *              the Request Storables assigned to this Response,
      *              false otherwise.
      * 
@@ -147,7 +147,7 @@ interface Response extends SwitchableComponent, Positionable
 
     /**
      * Assign a OutputComponent to this Response by adding it's 
-     * storable to this Response's assigned OutputComponent 
+     * Storable to this Response's assigned OutputComponent 
      * Storables.
      *
      * @param OutputComponent $outputComponent The OutputComponent 
@@ -171,7 +171,7 @@ interface Response extends SwitchableComponent, Positionable
      * @param string $nameOrId The name, or unique id of the 
      *                         OutputComponent to remove.
      *
-     * @return bool True if the OutputComponent's storable was 
+     * @return bool True if the OutputComponent's Storable was 
      *              removed from the OutputComponent Storables 
      *              assigned to this Response, false otherwise.
      */
