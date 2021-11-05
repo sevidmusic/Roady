@@ -129,6 +129,13 @@ interface Response extends SwitchableComponent, Positionable
      * Remove an assigned Request's Storable by name or unique id
      * from the Request Storables assigned to this Response.
      *
+     * Note: It is up to the implementation to determine how
+     * to resolve a specified name that matches the name of
+     * multiple assigned Requests.
+     *
+     * @param string $nameOrId The name, or unique id of the Request
+     *                         to remove.
+     *
      * @return bool True if the Request's storable was removed from
      *              the Request Storables assigned to this Response,
      *              false otherwise.
@@ -153,6 +160,13 @@ interface Response extends SwitchableComponent, Positionable
      * Remove an assigned OutputComponent's Storable by name or 
      * unique id from the OutputComponent Storables assigned to 
      * this Response.
+     *
+     * Note: It is up to the implementation to determine how
+     * to resolve a specified name that matches the name of
+     * multiple assigned OutputComponents.
+     *
+     * @param string $nameOrId The name, or unique id of the 
+     *                         OutputComponent to remove.
      *
      * @return bool True if the OutputComponent's storable was 
      *              removed from the OutputComponent Storables 
