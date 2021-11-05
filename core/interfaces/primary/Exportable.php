@@ -4,7 +4,7 @@ namespace roady\interfaces\primary;
 
 /**
  * An Exportable can articulate its own type in a manner equal
- * to calling `get_class($this)`, can export its properties as 
+ * to calling `get_class($this);`, can export its properties as 
  * an array of values that are indexed by property name, and can 
  * have its properties set by importing an array of values that 
  * are indexed by property name. 
@@ -13,7 +13,7 @@ namespace roady\interfaces\primary;
  *
  * public function getType(): string;
  * public function export(): array<string, mixed>;
- * public function import(array $export): bool;
+ * public function import(array<string, mixed> $export): bool;
  *
  */
 interface Exportable extends Classifiable
@@ -40,14 +40,14 @@ interface Exportable extends Classifiable
      * property named $bar whose type was string, then $bar could
      * be set via:
      *
-     * `$foo->import(['bar' => "bar's new value"]);`
+     * `$foo->import(["bar" => "bar's new value"]);`
      *
      * Note: The type of each property value must match the type
      * expected by the property being set. For example, a property
      * that expects a string cannot be assigned a boolean.
      *
      * Note: It is not necessary to provide values for all 
-     * property's, only those that are intended to be set.
+     * properties, only those that are intended to be set.
      *
      * Note: This method can be used to set properties of any scope.
      *
