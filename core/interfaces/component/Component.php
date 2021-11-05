@@ -9,7 +9,7 @@ use roady\interfaces\primary\Storable;
 
 /**
  * A Component can articulate its own type in a manner equal to 
- * calling `get_class($this)`, can export its properties as an 
+ * calling `get_class($this);`, can export its properties as an 
  * array of values that are indexed by property name, can have its 
  * properties set by importing an array of values that are indexed 
  * by property name, can be identified by an alpha-numeric name, 
@@ -20,7 +20,7 @@ use roady\interfaces\primary\Storable;
  *
  * public function getType(): string;
  * public function export(): array<string, mixed>;
- * public function import(array $export): bool;
+ * public function import(array<string, mixed> $export): bool;
  * public function getName(): string;
  * public function getUniqueId(): string;
  * public function getLocation(): string;

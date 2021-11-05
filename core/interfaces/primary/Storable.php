@@ -18,14 +18,20 @@ interface Storable extends Identifiable
 {
 
     /**
+     * Return the alpha-numeric name of the container
+     * this object can be can be stored in.
+     *
      * @return string The alpha-numeric name of the container
-     *                the Storable can be stored in.
+     *                this object can be can be stored in.
      */
     public function getContainer(): string;
 
     /**
+     * Return the alpha-numeric name of the location
+     * this object can be can be stored at.
+     *
      * @return string The alpha-numeric name of the location
-     *                the Storable can be stored at.
+     *                this object can be can be stored at.
      */
     public function getLocation(): string;
 

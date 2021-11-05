@@ -4,7 +4,7 @@ namespace roady\interfaces\primary;
 
 /**
  * An Exportable can articulate its own type in a manner equal
- * to calling `get_class($this)`, can export its properties as 
+ * to calling `get_class($this);`, can export its properties as 
  * an array of values that are indexed by property name, and can 
  * have its properties set by importing an array of values that 
  * are indexed by property name. 
@@ -13,7 +13,7 @@ namespace roady\interfaces\primary;
  *
  * public function getType(): string;
  * public function export(): array<string, mixed>;
- * public function import(array $export): bool;
+ * public function import(array<string, mixed> $export): bool;
  *
  */
 interface Exportable extends Classifiable

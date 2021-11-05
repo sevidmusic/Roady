@@ -6,9 +6,8 @@ use roady\interfaces\component\SwitchableComponent;
 use roady\interfaces\primary\Positionable; 
 
 /**
- * An OutputComponent is a SwitchableComponent that can generate 
- * output, and has a numeric position that can be incremented or 
- * decremented.
+ * An OutputComponent is a SwitchableComponent that has output, and
+ * also has a numeric position that can be incremented or decremented.
  *
  * Methods:
  *
@@ -16,7 +15,7 @@ use roady\interfaces\primary\Positionable;
  * public function switchState(): bool;
  * public function getType(): string;
  * public function export(): array<string, mixed>;
- * public function import(array $export): bool;
+ * public function import(array<string, mixed> $export): bool;
  * public function getName(): string;
  * public function getUniqueId(): string;
  * public function getLocation(): string;

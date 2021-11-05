@@ -4,7 +4,7 @@ namespace roady\interfaces\primary;
 
 /**
  * A Classifiable can articulate its own type in a manner equal
- * to calling `get_class($this)`.
+ * to calling `get_class($this);`.
  *
  * Methods:
  *
@@ -18,8 +18,8 @@ interface Classifiable
      * Returns the objects type.
      *
      * Note: The return value will match the value returned by 
-     * calling `get_class($this)`, but will not necessarily match 
-     * the value of `CLASSNAME::class`. 
+     * calling `get_class($this);`, but will not necessarily match 
+     * the value of `CLASSNAME::class;`. 
      *
      * @return string The objects type. 
      *

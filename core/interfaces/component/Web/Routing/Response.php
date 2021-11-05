@@ -16,8 +16,9 @@ use roady\interfaces\primary\Positionable;
  * with stored Requests.
  *
  * A Response will respond to any requests to a domain that 
- * are represented by a Request that matches one of the stored 
- * Requests that are assigned to the Response.
+ * are represented by a Request whose url matches the url 
+ * of one of the stored Requests that are assigned to the 
+ * Response.
  *
  * A Response will also respond to requests to a domain that 
  * define a $_GET parameter named `request` whose assigned
@@ -33,7 +34,7 @@ use roady\interfaces\primary\Positionable;
  * public function switchState(): bool;
  * public function getType(): string;
  * public function export(): array<string, mixed>;
- * public function import(array $export): bool;
+ * public function import(array<string, mixed> $export): bool;
  * public function getName(): string;
  * public function getUniqueId(): string;
  * public function getLocation(): string;
@@ -74,47 +75,101 @@ interface Response extends SwitchableComponent, Positionable
     public function getContainer(): string;
 
     /**
-     * Returns true if this Response is assigned a stored Request 
-     * that matches the specified $request, or if the specified
-     * Request defines a $_GET parameter whose value matches
-     * the name of the Response, false otherwise.
+     * Determine whether or not it is appropriate for this Response
+     * to respond to the specified Request.
      *
-     * Note: The Request must match a Request that exists in
-     * storage that is accessible to the specified ComponentCrud.
+     * Returns true if this Response is assigned a stored Request 
+     * whose url matches the specified Request's url, or if the 
+     * specified Request defines a $_GET parameter named 'request' 
+     * whose assigned value matches the name of the Response, false 
+     * otherwise.
      *
      * @param Request $request The Request to check.
      *
      * @param ComponentCrud $crud A ComponentCrud to use to read 
-     *                            stored Requests from storage.
-     *                      
-     *
+     *                            assigned stored Requests from 
+     *                            storage.
+     * 
      * @return bool True if this Response is assigned a stored 
-     *              Request that matches the specified $request, 
-     *              false otherwise.
+     *              Request whose url matches the specified 
+     *              Request's url, or if the specified Request 
+     *              defines a $_GET parameter named 'request' 
+     *              whose assigned value matches the name of the 
+     *              Response, false otherwise.
      *
      */
     public function respondsToRequest(Request $request, ComponentCrud $crud): bool;
 
     /**
-     * Add the specified Request's Storable to this Response's
-     * assigned Request Storables. 
-     * 
+     * Assign a Request to this Response by adding it's storable
+     * to this Response's assigned Request Storables.
+     *
+     * @param Request $request The Request to add.
+     *
+     * @return bool True if the Request's Storable was added to 
+     *              this Response's assigned Request Storables, 
+     *              false otherwise.
      */
     public function addRequestStorageInfo(Request $request): bool;
 
     /**
-     * @return array<int, Storable>
+     * Return a numerically indexed array of the Request Storables 
+     * assigned to this Response.
+     *
+     * Note: These Storables can be used to read the actual Requests 
+     *       from storage via a ComponentCrud.
+     *
+     * @return array<int, Storable> A numerically indexed array of 
+     *                              the Request Storables assigned 
+     *                              to this Response.
      */
     public function getRequestStorageInfo(): array;
 
+    /**
+     * Remove an assigned Request's Storable by name or unique id
+     * from the Request Storables assigned to this Response.
+     *
+     * @return bool True if the Request's storable was removed from
+     *              the Request Storables assigned to this Response,
+     *              false otherwise.
+     */
     public function removeRequestStorageInfo(string $nameOrId): bool;
 
+    /**
+     * Assign a OutputComponent to this Response by adding it's 
+     * storable to this Response's assigned OutputComponent 
+     * Storables.
+     *
+     * @param OutputComponent $outputComponent The OutputComponent 
+     *                                         to add.
+     *
+     * @return bool True if the OutputComponent's Storable was added 
+     *         to this Response's assigned OutputComponent Storables, 
+     *         false otherwise.
+     */
     public function addOutputComponentStorageInfo(OutputComponent $outputComponent): bool;
 
+    /**
+     * Remove an assigned OutputComponent's Storable by name or 
+     * unique id from the OutputComponent Storables assigned to 
+     * this Response.
+     *
+     * @return bool True if the OutputComponent's storable was 
+     *              removed from the OutputComponent Storables 
+     *              assigned to this Response, false otherwise.
+     */
     public function removeOutputComponentStorageInfo(string $nameOrId): bool;
 
     /**
-     * @return array<int, Storable>
+     * Return a numerically indexed array of the OutputComponent 
+     * Storables assigned to this Response.
+     *
+     * Note: These Storables can be used to read the actual 
+     *       OutputComponents from storage via a ComponentCrud.
+     *
+     * @return array<int, Storable> A numerically indexed array of 
+     *                              the OutputComponent Storables 
+     *                              assigned to this Response.
      */
     public function getOutputComponentStorageInfo(): array;
 

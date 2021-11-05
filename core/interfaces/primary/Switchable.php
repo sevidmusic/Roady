@@ -15,6 +15,8 @@ interface Switchable
 {
 
     /**
+     * Returns the currently assigned boolean state.
+     *
      * @return bool The currently assigned boolean state.
      */
     public function getState(): bool;
