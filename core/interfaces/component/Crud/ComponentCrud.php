@@ -33,8 +33,10 @@ interface ComponentCrud extends SwitchableComponent
 {
 
     /**
-     * Create a Component in storage. Returns true if the specified 
-     * Component was created in storage, false otherwise.
+     * Create a Component in storage. 
+     *
+     * Returns true if the specified Component was created 
+     * in storage, false otherwise.
      *
      * Note: If this ComponentCrud's state is set to false, then
      * the Component will not be created.
@@ -49,7 +51,8 @@ interface ComponentCrud extends SwitchableComponent
 
     /**
      * Read a Component from storage using the specified Storable
-     * to determine where the Component should exist in storage.
+     * to determine where the Component is expected to exist in 
+     * storage.
      *
      * If the Component does not exist in storage, a new instance
      * of a roady\classes\component\Component will be returned 
@@ -60,8 +63,8 @@ interface ComponentCrud extends SwitchableComponent
      *       ComponentCrud's state is is set to false.
      *
      * @param Storable $storable The Storable to use to determine
-     *                           where the Component should exist 
-     *                           in storage.
+     *                           where the Component is expected 
+     *                           to exist in storage.
      *                           
      * @return Component The stored Component, or, a new instance
      *                   of a roady\classes\component\Component 
@@ -72,15 +75,15 @@ interface ComponentCrud extends SwitchableComponent
 
     /**
      * Update a stored Component using the specified Storable to
-     * determine where the Component to be updated should exist 
-     * in storage.
+     * determine where the Component to be updated is expected to 
+     * exist in storage.
      *
      * Note: If this ComponentCrud's state is set to false, then
      * the Component will not be updated.
      *
      * @param Storable $storable The Storable to use to determine
-     *                           where the Component should exist 
-     *                           in storage.
+     *                           where the Component is expected 
+     *                           to exist in storage.
      *
      * @param Component $component The new Component that will
      *                             replace the original Component.
@@ -92,15 +95,15 @@ interface ComponentCrud extends SwitchableComponent
 
     /**
      * Delete a Component from storage using the specified Storable 
-     * to determine where the Component to be deleted should exist 
-     * in storage.
+     * to determine where the Component to be deleted is expected to 
+     * exist in storage.
      *
      * Note: If this ComponentCrud's state is set to false, then
      * the Component will not be deleted.
      *
      * @param Storable $storable The Storable to use to determine
-     *                           where the Component should exist 
-     *                           in storage.
+     *                           where the Component is expected to 
+     *                           exist in storage.
      *
      * @return bool True if the Component was deleted, false 
      *              otherwise.
@@ -149,10 +152,10 @@ interface ComponentCrud extends SwitchableComponent
      *                     read from storage.
      *
      * @param string $location The name of the location the Component
-     *                         should exist at. 
+     *                         is expected to exist at. 
      * 
      * @param string $container The name of the container the 
-     *                          Component should exist in. 
+     *                          Component is expected to exist in. 
      *
      * @return Component A Component read from the specified 
      *                   container at the specified location
