@@ -54,13 +54,11 @@ interface ComponentCrud extends SwitchableComponent
      * to determine where the Component is expected to exist in 
      * storage.
      *
-     * If the Component does not exist in storage, a new instance
+     * If the Component does not exist in storage, or if this 
+     * ComponentCrud's state is set to false, then a new instance
      * of a roady\classes\component\Component will be returned 
      * whose name, container, and location are all assigned the 
      * value __MOCK_COMPONENT__.
-     *
-     * Note: A "Mock Component" will also be returned if this
-     *       ComponentCrud's state is is set to false.
      *
      * @param Storable $storable The Storable to use to determine
      *                           where the Component is expected 
@@ -112,27 +110,32 @@ interface ComponentCrud extends SwitchableComponent
     public function delete(Storable $storable): bool;
 
     /**
-     * Return an array of all the Components that are stored in a
-     * specified container at a specified location.
+     * Return a numerically indexed array of all the Components that 
+     * are stored in a specified container at a specified location.
      *
-     * Note: If this ComponentCrud's state is set to false, then
-     * an empty array will be returned.
+     * Note: If this ComponentCrud's state is set to false, or if 
+     * there aren't any Components in the specified container at 
+     * the specified location, then the returned array will be 
+     * empty.
      *
      * @param string $location The name of the location to read 
-     *                         Components from.
+     *                         the Components from.
      *
      * @param string $container The name of the container to read 
-     *                          Components from.
+     *                          the Components from.
      *
-     * @return array<Component> An array of all the Components that 
-     *                          are stored in the specified container 
-     *                          at the specified location. This array
-     *                          will be empty if this ComponentCrud's
-     *                          state is set to false, or if there
-     *                          aren't any Components in the 
-     *                          specified container at the specified
-     *                          location.
      *
+     * @return array<int, Component> A numerically indexed array 
+     *                               of all the Components that 
+     *                               are stored in the specified 
+     *                               container at the specified 
+     *                               location. This array will
+     *                               be empty if this ComponentCrud's
+     *                               state is set to false, or if
+     *                               there aren't any Components
+     *                               stored in the specified 
+     *                               container at the specified 
+     *                               location.
      */
     public function readAll(string $location, string $container): array;
 
