@@ -2,28 +2,32 @@
 
 namespace roady\interfaces\component\Registry\Storage;
 
-use roady\interfaces\component\Component as ComponentInterface;
-use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
-use roady\interfaces\primary\Storable as StorableInterface;
+use roady\interfaces\component\Component; 
+use roady\interfaces\component\Crud\ComponentCrud; 
+use roady\interfaces\primary\Storable; 
 
-interface StoredComponentRegistry extends ComponentInterface
+/**
+ * A StoredComponentRegistry represents a collection of stored
+ * Components of the same type. 
+ */
+interface StoredComponentRegistry extends Component
 {
 
     public function getAcceptedImplementation(): string;
 
-    public function getComponentCrud(): ComponentCrudInterface;
+    public function getComponentCrud(): ComponentCrud;
 
-    public function registerComponent(ComponentInterface $component): bool;
+    public function registerComponent(Component $component): bool;
 
-    public function unRegisterComponent(StorableInterface $storable): bool;
+    public function unRegisterComponent(Storable $storable): bool;
 
     /**
-     * @return array <int, ComponentInterface>
+     * @return array <int, Component>
      */
     public function getRegisteredComponents(): array;
 
     /**
-     * @return array<int, StorableInterface>
+     * @return array<int, Storable>
      */
     public function getRegistry(): array;
 
