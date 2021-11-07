@@ -32,5 +32,39 @@ use roady\interfaces\component\Web\Routing\Router;
 interface ResponseUI extends OutputComponent
 {
 
+    /**
+     * Return the collective output of all of the OutputComponents 
+     * that are assigned to each of the Responses returned by the
+     * getResponses() method of the Router returned by this 
+     * ResponseUI's getRouter() method.
+     *
+     * Note: The collective output of the OutputComponents 
+     * assigned to each Response will be sorted using each
+     * Response's assigned position to determine order.
+     *
+     * Note: The output of each OutputComponent assigned to a 
+     * Response will be sorted relative to the output of the 
+     * other OutputComponents that are assigned to the same 
+     * Response using each OutputComponent's assigned position 
+     * to determine order.
+     *
+     * @return string The collective output of all of the 
+     *                OutputComponents that are assigned to 
+     *                each of the Responses returned by the
+     *                getResponses() method of the Router 
+     *                returned by this ResponseUI's getRouter() 
+     *                method.
+     *
+     * @throws \RuntimeException Throws a RuntimeException if the 
+     *                           collective output is empty.
+     */
+    public function getOutput(): string;
+
+    /**
+     * Return the Router used by this ResponseUI. 
+     *
+     * @return Router The Router used by this ResponseUI.
+     *
+     */
     public function getRouter(): Router;
 }
