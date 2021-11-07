@@ -7,8 +7,8 @@ use roady\interfaces\component\Crud\ComponentCrud;
 use roady\interfaces\primary\Storable; 
 
 /**
- * A StoredComponentRegistry represents a collection of stored
- * Components of the same type. 
+ * A StoredComponentRegistry is a Component that represents a 
+ * collection of stored Components of the same type.
  *
  * Methods:
  *
@@ -33,21 +33,21 @@ interface StoredComponentRegistry extends Component
 {
 
     /**
-     * Return the type of Component accepted by this 
-     * StoredComponentRegistry.
+     * Return the type of Component implementation that can be 
+     * registered by this StoredComponentRegistry.
      *
-     * @return string The type of Component accepted 
-     *                by this StoredComponentRegistry.
+     * @return string The type of Component implementation that can 
+     *                be registered by this StoredComponentRegistry.
      */
     public function getAcceptedImplementation(): string;
 
     /**
      * Return the ComponentCrud used by this StoredComponentRegistry 
-     * to read Components from storage.
+     * to read registered Components from storage.
      *
      * @return ComponentCrud The ComponentCrud used by this 
      *                       StoredComponentRegistry to read 
-     *                       Components from storage.
+     *                       registered Components from storage.
      */
     public function getComponentCrud(): ComponentCrud;
 
@@ -85,26 +85,27 @@ interface StoredComponentRegistry extends Component
      * Return a numerically indexed array of the registered 
      * Components. 
      *
+     * Note: These Components will be read from storage via the 
+     * ComponentCrud returned by this StoredComponentRegistry's 
+     * getComponentCrud() method.
+     *
      * @return array <int, Component> A numerically indexed array of 
      *                                the registered Components. 
      */
     public function getRegisteredComponents(): array;
 
     /**
-     */
-
-    /**
-     * Return a numerically indexed array of all of the registered 
-     * Component Storables. 
+     * Return a numerically indexed array of Storables for each of
+     * the registered Components. 
      *
-     * @return array<int, Storable> A numerically indexed array of 
-     *                              all of the registered Component
-     *                              Storables. 
+     * @return array<int, Storable> A numerically indexed array 
+     *                              of Storables for each of the 
+     *                              registered Components. 
      */
     public function getRegistry(): array;
 
     /**
-     * Empty the registry, i.e., unregister all the of registered
+     * Empty the registry. This will unregister all the of registered
      * Components.
      */
     public function emptyRegistry(): void;
