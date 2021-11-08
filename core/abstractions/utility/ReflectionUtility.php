@@ -2,6 +2,7 @@
 
 namespace roady\abstractions\utility;
 
+use ReflectionProperty;
 use roady\dev\traits\Logger;
 use roady\interfaces\utility\ReflectionUtility as ReflectionUtilityInterface;
 use Exception;
@@ -15,55 +16,49 @@ abstract class ReflectionUtility implements ReflectionUtilityInterface
 {
     use Logger;
 
-    const FAILED_TO_REFLECT_MOCK_STD_METHOD = <<<EOD
+    private const FAILED_TO_REFLECT_MOCK_STD_METHOD = <<<EOD
 ReflectionUtility Fatal Error:
 The specified method %s() could not be reflected for class %s,
 and also failed to default to an empty instance of stdClass().
 EOD;
 
-    const FAILED_TO_REFLECT_CLASS_METHOD = <<<EOD
+    private const FAILED_TO_REFLECT_CLASS_METHOD = <<<EOD
 ReflectionUtility Error:
 The specified method %s() could not be reflected for class %s.
 Defaulting to stdClass().
 EOD;
 
-    const METHOD_DOES_NOT_EXIST = <<<EOD
+    private const METHOD_DOES_NOT_EXIST = <<<EOD
 ReflectionUtility Warning:
 The specified method %s() is not defined in class %s.
 You may safely ignore this warning if this is expected.
 EOD;
 
-    const RANDOM_BYTES_FAILED = <<<EOD
+    private const RANDOM_BYTES_FAILED = <<<EOD
 ReflectionUtility Warning:
 Failed to generate alpha-numeric string using random_bytes(),
 defaulting to str_shuffle(). You can safely ignore this warning
 if the generated string does not need to be cryptographically secure.
 EOD;
 
-    const INVALID_CLASS_PARAMETER = <<<EOD
+    private const INVALID_CLASS_PARAMETER = <<<EOD
 'ReflectionUtility Error:
 Invalid type %s passed to %s'
 EOD;
 
-    const FAILED_TO_REFLECT_CLASS = <<<EOD
+    private const FAILED_TO_REFLECT_CLASS = <<<EOD
 ReflectionUtility Error:
 Failed to reflect class %s. Defaulting to reflect empty
 stdClass() instance.
 EOD;
 
-    const FAILED_TO_REFLECT_MOCK_STD = <<<EOD
-ReflectionUtility Fatal Error:
-Failed to reflect class %s, and also failed to reflect empty
-stdClass() by default.
-EOD;
-
-    const CONSTRUCT = '__construct';
-    const BOOLEAN = 'boolean';
-    const INTEGER = 'integer';
-    const DOUBLE = 'double';
-    const STRING = 'string';
-    const ARRAY1 = 'array';
-    const NULL = 'NULL';
+    private const CONSTRUCT = '__construct';
+    private const BOOLEAN = 'boolean';
+    private const INTEGER = 'integer';
+    private const DOUBLE = 'double';
+    private const STRING = 'string';
+    private const ARRAY1 = 'array';
+    private const NULL = 'NULL';
 
     public function getClassPropertyNames(string|object $class): array
     {
@@ -76,7 +71,7 @@ EOD;
 
     /**
      * @param class-string<object>|object $class
-     * @return array<mixed>
+     * @return array<int, ReflectionProperty>
      */
     private function getClassPropertyReflections(string|object $class): array
     {
@@ -101,15 +96,7 @@ EOD;
                 self::FAILED_TO_REFLECT_CLASS,
                 $this->getClass($class)
             );
-            try {
-                return new ReflectionClass((object)[]);
-            } catch (ReflectionException $e) {
-                $this->log(
-                    self::FAILED_TO_REFLECT_MOCK_STD,
-                    $this->getClass($class)
-                );
-                exit(0);
-            }
+            return new ReflectionClass((object)[]);
         }
     }
 
@@ -123,9 +110,13 @@ EOD;
         $propertyTypes = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
             $reflectionProperty->setAccessible(true);
-            $propertyTypes[strval($reflectionProperty->getName())] = gettype(
-                $reflectionProperty->getValue($this->getClassInstance($class))
-            );
+            try {
+                $propertyTypes[strval($reflectionProperty->getName())] = gettype(
+                    $reflectionProperty->getValue($this->getClassInstance($class))
+                );
+            } catch (ReflectionException $e) {
+                return [];
+            }
         }
         return $propertyTypes;
     }
@@ -133,10 +124,18 @@ EOD;
     public function getClassInstance(string|object $class, array $constructorArguments = array()): object
     {
         if (method_exists($class, self::CONSTRUCT) === false) {
-            return $this->getClassReflection($class)->newInstanceArgs([]);
+            try {
+                return $this->getClassReflection($class)->newInstanceArgs([]);
+            } catch (ReflectionException $e) {
+                return $e;
+            }
         }
         if (empty($constructorArguments) === true) {
-            return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, self::CONSTRUCT));
+            try {
+                return $this->getClassReflection($class)->newInstanceArgs($this->generateMockClassMethodArguments($class, self::CONSTRUCT));
+            } catch (ReflectionException $e) {
+                return $e;
+            }
         }
         return $this->getClassReflection($class)->newInstanceArgs($constructorArguments);
     }
@@ -174,7 +173,11 @@ EOD;
              * @var class-string<object>|object $type
              */
             $type = '\\' . str_replace(['roady\interfaces'], ['roady\classes'], $type);
-            array_push($defaults, $this->getClassInstance($type));
+            try {
+                array_push($defaults, $this->getClassInstance($type));
+            } catch (ReflectionException $e) {
+                return [];
+            }
         }
         return $defaults;
     }
@@ -282,11 +285,15 @@ EOD;
         $propertyValues = array();
         foreach ($this->getClassPropertyReflections($class) as $reflectionProperty) {
             $reflectionProperty->setAccessible(true);
-            $propertyValues[strval($reflectionProperty->getName())] = (
-            is_string($class) === true
-                ? $reflectionProperty->getValue($this->getClassInstance($class))
-                : $reflectionProperty->getValue($class)
-            );
+            try {
+                $propertyValues[strval($reflectionProperty->getName())] = (
+                is_string($class) === true
+                    ? $reflectionProperty->getValue($this->getClassInstance($class))
+                    : $reflectionProperty->getValue($class)
+                );
+            } catch (ReflectionException $e) {
+                return [];
+            }
         }
         return $propertyValues;
     }

@@ -3,6 +3,7 @@
 namespace roady\interfaces\utility;
 
 use ReflectionClass;
+use ReflectionException;
 
 /**
  * A ReflectionUtility can be used to reflect or get information
@@ -108,6 +109,12 @@ interface ReflectionUtility
      *
      * @return object A new object instance of the same type as the
      *                specified class or object instance.
+     *
+     * @throws ReflectionException If the object instance of the
+     *                             same type as the specified class
+     *                             cannot be instantiated for any
+     *                             reason, a ReflectionException
+     *                             will be thrown.
      *
      */
     public function getClassInstance(string|object $class, array $constructorArguments = array()): object;
