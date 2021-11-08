@@ -11,17 +11,22 @@ use roady\interfaces\component\Component as ComponentInterface;
 use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
 use roady\interfaces\component\Factory\Factory as FactoryInterface;
 use roady\interfaces\component\OutputComponent as OutputComponentInterface;
-use roady\interfaces\component\ResponseUI as ResponseUIInterface;
 use roady\interfaces\component\UserInterface\WebUI as WebUIInterface;
 use roady\interfaces\component\Web\Routing\Request as RequestInterface;
 use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
+use RuntimeException as PHPRuntimeException;
+use rig\classes\command\ConfigureAppOutput;
+use rig\classes\ui\CommandLineUI;
+/**
+ * The following use statements are here for PhpStan, these 
+ * interfaces indicate the expected parameter types for the
+ * getWebUITestArgs() method, PhpStan complains if these use
+ * statements are not here.
+ */
 use roady\interfaces\component\Web\Routing\Router as RouterInterface;
 use roady\interfaces\primary\Positionable as PositionableInterface;
 use roady\interfaces\primary\Storable as StorableInterface;
 use roady\interfaces\primary\Switchable as SwitchableInterface;
-use RuntimeException as PHPRuntimeException;
-use rig\classes\command\ConfigureAppOutput;
-use rig\classes\ui\CommandLineUI;
 
 trait WebUITestTrait
 {

@@ -15,13 +15,15 @@ use RuntimeException as PHPRuntimeException;
 abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 {
 
-    private const CLOSEBODY = '</body>' . PHP_EOL;
-    private const CLOSEHEAD = '</head>' . PHP_EOL;
-    private const CLOSEHTML = '</html>' . PHP_EOL;
     private const DOCTYPE = '<!DOCTYPE html>' . PHP_EOL;
-    private const OPENBODY = '<body>' . PHP_EOL;
-    private const OPENHEAD = '<head>' . PHP_EOL;
     private const OPENHTML = '<html lang="en">' . PHP_EOL;
+    private const OPENHEAD = '<head>' . PHP_EOL;
+    private const OPENTITLE = '<title>';
+    private const CLOSETITLE = '</title>';
+    private const CLOSEHEAD = '</head>' . PHP_EOL;
+    private const OPENBODY = '<body>' . PHP_EOL;
+    private const CLOSEBODY = '</body>' . PHP_EOL;
+    private const CLOSEHTML = '</html>' . PHP_EOL;
 
     /**
      * @var string $webUIOutput The collective output of all Responses to the
@@ -75,13 +77,13 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
             self::DOCTYPE .
             self::OPENHTML .
             self::OPENHEAD .
-            '<title>' .
+            self::OPENTITLE .
             (
                 $this->getRouter()->getRequest()->getGet()['request']
                 ??
                 $this->getRouter()->getRequest()->getUrl()
             ) .
-            '</title>'
+            self::CLOSETITLE 
         ;
     }
 
