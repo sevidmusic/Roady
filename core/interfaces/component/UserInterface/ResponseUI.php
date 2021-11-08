@@ -40,14 +40,14 @@ interface ResponseUI extends OutputComponent
      * Note: The collective output of the OutputComponents 
      * assigned to each Response will be sorted relative to
      * the collective output of the OutputComponents assigned
-     * to the other Responses using each Response's assigned 
-     * position to determine order.
+     * to the other Responses based on each Response's assigned 
+     * numeric position.
      *
      * Note: The output of each OutputComponent assigned to a 
      * Response will be sorted relative to the output of the 
      * other OutputComponents that are assigned to the same 
-     * Response using each OutputComponent's assigned position 
-     * to determine order.
+     * Response based on each OutputComponent's assigned numeric
+     * position.
      *
      * @return string The collective output of all of the 
      *                OutputComponents that are assigned to 
