@@ -35,12 +35,13 @@ interface ResponseUI extends OutputComponent
     /**
      * Return the collective output of all of the OutputComponents 
      * that are assigned to each of the Responses returned by the
-     * getResponses() method of the Router returned by this 
-     * ResponseUI's getRouter() method.
+     * Router used by this ResponseUI in response to a Request.
      *
      * Note: The collective output of the OutputComponents 
-     * assigned to each Response will be sorted using each
-     * Response's assigned position to determine order.
+     * assigned to each Response will be sorted relative to
+     * the collective output of the OutputComponents assigned
+     * to the other Responses using each Response's assigned 
+     * position to determine order.
      *
      * Note: The output of each OutputComponent assigned to a 
      * Response will be sorted relative to the output of the 
@@ -51,9 +52,7 @@ interface ResponseUI extends OutputComponent
      * @return string The collective output of all of the 
      *                OutputComponents that are assigned to 
      *                each of the Responses returned by the
-     *                getResponses() method of the Router 
-     *                returned by this ResponseUI's getRouter() 
-     *                method.
+     *                Router used by this ResponseUI.
      *
      * @throws \RuntimeException Throws a RuntimeException if the 
      *                           collective output is empty.
