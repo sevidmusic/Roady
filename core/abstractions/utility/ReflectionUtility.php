@@ -57,7 +57,7 @@ EOD;
     private const INTEGER = 'integer';
     private const DOUBLE = 'double';
     private const STRING = 'string';
-    private const ARRAY1 = 'array';
+    private const ARRAY = 'array';
     private const NULL = 'NULL';
 
     public function getClassPropertyNames(string|object $class): array
@@ -160,7 +160,7 @@ EOD;
                 array_push($defaults, $this->generateRandomAlphaNumString());
                 continue;
             }
-            if ($type === self::ARRAY1) {
+            if ($type === self::ARRAY) {
                 array_push($defaults, array());
                 continue;
             }
