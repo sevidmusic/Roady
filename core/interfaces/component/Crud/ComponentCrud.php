@@ -4,7 +4,8 @@ namespace roady\interfaces\component\Crud;
 
 use roady\interfaces\component\Component; 
 use roady\interfaces\component\SwitchableComponent; 
-use roady\interfaces\primary\Storable; 
+use roady\interfaces\primary\Storable;
+use RuntimeException;
 
 /**
  * A ComponentCrud is a SwitchableComponent that can be used to
@@ -171,7 +172,7 @@ interface ComponentCrud extends SwitchableComponent
      *                   whose name, container, and location 
      *                   are assigned the value DEFAULT.
      *
-     * @throws \RuntimeException Throws a RuntimeException if a 
+     * @throws RuntimeException Throws a RuntimeException if a
      *                           match is not found.
      */
     public function readByNameAndType(string $name, string $type, string $location, string $container): Component;

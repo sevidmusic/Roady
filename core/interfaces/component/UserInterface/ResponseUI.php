@@ -3,7 +3,8 @@
 namespace roady\interfaces\component\UserInterface;
 
 use roady\interfaces\component\OutputComponent; 
-use roady\interfaces\component\Web\Routing\Router; 
+use roady\interfaces\component\Web\Routing\Router;
+use RuntimeException;
 
 /**
  * A ResponseUI is an OutputComponent whose output is generated
@@ -54,7 +55,7 @@ interface ResponseUI extends OutputComponent
      *                each of the Responses returned by the
      *                Router used by this ResponseUI.
      *
-     * @throws \RuntimeException Throws a RuntimeException if the 
+     * @throws RuntimeException Throws a RuntimeException if the
      *                           collective output is empty.
      */
     public function getOutput(): string;

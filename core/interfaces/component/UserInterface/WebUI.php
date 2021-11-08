@@ -3,6 +3,7 @@
 namespace roady\interfaces\component\UserInterface;
 
 use roady\interfaces\component\UserInterface\ResponseUI;
+use RuntimeException;
 
 /**
  * A WebUI is a ResponseUI that outputs a valid html document
@@ -64,7 +65,7 @@ interface WebUI extends ResponseUI
      *                of the Responses returned by the Router 
      *                used by this WebUI in response to a Request.
      *
-     * @throws \RuntimeException Throws a RuntimeException if the 
+     * @throws RuntimeException Throws a RuntimeException if the
      *                           collective output is empty.
      */
     public function getOutput(): string;
