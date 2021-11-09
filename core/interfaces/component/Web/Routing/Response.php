@@ -15,13 +15,13 @@ use roady\interfaces\primary\Positionable;
  * A Response can be used to associate stored OutputComponents 
  * with stored Requests.
  *
- * A Response will respond to any requests to a domain that 
- * are represented by a Request whose url matches the url 
+ * A Response will respond to any request to a domain that
+ * is represented by a Request whose url matches the url
  * of one of the stored Requests that are assigned to the 
  * Response.
  *
- * A Response will also respond to requests to a domain that 
- * define a $_GET parameter named `request` whose assigned
+ * A Response will also respond to any request to a domain that
+ * defines a $_GET parameter named `request` whose assigned
  * value matches the name of this Response.
  *
  * Constants:
@@ -75,7 +75,7 @@ interface Response extends SwitchableComponent, Positionable
     public function getContainer(): string;
 
     /**
-     * Determine whether or not it is appropriate for this Response
+     * Determine whether it is appropriate for this Response
      * to respond to the specified Request.
      *
      * Returns true if this Response is assigned a stored Request 

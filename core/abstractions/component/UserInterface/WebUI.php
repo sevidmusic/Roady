@@ -16,14 +16,14 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 {
 
     private const DOCTYPE = '<!DOCTYPE html>' . PHP_EOL;
-    private const OPENHTML = '<html lang="en">' . PHP_EOL;
-    private const OPENHEAD = '<head>' . PHP_EOL;
-    private const OPENTITLE = '<title>';
-    private const CLOSETITLE = '</title>';
-    private const CLOSEHEAD = '</head>' . PHP_EOL;
-    private const OPENBODY = '<body>' . PHP_EOL;
-    private const CLOSEBODY = '</body>' . PHP_EOL;
-    private const CLOSEHTML = '</html>' . PHP_EOL;
+    private const OPEN_HTML = '<html lang="en">' . PHP_EOL;
+    private const OPEN_HEAD = '<head>' . PHP_EOL;
+    private const OPEN_TITLE = '<title>';
+    private const CLOSE_TITLE = '</title>';
+    private const CLOSE_HEAD = '</head>' . PHP_EOL;
+    private const OPEN_BODY = '<body>' . PHP_EOL;
+    private const CLOSE_BODY = '</body>' . PHP_EOL;
+    private const CLOSE_HTML = '</html>' . PHP_EOL;
 
     /**
      * @var string $webUIOutput The collective output of all Responses to the
@@ -75,15 +75,15 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
          */
         $this->webUIOutput =
             self::DOCTYPE .
-            self::OPENHTML .
-            self::OPENHEAD .
-            self::OPENTITLE .
+            self::OPEN_HTML .
+            self::OPEN_HEAD .
+            self::OPEN_TITLE .
             (
                 $this->getRouter()->getRequest()->getGet()['request']
                 ??
                 $this->getRouter()->getRequest()->getUrl()
             ) .
-            self::CLOSETITLE 
+            self::CLOSE_TITLE
         ;
     }
 
@@ -112,12 +112,12 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 
     private function responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened(ResponseInterface $response): bool
     {
-        return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSEHEAD . self::OPENBODY));
+        return ($response->getPosition() >= 0 && !str_contains($this->webUIOutput, self::CLOSE_HEAD . self::OPEN_BODY));
     }
 
     private function closeHeadOpenBody(): void
     {
-        $this->webUIOutput .= self::CLOSEHEAD . self::OPENBODY;
+        $this->webUIOutput .= self::CLOSE_HEAD . self::OPEN_BODY;
     }
 
     private function addResponseOutputToWebUIOutput(ResponseInterface $response): void
@@ -149,7 +149,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 
     private function closeBodyCloseHtml(): void
     {
-        $this->webUIOutput .= self::CLOSEBODY . self::CLOSEHTML;
+        $this->webUIOutput .= self::CLOSE_BODY . self::CLOSE_HTML;
     }
 
     /**
@@ -182,7 +182,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         $stylesheetsToLoad = [];
         foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
             if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
-                if($this->isAGlobalStylesheet($stylesheetName) || $this->stylesheetNameMathesARequestQueryStringValue($stylesheetName)) {
+                if($this->isAGlobalStylesheet($stylesheetName) || $this->stylesheetNameMatchesARequestQueryStringValue($stylesheetName)) {
                     array_push($stylesheetsToLoad, $stylesheetName);
                 }
             }
@@ -190,7 +190,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return $stylesheetsToLoad;
     }
 
-    private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
+    private function stylesheetNameMatchesARequestQueryStringValue(string $stylesheetName): bool
     {
         $nameWithoutExtension = str_replace('.css', '', $stylesheetName);
         if(str_contains(strval(parse_url($this->getRouter()->getRequest()->getUrl(), PHP_URL_QUERY)), $nameWithoutExtension)) {
@@ -215,7 +215,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     }
 
     /**
-     * Returns an array of the names of all of the stylesheets defined by the specified App.
+     * Returns an array of the names of all the stylesheets defined by the specified App.
      * @param string $appName The name of the App that defines the stylesheets.
      * @return array<int, string> Array of the names of the stylesheets defined by the specified App.
      */

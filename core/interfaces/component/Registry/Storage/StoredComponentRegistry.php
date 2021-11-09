@@ -55,9 +55,9 @@ interface StoredComponentRegistry extends Component
      * Register a Component. 
      *
      * Note: The Component's type must match the accepted 
-     * implementation or it will not be registered.
+     * implementation, or it will not be registered.
      *
-     * Note: The Component must exist in storage or it will not
+     * Note: The Component must exist in storage, or it will not
      * be registered.
      *
      * @param Component $component The Component to register.
