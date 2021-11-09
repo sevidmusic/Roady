@@ -8,7 +8,9 @@ use roady\interfaces\primary\Storable;
 /**
  * A JsonStorageDriver is a StorageDriver that utilizes json
  * files for storage.
- * 
+ *
+ * Constants:
+ *
  * STORAGE_DIRECTORY_NAME: string
  *
  * Methods:

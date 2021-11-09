@@ -204,16 +204,16 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
          * !IMPORTANT: Clone's storable must match supplied storable. This MUST
          * be the last thing done before returning!!!
          *
-         * Note: Since Components are Storables, Component->export()['stroable']
+         * Note: Since Components are Storables, Component->export()['storable']
          * MUST be used when handling actual Components or the Component passed
-         * as the $storabale parameter to read  will be assigned in it's entirety
+         * as the $storable parameter to read  will be assigned in its entirety
          * to the returned Component's storable, which may not break the returned
-         * Component, but will corrupt it's data.
+         * Component, but will corrupt its data.
          *
-         * Put simply, if $storable is a Component, we dont want to assign it
+         * Put simply, if $storable is a Component, we don't want to assign it
          * as the clone's $storable, we just want it's Storable.
          *
-         * If $storable is just a Storable, than assign it to the clone as is.
+         * If $storable is just a Storable, then assign it to the clone as is.
          */
         switch ($this->isAComponent($storable)) {
             case true:
@@ -254,7 +254,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
 
     /**
      * Determine if the $data is corrupted. The data will be determined to be
-     * corruted if either of the following is true:
+     * corrupted if either of the following is true:
      *     1. $data['type'] is not set
      *     2. $data['type'] does not implement the ComponentInterface
      * @param array<mixed> $data
@@ -292,7 +292,7 @@ abstract class JsonStorageDriver extends SwitchableComponentBase implements Json
     }
 
     /**
-     * Recursivly base64 decode base64 encoded data in the $array.
+     * Recursively base64 decode base64 encoded data in the $array.
      * @param array<mixed> $array
      * @return array<mixed>
      */

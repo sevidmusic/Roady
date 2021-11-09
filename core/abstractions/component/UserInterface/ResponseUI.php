@@ -28,15 +28,15 @@ abstract class ResponseUI extends CoreOutputComponent implements ResponseUIInter
     /**
      * @return array<string, PositionableInterface>
      */
-    protected function sortPositionables(PositionableInterface ...$postionables): array
+    protected function sortPositionables(PositionableInterface ...$positionables): array
     {
         $sorted = [];
-        foreach($postionables as $postionable) {
-            while(isset($sorted[strval($postionable->getPosition())]))
+        foreach($positionables as $positionable) {
+            while(isset($sorted[strval($positionable->getPosition())]))
             {
-                $postionable->increasePosition();
+                $positionable->increasePosition();
             }
-            $sorted[strval($postionable->getPosition())] = $postionable;
+            $sorted[strval($positionable->getPosition())] = $positionable;
         }
         ksort($sorted, SORT_NUMERIC);
         /** @var array<string, PositionableInterface> $sorted */

@@ -7,7 +7,7 @@ use RuntimeException;
 
 /**
  * A WebUI is a ResponseUI that outputs a valid html document
- * that incorporates the collective output of all of the 
+ * that incorporates the collective output of all the
  * OutputComponents that are assigned to each of the Responses 
  * returned by a Router in response to a specific Request.
  *
@@ -33,7 +33,7 @@ interface WebUI extends ResponseUI
 
     /**
      * Return a valid Html document that incorporates the 
-     * collective output of all of the OutputComponents that 
+     * collective output of all the OutputComponents that
      * are assigned to each of the Responses returned by the 
      * Router used by this WebUI in response to a Request.
      *
@@ -60,7 +60,7 @@ interface WebUI extends ResponseUI
      * numeric position.
      *
      * @return string A valid Html document that incorporates 
-     *                the collective output of all of the 
+     *                the collective output of all the
      *                OutputComponents that are assigned to each 
      *                of the Responses returned by the Router 
      *                used by this WebUI in response to a Request.

@@ -58,8 +58,8 @@ abstract class AppBuilder implements AppBuilderInterface
      *                                           that contains the Component configuration
      *                                           files that define the Components to build.
      *
-     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory to
-     *                                                            use to build the configured
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory to use
+     *                                                            to build the App's configured
      *                                                            Components.
      *
      */
@@ -92,7 +92,7 @@ abstract class AppBuilder implements AppBuilderInterface
      * Remove all the Components registered by the provided AppComponentsFactory
      * from storage.
      *
-     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory whose regiseterd
+     * @param AppComponentsFactoryInterface $appComponentsFactory The AppComponentsFactory whose registered
      *                                                            Components should be removed.
      */
     private static function removeRegisteredComponents(AppComponentsFactoryInterface $appComponentsFactory): void
@@ -123,7 +123,7 @@ abstract class AppBuilder implements AppBuilderInterface
     }
 
     /**
-     * Return an appropritate Request to be used as the App's domain.
+     * Return an appropriate Request to be used as the App's domain.
      * If $domain is a valid url, it will be used, if it
      * is not a valid url, http://localhost:8080 will be used.
      * @param string $domain The App's domain.

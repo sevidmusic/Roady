@@ -3,7 +3,7 @@
 namespace roady\interfaces\primary;
 
 /**
- * A Identifiable can be identified by an alpha-numeric name, 
+ * An Identifiable can be identified by an alpha-numeric name,
  * and a unique alpha-numeric id.
  *
  * Methods:

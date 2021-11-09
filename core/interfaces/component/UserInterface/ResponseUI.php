@@ -8,7 +8,7 @@ use RuntimeException;
 
 /**
  * A ResponseUI is an OutputComponent whose output is generated
- * from the collective output of all of the OutputComponents that
+ * from the collective output of all the OutputComponents that
  * are assigned to each of the Responses returned by a Router
  * in response to a specific Request.
  *
@@ -34,7 +34,7 @@ interface ResponseUI extends OutputComponent
 {
 
     /**
-     * Return the collective output of all of the OutputComponents 
+     * Return the collective output of all the OutputComponents
      * that are assigned to each of the Responses returned by the
      * Router used by this ResponseUI in response to a Request.
      *

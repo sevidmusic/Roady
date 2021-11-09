@@ -6,7 +6,7 @@ use roady\interfaces\component\Factory\App\AppComponentsFactory;
 
 /**
  * An AppBuilder is a utility that can be used to build a 
- * roady App and it's configured Components for a domain via 
+ * roady App, and it's configured Components for a domain via
  * a AppComponentsFactory.
  *
  * Methods:

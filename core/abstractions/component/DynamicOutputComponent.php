@@ -5,11 +5,11 @@ namespace roady\abstractions\component;
 use roady\interfaces\primary\Storable as StorableInterface;
 use roady\interfaces\primary\Switchable as SwitchableInterface;
 use roady\interfaces\primary\Positionable as PositionableInterface;
-use roady\abstractions\component\OutputComponent as OutputCompoenentBase;
+use roady\abstractions\component\OutputComponent as OutputComponentBase;
 use roady\interfaces\component\DynamicOutputComponent as DynamicOutputComponentInterface;
 use RuntimeException;
 
-abstract class DynamicOutputComponent extends OutputCompoenentBase implements DynamicOutputComponentInterface
+abstract class DynamicOutputComponent extends OutputComponentBase implements DynamicOutputComponentInterface
 {
 
     private string $appDirectoryName;
