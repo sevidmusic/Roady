@@ -21,7 +21,7 @@ For a guide on getting started with roady visit:
 
 [Getting Started](https://roadydemos.us-east-1.linodeobjects.com/GettingStarted.webm)
 
-### Quick Installation, Setup, & Hello World Example
+# Quick Installation, Setup, & Hello World Example
 
 The following is a quick demonstration of how to install
 and setup roady, and how to create a Hello World App.
@@ -95,7 +95,7 @@ the following local urls:
 
 [http://localhost:8080/index.php?request=HelloWorld](http://localhost:8080/index.php?request=HelloWorld)
 
-### Install, setup, and Hello World command summary:
+# Install, setup, and Hello World command summary:
 
 The following is a summary of the commands used in the examples
 above to install and setup roady, and create a HelloWorld app:
