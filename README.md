@@ -16,9 +16,10 @@ For a guide on getting started with roady visit:
 
 [https://roady.tech/index.php?request=getting-started](https://roady.tech/index.php?request=getting-started)
 
-### Quick Installation, Setup, & Hello World Video 
+# Tutorial Videos:
+[Quick Installation, Setup, & Hello World](https://roadydemos.us-east-1.linodeobjects.com/QuickInstallSetupHelloWorldFinal.webm)
 
-[https://roadydemos.us-east-1.linodeobjects.com/QuickInstallSetupHelloWorldFinal.webm](https://roadydemos.us-east-1.linodeobjects.com/QuickInstallSetupHelloWorldFinal.webm)
+[Getting Started](https://roadydemos.us-east-1.linodeobjects.com/GettingStarted.webm)
 
 ### Quick Installation, Setup, & Hello World Example
 
