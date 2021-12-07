@@ -148,6 +148,10 @@ behind them.
 However, if you like to tinker and try new things solely out of
 curiosity, then I hope you'll give roady a try.
 
+Thank you,
+
+- Sevi D
+
 Note: If you have any questions or feedback roady is on twitter
 and reddit:
 
