@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "383e7a0941557545e5d9033fcc711228",
+    "content-hash": "1b43b9adadad2d0c74784cb290caaa1a",
     "packages": [
         {
             "name": "darling/rig",
@@ -50,16 +50,16 @@
         },
         {
             "name": "darling/roady-app-packages",
-            "version": "v1.4.2",
+            "version": "v1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/roadyAppPackages.git",
-                "reference": "063255a9816980268ae50bdab985adf234b50d99"
+                "reference": "0cfd59c80b43c86831b79c2e6e2f3bb88909709e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/063255a9816980268ae50bdab985adf234b50d99",
-                "reference": "063255a9816980268ae50bdab985adf234b50d99",
+                "url": "https://api.github.com/repos/sevidmusic/roadyAppPackages/zipball/0cfd59c80b43c86831b79c2e6e2f3bb88909709e",
+                "reference": "0cfd59c80b43c86831b79c2e6e2f3bb88909709e",
                 "shasum": ""
             },
             "type": "library",
@@ -70,9 +70,9 @@
             "description": "A collection of App packages that can be made into Roady Apps.",
             "support": {
                 "issues": "https://github.com/sevidmusic/roadyAppPackages/issues",
-                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.4.2"
+                "source": "https://github.com/sevidmusic/roadyAppPackages/tree/v1.4.3"
             },
-            "time": "2021-12-07T22:45:11+00:00"
+            "time": "2021-12-21T05:37:42+00:00"
         }
     ],
     "packages-dev": [
@@ -2240,6 +2240,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": "^8.0",
         "ext-json": "*"
     },
     "platform-dev": [],
