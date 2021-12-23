@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": "^8.0",
         "ext-json": "*",
         "darling/rig": "^1.0",
         "darling/roady-app-packages": "^1.0"
