@@ -14,6 +14,7 @@ abstract class DynamicOutputComponent extends OutputComponentBase implements Dyn
 
     private string $appDirectoryName;
     private string $dynamicFileName;
+    private string $cachedPhpOutput = '';
 
     public function __construct(StorableInterface $storable, SwitchableInterface $switchable, PositionableInterface $positionable, string $appDirectoryName, string $dynamicFileName)
     {
@@ -97,10 +98,18 @@ abstract class DynamicOutputComponent extends OutputComponentBase implements Dyn
 
     private function executeDynamicFileInPhpOutputBuffer(): string
     {
+        if(!empty($this->cachedPhpOutput)) {
+            return $this->cachedPhpOutput;
+        }
         ob_start();
         require $this->getDynamicFilePath();
         $output = ob_get_clean();
-        return (is_string($output) ? $output : '');
+        $this->cachedPhpOutput = (
+            is_string($output) 
+            ? $output 
+            : ''
+        );
+        return $this->cachedPhpOutput;
     }
 
     private function getDynamicFileContentsAsPlainText(): string
