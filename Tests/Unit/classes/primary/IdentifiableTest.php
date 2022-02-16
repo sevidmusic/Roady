@@ -9,7 +9,9 @@ class IdentifiableTest extends AbstractIdentifiableTest
 {
     public function setUp(): void
     {
-        $this->setIdentifiable(new Identifiable('MockName'));
+        $this->setIdentifiable(
+            new Identifiable($this->getRandomTestName())
+        );
     }
 
 }

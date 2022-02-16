@@ -18,13 +18,11 @@ str_shuffle(). You can safely ignore this warning if the generated
 id does not need to be cryptographically secure.
 EOD;
 
-    private string $name;
-
     private string $uniqueId;
 
-    public function __construct(string $name)
+    public function __construct(private string $name)
     {
-        $this->name = $name;
+        $this->name = $this->removeNonAlphanumericCharacters($name);
         $this->uniqueId = $this->generateUniqueId();
     }
 
@@ -42,6 +40,11 @@ EOD;
     public function getName(): string
     {
         return $this->name;
+    }
+
+    private function removeNonAlphanumericCharacters(string $name): string
+    {
+        return strval(preg_replace('/[^a-z0-9]/i', '', $name));
     }
 
     public function getUniqueId(): string

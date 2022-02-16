@@ -4,6 +4,7 @@ namespace UnitTests\abstractions\primary;
 
 use PHPUnit\Framework\TestCase;
 use UnitTests\interfaces\primary\TestTraits\IdentifiableTestTrait;
+use roady\abstractions\primary\Identifiable;
 
 class IdentifiableTest extends TestCase
 {
@@ -13,8 +14,8 @@ class IdentifiableTest extends TestCase
     {
         $this->setIdentifiable(
             $this->getMockForAbstractClass(
-                '\roady\abstractions\primary\Identifiable',
-                ['MockName']
+                Identifiable::class,
+                [$this->getRandomTestName()]
             )
         );
     }
