@@ -260,7 +260,7 @@ trait JsonStorageDriverTestTrait
         $this->assertEquals(
             $this->getJsonStorageDriver()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId(),
-            'read() must return a __MOCK__COMPONENT__ if state is false.'
+            'read() must return a MOCKCOMPONENT if state is false.'
         );
     }
 
