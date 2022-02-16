@@ -120,19 +120,19 @@ trait ComponentCrudTestTrait
         $this->getComponentCrud()->create($this->getComponentCrud());
         $this->turnCrudOff();
         $this->assertEquals(
-            '__MOCK_COMPONENT__',
+            'MOCKCOMPONENT',
             $this->getStoredComponent()->getName(),
-            'read() must return a __MOCK__COMPONENT__ if state is false.'
+            'read() must return a MOCKCOMPONENT if state is false.'
         );
         $this->assertEquals(
-            '__MOCK_COMPONENT__',
+            'MOCKCOMPONENT',
             $this->getStoredComponent()->getLocation(),
-            'read() must return a __MOCK__COMPONENT__ if state is false.'
+            'read() must return a MOCKCOMPONENT if state is false.'
         );
         $this->assertEquals(
-            '__MOCK_COMPONENT__',
+            'MOCKCOMPONENT',
             $this->getStoredComponent()->getContainer(),
-            'read() must return a __MOCK__COMPONENT__ if state is false.'
+            'read() must return a MOCKCOMPONENT if state is false.'
         );
     }
 

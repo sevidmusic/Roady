@@ -29,6 +29,6 @@ class StringTestUtility extends TestCase
 
     public function stringIsAlphaNumeric(string $string): void
     {
-        $this->assertTrue(ctype_alnum($string));
+        $this->assertTrue(ctype_alnum($string), "The string {$string} is not alphanumeric");
     }
 }

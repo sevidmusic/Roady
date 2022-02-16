@@ -59,7 +59,7 @@ interface ComponentCrud extends SwitchableComponent
      * ComponentCrud's state is set to false, then a new instance
      * of a roady\classes\component\Component will be returned 
      * whose name, container, and location are all assigned the 
-     * value __MOCK_COMPONENT__.
+     * value MOCKCOMPONENT.
      *
      * @param Storable $storable The Storable to use to determine
      *                           where the Component is expected 
@@ -68,7 +68,7 @@ interface ComponentCrud extends SwitchableComponent
      * @return Component The stored Component, or, a new instance
      *                   of a roady\classes\component\Component 
      *                   whose name, container, and location are 
-     *                   all assigned the value __MOCK_COMPONENT__.
+     *                   all assigned the value MOCKCOMPONENT.
      */
     public function read(Storable $storable): Component;
 

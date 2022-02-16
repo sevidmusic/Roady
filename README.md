@@ -124,7 +124,7 @@ rig --start-server --open-in-browser
 ```
 
 # A note from the developer:
-
+ 
 I want to emphasize that I developed roady as a tool for myself,
 and I share it humbly as an example of my work and learning.
 
@@ -132,34 +132,34 @@ I love coding, I love to learn about coding, and I love to build
 things for the experience, and for the knowledge gained from 
 that experience.
 
-roady is not a fully-featured framework, nor is it intended 
-to be.
+roady is not a fully-featured framework, nor is it intended to be.
 
-roady is my own personal experiment, and will continue to evolve
+roady is my own personal experiment, and will continue to evolve 
 based on my own needs.
 
-If you need a framework designed to accommodate a large number 
-of use cases, that is developed, used, and supported by a 
-large community of incredible developers, then please use 
-Laravel, Symphony, or any of the other wonderful open source 
-PHP projects that have a solid reputation and years of work 
-behind them.
+roady is ready for use.
 
-However, if you like to tinker and try new things solely out of
-curiosity, then I hope you'll give roady a try.
+https://roady.tech was developed with roady, and is running on roady.
 
-Thank you,
+My personal website, https://sevidmusic.com, is being developed with
+roady, and is also running on roady.
 
-- Sevi D
+Roady is still a work in progress, if you have any questions or 
+feedback feel free to contact me on Twitter, Reddit, or LinkedIn.
 
-Note: If you have any questions or feedback roady is on twitter
-and reddit:
+### Links:
 
-[https://twitter.com/RoadyRig](https://twitter.com/RoadyRig)
+Twitter: https://twitter.com/roadyRig
 
-[https://www.reddit.com/r/roady/](https://www.reddit.com/r/roady/)
+Reddit: https://www.reddit.com/r/roady/
 
-More information about roady can be found online at:
+LinkedIn: https://www.linkedin.com/in/sevi-d-foreman-24a62951/
 
-[https://roady.tech](https://roady.tech)
+roady on GitHub: https://github.com/sevidmusic/roady
+
+rig on GitHub: https://github.com/sevidmusic/rig
+
+roadyAppPackages on GitHub: https://github.com/sevidmusic/roadyAppPackages
+
+
 

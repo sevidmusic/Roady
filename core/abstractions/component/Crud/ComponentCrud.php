@@ -15,7 +15,7 @@ use RuntimeException;
 abstract class ComponentCrud extends SwitchableComponentBase implements ComponentCrudInterface
 {
 
-    private const MOCK_COMPONENT = '__MOCK_COMPONENT__';
+    private const MOCK_COMPONENT = 'MOCKCOMPONENT';
     private StandardStorageDriverInterface $storageDriver;
 
     public function __construct(StorableInterface $storable, SwitchableInterface $switchable, StandardStorageDriverInterface $storageDriver)
