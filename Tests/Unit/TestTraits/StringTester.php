@@ -17,7 +17,9 @@ trait StringTester
         $this->setStringTestUtility(new StringTestUtility());
     }
 
-    private function setStringTestUtility(StringTestUtility $stringTestUtility): void
+    private function setStringTestUtility(
+        StringTestUtility $stringTestUtility
+    ): void
     {
         if (!isset($this->stringTestUtility)) {
             $this->stringTestUtility = $stringTestUtility;
