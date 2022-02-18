@@ -15,14 +15,18 @@ class StringTestUtilityTest extends TestCase
         $this->setStringTestUtilityInstance(new StringTestUtility());
     }
 
-    private function setStringTestUtilityInstance(StringTestUtility $stringTestUtility): void
+    private function setStringTestUtilityInstance(
+        StringTestUtility $stringTestUtility
+    ): void
     {
         $this->stringTestUtility = $stringTestUtility;
     }
 
     public function testCanTestStringIsNotEmpty(): void
     {
-        $this->getStringTestUtility()->stringIsNotEmpty('Non Empty String');
+        $this->getStringTestUtility()->stringIsNotEmpty(
+            'Non Empty String'
+        );
     }
 
     private function getStringTestUtility(): StringTestUtility
@@ -42,11 +46,16 @@ class StringTestUtilityTest extends TestCase
 
     public function testCanTestStringLengthIsExpectedStringLength(): void
     {
-        $this->getStringTestUtility()->stringLengthIsExpectedStringLength('Bar', 3);
+        $this->getStringTestUtility()->stringLengthIsExpectedStringLength(
+            'Bar', 
+            3
+        );
     }
 
     public function testCanTestStringIsAlphaNumeric(): void
     {
-        $this->getStringTestUtility()->stringIsAlphaNumeric('abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $this->getStringTestUtility()->stringIsAlphaNumeric(
+            'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        );
     }
 }
