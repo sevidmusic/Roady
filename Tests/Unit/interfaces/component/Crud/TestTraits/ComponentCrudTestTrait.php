@@ -15,10 +15,12 @@ trait ComponentCrudTestTrait
 
     public function testStorageDriverIsSetAndIsAStorageDriverPostInstantiation(): void
     {
-        $classImplements = class_implements($this->getComponentCrudStorageDriver());
+        $classImplements = class_implements(
+            $this->getComponentCrudStorageDriver(),
+        );
         $this->assertTrue(
             in_array(
-                'roady\interfaces\component\Driver\Storage\StorageDriver',
+                StandardStorageDriverInterface::class,
                 (is_array($classImplements) ? $classImplements : [])
             )
         );
@@ -34,7 +36,9 @@ trait ComponentCrudTestTrait
         return $this->componentCrud;
     }
 
-    public function setComponentCrud(ComponentCrudInterface $componentCrud): void
+    public function setComponentCrud(
+        ComponentCrudInterface $componentCrud
+    ): void
     {
         $this->componentCrud = $componentCrud;
     }
@@ -43,7 +47,9 @@ trait ComponentCrudTestTrait
     {
         $this->turnCrudOn();
         $this->assertTrue(
-            $this->getComponentCrud()->create($this->getComponentCrud())
+            $this->getComponentCrud()->create(
+                $this->getComponentCrud()
+            )
         );
     }
 
@@ -66,7 +72,9 @@ trait ComponentCrudTestTrait
 
     private function getStoredComponent(): ComponentInterface
     {
-        return $this->getComponentCrud()->read($this->getComponentCrudStorable());
+        return $this->getComponentCrud()->read(
+            $this->getComponentCrudStorable()
+        );
     }
 
     private function getComponentCrudStorable(): StorableInterface
@@ -76,22 +84,24 @@ trait ComponentCrudTestTrait
 
     public function testDeleteRemovesSpecifiedComponent(): void
     {
-        $this->getComponentCrud()->create($this->getComponentCrud());
-        $this->getComponentCrud()->delete($this->getComponentCrudStorable());
+        $this->getComponentCrud()->create(
+            $this->getComponentCrud()
+        );
+        $this->getComponentCrud()->delete(
+            $this->getComponentCrudStorable()
+        );
         $this->assertNotEquals(
             $this->getComponentCrud()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId()
         );
     }
 
-    /**
-     * @todo Implement following tests:
-     * testUpdatePreservesUniqueId()
-     */
     public function testUpdateUpdatesSpecifiedComponent(): void
     {
         $standardComponent = $this->getStoredComponent();
-        $this->getComponentCrud()->create($this->getComponentCrud());
+        $this->getComponentCrud()->create(
+            $this->getComponentCrud()
+        );
         $storedComponent = $this->getStoredComponent();
         $this->getComponentCrud()->update(
             $this->getComponentCrudStorable(),
@@ -107,17 +117,23 @@ trait ComponentCrudTestTrait
     public function testReadAllReturnsArrayOfComponentsStoredInSpecifiedContainerAtSpecifiedLocation(): void
     {
         $this->turnCrudOn();
-        $this->getComponentCrud()->create($this->getComponentCrud());
+        $this->getComponentCrud()->create(
+            $this->getComponentCrud()
+        );
         $components = $this->getComponentCrud()->readAll(
             $this->getComponentCrud()->getLocation(),
             $this->getComponentCrud()->getContainer()
         );
-        $this->assertTrue(in_array($this->getComponentCrud(), $components));
+        $this->assertTrue(in_array(
+            $this->getComponentCrud(), $components)
+        );
     }
 
     public function testReadReturnsMockComponentInstanceIfStateIsFalse(): void
     {
-        $this->getComponentCrud()->create($this->getComponentCrud());
+        $this->getComponentCrud()->create(
+            $this->getComponentCrud()
+        );
         $this->turnCrudOff();
         $this->assertEquals(
             'MOCKCOMPONENT',
@@ -147,7 +163,9 @@ trait ComponentCrudTestTrait
     {
         $this->turnCrudOn();
         $component = $this->getStoredComponent();
-        $this->getComponentCrud()->create($this->getComponentCrud());
+        $this->getComponentCrud()->create(
+            $this->getComponentCrud()
+        );
         $this->turnCrudOff();
         $this->assertFalse(
             $this->getComponentCrud()->update(
@@ -172,7 +190,9 @@ trait ComponentCrudTestTrait
     public function testDeleteReturnsFalseAndDoesNotDeleteComponentIfStateIsFalse(): void
     {
         $this->turnCrudOn();
-        $this->getComponentCrud()->create($this->getComponentCrud());
+        $this->getComponentCrud()->create(
+            $this->getComponentCrud()
+        );
         $this->turnCrudOff();
         $this->assertFalse(
             $this->getComponentCrud()->delete(
@@ -220,14 +240,20 @@ trait ComponentCrudTestTrait
     public function testStorageDriverIsOnUponInstantiation(): void
     {
         $this->assertTrue(
-            $this->getComponentCrud()->export()['storageDriver']->getState(),
-            'The storage driver\'s state must be true or the ComponentCrud will not be able to operate on stored data.'
+            $this->getComponentCrud()
+                 ->export()['storageDriver']
+                 ->getState(),
+             'The storage driver\'s state must be true or the' .
+             'ComponentCrud will not be able to operate on ' .
+             'stored data.'
         );
     }
 
     protected function setComponentCrudParentTestInstances(): void
     {
-        $this->setSwitchableComponent($this->getComponentCrud());
+        $this->setSwitchableComponent(
+            $this->getComponentCrud()
+        );
         $this->setSwitchableComponentParentTestInstances();
     }
 
@@ -277,10 +303,4 @@ trait ComponentCrudTestTrait
         );
         $crud->delete($crud);
     }
-/*
-
-// Addressing read()
-    public function testReadReturnsComponentWhoseNameLocationAndContainerAreDEFAULTIfAMatchIsNotFound(): void
-    public function testReadThrowsRuntimeExceptionIfAMatchNotFound(): void
-*/
 }

@@ -18,7 +18,7 @@ use RuntimeException as PHPRuntimeException;
 use rig\classes\command\ConfigureAppOutput;
 use rig\classes\ui\CommandLineUI;
 /**
- * The following use statements are here for PhpStan, these 
+ * The following use statements are here for PhpStan, these
  * interfaces indicate the expected parameter types for the
  * getWebUITestArgs() method, PhpStan complains if these use
  * statements are not here.
