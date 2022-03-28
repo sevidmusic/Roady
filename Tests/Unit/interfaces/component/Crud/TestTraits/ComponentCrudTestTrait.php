@@ -99,7 +99,7 @@ trait ComponentCrudTestTrait
      *
      * @return void
      */
-    private function turnCrudToTestOn(): void
+    private function setComponentCrudToTestsStateToTrue(): void
     {
         if ($this->componentCrudToTest()->getState() === false) {
             $this->componentCrudToTest()->switchState();
@@ -192,7 +192,7 @@ trait ComponentCrudTestTrait
         $this->componentCrudToTest()->create(
             $this->componentCrudToTest()
         );
-        $this->turnCrudOff();
+        $this->setComponentCrudToTestsStateToFalse();
         $this->assertEquals(
             'MOCKCOMPONENT',
             $this->getStoredComponent()->getName(),
@@ -210,7 +210,7 @@ trait ComponentCrudTestTrait
         );
     }
 
-    private function turnCrudOff(): void
+    private function setComponentCrudToTestsStateToFalse(): void
     {
         if ($this->componentCrudToTest()->getState() === true) {
             $this->componentCrudToTest()->switchState();
@@ -223,7 +223,7 @@ trait ComponentCrudTestTrait
         $this->componentCrudToTest()->create(
             $this->componentCrudToTest()
         );
-        $this->turnCrudOff();
+        $this->setComponentCrudToTestsStateToFalse();
         $this->assertFalse(
             $this->componentCrudToTest()->update(
                 $this->componentCrudToTest(),
@@ -231,7 +231,7 @@ trait ComponentCrudTestTrait
             ),
             'update() must return false if state is false.'
         );
-        $this->turnCrudToTestOn();
+        $this->setComponentCrudToTestsStateToTrue();
         $this->assertNotEquals(
             $this->getStoredComponent()->getUniqueId(),
             $component->getUniqueId(),
@@ -249,14 +249,14 @@ trait ComponentCrudTestTrait
         $this->componentCrudToTest()->create(
             $this->componentCrudToTest()
         );
-        $this->turnCrudOff();
+        $this->setComponentCrudToTestsStateToFalse();
         $this->assertFalse(
             $this->componentCrudToTest()->delete(
                 $this->componentCrudToTest()
             ),
             'delete() must return false if state is false.'
         );
-        $this->turnCrudToTestOn();
+        $this->setComponentCrudToTestsStateToTrue();
         $this->assertEquals(
             $this->getStoredComponent()->getUniqueId(),
             $this->componentCrudToTest()->getUniqueId(),
@@ -266,14 +266,14 @@ trait ComponentCrudTestTrait
 
     public function testCreateReturnsFalseAndDoesNotCreateComponentIfStateIsFalse(): void
     {
-        $this->turnCrudOff();
+        $this->setComponentCrudToTestsStateToFalse();
         $this->assertFalse(
             $this->componentCrudToTest()->create(
                 $this->componentCrudToTest()
             ),
             'create() must return false if state is false.'
         );
-        $this->turnCrudToTestOn();
+        $this->setComponentCrudToTestsStateToTrue();
         $this->assertNotEquals(
             $this->componentCrudToTest()->getUniqueId(),
             $this->getStoredComponent()->getUniqueId(),
@@ -283,7 +283,7 @@ trait ComponentCrudTestTrait
 
     public function testReadAllReturnsAnEmptyArrayIfStateIsFalse(): void
     {
-        $this->turnCrudOff();
+        $this->setComponentCrudToTestsStateToFalse();
         $this->assertEmpty(
             $this->componentCrudToTest()->readAll(
                 $this->componentCrudToTest()->getLocation(),
