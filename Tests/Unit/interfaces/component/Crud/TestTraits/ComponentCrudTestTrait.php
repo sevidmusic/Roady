@@ -62,6 +62,10 @@ trait ComponentCrudTestTrait
     /**
      * Set the ComponentCrud implementation instance to be tested.
      *
+     * @param ComponentCrud $componentCrudToTest The ComponentCrud
+     *                                           implementation
+     *                                           instance to be
+     *                                           tested.
      * @return void
      */
     public function setComponentCrud(
@@ -88,14 +92,11 @@ trait ComponentCrudTestTrait
                 $this->componentCrudToTest()
             )
         );
-        $this->componentCrudToTest()->delete(
-            $this->componentCrudToTest()
-        );
     }
 
     /**
      * Switch the state of the ComponentCrud currently being tested
-     * to true if it is false.
+     * to true.
      *
      * @return void
      */
@@ -122,9 +123,6 @@ trait ComponentCrudTestTrait
                 $this->componentCrudToTest()
             )->getUniqueId()
         );
-        $this->componentCrudToTest()->delete(
-            $this->componentCrudToTest()
-        );
     }
 
     /**
@@ -139,6 +137,10 @@ trait ComponentCrudTestTrait
         );
     }
 
+    /** Test that delete() removes the specified Component.
+     *
+     * @return void
+     */
     public function testDeleteRemovesSpecifiedComponent(): void
     {
         $this->componentCrudToTest()->create(
@@ -154,6 +156,13 @@ trait ComponentCrudTestTrait
             )->getUniqueId()
         );
     }
+
+    /**
+     * @here
+     * Test that update() updates the specified Component.
+     *
+     * @return void
+     */
 
     public function testUpdateUpdatesSpecifiedComponent(): void
     {
@@ -357,6 +366,12 @@ trait ComponentCrudTestTrait
             $crud->getType(),
             $component->getType()
         );
-        $crud->delete($crud);
+    }
+
+    public function tearDown(): void
+    {
+        $this->componentcrudToTest()->delete(
+            $this->componentcrudToTest()
+        );
     }
 }
