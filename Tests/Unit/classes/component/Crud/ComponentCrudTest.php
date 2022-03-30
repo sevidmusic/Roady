@@ -12,7 +12,7 @@ class ComponentCrudTest extends AbstractComponentCrudTest
 {
     public function setUp(): void
     {
-        $this->setComponentCrud(
+        $this->setComponentCrudToTest(
             new ComponentCrud(
                 new Storable(
                     'ComponentCrudName',
@@ -30,6 +30,6 @@ class ComponentCrudTest extends AbstractComponentCrudTest
                 )
             )
         );
-        $this->setComponentCrudParentTestInstances();
+        $this->setComponentCrudToTestParentTestInstances();
     }
 }

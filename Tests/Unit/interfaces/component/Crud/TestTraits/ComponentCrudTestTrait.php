@@ -68,7 +68,7 @@ trait ComponentCrudTestTrait
      *                                           tested.
      * @return void
      */
-    public function setComponentCrud(
+    public function setComponentCrudToTest(
         ComponentCrud $componentCrudToTest
     ): void
     {
@@ -314,7 +314,7 @@ trait ComponentCrudTestTrait
         );
     }
 
-    protected function setComponentCrudParentTestInstances(): void
+    protected function setComponentCrudToTestParentTestInstances(): void
     {
         $this->setSwitchableComponent(
             $this->componentCrudToTest()
