@@ -4,9 +4,11 @@ namespace UnitTests\interfaces\component\Crud\TestTraits;
 
 use RuntimeException;
 use roady\interfaces\component\Component;
+use roady\classes\component\Component as StandardComponent;
 use roady\interfaces\component\Crud\ComponentCrud;
 use roady\interfaces\component\Driver\Storage\StorageDriver;
 use roady\interfaces\primary\Storable;
+use roady\classes\primary\Storable as StandardStorable;
 
 /**
  * The ComponentCrudTestTrait defines tests for implementations of
@@ -68,7 +70,7 @@ trait ComponentCrudTestTrait
      *                                           tested.
      * @return void
      */
-    public function setComponentCrud(
+    public function setComponentCrudToTest(
         ComponentCrud $componentCrudToTest
     ): void
     {
@@ -158,7 +160,6 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * @here
      * Test that update() updates the specified Component.
      *
      * @return void
@@ -166,19 +167,26 @@ trait ComponentCrudTestTrait
 
     public function testUpdateUpdatesSpecifiedComponent(): void
     {
-        $standardComponent = $this->getStoredComponent();
         $this->componentCrudToTest()->create(
             $this->componentCrudToTest()
         );
-        $storedComponent = $this->getStoredComponent();
+        $standardComponent = $this->newComponentInstance();
         $this->componentCrudToTest()->update(
             $this->componentCrudToTest(),
             $standardComponent
         );
-        $this->assertNotEquals(
-            $storedComponent->getUniqueId(),
-            $this->getStoredComponent()->getUniqueId(),
-            'Update did not update specified component.'
+        $this->assertEquals(
+            $standardComponent,
+            $this->componentCrudToTest()->read(
+                $standardComponent
+            ),
+            'Update must update the specified component.' .
+            'Expected Component Id:' . PHP_EOL .
+            $standardComponent->getUniqueId() . PHP_EOL .
+            'Actual Component Id:' . PHP_EOL .
+            $this->componentCrudToTest()->read(
+                $standardComponent
+            )->getUniqueId()
         );
     }
 
@@ -314,7 +322,7 @@ trait ComponentCrudTestTrait
         );
     }
 
-    protected function setComponentCrudParentTestInstances(): void
+    protected function setComponentCrudToTestParentTestInstances(): void
     {
         $this->setSwitchableComponent(
             $this->componentCrudToTest()
@@ -372,6 +380,22 @@ trait ComponentCrudTestTrait
     {
         $this->componentcrudToTest()->delete(
             $this->componentcrudToTest()
+        );
+    }
+
+    /**
+     * Get a new instance of a roady\classes\component\Component.
+     *
+     * @return StandardComponent
+     */
+    private function newComponentInstance(): StandardComponent
+    {
+        return new StandardComponent(
+            new StandardStorable(
+                'TestComponent',
+                'TestsComponents',
+                'ComponentCrudTestComponents'
+            )
         );
     }
 }

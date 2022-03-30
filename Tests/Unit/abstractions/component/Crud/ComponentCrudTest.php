@@ -14,7 +14,7 @@ class ComponentCrudTest extends SwitchableComponentTest
 
     public function setUp(): void
     {
-        $this->setComponentCrud(
+        $this->setComponentCrudToTest(
             $this->getMockForAbstractClass(
                 '\roady\abstractions\component\Crud\ComponentCrud',
                 [
@@ -35,7 +35,7 @@ class ComponentCrudTest extends SwitchableComponentTest
                 ]
             )
         );
-        $this->setComponentCrudParentTestInstances();
+        $this->setComponentCrudToTestParentTestInstances();
     }
 
 }
