@@ -161,10 +161,12 @@ trait ComponentCrudTestTrait
             $this->componentCrudToTest()
         );
         $this->assertNotEquals(
-            $this->componentCrudToTest()->getUniqueId(),
+            $this->componentCrudToTest(),
             $this->componentCrudToTest()->read(
                 $this->componentCrudToTest()
-            )->getUniqueId()
+            ),
+            $this->componentCrudToTest()::class .
+            '->delete() must delete the specified Component.'
         );
     }
 
