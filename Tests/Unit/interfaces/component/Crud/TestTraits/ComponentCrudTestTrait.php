@@ -219,8 +219,16 @@ trait ComponentCrudTestTrait
             $this->componentCrudToTest()->getLocation(),
             $this->componentCrudToTest()->getContainer()
         );
-        $this->assertTrue(in_array(
-            $this->componentCrudToTest(), $components)
+        $this->assertTrue(
+            in_array(
+                $this->componentCrudToTest(), $components
+            ),
+            $this->componentCrudToTest()::class .
+            '->readAll() must return an array of all the ' .
+            'Components stored at the specified location: ' .
+            $this->componentCrudToTest()->getLocation() . ' ' .
+            ', in the specified contianer: ' .
+            $this->componentCrudToTest()->getContainer()
         );
     }
 
