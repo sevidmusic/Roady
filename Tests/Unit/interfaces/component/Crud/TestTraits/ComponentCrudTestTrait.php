@@ -43,7 +43,8 @@ trait ComponentCrudTestTrait
                 (is_array($classImplements) ? $classImplements : [])
             ),
             'Exporting a ComponentCrud\'s StorageDriver via' .
-            'ComponentCrud->export()[\'storageDriver\']' .
+            $this->componentCrudToTest()::class .
+            '->export()[\'storageDriver\']' .
             'must return an object that implements the' .
             StorageDriver::class .
             ' interface'
@@ -92,7 +93,10 @@ trait ComponentCrudTestTrait
         $this->assertTrue(
             $this->componentCrudToTest()->create(
                 $this->componentCrudToTest()
-            )
+            ),
+            $this->componentCrudToTest()::class .
+            '->create() must return true if Component' .
+            'was created successfully.'
         );
     }
 
@@ -120,10 +124,15 @@ trait ComponentCrudTestTrait
             $this->componentCrudToTest()
         );
         $this->assertEquals(
-            $this->componentCrudToTest()->getUniqueId(),
+            $this->componentCrudToTest(),
             $this->componentCrudToTest()->read(
                 $this->componentCrudToTest()
-            )->getUniqueId()
+            ),
+            $this->componentCrudToTest()::class .
+            '->read() must return the stored Component whose ' .
+            'assigned ' . Storable::class . ' implementation ' .
+            'instance matches the specified ' . Storable::class .
+            ' implementation instance.'
         );
     }
 
@@ -215,9 +224,8 @@ trait ComponentCrudTestTrait
 
     /**
      * Test that an appropriately configured instance of a
-     * roady\classes\component\Component is returned if
-     * the read() is called and the ComponentCrud's state
-     * is false.
+     * roady\classes\component\Component is returned by
+     * read() if the ComponentCrud's state is false.
      *
      * @todo Refactor/rename test to: testReadReturnsComponentInstanceWhoseNameLocationAndConatinerAreREAD_ERROR_COMPONENT_CRUD_STATE_IS_FALSEIfState
      *
