@@ -47,7 +47,7 @@ trait ComponentCrudTestTrait
             '->export()[\'storageDriver\']' .
             'must return an object that implements the' .
             StorageDriver::class .
-            ' interface'
+            ' interface.'
         );
     }
 
@@ -79,11 +79,11 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * @todo ComponentCrud: Refactor appropriate test methods,
-     *                      and implement missing tests methods.
+     * Test that create() returns true if Component was created
+     * successfully.
      *
-     * Refactor testCreateReturnsTrue() to be
-     * testCreateReturnsTrueIfComponentWasCreated()
+     * @todo Refactor testCreateReturnsTrue() to be
+     *       testCreateReturnsTrueIfComponentWasCreated()
      *
      * @see https://github.com/sevidmusic/roady/issues/315
      *
@@ -133,18 +133,6 @@ trait ComponentCrudTestTrait
             'assigned ' . Storable::class . ' implementation ' .
             'instance matches the specified ' . Storable::class .
             ' implementation instance.'
-        );
-    }
-
-    /**
-     * Return the ComponentCrud to test from storage if it exists.
-     *
-     * @return Component
-     */
-    private function getStoredComponent(): Component
-    {
-        return $this->componentCrudToTest()->read(
-            $this->componentCrudToTest()
         );
     }
 
@@ -251,17 +239,23 @@ trait ComponentCrudTestTrait
         $this->setComponentCrudToTestsStateToFalse();
         $this->assertEquals(
             'MOCKCOMPONENT',
-            $this->getStoredComponent()->getName(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getName(),
             'read() must return a MOCKCOMPONENT if state is false.'
         );
         $this->assertEquals(
             'MOCKCOMPONENT',
-            $this->getStoredComponent()->getLocation(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getLocation(),
             'read() must return a MOCKCOMPONENT if state is false.'
         );
         $this->assertEquals(
             'MOCKCOMPONENT',
-            $this->getStoredComponent()->getContainer(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getContainer(),
             'read() must return a MOCKCOMPONENT if state is false.'
         );
     }
@@ -300,12 +294,16 @@ trait ComponentCrudTestTrait
         );
         $this->setComponentCrudToTestsStateToTrue();
         $this->assertNotEquals(
-            $this->getStoredComponent()->getUniqueId(),
+            $this->componentcrudToTest()->read(
+                $this->componentcrudToTest()
+            )->getUniqueId(),
             $component->getUniqueId(),
             'update() must not update component if state is false.'
         );
         $this->assertEquals(
-            $this->getStoredComponent()->getUniqueId(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getUniqueId(),
             $this->componentCrudToTest()->getUniqueId(),
             'update() must not update component if state is false.'
         );
@@ -325,7 +323,9 @@ trait ComponentCrudTestTrait
         );
         $this->setComponentCrudToTestsStateToTrue();
         $this->assertEquals(
-            $this->getStoredComponent()->getUniqueId(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getUniqueId(),
             $this->componentCrudToTest()->getUniqueId(),
             'delete() must not update component if state is false.'
         );
@@ -343,7 +343,9 @@ trait ComponentCrudTestTrait
         $this->setComponentCrudToTestsStateToTrue();
         $this->assertNotEquals(
             $this->componentCrudToTest()->getUniqueId(),
-            $this->getStoredComponent()->getUniqueId(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getUniqueId(),
             'create() must not update component if state is false.'
         );
     }
