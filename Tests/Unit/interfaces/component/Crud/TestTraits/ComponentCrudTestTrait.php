@@ -42,12 +42,12 @@ trait ComponentCrudTestTrait
                 StorageDriver::class,
                 (is_array($classImplements) ? $classImplements : [])
             ),
-            'Exporting a ComponentCrud\'s StorageDriver via' .
+            'Exporting a ComponentCrud\'s StorageDriver via ' .
             $this->componentCrudToTest()::class .
-            '->export()[\'storageDriver\']' .
-            'must return an object that implements the' .
+            '->export()[\'storageDriver\'] ' .
+            'must return an object that implements the ' .
             StorageDriver::class .
-            ' interface.'
+            'interface.'
         );
     }
 
