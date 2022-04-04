@@ -13,6 +13,36 @@ use roady\classes\component\OutputComponent;
 use roady\classes\component\Web\Routing\Request;
 use roady\classes\component\Web\Routing\Response;
 
+/**
+ * private function createTestApp(string $appName, string $domain): void
+ * private function createTestGlobalResponse(string $appName, string $domain): void
+ * private function createTestOutputComponent(string $appName, string $domain): void
+ * private function createTestRequest(string $appName, string $domain): void
+ * private function createTestResponse(string $appName, string $domain): void
+ * private function determinAppsLocation(AppComponentsFactoryInterface $appComponentsFactory): string
+ * private function determinePathToDdmsExecutable(): string
+ * private function determinePathToTestApp(string $appName): string
+ * private function getRandomDomain(): string
+ * private function getRandomName(string $type): string
+ * private function registerExpectedGlobalResponse(string $name, int|float $position): void
+ * private function registerExpectedOutputComponent(string $name, string $output): void
+ * private function registerExpectedRequest(string $name, string $relativeUrl): void
+ * private function registerExpectedResponse(string $name, int|float $position): void
+ * private function removeTestApp(AppComponentsFactoryInterface $appComponentsFactory): void
+ * private function verifyExpectedOutputComponentsExist(AppComponentsFactoryInterface $appComponentsFactory): void
+ * private function verifyExpectedRequestsExist(AppComponentsFactoryInterface $appComponentsFactory): void
+ * private function verifyExpectedResponsesExist(AppComponentsFactoryInterface $appComponentsFactory): void
+ * private static function removeDirectory(string $dir): void
+ * public function testBuildAppIncreasesNumberOfStoredComponentsIfAppDefinesComponents(): void
+ * public function testBuildAppStoresAppsConfiguredOutputComponents(): void
+ * public function testBuildAppStoresAppsConfiguredRequests(): void
+ * public function testBuildAppStoresAppsConfiguredResponses(): void
+ * public function testBuildAppUpdatesAppsStoredAppComponentsFactory(): void
+ * public function testCallingBuildAppTwiceOnSameAppWithNoChangeToNumberOfConfiguredComponentsResultsInEqualNumberOfStoredComponents(): void
+ * public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedAppsNameMatchesTheSpecifiedAppName(): void
+ * public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedDomiansUrlMatchesTheSpecifiedDomain(): void
+ * public function testGetAppsAppComponentsFactoryReturnsAppComponentsFactoryThatMatchesAppsStoredAppComponentsFactoryInstance(): void
+ */
 trait AppBuilderTestTrait
 {
 

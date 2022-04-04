@@ -10,6 +10,25 @@ use roady\interfaces\component\Web\Routing\Request;
 use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 use roady\interfaces\component\Web\Routing\Router as RouterInterface;
 
+/**
+ * private function classImplements(string|object $class): array {
+ * private function getStandardResponse(string $name = '', string $location = '', string $container = ''): CoreResponse
+ * private function objectInstanceIsSetAndCorrectType(string $propertyName, string $type): bool
+ * private function removeDirectory(string $dir): void
+ * protected function setRouterParentTestInstances(): void
+ * public function getRouter(): RouterInterface
+ * public function setRouter(RouterInterface $router): void
+ * public function tearDown(): void
+ * public function testCrudIsSetPostInstantiation(): void
+ * public function testGetCrudReturnsAssignedCrud(): void
+ * public function testGetRequestReturnsAssignedRequest(): void
+ * public function testGetResponseContainerReturnsStringWhoseValueMatchesTheResponseInterfacesResponseContainerConstant(): void
+ * public function testGetResponsesReturnsArrayOfResponsesThatAreNotCorrupted(): void
+ * public function testGetResponsesReturnsArrayOfResponsesThatRespondToAssignedRequest(): void
+ * public function testGetResponsesReturnsArrayOfResponsesWhoseStateIsTrue(): void
+ * public function testGetResponsesReturnsEmptyArrayIfStateIsFalse(): void
+ * public function testRequestIsSetPostInstantiation(): void
+ */
 trait RouterTestTrait
 {
 

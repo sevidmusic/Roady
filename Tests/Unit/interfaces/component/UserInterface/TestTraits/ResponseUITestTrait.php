@@ -25,6 +25,35 @@ use roady\classes\component\Web\App as CoreApp;
 use roady\classes\component\OutputComponent as CoreOutputComponent;
 use RuntimeException as PHPRuntimeException;
 
+/*
+ * protected function expectedOutput(): string
+ * protected function expectedResponses(): array
+ * protected function getRoutersComponentCrud(): ComponentCrudInterface
+ * protected function setResponseUIParentTestInstances(): void
+ * protected function sortPositionables(PositionableInterface ...$postionables): array
+ * protected static function deleteAllInContainer(string $container): void
+ * protected static function expectedAppLocation(): string
+ * protected static function getComponentCrud(): ComponentCrudInterface
+ * protected static function getStandardStorageDriver(): StorageDriverInterface
+ * protected static function getTestComponentContainer(): string
+ * protected static function readAllFromContainer(string $container): array
+ * public function getResponseUI(): ResponseUIInterface
+ * public function getResponseUITestArgs(): array
+ * public function setResponseUI(ResponseUIInterface $responseUI): void
+ * public function testGetOutputReturnsCollectiveOutputFromAllResponsesReturnedByRouterSortedByResponsePositionThenOutputComponentPosition(): void
+ * public function testGetOutputThrowsRuntimeExceptionIfOutputIsEmpty(): void
+ * public function testGetRouterReturnsAssignedRouter(): void
+ * public function testGetRouterTestMethodReturnsARouterImplemnetationInstance(): void
+ * public function testRouterPropertyIsAssignedARouterImplementationInstancePostInstantiation(): void
+ * public static function generateTestOutputComponent(): OutputComponentInterface
+ * public static function generateTestResponse(): ResponseInterface
+ * public static function getIndependantTestRequest(): RequestInterface
+ * public static function getRequest(): RequestInterface
+ * public static function getRouter(): RouterInterface
+ * public static function setUpBeforeClass(): void
+ * public static function tearDownAfterClass(): void
+ */
+
 trait ResponseUITestTrait
 {
 
