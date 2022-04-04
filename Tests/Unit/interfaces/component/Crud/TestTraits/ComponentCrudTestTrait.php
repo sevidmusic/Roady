@@ -14,6 +14,8 @@ use roady\classes\primary\Storable as StandardStorable;
  * The ComponentCrudTestTrait defines tests for implementations of
  * the ComponentCrud interface.
  *
+ * Methods:
+ *
  * private function newComponentInstance(): StandardComponent
  * private function setComponentCrudToTestsStateToFalse(): void
  * private function setComponentCrudToTestsStateToTrue(): void
@@ -21,6 +23,9 @@ use roady\classes\primary\Storable as StandardStorable;
  * public function componentCrudToTest(): ComponentCrud
  * public function setComponentCrudToTest(
  * public function tearDown(): void
+ *
+ * Test Methods:
+ *
  * public function testCreateReturnsFalseAndDoesNotCreateComponentIfStateIsFalse(): void
  * public function testCreateReturnsTrue(): void
  * public function testDeleteRemovesSpecifiedComponent(): void
@@ -50,28 +55,108 @@ trait ComponentCrudTestTrait
     private ComponentCrud $componentCrudToTest;
 
     /**
-     * Test that exporting a ComponentCrud's storageDriver
-     * returns an object instance that is an implementation of the
-     * StorageDriver interface.
+     * Get a new instance of a roady\classes\component\Component.
+     *
+     * @return StandardComponent
+     */
+    private function newComponentInstance(): StandardComponent
+    {
+        return new StandardComponent(
+            new StandardStorable(
+                'TestComponent',
+                $this->componentCrudToTest()->getLocation(),
+                $this->componentCrudToTest()->getContainer(),
+            )
+        );
+    }
+
+    /**
+     * Set the state of the componentCrudToTest to false/
      *
      * @return void
      */
-    public function testExportStorageDriverReturnsAStorageDriver(): void
+    private function setComponentCrudToTestsStateToFalse(): void
     {
-        $classImplements = class_implements(
-            $this->componentCrudToTest()->export()['storageDriver'],
+        if ($this->componentCrudToTest()->getState() === true) {
+            $this->componentCrudToTest()->switchState();
+        }
+    }
+
+    /**
+     * Switch the state of the ComponentCrud currently being tested
+     * to true.
+     *
+     * @return void
+     */
+    private function setComponentCrudToTestsStateToTrue(): void
+    {
+        if ($this->componentCrudToTest()->getState() === false) {
+            $this->componentCrudToTest()->switchState();
+        }
+    }
+
+    protected function setComponentCrudToTestParentTestInstances(): void
+    {
+        $this->setSwitchableComponent(
+            $this->componentCrudToTest()
         );
-        $this->assertTrue(
-            in_array(
-                StorageDriver::class,
-                (is_array($classImplements) ? $classImplements : [])
+        $this->setSwitchableComponentParentTestInstances();
+    }
+
+    /**
+     * Return the ComponentCrud implementation instance to be
+     * tested.
+     *
+     * @return ComponentCrud
+     */
+    public function componentCrudToTest(): ComponentCrud
+    {
+        return $this->componentCrudToTest;
+    }
+
+    /**
+     * Set the ComponentCrud implementation instance to be tested.
+     *
+     * @param ComponentCrud $componentCrudToTest The ComponentCrud
+     *                                           implementation
+     *                                           instance to be
+     *                                           tested.
+     * @return void
+     */
+    public function setComponentCrudToTest(
+        ComponentCrud $componentCrudToTest
+    ): void
+    {
+        $this->componentCrudToTest = $componentCrudToTest;
+    }
+
+    public function tearDown(): void
+    {
+        $storedComponents = $this->componentcrudToTest()->readAll(
+            $this->componentCrudToTest()->getLocation(),
+            $this->componentCrudToTest()->getContainer(),
+        );
+        foreach($storedComponents as $component) {
+            $this->componentCrudToTest()->delete($component);
+        }
+    }
+
+    public function testCreateReturnsFalseAndDoesNotCreateComponentIfStateIsFalse(): void
+    {
+        $this->setComponentCrudToTestsStateToFalse();
+        $this->assertFalse(
+            $this->componentCrudToTest()->create(
+                $this->componentCrudToTest()
             ),
-            'Exporting a ComponentCrud\'s StorageDriver via ' .
-            $this->componentCrudToTest()::class .
-            '->export()[\'storageDriver\'] ' .
-            'must return an object that implements the ' .
-            StorageDriver::class .
-            'interface.'
+            'create() must return false if state is false.'
+        );
+        $this->setComponentCrudToTestsStateToTrue();
+        $this->assertNotEquals(
+            $this->componentCrudToTest()->getUniqueId(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            )->getUniqueId(),
+            'create() must not update component if state is false.'
         );
     }
 
@@ -97,29 +182,6 @@ trait ComponentCrudTestTrait
         );
     }
 
-    /**
-     * Test that read() returns the specified Component.
-     *
-     * @return void
-     */
-    public function testReadReturnsSpecifiedComponent(): void
-    {
-        $this->componentCrudToTest()->create(
-            $this->componentCrudToTest()
-        );
-        $this->assertEquals(
-            $this->componentCrudToTest(),
-            $this->componentCrudToTest()->read(
-                $this->componentCrudToTest()
-            ),
-            $this->componentCrudToTest()::class .
-            '->read() must return the stored Component whose ' .
-            'assigned ' . Storable::class . ' implementation ' .
-            'instance matches the specified ' . Storable::class .
-            ' implementation instance.'
-        );
-    }
-
     /** Test that delete() removes the specified Component.
      *
      * @return void
@@ -142,33 +204,63 @@ trait ComponentCrudTestTrait
         );
     }
 
-    /**
-     * Test that update() updates the specified Component.
-     *
-     * @return void
-     */
-    public function testUpdateUpdatesSpecifiedComponent(): void
+    public function testDeleteReturnsFalseAndDoesNotDeleteComponentIfStateIsFalse(): void
     {
         $this->componentCrudToTest()->create(
             $this->componentCrudToTest()
         );
-        $standardComponent = $this->newComponentInstance();
-        $this->componentCrudToTest()->update(
-            $this->componentCrudToTest(),
-            $standardComponent
-        );
-        $this->assertEquals(
-            $standardComponent,
-            $this->componentCrudToTest()->read(
-                $standardComponent
+        $this->setComponentCrudToTestsStateToFalse();
+        $this->assertFalse(
+            $this->componentCrudToTest()->delete(
+                $this->componentCrudToTest()
             ),
-            'Update must update the specified component.' .
-            'Expected Component Id:' . PHP_EOL .
-            $standardComponent->getUniqueId() . PHP_EOL .
-            'Actual Component Id:' . PHP_EOL .
+            'delete() must return false if state is false.'
+        );
+        $this->setComponentCrudToTestsStateToTrue();
+        $this->assertEquals(
             $this->componentCrudToTest()->read(
-                $standardComponent
-            )->getUniqueId()
+                $this->componentCrudToTest()
+            )->getUniqueId(),
+            $this->componentCrudToTest()->getUniqueId(),
+            'delete() must not update component if state is false.'
+        );
+    }
+
+    /**
+     * Test that exporting a ComponentCrud's storageDriver
+     * returns an object instance that is an implementation of the
+     * StorageDriver interface.
+     *
+     * @return void
+     */
+    public function testExportStorageDriverReturnsAStorageDriver(): void
+    {
+        $classImplements = class_implements(
+            $this->componentCrudToTest()->export()['storageDriver'],
+        );
+        $this->assertTrue(
+            in_array(
+                StorageDriver::class,
+                (is_array($classImplements) ? $classImplements : [])
+            ),
+            'Exporting a ComponentCrud\'s StorageDriver via ' .
+            $this->componentCrudToTest()::class .
+            '->export()[\'storageDriver\'] ' .
+            'must return an object that implements the ' .
+            StorageDriver::class .
+            'interface.'
+        );
+    }
+
+    public function testReadAllReturnsAnEmptyArrayIfStateIsFalse(): void
+    {
+        $this->setComponentCrudToTestsStateToFalse();
+        $this->assertEmpty(
+            $this->componentCrudToTest()->readAll(
+                $this->componentCrudToTest()->getLocation(),
+                $this->componentCrudToTest()->getContainer()
+            ),
+            'readAll() must return an empty array if state is false.'
         );
     }
 
@@ -201,6 +293,51 @@ trait ComponentCrudTestTrait
             $this->componentCrudToTest()->getLocation() . ' ' .
             ', in the specified contianer: ' .
             $this->componentCrudToTest()->getContainer()
+        );
+    }
+
+    public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
+    {
+        $crud = $this->componentCrudToTest();
+        $crud->create($crud);
+        $component = $crud->readByNameAndType(
+            $crud->getName(),
+            $crud->getType(),
+            $crud->getLocation(),
+            $crud->getContainer()
+        );
+        $this->assertEquals(
+            $crud->getName(),
+            $component->getName()
+        );
+        $this->assertEquals(
+            $crud->getType(),
+            $component->getType()
+        );
+    }
+
+    public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $component = $this->componentCrudToTest()->readByNameAndType(
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999))
+        );
+        $this->assertEquals('DEFAULT', $component->getName());
+        $this->assertEquals('DEFAULT', $component->getLocation());
+        $this->assertEquals('DEFAULT', $component->getContainer());
+    }
+
+    public function testReadByNameAndTypeThrowsRuntimeExceptionIfAMatchIsNotFound(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->componentCrudToTest()->readByNameAndType(
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999)),
+            strval(rand(1000, 9999))
         );
     }
 
@@ -245,6 +382,41 @@ trait ComponentCrudTestTrait
     }
 
     /**
+     * Test that read() returns the specified Component.
+     *
+     * @return void
+     */
+    public function testReadReturnsSpecifiedComponent(): void
+    {
+        $this->componentCrudToTest()->create(
+            $this->componentCrudToTest()
+        );
+        $this->assertEquals(
+            $this->componentCrudToTest(),
+            $this->componentCrudToTest()->read(
+                $this->componentCrudToTest()
+            ),
+            $this->componentCrudToTest()::class .
+            '->read() must return the stored Component whose ' .
+            'assigned ' . Storable::class . ' implementation ' .
+            'instance matches the specified ' . Storable::class .
+            ' implementation instance.'
+        );
+    }
+
+    public function testStorageDriverIsOnUponInstantiation(): void
+    {
+        $this->assertTrue(
+            $this->componentCrudToTest()
+                 ->export()['storageDriver']
+                 ->getState(),
+             'The storage driver\'s state must be true or the' .
+             'ComponentCrud will not be able to operate on ' .
+             'stored data.'
+        );
+    }
+
+    /**
      * Test that update returns false and does not update the
      * specified Component if the ComponentCrud's state is false.
      *
@@ -281,201 +453,34 @@ trait ComponentCrudTestTrait
         );
     }
 
-    public function testDeleteReturnsFalseAndDoesNotDeleteComponentIfStateIsFalse(): void
+    /**
+     * Test that update() updates the specified Component.
+     *
+     * @return void
+     */
+    public function testUpdateUpdatesSpecifiedComponent(): void
     {
         $this->componentCrudToTest()->create(
             $this->componentCrudToTest()
         );
-        $this->setComponentCrudToTestsStateToFalse();
-        $this->assertFalse(
-            $this->componentCrudToTest()->delete(
-                $this->componentCrudToTest()
-            ),
-            'delete() must return false if state is false.'
+        $standardComponent = $this->newComponentInstance();
+        $this->componentCrudToTest()->update(
+            $this->componentCrudToTest(),
+            $standardComponent
         );
-        $this->setComponentCrudToTestsStateToTrue();
         $this->assertEquals(
+            $standardComponent,
             $this->componentCrudToTest()->read(
-                $this->componentCrudToTest()
-            )->getUniqueId(),
-            $this->componentCrudToTest()->getUniqueId(),
-            'delete() must not update component if state is false.'
-        );
-    }
-
-    public function testCreateReturnsFalseAndDoesNotCreateComponentIfStateIsFalse(): void
-    {
-        $this->setComponentCrudToTestsStateToFalse();
-        $this->assertFalse(
-            $this->componentCrudToTest()->create(
-                $this->componentCrudToTest()
+                $standardComponent
             ),
-            'create() must return false if state is false.'
-        );
-        $this->setComponentCrudToTestsStateToTrue();
-        $this->assertNotEquals(
-            $this->componentCrudToTest()->getUniqueId(),
+            'Update must update the specified component.' .
+            'Expected Component Id:' . PHP_EOL .
+            $standardComponent->getUniqueId() . PHP_EOL .
+            'Actual Component Id:' . PHP_EOL .
             $this->componentCrudToTest()->read(
-                $this->componentCrudToTest()
-            )->getUniqueId(),
-            'create() must not update component if state is false.'
+                $standardComponent
+            )->getUniqueId()
         );
     }
 
-    public function testReadAllReturnsAnEmptyArrayIfStateIsFalse(): void
-    {
-        $this->setComponentCrudToTestsStateToFalse();
-        $this->assertEmpty(
-            $this->componentCrudToTest()->readAll(
-                $this->componentCrudToTest()->getLocation(),
-                $this->componentCrudToTest()->getContainer()
-            ),
-            'readAll() must return an empty array if state is false.'
-        );
-    }
-
-    public function testStorageDriverIsOnUponInstantiation(): void
-    {
-        $this->assertTrue(
-            $this->componentCrudToTest()
-                 ->export()['storageDriver']
-                 ->getState(),
-             'The storage driver\'s state must be true or the' .
-             'ComponentCrud will not be able to operate on ' .
-             'stored data.'
-        );
-    }
-
-    public function testReadByNameAndTypeThrowsRuntimeExceptionIfAMatchIsNotFound(): void
-    {
-        $this->expectException(RuntimeException::class);
-        $this->componentCrudToTest()->readByNameAndType(
-            strval(rand(1000, 9999)),
-            strval(rand(1000, 9999)),
-            strval(rand(1000, 9999)),
-            strval(rand(1000, 9999))
-        );
-    }
-
-
-    public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound(): void
-    {
-        $this->expectException(RuntimeException::class);
-        $component = $this->componentCrudToTest()->readByNameAndType(
-            strval(rand(1000, 9999)),
-            strval(rand(1000, 9999)),
-            strval(rand(1000, 9999)),
-            strval(rand(1000, 9999))
-        );
-        $this->assertEquals('DEFAULT', $component->getName());
-        $this->assertEquals('DEFAULT', $component->getLocation());
-        $this->assertEquals('DEFAULT', $component->getContainer());
-    }
-
-    public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
-    {
-        $crud = $this->componentCrudToTest();
-        $crud->create($crud);
-        $component = $crud->readByNameAndType(
-            $crud->getName(),
-            $crud->getType(),
-            $crud->getLocation(),
-            $crud->getContainer()
-        );
-        $this->assertEquals(
-            $crud->getName(),
-            $component->getName()
-        );
-        $this->assertEquals(
-            $crud->getType(),
-            $component->getType()
-        );
-    }
-
-    /**
-     * Switch the state of the ComponentCrud currently being tested
-     * to true.
-     *
-     * @return void
-     */
-    private function setComponentCrudToTestsStateToTrue(): void
-    {
-        if ($this->componentCrudToTest()->getState() === false) {
-            $this->componentCrudToTest()->switchState();
-        }
-    }
-
-    /**
-     * Return the ComponentCrud implementation instance to be
-     * tested.
-     *
-     * @return ComponentCrud
-     */
-    public function componentCrudToTest(): ComponentCrud
-    {
-        return $this->componentCrudToTest;
-    }
-
-    /**
-     * Set the ComponentCrud implementation instance to be tested.
-     *
-     * @param ComponentCrud $componentCrudToTest The ComponentCrud
-     *                                           implementation
-     *                                           instance to be
-     *                                           tested.
-     * @return void
-     */
-    public function setComponentCrudToTest(
-        ComponentCrud $componentCrudToTest
-    ): void
-    {
-        $this->componentCrudToTest = $componentCrudToTest;
-    }
-
-    /**
-     * Set the state of the componentCrudToTest to false/
-     *
-     * @return void
-     */
-    private function setComponentCrudToTestsStateToFalse(): void
-    {
-        if ($this->componentCrudToTest()->getState() === true) {
-            $this->componentCrudToTest()->switchState();
-        }
-    }
-
-    protected function setComponentCrudToTestParentTestInstances(): void
-    {
-        $this->setSwitchableComponent(
-            $this->componentCrudToTest()
-        );
-        $this->setSwitchableComponentParentTestInstances();
-    }
-
-    public function tearDown(): void
-    {
-        $storedComponents = $this->componentcrudToTest()->readAll(
-            $this->componentCrudToTest()->getLocation(),
-            $this->componentCrudToTest()->getContainer(),
-        );
-        foreach($storedComponents as $component) {
-            $this->componentCrudToTest()->delete($component);
-        }
-    }
-
-    /**
-     * Get a new instance of a roady\classes\component\Component.
-     *
-     * @return StandardComponent
-     */
-    private function newComponentInstance(): StandardComponent
-    {
-        return new StandardComponent(
-            new StandardStorable(
-                'TestComponent',
-                $this->componentCrudToTest()->getLocation(),
-                $this->componentCrudToTest()->getContainer(),
-            )
-        );
-    }
 }
