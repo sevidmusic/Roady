@@ -6,6 +6,33 @@ use roady\interfaces\component\Component as ComponentInterface;
 use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
+/*
+ * private function classImplements(string|object $class): array {
+ * protected function setStoredComponentRegistryParentTestInstances(): void
+ * public function getStoredComponentRegistry(): StoredComponentRegistryInterface
+ * public function setStoredComponentRegistry(StoredComponentRegistryInterface $storedComponentRegistry): void
+ * public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplementationPostInstantiation(): void
+ * public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedInterfacePostInstantiation(): void
+ * public function testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostInstantiation(): void
+ * public function testEmptyRegistryAssignsAnEmptyArrayToTheRegistryProperty(): void
+ * public function testGetAcceptedImplementationReturnsSameNamespaceAssignedToAcceptedImplementationPropertyOnInstantiation(): void
+ * public function testGetComponentCrudReturnsSameComponentCrudImplementationInstanceAssignedToComponentCrudPropertyOnInstantiation(): void
+ * public function testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
+ * public function testGetRegistryReturnsArrayAssignedToRegistryProperty(): void
+ * public function testPurgeRegistryRemovesAllStorablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
+ * public function testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
+ * public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
+ * public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsAlreadyRegistered(): void
+ * public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
+ * public function testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
+ * public function testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
+ * public function testRegistryPropertyIsSetToAnEmptyArrayPostInstantiation(): void
+ * public function testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
+ * public function testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryPropertysArray(): void
+ * public function testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
+ *
+ */
+
 trait StoredComponentRegistryTestTrait
 {
 

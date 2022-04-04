@@ -15,6 +15,29 @@ use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
 use roady\interfaces\primary\Positionable as PositionableInterface;
 
+/**
+ * private function getMockOutputComponent(): CoreOutputComponent
+ * private function getMockStorable(): CoreStorable
+ * private function getMockSwitchable(): CoreSwitchable
+ * protected function getMockCrud(): ComponentCrudInterface
+ * protected function getMockRequest(): CoreRequest
+ * protected function setResponseParentTestInstances(): void
+ * public function getResponse(): ResponseInterface
+ * public function setResponse(ResponseInterface $response): void
+ * public function testAddORequestStorageInfoAddsSpecifiedORequestsStorableInstance(): void
+ * public function testAddOutputComponentStorageInfoAddsSpecifiedOutputComponentsStorableInstance(): void
+ * public function testGetContainerReturnsValueOfRESPONSE_CONTAINERConstant(): void
+ * public function testGetOutputComponentStorageInfoReturnsArrayOfStorableInstancesForAssignedOutputComponents(): void
+ * public function testGetOutputComponentStorageInfoReturnsEmptyArrayIfStateIsFalse(): void
+ * public function testGetRequestStorageInfoReturnsArrayOfStorableInstancesForAssignedRequests(): void
+ * public function testPositionablePropertyIsAssignedAPositionableImplementationInstancePostInstantiation(): void
+ * public function testRESPONSE_CONTAINERConstantIsAssignedStringRESPONSES(): void
+ * public function testRemoveOutputComponentStorageInfoRemovesSpecifiedOutputComponentsStorableInstance(): void
+ * public function testRemoveRequestStorageInfoRemovesSpecifiedRequestsStorableInstance(): void
+ * public function testRespondsToRequestReturnsFalseForUnknownRequest(): void
+ * public function testRespondsToRequestReturnsTrueForAnyRequestWhoseAssignedUrlContainsAGetParameterNamed_request_WhoseAssignedValueMatchesRespectiveResponsesName(): void
+ * public function testRespondsToRequestReturnsTrueForAssignedRequest(): void
+ */
 trait ResponseTestTrait
 {
 

@@ -28,6 +28,40 @@ use roady\interfaces\primary\Positionable as PositionableInterface;
 use roady\interfaces\primary\Storable as StorableInterface;
 use roady\interfaces\primary\Switchable as SwitchableInterface;
 
+/**
+ * private function buildApp(string $appName): void
+ * private function createCssFileForSpecificRequestForApp(string $appName, string $requestName): void
+ * private function createTestApp(string $appName): void
+ * private function createTestAppWithCssFiles(string $appName, array $cssFileNames, bool $build): void {
+ * private function determineAppsDefinedStylesheetNames(string $appName) {
+ * private function determineBuiltAppNames(): array
+ * private function determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem(string $appName): array
+ * private function determinePathToApp(string $appName): string
+ * private function determinePathToAppsComponentsPhp(string $appName): string
+ * private function determinePathToAppsCssDir(string $appName): string
+ * private function determineStylesheetPath(string $appName, string $stylesheetName): string
+ * private function expectClosingBodyAndClosingHtmlTags(): void
+ * private function expectCssLinkForApp(string $appName, string $cssFileName): void
+ * private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
+ * private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(ResponseInterface $response): void
+ * private function expectHtmlLinkTagsForGlobalCssFilesDefinedByBuiltApps(): void
+ * private function expectLinksForStylesheetsDefinedByBuiltApps(): void
+ * private function expectResponseOutput(ResponseInterface $response): void
+ * private function getCurrentRequest(): RequestInterface
+ * private function getSortedResponsesExpectedByTest(): array
+ * private function hasCssFileExtension(string $stylesheetName): bool
+ * private function isAAppComponentsFactory(ComponentInterface $component): bool {
+ * private function isAGlobalStylesheet(string $stylesheetName): bool
+ * private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
+ * private static function removeDirectory(string $dir): void
+ * protected function expectedOutput(): string
+ * protected function setWebUIParentTestInstances(): void
+ * protected function tearDown(): void
+ * public function getWebUI(): WebUIInterface
+ * public function getWebUITestArgs(): array
+ * public function setWebUI(WebUIInterface $webUI): void
+ * public static function getRequest(): RequestInterface
+ */
 trait WebUITestTrait
 {
 

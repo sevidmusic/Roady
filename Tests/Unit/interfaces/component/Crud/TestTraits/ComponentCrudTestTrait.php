@@ -13,6 +13,30 @@ use roady\classes\primary\Storable as StandardStorable;
 /**
  * The ComponentCrudTestTrait defines tests for implementations of
  * the ComponentCrud interface.
+ *
+ * private function newComponentInstance(): StandardComponent
+ * private function setComponentCrudToTestsStateToFalse(): void
+ * private function setComponentCrudToTestsStateToTrue(): void
+ * protected function setComponentCrudToTestParentTestInstances(): void
+ * public function componentCrudToTest(): ComponentCrud
+ * public function setComponentCrudToTest(
+ * public function tearDown(): void
+ * public function testCreateReturnsFalseAndDoesNotCreateComponentIfStateIsFalse(): void
+ * public function testCreateReturnsTrue(): void
+ * public function testDeleteRemovesSpecifiedComponent(): void
+ * public function testDeleteReturnsFalseAndDoesNotDeleteComponentIfStateIsFalse(): void
+ * public function testExportStorageDriverReturnsAStorageDriver(): void
+ * public function testReadAllReturnsAnEmptyArrayIfStateIsFalse(): void
+ * public function testReadAllReturnsArrayOfComponentsStoredInSpecifiedContainerAtSpecifiedLocation(): void
+ * public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
+ * public function testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound(): void
+ * public function testReadByNameAndTypeThrowsRuntimeExceptionIfAMatchIsNotFound(): void
+ * public function testReadReturnsMockComponentInstanceIfStateIsFalse(): void
+ * public function testReadReturnsSpecifiedComponent(): void
+ * public function testStorageDriverIsOnUponInstantiation(): void
+ * public function testUpdateReturnsFalseAndDoesNotUpdateComponentIfStateIsFalse(): void
+ * public function testUpdateUpdatesSpecifiedComponent(): void
+ *
  */
 trait ComponentCrudTestTrait
 {
@@ -52,33 +76,6 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * Return the ComponentCrud implementation instance to be
-     * tested.
-     *
-     * @return ComponentCrud
-     */
-    public function componentCrudToTest(): ComponentCrud
-    {
-        return $this->componentCrudToTest;
-    }
-
-    /**
-     * Set the ComponentCrud implementation instance to be tested.
-     *
-     * @param ComponentCrud $componentCrudToTest The ComponentCrud
-     *                                           implementation
-     *                                           instance to be
-     *                                           tested.
-     * @return void
-     */
-    public function setComponentCrudToTest(
-        ComponentCrud $componentCrudToTest
-    ): void
-    {
-        $this->componentCrudToTest = $componentCrudToTest;
-    }
-
-    /**
      * Test that create() returns true if Component was created
      * successfully.
      *
@@ -98,19 +95,6 @@ trait ComponentCrudTestTrait
             '->create() must return true if Component' .
             'was created successfully.'
         );
-    }
-
-    /**
-     * Switch the state of the ComponentCrud currently being tested
-     * to true.
-     *
-     * @return void
-     */
-    private function setComponentCrudToTestsStateToTrue(): void
-    {
-        if ($this->componentCrudToTest()->getState() === false) {
-            $this->componentCrudToTest()->switchState();
-        }
     }
 
     /**
@@ -261,18 +245,6 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * Set the state of the componentCrudToTest to false/
-     *
-     * @return void
-     */
-    private function setComponentCrudToTestsStateToFalse(): void
-    {
-        if ($this->componentCrudToTest()->getState() === true) {
-            $this->componentCrudToTest()->switchState();
-        }
-    }
-
-    /**
      * Test that update returns false and does not update the
      * specified Component if the ComponentCrud's state is false.
      *
@@ -374,14 +346,6 @@ trait ComponentCrudTestTrait
         );
     }
 
-    protected function setComponentCrudToTestParentTestInstances(): void
-    {
-        $this->setSwitchableComponent(
-            $this->componentCrudToTest()
-        );
-        $this->setSwitchableComponentParentTestInstances();
-    }
-
     public function testReadByNameAndTypeThrowsRuntimeExceptionIfAMatchIsNotFound(): void
     {
         $this->expectException(RuntimeException::class);
@@ -426,6 +390,66 @@ trait ComponentCrudTestTrait
             $crud->getType(),
             $component->getType()
         );
+    }
+
+    /**
+     * Switch the state of the ComponentCrud currently being tested
+     * to true.
+     *
+     * @return void
+     */
+    private function setComponentCrudToTestsStateToTrue(): void
+    {
+        if ($this->componentCrudToTest()->getState() === false) {
+            $this->componentCrudToTest()->switchState();
+        }
+    }
+
+    /**
+     * Return the ComponentCrud implementation instance to be
+     * tested.
+     *
+     * @return ComponentCrud
+     */
+    public function componentCrudToTest(): ComponentCrud
+    {
+        return $this->componentCrudToTest;
+    }
+
+    /**
+     * Set the ComponentCrud implementation instance to be tested.
+     *
+     * @param ComponentCrud $componentCrudToTest The ComponentCrud
+     *                                           implementation
+     *                                           instance to be
+     *                                           tested.
+     * @return void
+     */
+    public function setComponentCrudToTest(
+        ComponentCrud $componentCrudToTest
+    ): void
+    {
+        $this->componentCrudToTest = $componentCrudToTest;
+    }
+
+    /**
+     * Set the state of the componentCrudToTest to false/
+     *
+     * @return void
+     */
+    private function setComponentCrudToTestsStateToFalse(): void
+    {
+        if ($this->componentCrudToTest()->getState() === true) {
+            $this->componentCrudToTest()->switchState();
+        }
+    }
+
+    protected function setComponentCrudToTestParentTestInstances(): void
+    {
+        $this->setSwitchableComponent(
+            $this->componentCrudToTest()
+        );
+        $this->setSwitchableComponentParentTestInstances();
     }
 
     public function tearDown(): void
