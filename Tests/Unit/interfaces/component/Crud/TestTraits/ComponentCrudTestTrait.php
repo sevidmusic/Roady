@@ -356,21 +356,22 @@ trait ComponentCrudTestTrait
      */
     public function testReadByNameAndTypeReturnsComponentWhoseNameAndTypeMatchSpecifiedNameAndTypeIfAStoredComponentWithMatchngNameAndTypeExists(): void
     {
-        $crud = $this->componentCrudToTest();
-        $crud->create($crud);
-        $component = $crud->readByNameAndType(
-            $crud->getName(),
-            $crud->getType(),
-            $crud->getLocation(),
-            $crud->getContainer()
+        $this->componentCrudToTest()->create(
+            $this->componentCrudToTest()
+        );
+        $storedComponent = $this->componentCrudToTest()->readByNameAndType(
+            $this->componentCrudToTest()->getName(),
+            $this->componentCrudToTest()->getType(),
+            $this->componentCrudToTest()->getLocation(),
+            $this->componentCrudToTest()->getContainer()
         );
         $this->assertEquals(
-            $crud->getName(),
-            $component->getName()
+            $this->componentCrudToTest()->getName(),
+            $storedComponent->getName()
         );
         $this->assertEquals(
-            $crud->getType(),
-            $component->getType()
+            $this->componentCrudToTest()->getType(),
+            $storedComponent->getType()
         );
     }
 
