@@ -7,10 +7,15 @@ use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 /*
+ * Methods:
+ *
  * private function classImplements(string|object $class): array {
  * protected function setStoredComponentRegistryParentTestInstances(): void
  * public function getStoredComponentRegistry(): StoredComponentRegistryInterface
  * public function setStoredComponentRegistry(StoredComponentRegistryInterface $storedComponentRegistry): void
+ *
+ * Test Methods:
+ *
  * public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedComponentImplementationPostInstantiation(): void
  * public function testAcceptedImplementationPropertyIsAssignedNamespaceOfADefinedInterfacePostInstantiation(): void
  * public function testComponentCrudPropertyIsAssignedAnInstanceOfAComponentCrudImplementationPostInstantiation(): void
