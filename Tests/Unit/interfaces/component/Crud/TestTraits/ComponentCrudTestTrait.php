@@ -341,7 +341,7 @@ trait ComponentCrudTestTrait
             '->readAll() must return an array of all the ' .
             'Components stored at the specified location: ' .
             $this->componentCrudToTest()->getLocation() . ' ' .
-            ', in the specified contianer: ' .
+            ', in the specified container: ' .
             $this->componentCrudToTest()->getContainer()
         );
     }
@@ -375,9 +375,9 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * Test readByNameAndType() returns a Component whse name,
-     * location, and container are assigned the value
-     * DEFAULT if a match is not found.
+     * Test readByNameAndType() returns a Component whose name,
+     * location, and container are assigned the value DEFAULT if
+     * a match is not found.
      *
      * @todo Refactor test
      * testReadByNameAndTypeReturnsComponentWhoseNameLoctionAndContainerAreDEFAULTIfAMatchIsNotFound()
@@ -420,9 +420,11 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * Test that an appropriately configured instance of a
-     * roady\classes\component\Component is returned by
-     * read() if the ComponentCrud's state is false.
+     * Test readByNameAndType() returns a
+     * roady\classes\component\Component whose
+     * name, location, and container are assigned
+     * the value MOCKCOMPONENT if the ComponentCrud's
+     * state is false.
      *
      * @todo Refactor/rename test to: testReadReturnsComponentInstanceWhoseNameLocationAndConatinerAreREAD_ERROR_COMPONENT_CRUD_STATE_IS_FALSEIfState
      *
