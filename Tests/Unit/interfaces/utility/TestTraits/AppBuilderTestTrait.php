@@ -14,6 +14,8 @@ use roady\classes\component\Web\Routing\Request;
 use roady\classes\component\Web\Routing\Response;
 
 /**
+ * Methods:
+ *
  * private function createTestApp(string $appName, string $domain): void
  * private function createTestGlobalResponse(string $appName, string $domain): void
  * private function createTestOutputComponent(string $appName, string $domain): void
@@ -33,6 +35,9 @@ use roady\classes\component\Web\Routing\Response;
  * private function verifyExpectedRequestsExist(AppComponentsFactoryInterface $appComponentsFactory): void
  * private function verifyExpectedResponsesExist(AppComponentsFactoryInterface $appComponentsFactory): void
  * private static function removeDirectory(string $dir): void
+ *
+ * Test Methods:
+ *
  * public function testBuildAppIncreasesNumberOfStoredComponentsIfAppDefinesComponents(): void
  * public function testBuildAppStoresAppsConfiguredOutputComponents(): void
  * public function testBuildAppStoresAppsConfiguredRequests(): void
