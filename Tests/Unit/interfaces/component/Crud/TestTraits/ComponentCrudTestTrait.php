@@ -42,6 +42,11 @@ use roady\classes\primary\Storable as StandardStorable;
  * public function testUpdateReturnsFalseAndDoesNotUpdateComponentIfStateIsFalse(): void
  * public function testUpdateUpdatesSpecifiedComponent(): void
  *
+ * Issues:
+ * @see https://github.com/sevidmusic/roady/issues/315
+ * @see https://github.com/sevidmusic/roady/issues/320
+ * @see https://github.com/sevidmusic/roady/issues/322
+ *
  */
 trait ComponentCrudTestTrait
 {
@@ -55,7 +60,7 @@ trait ComponentCrudTestTrait
     private ComponentCrud $componentCrudToTest;
 
     /**
-     * Get a new instance of a roady\classes\component\Component.
+     * Return a new instance of a roady\classes\component\Component.
      *
      * @return StandardComponent
      */
@@ -71,7 +76,7 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * Set the state of the componentCrudToTest to false/
+     * Set the state of the ComponentCrud to test to false.
      *
      * @return void
      */
@@ -83,8 +88,7 @@ trait ComponentCrudTestTrait
     }
 
     /**
-     * Switch the state of the ComponentCrud currently being tested
-     * to true.
+     * Switch the state of the ComponentCrud to test to true.
      *
      * @return void
      */
@@ -95,6 +99,18 @@ trait ComponentCrudTestTrait
         }
     }
 
+    /**
+     * ComponentCrud implementations are also implementations of
+     * the roady\interfaces\component\SwitchableComponent interface,
+     * and therefore must pass the tests defined by the
+     * Tests\Unit\interfaces\component\TestTraits\SwitchableComponentTestTrait
+     *
+     * This method passes the ComponentCrud implementation instance
+     * to be tested to the setSwitchableComponent() method defined by the
+     * Tests\Unit\interfaces\component\TestTraits\SwitchableComponentTestTrait.
+     *
+     * @return void
+     */
     protected function setComponentCrudToTestParentTestInstances(): void
     {
         $this->setSwitchableComponent(
@@ -141,6 +157,13 @@ trait ComponentCrudTestTrait
         }
     }
 
+    /**
+     * Test that create() returns false, and does not create
+     * the specified Component if the ComponentCrud's state
+     * is false.
+     *
+     * @return void
+     */
     public function testCreateReturnsFalseAndDoesNotCreateComponentIfStateIsFalse(): void
     {
         $this->setComponentCrudToTestsStateToFalse();
@@ -204,6 +227,13 @@ trait ComponentCrudTestTrait
         );
     }
 
+    /**
+     * Test that delete() returns false, and does not delete
+     * the specified Component if the ComponentCrud's state
+     * is false.
+     *
+     * @return void
+     */
     public function testDeleteReturnsFalseAndDoesNotDeleteComponentIfStateIsFalse(): void
     {
         $this->componentCrudToTest()->create(
