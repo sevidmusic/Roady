@@ -34,7 +34,7 @@ use roady\classes\component\Web\Routing\Response;
  * private function verifyExpectedOutputComponentsExist(AppComponentsFactoryInterface $appComponentsFactory): void
  * private function verifyExpectedRequestsExist(AppComponentsFactoryInterface $appComponentsFactory): void
  * private function verifyExpectedResponsesExist(AppComponentsFactoryInterface $appComponentsFactory): void
- * private static function removeDirectory(string $dir): void
+ * private static function removeAppDirectory(string $pathToTheAppsDirectory): void
  *
  * Test Methods:
  *
@@ -348,7 +348,7 @@ trait AppBuilderTestTrait
             $appComponentsFactory->getComponentCrud()->delete($component);
         }
         $pathToTestApp = $this->determinePathToTestApp($appName);
-        self::removeDirectory($pathToTestApp);
+        self::removeAppDirectory($pathToTestApp);
     }
 
     private function determinePathToTestApp(string $appName): string
@@ -360,20 +360,45 @@ trait AppBuilderTestTrait
         );
     }
 
-    private static function removeDirectory(string $dir): void
+    /**
+     * Remove a directory recursively so long as it exist within
+     * roady's Apps directory.
+     *
+     * Note: If the specified $pathToTheAppsDirectory does not
+     * contain the string `roady/Apps` in it's path, then the
+     * directory will not be removed.
+     *
+     * @return void
+     */
+    private static function removeAppDirectory(string $pathToTheAppsDirectory): void
     {
-        if (is_dir($dir)) {
-            $ls = scandir($dir);
+        if (
+            $pathToTheAppsDirectory !== '/'
+            &&
+            str_contains($pathToTheAppsDirectory, 'roady' . DIRECTORY_SEPARATOR . 'Apps')
+            &&
+            is_dir($pathToTheAppsDirectory)
+        ) {
+            $ls = scandir($pathToTheAppsDirectory);
             $contents = (is_array($ls) ? $ls : []);
             foreach ($contents as $item) {
                 if ($item != "." && $item != "..") {
-                    $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
+                    $itemPath = $pathToTheAppsDirectory . DIRECTORY_SEPARATOR . $item;
                     (is_dir($itemPath) === true && is_link($itemPath) === false)
-                        ? self::removeDirectory($itemPath)
+                        ? self::removeAppDirectory($itemPath)
                         : unlink($itemPath);
                 }
             }
-            rmdir($dir);
+            rmdir($pathToTheAppsDirectory);
+            error_log(
+                'roady Test Log:' .
+                PHP_EOL .
+                '    ' .
+                AppBuilderTestTrait::class .
+                '::removeAppDirectory("' . $pathToTheAppsDirectory . '")' .
+                ' removed specified directory.'
+            );
+
         }
     }
 
