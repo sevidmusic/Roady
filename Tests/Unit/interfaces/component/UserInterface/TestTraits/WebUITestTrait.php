@@ -53,7 +53,7 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function isAAppComponentsFactory(ComponentInterface $component): bool {
  * private function isAGlobalStylesheet(string $stylesheetName): bool
  * private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
- * private static function removeDirectory(string $dir): void
+ * private static function removeAppDirectory(string $dir): void
  * protected function expectedOutput(): string
  * protected function setWebUIParentTestInstances(): void
  * protected function tearDown(): void
@@ -61,6 +61,34 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * public function getWebUITestArgs(): array
  * public function setWebUI(WebUIInterface $webUI): void
  * public static function getRequest(): RequestInterface
+ */
+
+/**
+ * The WebUITestTrait is intended to be used in conjunction with
+ * the ResponseUITestTrait to test implementations of the WebUI
+ * interface.
+ *
+ * The WebUITestTrait implements it's own expectedOutput() method
+ * which is intended to replace the expectedOutput() method defined
+ * by the ResponseUITestTrait.
+ *
+ * The WebUI does not modify or provide any additional test of it's
+ * own, instead is simply overwrites the ResponseUITestTrait's
+ * expectedOutput() method to accommodate the additional expectations
+ * of a WebUI's getOutput() method's output.
+ *
+ * The WebUITestTrait also overwrites the ResponseUITestTrait's
+ * getRequest() method.
+ *
+ * Note: Make sure to include the following when using this Trait
+ * in conjunction with the ResponseUITestTrait.
+ *
+ * ```
+ * use ResponseUITestInterface, WebUITestInterface {
+ *     WebUITestInterface::expectedOutput insteadof ResponseUITestInterface;
+ *     WebUITestInterface::getRequest insteadof ResponseUITestInterface;
+ * }
+ * ```
  */
 trait WebUITestTrait
 {
@@ -161,11 +189,15 @@ trait WebUITestTrait
         $this->expectLinksForStylesheetsDefinedByBuiltApps();
     }
 
+    /**
+     * Call parent's tearDown() method, and remove any test
+     * Apps created during testing from roady's Apps directory.
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
         foreach($this->createdApps as $appName) {
-            self::removeDirectory($this->determinePathToApp($appName));
+            self::removeAppDirectory($this->determinePathToApp($appName));
         }
     }
 
@@ -374,16 +406,25 @@ trait WebUITestTrait
         file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $requestName, ' body { font-family: monospace; }', LOCK_SH);
     }
 
-    private static function removeDirectory(string $dir): void
+    private static function removeAppDirectory(string $dir): void
     {
-        if ($dir !== '/' && is_dir($dir)) {
+        if (
+            $dir !== '/'
+            &&
+            str_contains(
+                'roady' . DIRECTORY_SEPARATOR . 'Apps',
+                $dir
+            )
+            &&
+            is_dir($dir)
+        ) {
             $ls = scandir($dir);
             $contents = (is_array($ls) ? $ls : []);
             foreach ($contents as $item) {
                 if ($item != "." && $item != "..") {
                     $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
                     (is_dir($itemPath) === true && is_link($itemPath) === false)
-                        ? self::removeDirectory($itemPath)
+                        ? self::removeAppDirectory($itemPath)
                         : unlink($itemPath);
                 }
             }
