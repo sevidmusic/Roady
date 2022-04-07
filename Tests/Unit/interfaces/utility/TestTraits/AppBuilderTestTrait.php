@@ -341,6 +341,24 @@ trait AppBuilderTestTrait
         );
     }
 
+    /**
+     * Remove any Components created by the App that owns
+     * the specified AppComponentsFactory.
+     *
+     * Also, remove the App directory of the App that owns the
+     * specified AppComponentsFactory from roady's Apps directory.
+     *
+     * @param AppComponentsFactoryInterface $appComponentsFactory
+     *                                      The AppComponentsFactory
+     *                                      that belongs to the App
+     *                                      whose Components should
+     *                                      be removed from storage,
+     *                                      and whose directory
+     *                                      should be removed from
+     *                                      roady's Apps directory.
+     * @return void
+     *
+     */
     private function removeTestApp(AppComponentsFactoryInterface $appComponentsFactory): void
     {
         $appName = $appComponentsFactory->getApp()->getName();
@@ -351,6 +369,15 @@ trait AppBuilderTestTrait
         self::removeAppDirectory($pathToTestApp);
     }
 
+    /**
+     * Determine the path to the specified App in roady's Apps
+     * directory.
+     *
+     * @param string $appName The name of the App.
+     *
+     * @return string The path to the specified App in roady's Apps
+     *                directory.
+     */
     private function determinePathToTestApp(string $appName): string
     {
         return str_replace(
@@ -363,6 +390,9 @@ trait AppBuilderTestTrait
     /**
      * Remove a directory recursively so long as it exist within
      * roady's Apps directory.
+     *
+     * This method is intended to be used to remove any Apps created
+     * during testing.
      *
      * Note: If the specified $pathToTheAppsDirectory does not
      * contain the string `roady/Apps` in it's path, then the
