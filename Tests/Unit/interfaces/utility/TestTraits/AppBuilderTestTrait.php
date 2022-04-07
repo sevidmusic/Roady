@@ -348,7 +348,8 @@ trait AppBuilderTestTrait
      * Also, remove the App directory of the App that owns the
      * specified AppComponentsFactory from roady's Apps directory.
      *
-     * @param AppComponentsFactoryInterface The AppComponentsFactory
+     * @param AppComponentsFactoryInterface $appComponentsFactory
+     *                                      The AppComponentsFactory
      *                                      that belongs to the App
      *                                      whose Components should
      *                                      be removed from storage,
