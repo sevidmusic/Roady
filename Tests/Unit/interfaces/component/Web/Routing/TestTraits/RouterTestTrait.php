@@ -92,35 +92,11 @@ trait RouterTestTrait
         );
     }
 
-    public function tearDown(): void
-    {
-        $this->removeDirectory(
-            $this->getRouter()->export()['crud']->export()['storageDriver']->getStorageDirectoryPath()
-        );
-    }
-
-    private function removeDirectory(string $dir): void
-    {
-        if (is_dir($dir)) {
-            $ls = scandir($dir);
-            $contents = (is_array($ls) ? $ls : []);
-            foreach ($contents as $item) {
-                if ($item != "." && $item != "..") {
-                    $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
-                    (is_dir($itemPath) === true && is_link($itemPath) === false)
-                        ? $this->removeDirectory($itemPath)
-                        : unlink($itemPath);
-                }
-            }
-            rmdir($dir);
-        }
-    }
-
     public function testGetCrudReturnsAssignedCrud(): void
     {
         $this->assertEquals(
-            $this->getRouter()->export()['crud']->getUniqueId(),
-            $this->getRouter()->getCrud()->getUniqueId()
+            $this->getRouter()->export()['crud'],
+            $this->getRouter()->getCrud()
         );
     }
 
