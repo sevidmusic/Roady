@@ -29,6 +29,16 @@ trait DynamicOutputComponentTestTrait
 
     public static function tearDownAfterClass(): void
     {
+        /**
+         * The order of these calls matters!
+         *
+         * Clean up will fail if order of calls is not:
+         *
+         * self::removeUniqueSharedDynamicOutputFile();
+         * self::removeDuplicateDynamicOutputFiles();
+         * self::removeTestAppDynamicOutputDirectory();
+         * self::removeTestAppDirectory();
+         */
         self::removeUniqueSharedDynamicOutputFile();
         self::removeDuplicateDynamicOutputFiles();
         self::removeTestAppDynamicOutputDirectory();
@@ -37,28 +47,33 @@ trait DynamicOutputComponentTestTrait
 
     private static function getAppsDuplicateTxtFilePath(): string
     {
-        return self::getTestAppDynamicOutputDirectoryPath() . self::getDuplicateDynamicTxtFileName();
+        return self::getTestAppDynamicOutputDirectoryPath() .
+            self::getDuplicateDynamicTxtFileName();
     }
 
     private static function getAppsDuplicatePhpFilePath(): string
     {
-        return self::getTestAppDynamicOutputDirectoryPath() . self::getDuplicateDynamicPhpFileName();
+        return self::getTestAppDynamicOutputDirectoryPath() .
+            self::getDuplicateDynamicPhpFileName();
     }
 
     private static function getSharedDuplicateTxtFilePath(): string
     {
-        return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getDuplicateDynamicTxtFileName();
+        return self::expectedSharedDynamicOutputFileDirectoryPath() .
+            self::getDuplicateDynamicTxtFileName();
     }
 
     private static function getSharedDuplicatePhpFilePath(): string
     {
-        return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getDuplicateDynamicPhpFileName();
+        return self::expectedSharedDynamicOutputFileDirectoryPath() .
+            self::getDuplicateDynamicPhpFileName();
     }
 
 
     private static function getUniqueSharedPhpFilePath(): string
     {
-        return self::expectedSharedDynamicOutputFileDirectoryPath() . self::getUniqueSharedDynamicPhpFileName();
+        return self::expectedSharedDynamicOutputFileDirectoryPath() .
+            self::getUniqueSharedDynamicPhpFileName();
     }
 
     private static function createUniqueSharedDynamicOutputFile(): void
@@ -66,7 +81,9 @@ trait DynamicOutputComponentTestTrait
         $php = '<?php echo "Hello world";';
         if(!file_exists(self::getUniqueSharedPhpFilePath()))
         {
-            file_put_contents(self::getUniqueSharedPhpFilePath(), $php);
+            file_put_contents(
+                self::getUniqueSharedPhpFilePath(), $php
+            );
         }
     }
 
@@ -78,22 +95,23 @@ trait DynamicOutputComponentTestTrait
         }
     }
 
-
-
-
-
-
     private static function createAppsDuplicateDynamicOutputFiles(): void
     {
         $plainText = 'plain text';
         $php = '<?php echo "Hello world";';
         if(!file_exists(self::getAppsDuplicateTxtFilePath()))
         {
-            file_put_contents(self::getAppsDuplicateTxtFilePath(), $plainText);
+            file_put_contents(
+                self::getAppsDuplicateTxtFilePath(),
+                $plainText
+            );
         }
         if(!file_exists(self::getAppsDuplicatePhpFilePath()))
         {
-            file_put_contents(self::getAppsDuplicatePhpFilePath(), $php);
+            file_put_contents(
+                self::getAppsDuplicatePhpFilePath(),
+                $php
+            );
         }
     }
 
@@ -151,7 +169,6 @@ trait DynamicOutputComponentTestTrait
     {
         if(!is_dir(self::getTestAppDynamicOutputDirectoryPath()))
         {
-            # THIS MUST BE FIRST
             mkdir(self::getTestAppDynamicOutputDirectoryPath());
         }
     }
@@ -160,21 +177,21 @@ trait DynamicOutputComponentTestTrait
     {
         if(is_dir(self::getTestAppDynamicOutputDirectoryPath()))
         {
-            # THIS MUST BE LAST REMOVAL OR RMDIR WILL FAIL
             rmdir(self::getTestAppDynamicOutputDirectoryPath());
         }
     }
 
     private static function getTestAppDynamicOutputDirectoryPath(): string
     {
-       return self::getTestApDirectoryPath() . 'DynamicOutput' . DIRECTORY_SEPARATOR;
+        return self::getTestApDirectoryPath() .
+            'DynamicOutput' .
+            DIRECTORY_SEPARATOR;
     }
 
     private static function createTestAppDirectory(): void
     {
         if(!is_dir(self::getTestApDirectoryPath()))
         {
-            # THIS MUST BE FIRST
             mkdir(self::getTestApDirectoryPath());
         }
     }
@@ -183,7 +200,6 @@ trait DynamicOutputComponentTestTrait
     {
         if(is_dir(self::getTestApDirectoryPath()))
         {
-            # THIS MUST BE LAST REMOVAL OR RMDIR WILL FAIL
             rmdir(self::getTestApDirectoryPath());
         }
     }
@@ -195,12 +211,18 @@ trait DynamicOutputComponentTestTrait
 
     private static function getTestApDirectoryPath(): string
     {
-        return self::determineDDMSRootDirectory() . 'Apps' . DIRECTORY_SEPARATOR . self::tempAppDirectoryName() . DIRECTORY_SEPARATOR;
+        return self::determineDDMSRootDirectory() .
+            'Apps' .
+            DIRECTORY_SEPARATOR .
+            self::tempAppDirectoryName() .
+            DIRECTORY_SEPARATOR;
     }
 
     protected function setDynamicOutputComponentParentTestInstances(): void
     {
-        $this->setOutputComponent($this->getDynamicOutputComponent());
+        $this->setOutputComponent(
+            $this->getDynamicOutputComponent()
+        );
         $this->setOutputComponentParentTestInstances();
     }
 
@@ -209,7 +231,9 @@ trait DynamicOutputComponentTestTrait
         return $this->dynamicOutputComponent;
     }
 
-    public function setDynamicOutputComponent(DynamicOutputComponentInterface $dynamicOutputComponent): void
+    public function setDynamicOutputComponent(
+        DynamicOutputComponentInterface $dynamicOutputComponent
+    ): void
     {
         $this->dynamicOutputComponent = $dynamicOutputComponent;
     }
@@ -225,6 +249,19 @@ trait DynamicOutputComponentTestTrait
     }
 
     /**
+     * Return an array of test arguments to be passed to the
+     * __construct method of a DynamicOutputComponent.
+     *
+     * The array structure will be:
+     *
+     * array{
+     *     0: CoreStorable,
+     *     1: CoreSwitchable,
+     *     2: CorePositionable,
+     *     3: string,
+     *     4: string
+     * }
+     *
      * @return array{0: CoreStorable, 1: CoreSwitchable, 2: CorePositionable, 3: string, 4: string}
      */
     public function getDynamicOutputComponentTestArgs(): array
@@ -244,12 +281,24 @@ trait DynamicOutputComponentTestTrait
 
     private static function determineCurrentSubDirectoryPath(): string
     {
-        return 'Tests' . DIRECTORY_SEPARATOR . 'Unit' . DIRECTORY_SEPARATOR . 'interfaces' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'TestTraits';
+        return 'Tests' .
+            DIRECTORY_SEPARATOR .
+            'Unit' .
+            DIRECTORY_SEPARATOR .
+            'interfaces' .
+            DIRECTORY_SEPARATOR .
+            'component' .
+            DIRECTORY_SEPARATOR .
+            'TestTraits';
     }
 
     private function determineAppsSubDirectoryPath(): string
     {
-        return 'Apps' . DIRECTORY_SEPARATOR . $this->getDynamicOutputComponent()->export()['appDirectoryName'] . DIRECTORY_SEPARATOR;
+        return 'Apps' .
+            DIRECTORY_SEPARATOR .
+            $this->getDynamicOutputComponent()
+                 ->export()['appDirectoryName'] .
+            DIRECTORY_SEPARATOR;
     }
 
     private static function determineDDMSRootDirectory(): string
@@ -263,12 +312,17 @@ trait DynamicOutputComponentTestTrait
 
     private function expectedCurrentAppDirectoryPath(): string
     {
-        return self::determineDDMSRootDirectory() . $this->determineAppsSubDirectoryPath();
+        return self::determineDDMSRootDirectory() .
+            $this->determineAppsSubDirectoryPath();
     }
 
     private static function getRandomName(): string
     {
-        return 'foo' . rand(100000,99999) . 'bar' . rand(100,999) . 'baz' . rand(10000000,99999999);
+        return 'foo' .
+            rand(100000,99999) .
+            'bar' .
+            rand(100,999) .
+            'baz' . rand(10000000,99999999);
     }
 
     private static function getExistingAppDynamicPhpFileName(): string
@@ -276,31 +330,34 @@ trait DynamicOutputComponentTestTrait
         return self::getDuplicateDynamicPhpFileName();
     }
 
-/*    private static function getExistingSharedDynamicPhpFileName(): string
-    {
-        return 'CurrentRequestDisplay.php';
-    }
-*/
     private static function expectedSharedDynamicOutputFileDirectoryPath(): string
     {
 
-        return self::determineDDMSRootDirectory() . 'SharedDynamicOutput' . DIRECTORY_SEPARATOR;
+        return self::determineDDMSRootDirectory() .
+            'SharedDynamicOutput' .
+            DIRECTORY_SEPARATOR;
     }
 
     private function expectedAppsDynamicOutputFileDirectoryPath(): string
     {
-        return $this->expectedCurrentAppDirectoryPath() . 'DynamicOutput' . DIRECTORY_SEPARATOR;
+        return $this->expectedCurrentAppDirectoryPath() .
+            'DynamicOutput' . DIRECTORY_SEPARATOR;
     }
 
     public function testGetAppsDynamicOutputFilesDirectoryPathReturnsExpectedPath(): void
     {
-        if(!is_dir($this->expectedAppsDynamicOutputFileDirectoryPath()))
+        if(
+            !is_dir(
+                $this->expectedAppsDynamicOutputFileDirectoryPath()
+            )
+        )
         {
             $this->expectException(RuntimeException::class);
         }
         $this->assertEquals(
             $this->expectedAppsDynamicOutputFileDirectoryPath(),
-            $this->getDynamicOutputComponent()->getAppsDynamicOutputFilesDirectoryPath()
+            $this->getDynamicOutputComponent()
+                 ->getAppsDynamicOutputFilesDirectoryPath()
         );
     }
 
