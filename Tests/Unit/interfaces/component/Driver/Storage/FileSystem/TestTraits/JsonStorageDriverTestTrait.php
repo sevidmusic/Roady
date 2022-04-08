@@ -357,5 +357,10 @@ trait JsonStorageDriverTestTrait
         $this->setSwitchableComponentParentTestInstances();
     }
 
+    public function tearDown(): void
+    {
+        $this->getJsonStorageDriver()
+             ->delete($this->getJsonStorageDriver());
+    }
 }
 
