@@ -411,10 +411,7 @@ trait WebUITestTrait
         if (
             $dir !== '/'
             &&
-            str_contains(
-                'roady' . DIRECTORY_SEPARATOR . 'Apps',
-                $dir
-            )
+            str_contains($dir, 'roady' . DIRECTORY_SEPARATOR . 'Apps')
             &&
             is_dir($dir)
         ) {
@@ -423,13 +420,20 @@ trait WebUITestTrait
             foreach ($contents as $item) {
                 if ($item != "." && $item != "..") {
                     $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
-                    (is_dir($itemPath) === true && is_link($itemPath) === false)
-                        ? self::removeAppDirectory($itemPath)
-                        : unlink($itemPath);
+                    match(is_dir($itemPath) === true && is_link($itemPath) === false)
+                    {
+                        true => self::removeAppDirectory($itemPath),
+                        default => self::removeFile($itemPath),
+                    };
                 }
             }
             rmdir($dir);
         }
+    }
+
+    private static function removeFile(string $path): void
+    {
+        unlink($path);
     }
 
     private function expectClosingBodyAndClosingHtmlTags(): void
