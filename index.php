@@ -10,22 +10,22 @@ use roady\classes\primary\Switchable;
 use roady\classes\utility\AppBuilder;
 
 $currentRequest = new Request(
-    new Storable('CurrentRequest', 
-        'Requests', 
+    new Storable('CurrentRequest',
+        'Requests',
         'Index'
-    ), 
+    ),
     new Switchable()
 );
 
 $appComponentsFactory = AppBuilder::getAppsAppComponentsFactory(
-    basename(__DIR__), 
+    basename(__DIR__),
     $currentRequest->getUrl()
 );
 
 try {
     $userInterface = new WebUI(
         $appComponentsFactory->getPrimaryFactory()->buildStorable(
-            'AppUI', 
+            'AppUI',
             'Index'
         ),
         $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
@@ -34,7 +34,7 @@ try {
         ),
         new Router(
             $appComponentsFactory->getPrimaryFactory()->buildStorable(
-                'AppRouter', 
+                'AppRouter',
                 'Index'
             ),
             $appComponentsFactory->getPrimaryFactory()->buildSwitchable(),
@@ -132,7 +132,7 @@ try {
             <span style='font-size:5rem;'>&#128528;</span>
         </h1>
         <p>Sorry, your request could not be resolved.</p>
-        <p>Request: 
+        <p>Request:
             <a href="<?php echo $currentRequest->getUrl(); ?>">
                 <?php echo $currentRequest->getUrl(); ?>
             </a>

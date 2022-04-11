@@ -14,27 +14,8 @@ use roady\classes\component\Web\Routing\Request;
 use roady\classes\component\Web\Routing\Response;
 
 /**
- * Methods:
- *
- * private function createTestApp(string $appName, string $domain): void
- * private function createTestGlobalResponse(string $appName, string $domain): void
- * private function createTestOutputComponent(string $appName, string $domain): void
- * private function createTestRequest(string $appName, string $domain): void
- * private function createTestResponse(string $appName, string $domain): void
- * private function determinAppsLocation(AppComponentsFactoryInterface $appComponentsFactory): string
- * private function determinePathToDdmsExecutable(): string
- * private function determinePathToTestApp(string $appName): string
- * private function getRandomDomain(): string
- * private function getRandomName(string $type): string
- * private function registerExpectedGlobalResponse(string $name, int|float $position): void
- * private function registerExpectedOutputComponent(string $name, string $output): void
- * private function registerExpectedRequest(string $name, string $relativeUrl): void
- * private function registerExpectedResponse(string $name, int|float $position): void
- * private function removeTestApp(AppComponentsFactoryInterface $appComponentsFactory): void
- * private function verifyExpectedOutputComponentsExist(AppComponentsFactoryInterface $appComponentsFactory): void
- * private function verifyExpectedRequestsExist(AppComponentsFactoryInterface $appComponentsFactory): void
- * private function verifyExpectedResponsesExist(AppComponentsFactoryInterface $appComponentsFactory): void
- * private static function removeAppDirectory(string $pathToTheAppsDirectory): void
+ * The AppBuilderTestTrait defines tests for implementations of the
+ * roady\interfaces\utility\AppBuilder interface.
  *
  * Test Methods:
  *
@@ -47,6 +28,86 @@ use roady\classes\component\Web\Routing\Response;
  * public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedAppsNameMatchesTheSpecifiedAppName(): void
  * public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedDomiansUrlMatchesTheSpecifiedDomain(): void
  * public function testGetAppsAppComponentsFactoryReturnsAppComponentsFactoryThatMatchesAppsStoredAppComponentsFactoryInstance(): void
+ *
+ * Methods:
+ *
+ * private function createTestApp(
+ *     string $appName,
+ *     string $domain
+ * ): void
+ *
+ * private function createTestGlobalResponse(
+ *     string $appName,
+ *     string $domain
+ * ): void
+ *
+ * private function createTestOutputComponent(
+ *     string $appName,
+ *     string $domain
+ * ): void
+ *
+ * private function createTestRequest(
+ *     string $appName,
+ *     string $domain
+ * ): void
+ *
+ * private function createTestResponse(
+ *     string $appName,
+ *     string $domain
+ * ): void
+ *
+ * private function determinAppsLocation(
+ *     AppComponentsFactoryInterface $appComponentsFactory
+ * ): string
+ *
+ * private function determinePathToDdmsExecutable(): string
+ *
+ * private function determinePathToTestApp(string $appName): string
+ *
+ * private function getRandomDomain(): string
+ *
+ * private function getRandomName(string $type): string
+ *
+ * private function registerExpectedGlobalResponse(
+ *     string $name,
+ *     int|float $position
+ * ): void
+ *
+ * private function registerExpectedOutputComponent(
+ *     string $name,
+ *     string $output
+ * ): void
+ *
+ * private function registerExpectedRequest(
+ *     string $name,
+ *     string $relativeUrl
+ * ): void
+ *
+ * private function registerExpectedResponse(
+ *     string $name,
+ *     int|float $position
+ * ): void
+ *
+ * private function removeTestApp(
+ *     AppComponentsFactoryInterface $appComponentsFactory
+ * ): void
+ *
+ * private function verifyExpectedOutputComponentsExist(
+ *     AppComponentsFactoryInterface $appComponentsFactory
+ * ): void
+ *
+ * private function verifyExpectedRequestsExist(
+ *     AppComponentsFactoryInterface $appComponentsFactory
+ * ): void
+ *
+ * private function verifyExpectedResponsesExist(
+ *     AppComponentsFactoryInterface $appComponentsFactory
+ * ): void
+ *
+ * private static function removeAppDirectory(
+ *     string $pathToTheAppsDirectory
+ * ): void
+ *
  */
 trait AppBuilderTestTrait
 {
@@ -55,21 +116,30 @@ trait AppBuilderTestTrait
      * @var array<string, string> $expectedOutputComponentNamesAndOutput
      */
     private array $expectedOutputComponentNamesAndOutput = [];
+
     /**
      * @var array<string, string> $expectedRequestNamesAndUrls
      */
     private array $expectedRequestNamesAndUrls = [];
+
     /**
      * @var array<string, int|float> $expectedResponseNamesAndPositions
      */
+
     private array $expectedResponseNamesAndPositions = [];
+
     /**
      * @var array<string, int|float> $expectedGlobalResponseNamesAndPositions
      */
     private array $expectedGlobalResponseNamesAndPositions = [];
+
     private string $outputComponentContainer = 'TestOutput';
+
+    /**
+     * @devnote: Response container is Response::RESPONSE_CONTAINER
+     */
     private string $requestContainer = 'TestRequests';
-    # @devnote: Response container is Response::RESPONSE_CONTAINER
+
 
     private function getRandomName(string $type): string
     {
@@ -91,6 +161,7 @@ trait AppBuilderTestTrait
             $appComponentsFactory->getApp()->getName(),
             'The name of the App assigned to the AppComponentsFactory MUST match the name supplied to the $appName parameter.'
         );
+        $this->removeTestApp($appComponentsFactory);
     }
 
     public function testGetAppsAppComponentsFactoryReturnsAnAppComponentsFactoryInstanceWhoseAssignedDomiansUrlMatchesTheSpecifiedDomain(): void
@@ -103,6 +174,7 @@ trait AppBuilderTestTrait
             $appComponentsFactory->getApp()->getAppDomain()->getUrl(),
             'The url assigned to the AppComponentsFactory\'s App\'s assigned domain MUST matc the url passed to the $domain parameter.'
         );
+        $this->removeTestApp($appComponentsFactory);
     }
 
     public function testGetAppsAppComponentsFactoryReturnsAppComponentsFactoryThatMatchesAppsStoredAppComponentsFactoryInstance(): void
@@ -130,7 +202,12 @@ trait AppBuilderTestTrait
             $appComponentsFactorySecondInstance,
             'getAppsAppComponentsFactory() MUST return a AppComponentsFactory that matches the App\'s stored AppComponentsFactory. If the App\'s stored AppComponentsFactory does not exist, getAppsAppComponentsFactory() MUST create it.'
         );
-
+        /** @var AppComponentsFactoryInterface $appComponentsFactoryFirstInstance */
+        $this->removeTestApp($appComponentsFactoryFirstInstance);
+        /** @var AppComponentsFactoryInterface $appComponentsFactoryStoredInstance */
+        $this->removeTestApp($appComponentsFactoryStoredInstance);
+        /** @var AppComponentsFactoryInterface $appComponentsFactorySecondInstance */
+        $this->removeTestApp($appComponentsFactorySecondInstance);
     }
 
     public function testBuildAppIncreasesNumberOfStoredComponentsIfAppDefinesComponents(): void
@@ -234,7 +311,7 @@ trait AppBuilderTestTrait
                 );
             }
         }
-
+        $this->removeTestApp($appComponentsFactory);
     }
 
     public function testBuildAppStoresAppsConfiguredResponses(): void
@@ -332,6 +409,7 @@ trait AppBuilderTestTrait
                 );
             }
         }
+        $this->removeTestApp($appComponentsFactory);
     }
 
     private function determinAppsLocation(AppComponentsFactoryInterface $appComponentsFactory): string
@@ -365,6 +443,7 @@ trait AppBuilderTestTrait
         foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $component) {
             $appComponentsFactory->getComponentCrud()->delete($component);
         }
+        $appComponentsFactory->getComponentCrud()->delete($appComponentsFactory);
         $pathToTestApp = $this->determinePathToTestApp($appName);
         self::removeAppDirectory($pathToTestApp);
     }
