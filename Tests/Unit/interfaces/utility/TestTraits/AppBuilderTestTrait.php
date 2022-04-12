@@ -499,15 +499,6 @@ trait AppBuilderTestTrait
                 }
             }
             rmdir($pathToTheAppsDirectory);
-            error_log(
-                'roady Test Log:' .
-                PHP_EOL .
-                '    ' .
-                AppBuilderTestTrait::class .
-                '::removeAppDirectory("' . $pathToTheAppsDirectory . '")' .
-                ' removed specified directory.'
-            );
-
         }
     }
 
