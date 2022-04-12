@@ -2,19 +2,19 @@
 
 namespace UnitTests\interfaces\component\UserInterface\TestTraits;
 
-use roady\classes\component\Web\App as CoreApp;
-use roady\classes\component\Web\Routing\Request as CoreRequest;
-use roady\classes\primary\Positionable as CorePositionable;
-use roady\classes\primary\Storable as CoreStorable;
-use roady\classes\primary\Switchable as CoreSwitchable;
-use roady\interfaces\component\Component as ComponentInterface;
-use roady\interfaces\component\Factory\App\AppComponentsFactory as AppComponentsFactoryInterface;
-use roady\interfaces\component\Factory\Factory as FactoryInterface;
-use roady\interfaces\component\OutputComponent as OutputComponentInterface;
-use roady\interfaces\component\UserInterface\WebUI as WebUIInterface;
+use roady\classes\component\Web\App;
+use roady\classes\component\Web\Routing\Request;
+use roady\classes\primary\Positionable;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
+use roady\interfaces\component\Component;
+use roady\interfaces\component\Factory\App\AppComponentsFactory;
+use roady\interfaces\component\Factory\Factory;
+use roady\interfaces\component\OutputComponent;
+use roady\interfaces\component\UserInterface\WebUI;
 use roady\interfaces\component\Web\Routing\Request as RequestInterface;
-use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
-use RuntimeException as PHPRuntimeException;
+use roady\interfaces\component\Web\Routing\Response;
+use RuntimeException;
 use rig\classes\command\ConfigureAppOutput;
 use rig\classes\ui\CommandLineUI;
 /**
@@ -43,23 +43,23 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function expectClosingBodyAndClosingHtmlTags(): void
  * private function expectCssLinkForApp(string $appName, string $cssFileName): void
  * private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
- * private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(ResponseInterface $response): void
+ * private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(Response $response): void
  * private function expectHtmlLinkTagsForGlobalCssFilesDefinedByBuiltApps(): void
  * private function expectLinksForStylesheetsDefinedByBuiltApps(): void
- * private function expectResponseOutput(ResponseInterface $response): void
+ * private function expectResponseOutput(Response $response): void
  * private function getCurrentRequest(): RequestInterface
  * private function getSortedResponsesExpectedByTest(): array
  * private function hasCssFileExtension(string $stylesheetName): bool
- * private function isAAppComponentsFactory(ComponentInterface $component): bool {
+ * private function isAAppComponentsFactory(Component $component): bool {
  * private function isAGlobalStylesheet(string $stylesheetName): bool
  * private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
  * private static function removeAppDirectory(string $dir): void
  * protected function expectedOutput(): string
  * protected function setWebUIParentTestInstances(): void
  * protected function tearDown(): void
- * public function getWebUI(): WebUIInterface
+ * public function getWebUI(): WebUI
  * public function getWebUITestArgs(): array
- * public function setWebUI(WebUIInterface $webUI): void
+ * public function setWebUI(WebUI $webUI): void
  * public static function getRequest(): RequestInterface
  */
 
@@ -93,7 +93,7 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
 trait WebUITestTrait
 {
 
-    private WebUIInterface $webUI;
+    private WebUI $webUI;
     private string $doctype = '<!DOCTYPE html>' . PHP_EOL;
     private string $openHtml = '<html lang="en">' . PHP_EOL;
     private string $openHead = '<head>' . PHP_EOL;
@@ -118,7 +118,7 @@ trait WebUITestTrait
         $this->expectDoctypeOpeningHtmlAndOpeningHeadTags();
         $this->expectHtmlLinkTagsForGlobalCssFilesDefinedByBuiltApps();
         /**
-         * @var ResponseInterface $response
+         * @var Response $response
          */
         foreach($this->getSortedResponsesExpectedByTest() as $response)
         {
@@ -135,11 +135,11 @@ trait WebUITestTrait
     }
 
     /**
-     * @return array<string, ResponseInterface>
+     * @return array<string, Response>
      */
     private function getSortedResponsesExpectedByTest(): array
     {
-        /** @var array<string, ResponseInterface> $sortedResponses */
+        /** @var array<string, Response> $sortedResponses */
         $sortedResponses = $this->sortPositionables(...$this->expectedResponses());
         return $sortedResponses;
     }
@@ -265,31 +265,29 @@ trait WebUITestTrait
     }
 
     /**
-     * @return array<int, string> Array of the names of the Apps that are currenlty built
+     * @return array<int, string> Array of the names of the Apps
+     *                            that are currently built
      */
     private function determineBuiltAppNames(): array
     {
         $builtAppNames = [];
-        $factories = $this->getRoutersComponentCrud()->readAll(
-            CoreApp::deriveAppLocationFromRequest($this->getWebUI()->getRouter()->getRequest()),
-            FactoryInterface::CONTAINER
-        );
-        /**
-         * @var FactoryInterface $factory
-         */
-        foreach($factories as $factory) {
-            if($this->isAAppComponentsFactory($factory)) {
-                /** @var AppComponentsFactoryInterface $factory */
-                array_push($builtAppNames, $factory->getApp()->getName());
-            }
+        foreach(
+            $this->getExistingAppComponentsFactories()
+            as
+            $appComponentsFactory
+        ) {
+            array_push(
+                $builtAppNames,
+                $appComponentsFactory->getApp()->getName()
+            );
         }
         return $builtAppNames;
     }
 
-    private function isAAppComponentsFactory(ComponentInterface $component): bool {
+    private function isAAppComponentsFactory(Component $component): bool {
         $implements = class_implements($component);
         if(is_array($implements)) {
-            return in_array(AppComponentsFactoryInterface::class, $implements);
+            return in_array(AppComponentsFactory::class, $implements);
         }
         return false;
     }
@@ -302,8 +300,17 @@ trait WebUITestTrait
     private function buildApp(string $appName): void
     {
         try {
-            exec(PHP_BINARY . ' ' . escapeshellarg($this->determinePathToAppsComponentsPhp($appName)) . ' http://DEFAULT');
-        } catch(PHPRuntimeException $e) { /** Failed to build App */ }
+            exec(
+                PHP_BINARY .
+                ' ' .
+                escapeshellarg(
+                    $this->determinePathToAppsComponentsPhp(
+                        $appName
+                    )
+                ) .
+                ' http://WebUITestTraitTest.test.domain'
+            );
+        } catch(RuntimeException $e) { /** Failed to build App */ }
     }
 
     protected function setWebUIParentTestInstances(): void
@@ -312,12 +319,12 @@ trait WebUITestTrait
         $this->setResponseUIParentTestInstances();
     }
 
-    public function getWebUI(): WebUIInterface
+    public function getWebUI(): WebUI
     {
         return $this->webUI;
     }
 
-    public function setWebUI(WebUIInterface $webUI): void
+    public function setWebUI(WebUI $webUI): void
     {
         $this->webUI = $webUI;
     }
@@ -328,13 +335,13 @@ trait WebUITestTrait
     public function getWebUITestArgs(): array
     {
         return [
-            new CoreStorable(
+            new Storable(
                 'MockWebUIName',
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
-            new CoreSwitchable(),
-            new CorePositionable(),
+            new Switchable(),
+            new Positionable(),
             self::getRouter()
         ];
     }
@@ -356,7 +363,7 @@ trait WebUITestTrait
     }
 
 
-    private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(ResponseInterface $response): void
+    private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(Response $response): void
     {
         if($response->getPosition() >= 0 && !str_contains($this->expectedOutput, $this->closeHead . $this->openBody)) {
             $this->expectedOutput .= $this->closeHead . $this->openBody;
@@ -441,24 +448,24 @@ trait WebUITestTrait
         $this->expectedOutput .= $this->closeBody . $this->closeHtml;
     }
 
-    private function expectResponseOutput(ResponseInterface $response): void
+    private function expectResponseOutput(Response $response): void
     {
-        /** @var array<int, OutputComponentInterface> $outputComponents */
+        /** @var array<int, OutputComponent> $outputComponents */
         $outputComponents = [];
         foreach($response->getOutputComponentStorageInfo() as $storable)
         {
             /**
-             * @var OutputComponentInterface $component
+             * @var OutputComponent $component
              */
             $component = $this->getRoutersComponentCrud()->read($storable);
-            if($this->isProperImplementation(OutputComponentInterface::class, $component))
+            if($this->isProperImplementation(OutputComponent::class, $component))
             {
                 array_push($outputComponents, $component);
             }
         }
         $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
         /**
-         * @var OutputComponentInterface $outputComponent
+         * @var OutputComponent $outputComponent
          */
         foreach($sortedOutputComponents as $outputComponent)
         {
@@ -468,16 +475,37 @@ trait WebUITestTrait
 
     public static function getRequest(): RequestInterface
     {
-        $request = new CoreRequest(
-            new CoreStorable(
+        $request = new Request(
+            new Storable(
                 'ResponseUICurrentRequest' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
-            new CoreSwitchable()
+            new Switchable()
         );
         $request->import(['url' => './?request=' . self::$requestedStylesheetNameA . '&request=' . self::$requestedStylesheetNameB]);
         return $request;
     }
 
+    /**
+     * @return array<int, AppComponentsFactory>
+     */
+    private function getExistingAppComponentsFactories(): array
+    {
+        $factories = $this->getRoutersComponentCrud()->readAll(
+            App::deriveAppLocationFromRequest(
+                $this->getWebUI()->getRouter()->getRequest()
+            ),
+            Factory::CONTAINER
+        );
+        $appComponentFactories = [];
+        foreach($factories as $factory) {
+            if($this->isAAppComponentsFactory($factory)) {
+                /** @var AppComponentsFactory $factory) */
+                array_push($appComponentFactories, $factory);
+            }
+        }
+        return $appComponentFactories;
+    }
 }
+
