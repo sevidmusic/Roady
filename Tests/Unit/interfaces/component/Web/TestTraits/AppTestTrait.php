@@ -2,17 +2,17 @@
 
 namespace UnitTests\interfaces\component\Web\TestTraits;
 
+use RuntimeException;
 use roady\abstractions\component\Web\App as AppBase;
-use roady\classes\component\Component as CoreComponent;
-use roady\classes\component\Crud\ComponentCrud as CoreComponentCrud;
+use roady\classes\component\Component;
+use roady\classes\component\Crud\ComponentCrud;
 use roady\classes\component\Driver\Storage\FileSystem\JsonStorageDriver;
-use roady\classes\component\Web\App as CoreApp;
-use roady\classes\component\Web\Routing\Request as CoreRequest;
-use roady\classes\primary\Storable as CoreStorable;
-use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\classes\component\Web\App;
+use roady\classes\component\Web\Routing\Request;
+use roady\classes\primary\Storable;
+use roady\classes\primary\Switchable;
 use roady\interfaces\component\Web\App as AppInterface;
 use roady\interfaces\component\Web\Routing\Request as RequestInterface;
-use RuntimeException;
 
 trait AppTestTrait
 {
@@ -49,13 +49,13 @@ trait AppTestTrait
     protected function getMockRequest(): RequestInterface
     {
         if (!isset($this->mockRequest)) {
-            $this->mockRequest = new CoreRequest(
-                new CoreStorable(
+            $this->mockRequest = new Request(
+                new Storable(
                     "MockRequest",
                     "Temp",
                     "Temp"
                 ),
-                new CoreSwitchable()
+                new Switchable()
             );
             $this->mockRequest->import(['url' => $this->getRandomUrl()]);
         }
@@ -66,22 +66,22 @@ trait AppTestTrait
     {
         $urls = [
             // Well formed urls
-            'http://192.168.33.10:80',
-            'http://192.168.33.10:80/index.php',
-            'http://192.168.33.10:80/index.php?foo=bar&baz=bazzer',
-            'http://dcms.dev',
-            'http://dcms.dev/index.php',
-            'http://dcms.dev/index.php?foo=bar',
+            'http://000.000.00.00:00/index.php?foo=bar&baz=bazzer',
+            'http://roady.dev',
+            'http://roady.dev/index.php',
+            'http://roady.dev/index.php?foo=bar',
+            'https://roady.tech',
             // Malformed urls
-            '//192.168.33.10:80',
-            'http:192.168.33.10:80/index.php',
+            '//000.000.00.00:00',
+            'http:000.000.00.00:00/index.php',
             '/index.php?foo=bar&baz=bazzer',
             '/',
             './',
             '../',
-            'dcms.dev/index.php',
-            'dcms.dev',
-            'dcms',
+            'roady.dev/index.php',
+            'roady.dev',
+            'roady',
+            'foo/bar/baz/bazzer',
         ];
         return $urls[array_rand($urls)];
     }
@@ -95,37 +95,36 @@ trait AppTestTrait
         );
     }
 
-    public function testDeriveAppNameLocationReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrStringDEFAULTIfUrlHostCantBeDetermined(): void
+    public function testDeriveAppLocationFromRequestReturnsAlphaNumericStringFormOfValueReturnedByParsingSpecifiedRequestsUrlToGetHostOrTheString_AppDeriveAppLocationFromRequestMethodFailedToDeriveAppLocationFromRequest_IfUrlHostCantBeDetermined(): void
     {
         $mockRequest = $this->getMockRequest();
-        $mockRequest->import(['url' => $this->getRandomUrl()]);
         $host = parse_url($mockRequest->getUrl(), PHP_URL_HOST);
         $port = parse_url($mockRequest->getUrl(), PHP_URL_PORT);
         $hostPort = $host . strval($port);
-        $expectedNameLocation = preg_replace(
+        $expectedLocation = preg_replace(
             "/[^A-Za-z0-9]/",
             '',
             $hostPort
         );
-        if (empty($expectedNameLocation)) {
-            $expectedNameLocation = 'DEFAULT';
+        if (empty($expectedLocation)) {
+            $expectedLocation = 'AppDeriveAppLocationFromRequestMethodFailedToDeriveAppLocationFromRequest';
         }
         $this->assertEquals(
-            $expectedNameLocation,
-            $this->getApp()::deriveAppLocationFromRequest($this->getMockRequest())
+            $expectedLocation,
+            $this->getApp()::deriveAppLocationFromRequest($mockRequest)
         );
     }
 
     public function testLocationWasSetUsingDeriveAppNameLocationFromRequestMethod(): void
     {
-        $expectedNameLocation = CoreApp::deriveAppLocationFromRequest($this->getMockRequest());
+        $expectedNameLocation = App::deriveAppLocationFromRequest($this->getMockRequest());
         $this->assertEquals($expectedNameLocation, $this->getApp()->getLocation());
         $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getLocation());
     }
 
     public function testNameWasSetUsingDeriveAppNameLocationFromRequestMethodIfNameWasNotSpecified(): void
     {
-        $expectedNameLocation = CoreApp::deriveAppLocationFromRequest($this->getMockRequest());
+        $expectedNameLocation = App::deriveAppLocationFromRequest($this->getMockRequest());
         $this->assertEquals($expectedNameLocation, $this->getApp()->getName());
         $this->assertEquals($expectedNameLocation, $this->getApp()->export()['storable']->getName());
     }
@@ -133,16 +132,15 @@ trait AppTestTrait
     public function testNameWasSetToSpecifiedNameIfNameWasSpecified(): void
     {
         $expectedName = "HelloWorld";
-        $namedApp = new CoreApp($this->getMockRequest(), new CoreSwitchable(), $expectedName);
+        $namedApp = new App($this->getMockRequest(), new Switchable(), $expectedName);
         $this->assertEquals($expectedName, $namedApp->getName());
         $this->assertEquals($expectedName, $namedApp->export()['storable']->getName());
     }
 
-
     private function purgeAppStorage(): void
     {
         $installedApps = $this->getMockCrud()->readAll(
-            CoreApp::deriveAppLocationFromRequest($this->getMockRequest()),
+            App::deriveAppLocationFromRequest($this->getMockRequest()),
             AppInterface::APP_CONTAINER
         );
         foreach ($installedApps as $storable) {
@@ -150,26 +148,17 @@ trait AppTestTrait
         }
     }
 
-    protected function getMockCrud(): CoreComponentCrud
+    protected function getMockCrud(): ComponentCrud
     {
-        return new CoreComponentCrud(
-            new CoreStorable('MockCrud', 'TEMP', 'TEMP'),
-            new CoreSwitchable(),
+        return new ComponentCrud(
+            new Storable('MockCrud', 'TEMP', 'TEMP'),
+            new Switchable(),
             new JsonStorageDriver(
-                new CoreStorable('MockStandardStorageDriver', 'Temp', 'Temp'),
-                new CoreSwitchable()
+                new Storable('MockStandardStorageDriver', 'Temp', 'Temp'),
+                new Switchable()
             )
         );
     }
-
-
-
-
-
-
-
-
-
 
     protected function setAppParentTestInstances(): void
     {
