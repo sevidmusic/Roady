@@ -32,12 +32,16 @@ abstract class App extends SwitchableComponentBase implements AppInterface
 
     public static function deriveAppLocationFromRequest(RequestInterface $request): string
     {
-        $nameLocation = preg_replace(
+        $location = preg_replace(
             "/[^A-Za-z0-9]/",
             '',
             parse_url($request->getUrl(), PHP_URL_HOST) . strval(parse_url($request->getUrl(), PHP_URL_PORT))
         );
-        return (empty($nameLocation) === true ? 'DEFAULT' : $nameLocation);
+        return (
+            empty($location) === true
+            ? 'AppDeriveAppLocationFromRequestMethodFailedToDeriveAppLocationFromRequest'
+            : $location
+        );
     }
 
     private static function isAnApp(ComponentInterface $component): bool

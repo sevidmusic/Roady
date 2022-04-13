@@ -81,7 +81,7 @@ trait ResponseTestTrait
     public function testRespondsToRequestReturnsTrueForAnyRequestWhoseAssignedUrlContainsAGetParameterNamed_request_WhoseAssignedValueMatchesRespectiveResponsesName(): void
     {
         $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName = $this->getMockRequest();
-        $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName->import(['url' => 'http://DEFAULT/index.php?request=' . $this->getResponse()->getName()]);
+        $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName->import(['url' => 'http://ResponseTestTrait.test.domain/index.php?request=' . $this->getResponse()->getName()]);
         $this->assertTrue(
             $this->getResponse()->respondsToRequest(
                 $unassignedRequestUrlDefinesGetParam_request_WithValueResponseName,
