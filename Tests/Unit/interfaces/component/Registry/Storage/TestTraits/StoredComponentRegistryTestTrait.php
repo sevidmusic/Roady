@@ -7,12 +7,10 @@ use roady\interfaces\component\Crud\ComponentCrud as ComponentCrudInterface;
 use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as StoredComponentRegistryInterface;
 
 /*
- * Methods:
- *
- * private function classImplements(string|object $class): array {
- * protected function setStoredComponentRegistryParentTestInstances(): void
- * public function getStoredComponentRegistry(): StoredComponentRegistryInterface
- * public function setStoredComponentRegistry(StoredComponentRegistryInterface $storedComponentRegistry): void
+ * The StoredComponentRegistryInterface defines tests for
+ * implementations of the
+ * roady\interfaces\component\Registry\Storage\StoredComponentRegistry
+ * interface.
  *
  * Test Methods:
  *
@@ -35,6 +33,13 @@ use roady\interfaces\component\Registry\Storage\StoredComponentRegistry as Store
  * public function testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
  * public function testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryPropertysArray(): void
  * public function testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
+ *
+ * Methods:
+ *
+ * private function classImplements(string|object $class): array {
+ * protected function setStoredComponentRegistryParentTestInstances(): void
+ * public function getStoredComponentRegistry(): StoredComponentRegistryInterface
+ * public function setStoredComponentRegistry(StoredComponentRegistryInterface $storedComponentRegistry): void
  *
  */
 
