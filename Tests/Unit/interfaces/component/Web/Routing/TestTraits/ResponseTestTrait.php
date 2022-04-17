@@ -76,6 +76,7 @@ trait ResponseTestTrait
             ),
             'respondsToRequest() must return true for assigned request.'
         );
+        $this->getMockCrud()->delete($request);
     }
 
     public function testRespondsToRequestReturnsTrueForAnyRequestWhoseAssignedUrlContainsAGetParameterNamed_request_WhoseAssignedValueMatchesRespectiveResponsesName(): void
@@ -115,9 +116,9 @@ trait ResponseTestTrait
     private function getMockStorable(): CoreStorable
     {
         return new CoreStorable(
-            'MockName',
-            'MockLocation',
-            'MockContainer'
+            'ResponseTestTraitMockTestComponent',
+            'ResponseTestTraitMockLocation',
+            'ResponseTestTraitMockContainer'
         );
     }
 
