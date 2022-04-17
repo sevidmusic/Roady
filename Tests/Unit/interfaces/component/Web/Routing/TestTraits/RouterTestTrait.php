@@ -5,6 +5,7 @@ namespace UnitTests\interfaces\component\Web\Routing\TestTraits;
 use roady\classes\component\Web\Routing\Response as CoreResponse;
 use roady\classes\primary\Storable as CoreStorable;
 use roady\classes\primary\Switchable as CoreSwitchable;
+use roady\interfaces\component\Component;
 use roady\interfaces\component\Crud\ComponentCrud;
 use roady\interfaces\component\Web\Routing\Request;
 use roady\interfaces\component\Web\Routing\Response as ResponseInterface;
@@ -33,6 +34,11 @@ trait RouterTestTrait
 {
 
     private RouterInterface $router;
+
+    /**
+     * @var array<int, Component> $storedComponents
+     */
+    private array $storedComponents = [];
 
     public function testGetResponseContainerReturnsStringWhoseValueMatchesTheResponseInterfacesResponseContainerConstant(): void
     {
@@ -108,12 +114,31 @@ trait RouterTestTrait
         );
     }
 
+    private function storeComponent(Component $component): void
+    {
+        if($this->getRouter()->getCrud()->create($component)) {
+            array_push($this->storedComponents, $component);
+        }
+    }
+
+    public function tearDown(): void
+    {
+        foreach($this->storedComponents as $storedComponent) {
+            $this->removeStoredComponent($storedComponent);
+        }
+    }
+
+    private function removeStoredComponent(Component $component): void
+    {
+        $this->getRouter()->getCrud()->delete($component);
+    }
+
     public function testGetResponsesReturnsArrayOfResponsesThatAreNotCorrupted(): void
     {
         $response = $this->getStandardResponse();
         $response->addRequestStorageInfo($this->getRouter()->getRequest());
-        $this->getRouter()->getCrud()->create($this->getRouter()->getRequest());
-        $this->getRouter()->getCrud()->create($response);
+        $this->storeComponent($this->getRouter()->getRequest());
+        $this->storeComponent($response);
         $this->assertFalse(
             empty(
             $this->getRouter()->getResponses(
@@ -146,10 +171,10 @@ trait RouterTestTrait
     public function testGetResponsesReturnsArrayOfResponsesThatRespondToAssignedRequest(): void
     {
         $response = $this->getStandardResponse();
-        $this->getRouter()->getCrud()->create($this->getRouter()->getRequest());
+        $this->storeComponent($this->getRouter()->getRequest());
         $response->addRequestStorageInfo($this->getRouter()->getRequest());
-        $this->getRouter()->getCrud()->create($response);
-        $this->getRouter()->getCrud()->create($this->getStandardResponse());
+        $this->storeComponent($response);
+        $this->storeComponent($this->getStandardResponse());
         foreach ($this->getRouter()->getResponses($response->getLocation(), $response->getContainer()) as $response) {
             $this->assertTrue(
                 $response->respondsToRequest($this->getRouter()->getRequest(), $this->getRouter()->getCrud()),
@@ -164,9 +189,9 @@ trait RouterTestTrait
         $enabledResponse->addRequestStorageInfo($this->getRouter()->getRequest());
         $disabledResponse = $this->getStandardResponse('DisabledResponse');
         $disabledResponse->addRequestStorageInfo($this->getRouter()->getRequest());
-        $this->getRouter()->getCrud()->create($enabledResponse);
-        $this->getRouter()->getCrud()->create($disabledResponse);
-        $this->getRouter()->getCrud()->create($this->getRouter()->getRequest());
+        $this->storeComponent($enabledResponse);
+        $this->storeComponent($disabledResponse);
+        $this->storeComponent($this->getRouter()->getRequest());
         foreach ($this->getRouter()->getResponses($enabledResponse->getLocation(), $enabledResponse->getContainer()) as $enabledResponse) {
             $this->assertTrue(
                 $enabledResponse->getState(),
