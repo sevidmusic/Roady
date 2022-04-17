@@ -37,11 +37,19 @@ use roady\interfaces\component\Registry\Storage\StoredComponentRegistry;
  * Methods:
  *
  * private function classImplements(string|object $class): array
- * protected function setStoredComponentRegistryParentTestInstances(): void
  * public function getStoredComponentRegistry(): StoredComponentRegistry
+ * private function removeStoredComponent(
+ *     Component $component
+ * ): void
  * public function setStoredComponentRegistry(
  *     StoredComponentRegistry $storedComponentRegistry
  * ): void
+ * protected function setStoredComponentRegistryParentTestInstances(): void
+ * private function storeAndRegister(
+ *     Component $component,
+ *     StoredComponentRegistry $storedComponentRegistry
+ * ): void
+ * private function storeComponent(Component $component): void
  *
  */
 
@@ -52,6 +60,11 @@ trait StoredComponentRegistryTestTrait
      * @var StoredComponentRegistry $storedComponentRegistry
      */
     private StoredComponentRegistry $storedComponentRegistry;
+
+    /**
+     * @var array<int, Component> $storedComponents
+     */
+    private array $storedComponents = [];
 
     public function testExportingAcceptedImplementationReturnsNamespaceOfADefinedComponentImplementation(): void
     {
@@ -97,11 +110,9 @@ trait StoredComponentRegistryTestTrait
 
     public function testEmptyRegistryAssignsAnEmptyArrayToTheRegistryProperty(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
-        $this->getStoredComponentRegistry()->registerComponent(
-            $this->getStoredComponentRegistry()
+        $this->storeAndRegister(
+            $this->getStoredComponentRegistry(),
+            $this->getStoredComponentRegistry(),
         );
         $this->getStoredComponentRegistry()->emptyRegistry();
         $this->assertEquals(
@@ -109,9 +120,6 @@ trait StoredComponentRegistryTestTrait
             $this->getStoredComponentRegistry()
                  ->export()['registry']
         );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete($this->getStoredComponentRegistry());
     }
 
     public function testGetAcceptedImplementationReturnsSameNamespaceAssignedToAcceptedImplementationPropertyOnInstantiation(): void
@@ -135,22 +143,16 @@ trait StoredComponentRegistryTestTrait
 
     public function testGetRegisteredComponentsReadsAllRegisteredComponentsFromStorageAndReturnsThemInAnArray(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create(
-                 $this->getStoredComponentRegistry()
-                      ->export()['componentCrud']
-             );
-        $this->getStoredComponentRegistry()->registerComponent(
+        $this->storeAndRegister(
+            $this->getStoredComponentRegistry(),
             $this->getStoredComponentRegistry()
         );
-        $this->getStoredComponentRegistry()->registerComponent(
+        $this->storeAndRegister(
             $this->getStoredComponentRegistry()
-                 ->export()['componentCrud']
+                 ->export()['componentCrud'],
+            $this->getStoredComponentRegistry()
         );
+        /** Update the stored StoredComponentRegistry **/
         $this->getStoredComponentRegistry()
              ->export()['componentCrud']
              ->update(
@@ -181,27 +183,18 @@ trait StoredComponentRegistryTestTrait
 
     public function testPurgeRegistryRemovesAllStorablesThatReferenceComponentsThatNoLongerExistInStorageFromTheRegistryPropertysArray(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create(
-                 $this->getStoredComponentRegistry()
-                      ->export()['componentCrud']
-             );
-        $this->getStoredComponentRegistry()->registerComponent(
+        $this->storeAndRegister(
+            $this->getStoredComponentRegistry(),
             $this->getStoredComponentRegistry()
         );
-        $this->getStoredComponentRegistry()->registerComponent(
+        $this->storeAndRegister(
             $this->getStoredComponentRegistry()
-                 ->export()['componentCrud']
+                 ->export()['componentCrud'],
+            $this->getStoredComponentRegistry()
         );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete(
-                 $this->getStoredComponentRegistry()
-             );
+        $this->removeStoredComponent(
+            $this->getStoredComponentRegistry()
+        );
         $this->getStoredComponentRegistry()->purgeRegistry();
         $this->assertTrue(
             !in_array(
@@ -221,12 +214,6 @@ trait StoredComponentRegistryTestTrait
                 true
             )
         );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete(
-                 $this->getStoredComponentRegistry()
-                      ->export()['componentCrud']
-             );
     }
 
     public function testRegisterComponentAddsComponentsStorableToRegistryPropertysArrayIfComponentExistsInStorageAndIsNotAlreadyRegisteredAndIsAnAcceptedImplementation(): void
@@ -239,9 +226,9 @@ trait StoredComponentRegistryTestTrait
                      StoredComponentRegistry::class
                  ]
              );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
+        $this->storeComponent(
+            $this->getStoredComponentRegistry()
+        );
         $this->getStoredComponentRegistry()
              ->registerComponent(
                  $this->getStoredComponentRegistry()
@@ -255,6 +242,13 @@ trait StoredComponentRegistryTestTrait
                 true
             )
         );
+    }
+
+    public function tearDown(): void
+    {
+        foreach($this->storedComponents as $storedComponent) {
+            $this->removeStoredComponent($storedComponent);
+        }
     }
 
     public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentDoesNotExistInStorage(): void
@@ -274,9 +268,9 @@ trait StoredComponentRegistryTestTrait
 
     public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsAlreadyRegistered(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
+        $this->storeComponent(
+            $this->getStoredComponentRegistry()
+        );
         $this->getStoredComponentRegistry()
              ->registerComponent(
                  $this->getStoredComponentRegistry()
@@ -292,9 +286,6 @@ trait StoredComponentRegistryTestTrait
                      ->export()['registry']
             )
         );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete($this->getStoredComponentRegistry());
     }
 
     public function testRegisterComponentDoesNotAddComponentsStorableToRegistryPropertysArrayIfComponentIsNotAnAcceptedImplementation(): void
@@ -307,12 +298,10 @@ trait StoredComponentRegistryTestTrait
                      StoredComponentRegistry::class
                  ]
              );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create(
-                 $this->getStoredComponentRegistry()
-                      ->export()['componentCrud']
-             );
+        $this->storeComponent(
+            $this->getStoredComponentRegistry()
+                 ->export()['componentCrud']
+        );
         $this->getStoredComponentRegistry()
              ->registerComponent(
                  $this->getStoredComponentRegistry()
@@ -325,16 +314,18 @@ trait StoredComponentRegistryTestTrait
                      ->export()['registry']
             )
         );
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete(
-                 $this->getStoredComponentRegistry()
-                      ->export()['componentCrud']
-             );
     }
 
     public function testRegisterComponentReturnsFalseIfComponentWasNotRegistered(): void
     {
+        $status = $this->getStoredComponentRegistry()
+                       ->registerComponent(
+                           $this->getStoredComponentRegistry()
+                       );
+        $this->assertFalse($status);
+        $this->storeComponent(
+            $this->getStoredComponentRegistry()
+        );
         $this->getStoredComponentRegistry()
              ->import(
                  ['acceptedImplementation' => ComponentCrud::class]
@@ -343,27 +334,12 @@ trait StoredComponentRegistryTestTrait
                        ->registerComponent(
                            $this->getStoredComponentRegistry()
                        );
-        if (
-            !in_array(
-                $this->getStoredComponentRegistry()
-                     ->export()['storable'],
-                 $this->getStoredComponentRegistry()
-                      ->export()['registry'],
-                true
-            )
-        ) {
-            $this->assertFalse($status);
-        }
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete($this->getStoredComponentRegistry());
+        $this->assertFalse($status);
     }
 
     public function testRegisterComponentReturnsTrueIfComponentWasRegistered(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
+        $this->storeComponent($this->getStoredComponentRegistry());
         $status = $this->getStoredComponentRegistry()
                        ->registerComponent(
                            $this->getStoredComponentRegistry()
@@ -379,10 +355,6 @@ trait StoredComponentRegistryTestTrait
         ) {
             $this->assertTrue($status);
         }
-        $this->getStoredComponentRegistry()->export()['componentCrud']
-                                           ->delete(
-                                               $this->getStoredComponentRegistry()
-                                           );
     }
 
     public function testRegistryPropertyIsSetToAnEmptyArrayPostInstantiation(): void
@@ -394,13 +366,10 @@ trait StoredComponentRegistryTestTrait
 
     public function testUnRegisterComponentRemovesSpecifiedStorableFromRegistryPropertysArray(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
-        $this->getStoredComponentRegistry()
-             ->registerComponent(
-                 $this->getStoredComponentRegistry()
-             );
+        $this->storeAndRegister(
+            $this->getStoredComponentRegistry(),
+            $this->getStoredComponentRegistry()
+        );
         $this->getStoredComponentRegistry()
              ->unRegisterComponent(
                  $this->getStoredComponentRegistry()
@@ -414,10 +383,6 @@ trait StoredComponentRegistryTestTrait
                 true
             )
         );
-
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete($this->getStoredComponentRegistry());
     }
 
     public function testUnRegisterComponentReturnsFalseIfSpecifiedStorableWasNotRemovedFromRegistryPropertysArray(): void
@@ -431,13 +396,10 @@ trait StoredComponentRegistryTestTrait
 
     public function testUnRegisterComponentReturnsTrueIfSpecifiedStorableWasRemovedFromRegistryPropertysArray(): void
     {
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->create($this->getStoredComponentRegistry());
-        $this->getStoredComponentRegistry()
-             ->registerComponent(
-                 $this->getStoredComponentRegistry()
-             );
+        $this->storeAndRegister(
+            $this->getStoredComponentRegistry(),
+            $this->getStoredComponentRegistry()
+        );
         $status = $this->getStoredComponentRegistry()
                        ->unRegisterComponent(
                            $this->getStoredComponentRegistry()
@@ -451,13 +413,27 @@ trait StoredComponentRegistryTestTrait
         ) {
             $this->assertTrue($status);
         }
-        $this->getStoredComponentRegistry()
-             ->export()['componentCrud']
-             ->delete($this->getStoredComponentRegistry());
     }
 
     /**
-     * @return array<string, string>
+     * Return an array of the interfaces which are implemented
+     * by the specified class or object instance
+     *
+     * Note: If a class is specified, and the specified class does
+     *       not exist, an empty array will be returned.
+     *
+     * @param class-string $class The name of a existing class or
+     *                            interface, including the fully
+     *                            qualified namespace, or an object
+     *                            instance.
+     *
+     * @return array<string, string> An array of the interfaces
+     *                               which are implemented by
+     *                               the specified class or
+     *                               object instance, or an
+     *                               empty array if a class
+     *                               that does not exist is
+     *                               specified.
      */
     private function classImplements(string|object $class): array
     {
@@ -465,15 +441,18 @@ trait StoredComponentRegistryTestTrait
         return (is_array($classImplements) ? $classImplements : []);
     }
 
-    protected function setStoredComponentRegistryParentTestInstances(): void
-    {
-        $this->setComponent($this->getStoredComponentRegistry());
-        $this->setComponentParentTestInstances();
-    }
-
     public function getStoredComponentRegistry(): StoredComponentRegistry
     {
         return $this->storedComponentRegistry;
+    }
+
+    private function removeStoredComponent(
+        Component $component
+    ): void
+    {
+        $this->getStoredComponentRegistry()
+             ->export()['componentCrud']
+             ->delete($component);
     }
 
     public function setStoredComponentRegistry(
@@ -483,4 +462,59 @@ trait StoredComponentRegistryTestTrait
         $this->storedComponentRegistry = $storedComponentRegistry;
     }
 
+    protected function setStoredComponentRegistryParentTestInstances(): void
+    {
+        $this->setComponent($this->getStoredComponentRegistry());
+        $this->setComponentParentTestInstances();
+    }
+
+    /**
+     * Store the specified Component, and register it with the
+     * specified StoredComponentRegistry.
+     *
+     * @param Component $component The Component to store.
+     *
+     * @param StoredComponentRegistry $storedComponentRegistry
+     *                                The StoredComponentRegistry
+     *                                to register the stored
+     *                                Component with.
+     *
+     * @return void
+     */
+    private function storeAndRegister(
+        Component $component,
+        StoredComponentRegistry $storedComponentRegistry
+    ): void
+    {
+
+        /** Store the specified Component **/
+        $this->storeComponent($component);
+        /**
+         * Register the specified Component with the specified
+         * StoredComponentRegistry
+         */
+        $storedComponentRegistry->registerComponent(
+            $component
+        );
+    }
+
+    /**
+     * Store the specified Component.
+     *
+     * @param Component $component The Component to store.
+     *
+     * @return void
+     */
+    private function storeComponent(Component $component): void
+    {
+        /** Store the specified Component **/
+        if(
+            $this->getStoredComponentRegistry()
+                 ->export()['componentCrud']
+                 ->create($component)
+        ) {
+             array_push($this->storedComponents, $component);
+        }
+    }
 }
+
