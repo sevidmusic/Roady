@@ -17,9 +17,9 @@ class ComponentTest extends ExportableTest
                 '\roady\abstractions\component\Component',
                 [
                     new Storable(
-                        'MockComponentName',
-                        'MockComponentLocation',
-                        'MockComponentContainer'
+                        'AbstractComponentTestMockComponentName',
+                        'AbstractComponentTestMockComponentLocation',
+                        'AbstractComponentTestMockComponentContainer'
                     )
                 ]
             )

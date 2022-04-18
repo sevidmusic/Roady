@@ -14,9 +14,9 @@ class StorageDriverTest extends AbstractStandardTest
         $this->setStorageDriver(
             new StorageDriver(
                 new Storable(
-                    'StandardName',
-                    'StandardLocation',
-                    'StandardContainer'
+                    'StorageDriverTestStandardName',
+                    'StorageDriverTestStandardLocation',
+                    'StorageDriverTestStandardContainer'
                 ),
                 new Switchable()
             )

@@ -18,24 +18,24 @@ class RouterTest extends SwitchableComponentTest
     {
         $request = new Request(
             new Storable(
-                'MockRequest',
-                'MockRequestedLocation',
-                'MockRequestContainer'
+                'RouterTestMockRequestName',
+                'RouterTestMockRequestedLocation',
+                'RouterTestMockRequestContainer'
             ),
             new Switchable()
         );
         $crud = new Crud(
             new Storable(
-                'MockCrudName',
-                'MockCrudLocation',
-                'MockCrudContainer'
+                'RouterTestMockCrudName',
+                'RouterTestMockCrudLocation',
+                'RouterTestMockCrudContainer'
             ),
             new Switchable(),
             new JsonStorageDriver(
                 new Storable(
-                    'MockStorageDriverName',
-                    'MockStorageDriverLocation',
-                    'MockStorageDriverContainer'
+                    'RouterTestMockStorageDriverName',
+                    'RouterTestMockStorageDriverLocation',
+                    'RouterTestMockStorageDriverContainer'
                 ),
                 new Switchable()
             )
@@ -46,9 +46,9 @@ class RouterTest extends SwitchableComponentTest
                 '\roady\abstractions\component\Web\Routing\Router',
                 [
                     new Storable(
-                        'MockRouterName',
-                        'MockRouterLocation',
-                        'MockRouterContainer'
+                        'RouterTestMockRouterName',
+                        'RouterTestMockRouterLocation',
+                        'RouterTestMockRouterContainer'
                     ),
                     new Switchable(),
                     $request,

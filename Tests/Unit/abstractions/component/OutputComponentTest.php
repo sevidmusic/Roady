@@ -24,9 +24,9 @@ class OutputComponentTest extends SwitchableComponentTest
                 '\roady\abstractions\component\OutputComponent',
                 [
                     new Storable(
-                        'MockOutputComponentName',
-                        'MockOutputComponentLocation',
-                        'MockOutputComponentContainer'
+                        'AbstractOutputComponentTestMockOutputComponentName',
+                        'AbstractOutputComponentTestMockOutputComponentLocation',
+                        'AbstractOutputComponentTestMockOutputComponentContainer'
                     ),
                     new Switchable(),
                     new Positionable()

@@ -13,7 +13,11 @@ class StorableTest extends IdentifiableTest
         $this->setStorable(
             $this->getMockForAbstractClass(
                 '\roady\abstractions\primary\Storable',
-                ['MockName', 'MockLocation', 'MockContainer']
+                [
+                    'AbstractStorableTestMockStorableName',
+                    'AbstractStorableTestMockStorableLocation',
+                    'AbstractStorableTestMockStorableContainer'
+                ]
             )
         );
         $this->setIdentifiable($this->getStorable());

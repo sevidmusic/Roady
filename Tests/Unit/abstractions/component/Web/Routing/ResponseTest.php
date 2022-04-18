@@ -18,9 +18,9 @@ class ResponseTest extends SwitchableComponentTest
                 '\roady\abstractions\component\Web\Routing\Response',
                 [
                     new Storable(
-                        'MockResponseName',
-                        'MockResponseLocation',
-                        'MockResponseContainer'
+                        'AbstractResponseTestMockResponseName',
+                        'AbstractResponseTestMockResponseLocation',
+                        'AbstractResponseTestMockResponseContainer'
                     ),
                     new Switchable()
                 ]

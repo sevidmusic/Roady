@@ -352,7 +352,6 @@ trait JsonStorageDriverTestTrait
     {
         foreach($this->writtenComponents as $component) {
             $this->getJsonStorageDriver()->delete($component);
-            error_log('Deleted ' . $component->getName());
         }
         $this->getJsonStorageDriver()
              ->delete($this->getJsonStorageDriver());

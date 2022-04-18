@@ -20,22 +20,22 @@ class StoredComponentRegistryTest extends ComponentTest
                 '\roady\abstractions\component\Registry\Storage\StoredComponentRegistry',
                 [
                     new Storable(
-                        'MockStoredComponentRegistryName',
-                        'MockStoredComponentRegistryLocation',
-                        'MockStoredComponentRegistryContainer'
+                        'AbstractStoredComponentRegistryTestMockStoredComponentRegistryName',
+                        'AbstractStoredComponentRegistryTestMockStoredComponentRegistryLocation',
+                        'AbstractStoredComponentRegistryTestMockStoredComponentRegistryContainer'
                     ),
                     new ComponentCrud(
                         new Storable(
-                            'ComponentCrud',
-                            'Temp',
-                            'Temp'
+                            'AbstractStoredComponentRegistryTestComponentCrudName',
+                            'AbstractStoredComponentRegistryTestTempComponentCrudLocation',
+                            'AbstractStoredComponentRegistryTestComponentCrudContainer'
                         ),
                         new Switchable(),
                         new JsonStorageDriver(
                             new Storable(
-                                'StandardStorageDriver',
-                                'Temp',
-                                'Temp'
+                                'AbstractStoredComponentRegistryTestJsonStorageDriverName',
+                                'AbstractStoredComponentRegistryTestJsonStorageDriverLocation',
+                                'AbstractStoredComponentRegistryTestJsonStorageDriverContainer'
                             ),
                             new Switchable()
                         )

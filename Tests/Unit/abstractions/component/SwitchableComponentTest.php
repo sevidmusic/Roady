@@ -17,9 +17,9 @@ class SwitchableComponentTest extends ComponentTest
                 '\roady\abstractions\component\SwitchableComponent',
                 [
                     new Storable(
-                        'MockSwitchableComponentName',
-                        'MockSwitchableComponentLocation',
-                        'MockSwitchableComponentContainer'
+                        'AbstractSwitchableComponentTestMockSwitchableComponentName',
+                        'AbstractSwitchableComponentTestMockSwitchableComponentLocation',
+                        'AbstractSwitchableComponentTestMockSwitchableComponentContainer'
                     ),
                     new Switchable()
                 ]
