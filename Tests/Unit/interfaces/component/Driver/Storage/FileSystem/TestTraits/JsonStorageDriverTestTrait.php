@@ -4,14 +4,19 @@ namespace UnitTests\interfaces\component\Driver\Storage\FileSystem\TestTraits;
 
 use roady\classes\primary\Storable;
 use roady\classes\primary\Switchable;
-use roady\interfaces\component\Component as ComponentInterface;
-use roady\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver as JsonStorageDriverInterface;
+use roady\interfaces\component\Component;
+use roady\interfaces\component\Driver\Storage\FileSystem\JsonStorageDriver;
 use roady\interfaces\primary\Storable as StorableInterface;
 
 trait JsonStorageDriverTestTrait
 {
 
-    private JsonStorageDriverInterface $jsonStorageDriver;
+    private JsonStorageDriver $jsonStorageDriver;
+
+    /**
+     * @var array<int, Component>
+     */
+    private array $writtenComponents = [];
 
     public function testSTORAGE_DIRECTORY_NAMEConstantIsAssignedAnAlphaNumericString(): void
     {
@@ -29,7 +34,7 @@ trait JsonStorageDriverTestTrait
         );
         return str_replace(
             $namespacePath, '', __DIR__
-        ) . '.' . JsonStorageDriverInterface::STORAGE_DIRECTORY_NAME;
+        ) . '.' . JsonStorageDriver::STORAGE_DIRECTORY_NAME;
     }
 
     public function testGetStorageDirectoryPathReturnsExpectedStorageDirectoryPath(): void
@@ -42,13 +47,13 @@ trait JsonStorageDriverTestTrait
         );
     }
 
-    public function getJsonStorageDriver(): JsonStorageDriverInterface
+    public function getJsonStorageDriver(): JsonStorageDriver
     {
         return $this->jsonStorageDriver;
     }
 
     public function setJsonStorageDriver(
-        JsonStorageDriverInterface $jsonStorageDriver
+        JsonStorageDriver $jsonStorageDriver
     ): void
     {
         $this->jsonStorageDriver = $jsonStorageDriver;
@@ -61,9 +66,8 @@ trait JsonStorageDriverTestTrait
     public function testWriteAddsComponentsStorableToStorageIndex(): void
     {
         $this->turnJsonOn();
-        $this
-            ->getJsonStorageDriver()
-            ->write($this->getJsonStorageDriver());
+        $this->getJsonStorageDriver()
+             ->write($this->getJsonStorageDriver());
         $storageIndex = json_decode(
             $this->fileGetContents(
                 $this->getExpectedStorageIndexPath()
@@ -98,14 +102,12 @@ trait JsonStorageDriverTestTrait
     public function testDeleteRemovesSpecifiedComponent(): void
     {
         $this->turnJsonOn();
-        $this
-            ->getJsonStorageDriver()
-            ->write($this->getJsonStorageDriver());
-        $this
-            ->getJsonStorageDriver()
-            ->delete(
-                $this->getJsonStorageDriver()->export()['storable']
-            );
+        $this->writeComponent($this->getJsonStorageDriver());
+        $this->getJsonStorageDriver()
+             ->delete(
+                 $this->getJsonStorageDriver()
+                      ->export()['storable']
+             );
         $this->assertFalse(
             file_exists(
                 $this->getExpectedStoragePath(
@@ -136,14 +138,11 @@ trait JsonStorageDriverTestTrait
     public function testDeleteRemovesComponentsStorableFromStorageIndex(): void
     {
         $this->turnJsonOn();
-        $this
-            ->getJsonStorageDriver()
-            ->write($this->getJsonStorageDriver());
-        $this
-            ->getJsonStorageDriver()
-            ->delete(
-                $this->getJsonStorageDriver()->export()['storable']
-            );
+        $this->writeComponent($this->getJsonStorageDriver());
+        $this->getJsonStorageDriver()
+             ->delete(
+                 $this->getJsonStorageDriver()->export()['storable']
+             );
         $storageIndex = json_decode(
             $this->fileGetContents(
                 $this->getExpectedStorageIndexPath()
@@ -216,9 +215,7 @@ trait JsonStorageDriverTestTrait
     public function testReadReturnsComponentSpecifiedByStorable(): void
     {
         $this->turnJsonOn();
-        $this->getJsonStorageDriver()->write(
-            $this->getJsonStorageDriver()
-        );
+        $this->writeComponent($this->getJsonStorageDriver());
         $storedComponent = $this->getJsonStorageDriver()->read(
             $this->getJsonStorageDriver()
         );
@@ -231,9 +228,7 @@ trait JsonStorageDriverTestTrait
     public function testReadAllReturnsArrayOfAllComponentsStoredInSpecifiedContainerAtSpecifiedLocation(): void
     {
         $this->turnJsonOn();
-        $this->getJsonStorageDriver()->write(
-            $this->getJsonStorageDriver()
-        );
+        $this->writeComponent($this->getJsonStorageDriver());
         $this->assertTrue(
             in_array(
                 $this->getJsonStorageDriver(),
@@ -271,7 +266,7 @@ trait JsonStorageDriverTestTrait
         }
     }
 
-    private function getStoredComponent(): ComponentInterface
+    private function getStoredComponent(): Component
     {
         return $this->getJsonStorageDriver()->read(
             $this->getJsonStorageDriver()->export()['storable']
@@ -281,9 +276,7 @@ trait JsonStorageDriverTestTrait
     public function testReadReturnsMockComponentIfStateIsFalse(): void
     {
         $this->turnJsonOn();
-        $this->getJsonStorageDriver()->write(
-            $this->getJsonStorageDriver()
-        );
+        $this->writeComponent($this->getJsonStorageDriver());
         $this->turnJsonOff();
         $this->assertNotEquals(
             $this->getJsonStorageDriver()->getUniqueId(),
@@ -317,9 +310,7 @@ trait JsonStorageDriverTestTrait
     public function testDeleteReturnsFalseAndDoesNotDeleteIfStateIsFalse(): void
     {
         $this->turnJsonOn();
-        $this->getJsonStorageDriver()->write(
-            $this->getJsonStorageDriver()
-        );
+        $this->writeComponent($this->getJsonStorageDriver());
         $this->turnJsonOff();
         $this->assertFalse(
             $this->getJsonStorageDriver()->delete(
@@ -359,8 +350,19 @@ trait JsonStorageDriverTestTrait
 
     public function tearDown(): void
     {
+        foreach($this->writtenComponents as $component) {
+            $this->getJsonStorageDriver()->delete($component);
+            error_log('Deleted ' . $component->getName());
+        }
         $this->getJsonStorageDriver()
              ->delete($this->getJsonStorageDriver());
+    }
+
+    private function writeComponent(Component $component): void
+    {
+        if($this->getJsonStorageDriver()->write($component)) {
+            array_push($this->writtenComponents, $component);
+        }
     }
 }
 
