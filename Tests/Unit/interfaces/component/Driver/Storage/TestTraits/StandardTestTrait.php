@@ -30,16 +30,33 @@ trait StandardTestTrait
             $this->setJsonStorageDriver($this->getStorageDriver());
         } else {
             /**
-             * @devNote: Allow future Storage Drivers to implement the StorageDriverInterface and still pass
-             *           the StorageDriverTestTrait's tests by mocking JsonStorageDriver if StorageDriver
-             *           implementation being tested is not compatible with JsonStorageDriverTestTrait
+             * @devNote: roady's core implementation of the
+             *           StorageDriver interface is in fact
+             *           an extension of roady's core implementation
+             *           of the JsonStorageDriver interface.
+             *
+             *           The StandardTestTrait, which is used to
+             *           test roady's core StorageDriver, does
+             *           not define any of it's own tests, instead
+             *           it uses the JsonStorageDriverTestTrait's
+             *           tests.
+             *
+             *           The following call to setJsonStorageDriver()
+             *           is needed to allow future Storage Drivers to
+             *           implement the StorageDriverInterface still
+             *           pass the StandardTestTrait's tests by mocking
+             *           a JsonStorageDriver if the StorageDriver
+             *           implementation being tested is not
+             *           compatible with the
+             *           JsonStorageDriverTestTrait.
              */
+            $prefix = 'StandardTestTraitMockJsonStorageDriverUsedForCompatibilityWithJsonStorageDriverTestTrait';
             $this->setJsonStorageDriver(
                 new CoreJsonStorageDriver(
                     new CoreStorable(
-                        'DEFAULT_JSON_STORAGE_DRIVER',
-                        $this->getStorageDriver()->getLocation(),
-                        $this->getStorageDriver()->getContainer()
+                        $prefix . 'Name',
+                        $prefix . 'Location',
+                        $prefix . 'Container'
                     ),
                     new CoreSwitchable()
                 )

@@ -18,9 +18,9 @@ class RequestTest extends SwitchableComponentTest
                 '\roady\abstractions\component\Web\Routing\Request',
                 [
                     new Storable(
-                        'MockRequestName',
-                        'MockRequestLocation',
-                        'MockRequestContainer'
+                        'AbstractRequestTestMockRequestName',
+                        'AbstractRequestTestMockRequestLocation',
+                        'AbstractRequestTestMockRequestContainer'
                     ),
                     new Switchable()
                 ]

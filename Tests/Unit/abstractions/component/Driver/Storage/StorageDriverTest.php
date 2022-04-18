@@ -18,9 +18,9 @@ class StorageDriverTest extends JsonStorageDriverTest
                 '\roady\abstractions\component\Driver\Storage\StorageDriver',
                 [
                     new Storable(
-                        'MockStandardName',
-                        'MockStandardLocation',
-                        'MockStandardContainer'
+                        'AbstractStorageDriverTestMockStorageDriverName',
+                        'AbstractStorageDriverTestMockStorageDriverLocation',
+                        'AbstractStorageDriverTestMockStorageDriverContainer'
                     ),
                     new Switchable()
                 ]

@@ -12,9 +12,9 @@ class StorableTest extends AbstractStorableTest
     {
         $this->setStorable(
             new Storable(
-                'MockName',
-                'MockLocation',
-                'MockContainer'
+                'StorableTestMockStorableName',
+                'StorableTestMockStorableLocation',
+                'StorableTestMockStorableContainer'
             )
         );
         $this->setIdentifiable($this->getStorable());

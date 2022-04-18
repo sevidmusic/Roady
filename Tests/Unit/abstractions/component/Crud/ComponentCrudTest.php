@@ -20,16 +20,16 @@ class ComponentCrudTest extends SwitchableComponentTest
                 ComponentCrud::class,
                 [
                     new Storable(
-                        'MockComponentCrudName',
-                        'MockComponentCrudLocation',
-                        'MockComponentCrudContainer'
+                        'ComponentCrudTestTraitMockComponentCrudName',
+                        'ComponentCrudTestTraitMockComponentCrudLocation',
+                        'ComponentCrudTestTraitMockComponentCrudContainer'
                     ),
                     new Switchable(),
                     new StorageDriver(
                         new Storable(
-                            'MockStorageDriverName',
-                            'MockStorageDriverLocation',
-                            'MockStorageDriverContainer'
+                            'ComponentCrudTestTraitMockStorageDriverName',
+                            'ComponentCrudTestTraitMockStorageDriverLocation',
+                            'ComponentCrudTestTraitMockStorageDriverContainer'
                         ),
                         new Switchable()
                     )
