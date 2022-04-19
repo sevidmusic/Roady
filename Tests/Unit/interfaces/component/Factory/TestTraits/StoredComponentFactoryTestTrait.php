@@ -238,4 +238,23 @@ trait StoredComponentFactoryTestTrait
         return $this->app;
     }
 
+    public function tearDown(): void
+    {
+        foreach(
+            $this->getStoredComponentFactory()
+                 ->getStoredComponentRegistry()
+                 ->getRegisteredComponents() as $component
+        ) {
+            $this->getStoredComponentFactory()
+                 ->getStoredComponentRegistry()
+                 ->getComponentCrud()
+                 ->delete($component);
+        }
+
+        $this->getStoredComponentFactory()
+             ->getStoredComponentRegistry()
+             ->getComponentCrud()
+             ->delete($this->getStoredComponentFactory());
+    }
+
 }
