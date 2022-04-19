@@ -324,4 +324,23 @@ trait AppComponentsFactoryTestTrait
             $this->getMockStoredComponentRegistry()
         ];
     }
+
+    public function tearDown(): void
+    {
+        foreach(
+            $this->getAppComponentsFactory()
+                 ->getStoredComponentRegistry()
+                 ->getRegisteredComponents() as $component
+        ) {
+            $this->getAppComponentsFactory()
+                 ->getStoredComponentRegistry()
+                 ->getComponentCrud()
+                 ->delete($component);
+        }
+
+        $this->getAppComponentsFactory()
+             ->getStoredComponentRegistry()
+             ->getComponentCrud()
+             ->delete($this->getAppComponentsFactory());
+    }
 }

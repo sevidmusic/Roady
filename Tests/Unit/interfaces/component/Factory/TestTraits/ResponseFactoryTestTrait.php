@@ -290,4 +290,21 @@ trait ResponseFactoryTestTrait
         $this->setStoredComponentFactoryParentTestInstances();
     }
 
+    public function tearDown(): void
+    {
+        foreach(
+            $this->getResponseFactory()
+                 ->getStoredComponentRegistry()
+                 ->getRegisteredComponents() as $component
+        ) {
+            $this->getResponseFactory()
+                 ->getStoredComponentRegistry()
+                 ->getComponentCrud()
+                 ->delete($component);
+        }
+        $this->getResponseFactory()
+             ->getStoredComponentRegistry()
+             ->getComponentCrud()
+             ->delete($this->getResponseFactory());
+    }
 }

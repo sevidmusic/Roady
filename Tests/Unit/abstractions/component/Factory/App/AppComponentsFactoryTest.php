@@ -14,6 +14,9 @@ class AppComponentsFactoryTest extends CoreStoredComponentFactoryTest
         AppComponentsFactoryTestTrait::getOutputComponentFactory insteadof OutputComponentFactoryTestTrait;
         AppComponentsFactoryTestTrait::getRequestFactory insteadof RequestFactoryTestTrait;
         AppComponentsFactoryTestTrait::getResponseFactory insteadof ResponseFactoryTestTrait;
+        AppComponentsFactoryTestTrait::tearDown insteadof OutputComponentFactoryTestTrait;
+        AppComponentsFactoryTestTrait::tearDown insteadof RequestFactoryTestTrait;
+        AppComponentsFactoryTestTrait::tearDown insteadof ResponseFactoryTestTrait;
     }
 
     public function setUp(): void
