@@ -20,7 +20,7 @@ trait PrimaryFactoryTestTrait
         $this->assertTrue(
             in_array(
                 IdentifiableInterface::class,
-                $this->classImplements($this->getPrimaryFactory()->buildIdentifiable('AssignedName'))
+                $this->classImplements($this->getPrimaryFactory()->buildIdentifiable('PrimaryFactoryTestTraitIdentifiableAssignedName'))
             )
         );
     }
@@ -37,7 +37,7 @@ trait PrimaryFactoryTestTrait
 
     public function testBuildIdentifiableReturnsIdentifiableImplementationInstanceWhoseAssignedNameMatchesSpecifiedName(): void
     {
-        $expectedName = 'ExpectedName';
+        $expectedName = 'PrimaryFactoryTestTraitIdentifiableExpectedName';
         $identifiable = $this->getPrimaryFactory()->buildIdentifiable($expectedName);
         $this->assertEquals($expectedName, $identifiable->getName());
     }
@@ -49,8 +49,8 @@ trait PrimaryFactoryTestTrait
                 StorableInterface::class,
                 $this->classImplements(
                     $this->getPrimaryFactory()->buildStorable(
-                        'AssignedName',
-                        'AssignedContainer'
+                        'PrimaryFactoryTestTraitStorableAssignedName',
+                        'PrimaryFactoryTestTraitStorableAssignedContainer'
                     )
                 )
             )
@@ -59,19 +59,19 @@ trait PrimaryFactoryTestTrait
 
     public function testBuildStorableReturnsStorableImplementationInstanceWhoseAssignedNameMatchesSpecifiedName(): void
     {
-        $expectedName = 'ExpectedName';
+        $expectedName = 'PrimaryFactoryTestTraitStorableExpectedName';
         $storable = $this->getPrimaryFactory()->buildStorable(
             $expectedName,
-            'AssignedContainer'
+            'PrimaryFactoryTestTraitStorableAssignedContainer'
         );
         $this->assertEquals($expectedName, $storable->getName());
     }
 
     public function testBuildStorableReturnsStorableImplementationInstanceWhoseAssignedContainerMatchesSpecifiedContainer(): void
     {
-        $expectedContainer = 'ExpectedContainer';
+        $expectedContainer = 'PrimaryFactoryTestTraitStorableExpectedContainer';
         $storable = $this->getPrimaryFactory()->buildStorable(
-            'AssignedName',
+            'PrimaryFactoryTestTraitStorableAssignedName',
             $expectedContainer
         );
         $this->assertEquals($expectedContainer, $storable->getContainer());
@@ -81,7 +81,7 @@ trait PrimaryFactoryTestTrait
     {
         $this->assertEquals(
             $this->getPrimaryFactory()->export()['app']->getLocation(),
-            $this->getPrimaryFactory()->buildStorable('AssignedName', 'AssignedContainer')->getLocation(),
+            $this->getPrimaryFactory()->buildStorable('PrimaryFactoryTestTraitStorableAssignedName', 'PrimaryFactoryTestTraitStorableAssignedContainer')->getLocation(),
             'buildStorable() MUST return a Storable whose assigned location matches the Factory\'s App\'s assigned location.'
         );
     }
