@@ -21,14 +21,36 @@ trait OutputComponentFactoryTestTrait
 
     abstract protected function getMockCrud(): ComponentCrudInterface;
 
+    /**
+     * Call DynamicOutputComponentTestTrait::setUpBeforeClass() to
+     * create a test App, and some test dynamic output files.
+     */
     public static function setUpBeforeClass(): void
     {
         DynamicOutputComponentTestTrait::setUpBeforeClass();
     }
 
+    /**
+     * Call DynamicOutputComponentTestTrait::tearDownAfterClass() to
+     * remove test App, and any test dynamic output files.
+     */
     public static function tearDownAfterClass(): void
     {
         DynamicOutputComponentTestTrait::tearDownAfterClass();
+    }
+
+    public function tearDown(): void
+    {
+        foreach(
+            $this->getOutputComponentFactory()
+                 ->getStoredComponentRegistry()
+                 ->getRegisteredComponents() as $component
+        ) {
+            $this->getOutputComponentFactory()
+                 ->getStoredComponentRegistry()
+                 ->getComponentCrud()
+                 ->delete($component);
+        }
     }
 
     /**
@@ -49,9 +71,9 @@ trait OutputComponentFactoryTestTrait
             $this->isProperImplementation(
                 OutputComponentInterface::class,
                 $this->getOutputComponentFactory()->buildOutputComponent(
-                    'AssignedName',
-                    'AssignedContainer',
-                    'Assigned Output', 420.87
+                    'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+                    'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
+                    'OutputComponentFactoryTestTraitOutputComponent assigned output', 420.87
                 )
             )
         );
@@ -70,9 +92,9 @@ trait OutputComponentFactoryTestTrait
     public function testBuildOutputComponentStoresTheOutputComponentImplementationInstanceItBuilds(): void
     {
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
-            'Assigned Output',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponent assigned output',
             420.87
         );
         $this->assertTrue($this->wasStoredOnBuild($outputComponent));
@@ -81,9 +103,9 @@ trait OutputComponentFactoryTestTrait
     public function testBuildOutputComponentRegistersTheOutputComponentImplementationInstanceItBuilds(): void
     {
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
-            'Assigned Output',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponent assigned output',
             420.87
         );
         $this->assertTrue($this->wasRegisteredOnBuild($outputComponent));
@@ -91,11 +113,11 @@ trait OutputComponentFactoryTestTrait
 
     public function testBuildOutputComponentReturnsOutputComponentWhoseNameMatchesSuppliedName(): void
     {
-        $expectedName = 'ExpectedName';
+        $expectedName = 'OutputComponentFactoryTestTraitOutputComponentExpectedName';
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
             $expectedName,
-            'AssignedContainer',
-            'Assigned Output',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponent assigned output',
             420.87
         );
         $this->assertEquals(
@@ -106,11 +128,11 @@ trait OutputComponentFactoryTestTrait
 
     public function testBuildOutputComponentReturnsOutputComponentWhoseContainerMatchesSuppliedContainer(): void
     {
-        $expectedContainer = 'ExpectedContainer';
+        $expectedContainer = 'OutputComponentFactoryTestTraitOutputComponentExpectedContainer';
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
-            'AssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
             $expectedContainer,
-            'Assigned Output',
+            'OutputComponentFactoryTestTraitOutputComponent assigned output',
             420.87
         );
         $this->assertEquals(
@@ -123,8 +145,8 @@ trait OutputComponentFactoryTestTrait
     {
         $expectedOutput = 'Expected output';
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
             $expectedOutput,
             420.87
         );
@@ -138,9 +160,9 @@ trait OutputComponentFactoryTestTrait
     {
         $expectedPosition = 420.87;
         $outputComponent = $this->getOutputComponentFactory()->buildOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
-            'Assigned output',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponent assigned output',
             $expectedPosition
         );
         $this->assertEquals(
@@ -175,8 +197,8 @@ trait OutputComponentFactoryTestTrait
             $this->isProperImplementation(
                 DynamicOutputComponentInterface::class,
                 $this->getOutputComponentFactory()->buildDynamicOutputComponent(
-                    'AssignedName',
-                    'AssignedContainer',
+                    'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+                    'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
                     420.87,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
                     'Duplicate.php'
@@ -189,8 +211,8 @@ trait OutputComponentFactoryTestTrait
     public function testBuildDynamicOutputComponentStoresTheDynamicOutputComponentImplementationInstanceItBuilds(): void
     {
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
             420.87,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
@@ -201,8 +223,8 @@ trait OutputComponentFactoryTestTrait
     public function testBuildDynamicOutputComponentRegistersTheDynamicOutputComponentImplementationInstanceItBuilds(): void
     {
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
             420.87,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
@@ -223,8 +245,8 @@ trait OutputComponentFactoryTestTrait
             'Duplicate.php'
         );
         $fdoc = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
             420.87,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
@@ -237,10 +259,10 @@ trait OutputComponentFactoryTestTrait
 
     public function testBuildDynamicOutputComponentReturnsDynamicOutputComponentWhoseNameMatchesSuppliedName(): void
     {
-        $expectedName = 'ExpectedName';
+        $expectedName = 'OutputComponentFactoryTestTraitOutputComponentExpectedName';
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
             $expectedName,
-            'AssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
             420.87,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
@@ -253,9 +275,9 @@ trait OutputComponentFactoryTestTrait
 
     public function testBuildDynamicOutputComponentReturnsDynamicOutputComponentWhoseContainerMatchesSuppliedContainer(): void
     {
-        $expectedContainer = 'ExpectedContainer';
+        $expectedContainer = 'OutputComponentFactoryTestTraitOutputComponentExpectedContainer';
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
-            'AssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
             $expectedContainer,
             420.87,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
@@ -271,8 +293,8 @@ trait OutputComponentFactoryTestTrait
     {
         $expectedPosition = 420.87;
         $dynamicOutputComponent = $this->getOutputComponentFactory()->buildDynamicOutputComponent(
-            'AssignedName',
-            'AssignedContainer',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedName',
+            'OutputComponentFactoryTestTraitOutputComponentAssignedContainer',
             $expectedPosition,
             DynamicOutputComponentTestTrait::tempAppDirectoryName(),
             'Duplicate.php'
