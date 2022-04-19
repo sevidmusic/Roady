@@ -51,6 +51,10 @@ trait OutputComponentFactoryTestTrait
                  ->getComponentCrud()
                  ->delete($component);
         }
+        $this->getOutputComponentFactory()
+             ->getStoredComponentRegistry()
+             ->getComponentCrud()
+             ->delete($this->getOutputComponentFactory());
     }
 
     /**

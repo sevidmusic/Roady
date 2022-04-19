@@ -9,9 +9,9 @@ trait RequestFactoryTestTrait
 {
 
     private RequestFactoryInterface $requestFactory;
-    private string $expectedName = 'expectedName';
-    private string $expectedContainer = 'expectedContainer';
-    private string $expectedUrl = 'expectedUrl';
+    private string $expectedName = 'RequestFactoryTestTraitRequestExpectedName';
+    private string $expectedContainer = 'RequestFactoryTestTraitRequestExpectedContainer';
+    private string $expectedUrl = 'RequestFactoryTestTraitRequestExpectedUrl';
 
     public function testBuildRequestReturnsARequestImplementationInstance(): void
     {
@@ -87,4 +87,21 @@ trait RequestFactoryTestTrait
         $this->setStoredComponentFactoryParentTestInstances();
     }
 
+    public function tearDown(): void
+    {
+        foreach(
+            $this->getRequestFactory()
+                 ->getStoredComponentRegistry()
+                 ->getRegisteredComponents() as $component
+        ) {
+            $this->getRequestFactory()
+                 ->getStoredComponentRegistry()
+                 ->getComponentCrud()
+                 ->delete($component);
+        }
+        $this->getRequestFactory()
+             ->getStoredComponentRegistry()
+             ->getComponentCrud()
+             ->delete($this->getRequestFactory());
+    }
 }
