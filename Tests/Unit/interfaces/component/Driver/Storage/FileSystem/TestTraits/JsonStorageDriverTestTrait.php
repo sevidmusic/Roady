@@ -185,9 +185,8 @@ trait JsonStorageDriverTestTrait
     public function testWriteSavesComponentDataToJsonFileNamedUsingComponentIdUnderSubPathDefinedUsingComponentLocationAndContainer(): void
     {
         $this->turnJsonOn();
-        $this
-            ->getJsonStorageDriver()
-            ->write($this->getJsonStorageDriver());
+        $this->getJsonStorageDriver()
+             ->write($this->getJsonStorageDriver());
         $this->assertTrue(
             file_exists(
                 self::getExpectedStoragePath(
@@ -334,9 +333,9 @@ trait JsonStorageDriverTestTrait
     {
         return [
             new Storable(
-                'MockJsonName',
-                'MockJsonLocation',
-                'MockJsonContainer'
+                'JsonStorageDriverTestTraitMockJsonName',
+                'JsonStorageDriverTestTraitMockJsonLocation',
+                'JsonStorageDriverTestTraitMockJsonContainer'
             ),
             new Switchable()
         ];
@@ -353,6 +352,14 @@ trait JsonStorageDriverTestTrait
         foreach($this->writtenComponents as $component) {
             $this->getJsonStorageDriver()->delete($component);
         }
+        foreach($this->getJsonStorageDriver()
+             ->readAll(
+                 $this->getJsonStorageDriver()->getLocation(),
+                 $this->getJsonStorageDriver()->getContainer(),
+             ) as $component
+        ) {
+            $this->getJsonStorageDriver()->delete($component);
+        }
         $this->getJsonStorageDriver()
              ->delete($this->getJsonStorageDriver());
     }
@@ -363,5 +370,6 @@ trait JsonStorageDriverTestTrait
             array_push($this->writtenComponents, $component);
         }
     }
+
 }
 
