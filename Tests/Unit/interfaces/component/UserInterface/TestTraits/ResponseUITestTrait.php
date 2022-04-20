@@ -69,10 +69,29 @@ trait ResponseUITestTrait
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
-            new CorePositionable(rand(100, 999)),
+            new CorePositionable(rand(-10, 100)),
         );
         $outputComponent->import([
-            'output' => PHP_EOL . 'OC ID: ' . $outputComponent->getUniqueId() . PHP_EOL . 'OC NAME: ' . $outputComponent->getName() . PHP_EOL
+            'output' =>
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Position: ' .
+                $outputComponent->getPosition() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Name: ' .
+                $outputComponent->getName() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Id: ' .
+                $outputComponent->getUniqueId() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Location: ' .
+                $outputComponent->getLocation() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Container: ' .
+                $outputComponent->getContainer() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Type: ' .
+                $outputComponent->getType() .
+                PHP_EOL
         ]);
         return $outputComponent;
     }
@@ -86,7 +105,7 @@ trait ResponseUITestTrait
                 ResponseInterface::RESPONSE_CONTAINER,
             ),
             new CoreSwitchable(),
-            new CorePositionable(rand(0,100)),
+            new CorePositionable(rand(-10,10)),
         );
         $request = self::getRequest();
         self::getComponentCrud()->create($request);
@@ -102,7 +121,9 @@ trait ResponseUITestTrait
 
     public static function setUpBeforeClass(): void
     {
-        self::getComponentCrud()->create(self::generateTestResponse());
+        for($i=0; $i <= rand(10, 20); $i++) {
+            self::getComponentCrud()->create(self::generateTestResponse());
+        }
     }
 
     /**
@@ -158,16 +179,6 @@ trait ResponseUITestTrait
             new CorePositionable(),
             self::getRouter()
         ];
-    }
-
-    public function testGetRouterTestMethodReturnsARouterImplemnetationInstance(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                RouterInterface::class,
-                self::getRouter()
-            )
-        );
     }
 
     public static function getRouter(): RouterInterface

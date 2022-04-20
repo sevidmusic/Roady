@@ -92,6 +92,7 @@ trait WebUITestTrait
     private string $doctype = '<!DOCTYPE html>' . PHP_EOL;
     private string $openHtml = '<html lang="en">' . PHP_EOL;
     private string $openHead = '<head>' . PHP_EOL;
+    private string $titleSprint = PHP_EOL . '<title>%s</title>' . PHP_EOL;
     private string $closeHead = '</head>' . PHP_EOL;
     private string $openBody = '<body>' . PHP_EOL;
     private string $closeBody = '</body>' . PHP_EOL;
@@ -290,6 +291,39 @@ trait WebUITestTrait
         unlink($path);
     }
 
+    private function expectedTitle(): string
+    {
+        return sprintf(
+            $this->titleSprint,
+            (
+                $this->getWebUI()
+                     ->getRouter()
+                     ->getRequest()
+                     ->getGet()['request']
+                ??
+                $this->getWebUI()
+                     ->getRouter()
+                     ->getRequest()
+                     ->getName()
+            )
+        );
+    }
+
+    private function closeHeadAndOpenBodyIfAppropriate(Response $response, string &$expectedOutput): void
+    {
+        if(
+            $response->getPosition() >= 0
+            &&
+            !str_contains(
+                $expectedOutput,
+                $this->closeHead . $this->openBody
+            )
+        ) {
+            $expectedOutput .= $this->closeHead . $this->openBody;
+            error_log('Closed head opened body');
+        }
+    }
+
     /**
      * @devNote:
      * This overwrites the ResponseUITestTrait::expectedOutput() method.
@@ -297,14 +331,23 @@ trait WebUITestTrait
      */
     protected function expectedOutput(): string
     {
-        $expectedOutput = '';
+        $expectedOutput =
+            $this->doctype .
+            $this->openHtml .
+            $this->openHead .
+            $this->expectedTitle();
         $expectedResponses = $this->expectedResponses();
         $sortedResponses = $this->sortPositionables(...$expectedResponses);
+        error_log(strval(count($sortedResponses)));
         /**
          * @var Response $response
          */
         foreach($sortedResponses as $response)
         {
+            $this->closeHeadAndOpenBodyIfAppropriate(
+                $response,
+                $expectedOutput
+            );
             $outputComponents = [];
             foreach($response->getOutputComponentStorageInfo() as $storable)
             {
@@ -326,6 +369,10 @@ trait WebUITestTrait
                 $expectedOutput .= $outputComponent->getOutput();
             }
         }
+        $expectedOutput .= match(!str_contains($expectedOutput, $this->closeHead . $this->openBody)) {
+            true => $this->closeHead . $this->openBody . $this->closeBody . $this->closeHtml,
+            default => $this->closeBody . $this->closeHtml,
+        };
         error_log($expectedOutput);
         return $expectedOutput;
     }
