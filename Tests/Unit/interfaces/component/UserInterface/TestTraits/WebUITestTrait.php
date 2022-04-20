@@ -373,7 +373,7 @@ trait WebUITestTrait
             ),
             new Switchable()
         );
-        $request->import(['url' => './?request=' . self::$requestedStylesheetNameA . '&request=' . self::$requestedStylesheetNameB]);
+        $request->import(['url' => self::$testDomain . '/?request=' . self::$requestedStylesheetNameA . '&request=' . self::$requestedStylesheetNameB]);
         return $request;
     }
 

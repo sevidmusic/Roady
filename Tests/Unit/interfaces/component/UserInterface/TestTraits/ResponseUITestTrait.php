@@ -58,6 +58,7 @@ trait ResponseUITestTrait
 {
 
     protected ResponseUIInterface $responseUI;
+    protected static string $testDomain = 'http://ResponseUI.test.domain';
 
     public static function generateTestOutputComponent(): OutputComponentInterface
     {
@@ -185,7 +186,9 @@ trait ResponseUITestTrait
 
     protected static function expectedAppLocation(): string
     {
-        return CoreApp::deriveAppLocationFromRequest(self::getIndependantTestRequest());
+        return CoreApp::deriveAppLocationFromRequest(
+            self::getIndependantTestRequest()
+        );
     }
 
     protected static function getTestComponentContainer(): string
@@ -193,22 +196,33 @@ trait ResponseUITestTrait
         return 'TestComponents';
     }
 
+    /**
+     * This method is needed because getRequest() calls expectedAppLocation(),
+     * which needs a Request, but cant call getRequest() because it would
+     * lead to a recursive loop.
+     *
+     * The Request returned by this method should match the
+     * request returned by getRequest(), with the exception
+     * of the location, which will have to be set manually
+     * since expectedAppLocation() cant be called here.
+     */
     public static function getIndependantTestRequest(): RequestInterface
     {
         $request =  new CoreRequest(
             new CoreStorable(
-                'ResponseUICurrentRequest' . strval(rand(0, 999)),
-                'TestUrls',
+                'ResponseUIIndependantRequest' . strval(rand(0, 999)),
+                'ResponseUIIndependantRequests',
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable()
         );
+        $request->import(['url' => self::$testDomain]);
         return $request;
     }
 
     public static function getRequest(): RequestInterface
     {
-        return new CoreRequest(
+        $request = new CoreRequest(
             new CoreStorable(
                 'ResponseUICurrentRequest' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
@@ -216,6 +230,8 @@ trait ResponseUITestTrait
             ),
             new CoreSwitchable()
         );
+        $request->import(['url' => self::$testDomain]);
+        return $request;
     }
 
     protected static function getComponentCrud(): ComponentCrudInterface
