@@ -39,8 +39,9 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 
     public function getOutput(): string
     {
-        $this->import(['output' => $this->buildOutputWithHtmlStructure()]);
-        return ($this->getState() === true ? $this->export()['output'] : '');
+        return parent::getOutput();
+        #$this->import(['output' => $this->buildOutputWithHtmlStructure()]);
+        #return ($this->getState() === true ? $this->export()['output'] : '');
     }
 
     private function buildOutputWithHtmlStructure(): string

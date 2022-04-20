@@ -28,39 +28,33 @@ use roady\interfaces\primary\Positionable as PositionableInterface;
 use roady\interfaces\primary\Storable as StorableInterface;
 use roady\interfaces\primary\Switchable as SwitchableInterface;
 
+
 /**
  * private function buildApp(string $appName): void
- * private function createCssFileForSpecificRequestForApp(string $appName, string $requestName): void
+ * private function createCssFileForSpecificRequestForApp(string $appName,string $requestName): void
  * private function createTestApp(string $appName): void
- * private function createTestAppWithCssFiles(string $appName, array $cssFileNames, bool $build): void {
- * private function determineAppsDefinedStylesheetNames(string $appName) {
- * private function determineBuiltAppNames(): array
+ * private function createTestAppWithCssFiles(string $appName,array $cssFileNames,bool $build): void
+ * private function determineAppsDefinedStylesheetNames(string $appName): array
  * private function determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem(string $appName): array
  * private function determinePathToApp(string $appName): string
  * private function determinePathToAppsComponentsPhp(string $appName): string
  * private function determinePathToAppsCssDir(string $appName): string
- * private function determineStylesheetPath(string $appName, string $stylesheetName): string
- * private function expectClosingBodyAndClosingHtmlTags(): void
- * private function expectCssLinkForApp(string $appName, string $cssFileName): void
- * private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
- * private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(Response $response): void
- * private function expectHtmlLinkTagsForGlobalCssFilesDefinedByBuiltApps(): void
- * private function expectLinksForStylesheetsDefinedByBuiltApps(): void
- * private function expectResponseOutput(Response $response): void
- * private function getCurrentRequest(): RequestInterface
+ * private function determineStylesheetPath(string $appName,string $stylesheetName): string
  * private function getSortedResponsesExpectedByTest(): array
  * private function hasCssFileExtension(string $stylesheetName): bool
- * private function isAAppComponentsFactory(Component $component): bool {
+ * private function isAAppComponentsFactory(Component $component): bool
  * private function isAGlobalStylesheet(string $stylesheetName): bool
  * private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
+ * private static function getUniqueName(): string
  * private static function removeAppDirectory(string $dir): void
+ * private static function removeFile(string $path): void
  * protected function expectedOutput(): string
  * protected function setWebUIParentTestInstances(): void
- * protected function tearDown(): void
  * public function getWebUI(): WebUI
  * public function getWebUITestArgs(): array
  * public function setWebUI(WebUI $webUI): void
  * public static function getRequest(): RequestInterface
+ * public static function tearDown(): void
  */
 
 /**
@@ -73,12 +67,13 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * by the ResponseUITestTrait.
  *
  * The WebUI does not modify or provide any additional test of it's
- * own, instead is simply overwrites the ResponseUITestTrait's
+ * own, it only overwrites the ResponseUITestTrait's
  * expectedOutput() method to accommodate the additional expectations
  * of a WebUI's getOutput() method's output.
  *
  * The WebUITestTrait also overwrites the ResponseUITestTrait's
- * getRequest() method.
+ * getRequest() method to set up an appropriate Request for testing
+ * the WebUI.
  *
  * Note: Make sure to include the following when using this Trait
  * in conjunction with the ResponseUITestTrait.
@@ -108,195 +103,6 @@ trait WebUITestTrait
     private static string $requestedStylesheetNameA = 'requestedStylesheetNameA';
     private static string $requestedStylesheetNameB = 'requestedStylesheetNameB';
 
-    /**
-     * @devNote:
-     * This overwrites the ResponseUITestTrait::expectedOutput() method.
-     * @see Tests/Unit/abstractions/component/UserInterface/WebUITest.php
-     */
-    protected function expectedOutput(): string
-    {
-        $this->expectDoctypeOpeningHtmlAndOpeningHeadTags();
-        $this->expectHtmlLinkTagsForGlobalCssFilesDefinedByBuiltApps();
-        /**
-         * @var Response $response
-         */
-        foreach($this->getSortedResponsesExpectedByTest() as $response)
-        {
-            $this->expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened($response);
-            $this->expectResponseOutput($response);
-        }
-        $this->expectClosingBodyAndClosingHtmlTags();
-        return $this->expectedOutput;
-    }
-
-    private function getCurrentRequest(): RequestInterface
-    {
-        return $this->getWebUI()->getRouter()->getRequest();
-    }
-
-    /**
-     * @return array<string, Response>
-     */
-    private function getSortedResponsesExpectedByTest(): array
-    {
-        /** @var array<string, Response> $sortedResponses */
-        $sortedResponses = $this->sortPositionables(...$this->expectedResponses());
-        return $sortedResponses;
-    }
-
-    /**
-     * @param string $appName                   The name of the App to create.
-     * @param array<int, string> $cssFileNames  The names of the css files to create.
-     * @param bool $build                       If set to true, build the App, otherwise
-     *                                          don't build the App.
-     */
-    private function createTestAppWithCssFiles(string $appName, array $cssFileNames, bool $build): void {
-
-        $this->createTestApp($appName);
-        foreach($cssFileNames as $cssFileName) {
-            $this->createCssFileForSpecificRequestForApp($appName, $cssFileName);
-        }
-        if($build === true) {
-            $this->buildApp($appName);
-        }
-    }
-
-    private function expectHtmlLinkTagsForGlobalCssFilesDefinedByBuiltApps(): void
-    {
-        /**
-         * This App is used to test that only Built Apps have links for there
-         * global css files incorporated into the output. It is created, and a
-         * global css file is defined for it, but it will not be built, therefore,
-         * a link for it's global css file should not be incorporated into the output,
-         * if it is, then the WebUI::getOutput() method is not properly implemented.
-         */
-        $this->createTestAppWithCssFiles(
-            'IgnoredWebUITestApp' . strval(rand(100, PHP_INT_MAX)),
-            ['should-NOT-LOAD-since-app-was-NOT-built-and-also-does-NOT-match-current-request.css', self::$requestedStylesheetNameA . '.css', self::$requestedStylesheetNameB . '.css', 'global-should-NOT-LOAD-since-app-was-NOT-built.css'],
-            false
-        );
-        $this->createTestAppWithCssFiles(
-            'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX)),
-            ['global-SHOULD-LOAD-since-app-was-built.css', self::$requestedStylesheetNameA . '.css', 'should-NOT-LOAD-since-does-NOT-match-current-request.css'],
-            true
-        );
-        $this->createTestAppWithCssFiles(
-            'BuiltWebUITestApp' . strval(rand(100, PHP_INT_MAX)),
-            ['global-styles-SHOULD-LOAD-since-app-was-built.css', self::$requestedStylesheetNameA . '.css', self::$requestedStylesheetNameB . '.css', 'global-in-name-but-should-NOT-LOAD-because-extension-is-NOT-css'],
-            true
-        );
-        /** There should only be links for global css files incorporated into the output for Apps that were built */
-        $this->expectLinksForStylesheetsDefinedByBuiltApps();
-    }
-
-    /**
-     * Call parent's tearDown() method, and remove any test
-     * Apps created during testing from roady's Apps directory.
-     */
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        foreach($this->createdApps as $appName) {
-            self::removeAppDirectory($this->determinePathToApp($appName));
-        }
-    }
-
-    /**
-     * Returns an array of the names of all of the stylesheets defined by the specified App.
-     * @param string $appName The name of the App that defines the stylesheets.
-     * @return array<int, string> Array of the names of the stylesheets defined by the specified App.
-     */
-    private function determineAppsDefinedStylesheetNames(string $appName) {
-        if(is_dir($this->determinePathToAppsCssDir($appName))) {
-            $ls = scandir($this->determinePathToAppsCssDir($appName));
-            $definedStylesheets = array_diff((is_array($ls) ? $ls : []), ['.', '..']);
-        }
-        return ($definedStylesheets ?? []);
-    }
-
-    /**
-     * An array of the names of the stylesheets that should have <links> created for them.
-     * @return array<int, string> Array of the names of the stylesheets that should have <links> create for them.
-     */
-    private function determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem(string $appName): array
-    {
-        $stylesheetsToLoad = [];
-        foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
-            if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
-                if($this->stylesheetNameMathesARequestQueryStringValue($stylesheetName) || $this->isAGlobalStylesheet($stylesheetName)) {
-                    array_push($stylesheetsToLoad, $stylesheetName);
-                }
-            }
-        }
-        return ($stylesheetsToLoad ?? []);
-    }
-
-    private function isAGlobalStylesheet(string $stylesheetName): bool
-    {
-        return str_contains($stylesheetName, 'global');
-    }
-
-    private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
-    {
-        $nameWithoutExtension = str_replace('.css', '', $stylesheetName);
-        if(str_contains(strval(parse_url($this->getWebUI()->getRouter()->getRequest()->getUrl(), PHP_URL_QUERY)), $nameWithoutExtension)) {
-            return true;
-        }
-        return false;
-    }
-
-    private function determineStylesheetPath(string $appName, string $stylesheetName): string
-    {
-        return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
-    }
-
-    private function hasCssFileExtension(string $stylesheetName): bool
-    {
-        return (pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css');
-    }
-
-    private function expectLinksForStylesheetsDefinedByBuiltApps(): void
-    {
-        foreach($this->determineBuiltAppNames() as $appName) {
-            foreach($this->determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem($appName) as $stylesheetName) {
-                $this->expectCssLinkForApp($appName, $stylesheetName);
-            }
-        }
-    }
-
-    /**
-     * @return array<int, string> Array of the names of the Apps
-     *                            that are currently built
-     */
-    private function determineBuiltAppNames(): array
-    {
-        $builtAppNames = [];
-        foreach(
-            $this->getExistingAppComponentsFactories()
-            as
-            $appComponentsFactory
-        ) {
-            array_push(
-                $builtAppNames,
-                $appComponentsFactory->getApp()->getName()
-            );
-        }
-        return $builtAppNames;
-    }
-
-    private function isAAppComponentsFactory(Component $component): bool {
-        $implements = class_implements($component);
-        if(is_array($implements)) {
-            return in_array(AppComponentsFactory::class, $implements);
-        }
-        return false;
-    }
-
-    private function expectCssLinkForApp(string $appName, string $cssFileName): void
-    {
-        $this->expectedOutput .= '<link rel="stylesheet" href="Apps/' . $appName . '/css/' . $cssFileName . '">';
-    }
-
     private function buildApp(string $appName): void
     {
         try {
@@ -313,63 +119,13 @@ trait WebUITestTrait
         } catch(RuntimeException $e) { /** Failed to build App */ }
     }
 
-    protected function setWebUIParentTestInstances(): void
+    private function createCssFileForSpecificRequestForApp(string $appName, string $requestName): void
     {
-        $this->setResponseUI($this->getWebUI());
-        $this->setResponseUIParentTestInstances();
-    }
-
-    public function getWebUI(): WebUI
-    {
-        return $this->webUI;
-    }
-
-    public function setWebUI(WebUI $webUI): void
-    {
-        $this->webUI = $webUI;
-    }
-
-    /**
-     * @return array{0: StorableInterface, 1: SwitchableInterface, 2: PositionableInterface, 3: RouterInterface}
-     */
-    public function getWebUITestArgs(): array
-    {
-        return [
-            new Storable(
-                'MockWebUIName',
-                self::expectedAppLocation(),
-                self::getTestComponentContainer()
-            ),
-            new Switchable(),
-            new Positionable(),
-            self::getRouter()
-        ];
-    }
-
-    private function expectDoctypeOpeningHtmlAndOpeningHeadTags(): void
-    {
-        $this->expectedOutput =
-            $this->doctype .
-            $this->openHtml .
-            $this->openHead .
-            '<title>' .
-            (
-                $this->getWebUI()->getRouter()->getRequest()->getGet()['request']
-                ??
-                $this->getRouter()->getRequest()->getUrl()
-            ) .
-            '</title>'
-        ;
-    }
-
-
-    private function expectHeadTagIsClosedAndBodyTagIsOpenedIfResponsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotAlreadyClosedAndBodyWasNotAlreadyOpened(Response $response): void
-    {
-        if($response->getPosition() >= 0 && !str_contains($this->expectedOutput, $this->closeHead . $this->openBody)) {
-            $this->expectedOutput .= $this->closeHead . $this->openBody;
+        if(!is_dir($this->determinePathToAppsCssDir($appName))) {
+            mkdir($this->determinePathToAppsCssDir($appName));
         }
+        file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $requestName, ' body { font-family: monospace; }', LOCK_SH);
     }
-
     private function createTestApp(string $appName): void
     {
         $configureAppOutput = new ConfigureAppOutput();
@@ -389,15 +145,60 @@ trait WebUITestTrait
         array_push($this->createdApps, $appName);
     }
 
+    /**
+     * @param string $appName                   The name of the App to create.
+     * @param array<int, string> $cssFileNames  The names of the css files to create.
+     * @param bool $build                       If set to true, build the App, otherwise
+     *                                          don't build the App.
+     */
+    private function createTestAppWithCssFiles(string $appName, array $cssFileNames, bool $build): void {
+
+        $this->createTestApp($appName);
+        foreach($cssFileNames as $cssFileName) {
+            $this->createCssFileForSpecificRequestForApp($appName, $cssFileName);
+        }
+        if($build === true) {
+            $this->buildApp($appName);
+        }
+    }
+
+    /**
+     * Returns an array of the names of all of the stylesheets defined by the specified App.
+     *
+     * @param string $appName The name of the App that defines the stylesheets.
+     *
+     * @return array<int, string> Array of the names of the stylesheets defined by the specified App.
+     */
+    private function determineAppsDefinedStylesheetNames(string $appName): array {
+        if(is_dir($this->determinePathToAppsCssDir($appName))) {
+            $ls = scandir($this->determinePathToAppsCssDir($appName));
+            $definedStylesheets = array_diff((is_array($ls) ? $ls : []), ['.', '..']);
+        }
+        return ($definedStylesheets ?? []);
+    }
+
+    /**
+     * An array of the names of the stylesheets that should have <links> created for them.
+     *
+     * @return array<int, string> Array of the names of the stylesheets that should have <links> create for them.
+     */
+    private function determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem(string $appName): array
+    {
+        $stylesheetsToLoad = [];
+        foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
+            if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
+                if($this->stylesheetNameMathesARequestQueryStringValue($stylesheetName) || $this->isAGlobalStylesheet($stylesheetName)) {
+                    array_push($stylesheetsToLoad, $stylesheetName);
+                }
+            }
+        }
+        return ($stylesheetsToLoad ?? []);
+    }
+
     private function determinePathToApp(string $appName): string
     {
         $replace = 'Tests' . DIRECTORY_SEPARATOR . 'Unit' . DIRECTORY_SEPARATOR . 'interfaces' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'UserInterface' . DIRECTORY_SEPARATOR . 'TestTraits';
         return strval(str_replace($replace, 'Apps' . DIRECTORY_SEPARATOR . $appName, strval(realpath(__DIR__))));
-    }
-
-    private function determinePathToAppsCssDir(string $appName): string
-    {
-        return $this->determinePathToApp($appName) . DIRECTORY_SEPARATOR . 'css';
     }
 
     private function determinePathToAppsComponentsPhp(string $appName): string
@@ -405,12 +206,58 @@ trait WebUITestTrait
         return $this->determinePathToApp($appName) . DIRECTORY_SEPARATOR . 'Components.php';
     }
 
-    private function createCssFileForSpecificRequestForApp(string $appName, string $requestName): void
+    private function determinePathToAppsCssDir(string $appName): string
     {
-        if(!is_dir($this->determinePathToAppsCssDir($appName))) {
-            mkdir($this->determinePathToAppsCssDir($appName));
+        return $this->determinePathToApp($appName) . DIRECTORY_SEPARATOR . 'css';
+    }
+
+    private function determineStylesheetPath(string $appName, string $stylesheetName): string
+    {
+        return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
+    }
+
+    /**
+     * @return array<string, Response>
+     */
+    private function getSortedResponsesExpectedByTest(): array
+    {
+        /** @var array<string, Response> $sortedResponses */
+        $sortedResponses = $this->sortPositionables(...$this->expectedResponses());
+        return $sortedResponses;
+    }
+
+    private function hasCssFileExtension(string $stylesheetName): bool
+    {
+        return (pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css');
+    }
+
+
+    private function isAAppComponentsFactory(Component $component): bool {
+        $implements = class_implements($component);
+        if(is_array($implements)) {
+            return in_array(AppComponentsFactory::class, $implements);
         }
-        file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $requestName, ' body { font-family: monospace; }', LOCK_SH);
+        return false;
+    }
+
+
+    private function isAGlobalStylesheet(string $stylesheetName): bool
+    {
+        return str_contains($stylesheetName, 'global');
+    }
+
+    private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
+    {
+        $nameWithoutExtension = str_replace('.css', '', $stylesheetName);
+        if(str_contains(strval(parse_url($this->getWebUI()->getRouter()->getRequest()->getUrl(), PHP_URL_QUERY)), $nameWithoutExtension)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static function getUniqueName(string|null $type = null): string
+    {
+        return 'WebUITestTrait' . ($type ?? 'Component') . 'Name' . strval(rand(1000, 20000));
     }
 
     private static function removeAppDirectory(string $dir): void
@@ -443,41 +290,84 @@ trait WebUITestTrait
         unlink($path);
     }
 
-    private function expectClosingBodyAndClosingHtmlTags(): void
+    /**
+     * @devNote:
+     * This overwrites the ResponseUITestTrait::expectedOutput() method.
+     * @see Tests/Unit/abstractions/component/UserInterface/WebUITest.php
+     */
+    protected function expectedOutput(): string
     {
-        $this->expectedOutput .= $this->closeBody . $this->closeHtml;
-    }
-
-    private function expectResponseOutput(Response $response): void
-    {
-        /** @var array<int, OutputComponent> $outputComponents */
-        $outputComponents = [];
-        foreach($response->getOutputComponentStorageInfo() as $storable)
+        $expectedOutput = '';
+        $expectedResponses = $this->expectedResponses();
+        $sortedResponses = $this->sortPositionables(...$expectedResponses);
+        /**
+         * @var Response $response
+         */
+        foreach($sortedResponses as $response)
         {
-            /**
-             * @var OutputComponent $component
-             */
-            $component = $this->getRoutersComponentCrud()->read($storable);
-            if($this->isProperImplementation(OutputComponent::class, $component))
+            $outputComponents = [];
+            foreach($response->getOutputComponentStorageInfo() as $storable)
             {
-                array_push($outputComponents, $component);
+                /**
+                 * @var OutputComponent $component
+                 */
+                $component = $this->getRoutersComponentCrud()->read($storable);
+                if($this->isProperImplementation(OutputComponent::class, $component))
+                {
+                    array_push($outputComponents, $component);
+                }
+            }
+            $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            /**
+             * @var OutputComponent $outputComponent
+             */
+            foreach($sortedOutputComponents as $outputComponent)
+            {
+                $expectedOutput .= $outputComponent->getOutput();
             }
         }
-        $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
-        /**
-         * @var OutputComponent $outputComponent
-         */
-        foreach($sortedOutputComponents as $outputComponent)
-        {
-            $this->expectedOutput .= $outputComponent->getOutput();
-        }
+        error_log($expectedOutput);
+        return $expectedOutput;
+    }
+
+    protected function setWebUIParentTestInstances(): void
+    {
+        $this->setResponseUI($this->getWebUI());
+        $this->setResponseUIParentTestInstances();
+    }
+
+    public function getWebUI(): WebUI
+    {
+        return $this->webUI;
+    }
+
+    /**
+     * @return array{0: StorableInterface, 1: SwitchableInterface, 2: PositionableInterface, 3: RouterInterface}
+     */
+    public function getWebUITestArgs(): array
+    {
+        return [
+            new Storable(
+                'MockWebUIName',
+                self::expectedAppLocation(),
+                self::getTestComponentContainer()
+            ),
+            new Switchable(),
+            new Positionable(),
+            self::getRouter()
+        ];
+    }
+
+    public function setWebUI(WebUI $webUI): void
+    {
+        $this->webUI = $webUI;
     }
 
     public static function getRequest(): RequestInterface
     {
         $request = new Request(
             new Storable(
-                'ResponseUICurrentRequest' . strval(rand(0, 999)),
+                self::getUniqueName('Request'),
                 self::expectedAppLocation(),
                 self::getTestComponentContainer()
             ),
@@ -487,25 +377,12 @@ trait WebUITestTrait
         return $request;
     }
 
-    /**
-     * @return array<int, AppComponentsFactory>
-     */
-    private function getExistingAppComponentsFactories(): array
+    public function tearDown(): void
     {
-        $factories = $this->getRoutersComponentCrud()->readAll(
-            App::deriveAppLocationFromRequest(
-                $this->getWebUI()->getRouter()->getRequest()
-            ),
-            Factory::CONTAINER
-        );
-        $appComponentFactories = [];
-        foreach($factories as $factory) {
-            if($this->isAAppComponentsFactory($factory)) {
-                /** @var AppComponentsFactory $factory) */
-                array_push($appComponentFactories, $factory);
-            }
+        parent::tearDown();
+        foreach($this->createdApps as $appName) {
+             self::removeAppDirectory($this->determinePathToApp($appName));
         }
-        return $appComponentFactories;
     }
 }
 
