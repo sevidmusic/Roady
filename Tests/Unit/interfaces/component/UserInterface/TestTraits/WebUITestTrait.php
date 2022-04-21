@@ -92,6 +92,7 @@ trait WebUITestTrait
     private string $doctype = '<!DOCTYPE html>' . PHP_EOL;
     private string $openHtml = '<html lang="en">' . PHP_EOL;
     private string $openHead = '<head>' . PHP_EOL;
+    private string $viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
     private string $titleSprint = PHP_EOL . '<title>%s</title>' . PHP_EOL;
     private string $closeHead = '</head>' . PHP_EOL;
     private string $openBody = '<body>' . PHP_EOL;
@@ -335,7 +336,8 @@ trait WebUITestTrait
             $this->doctype .
             $this->openHtml .
             $this->openHead .
-            $this->expectedTitle();
+            $this->expectedTitle() .
+            $this->viewport;
         $expectedResponses = $this->expectedResponses();
         $sortedResponses = $this->sortPositionables(...$expectedResponses);
         error_log(strval(count($sortedResponses)));
