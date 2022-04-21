@@ -18,7 +18,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     private const DOCTYPE = '<!DOCTYPE html>' . PHP_EOL;
     private const OPEN_HTML = '<html lang="en">' . PHP_EOL;
     private const OPEN_HEAD = '<head>' . PHP_EOL;
-    private const VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    private const VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1.0">' . PHP_EOL;
     private string $titleSprint = PHP_EOL . '<title>%s</title>' . PHP_EOL;
     private const CLOSE_HEAD = '</head>' . PHP_EOL;
     private const OPEN_BODY = '<body>' . PHP_EOL;
