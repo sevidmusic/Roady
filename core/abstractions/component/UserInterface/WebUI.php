@@ -52,13 +52,36 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     public function getOutput(): string
     {
         #return parent::getOutput();
-        $this->import(['output' => $this->buildOutputWithHtmlStructure()]);
-        return ($this->getState() === true ? $this->export()['output'] : '');
+        $this->import(
+            [
+                'output' => $this->buildOutputWithHtmlStructure()
+            ]
+        );
+        return (
+            $this->getState() === true
+            ? $this->export()['output']
+            : ''
+        );
     }
 
+    private function closeHeadAndOpenBodyIfAppropriate(ResponseInterface $response): void
+    {
+        if(
+            $this->responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened(
+                $response
+            )
+        ) {
+            $this->closeHeadOpenBody();
+        }
+    }
     private function buildOutputWithHtmlStructure(): string
     {
-        /** @devNote: Always reset $this->rawCollectiveResponseOutput when $this->buildOutputWithHtmlStructure() is called. */
+        /**
+         * @devNote: Always reset $this->rawCollectiveResponseOutput
+         * when $this->buildOutputWithHtmlStructure() is called to
+         * prevent old collective Response output from being included
+         * in the new collective Response output.
+         */
         $this->rawCollectiveResponseOutput = '';
         $this->openHtml();
         $this->loadStylesheetsDefinedByBuiltApps();
@@ -67,15 +90,15 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
          */
         foreach($this->getSortedResponsesToCurrentRequest() as $response)
         {
-            if($this->responsePositionIsGreaterThanOrEqualToZeroAndHeadWasNotClosedAndBodyNotOpened($response)) {
-                $this->closeHeadOpenBody();
-            }
+            $this->closeHeadAndOpenBodyIfAppropriate($response);
             $this->addResponseOutputToWebUIOutput($response);
         }
         $this->closeBodyCloseHtml();
         if(empty($this->rawCollectiveResponseOutput))
         {
-            throw new PHPRuntimeException('There is nothing to show for this request.');
+            throw new PHPRuntimeException(
+                'There is nothing to show for this request.'
+            );
         }
         return $this->webUIOutput;
     }

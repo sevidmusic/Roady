@@ -30,7 +30,9 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
 
 
 /**
+ * private function addResponseOutputToExpectedOutput(Response $response, string &$expectedOutput): void
  * private function buildApp(string $appName): void
+ * private function closeHeadAndOpenBodyIfAppropriate(Response $response, string &$expectedOutput): void
  * private function createCssFileForSpecificRequestForApp(string $appName,string $requestName): void
  * private function createTestApp(string $appName): void
  * private function createTestAppWithCssFiles(string $appName,array $cssFileNames,bool $build): void
@@ -41,9 +43,11 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function determinePathToAppsCssDir(string $appName): string
  * private function determineStylesheetPath(string $appName,string $stylesheetName): string
  * private function getSortedResponsesExpectedByTest(): array
+ * private function getSortedResponsesToCurrentRequest(): array
  * private function hasCssFileExtension(string $stylesheetName): bool
  * private function isAAppComponentsFactory(Component $component): bool
  * private function isAGlobalStylesheet(string $stylesheetName): bool
+ * private function openHtml(string &$expectedOutput): void
  * private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
  * private static function getUniqueName(): string
  * private static function removeAppDirectory(string $dir): void
@@ -105,6 +109,31 @@ trait WebUITestTrait
     private static string $requestedStylesheetNameA = 'requestedStylesheetNameA';
     private static string $requestedStylesheetNameB = 'requestedStylesheetNameB';
 
+
+    private function addResponseOutputToExpectedOutput(Response $response, string &$expectedOutput): void
+    {
+            $outputComponents = [];
+            foreach($response->getOutputComponentStorageInfo() as $storable)
+            {
+                /**
+                 * @var OutputComponent $component
+                 */
+                $component = $this->getRoutersComponentCrud()->read($storable);
+                if($this->isProperImplementation(OutputComponent::class, $component))
+                {
+                    array_push($outputComponents, $component);
+                }
+            }
+            $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
+            /**
+             * @var OutputComponent $outputComponent
+             */
+            foreach($sortedOutputComponents as $outputComponent)
+            {
+                $expectedOutput .= $outputComponent->getOutput();
+            }
+    }
+
     private function buildApp(string $appName): void
     {
         try {
@@ -121,6 +150,20 @@ trait WebUITestTrait
         } catch(RuntimeException $e) { /** Failed to build App */ }
     }
 
+    private function closeHeadAndOpenBodyIfAppropriate(Response $response, string &$expectedOutput): void
+    {
+        if(
+            $response->getPosition() >= 0
+            &&
+            !str_contains(
+                $expectedOutput,
+                $this->closeHead . $this->openBody
+            )
+        ) {
+            $expectedOutput .= $this->closeHead . $this->openBody;
+        }
+    }
+
     private function createCssFileForSpecificRequestForApp(string $appName, string $requestName): void
     {
         if(!is_dir($this->determinePathToAppsCssDir($appName))) {
@@ -128,6 +171,7 @@ trait WebUITestTrait
         }
         file_put_contents($this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $requestName, ' body { font-family: monospace; }', LOCK_SH);
     }
+
     private function createTestApp(string $appName): void
     {
         $configureAppOutput = new ConfigureAppOutput();
@@ -218,6 +262,16 @@ trait WebUITestTrait
         return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
     }
 
+    private function openHtml(string &$expectedOutput): void
+    {
+        $expectedOutput =
+            $this->doctype .
+            $this->openHtml .
+            $this->openHead .
+            $this->expectedTitle() .
+            $this->viewport;
+    }
+
     /**
      * @return array<string, Response>
      */
@@ -226,6 +280,15 @@ trait WebUITestTrait
         /** @var array<string, Response> $sortedResponses */
         $sortedResponses = $this->sortPositionables(...$this->expectedResponses());
         return $sortedResponses;
+    }
+
+    /**
+     * @return array<int, PositionableInterface>
+     */
+    private function getSortedResponsesToCurrentRequest(): array
+    {
+        $expectedResponses = $this->expectedResponses();
+        return $this->sortPositionables(...$expectedResponses);
     }
 
     private function hasCssFileExtension(string $stylesheetName): bool
@@ -310,21 +373,6 @@ trait WebUITestTrait
         );
     }
 
-    private function closeHeadAndOpenBodyIfAppropriate(Response $response, string &$expectedOutput): void
-    {
-        if(
-            $response->getPosition() >= 0
-            &&
-            !str_contains(
-                $expectedOutput,
-                $this->closeHead . $this->openBody
-            )
-        ) {
-            $expectedOutput .= $this->closeHead . $this->openBody;
-            error_log('Closed head opened body');
-        }
-    }
-
     /**
      * @devNote:
      * This overwrites the ResponseUITestTrait::expectedOutput() method.
@@ -332,50 +380,24 @@ trait WebUITestTrait
      */
     protected function expectedOutput(): string
     {
-        $expectedOutput =
-            $this->doctype .
-            $this->openHtml .
-            $this->openHead .
-            $this->expectedTitle() .
-            $this->viewport;
-        $expectedResponses = $this->expectedResponses();
-        $sortedResponses = $this->sortPositionables(...$expectedResponses);
-        error_log(strval(count($sortedResponses)));
+        $expectedOutput = '';
+        $this->openHtml($expectedOutput);
+        // Expect stylesheets and js files
         /**
          * @var Response $response
          */
-        foreach($sortedResponses as $response)
+        foreach($this->getSortedResponsesToCurrentRequest() as $response)
         {
             $this->closeHeadAndOpenBodyIfAppropriate(
                 $response,
                 $expectedOutput
             );
-            $outputComponents = [];
-            foreach($response->getOutputComponentStorageInfo() as $storable)
-            {
-                /**
-                 * @var OutputComponent $component
-                 */
-                $component = $this->getRoutersComponentCrud()->read($storable);
-                if($this->isProperImplementation(OutputComponent::class, $component))
-                {
-                    array_push($outputComponents, $component);
-                }
-            }
-            $sortedOutputComponents = $this->sortPositionables(...$outputComponents);
-            /**
-             * @var OutputComponent $outputComponent
-             */
-            foreach($sortedOutputComponents as $outputComponent)
-            {
-                $expectedOutput .= $outputComponent->getOutput();
-            }
+            $this->addResponseOutputToExpectedOutput($response, $expectedOutput);
         }
         $expectedOutput .= match(!str_contains($expectedOutput, $this->closeHead . $this->openBody)) {
             true => $this->closeHead . $this->openBody . $this->closeBody . $this->closeHtml,
             default => $this->closeBody . $this->closeHtml,
         };
-        error_log($expectedOutput);
         return $expectedOutput;
     }
 
