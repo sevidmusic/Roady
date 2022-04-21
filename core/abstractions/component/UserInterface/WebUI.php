@@ -18,8 +18,8 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     private const DOCTYPE = '<!DOCTYPE html>' . PHP_EOL;
     private const OPEN_HTML = '<html lang="en">' . PHP_EOL;
     private const OPEN_HEAD = '<head>' . PHP_EOL;
-    private const OPEN_TITLE = '<title>';
-    private const CLOSE_TITLE = '</title>';
+    private const VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+    private string $titleSprint = PHP_EOL . '<title>%s</title>' . PHP_EOL;
     private const CLOSE_HEAD = '</head>' . PHP_EOL;
     private const OPEN_BODY = '<body>' . PHP_EOL;
     private const CLOSE_BODY = '</body>' . PHP_EOL;
@@ -39,9 +39,9 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 
     public function getOutput(): string
     {
-        return parent::getOutput();
-        #$this->import(['output' => $this->buildOutputWithHtmlStructure()]);
-        #return ($this->getState() === true ? $this->export()['output'] : '');
+        #return parent::getOutput();
+        $this->import(['output' => $this->buildOutputWithHtmlStructure()]);
+        return ($this->getState() === true ? $this->export()['output'] : '');
     }
 
     private function buildOutputWithHtmlStructure(): string
@@ -68,6 +68,21 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return $this->webUIOutput;
     }
 
+    private function title(): string
+    {
+        return sprintf(
+            $this->titleSprint,
+            (
+                $this->getRouter()
+                     ->getRequest()
+                     ->getGet()['request']
+                ??
+                $this->getRouter()
+                     ->getRequest()
+                     ->getName()
+            )
+        );
+    }
     private function openHtml(): void
     {
         /** @devNote:
@@ -78,13 +93,8 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
             self::DOCTYPE .
             self::OPEN_HTML .
             self::OPEN_HEAD .
-            self::OPEN_TITLE .
-            (
-                $this->getRouter()->getRequest()->getGet()['request']
-                ??
-                $this->getRouter()->getRequest()->getUrl()
-            ) .
-            self::CLOSE_TITLE
+            $this->title() .
+            self::VIEWPORT
         ;
     }
 
