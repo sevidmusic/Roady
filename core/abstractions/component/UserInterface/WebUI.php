@@ -26,16 +26,28 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     private const CLOSE_HTML = '</html>' . PHP_EOL;
 
     /**
-     * @var string $webUIOutput The collective output of all Responses to the
-     * current request, with html structure added...
+     * @var string $webUIOutput The collective output of all Responses
+     * to the current request with html structure incorporated.
      */
     private string $webUIOutput = '';
 
     /**
-     * @var string $collectiveResponseOutput
-     * The raw collective output of all Responses to the current Request.
+     * @var string $rawCollectiveResponseOutput
+     * The raw collective output of all Responses to the
+     * current Request.
+     *
+     * It is necessary to track the collective raw output of all
+     * Responses to make sure a RuntimeException is thrown if
+     * the collective output of all Responses is empty.
+     *
+     * It would not be possible to check the $webUIOutput
+     * to see if the collective output of all Responses
+     * is empty since the $webUIOutput will have html
+     * structure incorporated into it, so the unmodified
+     * collective output of all Responses is tracked
+     * by this property.
      */
-    private string $collectiveResponseOutput = '';
+    private string $rawCollectiveResponseOutput = '';
 
     public function getOutput(): string
     {
@@ -46,8 +58,8 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
 
     private function buildOutputWithHtmlStructure(): string
     {
-        /** @devNote: Always reset $this->collectiveResponseOutput when $this->buildOutputWithHtmlStructure() is called. */
-        $this->collectiveResponseOutput = '';
+        /** @devNote: Always reset $this->rawCollectiveResponseOutput when $this->buildOutputWithHtmlStructure() is called. */
+        $this->rawCollectiveResponseOutput = '';
         $this->openHtml();
         $this->loadStylesheetsDefinedByBuiltApps();
         /**
@@ -61,7 +73,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
             $this->addResponseOutputToWebUIOutput($response);
         }
         $this->closeBodyCloseHtml();
-        if(empty($this->collectiveResponseOutput))
+        if(empty($this->rawCollectiveResponseOutput))
         {
             throw new PHPRuntimeException('There is nothing to show for this request.');
         }
@@ -154,7 +166,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         foreach($sortedOutputComponents as $outputComponent)
         {
             $this->webUIOutput .= $outputComponent->getOutput();
-            $this->collectiveResponseOutput .= $outputComponent->getOutput();
+            $this->rawCollectiveResponseOutput .= $outputComponent->getOutput();
         }
     }
 
