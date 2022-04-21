@@ -58,6 +58,7 @@ trait ResponseUITestTrait
 {
 
     protected ResponseUIInterface $responseUI;
+    protected static string $testDomain = 'http://ResponseUI.test.domain';
 
     public static function generateTestOutputComponent(): OutputComponentInterface
     {
@@ -68,10 +69,29 @@ trait ResponseUITestTrait
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable(),
-            new CorePositionable(rand(100, 999)),
+            new CorePositionable(rand(-10, 100)),
         );
         $outputComponent->import([
-            'output' => PHP_EOL . 'OC ID: ' . $outputComponent->getUniqueId() . PHP_EOL . 'OC NAME: ' . $outputComponent->getName() . PHP_EOL
+            'output' =>
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Position: ' .
+                $outputComponent->getPosition() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Name: ' .
+                $outputComponent->getName() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Id: ' .
+                $outputComponent->getUniqueId() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Location: ' .
+                $outputComponent->getLocation() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Container: ' .
+                $outputComponent->getContainer() .
+                PHP_EOL .
+                'ResponseUITestTrait: Test OutputComponent Type: ' .
+                $outputComponent->getType() .
+                PHP_EOL
         ]);
         return $outputComponent;
     }
@@ -85,7 +105,7 @@ trait ResponseUITestTrait
                 ResponseInterface::RESPONSE_CONTAINER,
             ),
             new CoreSwitchable(),
-            new CorePositionable(rand(0,100)),
+            new CorePositionable(rand(-10,10)),
         );
         $request = self::getRequest();
         self::getComponentCrud()->create($request);
@@ -101,7 +121,9 @@ trait ResponseUITestTrait
 
     public static function setUpBeforeClass(): void
     {
-        self::getComponentCrud()->create(self::generateTestResponse());
+        for($i=0; $i <= rand(10, 20); $i++) {
+            self::getComponentCrud()->create(self::generateTestResponse());
+        }
     }
 
     /**
@@ -159,16 +181,6 @@ trait ResponseUITestTrait
         ];
     }
 
-    public function testGetRouterTestMethodReturnsARouterImplemnetationInstance(): void
-    {
-        $this->assertTrue(
-            $this->isProperImplementation(
-                RouterInterface::class,
-                self::getRouter()
-            )
-        );
-    }
-
     public static function getRouter(): RouterInterface
     {
         return new CoreRouter(
@@ -185,7 +197,9 @@ trait ResponseUITestTrait
 
     protected static function expectedAppLocation(): string
     {
-        return CoreApp::deriveAppLocationFromRequest(self::getIndependantTestRequest());
+        return CoreApp::deriveAppLocationFromRequest(
+            self::getIndependantTestRequest()
+        );
     }
 
     protected static function getTestComponentContainer(): string
@@ -193,22 +207,33 @@ trait ResponseUITestTrait
         return 'TestComponents';
     }
 
+    /**
+     * This method is needed because getRequest() calls expectedAppLocation(),
+     * which needs a Request, but cant call getRequest() because it would
+     * lead to a recursive loop.
+     *
+     * The Request returned by this method should match the
+     * request returned by getRequest(), with the exception
+     * of the location, which will have to be set manually
+     * since expectedAppLocation() cant be called here.
+     */
     public static function getIndependantTestRequest(): RequestInterface
     {
         $request =  new CoreRequest(
             new CoreStorable(
-                'ResponseUICurrentRequest' . strval(rand(0, 999)),
-                'TestUrls',
+                'ResponseUIIndependantRequest' . strval(rand(0, 999)),
+                'ResponseUIIndependantRequests',
                 self::getTestComponentContainer()
             ),
             new CoreSwitchable()
         );
+        $request->import(['url' => self::$testDomain]);
         return $request;
     }
 
     public static function getRequest(): RequestInterface
     {
-        return new CoreRequest(
+        $request = new CoreRequest(
             new CoreStorable(
                 'ResponseUICurrentRequest' . strval(rand(0, 999)),
                 self::expectedAppLocation(),
@@ -216,6 +241,8 @@ trait ResponseUITestTrait
             ),
             new CoreSwitchable()
         );
+        $request->import(['url' => self::$testDomain]);
+        return $request;
     }
 
     protected static function getComponentCrud(): ComponentCrudInterface
