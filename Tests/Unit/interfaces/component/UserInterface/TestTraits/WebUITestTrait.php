@@ -17,11 +17,13 @@ use roady\interfaces\component\Web\Routing\Response;
 use RuntimeException;
 use rig\classes\command\ConfigureAppOutput;
 use rig\classes\ui\CommandLineUI;
+
 /**
- * The following use statements are here for PhpStan, these
- * interfaces indicate the expected parameter types for the
- * getWebUITestArgs() method, PhpStan complains if these use
- * statements are not here.
+ * @devNote The following use statements are here for
+ *          PhpStan, these interfaces indicate the expected
+ *          parameter types for the getWebUITestArgs() method,
+ *          PhpStan complains if these use statements are not
+ *          here.
  */
 use roady\interfaces\component\Web\Routing\Router as RouterInterface;
 use roady\interfaces\primary\Positionable as PositionableInterface;
@@ -62,25 +64,25 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  */
 
 /**
- * The WebUITestTrait is intended to be used in conjunction with
- * the ResponseUITestTrait to test implementations of the WebUI
- * interface.
+ * The WebUITestTrait is intended to be used in conjunction
+ * with the ResponseUITestTrait to test implementations of
+ * the WebUI interface.
  *
- * The WebUITestTrait implements it's own expectedOutput() method
- * which is intended to replace the expectedOutput() method defined
- * by the ResponseUITestTrait.
+ * The WebUITestTrait implements it's own expectedOutput()
+ * method which is intended to replace the expectedOutput()
+ * method defined by the ResponseUITestTrait.
  *
- * The WebUI does not modify or provide any additional test of it's
- * own, it only overwrites the ResponseUITestTrait's
- * expectedOutput() method to accommodate the additional expectations
- * of a WebUI's getOutput() method's output.
+ * The WebUI does not modify or provide any additional test of
+ * it's own, it only overwrites the ResponseUITestTrait's
+ * expectedOutput() method to accommodate the additional
+ * expectations of a WebUI's getOutput() method's output.
  *
  * The WebUITestTrait also overwrites the ResponseUITestTrait's
- * getRequest() method to set up an appropriate Request for testing
- * the WebUI.
+ * getRequest() method to set up an appropriate Request for
+ * testing the WebUI.
  *
- * Note: Make sure to include the following when using this Trait
- * in conjunction with the ResponseUITestTrait.
+ * Note: Make sure to include the following when using this
+ * Trait in conjunction with the ResponseUITestTrait.
  *
  * ```
  * use ResponseUITestInterface, WebUITestInterface {
