@@ -44,6 +44,7 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function determinePathToAppsComponentsPhp(string $appName): string
  * private function determinePathToAppsCssDir(string $appName): string
  * private function determineStylesheetPath(string $appName,string $stylesheetName): string
+ * private function expectedTitle(): string
  * private function getSortedResponsesExpectedByTest(): array
  * private function getSortedResponsesToCurrentRequest(): array
  * private function hasCssFileExtension(string $stylesheetName): bool
@@ -59,8 +60,8 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * public function getWebUI(): WebUI
  * public function getWebUITestArgs(): array
  * public function setWebUI(WebUI $webUI): void
+ * public function tearDown(): void
  * public static function getRequest(): RequestInterface
- * public static function tearDown(): void
  */
 
 /**
@@ -72,8 +73,8 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * method which is intended to replace the expectedOutput()
  * method defined by the ResponseUITestTrait.
  *
- * The WebUI does not modify or provide any additional test of
- * it's own, it only overwrites the ResponseUITestTrait's
+ * The WebUI does not modify or provide any additional tests
+ * of it's own, it only overwrites the ResponseUITestTrait's
  * expectedOutput() method to accommodate the additional
  * expectations of a WebUI's getOutput() method's output.
  *
@@ -264,14 +265,22 @@ trait WebUITestTrait
         return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
     }
 
-    private function openHtml(string &$expectedOutput): void
+    private function expectedTitle(): string
     {
-        $expectedOutput =
-            $this->doctype .
-            $this->openHtml .
-            $this->openHead .
-            $this->expectedTitle() .
-            $this->viewport;
+        return sprintf(
+            $this->titleSprint,
+            (
+                $this->getWebUI()
+                     ->getRouter()
+                     ->getRequest()
+                     ->getGet()['request']
+                ??
+                $this->getWebUI()
+                     ->getRouter()
+                     ->getRequest()
+                     ->getName()
+            )
+        );
     }
 
     /**
@@ -311,6 +320,16 @@ trait WebUITestTrait
     private function isAGlobalStylesheet(string $stylesheetName): bool
     {
         return str_contains($stylesheetName, 'global');
+    }
+
+    private function openHtml(string &$expectedOutput): void
+    {
+        $expectedOutput =
+            $this->doctype .
+            $this->openHtml .
+            $this->openHead .
+            $this->expectedTitle() .
+            $this->viewport;
     }
 
     private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
@@ -357,24 +376,6 @@ trait WebUITestTrait
         unlink($path);
     }
 
-    private function expectedTitle(): string
-    {
-        return sprintf(
-            $this->titleSprint,
-            (
-                $this->getWebUI()
-                     ->getRouter()
-                     ->getRequest()
-                     ->getGet()['request']
-                ??
-                $this->getWebUI()
-                     ->getRouter()
-                     ->getRequest()
-                     ->getName()
-            )
-        );
-    }
-
     /**
      * @devNote:
      * This overwrites the ResponseUITestTrait::expectedOutput() method.
@@ -385,6 +386,8 @@ trait WebUITestTrait
         $expectedOutput = '';
         $this->openHtml($expectedOutput);
         // Expect stylesheets and js files
+
+
         /**
          * @var Response $response
          */
@@ -436,6 +439,14 @@ trait WebUITestTrait
         $this->webUI = $webUI;
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        foreach($this->createdApps as $appName) {
+             self::removeAppDirectory($this->determinePathToApp($appName));
+        }
+    }
+
     public static function getRequest(): RequestInterface
     {
         $request = new Request(
@@ -450,12 +461,5 @@ trait WebUITestTrait
         return $request;
     }
 
-    public function tearDown(): void
-    {
-        parent::tearDown();
-        foreach($this->createdApps as $appName) {
-             self::removeAppDirectory($this->determinePathToApp($appName));
-        }
-    }
 }
 
