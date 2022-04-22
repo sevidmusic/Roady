@@ -36,21 +36,28 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function buildApp(string $appName): void
  * private function closeHeadAndOpenBodyIfAppropriate(Response $response, string &$expectedOutput): void
  * private function createCssFileForApp(string $appName,string $cssFileName): void
+ * private function createJsFileForApp(
  * private function createTestApp(string $appName): void
  * private function createTestAppWithCssFiles(string $appName,array $cssFileNames,bool $build): void
+ * private function createTestAppWithJsFiles(
+ * private function determineAppsDefinedScriptNames(
  * private function determineAppsDefinedStylesheetNames(string $appName): array
+ * private function determineNamesOfScriptsDefinedByAppThatShouldHaveLinksCreatedForThem(
  * private function determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem(string $appName): array
  * private function determinePathToApp(string $appName): string
  * private function determinePathToAppsComponentsPhp(string $appName): string
  * private function determinePathToAppsCssDir(string $appName): string
+ * private function determineScriptPath(
  * private function determineStylesheetPath(string $appName,string $stylesheetName): string
  * private function expectedTitle(): string
  * private function getExpectedResponsesSortedByPosition(): array
  * private function getSortedResponsesExpectedByTest(): array
  * private function hasCssFileExtension(string $stylesheetName): bool
+ * private function hasJsFileExtension(string $stylesheetName): bool
  * private function isAAppComponentsFactory(Component $component): bool
  * private function isAGlobalStylesheet(string $stylesheetName): bool
  * private function openHtml(string &$expectedOutput): void
+ * private function scriptNameMathesARequestQueryStringValue(
  * private function stylesheetNameMathesARequestQueryStringValue(string $stylesheetName): bool
  * private static function getUniqueName(): string
  * private static function removeAppDirectory(string $dir): void
@@ -111,6 +118,7 @@ trait WebUITestTrait
     private string $closeHtml = '</html>' . PHP_EOL;
     private string $expectedOutput = '';
     private static string $globalCssFileName = 'test-global-css-file.css';
+    private static string $globalJsFileName = 'test-global-js-file.js';
     /**
      * @var array<int, string> $createdApps Array of the names of
      *                                      the Apps that were
@@ -119,8 +127,12 @@ trait WebUITestTrait
     private array $createdApps = [];
     private static string $requestedStylesheetNameA =
         'WebUITestTraitRequestedStylesheetNameA.css';
+    private static string $requestedScriptNameA =
+        'WebUITestTraitRequestedStylesheetNameA.js';
     private static string $requestedStylesheetNameB =
         'WebUITestTraitRequestedStylesheetNameB.css';
+    private static string $requestedScriptNameB =
+        'WebUITestTraitRequestedStylesheetNameB.js';
 
     private function addResponseOutputToExpectedOutput(
         Response $response,
@@ -229,11 +241,41 @@ trait WebUITestTrait
             $this->determinePathToAppsCssDir($appName) .
                 DIRECTORY_SEPARATOR .
                 $cssFileName,
-            ' body { font-family: monospace; }',
+            'body { font-family: monospace; }',
             LOCK_SH
         );
     }
 
+    /**
+     * Create a js file for the specified App.
+     *
+     * Note: The App must exist.
+     *
+     * @param string $appName     The name of the App to create the
+     *                            js file for.
+     *
+     * @param string $jsFileName The name to assign to the js
+     *                            file. Make sure to include the
+     *                            `.js` extension.
+     *
+     * @return void
+     */
+    private function createJsFileForApp(
+        string $appName,
+        string $jsFileName
+    ): void
+    {
+        if(!is_dir($this->determinePathToAppsJsDir($appName))) {
+            mkdir($this->determinePathToAppsJsDir($appName));
+        }
+        file_put_contents(
+            $this->determinePathToAppsJsDir($appName) .
+                DIRECTORY_SEPARATOR .
+                $jsFileName,
+            'console.log("Hello World");',
+            LOCK_SH
+        );
+    }
     private function relativeUrlOfTestRequest(): string
     {
         return substr(
@@ -298,6 +340,60 @@ trait WebUITestTrait
     }
 
     /**
+     * Create a Test App with js files.
+     *
+     * @param string $appName                   The name of the App
+     *                                          to create.
+     *
+     * @param array<int, string> $jsFileNames  The names of the js
+     *                                          files to create.
+     *
+     * @param bool $build                       If set to true, build
+     *                                          the App, otherwise
+     *                                          don't build the App.
+     */
+    private function createTestAppWithJsFiles(
+        string $appName,
+        array $jsFileNames,
+        bool $build
+    ): void {
+
+        $this->createTestApp($appName);
+        foreach($jsFileNames as $jsFileName) {
+            $this->createJsFileForApp(
+                $appName,
+                $jsFileName
+            );
+        }
+        if($build === true) {
+            $this->buildApp($appName);
+        }
+    }
+
+    /**
+     * Returns an array of the names of all of the scripts
+     * defined by the specified App.
+     *
+     * @param string $appName     The name of the App that defines
+     *                            the scripts.
+     *
+     * @return array<int, string> Array of the names of the
+     *                            scripts defined by the specified App.
+     */
+    private function determineAppsDefinedScriptNames(
+        string $appName
+    ): array {
+        if(is_dir($this->determinePathToAppsJsDir($appName))) {
+            $ls = scandir($this->determinePathToAppsJsDir($appName));
+            $definedScripts = array_diff(
+                (is_array($ls) ? $ls : []),
+                ['.', '..']
+            );
+        }
+        return ($definedScripts ?? []);
+    }
+
+    /**
      * Returns an array of the names of all of the stylesheets
      * defined by the specified App.
      *
@@ -318,6 +414,57 @@ trait WebUITestTrait
             );
         }
         return ($definedStylesheets ?? []);
+    }
+
+    /**
+     * An array of the names of the scripts that should have
+     * <script> tags created for them.
+     *
+     * @return array<int, string> Array of the names of the
+     *                            scripts that should have
+     *                            <script> tags created for them.
+     */
+    private function determineNamesOfScriptsDefinedByAppThatShouldHaveLinksCreatedForThem(
+        string $appName
+    ): array
+    {
+        $requestedScriptsToLoad = [];
+        $globalScriptsToLoad = [];
+        foreach(
+            $this->determineAppsDefinedScriptNames(
+                $appName
+            )
+            as
+            $scriptName
+        ) {
+            if(
+                $this->hasJsFileExtension($scriptName)
+                &&
+                file_exists(
+                    $this->determineScriptPath(
+                        $appName,
+                        $scriptName
+                    )
+                )
+            ) {
+                if(
+                    $this->scriptNameMathesARequestQueryStringValue(
+                        $scriptName
+                    )
+                    ||
+                    $this->isAGlobalScript($scriptName)
+                ) {
+                    (
+                        $this->isAGlobalScript($scriptName)
+                        ? array_push($globalScriptsToLoad, $scriptName)
+                        : array_push($requestedScriptsToLoad, $scriptName)
+                    );
+                }
+            }
+        }
+        sort($globalScriptsToLoad);
+        sort($requestedScriptsToLoad);
+        return array_merge($globalScriptsToLoad, $requestedScriptsToLoad);
     }
 
     /**
@@ -402,6 +549,16 @@ trait WebUITestTrait
             'Components.php';
     }
 
+    private function determinePathToAppsJsDir(
+        string $appName
+    ): string
+    {
+        return
+            $this->determinePathToApp($appName) .
+            DIRECTORY_SEPARATOR .
+            'js';
+    }
+
     private function determinePathToAppsCssDir(
         string $appName
     ): string
@@ -410,6 +567,17 @@ trait WebUITestTrait
             $this->determinePathToApp($appName) .
             DIRECTORY_SEPARATOR .
             'css';
+    }
+
+    private function determineScriptPath(
+        string $appName,
+        string $scriptName
+    ): string
+    {
+        return
+            $this->determinePathToAppsJsDir($appName) .
+            DIRECTORY_SEPARATOR .
+            $scriptName;
     }
 
     private function determineStylesheetPath(
@@ -457,6 +625,13 @@ trait WebUITestTrait
         return $sortedResponses;
     }
 
+    private function hasJsFileExtension(string $stylesheetName): bool
+    {
+        return (
+            pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'js'
+        );
+    }
+
     private function hasCssFileExtension(string $stylesheetName): bool
     {
         return (
@@ -476,6 +651,11 @@ trait WebUITestTrait
     }
 
 
+    private function isAGlobalScript(string $scriptName): bool
+    {
+        return str_contains($scriptName, 'global');
+    }
+
     private function isAGlobalStylesheet(string $stylesheetName): bool
     {
         return str_contains($stylesheetName, 'global');
@@ -491,6 +671,33 @@ trait WebUITestTrait
             $this->viewport;
     }
 
+    private function scriptNameMathesARequestQueryStringValue(
+        string $scriptName
+    ): bool
+    {
+        $nameWithoutExtension = str_replace(
+            '.js',
+            '',
+            $scriptName
+        );
+        if(
+            str_contains(
+                strval(
+                    parse_url(
+                        $this->getWebUI()
+                             ->getRouter()
+                             ->getRequest()
+                             ->getUrl(),
+                         PHP_URL_QUERY
+                    )
+                ),
+                $nameWithoutExtension
+            )
+        ) {
+            return true;
+        }
+        return false;
+    }
     private function stylesheetNameMathesARequestQueryStringValue(
         string $stylesheetName
     ): bool
@@ -598,6 +805,33 @@ trait WebUITestTrait
             ],
             true
         );
+        $this->createTestAppWithJsFiles(
+            $this->getUniqueName(),
+            [
+                self::$globalJsFileName,
+                self::$requestedScriptNameA,
+                self::$requestedScriptNameB,
+            ],
+            false
+        );
+        $this->createTestAppWithJsFiles(
+            $this->getUniqueName(),
+            [
+                self::$globalJsFileName,
+                self::$requestedScriptNameA,
+                self::$requestedScriptNameB,
+            ],
+            true
+        );
+        $this->createTestAppWithJsFiles(
+            $this->getUniqueName(),
+            [
+                self::$globalJsFileName,
+                self::$requestedScriptNameA,
+                self::$requestedScriptNameB,
+            ],
+            true
+        );
         $expectedOutput = '';
         $this->openHtml($expectedOutput);
         foreach($this->readAllStoredFactories() as $factory) {
@@ -615,6 +849,18 @@ trait WebUITestTrait
                         DIRECTORY_SEPARATOR .
                         $stylesheetName .
                         '">' .
+                        PHP_EOL;
+                }
+                foreach($this->determineNamesOfScriptsDefinedByAppThatShouldHaveLinksCreatedForThem($factory->getApp()->getName()) as $scriptName) {
+                    $expectedOutput .=
+                        '<script src="Apps' .
+                        DIRECTORY_SEPARATOR .
+                        $factory->getApp()->getName() .
+                        DIRECTORY_SEPARATOR .
+                        'js' .
+                        DIRECTORY_SEPARATOR .
+                        $scriptName .
+                        '"></script>' .
                         PHP_EOL;
                 }
             }
