@@ -58,7 +58,7 @@ trait ResponseUITestTrait
 {
 
     protected ResponseUIInterface $responseUI;
-    protected static string $testDomain = 'http://ResponseUI.test.domain';
+    protected static string $testDomain = 'http://ResponseUIImplementation.test.domain';
 
     public static function generateTestOutputComponent(): OutputComponentInterface
     {
@@ -281,7 +281,7 @@ trait ResponseUITestTrait
     }
 
     /**
-     * @return array<ResponseInterface>
+     * @return array<int, ResponseInterface>
      */
     protected function expectedResponses(): array
     {
