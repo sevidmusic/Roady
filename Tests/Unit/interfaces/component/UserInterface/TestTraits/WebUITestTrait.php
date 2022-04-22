@@ -35,7 +35,7 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function addResponseOutputToExpectedOutput(Response $response, string &$expectedOutput): void
  * private function buildApp(string $appName): void
  * private function closeHeadAndOpenBodyIfAppropriate(Response $response, string &$expectedOutput): void
- * private function createCssFileForSpecificRequestForApp(string $appName,string $requestName): void
+ * private function createCssFileForApp(string $appName,string $cssFileName): void
  * private function createTestApp(string $appName): void
  * private function createTestAppWithCssFiles(string $appName,array $cssFileNames,bool $build): void
  * private function determineAppsDefinedStylesheetNames(string $appName): array
@@ -194,9 +194,23 @@ trait WebUITestTrait
         }
     }
 
-    private function createCssFileForSpecificRequestForApp(
+    /**
+     * Create a css file for the specified App.
+     *
+     * Note: The App must exist.
+     *
+     * @param string $appName     The name of the App to create the
+     *                            css file for.
+     *
+     * @param string $cssFileName The name to assign to the css
+     *                            file. Make sure to include the
+     *                            `.css` extension.
+     *
+     * @return void
+     */
+    private function createCssFileForApp(
         string $appName,
-        string $requestName
+        string $cssFileName
     ): void
     {
         if(!is_dir($this->determinePathToAppsCssDir($appName))) {
@@ -205,7 +219,7 @@ trait WebUITestTrait
         file_put_contents(
             $this->determinePathToAppsCssDir($appName) .
                 DIRECTORY_SEPARATOR .
-                $requestName,
+                $cssFileName,
             ' body { font-family: monospace; }',
             LOCK_SH
         );
@@ -253,7 +267,7 @@ trait WebUITestTrait
 
         $this->createTestApp($appName);
         foreach($cssFileNames as $cssFileName) {
-            $this->createCssFileForSpecificRequestForApp(
+            $this->createCssFileForApp(
                 $appName,
                 $cssFileName
             );
@@ -609,6 +623,7 @@ trait WebUITestTrait
 
     public function tearDown(): void
     {
+        #error_log($this->getRouter()->getRequest()->getUrl());
         parent::tearDown();
         foreach($this->createdApps as $appName) {
             self::removeAppDirectory(
