@@ -163,7 +163,6 @@ trait WebUITestTrait
 
     private function buildApp(string $appName): void
     {
-        error_log('Attempting to build app: ' . $appName);
         try {
             exec(
                 PHP_BINARY .
@@ -175,7 +174,6 @@ trait WebUITestTrait
                 ) .
                 " '" . self::$testDomain . "'"
             );
-            error_log('Built app: ' . $appName);
         } catch(RuntimeException $e) {
             /** Failed to build App */
             error_log(
@@ -249,7 +247,6 @@ trait WebUITestTrait
 
     private function createTestApp(string $appName): void
     {
-        error_log($this->relativeUrlOfTestRequest());
         $configureAppOutput = new ConfigureAppOutput();
         $configureAppOutput->run(
             new CommandLineUI(),
@@ -578,34 +575,24 @@ trait WebUITestTrait
             $this->getUniqueName(),
             [
                 self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
                 self::$requestedStylesheetNameA,
                 self::$requestedStylesheetNameB,
             ],
-            false
+            false,
         );
-        /**
-         * Create Test App with a global stylesheet, and build it.
-         *
-         * This stylesheet should be incorporated.
-         */
         $this->createTestAppWithCssFiles(
             $this->getUniqueName(),
             [
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                self::$globalCssFileName,
+                self::$requestedStylesheetNameA,
+                self::$requestedStylesheetNameB,
             ],
             true
         );
         $this->createTestAppWithCssFiles(
             $this->getUniqueName(),
             [
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
-                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                self::$globalCssFileName,
                 self::$requestedStylesheetNameA,
                 self::$requestedStylesheetNameB,
             ],
@@ -613,18 +600,23 @@ trait WebUITestTrait
         );
         $expectedOutput = '';
         $this->openHtml($expectedOutput);
-        /**
-         * 1. Expect stylesheets (and js files,
-         *    once css files are handled)
-         * 2. Create a test App with css files
-         * 3. For each expected css file, add a link tag
-         *    to the $expectedOutput. This must happen
-         *    before the head is closed and body is
-         *    opened.
-         */
-        foreach($this->createdApps as $appName) {
-            foreach($this->determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem($appName) as $stylesheetName) {
-                $expectedOutput .= '<link rel="stylesheet" href="' . $this->determineStylesheetPath($appName, $stylesheetName) . '">' . PHP_EOL;
+        foreach($this->readAllStoredFactories() as $factory) {
+            /**
+             * @var AppComponentsFactory $factory
+             */
+            if($this->isAAppComponentsFactory($factory)) {
+                foreach($this->determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem($factory->getApp()->getName()) as $stylesheetName) {
+                    $expectedOutput .=
+                        '<link rel="stylesheet" href="Apps' .
+                        DIRECTORY_SEPARATOR .
+                        $factory->getApp()->getName() .
+                        DIRECTORY_SEPARATOR .
+                        'css' .
+                        DIRECTORY_SEPARATOR .
+                        $stylesheetName .
+                        '">' .
+                        PHP_EOL;
+                }
             }
         }
         foreach(
@@ -655,7 +647,6 @@ trait WebUITestTrait
                 $this->closeBody .
                 $this->closeHtml,
         };
-        error_log($expectedOutput);
         return $expectedOutput;
     }
 
@@ -665,6 +656,23 @@ trait WebUITestTrait
         $this->setResponseUIParentTestInstances();
     }
 
+    /**
+     * @return array<int, Component>
+     */
+    private function readAllStoredFactories(): array
+    {
+        return $this->getWebUI()
+                    ->getRouter()
+                    ->getCrud()
+                    ->readAll(
+                        App::deriveAppLocationFromRequest(
+                            $this->getWebUI()
+                                 ->getRouter()
+                                 ->getRequest()
+                        ),
+                        Factory::CONTAINER
+                    );
+    }
     public function tearDown(): void
     {
         parent::tearDown();
@@ -674,19 +682,7 @@ trait WebUITestTrait
             );
         }
         foreach(
-            $this->getWebUI()
-                 ->getRouter()
-                 ->getCrud()
-                 ->readAll(
-                     App::deriveAppLocationFromRequest(
-                         $this->getWebUI()
-                              ->getRouter()
-                              ->getRequest()
-                     ),
-                     Factory::CONTAINER
-                 )
-                 as
-                 $appComponentsFactory
+            $this->readAllStoredFactories() as $appComponentsFactory
         ) {
             /**
              * @var AppComponentsFactory $appComponentsFactory
@@ -764,22 +760,3 @@ trait WebUITestTrait
 
 }
 
-/**
- * @return array<int, string>
- *
-private function determineNamesOfStylesheetsThatShouldLoadForApp(string $appName): array
-{
-    $requestedStylesheetsToLoad = [];
-    $globalStylesheetsToLoad = [];
-    foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
-        if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
-            if($this->isAGlobalStylesheet($stylesheetName) || $this->stylesheetNameMatchesARequestQueryStringValue($stylesheetName)) {
-                ($this->isAGlobalStylesheet($stylesheetName) ? array_push($globalStylesheetsToLoad, $stylesheetName) : array_push($requestedStylesheetsToLoad, $stylesheetName));
-            }
-        }
-    }
-    sort($globalStylesheetsToLoad);
-    sort($requestedStylesheetsToLoad);
-    return array_merge($globalStylesheetsToLoad, $requestedStylesheetsToLoad);
-}
- */
