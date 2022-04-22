@@ -45,8 +45,8 @@ use roady\interfaces\primary\Switchable as SwitchableInterface;
  * private function determinePathToAppsCssDir(string $appName): string
  * private function determineStylesheetPath(string $appName,string $stylesheetName): string
  * private function expectedTitle(): string
+ * private function getExpectedResponsesSortedByPosition(): array
  * private function getSortedResponsesExpectedByTest(): array
- * private function getSortedResponsesToCurrentRequest(): array
  * private function hasCssFileExtension(string $stylesheetName): bool
  * private function isAAppComponentsFactory(Component $component): bool
  * private function isAGlobalStylesheet(string $stylesheetName): bool
@@ -172,7 +172,7 @@ trait WebUITestTrait
                         $appName
                     )
                 ) .
-                ' http://WebUITestTraitTest.test.domain'
+                $this->testDomain
             );
         } catch(RuntimeException $e) { /** Failed to build App */ }
     }
@@ -224,6 +224,9 @@ trait WebUITestTrait
                     'WebUITestAppOutput',
                     '--output',
                     'Web UI Test App Output',
+                    '--relative-urls',
+                    '/ ',
+                    'index.php',
                 ]
             )
         );
@@ -398,24 +401,19 @@ trait WebUITestTrait
     }
 
     /**
-     * @return array<string, Response>
+     * @return array<int, Response>
      */
-    private function getSortedResponsesExpectedByTest(): array
+    private function getExpectedResponsesSortedByPosition(): array
     {
-        /** @var array<string, Response> $sortedResponses */
-        $sortedResponses = $this->sortPositionables(
-            ...$this->expectedResponses()
-        );
-        return $sortedResponses;
-    }
-
-    /**
-     * @return array<int, PositionableInterface>
-     */
-    private function getSortedResponsesToCurrentRequest(): array
-    {
+        /**
+         * @var array<int, Response> $expectedResponses
+         */
         $expectedResponses = $this->expectedResponses();
-        return $this->sortPositionables(...$expectedResponses);
+        /**
+         * @var array<int, Response> $sortedResponses
+         */
+        $sortedResponses = $this->sortPositionables(...$expectedResponses);
+        return $sortedResponses;
     }
 
     private function hasCssFileExtension(string $stylesheetName): bool
@@ -541,7 +539,7 @@ trait WebUITestTrait
          * @var Response $response
          */
         foreach(
-            $this->getSortedResponsesToCurrentRequest() as $response
+            $this->getExpectedResponsesSortedByPosition() as $response
         )
         {
             $this->closeHeadAndOpenBodyIfAppropriate(

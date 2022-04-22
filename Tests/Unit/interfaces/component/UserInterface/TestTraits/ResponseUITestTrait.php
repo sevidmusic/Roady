@@ -281,7 +281,7 @@ trait ResponseUITestTrait
     }
 
     /**
-     * @return array<ResponseInterface>
+     * @return array<int, ResponseInterface>
      */
     protected function expectedResponses(): array
     {
