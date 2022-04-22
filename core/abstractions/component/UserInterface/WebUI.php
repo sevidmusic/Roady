@@ -85,6 +85,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         $this->rawCollectiveResponseOutput = '';
         $this->openHtml();
         $this->loadStylesheetsDefinedByBuiltApps();
+        $this->loadScriptsDefinedByBuiltApps();
         /**
          * @var ResponseInterface $response
          */
@@ -133,6 +134,14 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         ;
     }
 
+    private function loadScriptsDefinedByBuiltApps(): void
+    {
+        foreach ($this->determineBuiltAppNames() as $appName) {
+            foreach($this->determineNamesOfScriptsThatShouldLoadForApp($appName) as $scriptName) {
+                $this->webUIOutput .= '<script src="Apps/' . $appName  . '/js/' . $scriptName . '"></script>' . PHP_EOL;
+            }
+        }
+    }
     private function loadStylesheetsDefinedByBuiltApps(): void
     {
         foreach ($this->determineBuiltAppNames() as $appName) {
@@ -223,6 +232,25 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     /**
      * @return array<int, string>
      */
+    private function determineNamesOfScriptsThatShouldLoadForApp(string $appName): array
+    {
+        $requestedScriptsToLoad = [];
+        $globalScriptsToLoad = [];
+        foreach($this->determineAppsDefinedScriptNames($appName) as $scriptName) {
+            if($this->hasJsFileExtension($scriptName) && file_exists($this->determineScriptPath($appName, $scriptName))) {
+                if($this->isAGlobalScript($scriptName) || $this->scriptNameMatchesARequestQueryStringValue($scriptName)) {
+                    ($this->isAGlobalScript($scriptName) ? array_push($globalScriptsToLoad, $scriptName) : array_push($requestedScriptsToLoad, $scriptName));
+                }
+            }
+        }
+        sort($globalScriptsToLoad);
+        sort($requestedScriptsToLoad);
+        return array_merge($globalScriptsToLoad, $requestedScriptsToLoad);
+    }
+
+    /**
+     * @return array<int, string>
+     */
     private function determineNamesOfStylesheetsThatShouldLoadForApp(string $appName): array
     {
         $requestedStylesheetsToLoad = [];
@@ -239,6 +267,15 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return array_merge($globalStylesheetsToLoad, $requestedStylesheetsToLoad);
     }
 
+    private function scriptNameMatchesARequestQueryStringValue(string $scriptName): bool
+    {
+        $nameWithoutExtension = str_replace('.js', '', $scriptName);
+        if(str_contains(strval(parse_url($this->getRouter()->getRequest()->getUrl(), PHP_URL_QUERY)), $nameWithoutExtension)) {
+            return true;
+        }
+        return false;
+    }
+
     private function stylesheetNameMatchesARequestQueryStringValue(string $stylesheetName): bool
     {
         $nameWithoutExtension = str_replace('.css', '', $stylesheetName);
@@ -248,9 +285,19 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return false;
     }
 
+    private function isAGlobalScript(string $scriptName): bool
+    {
+        return str_contains($scriptName, 'global');
+    }
+
     private function isAGlobalStylesheet(string $stylesheetName): bool
     {
         return str_contains($stylesheetName, 'global');
+    }
+
+    private function determineScriptPath(string $appName, string $scriptName): string
+    {
+        return $this->determinePathToAppsJsDir($appName) . DIRECTORY_SEPARATOR . $scriptName;
     }
 
     private function determineStylesheetPath(string $appName, string $stylesheetName): string
@@ -258,9 +305,27 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         return $this->determinePathToAppsCssDir($appName) . DIRECTORY_SEPARATOR . $stylesheetName;
     }
 
+    private function hasJsFileExtension(string $scriptName): bool
+    {
+        return (pathinfo($scriptName, PATHINFO_EXTENSION) === 'js');
+    }
+
     private function hasCssFileExtension(string $stylesheetName): bool
     {
         return (pathinfo($stylesheetName, PATHINFO_EXTENSION) === 'css');
+    }
+
+    /**
+     * Returns an array of the names of all the scripts defined by the specified App.
+     * @param string $appName The name of the App that defines the scripts.
+     * @return array<int, string> Array of the names of the scripts defined by the specified App.
+     */
+    private function determineAppsDefinedScriptNames(string $appName) {
+        if(is_dir($this->determinePathToAppsJsDir($appName))) {
+            $ls = scandir($this->determinePathToAppsJsDir($appName));
+            $definedScripts = array_diff((is_array($ls) ? $ls : []), ['.', '..']);
+        }
+        return ($definedScripts ?? []);
     }
 
     /**
@@ -281,6 +346,11 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
         $replace = 'core' . DIRECTORY_SEPARATOR . 'abstractions' . DIRECTORY_SEPARATOR . 'component' . DIRECTORY_SEPARATOR . 'UserInterface';
         $path = strval(str_replace($replace, 'Apps' . DIRECTORY_SEPARATOR . $appName, strval(realpath(__DIR__))));
         return $path;
+    }
+
+    private function determinePathToAppsJsDir(string $appName): string
+    {
+        return $this->determinePathToApp($appName) . DIRECTORY_SEPARATOR . 'js';
     }
 
     private function determinePathToAppsCssDir(string $appName): string
