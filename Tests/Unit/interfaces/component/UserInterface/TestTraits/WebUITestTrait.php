@@ -673,6 +673,38 @@ trait WebUITestTrait
                 $this->determinePathToApp($appName)
             );
         }
+        foreach(
+            $this->getWebUI()
+                 ->getRouter()
+                 ->getCrud()
+                 ->readAll(
+                     App::deriveAppLocationFromRequest(
+                         $this->getWebUI()
+                              ->getRouter()
+                              ->getRequest()
+                     ),
+                     Factory::CONTAINER
+                 )
+                 as
+                 $appComponentsFactory
+        ) {
+            /**
+             * @var AppComponentsFactory $appComponentsFactory
+             */
+            if($this->isAAppComponentsFactory($appComponentsFactory))
+            {
+                foreach($appComponentsFactory->getStoredComponentRegistry()->getRegisteredComponents() as $component) {
+                    $this->getWebUI()
+                         ->getRouter()
+                         ->getCrud()
+                         ->delete($component);
+                }
+                $this->getWebUI()
+                     ->getRouter()
+                     ->getCrud()
+                     ->delete($appComponentsFactory);
+            }
+        }
     }
 
     public function getWebUI(): WebUI
