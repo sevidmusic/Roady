@@ -118,9 +118,9 @@ trait WebUITestTrait
      */
     private array $createdApps = [];
     private static string $requestedStylesheetNameA =
-        'requestedStylesheetNameA';
+        'WebUITestTraitRequestedStylesheetNameA';
     private static string $requestedStylesheetNameB =
-        'requestedStylesheetNameB';
+        'WebUITestTraitRequestedStylesheetNameB';
 
     private function addResponseOutputToExpectedOutput(
         Response $response,
@@ -225,8 +225,20 @@ trait WebUITestTrait
         );
     }
 
+    private function relativeUrlOfTestRequest(): string
+    {
+        return substr(
+            $this->getWebUI()->getRouter()->getRequest()->getUrl(),
+            strpos(
+                $this->getWebUI()->getRouter()->getRequest()->getUrl(),
+                "?"
+            ) + 1
+        );
+    }
+
     private function createTestApp(string $appName): void
     {
+        error_log($this->relativeUrlOfTestRequest());
         $configureAppOutput = new ConfigureAppOutput();
         $configureAppOutput->run(
             new CommandLineUI(),
@@ -239,8 +251,7 @@ trait WebUITestTrait
                     '--output',
                     'Web UI Test App Output',
                     '--relative-urls',
-                    '/ ',
-                    'index.php',
+                    '?' . $this->relativeUrlOfTestRequest()
                 ]
             )
         );
@@ -544,6 +555,7 @@ trait WebUITestTrait
      */
     protected function expectedOutput(): string
     {
+        $this->createTestApp($this->getUniqueName());
         $expectedOutput = '';
         $this->openHtml($expectedOutput);
         // Expect stylesheets and js files
@@ -580,6 +592,7 @@ trait WebUITestTrait
                 $this->closeBody .
                 $this->closeHtml,
         };
+        error_log($expectedOutput);
         return $expectedOutput;
     }
 
@@ -623,7 +636,7 @@ trait WebUITestTrait
 
     public function tearDown(): void
     {
-        #error_log($this->getRouter()->getRequest()->getUrl());
+        error_log($this->getWebUI()->getRouter()->getRequest()->getUrl());
         parent::tearDown();
         foreach($this->createdApps as $appName) {
             self::removeAppDirectory(
