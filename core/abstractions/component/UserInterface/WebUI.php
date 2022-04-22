@@ -137,7 +137,7 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
     {
         foreach ($this->determineBuiltAppNames() as $appName) {
             foreach($this->determineNamesOfStylesheetsThatShouldLoadForApp($appName) as $stylesheetName) {
-                $this->webUIOutput .= '<link rel="stylesheet" href="Apps/' . $appName  . '/css/' . $stylesheetName . '">';
+                $this->webUIOutput .= '<link rel="stylesheet" href="Apps/' . $appName  . '/css/' . $stylesheetName . '">' . PHP_EOL;
             }
         }
     }

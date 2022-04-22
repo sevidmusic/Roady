@@ -110,7 +110,7 @@ trait WebUITestTrait
     private string $closeBody = '</body>' . PHP_EOL;
     private string $closeHtml = '</html>' . PHP_EOL;
     private string $expectedOutput = '';
-    private string $globalCssFileName = 'test-global-css-file.css';
+    private static string $globalCssFileName = 'test-global-css-file.css';
     /**
      * @var array<int, string> $createdApps Array of the names of
      *                                      the Apps that were
@@ -118,9 +118,9 @@ trait WebUITestTrait
      */
     private array $createdApps = [];
     private static string $requestedStylesheetNameA =
-        'WebUITestTraitRequestedStylesheetNameA';
+        'WebUITestTraitRequestedStylesheetNameA.css';
     private static string $requestedStylesheetNameB =
-        'WebUITestTraitRequestedStylesheetNameB';
+        'WebUITestTraitRequestedStylesheetNameB.css';
 
     private function addResponseOutputToExpectedOutput(
         Response $response,
@@ -163,6 +163,7 @@ trait WebUITestTrait
 
     private function buildApp(string $appName): void
     {
+        error_log('Attempting to build app: ' . $appName);
         try {
             exec(
                 PHP_BINARY .
@@ -172,9 +173,13 @@ trait WebUITestTrait
                         $appName
                     )
                 ) .
-                $this->testDomain
+                " '" . self::$testDomain . "'"
             );
-        } catch(RuntimeException $e) { /** Failed to build App */ }
+            error_log('Built app: ' . $appName);
+        } catch(RuntimeException $e) {
+            /** Failed to build App */
+            error_log('Failed to build app: ' . $appName . PHP_EOL . 'Error: ' . $e->getMessage());
+        }
     }
 
     private function closeHeadAndOpenBodyIfAppropriate(
@@ -247,7 +252,7 @@ trait WebUITestTrait
                     '--for-app',
                     $appName,
                     '--name',
-                    'WebUITestAppOutput',
+                    $this->getUniqueName(),
                     '--output',
                     'Web UI Test App Output',
                     '--relative-urls',
@@ -273,7 +278,8 @@ trait WebUITestTrait
      */
     private function createTestAppWithCssFiles(
         string $appName,
-        array $cssFileNames, bool $build
+        array $cssFileNames,
+        bool $build
     ): void {
 
         $this->createTestApp($appName);
@@ -555,14 +561,46 @@ trait WebUITestTrait
      */
     protected function expectedOutput(): string
     {
-        $this->createTestApp($this->getUniqueName());
+        $this->createTestAppWithCssFiles(
+            $this->getUniqueName(),
+            [
+                self::$globalCssFileName,
+                self::$requestedStylesheetNameA,
+                self::$requestedStylesheetNameB,
+            ],
+            false
+        );
+        /**
+         * Create Test App with a global stylesheet, and build it.
+         *
+         * This stylesheet should be incorporated.
+         */
+        $this->createTestAppWithCssFiles(
+            $this->getUniqueName(),
+            [
+                self::$globalCssFileName,
+            ],
+            true
+        );
+        $this->createTestAppWithCssFiles(
+            $this->getUniqueName(),
+            [
+                self::$globalCssFileName,
+                self::$requestedStylesheetNameA,
+                self::$requestedStylesheetNameB,
+            ],
+            true
+        );
         $expectedOutput = '';
         $this->openHtml($expectedOutput);
-        // Expect stylesheets and js files
-
-
         /**
-         * @var Response $response
+         * 1. Expect stylesheets (and js files,
+         *    once css files are handled)
+         * 2. Create a test App with css files
+         * 3. For each expected css file, add a link tag
+         *    to the $expectedOutput. This must happen
+         *    before the head is closed and body is
+         *    opened.
          */
         foreach(
             $this->getExpectedResponsesSortedByPosition() as $response
@@ -602,6 +640,16 @@ trait WebUITestTrait
         $this->setResponseUIParentTestInstances();
     }
 
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        foreach($this->createdApps as $appName) {
+            self::removeAppDirectory(
+                $this->determinePathToApp($appName)
+            );
+        }
+    }
+
     public function getWebUI(): WebUI
     {
         return $this->webUI;
@@ -634,16 +682,6 @@ trait WebUITestTrait
         $this->webUI = $webUI;
     }
 
-    public function tearDown(): void
-    {
-        error_log($this->getWebUI()->getRouter()->getRequest()->getUrl());
-        parent::tearDown();
-        foreach($this->createdApps as $appName) {
-            self::removeAppDirectory(
-                $this->determinePathToApp($appName)
-            );
-        }
-    }
 
     public static function getRequest(): RequestInterface
     {
