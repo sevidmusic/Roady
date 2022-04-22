@@ -225,15 +225,18 @@ abstract class WebUI extends ResponseUIInterface implements WebUIInterface
      */
     private function determineNamesOfStylesheetsThatShouldLoadForApp(string $appName): array
     {
-        $stylesheetsToLoad = [];
+        $requestedStylesheetsToLoad = [];
+        $globalStylesheetsToLoad = [];
         foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
             if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
                 if($this->isAGlobalStylesheet($stylesheetName) || $this->stylesheetNameMatchesARequestQueryStringValue($stylesheetName)) {
-                    array_push($stylesheetsToLoad, $stylesheetName);
+                    ($this->isAGlobalStylesheet($stylesheetName) ? array_push($globalStylesheetsToLoad, $stylesheetName) : array_push($requestedStylesheetsToLoad, $stylesheetName));
                 }
             }
         }
-        return $stylesheetsToLoad;
+        sort($globalStylesheetsToLoad);
+        sort($requestedStylesheetsToLoad);
+        return array_merge($globalStylesheetsToLoad, $requestedStylesheetsToLoad);
     }
 
     private function stylesheetNameMatchesARequestQueryStringValue(string $stylesheetName): bool

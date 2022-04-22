@@ -178,7 +178,13 @@ trait WebUITestTrait
             error_log('Built app: ' . $appName);
         } catch(RuntimeException $e) {
             /** Failed to build App */
-            error_log('Failed to build app: ' . $appName . PHP_EOL . 'Error: ' . $e->getMessage());
+            error_log(
+                'Failed to build app: ' .
+                $appName .
+                PHP_EOL .
+                'Error: ' .
+                $e->getMessage()
+            );
         }
     }
 
@@ -329,7 +335,8 @@ trait WebUITestTrait
         string $appName
     ): array
     {
-        $stylesheetsToLoad = [];
+        $requestedStylesheetsToLoad = [];
+        $globalStylesheetsToLoad = [];
         foreach(
             $this->determineAppsDefinedStylesheetNames(
                 $appName
@@ -354,11 +361,17 @@ trait WebUITestTrait
                     ||
                     $this->isAGlobalStylesheet($stylesheetName)
                 ) {
-                    array_push($stylesheetsToLoad, $stylesheetName);
+                    (
+                        $this->isAGlobalStylesheet($stylesheetName)
+                        ? array_push($globalStylesheetsToLoad, $stylesheetName)
+                        : array_push($requestedStylesheetsToLoad, $stylesheetName)
+                    );
                 }
             }
         }
-        return ($stylesheetsToLoad ?? []);
+        sort($globalStylesheetsToLoad);
+        sort($requestedStylesheetsToLoad);
+        return array_merge($globalStylesheetsToLoad, $requestedStylesheetsToLoad);
     }
 
     private function determinePathToApp(string $appName): string
@@ -565,6 +578,9 @@ trait WebUITestTrait
             $this->getUniqueName(),
             [
                 self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
                 self::$requestedStylesheetNameA,
                 self::$requestedStylesheetNameB,
             ],
@@ -578,14 +594,18 @@ trait WebUITestTrait
         $this->createTestAppWithCssFiles(
             $this->getUniqueName(),
             [
-                self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
             ],
             true
         );
         $this->createTestAppWithCssFiles(
             $this->getUniqueName(),
             [
-                self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
+                $this->getUniqueName('Stylesheet') . self::$globalCssFileName,
                 self::$requestedStylesheetNameA,
                 self::$requestedStylesheetNameB,
             ],
@@ -602,6 +622,11 @@ trait WebUITestTrait
          *    before the head is closed and body is
          *    opened.
          */
+        foreach($this->createdApps as $appName) {
+            foreach($this->determineNamesOfStylesheetsDefinedByAppThatShouldHaveLinksCreatedForThem($appName) as $stylesheetName) {
+                $expectedOutput .= '<link rel="stylesheet" href="' . $this->determineStylesheetPath($appName, $stylesheetName) . '">' . PHP_EOL;
+            }
+        }
         foreach(
             $this->getExpectedResponsesSortedByPosition() as $response
         )
@@ -697,9 +722,9 @@ trait WebUITestTrait
             [
                 'url' =>
                     self::$testDomain . '/?request=' .
-                    self::$requestedStylesheetNameA .
+                    str_replace('.css', '', self::$requestedStylesheetNameA) .
                     '&request=' .
-                    self::$requestedStylesheetNameB
+                    str_replace('.css', '', self::$requestedStylesheetNameB)
             ]
         );
         return $request;
@@ -707,3 +732,22 @@ trait WebUITestTrait
 
 }
 
+/**
+ * @return array<int, string>
+ *
+private function determineNamesOfStylesheetsThatShouldLoadForApp(string $appName): array
+{
+    $requestedStylesheetsToLoad = [];
+    $globalStylesheetsToLoad = [];
+    foreach($this->determineAppsDefinedStylesheetNames($appName) as $stylesheetName) {
+        if($this->hasCssFileExtension($stylesheetName) && file_exists($this->determineStylesheetPath($appName, $stylesheetName))) {
+            if($this->isAGlobalStylesheet($stylesheetName) || $this->stylesheetNameMatchesARequestQueryStringValue($stylesheetName)) {
+                ($this->isAGlobalStylesheet($stylesheetName) ? array_push($globalStylesheetsToLoad, $stylesheetName) : array_push($requestedStylesheetsToLoad, $stylesheetName));
+            }
+        }
+    }
+    sort($globalStylesheetsToLoad);
+    sort($requestedStylesheetsToLoad);
+    return array_merge($globalStylesheetsToLoad, $requestedStylesheetsToLoad);
+}
+ */
