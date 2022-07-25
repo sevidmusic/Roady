@@ -94,6 +94,8 @@ use namespace\of\interface\that\will\be\extended\TheInterfaceToExtend;
  *
  * ```
  *
+ * @see TheInterfaceToExtend
+ *
  */
 interface ThisInterface extends TheInterfaceToExtend
 {
