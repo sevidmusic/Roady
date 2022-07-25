@@ -22,7 +22,7 @@ class Text implements TextInterface
 
     public function length(): int
     {
-        return 0;
+        return strlen($this->__toString());
     }
 }
 

@@ -21,6 +21,7 @@ use roady\interfaces\strings\Text;
  * Test Methods:
  *
  * ```
+ * public function test_length_returns_the_expected_strings_length(): void
  * public function test_toString_returns_the_expected_string(): void
  *
  * ```
@@ -110,6 +111,33 @@ trait TextTestTrait
     public function setExpectedString(string $string): void
     {
         $this->expectedString = $string;
+    }
+
+    /**
+     * Test that the implementation's length() method returns the
+     * length of the expected string.
+     *
+     * @return void
+     */
+    public function test_length_returns_the_expected_strings_length(): void
+    {
+        $this->assertEquals(
+            strlen($this->expectedString),
+            $this->testInstance->length(),
+            'The ' .
+            get_class($this->testInstance()) .
+            ' implementation\'s length() method must return ' .
+            'the length of the expected string: ' .
+            PHP_EOL .
+            PHP_EOL .
+            strlen($this->expectedString) .
+            PHP_EOL .
+            PHP_EOL .
+            'The returned string was: ' .
+            PHP_EOL .
+            PHP_EOL .
+            $this->testInstance()->length()
+        );
     }
 
     /**
