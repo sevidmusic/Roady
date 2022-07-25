@@ -122,7 +122,7 @@ trait TextTestTrait
     public function test_length_returns_the_expected_strings_length(): void
     {
         $this->assertEquals(
-            strlen($this->expectedString),
+            mb_strlen($this->expectedString),
             $this->testInstance->length(),
             'The ' .
             get_class($this->testInstance()) .
@@ -130,7 +130,7 @@ trait TextTestTrait
             'the length of the expected string: ' .
             PHP_EOL .
             PHP_EOL .
-            strlen($this->expectedString) .
+            mb_strlen($this->expectedString) .
             PHP_EOL .
             PHP_EOL .
             'The returned string was: ' .
