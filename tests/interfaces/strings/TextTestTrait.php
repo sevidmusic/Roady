@@ -12,9 +12,10 @@ use roady\interfaces\strings\Text;
  *
  * ```
  * abstract public function setup(): void;
+ * protected function expectedString(): string
+ * protected function setExpectedString(string $string): void
  * protected function setTestInstance(Text $testInstance): void
  * protected function testInstance(): Text
- * public function setExpectedString(string $string): void
  *
  * ```
  *
@@ -81,6 +82,30 @@ trait TextTestTrait
     abstract public function setup(): void;
 
     /**
+     * Get the string expected to be returned by the Text
+     * implementation's __toString() method.
+     *
+     * @return string
+     *
+     */
+    protected function expectedString(): string
+    {
+        return $this->expectedString;
+    }
+
+    /**
+     * Set the string expected to be returned by the Text
+     * implementation's __toString() method.
+     *
+     * @return void
+     *
+     */
+    protected function setExpectedString(string $string): void
+    {
+        $this->expectedString = $string;
+    }
+
+    /**
      * Set the Text implementation instance to test.
      *
      * @param Text $testInstance An instance of an implementation of
@@ -106,19 +131,6 @@ trait TextTestTrait
     }
 
     /**
-     * Set the string expected to be returned by the Text
-     * implementation's __toString() method.
-     *
-     * @return void
-     *
-     */
-    public function setExpectedString(string $string): void
-    {
-        $this->expectedString = $string;
-    }
-
-
-    /**
      * Test that the implementation's contains() method returns false
      * if any of the specified strings are not in the expected string.
      *
@@ -137,7 +149,7 @@ trait TextTestTrait
             'expected string:' .
             PHP_EOL .
             PHP_EOL .
-            $this->expectedString
+            $this->expectedString()
         );
     }
 
@@ -151,7 +163,7 @@ trait TextTestTrait
      */
     public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string(): void
     {
-        $chars = str_split($this->expectedString);
+        $chars = str_split($this->expectedString());
         $this->assertTrue(
             $this->testInstance()->contains(
                 $chars[array_rand($chars)],
@@ -165,7 +177,7 @@ trait TextTestTrait
             'expected string:' .
             PHP_EOL .
             PHP_EOL .
-            $this->expectedString
+            $this->expectedString()
         );
     }
 
@@ -178,7 +190,7 @@ trait TextTestTrait
     public function test_length_returns_the_expected_strings_length(): void
     {
         $this->assertEquals(
-            mb_strlen($this->expectedString),
+            mb_strlen($this->expectedString()),
             $this->testInstance->length(),
             'The ' .
             get_class($this->testInstance()) .
@@ -186,7 +198,7 @@ trait TextTestTrait
             'the length of the expected string: ' .
             PHP_EOL .
             PHP_EOL .
-            mb_strlen($this->expectedString) .
+            mb_strlen($this->expectedString()) .
             PHP_EOL .
             PHP_EOL .
             'The returned string was: ' .
@@ -206,7 +218,7 @@ trait TextTestTrait
     public function test_toString_returns_the_expected_string(): void
     {
         $this->assertEquals(
-            $this->expectedString,
+            $this->expectedString(),
             $this->testInstance->__toString(),
             'The ' .
             get_class($this->testInstance()) .
@@ -214,7 +226,7 @@ trait TextTestTrait
             'the expected string: ' .
             PHP_EOL .
             PHP_EOL .
-            $this->expectedString .
+            $this->expectedString() .
             PHP_EOL .
             PHP_EOL .
             'The returned string was: ' .
