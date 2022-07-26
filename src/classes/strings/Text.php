@@ -15,9 +15,14 @@ class Text implements TextInterface
         return $this->string;
     }
 
-    public function contains(string|Text|Stringable ...$string): bool
+    public function contains(string|Stringable ...$strings): bool
     {
-        return false;
+        foreach($strings as $string) {
+            if(!str_contains($this, $string)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public function length(): int

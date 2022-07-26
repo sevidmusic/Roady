@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
  * Defines tests for the `roady\classes\strings\Text` implementation
  * of the `roady\interfaces\strings\Text` interface.
  *
+ * @see TestCase
  * @see Text
  * @see TextTestTrait
  *
@@ -27,12 +28,12 @@ class TextTest extends TestCase
      */
     public function setup(): void
     {
+        $string = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+';
         try {
-            $string = random_bytes(rand(100, 1000));
+            $string .= random_bytes(rand(100, 1000));
         } catch(\Exception $e) {
-            $chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-            $string = str_shuffle($chars);
         }
+        $string = str_shuffle($string);
         $this->setExpectedString($string);
         $this->setTestInstance(new Text($string));
     }

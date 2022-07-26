@@ -19,7 +19,7 @@ use \Stringable;
  * Methods inherited from Stringable:
  *
  * ```
- * public function __toString();
+ * public function __toString(): string;
  *
  * ```
  *

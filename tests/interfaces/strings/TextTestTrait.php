@@ -21,6 +21,8 @@ use roady\interfaces\strings\Text;
  * Test Methods:
  *
  * ```
+ * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
+ * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
  * public function test_length_returns_the_expected_strings_length(): void
  * public function test_toString_returns_the_expected_string(): void
  *
@@ -33,12 +35,6 @@ trait TextTestTrait
 {
 
     /**
-     * @var Text $testInstance An instance of an implementation of
-     *                         the Text interface to test.
-     */
-    private Text $testInstance;
-
-    /**
      * @var string $expectedString The string that is expected
      *                             to be returned by the Text
      *                             implementation's __toString()
@@ -47,12 +43,19 @@ trait TextTestTrait
     private string $expectedString;
 
     /**
-     * This method must call setTestInstance() to assign an
-     * appropriate instance of a Text implementation to test.
+     * @var Text $testInstance An instance of an implementation of
+     *                         the Text interface to test.
+     */
+    private Text $testInstance;
+
+    /**
      *
-     * This method must also call setExpectedString() to assign the
-     * string expected to be returned by the implementation's
-     * __toString() method.
+     * This method must call setExpectedString() to set the string
+     * expected to be returned by the implementation's __toString()
+     * method.
+     *
+     * This method must also call setTestInstance() to set an
+     * appropriate instance of a Text implementation to test.
      *
      * This method may also be used to perform any additional setup
      * required by the implementation being tested.
@@ -65,11 +68,12 @@ trait TextTestTrait
      * public function setup(): void
      * {
      *     $string = str_shuffle('abcdefghijklmnopqrstuvwxyz');
-     *     $this->setTestInstance(new Text($string));
      *     $this->setExpectedString($string);
+     *     $this->setTestInstance(new Text($string));
      * }
      *
      * ```
+     *
      * @see setExpectedString(string $string);
      * @see setTestInstance(Text $testInstance);
      *
@@ -111,6 +115,58 @@ trait TextTestTrait
     public function setExpectedString(string $string): void
     {
         $this->expectedString = $string;
+    }
+
+
+    /**
+     * Test that the implementation's contains() method returns false
+     * if any of the specified strings are not in the expected string.
+     *
+     * @return void
+     *
+     */
+    public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string(): void
+    {
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $this->assertFalse(
+            $this->testInstance()->contains(str_shuffle($chars)),
+            'The ' .
+            get_class($this->testInstance()) .
+            ' implementation\'s contains() method must return ' .
+            'false if any of the specified strings are not in ' .
+            'expected string:' .
+            PHP_EOL .
+            PHP_EOL .
+            $this->expectedString
+        );
+    }
+
+
+    /**
+     * Test that the implementation's contains() method returns true
+     * if all of the specified strings are in the expected string.
+     *
+     * @return void
+     *
+     */
+    public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string(): void
+    {
+        $chars = str_split($this->expectedString);
+        $this->assertTrue(
+            $this->testInstance()->contains(
+                $chars[array_rand($chars)],
+                $this->testInstance(),
+                $chars[array_rand($chars)],
+            ),
+            'The ' .
+            get_class($this->testInstance()) .
+            ' implementation\'s contains() method must return ' .
+            'true if all of the specified strings are in the ' .
+            'expected string:' .
+            PHP_EOL .
+            PHP_EOL .
+            $this->expectedString
+        );
     }
 
     /**
