@@ -50,12 +50,7 @@ class TextTest extends TestCase
      */
     public function setup(): void
     {
-        $string = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+';
-        try {
-            $string .= random_bytes(rand(100, 1000));
-        } catch(\Exception $e) {
-        }
-        $string = str_shuffle($string);
+        $string = $this->randomChars();
         $this->setExpectedString($string);
         $this->setTestInstance(new Text($string));
     }

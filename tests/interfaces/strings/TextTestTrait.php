@@ -13,6 +13,7 @@ use roady\interfaces\strings\Text;
  * ```
  * abstract public function setup(): void;
  * protected function expectedString(): string
+ * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
  * protected function setTestInstance(Text $testInstance): void
  * protected function testInstance(): Text
@@ -91,6 +92,33 @@ trait TextTestTrait
     protected function expectedString(): string
     {
         return $this->expectedString;
+    }
+
+    /**
+     * Return a string composed of a random number of randomly
+     * generated characters.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * echo $this->randomChars();
+     * // example output: rqEzm*g1vRI7!lz#-%q
+     *
+     * echo $this->randomChars();
+     * // example output: Lz%R+bgR#79l!mz-
+     *
+     * ```
+     */
+    protected function randomChars(): string
+    {
+        $string = str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+');
+        try {
+            $string .= random_bytes(random_int(1, 1000));
+        } catch(\Exception $e) {
+        }
+        return str_shuffle($string);
     }
 
     /**
