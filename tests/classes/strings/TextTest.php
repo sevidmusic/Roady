@@ -10,18 +10,31 @@ use PHPUnit\Framework\TestCase;
  * Defines tests for the `roady\classes\strings\Text` implementation
  * of the `roady\interfaces\strings\Text` interface.
  *
+ * Methods:
+ *
+ * ```
+ *
+ * ```
+ *
  * Methods inherited from TextTestTrait:
  *
  * ```
  * abstract public function setup(): void;
  * protected function expectedString(): string
+ * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
  * protected function setTestInstance(Text $testInstance): void
  * protected function testInstance(): Text
  *
  * ```
  *
- * Test methods inherited from TextTestTrait:
+ * Test Methods:
+ *
+ * ```
+ *
+ * ```
+ *
+ * Test Methods inherited from TextTestTrait:
  *
  * ```
  * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void

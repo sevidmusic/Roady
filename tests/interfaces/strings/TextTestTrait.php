@@ -113,7 +113,9 @@ trait TextTestTrait
      */
     protected function randomChars(): string
     {
-        $string = str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+');
+        $string = str_shuffle(
+            'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+'
+        );
         try {
             $string .= random_bytes(random_int(1, 1000));
         } catch(\Exception $e) {
