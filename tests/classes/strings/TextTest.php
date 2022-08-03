@@ -10,12 +10,6 @@ use PHPUnit\Framework\TestCase;
  * Defines tests for the `roady\classes\strings\Text` implementation
  * of the `roady\interfaces\strings\Text` interface.
  *
- * Methods:
- *
- * ```
- *
- * ```
- *
  * Methods inherited from TextTestTrait:
  *
  * ```
@@ -25,12 +19,6 @@ use PHPUnit\Framework\TestCase;
  * protected function setExpectedString(string $string): void
  * protected function setTestInstance(Text $testInstance): void
  * protected function testInstance(): Text
- *
- * ```
- *
- * Test Methods:
- *
- * ```
  *
  * ```
  *

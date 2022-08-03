@@ -28,12 +28,6 @@ use tests\interfaces\strings\TextTestTrait;
  *
  * ```
  *
- * Test Methods:
- *
- * ```
- *
- * ```
- *
  * Test Methods inherited from TextTestTrait:
  *
  * ```

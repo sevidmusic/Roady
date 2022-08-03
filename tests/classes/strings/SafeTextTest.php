@@ -13,12 +13,6 @@ use PHPUnit\Framework\TestCase;
  * implementation of the `roady\interfaces\strings\SafeText`
  * interface.
  *
- * Methods:
- *
- * ```
- *
- * ```
- *
  * Methods inherited from SafeTextTestTrait:
  *
  * ```
@@ -28,12 +22,6 @@ use PHPUnit\Framework\TestCase;
  * protected function setExpectedString(string $string): void
  * protected function setTestInstance(Text $testInstance): void
  * protected function testInstance(): Text
- *
- * ```
- *
- * Test Methods:
- *
- * ```
  *
  * ```
  *

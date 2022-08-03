@@ -107,7 +107,7 @@ trait TextTestTrait
      * // example output: rqEzm*g1vRI7!lz#-%q
      *
      * echo $this->randomChars();
-     * // example output: Lz%R+bgR#79l!mz-
+     * // example output: @Lz%R+bgR#79l!mz-
      *
      * ```
      */
