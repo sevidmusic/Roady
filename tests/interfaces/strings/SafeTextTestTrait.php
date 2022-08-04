@@ -72,12 +72,15 @@ trait SafeTextTestTrait
      *
      * ```
      *
+     * @todo Check for case where string starts with a hyphen (-)
+     *
      */
     protected function makeStringSafe(string $string): string
     {
         $numericChar = strval(0);
-        $safeChars = preg_replace('/[^A-Za-z0-9_-]/', '_', $string);
-        $safeChars = preg_replace('#_+#', '_', ($safeChars ?? ''));
+        $safeChars = $this->removeDuplicateUnderscores(
+            $this->replaceUnsafeCharsWithUnderscores($string)
+        );
         return (
             empty($safeChars) || $safeChars === '_'
             ? $numericChar
@@ -88,5 +91,16 @@ trait SafeTextTestTrait
             )
         );
     }
+
+    protected function replaceUnsafeCharsWithUnderscores(string $string): string
+    {
+        return strval(preg_replace('/[^A-Za-z0-9_-]/', '_', $string));
+    }
+
+    protected function removeDuplicateUnderscores(string $string): string
+    {
+        return strval(preg_replace('#_+#', '_', $string));
+    }
+
 }
 

@@ -18,12 +18,17 @@ use roady\interfaces\strings\Text;
  * Any unsafe characters in the original Text will be replaced
  * with underscores.
  *
+ * SafeText will always begin with an alphanumeric character.
+ *
  * Note:
  *
  * If replacing the unsafe characters in the original Text with
  * underscores would result in a string that does not begin with
  * an alphanumeric character, then the numeric character 0 will
  * be prepended to the resulting SafeText.
+ *
+ * SafeText will never be empty, if the original Text is empty, then
+ * the SafeText will be the numeric character 0.
  *
  * Methods:
  *
