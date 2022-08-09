@@ -10,10 +10,18 @@ use PHPUnit\Framework\TestCase;
  * Defines tests for the `roady\classes\strings\Text` implementation
  * of the `roady\interfaces\strings\Text` interface.
  *
+ * Methods interface from TestCase:
+ *
+ * ```
+ * @see https://github.com/sebastianbergmann/phpunit/blob/main/src/Framework/Assert.php
+ * @see https://github.com/sebastianbergmann/phpunit/blob/main/src/Framework/TestCase.php
+ *
+ * ```
+ *
  * Methods inherited from TextTestTrait:
  *
  * ```
- * abstract public function setup(): void;
+ * abstract protected function setUp(): void;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
@@ -46,10 +54,14 @@ class TextTest extends TestCase
      * Set up a Text instance for testing using a randomly
      * generated string.
      *
+     * Note:This method will be called before each test is run.
+     *
      * @return void
      *
+     * @see https://phpunit.readthedocs.io/en/9.5/fixtures.html
+     *
      */
-    public function setup(): void
+    protected function setUp(): void
     {
         $string = $this->randomChars();
         $this->setExpectedString($string);

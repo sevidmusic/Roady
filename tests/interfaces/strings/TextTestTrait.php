@@ -11,7 +11,7 @@ use roady\interfaces\strings\Text;
  * Methods:
  *
  * ```
- * abstract public function setup(): void;
+ * abstract protected function setUp(): void;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
@@ -59,7 +59,7 @@ trait TextTestTrait
      * This method must also call setTestInstance() to set an
      * appropriate instance of a Text implementation to test.
      *
-     * This method may also be used to perform any additional setup
+     * This method may also be used to perform any additional setUp
      * required by the implementation being tested.
      *
      * @return void
@@ -67,7 +67,7 @@ trait TextTestTrait
      * @example
      *
      * ```
-     * public function setup(): void
+     * protected function setUp(): void
      * {
      *     $string = str_shuffle('abcdefghijklmnopqrstuvwxyz');
      *     $this->setExpectedString($string);
@@ -76,11 +76,12 @@ trait TextTestTrait
      *
      * ```
      *
+     * @see https://phpunit.readthedocs.io/en/9.5/fixtures.html
      * @see setExpectedString(string $string);
      * @see setTestInstance(Text $testInstance);
      *
      */
-    abstract public function setup(): void;
+    abstract protected function setUp(): void;
 
     /**
      * Get the string expected to be returned by the Text
@@ -110,6 +111,7 @@ trait TextTestTrait
      * // example output: @Lz%R+bgR#79l!mz-
      *
      * ```
+     *
      */
     protected function randomChars(): string
     {
@@ -198,7 +200,7 @@ trait TextTestTrait
             $this->testInstance()->contains(
                 $chars[array_rand($chars)],
                 $this->testInstance(),
-                $chars[array_rand($chars)],
+                ...$chars,
             ),
             'The ' .
             get_class($this->testInstance()) .
@@ -231,7 +233,7 @@ trait TextTestTrait
             mb_strlen($this->expectedString()) .
             PHP_EOL .
             PHP_EOL .
-            'The returned string was: ' .
+            'The returned string length was: ' .
             PHP_EOL .
             PHP_EOL .
             $this->testInstance()->length()

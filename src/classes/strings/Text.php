@@ -8,6 +8,29 @@ use \Stringable;
 class Text implements TextInterface
 {
 
+    /**
+     * Instantiate a new Text instance.
+     *
+     * @param string $string The string the Text will represent.
+     *
+     * @example
+     *
+     * ```
+     * $text = new Text('Foo bar baz.');
+     *
+     * echo $text;
+     * // example output: Foo bar baz.
+     *
+     * echo strval($text->length());
+     * // example output: 12
+     *
+     * echo ($text->contains($text) ? 'True' : 'False');
+     * // example output: True
+     *
+     *
+     * ```
+     *
+     */
     public function __construct(private string $string) {}
 
     public function __toString(): string
@@ -29,5 +52,6 @@ class Text implements TextInterface
     {
         return mb_strlen($this->__toString());
     }
+
 }
 
