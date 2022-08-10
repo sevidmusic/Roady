@@ -15,17 +15,14 @@ use roady\interfaces\strings\Text;
  * - Hyphens: -
  * - Periods: .
  *
- * Any unsafe characters in the original Text will be replaced
- * with underscores.
+ * Any unsafe characters in the original Text will be replaced with
+ * underscores.
  *
- * SafeText will always begin with an alphanumeric character.
+ * A consecutive sequence of 2 or more unsafe characters will be
+ * replaced by a single underscore.
  *
- * Note:
- *
- * If replacing the unsafe characters in the original Text with
- * underscores would result in a string that does not begin with
- * an alphanumeric character, then the numeric character 0 will
- * be prepended to the resulting SafeText.
+ * Consequently, a consecutive sequence of 2 or more underscores
+ * will also be replaced by a single underscore.
  *
  * SafeText will never be empty, if the original Text is empty, then
  * the SafeText will be the numeric character 0.
@@ -50,16 +47,28 @@ use roady\interfaces\strings\Text;
  *
  * ```
  * echo $safeText->originalText();
- * // example output: ^Foo$Bar*Baz%Bazzer!
+ * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(
  *
- * echo $safeText->originalText()->length();
- * // example output: 20
+ * echo strval($safeText->originalText()->length());
+ * // example output: 44
  *
  * echo $safeText;
- * // example output: 0_Foo_Bar_Baz_Bazzer_
+ * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
  *
  * echo strval($safeText->length());
- * // example output: 21
+ * // example output: 28
+ *
+ * echo $emptySafeText->originalText();
+ * // example output:
+ *
+ * echo strval($emptySafeText->originalText()->length());
+ * // example output: 0
+ *
+ * echo $emptySafeText;
+ * // example output: 0
+ *
+ * echo strval($emptySafeText->length());
+ * // example output: 1
  *
  * ```
  *
@@ -78,10 +87,10 @@ interface SafeText extends Text
      *
      * ```
      * echo $safeText->originalText();
-     * // example outpout: ^Foo$Bar*Baz%Bazzer!
+     * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(
      *
      * echo $safeText;
-     * // example output: 0_Foo_Bar_Baz_Bazzer_
+     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
      *
      * ```
      *

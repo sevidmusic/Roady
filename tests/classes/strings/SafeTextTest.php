@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  * Methods inherited from SafeTextTestTrait:
  *
  * ```
- * abstract public function setup(): void;
+ * abstract protected function setUp(): void;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
@@ -52,11 +52,17 @@ class SafeTextTest extends TextTest
      * @return void
      *
      */
-    public function setup(): void
+    protected function setUp(): void
     {
         $string = $this->randomChars();
         $this->setExpectedString($this->makeStringSafe($string));
         $this->setTestInstance(new SafeText(new Text($string)));
     }
 
+    protected function setUpWithEmptyString(): void
+    {
+        $string = '';
+        $this->setExpectedString($this->makeStringSafe($string));
+        $this->setTestInstance(new SafeText(new Text($string)));
+    }
 }

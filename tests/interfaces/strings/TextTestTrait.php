@@ -51,7 +51,6 @@ trait TextTestTrait
     private Text $testInstance;
 
     /**
-     *
      * This method must call setExpectedString() to set the string
      * expected to be returned by the implementation's __toString()
      * method.
@@ -84,7 +83,7 @@ trait TextTestTrait
     abstract protected function setUp(): void;
 
     /**
-     * Get the string expected to be returned by the Text
+     * Return the string expected to be returned by the Text
      * implementation's __toString() method.
      *
      * @return string
@@ -178,13 +177,9 @@ trait TextTestTrait
             get_class($this->testInstance()) .
             ' implementation\'s contains() method must return ' .
             'false if any of the specified strings are not in ' .
-            'expected string:' .
-            PHP_EOL .
-            PHP_EOL .
-            $this->expectedString()
+            'expected string.'
         );
     }
-
 
     /**
      * Test that the implementation's contains() method returns true
@@ -206,10 +201,7 @@ trait TextTestTrait
             get_class($this->testInstance()) .
             ' implementation\'s contains() method must return ' .
             'true if all of the specified strings are in the ' .
-            'expected string:' .
-            PHP_EOL .
-            PHP_EOL .
-            $this->expectedString()
+            'expected string.'
         );
     }
 
@@ -227,16 +219,7 @@ trait TextTestTrait
             'The ' .
             get_class($this->testInstance()) .
             ' implementation\'s length() method must return ' .
-            'the length of the expected string: ' .
-            PHP_EOL .
-            PHP_EOL .
-            mb_strlen($this->expectedString()) .
-            PHP_EOL .
-            PHP_EOL .
-            'The returned string length was: ' .
-            PHP_EOL .
-            PHP_EOL .
-            $this->testInstance()->length()
+            'the length of the expected string.'
         );
     }
 
@@ -255,16 +238,7 @@ trait TextTestTrait
             'The ' .
             get_class($this->testInstance()) .
             ' implementation\'s __toString() method must return ' .
-            'the expected string: ' .
-            PHP_EOL .
-            PHP_EOL .
-            $this->expectedString() .
-            PHP_EOL .
-            PHP_EOL .
-            'The returned string was: ' .
-            PHP_EOL .
-            PHP_EOL .
-            $this->testInstance->__toString()
+            'the expected string.'
         );
     }
 

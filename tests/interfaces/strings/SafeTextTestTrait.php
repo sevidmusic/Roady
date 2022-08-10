@@ -19,7 +19,7 @@ use tests\interfaces\strings\TextTestTrait;
  * Methods inherited from TextTestTrait:
  *
  * ```
- * abstract public function setup(): void;
+ * abstract protected function setUp(): void;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
@@ -102,5 +102,33 @@ trait SafeTextTestTrait
         return strval(preg_replace('#_+#', '_', $string));
     }
 
+    /**
+     * Setup for tests using an empty string.
+     *
+     */
+    abstract protected function setUpWithEmptyString(): void;
+
+
+    public function test_TEST_METHOD_setUpWithEmptyString_sets_up_expected_string_to_be_the_numeric_character_0(): void
+    {
+        $this->setUpWithEmptyString();
+        $this->assertEquals(
+            '0',
+            $this->expectedString(),
+            'The ' . get_class() . '::setUpWithEmptyString() ' .
+            'method must assign an empty string via the ' .
+            get_class() .
+            '::setExpectedString() method.'
+        );
+    }
+
+    public function test_toString_returns_the_numeric_character_0_if_original_text_was_an_empty_string(): void
+    {
+        $this->setUpWithEmptyString();
+        $this->assertEquals(
+            '0',
+            $this->testInstance()->__toString(),
+        );
+    }
 }
 
