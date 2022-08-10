@@ -11,7 +11,8 @@ class Text implements TextInterface
     /**
      * Instantiate a new Text instance.
      *
-     * @param string $string The string the Text will represent.
+     * @param string $string The string the Text instance will
+     *                       represent.
      *
      * @example
      *
