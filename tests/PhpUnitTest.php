@@ -22,7 +22,7 @@ class PhpUnitTest extends TestCase
     {
         $this->assertTrue(
             true,
-            'This test should run if phpunit is setup correctly'
+            'This test should run if phpunit is set up correctly'
         );
     }
 }
