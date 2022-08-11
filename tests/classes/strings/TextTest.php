@@ -36,7 +36,7 @@ use tests\interfaces\strings\TextTestTrait;
  * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
  * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
  * public function test_length_returns_the_expected_strings_length(): void
- * public function test_toString_returns_the_expected_string(): void
+ * public function test___toString_returns_the_expected_string(): void
  *
  * ```
  *

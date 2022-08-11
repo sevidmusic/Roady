@@ -23,7 +23,7 @@ use tests\interfaces\strings\TextTestTrait;
  *
  * ```
  * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
- * public function test_toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
+ * public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
  *
  * ```
  *
@@ -45,7 +45,7 @@ use tests\interfaces\strings\TextTestTrait;
  * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
  * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
  * public function test_length_returns_the_expected_strings_length(): void
- * public function test_toString_returns_the_expected_string(): void
+ * public function test___toString_returns_the_expected_string(): void
  *
  * ```
  *
@@ -208,7 +208,7 @@ trait SafeTextTestTrait
      * @return void
      *
      */
-    public function test_toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
+    public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
     {
         $this->setUpWithEmptyString();
         $this->assertEquals(
