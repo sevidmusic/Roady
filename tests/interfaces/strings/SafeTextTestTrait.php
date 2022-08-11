@@ -51,44 +51,47 @@ trait SafeTextTestTrait
      * Modify a string, insuring only the following characters
      * exist in the resulting string:
      *
-     * - Alphanumeric characters: A-Z, a-z, 0-9
+     * - Alphanumeric characters: A-Z, a-z, and 0-9
      * - Underscores: _
      * - Hyphens: -
      * - Periods: .
      *
-     * All unsafe characters will be replaced with underscores.
-     * If replacing unsafe characters with underscores results in a
-     * a string that does not start with an alphanumeric character,
-     * then the numeric character 0 will be prepended to the resulting
-     * string.
+     * A consecutive sequence of 2 or more unsafe characters will be
+     * replaced by a single underscore.
+     *
+     * Consequently, a consecutive sequence of 2 or more underscores
+     * will also be replaced by a single underscore.
+     *
+     * If the original string is empty, then the modified string will
+     * be the numeric character 0.
      *
      * @return string
      *
      * @example
      *
      * ```
-     * echo $this->makeStringSafe('!Foo&Bar(Baz');
-     * // example output: 7_Foo_Bar_Baz
+     * $string = '!(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(';
+     *
+     * echo $this->makeStringSafe($string);
+     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
+     *
+     * $string = '';
+     *
+     * echo $this->makeStringSafe($string);
+     * // example output: 0
      *
      * ```
-     *
-     * @todo Check for case where string starts with a hyphen (-)
      *
      */
     protected function makeStringSafe(string $string): string
     {
-        $numericChar = strval(0);
         $safeChars = $this->removeDuplicateUnderscores(
             $this->replaceUnsafeCharsWithUnderscores($string)
         );
         return (
-            empty($safeChars) || $safeChars === '_'
-            ? $numericChar
-            : (
-                substr($safeChars, 0, 1) === '_'
-                ? $numericChar . $safeChars
-                : $safeChars
-            )
+            empty($safeChars)
+            ? strval(0)
+            : $safeChars
         );
     }
 
