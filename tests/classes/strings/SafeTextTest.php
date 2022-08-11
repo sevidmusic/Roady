@@ -2,11 +2,10 @@
 
 namespace tests\classes\strings;
 
-use tests\interfaces\strings\SafeTextTestTrait;
-use tests\classes\strings\TextTest;
 use roady\classes\strings\SafeText;
 use roady\classes\strings\Text;
-use PHPUnit\Framework\TestCase;
+use tests\classes\strings\TextTest;
+use tests\interfaces\strings\SafeTextTestTrait;
 
 /**
  * Defines tests for the `roady\classes\strings\SafeText`
@@ -67,8 +66,8 @@ class SafeTextTest extends TextTest
 
     protected function setUpWithEmptyString(): void
     {
-        $string = '';
-        $this->setExpectedString($this->makeStringSafe($string));
-        $this->setTestInstance(new SafeText(new Text($string)));
+        $this->setExpectedString('0');
+        $this->setTestInstance(new SafeText(new Text('')));
     }
+
 }

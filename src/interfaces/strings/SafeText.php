@@ -15,7 +15,7 @@ use roady\interfaces\strings\Text;
  * - Hyphens: -
  * - Periods: .
  *
- * Any unsafe characters in the original Text will be replaced with
+ * Unsafe characters in the original Text will be replaced with
  * underscores.
  *
  * A consecutive sequence of 2 or more unsafe characters will be

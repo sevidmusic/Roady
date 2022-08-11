@@ -59,6 +59,30 @@ trait SafeTextTestTrait
     use TextTestTrait;
 
     /**
+     * This method must set the expected string to be the numeric
+     * character 0.
+     *
+     * This method must also set the test instance to be an
+     * appropriate instance of a SafeText implementation whose
+     * original Text represents an empty string.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * protected function setUpWithEmptyString(): void
+     * {
+     *     $this->setExpectedString('0');
+     *     $this->setTestInstance(new SafeText(new Text('')));
+     * }
+     *
+     * ```
+     *
+     */
+    abstract protected function setUpWithEmptyString(): void;
+
+    /**
      * Modify a string, insuring only the following characters
      * exist in the resulting string:
      *
@@ -66,6 +90,8 @@ trait SafeTextTestTrait
      * - Underscores: _
      * - Hyphens: -
      * - Periods: .
+     *
+     * Unsafe characters will be replaced with underscores.
      *
      * A consecutive sequence of 2 or more unsafe characters will be
      * replaced by a single underscore.
@@ -106,6 +132,31 @@ trait SafeTextTestTrait
         );
     }
 
+
+    /**
+     * Replace sequences of 2 or more underscores in the specified
+     * string with a single underscore.
+     *
+     * @param string $string The string to modify.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * $string = $this->removeDuplicateUnderscores('Foo_____Bar');
+     *
+     * echo $string;
+     * // example output: Foo_Bar
+     *
+     * ```
+     */
+    protected function removeDuplicateUnderscores(string $string): string
+    {
+        return strval(preg_replace('#_+#', '_', $string));
+    }
+
+
     /**
      * Replace all unsafe characters in the specified string with
      * underscores.
@@ -131,49 +182,9 @@ trait SafeTextTestTrait
     }
 
     /**
-     * Convert sequences of 2 or more underscores in the specified
-     * string into a single underscore.
-     *
-     * @param string $string The string to modify.
-     *
-     * @return string
-     *
-     * @example
-     *
-     * ```
-     * $string = $this->removeDuplicateUnderscores('Foo_____Bar');
-     *
-     * echo $string;
-     * // example output: Foo_Bar
-     *
-     * ```
-     */
-    protected function removeDuplicateUnderscores(string $string): string
-    {
-        return strval(preg_replace('#_+#', '_', $string));
-    }
-
-    /**
-     * Setup for tests using an empty string.
-     *
-     * @return void
-     *
-     * @example
-     *
-     * ```
-     * $this->setUpWithEmptyString();
-     *
-     * echo $this->expectedString();
-     * // example output: 0
-     *
-     * ```
-     *
-     */
-    abstract protected function setUpWithEmptyString(): void;
-
-    /**
-     * Test that the test class's setUpWithEmptyString() method sets
-     * the expected string to the numeric character 0.
+     * Test that the test class's implementation of the
+     * setUpWithEmptyString() method sets the expected
+     * string to the numeric character 0.
      *
      * @return void
      *
@@ -184,10 +195,9 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->expectedString(),
-            'The ' . get_class() . '::setUpWithEmptyString() ' .
-            'method must assign an empty string via the ' .
-            get_class() .
-            '::setExpectedString() method.'
+            'The ' . get_class() . ' implementation of the ' .
+            'setUpWithEmptyString() method must assign the numeric ' .
+            'character 0 as the expected string.'
         );
     }
 

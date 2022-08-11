@@ -2,9 +2,9 @@
 
 namespace tests\classes\strings;
 
-use tests\interfaces\strings\TextTestTrait;
-use roady\classes\strings\Text;
 use PHPUnit\Framework\TestCase;
+use roady\classes\strings\Text;
+use tests\interfaces\strings\TextTestTrait;
 
 /**
  * Defines tests for the `roady\classes\strings\Text` implementation

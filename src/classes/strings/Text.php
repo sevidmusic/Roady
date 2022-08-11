@@ -2,8 +2,8 @@
 
 namespace roady\classes\strings;
 
-use roady\interfaces\strings\Text as TextInterface;
 use \Stringable;
+use roady\interfaces\strings\Text as TextInterface;
 
 class Text implements TextInterface
 {
@@ -27,7 +27,6 @@ class Text implements TextInterface
      *
      * echo ($text->contains($text) ? 'True' : 'False');
      * // example output: True
-     *
      *
      * ```
      *

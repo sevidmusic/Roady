@@ -2,9 +2,9 @@
 
 namespace roady\classes\strings;
 
-use roady\interfaces\strings\Text as TextInterface;
-use roady\interfaces\strings\SafeText as SafeTextInterface;
 use roady\classes\strings\Text;
+use roady\interfaces\strings\SafeText as SafeTextInterface;
+use roady\interfaces\strings\Text as TextInterface;
 
 class SafeText extends Text implements SafeTextInterface
 {
@@ -27,6 +27,8 @@ class SafeText extends Text implements SafeTextInterface
      * - Underscores: _
      * - Hyphens: -
      * - Periods: .
+     *
+     * Unsafe characters will be replace with underscores.
      *
      * A consecutive sequence of 2 or more unsafe characters will be
      * replaced by a single underscore.
