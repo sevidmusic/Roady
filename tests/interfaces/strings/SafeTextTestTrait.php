@@ -34,8 +34,8 @@ use tests\interfaces\strings\TextTestTrait;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
- * protected function setTestInstance(Text $testInstance): void
- * protected function testInstance(): Text
+ * protected function setTextTestInstance(Text $textTestInstance): void
+ * protected function textTestInstance(): Text
  *
  * ```
  *
@@ -74,7 +74,7 @@ trait SafeTextTestTrait
      * protected function setUpWithEmptyString(): void
      * {
      *     $this->setExpectedString('0');
-     *     $this->setTestInstance(new SafeText(new Text('')));
+     *     $this->setTextTestInstance(new SafeText(new Text('')));
      * }
      *
      * ```
@@ -213,7 +213,7 @@ trait SafeTextTestTrait
         $this->setUpWithEmptyString();
         $this->assertEquals(
             '0',
-            $this->testInstance()->__toString(),
+            $this->textTestInstance()->__toString(),
         );
     }
 }

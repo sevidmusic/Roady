@@ -25,8 +25,8 @@ use tests\interfaces\strings\TextTestTrait;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
- * protected function setTestInstance(Text $testInstance): void
- * protected function testInstance(): Text
+ * protected function setTextTestInstance(Text $textTestInstance): void
+ * protected function textTestInstance(): Text
  *
  * ```
  *
@@ -65,7 +65,7 @@ class TextTest extends TestCase
     {
         $string = $this->randomChars();
         $this->setExpectedString($string);
-        $this->setTestInstance(new Text($string));
+        $this->setTextTestInstance(new Text($string));
     }
 
 }

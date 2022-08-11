@@ -23,8 +23,8 @@ use tests\interfaces\strings\SafeTextTestTrait;
  * protected function removeDuplicateUnderscores(string $string): string
  * protected function replaceUnsafeCharsWithUnderscores(string $string): string
  * protected function setExpectedString(string $string): void
- * protected function setTestInstance(Text $testInstance): void
- * protected function testInstance(): Text
+ * protected function setTextTestInstance(Text $textTestInstance): void
+ * protected function textTestInstance(): Text
  *
  * ```
  *
@@ -61,13 +61,13 @@ class SafeTextTest extends TextTest
     {
         $string = $this->randomChars();
         $this->setExpectedString($this->makeStringSafe($string));
-        $this->setTestInstance(new SafeText(new Text($string)));
+        $this->setTextTestInstance(new SafeText(new Text($string)));
     }
 
     protected function setUpWithEmptyString(): void
     {
         $this->setExpectedString('0');
-        $this->setTestInstance(new SafeText(new Text('')));
+        $this->setTextTestInstance(new SafeText(new Text('')));
     }
 
 }

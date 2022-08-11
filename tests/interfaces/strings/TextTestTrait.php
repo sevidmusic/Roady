@@ -15,8 +15,8 @@ use roady\interfaces\strings\Text;
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
- * protected function setTestInstance(Text $testInstance): void
- * protected function testInstance(): Text
+ * protected function setTextTestInstance(Text $textTestInstance): void
+ * protected function textTestInstance(): Text
  *
  * ```
  *
@@ -45,17 +45,17 @@ trait TextTestTrait
     private string $expectedString;
 
     /**
-     * @var Text $testInstance An instance of an implementation of
+     * @var Text $textTestInstance An instance of an implementation of
      *                         the Text interface to test.
      */
-    private Text $testInstance;
+    private Text $textTestInstance;
 
     /**
      * This method must call setExpectedString() to set the string
      * expected to be returned by the implementation's __toString()
      * method.
      *
-     * This method must also call setTestInstance() to set an
+     * This method must also call setTextTestInstance() to set an
      * appropriate instance of a Text implementation to test.
      *
      * This method may also be used to perform any additional setUp
@@ -70,14 +70,14 @@ trait TextTestTrait
      * {
      *     $string = str_shuffle('abcdefghijklmnopqrstuvwxyz');
      *     $this->setExpectedString($string);
-     *     $this->setTestInstance(new Text($string));
+     *     $this->setTextTestInstance(new Text($string));
      * }
      *
      * ```
      *
      * @see https://phpunit.readthedocs.io/en/9.5/fixtures.html
      * @see setExpectedString(string $string);
-     * @see setTestInstance(Text $testInstance);
+     * @see setTextTestInstance(Text $textTestInstance);
      *
      */
     abstract protected function setUp(): void;
@@ -139,15 +139,15 @@ trait TextTestTrait
     /**
      * Set the Text implementation instance to test.
      *
-     * @param Text $testInstance An instance of an implementation of
+     * @param Text $textTestInstance An instance of an implementation of
      *                           the Text interface to test.
      *
      * @return void
      *
      */
-    protected function setTestInstance(Text $testInstance): void
+    protected function setTextTestInstance(Text $textTestInstance): void
     {
-        $this->testInstance = $testInstance;
+        $this->textTestInstance = $textTestInstance;
     }
 
     /**
@@ -156,9 +156,9 @@ trait TextTestTrait
      * @return Text
      *
      */
-    protected function testInstance(): Text
+    protected function textTestInstance(): Text
     {
-        return $this->testInstance;
+        return $this->textTestInstance;
     }
 
     /**
@@ -172,9 +172,9 @@ trait TextTestTrait
     {
         $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $this->assertFalse(
-            $this->testInstance()->contains(str_shuffle($chars)),
+            $this->textTestInstance()->contains(str_shuffle($chars)),
             'The ' .
-            get_class($this->testInstance()) .
+            get_class($this->textTestInstance()) .
             ' implementation\'s contains() method must return ' .
             'false if any of the specified strings are not in ' .
             'expected string.'
@@ -192,13 +192,13 @@ trait TextTestTrait
     {
         $chars = str_split($this->expectedString());
         $this->assertTrue(
-            $this->testInstance()->contains(
+            $this->textTestInstance()->contains(
                 $chars[array_rand($chars)],
-                $this->testInstance(),
+                $this->textTestInstance(),
                 ...$chars,
             ),
             'The ' .
-            get_class($this->testInstance()) .
+            get_class($this->textTestInstance()) .
             ' implementation\'s contains() method must return ' .
             'true if all of the specified strings are in the ' .
             'expected string.'
@@ -215,9 +215,9 @@ trait TextTestTrait
     {
         $this->assertEquals(
             mb_strlen($this->expectedString()),
-            $this->testInstance->length(),
+            $this->textTestInstance->length(),
             'The ' .
-            get_class($this->testInstance()) .
+            get_class($this->textTestInstance()) .
             ' implementation\'s length() method must return ' .
             'the length of the expected string.'
         );
@@ -234,9 +234,9 @@ trait TextTestTrait
     {
         $this->assertEquals(
             $this->expectedString(),
-            $this->testInstance->__toString(),
+            $this->textTestInstance->__toString(),
             'The ' .
-            get_class($this->testInstance()) .
+            get_class($this->textTestInstance()) .
             ' implementation\'s __toString() method must return ' .
             'the expected string.'
         );
