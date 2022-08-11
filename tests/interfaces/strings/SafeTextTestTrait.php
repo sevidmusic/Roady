@@ -12,7 +12,12 @@ use tests\interfaces\strings\TextTestTrait;
  * Methods:
  *
  * ```
+ * abstract protected function setUpWithEmptyString(): void;
  * protected function makeStringSafe(string $string): string
+ * protected function removeDuplicateUnderscores(string $string): string
+ * protected function replaceUnsafeCharsWithUnderscores(string $string): string
+ * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
+ * public function test_toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
  *
  * ```
  *
@@ -95,11 +100,48 @@ trait SafeTextTestTrait
         );
     }
 
+    /**
+     * Replace all unsafe characters in the specified string with
+     * underscores.
+     *
+     * @param string $string The string to modify.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * $string = $this->replaceUnsafeCharsWithUnderscores('Foo!Bar');
+     *
+     * echo $string;
+     * // example output: Foo_Bar
+     *
+     * ```
+     *
+     */
     protected function replaceUnsafeCharsWithUnderscores(string $string): string
     {
         return strval(preg_replace('/[^A-Za-z0-9_-]/', '_', $string));
     }
 
+    /**
+     * Convert sequences of 2 or more underscores in the specified
+     * string into a single underscore.
+     *
+     * @param string $string The string to modify.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * $string = $this->removeDuplicateUnderscores('Foo_____Bar');
+     *
+     * echo $string;
+     * // example output: Foo_Bar
+     *
+     * ```
+     */
     protected function removeDuplicateUnderscores(string $string): string
     {
         return strval(preg_replace('#_+#', '_', $string));
@@ -108,11 +150,29 @@ trait SafeTextTestTrait
     /**
      * Setup for tests using an empty string.
      *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setUpWithEmptyString();
+     *
+     * echo $this->expectedString();
+     * // example output: 0
+     *
+     * ```
+     *
      */
     abstract protected function setUpWithEmptyString(): void;
 
-
-    public function test_TEST_METHOD_setUpWithEmptyString_sets_up_expected_string_to_be_the_numeric_character_0(): void
+    /**
+     * Test that the test class's setUpWithEmptyString() method sets
+     * the expected string to the numeric character 0.
+     *
+     * @return void
+     *
+     */
+    public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
     {
         $this->setUpWithEmptyString();
         $this->assertEquals(
@@ -125,7 +185,14 @@ trait SafeTextTestTrait
         );
     }
 
-    public function test_toString_returns_the_numeric_character_0_if_original_text_was_an_empty_string(): void
+    /**
+     * Test that __toString() returns the numeric character 0 if the
+     * original Text was empty.
+     *
+     * @return void
+     *
+     */
+    public function test_toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
     {
         $this->setUpWithEmptyString();
         $this->assertEquals(

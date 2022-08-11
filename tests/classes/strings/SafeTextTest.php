@@ -17,8 +17,12 @@ use PHPUnit\Framework\TestCase;
  *
  * ```
  * abstract protected function setUp(): void;
+ * abstract protected function setUpWithEmptyString(): void;
  * protected function expectedString(): string
+ * protected function makeStringSafe(string $string): string
  * protected function randomChars(): string
+ * protected function removeDuplicateUnderscores(string $string): string
+ * protected function replaceUnsafeCharsWithUnderscores(string $string): string
  * protected function setExpectedString(string $string): void
  * protected function setTestInstance(Text $testInstance): void
  * protected function testInstance(): Text
@@ -28,10 +32,12 @@ use PHPUnit\Framework\TestCase;
  * Test Methods inherited from SafeTextTestTrait:
  *
  * ```
+ * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
  * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
  * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
  * public function test_length_returns_the_expected_strings_length(): void
  * public function test_toString_returns_the_expected_string(): void
+ * public function test_toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
  *
  * ```
  *
