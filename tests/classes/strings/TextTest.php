@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  * Defines tests for the `roady\classes\strings\Text` implementation
  * of the `roady\interfaces\strings\Text` interface.
  *
- * Methods interface from TestCase:
+ * Methods inherited from TestCase:
  *
  * ```
  * @see https://github.com/sebastianbergmann/phpunit/blob/main/src/Framework/Assert.php

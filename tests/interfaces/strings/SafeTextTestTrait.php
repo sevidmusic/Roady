@@ -16,6 +16,12 @@ use tests\interfaces\strings\TextTestTrait;
  * protected function makeStringSafe(string $string): string
  * protected function removeDuplicateUnderscores(string $string): string
  * protected function replaceUnsafeCharsWithUnderscores(string $string): string
+ *
+ * ```
+ *
+ * Test Methods:
+ *
+ * ```
  * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
  * public function test_toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
  *
