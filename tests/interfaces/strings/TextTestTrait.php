@@ -23,10 +23,10 @@ use roady\interfaces\strings\Text;
  * Test Methods:
  *
  * ```
+ * public function test___toString_returns_the_expected_string(): void
  * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
  * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
  * public function test_length_returns_the_expected_strings_length(): void
- * public function test___toString_returns_the_expected_string(): void
  *
  * ```
  *
@@ -162,6 +162,25 @@ trait TextTestTrait
     }
 
     /**
+     * Test that the Text implementation's toString() method returns
+     * the expected string.
+     *
+     * @return void
+     *
+     */
+    public function test___toString_returns_the_expected_string(): void
+    {
+        $this->assertEquals(
+            $this->expectedString(),
+            $this->textTestInstance->__toString(),
+            'The ' .
+            get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must return ' .
+            'the expected string.'
+        );
+    }
+
+    /**
      * Test that the implementation's contains() method returns false
      * if any of the specified strings are not in the expected string.
      *
@@ -220,25 +239,6 @@ trait TextTestTrait
             get_class($this->textTestInstance()) .
             ' implementation\'s length() method must return ' .
             'the length of the expected string.'
-        );
-    }
-
-    /**
-     * Test that the Text implementation's toString() method returns
-     * the expected string.
-     *
-     * @return void
-     *
-     */
-    public function test___toString_returns_the_expected_string(): void
-    {
-        $this->assertEquals(
-            $this->expectedString(),
-            $this->textTestInstance->__toString(),
-            'The ' .
-            get_class($this->textTestInstance()) .
-            ' implementation\'s __toString() method must return ' .
-            'the expected string.'
         );
     }
 
