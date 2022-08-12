@@ -6,9 +6,43 @@ use roady\classes\strings\Text;
 use roady\interfaces\strings\SafeText as SafeTextInterface;
 use roady\interfaces\strings\Text as TextInterface;
 
+/**
+ * SafeText can be used to provide a safe form of Text.
+ *
+ * Any characters in the original Text that are not listed below
+ * will be replaced with underscores:
+ *
+ * - Alphanumeric characters: A-Z, a-z, and 0-9
+ * - Underscores: _
+ * - Hyphens: -
+ * - Periods: .
+ *
+ * @see SafeTextInterface
+ * @see Text
+ *
+ */
 class SafeText extends Text implements SafeTextInterface
 {
 
+    /**
+     * Instantiate a new SafeText instance using the specified Text.
+     *
+     * @param TextInterface $text The Text to construct the SafeText
+     *                            from.
+     *
+     * @example
+     *
+     * ```
+     * $safeText = new SafeText(new Text('Foo Bar Baz'));
+     *
+     * echo $safeText;
+     * // example output: Foo_Bar_Baz
+     *
+     * ```
+     *
+     * @see TextInterface
+     *
+     */
     public function __construct(private TextInterface $text)
     {
         parent::__construct($this->makeStringSafe($text));
