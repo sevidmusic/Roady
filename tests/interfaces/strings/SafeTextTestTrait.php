@@ -3,6 +3,8 @@
 namespace tests\interfaces\strings;
 
 use roady\interfaces\strings\SafeText;
+use roady\interfaces\strings\Text;
+use roady\classes\strings\Text as TextImplmentationToUseForTesting;
 use tests\interfaces\strings\TextTestTrait;
 
 /**
@@ -13,9 +15,12 @@ use tests\interfaces\strings\TextTestTrait;
  *
  * ```
  * abstract protected function setUpWithEmptyString(): void;
+ * abstract protected function setUpWithSpecificText(Text $text): void
  * protected function makeStringSafe(string $string): string
  * protected function removeDuplicateUnderscores(string $string): string
  * protected function replaceUnsafeCharsWithUnderscores(string $string): string
+ * protected function safeTextTestInstance(): Text
+ * protected function setSafeTextTestInstance(SafeText $safeTextTestInstance): void
  *
  * ```
  *
@@ -24,6 +29,7 @@ use tests\interfaces\strings\TextTestTrait;
  * ```
  * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
  * public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
+ * public function test_originalText_returns_expected_Text(): void
  *
  * ```
  *
@@ -42,10 +48,10 @@ use tests\interfaces\strings\TextTestTrait;
  * Test Methods inherited from TextTestTrait:
  *
  * ```
+ * public function test___toString_returns_the_expected_string(): void
  * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
  * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
  * public function test_length_returns_the_expected_strings_length(): void
- * public function test___toString_returns_the_expected_string(): void
  *
  * ```
  *
@@ -56,15 +62,26 @@ use tests\interfaces\strings\TextTestTrait;
 trait SafeTextTestTrait
 {
 
+    /**
+     * The TextTestTrait defines common tests for implementations of
+     * the Text interface.
+     *
+     */
     use TextTestTrait;
+
+    /**
+     * @var SafeText $safeText The instance of a SafeText
+     *                         implementation to test.
+     */
+    protected SafeText $safeText;
 
     /**
      * This method must set the expected string to be the numeric
      * character 0.
      *
-     * This method must also set the test instance to be an
-     * appropriate instance of a SafeText implementation whose
-     * original Text represents an empty string.
+     * This method must also set an appropriate instance of an
+     * implementation of the SafeText interface as the Text, and
+     * SafeText, instance to test.
      *
      * @return void
      *
@@ -74,13 +91,41 @@ trait SafeTextTestTrait
      * protected function setUpWithEmptyString(): void
      * {
      *     $this->setExpectedString('0');
-     *     $this->setTextTestInstance(new SafeText(new Text('')));
+     *     $safeText = new SafeText(new Text(''));
+     *     $this->setTextTestInstance($safeText);
+     *     $this->setSafeTextTestInstance($safeText);
      * }
      *
      * ```
      *
      */
     abstract protected function setUpWithEmptyString(): void;
+
+    /**
+     * This method must set the expected string to be a safe form
+     * of the specified Text.
+     *
+     * This method must also set an appropriate instance of an
+     * implementation of the SafeText interface as the Text, and
+     * SafeText, instance to test.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * protected function setUpWithSpecificText(Text $text): void
+     * {
+     *     $this->setExpectedString($this->makeStringSafe($text));
+     *     $safeText = new SafeText($text);
+     *     $this->setTextTestInstance($safeText);
+     *     $this->setSafeTextTestInstance($safeText);
+     * }
+     *
+     * ```
+     *
+     */
+    abstract protected function setUpWithSpecificText(Text $text): void;
 
     /**
      * Modify a string, insuring only the following characters
@@ -176,9 +221,40 @@ trait SafeTextTestTrait
      * ```
      *
      */
-    protected function replaceUnsafeCharsWithUnderscores(string $string): string
+    protected function replaceUnsafeCharsWithUnderscores(
+        string $string
+    ): string
     {
         return strval(preg_replace('/[^A-Za-z0-9_-]/', '_', $string));
+    }
+
+    /**
+     * Return the SafeText implementation instance to test.
+     *
+     * @return SafeText
+     *
+     */
+    protected function safeTextTestInstance(): SafeText
+    {
+        return $this->safeText;
+    }
+
+    /**
+     * Set the SafeText implementation instance to test.
+     *
+     * @param SafeText $safeTextTestInstance An instance of an
+     *                                       implementation of
+     *                                       the SafeText interface
+     *                                       to test.
+     *
+     * @return void
+     *
+     */
+    protected function setSafeTextTestInstance(
+        SafeText $safeTextTestInstance
+    ): void
+    {
+        $this->safeText = $safeTextTestInstance;
     }
 
     /**
@@ -213,7 +289,30 @@ trait SafeTextTestTrait
         $this->setUpWithEmptyString();
         $this->assertEquals(
             '0',
-            $this->textTestInstance()->__toString(),
+            $this->safeTextTestInstance()->__toString(),
+        );
+    }
+
+    /**
+     * Test that the implementation's originalText() method returns
+     * the expected Text.
+     *
+     * @return void
+     *
+     */
+    public function test_originalText_returns_the_expected_Text(): void
+    {
+        $text = new TextImplmentationToUseForTesting(
+            $this->randomChars()
+        );
+        $this->setUpWithSpecificText($text);
+        $this->assertEquals(
+            $text,
+            $this->safeTextTestInstance()->originalText(),
+            'The ' .
+            get_class() .
+            ' implementation\'s originalText() method must return ' .
+            'the original Text.'
         );
     }
 }
