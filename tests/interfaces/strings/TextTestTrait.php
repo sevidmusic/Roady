@@ -46,7 +46,7 @@ trait TextTestTrait
 
     /**
      * @var Text $textTestInstance An instance of an implementation of
-     *                         the Text interface to test.
+     *                             the Text interface to test.
      */
     private Text $textTestInstance;
 
@@ -139,13 +139,15 @@ trait TextTestTrait
     /**
      * Set the Text implementation instance to test.
      *
-     * @param Text $textTestInstance An instance of an implementation of
-     *                           the Text interface to test.
+     * @param Text $textTestInstance An instance of an implementation
+     *                               of the Text interface to test.
      *
      * @return void
      *
      */
-    protected function setTextTestInstance(Text $textTestInstance): void
+    protected function setTextTestInstance(
+        Text $textTestInstance
+    ): void
     {
         $this->textTestInstance = $textTestInstance;
     }
