@@ -76,8 +76,6 @@ trait TextTestTrait
      * ```
      *
      * @see https://phpunit.readthedocs.io/en/9.5/fixtures.html
-     * @see setExpectedString(string $string);
-     * @see setTextTestInstance(Text $textTestInstance);
      *
      */
     abstract protected function setUp(): void;

@@ -4,7 +4,7 @@ namespace tests\interfaces\strings;
 
 use roady\interfaces\strings\SafeText;
 use roady\interfaces\strings\Text;
-use roady\classes\strings\Text as TextImplmentationToUseForTesting;
+use roady\classes\strings\Text as TextToBeRepresentedBySafeText;
 use tests\interfaces\strings\TextTestTrait;
 
 /**
@@ -55,6 +55,7 @@ use tests\interfaces\strings\TextTestTrait;
  *
  * ```
  *
+ * @see SafeText
  * @see Text
  * @see TextTestTrait
  *
@@ -66,11 +67,13 @@ trait SafeTextTestTrait
      * The TextTestTrait defines common tests for implementations of
      * the Text interface.
      *
+     * @see TextTestTrait
+     *
      */
     use TextTestTrait;
 
     /**
-     * @var SafeText $safeText The instance of a SafeText
+     * @var SafeText $safeText An instance of a SafeText
      *                         implementation to test.
      */
     protected SafeText $safeText;
@@ -81,7 +84,7 @@ trait SafeTextTestTrait
      *
      * This method must also set an appropriate instance of an
      * implementation of the SafeText interface as the Text, and
-     * SafeText, instance to test.
+     * SafeText instance to test.
      *
      * @return void
      *
@@ -107,7 +110,7 @@ trait SafeTextTestTrait
      *
      * This method must also set an appropriate instance of an
      * implementation of the SafeText interface as the Text, and
-     * SafeText, instance to test.
+     * SafeText instance to test.
      *
      * @return void
      *
@@ -302,7 +305,7 @@ trait SafeTextTestTrait
      */
     public function test_originalText_returns_the_expected_Text(): void
     {
-        $text = new TextImplmentationToUseForTesting(
+        $text = new TextToBeRepresentedBySafeText(
             $this->randomChars()
         );
         $this->setUpWithSpecificText($text);
