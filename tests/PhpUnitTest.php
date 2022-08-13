@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Defines tests to make sure PHPUnit tests can be run.
  *
- * Methods:
+ * Test Methods:
  *
  * ```
  * public function test_php_unit_tests_are_run(): void
@@ -28,7 +28,7 @@ class PHPUnitTest extends TestCase
     {
         $this->assertTrue(
             true,
-            'This test should run if PHPUnit is set up correctly'
+            'This test should run if PHPUnit is set up correctly.'
         );
     }
 }
