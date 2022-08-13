@@ -28,6 +28,10 @@ use tests\interfaces\strings\TextTestTrait;
  *
  * ```
  * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
+ * public function test_TEST_METHOD_setUpWithSpecifiedText_sets_expected_string_to_be_a_safe_form_of_the_specified_Text(): void
+ * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
+ * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_unsafe_characters_have_been_replaced_by_a_single_underscore(): void
+ * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_unsafe_characters_have_been_replaced_by_underscores(): void
  * public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
  * public function test_originalText_returns_expected_Text(): void
  *
@@ -277,6 +281,27 @@ trait SafeTextTestTrait
             'The ' . get_class() . ' implementation of the ' .
             'setUpWithEmptyString() method must assign the numeric ' .
             'character 0 as the expected string.'
+        );
+    }
+
+    /**
+     * Test that the test class's implementation of the
+     * setUpWithSpecificText() method sets the expected
+     * string to a safe form of the specified Text.
+     *
+     * @return void
+     *
+     */
+    public function test_TEST_METHOD_setUpWithSpecifiedText_sets_expected_string_to_be_a_safe_form_of_the_specified_Text(): void
+    {
+        $text = new TextToBeRepresentedBySafeText($this->randomChars());
+        $this->setUpWithSpecificText($text);
+        $this->assertEquals(
+            $this->makeStringSafe($text->__toString()),
+            $this->expectedString(),
+            'The ' . get_class() . ' implementation of the ' .
+            'setUpWithSpecificText() method must set a safe ' .
+            'form of the specified Text as the expected string.'
         );
     }
 
