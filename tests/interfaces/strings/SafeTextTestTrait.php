@@ -305,7 +305,20 @@ trait SafeTextTestTrait
         );
     }
 
-    #public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
+    public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
+    {
+        $text = new TextToBeRepresentedBySafeText('__________');
+        $this->setUpWithSpecificText($text);
+        $this->assertEquals(
+            '_',
+            $this->safeTextTestInstance()->__toString(),
+            '__toString() must return a modified version of the ' .
+            'original Text where all consecutive sequences of 2 or ' .
+            'more underscores have been replaced by a single ' .
+            'underscores.'
+        );
+
+    }
 
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_unsafe_characters_have_been_replaced_by_a_single_underscore(): void
     {
