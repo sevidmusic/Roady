@@ -22,7 +22,7 @@ Example class:
 
 namespace roady\classes;
 
-trait ExampleClass
+class ExampleClass
 {
 
     public function aMethodDefinedByTheClass(): void
@@ -65,7 +65,7 @@ trait TestTrait
 
 ### Interfaces
 
-All roady classes must implement a roady interface.
+All roady classes must implement an interface.
 
 The following is an example of the basic format roady interfaces
 should adhere to.
