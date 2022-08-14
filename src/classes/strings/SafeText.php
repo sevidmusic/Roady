@@ -63,10 +63,10 @@ class SafeText extends Text implements SafeTextInterface
      * @example
      *
      * ```
-     * $string = '!(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(';
+     * $string = '!(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@7A(';
      *
      * echo $this->makeStringSafe($string);
-     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
+     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_7A_
      *
      * $string = '';
      *
