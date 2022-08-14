@@ -184,7 +184,6 @@ trait SafeTextTestTrait
         );
     }
 
-
     /**
      * Replace sequences of 2 or more underscores in the specified
      * string with a single underscore.
@@ -207,7 +206,6 @@ trait SafeTextTestTrait
     {
         return strval(preg_replace('#_+#', '_', $string));
     }
-
 
     /**
      * Replace all unsafe characters in the specified string with
@@ -305,6 +303,15 @@ trait SafeTextTestTrait
         );
     }
 
+    /**
+     * Test that the implementation's __toString() method returns a
+     * version of the string represented by the original Text where
+     * all consecutive sequences of 2 or more underscores has been
+     * replaced by a single underscore.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
     {
         $text = new TextToBeRepresentedBySafeText('__________');
@@ -320,6 +327,15 @@ trait SafeTextTestTrait
 
     }
 
+    /**
+     * Test that the implementation's __toString() method returns a
+     * version of the string represented by the original Text where
+     * all consecutive sequences of 2 or more unsafe characters has
+     * been replaced by a single underscore.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_unsafe_characters_have_been_replaced_by_a_single_underscore(): void
     {
         $text = new TextToBeRepresentedBySafeText(
@@ -337,6 +353,14 @@ trait SafeTextTestTrait
 
     }
 
+    /**
+     * Test that the implementation's __toString() method returns a
+     * version of the string represented by the original Text where
+     * all unsafe characters have been replaced by underscores.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_unsafe_characters_have_been_replaced_by_underscores(): void
     {
         $text = new TextToBeRepresentedBySafeText(
@@ -354,8 +378,8 @@ trait SafeTextTestTrait
     }
 
     /**
-     * Test that __toString() returns the numeric character 0 if the
-     * original Text was empty.
+     * Test that the implementation's __toString() returns the numeric
+     * character 0 if the original Text was empty.
      *
      * @return void
      *
@@ -366,17 +390,19 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->safeTextTestInstance()->__toString(),
+            '__toString() must return the numeric character 0 ' .
+            'if the original Text was empty.'
         );
     }
 
     /**
      * Test that the implementation's originalText() method returns
-     * the expected Text.
+     * the original Text.
      *
      * @return void
      *
      */
-    public function test_originalText_returns_the_expected_Text(): void
+    public function test_originalText_returns_the_original_Text(): void
     {
         $text = new TextToBeRepresentedBySafeText(
             $this->randomChars()
@@ -385,11 +411,9 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $text,
             $this->safeTextTestInstance()->originalText(),
-            'The ' .
-            get_class() .
-            ' implementation\'s originalText() method must return ' .
-            'the original Text.'
+            'originalText() must return the original Text.'
         );
     }
+
 }
 
