@@ -47,13 +47,13 @@ use roady\interfaces\strings\Text;
  *
  * ```
  * echo $safeText->originalText();
- * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(
+ * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@7A(
  *
  * echo strval($safeText->originalText()->length());
  * // example output: 44
  *
  * echo $safeText;
- * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
+ * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_7A_
  *
  * echo strval($safeText->length());
  * // example output: 28
@@ -87,10 +87,10 @@ interface SafeText extends Text
      *
      * ```
      * echo $safeText->originalText();
-     * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(
+     * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@7A(
      *
      * echo $safeText;
-     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
+     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_7A_
      *
      * ```
      *
