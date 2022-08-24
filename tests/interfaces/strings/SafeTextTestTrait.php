@@ -2,9 +2,9 @@
 
 namespace tests\interfaces\strings;
 
+use roady\classes\strings\Text as TextToBeRepresentedBySafeText;
 use roady\interfaces\strings\SafeText;
 use roady\interfaces\strings\Text;
-use roady\classes\strings\Text as TextToBeRepresentedBySafeText;
 use tests\interfaces\strings\TextTestTrait;
 
 /**
@@ -14,13 +14,15 @@ use tests\interfaces\strings\TextTestTrait;
  * Methods:
  *
  * ```
- * abstract protected function setUpWithEmptyString(): void;
+ * abstract protected function setUpWithEmptyString(): void
  * abstract protected function setUpWithSpecificText(Text $text): void
  * protected function makeStringSafe(string $string): string
+ * protected function removeDuplicateHyphens(string $string): string
+ * protected function removeDuplicatePeriods(string $string): string
  * protected function removeDuplicateUnderscores(string $string): string
- * protected function replaceUnsafeCharsWithUnderscores(string $string): string
- * protected function safeTextTestInstance(): Text
- * protected function setSafeTextTestInstance(SafeText $safeTextTestInstance): void
+ * protected function replaceUnsafeCharsWithUnderscores(
+ * protected function safeTextTestInstance(): SafeText
+ * protected function setSafeTextTestInstance()
  *
  * ```
  *
@@ -29,18 +31,20 @@ use tests\interfaces\strings\TextTestTrait;
  * ```
  * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
  * public function test_TEST_METHOD_setUpWithSpecifiedText_sets_expected_string_to_be_a_safe_form_of_the_specified_Text(): void
+ * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_hyphens_have_been_replaced_by_a_single_hyphen(): void
+ * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_periods_have_been_replaced_by_a_single_period(): void
  * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
  * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_unsafe_characters_have_been_replaced_by_a_single_underscore(): void
  * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_unsafe_characters_have_been_replaced_by_underscores(): void
  * public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
- * public function test_originalText_returns_expected_Text(): void
+ * public function test_originalText_returns_the_original_Text(): void
  *
  * ```
  *
  * Methods inherited from TextTestTrait:
  *
  * ```
- * abstract protected function setUp(): void;
+ * abstract protected function setUp(): void
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void
@@ -148,8 +152,14 @@ trait SafeTextTestTrait
      * A consecutive sequence of 2 or more unsafe characters will be
      * replaced by a single underscore.
      *
-     * Consequently, a consecutive sequence of 2 or more underscores
-     * will also be replaced by a single underscore.
+     * A consecutive sequence of 2 or more underscores will be
+     * replaced by a single underscore.
+     *
+     * A consecutive sequence of 2 or more hyphens will be replaced by
+     * a single hyphen.
+     *
+     * A consecutive sequence of 2 or more periods will be replaced by
+     * a single period.
      *
      * If the original string is empty, then the modified string will
      * be the numeric character 0.
@@ -174,14 +184,64 @@ trait SafeTextTestTrait
      */
     protected function makeStringSafe(string $string): string
     {
-        $safeChars = $this->removeDuplicateUnderscores(
-            $this->replaceUnsafeCharsWithUnderscores($string)
+        $safeChars = $this->removeDuplicatePeriods(
+            $this->removeDuplicateHyphens(
+                $this->removeDuplicateUnderscores(
+                    $this->replaceUnsafeCharsWithUnderscores($string)
+                )
+            )
         );
         return (
             empty($safeChars)
             ? strval(0)
             : $safeChars
         );
+    }
+
+    /**
+     * Replace sequences of 2 or more hyphens in the specified
+     * string with a single hyphen.
+     *
+     * @param string $string The string to modify.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * $string = $this->removeDuplicateHyphens('Foo-----Bar');
+     *
+     * echo $string;
+     * // example output: Foo-Bar
+     *
+     * ```
+     */
+    protected function removeDuplicateHyphens(string $string): string
+    {
+        return strval(preg_replace('#-+#', '-', $string));
+    }
+
+    /**
+     * Replace sequences of 2 or more periods in the specified
+     * string with a single period.
+     *
+     * @param string $string The string to modify.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * $string = $this->removeDuplicatePeriods('Foo....Bar');
+     *
+     * echo $string;
+     * // example output: Foo.Bar
+     *
+     * ```
+     */
+    protected function removeDuplicatePeriods(string $string): string
+    {
+        return strval(preg_replace('#\.+#', '.', $string));
     }
 
     /**
@@ -206,7 +266,6 @@ trait SafeTextTestTrait
     {
         return strval(preg_replace('#_+#', '_', $string));
     }
-
     /**
      * Replace all unsafe characters in the specified string with
      * underscores.
@@ -230,7 +289,7 @@ trait SafeTextTestTrait
         string $string
     ): string
     {
-        return strval(preg_replace('/[^A-Za-z0-9_-]/', '_', $string));
+        return strval(preg_replace('/[^A-Za-z0-9\._-]/', '_', $string));
     }
 
     /**
@@ -303,6 +362,35 @@ trait SafeTextTestTrait
         );
     }
 
+    public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_hyphens_have_been_replaced_by_a_single_hyphen(): void
+    {
+        $string = '-------------';
+        $text = new TextToBeRepresentedBySafeText($string);
+        $this->setUpWithSpecificText($text);
+        $this->assertEquals(
+            $this->makeStringSafe($string),
+            $this->safeTextTestInstance()->__toString(),
+            '__toString() must return a modified version of the ' .
+            'original Text where all consecutive sequences of 2 or ' .
+            'more hyphens have been replaced by a single ' .
+            'hyphen.'
+        );
+    }
+
+    public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_periods_have_been_replaced_by_a_single_period(): void
+    {
+        $string = '.......................';
+        $text = new TextToBeRepresentedBySafeText($string);
+        $this->setUpWithSpecificText($text);
+        $this->assertEquals(
+            $this->makeStringSafe($string),
+            $this->safeTextTestInstance()->__toString(),
+            '__toString() must return a modified version of the ' .
+            'original Text where all consecutive sequences of 2 or ' .
+            'more periods have been replaced by a single period.'
+        );
+    }
+
     /**
      * Test that the implementation's __toString() method returns a
      * version of the string represented by the original Text where
@@ -314,17 +402,17 @@ trait SafeTextTestTrait
      */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
     {
-        $text = new TextToBeRepresentedBySafeText('__________');
+        $string = '__________';
+        $text = new TextToBeRepresentedBySafeText($string);
         $this->setUpWithSpecificText($text);
         $this->assertEquals(
-            '_',
+            $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
             '__toString() must return a modified version of the ' .
             'original Text where all consecutive sequences of 2 or ' .
             'more underscores have been replaced by a single ' .
             'underscores.'
         );
-
     }
 
     /**
@@ -343,14 +431,15 @@ trait SafeTextTestTrait
         );
         $this->setUpWithSpecificText($text);
         $this->assertEquals(
-            '_Foo_',
+            $this->makeStringSafe(
+                str_shuffle('!@$%^*(:<') . 'Foo' . str_shuffle('&*(?><')
+            ),
             $this->safeTextTestInstance()->__toString(),
             '__toString() must return a modified version of the ' .
             'original Text where all consecutive sequences of 2 or ' .
             'more unsafe characters have been replaced by a single ' .
             'underscores.'
         );
-
     }
 
     /**

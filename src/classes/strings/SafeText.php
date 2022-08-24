@@ -78,8 +78,10 @@ class SafeText extends Text implements SafeTextInterface
      */
     protected function makeStringSafe(string $string): string
     {
-        $safeChars = preg_replace('/[^A-Za-z0-9_-]/', '_', $string);
+        $safeChars = preg_replace('/[^A-Za-z0-9\._-]/', '_', $string);
         $safeChars = preg_replace('#_+#', '_', ($safeChars ?? ''));
+        $safeChars = preg_replace('#-+#', '-', ($safeChars ?? ''));
+        $safeChars = preg_replace('#\.+#', '.', ($safeChars ?? ''));
         return strval(
             empty($safeChars)
             ? 0
