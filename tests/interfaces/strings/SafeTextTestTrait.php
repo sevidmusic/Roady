@@ -169,10 +169,10 @@ trait SafeTextTestTrait
      * @example
      *
      * ```
-     * $string = '!(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@MC(';
+     * $string = '!Foo Bar Baz..Bin!@#Bar--Foo____%$#@#$%^&*Bazzer';
      *
      * echo $this->makeStringSafe($string);
-     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_MC_
+     * // example output: _Foo_Bar_Baz.Bin_Bar-Foo_Bazzer
      *
      * $string = '';
      *
@@ -266,6 +266,7 @@ trait SafeTextTestTrait
     {
         return strval(preg_replace('#_+#', '_', $string));
     }
+
     /**
      * Replace all unsafe characters in the specified string with
      * underscores.
@@ -289,7 +290,9 @@ trait SafeTextTestTrait
         string $string
     ): string
     {
-        return strval(preg_replace('/[^A-Za-z0-9\._-]/', '_', $string));
+        return strval(
+            preg_replace('/[^A-Za-z0-9\._-]/', '_', $string)
+        );
     }
 
     /**
@@ -362,6 +365,15 @@ trait SafeTextTestTrait
         );
     }
 
+    /**
+     * Test that the implementation's __toString() method returns a
+     * version of the string represented by the original Text where
+     * all consecutive sequences of 2 or more hyphens have been
+     * replaced by a single hyphen.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_hyphens_have_been_replaced_by_a_single_hyphen(): void
     {
         $string = '-------------';
@@ -377,6 +389,15 @@ trait SafeTextTestTrait
         );
     }
 
+    /**
+     * Test that the implementation's __toString() method returns a
+     * version of the string represented by the original Text where
+     * all consecutive sequences of 2 or more periods have been
+     * replaced by a single period.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_periods_have_been_replaced_by_a_single_period(): void
     {
         $string = '.......................';
@@ -394,7 +415,7 @@ trait SafeTextTestTrait
     /**
      * Test that the implementation's __toString() method returns a
      * version of the string represented by the original Text where
-     * all consecutive sequences of 2 or more underscores has been
+     * all consecutive sequences of 2 or more underscores have been
      * replaced by a single underscore.
      *
      * @return void
@@ -411,7 +432,7 @@ trait SafeTextTestTrait
             '__toString() must return a modified version of the ' .
             'original Text where all consecutive sequences of 2 or ' .
             'more underscores have been replaced by a single ' .
-            'underscores.'
+            'underscore.'
         );
     }
 
@@ -426,14 +447,11 @@ trait SafeTextTestTrait
      */
     public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_unsafe_characters_have_been_replaced_by_a_single_underscore(): void
     {
-        $text = new TextToBeRepresentedBySafeText(
-            str_shuffle('!@$%^*(:<') . 'Foo' . str_shuffle('&*(?><')
-        );
+        $string = str_shuffle('!(:<') . 'Foo' . str_shuffle('*(?<');
+        $text = new TextToBeRepresentedBySafeText($string);
         $this->setUpWithSpecificText($text);
         $this->assertEquals(
-            $this->makeStringSafe(
-                str_shuffle('!@$%^*(:<') . 'Foo' . str_shuffle('&*(?><')
-            ),
+            $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
             '__toString() must return a modified version of the ' .
             'original Text where all consecutive sequences of 2 or ' .
