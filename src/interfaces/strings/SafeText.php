@@ -15,14 +15,19 @@ use roady\interfaces\strings\Text;
  * - Hyphens: -
  * - Periods: .
  *
- * Unsafe characters in the original Text will be replaced with
- * underscores.
+ * Unsafe characters will be replaced with underscores.
  *
  * A consecutive sequence of 2 or more unsafe characters will be
  * replaced by a single underscore.
  *
- * Consequently, a consecutive sequence of 2 or more underscores
- * will also be replaced by a single underscore.
+ * A consecutive sequence of 2 or more underscores will be
+ * replaced by a single underscore.
+ *
+ * A consecutive sequence of 2 or more hyphens will be replaced by
+ * a single hyphen.
+ *
+ * A consecutive sequence of 2 or more periods will be replaced by
+ * a single period.
  *
  * SafeText will never be empty, if the original Text is empty, then
  * the SafeText will be the numeric character 0.
@@ -47,16 +52,16 @@ use roady\interfaces\strings\Text;
  *
  * ```
  * echo $safeText->originalText();
- * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@7A(
+ * // example output: !Foo Bar Baz..Bin!@#Bar--Foo____%$#@#$%^&*Bazzer
  *
  * echo strval($safeText->originalText()->length());
- * // example output: 44
+ * // example output: 48
  *
  * echo $safeText;
- * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_7A_
+ * // example output: _Foo_Bar_Baz.Bin_Bar-Foo_Bazzer
  *
  * echo strval($safeText->length());
- * // example output: 28
+ * // example output: 31
  *
  * echo $emptySafeText->originalText();
  * // example output:
