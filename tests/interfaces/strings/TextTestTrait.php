@@ -11,7 +11,7 @@ use roady\interfaces\strings\Text;
  * Methods:
  *
  * ```
- * abstract protected function setUp(): void;
+ * abstract protected function setUp(): void
  * protected function expectedString(): string
  * protected function randomChars(): string
  * protected function setExpectedString(string $string): void

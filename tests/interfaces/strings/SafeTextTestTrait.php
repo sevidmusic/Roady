@@ -91,8 +91,8 @@ trait SafeTextTestTrait
      * character 0.
      *
      * This method must also set an appropriate instance of an
-     * implementation of the SafeText interface as the Text, and
-     * SafeText instance to test.
+     * implementation of the SafeText interface as both the Text
+     * and SafeText instance to test.
      *
      * @return void
      *
@@ -117,8 +117,8 @@ trait SafeTextTestTrait
      * of the specified Text.
      *
      * This method must also set an appropriate instance of an
-     * implementation of the SafeText interface as the Text, and
-     * SafeText instance to test.
+     * implementation of the SafeText interface as both the Text
+     * and SafeText instance to test.
      *
      * @return void
      *
@@ -463,7 +463,7 @@ trait SafeTextTestTrait
             'return a modified version of the original Text ' .
             'where all consecutive sequences of 2 or more ' .
             'unsafe characters have been replaced by a single ' .
-            'underscores.'
+            'underscore.'
         );
     }
 
