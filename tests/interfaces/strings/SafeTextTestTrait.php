@@ -382,7 +382,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s __toString() method must ' .
             'return a modified version of the original Text ' .
             'where all consecutive sequences of 2 or more ' .
@@ -407,7 +407,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s __toString() method must ' .
             'return a modified version of the original Text ' .
             'where all consecutive sequences of 2 or more ' .
@@ -432,7 +432,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s __toString() method must' .
             'return a modified version of the original Text ' .
             'where all consecutive sequences of 2 or more' .
@@ -458,7 +458,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s __toString() method must ' .
             'return a modified version of the original Text ' .
             'where all consecutive sequences of 2 or more ' .
@@ -484,7 +484,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($text),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s __toString() method must ' .
             'return a modified version of the original Text ' .
             'where all unsafe characters have been replaced ' .
@@ -506,7 +506,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s __toString() method must ' .
             'return the numeric character 0 if the original ' .
             'Text was empty.'
@@ -529,7 +529,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $text,
             $this->safeTextTestInstance()->originalText(),
-            'The ' . get_class($this->textTestInstance()) .
+            'The ' . get_class($this->safeTextTestInstance()) .
             ' implementation\'s originalText() method ' .
             'must return the original Text.'
         );
