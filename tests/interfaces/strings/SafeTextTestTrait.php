@@ -338,7 +338,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->expectedString(),
-            'The ' . get_class() . ' implementation of the ' .
+            'The ' . get_class() . ' implementation\'s ' .
             'setUpWithEmptyString() method must assign the numeric ' .
             'character 0 as the expected string.'
         );
@@ -359,7 +359,7 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($text->__toString()),
             $this->expectedString(),
-            'The ' . get_class() . ' implementation of the ' .
+            'The ' . get_class() . ' implementation\'s ' .
             'setUpWithSpecificText() method must set a safe ' .
             'form of the specified Text as the expected string.'
         );
@@ -382,10 +382,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            '__toString() must return a modified version of the ' .
-            'original Text where all consecutive sequences of 2 or ' .
-            'more hyphens have been replaced by a single ' .
-            'hyphen.'
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must ' .
+            'return a modified version of the original Text ' .
+            'where all consecutive sequences of 2 or more ' .
+            'hyphens have been replaced by a single hyphen.'
         );
     }
 
@@ -406,9 +407,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            '__toString() must return a modified version of the ' .
-            'original Text where all consecutive sequences of 2 or ' .
-            'more periods have been replaced by a single period.'
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must ' .
+            'return a modified version of the original Text ' .
+            'where all consecutive sequences of 2 or more ' .
+            'periods have been replaced by a single period.'
         );
     }
 
@@ -429,9 +432,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            '__toString() must return a modified version of the ' .
-            'original Text where all consecutive sequences of 2 or ' .
-            'more underscores have been replaced by a single ' .
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must' .
+            'return a modified version of the original Text ' .
+            'where all consecutive sequences of 2 or more' .
+            'underscores have been replaced by a single ' .
             'underscore.'
         );
     }
@@ -453,9 +458,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            '__toString() must return a modified version of the ' .
-            'original Text where all consecutive sequences of 2 or ' .
-            'more unsafe characters have been replaced by a single ' .
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must ' .
+            'return a modified version of the original Text ' .
+            'where all consecutive sequences of 2 or more ' .
+            'unsafe characters have been replaced by a single ' .
             'underscores.'
         );
     }
@@ -477,9 +484,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($text),
             $this->safeTextTestInstance()->__toString(),
-            '__toString() must return a modified version of the ' .
-            'original Text where all unsafe characters have been ' .
-            'replaced with underscores.'
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must ' .
+            'return a modified version of the original Text ' .
+            'where all unsafe characters have been replaced ' .
+            'with underscores.'
         );
 
     }
@@ -497,8 +506,10 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->safeTextTestInstance()->__toString(),
-            '__toString() must return the numeric character 0 ' .
-            'if the original Text was empty.'
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s __toString() method must ' .
+            'return the numeric character 0 if the original ' .
+            'Text was empty.'
         );
     }
 
@@ -518,7 +529,9 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $text,
             $this->safeTextTestInstance()->originalText(),
-            'originalText() must return the original Text.'
+            'The ' . get_class($this->textTestInstance()) .
+            ' implementation\'s originalText() method ' .
+            'must return the original Text.'
         );
     }
 
