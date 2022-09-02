@@ -9,13 +9,6 @@ use tests\interfaces\strings\TextTestTrait;
 class TextTest extends TestCase
 {
 
-    /**
-     * The TextTestTrait defines common tests for implementations of
-     * the Text interface.
-     *
-     * @see TextTestTrait
-     *
-     */
     use TextTestTrait;
 
     protected function setUp(): void
