@@ -40,8 +40,8 @@ use tests\interfaces\strings\TextTestTrait;
  * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_unsafe_characters_have_been_replaced_by_underscores(): void
  * public function test___toString_returns_the_expected_string(): void
  * public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
- * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
- * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
+ * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string(): void
+ * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string(): void
  * public function test_length_returns_the_expected_strings_length(): void
  * public function test_originalText_returns_the_original_Text(): void
  *
@@ -63,8 +63,8 @@ use tests\interfaces\strings\TextTestTrait;
  *
  * ```
  * public function test___toString_returns_the_expected_string(): void
- * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string()(): void
- * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string()(): void
+ * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string(): void
+ * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string(): void
  * public function test_length_returns_the_expected_strings_length(): void
  *
  * ```
