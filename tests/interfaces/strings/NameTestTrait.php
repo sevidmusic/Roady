@@ -68,9 +68,44 @@ trait NameTestTrait
         $this->name = $name;
     }
 
-    public function makeStringSafe(string $string): string
+    protected function makeStringSafe(string $string): string
     {
-        return substr(parent::makeStringSafe($string), 0, 70);
+        $string = parent::makeStringSafe($string);
+        $string = substr(
+            $string,
+            $this->positionOfFirstAlphanumericCharacter($string),
+            70
+        );
+        return match(
+            empty($string) ||
+            $string === '_' ||
+            $string === '-' ||
+            $string === '.'
+        ) {
+            true => strval(0),
+            default => $string
+        };
+    }
+
+    public function positionOfFirstAlphanumericCharacter(
+        string $string
+    ): int
+    {
+        $stringLength = mb_strlen($string);
+        for(
+            $firstAlphanumericCharacterIndex = 0;
+            $firstAlphanumericCharacterIndex < $stringLength;
+            $firstAlphanumericCharacterIndex++
+        ) {
+            if(
+                ctype_alnum(
+                    $string[$firstAlphanumericCharacterIndex]
+                )
+            ) {
+                break;
+            };
+        }
+        return $firstAlphanumericCharacterIndex;
     }
 
     public function test_length_is_less_than_71_even_if_original_Texts_length_is_greater_than_71(): void
@@ -98,4 +133,19 @@ trait NameTestTrait
         );
     }
 
+    public function test_Name_always_begins_with_an_alphanumeric_character(): void
+    {
+        $text = new TextToBeRepresentedBySafeText(
+            $this->randomChars()
+        );
+        $this->setUpWithSpecificText($text);
+        $this->assertTrue(
+            ctype_alnum(substr($this->nameTestInstance(), 0, 1)),
+            'The ' .
+            get_class($this->nameTestInstance()) .
+            ' implementation\'s __to_string() method must always ' .
+            'return a string that begins with an alphanumeric' .
+            'character.'
+        );
+    }
 }
