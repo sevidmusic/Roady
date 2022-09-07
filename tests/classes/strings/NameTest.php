@@ -5,7 +5,6 @@ namespace tests\classes\strings;
 use roady\classes\strings\Name;
 use roady\interfaces\strings\Text;
 use tests\interfaces\strings\NameTestTrait;
-use roady\classes\strings\Text as TextToBeRepresentedBySafeText;
 
 class NameTest extends SafeTextTest
 {
