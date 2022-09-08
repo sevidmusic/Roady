@@ -113,12 +113,14 @@ trait NameTestTrait
      * a single period.
      *
      * If the original string is empty, then the modified string will
-     * be the numeric character 0.
+     * be the numeric character: 0
      *
      * Finally, the resulting string will always start with an
-     * alphanumeric character. If the original Text does not contain
-     * any alphanumeric characters than the Name will be the numeric
-     * character 0.
+     * alphanumeric character.
+     *
+     * If the original string does not contain any alphanumeric
+     * characters than the modified string will be the numeric
+     * character: 0
      *
      * @return string
      *
@@ -285,4 +287,26 @@ trait NameTestTrait
         );
     }
 
+    /**
+     * Test that the length of a Name is always at least 1.
+     *
+     * @return void
+     *
+     */
+    public function test_that_the_length_of_a_Name_is_always_at_least_1(): void
+    {
+        $strings = ['', '.', '-', '_', $this->randomChars()];
+        $text = new TextToConvertToAName(
+            $strings[array_rand($strings)]
+        );
+        $this->setUpWithSpecificText($text);
+        $this->assertGreaterThan(
+            0,
+            $this->nameTestInstance()->length(),
+            'The ' .
+            get_class($this->nameTestInstance()) .
+            ' implementation must insure that the Name\'s length ' .
+            'is at least 1.'
+        );
+    }
 }
