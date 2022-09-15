@@ -34,13 +34,22 @@ class ClassStringTest extends TextTest
             $this->randomChars(),
             $this,
             ClassString::class,
+            'foo',
         ];
-        $string = $this->getClass($values[array_rand($values)]);
+        $this->setUpWithSpecifiedClass(
+            $values[array_rand($values)]
+        );
+    }
+
+    protected function setUpWithSpecifiedClass(
+        object|string $classString
+        ): void
+    {
+        $string = $this->getClass($classString);
         $classString = new ClassString($string);
         $this->setTextTestInstance($classString);
         $this->setClassStringTestInstance($classString);
         $this->setExpectedString($string);
     }
-
 }
 

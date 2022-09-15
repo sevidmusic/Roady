@@ -13,6 +13,7 @@ use tests\interfaces\strings\TextTestTrait;
  * Methods:
  *
  * ```
+ * abstract protected function setUpWithSpecifiedClass(object|string $classString): void
  * protected function classStringTestInstance(): ClassString
  * protected function getClass(object|string $classString): string
  * protected function setClassStringTestInstance(ClassString $classStringTestInstance): void
@@ -72,6 +73,31 @@ trait ClassStringTestTrait
      *                                     test.
      */
     protected ClassString $classString;
+
+    /**
+     * Setup with a specified class.
+     *
+     * @param object|string|class-string $classString
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * protected function setUpWithSpecifiedClass(
+     *     object|string $classString
+     * ): string
+     * {
+     *     $string = $this->getClass($classString);
+     *     $classString = new ClassString($string);
+     *     $this->setTextTestInstance($classString);
+     *     $this->setClassStringTestInstance($classString);
+     *     $this->setExpectedString($string);
+     * }
+     *
+     * ```
+     */
+    abstract protected function setUpWithSpecifiedClass(object|string $classString): void;
 
     /**
      * Return the ClassString implementation instance to test.
