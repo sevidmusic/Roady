@@ -5,6 +5,8 @@ namespace tests\interfaces\strings;
 use roady\interfaces\strings\ClassString;
 use roady\interfaces\strings\Text;
 use tests\interfaces\strings\TextTestTrait;
+use roady\classes\strings\Text as ExistingClassText;
+use roady\classes\strings\SafeText as ExistingClassSafeText;
 
 /**
  * The ClassStringTestTrait defines common tests for
@@ -23,7 +25,9 @@ use tests\interfaces\strings\TextTestTrait;
  * Test Methods:
  *
  * ```
+ * public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
  * public function test___toString_returns_the_fully_qualified_class_name_of_an_existing_class(): void
+ * public function test___toString_returns_the_fully_qualified_class_name_of_the_expected_class(): void
  *
  * ```
  *
@@ -76,6 +80,9 @@ trait ClassStringTestTrait
 
     /**
      * Setup with a specified class.
+     *
+     * This method must call setTextTestInstance(),
+     * setClassStringTestInstance(), and setExpectedString().
      *
      * @param object|string|class-string $classString
      *
@@ -156,6 +163,27 @@ trait ClassStringTestTrait
             'The ' . get_class($this->classStringTestInstance()) .
             '\'s __toString() method must return the fully ' .
             'qualified class name of an existing class.' .
+            PHP_EOL .
+            $this->classStringTestInstance()->__toString()
+        );
+    }
+
+    public function test___toString_returns_the_fully_qualified_class_name_of_the_expected_class(): void
+    {
+        $values = [
+            $this,
+            new ExistingClassText('Foo'),
+            new ExistingClassSafeText(new ExistingClassText('Bar'))
+        ];
+        $randClass = $values[array_rand($values)];
+        $expectedClass = get_class($randClass);
+        $this->setUpWithSpecifiedClass($randClass);
+        $this->assertEquals(
+            $expectedClass,
+            $this->classStringTestInstance()->__toString(),
+            'The ' . get_class($this->classStringTestInstance()) .
+            '\'s __toString() method must return the fully ' .
+            'qualified class name of the expected class.' .
             PHP_EOL .
             $this->classStringTestInstance()->__toString()
         );
