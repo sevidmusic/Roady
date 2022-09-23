@@ -2,10 +2,12 @@
 
 namespace tests\classes\__SUB_NAMESPACE__;
 
+use PHPUnit\Framework\TestCase;
 use roady\classes\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__;
 use tests\interfaces\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__TestTrait;
 
-class __TARGET_CLASS_NAME__Test
+class __TARGET_CLASS_NAME__Test extends TestCase
+
 {
 
     /**
