@@ -40,7 +40,7 @@ trait __TARGET_CLASS_NAME__TestTrait
      * @return __TARGET_CLASS_NAME__
      *
      */
-    protected function __LC_TARGET_CLASS_NAME__TestInstance(): ClassString
+    protected function __LC_TARGET_CLASS_NAME__TestInstance(): __TARGET_CLASS_NAME__
     {
         return $this->__LC_TARGET_CLASS_NAME__;
     }
@@ -58,7 +58,7 @@ trait __TARGET_CLASS_NAME__TestTrait
      *
      */
     protected function set__TARGET_CLASS_NAME__TestInstance(
-        ClassString $__LC_TARGET_CLASS_NAME__TestInstance
+        __TARGET_CLASS_NAME__ $__LC_TARGET_CLASS_NAME__TestInstance
     ): void
     {
         $this->__LC_TARGET_CLASS_NAME__ = $__LC_TARGET_CLASS_NAME__TestInstance;

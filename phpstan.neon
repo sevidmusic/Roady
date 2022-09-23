@@ -4,3 +4,5 @@ parameters:
         - src
         - tests
         - devTools
+    excludePaths:
+        - devTools/templates
