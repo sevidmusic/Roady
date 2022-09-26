@@ -45,11 +45,10 @@ class ClassStringTest extends TextTest
         object|string $classString
         ): void
     {
-        $string = $this->getClass($classString);
-        $classString = new ClassString($string);
+        $classString = new ClassString($classString);
         $this->setTextTestInstance($classString);
         $this->setClassStringTestInstance($classString);
-        $this->setExpectedString($string);
+        $this->setExpectedString($classString);
     }
 }
 

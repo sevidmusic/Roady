@@ -17,7 +17,6 @@ use roady\classes\strings\SafeText as ExistingClassSafeText;
  * ```
  * abstract protected function setUpWithSpecifiedClass(object|string $classString): void
  * protected function classStringTestInstance(): ClassString
- * protected function getClass(object|string $classString): string
  * protected function setClassStringTestInstance(ClassString $classStringTestInstance): void
  *
  * ```
@@ -25,7 +24,7 @@ use roady\classes\strings\SafeText as ExistingClassSafeText;
  * Test Methods:
  *
  * ```
- * public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
+ * @todo: public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
  * public function test___toString_returns_the_fully_qualified_class_name_of_an_existing_class(): void
  * public function test___toString_returns_the_fully_qualified_class_name_of_the_expected_class(): void
  *
@@ -95,8 +94,7 @@ trait ClassStringTestTrait
      *     object|string $classString
      * ): string
      * {
-     *     $string = $this->getClass($classString);
-     *     $classString = new ClassString($string);
+     *     $classString = new ClassString($classString);
      *     $this->setTextTestInstance($classString);
      *     $this->setClassStringTestInstance($classString);
      *     $this->setExpectedString($string);
@@ -115,24 +113,6 @@ trait ClassStringTestTrait
     protected function classStringTestInstance(): ClassString
     {
         return $this->classString;
-    }
-
-    protected function getClass(object|string $classString): string
-    {
-        $classString = (
-            is_object($classString) ?
-            get_class($classString) :
-            $classString
-        );
-        return (
-            class_exists($classString)
-            ? $classString
-            : str_replace(
-                'interfaces',
-                'classes',
-                ClassString::class
-            )
-        );
     }
 
     /**
