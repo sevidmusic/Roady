@@ -3,6 +3,7 @@
 namespace roady\classes\strings;
 
 use roady\classes\strings\Text;
+use roady\classes\strings\UnknownClass;
 use roady\interfaces\strings\ClassString as ClassStringInterface;
 use roady\interfaces\strings\Text as TextInterface;
 
@@ -24,7 +25,7 @@ class ClassString extends Text implements ClassStringInterface
         return (
             class_exists($classString)
             ? $classString
-            : get_class($this)
+            : UnknownClass::class
         );
     }
 

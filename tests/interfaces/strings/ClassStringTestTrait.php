@@ -2,6 +2,7 @@
 
 namespace tests\interfaces\strings;
 
+use roady\classes\strings\UnknownClass;
 use roady\interfaces\strings\ClassString;
 use roady\interfaces\strings\Text;
 use tests\interfaces\strings\TextTestTrait;
@@ -24,7 +25,7 @@ use roady\classes\strings\SafeText as ExistingClassSafeText;
  * Test Methods:
  *
  * ```
- * @todo: public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
+ * public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
  * public function test___toString_returns_the_fully_qualified_class_name_of_an_existing_class(): void
  * public function test___toString_returns_the_fully_qualified_class_name_of_the_expected_class(): void
  *
@@ -134,6 +135,21 @@ trait ClassStringTestTrait
         $this->classString = $classStringTestInstance;
     }
 
+    public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
+    {
+        $this->setUpWithSpecifiedClass($this->randomChars());
+        $this->assertEquals(
+            UnknownClass::class,
+            $this->classStringTestInstance()->__toString(),
+            'The ' . get_class($this->classStringTestInstance()) .
+            '\'s __toString() method must return the fully ' .
+            'qualified class name of an ' .
+            UnknownClass::class .
+            ' if the expected class does not exist.' .
+            PHP_EOL .
+            $this->classStringTestInstance()->__toString()
+        );
+    }
     public function test___toString_returns_the_fully_qualified_class_name_of_an_existing_class(): void
     {
         $this->assertTrue(
