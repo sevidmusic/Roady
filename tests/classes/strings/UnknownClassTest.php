@@ -18,12 +18,6 @@ final class UnknownClassTest extends ClassStringTest
      */
     use UnknownClassTestTrait;
 
-    /**
-     * Setup using a specified class or object instance.
-     *
-     * @return void
-     *
-     */
     protected function setUpWithSpecifiedClass(
         object|string $classString
         ): void

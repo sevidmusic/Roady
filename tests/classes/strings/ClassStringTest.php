@@ -21,7 +21,7 @@ class ClassStringTest extends TextTest
     use ClassStringTestTrait;
 
     /**
-     * Default setup a random string, class-string, or object
+     * Default setup using a random string, class-string, or object
      * instance.
      *
      * @return void
@@ -40,11 +40,6 @@ class ClassStringTest extends TextTest
         );
     }
 
-    /**
-     * Setup using a specified class or object instance.
-     *
-     * @return void
-     */
     protected function setUpWithSpecifiedClass(
         object|string $classString
         ): void

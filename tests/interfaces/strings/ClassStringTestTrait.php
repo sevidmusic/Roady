@@ -91,6 +91,13 @@ trait ClassStringTestTrait
         $this->classString = $classStringTestInstance;
     }
 
+    /**
+     * Test that __toString() returns the fully qualified class name
+     * of an UnknownClass if the expected class does not exist.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_the_fully_qualified_class_name_of_an_UnknonwClass_if_the_expected_class_does_not_exist(): void
     {
         $this->setUpWithSpecifiedClass($this->randomChars());
@@ -106,6 +113,15 @@ trait ClassStringTestTrait
             $this->classStringTestInstance()->__toString()
         );
     }
+
+    /**
+     *
+     * Test that __toString() returns the fully qualified class
+     * name of an existing class.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_the_fully_qualified_class_name_of_an_existing_class(): void
     {
         $this->assertTrue(
@@ -120,6 +136,13 @@ trait ClassStringTestTrait
         );
     }
 
+    /**
+     * Test that __toString() returns the fully qualified class
+     * name of the expected class.
+     *
+     * @return void
+     *
+     */
     public function test___toString_returns_the_fully_qualified_class_name_of_the_expected_class(): void
     {
         $values = [
