@@ -32,22 +32,6 @@ use roady\interfaces\strings\Text;
  * SafeText will never be empty, if the original Text is empty, then
  * the SafeText will be the numeric character 0.
  *
- * Methods:
- *
- * ```
- * public function originalText(): Text
- *
- * ```
- *
- * Methods inherited from Text:
- *
- * ```
- * public function __toString(): string;
- * public function contains(string|Stringable ...$strings): bool;
- * public function length(): int;
- *
- * ```
- *
  * @example
  *
  * ```
@@ -76,8 +60,6 @@ use roady\interfaces\strings\Text;
  * // example output: 1
  *
  * ```
- *
- * @see Text
  *
  */
 interface SafeText extends Text

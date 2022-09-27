@@ -7,13 +7,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Defines tests to make sure PHPUnit tests can be run.
  *
- * Test Methods:
- *
- * ```
- * public function test_php_unit_tests_are_run(): void
- *
- * ```
- *
  */
 class PHPUnitTest extends TestCase
 {

@@ -8,21 +8,6 @@ use \Stringable;
  * Text represents a string, can be cast to the string it represents,
  * and can provide information about the string it represents.
  *
- * Methods:
- *
- * ```
- * public function contains(string|Stringable ...$strings): bool;
- * public function length(): int;
- *
- * ```
- *
- * Methods inherited from Stringable:
- *
- * ```
- * public function __toString(): string;
- *
- * ```
- *
  * @example
  *
  * ```
@@ -39,8 +24,6 @@ use \Stringable;
  * // example output: 3
  *
  * ```
- *
- * @see Stringable
  *
  */
 interface Text extends Stringable

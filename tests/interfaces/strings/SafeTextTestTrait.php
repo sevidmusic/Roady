@@ -11,68 +11,6 @@ use tests\interfaces\strings\TextTestTrait;
  * The SafeTextTestTrait defines common tests for implementations of
  * the SafeText interface.
  *
- * Methods:
- *
- * ```
- * abstract protected function setUpWithEmptyString(): void
- * abstract protected function setUpWithSpecificText(Text $text): void
- * protected function makeStringSafe(string $string): string
- * protected function removeDuplicateHyphens(string $string): string
- * protected function removeDuplicatePeriods(string $string): string
- * protected function removeDuplicateUnderscores(string $string): string
- * protected function replaceUnsafeCharsWithUnderscores(string $string): string
- * protected function safeTextTestInstance(): SafeText
- * protected function setSafeTextTestInstance(SafeText $safeTextTestInstance): void
- * protected function setUpWithEmptyString(): void
- * protected function setUpWithSpecificText(Text $text): void
- *
- * ```
- *
- * Test Methods:
- *
- * ```
- * public function test_TEST_METHOD_setUpWithEmptyString_sets_expected_string_to_be_the_numeric_character_0(): void
- * public function test_TEST_METHOD_setUpWithSpecifiedText_sets_expected_string_to_be_a_safe_form_of_the_specified_Text(): void
- * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_hyphens_have_been_replaced_by_a_single_hyphen(): void
- * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_periods_have_been_replaced_by_a_single_period(): void
- * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_underscores_have_been_replaced_by_a_single_underscore(): void
- * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_consecutive_sequences_of_2_or_more_unsafe_characters_have_been_replaced_by_a_single_underscore(): void
- * public function test___toString_returns_a_modified_version_of_the_string_represented_by_the_original_Text_where_all_unsafe_characters_have_been_replaced_by_underscores(): void
- * public function test___toString_returns_the_expected_string(): void
- * public function test___toString_returns_the_numeric_character_0_if_original_text_was_empty(): void
- * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string(): void
- * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string(): void
- * public function test_length_returns_the_expected_strings_length(): void
- * public function test_originalText_returns_the_original_Text(): void
- *
- * ```
- *
- * Methods inherited from TextTestTrait:
- *
- * ```
- * abstract protected function setUp(): void
- * protected function expectedString(): string
- * protected function randomChars(): string
- * protected function setExpectedString(string $string): void
- * protected function setTextTestInstance(Text $textTestInstance): void
- * protected function textTestInstance(): Text
- *
- * ```
- *
- * Test Methods inherited from TextTestTrait:
- *
- * ```
- * public function test___toString_returns_the_expected_string(): void
- * public function test_contains_returns_false_if_any_of_the_specified_strings_are_not_in_the_expected_string(): void
- * public function test_contains_returns_true_if_all_of_the_specified_strings_are_in_the_expected_string(): void
- * public function test_length_returns_the_expected_strings_length(): void
- *
- * ```
- *
- * @see SafeText
- * @see Text
- * @see TextTestTrait
- *
  */
 trait SafeTextTestTrait
 {

@@ -7,7 +7,6 @@ use tests\interfaces\strings\UnknownClassTestTrait;
 use tests\classes\strings\ClassStringTest;
 
 final class UnknownClassTest extends ClassStringTest
-
 {
 
     /**
