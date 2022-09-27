@@ -18,5 +18,21 @@ use roady\interfaces\strings\ClassString;
 interface UnknownClass extends ClassString
 {
 
+    /**
+     * Return roady\classes\strings\UnknownClass
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * echo $unknownClass->__toString();
+     * // example output: roady\classes\strings\UnknownClass
+     *
+     * ```
+     *
+     */
+    public function __toString(): string;
+
 }
 

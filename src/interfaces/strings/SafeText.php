@@ -66,6 +66,48 @@ interface SafeText extends Text
 {
 
     /**
+     * Return a safe version of the original Text, insuring only the
+     * following characters exist in the returned string:
+     *
+     * - Alphanumeric characters: A-Z, a-z, and 0-9
+     * - Underscores: _
+     * - Hyphens: -
+     * - Periods: .
+     *
+     * Unsafe characters will be replaced with underscores.
+     *
+     * A consecutive sequence of 2 or more unsafe characters will be
+     * replaced by a single underscore.
+     *
+     * A consecutive sequence of 2 or more underscores will be
+     * replaced by a single underscore.
+     *
+     * A consecutive sequence of 2 or more hyphens will be replaced by
+     * a single hyphen.
+     *
+     * A consecutive sequence of 2 or more periods will be replaced by
+     * a single period.
+     *
+     * If the original string is empty, then the returned string will
+     * be the numeric character 0.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * echo $safeText->originalText()->__toString();
+     * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@7A(
+     *
+     * echo $safeText->toString();
+     * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_7A_
+     *
+     * ```
+     *
+     */
+    public function __toString(): string;
+
+    /**
      * Returns the original Text, which may contain unsafe characters.
      *
      * @return Text
@@ -76,8 +118,14 @@ interface SafeText extends Text
      * echo $safeText->originalText();
      * // example output: !(#(FJD(%F{{}|F"?F>>F<FIEI<DQ((#}}|}"D:O@7A(
      *
+     * echo strval($safeText->originalText()->length());
+     * // example output: 44
+     *
      * echo $safeText;
      * // example output: _FJD_F_F_F_F_FIEI_DQ_D_O_7A_
+     *
+     * echo strval($safeText->length());
+     * // example output: 28
      *
      * ```
      *

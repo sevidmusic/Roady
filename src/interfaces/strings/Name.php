@@ -68,14 +68,31 @@ interface Name extends SafeText
 {
 
     /**
-     * At the moment the Name interface does not define any
-     * unique methods.
+     * Return a string that begins with an alphanumeric character,
+     * is at least one character in length, is no more than 70
+     * characters in length, and only contains the following
+     * characters:
      *
-     * This may change in the future.
+     * - Alphanumeric characters: A-Z, a-z, and 0-9
+     * - Underscores: _
+     * - Hyphens: -
+     * - Periods: .
      *
-     * For now, this interface just functions as a namespace.
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * echo $name->originalText()->__toString();
+     * // example output: !Foo Bar Baz..Bin!@#Bar--Foo____%$#@#$%^&*
+     *
+     * echo $name->__toString();
+     * // example output: _Foo_Bar_Baz.Bin_Bar-Foo_
+     *
+     * ```
      *
      */
+    public function __toString(): string;
 
 }
 

@@ -25,6 +25,15 @@ interface ClassString extends Text
      * namespace.
      *
      * @return class-string
+     *
+     * @example
+     *
+     * ```
+     * echo $classString->__toString();
+     * // example output: roady\classes\strings\ClassString
+     *
+     * ```
+     *
      */
     public function __toString(): string;
 

@@ -30,6 +30,22 @@ interface Text extends Stringable
 {
 
     /**
+     * Return the original string.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * echo $text->__toString();
+     * // example output: Foo Bar Baz
+     *
+     * ```
+     *
+     */
+    public function __toString(): string;
+
+    /**
      * Return true if the Text contains all of the specified strings,
      * false otherwise.
      *
