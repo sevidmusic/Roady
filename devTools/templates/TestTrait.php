@@ -8,18 +8,6 @@ use roady\interfaces\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__;
  * The __TARGET_CLASS_NAME__TestTrait defines common tests for
  * implementations of the __TARGET_CLASS_NAME__ interface.
  *
- * Methods:
- *
- * ```
- *
- * ```
- *
- * Test Methods:
- *
- * ```
- *
- * ```
- *
  * @see __TARGET_CLASS_NAME__
  *
  */
