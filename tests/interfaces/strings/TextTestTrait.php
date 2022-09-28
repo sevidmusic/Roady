@@ -8,6 +8,8 @@ use roady\interfaces\strings\Text;
  * The TextTestTrait defines common tests for implementations of the
  * Text interface.
  *
+ * @see Text
+ *
  */
 trait TextTestTrait
 {

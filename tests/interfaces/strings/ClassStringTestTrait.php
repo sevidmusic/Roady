@@ -13,6 +13,8 @@ use roady\classes\strings\SafeText as ExistingClassSafeText;
  * The ClassStringTestTrait defines common tests for
  * implementations of the ClassString interface.
  *
+ * @see ClassString
+ *
  */
 trait ClassStringTestTrait
 {

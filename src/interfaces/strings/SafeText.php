@@ -61,6 +61,8 @@ use roady\interfaces\strings\Text;
  *
  * ```
  *
+ * @see Text
+ *
  */
 interface SafeText extends Text
 {

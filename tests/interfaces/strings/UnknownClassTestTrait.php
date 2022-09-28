@@ -10,6 +10,8 @@ use tests\interfaces\strings\ClassStringTestTrait;
  * The UnknownClassTestTrait defines common tests for
  * implementations of the UnknownClass interface.
  *
+ * @see UnknownClass
+ *
  */
 trait UnknownClassTestTrait
 {

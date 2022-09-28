@@ -14,6 +14,9 @@ use roady\interfaces\strings\ClassString;
  * // example output: roady\classes\strings\UnknownClass
  *
  * ```
+ *
+ * @see ClassString
+ *
  */
 interface UnknownClass extends ClassString
 {

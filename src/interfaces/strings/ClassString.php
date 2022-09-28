@@ -16,6 +16,8 @@ use roady\interfaces\strings\Text;
  *
  * ```
  *
+ * @see Text
+ *
  */
 interface ClassString extends Text
 {

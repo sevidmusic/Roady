@@ -11,7 +11,6 @@ use roady\interfaces\strings\Name;
  * Name interface.
  *
  * @see Name
- * @see SafeTextTestTrait
  *
  */
 trait NameTestTrait

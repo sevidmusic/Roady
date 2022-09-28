@@ -63,6 +63,8 @@ use roady\interfaces\strings\SafeText;
  *
  * ```
  *
+ * @see SafeText
+ *
  */
 interface Name extends SafeText
 {

@@ -25,6 +25,8 @@ use \Stringable;
  *
  * ```
  *
+ * @see Stringable
+ *
  */
 interface Text extends Stringable
 {

@@ -11,6 +11,8 @@ use tests\interfaces\strings\TextTestTrait;
  * The SafeTextTestTrait defines common tests for implementations of
  * the SafeText interface.
  *
+ * @see SafeText
+ *
  */
 trait SafeTextTestTrait
 {
