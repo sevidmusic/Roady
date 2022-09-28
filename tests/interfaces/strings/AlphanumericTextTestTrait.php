@@ -15,6 +15,11 @@ use tests\interfaces\strings\SafeTextTestTrait;
 trait AlphanumericTextTestTrait
 {
 
+    /**
+     * The SafeTextTestTrait defines common tests for implementations
+     * of the roady\interfaces\strings\SafeText interface.
+     *
+     */
     use SafeTextTestTrait;
 
     /**
