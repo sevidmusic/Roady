@@ -15,12 +15,6 @@ trait PositionableTestTrait
 {
 
     /**
-     * @var Positionable $positionable An instance of a Positionable
-     *                                 implementation to test.
-     */
-    protected Positionable $positionable;
-
-    /**
      * @param float $expectedModifier The expected modifier.
      */
     private float $expectedModifier;
@@ -31,6 +25,34 @@ trait PositionableTestTrait
     private float $expectedPosition;
 
     /**
+     * @var Positionable $positionable An instance of a Positionable
+     *                                 implementation to test.
+     */
+    protected Positionable $positionable;
+
+    /**
+     * Return the expected modifier.
+     *
+     * @return float
+     *
+     */
+    protected function expectedModifier(): float
+    {
+        return $this->expectedModifier;
+    }
+
+    /**
+     * Return the expected position.
+     *
+     * @return float
+     *
+     */
+    protected function expectedPosition(): float
+    {
+        return $this->expectedPosition;
+    }
+
+    /**
      * Return the Positionable implementation instance to test.
      *
      * @return Positionable
@@ -39,6 +61,51 @@ trait PositionableTestTrait
     protected function positionableTestInstance(): Positionable
     {
         return $this->positionable;
+    }
+
+    /**
+     * Return a random float.
+     *
+     * @return float
+     *
+     */
+    protected function randomFloat(): float
+    {
+        return floatval(
+            strval(rand(-100000000000, 100000000000)) .
+            '.' .
+            strval(rand(0, 100000000000))
+        );
+    }
+
+    /**
+     * Set the expected modifier.
+     *
+     * @param float $expectedModifier The expected modifier.
+     *
+     * @return void
+     *
+     */
+    protected function setExpectedModifier(
+        float $expectedModifier
+    ): void
+    {
+        $this->expectedModifier = $expectedModifier;
+    }
+
+    /**
+     * Set the expected position.
+     *
+     * @param float $expectedPosition The expected position.
+     *
+     * @return void
+     *
+     */
+    protected function setExpectedPosition(
+        float $expectedPosition
+    ): void
+    {
+        $this->expectedPosition = $expectedPosition;
     }
 
     /**
@@ -62,74 +129,6 @@ trait PositionableTestTrait
     }
 
     /**
-     * Return the expected modifier.
-     *
-     * @return float
-     *
-     */
-    protected function expectedModifier(): float
-    {
-        return $this->expectedModifier;
-    }
-
-    /**
-     * Set the expected modifier.
-     *
-     * @param float $expectedModifier The expected modifier.
-     *
-     * @return void
-     *
-     */
-    protected function setExpectedModifier(
-        float $expectedModifier
-    ): void
-    {
-        $this->expectedModifier = $expectedModifier;
-    }
-
-    /**
-     * Return the expected position.
-     *
-     * @return float
-     *
-     */
-    protected function expectedPosition(): float
-    {
-        return $this->expectedPosition;
-    }
-
-    /**
-     * Set the expected position.
-     *
-     * @param float $expectedPosition The expected position.
-     *
-     * @return void
-     *
-     */
-    protected function setExpectedPosition(
-        float $expectedPosition
-    ): void
-    {
-        $this->expectedPosition = $expectedPosition;
-    }
-
-    /**
-     * Return a random float.
-     *
-     * @return float
-     *
-     */
-    protected function randomFloat(): float
-    {
-        return floatval(
-            strval(rand(0, 100)) .
-            '.' .
-            strval(rand(0, 100))
-        );
-
-    }
-
-    /**
      * Test that the position() method returns the expected position.
      *
      * @return void
@@ -140,10 +139,11 @@ trait PositionableTestTrait
         $this->assertEquals(
             $this->expectedPosition(),
             $this->positionableTestInstance()->position(),
-            'The ' .
-            $this->positionableTestInstance()::class .
-            ' implementation\'s position() method must return the ' .
-            'expected position.'
+            $this->testFailedMessage(
+                $this->positionableTestInstance(),
+                'position',
+                'return the expected position'
+            )
         );
     }
 
@@ -158,10 +158,11 @@ trait PositionableTestTrait
         $this->assertEquals(
             $this->expectedModifier(),
             $this->positionableTestInstance()->modifier(),
-            'The ' .
-            $this->positionableTestInstance()::class .
-            ' implementation\'s modifier() method must return the ' .
-            'expected modifier.'
+            $this->testFailedMessage(
+                $this->positionableTestInstance(),
+                'modifier',
+                'return the expected modifier'
+            )
         );
     }
 
@@ -183,10 +184,11 @@ trait PositionableTestTrait
         $this->assertEquals(
             $this->expectedPosition(),
             $this->positionableTestInstance()->position(),
-            'The ' .
-            $this->positionableTestInstance()::class .
-            ' implementation\'s incrementPosition() method must ' .
-            'increase the position by the modifier.'
+            $this->testFailedMessage(
+                $this->positionableTestInstance(),
+                'incrementPosition',
+                'increase the position by the modifier'
+            )
         );
     }
 
@@ -208,10 +210,11 @@ trait PositionableTestTrait
         $this->assertEquals(
             $this->expectedPosition(),
             $this->positionableTestInstance()->position(),
-            'The ' .
-            $this->positionableTestInstance()::class .
-            ' implementation\'s decrementPosition() method must ' .
-            'decrease the position by the modifier.'
+            $this->testFailedMessage(
+                $this->positionableTestInstance(),
+                'decrementPosition',
+                'decrease the position by the modifier'
+            )
         );
     }
 

@@ -84,7 +84,7 @@ trait SwitchableTestTrait
     }
 
     /**
-     * Test the state() method returns the expected state.
+     * Test that the state() method returns the expected state.
      *
      * @return void
      *
@@ -94,9 +94,11 @@ trait SwitchableTestTrait
         $this->assertEquals(
             $this->expectedState(),
             $this->switchableTestInstance()->state(),
-            'The' .
-            $this->switchableTestInstance()::class .
-            '\'s state() method must return the expected state.'
+            $this->testFailedMessage(
+                $this->switchableTestInstance(),
+                'state',
+                'return the expected state.'
+            )
         );
     }
 
@@ -119,9 +121,11 @@ trait SwitchableTestTrait
         $this->assertEquals(
             $this->expectedState(),
             $this->switchableTestInstance()->state(),
-            'The' .
-            $this->switchableTestInstance()::class .
-            '\'s switchState() method must switch the expected state.'
+            $this->testFailedMessage(
+                $this->switchableTestInstance(),
+                'state',
+                'switch the expected state.'
+            )
         );
     }
 

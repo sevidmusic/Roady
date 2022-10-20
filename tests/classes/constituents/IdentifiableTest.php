@@ -2,14 +2,15 @@
 
 namespace tests\classes\constituents;
 
-use PHPUnit\Framework\TestCase;
+
 use roady\classes\constituents\Identifiable;
-use tests\interfaces\constituents\IdentifiableTestTrait;
+use roady\classes\strings\Id;
 use roady\classes\strings\Name;
 use roady\classes\strings\Text;
-use roady\classes\strings\Id;
+use tests\interfaces\constituents\IdentifiableTestTrait;
+use tests\RoadyTestCase;
 
-class IdentifiableTest extends TestCase
+class IdentifiableTest extends RoadyTestCase
 {
 
     /**

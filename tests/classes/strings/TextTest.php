@@ -2,11 +2,11 @@
 
 namespace tests\classes\strings;
 
-use PHPUnit\Framework\TestCase;
+use tests\RoadyTestCase;
 use roady\classes\strings\Text;
 use tests\interfaces\strings\TextTestTrait;
 
-class TextTest extends TestCase
+class TextTest extends RoadyTestCase
 {
 
     /**

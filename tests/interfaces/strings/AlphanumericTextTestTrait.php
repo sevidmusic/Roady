@@ -62,7 +62,8 @@ trait AlphanumericTextTestTrait
 
 
     /**
-     * Test __toString() returns an alphanumeric string.
+     * Test that the __toString() method returns an
+     * alphanumeric string.
      *
      * @return void
      *
@@ -73,15 +74,18 @@ trait AlphanumericTextTestTrait
             ctype_alnum(
                 $this->alphanumericTextTestInstance()->__toString()
             ),
-            $this->alphanumericTextTestInstance()::class .
-            '\'s __toString() method must return a string that only' .
-            'contains alphanumeric characters.'
+            $this->testFailedMessage(
+                $this->alphanumericTextTestInstance(),
+                '__toString',
+                'return a string that only contains alphanumeric ' .
+                'characters'
+            )
         );
     }
 
     /**
-     * Test __toString() returns an alphanumeric form of the
-     * original Text.
+     * Test that the __toString() method returns an alphanumeric
+     * form of the original Text.
      *
      * @return void
      *
@@ -93,10 +97,11 @@ trait AlphanumericTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($originalText),
             $this->alphanumericTextTestInstance()->__toString(),
-            'The ' .
-            $this->alphanumericTextTestInstance()::class .
-            'implementation\'s __toString() method must return ' .
-            'an alphanumeric form of the original Text.'
+            $this->testFailedMessage(
+                $this->alphanumericTextTestInstance(),
+                '__toString',
+                'return an alphanumeric form of the original Text'
+            )
         );
     }
     /**
@@ -146,5 +151,6 @@ trait AlphanumericTextTestTrait
             : $alphanumericString
         );
     }
+
 }
 

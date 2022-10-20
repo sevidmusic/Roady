@@ -2,12 +2,12 @@
 
 namespace tests\interfaces\strings;
 
+use roady\classes\strings\SafeText as ExistingClassSafeText;
+use roady\classes\strings\Text as ExistingClassText;
 use roady\classes\strings\UnknownClass;
 use roady\interfaces\strings\ClassString;
 use roady\interfaces\strings\Text;
 use tests\interfaces\strings\TextTestTrait;
-use roady\classes\strings\Text as ExistingClassText;
-use roady\classes\strings\SafeText as ExistingClassSafeText;
 
 /**
  * The ClassStringTestTrait defines common tests for
@@ -29,10 +29,8 @@ trait ClassStringTestTrait
     use TextTestTrait;
 
     /**
-     * @var ClassString $classString An instance of a
-     *                                     ClassString
-     *                                     implementation to
-     *                                     test.
+     * @var ClassString $classString An instance of a ClassString
+     *                               implementation to test.
      */
     protected ClassString $classString;
 

@@ -2,11 +2,11 @@
 
 namespace tests\classes\constituents;
 
-use PHPUnit\Framework\TestCase;
+use tests\RoadyTestCase;
 use roady\classes\constituents\Positionable;
 use tests\interfaces\constituents\PositionableTestTrait;
 
-class PositionableTest extends TestCase
+class PositionableTest extends RoadyTestCase
 {
 
     /**

@@ -2,11 +2,11 @@
 
 namespace tests\classes\constituents;
 
-use PHPUnit\Framework\TestCase;
+use tests\RoadyTestCase;
 use roady\classes\constituents\Switchable;
 use tests\interfaces\constituents\SwitchableTestTrait;
 
-class SwitchableTest extends TestCase
+class SwitchableTest extends RoadyTestCase
 {
 
     /**

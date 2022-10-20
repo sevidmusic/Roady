@@ -2,6 +2,7 @@
 
 namespace tests\interfaces\constituents;
 
+use roady\classes\strings\ClassString;
 use roady\interfaces\constituents\Identifiable;
 use roady\interfaces\strings\Id;
 use roady\interfaces\strings\Name;
@@ -17,13 +18,6 @@ trait IdentifiableTestTrait
 {
 
     /**
-     * @var Name $expectedName The Name that is expected to be
-     *                         assigned to the Identifiable
-     *                         implementation instance being tested.
-     */
-    private Name $expectedName;
-
-    /**
      * @var Id $expectedId The Id that is expected to be assigned to
      *                     the Identifiable implementation instance
      *                     being tested.
@@ -31,10 +25,15 @@ trait IdentifiableTestTrait
     private Id $expectedId;
 
     /**
-     * @var Identifiable $identifiable
-     *                              An instance of a
-     *                              Identifiable
-     *                              implementation to test.
+     * @var Name $expectedName The Name that is expected to be
+     *                         assigned to the Identifiable
+     *                         implementation instance being tested.
+     */
+    private Name $expectedName;
+
+    /**
+     * @var Identifiable $identifiable An instance of an Identifiable
+     *                                 implementation to test.
      */
     protected Identifiable $identifiable;
 
@@ -70,19 +69,27 @@ trait IdentifiableTestTrait
     }
 
     /**
-     * Set the Name that is expected to be assigned to the
+     * Return the Id that is expected to be assigned to the
      * Identifiable implementation instance being tested.
      *
-     * @param Name $name The Name that is expected to be assigned to
-     *                   the Identifiable implementation instance
-     *                   being tested.
-     *
-     * @return void
+     * @return Id
      *
      */
-    public function setExpectedName(Name $name): void
+    public function expectedId(): Id
     {
-        $this->expectedName = $name;
+        return $this->expectedId;
+    }
+
+    /**
+     * Return the Name that is expected to be assigned to the
+     * Identifiable implementation instance being tested.
+     *
+     * @return Name
+     *
+     */
+    public function expectedName(): Name
+    {
+        return $this->expectedName;
     }
 
     /**
@@ -102,31 +109,42 @@ trait IdentifiableTestTrait
     }
 
     /**
-     * Return the Name that is expected to be assigned to the
+     * Set the Name that is expected to be assigned to the
      * Identifiable implementation instance being tested.
      *
-     * @return Name
+     * @param Name $name The Name that is expected to be assigned to
+     *                   the Identifiable implementation instance
+     *                   being tested.
+     *
+     * @return void
      *
      */
-    public function expectedName(): Name
+    public function setExpectedName(Name $name): void
     {
-        return $this->expectedName;
+        $this->expectedName = $name;
     }
 
     /**
-     * Return the Id that is expected to be assigned to the
-     * Identifiable implementation instance being tested.
+     * Test that the id() method returns the expected Id.
      *
-     * @return Id
+     * @return void
      *
      */
-    public function expectedId(): Id
+    public function testIdReturnsExpectedId(): void
     {
-        return $this->expectedId;
+        $this->assertEquals(
+            $this->expectedId(),
+            $this->identifiableTestInstance()->id(),
+            $this->testFailedMessage(
+                $this->identifiableTestInstance(),
+                'id',
+                'return the expected Id'
+            )
+        );
     }
 
     /**
-     * Test the Name() method returns the expected Name.
+     * Test that the name() method returns the expected Name.
      *
      * @return void
      *
@@ -136,44 +154,30 @@ trait IdentifiableTestTrait
         $this->assertEquals(
             $this->expectedName(),
             $this->identifiableTestInstance()->name(),
-            'The ' .
-            $this->identifiableTestInstance()::class .
-            '\'s name() method must return the expected Name.'
+            $this->testFailedMessage(
+                $this->identifiableTestInstance(),
+                'name',
+                'return the expected Name'
+            )
         );
     }
 
     /**
-     * Test the id() method returns the expected Id.
+     * Test that the type() method returns an appropriate ClassString.
      *
      * @return void
      *
      */
-    public function testIdReturnsExpectedName(): void
+    public function testTypeReturnsAnAppropriateClassString(): void
     {
         $this->assertEquals(
-            $this->expectedId(),
-            $this->identifiableTestInstance()->id(),
-            'The ' .
-            $this->identifiableTestInstance()::class .
-            '\'s id() method must return the expected Id.'
-        );
-    }
-
-    /**
-     * Test the type() method returns an appropriate ClassString for
-     * the Identifiable instance being tested.
-     *
-     * @return void
-     *
-     */
-    public function testTypeReturnsExpectedClassString(): void
-    {
-        $this->assertEquals(
-            $this->identifiableTestInstance()::class,
+            new ClassString($this->identifiableTestInstance()),
             $this->identifiableTestInstance()->type(),
-            'The ' .
-            $this->identifiableTestInstance()::class .
-            '\'s type() method must return the expected ClassString.'
+            $this->testFailedMessage(
+                $this->identifiableTestInstance(),
+                'type',
+                'return an appropriate ClassString'
+            )
         );
     }
 
