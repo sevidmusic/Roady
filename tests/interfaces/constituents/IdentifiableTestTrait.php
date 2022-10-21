@@ -176,7 +176,6 @@ trait IdentifiableTestTrait
      *
      * ```
      *
-     *
      */
     public function setExpectedName(Name $name): void
     {

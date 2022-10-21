@@ -61,6 +61,7 @@ trait PositionableTestTrait
      * // example output: 5.917
      *
      * ```
+     *
      */
     protected function expectedPosition(): float
     {

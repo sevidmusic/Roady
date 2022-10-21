@@ -32,6 +32,18 @@ trait SwitchableTestTrait
      *
      * @return Switchable
      *
+     * @example
+     *
+     * ```
+     * echo (
+     *     $this->switchableTestInstance()->state()
+     *     ? 'true'
+     *     : 'false'
+     * );
+     * // example output: true
+     *
+     * ```
+     *
      */
     protected function switchableTestInstance(): Switchable
     {
@@ -48,6 +60,15 @@ trait SwitchableTestTrait
      *
      * @return void
      *
+     * @example
+     *
+     * ```
+     * $this->setSwitchableTestInstance(
+     *     new roady\classes\constituents\Switchable(true),
+     * );
+     *
+     * ```
+     *
      */
     protected function setSwitchableTestInstance(
         Switchable $switchableTestInstance
@@ -56,7 +77,6 @@ trait SwitchableTestTrait
         $this->switchable = $switchableTestInstance;
     }
 
-
     /**
      * Set the expected boolean state of the Switchable implementation
      * instance being tested.
@@ -64,6 +84,13 @@ trait SwitchableTestTrait
      * @para bool $expectedState The expected boolean state.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setExpectedState(true);
+     *
+     * ```
      *
      */
     protected function setExpectedState(bool $expectedState): void
@@ -76,6 +103,14 @@ trait SwitchableTestTrait
      * implementation instance being tested.
      *
      * @return bool
+     *
+     * @example
+     *
+     * ```
+     * echo ($this->expectedState() ? 'true' : 'false');
+     * // example output: true
+     *
+     * ```
      *
      */
     protected function expectedState(): bool
@@ -97,7 +132,7 @@ trait SwitchableTestTrait
             $this->testFailedMessage(
                 $this->switchableTestInstance(),
                 'state',
-                'return the expected state.'
+                'return the expected state'
             )
         );
     }
@@ -124,7 +159,7 @@ trait SwitchableTestTrait
             $this->testFailedMessage(
                 $this->switchableTestInstance(),
                 'state',
-                'switch the expected state.'
+                'switch the expected state'
             )
         );
     }
