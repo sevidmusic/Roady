@@ -42,6 +42,14 @@ trait IdentifiableTestTrait
      *
      * @return Identifiable
      *
+     * @example
+     *
+     * ```
+     * echo $this->identifiableTestInstance()->type();
+     * // roady\classes\constituents\Identifiable
+     *
+     * ```
+     *
      */
     protected function identifiableTestInstance(): Identifiable
     {
@@ -60,6 +68,20 @@ trait IdentifiableTestTrait
      *
      * @return void
      *
+     * @example
+     *
+     * ```
+     * $this->setIdentifiableTestInstance(
+     *     new roady\classes\constituents\Identifiable(
+     *         new roady\classes\strings\Name(
+     *             new roady\classes\strings\Text('Name')
+     *         ),
+     *         new roady\classes\strings\Id()
+     *     )
+     * );
+     *
+     * ```
+     *
      */
     protected function setIdentifiableTestInstance(
         Identifiable $identifiableTestInstance
@@ -74,6 +96,16 @@ trait IdentifiableTestTrait
      *
      * @return Id
      *
+     * @example
+     *
+     * ```
+     * echo $this->expectedId();
+     *
+     * // example output:
+     * P5ANEmDAaUDXtayGiT2b6dVXz5hmCrVfVPBCsbu8zpUq3AetPYixuYWWOn3RZT2l
+     *
+     * ```
+     *
      */
     public function expectedId(): Id
     {
@@ -85,6 +117,14 @@ trait IdentifiableTestTrait
      * Identifiable implementation instance being tested.
      *
      * @return Name
+     *
+     * @example
+     *
+     * ```
+     * echo $this->expectedName();
+     * // example output: Name
+     *
+     * ```
      *
      */
     public function expectedName(): Name
@@ -102,6 +142,13 @@ trait IdentifiableTestTrait
      *
      * @return void
      *
+     * @example
+     *
+     * ```
+     * $this->setExpectedId(new roady\classes\strings\Id());
+     *
+     * ```
+     *
      */
     public function setExpectedId(Id $id): void
     {
@@ -117,6 +164,18 @@ trait IdentifiableTestTrait
      *                   being tested.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setExpectedName(
+     *     new roady\classes\strings\Name(
+     *         new roady\classes\strings\Text('Name'),
+     *     )
+     * );
+     *
+     * ```
+     *
      *
      */
     public function setExpectedName(Name $name): void
