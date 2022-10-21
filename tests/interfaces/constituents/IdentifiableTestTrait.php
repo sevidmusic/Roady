@@ -35,7 +35,7 @@ trait IdentifiableTestTrait
      * @var Identifiable $identifiable An instance of an Identifiable
      *                                 implementation to test.
      */
-    protected Identifiable $identifiable;
+    private Identifiable $identifiable;
 
     /**
      * Return the Identifiable implementation instance to test.
@@ -107,7 +107,7 @@ trait IdentifiableTestTrait
      * ```
      *
      */
-    public function expectedId(): Id
+    protected function expectedId(): Id
     {
         return $this->expectedId;
     }
@@ -127,7 +127,7 @@ trait IdentifiableTestTrait
      * ```
      *
      */
-    public function expectedName(): Name
+    protected function expectedName(): Name
     {
         return $this->expectedName;
     }
@@ -150,7 +150,7 @@ trait IdentifiableTestTrait
      * ```
      *
      */
-    public function setExpectedId(Id $id): void
+    protected function setExpectedId(Id $id): void
     {
         $this->expectedId = $id;
     }
@@ -177,7 +177,7 @@ trait IdentifiableTestTrait
      * ```
      *
      */
-    public function setExpectedName(Name $name): void
+    protected function setExpectedName(Name $name): void
     {
         $this->expectedName = $name;
     }

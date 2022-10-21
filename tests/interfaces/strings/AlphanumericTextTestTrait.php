@@ -28,17 +28,73 @@ trait AlphanumericTextTestTrait
      *                                         implementation to
      *                                         test.
      */
-    protected AlphanumericText $alphanumericText;
+    private AlphanumericText $alphanumericText;
 
     /**
      * Return the AlphanumericText implementation instance to test.
      *
      * @return AlphanumericText
      *
+     * @example
+     *
+     * ```
+     * echo $this->alphanumericTextTestInstance();
+     * // example output: FooBarBaz123
+     *
+     * ```
+     *
      */
     protected function alphanumericTextTestInstance(): AlphanumericText
     {
         return $this->alphanumericText;
+    }
+
+    /**
+     * Modify a string, insuring only alphanumeric characters
+     * exist in the resulting string:
+     *
+     * If the original string is empty, then the modified string will
+     * be the numeric character 0.
+     *
+     * If the original string does not contain any alphanumeric
+     * characters, then the modified string will be the numeric
+     * character 0.
+     *
+     * Also, the first letter of each alphanumeric word in the
+     * original string will be capitalized in the resulting string.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * $string = '!Foo Bar Baz..Bin!@#Bar--foo____%$#@#$%^&*bazzer';
+     *
+     * echo $this->makeStringSafe($string);
+     * // example output: FooBarBazBinBarFooBazzer
+     *
+     * $string = '';
+     *
+     * echo $this->makeStringSafe($string);
+     * // example output: 0
+     *
+     * ```
+     *
+     */
+    protected function makeStringSafe(string $string): string
+    {
+        $safeString = parent::makeStringSafe($string);
+        $words = ucwords($safeString, '_-.');
+        $alphanumericString = preg_replace(
+            "/[^A-Za-z0-9 ]/",
+            '',
+            $words
+        );
+        return strval(
+            empty($alphanumericString)
+            ? 0
+            : $alphanumericString
+        );
     }
 
     /**
@@ -51,6 +107,17 @@ trait AlphanumericTextTestTrait
      *                                           interface to test.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setAlphanumericTextTestInstance(
+     *     new roady\classes\strings\AlphanumericText(
+     *         new roady\classes\strings\Text('Foo Bar Baz'),
+     *     )
+     * );
+     *
+     * ```
      *
      */
     protected function setAlphanumericTextTestInstance(
@@ -102,53 +169,6 @@ trait AlphanumericTextTestTrait
                 '__toString',
                 'return an alphanumeric form of the original Text'
             )
-        );
-    }
-    /**
-     * Modify a string, insuring only alphanumeric characters
-     * exist in the resulting string:
-     *
-     * If the original string is empty, then the modified string will
-     * be the numeric character 0.
-     *
-     * If the original string does not contain any alphanumeric
-     * characters, then the modified string will be the numeric
-     * character 0.
-     *
-     * Also, the first letter of each alphanumeric word in the
-     * original string will be capitalized in the resulting string.
-     *
-     * @return string
-     *
-     * @example
-     *
-     * ```
-     * $string = '!Foo Bar Baz..Bin!@#Bar--foo____%$#@#$%^&*bazzer';
-     *
-     * echo $this->makeStringSafe($string);
-     * // example output: FooBarBazBinBarFooBazzer
-     *
-     * $string = '';
-     *
-     * echo $this->makeStringSafe($string);
-     * // example output: 0
-     *
-     * ```
-     *
-     */
-    protected function makeStringSafe(string $string): string
-    {
-        $safeString = parent::makeStringSafe($string);
-        $words = ucwords($safeString, '_-.');
-        $alphanumericString = preg_replace(
-            "/[^A-Za-z0-9 ]/",
-            '',
-            $words
-        );
-        return strval(
-            empty($alphanumericString)
-            ? 0
-            : $alphanumericString
         );
     }
 

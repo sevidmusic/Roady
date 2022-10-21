@@ -28,7 +28,7 @@ trait PositionableTestTrait
      * @var Positionable $positionable An instance of a Positionable
      *                                 implementation to test.
      */
-    protected Positionable $positionable;
+    private Positionable $positionable;
 
     /**
      * Return the expected modifier.
