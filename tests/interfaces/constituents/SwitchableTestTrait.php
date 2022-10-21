@@ -158,7 +158,7 @@ trait SwitchableTestTrait
             $this->switchableTestInstance()->state(),
             $this->testFailedMessage(
                 $this->switchableTestInstance(),
-                'state',
+                'switchState',
                 'switch the expected state'
             )
         );
