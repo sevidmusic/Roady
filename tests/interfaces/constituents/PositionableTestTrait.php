@@ -35,6 +35,14 @@ trait PositionableTestTrait
      *
      * @return float
      *
+     * @example
+     *
+     * ```
+     * echo strval($this->expectedModifier());
+     * // example output: 1
+     *
+     * ```
+     *
      */
     protected function expectedModifier(): float
     {
@@ -46,6 +54,13 @@ trait PositionableTestTrait
      *
      * @return float
      *
+     * @example
+     *
+     * ```
+     * echo strval($this->expectedPosition());
+     * // example output: 5.917
+     *
+     * ```
      */
     protected function expectedPosition(): float
     {
@@ -57,6 +72,14 @@ trait PositionableTestTrait
      *
      * @return Positionable
      *
+     * @example
+     *
+     * ```
+     * echo strval($this->positionableTestInstance()->position());
+     * // example output: 0.319
+     *
+     * ```
+     *
      */
     protected function positionableTestInstance(): Positionable
     {
@@ -67,6 +90,14 @@ trait PositionableTestTrait
      * Return a random float.
      *
      * @return float
+     *
+     * @example
+     *
+     * ```
+     * echo strval($this->randomFloat());
+     * // example output: 1029.917
+     *
+     * ```
      *
      */
     protected function randomFloat(): float
@@ -85,6 +116,13 @@ trait PositionableTestTrait
      *
      * @return void
      *
+     * @example
+     *
+     * ```
+     * $this->setExpectedModifier($this->randomFloat());
+     *
+     * ```
+     *
      */
     protected function setExpectedModifier(
         float $expectedModifier
@@ -99,6 +137,13 @@ trait PositionableTestTrait
      * @param float $expectedPosition The expected position.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setExpectedPosition($this->randomFloat());
+     *
+     * ```
      *
      */
     protected function setExpectedPosition(
@@ -119,6 +164,18 @@ trait PositionableTestTrait
      *                                               test.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setPositionableTestInstance(
+     *     new roady\classes\constituents\Positionable(
+     *         position: $this->randomFloat(),
+     *         modifier: $this->randomFloat()
+     *     )
+     * );
+     *
+     * ```
      *
      */
     protected function setPositionableTestInstance(

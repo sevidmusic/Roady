@@ -35,6 +35,9 @@ class RoadyTestCase extends TestCase
     /**
      * Return a message that indicates the failure of a test.
      *
+     * @param object $testedInstance The object instance that
+     *                               was tested.
+     *
      * @param string $testedMethod The name of the method that was
      *                             tested.
      *
