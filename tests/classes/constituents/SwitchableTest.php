@@ -2,8 +2,8 @@
 
 namespace tests\classes\constituents;
 
-use tests\RoadyTestCase;
 use roady\classes\constituents\Switchable;
+use tests\RoadyTestCase;
 use tests\interfaces\constituents\SwitchableTestTrait;
 
 class SwitchableTest extends RoadyTestCase
@@ -18,12 +18,6 @@ class SwitchableTest extends RoadyTestCase
      */
     use SwitchableTestTrait;
 
-    /**
-     * Set up a Switchable implementation instance to test, and
-     * set the expected state.
-     *
-     * @return void
-     */
     public function setUp(): void
     {
         $expectedState = boolval(rand(0, 1));

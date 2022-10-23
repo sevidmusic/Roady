@@ -28,6 +28,27 @@ trait SwitchableTestTrait
     private bool $expectedState;
 
     /**
+     * Set up a Switchable implementation instance to test.
+     *
+     * This method must call setExpectedState(), and
+     * setSwitchableTestInstance().
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $expectedState = boolval(rand(0, 1));
+     * $this->setExpectedState($expectedState);
+     * $this->setSwitchableTestInstance(
+     *     new Switchable($expectedState)
+     * );
+     *
+     * ```
+     */
+    abstract public function setUp(): void;
+
+    /**
      * Return the Switchable implementation instance to test.
      *
      * @return Switchable
