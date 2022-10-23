@@ -38,6 +38,40 @@ trait IdentifiableTestTrait
     private Identifiable $identifiable;
 
     /**
+     * Set up an Identifiable implementation instance to test.
+     *
+     * This method must call setExpectedName(), setExpectedId(),
+     * and setIdentifiableTestInstance().
+     *
+     * This method may also perform any additional set up that may
+     * be required.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $expectedName = new roady\classes\strings\Name(
+     *     new roady\classes\strings\Text(
+     *         'Name'
+     *     )
+     * );
+     * $expectedId = new roady\classes\strings\Id();
+     * $this->setExpectedName($expectedName);
+     * $this->setExpectedId($expectedId);
+     * $this->setIdentifiableTestInstance(
+     *     new roady\classes\constituents\Identifiable(
+     *         $expectedName,
+     *         $expectedId,
+     *     )
+     * );
+     *
+     * ```
+     *
+     */
+    abstract public function setUp(): void;
+
+    /**
      * Return the Identifiable implementation instance to test.
      *
      * @return Identifiable
@@ -46,7 +80,7 @@ trait IdentifiableTestTrait
      *
      * ```
      * echo $this->identifiableTestInstance()->type();
-     * // roady\classes\constituents\Identifiable
+     * // example output: roady\classes\constituents\Identifiable
      *
      * ```
      *

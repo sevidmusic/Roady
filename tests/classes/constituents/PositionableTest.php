@@ -19,13 +19,6 @@ class PositionableTest extends RoadyTestCase
      */
     use PositionableTestTrait;
 
-
-    /**
-     * Set up a Positionable implementation instance to test.
-     *
-     * @return void
-     *
-     */
     public function setUp(): void
     {
         $randomPosition = $this->randomFloat();

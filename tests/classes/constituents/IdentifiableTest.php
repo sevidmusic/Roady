@@ -2,13 +2,12 @@
 
 namespace tests\classes\constituents;
 
-
 use roady\classes\constituents\Identifiable;
 use roady\classes\strings\Id;
 use roady\classes\strings\Name;
 use roady\classes\strings\Text;
-use tests\interfaces\constituents\IdentifiableTestTrait;
 use tests\RoadyTestCase;
+use tests\interfaces\constituents\IdentifiableTestTrait;
 
 class IdentifiableTest extends RoadyTestCase
 {
@@ -24,13 +23,6 @@ class IdentifiableTest extends RoadyTestCase
      */
     use IdentifiableTestTrait;
 
-
-    /**
-     * Set up an Identifiable implementation instance to test.
-     *
-     * @return void
-     *
-     */
     public function setUp(): void
     {
         $expectedName = new Name(

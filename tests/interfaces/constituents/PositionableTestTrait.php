@@ -31,6 +31,35 @@ trait PositionableTestTrait
     private Positionable $positionable;
 
     /**
+     * Set up a Positionable implementation instance to test.
+     *
+     * This method must call setExpectedModifier(),
+     * setExpectedPosition(), and setPositionableTestInstance().
+     *
+     * This method may also perform any additional set up that
+     * may be required.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $randomPosition = $this->randomFloat();
+     * $randomModifier = $this->randomFloat();
+     * $this->setExpectedModifier($randomModifier);
+     * $this->setExpectedPosition($randomPosition);
+     * $this->setPositionableTestInstance(
+     *     new roady\classes\constituents\Positionable(
+     *         $randomPosition,
+     *         $randomModifier
+     *     )
+     * );
+     *
+     * ```
+     */
+    abstract public function setUp(): void;
+
+    /**
      * Return the expected modifier.
      *
      * @return float
@@ -245,7 +274,7 @@ trait PositionableTestTrait
             $this->testFailedMessage(
                 $this->positionableTestInstance(),
                 'incrementPosition',
-                'increase the position by the modifier'
+                'increments the position by the modifier'
             )
         );
     }
@@ -271,7 +300,7 @@ trait PositionableTestTrait
             $this->testFailedMessage(
                 $this->positionableTestInstance(),
                 'decrementPosition',
-                'decrease the position by the modifier'
+                'decrements the position by the modifier'
             )
         );
     }
