@@ -10,15 +10,17 @@ class SwitchableTest extends RoadyTestCase
 {
 
     /**
-     * The SwitchableTestTrait defines common tests for implementations
-     * of the roady\interfaces\constituents\Switchable interface.
+     * The SwitchableTestTrait defines common
+     * tests for implementations of the
+     * roady\interfaces\constituents\Switchable
+     * interface.
      *
      * @see SwitchableTestTrait
      *
      */
     use SwitchableTestTrait;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $expectedState = boolval(rand(0, 1));
         $this->setExpectedState($expectedState);

@@ -3,6 +3,7 @@
 namespace tests\interfaces\strings;
 
 use roady\interfaces\strings\AlphanumericText;
+use roady\interfaces\strings\Text;
 use tests\interfaces\strings\SafeTextTestTrait;
 
 /**
@@ -23,12 +24,49 @@ trait AlphanumericTextTestTrait
     use SafeTextTestTrait;
 
     /**
-     * @var AlphanumericText $alphanumericText An instance of a
+     * @var AlphanumericText $alphanumericText An instance of an
      *                                         AlphanumericText
      *                                         implementation to
      *                                         test.
      */
     private AlphanumericText $alphanumericText;
+
+    /**
+     * Set up an AlphanumericText implementation instance for testing
+     * using the specified Text.
+     *
+     * This method must call setTextTestInstance(),
+     * setSafeTextTestInstance(), setAlphanumericTextTestInstance(),
+     * and setExpectedString().
+     *
+     * This method must filter the original Text via the
+     * makeStringSafe() method prior to passing it to
+     * the setExpectedString() method.
+     *
+     * This method may also perform any additional set up that may
+     * be required.
+     *
+     * @param Text $text The text to use for set up.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $alphanumericText = new roady\classes\strings\AlphanumericText(
+     *     $text
+     * );
+     * $this->setTextTestInstance($alphanumericText);
+     * $this->setSafeTextTestInstance($alphanumericText);
+     * $this->setAlphanumericTextTestInstance($alphanumericText);
+     * $this->setExpectedString($this->makeStringSafe($text));
+     *
+     * ```
+     *
+     * @see Text
+     *
+     */
+    abstract protected function setUpWithSpecificText(Text $text): void;
 
     /**
      * Return the AlphanumericText implementation instance to test.
@@ -127,7 +165,6 @@ trait AlphanumericTextTestTrait
         $this->alphanumericText = $alphanumericTextTestInstance;
     }
 
-
     /**
      * Test that the __toString() method returns an
      * alphanumeric string.
@@ -159,10 +196,10 @@ trait AlphanumericTextTestTrait
      */
     public function test__toStringReturnsAnAlphanumericFormOfTheOriginalText(): void
     {
-        $originalText = $this->alphanumericTextTestInstance()
-                             ->originalText();
         $this->assertEquals(
-            $this->makeStringSafe($originalText),
+            $this->makeStringSafe(
+                $this->alphanumericTextTestInstance()->originalText()
+            ),
             $this->alphanumericTextTestInstance()->__toString(),
             $this->testFailedMessage(
                 $this->alphanumericTextTestInstance(),

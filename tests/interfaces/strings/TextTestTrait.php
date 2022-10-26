@@ -94,7 +94,10 @@ trait TextTestTrait
             'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+'
         );
         try {
-            $string .= random_bytes(random_int(1, 1000));
+            $string .=
+                random_bytes(random_int(1, 100)) .
+                $string .
+                random_bytes(random_int(1, 100));
         } catch(\Exception $e) {
         }
         return str_shuffle($string);

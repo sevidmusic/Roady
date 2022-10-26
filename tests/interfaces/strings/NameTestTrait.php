@@ -126,6 +126,13 @@ trait NameTestTrait
      *
      * @see Name
      *
+     * @example
+     *
+     * ```
+     * $this->nameTestInstance();
+     *
+     * ```
+     *
      */
     public function nameTestInstance(): Name
     {
@@ -138,6 +145,13 @@ trait NameTestTrait
      *
      * @return int
      *
+     * @example
+     *
+     * ```
+     * echo $this->positionOfFirstAlphanumericCharacter('_Foo');
+     * // example output: 1
+     *
+     * ```
      */
     protected function positionOfFirstAlphanumericCharacter(
         string $string
@@ -168,6 +182,17 @@ trait NameTestTrait
      *
      * @see Name
      *
+     * @example
+     *
+     * ```
+     * $this->setNameTestInstance(
+     *     new roady\classes\strings\Name(
+     *         new roady\classes\strings\Text('Name')
+     *     )
+     * );
+     *
+     * ```
+     *
      */
     public function setNameTestInstance(Name $name): void
     {
@@ -188,13 +213,14 @@ trait NameTestTrait
         $this->setUpWithSpecificText($text);
         $this->assertTrue(
             ctype_alnum(substr($this->nameTestInstance(), 0, 1)),
-            'The ' .
-            get_class($this->nameTestInstance()) .
-            ' implementation must insure that the Name always ' .
-            'starts with an alphanumeric character.'
+            $this->testFailedMessage(
+                $this->nameTestInstance(),
+                '',
+                'A Name must always start with an alphanumeric ' .
+                'character'
+            )
         );
     }
-
 
     /**
      * Test that the length of a Name is always less than 71.
@@ -205,25 +231,22 @@ trait NameTestTrait
     public function test_that_the_length_of_a_Name_is_always_less_than_71(): void
     {
         $text = new TextToConvertToAName(
-            '1234567890' .
-            '1234567890' .
-            '1234567890' .
-            '1234567890' .
-            '1234567890' .
-            '1234567890' .
-            '1234567890' .
-            '1' .
-            $this->randomChars()
+            str_shuffle(
+                str_repeat('1234567890', 100) .
+                $this->randomChars()
+            )
         );
         $this->setUpWithSpecificText($text);
-        $this->assertLessThan(
-            71,
+        $this->assertLessThanOrEqual(
+            70,
             $this->nameTestInstance()->length(),
-            'The ' .
-            get_class($this->nameTestInstance()) .
-            ' implementation must insure that the Name\'s length ' .
-            'is less than 71 even if the original Text\'s length ' .
-            'was greater than 71'
+            $this->testFailedMessage(
+                $this->nameTestInstance(),
+                '',
+                'A Name\'s length must be less than or equal to ' .
+                '70 even if the original Text\'s length was ' .
+                'greater than 70'
+            )
         );
     }
 
@@ -235,18 +258,21 @@ trait NameTestTrait
      */
     public function test_that_the_length_of_a_Name_is_always_at_least_1(): void
     {
-        $strings = ['', '.', '-', '_', $this->randomChars()];
+        $strings = ['', ' ', '.', '-', '_', $this->randomChars()];
         $text = new TextToConvertToAName(
             $strings[array_rand($strings)]
         );
         $this->setUpWithSpecificText($text);
-        $this->assertGreaterThan(
-            0,
+        $this->assertGreaterThanOrEqual(
+            1,
             $this->nameTestInstance()->length(),
-            'The ' .
-            get_class($this->nameTestInstance()) .
-            ' implementation must insure that the Name\'s length ' .
-            'is at least 1.'
+            $this->testFailedMessage(
+                $this->nameTestInstance(),
+                '',
+                'A Name\'s length must be greater than or equal to ' .
+                '1 even if the original Text\'s length was ' .
+                'less than 1'
+            )
         );
     }
 }

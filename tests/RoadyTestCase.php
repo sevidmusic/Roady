@@ -41,6 +41,10 @@ class RoadyTestCase extends TestCase
      * @param string $testedMethod The name of the method that was
      *                             tested.
      *
+     *                             Note: If the test is not specific
+     *                             to a method, than an empty string
+     *                             can be passed as the $testedMethod.
+     *
      * @param string $expectation A brief description of what was
      *                            expected by the test.
      *
@@ -64,10 +68,21 @@ class RoadyTestCase extends TestCase
         string $expectation
     ): string
     {
-        return 'The ' .
-        $testedInstance::class .
-        ' implementation\'s ' .
-        $testedMethod .
-        '() method must ' . $expectation . '.';
+        return match(empty($testedMethod)) {
+            true => 'The ' .
+                    $testedInstance::class .
+                    ' implementation fails to fulfill the ' .
+                    'following expectation:' .
+                    str_repeat(PHP_EOL, 2) .
+                    $expectation .
+                    '.',
+            default => 'The ' .
+                       $testedInstance::class .
+                       ' implementation\'s ' .
+                       $testedMethod .
+                       '() method must ' .
+                       $expectation .
+                       '.'
+        };
     }
 }

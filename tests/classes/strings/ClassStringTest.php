@@ -12,8 +12,9 @@ class ClassStringTest extends TextTest
 {
 
     /**
-     * The ClassStringTestTrait defines common tests for implementations
-     * of the roady\interfaces\strings\ClassString interface.
+     * The ClassStringTestTrait defines common tests for
+     * implementations of the roady\interfaces\strings\ClassString
+     * interface.
      *
      * @see ClassStringTestTrait
      *
@@ -31,9 +32,8 @@ class ClassStringTest extends TextTest
     {
         $values = [
             $this->randomChars(),
-            $this,
             ClassString::class,
-            'foo',
+            $this,
         ];
         $this->setUpWithSpecifiedClass(
             $values[array_rand($values)]
@@ -42,12 +42,13 @@ class ClassStringTest extends TextTest
 
     protected function setUpWithSpecifiedClass(
         object|string $classString
-        ): void
+    ): void
     {
         $classString = new ClassString($classString);
         $this->setTextTestInstance($classString);
         $this->setClassStringTestInstance($classString);
         $this->setExpectedString($classString);
     }
+
 }
 

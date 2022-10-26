@@ -3,8 +3,8 @@
 namespace tests\classes\strings;
 
 use roady\classes\strings\Id;
-use tests\interfaces\strings\IdTestTrait;
 use tests\classes\strings\AlphanumericTextTest;
+use tests\interfaces\strings\IdTestTrait;
 
 class IdTest extends AlphanumericTextTest
 {

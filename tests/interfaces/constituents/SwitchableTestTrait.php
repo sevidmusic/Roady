@@ -33,6 +33,9 @@ trait SwitchableTestTrait
      * This method must call setExpectedState(), and
      * setSwitchableTestInstance().
      *
+     * This method may also perform any additional set up that may
+     * be required.
+     *
      * @return void
      *
      * @example
@@ -46,7 +49,7 @@ trait SwitchableTestTrait
      *
      * ```
      */
-    abstract public function setUp(): void;
+    abstract protected function setUp(): void;
 
     /**
      * Return the Switchable implementation instance to test.

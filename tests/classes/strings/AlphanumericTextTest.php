@@ -4,8 +4,8 @@ namespace tests\classes\strings;
 
 use roady\classes\strings\AlphanumericText;
 use roady\interfaces\strings\Text;
-use tests\interfaces\strings\AlphanumericTextTestTrait;
 use tests\classes\strings\SafeTextTest;
+use tests\interfaces\strings\AlphanumericTextTestTrait;
 
 class AlphanumericTextTest extends SafeTextTest
 {
@@ -21,16 +21,6 @@ class AlphanumericTextTest extends SafeTextTest
      */
     use AlphanumericTextTestTrait;
 
-    /**
-     * Set up using the specified Text.
-     *
-     * @param Text $text The text to use for set up.
-     *
-     * @return void
-     *
-     * @see Text
-     *
-     */
     protected function setUpWithSpecificText(Text $text): void
     {
         $alphanumericText = new AlphanumericText($text);
@@ -39,5 +29,6 @@ class AlphanumericTextTest extends SafeTextTest
         $this->setAlphanumericTextTestInstance($alphanumericText);
         $this->setExpectedString($this->makeStringSafe($text));
     }
+
 }
 

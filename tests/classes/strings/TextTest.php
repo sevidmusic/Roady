@@ -2,8 +2,8 @@
 
 namespace tests\classes\strings;
 
-use tests\RoadyTestCase;
 use roady\classes\strings\Text;
+use tests\RoadyTestCase;
 use tests\interfaces\strings\TextTestTrait;
 
 class TextTest extends RoadyTestCase

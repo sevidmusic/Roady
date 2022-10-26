@@ -66,6 +66,13 @@ trait ClassStringTestTrait
      *
      * @return ClassString
      *
+     * @example
+     *
+     * ```
+     * $this->classStringTestInstance();
+     *
+     * ```
+     *
      */
     protected function classStringTestInstance(): ClassString
     {
@@ -75,13 +82,21 @@ trait ClassStringTestTrait
     /**
      * Set the ClassString implementation instance to test.
      *
-     * @param ClassString $classStringTestInstance
-     *                                       An instance of an
-     *                                       implementation of
-     *                                       the ClassString
-     *                                       interface to test.
+     * @param ClassString $classStringTestInstance An instance of an
+     *                                             implementation of
+     *                                             the ClassString
+     *                                             interface to test.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setClassStringTestInstance(
+     *     new roady\classes\strings\ClassString($this)
+     * );
+     *
+     * ```
      *
      */
     protected function setClassStringTestInstance(
@@ -104,13 +119,13 @@ trait ClassStringTestTrait
         $this->assertEquals(
             UnknownClass::class,
             $this->classStringTestInstance()->__toString(),
-            'The ' . get_class($this->classStringTestInstance()) .
-            '\'s __toString() method must return the fully ' .
-            'qualified class name of an ' .
-            UnknownClass::class .
-            ' if the expected class does not exist.' .
-            PHP_EOL .
-            $this->classStringTestInstance()->__toString()
+            $this->testFailedMessage(
+                $this->classStringTestInstance(),
+                '__toString',
+                'return the fully qualified class name of an ' .
+                UnknownClass::class .
+                ' if the expected class does not exist'
+            )
         );
     }
 
@@ -128,11 +143,12 @@ trait ClassStringTestTrait
             class_exists(
                 $this->classStringTestInstance()->__toString()
             ),
-            'The ' . get_class($this->classStringTestInstance()) .
-            '\'s __toString() method must return the fully ' .
-            'qualified class name of an existing class.' .
-            PHP_EOL .
-            $this->classStringTestInstance()->__toString()
+            $this->testFailedMessage(
+                $this->classStringTestInstance(),
+                '__toString',
+                'return the fully qualified class name of an ' .
+                'existing class'
+            )
         );
     }
 
@@ -156,11 +172,12 @@ trait ClassStringTestTrait
         $this->assertEquals(
             $expectedClass,
             $this->classStringTestInstance()->__toString(),
-            'The ' . get_class($this->classStringTestInstance()) .
-            '\'s __toString() method must return the fully ' .
-            'qualified class name of the expected class.' .
-            PHP_EOL .
-            $this->classStringTestInstance()->__toString()
+            $this->testFailedMessage(
+                $this->classStringTestInstance(),
+                '__toString',
+                'return the fully qualified class name of the ' .
+                'expected class'
+            )
         );
     }
 }
