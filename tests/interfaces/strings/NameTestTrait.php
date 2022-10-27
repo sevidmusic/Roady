@@ -3,8 +3,9 @@
 namespace tests\interfaces\strings;
 
 use roady\classes\strings\Text as TextToConvertToAName;
-use tests\interfaces\strings\SafeTextTestTrait;
 use roady\interfaces\strings\Name;
+use roady\interfaces\strings\Text;
+use tests\interfaces\strings\SafeTextTestTrait;
 
 /**
  * The NameTestTrait defines common tests for implementations of the
@@ -28,6 +29,41 @@ trait NameTestTrait
      *                 interface to test.
      */
     private Name $name;
+
+    /**
+     * Set up an instance of a Name implementation to test using the
+     * specified Text.
+     *
+     * This method must pass the Name implementation instance to test
+     * to the setTextTestInstance(), setSafeTextTestInstance(),
+     * and setNameTestInstance() methods.
+     *
+     * This method must filter the specified $text via the
+     * makeStringSafe() method, and pass the resulting string
+     * to the setExpectedString() method.
+     *
+     * This method may also perform any additional set up that
+     * may be required.
+     *
+     * @param Text $text The text to use for set up.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $name = new roady\classes\strings\Name($text);
+     * $this->setTextTestInstance($name);
+     * $this->setSafeTextTestInstance($name);
+     * $this->setNameTestInstance($name);
+     * $this->setExpectedString($this->makeStringSafe($text));
+     *
+     * ```
+     *
+     * @see Text
+     *
+     */
+    abstract protected function setUpWithSpecificText(Text $text): void;
 
     /**
      * Modify a string, insuring only the following characters
@@ -67,11 +103,10 @@ trait NameTestTrait
      * @example
      *
      * ```
-     * $string = '!Foo Bar Baz..Bin!@#Bar--Foo____%$#@#$%^&*Bazzer';
+     * $string = '!Foo Bar baz..Bin!@#Bar--Foo____%$#@#$%^&*bazzer';
      *
      * echo $this->makeStringSafe($string);
-     * // example output: Foo_Bar_Baz.Bin_Bar-Foo_Bazzer
-     *
+     * // example output: Foo_bar_baz.Bin_Bar-Foo_bazzer
      * $string = '';
      *
      * echo $this->makeStringSafe($string);
