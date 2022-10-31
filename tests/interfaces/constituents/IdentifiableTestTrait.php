@@ -79,8 +79,7 @@ trait IdentifiableTestTrait
      * @example
      *
      * ```
-     * echo $this->identifiableTestInstance()->type();
-     * // example output: roady\classes\constituents\Identifiable
+     * $this->identifiableTestInstance();
      *
      * ```
      *

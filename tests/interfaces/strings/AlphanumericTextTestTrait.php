@@ -39,9 +39,9 @@ trait AlphanumericTextTestTrait
      * setSafeTextTestInstance(), setAlphanumericTextTestInstance(),
      * and setExpectedString().
      *
-     * This method must filter the original Text via the
-     * makeStringSafe() method prior to passing it to
-     * the setExpectedString() method.
+     * This method must pass a version of the original Text that
+     * was filtered via the makeStringSafe() method to the
+     * setExpectedString() method.
      *
      * This method may also perform any additional set up that may
      * be required.
@@ -138,11 +138,10 @@ trait AlphanumericTextTestTrait
     /**
      * Set the AlphanumericText implementation instance to test.
      *
-     * @param AlphanumericText $alphanumericTextTestInstance
-     *                                           An instance of an
-     *                                           implementation of
-     *                                           the AlphanumericText
-     *                                           interface to test.
+     * @param AlphanumericText $alphanumericTextTestInstance An instance of an
+     *                                                       implementation of the
+     *                                                       AlphanumericText interface
+     *                                                       to test.
      *
      * @return void
      *

@@ -20,12 +20,6 @@ class SafeTextTest extends TextTest
      */
     use SafeTextTestTrait;
 
-    /**
-     * Default setup using randomly generated Text.
-     *
-     * @return void
-     *
-     */
     protected function setUp(): void
     {
         $this->setUpWithSpecificText(
@@ -33,13 +27,6 @@ class SafeTextTest extends TextTest
         );
     }
 
-    /**
-     * Setup for tests that expect original Text to be an
-     * empty string.
-     *
-     * @return void
-     *
-     */
     protected function setUpWithEmptyString(): void
     {
         $this->setUpWithSpecificText(
@@ -47,30 +34,6 @@ class SafeTextTest extends TextTest
         );
     }
 
-    /**
-     * Set up using the specified Text.
-     *
-     * @param Text $text The text to use for set up.
-     *
-     * @return void
-     *
-     * @example
-     *
-     * ```
-     * $this->setUpWithSpecificText(
-     *     new TextToBeRepresentedBySafeText('Foo Bar Baz')
-     * );
-     *
-     * $this->assertEquals(
-     *     'Foo_Bar_Baz',
-     *     $this->safeTextTestInstance()
-     * );
-     *
-     * ```
-     *
-     * @see Text
-     *
-     */
     protected function setUpWithSpecificText(Text $text): void
     {
         $safeText = new SafeText($text);

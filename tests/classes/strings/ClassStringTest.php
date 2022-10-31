@@ -21,13 +21,6 @@ class ClassStringTest extends TextTest
      */
     use ClassStringTestTrait;
 
-    /**
-     * Default setup using a random string, class-string, or object
-     * instance.
-     *
-     * @return void
-     *
-     */
     protected function setUp(): void
     {
         $values = [

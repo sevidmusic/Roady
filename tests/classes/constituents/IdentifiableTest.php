@@ -9,6 +9,11 @@ use roady\classes\strings\Text;
 use tests\RoadyTestCase;
 use tests\interfaces\constituents\IdentifiableTestTrait;
 
+/**
+ * Test case for the roady\classes\strings\Identifiable implementation
+ * of the roady\interfaces\strings\Identifiable interface.
+ *
+ */
 class IdentifiableTest extends RoadyTestCase
 {
 

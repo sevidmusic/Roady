@@ -2,8 +2,8 @@
 
 namespace tests\classes\constituents;
 
-use tests\RoadyTestCase;
 use roady\classes\constituents\Positionable;
+use tests\RoadyTestCase;
 use tests\interfaces\constituents\PositionableTestTrait;
 
 class PositionableTest extends RoadyTestCase

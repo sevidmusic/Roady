@@ -33,12 +33,29 @@ trait SafeTextTestTrait
     protected SafeText $safeText;
 
     /**
-     * This method must set the expected string to be the numeric
-     * character 0.
+     * Setup a SafeText implementation instance to test using a Text
+     * instance instantiated with a randomly generated string.
      *
-     * This method must also set an appropriate instance of an
-     * implementation of the SafeText interface as both the Text
-     * and SafeText instance to test.
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * protected function setUp(): void
+     * {
+     *     $this->setUpWithSpecificText(
+     *         new roady\classes\strings\Text($this->randomChars())
+     *     );
+     * }
+     *
+     * ```
+     *
+     */
+    abstract protected function setUp(): void;
+
+    /**
+     * Setup a SafeText implementation instance to test using a Text
+     * instance instantiated with an empty string.
      *
      * @return void
      *
@@ -47,10 +64,9 @@ trait SafeTextTestTrait
      * ```
      * protected function setUpWithEmptyString(): void
      * {
-     *     $this->setExpectedString('0');
-     *     $safeText = new SafeText(new Text(''));
-     *     $this->setTextTestInstance($safeText);
-     *     $this->setSafeTextTestInstance($safeText);
+     *     $this->setUpWithSpecificText(
+     *         new roady\classes\strings\Text('')
+     *     );
      * }
      *
      * ```
@@ -65,6 +81,8 @@ trait SafeTextTestTrait
      * This method must also set an appropriate instance of an
      * implementation of the SafeText interface as both the Text
      * and SafeText instance to test.
+     *
+     * @param Text $text The text to use for set up.
      *
      * @return void
      *
@@ -115,10 +133,10 @@ trait SafeTextTestTrait
      * @example
      *
      * ```
-     * $string = '!Foo Bar Baz..Bin!@#Bar--Foo____%$#@#$%^&*Bazzer';
+     * $string = '!Foo bar baz..Bin!@#Bar--Foo____%$#@#$%^&*bazzer';
      *
      * echo $this->makeStringSafe($string);
-     * // example output: _Foo_Bar_Baz.Bin_Bar-Foo_Bazzer
+     * // example output: _Foo_bar_baz.Bin_Bar-Foo_bazzer
      *
      * $string = '';
      *
@@ -284,9 +302,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->expectedString(),
-            'The ' . get_class() . ' implementation\'s ' .
-            'setUpWithEmptyString() method must assign the numeric ' .
-            'character 0 as the expected string.'
+            $this->testFailedMessage(
+                $this,
+                'setUpWithEmptyString',
+                'assign the numeric character 0 as the expected string'
+            )
         );
     }
 
@@ -305,9 +325,12 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($text->__toString()),
             $this->expectedString(),
-            'The ' . get_class() . ' implementation\'s ' .
-            'setUpWithSpecificText() method must set a safe ' .
-            'form of the specified Text as the expected string.'
+            $this->testFailedMessage(
+                $this,
+                'setUpWithSpecificText',
+                'set a safe form of the specified Text as the ' .
+                'expected string'
+            )
         );
     }
 
@@ -328,11 +351,13 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s __toString() method must ' .
-            'return a modified version of the original Text ' .
-            'where all consecutive sequences of 2 or more ' .
-            'hyphens have been replaced by a single hyphen.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                '__toString',
+                'return a modified version of the original Text ' .
+                'where all consecutive sequences of 2 or more ' .
+                'hyphens have been replaced by a single hyphen'
+            )
         );
     }
 
@@ -353,11 +378,13 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s __toString() method must ' .
-            'return a modified version of the original Text ' .
-            'where all consecutive sequences of 2 or more ' .
-            'periods have been replaced by a single period.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                '__toString',
+                'return a modified version of the original Text ' .
+                'where all consecutive sequences of 2 or more ' .
+                'periods have been replaced by a single period'
+            )
         );
     }
 
@@ -378,12 +405,14 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s __toString() method must' .
-            'return a modified version of the original Text ' .
-            'where all consecutive sequences of 2 or more' .
-            'underscores have been replaced by a single ' .
-            'underscore.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                '__toString',
+                'return a modified version of the original Text ' .
+                'where all consecutive sequences of 2 or more ' .
+                'underscores have been replaced by a single ' .
+                'underscore'
+            )
         );
     }
 
@@ -404,12 +433,14 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($string),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s __toString() method must ' .
-            'return a modified version of the original Text ' .
-            'where all consecutive sequences of 2 or more ' .
-            'unsafe characters have been replaced by a single ' .
-            'underscore.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                '__toString',
+                'return a modified version of the original Text ' .
+                'where all consecutive sequences of 2 or more ' .
+                'unsafe characters have been replaced by a single ' .
+                'underscore'
+            )
         );
     }
 
@@ -430,13 +461,14 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $this->makeStringSafe($text),
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s __toString() method must ' .
-            'return a modified version of the original Text ' .
-            'where all unsafe characters have been replaced ' .
-            'with underscores.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                '__toString',
+                'return a modified version of the original Text ' .
+                'where all unsafe characters have been replaced ' .
+                'with underscores'
+            )
         );
-
     }
 
     /**
@@ -452,10 +484,12 @@ trait SafeTextTestTrait
         $this->assertEquals(
             '0',
             $this->safeTextTestInstance()->__toString(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s __toString() method must ' .
-            'return the numeric character 0 if the original ' .
-            'Text was empty.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                '__toString',
+                'return the numeric character 0 if the original ' .
+                'Text was empty'
+            )
         );
     }
 
@@ -475,9 +509,11 @@ trait SafeTextTestTrait
         $this->assertEquals(
             $text,
             $this->safeTextTestInstance()->originalText(),
-            'The ' . get_class($this->safeTextTestInstance()) .
-            ' implementation\'s originalText() method ' .
-            'must return the original Text.'
+            $this->testFailedMessage(
+                $this->safeTextTestInstance(),
+                'originalText',
+                'return the original Text.'
+            )
         );
     }
 

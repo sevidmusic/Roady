@@ -103,10 +103,11 @@ trait NameTestTrait
      * @example
      *
      * ```
-     * $string = '!Foo Bar baz..Bin!@#Bar--Foo____%$#@#$%^&*bazzer';
+     * $string = '!Foo bar baz..Bin!@#Bar--Foo____%$#@#$%^&*bazzer';
      *
      * echo $this->makeStringSafe($string);
      * // example output: Foo_bar_baz.Bin_Bar-Foo_bazzer
+     *
      * $string = '';
      *
      * echo $this->makeStringSafe($string);

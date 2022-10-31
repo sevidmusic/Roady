@@ -35,6 +35,34 @@ trait ClassStringTestTrait
     protected ClassString $classString;
 
     /**
+     * Setup using a random string, class-string, or object
+     * instance.
+     *
+     * This method must pass a random string, class-string, or object instance to
+     * the setUpWithSpecifiedClass() method.
+     *
+     * This method may perform any additional set up that may be required.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $values = [
+     *     $this->randomChars(),
+     *     roady\classes\strings\ClassString::class,
+     *     $this,
+     * ];
+     * $this->setUpWithSpecifiedClass(
+     *     $values[array_rand($values)]
+     * );
+     *
+     * ```
+     *
+     */
+    abstract protected function setUp(): void;
+
+    /**
      * Setup with a specified class.
      *
      * This method must call setTextTestInstance(),
