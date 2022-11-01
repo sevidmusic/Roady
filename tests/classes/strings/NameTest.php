@@ -8,6 +8,7 @@ use tests\interfaces\strings\NameTestTrait;
 
 class NameTest extends SafeTextTest
 {
+
     use NameTestTrait;
 
     protected function setUpWithSpecificText(Text $text): void
@@ -18,4 +19,5 @@ class NameTest extends SafeTextTest
         $this->setNameTestInstance($name);
         $this->setExpectedString($this->makeStringSafe($text));
     }
+
 }

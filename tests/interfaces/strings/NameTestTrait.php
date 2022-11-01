@@ -259,12 +259,12 @@ trait NameTestTrait
     }
 
     /**
-     * Test that the length of a Name is always less than 71.
+     * Test that the length of a Name less than or equal to 70.
      *
      * @return void
      *
      */
-    public function test_that_the_length_of_a_Name_is_always_less_than_71(): void
+    public function test_that_the_length_of_a_Name_is_less_than_or_equal_to_70(): void
     {
         $text = new TextToConvertToAName(
             str_shuffle(
@@ -311,4 +311,6 @@ trait NameTestTrait
             )
         );
     }
+
 }
+

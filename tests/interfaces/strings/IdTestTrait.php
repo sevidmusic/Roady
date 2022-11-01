@@ -17,8 +17,8 @@ trait IdTestTrait
 
     /**
      * The AlphanumericTextTestTrait defines
-     * common tests for implementations of the
-     * roady\interfaces\strings\AlphanumericText
+     * common tests for implementations of
+     * the roady\interfaces\strings\AlphanumericText
      * interface.
      *
      */
@@ -54,8 +54,8 @@ trait IdTestTrait
      *
      * This method must pass the Id implementation
      * instance to test to the setTextTestInstance(),
-     * setAlphanumericTextTestInstance(), setIdTestInstance(),
-     * and setExpectedString() methods.
+     * setSafeTextTestInstance(), setAlphanumericTextTestInstance(),
+     * setIdTestInstance(), and setExpectedString() methods.
      *
      * @return void
      *

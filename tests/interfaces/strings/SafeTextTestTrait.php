@@ -36,6 +36,11 @@ trait SafeTextTestTrait
      * Setup a SafeText implementation instance to test using a Text
      * instance instantiated with a randomly generated string.
      *
+     * This method must call setUpWithSpecificText().
+     *
+     * This method may perform any additional set up that may be
+     * required.
+     *
      * @return void
      *
      * @example
@@ -75,12 +80,17 @@ trait SafeTextTestTrait
     abstract protected function setUpWithEmptyString(): void;
 
     /**
-     * This method must set the expected string to be a safe form
-     * of the specified Text.
+     * Set up an instance of a SafeText implementation to
+     * test using the specified Text.
      *
-     * This method must also set an appropriate instance of an
-     * implementation of the SafeText interface as both the Text
-     * and SafeText instance to test.
+     * This method must pass the specified Text to the
+     * makeStringSafe() method, and pass the resulting
+     * string to the setExpectedString() method.
+     *
+     * This method must also pass the SafeText implementation
+     * instance to test to the setTextTestInstance(), and
+     * setSafeTextTestInstance() methods.
+     *
      *
      * @param Text $text The text to use for set up.
      *
@@ -264,6 +274,13 @@ trait SafeTextTestTrait
      *
      * @return SafeText
      *
+     * @example
+     *
+     * ```
+     * $this->safeTextTestInstance();
+     *
+     * ```
+     *
      */
     protected function safeTextTestInstance(): SafeText
     {
@@ -279,6 +296,17 @@ trait SafeTextTestTrait
      *                                       to test.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setSafeTextTestInstance(
+     *     new roady\classes\strings\SafeText(
+     *         new roady\classes\strings\Text('Foo')
+     *     )
+     * );
+     *
+     * ```
      *
      */
     protected function setSafeTextTestInstance(
@@ -304,7 +332,7 @@ trait SafeTextTestTrait
             $this->expectedString(),
             $this->testFailedMessage(
                 $this,
-                'setUpWithEmptyString',
+                $this::class . '::setUpWithEmptyString',
                 'assign the numeric character 0 as the expected string'
             )
         );
@@ -327,7 +355,7 @@ trait SafeTextTestTrait
             $this->expectedString(),
             $this->testFailedMessage(
                 $this,
-                'setUpWithSpecificText',
+                $this::class . 'setUpWithSpecificText',
                 'set a safe form of the specified Text as the ' .
                 'expected string'
             )
