@@ -18,12 +18,6 @@ class TextTest extends RoadyTestCase
     use TextTestTrait;
 
 
-    /**
-     * Default setup using a randomly generated string.
-     *
-     * @return void
-     *
-     */
     protected function setUp(): void
     {
         $string = $this->randomChars();
