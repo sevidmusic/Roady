@@ -53,12 +53,13 @@ class RoadyTestCase extends TestCase
      * ```
      * echo $this->testFailedMessage(
      *     $this,
-     *     'name',
-     *     'return the expected Name'
+     *     'test_php_unit_tests_are_run',
+     *     'run if PHPUnit is set up correctly'
      * );
      * // example output:
-     *    The roady\classes\constituents\Identifiable implementation's
-     *    name() method must return the expected Name.
+     *    The tests\RoadyTestCase implementation's
+     *    test_php_unit_tests_are_run() method must
+     *    run if PHPUnit is set up correctly.
      *
      * ```
      */

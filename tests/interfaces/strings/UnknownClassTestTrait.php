@@ -2,8 +2,8 @@
 
 namespace tests\interfaces\strings;
 
-use roady\interfaces\strings\UnknownClass;
 use roady\classes\strings\UnknownClass as UnknownClassString;
+use roady\interfaces\strings\UnknownClass;
 use tests\interfaces\strings\ClassStringTestTrait;
 
 /**
@@ -24,10 +24,8 @@ trait UnknownClassTestTrait
     use ClassStringTestTrait;
 
     /**
-     * @var UnknownClass $unknownClass
-     *                              An instance of a
-     *                              UnknownClass
-     *                              implementation to test.
+     * @var UnknownClass $unknownClass An instance of a UnknownClass
+     *                                 implementation to test.
      */
     protected UnknownClass $unknownClass;
 
@@ -35,6 +33,14 @@ trait UnknownClassTestTrait
      * Return the UnknownClass implementation instance to test.
      *
      * @return UnknownClass
+     *
+     * @example
+     *
+     * ```
+     * echo $this->unknownClassTestInstance();
+     * // example output: roady\classes\strings\UnknownClass
+     *
+     * ```
      *
      */
     protected function unknownClassTestInstance(): UnknownClass
@@ -45,13 +51,23 @@ trait UnknownClassTestTrait
     /**
      * Set the UnknownClass implementation instance to test.
      *
-     * @param UnknownClass $unknownClassTestInstance
-     *                              An instance of an
-     *                              implementation of
-     *                              the UnknownClass
-     *                              interface to test.
+     * @param UnknownClass $unknownClassTestInstance An instance of
+     *                                               an implementation
+     *                                               of the
+     *                                               UnknownClass
+     *                                               interface to
+     *                                               test.
      *
      * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setUnknownClassTestInstance(
+     *     new roady\classes\strings\UnknownClass()
+     * );
+     *
+     * ```
      *
      */
     protected function setUnknownClassTestInstance(
@@ -62,23 +78,28 @@ trait UnknownClassTestTrait
     }
 
     /**
-     * Overrides ClassString::test___toString_returns_the_fully_qualified_class_name_of_the_expected_class.
+     * Overrides parent method:
+     *
+     * ClassString::test___toString_returns_the_fully_qualified_class_name_of_the_expected_class.
      *
      * An UnknownClass implementation's __toString() method must
-     * return UnknownClassString::class.
+     * return it's own fully qualified classname.
      *
      * @return void
      *
      */
     public function test___toString_returns_the_fully_qualified_class_name_of_the_expected_class(): void
     {
-        $expectedClass = UnknownClassString::class;
+        $expectedClass = $this->unknownClassTestInstance()::class;
         $this->setUpWithSpecifiedClass($expectedClass);
         $this->assertEquals(
             $expectedClass,
             $this->classStringTestInstance()->__toString(),
-            'The ' . get_class($this->classStringTestInstance()) .
-            '\'s __toString() method must return ' . $expectedClass
+            $this->testFailedMessage(
+                $this->classStringTestInstance(),
+                '__toString',
+                'return ' . $expectedClass
+            )
         );
     }
 }

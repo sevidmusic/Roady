@@ -3,8 +3,8 @@
 namespace tests\classes\strings;
 
 use roady\classes\strings\UnknownClass;
-use tests\interfaces\strings\UnknownClassTestTrait;
 use tests\classes\strings\ClassStringTest;
+use tests\interfaces\strings\UnknownClassTestTrait;
 
 final class UnknownClassTest extends ClassStringTest
 {
