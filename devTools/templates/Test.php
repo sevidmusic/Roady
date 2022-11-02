@@ -2,16 +2,18 @@
 
 namespace tests\classes\__SUB_NAMESPACE__;
 
-use PHPUnit\Framework\TestCase;
 use roady\classes\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__;
+use tests\RoadyTestCase;
 use tests\interfaces\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__TestTrait;
 
-class __TARGET_CLASS_NAME__Test extends TestCase
+class __TARGET_CLASS_NAME__Test extends RoadyTestCase
 {
 
     /**
-     * The __TARGET_CLASS_NAME__TestTrait defines common tests for implementations
-     * of the roady\interfaces\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__ interface.
+     * The __TARGET_CLASS_NAME__TestTrait defines
+     * common tests for implementations of the
+     * roady\interfaces\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__
+     * interface.
      *
      * @see __TARGET_CLASS_NAME__TestTrait
      *

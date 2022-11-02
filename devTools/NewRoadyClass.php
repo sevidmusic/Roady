@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This script can be generate source code for a new roady Class,
+ * This script can generate source code for a new roady Class,
  * including it's Interface, TestTrait, and Test class.
  *
  * The code is generated using the templates located in
