@@ -2,6 +2,9 @@
 
 namespace roady\interfaces\utilities;
 
+use ReflectionException;
+use roady\interfaces\strings\ClassString;
+
 /**
  * A Reflection can be used to get information about a class
  * or object instance.
@@ -11,6 +14,8 @@ namespace roady\interfaces\utilities;
  * ```
  * var_dump($reflection->methodNames());
  *
+ * // example output:
+ *
  * array(2) {
  *   [0]=>
  *   string(7) "method1"
@@ -19,6 +24,7 @@ namespace roady\interfaces\utilities;
  * }
  *
  * ```
+ *
  */
 interface Reflection
 {
@@ -33,6 +39,8 @@ interface Reflection
      *
      * ```
      * var_dump($reflection->methodNames());
+     *
+     * // example output:
      *
      * array(2) {
      *   [0]=>
@@ -142,6 +150,8 @@ interface Reflection
      *
      * ```
      * var_dump($reflection->propertyNames());
+     *
+     * // example output:
      *
      * array(2) {
      *   [0]=>
