@@ -52,5 +52,22 @@ trait ReflectionTestTrait
         $this->reflection = $reflectionTestInstance;
     }
 
+    /**
+     * Set up an instance of a Reflection to test.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->setReflectionTestInstance(
+     *     new roady\classes\utilities\Reflection()
+     * );
+     *
+     * ```
+     *
+     */
+    abstract public function setUp(): void;
+
 }
 

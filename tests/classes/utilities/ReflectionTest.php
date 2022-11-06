@@ -20,5 +20,11 @@ class ReflectionTest extends RoadyTestCase
      */
     use ReflectionTestTrait;
 
+    public function setUp(): void
+    {
+        $this->setReflectionTestInstance(
+            new Reflection()
+        );
+    }
 }
 
