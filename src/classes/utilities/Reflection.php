@@ -8,6 +8,10 @@ use roady\interfaces\strings\ClassString;
 class Reflection implements ReflectionInterface
 {
 
+    public function __construct()
+    {
+    }
+
     public function methodNames(): array
     {
         return [];
@@ -31,6 +35,11 @@ class Reflection implements ReflectionInterface
     public function propertyTypes(): array
     {
         return [];
+    }
+
+    public function type(): ClassString
+    {
+        return new \roady\classes\strings\ClassString($this);
     }
 
 }

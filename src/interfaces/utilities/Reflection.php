@@ -153,11 +153,21 @@ interface Reflection
      *
      * // example output:
      *
-     * array(2) {
+     * array(7) {
      *   [0]=>
-     *   string(7) "property1"
+     *   string(9) "property1"
      *   [1]=>
-     *   string(7) "property2"
+     *   string(9) "property2"
+     *   [2]=>
+     *   string(9) "property3"
+     *   [3]=>
+     *   string(9) "property4"
+     *   [4]=>
+     *   string(9) "property5"
+     *   [5]=>
+     *   string(9) "property6"
+     *   [6]=>
+     *   string(9) "property7"
      * }
      *
      * ```
@@ -180,27 +190,43 @@ interface Reflection
      * var_dump($reflection->propertyTypes());
      *
      * // example output:
-     *
      * array(7) {
-     *   ["foo"]=>
+     *   ["property1"]=>
      *   string(4) "bool"
-     *   ["bar"]=>
+     *   ["property2"]=>
      *   string(6) "string"
-     *   ["baz"]=>
-     *   string(5) "array"
-     *   ["bin"]=>
-     *   string(3) "int"
-     *   ["oof"]=>
-     *   string(5) "float"
-     *   ["rab"]=>
+     *   ["property3"]=>
      *   string(4) "null"
-     *   ["zab"]=>
+     *   ["property4"]=>
+     *   string(5) "array"
+     *   ["property5"]=>
+     *   string(3) "int"
+     *   ["property6"]=>
+     *   string(5) "float"
+     *   ["property7"]=>
      *   string(34) "roady\classes\utilities\Reflection"
      * }
      *
      * ```
      */
     public function propertyTypes(): array;
+
+    /**
+     * Return the type of the reflected class or object instance
+     * as a ClassString.
+     *
+     * @return ClassString
+     *
+     * @example
+     *
+     * ```
+     * echo $reflection->type();
+     * // example output: namespace\of\reflected\class\ClassName;
+     *
+     * ```
+     *
+     */
+    public function type(): ClassString;
 
 }
 
