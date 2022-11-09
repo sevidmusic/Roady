@@ -4,6 +4,7 @@ namespace roady\classes\utilities;
 
 use roady\interfaces\utilities\Reflection as ReflectionInterface;
 use roady\interfaces\strings\ClassString;
+use \ReflectionClass;
 
 class Reflection implements ReflectionInterface
 {

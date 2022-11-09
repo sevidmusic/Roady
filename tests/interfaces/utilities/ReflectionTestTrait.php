@@ -3,6 +3,7 @@
 namespace tests\interfaces\utilities;
 
 use roady\interfaces\utilities\Reflection;
+use \ReflectionClass;
 
 /**
  * The ReflectionTestTrait defines common tests for
@@ -15,10 +16,8 @@ trait ReflectionTestTrait
 {
 
     /**
-     * @var Reflection $reflection
-     *                              An instance of a
-     *                              Reflection
-     *                              implementation to test.
+     * @var Reflection $reflection An instance of a Reflection
+     *                             implementation to test.
      */
     protected Reflection $reflection;
 
@@ -36,11 +35,10 @@ trait ReflectionTestTrait
     /**
      * Set the Reflection implementation instance to test.
      *
-     * @param Reflection $reflectionTestInstance
-     *                              An instance of an
-     *                              implementation of
-     *                              the Reflection
-     *                              interface to test.
+     * @param Reflection $reflectionTestInstance An instance of an
+     *                                           implementation of
+     *                                           the Reflection
+     *                                           interface to test.
      *
      * @return void
      *
@@ -68,6 +66,33 @@ trait ReflectionTestTrait
      *
      */
     abstract public function setUp(): void;
+
+    /**
+     * Return a random fully qualified class name, or object instance.
+     *
+     * @return class-string|object
+     *
+     * @example
+     *
+     * ```
+     * var_dump(
+     *     $this->randomClassStringOrObjectInstance()::class
+     * );
+     *
+     * // example output:
+     * string(26) "roady\classes\strings\Text"
+     *
+     * var_dump(
+     *     $this->randomClassStringOrObjectInstance()::class
+     * );
+     *
+     * // example output:
+     * string(26) "roady\classes\constituents\Identifiable"
+     *
+     * ```
+     *
+     */
+    abstract public function randomClassStringOrObjectInstance(): string|object;
 
 }
 
