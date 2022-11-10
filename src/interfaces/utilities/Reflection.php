@@ -6,8 +6,8 @@ use ReflectionException;
 use roady\interfaces\strings\ClassString;
 
 /**
- * A Reflection can be used to get information about a class
- * or object instance.
+ * A Reflection can be used to get information about a reflected
+ * class or object instance.
  *
  * @example
  *
@@ -76,19 +76,19 @@ interface Reflection
      *
      * array(7) {
      *   [0]=>
-     *   string(3) "foo"
+     *   string(10) "parameter1"
      *   [1]=>
-     *   string(3) "bar"
+     *   string(10) "parameter2"
      *   [2]=>
-     *   string(3) "baz"
+     *   string(10) "parameter3"
      *   [3]=>
-     *   string(3) "bin"
+     *   string(10) "parameter4"
      *   [4]=>
-     *   string(3) "oof"
+     *   string(10) "parameter5"
      *   [5]=>
-     *   string(3) "rab"
+     *   string(10) "parameter6"
      *   [6]=>
-     *   string(3) "zab"
+     *   string(10) "parameter7"
      * }
      *
      * ```
@@ -110,7 +110,7 @@ interface Reflection
      *                       types should be included in the
      *                       returned array.
      *
-     * @return array<string, string>
+     * @return array<string, string|ClassString>
      *
      * @example
      *
@@ -120,20 +120,23 @@ interface Reflection
      * // example output:
      *
      * array(7) {
-     *   ["foo"]=>
+     *   ["parameter1"]=>
      *   string(4) "bool"
-     *   ["bar"]=>
-     *   string(6) "string"
-     *   ["baz"]=>
-     *   string(5) "array"
-     *   ["bin"]=>
+     *   ["parameter2"]=>
      *   string(3) "int"
-     *   ["oof"]=>
+     *   ["parameter3"]=>
      *   string(5) "float"
-     *   ["rab"]=>
+     *   ["parameter4"]=>
      *   string(4) "null"
-     *   ["zab"]=>
-     *   string(34) "roady\classes\utilities\Reflection"
+     *   ["parameter5"]=>
+     *   string(5) "array"
+     *   ["parameter6"]=>
+     *   string(6) "string"
+     *   ["parameter7"]=>
+     *   object(roady\classes\strings\ClassString)#3 (1) {
+     *     ["string":"roady\classes\strings\Text":private]=>
+     *     string(24) "roady\classes\strings\Id"
+     *   }
      * }
      *
      * ```
@@ -182,7 +185,7 @@ interface Reflection
      * The types in the array will be indexed by the name of the
      * property they are associated with.
      *
-     * @return array<string, string>
+     * @return array<string, string|ClassString>
      *
      * @example
      *
@@ -190,21 +193,25 @@ interface Reflection
      * var_dump($reflection->propertyTypes());
      *
      * // example output:
+     *
      * array(7) {
      *   ["property1"]=>
      *   string(4) "bool"
      *   ["property2"]=>
-     *   string(6) "string"
-     *   ["property3"]=>
-     *   string(4) "null"
-     *   ["property4"]=>
-     *   string(5) "array"
-     *   ["property5"]=>
      *   string(3) "int"
-     *   ["property6"]=>
+     *   ["property3"]=>
      *   string(5) "float"
+     *   ["property4"]=>
+     *   string(4) "null"
+     *   ["property5"]=>
+     *   string(5) "array"
+     *   ["property6"]=>
+     *   string(6) "string"
      *   ["property7"]=>
-     *   string(34) "roady\classes\utilities\Reflection"
+     *   object(roady\classes\strings\ClassString)#3 (1) {
+     *     ["string":"roady\classes\strings\Text":private]=>
+     *     string(24) "roady\classes\strings\Id"
+     *   }
      * }
      *
      * ```

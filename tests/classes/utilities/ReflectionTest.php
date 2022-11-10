@@ -3,12 +3,7 @@
 namespace tests\classes\utilities;
 
 use \ReflectionClass;
-use roady\classes\constituents\Identifiable;
-use roady\classes\strings\Id;
-use roady\classes\strings\Name;
-use roady\classes\strings\Text;
 use roady\classes\utilities\Reflection;
-use roady\interfaces\strings\ClassString;
 use tests\RoadyTestCase;
 use tests\interfaces\utilities\ReflectionTestTrait;
 
@@ -25,27 +20,32 @@ class ReflectionTest extends RoadyTestCase
      */
     use ReflectionTestTrait;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
+        $class = $this->randomClassStringOrObjectInstance();
+        $this->setClassToBeReflected($class);
         $this->setReflectionTestInstance(
-            new Reflection()
+            new Reflection(
+                $this->reflectionClass($class)
+            )
         );
     }
 
-    public function randomClassStringOrObjectInstance(): string|object
+    /**
+     * This doc block is for phpstan.
+     *
+     * Full documentation of this method can be found in
+     * tests/interfaces/utilities/ReflectionTestTrait.php
+     *
+     * @param class-string|object $class The class-string or object
+     *                                   instance to be reflected.
+     */
+    protected function setClassToBeReflected(
+        string|object $class
+    ): void
     {
-        $classStringsAndObjects = [
-            ClassString::class,
-            Name::class,
-            Reflection::class,
-            RoadyTestCase::class,
-            new Id(),
-            new Identifiable( new Name(new Text('Foo')), new Id()),
-            new Text('Foo'),
-        ];
-        return $classStringsAndObjects[
-            array_rand($classStringsAndObjects)
-        ];
+        $this->reflectedClass = $class;
     }
+
 }
 

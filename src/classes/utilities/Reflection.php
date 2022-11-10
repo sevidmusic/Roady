@@ -2,16 +2,44 @@
 
 namespace roady\classes\utilities;
 
-use roady\interfaces\utilities\Reflection as ReflectionInterface;
-use roady\interfaces\strings\ClassString;
 use \ReflectionClass;
+use roady\classes\strings\ClassString;
+use roady\interfaces\strings\ClassString as ClassStringInterface;
+use roady\interfaces\utilities\Reflection as ReflectionInterface;
 
 class Reflection implements ReflectionInterface
 {
 
-    public function __construct()
-    {
-    }
+    /**
+     * Instantiate a new Reflection of the class or object instance
+     * reflected by the specified ReflectionClass instance.
+     *
+     * @param ReflectionClass <object> $reflectionClass
+     *
+     *                                     An instance of a
+     *                                     ReflectionClass.
+     *
+     *                                     The Reflection will provide
+     *                                     information about the class
+     *                                     or object instance
+     *                                     reflected by the specified
+     *                                     ReflectionClass.
+     *
+     * @example
+     *
+     * ```
+     * $reflection = new \roady\classes\utilities\Reflection(
+     *                   new \ReflectionClass(
+     *                       \roady\classes\strings\Id::class
+     *                   )
+     *               );
+     *
+     * ```
+     *
+     */
+    public function __construct(
+        private ReflectionClass $reflectionClass
+    ) {}
 
     public function methodNames(): array
     {
@@ -38,9 +66,11 @@ class Reflection implements ReflectionInterface
         return [];
     }
 
-    public function type(): ClassString
+    public function type(): ClassStringInterface
     {
-        return new \roady\classes\strings\ClassString($this);
+        return new ClassString(
+            $this->reflectionClass->getName()
+        );
     }
 
 }
