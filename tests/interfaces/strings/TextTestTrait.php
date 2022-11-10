@@ -79,39 +79,6 @@ trait TextTestTrait
     }
 
     /**
-     * Return a string composed of a random number of randomly
-     * generated characters.
-     *
-     * @return string
-     *
-     * @example
-     *
-     * ```
-     * echo $this->randomChars();
-     * // example output: rqEzm*g1vRI7!lz#-%q
-     *
-     * echo $this->randomChars();
-     * // example output: @Lz%R+bgR#79l!mz-
-     *
-     * ```
-     *
-     */
-    protected function randomChars(): string
-    {
-        $string = str_shuffle(
-            'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-=+'
-        );
-        try {
-            $string .=
-                random_bytes(random_int(1, 100)) .
-                $string .
-                random_bytes(random_int(1, 100));
-        } catch(\Exception $e) {
-        }
-        return str_shuffle($string);
-    }
-
-    /**
      * Set the string expected to be returned by the Text
      * implementation's __toString() method.
      *
