@@ -188,8 +188,6 @@ trait ReflectionTestTrait
         ];
     }
 
-
-
     /**
      * Return an instance of a ReflectionClass instantiated
      * with the specified class string or object instance.
