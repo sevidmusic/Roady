@@ -238,5 +238,32 @@ trait ReflectionTestTrait
             ),
         );
     }
+
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the methods defined by the
+     * reflected class.
+     */
+    public function testMethodNamesReturnsTheNamesOfTheMethodsDefinedByTheReflectedClass(): void
+    {
+        $reflectionClass = $this->reflectionClass(
+            $this->reflectedClass
+        );
+        $methodNames = [];
+        foreach($reflectionClass->getMethods() as $reflectionMethod) {
+            array_push($methodNames, $reflectionMethod->name);
+        }
+        $this->assertEquals(
+            $methodNames,
+            $this->reflectionTestInstance()->methodNames(),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the methods ' .
+                'defined by the reflected class'
+            )
+        );
+    }
 }
 

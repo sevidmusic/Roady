@@ -33,6 +33,40 @@ interface Reflection
      * Return a numerically indexed array of the names of the
      * methods defined by the reflected class or object instance.
      *
+     * @param int|null $filter Determine what method names are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         ReflectionMethod::IS_STATIC
+     *                         ReflectionMethod::IS_PUBLIC
+     *                         ReflectionMethod::IS_PROTECTED
+     *                         ReflectionMethod::IS_PRIVATE
+     *                         ReflectionMethod::IS_ABSTRACT
+     *                         ReflectionMethod::IS_FINAL
+     *
+     *                         All methods with fit the expectation
+     *                         of the given filters will be included
+     *                         in the returned array.
+     *
+     *                         If filters are not specified, then
+     *                         all of the class's method names will
+     *                         be included in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static methods via
+     *                         a call like:
+     *
+     *                         ```
+     *                         $reflection->methodNames(
+     *                             ~ReflectionMethod::IS_STATIC
+     *                         );
+     *
+     *                         ```
+     *
      * @return array<int, string>
      *
      * @example
@@ -49,9 +83,31 @@ interface Reflection
      *   string(7) "method2"
      * }
      *
+     * var_dump(
+     *     $reflection->methodNames(ReflectionMethod::IS_PUBLIC)
+     * );
+     *
+     * // example output:
+     *
+     * array(1) {
+     *   [0]=>
+     *   string(7) "method1"
+     * }
+     *
+     * var_dump(
+     *     $reflection->methodNames(ReflectionMethod::IS_PRIVATE)
+     * );
+     *
+     * // example output:
+     *
+     * array(1) {
+     *   [0]=>
+     *   string(7) "method2"
+     * }
+     *
      * ```
      */
-    public function methodNames(): array;
+    public function methodNames(int|null $filter = null): array;
 
     /**
      * Return a numerically indexed array of the names of the
