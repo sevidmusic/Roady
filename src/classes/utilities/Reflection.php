@@ -44,7 +44,11 @@ class Reflection implements ReflectionInterface
     public function methodNames(int|null $filter = null): array
     {
         $methodNames = [];
-        foreach($this->reflectionClass->getMethods(/* $filter */) as $reflectionMethod) {
+        foreach(
+            $this->reflectionClass->getMethods($filter)
+            as
+            $reflectionMethod
+        ) {
             array_push($methodNames, $reflectionMethod->name);
         }
         return $methodNames;

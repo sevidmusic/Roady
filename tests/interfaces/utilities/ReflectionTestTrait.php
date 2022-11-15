@@ -3,6 +3,7 @@
 namespace tests\interfaces\utilities;
 
 use \ReflectionClass;
+use \ReflectionMethod;
 use roady\classes\constituents\Identifiable;
 use roady\classes\strings\Id;
 use roady\classes\strings\Name;
@@ -37,6 +38,48 @@ trait ReflectionTestTrait
      *                                          tested.
      */
     private string|object $reflectedClass;
+
+    /**
+     * Determine the method names of a reflected class.
+     *
+     * @param int $filter
+     *
+     * @return array <int, string>
+     *
+     * @example
+     *
+     * ```
+     * var_dump($this->determineReflectedClassesMethodNames());
+     *
+     * // example output:
+     *
+     * array(2) {
+     *   [0]=>
+     *   string(7) "method1"
+     *   [1]=>
+     *   string(7) "method2"
+     * }
+     *
+     * ```
+     *
+     */
+    protected function determineReflectedClassesMethodNames(
+        int|null $filter = null
+    ): array
+    {
+        $reflectionClass = $this->reflectionClass(
+            $this->reflectedClass
+        );
+        $methodNames = [];
+        foreach(
+            $reflectionClass->getMethods($filter)
+            as
+            $reflectionMethod
+        ) {
+            array_push($methodNames, $reflectionMethod->name);
+        }
+        return $methodNames;
+    }
 
     /**
      * Return the Reflection implementation instance to test.
@@ -135,6 +178,7 @@ trait ReflectionTestTrait
      * $this->setClassToBeReflected($this::class): void;
      *
      * ```
+     *
      */
     abstract protected function setClassToBeReflected(
         string|object $class
@@ -242,20 +286,16 @@ trait ReflectionTestTrait
 
     /**
      * Test that the methodNames() method returns a numerically
-     * indexed array of the names of the methods defined by the
-     * reflected class.
+     * indexed array of the names of all the methods defined by
+     * the reflected class if no filter is specified.
+     *
+     * @return void
+     *
      */
-    public function testMethodNamesReturnsTheNamesOfTheMethodsDefinedByTheReflectedClass(): void
+    public function testMethodNamesReturnsTheNamesOfAllTheMethodsDefinedByTheReflectedClassIfNoFilterIsSpecified(): void
     {
-        $reflectionClass = $this->reflectionClass(
-            $this->reflectedClass
-        );
-        $methodNames = [];
-        foreach($reflectionClass->getMethods() as $reflectionMethod) {
-            array_push($methodNames, $reflectionMethod->name);
-        }
         $this->assertEquals(
-            $methodNames,
+            $this->determineReflectedClassesMethodNames(),
             $this->reflectionTestInstance()->methodNames(),
             $this->testFailedMessage(
                 $this->reflectionTestInstance(),
@@ -265,5 +305,156 @@ trait ReflectionTestTrait
             )
         );
     }
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the private methods defined
+     * by the reflected class if the ReflectionMethod::IS_PRIVATE
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function testMethodNamesReturnsTheNamesOfThePrivateMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_PRIVATEFilterIsSpecified(): void
+    {
+        $filter = ReflectionMethod::IS_PRIVATE;
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodNames($filter),
+            $this->reflectionTestInstance()->methodNames($filter),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the private ' .
+                'methods defined by the reflected class if the' .
+                'ReflectionClass::IS_PRIVATE filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the protected methods defined
+     * by the reflected class if the ReflectionMethod::IS_PROTECTED
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function testMethodNamesReturnsTheNamesOfTheProtectedMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_PROTECTEDFilterIsSpecified(): void
+    {
+        $filter = ReflectionMethod::IS_PROTECTED;
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodNames($filter),
+            $this->reflectionTestInstance()->methodNames($filter),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the protected ' .
+                'methods defined by the reflected class if the' .
+                'ReflectionClass::IS_PROTECTED filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the public methods defined
+     * by the reflected class if the ReflectionMethod::IS_PUBLIC
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function testMethodNamesReturnsTheNamesOfThePublicMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_PUBLICFilterIsSpecified(): void
+    {
+        $filter = ReflectionMethod::IS_PUBLIC;
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodNames($filter),
+            $this->reflectionTestInstance()->methodNames($filter),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the public ' .
+                'methods defined by the reflected class if the' .
+                'ReflectionClass::IS_PUBLIC filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the abstract methods defined
+     * by the reflected class if the ReflectionMethod::IS_ABSTRACT
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function testMethodNamesReturnsTheNamesOfTheAbstractMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_ABSTRACTFilterIsSpecified(): void
+    {
+        $filter = ReflectionMethod::IS_ABSTRACT;
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodNames($filter),
+            $this->reflectionTestInstance()->methodNames($filter),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the abstract ' .
+                'methods defined by the reflected class if the' .
+                'ReflectionClass::IS_ABSTRACT filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the static methods defined
+     * by the reflected class if the ReflectionMethod::IS_STATIC
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function testMethodNamesReturnsTheNamesOfTheStaticMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_STATICFilterIsSpecified(): void
+    {
+        $filter = ReflectionMethod::IS_STATIC;
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodNames($filter),
+            $this->reflectionTestInstance()->methodNames($filter),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the static ' .
+                'methods defined by the reflected class if the' .
+                'ReflectionClass::IS_STATIC filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the methodNames() method returns a numerically
+     * indexed array of the names of the final methods defined
+     * by the reflected class if the ReflectionMethod::IS_FINAL
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function testMethodNamesReturnsTheNamesOfTheFinalMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_FINALFilterIsSpecified(): void
+    {
+        $filter = ReflectionMethod::IS_FINAL;
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodNames($filter),
+            $this->reflectionTestInstance()->methodNames($filter),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the final ' .
+                'methods defined by the reflected class if the' .
+                'ReflectionClass::IS_FINAL filter is specified'
+            )
+        );
+    }
+
 }
 
