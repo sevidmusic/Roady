@@ -29,5 +29,5 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run phpstan test
+    - name: Run phpstan analysis
       run: ./vendor/bin/phpstan analyze --level 9 ./src ./tests
