@@ -1,14 +1,5 @@
-*.sh
 vendor/
 .idea/
 .vagrant/
 *.phpunit.result.cache
-.vimrc
-php.tags
-ctags.tags
-xaa
 *.swp
-.StoredComponentJsonData*/
-*.txt
-Apps/*
-dsh/.dsh_license_notice_already_shown
