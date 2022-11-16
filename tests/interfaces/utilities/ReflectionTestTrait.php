@@ -212,9 +212,12 @@ trait ReflectionTestTrait
     protected function randomClassStringOrObjectInstance(): string|object
     {
         $classStringsAndObjects = [
-            ClassString::class,
+            ReflectionClass::class,
+            ReflectionMethod::class,
+            Text::class,
+            Identifiable::class,
+            Id::class,
             Name::class,
-            Reflection::class,
             RoadyTestCase::class,
             new Id(),
             new Identifiable(
