@@ -44,11 +44,12 @@ interface Reflection
      *                         ReflectionMethod::IS_ABSTRACT
      *                         ReflectionMethod::IS_FINAL
      *
-     *                         All methods with fit the expectation
-     *                         of the given filters will be included
-     *                         in the returned array.
+     *                         All methods defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
      *
-     *                         If filters are not specified, then
+     *                         If no filters are specified, then
      *                         all of the class's method names will
      *                         be included in the returned array.
      *
