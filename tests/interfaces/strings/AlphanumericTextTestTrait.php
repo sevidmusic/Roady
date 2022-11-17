@@ -171,7 +171,7 @@ trait AlphanumericTextTestTrait
      * @return void
      *
      */
-    public function test__toStringReturnsAnAlphanumericString(): void
+    public function test__to_string_returns_an_alphanumeric_string(): void
     {
         $this->assertTrue(
             ctype_alnum(
@@ -193,7 +193,7 @@ trait AlphanumericTextTestTrait
      * @return void
      *
      */
-    public function test__toStringReturnsAnAlphanumericFormOfTheOriginalText(): void
+    public function test__to_string_returns_an_alphanumeric_form_of_the_original_text(): void
     {
         $this->assertEquals(
             $this->makeStringSafe(

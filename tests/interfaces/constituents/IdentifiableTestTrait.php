@@ -221,7 +221,7 @@ trait IdentifiableTestTrait
      * @return void
      *
      */
-    public function testIdReturnsExpectedId(): void
+    public function test_id_returns_expected_id(): void
     {
         $this->assertEquals(
             $this->expectedId(),
@@ -240,7 +240,7 @@ trait IdentifiableTestTrait
      * @return void
      *
      */
-    public function testNameReturnsExpectedName(): void
+    public function test_name_returns_expected_name(): void
     {
         $this->assertEquals(
             $this->expectedName(),
@@ -259,7 +259,7 @@ trait IdentifiableTestTrait
      * @return void
      *
      */
-    public function testTypeReturnsAnAppropriateClassString(): void
+    public function test_type_returns_an_appropriate_class_string(): void
     {
         $this->assertEquals(
             new ClassString($this->identifiableTestInstance()),

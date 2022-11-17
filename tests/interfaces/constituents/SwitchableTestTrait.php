@@ -148,7 +148,7 @@ trait SwitchableTestTrait
      * @return void
      *
      */
-    public function testStateReturnsExpectedState(): void
+    public function test_state_returns_expected_state(): void
     {
         $this->assertEquals(
             $this->expectedState(),
@@ -167,7 +167,7 @@ trait SwitchableTestTrait
      * @return void
      *
      */
-    public function testSwitchStateSwtichesTheState(): void
+    public function test_switch_state_swtiches_the_state(): void
     {
         $this->setExpectedState(
             (

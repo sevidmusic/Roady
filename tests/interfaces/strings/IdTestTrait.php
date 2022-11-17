@@ -120,7 +120,7 @@ trait IdTestTrait
      * @return void
      *
      */
-    public function testLengthIsGreaterThanOrEqualTo60(): void
+    public function test_length_is_greater_than_or_equal_to_60(): void
     {
         for($i = 0; $i < 1000; $i++) {
             $this->setUpWithNewInstance();
@@ -143,7 +143,7 @@ trait IdTestTrait
      * @return void
      *
      */
-    public function testLengthIsLessThanOrEqualTo80(): void
+    public function test_length_is_less_than_or_equal_to_80(): void
     {
         for($i = 0; $i < 1000; $i++) {
             $this->setUpWithNewInstance();

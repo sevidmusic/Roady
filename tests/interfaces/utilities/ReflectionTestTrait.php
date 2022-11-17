@@ -269,7 +269,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testTypeReturnsTypeOfReflectedClass(): void
+    public function test_type_returns_type_of_reflected_class(): void
     {
         $this->assertEquals(
             (
@@ -295,7 +295,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfAllTheMethodsDefinedByTheReflectedClassIfNoFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_all_the_methods_defined_by_the_reflected_class_if_no_filter_is_specified(): void
     {
         $this->assertEquals(
             $this->determineReflectedClassesMethodNames(),
@@ -318,7 +318,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfThePrivateMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_PRIVATEFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_the_private_methods_defined_by_the_reflected_class_if_the_ReflectionMethodIS_PRIVATE_filter_is_specified(): void
     {
         $filter = ReflectionMethod::IS_PRIVATE;
         $this->assertEquals(
@@ -343,7 +343,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfTheProtectedMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_PROTECTEDFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_the_protected_methods_defined_by_the_reflected_class_if_the_ReflectionMethodIS_PROTECTED_filter_is_specified(): void
     {
         $filter = ReflectionMethod::IS_PROTECTED;
         $this->assertEquals(
@@ -368,7 +368,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfThePublicMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_PUBLICFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_the_public_methods_defined_by_the_reflected_class_if_the_ReflectionMethodIS_PUBLIC_filter_is_specified(): void
     {
         $filter = ReflectionMethod::IS_PUBLIC;
         $this->assertEquals(
@@ -393,7 +393,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfTheAbstractMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_ABSTRACTFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_the_abstract_methods_defined_by_the_reflected_class_if_the_ReflectionMethodIS_ABSTRACT_filter_is_specified(): void
     {
         $filter = ReflectionMethod::IS_ABSTRACT;
         $this->assertEquals(
@@ -418,7 +418,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfTheStaticMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_STATICFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_the_static_methods_defined_by_the_reflected_class_if_the_ReflectionMethodIS_STATIC_filter_is_specified(): void
     {
         $filter = ReflectionMethod::IS_STATIC;
         $this->assertEquals(
@@ -443,7 +443,7 @@ trait ReflectionTestTrait
      * @return void
      *
      */
-    public function testMethodNamesReturnsTheNamesOfTheFinalMethodsDefinedByTheReflectedClassIfTheReflectionClassIS_FINALFilterIsSpecified(): void
+    public function test_method_names_returns_the_names_of_the_final_methods_defined_by_the_reflected_class_if_the_ReflectionMethodIS_FINAL_filter_is_specified(): void
     {
         $filter = ReflectionMethod::IS_FINAL;
         $this->assertEquals(

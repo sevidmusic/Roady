@@ -221,7 +221,7 @@ trait PositionableTestTrait
      * @return void
      *
      */
-    public function testPositionReturnsTheExpectedPosition(): void
+    public function test_position_returns_the_expected_position(): void
     {
         $this->assertEquals(
             $this->expectedPosition(),
@@ -240,7 +240,7 @@ trait PositionableTestTrait
      * @return void
      *
      */
-    public function testModifierReturnsTheExpectedModifier(): void
+    public function test_modifier_returns_the_expected_modifier(): void
     {
         $this->assertEquals(
             $this->expectedModifier(),
@@ -260,7 +260,7 @@ trait PositionableTestTrait
      * @return void
      *
      */
-    public function testIncrementPositionIncrementsThePositionByTheModifier(): void
+    public function test_increment_position_increments_the_position_by_the_modifier(): void
     {
         $this->setExpectedPosition(
             $this->positionableTestInstance()->position()
@@ -286,7 +286,7 @@ trait PositionableTestTrait
      * @return void
      *
      */
-    public function testDecrementPositionDecrementsThePositionByTheModifier(): void
+    public function test_decrement_position_decrements_the_position_by_the_modifier(): void
     {
         $this->setExpectedPosition(
             $this->positionableTestInstance()->position()
