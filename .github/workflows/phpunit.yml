@@ -28,6 +28,7 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-      
+
     - name: Run phpunit tests
       run: ./vendor/bin/phpunit -c ./php.xml
+
