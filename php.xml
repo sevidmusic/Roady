@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true"
+         convertDeprecationsToExceptions="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="true"
+         processIsolation="true"
+         stopOnError="true"
+         stopOnFailure="false"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         beStrictAboutCoversAnnotation="true"
+         executionOrder="random"
+>
+
+    <testsuites>
+
+        <testsuite name="all">
+            <directory>tests</directory>
+        </testsuite>
+
+    </testsuites>
+
+</phpunit>
+

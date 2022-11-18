@@ -1,0 +1,9 @@
+parameters:
+    level: 9
+    paths:
+        - src
+        - tests
+        - devTools
+    excludePaths:
+        - devTools/templates
+
