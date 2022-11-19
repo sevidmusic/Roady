@@ -126,3 +126,71 @@ interface ThisInterface extends TheInterfaceToExtend
 
 ```
 
+### Commits
+
+Commit messages should describe in reasonable detail what changes
+the commit makes.
+
+The following examples can be used as formatting guides for
+appropriate commits.
+
+New interfaces:
+
+```
+
+    Defined the following new interface:
+
+    ```
+    [interface]
+
+    ```
+
+    A class that implements the `[interface]` interface [description].
+
+    Public methods defined by the `[interface]` interface:
+
+    ```
+    [methods]
+
+    ```
+
+    For example:
+
+    ```
+    [code example]
+
+    ```
+
+```
+
+New classes:
+
+```
+
+    Began development of new class `[class]` which implements the
+    `[interface]` interface.
+
+    Implemented the following methods defined by the `[interface]`
+    interface:
+
+    ```
+    [methods]
+
+    ```
+
+    For example:
+
+    ```
+    [code example]
+
+    ```
+
+    Implemented the following tests in `[test trait]`:
+
+    ```
+    [test methods]
+
+    ```
+
+```
+
