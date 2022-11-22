@@ -32,7 +32,7 @@ interface Text extends Stringable
 {
 
     /**
-     * Return the original string.
+     * Return the string this Text represents.
      *
      * @return string
      *
