@@ -17,7 +17,6 @@ class TextTest extends RoadyTest
      */
     use TextTestTrait;
 
-
     protected function setUp(): void
     {
         $string = $this->randomChars();
