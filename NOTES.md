@@ -28,8 +28,6 @@ namespace roady\interfaces\events\storage;
 interface Read
 {
 
-    public function domain(): Domain;
-
     public function readById(
         Domain $domain,
         ClassString $type,
