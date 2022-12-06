@@ -120,5 +120,27 @@ class RoadyTest extends TestCase
         return str_shuffle($string);
     }
 
+    /**
+     * Return a random float.
+     *
+     * @return float
+     *
+     * @example
+     *
+     * ```
+     * echo strval($this->randomFloat());
+     * // example output: 1029.917
+     *
+     * ```
+     *
+     */
+    protected function randomFloat(): float
+    {
+        return floatval(
+            strval(rand(-100000000000, 100000000000)) .
+            '.' .
+            strval(rand(0, 100000000000))
+        );
+    }
 }
 
