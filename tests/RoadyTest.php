@@ -4,6 +4,14 @@ namespace tests;
 
 use PHPUnit\Framework\TestCase;
 
+use \ReflectionClass;
+use roady\classes\strings\Id;
+use roady\classes\strings\Name;
+use roady\classes\strings\Text;
+use roady\classes\utilities\Reflection;
+use tests\dev\mock\classes\ReflectedAbstractClass;
+use tests\dev\mock\classes\ReflectedClass;
+
 /**
  * Defines common methods that may be useful to all roady test
  * classes.
@@ -142,5 +150,54 @@ class RoadyTest extends TestCase
             strval(rand(0, 100000000000))
         );
     }
+
+    /**
+     * Return a random fully qualified class name, or object instance.
+     *
+     * @return class-string|object
+     *
+     * @example
+     *
+     * ```
+     * var_dump(
+     *     $this->randomClassStringOrObjectInstance()::class
+     * );
+     *
+     * // example output:
+     * string(26) "roady\classes\strings\Text"
+     *
+     * var_dump(
+     *     $this->randomClassStringOrObjectInstance()::class
+     * );
+     *
+     * // example output:
+     * string(26) "roady\classes\constituents\Identifiable"
+     *
+     * ```
+     *
+     */
+    protected function randomClassStringOrObjectInstance(): string|object
+    {
+        $classStringsAndObjects = [
+            ReflectionClass::class,
+            Reflection::class,
+            Id::class,
+            Name::class,
+            RoadyTest::class,
+            ReflectedAbstractClass::class,
+            new Id(),
+            new Text('Foo'),
+            new Name(new Text('Foo')),
+            new Reflection(
+                new ReflectionClass(new Id())
+            ),
+            new ReflectionClass(new Id()),
+            new ReflectedClass(true, 100),
+        ];
+        return $classStringsAndObjects[
+            array_rand($classStringsAndObjects)
+        ];
+    }
+
 }
 
