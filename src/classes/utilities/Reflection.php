@@ -50,14 +50,33 @@ class Reflection implements ReflectionInterface
             as
             $reflectionMethod
         ) {
-            array_push($methodNames, $reflectionMethod->name);
+            array_push($methodNames, $reflectionMethod->getName());
         }
         return $methodNames;
     }
 
     public function methodParameterNames(string $method): array
     {
-        return [];
+        $parameterNames = [];
+        foreach(
+            $this->reflectionClass->getMethods()
+            as
+            $reflectionMethod
+        ) {
+            if($reflectionMethod->getName() === $method) {
+                foreach(
+                    $reflectionMethod->getParameters()
+                    as
+                    $reflectionParameter
+                ) {
+                    array_push(
+                        $parameterNames,
+                        $reflectionParameter->getName()
+                    );
+                }
+            }
+        }
+        return $parameterNames;
     }
 
     public function methodParameterTypes(string $method): array

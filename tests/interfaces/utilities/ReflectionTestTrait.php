@@ -76,7 +76,8 @@ trait ReflectionTestTrait
      *                         a call like:
      *
      *                         ```
-     *                         $reflection->methodNames(
+     *                         $this->
+     *                         determineReflectedClassesMethodNames(
      *                             ~Reflection::IS_STATIC
      *                         );
      *
@@ -131,7 +132,7 @@ trait ReflectionTestTrait
     ): array
     {
         $reflectionClass = $this->reflectionClass(
-            $this->reflectedClass
+            $this->reflectedClass()
         );
         $methodNames = [];
         foreach(
@@ -139,9 +140,95 @@ trait ReflectionTestTrait
             as
             $reflectionMethod
         ) {
-            array_push($methodNames, $reflectionMethod->name);
+            array_push($methodNames, $reflectionMethod->getName());
         }
         return $methodNames;
+    }
+
+    /**
+     * Return a numerically indexed array of the names of the
+     * parameters defined by the specified method of the class
+     * or object instance reflected by the Reflection implementation
+     * instance being tested.
+     *
+     * @return array<int, string>
+     *
+     * @example
+     *
+     * ```
+     * var_dump($r->determineReflectedClassesMethodNames('foo'));
+     *
+     * // example output:
+     *
+     * array(7) {
+     *   [0]=>
+     *   string(10) "parameter1"
+     *   [1]=>
+     *   string(10) "parameter2"
+     *   [2]=>
+     *   string(10) "parameter3"
+     *   [3]=>
+     *   string(10) "parameter4"
+     *   [4]=>
+     *   string(10) "parameter5"
+     *   [5]=>
+     *   string(10) "parameter6"
+     *   [6]=>
+     *   string(10) "parameter7"
+     * }
+     *
+     * ```
+     *
+     */
+    protected function determineReflectedClassesMethodParameterNames(
+        string $methodName
+    ): array
+    {
+        $reflectionClass = $this->reflectionClass(
+            $this->reflectedClass()
+        );
+        $parameterNames = [];
+        foreach(
+            $reflectionClass->getMethods()
+            as
+            $reflectionMethod
+        ) {
+            if($reflectionMethod->getName() === $methodName) {
+                foreach(
+                    $reflectionMethod->getParameters()
+                    as
+                    $reflectionParameter
+                ) {
+                    array_push(
+                        $parameterNames,
+                        $reflectionParameter->getName()
+                    );
+                }
+            }
+        }
+        return $parameterNames;
+    }
+
+    /**
+     * Return the class-string or object instance to be reflected by
+     * the Reflection implementation instance being tested.
+     *
+     * @return class-string|object
+     *
+     * @example
+     *
+     * ```
+     * var_dump($this->reflectedClass());
+     *
+     * // example output:
+     * roady\classes\utilities\Reflection
+     *
+     * ```
+     *
+     */
+    public function reflectedClass(): string|object
+    {
+        return $this->reflectedClass;
     }
 
     /**
@@ -290,9 +377,9 @@ trait ReflectionTestTrait
     {
         $this->assertEquals(
             (
-                is_object($this->reflectedClass)
-                ? $this->reflectedClass::class
-                : $this->reflectedClass
+                is_object($this->reflectedClass())
+                ? $this->reflectedClass()::class
+                : $this->reflectedClass()
             ),
             $this->reflectionTestInstance()->type(),
             $this->testFailedMessage(
@@ -536,6 +623,14 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the value of the Reflection::IS_ABSTRACT
+     * constant is equal to the value of the
+     * ReflectionMethod::IS_ABSTRACT constant.
+     *
+     * @return void
+     *
+     */
     public function test_ReflectionIS_ABSTRACT_constant_is_equal_to_ReflectionMethodIS_ABSTRACT_constant(): void
     {
         $this->assertEquals(
@@ -551,6 +646,14 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the value of the Reflection::IS_FINAL constant
+     * is equal to the value of the ReflectionMethod::IS_FINAL
+     * constant.
+     *
+     * @return void
+     *
+     */
     public function test_ReflectionIS_FINAL_constant_is_equal_to_ReflectionMethodIS_FINAL_constant(): void
     {
         $this->assertEquals(
@@ -566,6 +669,14 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the value of the Reflection::IS_PRIVATE constant
+     * is equal to the value of the ReflectionMethod::IS_PRIVATE
+     * constant.
+     *
+     * @return void
+     *
+     */
     public function test_ReflectionIS_PRIVATE_constant_is_equal_to_ReflectionMethodIS_PRIVATE_constant(): void
     {
         $this->assertEquals(
@@ -581,6 +692,14 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the value of the Reflectionvalue::IS_PROTECTED
+     * constant is equal to the value of the
+     * ReflectionMethod::IS_PROTECTED constant.
+     *
+     * @return void
+     *
+     */
     public function test_ReflectionIS_PROTECTED_constant_is_equal_to_ReflectionMethodIS_PROTECTED_constant(): void
     {
         $this->assertEquals(
@@ -596,6 +715,14 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the value of the Reflection::IS_PUBLIC constant
+     * is equal to the value of the ReflectionMethod::IS_PUBLIC
+     * constant.
+     *
+     * @return void
+     *
+     */
     public function test_ReflectionIS_PUBLIC_constant_is_equal_to_ReflectionMethodIS_PUBLIC_constant(): void
     {
         $this->assertEquals(
@@ -611,6 +738,14 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the value of the Reflection::IS_STATIC constant
+     * is equal to the value of the ReflectionMethod::IS_STATIC
+     * constant.
+     *
+     * @return void
+     *
+     */
     public function test_ReflectionIS_STATIC_constant_is_equal_to_ReflectionMethodIS_STATIC_constant(): void
     {
         $this->assertEquals(
@@ -622,6 +757,37 @@ trait ReflectionTestTrait
                 'The value of the Reflection::IS_STATIC constant ' .
                 'must be equal to the value of the ' .
                 'ReflectionMethod::IS_STATIC constant.'
+            )
+        );
+    }
+
+    /**
+     * Test that the methodParameterNames() method returns a
+     * numerically indexed array of the names of the parameters
+     * defined by the specified method of the reflected class or
+     * object instance.
+     *
+     * @return void
+     *
+     */
+    public function test_methodParameterNames_returns_a_numerically_indexed_array_of_the_names_of_the_parameters_defined_by_the_specified_method(): void
+    {
+        // ranom method name
+        $methodNames = $this->determineReflectedClassesMethodNames();
+        $methodName = $methodNames[array_rand($methodNames)];
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodParameterNames(
+                $methodName
+            ),
+            $this->reflectionTestInstance()->methodParameterNames(
+                $methodName
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return a numerically indexed array of the names ' .
+                'of the parameters defined by the specified method ' .
+                'of the reflected class or object instance.'
             )
         );
     }
