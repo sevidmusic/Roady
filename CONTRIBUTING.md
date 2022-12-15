@@ -49,11 +49,28 @@ namespace tests\interfaces;
 trait TestTrait
 {
 
+    /**
+     * [Descrption]
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * ```
+     *
+     */
     public function aMethodDefinedByTheTestTrait(): void
     {
         // ...
     }
 
+    /**
+     * [Descrption]
+     *
+     * @return void
+     *
+     */
     public function test_method_defined_by_the_test_trait(): void
     {
         // ...
