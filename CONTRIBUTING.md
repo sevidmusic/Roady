@@ -223,6 +223,10 @@ Implemented a new class method:
 
     ```
 
+    The `[method]` method is defined by the `[interface]` interface.
+
+    [Descrption]
+
     For example:
 
     ```
