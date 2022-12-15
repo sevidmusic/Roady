@@ -194,3 +194,48 @@ New classes:
 
 ```
 
+Defined a new interface method:
+
+```
+    Defined the following method in the `[interface]` interface:
+
+    ```
+    [method]
+
+    ```
+
+    For example:
+
+    ```
+    [code example]
+
+    ```
+
+```
+
+Implemented a new class method:
+
+```
+    Implemented the following method in the `[class]` class:
+
+    ```
+    [method]
+
+    ```
+
+    For example:
+
+    ```
+    [code example]
+
+    ```
+
+    Implemented the following tests in `[test trait]`:
+
+    ```
+    [test methods]
+
+    ```
+
+```
+
