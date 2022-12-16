@@ -3,6 +3,7 @@
 namespace roady\classes\utilities;
 
 use \ReflectionClass;
+use \ReflectionMethod;
 use roady\classes\strings\ClassString;
 use roady\interfaces\strings\ClassString as ClassStringInterface;
 use roady\interfaces\utilities\Reflection as ReflectionInterface;
@@ -59,22 +60,14 @@ class Reflection implements ReflectionInterface
     {
         $parameterNames = [];
         foreach(
-            $this->reflectionClass->getMethods()
+            $this->reflectionMethod($method)->getParameters()
             as
-            $reflectionMethod
+            $reflectionParameter
         ) {
-            if($reflectionMethod->getName() === $method) {
-                foreach(
-                    $reflectionMethod->getParameters()
-                    as
-                    $reflectionParameter
-                ) {
-                    array_push(
-                        $parameterNames,
-                        $reflectionParameter->getName()
-                    );
-                }
-            }
+            array_push(
+                $parameterNames,
+                $reflectionParameter->getName()
+            );
         }
         return $parameterNames;
     }
@@ -106,5 +99,32 @@ class Reflection implements ReflectionInterface
         );
     }
 
+    /**
+     * Return an instance of a ReflectionMethod for the specified
+     * method of the reflected class or object instance.
+     *
+     * @param string $method The name of the method to be reflected
+     *                       by the returned ReflectionMethod
+     *                       instance.
+     *
+     * @return ReflectionMethod
+     *
+     * @example
+     *
+     * ```
+     * $this->reflectionMethod('methodName');
+     *
+     * ```
+     *
+     */
+    final protected function reflectionMethod(
+        string $method
+    ): ReflectionMethod
+    {
+        return new ReflectionMethod(
+            $this->type()->__toString(),
+            $method
+        );
+    }
 }
 

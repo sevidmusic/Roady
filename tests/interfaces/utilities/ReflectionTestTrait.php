@@ -181,7 +181,7 @@ trait ReflectionTestTrait
      *
      */
     protected function determineReflectedClassesMethodParameterNames(
-        string $methodName
+        string $method
     ): array
     {
         $reflectionClass = $this->reflectionClass(
@@ -189,26 +189,46 @@ trait ReflectionTestTrait
         );
         $parameterNames = [];
         foreach(
-            $reflectionClass->getMethods()
+            $this->reflectionMethod($method)->getParameters()
             as
-            $reflectionMethod
+            $reflectionParameter
         ) {
-            if($reflectionMethod->getName() === $methodName) {
-                foreach(
-                    $reflectionMethod->getParameters()
-                    as
-                    $reflectionParameter
-                ) {
-                    array_push(
-                        $parameterNames,
-                        $reflectionParameter->getName()
-                    );
-                }
-            }
+            array_push(
+                $parameterNames,
+                $reflectionParameter->getName()
+            );
         }
         return $parameterNames;
     }
 
+    /**
+     * Return an instance of a ReflectionMethod for the specified
+     * method of the class or object instance reflected by the
+     * Reflection implementation instance being tested.
+     *
+     * @param string $method The name of the method to be reflected
+     *                       by the returned ReflectionMethod
+     *                       instance.
+     *
+     * @return ReflectionMethod
+     *
+     * @example
+     *
+     * ```
+     * $this->reflectionMethod('methodName');
+     *
+     * ```
+     *
+     */
+    final protected function reflectionMethod(
+        string $method
+    ): ReflectionMethod
+    {
+        return new ReflectionMethod(
+            $this->reflectedClass(),
+            $method
+        );
+    }
     /**
      * Return the class-string or object instance to be reflected by
      * the Reflection implementation instance being tested.
