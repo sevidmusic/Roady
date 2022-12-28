@@ -4,6 +4,9 @@ namespace tests\interfaces\utilities;
 
 use \ReflectionClass;
 use \ReflectionMethod;
+use \ReflectionNamedType;
+use \ReflectionParameter;
+use \ReflectionUnionType;
 use roady\classes\constituents\Identifiable;
 use roady\classes\strings\Id;
 use roady\classes\strings\Name;
@@ -147,16 +150,22 @@ trait ReflectionTestTrait
 
     /**
      * Return a numerically indexed array of the names of the
-     * parameters defined by the specified method of the class
+     * parameters expected by the specified method of the class
      * or object instance reflected by the Reflection implementation
      * instance being tested.
+     *
+     * @param string $method The name of the method whose parameter
+     *                       names should be included in the
+     *                       returned array.
      *
      * @return array<int, string>
      *
      * @example
      *
      * ```
-     * var_dump($r->determineReflectedClassesMethodNames('foo'));
+     * var_dump(
+     *     $this->determineReflectedClassesMethodParameterNames('foo')
+     * );
      *
      * // example output:
      *
@@ -184,6 +193,9 @@ trait ReflectionTestTrait
         string $method
     ): array
     {
+        if(empty($method)) {
+            return [];
+        }
         $reflectionClass = $this->reflectionClass(
             $this->reflectedClass()
         );
@@ -199,6 +211,203 @@ trait ReflectionTestTrait
             );
         }
         return $parameterNames;
+    }
+
+    /**
+     * Returns an associatively indexed array of numerically
+     * indexed arrays of strings indicating the types expected
+     * by the parameters defined by the specified method of the
+     * reflected class or object instance.
+     *
+     * The arrays will be indexed by the name of the parameter they
+     * are associated with.
+     *
+     * @return array<string, array<int, string>>
+     *
+     * @example
+     *
+     * ```
+     * var_dump(
+     *     $this->determineReflectedClassesMethodParameterTypes()
+     * );
+     *
+     * // example output:
+     * array(1) {
+     *   ["parameter1"]=>
+     *   array(2) {
+     *     [0]=>
+     *     string(6) "object"
+     *     [1]=>
+     *     string(6) "string"
+     *   }
+     *
+     * ```
+     *
+     */
+    protected function determineReflectedClassesMethodParameterTypes(
+        string $method
+    ): array
+    {
+        if(empty($method)) { return []; }
+        $reflectionClass = $this->reflectionClass(
+            $this->reflectedClass()
+        );
+        $parameterTypes = [];
+        foreach(
+            $this->reflectionMethod($method)->getParameters()
+            as
+            $reflectionParameter
+        ) {
+            $type = $reflectionParameter->getType();
+            if(!$type instanceof \ReflectionType) { continue; }
+            if($type instanceof ReflectionUnionType) {
+                $this->addUnionTypesToArray(
+                    $reflectionParameter,
+                    $parameterTypes,
+                    $type
+                );
+                continue;
+            }
+            if($type instanceof ReflectionNamedType) {
+                $this->addNamedTypeToArray(
+                    $reflectionParameter,
+                    $parameterTypes,
+                    $type
+                );
+            }
+        }
+        return $parameterTypes;
+    }
+
+    /**
+     * Add an array of strings indicating the types represented by
+     * the specified $reflectionUnionType to the specified array of
+     * $parameterTypes.
+     *
+     * If the $reflectionUnionType is nullable, then the string "null"
+     * will be included in the array.
+     *
+     * Index the array by the specified $reflectionParameter's name.
+     *
+     * @param ReflectionParameter $reflectionParameter
+     *                                An instance of a
+     *                                ReflectionParameter that
+     *                                represents the parameter
+     *                                whose types are to be
+     *                                represented in the array.
+     *
+     * @param array<string, array<int, string>> &$parameterTypes
+     *                                              The array of
+     *                                              parameter types
+     *                                              to add the array
+     *                                              to.
+     *
+     * @param ReflectionUnionType $reflectionUnionType
+     *                                An instance of a
+     *                                ReflectionUnionType
+     *                                that represents the
+     *                                types expected by the
+     *                                parameter whose types
+     *                                are to be represented
+     *                                in the array.
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->addUnionTypesToArray(
+     *     $reflectionParameter,
+     *     $parameterTypes,
+     *     $type
+     * );
+     *
+     * ```
+     *
+     */
+    private function addUnionTypesToArray(
+        ReflectionParameter $reflectionParameter,
+        array &$parameterTypes,
+        ReflectionUnionType $reflectionUnionType
+    ): void
+    {
+            $reflectionUnionTypes = $reflectionUnionType->getTypes();
+            foreach($reflectionUnionTypes as $unionType) {
+                $parameterTypes[$reflectionParameter->getName()][]
+                    = $unionType->getName();
+            }
+            if(
+                !in_array(
+                    'null',
+                    $parameterTypes[$reflectionParameter->getName()]
+                )
+                &&
+                $reflectionUnionType->allowsNull()
+            ) {
+                $parameterTypes[$reflectionParameter->getName()][]
+                    = 'null';
+            }
+    }
+
+
+    /**
+     * Add an array that contains a string indicating the type
+     * represented by the specified $reflectionNamedType to the
+     * specified array of $parameterTypes.
+     *
+     * If the $reflectionNamedType is nullable, then the string
+     * "null" will be included in the array.
+     *
+     * The array will be indexed by the specified
+     * $reflectionParameter's name.
+     *
+     * @param ReflectionParameter $reflectionParameter
+     *                                An instance of a
+     *                                ReflectionParameter that
+     *                                represents the parameter
+     *                                whose type is to be
+     *                                represented in the array.
+     *
+     * @param array<string, array<int, string>> &$parameterTypes
+     *                                              The array of
+     *                                              parameter types
+     *                                              to add the array
+     *                                              to.
+     *
+     * @param ReflectionNamedType $reflectionNamedType
+     *                                An instance of a
+     *                                ReflectionNamedType
+     *                                that represents the
+     *                                type expected by the
+     *                                parameter whose type
+     *                                is to be represented
+     *                                in the array.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $this->addNamedTypeToArray(
+     *     $reflectionParameter,
+     *     $parameterTypes,
+     *     $reflectionNamedType
+     * );
+     *
+     * ```
+     *
+     */
+    private function addNamedTypeToArray(
+        ReflectionParameter $reflectionParameter,
+        array &$parameterTypes,
+        ReflectionNamedType $reflectionNamedType
+    ): void
+    {
+        $parameterTypes[$reflectionParameter->getName()] =
+            [$reflectionNamedType->getName()];
+        if($reflectionNamedType->allowsNull()) {
+            $parameterTypes[$reflectionParameter->getName()][] =
+                'null';
+        }
     }
 
     /**
@@ -229,6 +438,7 @@ trait ReflectionTestTrait
             $method
         );
     }
+
     /**
      * Return the class-string or object instance to be reflected by
      * the Reflection implementation instance being tested.
@@ -381,9 +591,41 @@ trait ReflectionTestTrait
      * ```
      *
      */
-    protected function reflectionClass(string|object $class): ReflectionClass
+    protected function reflectionClass(
+        string|object $class
+    ): ReflectionClass
     {
         return new ReflectionClass($class);
+    }
+
+    /**
+     * Return the name of a randomly chosen method defined by
+     * the reflected class or object instance.
+     *
+     * If the reflected class or object instance does not define
+     * any methods, then an empty string will be returned.
+     *
+     * @return string
+     *
+     * @example
+     *
+     * ```
+     * echo $this->randomMethodName();
+     *
+     * // example output:
+     * someMethodDefinedByTheReflectedClassOrObjectInstance
+     *
+     * ```
+     *
+     */
+    protected function randomMethodName(): string
+    {
+        $methodNames = $this->determineReflectedClassesMethodNames();
+        return (
+            empty($methodNames)
+            ? ''
+            : $methodNames[array_rand($methodNames)]
+        );
     }
 
     /**
@@ -728,8 +970,8 @@ trait ReflectionTestTrait
             $this->testFailedMessage(
                 $this->reflectionTestInstance(),
                 '',
-                'The value of the Reflection::IS_PROTECTED constant ' .
-                'must be equal to the value of the ' .
+                'The value of the Reflection::IS_PROTECTED ' .
+                'constant must be equal to the value of the ' .
                 'ReflectionMethod::IS_PROTECTED constant.'
             )
         );
@@ -792,9 +1034,7 @@ trait ReflectionTestTrait
      */
     public function test_methodParameterNames_returns_a_numerically_indexed_array_of_the_names_of_the_parameters_defined_by_the_specified_method(): void
     {
-        // ranom method name
-        $methodNames = $this->determineReflectedClassesMethodNames();
-        $methodName = $methodNames[array_rand($methodNames)];
+        $methodName = $this->randomMethodName();
         $this->assertEquals(
             $this->determineReflectedClassesMethodParameterNames(
                 $methodName
@@ -812,5 +1052,37 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the methodParameterTypes() method returns an
+     * associatively indexed array of numerically indexed arrays
+     * of strings indicating the types of the parameters defined
+     * by the specified method of the reflected class or object
+     * instance.
+     *
+     * @return void
+     *
+     */
+    public function test_methodParameterTypes_returns_a_numerically_indexed_array_of_the_types_expected_by_the_parameters_defined_by_the_specified_method(): void
+    {
+        $methodNames = $this->determineReflectedClassesMethodNames();
+        $methodName = $this->randomMethodName();
+        $this->assertEquals(
+            $this->determineReflectedClassesMethodParameterTypes(
+                $methodName
+            ),
+            $this->reflectionTestInstance()->methodParameterTypes(
+                $methodName
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodParameterTypes',
+                'return an associatively indexed array of ' .
+                'numerically indexed arrays of strings indicating '.
+                'the types of the parameters expected by ' .
+                'the specified method of the reflected class ' .
+                'or object instance.'
+            )
+        );
+    }
 }
 
