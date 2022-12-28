@@ -179,6 +179,8 @@ class RoadyTest extends TestCase
     protected function randomClassStringOrObjectInstance(): string|object
     {
         $classStringsAndObjects = [
+            /**
+
             ReflectionClass::class,
             Reflection::class,
             Id::class,
@@ -192,7 +194,8 @@ class RoadyTest extends TestCase
                 new ReflectionClass(new Id())
             ),
             new ReflectionClass(new Id()),
-            new ReflectedClass(true, 100),
+             */
+            new ReflectedClass(),
         ];
         return $classStringsAndObjects[
             array_rand($classStringsAndObjects)

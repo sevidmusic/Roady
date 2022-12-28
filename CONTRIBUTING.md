@@ -49,11 +49,28 @@ namespace tests\interfaces;
 trait TestTrait
 {
 
+    /**
+     * [Descrption]
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * ```
+     *
+     */
     public function aMethodDefinedByTheTestTrait(): void
     {
         // ...
     }
 
+    /**
+     * [Descrption]
+     *
+     * @return void
+     *
+     */
     public function test_method_defined_by_the_test_trait(): void
     {
         // ...
@@ -177,6 +194,55 @@ New classes:
     [methods]
 
     ```
+
+    For example:
+
+    ```
+    [code example]
+
+    ```
+
+    Implemented the following tests in `[test trait]`:
+
+    ```
+    [test methods]
+
+    ```
+
+```
+
+Defined a new interface method:
+
+```
+    Defined the following method in the `[interface]` interface:
+
+    ```
+    [method]
+
+    ```
+
+    For example:
+
+    ```
+    [code example]
+
+    ```
+
+```
+
+Implemented a new class method:
+
+```
+    Implemented the following method in the `[class]` class:
+
+    ```
+    [method]
+
+    ```
+
+    The `[method]` method is defined by the `[interface]` interface.
+
+    [Descrption]
 
     For example:
 

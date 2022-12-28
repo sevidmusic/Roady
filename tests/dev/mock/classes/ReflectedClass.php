@@ -3,6 +3,7 @@
 namespace tests\dev\mock\classes;
 
 use tests\dev\mock\classes\ReflectedAbstractClass;
+use \Closure;
 
 /**
  * This class is only intended to be used in tests.
@@ -14,41 +15,142 @@ use tests\dev\mock\classes\ReflectedAbstractClass;
 class ReflectedClass extends ReflectedAbstractClass
 {
 
-    public const PUBLIC_CONSTANT = 1;
-
-    public function __construct(
-        private bool $foo,
-        protected int $baz
-    ){}
-
-    public function foo(): bool
+    private function privateMethodWithNoParameters(): void
     {
-        return $this->privateMethod();
+        $this::staticMethodWithNoParameters();
     }
 
-    public function bar(): int
+    /**
+     * Parent method that expects parameters of varying type.
+     *
+     * @param array<mixed> $arrayParameter
+     *
+     * @return void
+     *
+     */
+    private function privateMethodWithParameters(
+        Closure $closureParameter,
+        string $stringParameter,
+        int $intParameter,
+        float $floatParameter,
+        bool $boolParameter,
+        object $objectParameter,
+        array $arrayParameter,
+        mixed $mixedParameter,
+        Closure|string|int|ReflectedAbstractClass $unionTypeParameter,
+        bool|int|null $nullalbleRequiredParameter,
+        ReflectedAbstractClass|null $nullalbleOptionalParameter= null
+    ): void
     {
-        return $this->protectedMethod();
+        var_dump(
+            $closureParameter,
+            $stringParameter,
+            $intParameter,
+            $floatParameter,
+            $boolParameter,
+            $objectParameter,
+            $arrayParameter,
+            $nullalbleRequiredParameter,
+            $nullalbleOptionalParameter
+        );
     }
 
-    private function privateMethod(): bool
+    protected function protectedMethodWithNoParameters(): void
     {
-        return $this->foo;
+        $this->privateMethodWithNoParameters();
     }
 
-    protected function protectedMethod(): int
+    /**
+     * Parent method that expects parameters of varying type.
+     *
+     * @param array<mixed> $arrayParameter
+     *
+     * @return void
+     *
+     */
+    protected function protectedMethodWithParameters(
+        Closure $closureParameter,
+        string $stringParameter,
+        int $intParameter,
+        float $floatParameter,
+        bool $boolParameter,
+        object $objectParameter,
+        array $arrayParameter,
+        mixed $mixedParameter,
+        Closure|string|int|ReflectedAbstractClass $unionTypeParameter,
+        bool|int|null $nullalbleRequiredParameter,
+        ReflectedAbstractClass|null $nullalbleOptionalParameter= null
+    ): void
     {
-        return $this->finalMethod();
+        $this->privateMethodWithParameters(
+            $closureParameter,
+            $stringParameter,
+            $intParameter,
+            $floatParameter,
+            $boolParameter,
+            $objectParameter,
+            $arrayParameter,
+            $mixedParameter,
+            $unionTypeParameter,
+            $nullalbleRequiredParameter,
+            $nullalbleOptionalParameter
+        );
     }
 
-    public static function staticMethod(bool $foo, int $baz): string
+    public function publicMethodWithNoParameters(): void
     {
-        $instance = new ReflectedClass($foo, $baz);
-        return strval($instance->foo()) . strval($instance->bar());
+        $this->protectedMethodWithNoParameters();
     }
 
-    final protected function finalMethod(): int {
-        return $this->baz + self::PUBLIC_CONSTANT;
+    /**
+     * Parent method that expects parameters of varying type.
+     *
+     * @param array<mixed> $arrayParameter
+     *
+     * @return void
+     *
+     */
+    public function publicMethodWithParameters(
+        Closure $closureParameter,
+        string $stringParameter,
+        int $intParameter,
+        float $floatParameter,
+        bool $boolParameter,
+        object $objectParameter,
+        array $arrayParameter,
+        mixed $mixedParameter,
+        Closure|string|int|ReflectedAbstractClass $unionTypeParameter,
+        bool|int|null $nullalbleRequiredParameter,
+        ReflectedAbstractClass|null $nullalbleOptionalParameter= null
+    ): void
+    {
+        $this->protectedMethodWithParameters(
+            $closureParameter,
+            $stringParameter,
+            $intParameter,
+            $floatParameter,
+            $boolParameter,
+            $objectParameter,
+            $arrayParameter,
+            $mixedParameter,
+            $unionTypeParameter,
+            $nullalbleRequiredParameter,
+            $nullalbleOptionalParameter
+        );
+    }
+
+    public static function staticMethodWithNoParameters():void
+    {
+        var_dump(phpinfo());
+    }
+
+    public static function staticMethodWithParameters(
+        ReflectedAbstractClass $parameter1,
+        object|bool|null $parameter2 = null
+    ): bool
+    {
+        var_dump($parameter1);
+        return ($parameter2 instanceof ReflectedAbstractClass);
     }
 
 }

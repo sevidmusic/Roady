@@ -240,21 +240,19 @@ interface Reflection
     public function methodParameterNames(string $method): array;
 
     /**
-     * Return an associatively indexed array of the parameter types
-     * expected by the specified method of the reflected class or
-     * object instance.
+     * Returns an associatively indexed array of numerically
+     * indexed arrays of strings indicating the types expected
+     * by the parameters defined by the specified method of the
+     * reflected class or object instance.
      *
-     * The types in the array will be indexed by the name of the
-     * parameter they are associated with.
-     *
-     * The parameters types will be ordered according the order
-     * that the parameters were declared by the respective method.
+     * The arrays will be indexed by the name of the parameter they
+     * are associated with.
      *
      * @param string $method The name of method whose parameter
      *                       types should be included in the
      *                       returned array.
      *
-     * @return array<string, string|ClassString>
+     * @return array<string, array<int, string>>
      *
      * @example
      *
@@ -262,24 +260,12 @@ interface Reflection
      * var_dump($reflection->methodParameterTypes('method1'));
      *
      * // example output:
-     *
-     * array(7) {
-     *   ["parameter1"]=>
-     *   string(4) "bool"
-     *   ["parameter2"]=>
-     *   string(3) "int"
-     *   ["parameter3"]=>
-     *   string(5) "float"
-     *   ["parameter4"]=>
-     *   string(4) "null"
-     *   ["parameter5"]=>
-     *   string(5) "array"
-     *   ["parameter6"]=>
-     *   string(6) "string"
-     *   ["parameter7"]=>
-     *   object(roady\classes\strings\ClassString)#3 (1) {
-     *     ["string":"roady\classes\strings\Text":private]=>
-     *     string(24) "roady\classes\strings\Id"
+     * var_dump($reflection->methodParameterTypes('methodParameterTypes'));
+     * array(1) {
+     *   ["method"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(6) "string"
      *   }
      * }
      *
@@ -446,6 +432,77 @@ interface Reflection
      *
      */
     public function type(): ClassString;
+
+    /**
+     * @devNote
+     *
+     * I have not decided if this method will be apart of the
+     * Reflection interface.
+     *
+     * @endDevNote
+     *
+     * Return a new instance of the reflected class or object instance
+     * constructed with the provided $constructorArguments.
+     *
+     * @param array<int, mixed> $constructorArguments The arguments
+     *                                                to pass to the
+     *                                                __construct()
+     *                                                method of the
+     *                                                reflected class.
+     * @return object
+     *
+     * @example
+     *
+     * ```
+     * $reflectionOfAnObjectInstance->instance();
+     *
+     * //
+     *
+     * ```
+     *
+     */
+    // public function newInstance(array $constructorArguments = []): void;
+
+
+    /**
+     * @devNote
+     *
+     * I have not decided if this method will be apart of the
+     * Reflection interface.
+     *
+     * @endDevNote
+     *
+     * Return the original reflected object instance, or a
+     * ClassStriing that represents the type of the reflected
+     * class.
+     *
+     * @return
+     *
+     * @example
+     *
+     * ```
+     * var_dump($reflectionOfAnObjectInstance->reflectedClass());
+     *
+     * // example output:
+     * object(stdClass)#1 (2) {
+     *   ["foo"]=>
+     *   string(3) "bar"
+     *   ["baz"]=>
+     *   string(6) "bazzer"
+     * }
+     *
+     * var_dump($reflectionOfAClass->reflectedClass());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#5 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(8) "stdClass"
+     * }
+     *
+     * ```
+     *
+     */
+    // public function reflectedClass(): object;
 
 }
 
