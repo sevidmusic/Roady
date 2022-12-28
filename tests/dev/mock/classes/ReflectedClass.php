@@ -42,7 +42,6 @@ class ReflectedClass extends ReflectedAbstractClass
         ReflectedAbstractClass|null $nullalbleOptionalParameter= null
     ): void
     {
-        $this->privateMethodWithNoParameters();
         var_dump(
             $closureParameter,
             $stringParameter,
@@ -58,7 +57,7 @@ class ReflectedClass extends ReflectedAbstractClass
 
     protected function protectedMethodWithNoParameters(): void
     {
-        $this->protectedMethodWithNoParameters();
+        $this->privateMethodWithNoParameters();
     }
 
     /**
