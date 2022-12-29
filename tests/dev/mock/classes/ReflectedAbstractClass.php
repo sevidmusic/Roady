@@ -87,6 +87,24 @@ abstract class ReflectedAbstractClass
     public static mixed $parentPublicStaticMixedProperty = null;
     public static object $parentPublicStaticObjectProperty;
 
+    abstract protected function abstractProtectedFunction(): void;
+    abstract public function abstractPublicFunction(): void;
+    abstract protected static function abstractProtectedStaticFunction(): void;
+    abstract public static function abstractPublicStaticFunction(): void;
+
+    abstract public static function abstractPublicAcceptsAStringFunction(string $string): void;
+    abstract public static function abstractPublicAcceptsAIntFunction(int $int): void;
+    abstract public static function abstractPublicAcceptsAFloatFunction(float $float): void;
+    abstract public static function abstractPublicAcceptsABoolFunction(bool $bool): void;
+    abstract public static function abstractPublicAcceptsAObjectFunction(object $object): void;
+    /**
+     * @param array<mixed> $array
+     */
+    abstract public static function abstractPublicAcceptsAArrayFunction(array $array): void;
+    abstract public static function abstractPublicAcceptsAClosureFunction(Closure $closure): void;
+    abstract public static function abstractPublicAcceptsAIntBoolFunction(int|bool $unionType): void;
+    abstract public static function abstractPublicAcceptsAStringOrNullFunction(?string $string): void;
+
     public function getPrivateNullableProperty(): ?int
     {
         return $this->parentPrivateNullableProperty;
