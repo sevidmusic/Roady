@@ -310,7 +310,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public static function getStaticPrivateNullableProperty(): ?int
+    public static function getPrivateStaticNullableProperty(): ?int
     {
         return self::$privateStaticNullableProperty;
     }
@@ -318,7 +318,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public static function getStaticPrivateClosureProperty(): Closure
+    public static function getPrivateStaticClosureProperty(): Closure
     {
         self::$privateStaticClosureProperty = static function(): void {};
         return self::$privateStaticClosureProperty;
@@ -327,7 +327,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public static function getStaticPrivateArrayProperty(): array
+    public static function getPrivateStaticArrayProperty(): array
     {
         return self::$privateStaticArrayProperty;
     }
@@ -335,7 +335,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return bool
      */
-    public static function getStaticPrivateBoolProperty(): bool
+    public static function getPrivateStaticBoolProperty(): bool
     {
         return self::$privateStaticBoolProperty;
     }
@@ -343,7 +343,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return float
      */
-    public static function getStaticPrivateFloatProperty(): float
+    public static function getPrivateStaticFloatProperty(): float
     {
         return self::$privateStaticFloatProperty;
     }
@@ -351,7 +351,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return int
      */
-    public static function getStaticPrivateIntProperty(): int
+    public static function getPrivateStaticIntProperty(): int
     {
         return self::$privateStaticIntProperty;
     }
@@ -359,7 +359,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public static function getStaticPrivateUnionTypeProperty(): int|bool|string
+    public static function getPrivateStaticUnionTypeProperty(): int|bool|string
     {
         return self::$privateStaticUnionTypeProperty;
     }
@@ -367,7 +367,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public static function getStaticPrivateMixedProperty(): mixed
+    public static function getPrivateStaticMixedProperty(): mixed
     {
         return self::$privateStaticMixedProperty;
     }
@@ -375,7 +375,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return object
      */
-    public static function getStaticPrivateObjectProperty(): object
+    public static function getPrivateStaticObjectProperty(): object
     {
         self::$privateStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$privateStaticObjectProperty;
@@ -384,7 +384,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public static function getStaticProtectedNullableProperty(): ?int
+    public static function getProtectedStaticNullableProperty(): ?int
     {
         return self::$protectedStaticNullableProperty;
     }
@@ -392,7 +392,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public static function getStaticProtectedClosureProperty(): Closure
+    public static function getProtectedStaticClosureProperty(): Closure
     {
         self::$protectedStaticClosureProperty = static function(): void {};
         return self::$protectedStaticClosureProperty;
@@ -401,7 +401,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public static function getStaticProtectedArrayProperty(): array
+    public static function getProtectedStaticArrayProperty(): array
     {
         return self::$protectedStaticArrayProperty;
     }
@@ -409,7 +409,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return bool
      */
-    public static function getStaticProtectedBoolProperty(): bool
+    public static function getProtectedStaticBoolProperty(): bool
     {
         return self::$protectedStaticBoolProperty;
     }
@@ -417,7 +417,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return float
      */
-    public static function getStaticProtectedFloatProperty(): float
+    public static function getProtectedStaticFloatProperty(): float
     {
         return self::$protectedStaticFloatProperty;
     }
@@ -425,7 +425,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return int
      */
-    public static function getStaticProtectedIntProperty(): int
+    public static function getProtectedStaticIntProperty(): int
     {
         return self::$protectedStaticIntProperty;
     }
@@ -433,7 +433,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public static function getStaticProtectedUnionTypeProperty(): int|bool|string
+    public static function getProtectedStaticUnionTypeProperty(): int|bool|string
     {
         return self::$protectedStaticUnionTypeProperty;
     }
@@ -441,7 +441,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public static function getStaticProtectedMixedProperty(): mixed
+    public static function getProtectedStaticMixedProperty(): mixed
     {
         return self::$protectedStaticMixedProperty;
     }
@@ -449,7 +449,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return object
      */
-    public static function getStaticProtectedObjectProperty(): object
+    public static function getProtectedStaticObjectProperty(): object
     {
         self::$protectedStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$protectedStaticObjectProperty;
@@ -459,7 +459,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public static function getStaticPublicNullableProperty(): ?int
+    public static function getPublicStaticNullableProperty(): ?int
     {
         return self::$publicStaticNullableProperty;
     }
@@ -467,7 +467,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public static function getStaticPublicClosureProperty(): Closure
+    public static function getPublicStaticClosureProperty(): Closure
     {
         self::$publicStaticClosureProperty = static function(): void {};
         return self::$publicStaticClosureProperty;
@@ -476,7 +476,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public static function getStaticPublicArrayProperty(): array
+    public static function getPublicStaticArrayProperty(): array
     {
         return self::$publicStaticArrayProperty;
     }
@@ -484,7 +484,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return bool
      */
-    public static function getStaticPublicBoolProperty(): bool
+    public static function getPublicStaticBoolProperty(): bool
     {
         return self::$publicStaticBoolProperty;
     }
@@ -492,7 +492,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return float
      */
-    public static function getStaticPublicFloatProperty(): float
+    public static function getPublicStaticFloatProperty(): float
     {
         return self::$publicStaticFloatProperty;
     }
@@ -500,7 +500,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return int
      */
-    public static function getStaticPublicIntProperty(): int
+    public static function getPublicStaticIntProperty(): int
     {
         return self::$publicStaticIntProperty;
     }
@@ -508,7 +508,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public static function getStaticPublicUnionTypeProperty(): int|bool|string
+    public static function getPublicStaticUnionTypeProperty(): int|bool|string
     {
         return self::$publicStaticUnionTypeProperty;
     }
@@ -516,7 +516,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public static function getStaticPublicMixedProperty(): mixed
+    public static function getPublicStaticMixedProperty(): mixed
     {
         return self::$publicStaticMixedProperty;
     }
@@ -524,7 +524,7 @@ class ReflectedClass extends ReflectedAbstractClass
     /**
      * @return object
      */
-    public static function getStaticPublicObjectProperty(): object
+    public static function getPublicStaticObjectProperty(): object
     {
         self::$publicStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$publicStaticObjectProperty;
