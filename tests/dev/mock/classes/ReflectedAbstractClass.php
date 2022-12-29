@@ -87,7 +87,7 @@ abstract class ReflectedAbstractClass
     public static mixed $parentPublicStaticMixedProperty = null;
     public static object $parentPublicStaticObjectProperty;
 
-    public function getParentPrivateNullableProperty(): ?int
+    public function getPrivateNullableProperty(): ?int
     {
         return $this->parentPrivateNullableProperty;
     }
@@ -95,7 +95,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public function getParentPrivateClosureProperty(): Closure
+    public function getPrivateClosureProperty(): Closure
     {
         $this->parentPrivateClosureProperty = function(): void {};
         return $this->parentPrivateClosureProperty;
@@ -104,7 +104,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public function getParentPrivateArrayProperty(): array
+    public function getPrivateArrayProperty(): array
     {
         return $this->parentPrivateArrayProperty;
     }
@@ -112,7 +112,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return bool
      */
-    public function getParentPrivateBoolProperty(): bool
+    public function getPrivateBoolProperty(): bool
     {
         return $this->parentPrivateBoolProperty;
     }
@@ -120,7 +120,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return float
      */
-    public function getParentPrivateFloatProperty(): float
+    public function getPrivateFloatProperty(): float
     {
         return $this->parentPrivateFloatProperty;
     }
@@ -128,7 +128,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int
      */
-    public function getParentPrivateIntProperty(): int
+    public function getPrivateIntProperty(): int
     {
         return $this->parentPrivateIntProperty;
     }
@@ -136,7 +136,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public function getParentPrivateUnionTypeProperty(): int|bool|string
+    public function getPrivateUnionTypeProperty(): int|bool|string
     {
         return $this->parentPrivateUnionTypeProperty;
     }
@@ -144,7 +144,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public function getParentPrivateMixedProperty(): mixed
+    public function getPrivateMixedProperty(): mixed
     {
         return $this->parentPrivateMixedProperty;
     }
@@ -152,7 +152,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return object
      */
-    public function getParentPrivateObjectProperty(): object
+    public function getPrivateObjectProperty(): object
     {
         $this->parentPrivateObjectProperty = (object) ['foo' => 'bar'];
         return $this->parentPrivateObjectProperty;
@@ -161,7 +161,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public function getParentProtectedNullableProperty(): ?int
+    public function getProtectedNullableProperty(): ?int
     {
         return $this->parentProtectedNullableProperty;
     }
@@ -169,7 +169,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public function getParentProtectedClosureProperty(): Closure
+    public function getProtectedClosureProperty(): Closure
     {
         $this->parentProtectedClosureProperty = function(): void {};
         return $this->parentProtectedClosureProperty;
@@ -178,7 +178,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public function getParentProtectedArrayProperty(): array
+    public function getProtectedArrayProperty(): array
     {
         return $this->parentProtectedArrayProperty;
     }
@@ -186,7 +186,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return bool
      */
-    public function getParentProtectedBoolProperty(): bool
+    public function getProtectedBoolProperty(): bool
     {
         return $this->parentProtectedBoolProperty;
     }
@@ -194,7 +194,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return float
      */
-    public function getParentProtectedFloatProperty(): float
+    public function getProtectedFloatProperty(): float
     {
         return $this->parentProtectedFloatProperty;
     }
@@ -202,7 +202,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int
      */
-    public function getParentProtectedIntProperty(): int
+    public function getProtectedIntProperty(): int
     {
         return $this->parentProtectedIntProperty;
     }
@@ -210,7 +210,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public function getParentProtectedUnionTypeProperty(): int|bool|string
+    public function getProtectedUnionTypeProperty(): int|bool|string
     {
         return $this->parentProtectedUnionTypeProperty;
     }
@@ -218,7 +218,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public function getParentProtectedMixedProperty(): mixed
+    public function getProtectedMixedProperty(): mixed
     {
         return $this->parentProtectedMixedProperty;
     }
@@ -226,7 +226,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return object
      */
-    public function getParentProtectedObjectProperty(): object
+    public function getProtectedObjectProperty(): object
     {
         $this->parentProtectedObjectProperty = (object) ['foo' => 'bar'];
         return $this->parentProtectedObjectProperty;
@@ -235,7 +235,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public function getParentPublicNullableProperty(): ?int
+    public function getPublicNullableProperty(): ?int
     {
         return $this->parentPublicNullableProperty;
     }
@@ -243,7 +243,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public function getParentPublicClosureProperty(): Closure
+    public function getPublicClosureProperty(): Closure
     {
         $this->parentPublicClosureProperty = function(): void {};
         return $this->parentPublicClosureProperty;
@@ -252,7 +252,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public function getParentPublicArrayProperty(): array
+    public function getPublicArrayProperty(): array
     {
         return $this->parentPublicArrayProperty;
     }
@@ -260,7 +260,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return bool
      */
-    public function getParentPublicBoolProperty(): bool
+    public function getPublicBoolProperty(): bool
     {
         return $this->parentPublicBoolProperty;
     }
@@ -268,7 +268,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return float
      */
-    public function getParentPublicFloatProperty(): float
+    public function getPublicFloatProperty(): float
     {
         return $this->parentPublicFloatProperty;
     }
@@ -276,7 +276,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int
      */
-    public function getParentPublicIntProperty(): int
+    public function getPublicIntProperty(): int
     {
         return $this->parentPublicIntProperty;
     }
@@ -284,7 +284,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public function getParentPublicUnionTypeProperty(): int|bool|string
+    public function getPublicUnionTypeProperty(): int|bool|string
     {
         return $this->parentPublicUnionTypeProperty;
     }
@@ -292,7 +292,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public function getParentPublicMixedProperty(): mixed
+    public function getPublicMixedProperty(): mixed
     {
         return $this->parentPublicMixedProperty;
     }
@@ -300,7 +300,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return object
      */
-    public function getParentPublicObjectProperty(): object
+    public function getPublicObjectProperty(): object
     {
         $this->parentPublicObjectProperty = (object) ['foo' => 'bar'];
         return $this->parentPublicObjectProperty;
@@ -309,7 +309,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public static function getParentPrivateStaticNullableProperty(): ?int
+    public static function getPrivateStaticNullableProperty(): ?int
     {
         return self::$parentPrivateStaticNullableProperty;
     }
@@ -317,7 +317,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public static function getParentPrivateStaticClosureProperty(): Closure
+    public static function getPrivateStaticClosureProperty(): Closure
     {
         self::$parentPrivateStaticClosureProperty = static function(): void {};
         return self::$parentPrivateStaticClosureProperty;
@@ -326,7 +326,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public static function getParentPrivateStaticArrayProperty(): array
+    public static function getPrivateStaticArrayProperty(): array
     {
         return self::$parentPrivateStaticArrayProperty;
     }
@@ -334,7 +334,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return bool
      */
-    public static function getParentPrivateStaticBoolProperty(): bool
+    public static function getPrivateStaticBoolProperty(): bool
     {
         return self::$parentPrivateStaticBoolProperty;
     }
@@ -342,7 +342,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return float
      */
-    public static function getParentPrivateStaticFloatProperty(): float
+    public static function getPrivateStaticFloatProperty(): float
     {
         return self::$parentPrivateStaticFloatProperty;
     }
@@ -350,7 +350,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int
      */
-    public static function getParentPrivateStaticIntProperty(): int
+    public static function getPrivateStaticIntProperty(): int
     {
         return self::$parentPrivateStaticIntProperty;
     }
@@ -358,7 +358,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public static function getParentPrivateStaticUnionTypeProperty(): int|bool|string
+    public static function getPrivateStaticUnionTypeProperty(): int|bool|string
     {
         return self::$parentPrivateStaticUnionTypeProperty;
     }
@@ -366,7 +366,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public static function getParentPrivateStaticMixedProperty(): mixed
+    public static function getPrivateStaticMixedProperty(): mixed
     {
         return self::$parentPrivateStaticMixedProperty;
     }
@@ -374,7 +374,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return object
      */
-    public static function getParentPrivateStaticObjectProperty(): object
+    public static function getPrivateStaticObjectProperty(): object
     {
         self::$parentPrivateStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$parentPrivateStaticObjectProperty;
@@ -383,7 +383,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public static function getParentProtectedStaticNullableProperty(): ?int
+    public static function getProtectedStaticNullableProperty(): ?int
     {
         return self::$parentProtectedStaticNullableProperty;
     }
@@ -391,7 +391,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public static function getParentProtectedStaticClosureProperty(): Closure
+    public static function getProtectedStaticClosureProperty(): Closure
     {
         self::$parentProtectedStaticClosureProperty = static function(): void {};
         return self::$parentProtectedStaticClosureProperty;
@@ -400,7 +400,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public static function getParentProtectedStaticArrayProperty(): array
+    public static function getProtectedStaticArrayProperty(): array
     {
         return self::$parentProtectedStaticArrayProperty;
     }
@@ -408,7 +408,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return bool
      */
-    public static function getParentProtectedStaticBoolProperty(): bool
+    public static function getProtectedStaticBoolProperty(): bool
     {
         return self::$parentProtectedStaticBoolProperty;
     }
@@ -416,7 +416,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return float
      */
-    public static function getParentProtectedStaticFloatProperty(): float
+    public static function getProtectedStaticFloatProperty(): float
     {
         return self::$parentProtectedStaticFloatProperty;
     }
@@ -424,7 +424,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int
      */
-    public static function getParentProtectedStaticIntProperty(): int
+    public static function getProtectedStaticIntProperty(): int
     {
         return self::$parentProtectedStaticIntProperty;
     }
@@ -432,7 +432,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public static function getParentProtectedStaticUnionTypeProperty(): int|bool|string
+    public static function getProtectedStaticUnionTypeProperty(): int|bool|string
     {
         return self::$parentProtectedStaticUnionTypeProperty;
     }
@@ -440,7 +440,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public static function getParentProtectedStaticMixedProperty(): mixed
+    public static function getProtectedStaticMixedProperty(): mixed
     {
         return self::$parentProtectedStaticMixedProperty;
     }
@@ -448,7 +448,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return object
      */
-    public static function getParentProtectedStaticObjectProperty(): object
+    public static function getProtectedStaticObjectProperty(): object
     {
         self::$parentProtectedStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$parentProtectedStaticObjectProperty;
@@ -458,7 +458,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return ?int
      */
-    public static function getParentPublicStaticNullableProperty(): ?int
+    public static function getPublicStaticNullableProperty(): ?int
     {
         return self::$parentPublicStaticNullableProperty;
     }
@@ -466,7 +466,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return Closure
      */
-    public static function getParentPublicStaticClosureProperty(): Closure
+    public static function getPublicStaticClosureProperty(): Closure
     {
         self::$parentPublicStaticClosureProperty = static function(): void {};
         return self::$parentPublicStaticClosureProperty;
@@ -475,7 +475,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return array<mixed>
      */
-    public static function getParentPublicStaticArrayProperty(): array
+    public static function getPublicStaticArrayProperty(): array
     {
         return self::$parentPublicStaticArrayProperty;
     }
@@ -483,7 +483,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return bool
      */
-    public static function getParentPublicStaticBoolProperty(): bool
+    public static function getPublicStaticBoolProperty(): bool
     {
         return self::$parentPublicStaticBoolProperty;
     }
@@ -491,7 +491,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return float
      */
-    public static function getParentPublicStaticFloatProperty(): float
+    public static function getPublicStaticFloatProperty(): float
     {
         return self::$parentPublicStaticFloatProperty;
     }
@@ -499,7 +499,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int
      */
-    public static function getParentPublicStaticIntProperty(): int
+    public static function getPublicStaticIntProperty(): int
     {
         return self::$parentPublicStaticIntProperty;
     }
@@ -507,7 +507,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return int|bool|string
      */
-    public static function getParentPublicStaticUnionTypeProperty(): int|bool|string
+    public static function getPublicStaticUnionTypeProperty(): int|bool|string
     {
         return self::$parentPublicStaticUnionTypeProperty;
     }
@@ -515,7 +515,7 @@ abstract class ReflectedAbstractClass
     /**
      * @return mixed
      */
-    public static function getParentPublicStaticMixedProperty(): mixed
+    public static function getPublicStaticMixedProperty(): mixed
     {
         return self::$parentPublicStaticMixedProperty;
     }
@@ -523,10 +523,177 @@ abstract class ReflectedAbstractClass
     /**
      * @return object
      */
-    public static function getParentPublicStaticObjectProperty(): object
+    public static function getPublicStaticObjectProperty(): object
     {
         self::$parentPublicStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$parentPublicStaticObjectProperty;
+    }
+
+    private function parentPrivateMethodToReturnAString(): string
+    {
+        return 'a string';
+    }
+
+    private function parentPrivateMethodToReturnABool(): bool
+    {
+        return true;
+    }
+
+    private function parentPrivateMethodToReturnAFloat(): float
+    {
+        return 3.14;
+    }
+
+    private function parentPrivateMethodToReturnAInt(): int
+    {
+        return 42;
+    }
+
+    private function parentPrivateMethodToReturnAClosure(): Closure
+    {
+        return function(): void {};
+    }
+
+    private function parentPrivateMethodToReturnAObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    private function parentPrivateMethodToReturnAArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    private function parentPrivateMethodToReturnABoolOrInt(): bool|int
+    {
+        if (rand(1, 100) <= 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    private function parentPrivateMethodToReturnAStringOrNull(): ?string
+    {
+        if (rand(1, 100) >= 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    private static function parentPrivateMethodToReturnAStaticString(): string
+    {
+        return 'some string';
+    }
+
+    private static function parentPrivateMethodToReturnAStaticBool(): bool
+    {
+        return true;
+    }
+
+    private static function parentPrivateMethodToReturnAStaticFloat(): float
+    {
+        return 3.14;
+    }
+
+    private static function parentPrivateMethodToReturnAStaticInt(): int
+    {
+        return 42;
+    }
+
+    private static function parentPrivateMethodToReturnAStaticClosure(): Closure
+    {
+        return function():void {};
+    }
+
+    private static function parentPrivateMethodToReturnAStaticObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    private static function parentPrivateMethodToReturnAStaticArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    private static function parentPrivateMethodToReturnAStaticBoolOrInt(): bool|int
+    {
+        if (rand(1, 100) === 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    private static function parentPrivateMethodToReturnAStaticStringOrNull(): ?string
+    {
+        if (rand(1, 100) === 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+
+    protected function dumpAll(): void
+    {
+        var_dump(
+            $this->parentPrivateMethodToReturnAString(),
+            $this->parentPrivateMethodToReturnABool(),
+            $this->parentPrivateMethodToReturnAFloat(),
+            $this->parentPrivateMethodToReturnAInt(),
+            $this->parentPrivateMethodToReturnAClosure(),
+            $this->parentPrivateMethodToReturnAObject(),
+            $this->parentPrivateMethodToReturnAArray(),
+            $this->parentPrivateMethodToReturnABoolOrInt(),
+            $this->parentPrivateMethodToReturnAStringOrNull(),
+            self::parentPrivateMethodToReturnAStaticString(),
+            self::parentPrivateMethodToReturnAStaticBool(),
+            self::parentPrivateMethodToReturnAStaticFloat(),
+            self::parentPrivateMethodToReturnAStaticInt(),
+            self::parentPrivateMethodToReturnAStaticClosure(),
+            self::parentPrivateMethodToReturnAStaticObject(),
+            self::parentPrivateMethodToReturnAStaticArray(),
+            self::parentPrivateMethodToReturnAStaticBoolOrInt(),
+            self::parentPrivateMethodToReturnAStaticStringOrNull(),
+        );
+    }
+
+    protected function dumpInstance(): void
+    {
+        var_dump(
+            $this->parentPrivateMethodToReturnAString(),
+            $this->parentPrivateMethodToReturnABool(),
+            $this->parentPrivateMethodToReturnAFloat(),
+            $this->parentPrivateMethodToReturnAInt(),
+            $this->parentPrivateMethodToReturnAClosure(),
+            $this->parentPrivateMethodToReturnAObject(),
+            $this->parentPrivateMethodToReturnAArray(),
+            $this->parentPrivateMethodToReturnABoolOrInt(),
+            $this->parentPrivateMethodToReturnAStringOrNull(),
+        );
+    }
+
+    protected static function dumpStatic(): void
+    {
+        var_dump(
+            self::parentPrivateMethodToReturnAStaticString(),
+            self::parentPrivateMethodToReturnAStaticBool(),
+            self::parentPrivateMethodToReturnAStaticFloat(),
+            self::parentPrivateMethodToReturnAStaticInt(),
+            self::parentPrivateMethodToReturnAStaticClosure(),
+            self::parentPrivateMethodToReturnAStaticObject(),
+            self::parentPrivateMethodToReturnAStaticArray(),
+            self::parentPrivateMethodToReturnAStaticBoolOrInt(),
+            self::parentPrivateMethodToReturnAStaticStringOrNull(),
+        );
     }
 
     protected function parentProtectedMethodToReturnAString(): string
