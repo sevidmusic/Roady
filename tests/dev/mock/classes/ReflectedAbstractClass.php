@@ -3,6 +3,7 @@
 namespace tests\dev\mock\classes;
 
 use \Closure;
+use \stdClass;
 
 /**
  * This class is only intended to be used in tests.
@@ -528,4 +529,227 @@ abstract class ReflectedAbstractClass
         return self::$parentPublicStaticObjectProperty;
     }
 
+    protected function parentProtectedMethodToReturnAString(): string
+    {
+        return 'a string';
+    }
+
+    protected function parentProtectedMethodToReturnABool(): bool
+    {
+        return true;
+    }
+
+    protected function parentProtectedMethodToReturnAFloat(): float
+    {
+        return 3.14;
+    }
+
+    protected function parentProtectedMethodToReturnAInt(): int
+    {
+        return 42;
+    }
+
+    protected function parentProtectedMethodToReturnAClosure(): Closure
+    {
+        return function(): void {};
+    }
+
+    protected function parentProtectedMethodToReturnAObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    protected function parentProtectedMethodToReturnAArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    protected function parentProtectedMethodToReturnABoolOrInt(): bool|int
+    {
+        if (rand(1, 100) <= 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    protected function parentProtectedMethodToReturnAStringOrNull(): ?string
+    {
+        if (rand(1, 100) >= 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticString(): string
+    {
+        return 'some string';
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticBool(): bool
+    {
+        return true;
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticFloat(): float
+    {
+        return 3.14;
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticInt(): int
+    {
+        return 42;
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticClosure(): Closure
+    {
+        return function():void {};
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    protected static function parentProtectedMethodToReturnAStaticArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticBoolOrInt(): bool|int
+    {
+        if (rand(1, 100) === 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    protected static function parentProtectedMethodToReturnAStaticStringOrNull(): ?string
+    {
+        if (rand(1, 100) === 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    public function parentPublicMethodToReturnAString(): string
+    {
+        return 'a string';
+    }
+
+    public function parentPublicMethodToReturnABool(): bool
+    {
+        return true;
+    }
+
+    public function parentPublicMethodToReturnAFloat(): float
+    {
+        return 3.14;
+    }
+
+    public function parentPublicMethodToReturnAInt(): int
+    {
+        return 42;
+    }
+
+    public function parentPublicMethodToReturnAClosure(): Closure
+    {
+        return function(): void {};
+    }
+
+    public function parentPublicMethodToReturnAObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function parentPublicMethodToReturnAArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    public function parentPublicMethodToReturnABoolOrInt(): bool|int
+    {
+        if (rand(1, 100) <= 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    public function parentPublicMethodToReturnAStringOrNull(): ?string
+    {
+        if (rand(1, 100) >= 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    public static function parentPublicMethodToReturnAStaticString(): string
+    {
+        return 'some string';
+    }
+
+    public static function parentPublicMethodToReturnAStaticBool(): bool
+    {
+        return true;
+    }
+
+    public static function parentPublicMethodToReturnAStaticFloat(): float
+    {
+        return 3.14;
+    }
+
+    public static function parentPublicMethodToReturnAStaticInt(): int
+    {
+        return 42;
+    }
+
+    public static function parentPublicMethodToReturnAStaticClosure(): Closure
+    {
+        return function():void {};
+    }
+
+    public static function parentPublicMethodToReturnAStaticObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public static function parentPublicMethodToReturnAStaticArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    public static function parentPublicMethodToReturnAStaticBoolOrInt(): bool|int
+    {
+        if (rand(1, 100) === 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    public static function parentPublicMethodToReturnAStaticStringOrNull(): ?string
+    {
+        if (rand(1, 100) === 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
 }

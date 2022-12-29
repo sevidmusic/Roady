@@ -4,7 +4,7 @@ namespace tests\dev\mock\classes;
 
 use tests\dev\mock\classes\ReflectedAbstractClass;
 use \Closure;
-
+use \stdClass;
 /**
  * This class is only intended to be used in tests.
  *
@@ -528,5 +528,396 @@ class ReflectedClass extends ReflectedAbstractClass
     {
         self::$publicStaticObjectProperty = (object) ['foo' => 'bar'];
         return self::$publicStaticObjectProperty;
+    }
+
+    private function privateMethodToReturnAString(): string
+    {
+        return 'a string';
+    }
+
+    private function privateMethodToReturnABool(): bool
+    {
+        return true;
+    }
+
+    private function privateMethodToReturnAFloat(): float
+    {
+        return 3.14;
+    }
+
+    private function privateMethodToReturnAInt(): int
+    {
+        return 42;
+    }
+
+    private function privateMethodToReturnAClosure(): Closure
+    {
+        return function(): void {};
+    }
+
+    private function privateMethodToReturnAObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    private function privateMethodToReturnAArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    private function privateMethodToReturnABoolOrInt(): bool|int
+    {
+        if (rand(1, 100) <= 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    private function privateMethodToReturnAStringOrNull(): ?string
+    {
+        if (rand(1, 100) >= 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    private static function privateMethodToReturnAStaticString(): string
+    {
+        return 'some string';
+    }
+
+    private static function privateMethodToReturnAStaticBool(): bool
+    {
+        return true;
+    }
+
+    private static function privateMethodToReturnAStaticFloat(): float
+    {
+        return 3.14;
+    }
+
+    private static function privateMethodToReturnAStaticInt(): int
+    {
+        return 42;
+    }
+
+    private static function privateMethodToReturnAStaticClosure(): Closure
+    {
+        return function():void {};
+    }
+
+    private static function privateMethodToReturnAStaticObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    private static function privateMethodToReturnAStaticArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    private static function privateMethodToReturnAStaticBoolOrInt(): bool|int
+    {
+        if (rand(1, 100) === 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    private static function privateMethodToReturnAStaticStringOrNull(): ?string
+    {
+        if (rand(1, 100) === 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+
+    protected function dumpAll(): void
+    {
+        var_dump(
+            $this->privateMethodToReturnAString(),
+            $this->privateMethodToReturnABool(),
+            $this->privateMethodToReturnAFloat(),
+            $this->privateMethodToReturnAInt(),
+            $this->privateMethodToReturnAClosure(),
+            $this->privateMethodToReturnAObject(),
+            $this->privateMethodToReturnAArray(),
+            $this->privateMethodToReturnABoolOrInt(),
+            $this->privateMethodToReturnAStringOrNull(),
+            self::privateMethodToReturnAStaticString(),
+            self::privateMethodToReturnAStaticBool(),
+            self::privateMethodToReturnAStaticFloat(),
+            self::privateMethodToReturnAStaticInt(),
+            self::privateMethodToReturnAStaticClosure(),
+            self::privateMethodToReturnAStaticObject(),
+            self::privateMethodToReturnAStaticArray(),
+            self::privateMethodToReturnAStaticBoolOrInt(),
+            self::privateMethodToReturnAStaticStringOrNull(),
+        );
+    }
+
+    protected function dumpInstance(): void
+    {
+        var_dump(
+            $this->privateMethodToReturnAString(),
+            $this->privateMethodToReturnABool(),
+            $this->privateMethodToReturnAFloat(),
+            $this->privateMethodToReturnAInt(),
+            $this->privateMethodToReturnAClosure(),
+            $this->privateMethodToReturnAObject(),
+            $this->privateMethodToReturnAArray(),
+            $this->privateMethodToReturnABoolOrInt(),
+            $this->privateMethodToReturnAStringOrNull(),
+        );
+    }
+
+    protected static function dumpStatic(): void
+    {
+        var_dump(
+            self::privateMethodToReturnAStaticString(),
+            self::privateMethodToReturnAStaticBool(),
+            self::privateMethodToReturnAStaticFloat(),
+            self::privateMethodToReturnAStaticInt(),
+            self::privateMethodToReturnAStaticClosure(),
+            self::privateMethodToReturnAStaticObject(),
+            self::privateMethodToReturnAStaticArray(),
+            self::privateMethodToReturnAStaticBoolOrInt(),
+            self::privateMethodToReturnAStaticStringOrNull(),
+        );
+    }
+
+    protected function protectedMethodToReturnAString(): string
+    {
+        return 'a string';
+    }
+
+    protected function protectedMethodToReturnABool(): bool
+    {
+        return true;
+    }
+
+    protected function protectedMethodToReturnAFloat(): float
+    {
+        return 3.14;
+    }
+
+    protected function protectedMethodToReturnAInt(): int
+    {
+        return 42;
+    }
+
+    protected function protectedMethodToReturnAClosure(): Closure
+    {
+        return function(): void {};
+    }
+
+    protected function protectedMethodToReturnAObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    protected function protectedMethodToReturnAArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    protected function protectedMethodToReturnABoolOrInt(): bool|int
+    {
+        if (rand(1, 100) <= 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    protected function protectedMethodToReturnAStringOrNull(): ?string
+    {
+        if (rand(1, 100) >= 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    protected static function protectedMethodToReturnAStaticString(): string
+    {
+        return 'some string';
+    }
+
+    protected static function protectedMethodToReturnAStaticBool(): bool
+    {
+        return true;
+    }
+
+    protected static function protectedMethodToReturnAStaticFloat(): float
+    {
+        return 3.14;
+    }
+
+    protected static function protectedMethodToReturnAStaticInt(): int
+    {
+        return 42;
+    }
+
+    protected static function protectedMethodToReturnAStaticClosure(): Closure
+    {
+        return function():void {};
+    }
+
+    protected static function protectedMethodToReturnAStaticObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    protected static function protectedMethodToReturnAStaticArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    protected static function protectedMethodToReturnAStaticBoolOrInt(): bool|int
+    {
+        if (rand(1, 100) === 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    protected static function protectedMethodToReturnAStaticStringOrNull(): ?string
+    {
+        if (rand(1, 100) === 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    public function publicMethodToReturnAString(): string
+    {
+        return 'a string';
+    }
+
+    public function publicMethodToReturnABool(): bool
+    {
+        return true;
+    }
+
+    public function publicMethodToReturnAFloat(): float
+    {
+        return 3.14;
+    }
+
+    public function publicMethodToReturnAInt(): int
+    {
+        return 42;
+    }
+
+    public function publicMethodToReturnAClosure(): Closure
+    {
+        return function(): void {};
+    }
+
+    public function publicMethodToReturnAObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function publicMethodToReturnAArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    public function publicMethodToReturnABoolOrInt(): bool|int
+    {
+        if (rand(1, 100) <= 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    public function publicMethodToReturnAStringOrNull(): ?string
+    {
+        if (rand(1, 100) >= 50) {
+            return 'some string';
+        }
+
+        return null;
+    }
+
+    public static function publicMethodToReturnAStaticString(): string
+    {
+        return 'some string';
+    }
+
+    public static function publicMethodToReturnAStaticBool(): bool
+    {
+        return true;
+    }
+
+    public static function publicMethodToReturnAStaticFloat(): float
+    {
+        return 3.14;
+    }
+
+    public static function publicMethodToReturnAStaticInt(): int
+    {
+        return 42;
+    }
+
+    public static function publicMethodToReturnAStaticClosure(): Closure
+    {
+        return function():void {};
+    }
+
+    public static function publicMethodToReturnAStaticObject(): object
+    {
+        return new stdClass();
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public static function publicMethodToReturnAStaticArray(): array
+    {
+        return [1, 2, 3];
+    }
+
+    public static function publicMethodToReturnAStaticBoolOrInt(): bool|int
+    {
+        if (rand(1, 100) === 50) {
+            return true;
+        }
+
+        return 42;
+    }
+
+    public static function publicMethodToReturnAStaticStringOrNull(): ?string
+    {
+        if (rand(1, 100) === 50) {
+            return 'some string';
+        }
+
+        return null;
     }
 }
