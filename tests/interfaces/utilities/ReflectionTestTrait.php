@@ -16,8 +16,8 @@ use roady\interfaces\utilities\Reflection;
 use tests\RoadyTest;
 
 /**
- * The ReflectionTestTrait defines common tests for
- * implementations of the Reflection interface.
+ * The ReflectionTestTrait defines common tests for implementations
+ * of the Reflection interface.
  *
  * @see Reflection
  *
@@ -215,12 +215,15 @@ trait ReflectionTestTrait
 
     /**
      * Returns an associatively indexed array of numerically
-     * indexed arrays of strings indicating the types expected
-     * by the parameters defined by the specified method of the
-     * reflected class or object instance.
+     * indexed arrays of strings indicating the types accepted
+     * by the parameters expected by the specified method of
+     * the class or object instance reflected by the Reflection
+     * implementation being tested.
      *
      * The arrays will be indexed by the name of the parameter they
      * are associated with.
+     *
+     * @param string $method The name of the target method.
      *
      * @return array<string, array<int, string>>
      *
@@ -232,14 +235,22 @@ trait ReflectionTestTrait
      * );
      *
      * // example output:
-     * array(1) {
+     * array(2) {
      *   ["parameter1"]=>
-     *   array(2) {
+     *   array(3) {
      *     [0]=>
-     *     string(6) "object"
-     *     [1]=>
      *     string(6) "string"
+     *     [1]=>
+     *     string(3) "int"
+     *     [2]=>
+     *     string(4) "null"
      *   }
+     *   ["parameter2"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     * }
      *
      * ```
      *
@@ -287,7 +298,8 @@ trait ReflectionTestTrait
      * If the $reflectionUnionType is nullable, then the string "null"
      * will be included in the array.
      *
-     * Index the array by the specified $reflectionParameter's name.
+     * The array will be indexed in the specified $parameterTypes
+     * array by the specified $reflectionParameter's name.
      *
      * @param ReflectionParameter $reflectionParameter
      *                                An instance of a
@@ -318,7 +330,7 @@ trait ReflectionTestTrait
      * $this->addUnionTypesToArray(
      *     $reflectionParameter,
      *     $parameterTypes,
-     *     $type
+     *     $reflectionUnionType
      * );
      *
      * ```
@@ -408,6 +420,112 @@ trait ReflectionTestTrait
             $parameterTypes[$reflectionParameter->getName()][] =
                 'null';
         }
+    }
+
+    /**
+     * Return a numerically indexed array of the names of
+     * the properties defined by the class or object instance
+     * reflected by the Reflection implementation instance
+     * being tested.
+     *
+     * @param int|null $filter Determine what property names are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         ReflectionMethod::IS_ABSTRACT
+     *                         ReflectionMethod::IS_FINAL
+     *                         ReflectionMethod::IS_PRIVATE
+     *                         ReflectionMethod::IS_PROTECTED
+     *                         ReflectionMethod::IS_PUBLIC
+     *                         ReflectionMethod::IS_STATIC
+     *
+     *                         All properties defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the names of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties
+     *                         via a call like:
+     *
+     *                         ```
+     *                         $this->
+     *                         determineReflectedClassesPropertyNames(
+     *                             ~Reflection::IS_STATIC
+     *                         );
+     *
+     *                         ```
+     *
+     * @return array <int, string>
+     *
+     * @example
+     *
+     * ```
+     * var_dump($this->determineReflectedClassesPropertyNames());
+     *
+     * // example output:
+     *
+     * array(2) {
+     *   [0]=>
+     *   string(9) "property1"
+     *   [1]=>
+     *   string(9) "property2"
+     * }
+     *
+     * var_dump(
+     *     $this->determineReflectedClassesPropertyNames(
+     *         ReflectionMethod::IS_PUBLIC
+     *     )
+     * );
+     *
+     * // example output:
+     *
+     * array(1) {
+     *   [0]=>
+     *   string(9) "property1"
+     * }
+     *
+     * var_dump(
+     *     $this->determineReflectedClassesPropertyNames(
+     *         ReflectionMethod::IS_PRIVATE
+     *     )
+     * );
+     *
+     * // example output:
+     *
+     * array(1) {
+     *   [0]=>
+     *   string(9) "property2"
+     * }
+     *
+     * ```
+     */
+    protected function determineReflectedClassesPropertyNames(
+        int|null $filter = null
+    ): array
+    {
+        $reflectionClass = $this->reflectionClass(
+            $this->reflectedClass()
+        );
+        $propertyNames = [];
+        foreach(
+            $reflectionClass->getProperties($filter)
+            as
+            $reflectionProperty
+        ) {
+            array_push($propertyNames, $reflectionProperty->getName());
+        }
+        return $propertyNames;
     }
 
     /**
@@ -1084,5 +1202,28 @@ trait ReflectionTestTrait
             )
         );
     }
+
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of all the properties defined by
+     * the reflected class if no filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_all_the_properties_defined_by_the_reflected_class_if_no_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            $this->determineReflectedClassesPropertyNames(),
+            $this->reflectionTestInstance()->propertyNames(),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'methodNames',
+                'return an array of the names of the properties ' .
+                'defined by the reflected class'
+            )
+        );
+    }
+
 }
 

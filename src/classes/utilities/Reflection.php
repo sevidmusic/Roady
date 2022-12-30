@@ -107,9 +107,17 @@ class Reflection implements ReflectionInterface
         return $parameterTypes;
     }
 
-    public function propertyNames(): array
+    public function propertyNames(int|null $filter = null): array
     {
-        return [];
+        $propertyNames = [];
+        foreach(
+            $this->reflectionClass->getProperties($filter)
+            as
+            $reflectionProperty
+        ) {
+            array_push($propertyNames, $reflectionProperty->getName());
+        }
+        return $propertyNames;
     }
 
     public function propertyTypes(): array

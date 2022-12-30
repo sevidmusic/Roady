@@ -277,6 +277,42 @@ interface Reflection
      * Return a numerically indexed array of the names of the
      * properties defined by the reflected class or object instance.
      *
+     * @param int|null $filter Determine what property names are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         Reflection::IS_ABSTRACT
+     *                         Reflection::IS_FINAL
+     *                         Reflection::IS_PRIVATE
+     *                         Reflection::IS_PROTECTED
+     *                         Reflection::IS_PUBLIC
+     *                         Reflection::IS_STATIC
+     *
+     *                         All properties defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the names of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties via
+     *                         a call like:
+     *
+     *                         ```
+     *                         $reflection->propertyNames(
+     *                             ~Reflection::IS_STATIC
+     *                         );
+     *
+     *                         ```
      * @return array<int, string>
      *
      * @example
@@ -306,7 +342,7 @@ interface Reflection
      * ```
      *
      */
-    public function propertyNames(): array;
+    public function propertyNames(int|null $filter = null): array;
 
     /**
      * Return an associatively indexed array of the reflected class
