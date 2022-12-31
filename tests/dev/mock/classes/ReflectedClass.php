@@ -12,7 +12,7 @@ use \stdClass;
  *
  */
 
-class ReflectedClass extends ReflectedAbstractClass
+final class ReflectedClass extends ReflectedAbstractClass
 {
 
     private ?int $privateNullableProperty = null;

@@ -1225,5 +1225,215 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of the abstract properties defined
+     * by the reflected class if the Reflection::IS_ABSTRACT
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_the_abstract_properties_defined_by_the_reflected_class_if_the_ReflectionIS_ABSTRACT_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_ABSTRACT is used intentionally to
+             * test that the effect of passing Reflection::IS_ABSTRACT
+             * to the propertyNames() method is the same as passing
+             * ReflectionMethod::IS_ABSTRACT to the propertyNames()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyNames(
+                ReflectionMethod::IS_ABSTRACT
+            ),
+            $this->reflectionTestInstance()->propertyNames(
+                Reflection::IS_ABSTRACT
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyNames',
+                'return an array of the names of the abstract ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_ABSTRACT filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of the final properties defined
+     * by the reflected class if the Reflection::IS_FINAL
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_the_final_properties_defined_by_the_reflected_class_if_the_ReflectionIS_FINAL_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_FINAL is used intentionally to
+             * test that the effect of passing Reflection::IS_FINAL
+             * to the propertyNames() method is the same as passing
+             * ReflectionMethod::IS_FINAL to the propertyNames()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyNames(
+                ReflectionMethod::IS_FINAL
+            ),
+            $this->reflectionTestInstance()->propertyNames(
+                Reflection::IS_FINAL
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyNames',
+                'return an array of the names of the final ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_FINAL filter is specified'
+            )
+        );
+    }
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of the private properties defined
+     * by the reflected class if the Reflection::IS_PRIVATE
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_the_private_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PRIVATE_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_PRIVATE is used intentionally to
+             * test that the effect of passing Reflection::IS_PRIVATE
+             * to the propertyNames() method is the same as passing
+             * ReflectionMethod::IS_PRIVATE to the propertyNames()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyNames(
+               ReflectionMethod::IS_PRIVATE
+            ),
+            $this->reflectionTestInstance()->propertyNames(
+                Reflection::IS_PRIVATE
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyNames',
+                'return an array of the names of the private ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_PRIVATE filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of the protected properties defined
+     * by the reflected class if the Reflection::IS_PROTECTED
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_the_protected_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PROTECTED_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_PROTECTED is used
+             * intentionally to test that the effect of
+             * passing Reflection::IS_PROTECTED to the
+             * propertyNames() method is the same as passing
+             * ReflectionMethod::IS_PROTECTED to the
+             * propertyNames() method.
+             */
+            $this->determineReflectedClassesPropertyNames(
+                ReflectionMethod::IS_PROTECTED
+            ),
+            $this->reflectionTestInstance()->propertyNames(
+                Reflection::IS_PROTECTED
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyNames',
+                'return an array of the names of the protected ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_PROTECTED filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of the public properties defined
+     * by the reflected class if the Reflection::IS_PUBLIC
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_the_public_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PUBLIC_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_PUBLIC is used intentionally to
+             * test that the effect of passing Reflection::IS_PUBLIC
+             * to the propertyNames() method is the same as passing
+             * ReflectionMethod::IS_PUBLIC to the propertyNames()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyNames(
+                ReflectionMethod::IS_PUBLIC
+            ),
+            $this->reflectionTestInstance()->propertyNames(
+                Reflection::IS_PUBLIC
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyNames',
+                'return an array of the names of the public ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_PUBLIC filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyNames() method returns a numerically
+     * indexed array of the names of the static properties defined
+     * by the reflected class if the Reflection::IS_STATIC
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyNames_returns_the_names_of_the_static_properties_defined_by_the_reflected_class_if_the_ReflectionIS_STATIC_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_STATIC is used intentionally to
+             * test that the effect of passing Reflection::IS_STATIC
+             * to the propertyNames() method is the same as passing
+             * ReflectionMethod::IS_STATIC to the propertyNames()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyNames(
+                ReflectionMethod::IS_STATIC
+            ),
+            $this->reflectionTestInstance()->propertyNames(
+                Reflection::IS_STATIC
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyNames',
+                'return an array of the names of the static ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_STATIC filter is specified'
+            )
+        );
+    }
+
 }
 
