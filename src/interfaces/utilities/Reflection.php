@@ -385,66 +385,39 @@ interface Reflection
     public function propertyTypes(): array;
 
     /**
-     * Return an associatively indexed array of the reflected
-     * object instance's property values.
+     * Returns an associatively indexed array of numerically
+     * indexed arrays of strings indicating the types accepted
+     * by the properties defined by the class or object instance
+     * reflected by the Reflection implementation being tested.
      *
-     * The values in the array will be indexed by the name of the
-     * property they are associated with.
+     * The arrays of types be indexed by the name of the property
+     * they are associated with.
      *
-     * Note: If the Reflection reflects a class as opposed to an
-     * object instance, then an empty array will be returned. It
-     * is not possible to determine the values of a reflected class
-     * since it is not an object instance.
-     *
-     * @return array<string, mixed>
+     * @return array<string, array<int, string>>
      *
      * @example
      *
      * ```
-     * var_dump($objectInstanceReflection->propertyValues());
+     * var_dump(
+     *     $this->propertyTypes()
+     * );
      *
      * // example output:
-     * array(7) {
+     * array(2) {
      *   ["property1"]=>
-     *   bool(true)
-     *   ["property2"]=>
-     *   int(96215)
-     *   ["property3"]=>
-     *   int(19.2389)
-     *   ["property4"]=>
-     *   NULL
-     *   ["property5"]=>
      *   array(3) {
      *     [0]=>
-     *     string(3) "foo"
+     *     string(6) "string"
      *     [1]=>
-     *     string(3) "bar"
+     *     string(3) "int"
      *     [2]=>
-     *     string(3) "baz"
+     *     string(4) "null"
      *   }
-     *   ["property6"]=>
-     *   string(12) "FooBarBazzer"
-     *   ["property7"]=>
-     *   object(roady\classes\strings\Id)#3 (2) {
-     *     ["string":"roady\classes\strings\Text":private]=>
-     *     string(75) "Pos2MW2FCMh0laS66Jnpcf7gDRHtVv0aqOOoasYe6AE4lRbKCCgTxsL1UHtqPFNhZuY82tfXWMn"
-     *     ["text":"roady\classes\strings\SafeText":private]=>
-     *     object(roady\classes\strings\AlphanumericText)#2 (2) {
-     *       ["string":"roady\classes\strings\Text":private]=>
-     *       string(75) "Pos2MW2FCMh0laS66Jnpcf7gDRHtVv0aqOOoasYe6AE4lRbKCCgTxsL1UHtqPFNhZuY82tfXWMn"
-     *       ["text":"roady\classes\strings\SafeText":private]=>
-     *       object(roady\classes\strings\Text)#4 (1) {
-     *         ["string":"roady\classes\strings\Text":private]=>
-     *         string(75) "pos2MW2FCMh0laS66Jnpcf7gDRHtVv0aqOOoasYe6AE4lRbKCCgTxsL1UHtqPFNhZuY82tfXWMn"
-     *       }
-     *     }
+     *   ["property2"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
      *   }
-     * }
-     *
-     * var_dump($classReflection->propertyValues());
-     *
-     * // example output:
-     * array(0) {
      * }
      *
      * ```
