@@ -6,12 +6,8 @@ use \ReflectionClass;
 use \ReflectionMethod;
 use \ReflectionNamedType;
 use \ReflectionParameter;
+use \ReflectionProperty;
 use \ReflectionUnionType;
-use roady\classes\constituents\Identifiable;
-use roady\classes\strings\Id;
-use roady\classes\strings\Name;
-use roady\classes\strings\Text;
-use roady\interfaces\strings\ClassString;
 use roady\interfaces\utilities\Reflection;
 use tests\RoadyTest;
 
@@ -293,43 +289,43 @@ trait ReflectionTestTrait
     /**
      * Add an array of strings indicating the types represented by
      * the specified $reflectionUnionType to the specified array of
-     * $parameterTypes.
+     * $types.
      *
      * If the $reflectionUnionType is nullable, then the string "null"
-     * will be included in the array.
+     * will also be added to the array of $types.
      *
-     * The array will be indexed in the specified $parameterTypes
-     * array by the specified $reflectionParameter's name.
+     * The array of strings indicating the types represented by the
+     * specified $reflectionUnionType will be indexed in the specified
+     * $types array by the specified $propertyOrParameterReflection's
+     * name.
      *
-     * @param ReflectionParameter $reflectionParameter
-     *                                An instance of a
-     *                                ReflectionParameter that
-     *                                represents the parameter
-     *                                whose types are to be
-     *                                represented in the array.
+     * @param ReflectionParameter $propertyOrParameterReflection
+     *                            An instance of a ReflectionProperty
+     *                            or a ReflectionParameter that
+     *                            represents the property or parameter
+     *                            whose types are to be represented in
+     *                            the array.
      *
-     * @param array<string, array<int, string>> &$parameterTypes
-     *                                              The array of
-     *                                              parameter types
-     *                                              to add the array
-     *                                              to.
+     * @param array<string, array<int, string>> &$types The array to
+     *                                                  add the array
+     *                                                  of types to.
      *
      * @param ReflectionUnionType $reflectionUnionType
      *                                An instance of a
      *                                ReflectionUnionType
      *                                that represents the
-     *                                types expected by the
-     *                                parameter whose types
-     *                                are to be represented
-     *                                in the array.
+     *                                types accepted by the
+     *                                property or parameter
+     *                                whose types are to be
+     *                                represented in the array.
      * @return void
      *
      * @example
      *
      * ```
      * $this->addUnionTypesToArray(
-     *     $reflectionParameter,
-     *     $parameterTypes,
+     *     $propertyOrParameterReflection,
+     *     $types,
      *     $reflectionUnionType
      * );
      *
@@ -337,62 +333,63 @@ trait ReflectionTestTrait
      *
      */
     private function addUnionTypesToArray(
-        ReflectionParameter $reflectionParameter,
-        array &$parameterTypes,
+        ReflectionProperty
+        |ReflectionParameter $propertyOrParameterReflection,
+        array &$types,
         ReflectionUnionType $reflectionUnionType
     ): void
     {
-            $reflectionUnionTypes = $reflectionUnionType->getTypes();
-            foreach($reflectionUnionTypes as $unionType) {
-                $parameterTypes[$reflectionParameter->getName()][]
-                    = $unionType->getName();
-            }
-            if(
-                !in_array(
-                    'null',
-                    $parameterTypes[$reflectionParameter->getName()]
-                )
-                &&
-                $reflectionUnionType->allowsNull()
-            ) {
-                $parameterTypes[$reflectionParameter->getName()][]
-                    = 'null';
-            }
+        $reflectionUnionTypes = $reflectionUnionType->getTypes();
+        foreach($reflectionUnionTypes as $unionType) {
+            $types[$propertyOrParameterReflection->getName()][]
+                = $unionType->getName();
+        }
+        if(
+            !in_array(
+                'null',
+                $types[$propertyOrParameterReflection->getName()]
+            )
+            &&
+            $reflectionUnionType->allowsNull()
+        ) {
+            $types[$propertyOrParameterReflection->getName()][]
+                = 'null';
+        }
     }
 
 
     /**
      * Add an array that contains a string indicating the type
      * represented by the specified $reflectionNamedType to the
-     * specified array of $parameterTypes.
+     * specified array of $types.
      *
      * If the $reflectionNamedType is nullable, then the string
-     * "null" will be included in the array.
+     * "null" will also be added to the array.
      *
      * The array will be indexed by the specified
-     * $reflectionParameter's name.
+     * $propertyOrParameterReflection's name.
      *
-     * @param ReflectionParameter $reflectionParameter
-     *                                An instance of a
-     *                                ReflectionParameter that
-     *                                represents the parameter
-     *                                whose type is to be
-     *                                represented in the array.
+     * @param ReflectionProperty|ReflectionParameter $propertyOrParameterReflection
+     *                           An instance of a ReflectionProperty
+     *                           or a ReflectionParameter that
+     *                           represents the property or
+     *                           parameter whose type is to be
+     *                           represented in the array.
      *
-     * @param array<string, array<int, string>> &$parameterTypes
-     *                                              The array of
-     *                                              parameter types
-     *                                              to add the array
-     *                                              to.
+     * @param array<string, array<int, string>> &$types The array
+     *                                                  to add the
+     *                                                  array of types
+     *                                                  to.
      *
      * @param ReflectionNamedType $reflectionNamedType
      *                                An instance of a
      *                                ReflectionNamedType
      *                                that represents the
-     *                                type expected by the
-     *                                parameter whose type
-     *                                is to be represented
-     *                                in the array.
+     *                                type accepted by the
+     *                                property or parameter
+     *                                whose type is to be
+     *                                represented in the
+     *                                array.
      *
      * @return void
      *
@@ -400,8 +397,8 @@ trait ReflectionTestTrait
      *
      * ```
      * $this->addNamedTypeToArray(
-     *     $reflectionParameter,
-     *     $parameterTypes,
+     *     $propertyOrParameterReflection,
+     *     $types,
      *     $reflectionNamedType
      * );
      *
@@ -409,15 +406,16 @@ trait ReflectionTestTrait
      *
      */
     private function addNamedTypeToArray(
-        ReflectionParameter $reflectionParameter,
-        array &$parameterTypes,
+        ReflectionProperty
+        |ReflectionParameter $propertyOrParameterReflection,
+        array &$types,
         ReflectionNamedType $reflectionNamedType
     ): void
     {
-        $parameterTypes[$reflectionParameter->getName()] =
+        $types[$propertyOrParameterReflection->getName()] =
             [$reflectionNamedType->getName()];
         if($reflectionNamedType->allowsNull()) {
-            $parameterTypes[$reflectionParameter->getName()][] =
+            $types[$propertyOrParameterReflection->getName()][] =
                 'null';
         }
     }
@@ -526,6 +524,77 @@ trait ReflectionTestTrait
             array_push($propertyNames, $reflectionProperty->getName());
         }
         return $propertyNames;
+    }
+
+    /**
+     * Returns an associatively indexed array of numerically
+     * indexed arrays of strings indicating the types accepted
+     * by the properties defined by the class or object instance
+     * reflected by the Reflection implementation being tested.
+     *
+     * The arrays of types be indexed by the name of the property
+     * they are associated with.
+     *
+     * @return array<string, array<int, string>>
+     *
+     * @example
+     *
+     * ```
+     * var_dump(
+     *     $this->determineReflectedClassesMethodParameterTypes()
+     * );
+     *
+     * // example output:
+     * array(2) {
+     *   ["property1"]=>
+     *   array(3) {
+     *     [0]=>
+     *     string(6) "string"
+     *     [1]=>
+     *     string(3) "int"
+     *     [2]=>
+     *     string(4) "null"
+     *   }
+     *   ["property2"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     * }
+     *
+     * ```
+     *
+     */
+    protected function determineReflectedClassesPropertyTypes(): array
+    {
+        $reflectionClass = $this->reflectionClass(
+            $this->reflectedClass()
+        );
+        $propertyTypes = [];
+        foreach(
+            $reflectionClass->getProperties()
+            as
+            $reflectionProperty
+        ) {
+            $type = $reflectionProperty->getType();
+            if(!$type instanceof \ReflectionType) { continue; }
+            if($type instanceof ReflectionUnionType) {
+                $this->addUnionTypesToArray(
+                    $reflectionProperty,
+                    $propertyTypes,
+                    $type
+                );
+                continue;
+            }
+            if($type instanceof ReflectionNamedType) {
+                $this->addNamedTypeToArray(
+                    $reflectionProperty,
+                    $propertyTypes,
+                    $type
+                );
+            }
+        }
+        return $propertyTypes;
     }
 
     /**
@@ -1435,5 +1504,30 @@ trait ReflectionTestTrait
         );
     }
 
+    /**
+     * Test that the propertyTypes() method returns an associatively
+     * indexed array of numerically indexed arrays of strings
+     * indicating the types accepted by the properties defined by
+     * the reflected class or object instance.
+     *
+     * @return void
+     *
+     */
+    public function test_PropertyTypes_returns_a_numerically_indexed_array_of_the_types_of_the_properties_defined_by_the_reflected_class_or_object_instance(): void
+    {
+        $methodNames = $this->determineReflectedClassesPropertyNames();
+        $this->assertEquals(
+            $this->determineReflectedClassesPropertyTypes(),
+            $this->reflectionTestInstance()->propertyTypes(),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'return an associatively indexed array of ' .
+                'numerically indexed arrays of strings indicating '.
+                'the types accepted by the properties defined by ' .
+                'the reflected class or object instance.'
+            )
+        );
+    }
 }
 

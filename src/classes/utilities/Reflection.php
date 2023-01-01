@@ -2,11 +2,12 @@
 
 namespace roady\classes\utilities;
 
-use \ReflectionNamedType;
-use \ReflectionParameter;
-use \ReflectionUnionType;
 use \ReflectionClass;
 use \ReflectionMethod;
+use \ReflectionNamedType;
+use \ReflectionParameter;
+use \ReflectionProperty;
+use \ReflectionUnionType;
 use roady\classes\strings\ClassString;
 use roady\interfaces\strings\ClassString as ClassStringInterface;
 use roady\interfaces\utilities\Reflection as ReflectionInterface;
@@ -19,16 +20,8 @@ class Reflection implements ReflectionInterface
      * reflected by the specified ReflectionClass instance.
      *
      * @param ReflectionClass <object> $reflectionClass
-     *
      *                                     An instance of a
      *                                     ReflectionClass.
-     *
-     *                                     The Reflection will
-     *                                     provide information
-     *                                     about the class or
-     *                                     object instance
-     *                                     reflected by the
-     *                                     specified ReflectionClass.
      *
      * @example
      *
@@ -122,7 +115,32 @@ class Reflection implements ReflectionInterface
 
     public function propertyTypes(): array
     {
-        return [];
+        $reflectionClass = $this->reflectionClass;
+        $propertyTypes = [];
+        foreach(
+            $reflectionClass->getProperties()
+            as
+            $reflectionProperty
+        ) {
+            $type = $reflectionProperty->getType();
+            if(!$type instanceof \ReflectionType) { continue; }
+            if($type instanceof ReflectionUnionType) {
+                $this->addUnionTypesToArray(
+                    $reflectionProperty,
+                    $propertyTypes,
+                    $type
+                );
+                continue;
+            }
+            if($type instanceof ReflectionNamedType) {
+                $this->addNamedTypeToArray(
+                    $reflectionProperty,
+                    $propertyTypes,
+                    $type
+                );
+            }
+        }
+        return $propertyTypes;
     }
 
     public function propertyValues(): array
@@ -175,7 +193,7 @@ class Reflection implements ReflectionInterface
      *
      * Index the array by the specified $reflectionParameter's name.
      *
-     * @param ReflectionParameter $reflectionParameter
+     * @param ReflectionProperty|ReflectionParameter $reflectionParameter
      *                                An instance of a
      *                                ReflectionParameter that
      *                                represents the parameter
@@ -211,27 +229,27 @@ class Reflection implements ReflectionInterface
      *
      */
     private function addUnionTypesToArray(
-        ReflectionParameter $reflectionParameter,
+        ReflectionProperty|ReflectionParameter $reflectionParameter,
         array &$parameterTypes,
         ReflectionUnionType $reflectionUnionType
     ): void
     {
-            $reflectionUnionTypes = $reflectionUnionType->getTypes();
-            foreach($reflectionUnionTypes as $unionType) {
-                $parameterTypes[$reflectionParameter->getName()][]
-                    = $unionType->getName();
-            }
-            if(
-                !in_array(
-                    'null',
-                    $parameterTypes[$reflectionParameter->getName()]
-                )
-                &&
-                $reflectionUnionType->allowsNull()
-            ) {
-                $parameterTypes[$reflectionParameter->getName()][]
-                    = 'null';
-            }
+        $reflectionUnionTypes = $reflectionUnionType->getTypes();
+        foreach($reflectionUnionTypes as $unionType) {
+            $parameterTypes[$reflectionParameter->getName()][]
+                = $unionType->getName();
+        }
+        if(
+            !in_array(
+                'null',
+                $parameterTypes[$reflectionParameter->getName()]
+            )
+            &&
+            $reflectionUnionType->allowsNull()
+        ) {
+            $parameterTypes[$reflectionParameter->getName()][]
+                = 'null';
+        }
     }
 
 
@@ -246,7 +264,7 @@ class Reflection implements ReflectionInterface
      * The array will be indexed by the specified
      * $reflectionParameter's name.
      *
-     * @param ReflectionParameter $reflectionParameter
+     * @param ReflectionProperty|ReflectionParameter $reflectionParameter
      *                                An instance of a
      *                                ReflectionParameter that
      *                                represents the parameter
@@ -283,7 +301,7 @@ class Reflection implements ReflectionInterface
      *
      */
     private function addNamedTypeToArray(
-        ReflectionParameter $reflectionParameter,
+        ReflectionProperty|ReflectionParameter $reflectionParameter,
         array &$parameterTypes,
         ReflectionNamedType $reflectionNamedType
     ): void
