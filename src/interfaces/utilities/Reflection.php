@@ -385,47 +385,6 @@ interface Reflection
     public function propertyTypes(): array;
 
     /**
-     * Returns an associatively indexed array of numerically
-     * indexed arrays of strings indicating the types accepted
-     * by the properties defined by the class or object instance
-     * reflected by the Reflection implementation being tested.
-     *
-     * The arrays of types be indexed by the name of the property
-     * they are associated with.
-     *
-     * @return array<string, array<int, string>>
-     *
-     * @example
-     *
-     * ```
-     * var_dump(
-     *     $this->propertyTypes()
-     * );
-     *
-     * // example output:
-     * array(2) {
-     *   ["property1"]=>
-     *   array(3) {
-     *     [0]=>
-     *     string(6) "string"
-     *     [1]=>
-     *     string(3) "int"
-     *     [2]=>
-     *     string(4) "null"
-     *   }
-     *   ["property2"]=>
-     *   array(1) {
-     *     [0]=>
-     *     string(4) "bool"
-     *   }
-     * }
-     *
-     * ```
-     *
-     */
-    public function propertyValues(): array;
-
-    /**
      * Return the type of the reflected class or object instance
      * as a ClassString.
      *
@@ -441,77 +400,6 @@ interface Reflection
      *
      */
     public function type(): ClassString;
-
-    /**
-     * @devNote
-     *
-     * I have not decided if this method will be apart of the
-     * Reflection interface.
-     *
-     * @endDevNote
-     *
-     * Return a new instance of the reflected class or object instance
-     * constructed with the provided $constructorArguments.
-     *
-     * @param array<int, mixed> $constructorArguments The arguments
-     *                                                to pass to the
-     *                                                __construct()
-     *                                                method of the
-     *                                                reflected class.
-     * @return object
-     *
-     * @example
-     *
-     * ```
-     * $reflectionOfAnObjectInstance->instance();
-     *
-     * //
-     *
-     * ```
-     *
-     */
-    // public function newInstance(array $constructorArguments = []): void;
-
-
-    /**
-     * @devNote
-     *
-     * I have not decided if this method will be apart of the
-     * Reflection interface.
-     *
-     * @endDevNote
-     *
-     * Return the original reflected object instance, or a
-     * ClassStriing that represents the type of the reflected
-     * class.
-     *
-     * @return
-     *
-     * @example
-     *
-     * ```
-     * var_dump($reflectionOfAnObjectInstance->reflectedClass());
-     *
-     * // example output:
-     * object(stdClass)#1 (2) {
-     *   ["foo"]=>
-     *   string(3) "bar"
-     *   ["baz"]=>
-     *   string(6) "bazzer"
-     * }
-     *
-     * var_dump($reflectionOfAClass->reflectedClass());
-     *
-     * // example output:
-     * object(roady\classes\strings\ClassString)#5 (1) {
-     *   ["string":"roady\classes\strings\Text":private]=>
-     *   string(8) "stdClass"
-     * }
-     *
-     * ```
-     *
-     */
-    // public function reflectedClass(): object;
 
 }
 

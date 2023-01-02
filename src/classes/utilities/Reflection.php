@@ -143,11 +143,6 @@ class Reflection implements ReflectionInterface
         return $propertyTypes;
     }
 
-    public function propertyValues(): array
-    {
-        return [];
-    }
-
     public function type(): ClassStringInterface
     {
         return new ClassString(
