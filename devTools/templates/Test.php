@@ -3,10 +3,10 @@
 namespace tests\classes\__SUB_NAMESPACE__;
 
 use roady\classes\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__;
-use tests\RoadyTestCase;
+use tests\RoadyTest;
 use tests\interfaces\__SUB_NAMESPACE__\__TARGET_CLASS_NAME__TestTrait;
 
-class __TARGET_CLASS_NAME__Test extends RoadyTestCase
+class __TARGET_CLASS_NAME__Test extends RoadyTest
 {
 
     /**
