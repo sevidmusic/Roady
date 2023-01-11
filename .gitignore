@@ -3,4 +3,4 @@ vendor/
 .vagrant/
 *.phpunit.result.cache
 *.swp
-
+*.todos
