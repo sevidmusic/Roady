@@ -616,7 +616,7 @@ trait ReflectionTestTrait
      * ```
      *
      */
-    final protected function reflectionMethod(
+    private function reflectionMethod(
         string $method
     ): ReflectionMethod
     {
