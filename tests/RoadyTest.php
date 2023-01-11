@@ -5,8 +5,10 @@ namespace tests;
 use PHPUnit\Framework\TestCase;
 
 use \ReflectionClass;
+use \stdClass;
 use roady\classes\strings\Id;
 use roady\classes\strings\Name;
+use roady\classes\strings\SafeText;
 use roady\classes\strings\Text;
 use roady\classes\utilities\Reflection;
 use tests\dev\mock\classes\ReflectedAbstractClass;
@@ -185,19 +187,49 @@ class RoadyTest extends TestCase
             Name::class,
             RoadyTest::class,
             ReflectedAbstractClass::class,
-            new Id(),
-            new Text('Foo'),
-            new Name(new Text('Foo')),
-            new Reflection(
-                new ReflectionClass(new Id())
-            ),
-            new ReflectionClass(new Id()),
-            new ReflectedClass(),
+            $this->randomObjectInstance(),
         ];
         return $classStringsAndObjects[
             array_rand($classStringsAndObjects)
         ];
     }
 
+    /**
+     * Return a random object instance.
+     *
+     * @return object
+     *
+     * @example
+     *
+     * ```
+     * var_dump(
+     *     $this->randomClassStringOrObjectInstance()::class
+     * );
+     *
+     * // example output:
+     * object(stdClass)#1 (0) {
+     * }
+     *
+     * ```
+     *
+     */
+    protected function randomObjectInstance(): object
+    {
+        $objects = [
+            new stdClass(),
+            new Text('Foo'),
+            new SafeText(new Text('Bar')),
+            new Name(new Text('Baz')),
+            new ReflectionClass(new Id()),
+            new Reflection(
+                new ReflectionClass(new Id())
+            ),
+            new ReflectedClass(),
+            new Id(),
+        ];
+        return $objects[
+            array_rand($objects)
+        ];
+    }
 }
 
