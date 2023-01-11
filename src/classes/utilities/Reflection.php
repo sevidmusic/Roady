@@ -309,5 +309,26 @@ class Reflection implements ReflectionInterface
         }
     }
 
+    /**
+     * Return the ReflectionClass instance that reflects the
+     * class-string or object reflected by this Reflection.
+     *
+     * @return ReflectionClass<object>
+     *
+     * @example
+     *
+     * ```
+     * object(ReflectionClass)#6 (1) {
+     *   ["name"]=>
+     *   string(24) "roady\classes\strings\Id"
+     * }
+     * ```
+     *
+     */
+    protected function reflectionClass(): ReflectionClass
+    {
+        return $this->reflectionClass;
+    }
+
 }
 
