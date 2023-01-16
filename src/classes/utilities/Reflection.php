@@ -43,7 +43,7 @@ class Reflection implements ReflectionInterface
     {
         $methodNames = [];
         foreach(
-            $this->reflectionClass->getMethods($filter)
+            $this->reflectionClass()->getMethods($filter)
             as
             $reflectionMethod
         ) {
@@ -104,18 +104,22 @@ class Reflection implements ReflectionInterface
     {
         $propertyNames = [];
         foreach(
-            $this->reflectionClass->getProperties($filter)
+            $this->reflectionClass()->getProperties($filter)
             as
             $reflectionProperty
         ) {
             array_push($propertyNames, $reflectionProperty->getName());
         }
+        $this->addParentPropertyNamesToArray(
+            $this->reflectionClass(),
+            $propertyNames
+        );
         return $propertyNames;
     }
 
     public function propertyTypes(): array
     {
-        $reflectionClass = $this->reflectionClass;
+        $reflectionClass = $this->reflectionClass();
         $propertyTypes = [];
         foreach(
             $reflectionClass->getProperties()
@@ -146,8 +150,53 @@ class Reflection implements ReflectionInterface
     public function type(): ClassStringInterface
     {
         return new ClassString(
-            $this->reflectionClass->getName()
+            $this->reflectionClass()->getName()
         );
+    }
+
+    /**
+     * Add the names of the properties defined by the parent
+     * classes of the of object reflected by the specified
+     * ReflectionClass instance to the specified array.
+     *
+     * @param ReflectionClass <object> $reflectionClass
+     *                                     An instance of a
+     *                                     ReflectionClass that
+     *                                     reflects the object
+     *                                     whose parent property
+     *                                     names should be added
+     *                                     to the specified array
+     *                                     of $propertyNames.
+     *
+     * @param array<string, mixed> &$propertyNames The array to add
+     *                                             the property names
+     *                                             to.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $propertyNames = [];
+     * $this->addParentPropertyNamesToArray(
+     *     $this->reflectionClass(),
+     *     $propertyNames
+     * );
+     *
+     * ```
+     *
+     */
+    private function addParentPropertyNamesToArray(
+        ReflectionClass $reflectionClass,
+        array &$propertyNames
+    ): void
+    {
+        while($parent = $reflectionClass->getParentClass()) {
+            foreach($parent->getProperties() as $property) {
+                array_push($propertyNames, $property->getName());
+            }
+            $reflectionClass = $parent;
+        }
     }
 
     /**

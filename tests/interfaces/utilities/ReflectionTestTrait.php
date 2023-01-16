@@ -523,7 +523,56 @@ trait ReflectionTestTrait
         ) {
             array_push($propertyNames, $reflectionProperty->getName());
         }
+        $this->addParentPropertyNamesToArray(
+            $reflectionClass,
+            $propertyNames
+        );
         return $propertyNames;
+    }
+
+    /**
+     * Add the names of the properties defined by the parent
+     * classes of the of object reflected by the specified
+     * ReflectionClass instance to the specified array.
+     *
+     * @param ReflectionClass <object> $reflectionClass
+     *                                     An instance of a
+     *                                     ReflectionClass that
+     *                                     reflects the object
+     *                                     whose parent property
+     *                                     names should be added
+     *                                     to the specified array
+     *                                     of $propertyNames.
+     *
+     * @param array<string, mixed> &$propertyNames The array to add
+     *                                             the property names
+     *                                             to.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $propertyNames = [];
+     * $this->addParentPropertyNamesToArray(
+     *     $this->reflectionClass(),
+     *     $propertyNames
+     * );
+     *
+     * ```
+     *
+     */
+    private function addParentPropertyNamesToArray(
+        ReflectionClass $reflectionClass,
+        array &$propertyNames
+    ): void
+    {
+        while($parent = $reflectionClass->getParentClass()) {
+            foreach($parent->getProperties() as $property) {
+                array_push($propertyNames, $property->getName());
+            }
+            $reflectionClass = $parent;
+        }
     }
 
     /**
