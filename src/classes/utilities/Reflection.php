@@ -144,6 +144,10 @@ class Reflection implements ReflectionInterface
                 );
             }
         }
+        $this->addParentPropertyTypesToArray(
+            $this->reflectionClass(),
+            $propertyTypes
+        );
         return $propertyTypes;
     }
 
@@ -152,6 +156,73 @@ class Reflection implements ReflectionInterface
         return new ClassString(
             $this->reflectionClass()->getName()
         );
+    }
+
+    /**
+     * Add the types accepted by the properties defined by
+     * the parent classes of the of object reflected by the
+     * specified ReflectionClass instance to the specified
+     * array.
+     *
+     * @param ReflectionClass <object> $reflectionClass
+     *                                     An instance of a
+     *                                     ReflectionClass that
+     *                                     reflects the object
+     *                                     whose parent property
+     *                                     types should be added
+     *                                     to the specified array
+     *                                     of $propertyTypes.
+     *
+     * @param array<string, mixed> &$propertyTypes The array to add
+     *                                             the property types
+     *                                             to.
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $propertyTypes = [];
+     * $this->addParentPropertyTypesToArray(
+     *     $this->reflectionClass(),
+     *     $propertyTypes
+     * );
+     *
+     * ```
+     *
+     */
+    private function addParentPropertyTypesToArray(
+        ReflectionClass $reflectionClass,
+        array &$propertyTypes
+    ): void
+    {
+        while($parent = $reflectionClass->getParentClass()) {
+            foreach(
+                $parent->getProperties()
+                as
+                $reflectionProperty
+            ) {
+                $type = $reflectionProperty->getType();
+                if(!$type instanceof \ReflectionType) { continue; }
+                if($type instanceof ReflectionUnionType) {
+                    $this->addUnionTypesToArray(
+                        $reflectionProperty,
+                        $propertyTypes,
+                        $type
+                    );
+                    $reflectionClass = $parent;
+                    continue;
+                }
+                if($type instanceof ReflectionNamedType) {
+                    $this->addNamedTypeToArray(
+                        $reflectionProperty,
+                        $propertyTypes,
+                        $type
+                    );
+                }
+            }
+            $reflectionClass = $parent;
+        }
     }
 
     /**
