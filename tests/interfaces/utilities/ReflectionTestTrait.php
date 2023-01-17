@@ -77,7 +77,7 @@ trait ReflectionTestTrait
      *                         ```
      *                         $this->
      *                         determineReflectedClassesMethodNames(
-     *                             ~Reflection::IS_STATIC
+     *                             ~ReflectionMethod::IS_STATIC
      *                         );
      *
      *                         ```
@@ -459,7 +459,7 @@ trait ReflectionTestTrait
      *                         ```
      *                         $this->
      *                         determineReflectedClassesPropertyNames(
-     *                             ~Reflection::IS_STATIC
+     *                             ~ReflectionMethod::IS_STATIC
      *                         );
      *
      *                         ```
@@ -525,14 +525,15 @@ trait ReflectionTestTrait
         }
         $this->addParentPropertyNamesToArray(
             $reflectionClass,
-            $propertyNames
+            $propertyNames,
+            $filter
         );
         return $propertyNames;
     }
 
     /**
      * Add the names of the properties defined by the parent
-     * classes of the of object reflected by the specified
+     * classes of the object reflected by the specified
      * ReflectionClass instance to the specified array.
      *
      * @param ReflectionClass <object> $reflectionClass
@@ -548,15 +549,58 @@ trait ReflectionTestTrait
      *                                             the property names
      *                                             to.
      *
+     * @param int|null $filter Determine what property names are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         ReflectionMethod::IS_ABSTRACT
+     *                         ReflectionMethod::IS_FINAL
+     *                         ReflectionMethod::IS_PRIVATE
+     *                         ReflectionMethod::IS_PROTECTED
+     *                         ReflectionMethod::IS_PUBLIC
+     *                         ReflectionMethod::IS_STATIC
+     *
+     *                         All properties defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the names of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties
+     *                         via a call like:
+     *
+     *                         ```
+     *
+     *                         $propertyNames = [];
+     *                         $this->addParentPropertyNamesToArray(
+     *                             $this->reflectionClass(),
+     *                             $propertyNames,
+     *                             ~ReflectionMethod::IS_STATIC
+     *                         );
+     *
+     *                         ```
+     *
      * @return void
      *
      * @example
      *
      * ```
+     * $filter = ReflectionMethod::IS_STATIC;
      * $propertyNames = [];
      * $this->addParentPropertyNamesToArray(
      *     $this->reflectionClass(),
-     *     $propertyNames
+     *     $propertyNames,
+     *     $filter
      * );
      *
      * ```
@@ -564,11 +608,12 @@ trait ReflectionTestTrait
      */
     private function addParentPropertyNamesToArray(
         ReflectionClass $reflectionClass,
-        array &$propertyNames
+        array &$propertyNames,
+        $filter = null
     ): void
     {
         while($parent = $reflectionClass->getParentClass()) {
-            foreach($parent->getProperties() as $property) {
+            foreach($parent->getProperties($filter) as $property) {
                 array_push($propertyNames, $property->getName());
             }
             $reflectionClass = $parent;
