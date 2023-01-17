@@ -112,7 +112,8 @@ class Reflection implements ReflectionInterface
         }
         $this->addParentPropertyNamesToArray(
             $this->reflectionClass(),
-            $propertyNames
+            $propertyNames,
+            $filter
         );
         return $propertyNames;
     }
@@ -155,9 +156,9 @@ class Reflection implements ReflectionInterface
     }
 
     /**
-     * Add the names of the properties defined by the parent
-     * classes of the of object reflected by the specified
-     * ReflectionClass instance to the specified array.
+     * Add the names of the properties defined by the parent classes
+     * of the object reflected by the specified ReflectionClass
+     * instance to the specified array.
      *
      * @param ReflectionClass <object> $reflectionClass
      *                                     An instance of a
@@ -171,6 +172,44 @@ class Reflection implements ReflectionInterface
      * @param array<string, mixed> &$propertyNames The array to add
      *                                             the property names
      *                                             to.
+     *
+     * @param int|null $filter Determine what property names are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         Reflection::IS_ABSTRACT
+     *                         Reflection::IS_FINAL
+     *                         Reflection::IS_PRIVATE
+     *                         Reflection::IS_PROTECTED
+     *                         Reflection::IS_PUBLIC
+     *                         Reflection::IS_STATIC
+     *
+     *                         All properties defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the names of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties
+     *                         via a call like:
+     *
+     *                         ```
+     *                         $this->
+     *                         determineReflectedClassesPropertyNames(
+     *                             ~Reflection::IS_STATIC
+     *                         );
+     *
+     *                         ```
      *
      * @return void
      *
@@ -188,11 +227,12 @@ class Reflection implements ReflectionInterface
      */
     private function addParentPropertyNamesToArray(
         ReflectionClass $reflectionClass,
-        array &$propertyNames
+        array &$propertyNames,
+        $filter = null
     ): void
     {
         while($parent = $reflectionClass->getParentClass()) {
-            foreach($parent->getProperties() as $property) {
+            foreach($parent->getProperties($filter) as $property) {
                 array_push($propertyNames, $property->getName());
             }
             $reflectionClass = $parent;
@@ -217,7 +257,7 @@ class Reflection implements ReflectionInterface
      * ```
      *
      */
-    final protected function reflectionMethod(
+    protected function reflectionMethod(
         string $method
     ): ReflectionMethod
     {
