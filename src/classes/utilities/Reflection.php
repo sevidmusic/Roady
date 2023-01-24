@@ -115,6 +115,7 @@ class Reflection implements ReflectionInterface
             $propertyNames,
             $filter
         );
+        $propertyNames = array_unique($propertyNames);
         return $propertyNames;
     }
 
