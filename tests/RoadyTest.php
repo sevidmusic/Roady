@@ -11,6 +11,19 @@ use roady\classes\strings\Name;
 use roady\classes\strings\SafeText;
 use roady\classes\strings\Text;
 use roady\classes\utilities\Reflection;
+use tests\dev\mock\classes\ClassABaseClass;
+use tests\dev\mock\classes\ClassBExtendsClassA;
+use tests\dev\mock\classes\ClassCExtendsClassBInheirtsFromClassA;
+use tests\dev\mock\classes\ClassDExtendsClassCInheirtsFromClassBAndFromClassA;
+use tests\dev\mock\classes\PrivateMethods;
+use tests\dev\mock\classes\PrivateProperties;
+use tests\dev\mock\classes\PrivateStaticProperties;
+use tests\dev\mock\classes\ProtectedMethods;
+use tests\dev\mock\classes\ProtectedProperties;
+use tests\dev\mock\classes\ProtectedStaticProperties;
+use tests\dev\mock\classes\PublicMethods;
+use tests\dev\mock\classes\PublicProperties;
+use tests\dev\mock\classes\PublicStaticProperties;
 use tests\dev\mock\classes\ReflectedAbstractClass;
 use tests\dev\mock\classes\ReflectedClass;
 
@@ -181,13 +194,24 @@ class RoadyTest extends TestCase
     protected function randomClassStringOrObjectInstance(): string|object
     {
         $classStringsAndObjects = [
-            ReflectionClass::class,
-            Reflection::class,
-            Id::class,
-            Name::class,
-            RoadyTest::class,
-            ReflectedAbstractClass::class,
             $this->randomObjectInstance(),
+            ClassDExtendsClassCInheirtsFromClassBAndFromClassA::class,
+            /*
+            ReflectedClass::class,
+            ReflectedAbstractClass::class,
+            ClassABaseClass::class,
+            ClassBExtendsClassA::class,
+            ClassCExtendsClassBInheirtsFromClassA::class,
+            PrivateMethods::class,
+            PrivateProperties::class,
+            PrivateStaticProperties::class,
+            ProtectedMethods::class,
+            ProtectedProperties::class,
+            ProtectedStaticProperties::class,
+            PublicMethods::class,
+            PublicProperties::class,
+            PublicStaticProperties::class,
+             */
         ];
         return $classStringsAndObjects[
             array_rand($classStringsAndObjects)
@@ -216,16 +240,22 @@ class RoadyTest extends TestCase
     protected function randomObjectInstance(): object
     {
         $objects = [
-            new stdClass(),
-            new Text('Foo'),
-            new SafeText(new Text('Bar')),
-            new Name(new Text('Baz')),
-            new ReflectionClass(new Id()),
-            new Reflection(
-                new ReflectionClass(new Id())
-            ),
+            new ClassDExtendsClassCInheirtsFromClassBAndFromClassA(),
+            /*
             new ReflectedClass(),
-            new Id(),
+            new ClassABaseClass(),
+            new ClassBExtendsClassA(),
+            new ClassCExtendsClassBInheirtsFromClassA(),
+            new PrivateMethods(),
+            new PrivateProperties(),
+            new PrivateStaticProperties(),
+            new ProtectedMethods(),
+            new ProtectedProperties(),
+            new ProtectedStaticProperties(),
+            new PublicMethods(),
+            new PublicProperties(),
+            new PublicStaticProperties(),
+             */
         ];
         return $objects[
             array_rand($objects)
