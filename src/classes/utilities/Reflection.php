@@ -146,7 +146,118 @@ class Reflection implements ReflectionInterface
                 );
             }
         }
+        $this->addParentPropertyTypesToArray(
+            $this->reflectionClass(),
+            $propertyTypes,
+            $filter
+        );
         return $propertyTypes;
+    }
+
+    /**
+     * Add the types of the properties defined by the parent
+     * classes of the reflected class or object instance to
+     * the specified array.
+     *
+     * @param ReflectionClass <object> $reflectionClass
+     *                                     An instance of a
+     *                                     ReflectionClass that
+     *                                     reflects the object
+     *                                     whose parent property
+     *                                     names should be added
+     *                                     to the specified array
+     *                                     of $propertyNames.
+     *
+     * @param array<string, array<int, string>> &$propertyTypes
+     *                                          The array to add the
+     *                                          arrays of property
+     *                                          types to.
+     *
+     * @param int|null $filter Determine what property types are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         ReflectionMethod::IS_ABSTRACT
+     *                         ReflectionMethod::IS_FINAL
+     *                         ReflectionMethod::IS_PRIVATE
+     *                         ReflectionMethod::IS_PROTECTED
+     *                         ReflectionMethod::IS_PUBLIC
+     *                         ReflectionMethod::IS_STATIC
+     *
+     *                         All properties defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the types of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties
+     *                         via a call like:
+     *
+     *                         ```
+     *
+     *                         $propertyNames = [];
+     *                         $this->addParentPropertyTypesToArray(
+     *                             $this->reflectionClass(),
+     *                             $propertyNames,
+     *                             ~ReflectionMethod::IS_STATIC
+     *                         );
+     *
+     *                         ```
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $filter = ReflectionMethod::IS_STATIC;
+     * $propertyNames = [];
+     * $this->addParentPropertyTypesToArray(
+     *     $this->reflectionClass(),
+     *     $propertyNames,
+     *     $filter
+     * );
+     *
+     * ```
+     *
+     */
+    private function addParentPropertyTypesToArray(
+        ReflectionClass $reflectionClass,
+        array &$propertyTypes,
+        $filter = null
+    ): void
+    {
+        while($parent = $reflectionClass->getParentClass()) {
+            foreach($parent->getProperties($filter) as $property) {
+                $type = $property->getType();
+                if(!$type instanceof \ReflectionType) { continue; }
+                if($type instanceof ReflectionUnionType) {
+                    $this->addUnionTypesToArray(
+                        $property,
+                        $propertyTypes,
+                        $type
+                    );
+                    continue;
+                }
+                if($type instanceof ReflectionNamedType) {
+                    $this->addNamedTypeToArray(
+                        $property,
+                        $propertyTypes,
+                        $type
+                    );
+                }
+            }
+            $reflectionClass = $parent;
+        }
     }
 
     public function type(): ClassStringInterface
@@ -323,6 +434,8 @@ class Reflection implements ReflectionInterface
         foreach($reflectionUnionTypes as $unionType) {
             $parameterTypes[$reflectionParameter->getName()][]
                 = $unionType->getName();
+            $parameterTypes[$reflectionParameter->getName()] =
+                array_unique($parameterTypes[$reflectionParameter->getName()]);
         }
         if(
             !in_array(

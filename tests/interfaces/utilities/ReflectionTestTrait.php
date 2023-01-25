@@ -9,7 +9,6 @@ use \ReflectionParameter;
 use \ReflectionProperty;
 use \ReflectionUnionType;
 use roady\interfaces\utilities\Reflection;
-use tests\RoadyTest;
 
 /**
  * The ReflectionTestTrait defines common tests for implementations
@@ -343,6 +342,11 @@ trait ReflectionTestTrait
         foreach($reflectionUnionTypes as $unionType) {
             $types[$propertyOrParameterReflection->getName()][]
                 = $unionType->getName();
+            $types[$propertyOrParameterReflection->getName()] =
+                array_unique(
+                    $types[$propertyOrParameterReflection->getName()]
+                );
+
         }
         if(
             !in_array(
@@ -437,14 +441,16 @@ trait ReflectionTestTrait
      *                         ReflectionMethod::IS_PUBLIC
      *                         ReflectionMethod::IS_STATIC
      *
-     *                         All properties defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         The names of all the properties
+     *                         declared by the reflected class
+     *                         or object instance that meet the
+     *                         expectation of the given filters
+     *                         will be included in the returned
+     *                         array.
      *
      *                         If no filters are specified, then
      *                         the names of all of the properties
-     *                         defined by the reflected class or
+     *                         declared by the reflected class or
      *                         object instance will be included
      *                         in the returned array.
      *
@@ -453,8 +459,9 @@ trait ReflectionTestTrait
      *                         filters. For instance a bitwise
      *                         NOT (~), will not work as expected.
      *                         For example, it is not possible to
-     *                         retrieve all non-static properties
-     *                         via a call like:
+     *                         retrieve the names of all of the
+     *                         non-static properties via a call
+     *                         like:
      *
      *                         ```
      *                         $this->
@@ -521,7 +528,10 @@ trait ReflectionTestTrait
             as
             $reflectionProperty
         ) {
-            array_push($propertyNames, $reflectionProperty->getName());
+            array_push(
+                $propertyNames,
+                $reflectionProperty->getName()
+            );
         }
         $this->addParentPropertyNamesToArray(
             $reflectionClass,
@@ -561,14 +571,15 @@ trait ReflectionTestTrait
      *                         ReflectionMethod::IS_PUBLIC
      *                         ReflectionMethod::IS_STATIC
      *
-     *                         All properties defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         The names of the properties declared
+     *                         by the reflected class or object
+     *                         instance that meet the expectation
+     *                         of the given filters will be included
+     *                         in the returned array.
      *
      *                         If no filters are specified, then
      *                         the names of all of the properties
-     *                         defined by the reflected class or
+     *                         declared by the reflected class or
      *                         object instance will be included
      *                         in the returned array.
      *
@@ -624,19 +635,60 @@ trait ReflectionTestTrait
     /**
      * Returns an associatively indexed array of numerically
      * indexed arrays of strings indicating the types accepted
-     * by the properties defined by the class or object instance
+     * by the properties declared by the class or object instance
      * reflected by the Reflection implementation being tested.
      *
-     * The arrays of types be indexed by the name of the property
-     * they are associated with.
+     * The arrays of types will be indexed by the name of the
+     * property they are associated with.
      *
+     * @param int|null $filter Determine what property types are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         ReflectionMethod::IS_ABSTRACT
+     *                         ReflectionMethod::IS_FINAL
+     *                         ReflectionMethod::IS_PRIVATE
+     *                         ReflectionMethod::IS_PROTECTED
+     *                         ReflectionMethod::IS_PUBLIC
+     *                         ReflectionMethod::IS_STATIC
+     *
+     *                         The types of the properties declared
+     *                         by the reflected class or object
+     *                         instance that meet the expectation
+     *                         of the given filters will be
+     *                         included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the types of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties
+     *                         via a call like:
+     *
+     *                         ```
+     *
+     *                         $propertyTypes = [];
+     *                         $this->determineReflectedClassesPropertyTypes(
+     *                             $this->reflectionClass(),
+     *                             $propertyTypes,
+     *                             ~ReflectionMethod::IS_STATIC
+     *                         );
+     *
+     *                         ```
      * @return array<string, array<int, string>>
      *
      * @example
      *
      * ```
      * var_dump(
-     *     $this->determineReflectedClassesMethodParameterTypes()
+     *     $this->determineReflectedClassesPropertyTypes()
      * );
      *
      * // example output:
@@ -689,7 +741,119 @@ trait ReflectionTestTrait
                 );
             }
         }
+        $this->addParentPropertyTypesToArray(
+            $reflectionClass,
+            $propertyTypes,
+            $filter
+        );
         return $propertyTypes;
+    }
+
+    /**
+     * Add the types of the properties declared by the parent
+     * classes of the object reflected by the specified
+     * ReflectionClass instance to the specified array.
+     *
+     * @param ReflectionClass <object> $reflectionClass
+     *                                     An instance of a
+     *                                     ReflectionClass that
+     *                                     reflects the object
+     *                                     whose parent property
+     *                                     names should be added
+     *                                     to the specified array
+     *                                     of $propertyNames.
+     *
+     * @param array<string, array<int, string>> &$propertyTypes
+     *                                          The array to add the
+     *                                          arrays of property
+     *                                          types to.
+     *
+     * @param int|null $filter Determine what property types are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         ReflectionMethod::IS_ABSTRACT
+     *                         ReflectionMethod::IS_FINAL
+     *                         ReflectionMethod::IS_PRIVATE
+     *                         ReflectionMethod::IS_PROTECTED
+     *                         ReflectionMethod::IS_PUBLIC
+     *                         ReflectionMethod::IS_STATIC
+     *
+     *                         The types of the properties declared
+     *                         by the reflected class or object
+     *                         instance that meet the expectation
+     *                         of the given filters will be included
+     *                         in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the types of all of the properties
+     *                         declared by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties
+     *                         via a call like:
+     *
+     *                         ```
+     *
+     *                         $propertyNames = [];
+     *                         $this->addParentPropertyTypesToArray(
+     *                             $this->reflectionClass(),
+     *                             $propertyNames,
+     *                             ~ReflectionMethod::IS_STATIC
+     *                         );
+     *
+     *                         ```
+     *
+     * @return void
+     *
+     * @example
+     *
+     * ```
+     * $filter = ReflectionMethod::IS_STATIC;
+     * $propertyNames = [];
+     * $this->addParentPropertyTypesToArray(
+     *     $this->reflectionClass(),
+     *     $propertyNames,
+     *     $filter
+     * );
+     *
+     * ```
+     *
+     */
+    private function addParentPropertyTypesToArray(
+        ReflectionClass $reflectionClass,
+        array &$propertyTypes,
+        $filter = null
+    ): void
+    {
+        while($parent = $reflectionClass->getParentClass()) {
+            foreach($parent->getProperties($filter) as $property) {
+                $type = $property->getType();
+                if(!$type instanceof \ReflectionType) { continue; }
+                if($type instanceof ReflectionUnionType) {
+                    $this->addUnionTypesToArray(
+                        $property,
+                        $propertyTypes,
+                        $type
+                    );
+                    continue;
+                }
+                if($type instanceof ReflectionNamedType) {
+                    $this->addNamedTypeToArray(
+                        $property,
+                        $propertyTypes,
+                        $type
+                    );
+                }
+            }
+            $reflectionClass = $parent;
+        }
     }
 
     /**
@@ -1602,14 +1766,14 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * indicating the types accepted by all of the properties defined
+     * indicating the types accepted by all of the properties declared
      * by the reflected class or object instance if no filter is
      * specified.
      *
      * @return void
      *
      */
-    public function test_PropertyTypes_returns_an_associatively_indexed_array_of_arrays_of_the_types_of_all_the_properties_defined_by_the_reflected_class_or_object_instance_if_no_filter_is_specified(): void
+    public function test_PropertyTypes_returns_an_associatively_indexed_array_of_arrays_of_the_types_of_all_the_properties_declared_by_the_reflected_class_or_object_instance_if_no_filter_is_specified(): void
     {
         $this->assertEquals(
             $this->determineReflectedClassesPropertyTypes(),
@@ -1619,9 +1783,9 @@ trait ReflectionTestTrait
                 'propertyTypes',
                 'return an associatively indexed array of ' .
                 'numerically indexed arrays of strings indicating '.
-                'the types accepted by all of the properties defined by ' .
-                'the reflected class or object instance if no ' .
-                'filter is specified.'
+                'the types accepted by all of the properties ' .
+                'declared by the reflected class or object ' .
+                'instance if no filter is specified.'
             )
         );
     }
@@ -1653,14 +1817,14 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * representing the types of the final properties defined
+     * representing the types of the final properties declared
      * by the reflected class if the Reflection::IS_FINAL
      * filter is specified.
      *
      * @return void
      *
      */
-    public function test_propertyTypes_returns_the_types_of_the_final_properties_defined_by_the_reflected_class_if_the_ReflectionIS_FINAL_filter_is_specified(): void
+    public function test_propertyTypes_returns_the_types_of_the_final_properties_declared_by_the_reflected_class_if_the_ReflectionIS_FINAL_filter_is_specified(): void
     {
         $this->assertEquals(
             /**
@@ -1680,7 +1844,7 @@ trait ReflectionTestTrait
                 $this->reflectionTestInstance(),
                 'propertyTypes',
                 'return an array of the types of the final ' .
-                'properties defined by the reflected class if the' .
+                'properties declared by the reflected class if the' .
                 'ReflectionClass::IS_FINAL filter is specified'
             )
         );
@@ -1689,14 +1853,14 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * representing the types of the private properties defined
+     * representing the types of the private properties declared
      * by the reflected class if the Reflection::IS_PRIVATE
      * filter is specified.
      *
      * @return void
      *
      */
-    public function test_propertyTypes_returns_the_types_of_the_private_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PRIVATE_filter_is_specified(): void
+    public function test_propertyTypes_returns_the_types_of_the_private_properties_declared_by_the_reflected_class_if_the_ReflectionIS_PRIVATE_filter_is_specified(): void
     {
         $this->assertEquals(
             /**
@@ -1716,7 +1880,7 @@ trait ReflectionTestTrait
                 $this->reflectionTestInstance(),
                 'propertyTypes',
                 'return an array of the types of the private ' .
-                'properties defined by the reflected class if the' .
+                'properties declared by the reflected class if the' .
                 'ReflectionClass::IS_PRIVATE filter is specified'
             )
         );
@@ -1725,14 +1889,14 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * representing the types of the protected properties defined
+     * representing the types of the protected properties declared
      * by the reflected class if the Reflection::IS_PROTECTED
      * filter is specified.
      *
      * @return void
      *
      */
-    public function test_propertyTypes_returns_the_types_of_the_protected_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PROTECTED_filter_is_specified(): void
+    public function test_propertyTypes_returns_the_types_of_the_protected_properties_declared_by_the_reflected_class_if_the_ReflectionIS_PROTECTED_filter_is_specified(): void
     {
         $this->assertEquals(
             /**
@@ -1753,7 +1917,7 @@ trait ReflectionTestTrait
                 $this->reflectionTestInstance(),
                 'propertyTypes',
                 'return an array of the types of the protected ' .
-                'properties defined by the reflected class if the' .
+                'properties declared by the reflected class if the' .
                 'ReflectionClass::IS_PROTECTED filter is specified'
             )
         );
@@ -1762,14 +1926,14 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * representing the types of the public properties defined
+     * representing the types of the public properties declared
      * by the reflected class if the Reflection::IS_PUBLIC
      * filter is specified.
      *
      * @return void
      *
      */
-    public function test_propertyTypes_returns_the_types_of_the_public_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PUBLIC_filter_is_specified(): void
+    public function test_propertyTypes_returns_the_types_of_the_public_properties_declared_by_the_reflected_class_if_the_ReflectionIS_PUBLIC_filter_is_specified(): void
     {
         $this->assertEquals(
             /**
@@ -1789,7 +1953,7 @@ trait ReflectionTestTrait
                 $this->reflectionTestInstance(),
                 'propertyTypes',
                 'return an array of the types of the public ' .
-                'properties defined by the reflected class if the' .
+                'properties declared by the reflected class if the' .
                 'ReflectionClass::IS_PUBLIC filter is specified'
             )
         );
@@ -1798,14 +1962,14 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * representing the types of the static properties defined
+     * representing the types of the static properties declared
      * by the reflected class if the Reflection::IS_STATIC
      * filter is specified.
      *
      * @return void
      *
      */
-    public function test_propertyTypes_returns_the_types_of_the_static_properties_defined_by_the_reflected_class_if_the_ReflectionIS_STATIC_filter_is_specified(): void
+    public function test_propertyTypes_returns_the_types_of_the_static_properties_declared_by_the_reflected_class_if_the_ReflectionIS_STATIC_filter_is_specified(): void
     {
         $this->assertEquals(
             /**
@@ -1825,7 +1989,7 @@ trait ReflectionTestTrait
                 $this->reflectionTestInstance(),
                 'propertyTypes',
                 'return an array of the types of the static ' .
-                'properties defined by the reflected class if the' .
+                'properties declared by the reflected class if the' .
                 'ReflectionClass::IS_STATIC filter is specified'
             )
         );
