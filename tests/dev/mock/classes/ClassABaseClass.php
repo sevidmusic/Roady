@@ -14,20 +14,26 @@ use \Closure;
  */
 class ClassABaseClass
 {
-    private bool $classABaseClassPrivateProperty = true;
-    protected bool $classABaseClassProtectedProperty = false;
-    public bool $classABaseClassPublicProperty = true;
-    private static bool $classABaseClassPrivateStaticProperty = true;
-    protected static bool $classABaseClassProtectedStaticProperty = false;
-    public static bool $classABaseClassPublicStaticProperty = true;
-    private bool $privatePropertySharedName = true;
+    /**
+     * @var bool|array<mixed> $classABaseClassPrivateProperty
+     */
+    private bool|array $classABaseClassPrivateProperty = true;
+    protected int|bool $classABaseClassProtectedProperty = false;
+    public int|bool $classABaseClassPublicProperty = true;
+    private static int|bool $classABaseClassPrivateStaticProperty = true;
+    protected static int|bool $classABaseClassProtectedStaticProperty = false;
+    public static int|bool $classABaseClassPublicStaticProperty = true;
+    private string|int|bool $privatePropertySharedName = true;
     protected bool $protectedPropertySharedName = true;
     public bool $publicPropertySharedName = true;
     private static bool $privateStaticPropertySharedName = true;
     protected static bool $protectedStaticPropertySharedName = true;
     public static bool $publicStaticPropertySharedName = true;
 
-    private function classABaseClassPrivateMethod(): bool
+    /**
+     * @return bool|array<mixed> $classABaseClassPrivateProperty
+     */
+    private function classABaseClassPrivateMethod(): array|bool
     {
         if($this->privatePropertySharedName) {
             return $this->classABaseClassPrivateProperty;
@@ -35,7 +41,7 @@ class ClassABaseClass
         return false;
     }
 
-    private static function classABaseClassPrivateStaticMethod(): bool
+    private static function classABaseClassPrivateStaticMethod(): int|bool
     {
         if(self::$privateStaticPropertySharedName) {
             return self::$classABaseClassPrivateStaticProperty;
