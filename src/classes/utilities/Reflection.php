@@ -119,12 +119,12 @@ class Reflection implements ReflectionInterface
         return $propertyNames;
     }
 
-    public function propertyTypes(): array
+    public function propertyTypes(int $filter = null): array
     {
         $reflectionClass = $this->reflectionClass();
         $propertyTypes = [];
         foreach(
-            $reflectionClass->getProperties()
+            $reflectionClass->getProperties($filter)
             as
             $reflectionProperty
         ) {

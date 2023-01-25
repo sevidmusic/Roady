@@ -660,14 +660,14 @@ trait ReflectionTestTrait
      * ```
      *
      */
-    protected function determineReflectedClassesPropertyTypes(): array
+    protected function determineReflectedClassesPropertyTypes(int $filter = null): array
     {
         $reflectionClass = $this->reflectionClass(
             $this->reflectedClass()
         );
         $propertyTypes = [];
         foreach(
-            $reflectionClass->getProperties()
+            $reflectionClass->getProperties($filter)
             as
             $reflectionProperty
         ) {
@@ -1602,15 +1602,15 @@ trait ReflectionTestTrait
     /**
      * Test that the propertyTypes() method returns an associatively
      * indexed array of numerically indexed arrays of strings
-     * indicating the types accepted by the properties defined by
-     * the reflected class or object instance.
+     * indicating the types accepted by all of the properties defined
+     * by the reflected class or object instance if no filter is
+     * specified.
      *
      * @return void
      *
      */
-    public function test_PropertyTypes_returns_a_numerically_indexed_array_of_the_types_of_the_properties_defined_by_the_reflected_class_or_object_instance(): void
+    public function test_PropertyTypes_returns_an_associatively_indexed_array_of_arrays_of_the_types_of_all_the_properties_defined_by_the_reflected_class_or_object_instance_if_no_filter_is_specified(): void
     {
-        $methodNames = $this->determineReflectedClassesPropertyNames();
         $this->assertEquals(
             $this->determineReflectedClassesPropertyTypes(),
             $this->reflectionTestInstance()->propertyTypes(),
@@ -1619,8 +1619,214 @@ trait ReflectionTestTrait
                 'propertyTypes',
                 'return an associatively indexed array of ' .
                 'numerically indexed arrays of strings indicating '.
-                'the types accepted by the properties defined by ' .
-                'the reflected class or object instance.'
+                'the types accepted by all of the properties defined by ' .
+                'the reflected class or object instance if no ' .
+                'filter is specified.'
+            )
+        );
+    }
+
+
+
+    /**
+     * Test that the propertyTypes() method returns an empty array
+     * if the Reflection::IS_ABSTRACT filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyTypes_returns_an_empty_array_if_the_ReflectionIS_ABSTRACT_filter_is_specified(): void
+    {
+        $this->assertEmpty(
+            $this->reflectionTestInstance()->propertyTypes(
+                Reflection::IS_ABSTRACT
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'An empty array if the' .
+                'ReflectionClass::IS_ABSTRACT filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyTypes() method returns an associatively
+     * indexed array of numerically indexed arrays of strings
+     * representing the types of the final properties defined
+     * by the reflected class if the Reflection::IS_FINAL
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyTypes_returns_the_types_of_the_final_properties_defined_by_the_reflected_class_if_the_ReflectionIS_FINAL_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_FINAL is used intentionally to
+             * test that the effect of passing Reflection::IS_FINAL
+             * to the propertyTypes() method is the same as passing
+             * ReflectionMethod::IS_FINAL to the propertyTypes()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyTypes(
+                ReflectionMethod::IS_FINAL
+            ),
+            $this->reflectionTestInstance()->propertyTypes(
+                Reflection::IS_FINAL
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'return an array of the types of the final ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_FINAL filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyTypes() method returns an associatively
+     * indexed array of numerically indexed arrays of strings
+     * representing the types of the private properties defined
+     * by the reflected class if the Reflection::IS_PRIVATE
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyTypes_returns_the_types_of_the_private_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PRIVATE_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_PRIVATE is used intentionally to
+             * test that the effect of passing Reflection::IS_PRIVATE
+             * to the propertyTypes() method is the same as passing
+             * ReflectionMethod::IS_PRIVATE to the propertyTypes()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyTypes(
+               ReflectionMethod::IS_PRIVATE
+            ),
+            $this->reflectionTestInstance()->propertyTypes(
+                Reflection::IS_PRIVATE
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'return an array of the types of the private ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_PRIVATE filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyTypes() method returns an associatively
+     * indexed array of numerically indexed arrays of strings
+     * representing the types of the protected properties defined
+     * by the reflected class if the Reflection::IS_PROTECTED
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyTypes_returns_the_types_of_the_protected_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PROTECTED_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_PROTECTED is used
+             * intentionally to test that the effect of
+             * passing Reflection::IS_PROTECTED to the
+             * propertyTypes() method is the same as passing
+             * ReflectionMethod::IS_PROTECTED to the
+             * propertyTypes() method.
+             */
+            $this->determineReflectedClassesPropertyTypes(
+                ReflectionMethod::IS_PROTECTED
+            ),
+            $this->reflectionTestInstance()->propertyTypes(
+                Reflection::IS_PROTECTED
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'return an array of the types of the protected ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_PROTECTED filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyTypes() method returns an associatively
+     * indexed array of numerically indexed arrays of strings
+     * representing the types of the public properties defined
+     * by the reflected class if the Reflection::IS_PUBLIC
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyTypes_returns_the_types_of_the_public_properties_defined_by_the_reflected_class_if_the_ReflectionIS_PUBLIC_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_PUBLIC is used intentionally to
+             * test that the effect of passing Reflection::IS_PUBLIC
+             * to the propertyTypes() method is the same as passing
+             * ReflectionMethod::IS_PUBLIC to the propertyTypes()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyTypes(
+                ReflectionMethod::IS_PUBLIC
+            ),
+            $this->reflectionTestInstance()->propertyTypes(
+                Reflection::IS_PUBLIC
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'return an array of the types of the public ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_PUBLIC filter is specified'
+            )
+        );
+    }
+
+    /**
+     * Test that the propertyTypes() method returns an associatively
+     * indexed array of numerically indexed arrays of strings
+     * representing the types of the static properties defined
+     * by the reflected class if the Reflection::IS_STATIC
+     * filter is specified.
+     *
+     * @return void
+     *
+     */
+    public function test_propertyTypes_returns_the_types_of_the_static_properties_defined_by_the_reflected_class_if_the_ReflectionIS_STATIC_filter_is_specified(): void
+    {
+        $this->assertEquals(
+            /**
+             * ReflectionMethod::IS_STATIC is used intentionally to
+             * test that the effect of passing Reflection::IS_STATIC
+             * to the propertyTypes() method is the same as passing
+             * ReflectionMethod::IS_STATIC to the propertyTypes()
+             * method.
+             */
+            $this->determineReflectedClassesPropertyTypes(
+                ReflectionMethod::IS_STATIC
+            ),
+            $this->reflectionTestInstance()->propertyTypes(
+                Reflection::IS_STATIC
+            ),
+            $this->testFailedMessage(
+                $this->reflectionTestInstance(),
+                'propertyTypes',
+                'return an array of the types of the static ' .
+                'properties defined by the reflected class if the' .
+                'ReflectionClass::IS_STATIC filter is specified'
             )
         );
     }
