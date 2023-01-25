@@ -351,6 +351,43 @@ interface Reflection
      * The types in the array will be indexed by the name of the
      * property they are associated with.
      *
+     * @param int|null $filter Determine which property's types are
+     *                         included in the returned array
+     *                         based on the following filters:
+     *
+     *                         Reflection::IS_ABSTRACT
+     *                         Reflection::IS_FINAL
+     *                         Reflection::IS_PRIVATE
+     *                         Reflection::IS_PROTECTED
+     *                         Reflection::IS_PUBLIC
+     *                         Reflection::IS_STATIC
+     *
+     *                         All properties defined by the reflected
+     *                         class or object instance that meet the
+     *                         expectation of the given filters will
+     *                         be included in the returned array.
+     *
+     *                         If no filters are specified, then
+     *                         the types of all of the properties
+     *                         defined by the reflected class or
+     *                         object instance will be included
+     *                         in the returned array.
+     *
+     *                         Note: Note that some bitwise
+     *                         operations will not work with these
+     *                         filters. For instance a bitwise
+     *                         NOT (~), will not work as expected.
+     *                         For example, it is not possible to
+     *                         retrieve all non-static properties via
+     *                         a call like:
+     *
+     *                         ```
+     *                         $reflection->propertyTypes(
+     *                             ~Reflection::IS_STATIC
+     *                         );
+     *
+     *                         ```
+     *
      * @return array<string, string|ClassString>
      *
      * @example
@@ -382,7 +419,7 @@ interface Reflection
      *
      * ```
      */
-    public function propertyTypes(): array;
+    public function propertyTypes(int $filter = null): array;
 
     /**
      * Return the type of the reflected class or object instance
