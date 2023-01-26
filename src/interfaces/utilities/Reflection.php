@@ -13,15 +13,22 @@ use roady\interfaces\strings\ClassString;
  * @example
  *
  * ```
- * var_dump($reflection->methodNames());
+ * var_dump($reflection->methodNames(Reflection::IS_PUBLIC));
  *
  * // example output:
- *
- * array(2) {
+ * array(6) {
  *   [0]=>
- *   string(7) "method1"
+ *   string(11) "methodNames"
  *   [1]=>
- *   string(7) "method2"
+ *   string(20) "methodParameterNames"
+ *   [2]=>
+ *   string(20) "methodParameterTypes"
+ *   [3]=>
+ *   string(13) "propertyNames"
+ *   [4]=>
+ *   string(13) "propertyTypes"
+ *   [5]=>
+ *   string(4) "type"
  * }
  *
  * ```
@@ -34,10 +41,9 @@ interface Reflection
      * The Reflection::IS_FINAL constant is an alias for the
      * ReflectionMethod::IS_FINAL constant.
      *
-     * The Reflection::IS_FINAL constant can be passed to the
-     * methodNames() method to indicate that the names of the
-     * final methods defined by the reflected class or object
-     * instance should be included in the returned array.
+     * The Reflection::IS_FINAL constant can be used to filter
+     * the results of the methodNames(), propertyNames(), and
+     * propertyTypes() methods.
      *
      * @see ReflectionMethod::IS_FINAL
      *
@@ -48,10 +54,9 @@ interface Reflection
      * The Reflection::IS_ABSTRACT constant is an alias for the
      * ReflectionMethod::IS_ABSTRACT constant.
      *
-     * The Reflection::IS_ABSTRACT constant can be passed to the
-     * methodNames() method to indicate that the names of the
-     * abstract methods defined by the reflected class or object
-     * instance should be included in the returned array.
+     * The Reflection::IS_ABSTRACT constant can be used to filter
+     * the results of the methodNames(), propertyNames(), and
+     * propertyTypes() methods.
      *
      * @see ReflectionMethod::IS_ABSTRACT
      *
@@ -62,10 +67,9 @@ interface Reflection
      * The Reflection::IS_PRIVATE constant is an alias for the
      * ReflectionMethod::IS_PRIVATE constant.
      *
-     * The Reflection::IS_PRIVATE constant can be passed to the
-     * methodNames() method to indicate that the names of the
-     * private methods defined by the reflected class or object
-     * instance should be included in the returned array.
+     * The Reflection::IS_PRIVATE constant can be used to filter
+     * the results of the methodNames(), propertyNames(), and
+     * propertyTypes() methods.
      *
      * @see ReflectionMethod::IS_PRIVATE
      *
@@ -76,10 +80,9 @@ interface Reflection
      * The Reflection::IS_PROTECTED constant is an alias for the
      * ReflectionMethod::IS_PROTECTED constant.
      *
-     * The Reflection::IS_PROTECTED constant can be passed to the
-     * methodNames() method to indicate that the names of the
-     * protected methods defined by the reflected class or object
-     * instance should be included in the returned array.
+     * The Reflection::IS_PROTECTED constant can be used to filter
+     * the results of the methodNames(), propertyNames(), and
+     * propertyTypes() methods.
      *
      * @see ReflectionMethod::IS_PROTECTED
      *
@@ -90,10 +93,9 @@ interface Reflection
      * The Reflection::IS_PUBLIC constant is an alias for the
      * ReflectionMethod::IS_PUBLIC constant.
      *
-     * The Reflection::IS_PUBLIC constant can be passed to the
-     * methodNames() method to indicate that the names of the
-     * public methods defined by the reflected class or object
-     * instance should be included in the returned array.
+     * The Reflection::IS_PUBLIC constant can be used to filter
+     * the results of the methodNames(), propertyNames(), and
+     * propertyTypes() methods.
      *
      * @see ReflectionMethod::IS_PUBLIC
      *
@@ -104,10 +106,9 @@ interface Reflection
      * The Reflection::IS_STATIC constant is an alias for the
      * ReflectionMethod::IS_STATIC constant.
      *
-     * The Reflection::IS_STATIC constant can be passed to the
-     * methodNames() method to indicate that the names of the
-     * static methods defined by the reflected class or object
-     * instance should be included in the returned array.
+     * The Reflection::IS_STATIC constant can be used to filter
+     * the results of the methodNames(), propertyNames(), and
+     * propertyTypes() methods.
      *
      * @see ReflectionMethod::IS_STATIC
      *
@@ -129,10 +130,11 @@ interface Reflection
      *                         Reflection::IS_PUBLIC
      *                         Reflection::IS_STATIC
      *
-     *                         All methods defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         The names of the methods defined
+     *                         by the reflected class or object
+     *                         instance that meet the expectation
+     *                         of the given filters will be included
+     *                         in the returned array.
      *
      *                         If no filters are specified, then
      *                         the names of all of the methods
@@ -145,8 +147,8 @@ interface Reflection
      *                         filters. For instance a bitwise
      *                         NOT (~), will not work as expected.
      *                         For example, it is not possible to
-     *                         retrieve all non-static methods via
-     *                         a call like:
+     *                         retrieve the names of all of the
+     *                         non-static methods via a call like:
      *
      *                         ```
      *                         $reflection->methodNames(
@@ -160,37 +162,23 @@ interface Reflection
      * @example
      *
      * ```
-     * var_dump($reflection->methodNames());
+     *
+     * var_dump($reflection->methodNames(Reflection::IS_PUBLIC));
      *
      * // example output:
-     *
-     * array(2) {
+     * array(6) {
      *   [0]=>
-     *   string(7) "method1"
+     *   string(11) "methodNames"
      *   [1]=>
-     *   string(7) "method2"
-     * }
-     *
-     * var_dump(
-     *     $reflection->methodNames(ReflectionMethod::IS_PUBLIC)
-     * );
-     *
-     * // example output:
-     *
-     * array(1) {
-     *   [0]=>
-     *   string(7) "method1"
-     * }
-     *
-     * var_dump(
-     *     $reflection->methodNames(ReflectionMethod::IS_PRIVATE)
-     * );
-     *
-     * // example output:
-     *
-     * array(1) {
-     *   [0]=>
-     *   string(7) "method2"
+     *   string(20) "methodParameterNames"
+     *   [2]=>
+     *   string(20) "methodParameterTypes"
+     *   [3]=>
+     *   string(13) "propertyNames"
+     *   [4]=>
+     *   string(13) "propertyTypes"
+     *   [5]=>
+     *   string(4) "type"
      * }
      *
      * ```
@@ -214,25 +202,14 @@ interface Reflection
      * @example
      *
      * ```
-     * var_dump($reflection->methodParameterNames('method1'));
+     * var_dump(
+     *     $reflection->methodParameterNames('methodParameterNames')
+     * );
      *
      * // example output:
-     *
-     * array(7) {
+     * array(1) {
      *   [0]=>
-     *   string(10) "parameter1"
-     *   [1]=>
-     *   string(10) "parameter2"
-     *   [2]=>
-     *   string(10) "parameter3"
-     *   [3]=>
-     *   string(10) "parameter4"
-     *   [4]=>
-     *   string(10) "parameter5"
-     *   [5]=>
-     *   string(10) "parameter6"
-     *   [6]=>
-     *   string(10) "parameter7"
+     *   string(6) "method"
      * }
      *
      * ```
@@ -245,8 +222,8 @@ interface Reflection
      * by the parameters defined by the specified method of the
      * reflected class or object instance.
      *
-     * The arrays will be indexed by the name of the parameter they
-     * are associated with.
+     * The arrays of strings indicating the accepted types will be
+     * indexed by the name of the parameter they are associated with.
      *
      * @param string $method The name of method whose parameter
      *                       types should be included in the
@@ -257,10 +234,11 @@ interface Reflection
      * @example
      *
      * ```
-     * var_dump($reflection->methodParameterTypes('method1'));
+     * var_dump(
+     *     $reflection->methodParameterTypes('methodParameterTypes')
+     * );
      *
      * // example output:
-     * var_dump($reflection->methodParameterTypes('methodParameterTypes'));
      * array(1) {
      *   ["method"]=>
      *   array(1) {
@@ -275,27 +253,27 @@ interface Reflection
 
     /**
      * Return a numerically indexed array of the names of the
-     * properties defined by the reflected class or object instance.
+     * properties declared by the reflected class or object instance.
      *
      * @param int|null $filter Determine what property names are
      *                         included in the returned array
      *                         based on the following filters:
      *
-     *                         Reflection::IS_ABSTRACT
      *                         Reflection::IS_FINAL
      *                         Reflection::IS_PRIVATE
      *                         Reflection::IS_PROTECTED
      *                         Reflection::IS_PUBLIC
      *                         Reflection::IS_STATIC
      *
-     *                         All properties defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         The names of the properties declared
+     *                         by the reflected class or object
+     *                         instance that meet the expectation of
+     *                         the given filters will be included in
+     *                         the returned array.
      *
      *                         If no filters are specified, then
      *                         the names of all of the properties
-     *                         defined by the reflected class or
+     *                         declared by the reflected class or
      *                         object instance will be included
      *                         in the returned array.
      *
@@ -345,17 +323,18 @@ interface Reflection
     public function propertyNames(int|null $filter = null): array;
 
     /**
-     * Return an associatively indexed array of the reflected class
-     * or object instance's property types.
+     * Return an associatively indexed array of numerically
+     * indexed arrays of strings indicating the types accepted
+     * by the properties declared by the reflected class or
+     * object instance.
      *
-     * The types in the array will be indexed by the name of the
-     * property they are associated with.
+     * The arrays of strings indicating the accepted types will be
+     * indexed by the name of the property they are associated with.
      *
-     * @param int|null $filter Determine which property's types are
-     *                         included in the returned array
+     * @param int|null $filter Determine which property's types
+     *                         are included in the returned array
      *                         based on the following filters:
      *
-     *                         Reflection::IS_ABSTRACT
      *                         Reflection::IS_FINAL
      *                         Reflection::IS_PRIVATE
      *                         Reflection::IS_PROTECTED
@@ -397,7 +376,7 @@ interface Reflection
      *
      * // example output:
      *
-     * array(7) {
+     * array(6) {
      *   ["property1"]=>
      *   string(4) "bool"
      *   ["property2"]=>
@@ -410,11 +389,6 @@ interface Reflection
      *   string(5) "array"
      *   ["property6"]=>
      *   string(6) "string"
-     *   ["property7"]=>
-     *   object(roady\classes\strings\ClassString)#3 (1) {
-     *     ["string":"roady\classes\strings\Text":private]=>
-     *     string(24) "roady\classes\strings\Id"
-     *   }
      * }
      *
      * ```
