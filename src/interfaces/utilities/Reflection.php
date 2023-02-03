@@ -13,22 +13,35 @@ use roady\interfaces\strings\ClassString;
  * @example
  *
  * ```
+ * var_dump($reflection->type());
+ *
+ * // example output:
+ * object(roady\classes\strings\ClassString)#4 (1) {
+ *   ["string":"roady\classes\strings\Text":private]=>
+ *   string(36) "tests\dev\mock\classes\PublicMethods"
+ * }
+ *
  * var_dump($reflection->methodNames(Reflection::IS_PUBLIC));
  *
  * // example output:
- * array(6) {
+ *
+ * array(8) {
  *   [0]=>
- *   string(11) "methodNames"
+ *   string(25) "publicMethodToReturnArray"
  *   [1]=>
- *   string(20) "methodParameterNames"
+ *   string(24) "publicMethodToReturnBool"
  *   [2]=>
- *   string(20) "methodParameterTypes"
+ *   string(27) "publicMethodToReturnClosure"
  *   [3]=>
- *   string(13) "propertyNames"
+ *   string(23) "publicMethodToReturnInt"
  *   [4]=>
- *   string(13) "propertyTypes"
+ *   string(25) "publicMethodToReturnFloat"
  *   [5]=>
- *   string(4) "type"
+ *   string(32) "publicMethodToReturnObjectOrNull"
+ *   [6]=>
+ *   string(26) "publicMethodToReturnObject"
+ *   [7]=>
+ *   string(26) "publicMethodToReturnString"
  * }
  *
  * ```
@@ -55,8 +68,7 @@ interface Reflection
      * ReflectionMethod::IS_ABSTRACT constant.
      *
      * The Reflection::IS_ABSTRACT constant can be used to filter
-     * the results of the methodNames(), propertyNames(), and
-     * propertyTypes() methods.
+     * the results of the methodNames() method.
      *
      * @see ReflectionMethod::IS_ABSTRACT
      *
@@ -162,26 +174,39 @@ interface Reflection
      * @example
      *
      * ```
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(36) "tests\dev\mock\classes\PublicMethods"
+     * }
      *
      * var_dump($reflection->methodNames(Reflection::IS_PUBLIC));
      *
      * // example output:
-     * array(6) {
+     *
+     * array(8) {
      *   [0]=>
-     *   string(11) "methodNames"
+     *   string(25) "publicMethodToReturnArray"
      *   [1]=>
-     *   string(20) "methodParameterNames"
+     *   string(24) "publicMethodToReturnBool"
      *   [2]=>
-     *   string(20) "methodParameterTypes"
+     *   string(27) "publicMethodToReturnClosure"
      *   [3]=>
-     *   string(13) "propertyNames"
+     *   string(23) "publicMethodToReturnInt"
      *   [4]=>
-     *   string(13) "propertyTypes"
+     *   string(25) "publicMethodToReturnFloat"
      *   [5]=>
-     *   string(4) "type"
+     *   string(32) "publicMethodToReturnObjectOrNull"
+     *   [6]=>
+     *   string(26) "publicMethodToReturnObject"
+     *   [7]=>
+     *   string(26) "publicMethodToReturnString"
      * }
      *
      * ```
+     *
      */
     public function methodNames(int|null $filter = null): array;
 
@@ -190,26 +215,34 @@ interface Reflection
      * parameters expected by the specified method of the reflected
      * class or object instance.
      *
-     * The parameters names will be ordered according the order
-     * that the parameters were declared by the respective method.
+     * The parameter names will be ordered according to the order
+     * that the parameters are expected by the specified method.
      *
-     * @param string $method The name of method whose parameter
-     *                       names should be included in the
-     *                       returned array.
+     * @param string $method The name of method.
      *
      * @return array<int, string>
      *
      * @example
      *
      * ```
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#5 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(36) "tests\dev\mock\classes\PublicMethods"
+     * }
+     *
      * var_dump(
-     *     $reflection->methodParameterNames('methodParameterNames')
+     *     $reflection->methodParameterNames(
+     *         'publicMethodToReturnObjectOrNull'
+     *     )
      * );
      *
      * // example output:
      * array(1) {
      *   [0]=>
-     *   string(6) "method"
+     *   string(28) "parameterAcceptsObjectOrNull"
      * }
      *
      * ```
@@ -218,32 +251,41 @@ interface Reflection
 
     /**
      * Returns an associatively indexed array of numerically
-     * indexed arrays of strings indicating the types expected
-     * by the parameters defined by the specified method of the
+     * indexed arrays of strings indicating the types accepted
+     * by the parameters expected by the specified method of the
      * reflected class or object instance.
      *
-     * The arrays of strings indicating the accepted types will be
-     * indexed by the name of the parameter they are associated with.
+     * The arrays of strings indicating the types accepted by each
+     * parameter will be indexed by the name of the parameter they
+     * are associated with.
      *
-     * @param string $method The name of method whose parameter
-     *                       types should be included in the
-     *                       returned array.
+     * @param string $method The name of method.
      *
      * @return array<string, array<int, string>>
      *
      * @example
      *
      * ```
-     * var_dump(
-     *     $reflection->methodParameterTypes('methodParameterTypes')
-     * );
+     * var_dump($reflection->type());
      *
      * // example output:
+     * object(roady\classes\strings\ClassString)#5 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(36) "tests\dev\mock\classes\PublicMethods"
+     * }
+     *
+     * var_dump(
+     *     $reflection->methodParameterTypes(
+     *         'publicMethodToReturnObjectOrNull'
+     *     )
+     * );
      * array(1) {
-     *   ["method"]=>
-     *   array(1) {
+     *   ["parameterAcceptsObjectOrNull"]=>
+     *   array(2) {
      *     [0]=>
-     *     string(6) "string"
+     *     string(6) "object"
+     *     [1]=>
+     *     string(4) "null"
      *   }
      * }
      *
@@ -253,7 +295,8 @@ interface Reflection
 
     /**
      * Return a numerically indexed array of the names of the
-     * properties declared by the reflected class or object instance.
+     * properties declared by the reflected class or object
+     * instance.
      *
      * @param int|null $filter Determine what property names are
      *                         included in the returned array
@@ -282,8 +325,8 @@ interface Reflection
      *                         filters. For instance a bitwise
      *                         NOT (~), will not work as expected.
      *                         For example, it is not possible to
-     *                         retrieve all non-static properties via
-     *                         a call like:
+     *                         retrieve all non-static properties
+     *                         via a call like:
      *
      *                         ```
      *                         $reflection->propertyNames(
@@ -296,25 +339,34 @@ interface Reflection
      * @example
      *
      * ```
-     * var_dump($reflection->propertyNames());
+     * var_dump($reflection->type());
      *
      * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(39) "tests\dev\mock\classes\PublicProperties"
+     * }
      *
-     * array(7) {
+     * var_dump($reflection->propertyNames(Reflection::IS_PUBLIC));
+     *
+     * // example output:
+     * array(8) {
      *   [0]=>
-     *   string(9) "property1"
+     *   string(26) "publicPropertyAcceptsArray"
      *   [1]=>
-     *   string(9) "property2"
+     *   string(25) "publicPropertyAcceptsBool"
      *   [2]=>
-     *   string(9) "property3"
+     *   string(34) "publicPropertyAcceptsClosureOrNull"
      *   [3]=>
-     *   string(9) "property4"
+     *   string(26) "publicPropertyAcceptsFloat"
      *   [4]=>
-     *   string(9) "property5"
+     *   string(24) "publicPropertyAcceptsInt"
      *   [5]=>
-     *   string(9) "property6"
+     *   string(33) "publicPropertyAcceptsObjectOrNull"
      *   [6]=>
-     *   string(9) "property7"
+     *   string(27) "publicPropertyAcceptsObject"
+     *   [7]=>
+     *   string(27) "publicPropertyAcceptsString"
      * }
      *
      * ```
@@ -328,12 +380,15 @@ interface Reflection
      * by the properties declared by the reflected class or
      * object instance.
      *
-     * The arrays of strings indicating the accepted types will be
-     * indexed by the name of the property they are associated with.
+     * The arrays of strings indicating the types accepted by each
+     * property will be indexed by the name of the property they
+     * are associated with.
      *
-     * @param int|null $filter Determine which property's types
-     *                         are included in the returned array
-     *                         based on the following filters:
+     * @param int|null $filter Determine which properties should
+     *                         have an array of strings indicating
+     *                         their accepted types included in
+     *                         the returned array based on the
+     *                         following filters:
      *
      *                         Reflection::IS_FINAL
      *                         Reflection::IS_PRIVATE
@@ -341,24 +396,28 @@ interface Reflection
      *                         Reflection::IS_PUBLIC
      *                         Reflection::IS_STATIC
      *
-     *                         All properties defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         Each property declared by the reflected
+     *                         class or object instance that meets
+     *                         the expectation of the specified
+     *                         filters will have an array of strings
+     *                         indicating the types accepted by the
+     *                         property included in the returned
+     *                         array.
      *
-     *                         If no filters are specified, then
-     *                         the types of all of the properties
-     *                         defined by the reflected class or
-     *                         object instance will be included
-     *                         in the returned array.
+     *                         If no filters are specified, then all
+     *                         properties declared by the reflected
+     *                         class or object instance will have an
+     *                         array of strings indicating the types
+     *                         accepted by the property included in
+     *                         the returned array.
      *
      *                         Note: Note that some bitwise
      *                         operations will not work with these
      *                         filters. For instance a bitwise
      *                         NOT (~), will not work as expected.
      *                         For example, it is not possible to
-     *                         retrieve all non-static properties via
-     *                         a call like:
+     *                         retrieve the types of all non-static
+     *                         properties via a call like:
      *
      *                         ```
      *                         $reflection->propertyTypes(
@@ -367,28 +426,68 @@ interface Reflection
      *
      *                         ```
      *
-     * @return array<string, string|ClassString>
+     * @return array<string, array<int, string>>
      *
      * @example
      *
      * ```
-     * var_dump($reflection->propertyTypes());
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(39) "tests\dev\mock\classes\PublicProperties"
+     * }
+     *
+     * var_dump( $reflection->propertyTypes(Reflection::IS_PUBLIC));
      *
      * // example output:
      *
-     * array(6) {
-     *   ["property1"]=>
-     *   string(4) "bool"
-     *   ["property2"]=>
-     *   string(3) "int"
-     *   ["property3"]=>
-     *   string(5) "float"
-     *   ["property4"]=>
-     *   string(4) "null"
-     *   ["property5"]=>
-     *   string(5) "array"
-     *   ["property6"]=>
-     *   string(6) "string"
+     * array(8) {
+     *   ["publicPropertyAcceptsArray"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(5) "array"
+     *   }
+     *   ["publicPropertyAcceptsBool"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     *   ["publicPropertyAcceptsClosureOrNull"]=>
+     *   array(2) {
+     *     [0]=>
+     *     string(7) "Closure"
+     *     [1]=>
+     *     string(4) "null"
+     *   }
+     *   ["publicPropertyAcceptsFloat"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(5) "float"
+     *   }
+     *   ["publicPropertyAcceptsInt"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(3) "int"
+     *   }
+     *   ["publicPropertyAcceptsObjectOrNull"]=>
+     *   array(2) {
+     *     [0]=>
+     *     string(6) "object"
+     *     [1]=>
+     *     string(4) "null"
+     *   }
+     *   ["publicPropertyAcceptsObject"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(6) "object"
+     *   }
+     *   ["publicPropertyAcceptsString"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(6) "string"
+     *   }
      * }
      *
      * ```
@@ -404,8 +503,13 @@ interface Reflection
      * @example
      *
      * ```
-     * echo $reflection->type();
-     * // example output: namespace\of\reflected\class\ClassName;
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(39) "tests\dev\mock\classes\PublicProperties"
+     * }
      *
      * ```
      *

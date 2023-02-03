@@ -20,16 +20,14 @@ class Reflection implements ReflectionInterface
      * reflected by the specified ReflectionClass instance.
      *
      * @param ReflectionClass <object> $reflectionClass
-     *                                     An instance of a
-     *                                     ReflectionClass.
+     *                                               An instance of a
+     *                                               ReflectionClass.
      *
      * @example
      *
      * ```
      * $reflection = new \roady\classes\utilities\Reflection(
-     *                   new \ReflectionClass(
-     *                       \roady\classes\strings\Id::class
-     *                   )
+     *                   new \ReflectionClass(\stdClass::class)
      *               );
      *
      * ```
@@ -154,62 +152,83 @@ class Reflection implements ReflectionInterface
         return $propertyTypes;
     }
 
+    public function type(): ClassStringInterface
+    {
+        return new ClassString(
+            $this->reflectionClass()->getName()
+        );
+    }
+
     /**
-     * Add the types of the properties defined by the parent
-     * classes of the reflected class or object instance to
-     * the specified array.
+     * For each property declared by the parents of the reflected
+     * class or object instance add a numerically indexed array of
+     * strings that indicate the types accepted by the property
+     * to the specified array of $propertyTypes.
      *
      * @param ReflectionClass <object> $reflectionClass
      *                                     An instance of a
      *                                     ReflectionClass that
-     *                                     reflects the object
-     *                                     whose parent property
-     *                                     names should be added
-     *                                     to the specified array
-     *                                     of $propertyNames.
+     *                                     reflects the class or
+     *                                     object instance that
+     *                                     is to have arrays of
+     *                                     strings indicating the
+     *                                     types accepted by each
+     *                                     property declared by
+     *                                     it's parents added to
+     *                                     the specified array of
+     *                                     $propertyTypes.
      *
-     * @param array<string, array<int, string>> &$propertyTypes
-     *                                          The array to add the
-     *                                          arrays of property
-     *                                          types to.
+     * @param array<string, array<int, string>> &$propertyTypes The
+     *                                                          array
+     *                                                          to add
+     *                                                          the
+     *                                                          arrays
+     *                                                          to.
      *
-     * @param int|null $filter Determine what property types are
-     *                         included in the returned array
-     *                         based on the following filters:
+     * @param int|null $filter Determine what properties have an
+     *                         array of strings indicating their
+     *                         accepted types added to the specified
+     *                         array of $propertyTypes based on the
+     *                         following filters:
      *
-     *                         ReflectionMethod::IS_ABSTRACT
-     *                         ReflectionMethod::IS_FINAL
-     *                         ReflectionMethod::IS_PRIVATE
-     *                         ReflectionMethod::IS_PROTECTED
-     *                         ReflectionMethod::IS_PUBLIC
-     *                         ReflectionMethod::IS_STATIC
+     *                         Reflection::IS_FINAL
+     *                         Reflection::IS_PRIVATE
+     *                         Reflection::IS_PROTECTED
+     *                         Reflection::IS_PUBLIC
+     *                         Reflection::IS_STATIC
      *
-     *                         All properties defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         An array of strings indicating a
+     *                         property's accepted types will be
+     *                         added to the specified array of
+     *                         $propertyTypes for each property
+     *                         declared by the parents of the
+     *                         reflected class or object instance
+     *                         that meets the expectation of the
+     *                         given filters.
      *
      *                         If no filters are specified, then
-     *                         the types of all of the properties
-     *                         defined by the reflected class or
-     *                         object instance will be included
-     *                         in the returned array.
+     *                         an array of strings indicating a
+     *                         property's accepted types will be
+     *                         added to the specified array of
+     *                         $propertyTypes for each property
+     *                         declared by the parents of the
+     *                         reflected class or object instance.
      *
      *                         Note: Note that some bitwise
-     *                         operations will not work with these
-     *                         filters. For instance a bitwise
-     *                         NOT (~), will not work as expected.
-     *                         For example, it is not possible to
-     *                         retrieve all non-static properties
-     *                         via a call like:
+     *                         operations will not work with
+     *                         these filters. For instance a
+     *                         bitwise NOT (~), will not work
+     *                         as expected. For example, it is
+     *                         not possible to target all non-static
+     *                         properties via a call like:
      *
      *                         ```
      *
      *                         $propertyNames = [];
      *                         $this->addParentPropertyTypesToArray(
      *                             $this->reflectionClass(),
-     *                             $propertyNames,
-     *                             ~ReflectionMethod::IS_STATIC
+     *                             $propertyTypes,
+     *                             ~Reflection::IS_STATIC
      *                         );
      *
      *                         ```
@@ -219,13 +238,74 @@ class Reflection implements ReflectionInterface
      * @example
      *
      * ```
-     * $filter = ReflectionMethod::IS_STATIC;
-     * $propertyNames = [];
-     * $this->addParentPropertyTypesToArray(
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#13 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(73) "tests\dev\mock\classes\ClassDExtendsClassCInheirtsFromClassBAndFromClassA"
+     * }
+     *
+     * $propertyTypes = [];
+     *
+     * $reflection->addParentPropertyTypesToArray(
      *     $this->reflectionClass(),
-     *     $propertyNames,
-     *     $filter
+     *     $propertyTypes,
+     *     Reflection::IS_PRIVATE
      * );
+     *
+     * var_dump($propertyTypes);
+     *
+     * array(8) {
+     *   ["classCExtendsClassBInheirtsFromClassAPrivateProperty"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     *   ["classCExtendsClassBInheirtsFromClassAPrivateStaticProperty"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     *   ["privatePropertySharedName"]=>
+     *   array(3) {
+     *     [0]=>
+     *     string(4) "bool"
+     *     [1]=>
+     *     string(6) "string"
+     *     [2]=>
+     *     string(3) "int"
+     *   }
+     *   ["privateStaticPropertySharedName"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     *   ["classBExtendsClassAPrivateProperty"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     *   ["classBExtendsClassAPrivateStaticProperty"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     *   ["classABaseClassPrivateProperty"]=>
+     *   array(2) {
+     *     [0]=>
+     *     string(5) "array"
+     *     [1]=>
+     *     string(4) "bool"
+     *   }
+     *   ["classABaseClassPrivateStaticProperty"]=>
+     *   array(2) {
+     *     [0]=>
+     *     string(3) "int"
+     *     [1]=>
+     *     string(4) "bool"
+     *   }
+     * }
      *
      * ```
      *
@@ -260,59 +340,55 @@ class Reflection implements ReflectionInterface
         }
     }
 
-    public function type(): ClassStringInterface
-    {
-        return new ClassString(
-            $this->reflectionClass()->getName()
-        );
-    }
-
     /**
-     * Add the names of the properties defined by the parent classes
+     * Add the names of the properties declared by the parent classes
      * of the object reflected by the specified ReflectionClass
      * instance to the specified array.
      *
      * @param ReflectionClass <object> $reflectionClass
      *                                     An instance of a
      *                                     ReflectionClass that
-     *                                     reflects the object
-     *                                     whose parent property
-     *                                     names should be added
-     *                                     to the specified array
-     *                                     of $propertyNames.
+     *                                     reflects the class or
+     *                                     object instance whose
+     *                                     parent's property names
+     *                                     should be added to the
+     *                                     specified array of
+     *                                     $propertyNames.
      *
-     * @param array<string, mixed> &$propertyNames The array to add
-     *                                             the property names
-     *                                             to.
+     * @param array<int, string> &$propertyNames The array to add the
+     *                                           property names to.
      *
      * @param int|null $filter Determine what property names are
-     *                         included in the returned array
-     *                         based on the following filters:
+     *                         added to the specified array of
+     *                         $propertyNames based on the following
+     *                         filters:
      *
-     *                         Reflection::IS_ABSTRACT
      *                         Reflection::IS_FINAL
      *                         Reflection::IS_PRIVATE
      *                         Reflection::IS_PROTECTED
      *                         Reflection::IS_PUBLIC
      *                         Reflection::IS_STATIC
      *
-     *                         All properties defined by the reflected
-     *                         class or object instance that meet the
-     *                         expectation of the given filters will
-     *                         be included in the returned array.
+     *                         The names of all of the properties
+     *                         declared by the parents of the
+     *                         reflected class or object instance
+     *                         that meet the expectation of the
+     *                         given filters will be added to the
+     *                         specified array of $propertyNames.
      *
      *                         If no filters are specified, then
      *                         the names of all of the properties
-     *                         defined by the reflected class or
-     *                         object instance will be included
-     *                         in the returned array.
+     *                         declared by the parents of the
+     *                         reflected class or object instance
+     *                         will be added to the specified array
+     *                         of $propertyNames.
      *
      *                         Note: Note that some bitwise
      *                         operations will not work with these
      *                         filters. For instance a bitwise
      *                         NOT (~), will not work as expected.
      *                         For example, it is not possible to
-     *                         retrieve all non-static properties
+     *                         target all non-static properties
      *                         via a call like:
      *
      *                         ```
@@ -328,11 +404,51 @@ class Reflection implements ReflectionInterface
      * @example
      *
      * ```
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(73) "tests\dev\mock\classes\ClassDExtendsClassCInheirtsFromClassBAndFromClassA"
+     * }
+     *
      * $propertyNames = [];
-     * $this->addParentPropertyNamesToArray(
+     *
+     * $reflection->addParentPropertyNamesToArray(
      *     $this->reflectionClass(),
-     *     $propertyNames
+     *     $propertyNames,
+     *     Reflection::IS_PRIVATE
      * );
+     *
+     * var_dump($propertyNames);
+     *
+     * // example output:
+     * array(12) {
+     *   [0]=>
+     *   string(52) "classCExtendsClassBInheirtsFromClassAPrivateProperty"
+     *   [1]=>
+     *   string(58) "classCExtendsClassBInheirtsFromClassAPrivateStaticProperty"
+     *   [2]=>
+     *   string(25) "privatePropertySharedName"
+     *   [3]=>
+     *   string(31) "privateStaticPropertySharedName"
+     *   [4]=>
+     *   string(34) "classBExtendsClassAPrivateProperty"
+     *   [5]=>
+     *   string(40) "classBExtendsClassAPrivateStaticProperty"
+     *   [6]=>
+     *   string(25) "privatePropertySharedName"
+     *   [7]=>
+     *   string(31) "privateStaticPropertySharedName"
+     *   [8]=>
+     *   string(30) "classABaseClassPrivateProperty"
+     *   [9]=>
+     *   string(36) "classABaseClassPrivateStaticProperty"
+     *   [10]=>
+     *   string(25) "privatePropertySharedName"
+     *   [11]=>
+     *   string(31) "privateStaticPropertySharedName"
+     * }
      *
      * ```
      *
@@ -364,7 +480,25 @@ class Reflection implements ReflectionInterface
      * @example
      *
      * ```
-     * $this->reflectionMethod('methodName');
+     * var_dump($reflection->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(36) "tests\dev\mock\classes\PublicMethods"
+     * }
+     *
+     * var_dump(
+     *     $reflection->reflectionMethod('publicMethodToReturnInt')
+     * );
+     *
+     * // example output:
+     * object(ReflectionMethod)#4 (2) {
+     *   ["name"]=>
+     *   string(23) "publicMethodToReturnInt"
+     *   ["class"]=>
+     *   string(36) "tests\dev\mock\classes\PublicMethods"
+     * }
      *
      * ```
      *
@@ -380,134 +514,219 @@ class Reflection implements ReflectionInterface
     }
 
     /**
-     * Add an array of strings indicating the types represented by
+     * Add an array of strings indicating the types reflected by
      * the specified $reflectionUnionType to the specified array of
-     * $parameterTypes.
+     * $types.
      *
-     * If the $reflectionUnionType is nullable, then the string "null"
-     * will be included in the array.
+     * If the $reflectionUnionType is nullable, then the string
+     * "null" will be included in the array of strings.
      *
-     * Index the array by the specified $reflectionParameter's name.
+     * The array of strings will be indexed in the array of $types
+     * by the specified $parameterOrProperty's name.
      *
-     * @param ReflectionProperty|ReflectionParameter $reflectionParameter
-     *                                An instance of a
-     *                                ReflectionParameter that
-     *                                represents the parameter
-     *                                whose types are to be
-     *                                represented in the array.
+     * @param ReflectionParameter|ReflectionProperty $parameterOrProperty
+     *                                           An instance of a
+     *                                           ReflectionParameter
+     *                                           or a
+     *                                           ReflectionProperty
+     *                                           that reflects the
+     *                                           parameter or
+     *                                           property whose name
+     *                                           will be used to
+     *                                           index the array of
+     *                                           strings indicating
+     *                                           the types reflected
+     *                                           by the specified
+     *                                           $reflectionUnionType.
      *
-     * @param array<string, array<int, string>> &$parameterTypes
-     *                                              The array of
-     *                                              parameter types
-     *                                              to add the array
-     *                                              to.
+     * @param array<string, array<int, string>> &$types
+     *                                             The array of $types
+     *                                             to add the array of
+     *                                             strings indicating
+     *                                             the types reflected
+     *                                             by the specified
+     *                                             ReflectionUnionType
+     *                                             to.
      *
      * @param ReflectionUnionType $reflectionUnionType
-     *                                An instance of a
-     *                                ReflectionUnionType
-     *                                that represents the
-     *                                types expected by the
-     *                                parameter whose types
-     *                                are to be represented
-     *                                in the array.
+     *                                            An instance of a
+     *                                            ReflectionUnionType
+     *                                            that reflects the
+     *                                            types that are to
+     *                                            be represented in
+     *                                            the array that will
+     *                                            be added to the
+     *                                            specified array of
+     *                                            $types.
+     *
      * @return void
      *
      * @example
      *
      * ```
-     * $this->addUnionTypesToArray(
-     *     $reflectionParameter,
-     *     $parameterTypes,
-     *     $type
+     * var_dump($this->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(73) "tests\dev\mock\classes\ClassDExtendsClassCInheirtsFromClassBAndFromClassA"
+     * }
+     *
+     * $types = [];
+     *
+     * $reflectionProperty = new \ReflectionProperty(
+     *     $this->type()->__toString(),
+     *     'classDExtendsClassCInheirtsFromClassBAndFromClassAPublicProperty'
      * );
+     *
+     * $reflectionUnionType = $reflectionProperty->getType();
+     *
+     * $this->addUnionTypesToArray(
+     *     $reflectionProperty,
+     *     $types,
+     *     $reflectionUnionType
+     * );
+     *
+     * var_dump($types);
+     *
+     * // example output:
+     *
+     * array(1) {
+     *   ["classDExtendsClassCInheirtsFromClassBAndFromClassAPublicProperty"]=>
+     *   array(3) {
+     *     [0]=>
+     *     string(3) "int"
+     *     [1]=>
+     *     string(4) "bool"
+     *     [2]=>
+     *     string(4) "null"
+     *   }
+     * }
      *
      * ```
      *
      */
     private function addUnionTypesToArray(
-        ReflectionProperty|ReflectionParameter $reflectionParameter,
-        array &$parameterTypes,
+        ReflectionProperty|ReflectionParameter
+        $parameterOrProperty,
+        array &$types,
         ReflectionUnionType $reflectionUnionType
     ): void
     {
         $reflectionUnionTypes = $reflectionUnionType->getTypes();
         foreach($reflectionUnionTypes as $unionType) {
-            $parameterTypes[$reflectionParameter->getName()][]
+            $types[$parameterOrProperty->getName()][]
                 = $unionType->getName();
-            $parameterTypes[$reflectionParameter->getName()] =
-                array_unique($parameterTypes[$reflectionParameter->getName()]);
+            $types[$parameterOrProperty->getName()] =
+                array_unique(
+                    $types[$parameterOrProperty->getName()]
+                );
         }
         if(
             !in_array(
                 'null',
-                $parameterTypes[$reflectionParameter->getName()]
+                $types[$parameterOrProperty->getName()]
             )
             &&
             $reflectionUnionType->allowsNull()
         ) {
-            $parameterTypes[$reflectionParameter->getName()][]
+            $types[$parameterOrProperty->getName()][]
                 = 'null';
         }
     }
 
 
     /**
-     * Add an array that contains a string indicating the type
-     * represented by the specified $reflectionNamedType to the
-     * specified array of $parameterTypes.
+     * Add an array of strings indicating the types reflected by the
+     * specified $reflectionNamedType to the specified array of
+     * $types.
      *
      * If the $reflectionNamedType is nullable, then the string
-     * "null" will be included in the array.
+     * "null" will also be included in the array.
      *
-     * The array will be indexed by the specified
-     * $reflectionParameter's name.
+     * The array of strings will be indexed in the array of $types
+     * by the specified $parameterOrProperty's name.
      *
-     * @param ReflectionProperty|ReflectionParameter $reflectionParameter
-     *                                An instance of a
-     *                                ReflectionParameter that
-     *                                represents the parameter
-     *                                whose type is to be
-     *                                represented in the array.
+     * @param ReflectionParameter|ReflectionProperty $parameterOrProperty
+     *                                           An instance of a
+     *                                           ReflectionParameter
+     *                                           or a
+     *                                           ReflectionProperty
+     *                                           that reflects the
+     *                                           parameter or
+     *                                           property whose name
+     *                                           will be used to
+     *                                           index the array of
+     *                                           strings indicating
+     *                                           the types reflected
+     *                                           by the specified
+     *                                           $reflectionNamedType.
      *
-     * @param array<string, array<int, string>> &$parameterTypes
-     *                                              The array of
-     *                                              parameter types
-     *                                              to add the array
-     *                                              to.
+     * @param array<string, array<int, string>> &$types
+     *                                             The array of $types
+     *                                             to add the array of
+     *                                             strings indicating
+     *                                             the types reflected
+     *                                             by the specified
+     *                                             ReflectionNamedType
+     *                                             to.
      *
      * @param ReflectionNamedType $reflectionNamedType
-     *                                An instance of a
-     *                                ReflectionNamedType
-     *                                that represents the
-     *                                type expected by the
-     *                                parameter whose type
-     *                                is to be represented
-     *                                in the array.
+     *                                            An instance of a
+     *                                            ReflectionNamedType
+     *                                            that reflects the
+     *                                            types that are to
+     *                                            be indicated by
+     *                                            strings in the
+     *                                            array that will be
+     *                                            added to the
+     *                                            specified array of
+     *                                            $types.
      *
      * @return void
      *
      * @example
      *
      * ```
-     * $this->addNamedTypeToArray(
-     *     $reflectionParameter,
-     *     $parameterTypes,
+     * $types = [];
+     *
+     * $reflectionProperty = new \ReflectionProperty(
+     *     $this->type()->__toString(),
+     *     'classDExtendsClassCInheirtsFromClassBAndFromClassAPublicStaticProperty'
+     * );
+     *
+     * $reflectionNamedType = $reflectionProperty->getType();
+     *
+     * $reflection->addNamedTypeToArray(
+     *     $reflectionProperty,
+     *     $types,
      *     $reflectionNamedType
      * );
+     *
+     * var_dump($types);
+     *
+     * // example output:
+     * array(1) {
+     *   ["classDExtendsClassCInheirtsFromClassBAndFromClassAPublicStaticProperty"]=>
+     *   array(1) {
+     *     [0]=>
+     *     string(4) "bool"
+     *   }
+     * }
      *
      * ```
      *
      */
     private function addNamedTypeToArray(
-        ReflectionProperty|ReflectionParameter $reflectionParameter,
-        array &$parameterTypes,
+        ReflectionProperty|ReflectionParameter $parameterOrProperty,
+        array &$types,
         ReflectionNamedType $reflectionNamedType
     ): void
     {
-        $parameterTypes[$reflectionParameter->getName()] =
+        $types[$parameterOrProperty->getName()] =
             [$reflectionNamedType->getName()];
         if($reflectionNamedType->allowsNull()) {
-            $parameterTypes[$reflectionParameter->getName()][] =
+            $types[$parameterOrProperty->getName()][] =
                 'null';
         }
     }
@@ -521,10 +740,14 @@ class Reflection implements ReflectionInterface
      * @example
      *
      * ```
-     * object(ReflectionClass)#6 (1) {
+     * var_dump($this->reflectionClass());
+     *
+     * // example output:
+     * object(ReflectionClass)#3 (1) {
      *   ["name"]=>
-     *   string(24) "roady\classes\strings\Id"
+     *   string(36) "tests\dev\mock\classes\PublicMethods"
      * }
+     *
      * ```
      *
      */
