@@ -196,7 +196,6 @@ class RoadyTest extends TestCase
         $classStringsAndObjects = [
             $this->randomObjectInstance(),
             ClassDExtendsClassCInheirtsFromClassBAndFromClassA::class,
-            /*
             ReflectedClass::class,
             ReflectedAbstractClass::class,
             ClassABaseClass::class,
@@ -211,7 +210,6 @@ class RoadyTest extends TestCase
             PublicMethods::class,
             PublicProperties::class,
             PublicStaticProperties::class,
-             */
         ];
         return $classStringsAndObjects[
             array_rand($classStringsAndObjects)
@@ -241,7 +239,6 @@ class RoadyTest extends TestCase
     {
         $objects = [
             new ClassDExtendsClassCInheirtsFromClassBAndFromClassA(),
-            /*
             new ReflectedClass(),
             new ClassABaseClass(),
             new ClassBExtendsClassA(),
@@ -255,7 +252,6 @@ class RoadyTest extends TestCase
             new PublicMethods(),
             new PublicProperties(),
             new PublicStaticProperties(),
-             */
         ];
         return $objects[
             array_rand($objects)
