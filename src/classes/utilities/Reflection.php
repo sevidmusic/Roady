@@ -404,7 +404,7 @@ class Reflection implements ReflectionInterface
      * @example
      *
      * ```
-     * var_dump($reflection->type());
+     * var_dump($this->type());
      *
      * // example output:
      * object(roady\classes\strings\ClassString)#4 (1) {
@@ -642,7 +642,7 @@ class Reflection implements ReflectionInterface
      * $types.
      *
      * If the $reflectionNamedType is nullable, then the string
-     * "null" will also be included in the array.
+     * "null" will also be included in the array of strings.
      *
      * The array of strings will be indexed in the array of $types
      * by the specified $parameterOrProperty's name.
@@ -688,6 +688,14 @@ class Reflection implements ReflectionInterface
      * @example
      *
      * ```
+     * var_dump($this->type());
+     *
+     * // example output:
+     * object(roady\classes\strings\ClassString)#4 (1) {
+     *   ["string":"roady\classes\strings\Text":private]=>
+     *   string(73) "tests\dev\mock\classes\ClassDExtendsClassCInheirtsFromClassBAndFromClassA"
+     * }
+     *
      * $types = [];
      *
      * $reflectionProperty = new \ReflectionProperty(

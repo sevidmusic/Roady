@@ -218,7 +218,9 @@ interface Reflection
      * The parameter names will be ordered according to the order
      * that the parameters are expected by the specified method.
      *
-     * @param string $method The name of method.
+     * @param string $method The name of the method whose parameter
+     *                       names should be included in the
+     *                       returned array.
      *
      * @return array<int, string>
      *
