@@ -16,46 +16,85 @@ class PublicStaticMethods
 {
 
     /**
-     * @return array<int, int>
+     * @param array<mixed> $parameterAcceptsArray
+     *
+     * @return array<mixed>
      */
-    public static function publicStaticMethodsMethodToReturnArray() : array
+    public static function publicStaticMethodsMethodToReturnArray(
+        array $parameterAcceptsArray,
+        ?bool $parameterAcceptsBoolOrNull = null
+    ) : array
     {
-        return array_fill(0, rand(1, 100), rand(1, 100));
+        return (
+            empty($parameterAcceptsArray)
+            ? array_merge(
+                array_fill(
+                    intval($parameterAcceptsBoolOrNull),
+                    rand(1, 100),
+                    rand(1, 100)
+                )
+            )
+            : [$parameterAcceptsBoolOrNull]
+        );
     }
 
-    public static function publicStaticMethodsMethodToReturnBool() : bool
+    public static function publicStaticMethodsMethodToReturnBool(
+        ?int $parameterAcceptsIntOrNull = null
+    ) : bool
     {
-        return (rand(0,1) === 1 ? true : false);
+        return (
+            $parameterAcceptsIntOrNull > rand(1, 100)
+            ? true
+            : false
+        );
     }
 
-    public static function publicStaticMethodsMethodToReturnClosure() : Closure
+    public static function publicStaticMethodsMethodToReturnClosure(
+        string $parameterAcceptsString,
+        ?bool $parameterAcceptsBoolOrNull = null
+    ) : Closure
     {
         return function(): void {};
     }
 
-    public static function publicStaticMethodsMethodToReturnInt() : int
+    public static function publicStaticMethodsMethodToReturnInt(
+        int $parameterAcceptsInt
+    ) : int
     {
-        return rand(1, 100);
+        return rand(
+            $parameterAcceptsInt,
+            $parameterAcceptsInt + rand(10, 1000)
+        );
     }
 
-    public static function publicStaticMethodsMethodToReturnFloat() : float
+    public static function publicStaticMethodsMethodToReturnFloat(
+        ?bool $parameterAcceptsBoolOrNull = null
+    ) : float
     {
         return floatval(strval(rand(1, 10)) . strval(rand(1, 100)));
     }
 
-    public static function publicStaticMethodsMethodToReturnNullableObject() : ?object
+    public static function publicStaticMethodsMethodToReturnNullableObject(
+        ?bool $parameterAcceptsBoolOrNull = null)
+        : ?object
     {
         return (rand(0, 1) === 1 ? new \stdClass() : null);
     }
 
-    public static function publicStaticMethodsMethodToReturnObject() : object
+    public static function publicStaticMethodsMethodToReturnObject(
+        ?object $parameterAcceptsObjectOrNull = null
+    ) : object
     {
-        return new \stdClass();
+        $object = new \stdClass();
+        $object->publicProperty = $object;
+        return $object;
     }
 
-    public static function publicStaticMethodsMethodToReturnString() : string
+    public static function publicStaticMethodsMethodToReturnString(
+        ?bool $parameterAcceptsBoolOrNull = null
+    ) : string
     {
-        return 'Foo bar baz';
+        return $parameterAcceptsBoolOrNull ? 'Foo bar baz' : '';
     }
 
 

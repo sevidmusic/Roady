@@ -18,8 +18,8 @@ class ClassDExtendsClassCInheirtsFromClassBAndFromClassA extends ClassCExtendsCl
 {
     private bool $classDExtendsClassCInheirtsFromClassBAndFromClassAPrivateProperty = true;
     protected bool $classDExtendsClassCInheirtsFromClassBAndFromClassAProtectedProperty = false;
-    public bool $classDExtendsClassCInheirtsFromClassBAndFromClassAPublicProperty = true;
-    private static bool $classDExtendsClassCInheirtsFromClassBAndFromClassAPrivateStaticProperty = true;
+    public int|bool|null $classDExtendsClassCInheirtsFromClassBAndFromClassAPublicProperty = null;
+    private static int|bool|null $classDExtendsClassCInheirtsFromClassBAndFromClassAPrivateStaticProperty = true;
     protected static bool $classDExtendsClassCInheirtsFromClassBAndFromClassAProtectedStaticProperty = false;
     public static bool $classDExtendsClassCInheirtsFromClassBAndFromClassAPublicStaticProperty = true;
     private bool $privatePropertySharedName = true;
@@ -37,7 +37,7 @@ class ClassDExtendsClassCInheirtsFromClassBAndFromClassA extends ClassCExtendsCl
         return false;
     }
 
-    private static function classDExtendsClassCInheirtsFromClassBAndFromClassAPrivateStaticMethod(): bool
+    private static function classDExtendsClassCInheirtsFromClassBAndFromClassAPrivateStaticMethod(): int|bool|null
     {
         if(self::$privateStaticPropertySharedName) {
             return self::$classDExtendsClassCInheirtsFromClassBAndFromClassAPrivateStaticProperty;

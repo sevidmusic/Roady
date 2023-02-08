@@ -17,13 +17,13 @@ class PublicProperties
     /**
      * @var array<int, int>
      */
-    public array $publicPropertiesPublicArray = [0, 1, 2];
-    public bool $publicPropertiesPublicBool = true;
-    public ?Closure $publicPropertiesPublicClosure = null;
-    public float $publicPropertiesPublicFloat = 0.0;
-    public int $publicPropertiesPublicInt = 0;
-    public ?object $publicPropertiesPublicNullableObject = null;
-    public object $publicPropertiesPublicObject;
-    public string $publicPropertiesPublicString = 'Foo Bar Baz';
+    public array $publicPropertyAcceptsArray = [0, 1, 2];
+    public bool $publicPropertyAcceptsBool = true;
+    public ?Closure $publicPropertyAcceptsClosureOrNull = null;
+    public float $publicPropertyAcceptsFloat = 0.0;
+    public int $publicPropertyAcceptsInt = 0;
+    public ?object $publicPropertyAcceptsObjectOrNull = null;
+    public object $publicPropertyAcceptsObject;
+    public string $publicPropertyAcceptsString = 'Foo Bar Baz';
 
 }

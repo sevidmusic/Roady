@@ -15,6 +15,15 @@ use tests\interfaces\utilities\ReflectionTestTrait;
  */
 trait ObjectReflectionTestTrait
 {
+
+    /**
+     * The ReflectionTestTrait defines common tests for
+     * implementations of the roady\interfaces\utilities\Reflection
+     * interface.
+     *
+     * @see ReflectionTestTrait
+     *
+     */
     use ReflectionTestTrait;
 
     /**
@@ -170,7 +179,7 @@ trait ObjectReflectionTestTrait
      * Return an associatively indexed array of the values
      * of the properties defined by the object reflected by
      * the ObjectReflection implementation instance being
-     * tested, indexed by property name.
+     * tested indexed by property name.
      *
      * Note: Uninitialized properties will be assigned the value null.
      *
@@ -354,7 +363,7 @@ trait ObjectReflectionTestTrait
     /**
      * Test that the propertyValues() method returns an
      * associatively indexed array of the values of the
-     * properties defined by the reflected object, indexed
+     * properties defined by the reflected object indexed
      * by property name.
      *
      * @return void
