@@ -12,7 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.1",
-        "ext-json": "*"
+        "darling/php-unit-test-utilities": "0.0.0-alpha"
     },
     "autoload": {
         "psr-4": {
@@ -25,4 +25,3 @@
         "phpstan/phpstan": "^1.0"
     }
 }
-
