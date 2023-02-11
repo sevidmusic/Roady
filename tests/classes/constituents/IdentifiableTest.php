@@ -3,15 +3,15 @@
 namespace tests\classes\constituents;
 
 use roady\classes\constituents\Identifiable;
-use roady\classes\strings\Id;
-use roady\classes\strings\Name;
-use roady\classes\strings\Text;
+use Darling\PHPTextTypes\classes\strings\Id;
+use Darling\PHPTextTypes\classes\strings\Name;
+use Darling\PHPTextTypes\classes\strings\Text;
 use tests\RoadyTest;
 use tests\interfaces\constituents\IdentifiableTestTrait;
 
 /**
- * Test case for the roady\classes\strings\Identifiable implementation
- * of the roady\interfaces\strings\Identifiable interface.
+ * Test case for the Darling\PHPTextTypes\classes\strings\Identifiable implementation
+ * of the Darling\PHPTextTypes\interfaces\strings\Identifiable interface.
  *
  */
 class IdentifiableTest extends RoadyTest

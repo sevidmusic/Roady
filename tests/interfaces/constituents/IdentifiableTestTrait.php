@@ -2,10 +2,10 @@
 
 namespace tests\interfaces\constituents;
 
-use roady\classes\strings\ClassString;
+use Darling\PHPTextTypes\classes\strings\ClassString;
 use roady\interfaces\constituents\Identifiable;
-use roady\interfaces\strings\Id;
-use roady\interfaces\strings\Name;
+use Darling\PHPTextTypes\interfaces\strings\Id;
+use Darling\PHPTextTypes\interfaces\strings\Name;
 
 /**
  * The IdentifiableTestTrait defines common tests for implementations
@@ -61,12 +61,12 @@ trait IdentifiableTestTrait
      * ```
      * public function setUp(): void;
      * {
-     *     $expectedName = new roady\classes\strings\Name(
-     *         new roady\classes\strings\Text(
+     *     $expectedName = new Darling\PHPTextTypes\classes\strings\Name(
+     *         new Darling\PHPTextTypes\classes\strings\Text(
      *             'Name'
      *         )
      *     );
-     *     $expectedId = new roady\classes\strings\Id();
+     *     $expectedId = new Darling\PHPTextTypes\classes\strings\Id();
      *     $this->setExpectedName($expectedName);
      *     $this->setExpectedId($expectedId);
      *     $this->setIdentifiableTestInstance(
@@ -117,10 +117,10 @@ trait IdentifiableTestTrait
      * ```
      * $this->setIdentifiableTestInstance(
      *     new \roady\classes\constituents\Identifiable(
-     *         new \roady\classes\strings\Name(
-     *             new \roady\classes\strings\Text('Name')
+     *         new \Darling\PHPTextTypes\classes\strings\Name(
+     *             new \Darling\PHPTextTypes\classes\strings\Text('Name')
      *         ),
-     *         new \roady\classes\strings\Id()
+     *         new \Darling\PHPTextTypes\classes\strings\Id()
      *     )
      * );
      *
@@ -189,7 +189,7 @@ trait IdentifiableTestTrait
      * @example
      *
      * ```
-     * $this->setExpectedId(new \roady\classes\strings\Id());
+     * $this->setExpectedId(new \Darling\PHPTextTypes\classes\strings\Id());
      *
      * ```
      *
@@ -213,8 +213,8 @@ trait IdentifiableTestTrait
      *
      * ```
      * $this->setExpectedName(
-     *     new \roady\classes\strings\Name(
-     *         \new roady\classes\strings\Text('Name'),
+     *     new \Darling\PHPTextTypes\classes\strings\Name(
+     *         \new Darling\PHPTextTypes\classes\strings\Text('Name'),
      *     )
      * );
      *
