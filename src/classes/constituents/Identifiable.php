@@ -2,11 +2,11 @@
 
 namespace roady\classes\constituents;
 
-use roady\classes\strings\ClassString;
+use Darling\PHPTextTypes\classes\strings\ClassString;
 use roady\interfaces\constituents\Identifiable as IdentifiableInterface;
-use roady\interfaces\strings\ClassString as ClassStringInterface;
-use roady\interfaces\strings\Id;
-use roady\interfaces\strings\Name;
+use Darling\PHPTextTypes\interfaces\strings\ClassString as ClassStringInterface;
+use Darling\PHPTextTypes\interfaces\strings\Id;
+use Darling\PHPTextTypes\interfaces\strings\Name;
 
 class Identifiable implements IdentifiableInterface
 {

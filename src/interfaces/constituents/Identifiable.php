@@ -2,9 +2,9 @@
 
 namespace roady\interfaces\constituents;
 
-use roady\interfaces\strings\ClassString;
-use roady\interfaces\strings\Id;
-use roady\interfaces\strings\Name;
+use Darling\PHPTextTypes\interfaces\strings\ClassString;
+use Darling\PHPTextTypes\interfaces\strings\Id;
+use Darling\PHPTextTypes\interfaces\strings\Name;
 
 /**
  * An Identifiable can be identified by name, id, and type.
