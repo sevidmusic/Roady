@@ -55,16 +55,16 @@
         },
         {
             "name": "darling/php-text-types",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPTextTypes.git",
-                "reference": "c0597396b648abe357a545cb102fe21269567daf"
+                "reference": "305b226a857fb58c3ed8535d383f10ec64152825"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPTextTypes/zipball/c0597396b648abe357a545cb102fe21269567daf",
-                "reference": "c0597396b648abe357a545cb102fe21269567daf",
+                "url": "https://api.github.com/repos/sevidmusic/PHPTextTypes/zipball/305b226a857fb58c3ed8535d383f10ec64152825",
+                "reference": "305b226a857fb58c3ed8535d383f10ec64152825",
                 "shasum": ""
             },
             "require": {
@@ -95,22 +95,22 @@
             "description": "A collection of classes that represent various types of text.",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPTextTypes/issues",
-                "source": "https://github.com/sevidmusic/PHPTextTypes/tree/v1.0.4"
+                "source": "https://github.com/sevidmusic/PHPTextTypes/tree/v1.0.5"
             },
-            "time": "2023-03-01T22:45:36+00:00"
+            "time": "2023-03-01T23:34:07+00:00"
         },
         {
             "name": "darling/php-unit-test-utilities",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPUnitTestUtilities.git",
-                "reference": "0282d1324b2208734e13ff24b3d502154d7e7d20"
+                "reference": "e447eed1c301e78e3114ed44261d3d40ad9d9708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPUnitTestUtilities/zipball/0282d1324b2208734e13ff24b3d502154d7e7d20",
-                "reference": "0282d1324b2208734e13ff24b3d502154d7e7d20",
+                "url": "https://api.github.com/repos/sevidmusic/PHPUnitTestUtilities/zipball/e447eed1c301e78e3114ed44261d3d40ad9d9708",
+                "reference": "e447eed1c301e78e3114ed44261d3d40ad9d9708",
                 "shasum": ""
             },
             "require": {
@@ -140,9 +140,9 @@
             "description": "A collection of traits that define methods to aide in the implementation of phpunit tests.",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPUnitTestUtilities/issues",
-                "source": "https://github.com/sevidmusic/PHPUnitTestUtilities/tree/v1.0.1"
+                "source": "https://github.com/sevidmusic/PHPUnitTestUtilities/tree/v1.0.2"
             },
-            "time": "2023-03-01T20:10:19+00:00"
+            "time": "2023-03-01T23:26:37+00:00"
         }
     ],
     "packages-dev": [
