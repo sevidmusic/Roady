@@ -1,29 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit bootstrap="vendor/autoload.php"
-         colors="true"
-         verbose="true"
-         convertDeprecationsToExceptions="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         forceCoversAnnotation="true"
-         processIsolation="true"
-         stopOnError="true"
-         stopOnFailure="false"
-         beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
-         beStrictAboutCoversAnnotation="true"
-         executionOrder="random"
->
-
-    <testsuites>
-
-        <testsuite name="all">
-            <directory>tests</directory>
-        </testsuite>
-
-    </testsuites>
-
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" colors="true" processIsolation="true" stopOnError="true" stopOnFailure="false" beStrictAboutOutputDuringTests="true" executionOrder="random" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" cacheDirectory=".phpunit.cache" requireCoverageMetadata="true" beStrictAboutCoverageMetadata="true">
+  <testsuites>
+    <testsuite name="all">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
-

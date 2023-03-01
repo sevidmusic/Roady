@@ -153,6 +153,8 @@ trait SwitchableTestTrait
      *
      * @return void
      *
+     * @covers \roady\classes\constituents\Switchable::state()
+     *
      */
     public function test_state_returns_expected_state(): void
     {
@@ -171,6 +173,8 @@ trait SwitchableTestTrait
      * Test the switchState() method switches the expected state.
      *
      * @return void
+     *
+     * @covers \roady\classes\constituents\Switchable::switchState()
      *
      */
     public function test_switch_state_swtiches_the_state(): void

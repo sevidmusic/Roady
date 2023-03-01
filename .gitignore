@@ -2,5 +2,6 @@ vendor/
 .idea/
 .vagrant/
 *.phpunit.result.cache
+.phpunit.cache/
 *.swp
 *.todos
