@@ -231,6 +231,8 @@ trait IdentifiableTestTrait
      *
      * @return void
      *
+     * @covers \roady\classes\constituents\Identifiable::id()
+     *
      */
     public function test_id_returns_expected_id(): void
     {
@@ -250,6 +252,8 @@ trait IdentifiableTestTrait
      *
      * @return void
      *
+     * @covers \roady\classes\constituents\Identifiable::name()
+     *
      */
     public function test_name_returns_expected_name(): void
     {
@@ -268,6 +272,8 @@ trait IdentifiableTestTrait
      * Test that the type() method returns an appropriate ClassString.
      *
      * @return void
+     *
+     * @covers \roady\classes\constituents\Identifiable::type()
      *
      */
     public function test_type_returns_an_appropriate_class_string(): void

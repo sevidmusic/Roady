@@ -226,6 +226,8 @@ trait PositionableTestTrait
      *
      * @return void
      *
+     * @covers \roady\classes\constituents\Positionable::position()
+     *
      */
     public function test_position_returns_the_expected_position(): void
     {
@@ -244,6 +246,8 @@ trait PositionableTestTrait
      * Test that the modifier() method returns the expected modifier.
      *
      * @return void
+     *
+     * @covers \roady\classes\constituents\Positionable::modifier()
      *
      */
     public function test_modifier_returns_the_expected_modifier(): void
@@ -264,6 +268,8 @@ trait PositionableTestTrait
      * position.
      *
      * @return void
+     *
+     * @covers \roady\classes\constituents\Positionable::incrementPosition()
      *
      */
     public function test_increment_position_increments_the_position_by_the_modifier(): void
@@ -290,6 +296,8 @@ trait PositionableTestTrait
      * position.
      *
      * @return void
+     *
+     * @covers \roady\classes\constituents\Positionable::decrementPosition()
      *
      */
     public function test_decrement_position_decrements_the_position_by_the_modifier(): void
