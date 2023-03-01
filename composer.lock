@@ -55,16 +55,16 @@
         },
         {
             "name": "darling/php-text-types",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPTextTypes.git",
-                "reference": "75d1f6c3a08dbda4b6ef7f390a25317eafee8382"
+                "reference": "c0597396b648abe357a545cb102fe21269567daf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPTextTypes/zipball/75d1f6c3a08dbda4b6ef7f390a25317eafee8382",
-                "reference": "75d1f6c3a08dbda4b6ef7f390a25317eafee8382",
+                "url": "https://api.github.com/repos/sevidmusic/PHPTextTypes/zipball/c0597396b648abe357a545cb102fe21269567daf",
+                "reference": "c0597396b648abe357a545cb102fe21269567daf",
                 "shasum": ""
             },
             "require": {
@@ -95,9 +95,9 @@
             "description": "A collection of classes that represent various types of text.",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPTextTypes/issues",
-                "source": "https://github.com/sevidmusic/PHPTextTypes/tree/v1.0.3"
+                "source": "https://github.com/sevidmusic/PHPTextTypes/tree/v1.0.4"
             },
-            "time": "2023-03-01T21:55:21+00:00"
+            "time": "2023-03-01T22:45:36+00:00"
         },
         {
             "name": "darling/php-unit-test-utilities",
