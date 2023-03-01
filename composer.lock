@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "darling/php-reflection-utilities",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPReflectionUtilities.git",
-                "reference": "664e89b4cc5526da25ffa36bac37813614701404"
+                "reference": "71f94927ffc775059a1b561a087377c53fda48cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPReflectionUtilities/zipball/664e89b4cc5526da25ffa36bac37813614701404",
-                "reference": "664e89b4cc5526da25ffa36bac37813614701404",
+                "url": "https://api.github.com/repos/sevidmusic/PHPReflectionUtilities/zipball/71f94927ffc775059a1b561a087377c53fda48cb",
+                "reference": "71f94927ffc775059a1b561a087377c53fda48cb",
                 "shasum": ""
             },
             "require": {
@@ -49,9 +49,9 @@
             "description": "A collection of php classes that can be used to aide in reflection with PHP",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPReflectionUtilities/issues",
-                "source": "https://github.com/sevidmusic/PHPReflectionUtilities/tree/v1.0.1"
+                "source": "https://github.com/sevidmusic/PHPReflectionUtilities/tree/v1.0.2"
             },
-            "time": "2023-03-01T21:49:25+00:00"
+            "time": "2023-03-01T22:51:00+00:00"
         },
         {
             "name": "darling/php-text-types",
