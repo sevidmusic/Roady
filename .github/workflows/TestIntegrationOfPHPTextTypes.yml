@@ -1,0 +1,57 @@
+name: Test Integration of the darling php-text-types library
+
+
+on:
+  push:
+    branches: [ "roady" ]
+  pull_request:
+    branches: [ "roady" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+      
+    - name: Test Integration of the Text class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/TextTests.php
+      
+    - name: Test Integration of the SafeText class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/SafeTextTests.php
+
+    - name: Test Integration of the Id class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/IdTests.php
+
+    - name: Test Integration of the Name class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/NameTests.php
+      
+    - name: Test Integration of the AlphanumericText class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/AlphaNumericTextTests.php
+      
+    - name: Test Integration of the ClassString class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/ClassStringTests.php
+      
+    - name: Test Integration of the UnknownClass class from the darling php-text-types library
+      run: php ./tests/integration/libraries/PHPTextTypes/UnknownClassTests.php
+    
+    
