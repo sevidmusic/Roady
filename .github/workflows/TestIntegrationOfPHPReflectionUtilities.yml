@@ -32,6 +32,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
       
-    - name: Test Integration of the darling php-reflection-utilities library
+    - name: Test Integration of the Reflection class from the darling php-reflection-utilities library
       run: php ./tests/integration/libraries/PHPReflectionUtilities/ReflectionTests.php
+    
+    - name: Test Integration of the Object Reflection class from the darling php-reflection-utilities library
+      run: php ./tests/integration/libraries/PHPReflectionUtilities/ObjectReflectionTests.php
     
