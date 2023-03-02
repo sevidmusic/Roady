@@ -5,14 +5,14 @@
  * library.
  *
  * Specifically, it tests the
- * `Darling\PHPReflectionUtilities\classes\utilities\Reflection`
+ * `Darling\PHPReflectionUtilities\classes\utilities\ObjectReflection`
  * class.
  *
  * The tests defined in this file can be run with the following
  * command:
  *
  * ```
- * php ./tests/integration/libraries/PHPReflectionUtilities/ReflectionTests.php
+ * php ObjectReflectionTests.php
  *
  * ```
  *
