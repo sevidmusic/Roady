@@ -12,7 +12,7 @@
  * command:
  *
  * ```
- * php ./tests/integration/libraries/PHPReflectionUtilities/ReflectionTests.php
+ * php ReflectionTests.php
  *
  * ```
  *
