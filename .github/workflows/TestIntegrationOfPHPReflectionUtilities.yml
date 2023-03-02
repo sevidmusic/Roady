@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Test Integration of the darling php-reflection-utilities library
 
 on:
   push:
