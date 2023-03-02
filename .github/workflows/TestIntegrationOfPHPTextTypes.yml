@@ -46,7 +46,7 @@ jobs:
       run: php ./tests/integration/libraries/PHPTextTypes/NameTests.php
       
     - name: Test Integration of the AlphanumericText class from the darling php-text-types library
-      run: php ./tests/integration/libraries/PHPTextTypes/AlphaNumericTextTests.php
+      run: php ./tests/integration/libraries/PHPTextTypes/AlphanumericTextTests.php
       
     - name: Test Integration of the ClassString class from the darling php-text-types library
       run: php ./tests/integration/libraries/PHPTextTypes/ClassStringTests.php
