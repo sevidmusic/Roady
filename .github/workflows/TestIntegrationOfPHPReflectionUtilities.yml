@@ -30,8 +30,8 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-    - run: composer install --prefer-dist --no-progress
+      run: composer install --prefer-dist --no-progress
       
     - name: Test Integration of the darling php-reflection-utilities library
-    - run: php ./tests/integration/libraries/PHPReflectionUtilities/ReflectionTests.php
+      run: php ./tests/integration/libraries/PHPReflectionUtilities/ReflectionTests.php
     
