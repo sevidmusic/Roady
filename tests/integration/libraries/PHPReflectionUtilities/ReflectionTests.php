@@ -31,8 +31,9 @@ require str_replace(
 );
 
 use \Darling\PHPReflectionUtilities\classes\utilities\Reflection;
+use \Darling\PHPTextTypes\classes\strings\ClassString;
 
-$reflection = new Reflection(new ReflectionClass(Reflection::class));
+$reflection = new Reflection(new ClassString(Reflection::class));
 
 // Test the `methodNames()` method.
 var_dump($reflection->methodNames());
