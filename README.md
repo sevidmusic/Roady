@@ -52,7 +52,7 @@ versions of roady.
 - Better use of `php 8` features where appropriate.
 - A better command line utility built into roady.
 
-# Summary:
+# (TODO):
 
 # PHPFilesystemPaths Library:
 
@@ -133,6 +133,14 @@ Defines a collection of `PathToRoadyHtmlFileTemplateFile` instances.
 
 Defines a directory listing of a specified `PathToDirectoryOfRoadyHtmlFileTemplates` in the form of a `PathToRoadyHtmlFileTemplateFileCollection`
 
+### `\Darling\RoadyTemplateUtilities\interfaces\templates\TemplateReader`:
+
+Can read a Roady HTML template file and provide the following:
+
+- The templates contents as a string
+
+- A PositionNameCollection that contains all the PositionNames defined
+  in the template.
 
 # RoadyRoutingUtilities Library:
 
@@ -1011,3 +1019,70 @@ interface ModuleOutputRouteDeterminator
 }
 ```
 
+
+### Darling\RoadyPositionNames\interfaces\collections\PositionNameCollection;
+
+```
+
+<?php
+
+namespace Darling\RoadyPositionNames\interfaces\collections;
+
+use \Darling\RoadyPositionNames\interfaces\identifiers\PositionName;
+
+/**
+ * A PositionNameCollection defines a collection of PositionNames.
+ *
+ */
+interface PositionNameCollection
+{
+
+    /**
+     * Return a numerically indexed array of PositionNames.
+     *
+     * @return array<int, PositionName>
+     *
+     */
+    public function collection(): array;
+
+}
+
+```
+
+
+### `\Darling\RoadyTemplateUtilities\interfaces\templates\TemplateReader`:
+
+
+```
+<?php
+
+namespace Darling\RoadyTemplateUtilities\interfaces\templates;
+
+use \Darling\RoadyPositionNames\interfaces\collections\PositionNameCollection;
+
+/**
+ *
+ *
+ */
+interface TemplateReader
+{
+
+    /**
+     *
+     *
+     * @return PositionNameCollection
+     *
+     */
+    public function namedPositions(): PositionNameCollection;
+
+    /**
+     *
+     *
+     * @return string
+     *
+     */
+    public function content(): string;
+
+}
+
+```
