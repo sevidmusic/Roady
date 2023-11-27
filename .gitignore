@@ -1,4 +1,5 @@
 vendor/
+.phpactor.json
 .idea/
 .vagrant/
 *.phpunit.result.cache
