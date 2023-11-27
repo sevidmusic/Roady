@@ -821,6 +821,67 @@ interface ListingOfDirectoryOfRoadyModules
 
 ```
 
+### \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
+
+```
+<?php
+
+namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
+
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
+use \Darling\RoadyRoutingUtilties\interfaces\collections\RouteCollection;
+
+interface ModuleCSSRouteDeterminator
+{
+
+    public function pathToRoadyModuleDirectory(): PathToRoadyModuleDirectory;
+
+    public function routeCollection(): RouteCollection
+
+}
+
+```
+
+### \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
+
+```
+<?php
+
+namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
+
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
+use \Darling\RoadyRoutingUtilties\interfaces\collections\RouteCollection;
+
+interface ModuleJSRouteDeterminator
+{
+
+    public function pathToRoadyModuleDirectory(): PathToRoadyModuleDirectory;
+
+    public function routeCollection(): RouteCollection
+
+}
+
+```
+
+### \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
+
+```
+<?php
+
+namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
+
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
+use \Darling\RoadyRoutingUtilties\interfaces\collections\RouteCollection;
+
+interface ModuleOutputRouteDeterminator
+{
+
+    public function pathToRoadyModuleDirectory(): PathToRoadyModuleDirectory;
+
+    public function routeCollection(): RouteCollection
+
+}
+```
 
 ### \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory
 
@@ -995,68 +1056,6 @@ interface PathToRoadyHtmlFileTemplateCollection
 
 }
 
-```
-
-### \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
-
-```
-<?php
-
-namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
-
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyRoutingUtilties\interfaces\collections\RouteCollection;
-
-interface ModuleCSSRouteDeterminator
-{
-
-    public function pathToRoadyModuleDirectory(): PathToRoadyModuleDirectory;
-
-    public function routeCollection(): RouteCollection
-
-}
-
-```
-
-### \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-
-```
-<?php
-
-namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
-
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyRoutingUtilties\interfaces\collections\RouteCollection;
-
-interface ModuleJSRouteDeterminator
-{
-
-    public function pathToRoadyModuleDirectory(): PathToRoadyModuleDirectory;
-
-    public function routeCollection(): RouteCollection
-
-}
-
-```
-
-### \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
-
-```
-<?php
-
-namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
-
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyRoutingUtilties\interfaces\collections\RouteCollection;
-
-interface ModuleOutputRouteDeterminator
-{
-
-    public function pathToRoadyModuleDirectory(): PathToRoadyModuleDirectory;
-
-    public function routeCollection(): RouteCollection
-
-}
 ```
 
 
