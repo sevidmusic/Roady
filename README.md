@@ -190,6 +190,7 @@ use \Darling\PHPTextTypes\classes\strings\SafeTextCollection;
 use \Darling\PHPTextTypes\classes\strings\Text;
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
+use \Darling\RoadyRoutes\classes\collections\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\request\Request;
 use \Darling\RoadyRoutingUtilities\classes\routing\Router;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
@@ -230,6 +231,7 @@ $ui = new RoadyUI(
             )
         )
     ),
+    new RouteCollectionSorter(),
 );
 
 echo $ui->__toString();
