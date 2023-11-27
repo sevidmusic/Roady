@@ -121,19 +121,19 @@ Determines output routes for a module.
 
 Defines a path to a directory of Roady HTML templates.
 
-### `\Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplateFile`:
+### `\Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplate`:
 
 Defines a path to an existing Roady HTML template file.
 
-### `\Darling\RoadyTemplateUtilities\interfaces\collections\PathToRoadyHtmlFileTemplateFileCollection`:
+### `\Darling\RoadyTemplateUtilities\interfaces\collections\PathToRoadyHtmlFileTemplateCollection`:
 
-Defines a collection of `PathToRoadyHtmlFileTemplateFile` instances.
+Defines a collection of `PathToRoadyHtmlFileTemplate` instances.
 
 ### `\Darling\RoadyTemplateUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyHtmlFileTemplates`:
 
-Defines a directory listing of a specified `PathToDirectoryOfRoadyHtmlFileTemplates` in the form of a `PathToRoadyHtmlFileTemplateFileCollection`
+Defines a directory listing of a specified `PathToDirectoryOfRoadyHtmlFileTemplates` in the form of a `PathToRoadyHtmlFileTemplateCollection`
 
-### `\Darling\RoadyTemplateUtilities\interfaces\templates\TemplateReader`:
+### `\Darling\RoadyTemplateUtilities\interfaces\template\info\TemplateReader`:
 
 Can read a Roady HTML template file and provide the following:
 
@@ -161,7 +161,14 @@ Interface for routing requests.
 
 ### `\Darling\RoadyUIUtilities\interfaces\ui\RoadyUI`:
 
-Interface representing the user interface of Roady.
+Roady's user interface.
+
+# RoudyRoutes Library:
+
+### Darling\RoadyRoutes\interfaces\collections\PositionNameCollection;
+
+Defines a collection of PositionNames.
+
 
 ######################################################################
 ############################ Roady 2.0 ###############################
@@ -176,7 +183,7 @@ of the RoadyModuleUtilities library. However, for the moment this
 file may contain references to classes that are/or will be defined
 by other libraries so I can organize my thoughts.
 
-This file will change alot before the first release of this library.
+This file will change a lot before the first release of this library.
 
 The RoadyModuleUtilities library will provide classes for working with
 Roady modules.
@@ -191,8 +198,6 @@ and RoadyTemplateUtilities libraries:
 <?php
 
 # Roady's index.php
-
-use \Darling\PHPFilesystemPaths\classes\paths\PathToExistingDirectory;
 use \Darling\PHPTextTypes\classes\strings\SafeText;
 use \Darling\PHPTextTypes\classes\strings\SafeTextCollection;
 use \Darling\PHPTextTypes\classes\strings\Text;
@@ -255,9 +260,9 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
-use \Darling\RoadyRoutingUtilities\interfaces\request\Request;
-use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
+use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
+use \Darling\RoadyRoutingUtilities\interfaces\request\Request;
 /**
  * The following is a rough draft/approximation of the actual
  * implementation of this file.
@@ -273,65 +278,54 @@ class Router
         private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
     ) {}
 
+    public function request(): Request
+    {
+        return $this->request;
+    }
+
+    public function listingOfDirectoryOfRoadyModules(): ListingOfDirectoryOfRoadyModules
+    {
+        return $this->listingOfDirectoryOfRoadyModules();
+    }
+
     public function response(): RouteCollection
     {
         $definedRoutes = [];
-
-        foreach($this->listingOfDirectoryOfRoadyModules->pathsToRoadyModuleDirectories() as $pathToRoadyModuleDirectory) {
-
+        foreach($this->listingOfDirectoryOfRoadyModules()->pathToRoadyModuleDirectoryCollection()->collection() as $pathToRoadyModuleDirectory) {
             $moduleAuthoritiesJsonConfigurationReader = new ModuleAuthoritiesJsonConfigurationReader($pathToRoadyModuleDirectory);
-
             if(in_array($this->request()->url()->domain()->authority(), $moduleAuthoritiesJsonConfigurationReader->authorityCollection()->collection())) {
-
                 $moduleCSSRouteDeterminator = new ModuleCSSRouteDeterminator($pathToRoadyModuleDirectory);
-
                 foreach($moduleCSSRouteDeterminator->cssRoutes()->collection() as $cssRoute) {
-
                     $definedRoutes[] = $cssRoute;
-
                 }
                 $moduleJSRouteDeterminator = new ModuleJSRouteDeterminator($pathToRoadyModuleDirectory);
 
                 foreach($moduleJSRouteDeterminator->cssRoutes()->collection() as $jsRoute) {
-
                     $definedRoutes[] = $jsRoute;
-
                 }
                 $moduleOutputRouteDeterminator = new ModuleOutputRouteDeterminator($pathToRoadyModuleDirectory);
 
                 foreach($moduleOutputRouteDeterminator->outputRoutes()->collection() as $outputRoute) {
-
                     $definedRoutes[] = $outputRoute;
-
                 }
                 $moduleRoutesJsonConfigurationReader = new ModuleRoutesJsonConfigurationReader($pathToRoadyModuleDirectory);
 
                 foreach($moduleRoutesJsonConfigurationReader->configuredRoutes()->collection() as $configuredRoute) {
-
                     $definedRoutes[] = $configuredRoute;
-
                 }
             }
         }
         $responseRoutes = [];
-
         foreach($routes as $routeIndex => $route) {
-
             if(
-
                 in_array($request->name(), $route->nameCollection()->collection())
                 ||
                 in_array(new Name(new Text('global')), $route->nameCollection()->collection())
-
             ) {
-
                 $responseRoutes[] = $route;
-
             }
         }
-
         return new RouteCollection(...$responseRoutes);
-
     }
 
 }
@@ -345,10 +339,10 @@ class Router
 
 namespace \Darling\ROadyUIUtilities\interfaces\ui;
 
+use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\interfaces\routing\Router;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplateFile;
-use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
+use \Darling\RoadyTemplateUtilities\interfaces\template\info\RoadyHTMLTemplateFileReader;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -368,7 +362,7 @@ class RoadyUI
 
     public function render(): string
     {
-        $pathToRoadyHtmlFileTemplateFile = new PathToRoadyHtmlFileTemplateFile(
+        $pathToRoadyHtmlFileTemplateFile = new RoadyHTMLTemplateFileReader(
             $router->request()->name() . '.html',
             new PathToDirectoryOfRoadyHtmlFileTemplates(
                 new PathToExisitingDirectory(
@@ -880,7 +874,7 @@ interface PathToDirectoryOfRoadyHtmlFileTemplates extends Stringable
 ### \Darling\RoadyTemplateUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyHtmlFileTemplates;
 
 A ListingOfDirectoryOfRoadyHtmlFileTemplates defines a
-PathToRoadyHtmlFileTemplateFileCollection of PathToRoadyHtmlFileTemplateFile
+PathToRoadyHtmlFileTemplateCollection of PathToRoadyHtmlFileTemplate
 instances for the template files in the assigned
 PathToDirectoryOfRoadyHtmlFileTemplates.
 
@@ -889,23 +883,69 @@ PathToDirectoryOfRoadyHtmlFileTemplates.
 
 namespace \Darling\RoadyTemplateUtilities\interfaces\directory\listings;
 
-use \Darling\RoadyTemplateUtilities\interfaces\collections\PathToRoadyHtmlFileTemplateFileCollection;
+use \Darling\RoadyTemplateUtilities\interfaces\collections\PathToRoadyHtmlFileTemplateCollection;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
 
 interface ListingOfDirectoryOfRoadyHtmlFileTemplates
 {
 
    public function pathToDirectoryOfRoadyHtmlFileTemplates(): PathToDirectoryOfRoadyHtmlFileTemplates;
-   public function pathToRoadyHtmlFileTemplateFileCollection(): PathToRoadyHtmlFileTemplateFileCollection;
+   public function pathToRoadyHtmlFileTemplateFileCollection(): PathToRoadyHtmlFileTemplateCollection;
 
 }
 
 
 ```
 
-### \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplateFile
+### `\Darling\RoadyTemplateUtilities\interfaces\template\info\TemplateReader`:
 
-A PathToRoadyHtmlFileTemplateFile defines a path to an existing
+
+```
+<?php
+
+namespace Darling\RoadyTemplateUtilities\interfaces\templates;
+
+use \Darling\RoadyRoutes\interfaces\collections\PositionNameCollection;
+use \Darling\RoadyRoutes\interfaces\paths\PathToRoadyHtmlFileTemplate ;
+
+/**
+ *
+ *
+ */
+interface TemplateReader
+{
+
+    /**
+     *
+     *
+     * @return PositionNameCollection
+     *
+     */
+    public function namedPositions(): PositionNameCollection;
+
+    /**
+     *
+     *
+     * @return string
+     *
+     */
+    public function content(): string;
+
+    /**
+     *
+     *
+     * @return PathToRoadyHtmlFileTemplate
+     *
+     */
+    public function pathToRoadyHtmlFileTemplateFile (): PathToRoadyHtmlFileTemplate ;
+
+}
+
+```
+
+### \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplate
+
+A PathToRoadyHtmlFileTemplate defines a path to an existing
 Roady Template file.
 
 ```
@@ -917,7 +957,7 @@ use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
 use \Stringable;
 
-interface PathToRoadyHtmlFileTemplateFile extends Stringable
+interface PathToRoadyHtmlFileTemplate extends Stringable
 {
 
    public function templateName(): Name;
@@ -928,27 +968,27 @@ interface PathToRoadyHtmlFileTemplateFile extends Stringable
 
 ```
 
-### \Darling\RoadyTemplateUtilities\interfaces\collections\PathToRoadyHtmlFileTemplateFileCollection
+### \Darling\RoadyTemplateUtilities\interfaces\collections\PathToRoadyHtmlFileTemplateCollection
 
-A PathToRoadyHtmlFileTemplateFileCollection defines a collection of
-PathToRoadyHtmlFileTemplateFile instances.
+A PathToRoadyHtmlFileTemplateCollection defines a collection of
+PathToRoadyHtmlFileTemplate instances.
 
 ```
 <?php
 
 namespace \Darling\RoadyTemplateUtilities\interfaces\collections;
 
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplateFile;
+use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplate;
 
-interface PathToRoadyHtmlFileTemplateFileCollection
+interface PathToRoadyHtmlFileTemplateCollection
 {
 
    /**
-    * Return an array of PathToRoadyHtmlFileTemplateFile instances.
+    * Return an array of PathToRoadyHtmlFileTemplate instances.
     *
-    * @return array<int, PathToRoadyHtmlFileTemplateFile>
+    * @return array<int, PathToRoadyHtmlFileTemplate>
     *                                       An array of
-    *                                       PathToRoadyHtmlFileTemplateFile
+    *                                       PathToRoadyHtmlFileTemplate
     *                                       instances.
     */
    public function collection(): array;
@@ -1020,13 +1060,13 @@ interface ModuleOutputRouteDeterminator
 ```
 
 
-### Darling\RoadyPositionNames\interfaces\collections\PositionNameCollection;
+### Darling\RoadyRoutes\interfaces\collections\PositionNameCollection;
 
 ```
 
 <?php
 
-namespace Darling\RoadyPositionNames\interfaces\collections;
+namespace Darling\RoadyRoutes\interfaces\collections;
 
 use \Darling\RoadyPositionNames\interfaces\identifiers\PositionName;
 
@@ -1050,39 +1090,3 @@ interface PositionNameCollection
 ```
 
 
-### `\Darling\RoadyTemplateUtilities\interfaces\templates\TemplateReader`:
-
-
-```
-<?php
-
-namespace Darling\RoadyTemplateUtilities\interfaces\templates;
-
-use \Darling\RoadyPositionNames\interfaces\collections\PositionNameCollection;
-
-/**
- *
- *
- */
-interface TemplateReader
-{
-
-    /**
-     *
-     *
-     * @return PositionNameCollection
-     *
-     */
-    public function namedPositions(): PositionNameCollection;
-
-    /**
-     *
-     *
-     * @return string
-     *
-     */
-    public function content(): string;
-
-}
-
-```
