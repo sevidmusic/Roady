@@ -133,7 +133,7 @@ Defines a collection of `PathToRoadyHtmlFileTemplate` instances.
 
 Defines a directory listing of a specified `PathToDirectoryOfRoadyHtmlFileTemplates` in the form of a `PathToRoadyHtmlFileTemplateCollection`
 
-### `\Darling\RoadyTemplateUtilities\interfaces\template\info\RoadyHTMLTemplateFileReader`:
+### `\Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader`:
 
 Can read a Roady HTML template file and provide the following:
 
@@ -217,6 +217,7 @@ use \Darling\RoadyRoutingUtilities\classes\utilities\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
+use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -227,7 +228,6 @@ use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHtmlFile
 
 $ui = new RoadyUI(
     new Router(
-        /** @see comment ^ */
         new Request(),
         new ListingOfDirectoryOfRoadyModules(
             new PathToDirectoryOfRoadyModules(
@@ -260,6 +260,8 @@ $ui = new RoadyUI(
         )
     ),
     new RouteCollectionSorter(),
+    new RoadyHTMLTemplateFileReader(),
+
 );
 
 echo $ui->__toString();
@@ -422,7 +424,8 @@ namespace \Darling\ROadyUIUtilities\interfaces\ui;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\interfaces\routing\Router;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\template\info\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplate;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -435,37 +438,19 @@ class RoadyUI
 {
 
     public function __construct(
+
         private Router $router,
         private PathToDirectoryOfRoadyHtmlFileTemplates $pathToDirectoryOfRoadyHtmlFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
+        private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
     ) {}
 
     public function render(): string
     {
-        $pathToRoadyHtmlFileTemplateFile = new RoadyHTMLTemplateFileReader(
-            $router->request()->name() . '.html',
-            new PathToDirectoryOfRoadyHtmlFileTemplates(
-                new PathToExisitingDirectory(
-                    new SafeTextCollection(
-                        new SafeText(new Text('path')),
-                        new SafeText(new Text('to')),
-                        new SafeText(new Text('roady')),
-                        new SafeText(new Text('templates')),
-                        new SafeText(new Text('directory'))
-                    )
-                )
-            ),
-        );
-
-        $roadyTemplate = new RoadyHtmlFileTemplate($pathToRoadyHtmlFileTemplate);
-
         /** array<string, array<string, Route>> */
         $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition(
             $router->response()->routeCollection()
         );
-
-        $templateString = $roadyTemplate->__toString();
-
         /** array<string, array<string, string>> */
         $routeOutputStrings = [];
         foreach($sortedRoutes as $routePositionName => $routes) {
@@ -474,33 +459,39 @@ class RoadyUI
                 $this->getRouteOutput($route);
             }
         }
-        foreach($roadyTemplate->namedPositions() as $namedPosition) {
-            $templateString = str_replace(
-                '<' . $namedPosition . '></' . $namedPosition . '>',
-                implode(PHP_EOL, ($routeOutputStrings[$namedPosition] ?? [])),
-                $templateString,
+        /*
+         * Note: PathToRoadyHtmlFileTemplate path will default to
+         * a template file defined by the RoadyTemplateUtiltitiesLibrary
+         * if there is not a template that corresponds to the Request's
+         * name.
+         */
+        $pathToRoadyHtmlFileTemplate = new PathToRoadyHtmlFileTemplate(
+            $router->request()->name() . '.html',
+            $this->pathToDirectoryOfRoadyHtmlFileTemplates(),
+        );
+        $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
+            $pathToRoadyHtmlFileTemplate
+        );
+        foreach(
+            $this->roadyHTMLTemplateFileReader()->positionNameCollection(
+                $pathToRoadyHtmlFileTemplate
+            )->collection()
+            as
+            $positionName
+        ) {
+            $renderedContent = str_replace(
+                '<' . $positionName . '></' . $positionName . '>',
+                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])),
+                $renderedContent,
             );
         }
-        return $templateString;
+        return $renderedContent;
 
     }
 
     private function getRouteOutput(Route $route): string
     {
-        /**
-         * @TODO Need $route->moduleName() so output can be
-         * obtained via:
-         *   $router->pathToDirectoryOfRoadyModules()->__toString() .
-         *   $route->moduleName() .
-         *   $route->relaitvePath()->__toString();
-         *
-         * Also, don't forget that `output`, `css`, and `js` routes
-         * are handled differntly.
-         * Also, don't forget that `output` routes that have the
-         * extension `.php` will be executed as `php` and their
-         * output will be captured via an `object buffer`.
-         */
-         $targetFilePath = $router->pathToDirectoryOfRoadyModules()->__toString() .
+        $targetFilePath = $router->pathToDirectoryOfRoadyModules()->__toString() .
                            DIRECTORY_SEPARATOR .
                            $route->moduleName() .
                            DIRECTORY_SEPARATOR .
@@ -1031,14 +1022,14 @@ interface ListingOfDirectoryOfRoadyHtmlFileTemplates
 {
 
    public function pathToDirectoryOfRoadyHtmlFileTemplates(): PathToDirectoryOfRoadyHtmlFileTemplates;
-   public function pathToRoadyHtmlFileTemplateFileCollection(): PathToRoadyHtmlFileTemplateCollection;
+   public function PathToRoadyHtmlFileTemplateCollection(): PathToRoadyHtmlFileTemplateCollection;
 
 }
 
 
 ```
 
-### `\Darling\RoadyTemplateUtilities\interfaces\template\info\RoadyHTMLTemplateFileReader`:
+### `\Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader`:
 
 
 ```
