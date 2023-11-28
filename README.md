@@ -306,16 +306,6 @@ class Router
         private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
     ) {}
 
-    public function request(): Request
-    {
-        return $this->request;
-    }
-
-    public function listingOfDirectoryOfRoadyModules(): ListingOfDirectoryOfRoadyModules
-    {
-        return $this->listingOfDirectoryOfRoadyModules();
-    }
-
     public function response(): Response
     {
         $definedRoutes = [];
@@ -383,6 +373,16 @@ class Router
             }
         }
         return new Response($router->request(), RouteCollection(...$responseRoutes));
+    }
+
+    public function request(): Request
+    {
+        return $this->request;
+    }
+
+    public function listingOfDirectoryOfRoadyModules(): ListingOfDirectoryOfRoadyModules
+    {
+        return $this->listingOfDirectoryOfRoadyModules();
     }
 
     public function moduleAuthoritiesJsonConfigurationReader(): ModuleAuthoritiesJsonConfigurationReader
@@ -514,6 +514,26 @@ class RoadyUI
     public function __toString(): string
     {
         return $this->render();
+    }
+
+    public function router() Router
+    {
+        return $this->router;
+    }
+
+    public function pathToDirectoryOfRoadyHtmlFileTemplates() PathToDirectoryOfRoadyHtmlFileTemplates
+    {
+        return $this->pathToDirectoryOfRoadyHtmlFileTemplates;
+    }
+
+    public function routeCollectionSorter() RouteCollectionSorter
+    {
+        return $this->routeCollectionSorter;
+    }
+
+    public function roadyHTMLTemplateFileReader() RoadyHTMLTemplateFileReader
+    {
+        return $this->roadyHTMLTemplateFileReader;
     }
 
 }
