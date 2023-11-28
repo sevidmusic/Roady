@@ -198,15 +198,24 @@ and RoadyTemplateUtilities libraries:
 <?php
 
 # Roady's index.php
+
 use \Darling\PHPTextTypes\classes\strings\SafeText;
 use \Darling\PHPTextTypes\classes\strings\SafeTextCollection;
 use \Darling\PHPTextTypes\classes\strings\Text;
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
+use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutes\classes\collections\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
 use \Darling\RoadyRoutingUtilities\classes\responses\Response;
 use \Darling\RoadyRoutingUtilities\classes\utilities\Router;
+use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
+use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
 
 /**
@@ -233,6 +242,11 @@ $ui = new RoadyUI(
                 )
             )
         ),
+        new ModuleAuthoritiesJsonConfigurationReader(),
+        new ModuleCSSRouteDeterminator(),
+        new ModuleJSRouteDeterminator(),
+        new ModuleOutputRouteDeterminator(),
+        new ModuleRoutesJsonConfigurationReader(),
     ),
     new PathToDirectoryOfRoadyHtmlFileTemplates(
         new PathToExisitingDirectory(
