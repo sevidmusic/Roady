@@ -133,7 +133,7 @@ Defines a collection of `PathToRoadyHtmlFileTemplate` instances.
 
 Defines a directory listing of a specified `PathToDirectoryOfRoadyHtmlFileTemplates` in the form of a `PathToRoadyHtmlFileTemplateCollection`
 
-### `\Darling\RoadyTemplateUtilities\interfaces\template\info\TemplateReader`:
+### `\Darling\RoadyTemplateUtilities\interfaces\template\info\RoadyHTMLTemplateFileReader`:
 
 Can read a Roady HTML template file and provide the following:
 
@@ -144,17 +144,17 @@ Can read a Roady HTML template file and provide the following:
 
 # RoadyRoutingUtilities Library:
 
-### `\Darling\RoadyRoutingUtilities\interfaces\routing\Request`:
+### `\Darling\RoadyRoutingUtilities\interfaces\requests\Request`:
 
 Interface representing an HTTP request.
 
-### `\Darling\RoadyRoutingUtilities\interfaces\routing\Response`:
+### `\Darling\RoadyRoutingUtilities\interfaces\responses\Response`:
 
 Interface representing an HTTP response.
 
-### `\Darling\RoadyRoutingUtilities\interfaces\routing\Router`:
+### `\Darling\RoadyRoutingUtilities\interfaces\utilities\Router`:
 
-Interface for routing requests.
+Determnes the relationship between a Request and a Response.
 
 
 # RoadyUIUtilities Library:
@@ -204,8 +204,9 @@ use \Darling\PHPTextTypes\classes\strings\Text;
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyRoutes\classes\collections\RouteCollectionSorter;
-use \Darling\RoadyRoutingUtilities\classes\request\Request;
-use \Darling\RoadyRoutingUtilities\classes\routing\Router;
+use \Darling\RoadyRoutingUtilities\classes\requests\Request;
+use \Darling\RoadyRoutingUtilities\classes\responses\Response;
+use \Darling\RoadyRoutingUtilities\classes\utilities\Router;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
 
 /**
@@ -261,8 +262,14 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
-use \Darling\RoadyRoutingUtilities\interfaces\request\Request;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
+use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator
+
 /**
  * The following is a rough draft/approximation of the actual
  * implementation of this file.
@@ -276,6 +283,11 @@ class Router
     public function __construct(
         private Request $request,
         private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
+        private ModuleAuthoritiesJsonConfigurationReader $moduleAuthoritiesJsonConfigurationReader,
+        private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
+        private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
+        pirvate ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
+        private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
     ) {}
 
     public function request(): Request
@@ -288,29 +300,58 @@ class Router
         return $this->listingOfDirectoryOfRoadyModules();
     }
 
-    public function response(): RouteCollection
+    public function response(): Response
     {
         $definedRoutes = [];
-        foreach($this->listingOfDirectoryOfRoadyModules()->pathToRoadyModuleDirectoryCollection()->collection() as $pathToRoadyModuleDirectory) {
-            $moduleAuthoritiesJsonConfigurationReader = new ModuleAuthoritiesJsonConfigurationReader($pathToRoadyModuleDirectory);
-            if(in_array($this->request()->url()->domain()->authority(), $moduleAuthoritiesJsonConfigurationReader->authorityCollection()->collection())) {
-                $moduleCSSRouteDeterminator = new ModuleCSSRouteDeterminator($pathToRoadyModuleDirectory);
-                foreach($moduleCSSRouteDeterminator->cssRoutes()->collection() as $cssRoute) {
+        foreach(
+            $this->listingOfDirectoryOfRoadyModules()
+                 ->pathToRoadyModuleDirectoryCollection()
+                 ->collection()
+            as
+            $pathToRoadyModuleDirectory
+        ) {
+            if(
+                in_array(
+                    $this->request()->url()->domain()->authority(),
+                    $this->moduleAuthoritiesJsonConfigurationReader
+                         ->read($pathToRoadyModuleDirectory)
+                         ->collection()
+                )
+            ) {
+                foreach(
+                    $this->moduleCSSRouteDeterminator
+                         ->determineCSSRoutes($pathToRoadyModuleDirectory)
+                         ->collection()
+                    as
+                    $cssRoute
+                ) {
                     $definedRoutes[] = $cssRoute;
                 }
-                $moduleJSRouteDeterminator = new ModuleJSRouteDeterminator($pathToRoadyModuleDirectory);
-
-                foreach($moduleJSRouteDeterminator->cssRoutes()->collection() as $jsRoute) {
+                foreach(
+                    $this->moduleJSRouteDeterminator
+                         ->determineJSRoutes($pathToRoadyModuleDirectory)
+                         ->collection()
+                    as
+                    $jsRoute
+                ) {
                     $definedRoutes[] = $jsRoute;
                 }
-                $moduleOutputRouteDeterminator = new ModuleOutputRouteDeterminator($pathToRoadyModuleDirectory);
-
-                foreach($moduleOutputRouteDeterminator->outputRoutes()->collection() as $outputRoute) {
+                foreach(
+                    $this->moduleOutputRouteDeterminator
+                         ->determineOutputRoutes($pathToRoadyModuleDirectory)
+                         ->collection()
+                    as
+                    $outputRoute
+                ) {
                     $definedRoutes[] = $outputRoute;
                 }
-                $moduleRoutesJsonConfigurationReader = new ModuleRoutesJsonConfigurationReader($pathToRoadyModuleDirectory);
-
-                foreach($moduleRoutesJsonConfigurationReader->configuredRoutes()->collection() as $configuredRoute) {
+                foreach(
+                    $this->moduleRoutesJsonConfigurationReader
+                         ->read($pathToRoadyModuleDirectory)
+                         ->collection()
+                    as
+                    $configuredRoute
+                ) {
                     $definedRoutes[] = $configuredRoute;
                 }
             }
@@ -325,7 +366,7 @@ class Router
                 $responseRoutes[] = $route;
             }
         }
-        return new RouteCollection(...$responseRoutes);
+        return new Response($router->request(), RouteCollection(...$responseRoutes));
     }
 
 }
@@ -958,7 +999,7 @@ interface ListingOfDirectoryOfRoadyHtmlFileTemplates
 
 ```
 
-### `\Darling\RoadyTemplateUtilities\interfaces\template\info\TemplateReader`:
+### `\Darling\RoadyTemplateUtilities\interfaces\template\info\RoadyHTMLTemplateFileReader`:
 
 
 ```
@@ -973,7 +1014,7 @@ use \Darling\RoadyRoutes\interfaces\paths\PathToRoadyHtmlFileTemplate ;
  *
  *
  */
-interface TemplateReader
+interface RoadyHTMLTemplateFileReader
 {
 
     /**
@@ -982,7 +1023,7 @@ interface TemplateReader
      * @return PositionNameCollection
      *
      */
-    public function namedPositions(): PositionNameCollection;
+    public function namedPositions(PathToRoadyHtmlFileTemplate $pathToRoadyHtmlFileTemplate): PositionNameCollection;
 
     /**
      *
@@ -990,15 +1031,7 @@ interface TemplateReader
      * @return string
      *
      */
-    public function content(): string;
-
-    /**
-     *
-     *
-     * @return PathToRoadyHtmlFileTemplate
-     *
-     */
-    public function pathToRoadyHtmlFileTemplateFile (): PathToRoadyHtmlFileTemplate ;
+    public function content(PathToRoadyHtmlFileTemplate $pathToRoadyHtmlFileTemplate): string;
 
 }
 
