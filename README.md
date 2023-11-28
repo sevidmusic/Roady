@@ -327,13 +327,13 @@ class Router
             if(
                 in_array(
                     $this->request()->url()->domain()->authority(),
-                    $this->moduleAuthoritiesJsonConfigurationReader
+                    $this->moduleAuthoritiesJsonConfigurationReader()
                          ->read($pathToRoadyModuleDirectory)
                          ->collection()
                 )
             ) {
                 foreach(
-                    $this->moduleCSSRouteDeterminator
+                    $this->moduleCSSRouteDeterminator()
                          ->determineCSSRoutes($pathToRoadyModuleDirectory)
                          ->collection()
                     as
@@ -342,7 +342,7 @@ class Router
                     $definedRoutes[] = $cssRoute;
                 }
                 foreach(
-                    $this->moduleJSRouteDeterminator
+                    $this->moduleJSRouteDeterminator()
                          ->determineJSRoutes($pathToRoadyModuleDirectory)
                          ->collection()
                     as
@@ -351,7 +351,7 @@ class Router
                     $definedRoutes[] = $jsRoute;
                 }
                 foreach(
-                    $this->moduleOutputRouteDeterminator
+                    $this->moduleOutputRouteDeterminator()
                          ->determineOutputRoutes($pathToRoadyModuleDirectory)
                          ->collection()
                     as
@@ -360,7 +360,7 @@ class Router
                     $definedRoutes[] = $outputRoute;
                 }
                 foreach(
-                    $this->moduleRoutesJsonConfigurationReader
+                    $this->moduleRoutesJsonConfigurationReader()
                          ->read($pathToRoadyModuleDirectory)
                          ->collection()
                     as
@@ -381,6 +381,31 @@ class Router
             }
         }
         return new Response($router->request(), RouteCollection(...$responseRoutes));
+    }
+
+    public function moduleAuthoritiesJsonConfigurationReader(): ModuleAuthoritiesJsonConfigurationReader
+    {
+        return $this->moduleAuthoritiesJsonConfigurationReader;
+    }
+
+    public function moduleCSSRouteDeterminator(): ModuleCSSRouteDeterminator
+    {
+        return $this->moduleCSSRouteDeterminator;
+    }
+
+    public function moduleJSRouteDeterminator(): ModuleJSRouteDeterminator
+    {
+        return $this->moduleJSRouteDeterminator;
+    }
+
+    public function moduleOutputRouteDeterminator(): ModuleOutputRouteDeterminator
+    {
+        return $this->moduleOutputRouteDeterminator;
+    }
+
+    public function moduleRoutesJsonConfigurationReader(): ModuleRoutesJsonConfigurationReader
+    {
+        return $this->moduleRoutesJsonConfigurationReader;
     }
 
 }
