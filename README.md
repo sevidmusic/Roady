@@ -7,18 +7,18 @@ evolve over time.
 
 ### About
 
-roady is a PHP framework I have been developing for a long time.
+Roady is a PHP framework I have been developing for a long time.
 At this point it is a passion project. I love coding, working
-on roady makes me happy.
+on Roady makes me happy.
 
-The basic idea behind roady is:
+The basic idea behind Roady is:
 
 - The features of a website are implemented by individual Modules.
 
-  Note: In roady versions 1.1.2 and earlier, Modules were known
+  Note: In Roady versions 1.1.2 and earlier, Modules were known
         as Apps.
 
-  For example, say my band used roady to build our website, and we
+  For example, say my band used Roady to build our website, and we
   needed a music player. That music player would be implemented by
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
@@ -26,25 +26,37 @@ The basic idea behind roady is:
 - A Module may utilize javascript files, css files, html files, or php
   files to implement the features it provides.
 
+- Modules define Routes which define the relationship between a module
+  Name, a collection of names that map to Request names, a collection
+  of Named Positions that map to positions in a Roady HTML Template
+  file, and a Relative Path to a file that determines a Routes's
+  output.
+
+- Roady's UI uses a Router and the Routes defined by installed modules
+  to determine the "output" that should be served in Response to a
+  Request, and then uses the Routes defined by installed modules in
+  conjunction with a Roady HTML temlplate file to determine how the
+  "output" should be organized.
+
 - Multiple websites can run on a single installation of roady, each
-  making use of one or more installed roady Modules.
+  making use of one or more installed Roady Modules.
 
-- roady provides a command line utility that can be used for various
+- Roady provides a command line utility that can be used for various
   administrative tasks, including installation and management of
-  installed roady Modules.
+  installed Roady Modules.
 
-### Development of roady v2.0
+### Development of Roady v2.0
 
-roady v1.1.2 is the current stable version of roady, and can be
+Roady v1.1.2 is the current stable version of roady, and can be
 found here:
 
 [https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
 
-roady v2.0 is a complete re-write of roady that will build upon
+Roady v2.0 is a complete re-write of Roady that will build upon
 roady's original design, though it will not be compatible with previous
 versions of roady.
 
-### Goals for roady v2.0
+### Goals for Roady v2.0
 
 - Code must pass the scrutiny of `phpstan` analysis using `--level 9`.
 - A cleaner code base.
