@@ -145,12 +145,12 @@ namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -289,9 +289,10 @@ namespace \Darling\ROadyUIUtilities\interfaces\ui;
 
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\interfaces\routing\Router;
+use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHtmlFileTemplate as PathToRoadyHtmlFileTemplateInstance;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplate;
+use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -305,7 +306,7 @@ class RoadyUI
 
     public function __construct(
 
-        private Router $router,
+        private Router $this->router(),
         private PathToDirectoryOfRoadyHtmlFileTemplates $pathToDirectoryOfRoadyHtmlFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
         private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
@@ -315,7 +316,7 @@ class RoadyUI
     {
         /** array<string, array<string, Route>> */
         $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition(
-            $router->response()->routeCollection()
+            $this->router()->response()->routeCollection()
         );
         /** array<string, array<string, string>> */
         $routeOutputStrings = [];
@@ -325,22 +326,12 @@ class RoadyUI
                 $this->getRouteOutput($route);
             }
         }
-        /*
-         * Note: PathToRoadyHtmlFileTemplate path will default to
-         * a template file defined by the RoadyTemplateUtiltitiesLibrary
-         * if there is not a template that corresponds to the Request's
-         * name.
-         */
-        $pathToRoadyHtmlFileTemplate = new PathToRoadyHtmlFileTemplate(
-            $router->request()->name() . '.html',
-            $this->pathToDirectoryOfRoadyHtmlFileTemplates(),
-        );
         $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
-            $pathToRoadyHtmlFileTemplate
+            $this->pathToRoadyHtmlFileTemplate()
         );
         foreach(
             $this->roadyHTMLTemplateFileReader()->positionNameCollection(
-                $pathToRoadyHtmlFileTemplate
+                $this->pathToRoadyHtmlFileTemplate()
             )->collection()
             as
             $positionName
@@ -355,9 +346,17 @@ class RoadyUI
 
     }
 
+    private function pathToRoadyHtmlFileTemplate(): PathToRoadyHtmlFileTemplate
+    {
+        return new PathToRoadyHtmlFileTemplateInstance(
+            $this->router()->request()->name() . '.html',
+            $this->pathToDirectoryOfRoadyHtmlFileTemplates(),
+        );
+    }
+
     private function getRouteOutput(Route $route): string
     {
-        $targetFilePath = $router->pathToDirectoryOfRoadyModules()->__toString() .
+        $targetFilePath = $this->router()->pathToDirectoryOfRoadyModules()->__toString() .
                            DIRECTORY_SEPARATOR .
                            $route->moduleName() .
                            DIRECTORY_SEPARATOR .
