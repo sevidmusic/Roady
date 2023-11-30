@@ -300,6 +300,9 @@ use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate
 use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
 use Darling\PHPWebPaths\classes\paths\parts\url\Path;
 
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleInfo;
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
+
 /**
  * The following is a rough draft/approximation of the actual
  * implementation of this file.
@@ -311,7 +314,7 @@ class RoadyUI
 {
 
     public function __construct(
-        private Router $this->router(),
+        private Router $router,
         private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
         private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
@@ -335,12 +338,12 @@ class RoadyUI
             }
         }
         $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
-            $this->pathToRoadyHTMLFileTemplate()
+            $this->pathToRoadyHTMLFileTemplateForCurrentRequest()
         );
         foreach(
             $this->roadyHTMLTemplateFileReader()
                  ->positionNameCollection(
-                     $this->pathToRoadyHTMLFileTemplate()
+                     $this->pathToRoadyHTMLFileTemplateForCurrentRequest()
                  )->collection()
             as
             $positionName
@@ -380,7 +383,7 @@ class RoadyUI
         return $this->render();
     }
 
-    private function pathToRoadyHTMLFileTemplate(): PathToRoadyHTMLFileTemplate
+    private function pathToRoadyHTMLFileTemplateForCurrentRequest(): PathToRoadyHTMLFileTemplate
     {
         return new PathToRoadyHTMLFileTemplateInstance(
             new Name(
@@ -390,39 +393,11 @@ class RoadyUI
         );
     }
 
-    private function determinePathToModuleDirectory(Name $moduleName): PathToRoadyModuleDirectory
-    {
-        return new PathToRoadyModuleDirectory(
-            $this->router()
-                 ->listingOfDirectoryOfRoadyModules()
-                 ->pathToDirectoryOfRoadyModules(),
-            $moduleName
-        );
-    }
-
-    private function determineRealPathToFileInModuleDirectory(
-       Name $moduleName,
-       RelativePath $relativePath
-    ): PathToExistingFile
-    {
-        $pathToRoadyModuleDirectory = $this->determinePathToModuleDirectory($moduleName);
-        $pathToFile = $pathToRoadyModuleDirectory->__toString() .
-                      DIRECTORY_SEPARATOR .
-                      $relativePath->__toString();
-        $parts = explode(DIRECTORY_SEPARATOR, $pathToFile);
-        $safeTextParts = [];
-        foreach($parts as $part) {
-            $safeTextParts[] = new SafeText($part);
-        }
-        return new PathToExistingFile(
-            new SafeTextCollection(...$safeTextParts)
-        );
-    }
-
     private function getRouteOutput(Route $route): string
     {
-        $targetFilePath = $this->determineRealPathToFileInModuleDirectory(
-           $route->moduleName(), $route->relativePath()
+        $targetFilePath = $this->determinePathToFileInModuleDirectory(
+            $route->moduleName(),
+            $route->relativePath()
         );
         if($this->fileIsAPhpFile($targetFilePath)) {
             ob_start();
@@ -430,10 +405,10 @@ class RoadyUI
             return ob_get_clean();
         }
         if($this->fileIsACssFile($targetFilePath) {
-            return '<link rel="stylesheet" type="text/css" href="' . $this->determineRouteWebPath($this->router()->request()->domain(), $route) . '" />';
+            return '<link rel="stylesheet" type="text/css" href="' . $this->determineRouteUrl($this->router()->request()->domain(), $route) . '" />';
         }
         if($this->fileIsAJsFile($targetFilePath) {
-            return '<script type="text/javascript" src="' . $this->determineRouteWebPath($this->router()->request()->domain(), $route) . '"></script>';
+            return '<script type="text/javascript" src="' . $this->determineRouteUrl($this->router()->request()->domain(), $route) . '"></script>';
         }
         return strval(file_get_contents($targetFilePath->__toString()));
 
@@ -454,7 +429,44 @@ class RoadyUI
         return str_contains($pathToExistingFile, '.js');
     }
 
-    private function determineRouteWebPath(Route $route): Url {
+    ##################################################################
+    # \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleInfo #
+    ##################################################################
+
+    private function determinePathToModuleDirectory(Name $moduleName): PathToRoadyModuleDirectory
+    {
+        return new PathToRoadyModuleDirectory(
+            $moduleName,
+            $this->router()
+                 ->listingOfDirectoryOfRoadyModules()
+                 ->pathToDirectoryOfRoadyModules(),
+        );
+    }
+
+    private function determinePathToFileInModuleDirectory(
+       Name $moduleName,
+       RelativePath $relativePath
+    ): PathToExistingFile
+    {
+        $pathToRoadyModuleDirectory = $this->determinePathToModuleDirectory($moduleName);
+        $pathToFile = $pathToRoadyModuleDirectory->__toString() .
+                      DIRECTORY_SEPARATOR .
+                      $relativePath->__toString();
+        $parts = explode(DIRECTORY_SEPARATOR, $pathToFile);
+        $safeTextParts = [];
+        foreach($parts as $part) {
+            $safeTextParts[] = new SafeText($part);
+        }
+        return new PathToExistingFile(
+            new SafeTextCollection(...$safeTextParts)
+        );
+    }
+
+    ##################################################################
+    # \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo #
+    ##################################################################
+
+    private function determineRouteUrl(Route $route): Url {
         return new Url(
             domain: $this->router()->request()->domain(),
             path: $this->determineRoutesUrlPath($route),
@@ -464,7 +476,6 @@ class RoadyUI
     private function determineRoutesUrlPath(Route $route): Path
     {
         $parts = explode(
-            DIRECTORY_SEPARATOR,
             'modules' .
             DIRECTORY_SEPARATOR .
             $route->moduleName()->__toString() .
@@ -479,6 +490,7 @@ class RoadyUI
             new SafeTextCollection(...$safeTextParts)
         );
     }
+    ##################################################################
 
 }
 
