@@ -348,7 +348,7 @@ class RoadyUI
             $positionName
         ) {
             $renderedContent = str_replace(
-                '<' . $positionName . '></' . $positionName . '>',
+                '<' . $positionName->__toString() . '></' . $positionName->__toString() . '>',
                 implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])),
                 $renderedContent,
             );
@@ -385,7 +385,9 @@ class RoadyUI
     private function pathToRoadyHTMLFileTemplate(): PathToRoadyHTMLFileTemplate
     {
         return new PathToRoadyHTMLFileTemplateInstance(
-            $this->router()->request()->name() . '.html',
+            new Name(
+                new Text($this->router()->request()->name() . '.html')
+            ),
             $this->pathToDirectoryOfRoadyHTMLFileTemplates(),
         );
     }
@@ -405,12 +407,7 @@ class RoadyUI
        RelativePath $relativePath
     ): PathToExistingFile
     {
-        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
-            $this->router()
-                 ->listingOfDirectoryOfRoadyModules()
-                 ->pathToDirectoryOfRoadyModules(),
-            $moduleName
-        );
+        $pathToRoadyModuleDirectory = $this->determinePathToModuleDirectory($moduleName);
         $pathToFile = $pathToRoadyModuleDirectory->__toString() .
                       DIRECTORY_SEPARATOR .
                       $relativePath->__toString();
@@ -429,15 +426,15 @@ class RoadyUI
         $targetFilePath = $this->determineRealPathToFileInModuleDirectory(
            $route->moduleName(), $route->relativePath()
         );
-        if($this->fileIsAPhpFile($targetFilePath->__toString())) {
+        if($this->fileIsAPhpFile($targetFilePath)) {
             ob_start();
             include($targetFilePath->__toString());
             return ob_get_clean();
         }
-        if($this->fileIsACssFile($targetFilePath->__toString()) {
+        if($this->fileIsACssFile($targetFilePath) {
             return '<link rel="stylesheet" type="text/css" href="' . $this->determineRouteWebPath($this->router()->request()->domain(), $route) . '" />';
         }
-        if($this->fileIsAJsFile($targetFilePath->__toString()) {
+        if($this->fileIsAJsFile($targetFilePath) {
             return '<script type="text/javascript" src="' . $this->determineRouteWebPath($this->router()->request()->domain(), $route) . '"></script>';
         }
         return strval(file_get_contents($targetFilePath->__toString()));
@@ -469,5 +466,6 @@ class RoadyUI
     }
 
 }
+
 ```
 
