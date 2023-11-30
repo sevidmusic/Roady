@@ -287,12 +287,20 @@ class Router
 
 namespace \Darling\ROadyUIUtilities\interfaces\ui;
 
+use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\interfaces\routing\Router;
-use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHtmlFileTemplate as PathToRoadyHtmlFileTemplateInstance;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHtmlFileTemplate;
+use \Darling\RoadyRoutes\interfaces\routes\Route;
+use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
+use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHTMLFileTemplate as PathToRoadyHTMLFileTemplateInstance;
+use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
+use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
 use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyRoutes\interfaces\collections\PositionNameCollection;
+use \Darling\PHPTextTypes\interfaces\strings\Name;
+use \Darling\PHPTextTypes\interfaces\strings\SafeText;
+use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -305,9 +313,8 @@ class RoadyUI
 {
 
     public function __construct(
-
         private Router $this->router(),
-        private PathToDirectoryOfRoadyHtmlFileTemplates $pathToDirectoryOfRoadyHtmlFileTemplates,
+        private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
         private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
     ) {}
@@ -315,9 +322,12 @@ class RoadyUI
     public function render(): string
     {
         /** array<string, array<string, Route>> */
-        $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition(
-            $this->router()->response()->routeCollection()
-        );
+           $sortedRoutes = $this->routeCollectionSorter()
+                                ->sortByNamedPosition(
+                                    $this->router()
+                                         ->response()
+                                         ->routeCollection()
+                                    );
         /** array<string, array<string, string>> */
         $routeOutputStrings = [];
         foreach($sortedRoutes as $routePositionName => $routes) {
@@ -327,12 +337,13 @@ class RoadyUI
             }
         }
         $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
-            $this->pathToRoadyHtmlFileTemplate()
+            $this->pathToRoadyHTMLFileTemplate()
         );
         foreach(
-            $this->roadyHTMLTemplateFileReader()->positionNameCollection(
-                $this->pathToRoadyHtmlFileTemplate()
-            )->collection()
+            $this->roadyHTMLTemplateFileReader()
+                 ->positionNameCollection(
+                     $this->pathToRoadyHTMLFileTemplate()
+                 )->collection()
             as
             $positionName
         ) {
@@ -346,34 +357,90 @@ class RoadyUI
 
     }
 
-    private function pathToRoadyHtmlFileTemplate(): PathToRoadyHtmlFileTemplate
+    private function pathToRoadyHTMLFileTemplate(): PathToRoadyHTMLFileTemplate
     {
-        return new PathToRoadyHtmlFileTemplateInstance(
+        return new PathToRoadyHTMLFileTemplateInstance(
             $this->router()->request()->name() . '.html',
-            $this->pathToDirectoryOfRoadyHtmlFileTemplates(),
+            $this->pathToDirectoryOfRoadyHTMLFileTemplates(),
+        );
+    }
+
+    private function determinePathToModuleDirectory(Name $moduleName): PathToRoadyModuleDirectory
+    {
+        return new PathToRoadyModuleDirectory(
+            $this->router()
+                 ->listingOfDirectoryOfRoadyModules()
+                 ->pathToDirectoryOfRoadyModules(),
+            $moduleName
+        );
+    }
+
+    private function determineRealPathToFileInModuleDirectory(
+       Name $moduleName,
+       RelativePath $relativePath
+    ): PathToExistingFile
+    {
+        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
+            $this->router()
+                 ->listingOfDirectoryOfRoadyModules()
+                 ->pathToDirectoryOfRoadyModules(),
+            $moduleName
+        );
+        $pathToFile = $pathToRoadyModuleDirectory->__toString() .
+                      DIRECTORY_SEPARATOR .
+                      $relativePath->__toString();
+        $parts = explode(DIRECTORY_SEPARATOR, $pathToFile);
+        $safeTextParts = [];
+        foreach($parts as $part) {
+            $safeTextParts[] = new SafeText($part);
+        }
+        return new PathToExistingFile(
+            new SafeTextCollection(...$safeTextParts)
         );
     }
 
     private function getRouteOutput(Route $route): string
     {
-        $targetFilePath = $this->router()->pathToDirectoryOfRoadyModules()->__toString() .
-                           DIRECTORY_SEPARATOR .
-                           $route->moduleName() .
-                           DIRECTORY_SEPARATOR .
-                           $route->relaitvePath()->__toString();
-        if($this->fileIsAPhpFile($targetFilePath)) {
+        $targetFilePath = $this->determineRealPathToFileInModuleDirectory(
+           $route->moduleName(), $route->relativePath()
+        );
+        if($this->fileIsAPhpFile($targetFilePath->__toString())) {
             ob_start();
-            include($targetFilePath);
+            include($targetFilePath->__toString());
             return ob_get_clean();
         }
-        if($this->fileIsACssFile($targetFilePath) {
+        if($this->fileIsACssFile($targetFilePath->__toString()) {
             return '<link rel="stylesheet" type="text/css" href="' . $this->determineRouteWebPath($this->router()->request()->domain(), $route) . '" />';
         }
-        if($this->fileIsAJsFile($targetFilePath) {
+        if($this->fileIsAJsFile($targetFilePath->__toString()) {
             return '<script type="text/javascript" src="' . $this->determineRouteWebPath($this->router()->request()->domain(), $route) . '"></script>';
         }
-        return strval(file_get_contents($targetFilePath));
+        return strval(file_get_contents($targetFilePath->__toString()));
 
+    }
+
+    public function fileIsAPhpFile(PathToExistingFile $pathToExistingFile): bool
+    {
+        return str_contains($pathToExistingFile, '.php');
+    }
+
+    public function fileIsACssFile(PathToExistingFile $pathToExistingFile): bool
+    {
+        return str_contains($pathToExistingFile, '.css');
+    }
+
+    public function fileIsAJsFile(PathToExistingFile $pathToExistingFile): bool
+    {
+        return str_contains($pathToExistingFile, '.js');
+    }
+
+    public function determineRouteWebPath(Route $route): {
+        return $this->router()->request()->domain()->__toString() .
+               DIRECTORY_SEPARATOR .
+               $this->FIGUEOUTWEBROOT;
+               $route->moduleName()->__toString() .
+               DIRECTORY_SEPARATOR  .
+               $route->relativePath()->__toString();
     }
 
     public function __toString(): string
@@ -386,9 +453,9 @@ class RoadyUI
         return $this->router;
     }
 
-    public function pathToDirectoryOfRoadyHtmlFileTemplates() PathToDirectoryOfRoadyHtmlFileTemplates
+    public function pathToDirectoryOfRoadyHTMLFileTemplates() PathToDirectoryOfRoadyHTMLFileTemplates
     {
-        return $this->pathToDirectoryOfRoadyHtmlFileTemplates;
+        return $this->pathToDirectoryOfRoadyHTMLFileTemplates;
     }
 
     public function routeCollectionSorter() RouteCollectionSorter
@@ -402,6 +469,5 @@ class RoadyUI
     }
 
 }
-
 ```
 
