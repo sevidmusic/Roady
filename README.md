@@ -357,6 +357,31 @@ class RoadyUI
 
     }
 
+    public function router() Router
+    {
+        return $this->router;
+    }
+
+    public function pathToDirectoryOfRoadyHTMLFileTemplates() PathToDirectoryOfRoadyHTMLFileTemplates
+    {
+        return $this->pathToDirectoryOfRoadyHTMLFileTemplates;
+    }
+
+    public function routeCollectionSorter() RouteCollectionSorter
+    {
+        return $this->routeCollectionSorter;
+    }
+
+    public function roadyHTMLTemplateFileReader() RoadyHTMLTemplateFileReader
+    {
+        return $this->roadyHTMLTemplateFileReader;
+    }
+
+    public function __toString(): string
+    {
+        return $this->render();
+    }
+
     private function pathToRoadyHTMLFileTemplate(): PathToRoadyHTMLFileTemplate
     {
         return new PathToRoadyHTMLFileTemplateInstance(
@@ -419,53 +444,28 @@ class RoadyUI
 
     }
 
-    public function fileIsAPhpFile(PathToExistingFile $pathToExistingFile): bool
+    private function fileIsAPhpFile(PathToExistingFile $pathToExistingFile): bool
     {
-        return str_contains($pathToExistingFile, '.php');
+        return str_contains($pathToExistingFile->__toString(), '.php');
     }
 
-    public function fileIsACssFile(PathToExistingFile $pathToExistingFile): bool
+    private function fileIsACssFile(PathToExistingFile $pathToExistingFile->__toString()): bool
     {
-        return str_contains($pathToExistingFile, '.css');
+        return str_contains($pathToExistingFile->__toString(), '.css');
     }
 
-    public function fileIsAJsFile(PathToExistingFile $pathToExistingFile): bool
+    private function fileIsAJsFile(PathToExistingFile $pathToExistingFile): bool
     {
         return str_contains($pathToExistingFile, '.js');
     }
 
-    public function determineRouteWebPath(Route $route): {
+    private function determineRouteWebPath(Route $route): {
         return $this->router()->request()->domain()->__toString() .
                DIRECTORY_SEPARATOR .
                $this->FIGUEOUTWEBROOT;
                $route->moduleName()->__toString() .
                DIRECTORY_SEPARATOR  .
                $route->relativePath()->__toString();
-    }
-
-    public function __toString(): string
-    {
-        return $this->render();
-    }
-
-    public function router() Router
-    {
-        return $this->router;
-    }
-
-    public function pathToDirectoryOfRoadyHTMLFileTemplates() PathToDirectoryOfRoadyHTMLFileTemplates
-    {
-        return $this->pathToDirectoryOfRoadyHTMLFileTemplates;
-    }
-
-    public function routeCollectionSorter() RouteCollectionSorter
-    {
-        return $this->routeCollectionSorter;
-    }
-
-    public function roadyHTMLTemplateFileReader() RoadyHTMLTemplateFileReader
-    {
-        return $this->roadyHTMLTemplateFileReader;
     }
 
 }
