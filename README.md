@@ -144,7 +144,7 @@ use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirecto
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
