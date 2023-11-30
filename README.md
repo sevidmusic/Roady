@@ -37,10 +37,6 @@ The basic idea behind Roady is:
 - Multiple websites can run on a single installation of roady, each
   making use of one or more installed Roady Modules.
 
-- Roady provides a command line utility that can be used for various
-  administrative tasks, including installation and management of
-  installed Roady Modules.
-
 ### Development of Roady v2.0
 
 Roady v1.1.2 is the current stable version of roady, and can be
@@ -84,9 +80,6 @@ interface RoadyFileSystemPaths
 
 ```
 
-### \Darling\Roady\api\RoadyWebPaths;
-
-
 # Draft/Design Notes
 
 Pseudo code for how Roady's index.php might be implemented:
@@ -100,12 +93,14 @@ use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryO
 use \Darling\RoadyModuleUtilities\classes\utilities\ModuleAuthoritiesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\classes\utilities\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\classes\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleOutputRouteDeterminator
+use \Darling\RoadyModuleUtilities\classes\utilities\ModuleOutputRouteDeterminator;
 use \Darling\RoadyModuleUtilities\classes\utilities\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutes\classes\collections\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
 use \Darling\RoadyRoutingUtilities\classes\utilities\Router;
 use \Darling\RoadyTemplateUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyUIUtilities\ui\RoadyUI;
+use \Darling\Roady\api\RoadyFileSystemPaths;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -114,7 +109,7 @@ use \Darling\RoadyTemplateUtilities\classes\utilities\RoadyHTMLTemplateFileReade
  * The code in this file is likely to change.
  */
 
-$ui = new RoadyUI(
+$roadyUI = new RoadyUI(
     new Router(
         new Request(),
         new ListingOfDirectoryOfRoadyModules(
@@ -132,7 +127,7 @@ $ui = new RoadyUI(
 
 );
 
-echo $ui->__toString();
+echo $roadyUI->__toString();
 
 echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 
