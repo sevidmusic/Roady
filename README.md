@@ -301,6 +301,7 @@ use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHTMLFileTemplate as
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
 use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
+use Darling\PHPWebPaths\classes\paths\parts\url\Path;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -456,13 +457,30 @@ class RoadyUI
         return str_contains($pathToExistingFile, '.js');
     }
 
-    private function determineRouteWebPath(Route $route): {
-        return $this->router()->request()->domain()->__toString() .
-               DIRECTORY_SEPARATOR .
-               $this->FIGUEOUTWEBROOT;
-               $route->moduleName()->__toString() .
-               DIRECTORY_SEPARATOR  .
-               $route->relativePath()->__toString();
+    private function determineRouteWebPath(Route $route): Url {
+        return new Url(
+            domain: $this->router()->request()->domain(),
+            path: $this->determineRoutesUrlPath($route),
+        );
+    }
+
+    private function determineRoutesUrlPath(Route $route): Path
+    {
+        $parts = explode(
+            DIRECTORY_SEPARATOR,
+            'modules' .
+            DIRECTORY_SEPARATOR .
+            $route->moduleName()->__toString() .
+            DIRECTORY_SEPARATOR .
+            $route->relativePath()->__toString()
+        );
+        $safeTextParts = [];
+        foreach($parts as $part) {
+            $safeTextParts[] = new SafeText($part);
+        }
+        return new Path(
+            new SafeTextCollection(...$safeTextParts)
+        );
     }
 
 }
