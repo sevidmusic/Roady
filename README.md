@@ -59,6 +59,34 @@ the re-write of `Roady2.0`.
 ############################ Roady 2.0 ###############################
 ######################################################################
 
+# Roady's API
+
+Though Roady will primarily rely on other darling libraries for most
+of it's functionality, Roady will also define a simple API in
+the form of static classes.
+
+### \Darling\Roady\api\RoadyFileSystemPaths;
+
+```
+<?php
+
+namespace \Darling\Roady\api;
+
+use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
+use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHtmlFileTemplates;
+
+
+interface RoadyFileSystemPaths
+{
+    public static function pathToRoadysModulesDirectory(): PathToDirectoryOfRoadyModules;
+    public static function pathToRoadysTemplateDirectory(): PathToDirectoryOfRoadyHtmlFileTemplates;
+}
+
+```
+
+### \Darling\Roady\api\RoadyWebPaths;
+
+
 # Draft/Design Notes
 
 Pseudo code for how Roady's index.php might be implemented:
@@ -96,17 +124,7 @@ $ui = new RoadyUI(
     new Router(
         new Request(),
         new ListingOfDirectoryOfRoadyModules(
-            new PathToDirectoryOfRoadyModules(
-                new PathToExisitingDirectory(
-                    new SafeTextCollection(
-                        new SafeText(new Text('path')),
-                        new SafeText(new Text('to')),
-                        new SafeText(new Text('roady')),
-                        new SafeText(new Text('modules')),
-                        new SafeText(new Text('directory'))
-                    )
-                )
-            )
+            RoadyFileSystemPaths::pathToRoadysModulesDirectory()
         ),
         new ModuleAuthoritiesJsonConfigurationReader(),
         new ModuleCSSRouteDeterminator(),
@@ -114,17 +132,7 @@ $ui = new RoadyUI(
         new ModuleOutputRouteDeterminator(),
         new ModuleRoutesJsonConfigurationReader(),
     ),
-    new PathToDirectoryOfRoadyHtmlFileTemplates(
-        new PathToExisitingDirectory(
-            new SafeTextCollection(
-                new SafeText(new Text('path')),
-                new SafeText(new Text('to')),
-                new SafeText(new Text('roady')),
-                new SafeText(new Text('templates')),
-                new SafeText(new Text('directory'))
-            )
-        )
-    ),
+    RoadyFileSystemPaths::pathToRoadysTemplateDirectory(),
     new RouteCollectionSorter(),
     new RoadyHTMLTemplateFileReader(),
 
