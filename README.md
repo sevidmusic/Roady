@@ -1,4 +1,11 @@
-# Roady
+```
+    ____                  __
+   / __ \____  ____ _____/ /_  __
+  / /_/ / __ \/ __ `/ __  / / / /
+ / _, _/ /_/ / /_/ / /_/ / /_/ /
+/_/ |_|\____/\__,_/\__,_/\__, /
+                        /____/
+```
 
 ![alt text](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
@@ -19,9 +26,6 @@ The basic idea behind Roady is:
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
 
-- A Module may utilize javascript files, css files, html files, or php
-  files to implement the features it provides.
-
 - Modules define Routes which define the relationship between a Module
   Name, a collection of names that map to Request names, a collection
   of Named Positions that map to positions in a Roady HTML Template
@@ -30,36 +34,58 @@ The basic idea behind Roady is:
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the "output" that should be served in Response to a
-  Request, and then uses the Routes defined by installed Modules in
-  conjunction with a Roady HTML Template File to determine how the
-  "output" should be organized.
+  Request, and then uses the Routes returned by the Router's Response
+  in conjunction with a Roady HTML Template File to determine how the
+  "output" should be displayed.
 
 - Multiple websites can run on a single installation of roady, each
   making use of one or more installed Roady Modules.
 
-### Development of Roady v2.0
+### Example Module
+
+Possible directory structure of a Roady Module:
+
+```
+$ ls -R ./FooModule
+
+./:
+css  js  output
+
+./css: # The css directory is not required, but if it exists a Route will be defined for each file it contains
+files-in-the-css-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+global-files-will-be-dynamically-Routed-to-match-all-Requests.css
+
+./js: # The js directory is not required, but if it exists a Route will be defined for each file it contains
+files-in-the-js-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+
+./output: # The output directory is not required, but if it exists a Route will be defined for each file it contains
+files-in-the-output-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+
+./misc-assets-this-directory-name-is-arbitrary
+modules-may-contain-other-files-and-directories-that-may-be-nedded-for-the-module-to-function.txt
+
+```
+
+# Development of Roady v2.0
 
 Roady v1.1.2 is the current stable version of roady, and can be
 found here:
 
 [https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
 
-Roady v2.0 is a complete re-write of Roady that will build upon
-roady's original design, though it will not be compatible with previous
+Roady v2.0 is a complete re-write of Roady that will be influenced by
+roady's original design, but will not be compatible with previous
 versions of roady.
 
 NOTE: At the moment I am using this file to plan the rest of
-the re-write of `Roady2.0`.
+the re-write of `Roady2.0`. This file will be revised to document
+`Roady2.0` before `Roady2.0` is released.
 
-######################################################################
-############################ Roady 2.0 ###############################
-######################################################################
+### Todo:
 
 The following is a list of namespaces for the interfaces that still need to be defined.
 
 The namespace also indicates the library that the interface will be defined by.
-
-# Todo:
 
 ```
 ### RoadyRoutes
@@ -73,19 +99,19 @@ use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModuleInfo
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
 
 
 ### RoadyRoutingUtilities
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\Router;
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 
 ### RoadyTemplateUtilities
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
@@ -101,7 +127,8 @@ use \Darling\Roady\api\RoadyFileSystemPaths;
 
 
 ```
-# Roady's API
+
+### Roady's API
 
 Though Roady will primarily rely on other darling libraries for most
 of it's functionality, Roady will also define a simple API in
@@ -136,14 +163,14 @@ Pseudo code for how Roady's index.php might be implemented:
 # Roady's index.php
 
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
-use \Darling\RoadyRoutingUtilities\classes\utilities\Router;
+use \Darling\RoadyRoutingUtilities\classes\utilities\routing\Router;
 use \Darling\RoadyTemplateUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 use \Darling\Roady\api\RoadyFileSystemPaths;
@@ -187,11 +214,11 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
@@ -212,7 +239,7 @@ class Router
         private ModuleAuthoritiesJsonConfigurationReader $moduleAuthoritiesJsonConfigurationReader,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
-        pirvate ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
+        private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
         private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
     ) {}
 
@@ -273,7 +300,7 @@ class Router
             }
         }
         $responseRoutes = [];
-        foreach($routes as $routeIndex => $route) {
+        foreach($definedRoutes as $routeIndex => $route) {
             if(
                 in_array($request->name(), $route->nameCollection()->collection())
                 ||
@@ -337,11 +364,11 @@ use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModuleInfo
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 use \Darling\RoadyRoutes\interfaces\routes\Route;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\Router;
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHTMLFileTemplate as PathToRoadyHTMLFileTemplateInstance;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
@@ -363,7 +390,7 @@ class RoadyUI
         private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
         private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
-        private RoadyModuleInfo $roadyModuleInfo,
+        private RoadyModulePathDeterminator $roadyModulePathDeterminator,
         private RouteInfo $routeInfo,
     ) {}
 
@@ -425,9 +452,9 @@ class RoadyUI
         return $this->roadyHTMLTemplateFileReader;
     }
 
-    public function roadyModuleInfo(): RoadyModuleInfo
+    public function roadyModulePathDeterminator(): RoadyModulePathDeterminator
     {
-        return $this->roadyModuleInfo;
+        return $this->roadyModulePathDeterminator;
     }
 
     public function routeInfo(): RouteInfo
@@ -452,7 +479,7 @@ class RoadyUI
 
     private function getRouteOutput(Route $route): string
     {
-        $targetFilePath = $this->roaydModuleInfo()
+        $targetFilePath = $this->roaydRoadyModulePathDeterminator()
                                ->determinePathToFileInModuleDirectory(
                                    $this->listingOfDirectoryOfRoadyModules()
                                         ->pathToDirectoryOfRoadyModules(),
@@ -552,7 +579,7 @@ interface RouteInfo
 
 ```
 
-### Pseudo \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModuleInfo;
+### Pseudo \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator;
 
 Defines methods that provide information about Roady Modules.
 
@@ -569,19 +596,8 @@ use \Darling\RoadyModuleUtilities\classes\paths\PathToRoadyModuleDirectory;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 
-interface ModuleInfo
+interface RoadyModulePathDeterminator
 {
-
-    public function determinePathToModuleDirectory(
-        PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
-        Name $moduleName
-    ): PathToRoadyModuleDirectory
-    {
-        return new PathToRoadyModuleDirectory(
-            $moduleName,
-            $pathToDirectoryOfRoadyModules,
-        );
-    }
 
     public function determinePathToFileInModuleDirectory(
         PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
@@ -589,9 +605,9 @@ interface ModuleInfo
         RelativePath $relativePath
     ): PathToExistingFile
     {
-        $pathToRoadyModuleDirectory = $this->determinePathToModuleDirectory(
-            $pathToDirectoryOfRoadyModules,
+        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
             $moduleName,
+            $pathToDirectoryOfRoadyModules
         );
         $pathToFile = $pathToRoadyModuleDirectory->__toString() .
                       DIRECTORY_SEPARATOR .
