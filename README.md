@@ -30,9 +30,9 @@ The basic idea behind Roady is:
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the "output" that should be served in Response to a
-  Request, and then uses the Routes defined by installed Modules in
-  conjunction with a Roady HTML Template File to determine how the
-  "output" should be organized.
+  Request, and then uses the Routes returned by the Router's Response
+  in conjunction with a Roady HTML Template File to determine how the
+  "output" should be displayed.
 
 - Multiple websites can run on a single installation of roady, each
   making use of one or more installed Roady Modules.
