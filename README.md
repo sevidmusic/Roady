@@ -212,7 +212,7 @@ class Router
         private ModuleAuthoritiesJsonConfigurationReader $moduleAuthoritiesJsonConfigurationReader,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
-        pirvate ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
+        private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
         private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
     ) {}
 
@@ -273,7 +273,7 @@ class Router
             }
         }
         $responseRoutes = [];
-        foreach($routes as $routeIndex => $route) {
+        foreach($definedRoutes as $routeIndex => $route) {
             if(
                 in_array($request->name(), $route->nameCollection()->collection())
                 ||
