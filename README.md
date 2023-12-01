@@ -99,19 +99,19 @@ use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModulePathDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
 
 
 ### RoadyRoutingUtilities
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\Router;
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 
 ### RoadyTemplateUtilities
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
@@ -163,14 +163,14 @@ Pseudo code for how Roady's index.php might be implemented:
 # Roady's index.php
 
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\utilities\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
-use \Darling\RoadyRoutingUtilities\classes\utilities\Router;
+use \Darling\RoadyRoutingUtilities\classes\utilities\routing\Router;
 use \Darling\RoadyTemplateUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 use \Darling\Roady\api\RoadyFileSystemPaths;
@@ -214,11 +214,11 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
@@ -364,11 +364,11 @@ use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModulePathDeterminator
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 use \Darling\RoadyRoutes\interfaces\routes\Route;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\Router;
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHTMLFileTemplate as PathToRoadyHTMLFileTemplateInstance;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
@@ -579,7 +579,7 @@ interface RouteInfo
 
 ```
 
-### Pseudo \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModulePathDeterminator;
+### Pseudo \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator;
 
 Defines methods that provide information about Roady Modules.
 
