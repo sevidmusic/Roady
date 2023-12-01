@@ -156,22 +156,24 @@ use \Darling\Roady\api\RoadyFileSystemPaths;
 ### Roady's API
 
 Though Roady will primarily rely on other darling libraries for most
-of it's functionality, Roady will also define a simple API in
-the form of static classes.
+of it's functionality, Roady will define a simple API in the form of
+classes that define static methods.
 
-### \Darling\Roady\api\RoadyFileSystemPaths;
+### Possible api class: \Darling\Roady\api\RoadyFileSystemPaths;
 
 ```
 <?php
 
 namespace \Darling\Roady\api;
 
+use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
 
 
 interface RoadyFileSystemPaths
 {
+    public static function pathToRoadysRootDirectory(): PathToExistingDirectory;
     public static function pathToRoadysModulesDirectory(): PathToDirectoryOfRoadyModules;
     public static function pathToRoadysTemplateDirectory(): PathToDirectoryOfRoadyHTMLFileTemplates;
 }
