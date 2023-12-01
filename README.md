@@ -78,7 +78,7 @@ use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleCSSRouteDeterminato
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleJSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleOutputRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\ModuleRoutesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModuleInfo
+use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModulePathDeterminator
 
 
 ### RoadyRoutingUtilities
@@ -337,7 +337,7 @@ use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModuleInfo
+use \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModulePathDeterminator
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 use \Darling\RoadyRoutes\interfaces\routes\Route;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
@@ -363,7 +363,7 @@ class RoadyUI
         private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
         private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
-        private RoadyModuleInfo $roadyModuleInfo,
+        private RoadyModulePathDeterminator $roadyModulePathDeterminator,
         private RouteInfo $routeInfo,
     ) {}
 
@@ -425,9 +425,9 @@ class RoadyUI
         return $this->roadyHTMLTemplateFileReader;
     }
 
-    public function roadyModuleInfo(): RoadyModuleInfo
+    public function roadyModulePathDeterminator(): RoadyModulePathDeterminator
     {
-        return $this->roadyModuleInfo;
+        return $this->roadyModulePathDeterminator;
     }
 
     public function routeInfo(): RouteInfo
@@ -452,7 +452,7 @@ class RoadyUI
 
     private function getRouteOutput(Route $route): string
     {
-        $targetFilePath = $this->roaydModuleInfo()
+        $targetFilePath = $this->roaydRoadyModulePathDeterminator()
                                ->determinePathToFileInModuleDirectory(
                                    $this->listingOfDirectoryOfRoadyModules()
                                         ->pathToDirectoryOfRoadyModules(),
@@ -552,7 +552,7 @@ interface RouteInfo
 
 ```
 
-### Pseudo \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModuleInfo;
+### Pseudo \Darling\RoadyModuleUtilities\interfaces\utilities\RoadyModulePathDeterminator;
 
 Defines methods that provide information about Roady Modules.
 
@@ -569,19 +569,8 @@ use \Darling\RoadyModuleUtilities\classes\paths\PathToRoadyModuleDirectory;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 
-interface ModuleInfo
+interface RoadyModulePathDeterminator
 {
-
-    public function determinePathToModuleDirectory(
-        PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
-        Name $moduleName
-    ): PathToRoadyModuleDirectory
-    {
-        return new PathToRoadyModuleDirectory(
-            $moduleName,
-            $pathToDirectoryOfRoadyModules,
-        );
-    }
 
     public function determinePathToFileInModuleDirectory(
         PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
@@ -589,9 +578,9 @@ interface ModuleInfo
         RelativePath $relativePath
     ): PathToExistingFile
     {
-        $pathToRoadyModuleDirectory = $this->determinePathToModuleDirectory(
-            $pathToDirectoryOfRoadyModules,
+        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
             $moduleName,
+            $pathToDirectoryOfRoadyModules
         );
         $pathToFile = $pathToRoadyModuleDirectory->__toString() .
                       DIRECTORY_SEPARATOR .
