@@ -1,4 +1,11 @@
-# Roady
+```
+    ____                  __
+   / __ \____  ____ _____/ /_  __
+  / /_/ / __ \/ __ `/ __  / / / /
+ / _, _/ /_/ / /_/ / /_/ / /_/ /
+/_/ |_|\____/\__,_/\__,_/\__, /
+                        /____/
+```
 
 ![alt text](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
@@ -19,9 +26,6 @@ The basic idea behind Roady is:
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
 
-- A Module may utilize javascript files, css files, html files, or php
-  files to implement the features it provides.
-
 - Modules define Routes which define the relationship between a Module
   Name, a collection of names that map to Request names, a collection
   of Named Positions that map to positions in a Roady HTML Template
@@ -37,29 +41,51 @@ The basic idea behind Roady is:
 - Multiple websites can run on a single installation of roady, each
   making use of one or more installed Roady Modules.
 
-### Development of Roady v2.0
+### Example Module
+
+Possible directory structure of a Roady Module:
+
+```
+$ ls -R ./FooModule
+
+./:
+css  js  output
+
+./css: # The css directory is not required, but if it exists a Route will be defined for each file it contains
+files-in-the-css-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+global-files-will-be-dynamically-Routed-to-match-all-Requests.css
+
+./js: # The js directory is not required, but if it exists a Route will be defined for each file it contains
+files-in-the-js-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+
+./output: # The output directory is not required, but if it exists a Route will be defined for each file it contains
+files-in-the-output-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+
+./misc-assets-this-directory-name-is-arbitrary
+modules-may-contain-other-files-and-directories-that-may-be-nedded-for-the-module-to-function.txt
+
+```
+
+# Development of Roady v2.0
 
 Roady v1.1.2 is the current stable version of roady, and can be
 found here:
 
 [https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
 
-Roady v2.0 is a complete re-write of Roady that will build upon
-roady's original design, though it will not be compatible with previous
+Roady v2.0 is a complete re-write of Roady that will be influenced by
+roady's original design, but will not be compatible with previous
 versions of roady.
 
 NOTE: At the moment I am using this file to plan the rest of
-the re-write of `Roady2.0`.
+the re-write of `Roady2.0`. This file will be revised to document
+`Roady2.0` before `Roady2.0` is released.
 
-######################################################################
-############################ Roady 2.0 ###############################
-######################################################################
+### Todo:
 
 The following is a list of namespaces for the interfaces that still need to be defined.
 
 The namespace also indicates the library that the interface will be defined by.
-
-# Todo:
 
 ```
 ### RoadyRoutes
@@ -101,7 +127,8 @@ use \Darling\Roady\api\RoadyFileSystemPaths;
 
 
 ```
-# Roady's API
+
+### Roady's API
 
 Though Roady will primarily rely on other darling libraries for most
 of it's functionality, Roady will also define a simple API in
