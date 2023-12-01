@@ -41,24 +41,50 @@ The basic idea behind Roady is:
 - Multiple websites can run on a single installation of roady, each
   making use of one or more installed Roady Modules.
 
-### Example Module
+### Anatomy of a Module
 
-Possible directory structure of a Roady Module:
+Possible directory structure of a Roady Module, starting with
+Module's root directory:
 
 ```
-$ ls -R ./FooModule
 
 ./:
-css  js  output
+authorities.json # defines authorities of the websites the module
+                 # will run on, for example:
 
-./css: # The css directory is not required, but if it exists a Route will be defined for each file it contains
+                 [
+                     'localhost:8080',
+                     'example.com',
+                     'sub.domain.example.com'
+                 ]
+
+routes.json      # defines the Module's hard-coded Routes, for example:
+
+                 [
+                     'ModuleName',
+                     ['homepage', 'another-requests-name'],
+                     [['section-1', 1], ['section-2', 0]],
+                     'relative/path/to/file/in/modules/directory'
+                 ]
+
+css              # The css directory is not required, but if it exists
+                 # a Route will be defined for each file it contains
+
+js               # The js directory is not required, but if it exists
+                 # a Route will be defined for each file it contains
+
+output           # The output directory is not required, but if it
+                 # exists a Route will be defined for each file it
+                 # contains
+
+./css:
 files-in-the-css-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
 global-files-will-be-dynamically-Routed-to-match-all-Requests.css
 
-./js: # The js directory is not required, but if it exists a Route will be defined for each file it contains
+./js:
 files-in-the-js-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
 
-./output: # The output directory is not required, but if it exists a Route will be defined for each file it contains
+./output:
 files-in-the-output-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
 
 ./misc-assets-this-directory-name-is-arbitrary
@@ -96,15 +122,15 @@ use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory;
 use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
 
 ### RoadyModuleUtilities
-use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
+use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModulePathDeterminator
 use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
 
 
 ### RoadyRoutingUtilities
@@ -115,7 +141,6 @@ use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 
 ### RoadyTemplateUtilities
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate as PathToRoadyHTMLFileTemplateInstance;
 use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
 use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
 
