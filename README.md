@@ -438,6 +438,15 @@ class RoadyUI
      */
     private array $previsoulyGeneratedScriptTags = [];
 
+    /**
+     * @var array<string, string> $previsoulyGeneratedTextOutput
+     *                            Array of <script> tags for js
+     *                            files that have already been
+     *                            been processed indexed by
+     *                            file path.
+     */
+    private array $previsoulyGeneratedTextOutput = [];
+
     public function __construct(
         private Router $router,
         private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
@@ -477,7 +486,7 @@ class RoadyUI
         ) {
             $renderedContent = str_replace(
                 '<' . $positionName->__toString() . '></' . $positionName->__toString() . '>',
-                implode(PHP_EOL, ($routeOutputStrings[$positionName] ??[])),
+                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])),
                 $renderedContent,
             );
         }
@@ -532,53 +541,57 @@ class RoadyUI
 
     private function getRouteOutput(Route $route): string
     {
+        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
+            $route->moduleName(),
+            $this->listingOfDirectoryOfRoadyModules()
+                 ->pathToDirectoryOfRoadyModules(),
+        );
         $targetFilePath = $this->roadyModuleFileSystemPathDeterminator()
                                ->determinePathToFileInModuleDirectory(
-                                   $this->listingOfDirectoryOfRoadyModules()
-                                        ->pathToDirectoryOfRoadyModules(),
-                          $route->moduleName(),
-                          $route->relativePath()
-        );
+                                   $pathToRoadyModuleDirectory,
+                                   $route->relativePath(),
+                          );
         if($this->fileIsAPhpFile($targetFilePath)) {
-            /** If we already have the output, just use it */
-            if(isset($this->previsoulyIncludedPHPOutput[$targetFilePath])) {
-                return $this->previsoulyIncludedPHPOutput[$targetFilePath];
+            /** Only get the output once */
+            if(!isset($this->previsoulyIncludedPHPOutput[$targetFilePath])) {
+                ob_start();
+                include_once($targetFilePath->__toString());
+                $this->previsoulyIncludedPHPOutput[$targetFilePath] = ob_get_clean();
             }
-            ob_start();
-            include_once($targetFilePath->__toString());
-            $this->previsoulyIncludedPHPOutput[$targetFilePath] = ob_get_clean();
             return $this->previsoulyIncludedPHPOutput[$targetFilePath];
         }
         if($this->fileIsACssFile($targetFilePath) {
-            /** If we already have styesheet <link>, just use it */
-            if(isset($this->previsoulyGeneratedCSSLinks[$targetFilePath])) {
-                return $this->previsoulyGeneratedCSSLinks[$targetFilePath];
+            /** Only get the output once */
+            if(!isset($this->previsoulyGeneratedCSSLinks[$targetFilePath])) {
+                $this->previsoulyGeneratedCSSLinks[$targetFilePath] =
+                    '<link rel="stylesheet" ' .
+                    'type="text/css" ' .
+                    'href="' .
+                    $this->routeInfo()->determineRouteUrl(
+                    $this->router()->request()->domain(),
+                    $route
+                    ) .
+                    '" />';
             }
-            $this->previsoulyGeneratedCSSLinks[$targetFilePath] =
-                '<link rel="stylesheet" ' .
-                'type="text/css" ' .
-                'href="' .
-                $this->routeInfo()->determineRouteUrl(
-                $this->router()->request()->domain(),
-                $route
-                ) .
-                '" />';
             return $this->previsoulyGeneratedCSSLinks[$targetFilePath];
         }
         if($this->fileIsAJsFile($targetFilePath) {
-            /** If we already have the js <script> tag, just use it */
-            if(isset($this->previsoulyGeneratedScriptTags[$targetFilePath])) {
-                return $this->previsoulyGeneratedScriptTags[$targetFilePath];
+            /** Only get the output once */
+            if(!isset($this->previsoulyGeneratedScriptTags[$targetFilePath])) {
+                $this->previsoulyGeneratedScriptTags[$targetFilePath] = '<script type="text/javascript" ' .
+                       'src="' . $this->routeInfo()->determineRouteUrl(
+                           $this->router()->request()->domain(),
+                           $route
+                ) .
+                '"></script>';
             }
-            $this->previsoulyGeneratedScriptTags[$targetFilePath] = '<script type="text/javascript" ' .
-                   'src="' . $this->routeInfo()->determineRouteUrl(
-                       $this->router()->request()->domain(),
-                       $route
-            ) .
-            '"></script>';
             return $this->previsoulyGeneratedScriptTags[$targetFilePath];
         }
-        return strval(file_get_contents($targetFilePath->__toString()));
+        if(!isset($this->previsoulyGeneratedTextOutput[$targetFilePath])) {
+            $this->previsoulyGeneratedTextOutput[$targetFilePath] =
+                strval(file_get_contents($targetFilePath->__toString()));
+        }
+        return $this->previsoulyGeneratedTextOutput[$targetFilePath];
 
     }
 
@@ -663,22 +676,16 @@ use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 
 interface RoadyModuleFileSystemPathDeterminator
 {
 
     public function determinePathToFileInModuleDirectory(
-        PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
-        Name $moduleName,
+        PathToRoadyModuleDirectory $pathToRoadyModuleDirectory,
         RelativePath $relativePath
     ): PathToExistingFile
     {
-        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
-            $moduleName,
-            $pathToDirectoryOfRoadyModules
-        );
         $pathToFile = $pathToRoadyModuleDirectory->__toString() .
                       DIRECTORY_SEPARATOR .
                       $relativePath->__toString();
