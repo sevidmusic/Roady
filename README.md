@@ -28,14 +28,14 @@ The basic idea behind Roady is:
 
 - Modules define Routes which define the relationship between a Module
   Name, a collection of names that map to Request names, a collection
-  of Named Positions that map to positions in a Roady HTML Template
+  of Named Positions that map to positions in a Roady HTML Layout
   file, and a Relative Path to a file that determines a Routes's
   output.
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the "output" that should be served in Response to a
   Request, and then uses the Routes returned by the Router's Response
-  in conjunction with a Roady HTML Template File to determine how the
+  in conjunction with a Roady HTML Layout File to determine how the
   "output" should be displayed.
 
 - Multiple websites can run on a single installation of roady, each
@@ -189,8 +189,6 @@ use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 
 ### RoadyLayoutUtilities
-use \Darling\RoadyLayoutUtilities\interfaces\paths\PathToDirectoryOfRoadyLayouts;
-use \Darling\RoadyLayoutUtilities\interfaces\paths\PathToRoadyLayout;
 use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyLayoutInfo;
 
 ### RoadyUIUtilities
@@ -216,14 +214,14 @@ namespace \Darling\Roady\api;
 
 use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
-use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
+use \Darling\RoadyLayoutUtilities\classes\paths\;
 
 
 interface RoadyFileSystemPaths
 {
     public static function pathToRoadysRootDirectory(): PathToExistingDirectory;
     public static function pathToRoadysModulesDirectory(): PathToDirectoryOfRoadyModules;
-    public static function pathToRoadysLayoutDirectory(): PathToDirectoryOfRoadyLayouts;
+
 }
 
 ```
@@ -246,7 +244,7 @@ use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleRoutesJs
 use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
 use \Darling\RoadyRoutingUtilities\classes\utilities\routing\Router;
-use \Darling\RoadyTemplateUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyLayoutUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 use \Darling\Roady\api\RoadyFileSystemPaths;
 
@@ -269,7 +267,6 @@ $roadyUI = new RoadyUI(
         new ModuleOutputRouteDeterminator(),
         new ModuleRoutesJsonConfigurationReader(),
     ),
-    RoadyFileSystemPaths::pathToRoadysLayoutDirectory(),
     new RouteCollectionSorter(),
     new RoadyHTMLTemplateFileReader(),
 
@@ -445,10 +442,8 @@ use \Darling\RoadyRoutes\interfaces\routes\Route;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
-use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHTMLFileTemplate as PathToRoadyHTMLFileTemplateInstance;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
-use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyLayoutUtilities\interfaces\paths\;
+use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -497,7 +492,6 @@ class RoadyUI
 
     public function __construct(
         private Router $router,
-        private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
         private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
@@ -518,17 +512,17 @@ class RoadyUI
         foreach($sortedRoutes as $routePositionName => $routes) {
             foreach($routes as $routePosition => $route) {
                 $routeOutputStrings[$routePositionName] =
-                $this->getRouteOutput($route);
+                $this->determineRouteOutput($route);
             }
         }
         /**
          * NEW IDEA: Just use modules for everything. A router will
-         * provide a pathToRoadyHTMLFileTemplateForCurrentRequest()
-         * method which will determine the appropriate Template by
+         * provide a pathToRoadyHTMLFileLayoutForCurrentRequest()
+         * method which will determine the appropriate Layout by
          * looking at all the modules that define an Authority that
          * mathes the current Request's Authority, and loading the
          * first template found whose name matches the name of the
-         * current Request. If multiple modules define a Template with
+         * current Request. If multiple modules define a Layout with
          * the same name, only the first template found will be used,
          * the rest will be ignored.
          *
@@ -555,12 +549,12 @@ class RoadyUI
          *
          */
         $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
-            $router->pathToRoadyHTMLFileTemplateForCurrentRequest()
+            $router->pathToRoadyHTMLFileLayoutForCurrentRequest()
         );
         foreach(
             $this->roadyHTMLTemplateFileReader()
                  ->positionNameCollection(
-                     $this->pathToRoadyHTMLFileTemplateForCurrentRequest()
+                     $this->pathToRoadyHTMLFileLayoutForCurrentRequest()
                  )->collection()
             as
             $positionName
@@ -578,11 +572,6 @@ class RoadyUI
     public function router() Router
     {
         return $this->router;
-    }
-
-    public function pathToDirectoryOfRoadyHTMLFileTemplates() PathToDirectoryOfRoadyHTMLFileTemplates
-    {
-        return $this->pathToDirectoryOfRoadyHTMLFileTemplates;
     }
 
     public function routeCollectionSorter() RouteCollectionSorter
@@ -610,17 +599,7 @@ class RoadyUI
         return $this->render();
     }
 
-    private function pathToRoadyHTMLFileTemplateForCurrentRequest(): PathToRoadyHTMLFileTemplate
-    {
-        return new PathToRoadyHTMLFileTemplateInstance(
-            new Name(
-                new Text($this->router()->request()->name() . '.html')
-            ),
-            $this->pathToDirectoryOfRoadyHTMLFileTemplates(),
-        );
-    }
-
-    private function getRouteOutput(Route $route): string
+    private function determineRouteOutput(Route $route): string
     {
         $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
             $route->moduleName(),
