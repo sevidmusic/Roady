@@ -244,7 +244,7 @@ use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleRoutesJs
 use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
 use \Darling\RoadyRoutingUtilities\classes\utilities\routing\Router;
-use \Darling\RoadyLayoutUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyLayoutUtilities\classes\utilities\RoadyHTMLLayoutFileReader;
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 use \Darling\Roady\api\RoadyFileSystemPaths;
 
@@ -268,7 +268,7 @@ $roadyUI = new RoadyUI(
         new ModuleRoutesJsonConfigurationReader(),
     ),
     new RouteCollectionSorter(),
-    new RoadyHTMLTemplateFileReader(),
+    new RoadyHTMLLayoutFileReader(),
 
 );
 
@@ -443,7 +443,7 @@ use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyLayoutUtilities\interfaces\paths\;
-use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
+use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyHTMLLayoutFileReader;
 
 /**
  * The following is a rough draft/approximation of the actual
@@ -493,7 +493,7 @@ class RoadyUI
     public function __construct(
         private Router $router,
         private RouteCollectionSorter $routeCollectionSorter,
-        private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
+        private RoadyHTMLLayoutFileReader $roadyHTMLLayoutFileReader,
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
         private RouteInfo $routeInfo,
     ) {}
@@ -548,11 +548,11 @@ class RoadyUI
          *    should be included.
          *
          */
-        $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
+        $renderedContent = $this->roadyHTMLLayoutFileReader()->read(
             $router->pathToRoadyHTMLFileLayoutForCurrentRequest()
         );
         foreach(
-            $this->roadyHTMLTemplateFileReader()
+            $this->roadyHTMLLayoutFileReader()
                  ->positionNameCollection(
                      $this->pathToRoadyHTMLFileLayoutForCurrentRequest()
                  )->collection()
@@ -579,9 +579,9 @@ class RoadyUI
         return $this->routeCollectionSorter;
     }
 
-    public function roadyHTMLTemplateFileReader() RoadyHTMLTemplateFileReader
+    public function roadyHTMLLayoutFileReader() RoadyHTMLLayoutFileReader
     {
-        return $this->roadyHTMLTemplateFileReader;
+        return $this->roadyHTMLLayoutFileReader;
     }
 
     public function roadyModuleFileSystemPathDeterminator(): RoadyModuleFileSystemPathDeterminator
