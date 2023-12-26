@@ -49,8 +49,8 @@ Module's root directory:
 ```
 
 ./:
-authorities.json # defines authorities of the websites the module
-                 # will run on, for example:
+authorities.json Defines the authorities of the websites the module
+                 will run on, for example:
 
                  [
                      'localhost:8080',
@@ -58,34 +58,96 @@ authorities.json # defines authorities of the websites the module
                      'sub.domain.example.com'
                  ]
 
-routes.json      # defines the Module's hard-coded Routes, for example:
+                 The authorities.json file is the only file that is
+                 required.
+
+routes.json      Defines the Module's hard-coded Routes, for example,
+                 the following defines a single Route:
 
                  [
-                     'ModuleName',
-                     ['homepage', 'another-requests-name'],
-                     [['section-1', 1], ['section-2', 0]],
-                     'relative/path/to/file/in/modules/directory'
+                     {
+                        "module-name":"module-defines-empty-routes-json-configuration-file",
+                        "responds-to":["responds-to-request", "responds-to-another-request", "responds-to-another-request-2"],
+                        "named-positions":[{"position-name":"section-0","position":0.0},{"position-name":"section-0","position":-72.26},{"position-name":"section-0","position":0.0}],
+                        "relative-path":"path\/to\/output-file.html"
+                     }
                  ]
 
-css              # The css directory is not required, but if it exists
-                 # a Route will be defined for each file it contains
+                 The routes.json file is not required.
 
-js               # The js directory is not required, but if it exists
-                 # a Route will be defined for each file it contains
+css              The css directory is not required, but if it exists
+                 a Route will be defined for each file it contains
 
-output           # The output directory is not required, but if it
-                 # exists a Route will be defined for each file it
-                 # contains
+js               The js directory is not required, but if it exists
+                 a Route will be defined for each file it contains
 
-./css:
-files-in-the-css-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
-global-files-will-be-dynamically-Routed-to-match-all-Requests.css
+output           The output directory is not required, but if it
+                 exists a Route will be defined for each file it
+                 contains
 
-./js:
-files-in-the-js-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+./css:           The css directory is where a module's stylesheets
+                 should be located.
 
-./output:
-files-in-the-output-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
+                 Files in the css directory will have a Route defined
+                 for them dynamically that will map to a request whose
+                 name matches the files name excluding the extension.php
+
+                 For example, a file named:
+
+                    homepage.css
+
+                 would be served in respobse to a Request named:
+
+                     homepage
+
+                 Files whose name contains the string:
+
+                    global
+
+                 will be served in response to all Requests.
+
+./js:            The js directory is where a module's javascript files
+                 should be located.
+
+                 Files in the js directory will have a Route defined
+                 for them dynamically that will map to a request whose
+                 name matches the files name excluding the extension.php
+
+                 For example, a file named:
+
+                    homepage.js
+
+                 would be served in respobse to a Request named:
+
+                     homepage
+
+                 Files whose name contains the string:
+
+                    global
+
+                 will be served in response to all Requests.
+
+./output:        The output directory is where a module's output files
+                 should be located.
+
+                 Files in the output directory will have a Route
+                 defined for them dynamically that will map to a
+                 request whose name matches the files name excluding
+                 the extension.php
+
+                 For example, a file named:
+
+                    homepage.php
+
+                 would be served in respobse to a Request named:
+
+                     homepage
+
+                 Files whose name contains the string:
+
+                    global
+
+                 will be served in response to all Requests.
 
 ./misc-assets-this-directory-name-is-arbitrary
 modules-may-contain-other-files-and-directories-that-may-be-nedded-for-the-module-to-function.txt
@@ -114,23 +176,10 @@ The following is a list of namespaces for the interfaces that still need to be d
 The namespace also indicates the library that the interface will be defined by.
 
 ```
-### RoadyRoutes
-use \Darling\RoadyRoutes\interfaces\routes\Route; # Needs new method `public function moduleName(): Name;`
 
-### PHPFilesystemPaths
-use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory;
-use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
 
 ### RoadyModuleUtilities
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModuleFileSystemPathDeterminator
 use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
 
 
 ### RoadyRoutingUtilities
@@ -139,17 +188,16 @@ use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 
-### RoadyTemplateUtilities
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
-use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
+### RoadyLayoutUtilities
+use \Darling\RoadyLayoutUtilities\interfaces\paths\PathToDirectoryOfRoadyLayouts;
+use \Darling\RoadyLayoutUtilities\interfaces\paths\PathToRoadyLayout;
+use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyLayoutInfo;
 
 ### RoadyUIUtilities
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 
 ### Roady
 use \Darling\Roady\api\RoadyFileSystemPaths;
-
 
 ```
 
@@ -175,7 +223,7 @@ interface RoadyFileSystemPaths
 {
     public static function pathToRoadysRootDirectory(): PathToExistingDirectory;
     public static function pathToRoadysModulesDirectory(): PathToDirectoryOfRoadyModules;
-    public static function pathToRoadysTemplateDirectory(): PathToDirectoryOfRoadyHTMLFileTemplates;
+    public static function pathToRoadysLayoutDirectory(): PathToDirectoryOfRoadyLayouts;
 }
 
 ```
@@ -221,7 +269,7 @@ $roadyUI = new RoadyUI(
         new ModuleOutputRouteDeterminator(),
         new ModuleRoutesJsonConfigurationReader(),
     ),
-    RoadyFileSystemPaths::pathToRoadysTemplateDirectory(),
+    RoadyFileSystemPaths::pathToRoadysLayoutDirectory(),
     new RouteCollectionSorter(),
     new RoadyHTMLTemplateFileReader(),
 
@@ -473,8 +521,41 @@ class RoadyUI
                 $this->getRouteOutput($route);
             }
         }
+        /**
+         * NEW IDEA: Just use modules for everything. A router will
+         * provide a pathToRoadyHTMLFileTemplateForCurrentRequest()
+         * method which will determine the appropriate Template by
+         * looking at all the modules that define an Authority that
+         * mathes the current Request's Authority, and loading the
+         * first template found whose name matches the name of the
+         * current Request. If multiple modules define a Template with
+         * the same name, only the first template found will be used,
+         * the rest will be ignored.
+         *
+         * Additionaly, modules that are intended to be used as a
+         * Theme can be identified by including the word "Theme" in
+         * their name. When the Router is looking for the appropriate
+         * template it will do the following:.
+         *
+         * 1. Identify which modules are meant to run on the current
+         *    site by checking the authorities.json file provided by
+         *    each module.
+         * 2. Identify which modules names contain the word "Theme"
+         * 3. If a "Theme" module defines a template whose name
+         *    matches the current request use it and ignore all
+         *    others.
+         * 4. If a "Theme" module does not exist that defines a
+         *    template that matches the current Request then look
+         *    for a template in the other modules that run on the
+         *    current site, using the first template found and
+         *    ignoring the rest.
+         * 5. If a template is not found then a the equvilant of a
+         *    404 page should be returned and no module output
+         *    should be included.
+         *
+         */
         $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
-            $this->pathToRoadyHTMLFileTemplateForCurrentRequest()
+            $router->pathToRoadyHTMLFileTemplateForCurrentRequest()
         );
         foreach(
             $this->roadyHTMLTemplateFileReader()
