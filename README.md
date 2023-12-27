@@ -457,33 +457,61 @@ class RoadyUI
 
     private const ROADY_UI_TEMPLATE_STRING = <<<'EOT'
 
-    <!-- Begin section-a -->
-    <section-a></section-a>
-    <!-- End section-a -->
+<!DOCTYPE html>
 
-    <!-- Begin section-b -->
-    <section-b></section-b>
-    <!-- End section-b -->
+<html>
 
-    <!-- Begin section-c -->
-    <section-c></section-c>
-    <!-- End section-c -->
+    <head>
 
-    <!-- Begin section-d -->
-    <section-d></section-d>
-    <!-- End section-d -->
+        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
 
-    <!-- Begin section-e -->
-    <section-e></section-e>
-    <!-- End section-e -->
+        <!-- Begin stylesheet links -->
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+        <!-- End stylesheet links -->
 
-    <!-- Begin section-f -->
-    <section-f></section-f>
-    <!-- End section-f -->
+        <!-- Begin head javascript tags -->
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+        <!-- End head javascript tags -->
 
-    <!-- Begin section-g -->
-    <section-g></section-g>
-    <!-- End section-g -->
+    </head>
+
+    <body>
+
+        <!-- Begin section-a -->
+        <section-a></section-a>
+        <!-- End section-a -->
+
+        <!-- Begin section-b -->
+        <section-b></section-b>
+        <!-- End section-b -->
+
+        <!-- Begin section-c -->
+        <section-c></section-c>
+        <!-- End section-c -->
+
+        <!-- Begin section-d -->
+        <section-d></section-d>
+        <!-- End section-d -->
+
+        <!-- Begin section-e -->
+        <section-e></section-e>
+        <!-- End section-e -->
+
+        <!-- Begin section-f -->
+        <section-f></section-f>
+        <!-- End section-f -->
+
+        <!-- Begin section-g -->
+        <section-g></section-g>
+        <!-- End section-g -->
+
+    </body>
+
+</html>
+
+<!-- Begin footer javascript tags -->
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
+<!-- End footer javascript tags -->
 
 EOT;
 
