@@ -516,6 +516,23 @@ class RoadyUI
             }
         }
         /**
+
+
+NEW IDEA: SCRAP LAYOUTS AND THEMES, rename routes.json to "APPROPRIATE-AUTHORITY.json", so every website has unique Routes that can be mapped to a constant internal template:
+
+```
+<section-a></section-a>
+<section-b></section-b>
+<section-c></section-c>
+<section-d></section-d>
+<section-e></section-e>
+<section-f></section-f>
+<section-g></section-g>
+
+```
+
+
+
          * NEW IDEA: Just use modules for everything. A router will
          * provide a pathToRoadyHTMLFileLayoutForCurrentRequest()
          * method which will determine the appropriate Layout by
