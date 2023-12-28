@@ -435,16 +435,16 @@ use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
+use \Darling\RoadyLayoutUtilities\interfaces\paths\;
+use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyHTMLLayoutFileReader;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModuleFileSystemPathDeterminator
+use \Darling\RoadyRoutes\interfaces\collections\PositionNameCollection;
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 use \Darling\RoadyRoutes\interfaces\routes\Route;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
-use \Darling\RoadyLayoutUtilities\interfaces\paths\;
-use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyHTMLLayoutFileReader;
-
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 /**
  * The following is a rough draft/approximation of the actual
  * implementation of this file.
@@ -558,6 +558,19 @@ EOT;
         private RouteInfo $routeInfo,
     ) {}
 
+    /*
+
+    // Test Code
+    $t = '<!DOCTYPE html> <html> <head> <title><roady-page-title-placeholder></roady-page-title-placeholder></title> <!-- Begin stylesheet links --> <roady-stylesheet-link-tags></roady-stylesheet-link-tags> <!-- End stylesheet links --> <!-- Begin head javascript tags --> <roady-head-javascript-tags></roady-head-javascript-tags> <!-- End head javascript tags --> </head> <body> <!-- Begin section-a --> <section-a></section-a> <!-- End section-a --> <!-- Begin section-b --> <section-b></section-b> <!-- End section-b --> <!-- Begin section-c --> <section-c></section-c> <!-- End section-c --> <!-- Begin section-d --> <section-d></section-d> <!-- End section-d --> <!-- Begin section-e --> <section-e></section-e> <!-- End section-e --> <!-- Begin section-f --> <section-f></section-f> <!-- End section-f --> <!-- Begin section-g --> <section-g></section-g> <!-- End section-g --> </body> </html> <!-- Begin footer javascript tags --> <roady-footer-javascript-tags></roady-footer-javascript-tags> <!-- End footer javascript tags -->';
+    $sections = ['section-a', 'section-b', 'section-c', 'section-d', 'section-e', 'section-f', 'section-g'];
+    $output = ['section-a' => ['foo', 'bar'], 'section-b' => ['baz', 'bazzer', 'bin'], 'section-c' => ['bizbaz'], 'section-d' => ['barbazfoo', 'barbaz'], 'section-e' => ['binner'], 'section-f' => ['foo', 'bar', 'biz-baz bin foo baz', 'foo baz bar baz bazzer'], 'section-g' => ['final output']];
+    foreach($sections as $section)
+    {
+        $t = str_replace("<$section></$section>", implode(PHP_EOL, $output[$section]), $t);
+    }
+
+    */
+
     public function render(): string
     {
         /** array<string, array<string, Route>> */
@@ -587,10 +600,9 @@ EOT;
 
         $renderedContent = self::ROADY_UI_TEMPLATE_STRING;
         foreach(
-            $this->roadyHTMLLayoutFileReader()
-                 ->positionNameCollection(
-                     $this->pathToRoadyHTMLFileLayoutForCurrentRequest()
-                 )->collection()
+            $this->roadyUIPositionNameCollection(
+                $this->pathToRoadyHTMLFileLayoutForCurrentRequest()
+            )->collection()
             as
             $positionName
         ) {
@@ -634,6 +646,12 @@ EOT;
         return $this->render();
     }
 
+    private function roadyUIPositionNameCollection(): PositionNameCollection
+    {
+        // return a collection of PositionNames derived from the self::ROADY_UI_TEMPLATE_STRING;
+        return new PositionNameCollection(...self::ROADY_UI_TEMPLATE_STRING);
+    }
+}
     private function determineRouteOutput(Route $route): string
     {
         $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
