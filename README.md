@@ -26,17 +26,47 @@ The basic idea behind Roady is:
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
 
-- Modules define Routes which define the relationship between a Module
-  Name, a collection of names that map to Request names, a collection
-  of Named Positions that map to positions in a Roady HTML Layout
-  file, and a Relative Path to a file that determines a Routes's
-  output.
+- Modulesdefine Routes for a website in a json file named after the
+  site domain's authority. This allows Modulesto define unique Routes
+  for each site.
+
+  A Route defines the relationship a collection of names that map to
+  the names of the Requests that a Route should be served in response
+  to, a collection of Named Positions that map to Named Positions
+  provided by Roady's UI, and a Relative Path to a file that
+  determines a Routes's output.
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the "output" that should be served in Response to a
-  Request, and then uses the Routes returned by the Router's Response
-  in conjunction with a Roady HTML Layout File to determine how the
-  "output" should be displayed.
+  Request.
+
+- Roady's UI provides the following Named Positions which can be
+  targeted by the Named Positions defined by a Module's Routes
+  to determine where each Module's output should be located. These
+  Named Positions can also be targeted by the css styles defined
+  by a module:
+
+        <roady-page-title-placeholder></roady-page-title-placeholder>
+
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+
+        <section-a></section-a>
+
+        <section-b></section-b>
+
+        <section-c></section-c>
+
+        <section-d></section-d>
+
+        <section-e></section-e>
+
+        <section-f></section-f>
+
+        <section-g></section-g>
+
+        <roady-footer-javascript-tags></roady-footer-javascript-tags>
 
 - Multiple websites can run on a single installation of roady, each
   making use of one or more installed Roady Modules.
@@ -49,41 +79,51 @@ Module's root directory:
 ```
 
 ./:
-authorities.json Defines the authorities of the websites the module
-                 will run on, for example:
 
-                 [
-                     'localhost:8080',
-                     'example.com',
-                     'sub.domain.example.com'
-                 ]
-
-                 The authorities.json file is the only file that is
-                 required.
-
-routes.json      Defines the Module's hard-coded Routes, for example,
-                 the following defines a single Route:
+APPROPRIATE.SITE.AUTHORITY.json
+                 A json file named after the appropriate site's
+                 Authority which defines the Module's hard-coded
+                 Routes, for example, the following defines a single
+                 Route:
 
                  [
                      {
-                        "module-name":"module-defines-empty-routes-json-configuration-file",
-                        "responds-to":["responds-to-request", "responds-to-another-request", "responds-to-another-request-2"],
-                        "named-positions":[{"position-name":"section-0","position":0.0},{"position-name":"section-0","position":-72.26},{"position-name":"section-0","position":0.0}],
+                        "module-name":"module-name",
+                        "responds-to":[
+                            "name-of-a-request-this-route-responds-to",
+                            "name-of-another-request-this-route-responds-to"
+                        ],
+                        "named-positions":[
+                            {
+                                "position-name":"section-a",
+                                "position":0.0
+                            },
+                            {
+                                "position-name":"section-d",
+                                "position":-72.26
+                            },
+                            {
+                                "position-name":"section-f",
+                                "position":0.0
+                            }
+                        ],
                         "relative-path":"path\/to\/output-file.html"
                      }
                  ]
 
-                 The routes.json file is not required.
-
 css              The css directory is not required, but if it exists
-                 a Route will be defined for each file it contains
+                 a Route will be dynamically defined for each file it
+                 contains. Any additional Routes will have to be
+                 configured manually in the modules SITE_ROUTES.json
+                 files.
 
 js               The js directory is not required, but if it exists
-                 a Route will be defined for each file it contains
+                 a Route will be dynamically defined for each file it
+                 contains.
 
 output           The output directory is not required, but if it
-                 exists a Route will be defined for each file it
-                 contains
+                 exists a Route will be dynamically defined for each
+                 file it contains.
 
 ./css:           The css directory is where a module's stylesheets
                  should be located.
@@ -149,8 +189,8 @@ output           The output directory is not required, but if it
 
                  will be served in response to all Requests.
 
-./misc-assets-this-directory-name-is-arbitrary
-modules-may-contain-other-files-and-directories-that-may-be-nedded-for-the-module-to-function.txt
+                 Modules may also contain other files and directories
+                 that may be nedded for the module to function.txt
 
 ```
 
@@ -176,20 +216,11 @@ The following is a list of namespaces for the interfaces that still need to be d
 The namespace also indicates the library that the interface will be defined by.
 
 ```
-
-
-### RoadyModuleUtilities
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
-
-
 ### RoadyRoutingUtilities
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
-
-### RoadyLayoutUtilities
-use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyLayoutInfo;
 
 ### RoadyUIUtilities
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
@@ -236,7 +267,6 @@ Pseudo code for how Roady's index.php might be implemented:
 # Roady's index.php
 
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleJSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleOutputRouteDeterminator;
@@ -244,7 +274,6 @@ use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleRoutesJs
 use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
 use \Darling\RoadyRoutingUtilities\classes\utilities\routing\Router;
-use \Darling\RoadyLayoutUtilities\classes\utilities\RoadyHTMLLayoutFileReader;
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 use \Darling\Roady\api\RoadyFileSystemPaths;
 
@@ -261,15 +290,12 @@ $roadyUI = new RoadyUI(
         new ListingOfDirectoryOfRoadyModules(
             RoadyFileSystemPaths::pathToRoadysModulesDirectory()
         ),
-        new ModuleAuthoritiesJsonConfigurationReader(),
         new ModuleCSSRouteDeterminator(),
         new ModuleJSRouteDeterminator(),
         new ModuleOutputRouteDeterminator(),
         new ModuleRoutesJsonConfigurationReader(),
     ),
     new RouteCollectionSorter(),
-    new RoadyHTMLLayoutFileReader(),
-
 );
 
 echo $roadyUI->__toString();
@@ -286,7 +312,6 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
@@ -307,8 +332,7 @@ class Router
 
     public function __construct(
         private Request $request,
-        private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
-        private ModuleAuthoritiesJsonConfigurationReader $moduleAuthoritiesJsonConfigurationReader,
+        private ListingOfDirectoryOfRoadyModules$listingOfDirectoryOfRoadyModules,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
         private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
@@ -326,12 +350,9 @@ class Router
             $pathToRoadyModuleDirectory
         ) {
             if(
-                in_array(
-                    $this->request()->url()->domain()->authority(),
-                    $this->moduleAuthoritiesJsonConfigurationReader()
-                         ->read($pathToRoadyModuleDirectory)
-                         ->collection()
-                )
+                $this->request()->url()->domain()->authority() . '.json'
+                ===
+                $this->determineModuleRouteJsonFileName($pathToRoadyModuleDirectory)
             ) {
                 foreach(
                     $this->moduleCSSRouteDeterminator()
@@ -478,31 +499,45 @@ class RoadyUI
     <body>
 
         <!-- Begin section-a -->
-        <section-a></section-a>
+        <div class="section-a">
+            <section-a></section-a>
+        </div>
         <!-- End section-a -->
 
         <!-- Begin section-b -->
-        <section-b></section-b>
+        <div class="section-b">
+            <section-b></section-b>
+        </div>
         <!-- End section-b -->
 
         <!-- Begin section-c -->
-        <section-c></section-c>
+        <div class="section-c">
+            <section-c></section-c>
+        </div>
         <!-- End section-c -->
 
         <!-- Begin section-d -->
-        <section-d></section-d>
+        <div class="section-d">
+            <section-d></section-d>
+        </div>
         <!-- End section-d -->
 
         <!-- Begin section-e -->
-        <section-e></section-e>
+        <div class="section-e">
+            <section-e></section-e>
+        </div>
         <!-- End section-e -->
 
         <!-- Begin section-f -->
-        <section-f></section-f>
+        <div class="section-f">
+            <section-f></section-f>
+        </div>
         <!-- End section-f -->
 
         <!-- Begin section-g -->
-        <section-g></section-g>
+        <div class="section-g">
+            <section-g></section-g>
+        </div>
         <!-- End section-g -->
 
     </body>
@@ -556,19 +591,6 @@ EOT;
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
         private RouteInfo $routeInfo,
     ) {}
-
-    /*
-
-    // Test Code
-    $t = '<!DOCTYPE html> <html> <head> <title><roady-page-title-placeholder></roady-page-title-placeholder></title> <!-- Begin stylesheet links --> <roady-stylesheet-link-tags></roady-stylesheet-link-tags> <!-- End stylesheet links --> <!-- Begin head javascript tags --> <roady-head-javascript-tags></roady-head-javascript-tags> <!-- End head javascript tags --> </head> <body> <!-- Begin section-a --> <section-a></section-a> <!-- End section-a --> <!-- Begin section-b --> <section-b></section-b> <!-- End section-b --> <!-- Begin section-c --> <section-c></section-c> <!-- End section-c --> <!-- Begin section-d --> <section-d></section-d> <!-- End section-d --> <!-- Begin section-e --> <section-e></section-e> <!-- End section-e --> <!-- Begin section-f --> <section-f></section-f> <!-- End section-f --> <!-- Begin section-g --> <section-g></section-g> <!-- End section-g --> </body> </html> <!-- Begin footer javascript tags --> <roady-footer-javascript-tags></roady-footer-javascript-tags> <!-- End footer javascript tags -->';
-    $sections = ['section-a', 'section-b', 'section-c', 'section-d', 'section-e', 'section-f', 'section-g'];
-    $output = ['section-a' => ['foo', 'bar'], 'section-b' => ['baz', 'bazzer', 'bin'], 'section-c' => ['bizbaz'], 'section-d' => ['barbazfoo', 'barbaz'], 'section-e' => ['binner'], 'section-f' => ['foo', 'bar', 'biz-baz bin foo baz', 'foo baz bar baz bazzer'], 'section-g' => ['final output']];
-    foreach($sections as $section)
-    {
-        $t = str_replace("<$section></$section>", implode(PHP_EOL, $output[$section]), $t);
-    }
-
-   */
 
     public function render(): string
     {
