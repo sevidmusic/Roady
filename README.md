@@ -553,7 +553,6 @@ EOT;
     public function __construct(
         private Router $router,
         private RouteCollectionSorter $routeCollectionSorter,
-        private RoadyHTMLLayoutFileReader $roadyHTMLLayoutFileReader,
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
         private RouteInfo $routeInfo,
     ) {}
@@ -569,7 +568,7 @@ EOT;
         $t = str_replace("<$section></$section>", implode(PHP_EOL, $output[$section]), $t);
     }
 
-    */
+   */
 
     public function render(): string
     {
@@ -589,20 +588,9 @@ EOT;
             }
         }
 
-       /**
-        * NEW IDEA: SCRAP LAYOUTS AND THEMES, rename routes.json to
-        * "APPROPRIATE-AUTHORITY.json", so every website has unique
-        * Routes that can be mapped to a constant internal template:
-        *
-        */
-
-
-
         $renderedContent = self::ROADY_UI_TEMPLATE_STRING;
         foreach(
-            $this->roadyUIPositionNameCollection(
-                $this->pathToRoadyHTMLFileLayoutForCurrentRequest()
-            )->collection()
+            $this->roadyUIPositionNameCollection()->collection()
             as
             $positionName
         ) {
@@ -624,11 +612,6 @@ EOT;
     public function routeCollectionSorter() RouteCollectionSorter
     {
         return $this->routeCollectionSorter;
-    }
-
-    public function roadyHTMLLayoutFileReader() RoadyHTMLLayoutFileReader
-    {
-        return $this->roadyHTMLLayoutFileReader;
     }
 
     public function roadyModuleFileSystemPathDeterminator(): RoadyModuleFileSystemPathDeterminator
