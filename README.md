@@ -26,26 +26,48 @@ The basic idea behind Roady is:
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
 
-- Modules define Routes for a website in a json file named after the
-  site domain's authority. This allows Modules to define unique Routes
-  for each site.
+- Multiple websites can run on a single installation of roady, each
+  making use of one or more installed Roady Modules.
+
+- Modules may define output in the form of html or php files to be
+  served in response to various requests to a website.
+
+- Modules may also define css stylesheets and javascript files to
+  add styles and additional functionality to a website.
+
+- Modules serve output to a website via the Routes defined in a json
+  file which is named after the website domain's authority. This
+  allows Modules to define unique Routes for each website.
 
   A Route defines the relationship between a collection of names that
-  map to the names of the Requests that a Route should be served in
-  response to, a collection of Named Positions that map to Named
-  Positions provided by Roady's UI which are used to structure the
-  collective output of the Route's that respond to the same Request,
-  and a Relative Path to a file that determines a Routes's output.
+  map to the names of the Requests that a Route's output should be
+  served in response to, a collection of Named Positions that map to
+  Named Positions provided by Roady's UI which are used to structure
+  the collective output of all of the Route's that respond to the same
+  Request, and a Relative Path to a file that determines a Routes's
+  output.
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
-  to determine the "output" that should be served in Response to a
+  to determine the output that should be served in Response to a
   Request.
 
 - Roady's UI provides the following Named Positions which can be
   targeted by the Named Positions defined by a Module's Routes
   to determine where each Module's output should be located relative
-  to the output of other Modules. These Named Positions can also be
-  targeted by the css styles defined by a module:
+  to the output of other Modules.
+
+  The Named Positions section-a through section-g can also be targeted
+  by the css styles defined by a module.
+
+  The Named Position roady-page-title-placeholder is reserved and
+  cannot be used by modules.
+
+  The Named Posisiton roady-stylesheet-link-tags can be used by
+  Routes to css stylesheets.
+
+  The Named Posisitons roady-head-javascript-tags and
+  roady-footer-javascript-tags can be used by Routes to
+  javascript files.
 
         <roady-page-title-placeholder></roady-page-title-placeholder>
 
@@ -69,8 +91,6 @@ The basic idea behind Roady is:
 
         <roady-footer-javascript-tags></roady-footer-javascript-tags>
 
-- Multiple websites can run on a single installation of roady, each
-  making use of one or more installed Roady Modules.
 
 ### Anatomy of a Module
 
@@ -82,7 +102,7 @@ Module's root directory:
 ./:
 
 APPROPRIATE.SITE.AUTHORITY.json
-                 A json file named after the appropriate site's
+                 A json file named after the appropriate website's
                  Authority which defines the Module's hard-coded
                  Routes, for example, the following defines a single
                  Route:
@@ -135,13 +155,14 @@ output           The output directory is not required, but if it
 
                  Files in the css directory will have a Route defined
                  for them dynamically that will map to a request whose
-                 name matches the files name excluding the extension.php
+                 name matches the files name excluding the css file
+                 extension
 
                  For example, a file named:
 
                     homepage.css
 
-                 would be served in respobse to a Request named:
+                 would be served in response to a Request named:
 
                      homepage
 
@@ -156,13 +177,14 @@ output           The output directory is not required, but if it
 
                  Files in the js directory will have a Route defined
                  for them dynamically that will map to a request whose
-                 name matches the files name excluding the extension.php
+                 name matches the files name excluding the js file
+                 extension.
 
                  For example, a file named:
 
                     homepage.js
 
-                 would be served in respobse to a Request named:
+                 would be served in response to a Request named:
 
                      homepage
 
@@ -178,13 +200,13 @@ output           The output directory is not required, but if it
                  Files in the output directory will have a Route
                  defined for them dynamically that will map to a
                  request whose name matches the files name excluding
-                 the extension.php
+                 the php file extension.
 
                  For example, a file named:
 
                     homepage.php
 
-                 would be served in respobse to a Request named:
+                 would be served in response to a Request named:
 
                      homepage
 
@@ -195,7 +217,7 @@ output           The output directory is not required, but if it
                  will be served in response to all Requests.
 
                  Modules may also contain other files and directories
-                 that may be nedded for the module to function.txt
+                 that may be needed for the module to function.
 
 ```
 
@@ -216,9 +238,11 @@ the re-write of `Roady2.0`. This file will be revised to document
 
 ### Todo:
 
-The following is a list of namespaces for the interfaces that still need to be defined.
+The following is a list of namespaces for the interfaces that still
+need to be defined.
 
-The namespace also indicates the library that the interface will be defined by.
+The namespace also indicates the library that the interface will be
+defined by.
 
 ```
 ### RoadyRoutingUtilities
