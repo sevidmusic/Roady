@@ -26,15 +26,16 @@ The basic idea behind Roady is:
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
 
-- Modulesdefine Routes for a website in a json file named after the
-  site domain's authority. This allows Modulesto define unique Routes
+- Modules define Routes for a website in a json file named after the
+  site domain's authority. This allows Modules to define unique Routes
   for each site.
 
-  A Route defines the relationship a collection of names that map to
-  the names of the Requests that a Route should be served in response
-  to, a collection of Named Positions that map to Named Positions
-  provided by Roady's UI, and a Relative Path to a file that
-  determines a Routes's output.
+  A Route defines the relationship between a collection of names that
+  map to the names of the Requests that a Route should be served in
+  response to, a collection of Named Positions that map to Named
+  Positions provided by Roady's UI which are used to structure the
+  collective output of the Route's that respond to the same Request,
+  and a Relative Path to a file that determines a Routes's output.
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the "output" that should be served in Response to a
@@ -42,9 +43,9 @@ The basic idea behind Roady is:
 
 - Roady's UI provides the following Named Positions which can be
   targeted by the Named Positions defined by a Module's Routes
-  to determine where each Module's output should be located. These
-  Named Positions can also be targeted by the css styles defined
-  by a module:
+  to determine where each Module's output should be located relative
+  to the output of other Modules. These Named Positions can also be
+  targeted by the css styles defined by a module:
 
         <roady-page-title-placeholder></roady-page-title-placeholder>
 
@@ -114,16 +115,20 @@ APPROPRIATE.SITE.AUTHORITY.json
 css              The css directory is not required, but if it exists
                  a Route will be dynamically defined for each file it
                  contains. Any additional Routes will have to be
-                 configured manually in the modules SITE_ROUTES.json
-                 files.
+                 configured manually in the modules
+                 APPROPRIATE.SITE.AUTHORITY.json files.
 
 js               The js directory is not required, but if it exists
                  a Route will be dynamically defined for each file it
-                 contains.
+                 contains. Any additional Routes will have to be
+                 configured manually in the modules
+                 APPROPRIATE.SITE.AUTHORITY.json files.
 
 output           The output directory is not required, but if it
                  exists a Route will be dynamically defined for each
-                 file it contains.
+                 file it contains. Any additional Routes will have to
+                 be configured manually in the modules
+                 APPROPRIATE.SITE.AUTHORITY.json files.
 
 ./css:           The css directory is where a module's stylesheets
                  should be located.
