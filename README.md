@@ -104,27 +104,30 @@ The following is an overview of how Roady works:
   a Module's Routes to determine where each Module's output should
   be located relative to the output of other Modules.
 
-        <roady-page-title-placeholder></roady-page-title-placeholder>
+        ```
+        roady-page-title-placeholder
 
-        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+        roady-stylesheet-link-tags
 
-        <roady-head-javascript-tags></roady-head-javascript-tags>
+        roady-head-javascript-tags
 
-        <section-a></section-a>
+        section-a
 
-        <section-b></section-b>
+        section-b
 
-        <section-c></section-c>
+        section-c
 
-        <section-d></section-d>
+        section-d
 
-        <section-e></section-e>
+        section-e
 
-        <section-f></section-f>
+        section-f
 
-        <section-g></section-g>
+        section-g
 
-        <roady-footer-javascript-tags></roady-footer-javascript-tags>
+        roady-footer-javascript-tags
+
+        ```
 
   The Named Positions `section-a` through `section-g` can be targeted
   by the `css` styles defined by a Module.
