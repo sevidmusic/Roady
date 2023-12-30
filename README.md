@@ -20,7 +20,7 @@ on Roady makes me happy.
 
 The following is an overview of how Roady works:
 
---- Modules ---
+### Modules
 
 - The features of a website are implemented by individual Modules.
   For example, say my band used Roady to build our website, and we
@@ -64,7 +64,7 @@ The following is an overview of how Roady works:
   Using a website Domain's Authority to name Route configuration files
   allows Modules to define unique Routes for each website.
 
---- Routes ---
+### Routes
 
   A Route defines the relationship between a collection of Names that
   map to the Names of the Requests that a Route's output should be
