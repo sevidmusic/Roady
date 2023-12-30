@@ -74,6 +74,25 @@ The following is an overview of how Roady works:
   Request, and a Relative Path to a `php` file, `html` file, `css`
   file, or `javascript` file.
 
+  For example, the following json defines a single Route:
+
+      ```
+      {
+          "module-name": "module-name",
+          "responds-to": [
+              "name-of-a-request-this-route-responds-to"
+          ],
+          "named-positions": [
+              {
+                  "position-name": "section-a",
+                  "position": 1.7
+              }
+          ],
+          "relative-path": "path\/to\/output-file.html"
+      }
+
+      ```
+
 ### Roady's User Interface (UI)
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
@@ -179,32 +198,54 @@ Module's Root Directory:
 APPROPRIATE.SITE.AUTHORITY.json
                  A json file named after the appropriate website's
                  Authority which defines the Module's hard-coded
-                 Routes, for example, the following defines a single
-                 Route:
+                 Routes, for example, the following defines a two
+                 Routes:
 
                  ```
                  [
                      {
-                        "module-name":"module-name",
-                        "responds-to":[
-                            "name-of-a-request-this-route-responds-to",
-                            "name-of-another-request-this-route-responds-to"
-                        ],
-                        "named-positions":[
-                            {
-                                "position-name":"section-a",
-                                "position":0.0
-                            },
-                            {
-                                "position-name":"section-d",
-                                "position":-72.26
-                            },
-                            {
-                                "position-name":"section-f",
-                                "position":0.0
-                            }
-                        ],
-                        "relative-path":"path\/to\/output-file.html"
+                         "module-name": "module-name",
+                         "responds-to": [
+                             "name-of-a-request-this-route-responds-to",
+                             "name-of-another-request-this-route-responds-to"
+                         ],
+                         "named-positions": [
+                             {
+                                 "position-name": "section-a",
+                                 "position": 0.0
+                             },
+                             {
+                                 "position-name": "section-d",
+                                 "position": -72.26
+                             },
+                             {
+                                 "position-name": "section-f",
+                                 "position": 0.0
+                             }
+                         ],
+                         "relative-path": "path\/to\/output-file.html"
+                     },
+                     {
+                         "module-name": "module-name",
+                         "responds-to": [
+                             "name-of-a-request-this-route-responds-to",
+                             "name-of-another-request-this-route-responds-to"
+                         ],
+                         "named-positions": [
+                             {
+                                 "position-name": "section-g",
+                                 "position": 0.002
+                             },
+                             {
+                                 "position-name": "section-a",
+                                 "position": 2.6
+                             },
+                             {
+                                 "position-name": "section-c",
+                                 "position": 0.001
+                             }
+                         ],
+                         "relative-path": "path\/to\/output-file.php"
                      }
                  ]
 
