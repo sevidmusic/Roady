@@ -18,7 +18,9 @@ Roady is a PHP framework I have been developing for a long time.
 At this point it is a passion project. I love coding, working
 on Roady makes me happy.
 
-The basic idea behind Roady is:
+The following is an overview of how Roady works:
+
+--- Modules ---
 
 - The features of a website are implemented by individual Modules.
   For example, say my band used Roady to build our website, and we
@@ -26,48 +28,62 @@ The basic idea behind Roady is:
   a Module. If we needed a calender to show upcoming gigs, it would
   be implemented by a different Module.
 
-- Multiple websites can run on a single installation of roady, each
+- Multiple websites can run on a single installation of Roady, each
   making use of one or more installed Roady Modules.
 
-- Modules may define output in the form of html or php files to be
-  served in response to various requests to a website.
+- Modules may define output in the form of `html` or `php` files to be
+  served in response to various requests to a website's Domain.
 
-- Modules may also define css stylesheets and javascript files to
-  add styles and additional functionality to a website.
+- Modules may define `css` stylesheets and `javascript` files to define
+  styles and implement additional functionality for a website.
 
-- Modules serve output to a website via the Routes defined in a json
-  file which is named after the website domain's authority. This
+- Modules may serve `css` , `javascript`, and `output` to a website
+  via the Routes defined in a `json` file which is named after
+  the website's Domain's Authority.
+
+  For example, `sub.example.com.8080.json` would be the name of the
+  file used to define Routes for a website with the following
+  Domain:
+
+       https://sub.example.com:8080/
+       \___/   \_/ \_____/ \_/ \__/
+         |      |     |     |   |
+       Scheme  Sub  Domain Top Port
+       |      Domain Name Level   ||
+       |      |Name       Domain  ||
+       |      |\_____________/    ||
+       |      |       |           ||
+       |      |      Host         ||
+       |       \__________________/|
+       |               |           |
+       |           AUTHORITY       |
+        \_________________________/
+                     |
+                  Domain
+
+  Using a website Domain's Authority to name Route configuration files
   allows Modules to define unique Routes for each website.
 
-  A Route defines the relationship between a collection of names that
-  map to the names of the Requests that a Route's output should be
+--- Routes ---
+
+  A Route defines the relationship between a collection of Names that
+  map to the Names of the Requests that a Route's output should be
   served in response to, a collection of Named Positions that map to
   Named Positions provided by Roady's UI which are used to structure
   the collective output of all of the Route's that respond to the same
   Request, and a Relative Path to a file that determines a Routes's
-  output.
+  `output`.
+
+--- Roady's User Interface (UI) ---
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
-  to determine the output that should be served in Response to a
+  to determine the `output` that should be served in Response to a
   Request.
 
-- Roady's UI provides the following Named Positions which can be
-  targeted by the Named Positions defined by a Module's Routes
-  to determine where each Module's output should be located relative
-  to the output of other Modules.
-
-  The Named Positions section-a through section-g can also be targeted
-  by the css styles defined by a module.
-
-  The Named Position roady-page-title-placeholder is reserved and
-  cannot be used by modules.
-
-  The Named Posisiton roady-stylesheet-link-tags can be used by
-  Routes to css stylesheets.
-
-  The Named Posisitons roady-head-javascript-tags and
-  roady-footer-javascript-tags can be used by Routes to
-  javascript files.
+- Roady's UI defines an internal template with the following Named
+  Positions which can be targeted by the Named Positions defined by
+  a Module's Routes to determine where each Module's output should
+  be located relative to the output of other Modules.
 
         <roady-page-title-placeholder></roady-page-title-placeholder>
 
@@ -91,15 +107,74 @@ The basic idea behind Roady is:
 
         <roady-footer-javascript-tags></roady-footer-javascript-tags>
 
+  The Named Positions `section-a` through `section-g` can be targeted
+  by the `css` styles defined by a Module.
+
+  For example:
+
+      .section-a { background: blue; color: orange; }
+
+      .section-b, .section-c { background: darkblue; color: white; }
+
+      .section-d, .section-e .section-f { background: black; color: lightgrey; }
+
+      .section-g { background: black; color: orange; }
+
+  The Named Position `roady-page-title-placeholder` is reserved and
+  cannot be used by Modules.
+
+  The Named Posisiton `roady-stylesheet-link-tags` can be used by
+  Routes that define a Relative Path to a `css` stylesheet.
+
+  Routes to stylesheets that are assigned the
+  `roady-stylesheet-link-tags` Named Position will
+  have `<link>` tags autmatically generated for
+  them at the `roady-stylesheet-link-tags` position
+  in Roady's UI's `output`.
+
+  For example if a Route defined by a module named `Foo` for the
+  Authority `localhost:8080` was assigned:
+
+      the Relative Path: `css/homepage.js`
+
+      the Named Position: `roady-stylesheet-link-tags`
+
+  Then the following `<link>` tag would be generated for the `Foo`
+  module's `homepage.css` stylesheet in Roady's UI's output at the
+  `roady-stylesheet-link-tags` position when the appropriate Request
+  was made.
+
+      <link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
+
+  The Named Posisiton `roady-head-javascript-tags` and
+  `roady-footer-javascript-tags` can be used by Routes that define
+  a Relative Path to a `javascript` file.
+
+  Routes to `javascript` files that are assigned the
+  `roady-head-javascript-tags` or `roady-footer-javascript-tags`
+  Named Position will have `<script>` tags automatically generated
+  for them at the `roady-head-javascript-tags` position in Roady's
+  UI's output.
+
+  For example if a Route defined by a module named Foo for the
+  Authority `localhost:8080` was assigned:
+
+      the Relative Path `js/homepage.js`
+
+      the Named Position `roady-head-javascript-tags`
+
+  Then the following `<script>` tag would be generated for the `Foo`
+  module's `homepage.js` javascript file in Roady's UI's output at the
+  `roady-head-javascript-tags` position when the appropriate Request
+  was made.
+
 
 ### Anatomy of a Module
 
 Possible directory structure of a Roady Module, starting with
 Module's root directory:
 
-```
-
-./:
+Module's Root Directory:
 
 APPROPRIATE.SITE.AUTHORITY.json
                  A json file named after the appropriate website's
@@ -107,6 +182,7 @@ APPROPRIATE.SITE.AUTHORITY.json
                  Routes, for example, the following defines a single
                  Route:
 
+                 ```
                  [
                      {
                         "module-name":"module-name",
@@ -131,6 +207,8 @@ APPROPRIATE.SITE.AUTHORITY.json
                         "relative-path":"path\/to\/output-file.html"
                      }
                  ]
+
+                 ```
 
 css              The css directory is not required, but if it exists
                  a Route will be dynamically defined for each file it
@@ -218,8 +296,6 @@ output           The output directory is not required, but if it
 
                  Modules may also contain other files and directories
                  that may be needed for the module to function.
-
-```
 
 # Development of Roady v2.0
 
