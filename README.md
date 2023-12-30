@@ -74,7 +74,7 @@ The following is an overview of how Roady works:
   Request, and a Relative Path to a `php` file, `html` file, `css`
   file, or `javascript` file.
 
---- Roady's User Interface (UI) ---
+### Roady's User Interface (UI)
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the `output` that should be served in Response to a
