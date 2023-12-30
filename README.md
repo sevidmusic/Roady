@@ -146,7 +146,7 @@ The following is an overview of how Roady works:
 
   Routes to stylesheets that are assigned the
   `roady-stylesheet-link-tags` Named Position will
-  have `<link>` tags autmatically generated for
+  have `<link>` tags automatically generated for
   them at the `roady-stylesheet-link-tags` position
   in Roady's UI's `output`.
 
