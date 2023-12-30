@@ -67,10 +67,10 @@ The following is an overview of how Roady works:
 ### Routes
 
   A Route defines the relationship between a collection of Names that
-  map to the Names of the Requests that a Route's output should be
-  served in response to, a collection of Named Positions that map to
-  Named Positions provided by Roady's UI which are used to structure
-  the collective output of all of the Route's that respond to the same
+  map to the Names of the Requests that a Route should be served in
+  response to, a collection of Named Positions that map to Named
+  Positions provided by Roady's UI which are used to structure the
+  collective output of all of the Route's that respond to the same
   Request, and a Relative Path to a `php` file, `html` file, `css`
   file, or `javascript` file.
 
