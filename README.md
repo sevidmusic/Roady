@@ -76,7 +76,6 @@ The following is an overview of how Roady works:
 
   For example, the following json defines a single Route:
 
-      ```
       {
           "module-name": "module-name",
           "responds-to": [
@@ -91,7 +90,6 @@ The following is an overview of how Roady works:
           "relative-path": "path\/to\/output-file.html"
       }
 
-      ```
 
 ### Roady's User Interface (UI)
 
@@ -104,7 +102,6 @@ The following is an overview of how Roady works:
   a Module's Routes to determine where each Module's output should
   be located relative to the output of other Modules.
 
-        ```
         roady-page-title-placeholder
 
         roady-stylesheet-link-tags
@@ -127,7 +124,6 @@ The following is an overview of how Roady works:
 
         roady-footer-javascript-tags
 
-        ```
 
   The Named Positions `section-a` through `section-g` can be targeted
   by the `css` styles defined by a Module.
