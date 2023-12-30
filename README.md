@@ -42,7 +42,7 @@ The following is an overview of how Roady works:
   the website's Domain's Authority.
 
   For example, `sub.example.com.8080.json` would be the name of the
-  file used to define Routes for a website with the following
+  `json` file used to define Routes for a website with the following
   Domain:
 
        https://sub.example.com:8080/
