@@ -7,12 +7,12 @@
                         /____/
 ```
 
-![alt text](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
+![roady logo](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
 Note: This document is still being drafted, and will continue to
 evolve over time.
 
-### About
+# About
 
 Roady is a PHP framework I have been developing for a long time.
 At this point it is a passion project. I love coding, working
@@ -20,51 +20,51 @@ on Roady makes me happy.
 
 The following is an overview of how Roady works:
 
-### Modules
+# Modules
 
-- The features of a website are implemented by individual Modules.
-  For example, say my band used Roady to build our website, and we
-  needed a music player. That music player would be implemented by
-  a Module. If we needed a calender to show upcoming gigs, it would
-  be implemented by a different Module.
+The features of a website are implemented by individual Modules.
+For example, say my band used Roady to build our website, and we
+needed a music player. That music player would be implemented by
+a Module. If we needed a calender to show upcoming gigs, it would
+be implemented by a different Module.
 
-- Multiple websites can run on a single installation of Roady, each
-  making use of one or more installed Roady Modules.
+Multiple websites can run on a single installation of Roady, each
+making use of one or more installed Roady Modules.
 
-- Modules may define output in the form of `html` or `php` files to be
-  served in response to various requests to a website's Domain.
+Modules may define output in the form of `html` or `php` files to be
+served in response to various requests to a website's Domain.
 
-- Modules may define `css` stylesheets and `javascript` files to define
-  styles and implement additional functionality for a website.
+Modules may define `css` stylesheets and `javascript` files to define
+styles and implement additional functionality for a website.
 
-- Modules may serve `css` , `javascript`, and `output` to a website
-  via the Routes defined in a `json` file which is named after
-  the website's Domain's Authority.
+Modules may serve `css` , `javascript`, and `output` to a website
+via the Routes defined in a `json` file which is named after
+the website's Domain's Authority.
 
-  For example, `sub.example.com.8080.json` would be the name of the
-  `json` file used to define Routes for a website with the following
-  Domain:
+For example, `sub.example.com.8080.json` would be the name of the
+`json` file used to define Routes for a website with the following
+Domain:
 
-       https://sub.example.com:8080/
-       \___/   \_/ \_____/ \_/ \__/
-         |      |     |     |   |
-       Scheme  Sub  Domain Top Port
-       |      Domain Name Level   ||
-       |      |Name       Domain  ||
-       |      |\_____________/    ||
-       |      |       |           ||
-       |      |      Host         ||
-       |       \__________________/|
-       |               |           |
-       |           AUTHORITY       |
-        \_________________________/
-                     |
-                  Domain
+     https://sub.example.com:8080/
+     \___/   \_/ \_____/ \_/ \__/
+       |      |     |     |   |
+     Scheme  Sub  Domain Top Port
+     |      Domain Name Level   ||
+     |      |Name       Domain  ||
+     |      |\_____________/    ||
+     |      |       |           ||
+     |      |      Host         ||
+     |       \__________________/|
+     |               |           |
+     |           AUTHORITY       |
+      \_________________________/
+                   |
+                Domain
 
-  Using a website Domain's Authority to name Route configuration files
-  allows Modules to define unique Routes for each website.
+Using a website Domain's Authority to name Route configuration files
+allows Modules to define unique Routes for each website.
 
-### Routes
+# Routes
 
   A Route defines the relationship between a collection of Names that
   map to the Names of the Requests that a Route should be served in
@@ -76,22 +76,25 @@ The following is an overview of how Roady works:
 
   For example, the following json defines a single Route:
 
-      {
-          "module-name": "module-name",
-          "responds-to": [
-              "name-of-a-request-this-route-responds-to"
-          ],
-          "named-positions": [
-              {
-                  "position-name": "section-a",
-                  "position": 1.7
-              }
-          ],
-          "relative-path": "path\/to\/output-file.html"
-      }
+  ```json
+  {
+      "module-name": "module-name",
+      "responds-to": [
+          "name-of-a-request-this-route-responds-to"
+      ],
+      "named-positions": [
+          {
+              "position-name": "section-a",
+              "position": 1.7
+          }
+      ],
+      "relative-path": "path\/to\/output-file.html"
+  }
+
+  ```
 
 
-### Roady's User Interface (UI)
+# Roady's User Interface (UI)
 
 - Roady's UI uses a Router and the Routes defined by installed Modules
   to determine the `output` that should be served in Response to a
@@ -130,13 +133,16 @@ The following is an overview of how Roady works:
 
   For example:
 
-      .section-a { background: blue; color: orange; }
+  ```css
+  .section-a { background: blue; color: orange; }
 
-      .section-b, .section-c { background: darkblue; color: white; }
+  .section-b, .section-c { background: darkblue; color: white; }
 
-      .section-d, .section-e .section-f { background: black; color: lightgrey; }
+  .section-d, .section-e .section-f { background: black; color: lightgrey; }
 
-      .section-g { background: black; color: orange; }
+  .section-g { background: black; color: orange; }
+
+  ```
 
   The Named Position `roady-page-title-placeholder` is reserved and
   cannot be used by Modules.
@@ -162,7 +168,9 @@ The following is an overview of how Roady works:
   `roady-stylesheet-link-tags` position when the appropriate Request
   was made.
 
-      <link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
+  ```html
+  <link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
+  ```
 
   The Named Posisiton `roady-head-javascript-tags` and
   `roady-footer-javascript-tags` can be used by Routes that define
@@ -186,111 +194,108 @@ The following is an overview of how Roady works:
   `roady-head-javascript-tags` position when the appropriate Request
   was made.
 
+  ```html
+  <script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
+  ```
 
-### Anatomy of a Module
+# Anatomy of a Module
 
-Possible directory structure of a Roady Module, starting with
-Module's root directory:
+Overivew of the files that might exist in a Module's directory:
 
-Module's Root Directory:
+### APPROPRIATE.SITE.AUTHORITY.json
 
-APPROPRIATE.SITE.AUTHORITY.json
-                 A json file named after the appropriate website's
-                 Authority which defines the Module's hard-coded
-                 Routes, for example, the following defines a two
-                 Routes:
+A json file named after the appropriate website's
+Authority which defines the Module's hard-coded
+Routes, for example, the following defines a two
+Routes:
 
-                 ```
-                 [
-                     {
-                         "module-name": "module-name",
-                         "responds-to": [
-                             "name-of-a-request-this-route-responds-to",
-                             "name-of-another-request-this-route-responds-to"
-                         ],
-                         "named-positions": [
-                             {
-                                 "position-name": "section-a",
-                                 "position": 0.0
-                             },
-                             {
-                                 "position-name": "section-d",
-                                 "position": -72.26
-                             },
-                             {
-                                 "position-name": "section-f",
-                                 "position": 0.0
-                             }
-                         ],
-                         "relative-path": "path\/to\/output-file.html"
-                     },
-                     {
-                         "module-name": "module-name",
-                         "responds-to": [
-                             "name-of-a-request-this-route-responds-to",
-                             "name-of-another-request-this-route-responds-to"
-                         ],
-                         "named-positions": [
-                             {
-                                 "position-name": "section-g",
-                                 "position": 0.002
-                             },
-                             {
-                                 "position-name": "section-a",
-                                 "position": 2.6
-                             },
-                             {
-                                 "position-name": "section-c",
-                                 "position": 0.001
-                             }
-                         ],
-                         "relative-path": "path\/to\/output-file.php"
-                     }
-                 ]
+```json
+[
+    {
+        "module-name": "module-name",
+        "responds-to": [
+            "name-of-a-request-this-route-responds-to",
+            "name-of-another-request-this-route-responds-to"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-a",
+                "position": 0.0
+            },
+            {
+                "position-name": "section-d",
+                "position": -72.26
+            },
+            {
+                "position-name": "section-f",
+                "position": 0.0
+            }
+        ],
+        "relative-path": "path\/to\/output-file.html"
+    },
+    {
+        "module-name": "module-name",
+        "responds-to": [
+            "name-of-a-request-this-route-responds-to",
+            "name-of-another-request-this-route-responds-to"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-g",
+                "position": 0.002
+            },
+            {
+                "position-name": "section-a",
+                "position": 2.6
+            },
+            {
+                "position-name": "section-c",
+                "position": 0.001
+            }
+        ],
+        "relative-path": "path\/to\/output-file.php"
+    }
+]
 
-                 ```
+```
 
-css              The css directory is not required, but if it exists
+### CSS:
+The css directory is not required, but if it exists
+a Route will be dynamically defined for each file it
+contains. Any additional Routes will have to be
+configured manually in the modules
+APPROPRIATE.SITE.AUTHORITY.json files.
+
+The css directory is where a module's stylesheets
+should be located.
+
+Files in the css directory will have a Route defined
+for them dynamically that will map to a request whose
+name matches the files name excluding the css file
+extension
+
+For example, a file named:
+
+   homepage.css
+
+would be served in response to a Request named:
+
+    homepage
+
+Files whose name contains the string:
+
+   global
+
+will be served in response to all Requests.
+
+### JS:
+
+The js directory is not required, but if it exists
                  a Route will be dynamically defined for each file it
                  contains. Any additional Routes will have to be
                  configured manually in the modules
                  APPROPRIATE.SITE.AUTHORITY.json files.
-
-js               The js directory is not required, but if it exists
-                 a Route will be dynamically defined for each file it
-                 contains. Any additional Routes will have to be
-                 configured manually in the modules
-                 APPROPRIATE.SITE.AUTHORITY.json files.
-
-output           The output directory is not required, but if it
-                 exists a Route will be dynamically defined for each
-                 file it contains. Any additional Routes will have to
-                 be configured manually in the modules
-                 APPROPRIATE.SITE.AUTHORITY.json files.
-
-./css:           The css directory is where a module's stylesheets
-                 should be located.
-
-                 Files in the css directory will have a Route defined
-                 for them dynamically that will map to a request whose
-                 name matches the files name excluding the css file
-                 extension
-
-                 For example, a file named:
-
-                    homepage.css
-
-                 would be served in response to a Request named:
-
-                     homepage
-
-                 Files whose name contains the string:
-
-                    global
-
-                 will be served in response to all Requests.
-
-./js:            The js directory is where a module's javascript files
+The js directory is where a module's javascript files
                  should be located.
 
                  Files in the js directory will have a Route defined
@@ -312,7 +317,15 @@ output           The output directory is not required, but if it
 
                  will be served in response to all Requests.
 
-./output:        The output directory is where a module's output files
+### OUTPUT:
+The output directory is not required, but if it
+                 exists a Route will be dynamically defined for each
+                 file it contains. Any additional Routes will have to
+                 be configured manually in the modules
+                 APPROPRIATE.SITE.AUTHORITY.json files.
+
+
+The output directory is where a module's output files
                  should be located.
 
                  Files in the output directory will have a Route
@@ -383,7 +396,7 @@ classes that define static methods.
 
 ### Possible api class: \Darling\Roady\api\RoadyFileSystemPaths;
 
-```
+```php
 <?php
 
 namespace \Darling\Roady\api;
@@ -406,7 +419,7 @@ interface RoadyFileSystemPaths
 
 Pseudo code for how Roady's index.php might be implemented:
 
-```
+```php
 <?php
 
 # Roady's index.php
@@ -451,7 +464,7 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 
 ### Pseudo Router Definition
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
@@ -591,7 +604,7 @@ class Router
 
 ### Pseudo RoadyUI Definition
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyUIUtilities\interfaces\ui;
@@ -881,7 +894,7 @@ EOT;
 
 Defines methods that provide information about Roady Routes.
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
@@ -929,7 +942,7 @@ interface RouteInfo
 Defines methods that provide information about Roady Module file
 system paths.
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
