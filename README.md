@@ -7,90 +7,367 @@
                         /____/
 ```
 
-![alt text](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
+![roady logo](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
 Note: This document is still being drafted, and will continue to
 evolve over time.
 
-### About
+# About
 
 Roady is a PHP framework I have been developing for a long time.
 At this point it is a passion project. I love coding, working
 on Roady makes me happy.
 
-The basic idea behind Roady is:
+The following is an overview of how Roady works:
 
-- The features of a website are implemented by individual Modules.
-  For example, say my band used Roady to build our website, and we
-  needed a music player. That music player would be implemented by
-  a Module. If we needed a calender to show upcoming gigs, it would
-  be implemented by a different Module.
+# Modules
 
-- Modules define Routes which define the relationship between a Module
-  Name, a collection of names that map to Request names, a collection
-  of Named Positions that map to positions in a Roady HTML Template
-  file, and a Relative Path to a file that determines a Routes's
-  output.
+The features of a website are implemented by individual Modules.
+For example, say my band used Roady to build our website, and we
+needed a music player, that music player would be implemented by
+a Module. If we needed a calender to show upcoming gigs, it would
+be implemented by a different Module.
 
-- Roady's UI uses a Router and the Routes defined by installed Modules
-  to determine the "output" that should be served in Response to a
-  Request, and then uses the Routes returned by the Router's Response
-  in conjunction with a Roady HTML Template File to determine how the
-  "output" should be displayed.
+Multiple websites can run on a single installation of Roady, each
+making use of one or more installed Roady Modules.
 
-- Multiple websites can run on a single installation of roady, each
-  making use of one or more installed Roady Modules.
+Modules may define `output` in the form of `html` or `php` files
+to be displayed in response to appropriate Requests via
+Roady's UI.
 
-### Anatomy of a Module
+Modules may define `css` stylesheets and `javascript` files to define
+styles and implement additional functionality for a website.
 
-Possible directory structure of a Roady Module, starting with
-Module's root directory:
+Modules may serve `php`, `html`, `css` , and `javascript`, to a
+website via the Routes defined in a `json` file which is named
+after the website's Domain's Authority.
+
+For example, `sub.example.com.8080.json` would be the name of the
+`json` file used to define Routes for a website with the following
+Domain:
+
+     https://sub.example.com:8080/
+     \___/   \_/ \_____/ \_/ \__/
+       |      |     |     |   |
+     Scheme  Sub  Domain Top Port
+     |      Domain Name Level   ||
+     |      |Name       Domain  ||
+     |      |\_____________/    ||
+     |      |       |           ||
+     |      |      Host         ||
+     |       \__________________/|
+     |               |           |
+     |           AUTHORITY       |
+      \_________________________/
+                   |
+                Domain
+
+Using a website's Domain's Authority to name Route configuration files
+allows Modules to define unique Routes for each website.
+
+# Routes
+
+A Route defines the relationship between a collection of Names that
+correspond to the Names of the Requests that a Route should be served
+in response to, a collection of Named Positions that correspond to
+Named Positions provided by Roady's UI which are used to structure the
+collective output of all of the Route's that respond to the same
+Request, and a Relative Path to a `php` file, `html` file, `css`
+file, or `javascript` file.
+
+For example, the following json defines a single Route:
+
+```json
+{
+    "module-name": "module-name",
+    "responds-to": [
+        "name-of-a-request-this-route-responds-to"
+    ],
+    "named-positions": [
+        {
+            "position-name": "section-a",
+            "position": 1.7
+        }
+    ],
+    "relative-path": "path\/to\/output-file.html"
+}
 
 ```
 
-./:
-authorities.json # defines authorities of the websites the module
-                 # will run on, for example:
+# Roady's User Interface (UI)
 
-                 [
-                     'localhost:8080',
-                     'example.com',
-                     'sub.domain.example.com'
-                 ]
+Roady's UI uses a Router and the Routes defined by installed Modules
+to determine the `php` files, `html` files, `css` files, and
+`javascript` files that should be served in Response to a Request.
 
-routes.json      # defines the Module's hard-coded Routes, for example:
-
-                 [
-                     'ModuleName',
-                     ['homepage', 'another-requests-name'],
-                     [['section-1', 1], ['section-2', 0]],
-                     'relative/path/to/file/in/modules/directory'
-                 ]
-
-css              # The css directory is not required, but if it exists
-                 # a Route will be defined for each file it contains
-
-js               # The js directory is not required, but if it exists
-                 # a Route will be defined for each file it contains
-
-output           # The output directory is not required, but if it
-                 # exists a Route will be defined for each file it
-                 # contains
-
-./css:
-files-in-the-css-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
-global-files-will-be-dynamically-Routed-to-match-all-Requests.css
-
-./js:
-files-in-the-js-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
-
-./output:
-files-in-the-output-directory-will-have-a-Route-defined-for-them-dynamically-that-will-map-to-a-request-whose-name-matches-the-files-name-excluding-the-extension.php
-
-./misc-assets-this-directory-name-is-arbitrary
-modules-may-contain-other-files-and-directories-that-may-be-nedded-for-the-module-to-function.txt
+Roady's UI defines an internal template with the following Named
+Positions which can be targeted by the Named Positions defined by
+a Module's Routes to determine where a Module's output should
+be located relative to the output of other Modules.
 
 ```
+roady-page-title-placeholder
+
+roady-stylesheet-link-tags
+
+roady-head-javascript-tags
+
+section-a
+
+section-b
+
+section-c
+
+section-d
+
+section-e
+
+section-f
+
+section-g
+
+roady-footer-javascript-tags
+
+```
+
+The Named Position `roady-page-title-placeholder` is reserved and
+cannot be used by Modules.
+
+The Named Position `roady-stylesheet-link-tags` can be used by
+Routes that define a Relative Path to a `css` stylesheet.
+
+Routes to stylesheets that are assigned the
+`roady-stylesheet-link-tags` Named Position will
+have `<link>` tags automatically generated for
+them at the `roady-stylesheet-link-tags` position
+in Roady's UI's `output`.
+
+For example if a Route defined by a module named `Foo` for the
+Authority `localhost:8080` was assigned the following Relative Path:
+
+```
+css/homepage.js
+```
+
+And was also assign to the Named Position:
+
+```
+roady-stylesheet-link-tags
+```
+
+Then the following `<link>` tag would be generated for the `Foo`
+module's `homepage.css` stylesheet in Roady's UI's output at the
+`roady-stylesheet-link-tags` position when the appropriate Request
+was made.
+
+```html
+<link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
+```
+
+The Named Positions `roady-head-javascript-tags` and
+`roady-footer-javascript-tags` can be used by Routes that define
+a Relative Path to a `javascript` file.
+
+Routes to `javascript` files that are assigned to the
+`roady-head-javascript-tags` Named Position will have `<script>`
+tags automatically generated for them at the
+`roady-head-javascript-tags` position in Roady's UI's output.
+
+Routes to `javascript` files that are assigned to the
+`roady-footer-javascript-tags` Named Position will have `<script>`
+tags automatically generated for them at the
+`roady-footer-javascript-tags` position in Roady's UI's output.
+
+For example if a Route defined by a module named Foo for the
+Authority `localhost:8080` was assigned the Relative Path:
+
+```
+js/homepage.js
+```
+
+And was also assigned to the Named Position:
+
+```
+roady-head-javascript-tags
+```
+
+Then the following `<script>` tag would be generated for the `Foo`
+module's `homepage.js` javascript file in Roady's UI's output at the
+`roady-head-javascript-tags` position when the appropriate Request
+was made.
+
+```html
+<script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
+```
+
+The Named Positions `section-a` through `section-g` are intended for
+module output, and can be targeted by the `css` styles defined by
+a Module.
+
+For example:
+
+```css
+.section-a { background: blue; color: orange; }
+
+.section-b, .section-c { background: darkblue; color: white; }
+
+.section-d, .section-e .section-f { background: black; color: lightgrey; }
+
+.section-g { background: black; color: orange; }
+
+```
+
+# Anatomy of a Module
+
+Overivew of the files that might exist in a Module's directory:
+
+### APPROPRIATE.SITE.AUTHORITY.json
+
+A json file named after the appropriate website's
+Authority which defines the Module's hard-coded
+Routes, for example, the following defines a two
+Routes:
+
+```json
+[
+    {
+        "module-name": "module-name",
+        "responds-to": [
+            "name-of-a-request-this-route-responds-to",
+            "name-of-another-request-this-route-responds-to"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-a",
+                "position": 0.0
+            },
+            {
+                "position-name": "section-d",
+                "position": -72.26
+            },
+            {
+                "position-name": "section-f",
+                "position": 0.0
+            }
+        ],
+        "relative-path": "path\/to\/output-file.html"
+    },
+    {
+        "module-name": "module-name",
+        "responds-to": [
+            "name-of-a-request-this-route-responds-to",
+            "name-of-another-request-this-route-responds-to"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-g",
+                "position": 0.002
+            },
+            {
+                "position-name": "section-a",
+                "position": 2.6
+            },
+            {
+                "position-name": "section-c",
+                "position": 0.001
+            }
+        ],
+        "relative-path": "path\/to\/output-file.php"
+    }
+]
+
+```
+
+### CSS:
+The css directory is not required, but if it exists
+a Route will be dynamically defined for each file it
+contains. Any additional Routes will have to be
+configured manually in the modules
+APPROPRIATE.SITE.AUTHORITY.json files.
+
+The css directory is where a module's stylesheets
+should be located.
+
+Files in the css directory will have a Route defined
+for them dynamically that will map to a request whose
+name matches the files name excluding the css file
+extension
+
+For example, a file named:
+
+   homepage.css
+
+would be served in response to a Request named:
+
+    homepage
+
+Files whose name contains the string:
+
+   global
+
+will be served in response to all Requests.
+
+### JS:
+
+The js directory is not required, but if it exists
+                 a Route will be dynamically defined for each file it
+                 contains. Any additional Routes will have to be
+                 configured manually in the modules
+                 APPROPRIATE.SITE.AUTHORITY.json files.
+The js directory is where a module's javascript files
+                 should be located.
+
+                 Files in the js directory will have a Route defined
+                 for them dynamically that will map to a request whose
+                 name matches the files name excluding the js file
+                 extension.
+
+                 For example, a file named:
+
+                    homepage.js
+
+                 would be served in response to a Request named:
+
+                     homepage
+
+                 Files whose name contains the string:
+
+                    global
+
+                 will be served in response to all Requests.
+
+### OUTPUT:
+The output directory is not required, but if it
+                 exists a Route will be dynamically defined for each
+                 file it contains. Any additional Routes will have to
+                 be configured manually in the modules
+                 APPROPRIATE.SITE.AUTHORITY.json files.
+
+
+The output directory is where a module's output files
+                 should be located.
+
+                 Files in the output directory will have a Route
+                 defined for them dynamically that will map to a
+                 request whose name matches the files name excluding
+                 the php file extension.
+
+                 For example, a file named:
+
+                    homepage.php
+
+                 would be served in response to a Request named:
+
+                     homepage
+
+                 Files whose name contains the string:
+
+                    global
+
+                 will be served in response to all Requests.
+
+                 Modules may also contain other files and directories
+                 that may be needed for the module to function.
 
 # Development of Roady v2.0
 
@@ -109,47 +386,24 @@ the re-write of `Roady2.0`. This file will be revised to document
 
 ### Todo:
 
-The following is a list of namespaces for the interfaces that still need to be defined.
+The following is a list of namespaces for the interfaces that still
+need to be defined.
 
-The namespace also indicates the library that the interface will be defined by.
+The namespace also indicates the library that the interface will be
+defined by.
 
 ```
-### RoadyRoutes
-use \Darling\RoadyRoutes\interfaces\routes\Route; # Needs new method `public function moduleName(): Name;`
-
-### PHPFilesystemPaths
-use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory;
-use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
-
-### RoadyModuleUtilities
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModuleFileSystemPathDeterminator
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleRoutesJsonConfigurationReader;
-
-
 ### RoadyRoutingUtilities
 use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 
-### RoadyTemplateUtilities
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
-use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
-
 ### RoadyUIUtilities
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 
 ### Roady
 use \Darling\Roady\api\RoadyFileSystemPaths;
-
 
 ```
 
@@ -161,21 +415,21 @@ classes that define static methods.
 
 ### Possible api class: \Darling\Roady\api\RoadyFileSystemPaths;
 
-```
+```php
 <?php
 
 namespace \Darling\Roady\api;
 
 use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingDirectory;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules;
-use \Darling\RoadyTemplateUtilities\classes\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
+use \Darling\RoadyLayoutUtilities\classes\paths\;
 
 
 interface RoadyFileSystemPaths
 {
     public static function pathToRoadysRootDirectory(): PathToExistingDirectory;
     public static function pathToRoadysModulesDirectory(): PathToDirectoryOfRoadyModules;
-    public static function pathToRoadysTemplateDirectory(): PathToDirectoryOfRoadyHTMLFileTemplates;
+
 }
 
 ```
@@ -184,13 +438,12 @@ interface RoadyFileSystemPaths
 
 Pseudo code for how Roady's index.php might be implemented:
 
-```
+```php
 <?php
 
 # Roady's index.php
 
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleJSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\classes\utilities\determinators\ModuleOutputRouteDeterminator;
@@ -198,7 +451,6 @@ use \Darling\RoadyModuleUtilities\classes\utilities\configuration\ModuleRoutesJs
 use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter;
 use \Darling\RoadyRoutingUtilities\classes\requests\Request;
 use \Darling\RoadyRoutingUtilities\classes\utilities\routing\Router;
-use \Darling\RoadyTemplateUtilities\classes\utilities\RoadyHTMLTemplateFileReader;
 use \Darling\RoadyUIUtilities\ui\RoadyUI;
 use \Darling\Roady\api\RoadyFileSystemPaths;
 
@@ -215,16 +467,12 @@ $roadyUI = new RoadyUI(
         new ListingOfDirectoryOfRoadyModules(
             RoadyFileSystemPaths::pathToRoadysModulesDirectory()
         ),
-        new ModuleAuthoritiesJsonConfigurationReader(),
         new ModuleCSSRouteDeterminator(),
         new ModuleJSRouteDeterminator(),
         new ModuleOutputRouteDeterminator(),
         new ModuleRoutesJsonConfigurationReader(),
     ),
-    RoadyFileSystemPaths::pathToRoadysTemplateDirectory(),
     new RouteCollectionSorter(),
-    new RoadyHTMLTemplateFileReader(),
-
 );
 
 echo $roadyUI->__toString();
@@ -235,13 +483,12 @@ echo '<!-- Powered by [Roady](https://github.com/sevidmusic/Roady) -->
 
 ### Pseudo Router Definition
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyRoutingUtilities\interfaces\routing;
 
 use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\interfaces\utilities\configuration\ModuleAuthoritiesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleJSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\ModuleOutputRouteDeterminator;
@@ -262,8 +509,7 @@ class Router
 
     public function __construct(
         private Request $request,
-        private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
-        private ModuleAuthoritiesJsonConfigurationReader $moduleAuthoritiesJsonConfigurationReader,
+        private ListingOfDirectoryOfRoadyModules$listingOfDirectoryOfRoadyModules,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
         private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
@@ -281,12 +527,9 @@ class Router
             $pathToRoadyModuleDirectory
         ) {
             if(
-                in_array(
-                    $this->request()->url()->domain()->authority(),
-                    $this->moduleAuthoritiesJsonConfigurationReader()
-                         ->read($pathToRoadyModuleDirectory)
-                         ->collection()
-                )
+                $this->request()->url()->domain()->authority() . '.json'
+                ===
+                $this->determineModuleRouteJsonFileName($pathToRoadyModuleDirectory)
             ) {
                 foreach(
                     $this->moduleCSSRouteDeterminator()
@@ -380,7 +623,7 @@ class Router
 
 ### Pseudo RoadyUI Definition
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyUIUtilities\interfaces\ui;
@@ -390,18 +633,16 @@ use \Darling\PHPFilesystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
+use \Darling\RoadyLayoutUtilities\interfaces\paths\;
+use \Darling\RoadyLayoutUtilities\interfaces\utilities\RoadyHTMLLayoutFileReader;
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
 use \Darling\RoadyModuleUtilities\interfaces\utilities\determinators\RoadyModuleFileSystemPathDeterminator
+use \Darling\RoadyRoutes\interfaces\collections\PositionNameCollection;
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 use \Darling\RoadyRoutes\interfaces\routes\Route;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
-use \Darling\RoadyTemplateUtilities\classes\paths\PathToRoadyHTMLFileTemplate as PathToRoadyHTMLFileTemplateInstance;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToDirectoryOfRoadyHTMLFileTemplates;
-use \Darling\RoadyTemplateUtilities\interfaces\paths\PathToRoadyHTMLFileTemplate;
-use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileReader;
-
+use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 /**
  * The following is a rough draft/approximation of the actual
  * implementation of this file.
@@ -411,6 +652,80 @@ use \Darling\RoadyTemplateUtilities\interfaces\utilities\RoadyHTMLTemplateFileRe
 
 class RoadyUI
 {
+
+    private const ROADY_UI_TEMPLATE_STRING = <<<'EOT'
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+
+        <!-- Begin stylesheet links -->
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+        <!-- End stylesheet links -->
+
+        <!-- Begin head javascript tags -->
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+        <!-- End head javascript tags -->
+
+    </head>
+
+    <body>
+
+        <!-- Begin section-a -->
+        <div class="section-a">
+            <section-a></section-a>
+        </div>
+        <!-- End section-a -->
+
+        <!-- Begin section-b -->
+        <div class="section-b">
+            <section-b></section-b>
+        </div>
+        <!-- End section-b -->
+
+        <!-- Begin section-c -->
+        <div class="section-c">
+            <section-c></section-c>
+        </div>
+        <!-- End section-c -->
+
+        <!-- Begin section-d -->
+        <div class="section-d">
+            <section-d></section-d>
+        </div>
+        <!-- End section-d -->
+
+        <!-- Begin section-e -->
+        <div class="section-e">
+            <section-e></section-e>
+        </div>
+        <!-- End section-e -->
+
+        <!-- Begin section-f -->
+        <div class="section-f">
+            <section-f></section-f>
+        </div>
+        <!-- End section-f -->
+
+        <!-- Begin section-g -->
+        <div class="section-g">
+            <section-g></section-g>
+        </div>
+        <!-- End section-g -->
+
+    </body>
+
+</html>
+
+<!-- Begin footer javascript tags -->
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
+<!-- End footer javascript tags -->
+
+EOT;
 
     /**
      * @var array<string, string> $previsoulyIncludedPHPOutput
@@ -438,11 +753,18 @@ class RoadyUI
      */
     private array $previsoulyGeneratedScriptTags = [];
 
+    /**
+     * @var array<string, string> $previsoulyGeneratedTextOutput
+     *                            Array of <script> tags for js
+     *                            files that have already been
+     *                            been processed indexed by
+     *                            file path.
+     */
+    private array $previsoulyGeneratedTextOutput = [];
+
     public function __construct(
         private Router $router,
-        private PathToDirectoryOfRoadyHTMLFileTemplates $pathToDirectoryOfRoadyHTMLFileTemplates,
         private RouteCollectionSorter $routeCollectionSorter,
-        private RoadyHTMLTemplateFileReader $roadyHTMLTemplateFileReader,
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
         private RouteInfo $routeInfo,
     ) {}
@@ -461,23 +783,19 @@ class RoadyUI
         foreach($sortedRoutes as $routePositionName => $routes) {
             foreach($routes as $routePosition => $route) {
                 $routeOutputStrings[$routePositionName] =
-                $this->getRouteOutput($route);
+                $this->determineRouteOutput($route);
             }
         }
-        $renderedContent = $this->roadyHTMLTemplateFileReader()->read(
-            $this->pathToRoadyHTMLFileTemplateForCurrentRequest()
-        );
+
+        $renderedContent = self::ROADY_UI_TEMPLATE_STRING;
         foreach(
-            $this->roadyHTMLTemplateFileReader()
-                 ->positionNameCollection(
-                     $this->pathToRoadyHTMLFileTemplateForCurrentRequest()
-                 )->collection()
+            $this->roadyUIPositionNameCollection()->collection()
             as
             $positionName
         ) {
             $renderedContent = str_replace(
                 '<' . $positionName->__toString() . '></' . $positionName->__toString() . '>',
-                implode(PHP_EOL, ($routeOutputStrings[$positionName] ??[])),
+                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])),
                 $renderedContent,
             );
         }
@@ -490,19 +808,9 @@ class RoadyUI
         return $this->router;
     }
 
-    public function pathToDirectoryOfRoadyHTMLFileTemplates() PathToDirectoryOfRoadyHTMLFileTemplates
-    {
-        return $this->pathToDirectoryOfRoadyHTMLFileTemplates;
-    }
-
     public function routeCollectionSorter() RouteCollectionSorter
     {
         return $this->routeCollectionSorter;
-    }
-
-    public function roadyHTMLTemplateFileReader() RoadyHTMLTemplateFileReader
-    {
-        return $this->roadyHTMLTemplateFileReader;
     }
 
     public function roadyModuleFileSystemPathDeterminator(): RoadyModuleFileSystemPathDeterminator
@@ -520,65 +828,65 @@ class RoadyUI
         return $this->render();
     }
 
-    private function pathToRoadyHTMLFileTemplateForCurrentRequest(): PathToRoadyHTMLFileTemplate
+    private function roadyUIPositionNameCollection(): PositionNameCollection
     {
-        return new PathToRoadyHTMLFileTemplateInstance(
-            new Name(
-                new Text($this->router()->request()->name() . '.html')
-            ),
-            $this->pathToDirectoryOfRoadyHTMLFileTemplates(),
-        );
+        // return a collection of PositionNames derived from the self::ROADY_UI_TEMPLATE_STRING;
+        return new PositionNameCollection(...self::ROADY_UI_TEMPLATE_STRING);
     }
-
-    private function getRouteOutput(Route $route): string
+}
+    private function determineRouteOutput(Route $route): string
     {
+        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
+            $route->moduleName(),
+            $this->listingOfDirectoryOfRoadyModules()
+                 ->pathToDirectoryOfRoadyModules(),
+        );
         $targetFilePath = $this->roadyModuleFileSystemPathDeterminator()
                                ->determinePathToFileInModuleDirectory(
-                                   $this->listingOfDirectoryOfRoadyModules()
-                                        ->pathToDirectoryOfRoadyModules(),
-                          $route->moduleName(),
-                          $route->relativePath()
-        );
+                                   $pathToRoadyModuleDirectory,
+                                   $route->relativePath(),
+                          );
         if($this->fileIsAPhpFile($targetFilePath)) {
-            /** If we already have the output, just use it */
-            if(isset($this->previsoulyIncludedPHPOutput[$targetFilePath])) {
-                return $this->previsoulyIncludedPHPOutput[$targetFilePath];
+            /** Only get the output once */
+            if(!isset($this->previsoulyIncludedPHPOutput[$targetFilePath])) {
+                ob_start();
+                include_once($targetFilePath->__toString());
+                $this->previsoulyIncludedPHPOutput[$targetFilePath] = ob_get_clean();
             }
-            ob_start();
-            include_once($targetFilePath->__toString());
-            $this->previsoulyIncludedPHPOutput[$targetFilePath] = ob_get_clean();
             return $this->previsoulyIncludedPHPOutput[$targetFilePath];
         }
         if($this->fileIsACssFile($targetFilePath) {
-            /** If we already have styesheet <link>, just use it */
-            if(isset($this->previsoulyGeneratedCSSLinks[$targetFilePath])) {
-                return $this->previsoulyGeneratedCSSLinks[$targetFilePath];
+            /** Only get the output once */
+            if(!isset($this->previsoulyGeneratedCSSLinks[$targetFilePath])) {
+                $this->previsoulyGeneratedCSSLinks[$targetFilePath] =
+                    '<link rel="stylesheet" ' .
+                    'type="text/css" ' .
+                    'href="' .
+                    $this->routeInfo()->determineRouteUrl(
+                    $this->router()->request()->domain(),
+                    $route
+                    ) .
+                    '" />';
             }
-            $this->previsoulyGeneratedCSSLinks[$targetFilePath] =
-                '<link rel="stylesheet" ' .
-                'type="text/css" ' .
-                'href="' .
-                $this->routeInfo()->determineRouteUrl(
-                $this->router()->request()->domain(),
-                $route
-                ) .
-                '" />';
             return $this->previsoulyGeneratedCSSLinks[$targetFilePath];
         }
         if($this->fileIsAJsFile($targetFilePath) {
-            /** If we already have the js <script> tag, just use it */
-            if(isset($this->previsoulyGeneratedScriptTags[$targetFilePath])) {
-                return $this->previsoulyGeneratedScriptTags[$targetFilePath];
+            /** Only get the output once */
+            if(!isset($this->previsoulyGeneratedScriptTags[$targetFilePath])) {
+                $this->previsoulyGeneratedScriptTags[$targetFilePath] = '<script type="text/javascript" ' .
+                       'src="' . $this->routeInfo()->determineRouteUrl(
+                           $this->router()->request()->domain(),
+                           $route
+                ) .
+                '"></script>';
             }
-            $this->previsoulyGeneratedScriptTags[$targetFilePath] = '<script type="text/javascript" ' .
-                   'src="' . $this->routeInfo()->determineRouteUrl(
-                       $this->router()->request()->domain(),
-                       $route
-            ) .
-            '"></script>';
             return $this->previsoulyGeneratedScriptTags[$targetFilePath];
         }
-        return strval(file_get_contents($targetFilePath->__toString()));
+        if(!isset($this->previsoulyGeneratedTextOutput[$targetFilePath])) {
+            $this->previsoulyGeneratedTextOutput[$targetFilePath] =
+                strval(file_get_contents($targetFilePath->__toString()));
+        }
+        return $this->previsoulyGeneratedTextOutput[$targetFilePath];
 
     }
 
@@ -605,7 +913,7 @@ class RoadyUI
 
 Defines methods that provide information about Roady Routes.
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
@@ -653,7 +961,7 @@ interface RouteInfo
 Defines methods that provide information about Roady Module file
 system paths.
 
-```
+```php
 <?php
 
 namespace \Darling\RoadyModuleUtilities\interfaces\utilities;
@@ -663,22 +971,16 @@ use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use \Darling\PHPTextTypes\interfaces\strings\Name;
 use \Darling\PHPTextTypes\interfaces\strings\SafeText;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
 
 interface RoadyModuleFileSystemPathDeterminator
 {
 
     public function determinePathToFileInModuleDirectory(
-        PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
-        Name $moduleName,
+        PathToRoadyModuleDirectory $pathToRoadyModuleDirectory,
         RelativePath $relativePath
     ): PathToExistingFile
     {
-        $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
-            $moduleName,
-            $pathToDirectoryOfRoadyModules
-        );
         $pathToFile = $pathToRoadyModuleDirectory->__toString() .
                       DIRECTORY_SEPARATOR .
                       $relativePath->__toString();
