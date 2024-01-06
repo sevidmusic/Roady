@@ -31,15 +31,16 @@ be implemented by a different Module.
 Multiple websites can run on a single installation of Roady, each
 making use of one or more installed Roady Modules.
 
-Modules may define `output` in the form of `html` or `php` files to be
-served in response to various requests to a website's Domain.
+Modules may define `output` in the form of `html` or `php` files
+to be displayed in response to appropriate Requests via
+Roady's UI.
 
 Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
 
-Modules may serve `css` , `javascript`, and `output` to a website
-via the Routes defined in a `json` file which is named after
-the website's Domain's Authority.
+Modules may serve `php`, `html`, `css` , and `javascript`, to a
+website via the Routes defined in a `json` file which is named
+after the website's Domain's Authority.
 
 For example, `sub.example.com.8080.json` would be the name of the
 `json` file used to define Routes for a website with the following
@@ -67,9 +68,9 @@ allows Modules to define unique Routes for each website.
 # Routes
 
 A Route defines the relationship between a collection of Names that
-map to the Names of the Requests that a Route should be served in
-response to, a collection of Named Positions that map to Named
-Positions provided by Roady's UI which are used to structure the
+correspond to the Names of the Requests that a Route should be served
+in response to, a collection of Named Positions that correspond to
+Named Positions provided by Roady's UI which are used to structure the
 collective output of all of the Route's that respond to the same
 Request, and a Relative Path to a `php` file, `html` file, `css`
 file, or `javascript` file.
@@ -104,31 +105,104 @@ Positions which can be targeted by the Named Positions defined by
 a Module's Routes to determine where a Module's output should
 be located relative to the output of other Modules.
 
-      roady-page-title-placeholder
+```
+roady-page-title-placeholder
 
-      roady-stylesheet-link-tags
+roady-stylesheet-link-tags
 
-      roady-head-javascript-tags
+roady-head-javascript-tags
 
-      section-a
+section-a
 
-      section-b
+section-b
 
-      section-c
+section-c
 
-      section-d
+section-d
 
-      section-e
+section-e
 
-      section-f
+section-f
 
-      section-g
+section-g
 
-      roady-footer-javascript-tags
+roady-footer-javascript-tags
 
+```
 
-The Named Positions `section-a` through `section-g` can be targeted
-by the `css` styles defined by a Module.
+The Named Position `roady-page-title-placeholder` is reserved and
+cannot be used by Modules.
+
+The Named Position `roady-stylesheet-link-tags` can be used by
+Routes that define a Relative Path to a `css` stylesheet.
+
+Routes to stylesheets that are assigned the
+`roady-stylesheet-link-tags` Named Position will
+have `<link>` tags automatically generated for
+them at the `roady-stylesheet-link-tags` position
+in Roady's UI's `output`.
+
+For example if a Route defined by a module named `Foo` for the
+Authority `localhost:8080` was assigned the following Relative Path:
+
+```
+css/homepage.js
+```
+
+And was also assign to the Named Position:
+
+```
+roady-stylesheet-link-tags
+```
+
+Then the following `<link>` tag would be generated for the `Foo`
+module's `homepage.css` stylesheet in Roady's UI's output at the
+`roady-stylesheet-link-tags` position when the appropriate Request
+was made.
+
+```html
+<link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
+```
+
+The Named Positions `roady-head-javascript-tags` and
+`roady-footer-javascript-tags` can be used by Routes that define
+a Relative Path to a `javascript` file.
+
+Routes to `javascript` files that are assigned to the
+`roady-head-javascript-tags` Named Position will have `<script>`
+tags automatically generated for them at the
+`roady-head-javascript-tags` position in Roady's UI's output.
+
+Routes to `javascript` files that are assigned to the
+`roady-footer-javascript-tags` Named Position will have `<script>`
+tags automatically generated for them at the
+`roady-footer-javascript-tags` position in Roady's UI's output.
+
+For example if a Route defined by a module named Foo for the
+Authority `localhost:8080` was assigned the Relative Path:
+
+```
+js/homepage.js
+```
+
+And was also assigned to the Named Position:
+
+```
+roady-head-javascript-tags
+```
+
+Then the following `<script>` tag would be generated for the `Foo`
+module's `homepage.js` javascript file in Roady's UI's output at the
+`roady-head-javascript-tags` position when the appropriate Request
+was made.
+
+```html
+<script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
+```
+
+The Named Positions `section-a` through `section-g` are intended for
+module output, and can be targeted by the `css` styles defined by
+a Module.
 
 For example:
 
@@ -141,60 +215,6 @@ For example:
 
 .section-g { background: black; color: orange; }
 
-```
-
-The Named Position `roady-page-title-placeholder` is reserved and
-cannot be used by Modules.
-
-The Named Posisiton `roady-stylesheet-link-tags` can be used by
-Routes that define a Relative Path to a `css` stylesheet.
-
-Routes to stylesheets that are assigned the
-`roady-stylesheet-link-tags` Named Position will
-have `<link>` tags automatically generated for
-them at the `roady-stylesheet-link-tags` position
-in Roady's UI's `output`.
-
-For example if a Route defined by a module named `Foo` for the
-Authority `localhost:8080` was assigned:
-
-    the Relative Path: `css/homepage.js`
-
-    the Named Position: `roady-stylesheet-link-tags`
-
-Then the following `<link>` tag would be generated for the `Foo`
-module's `homepage.css` stylesheet in Roady's UI's output at the
-`roady-stylesheet-link-tags` position when the appropriate Request
-was made.
-
-```html
-<link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
-```
-
-The Named Posisiton `roady-head-javascript-tags` and
-`roady-footer-javascript-tags` can be used by Routes that define
-a Relative Path to a `javascript` file.
-
-Routes to `javascript` files that are assigned the
-`roady-head-javascript-tags` or `roady-footer-javascript-tags`
-Named Position will have `<script>` tags automatically generated
-for them at the `roady-head-javascript-tags` position in Roady's
-UI's output.
-
-For example if a Route defined by a module named Foo for the
-Authority `localhost:8080` was assigned:
-
-    the Relative Path `js/homepage.js`
-
-    the Named Position `roady-head-javascript-tags`
-
-Then the following `<script>` tag would be generated for the `Foo`
-module's `homepage.js` javascript file in Roady's UI's output at the
-`roady-head-javascript-tags` position when the appropriate Request
-was made.
-
-```html
-<script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
 ```
 
 # Anatomy of a Module
