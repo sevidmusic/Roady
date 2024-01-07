@@ -41,7 +41,7 @@ of `html` or `php` files.
 Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
 
-Modules may serve `php`, `html`, `css` , and `javascript`, in Response
+Modules may serve `php`, `html`, `css`, and `javascript`, in Response
 to a Request to a website via the Routes defined in a `json`
 file which is named after the website's Domain's Authority.
 
@@ -99,14 +99,30 @@ For example, the following json defines a single Route:
 
 ### Anatomy of a Module
 
-Overivew of the files that might exist in a Module's directory:
+The following is an overview of the files and directories that might
+exist in a Module's directory:
+
+```
+css                              This is where css stylesheets should
+                                 be located.
+
+js                               This is where javascript files should
+                                 be located.
+
+output                           This is where php and html file
+                                 should be located.
+
+APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
+                                 website.
+```
 
 ### APPROPRIATE.SITE.AUTHORITY.json
 
-A json file named after the appropriate website's
-Authority which defines the Module's hard-coded
-Routes, for example, the following defines a two
-Routes:
+Manually configured Routes are defined for a specific website in a
+`json` file named after the website's Authority.
+
+For example, the following json defines two Routes for a website whose
+Authority is 'localhost:8080' in a file named `localhost.8080.json`:
 
 ```json
 [
@@ -159,14 +175,15 @@ Routes:
 ```
 
 ### CSS:
-The css directory is not required, but if it exists
-a Route will be dynamically defined for each file it
-contains. Any additional Routes will have to be
-configured manually in the modules
-APPROPRIATE.SITE.AUTHORITY.json files.
 
-The css directory is where a module's stylesheets
-should be located.
+The `css` directory is where a module's `css` stylesheets should be
+located.
+
+The css directory is not required, but if it exists a Route will be
+dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the css stylesheet. Any
+additional Routes will have to be configured manually in the modules
+APPROPRIATE.SITE.AUTHORITY.json files.
 
 Files in the css directory will have a Route defined
 for them dynamically that will map to a request whose
@@ -506,9 +523,9 @@ class Router
             $pathToRoadyModuleDirectory
         ) {
             if(
-                $this->request()->url()->domain()->authority() . '.json'
-                ===
-                $this->determineModuleRouteJsonFileName($pathToRoadyModuleDirectory)
+                $this->routeConfigurationFileExistsForRequestedAuthority(
+                    $this->request()->url()->domain()->authority()
+                )
             ) {
                 foreach(
                     $this->moduleCSSRouteDeterminator()
