@@ -73,12 +73,12 @@ allows Modules to define unique Routes for each website.
 A Route defines the relationship between a collection of Names that
 correspond to the Names of the Requests that a Route should be served
 in response to, a collection of Named Positions that correspond to
-Named Positions provided by Roady's UI which are used to structure the
-collective output of all of the Route's that respond to the same
-Request, and a Relative Path to a `php` file, `html` file, `css`
-file, or `javascript` file.
+the Named Positions provided by Roady's UI which are used to structure
+the collective output of all of the Route's that respond to the same
+Request, and a Relative Path to a `php` file, `html` file, `css` file,
+or `javascript` file.
 
-For example, the following json defines a single Route:
+For example, the following `json` defines a single Route:
 
 ```json
 {
@@ -109,20 +109,21 @@ css                              This is where css stylesheets should
 js                               This is where javascript files should
                                  be located.
 
-output                           This is where php and html file
+output                           This is where php and html files
                                  should be located.
 
 APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
-                                 website.
+                                 specific website.
 ```
 
 ### APPROPRIATE.SITE.AUTHORITY.json
 
 Manually configured Routes are defined for a specific website in a
-`json` file named after the website's Authority.
+`json` file named after the website's Domain's Authority.
 
-For example, the following json defines two Routes for a website whose
-Authority is 'localhost:8080' in a file named `localhost.8080.json`:
+For example, the following `json` defines two Routes for a
+website whose Authority is 'localhost:8080' in a file named
+`localhost.8080.json`:
 
 ```json
 [
@@ -272,7 +273,7 @@ Roady's UI uses a Router and the Routes defined by installed Modules
 to determine the `php` files, `html` files, `css` files, and
 `javascript` files that should be served in Response to a Request.
 
-Roady's UI defines an internal template with the following Named
+Roady's UI defines an internal layout with the following Named
 Positions which can be targeted by the Named Positions defined by
 a Module's Routes to determine where a Module's output should
 be located relative to the output of other Modules.
@@ -649,7 +650,8 @@ use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 class RoadyUI
 {
 
-    private const ROADY_UI_TEMPLATE_STRING = <<<'EOT'
+    /** Default layout used if there isn't a layout for the current Request */
+    private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
 
 <!DOCTYPE html>
 
@@ -659,67 +661,33 @@ class RoadyUI
 
         <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
 
-        <!-- Begin stylesheet links -->
         <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
-        <!-- End stylesheet links -->
 
-        <!-- Begin head javascript tags -->
         <roady-head-javascript-tags></roady-head-javascript-tags>
-        <!-- End head javascript tags -->
 
     </head>
 
     <body>
 
-        <!-- Begin section-a -->
-        <div class="section-a">
-            <section-a></section-a>
-        </div>
-        <!-- End section-a -->
+        <section-a></section-a>
 
-        <!-- Begin section-b -->
-        <div class="section-b">
-            <section-b></section-b>
-        </div>
-        <!-- End section-b -->
+        <section-b></section-b>
 
-        <!-- Begin section-c -->
-        <div class="section-c">
-            <section-c></section-c>
-        </div>
-        <!-- End section-c -->
+        <section-c></section-c>
 
-        <!-- Begin section-d -->
-        <div class="section-d">
-            <section-d></section-d>
-        </div>
-        <!-- End section-d -->
+        <section-d></section-d>
 
-        <!-- Begin section-e -->
-        <div class="section-e">
-            <section-e></section-e>
-        </div>
-        <!-- End section-e -->
+        <section-e></section-e>
 
-        <!-- Begin section-f -->
-        <div class="section-f">
-            <section-f></section-f>
-        </div>
-        <!-- End section-f -->
+        <section-f></section-f>
 
-        <!-- Begin section-g -->
-        <div class="section-g">
-            <section-g></section-g>
-        </div>
-        <!-- End section-g -->
+        <section-g></section-g>
 
     </body>
 
 </html>
 
-<!-- Begin footer javascript tags -->
 <roady-footer-javascript-tags></roady-footer-javascript-tags>
-<!-- End footer javascript tags -->
 
 EOT;
 
@@ -783,7 +751,7 @@ EOT;
             }
         }
 
-        $renderedContent = self::ROADY_UI_TEMPLATE_STRING;
+        $renderedContent = self::ROADY_UI_LAYOUT_STRING;
         foreach(
             $this->roadyUIPositionNameCollection()->collection()
             as
@@ -791,7 +759,11 @@ EOT;
         ) {
             $renderedContent = str_replace(
                 '<' . $positionName->__toString() . '></' . $positionName->__toString() . '>',
-                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])),
+                '<!-- Begin ' . $positionName->__toString() . ' -->' .
+                '<div class="' . $positionName->__toString() . '">' .
+                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])) .
+                '</div>' .
+                '<!-- End ' . $positionName->__toString() . ' -->',
                 $renderedContent,
             );
         }
@@ -826,8 +798,8 @@ EOT;
 
     private function roadyUIPositionNameCollection(): PositionNameCollection
     {
-        // return a collection of PositionNames derived from the self::ROADY_UI_TEMPLATE_STRING;
-        return new PositionNameCollection(...self::ROADY_UI_TEMPLATE_STRING);
+        // return a collection of PositionNames derived from the self::ROADY_UI_LAYOUT_STRING;
+        return new PositionNameCollection(...self::ROADY_UI_LAYOUT_STRING);
     }
 }
     private function determineRouteOutput(Route $route): string
@@ -991,6 +963,128 @@ interface RoadyModuleFileSystemPathDeterminator
     }
 
 }
+
+```
+
+# Layouts
+
+Layouts define the order of Roady's UI sections for specific
+websites.
+
+Layouts should be located in Roady's `layouts` directory.
+
+Layouts are not required, if none exist Roady will use it's own
+internally defined layout.
+
+Layouts must define an `authorities.json` file that will determine
+which websites the Layout will be used for.
+
+Layouts must also define a single `html` file named `default.html`
+which defines the default ordering of Roady's UI sections.
+
+For example, the default layout defined by Roady is:
+
+```html
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+
+    </head>
+
+    <body>
+
+        <section-a></section-a>
+
+        <section-b></section-b>
+
+        <section-c></section-c>
+
+        <section-d></section-d>
+
+        <section-e></section-e>
+
+        <section-f></section-f>
+
+        <section-g></section-g>
+
+    </body>
+
+</html>
+
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
+
+```
+
+Layouts may also define `html` files named after specific Requests
+to order Roady's UI sections differently for specific Requests.
+
+For example, to define a custom layout for a Request named `hompeage`,
+a layout file named `homepage.html` would be defined.
+
+Layout files must define the following sections. They do not need to
+be in a particular order, but they must be defined:
+
+```
+section-a
+section-b
+section-c
+section-d
+section-e
+section-f
+section-g
+```
+
+Layouts may also define additional sections that are unique to
+the Layout. For example, the following layout defines a custom
+section named `foo`, also, notice the required sections are out
+of order.
+
+```html
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+
+    </head>
+
+    <body>
+
+        <foo></foo>
+
+        <section-e></section-e>
+
+        <section-c></section-c>
+
+        <section-d></section-d>
+
+        <section-b></section-b>
+
+        <section-f></section-f>
+
+        <section-g></section-g>
+
+        <section-a></section-a>
+
+    </body>
+
+</html>
+
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
 
 ```
 
