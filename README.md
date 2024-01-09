@@ -948,60 +948,55 @@ interface RoadyModuleFileSystemPathDeterminator
 Layouts define the order of Roady's UI sections for specific
 websites.
 
-Layouts should be located in Roady's `layouts` directory.
+Installed layouts should be located in the same directory.
 
 Layouts are not required, if none exist Roady will use it's own
 internally defined layout.
 
-Layouts must define an `authorities.json` file that will determine
-which websites the Layout will be used for.
+Installed layouts may be used by any website running on Roady, but
+each website may only use one layout.
 
-Layouts must also define a single `html` file named `default.html`
-which defines the default ordering of Roady's UI sections.
+To configure layouts for specific websites, a file named
+`authorities.json` must be exist in the directory where all
+layouts are located that contains json that defines an array
+of `(string) key` `=>` `(string) value` pairs where the `key`
+is the website Domain's Authority and the value is the name of
+the layout to use for the website. For example:
+
+```
+{
+    "localhost": "layout-1",
+    "sub.example.com": "layout-2",
+    "localhost:8080": "layout-1"
+}
+
+```
+
+Layouts must define at least one `html` file named `default.html`
+which defines the layout's default ordering of Roady's UI sections.
 
 For example, the default layout defined by Roady is:
 
 ```html
-<!DOCTYPE html>
+<section-a></section-a>
 
-<html>
+<section-b></section-b>
 
-    <head>
+<section-c></section-c>
 
-        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+<section-d></section-d>
 
-        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+<section-e></section-e>
 
-        <roady-head-javascript-tags></roady-head-javascript-tags>
+<section-f></section-f>
 
-    </head>
-
-    <body>
-
-        <section-a></section-a>
-
-        <section-b></section-b>
-
-        <section-c></section-c>
-
-        <section-d></section-d>
-
-        <section-e></section-e>
-
-        <section-f></section-f>
-
-        <section-g></section-g>
-
-    </body>
-
-</html>
-
-<roady-footer-javascript-tags></roady-footer-javascript-tags>
+<section-g></section-g>
 
 ```
 
-Layouts may also define `html` files named after specific Requests
-to order Roady's UI sections differently for specific Requests.
+Layouts may also define additional `html` files which are named after
+specific Requests to order Roady's UI sections differently for
+different Requests.
 
 For example, to define a custom layout for a Request named `hompeage`,
 a layout file named `homepage.html` would be defined.
@@ -1021,47 +1016,28 @@ section-g
 
 Layouts may also define additional sections that are unique to
 the Layout. For example, the following layout defines a custom
-section named `foo`, also, notice the required sections are out
-of order.
+section named `foo`, also, notice the required sections are in
+a different order.
 
 ```html
-<!DOCTYPE html>
+<foo></foo>
 
-<html>
+<section-e></section-e>
 
-    <head>
+<section-c></section-c>
 
-        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+<section-d></section-d>
 
-        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+<section-b></section-b>
 
-        <roady-head-javascript-tags></roady-head-javascript-tags>
+<section-f></section-f>
 
-    </head>
+<section-g></section-g>
 
-    <body>
-
-        <foo></foo>
-
-        <section-e></section-e>
-
-        <section-c></section-c>
-
-        <section-d></section-d>
-
-        <section-b></section-b>
-
-        <section-f></section-f>
-
-        <section-g></section-g>
-
-        <section-a></section-a>
-
-    </body>
-
-</html>
-
-<roady-footer-javascript-tags></roady-footer-javascript-tags>
+<section-a></section-a>
 
 ```
 
+If Roady's UI determines that there are no modules that define output
+for a section then the section will not be included in Roady's UI
+output.
