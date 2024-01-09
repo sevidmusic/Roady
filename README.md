@@ -9,6 +9,20 @@
 
 ![roady logo](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
+# Development of Roady v2.0
+
+Roady v1.1.2 is the current stable version of roady, and can be
+found here:
+
+[https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
+
+Roady v2.0 is a complete re-write of Roady that will be influenced by
+roady's original design, but will not be compatible with previous
+versions of roady.
+
+NOTE: At the moment I am using this file to plan the rest of
+the re-write of `Roady2.0`. This file will be revised to document
+`Roady2.0` before `Roady2.0` is released.
 Note: This document is still being drafted, and will continue to
 evolve over time.
 
@@ -180,20 +194,15 @@ website whose Authority is 'localhost:8080' in a file named
 The `css` directory is where a module's `css` stylesheets should be
 located.
 
-The css directory is not required, but if it exists a Route will be
+The `css` directory is not required, but if it exists a Route will be
 dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the css stylesheet. Any
-additional Routes will have to be configured manually in the modules
-APPROPRIATE.SITE.AUTHORITY.json files.
-
-Files in the css directory will have a Route defined
-for them dynamically that will map to a request whose
-name matches the files name excluding the css file
-extension
+Request whose name matches the name of the `css` stylesheet excluding
+the `.css` extension. Any additional Routes will have to be configured
+manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
 
 For example, a file named:
 
-   homepage.css
+    homepage.css
 
 would be served in response to a Request named:
 
@@ -201,82 +210,72 @@ would be served in response to a Request named:
 
 Files whose name contains the string:
 
-   global
+    global
 
 will be served in response to all Requests.
 
 ### JS:
 
-The js directory is not required, but if it exists
-                 a Route will be dynamically defined for each file it
-                 contains. Any additional Routes will have to be
-                 configured manually in the modules
-                 APPROPRIATE.SITE.AUTHORITY.json files.
-The js directory is where a module's javascript files
-                 should be located.
+The `js` directory is where a module's javascript files should be
+located.
 
-                 Files in the js directory will have a Route defined
-                 for them dynamically that will map to a request whose
-                 name matches the files name excluding the js file
-                 extension.
+The `js` directory is not required, but if it exists a Route will be
+dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the javascript file excluding
+the `.js` extension. Any additional Routes will have to be configured
+manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
 
-                 For example, a file named:
+For example, a file named:
 
-                    homepage.js
+    homepage.js
 
-                 would be served in response to a Request named:
+would be served in response to a Request named:
 
-                     homepage
+    homepage
 
-                 Files whose name contains the string:
+Files whose name contains the string:
 
-                    global
+    global
 
-                 will be served in response to all Requests.
+will be served in response to all Requests.
 
 ### OUTPUT:
-The output directory is not required, but if it
-                 exists a Route will be dynamically defined for each
-                 file it contains. Any additional Routes will have to
-                 be configured manually in the modules
-                 APPROPRIATE.SITE.AUTHORITY.json files.
 
+The `output` directory is where a module's `php` and `html` files
+should be located.
 
-The output directory is where a module's output files
-                 should be located.
+The `output` directory is not required, but if it exists a Route will
+be dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the `php` or `html` file
+excluding the `.php` or `.html` extension. Any additional Routes will
+have to be configured manually in a `APPROPRIATE.SITE.AUTHORITY.json`
+file.
 
-                 Files in the output directory will have a Route
-                 defined for them dynamically that will map to a
-                 request whose name matches the files name excluding
-                 the php file extension.
+For example, a file named:
 
-                 For example, a file named:
+    homepage.php
 
-                    homepage.php
+would be served in response to a Request named:
 
-                 would be served in response to a Request named:
+    homepage
 
-                     homepage
+Files whose name contains the string:
 
-                 Files whose name contains the string:
+    global
 
-                    global
-
-                 will be served in response to all Requests.
-
-                 Modules may also contain other files and directories
-                 that may be needed for the module to function.
+will be served in response to all Requests.
 
 # Roady's User Interface (UI)
 
-Roady's UI uses a Router and the Routes defined by installed Modules
-to determine the `php` files, `html` files, `css` files, and
-`javascript` files that should be served in Response to a Request.
+Roady's UI uses a Router and the Routes defined by installed
+Modules to determine what output, link tags, and script tags
+should be rendered in Response to a Request.
 
-Roady's UI defines an internal layout with the following Named
-Positions which can be targeted by the Named Positions defined by
-a Module's Routes to determine where a Module's output should
-be located relative to the output of other Modules.
+### Named Positions
+
+Roady's UI uses layouts to determine the structure of the collective
+`output`, `css` stylesheets, and `javascript` files that should be
+rendered in Response to a Request.
 
 ```
 roady-page-title-placeholder
@@ -318,15 +317,11 @@ in Roady's UI's `output`.
 For example if a Route defined by a module named `Foo` for the
 Authority `localhost:8080` was assigned the following Relative Path:
 
-```
-css/homepage.js
-```
+    css/homepage.css
 
 And was also assign to the Named Position:
 
-```
-roady-stylesheet-link-tags
-```
+    roady-stylesheet-link-tags
 
 Then the following `<link>` tag would be generated for the `Foo`
 module's `homepage.css` stylesheet in Roady's UI's output at the
@@ -354,15 +349,11 @@ tags automatically generated for them at the
 For example if a Route defined by a module named Foo for the
 Authority `localhost:8080` was assigned the Relative Path:
 
-```
-js/homepage.js
-```
+    js/homepage.js
 
 And was also assigned to the Named Position:
 
-```
-roady-head-javascript-tags
-```
+    roady-head-javascript-tags
 
 Then the following `<script>` tag would be generated for the `Foo`
 module's `homepage.js` javascript file in Roady's UI's output at the
@@ -389,20 +380,6 @@ For example:
 .section-g { background: black; color: orange; }
 
 ```
-# Development of Roady v2.0
-
-Roady v1.1.2 is the current stable version of roady, and can be
-found here:
-
-[https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
-
-Roady v2.0 is a complete re-write of Roady that will be influenced by
-roady's original design, but will not be compatible with previous
-versions of roady.
-
-NOTE: At the moment I am using this file to plan the rest of
-the re-write of `Roady2.0`. This file will be revised to document
-`Roady2.0` before `Roady2.0` is released.
 
 ### Roady's API
 
