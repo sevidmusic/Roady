@@ -9,6 +9,20 @@
 
 ![roady logo](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
+# Development of Roady v2.0
+
+Roady v1.1.2 is the current stable version of roady, and can be
+found here:
+
+[https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
+
+Roady v2.0 is a complete re-write of Roady that will be influenced by
+roady's original design, but will not be compatible with previous
+versions of roady.
+
+NOTE: At the moment I am using this file to plan the rest of
+the re-write of `Roady2.0`. This file will be revised to document
+`Roady2.0` before `Roady2.0` is released.
 Note: This document is still being drafted, and will continue to
 evolve over time.
 
@@ -22,25 +36,28 @@ The following is an overview of how Roady works:
 
 # Modules
 
-The features of a website are implemented by individual Modules.
+With Roady the look, feel, features, and functionality of a website
+are implemented by individual Modules.
+
 For example, say my band used Roady to build our website, and we
 needed a music player, that music player would be implemented by
-a Module. If we needed a calender to show upcoming gigs, it would
-be implemented by a different Module.
+a Module.
+
+If we needed a calender to show upcoming gigs, it would be implemented
+by a different Module.
 
 Multiple websites can run on a single installation of Roady, each
 making use of one or more installed Roady Modules.
 
-Modules may define `output` in the form of `html` or `php` files
-to be displayed in response to appropriate Requests via
-Roady's UI.
+Modules may define `output` to be displayed via Roady's UI in the form
+of `html` or `php` files.
 
 Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
 
-Modules may serve `php`, `html`, `css` , and `javascript`, to a
-website via the Routes defined in a `json` file which is named
-after the website's Domain's Authority.
+Modules may serve `php`, `html`, `css`, and `javascript`, in Response
+to a Request to a website via the Routes defined in a `json`
+file which is named after the website's Domain's Authority.
 
 For example, `sub.example.com.8080.json` would be the name of the
 `json` file used to define Routes for a website with the following
@@ -65,17 +82,17 @@ Domain:
 Using a website's Domain's Authority to name Route configuration files
 allows Modules to define unique Routes for each website.
 
-# Routes
+### Routes
 
 A Route defines the relationship between a collection of Names that
 correspond to the Names of the Requests that a Route should be served
 in response to, a collection of Named Positions that correspond to
-Named Positions provided by Roady's UI which are used to structure the
-collective output of all of the Route's that respond to the same
-Request, and a Relative Path to a `php` file, `html` file, `css`
-file, or `javascript` file.
+the Named Positions provided by Roady's UI which are used to structure
+the collective output of all of the Route's that respond to the same
+Request, and a Relative Path to a `php` file, `html` file, `css` file,
+or `javascript` file.
 
-For example, the following json defines a single Route:
+For example, the following `json` defines a single Route:
 
 ```json
 {
@@ -94,139 +111,33 @@ For example, the following json defines a single Route:
 
 ```
 
-# Roady's User Interface (UI)
+### Anatomy of a Module
 
-Roady's UI uses a Router and the Routes defined by installed Modules
-to determine the `php` files, `html` files, `css` files, and
-`javascript` files that should be served in Response to a Request.
-
-Roady's UI defines an internal template with the following Named
-Positions which can be targeted by the Named Positions defined by
-a Module's Routes to determine where a Module's output should
-be located relative to the output of other Modules.
+The following is an overview of the files and directories that might
+exist in a Module's directory:
 
 ```
-roady-page-title-placeholder
+css                              This is where css stylesheets should
+                                 be located.
 
-roady-stylesheet-link-tags
+js                               This is where javascript files should
+                                 be located.
 
-roady-head-javascript-tags
+output                           This is where php and html files
+                                 should be located.
 
-section-a
-
-section-b
-
-section-c
-
-section-d
-
-section-e
-
-section-f
-
-section-g
-
-roady-footer-javascript-tags
-
+APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
+                                 specific website.
 ```
-
-The Named Position `roady-page-title-placeholder` is reserved and
-cannot be used by Modules.
-
-The Named Position `roady-stylesheet-link-tags` can be used by
-Routes that define a Relative Path to a `css` stylesheet.
-
-Routes to stylesheets that are assigned the
-`roady-stylesheet-link-tags` Named Position will
-have `<link>` tags automatically generated for
-them at the `roady-stylesheet-link-tags` position
-in Roady's UI's `output`.
-
-For example if a Route defined by a module named `Foo` for the
-Authority `localhost:8080` was assigned the following Relative Path:
-
-```
-css/homepage.js
-```
-
-And was also assign to the Named Position:
-
-```
-roady-stylesheet-link-tags
-```
-
-Then the following `<link>` tag would be generated for the `Foo`
-module's `homepage.css` stylesheet in Roady's UI's output at the
-`roady-stylesheet-link-tags` position when the appropriate Request
-was made.
-
-```html
-<link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
-```
-
-The Named Positions `roady-head-javascript-tags` and
-`roady-footer-javascript-tags` can be used by Routes that define
-a Relative Path to a `javascript` file.
-
-Routes to `javascript` files that are assigned to the
-`roady-head-javascript-tags` Named Position will have `<script>`
-tags automatically generated for them at the
-`roady-head-javascript-tags` position in Roady's UI's output.
-
-Routes to `javascript` files that are assigned to the
-`roady-footer-javascript-tags` Named Position will have `<script>`
-tags automatically generated for them at the
-`roady-footer-javascript-tags` position in Roady's UI's output.
-
-For example if a Route defined by a module named Foo for the
-Authority `localhost:8080` was assigned the Relative Path:
-
-```
-js/homepage.js
-```
-
-And was also assigned to the Named Position:
-
-```
-roady-head-javascript-tags
-```
-
-Then the following `<script>` tag would be generated for the `Foo`
-module's `homepage.js` javascript file in Roady's UI's output at the
-`roady-head-javascript-tags` position when the appropriate Request
-was made.
-
-```html
-<script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
-```
-
-The Named Positions `section-a` through `section-g` are intended for
-module output, and can be targeted by the `css` styles defined by
-a Module.
-
-For example:
-
-```css
-.section-a { background: blue; color: orange; }
-
-.section-b, .section-c { background: darkblue; color: white; }
-
-.section-d, .section-e .section-f { background: black; color: lightgrey; }
-
-.section-g { background: black; color: orange; }
-
-```
-
-# Anatomy of a Module
-
-Overivew of the files that might exist in a Module's directory:
 
 ### APPROPRIATE.SITE.AUTHORITY.json
 
-A json file named after the appropriate website's
-Authority which defines the Module's hard-coded
-Routes, for example, the following defines a two
-Routes:
+Manually configured Routes are defined for a specific website in a
+`json` file named after the website's Domain's Authority.
+
+For example, the following `json` defines two Routes for a
+website whose Authority is 'localhost:8080' in a file named
+`localhost.8080.json`:
 
 ```json
 [
@@ -279,23 +190,19 @@ Routes:
 ```
 
 ### CSS:
-The css directory is not required, but if it exists
-a Route will be dynamically defined for each file it
-contains. Any additional Routes will have to be
-configured manually in the modules
-APPROPRIATE.SITE.AUTHORITY.json files.
 
-The css directory is where a module's stylesheets
-should be located.
+The `css` directory is where a module's `css` stylesheets should be
+located.
 
-Files in the css directory will have a Route defined
-for them dynamically that will map to a request whose
-name matches the files name excluding the css file
-extension
+The `css` directory is not required, but if it exists a Route will be
+dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the `css` stylesheet excluding
+the `.css` extension. Any additional Routes will have to be configured
+manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
 
 For example, a file named:
 
-   homepage.css
+    homepage.css
 
 would be served in response to a Request named:
 
@@ -303,115 +210,182 @@ would be served in response to a Request named:
 
 Files whose name contains the string:
 
-   global
+    global
 
 will be served in response to all Requests.
 
 ### JS:
 
-The js directory is not required, but if it exists
-                 a Route will be dynamically defined for each file it
-                 contains. Any additional Routes will have to be
-                 configured manually in the modules
-                 APPROPRIATE.SITE.AUTHORITY.json files.
-The js directory is where a module's javascript files
-                 should be located.
+The `js` directory is where a module's javascript files should be
+located.
 
-                 Files in the js directory will have a Route defined
-                 for them dynamically that will map to a request whose
-                 name matches the files name excluding the js file
-                 extension.
+The `js` directory is not required, but if it exists a Route will be
+dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the javascript file excluding
+the `.js` extension. Any additional Routes will have to be configured
+manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
 
-                 For example, a file named:
+For example, a file named:
 
-                    homepage.js
+    homepage.js
 
-                 would be served in response to a Request named:
+would be served in response to a Request named:
 
-                     homepage
+    homepage
 
-                 Files whose name contains the string:
+Files whose name contains the string:
 
-                    global
+    global
 
-                 will be served in response to all Requests.
+will be served in response to all Requests.
 
 ### OUTPUT:
-The output directory is not required, but if it
-                 exists a Route will be dynamically defined for each
-                 file it contains. Any additional Routes will have to
-                 be configured manually in the modules
-                 APPROPRIATE.SITE.AUTHORITY.json files.
 
+The `output` directory is where a module's `php` and `html` files
+should be located.
 
-The output directory is where a module's output files
-                 should be located.
+The `output` directory is not required, but if it exists a Route will
+be dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the `php` or `html` file
+excluding the `.php` or `.html` extension. Any additional Routes will
+have to be configured manually in a `APPROPRIATE.SITE.AUTHORITY.json`
+file.
 
-                 Files in the output directory will have a Route
-                 defined for them dynamically that will map to a
-                 request whose name matches the files name excluding
-                 the php file extension.
+For example, a file named:
 
-                 For example, a file named:
+    homepage.php
 
-                    homepage.php
+would be served in response to a Request named:
 
-                 would be served in response to a Request named:
+    homepage
 
-                     homepage
+Files whose name contains the string:
 
-                 Files whose name contains the string:
+    global
 
-                    global
+will be served in response to all Requests.
 
-                 will be served in response to all Requests.
+# Roady's User Interface (UI)
 
-                 Modules may also contain other files and directories
-                 that may be needed for the module to function.
+Roady's UI uses a Router and the Routes defined by installed
+Modules to determine what output, link tags, and script tags
+should be rendered in Response to a Request.
 
-# Development of Roady v2.0
+### Named Positions
 
-Roady v1.1.2 is the current stable version of roady, and can be
-found here:
-
-[https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
-
-Roady v2.0 is a complete re-write of Roady that will be influenced by
-roady's original design, but will not be compatible with previous
-versions of roady.
-
-NOTE: At the moment I am using this file to plan the rest of
-the re-write of `Roady2.0`. This file will be revised to document
-`Roady2.0` before `Roady2.0` is released.
-
-### Todo:
-
-The following is a list of namespaces for the interfaces that still
-need to be defined.
-
-The namespace also indicates the library that the interface will be
-defined by.
+Roady's UI uses layouts to determine the structure of the collective
+`output`, `css` stylesheets, and `javascript` files that should be
+rendered in Response to a Request.
 
 ```
-### RoadyRoutingUtilities
-use \Darling\RoadyRoutingUtilities\interfaces\requests\Request;
-use \Darling\RoadyRoutingUtilities\interfaces\responses\Response;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\RouteInfo;
-use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
+roady-page-title-placeholder
 
-### RoadyUIUtilities
-use \Darling\RoadyUIUtilities\ui\RoadyUI;
+roady-stylesheet-link-tags
 
-### Roady
-use \Darling\Roady\api\RoadyFileSystemPaths;
+roady-head-javascript-tags
+
+section-a
+
+section-b
+
+section-c
+
+section-d
+
+section-e
+
+section-f
+
+section-g
+
+roady-footer-javascript-tags
+
+```
+
+The Named Position `roady-page-title-placeholder` is reserved and
+cannot be used by Modules.
+
+The Named Position `roady-stylesheet-link-tags` can be used by
+Routes that define a Relative Path to a `css` stylesheet.
+
+Routes to stylesheets that are assigned the
+`roady-stylesheet-link-tags` Named Position will
+have `<link>` tags automatically generated for
+them at the `roady-stylesheet-link-tags` position
+in Roady's UI's `output`.
+
+For example if a Route defined by a module named `Foo` for the
+Authority `localhost:8080` was assigned the following Relative Path:
+
+    css/homepage.css
+
+And was also assign to the Named Position:
+
+    roady-stylesheet-link-tags
+
+Then the following `<link>` tag would be generated for the `Foo`
+module's `homepage.css` stylesheet in Roady's UI's output at the
+`roady-stylesheet-link-tags` position when the appropriate Request
+was made.
+
+```html
+<link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
+```
+
+The Named Positions `roady-head-javascript-tags` and
+`roady-footer-javascript-tags` can be used by Routes that define
+a Relative Path to a `javascript` file.
+
+Routes to `javascript` files that are assigned to the
+`roady-head-javascript-tags` Named Position will have `<script>`
+tags automatically generated for them at the
+`roady-head-javascript-tags` position in Roady's UI's output.
+
+Routes to `javascript` files that are assigned to the
+`roady-footer-javascript-tags` Named Position will have `<script>`
+tags automatically generated for them at the
+`roady-footer-javascript-tags` position in Roady's UI's output.
+
+For example if a Route defined by a module named Foo for the
+Authority `localhost:8080` was assigned the Relative Path:
+
+    js/homepage.js
+
+And was also assigned to the Named Position:
+
+    roady-head-javascript-tags
+
+Then the following `<script>` tag would be generated for the `Foo`
+module's `homepage.js` javascript file in Roady's UI's output at the
+`roady-head-javascript-tags` position when the appropriate Request
+was made.
+
+```html
+<script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
+```
+
+The Named Positions `section-a` through `section-g` are intended for
+module output, and can be targeted by the `css` styles defined by
+a Module.
+
+For example:
+
+```css
+.section-a { background: blue; color: orange; }
+
+.section-b, .section-c { background: darkblue; color: white; }
+
+.section-d, .section-e .section-f { background: black; color: lightgrey; }
+
+.section-g { background: black; color: orange; }
 
 ```
 
 ### Roady's API
 
-Though Roady will primarily rely on other darling libraries for most
-of it's functionality, Roady will define a simple API in the form of
-classes that define static methods.
+Though Roady will primarily rely on modules and other darling
+libraries for most of it's functionality, Roady will define a
+simple API in the form of classes that define static methods.
 
 ### Possible api class: \Darling\Roady\api\RoadyFileSystemPaths;
 
@@ -527,9 +501,9 @@ class Router
             $pathToRoadyModuleDirectory
         ) {
             if(
-                $this->request()->url()->domain()->authority() . '.json'
-                ===
-                $this->determineModuleRouteJsonFileName($pathToRoadyModuleDirectory)
+                $this->routeConfigurationFileExistsForRequestedAuthority(
+                    $this->request()->url()->domain()->authority()
+                )
             ) {
                 foreach(
                     $this->moduleCSSRouteDeterminator()
@@ -653,7 +627,8 @@ use \Darling\RoadyRoutingUtilities\interfaces\utilities\routing\Router;
 class RoadyUI
 {
 
-    private const ROADY_UI_TEMPLATE_STRING = <<<'EOT'
+    /** Default layout used if there isn't a layout for the current Request */
+    private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
 
 <!DOCTYPE html>
 
@@ -663,67 +638,33 @@ class RoadyUI
 
         <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
 
-        <!-- Begin stylesheet links -->
         <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
-        <!-- End stylesheet links -->
 
-        <!-- Begin head javascript tags -->
         <roady-head-javascript-tags></roady-head-javascript-tags>
-        <!-- End head javascript tags -->
 
     </head>
 
     <body>
 
-        <!-- Begin section-a -->
-        <div class="section-a">
-            <section-a></section-a>
-        </div>
-        <!-- End section-a -->
+        <section-a></section-a>
 
-        <!-- Begin section-b -->
-        <div class="section-b">
-            <section-b></section-b>
-        </div>
-        <!-- End section-b -->
+        <section-b></section-b>
 
-        <!-- Begin section-c -->
-        <div class="section-c">
-            <section-c></section-c>
-        </div>
-        <!-- End section-c -->
+        <section-c></section-c>
 
-        <!-- Begin section-d -->
-        <div class="section-d">
-            <section-d></section-d>
-        </div>
-        <!-- End section-d -->
+        <section-d></section-d>
 
-        <!-- Begin section-e -->
-        <div class="section-e">
-            <section-e></section-e>
-        </div>
-        <!-- End section-e -->
+        <section-e></section-e>
 
-        <!-- Begin section-f -->
-        <div class="section-f">
-            <section-f></section-f>
-        </div>
-        <!-- End section-f -->
+        <section-f></section-f>
 
-        <!-- Begin section-g -->
-        <div class="section-g">
-            <section-g></section-g>
-        </div>
-        <!-- End section-g -->
+        <section-g></section-g>
 
     </body>
 
 </html>
 
-<!-- Begin footer javascript tags -->
 <roady-footer-javascript-tags></roady-footer-javascript-tags>
-<!-- End footer javascript tags -->
 
 EOT;
 
@@ -787,7 +728,7 @@ EOT;
             }
         }
 
-        $renderedContent = self::ROADY_UI_TEMPLATE_STRING;
+        $renderedContent = self::ROADY_UI_LAYOUT_STRING;
         foreach(
             $this->roadyUIPositionNameCollection()->collection()
             as
@@ -795,7 +736,11 @@ EOT;
         ) {
             $renderedContent = str_replace(
                 '<' . $positionName->__toString() . '></' . $positionName->__toString() . '>',
-                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])),
+                '<!-- Begin ' . $positionName->__toString() . ' -->' .
+                '<div class="' . $positionName->__toString() . '">' .
+                implode(PHP_EOL, ($routeOutputStrings[$positionName] ?? [])) .
+                '</div>' .
+                '<!-- End ' . $positionName->__toString() . ' -->',
                 $renderedContent,
             );
         }
@@ -830,8 +775,8 @@ EOT;
 
     private function roadyUIPositionNameCollection(): PositionNameCollection
     {
-        // return a collection of PositionNames derived from the self::ROADY_UI_TEMPLATE_STRING;
-        return new PositionNameCollection(...self::ROADY_UI_TEMPLATE_STRING);
+        // return a collection of PositionNames derived from the self::ROADY_UI_LAYOUT_STRING;
+        return new PositionNameCollection(...self::ROADY_UI_LAYOUT_STRING);
     }
 }
     private function determineRouteOutput(Route $route): string
@@ -995,6 +940,128 @@ interface RoadyModuleFileSystemPathDeterminator
     }
 
 }
+
+```
+
+# Layouts
+
+Layouts define the order of Roady's UI sections for specific
+websites.
+
+Layouts should be located in Roady's `layouts` directory.
+
+Layouts are not required, if none exist Roady will use it's own
+internally defined layout.
+
+Layouts must define an `authorities.json` file that will determine
+which websites the Layout will be used for.
+
+Layouts must also define a single `html` file named `default.html`
+which defines the default ordering of Roady's UI sections.
+
+For example, the default layout defined by Roady is:
+
+```html
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+
+    </head>
+
+    <body>
+
+        <section-a></section-a>
+
+        <section-b></section-b>
+
+        <section-c></section-c>
+
+        <section-d></section-d>
+
+        <section-e></section-e>
+
+        <section-f></section-f>
+
+        <section-g></section-g>
+
+    </body>
+
+</html>
+
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
+
+```
+
+Layouts may also define `html` files named after specific Requests
+to order Roady's UI sections differently for specific Requests.
+
+For example, to define a custom layout for a Request named `hompeage`,
+a layout file named `homepage.html` would be defined.
+
+Layout files must define the following sections. They do not need to
+be in a particular order, but they must be defined:
+
+```
+section-a
+section-b
+section-c
+section-d
+section-e
+section-f
+section-g
+```
+
+Layouts may also define additional sections that are unique to
+the Layout. For example, the following layout defines a custom
+section named `foo`, also, notice the required sections are out
+of order.
+
+```html
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-page-title-placeholder></roady-page-title-placeholder></title>
+
+        <roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+
+        <roady-head-javascript-tags></roady-head-javascript-tags>
+
+    </head>
+
+    <body>
+
+        <foo></foo>
+
+        <section-e></section-e>
+
+        <section-c></section-c>
+
+        <section-d></section-d>
+
+        <section-b></section-b>
+
+        <section-f></section-f>
+
+        <section-g></section-g>
+
+        <section-a></section-a>
+
+    </body>
+
+</html>
+
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
 
 ```
 
