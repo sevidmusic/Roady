@@ -35,8 +35,8 @@ evolve over time.
 
 Roady is a modular `php` framework.
 
-With Roady the features, and functionality of a website are
-implemented by individual Modules.
+With Roady the features and functionality of a website are implemented
+by individual Modules.
 
 For example, say my band used Roady to build our website, and we
 needed a music player, that music player would be implemented by
@@ -56,6 +56,23 @@ of `html` or `php` files.
 Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
 
+```
+-- Anatomy of a Module --
+
+css                              This is where css stylesheets should
+                                 be located.
+
+js                               This is where javascript files should
+                                 be located.
+
+output                           This is where php and html files
+                                 should be located.
+
+APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
+                                 specific website.
+
+```
+
 Modules may serve `php`, `html`, `css`, and `javascript`, in Response
 to a Request to a website via the Routes defined in a `json`
 file which is named after the website's Domain's Authority.
@@ -66,14 +83,6 @@ Domain:
 
 ```
  https://sub.example.com:8080/
- \___/   \_/ \_____/ \_/ \__/
-   |      |     |     |   |
- Scheme  Sub  Domain Top Port
- |      Domain Name Level   ||
- |      |Name       Domain  ||
- |      |\_____________/    ||
- |      |       |           ||
- |      |      Host         ||
  |       \__________________/|
  |               |           |
  |           AUTHORITY       |
@@ -88,13 +97,21 @@ allows Modules to define unique Routes for each website.
 
 ### Routes
 
-A Route defines the relationship between a collection of Names that
-correspond to the Names of the Requests that a Route should be served
-in response to, a collection of Named Positions that correspond to
-the Named Positions provided by Roady's UI which are used to structure
-the collective output of all of the Route's that respond to the same
-Request, and a Relative Path to a `php` file, `html` file, `css` file,
-or `javascript` file.
+A Route defines the following:
+
+ - The Name of the Module the Route is configured for.
+
+ - The relationship between a collection of Names that correspond
+   to the Names of the Requests that a Route should be served in
+   response to.
+
+ - A collection of Named Positions that correspond to the Named
+   Positions provided by Roady's UI which are used to structure
+   the collective output of all of the Route's that respond to
+   the same Request.
+
+ - A Relative Path to a `php` file, `html` file, `css` file, or
+   `javascript` file.
 
 For example, the following `json` defines a single Route:
 
@@ -115,28 +132,9 @@ For example, the following `json` defines a single Route:
 
 ```
 
-### Anatomy of a Module
-
-The following is an overview of the files and directories that might
-exist in a Module's directory:
-
-```
-css                              This is where css stylesheets should
-                                 be located.
-
-js                               This is where javascript files should
-                                 be located.
-
-output                           This is where php and html files
-                                 should be located.
-
-APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
-                                 specific website.
-```
-
 ### APPROPRIATE.SITE.AUTHORITY.json
 
-Manually configured Routes are defined for a specific website in a
+Manually configured Routes must be defined for a specific website in a
 `json` file named after the website's Domain's Authority.
 
 For example, the following `json` defines two Routes for a
