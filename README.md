@@ -56,6 +56,15 @@ of `html` or `php` files.
 Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
 
+| Directory | Description |
+| --- | --- |
+| `css` | This is where CSS stylesheets should be located. |
+| `js` | This is where JavaScript files should be located. |
+| `output` | This is where PHP and HTML files should be located. |
+| `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a specific website. |
+
+
+
 ```
 -- Anatomy of a Module --
 
