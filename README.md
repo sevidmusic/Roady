@@ -156,7 +156,7 @@ Installed layouts may be used by any website running on Roady, but
 each website may only use one layout.
 
 To configure layouts for specific websites, a file named
-`authorities.json` must be exist in the directory where all
+`layouts.json` must exist in the directory where all
 layouts are located that contains json that defines an array
 of `(string) key` `=>` `(string) value` pairs where the `key`
 is the website Domain's Authority and the value is the name of

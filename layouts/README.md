@@ -1,25 +1,28 @@
 
 This directory is where layouts should be located.
 
-It is also where the `authorities.json` layout configuration file
+It is also where the `layouts.json` layout configuration file
 should be located.
 
-# `authorities.json`
+# `layouts.json`
 
-The `authorities.json` defines which layouts are used by which
+The `layouts.json` defines which layouts are used by which
 websites.
 
 For example, the Authority for a website with the Domain
 `https://sub.example.com` is `sub.example.com`.
 
 So to use a layout named `foo-layout` for the `sub.example.com`
-website the following `authorities.json` file would be defined:
+website the following `layouts.json` file would be defined:
 
 ```json
 {"sub.example.com":"foo-layout"}
 ```
 
 # Layouts
+
+Layouts define the order of Roady's UI sections for specific
+websites.
 
 A layout is a directory of `html` files that each define the following
 named Positions that are used by Roady's UI to structure a web page:
