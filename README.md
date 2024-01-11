@@ -50,30 +50,22 @@ making use of one or more installed Roady Modules.
 
 # Modules
 
+### Anatomy of a Module
+
+| Directory | Description |
+| --- | --- |
+| `css` | This is where CSS stylesheets should be located. |
+| `js` | This is where JavaScript files should be located. |
+| `output` | This is where PHP and HTML files should be located. |
+| `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a specific website. |
+
+# How a Module Works
+
 Modules may define `output` to be displayed via Roady's UI in the form
 of `html` or `php` files.
 
 Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
-
-```
--- Anatomy of a Module --
-
-css                              This is where css stylesheets should
-                                 be located.
-
-js                               This is where javascript files should
-                                 be located.
-
-output                           This is where php and html files
-                                 should be located.
-
-APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
-                                 specific website.
-
-Note: Modules may also define custom files and directories if needed.
-
-```
 
 Modules may serve `php`, `html`, `css`, and `javascript`, in Response
 to a Request to a website via the Routes defined in a `json`
