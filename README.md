@@ -59,7 +59,6 @@ styles and implement additional functionality for a website.
 | Anatomy of a Module | |
 | --- | --- |
 | Directory | Description |
-| --- | --- |
 | `css` | This is where CSS stylesheets should be located. |
 | `js` | This is where JavaScript files should be located. |
 | `output` | This is where PHP and HTML files should be located. |
