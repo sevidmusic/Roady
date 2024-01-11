@@ -140,23 +140,17 @@ the `<html>` that should be rendered in Response to a Request.
 
 To structure the rendered `<html>`, Roady's UI uses a layout.
 
-````
-
-If a Module defines the Route:
-Request -> Router : Response;
-
-(Response, Layout) -> Roady UI : HTML
-```
-
 ### Layouts
 
 Layouts define the order of Roady's UI sections for specific
 websites.
 
-Note: All installed layouts should be located in the same directory.
+Layouts do not define styles, just structure.
 
 Layouts are not required, if none exist Roady will use it's own
 internally defined layout.
+
+Layouts should be installed in Roady's `layouts` directory.
 
 Installed layouts may be used by any website running on Roady, but
 each website may only use one layout.
