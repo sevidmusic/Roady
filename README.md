@@ -60,7 +60,7 @@ making use of one or more installed Roady Modules.
 | `js`                              | This is where JavaScript files |
 |                                     should be located.             |
 |                                   |                                |
-| `output`                          | This is where PHP and HTML     |
+| `output`                          | This is where PHP and html     |
 |                                     files should be located.       |
 |                                   |                                |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a |
@@ -135,9 +135,9 @@ For example, the following `json` defines a single Route:
 # Roady's User Interface (UI)
 
 Roady's UI uses the Routes defined by installed Modules to determine
-the `<html>` that should be rendered in Response to a Request.
+the `html` that should be rendered in Response to a Request.
 
-To structure the rendered `<html>`, Roady's UI uses a layout.
+To structure the rendered `html`, Roady's UI uses a layout.
 
 ### Layouts
 
