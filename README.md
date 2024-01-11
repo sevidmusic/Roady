@@ -59,6 +59,8 @@ making use of one or more installed Roady Modules.
 | `output` | This is where PHP and HTML files should be located. |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a specific website. |
 
+# How a Module Works
+
 Modules may define `output` to be displayed via Roady's UI in the form
 of `html` or `php` files.
 
