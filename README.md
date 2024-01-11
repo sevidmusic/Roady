@@ -55,16 +55,16 @@ making use of one or more installed Roady Modules.
 | Directory                         | Description                    |
 | ----------------------------------| ------------------------------ |
 | `css`                             | This is where CSS stylesheets  |
-|                                   | should be located.             |
+|                                     should be located.             |
 |                                   |                                |
 | `js`                              | This is where JavaScript files |
-|                                   | should be located.             |
+|                                     should be located.             |
 |                                   |                                |
 | `output`                          | This is where PHP and HTML     |
-|                                   | files should be located.       |
+|                                     files should be located.       |
 |                                   |                                |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a |
-|                                   | specific website.              |
+|                                     specific website.              |
 
 # How a Module Works
 
