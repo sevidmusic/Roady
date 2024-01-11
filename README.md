@@ -71,6 +71,8 @@ output                           This is where php and html files
 APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
                                  specific website.
 
+Note: Modules may also define custom files and directories if needed.
+
 ```
 
 Modules may serve `php`, `html`, `css`, and `javascript`, in Response
@@ -101,9 +103,8 @@ A Route defines the following:
 
  - The Name of the Module the Route is configured for.
 
- - The relationship between a collection of Names that correspond
-   to the Names of the Requests that a Route should be served in
-   response to.
+ - A collection of Names that correspond to the Names of the Requests
+   that a Route should be served in response to.
 
  - A collection of Named Positions that correspond to the Named
    Positions provided by Roady's UI which are used to structure
@@ -132,153 +133,119 @@ For example, the following `json` defines a single Route:
 
 ```
 
-### APPROPRIATE.SITE.AUTHORITY.json
+# Roady's User Interface (UI)
 
-Manually configured Routes must be defined for a specific website in a
-`json` file named after the website's Domain's Authority.
+Roady's UI uses the Routes defined by installed Modules to determine
+the `<html>` that should be rendered in Response to a Request.
 
-For example, the following `json` defines two Routes for a
-website whose Authority is 'localhost:8080' in a file named
-`localhost.8080.json`:
+To structure the rendered `<html>`, Roady's UI uses a layout.
 
-```json
-[
-    {
-        "module-name": "module-name",
-        "responds-to": [
-            "name-of-a-request-this-route-responds-to",
-            "name-of-another-request-this-route-responds-to"
-        ],
-        "named-positions": [
-            {
-                "position-name": "section-a",
-                "position": 0.0
-            },
-            {
-                "position-name": "section-d",
-                "position": -72.26
-            },
-            {
-                "position-name": "section-f",
-                "position": 0.0
-            }
-        ],
-        "relative-path": "path\/to\/output-file.html"
-    },
-    {
-        "module-name": "module-name",
-        "responds-to": [
-            "name-of-a-request-this-route-responds-to",
-            "name-of-another-request-this-route-responds-to"
-        ],
-        "named-positions": [
-            {
-                "position-name": "section-g",
-                "position": 0.002
-            },
-            {
-                "position-name": "section-a",
-                "position": 2.6
-            },
-            {
-                "position-name": "section-c",
-                "position": 0.001
-            }
-        ],
-        "relative-path": "path\/to\/output-file.php"
-    }
-]
+````
+
+If a Module defines the Route:
+Request -> Router : Response;
+
+(Response, Layout) -> Roady UI : HTML
+```
+
+### Layouts
+
+Layouts define the order of Roady's UI sections for specific
+websites.
+
+Note: All installed layouts should be located in the same directory.
+
+Layouts are not required, if none exist Roady will use it's own
+internally defined layout.
+
+Installed layouts may be used by any website running on Roady, but
+each website may only use one layout.
+
+To configure layouts for specific websites, a file named
+`authorities.json` must be exist in the directory where all
+layouts are located that contains json that defines an array
+of `(string) key` `=>` `(string) value` pairs where the `key`
+is the website Domain's Authority and the value is the name of
+the layout to use for the website. For example:
+
+```
+{
+    "localhost": "layout-1",
+    "sub.example.com": "layout-2",
+    "localhost:8080": "layout-1"
+}
 
 ```
 
-### CSS:
+Layouts must define at least one `html` file named `default.html`
+which defines the layout's default ordering of Roady's UI sections.
 
-The `css` directory is where a module's `css` stylesheets should be
-located.
+For example, the default layout defined by Roady is:
 
-The `css` directory is not required, but if it exists a Route will be
-dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the `css` stylesheet excluding
-the `.css` extension. Any additional Routes will have to be configured
-manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
+```html
+<section-a></section-a>
 
-For example, a file named:
+<section-b></section-b>
 
-    homepage.css
+<section-c></section-c>
 
-would be served in response to a Request named:
+<section-d></section-d>
 
-    homepage
+<section-e></section-e>
 
-Files whose name contains the string:
+<section-f></section-f>
 
-    global
+<section-g></section-g>
 
-will be served in response to all Requests.
+```
 
-### JS:
+Layouts may also define additional `html` files which are named after
+specific Requests to order Roady's UI sections differently for
+different Requests.
 
-The `js` directory is where a module's javascript files should be
-located.
+For example, to define a custom layout for a Request named `hompeage`,
+a layout file named `homepage.html` would be defined.
 
-The `js` directory is not required, but if it exists a Route will be
-dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the javascript file excluding
-the `.js` extension. Any additional Routes will have to be configured
-manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
+Layout files must define the following sections. They do not need to
+be in a particular order, but they must be defined:
 
-For example, a file named:
+```
+section-a
+section-b
+section-c
+section-d
+section-e
+section-f
+section-g
+```
 
-    homepage.js
+Layouts may also define additional sections that are unique to
+the Layout. For example, the following layout defines a custom
+section named `foo`, also, notice the required sections are in
+a different order.
 
-would be served in response to a Request named:
+```html
+<foo></foo>
 
-    homepage
+<section-e></section-e>
 
-Files whose name contains the string:
+<section-c></section-c>
 
-    global
+<section-d></section-d>
 
-will be served in response to all Requests.
+<section-b></section-b>
 
-### OUTPUT:
+<section-f></section-f>
 
-The `output` directory is where a module's `php` and `html` files
-should be located.
+<section-g></section-g>
 
-The `output` directory is not required, but if it exists a Route will
-be dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the `php` or `html` file
-excluding the `.php` or `.html` extension. Any additional Routes will
-have to be configured manually in a `APPROPRIATE.SITE.AUTHORITY.json`
-file.
+<section-a></section-a>
 
-For example, a file named:
+```
 
-    homepage.php
-
-would be served in response to a Request named:
-
-    homepage
-
-Files whose name contains the string:
-
-    global
-
-will be served in response to all Requests.
-
-# Roady's User Interface (UI)
-
-Roady's UI uses a Router and the Routes defined by installed
-Modules to determine what output, link tags, and script tags
-should be rendered in Response to a Request.
-
-### Named Positions
-
-Roady's UI uses layouts to determine the structure of the collective
-`output`, `css` stylesheets, and `javascript` files that should be
-rendered in Response to a Request.
-
+If Roady's UI determines that there are no modules that define output
+for a section then the section will not be included in Roady's UI
+output.
 ```
 roady-page-title-placeholder
 
@@ -382,105 +349,6 @@ For example:
 .section-g { background: black; color: orange; }
 
 ```
-
-# Layouts
-
-Layouts define the order of Roady's UI sections for specific
-websites.
-
-Installed layouts should be located in the same directory.
-
-Layouts are not required, if none exist Roady will use it's own
-internally defined layout.
-
-Installed layouts may be used by any website running on Roady, but
-each website may only use one layout.
-
-To configure layouts for specific websites, a file named
-`authorities.json` must be exist in the directory where all
-layouts are located that contains json that defines an array
-of `(string) key` `=>` `(string) value` pairs where the `key`
-is the website Domain's Authority and the value is the name of
-the layout to use for the website. For example:
-
-```
-{
-    "localhost": "layout-1",
-    "sub.example.com": "layout-2",
-    "localhost:8080": "layout-1"
-}
-
-```
-
-Layouts must define at least one `html` file named `default.html`
-which defines the layout's default ordering of Roady's UI sections.
-
-For example, the default layout defined by Roady is:
-
-```html
-<section-a></section-a>
-
-<section-b></section-b>
-
-<section-c></section-c>
-
-<section-d></section-d>
-
-<section-e></section-e>
-
-<section-f></section-f>
-
-<section-g></section-g>
-
-```
-
-Layouts may also define additional `html` files which are named after
-specific Requests to order Roady's UI sections differently for
-different Requests.
-
-For example, to define a custom layout for a Request named `hompeage`,
-a layout file named `homepage.html` would be defined.
-
-Layout files must define the following sections. They do not need to
-be in a particular order, but they must be defined:
-
-```
-section-a
-section-b
-section-c
-section-d
-section-e
-section-f
-section-g
-```
-
-Layouts may also define additional sections that are unique to
-the Layout. For example, the following layout defines a custom
-section named `foo`, also, notice the required sections are in
-a different order.
-
-```html
-<foo></foo>
-
-<section-e></section-e>
-
-<section-c></section-c>
-
-<section-d></section-d>
-
-<section-b></section-b>
-
-<section-f></section-f>
-
-<section-g></section-g>
-
-<section-a></section-a>
-
-```
-
-If Roady's UI determines that there are no modules that define output
-for a section then the section will not be included in Roady's UI
-output.
 
 ### Roady's API
 
@@ -1044,3 +912,137 @@ interface RoadyModuleFileSystemPathDeterminator
 
 ```
 
+### APPROPRIATE.SITE.AUTHORITY.json
+
+Manually configured Routes must be defined for a specific website in a
+`json` file named after the website's Domain's Authority.
+
+For example, the following `json` defines two Routes for a
+website whose Authority is 'localhost:8080' in a file named
+`localhost.8080.json`:
+
+```json
+[
+    {
+        "module-name": "module-name",
+        "responds-to": [
+            "name-of-a-request-this-route-responds-to",
+            "name-of-another-request-this-route-responds-to"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-a",
+                "position": 0.0
+            },
+            {
+                "position-name": "section-d",
+                "position": -72.26
+            },
+            {
+                "position-name": "section-f",
+                "position": 0.0
+            }
+        ],
+        "relative-path": "path\/to\/output-file.html"
+    },
+    {
+        "module-name": "module-name",
+        "responds-to": [
+            "name-of-a-request-this-route-responds-to",
+            "name-of-another-request-this-route-responds-to"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-g",
+                "position": 0.002
+            },
+            {
+                "position-name": "section-a",
+                "position": 2.6
+            },
+            {
+                "position-name": "section-c",
+                "position": 0.001
+            }
+        ],
+        "relative-path": "path\/to\/output-file.php"
+    }
+]
+
+```
+
+### CSS:
+
+The `css` directory is where a module's `css` stylesheets should be
+located.
+
+The `css` directory is not required, but if it exists a Route will be
+dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the `css` stylesheet excluding
+the `.css` extension. Any additional Routes will have to be configured
+manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
+
+For example, a file named:
+
+    homepage.css
+
+would be served in response to a Request named:
+
+    homepage
+
+Files whose name contains the string:
+
+    global
+
+will be served in response to all Requests.
+
+### JS:
+
+The `js` directory is where a module's javascript files should be
+located.
+
+The `js` directory is not required, but if it exists a Route will be
+dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the javascript file excluding
+the `.js` extension. Any additional Routes will have to be configured
+manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
+
+For example, a file named:
+
+    homepage.js
+
+would be served in response to a Request named:
+
+    homepage
+
+Files whose name contains the string:
+
+    global
+
+will be served in response to all Requests.
+
+### OUTPUT:
+
+The `output` directory is where a module's `php` and `html` files
+should be located.
+
+The `output` directory is not required, but if it exists a Route will
+be dynamically defined for each file it contains that responds to a
+Request whose name matches the name of the `php` or `html` file
+excluding the `.php` or `.html` extension. Any additional Routes will
+have to be configured manually in a `APPROPRIATE.SITE.AUTHORITY.json`
+file.
+
+For example, a file named:
+
+    homepage.php
+
+would be served in response to a Request named:
+
+    homepage
+
+Files whose name contains the string:
+
+    global
+
+will be served in response to all Requests.
