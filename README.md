@@ -50,12 +50,6 @@ making use of one or more installed Roady Modules.
 
 # Modules
 
-Modules may define `output` to be displayed via Roady's UI in the form
-of `html` or `php` files.
-
-Modules may define `css` stylesheets and `javascript` files to define
-styles and implement additional functionality for a website.
-
 ### Anatomy of a Module
 
 | Directory | Description |
@@ -64,6 +58,12 @@ styles and implement additional functionality for a website.
 | `js` | This is where JavaScript files should be located. |
 | `output` | This is where PHP and HTML files should be located. |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a specific website. |
+
+Modules may define `output` to be displayed via Roady's UI in the form
+of `html` or `php` files.
+
+Modules may define `css` stylesheets and `javascript` files to define
+styles and implement additional functionality for a website.
 
 Modules may serve `php`, `html`, `css`, and `javascript`, in Response
 to a Request to a website via the Routes defined in a `json`
