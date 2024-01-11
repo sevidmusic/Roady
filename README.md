@@ -63,27 +63,6 @@ styles and implement additional functionality for a website.
 | `output` | This is where PHP and HTML files should be located. |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a specific website. |
 
-
-
-```
--- Anatomy of a Module --
-
-css                              This is where css stylesheets should
-                                 be located.
-
-js                               This is where javascript files should
-                                 be located.
-
-output                           This is where php and html files
-                                 should be located.
-
-APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
-                                 specific website.
-
-Note: Modules may also define custom files and directories if needed.
-
-```
-
 Modules may serve `php`, `html`, `css`, and `javascript`, in Response
 to a Request to a website via the Routes defined in a `json`
 file which is named after the website's Domain's Authority.
