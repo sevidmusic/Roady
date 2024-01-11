@@ -57,7 +57,7 @@ Modules may define `css` stylesheets and `javascript` files to define
 styles and implement additional functionality for a website.
 
 | Anatomy of a Module |
-| --- |
+| --- | --- |
 | Directory | Description |
 | --- | --- |
 | `css` | This is where CSS stylesheets should be located. |
