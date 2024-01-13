@@ -141,25 +141,26 @@ To structure the rendered `html`, Roady's UI uses a layout.
 
 ### Layouts
 
-Layouts define the order of Roady's UI sections for specific
-websites.
+Layouts define uniquely named sections to define the `html` structure
+of different Responses to a Request to a website.
 
 Layouts do not define styles, just structure.
 
 Layouts are not required, if none exist Roady will use it's own
 internally defined layout.
 
-Layouts should be installed in Roady's `layouts` directory.
+Layouts should be located in Roady's `layouts` directory.
 
-Installed layouts may be used by any website running on Roady, but
+Available layouts may be used by any website running on Roady, but
 each website may only use one layout.
 
 To configure layouts for specific websites, a file named
-`layouts.json` must exist in the directory where all
-layouts are located that contains json that defines an array
-of `(string) key` `=>` `(string) value` pairs where the `key`
-is the website Domain's Authority and the value is the name of
-the layout to use for the website. For example:
+`layouts.json` must exist that contains json that defines an array
+of `key => value` pairs where the `key` is the website's Domain's
+Authority and the value is the name of the layout to use for the
+website.
+
+For example:
 
 ```
 {
@@ -170,10 +171,22 @@ the layout to use for the website. For example:
 
 ```
 
+The `layouts.json` file should be located in the directory where all
+layouts are located.
+
+For example, if the directory of all layouts was located in Roady's
+root directory then the path to the `layouts.json` configuration file
+would be:
+
+```
+/path/to/Roady/locations/layouts.json
+```
+
 Layouts must define at least one `html` file named `default.html`
 which defines the layout's default ordering of Roady's UI sections.
 
-For example, the default layout defined by Roady is:
+Layout files must define the following sections. They do not need to
+be in a particular order, but they must be defined:
 
 ```html
 <section-a></section-a>
@@ -190,26 +203,6 @@ For example, the default layout defined by Roady is:
 
 <section-g></section-g>
 
-```
-
-Layouts may also define additional `html` files which are named after
-specific Requests to order Roady's UI sections differently for
-different Requests.
-
-For example, to define a custom layout for a Request named `hompeage`,
-a layout file named `homepage.html` would be defined.
-
-Layout files must define the following sections. They do not need to
-be in a particular order, but they must be defined:
-
-```
-section-a
-section-b
-section-c
-section-d
-section-e
-section-f
-section-g
 ```
 
 Layouts may also define additional sections that are unique to
@@ -235,39 +228,35 @@ a different order.
 <section-a></section-a>
 
 ```
+Layouts may also define additional `html` files which are named after
+specific Requests to order Roady's UI sections differently for
+different Requests.
 
-If Roady's UI determines that there are no modules that define output
-for a section then the section will not be included in Roady's UI
-output.
-```
-roady-page-title-placeholder
+For example, to define a custom layout for a Request named `hompeage`,
+a layout file named `homepage.html` would be defined.
 
-roady-stylesheet-link-tags
 
-roady-head-javascript-tags
+If are not any modules that define output for a section then the
+section will excluded from Roady's UI output.
 
-section-a
+Roady's UI also defines the following additional sections internally,
+these sections are reserved and must not be present in a layout:
 
-section-b
+```html
+<roady-page-title-placeholder></roady-page-title-placeholder>
 
-section-c
+<roady-stylesheet-link-tags></roady-stylesheet-link-tags>
 
-section-d
+<roady-head-javascript-tags></roady-head-javascript-tags>
 
-section-e
-
-section-f
-
-section-g
-
-roady-footer-javascript-tags
+<roady-footer-javascript-tags></roady-footer-javascript-tags>
 
 ```
 
 The Named Position `roady-page-title-placeholder` is reserved and
 cannot be used by Modules.
 
-The Named Position `roady-stylesheet-link-tags` can be used by
+The Named Position `roady-stylesheet-link-tags` can be targeted by
 Routes that define a Relative Path to a `css` stylesheet.
 
 Routes to stylesheets that are assigned the
@@ -295,8 +284,9 @@ was made.
 ```
 
 The Named Positions `roady-head-javascript-tags` and
-`roady-footer-javascript-tags` can be used by Routes that define
-a Relative Path to a `javascript` file.
+`roady-footer-javascript-tags` can be targeted by
+Routes that define a Relative Path to a `javascript`
+file.
 
 Routes to `javascript` files that are assigned to the
 `roady-head-javascript-tags` Named Position will have `<script>`
