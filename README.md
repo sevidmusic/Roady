@@ -128,7 +128,7 @@ For example, the following `json` defines a single Route:
     ],
     "named-positions": [
         {
-            "position-name": "section-a",
+            "position-name": "name-of-position-in-layout",
             "position": 1.7
         }
     ],
@@ -142,7 +142,7 @@ For example, the following `json` defines a single Route:
 Roady's UI uses the Routes defined by installed Modules to determine
 the `html` that should be rendered in Response to a Request.
 
-To structure the rendered `html`, Roady's UI uses a layout.
+Roady's UI uses a layout to structure the rendered `html`.
 
 ### Layouts
 
@@ -151,8 +151,8 @@ Layouts should be located in Roady's `layouts` directory.
 Layouts are not required, if none exist Roady will use it's own
 internally defined layout.
 
-Layouts define uniquely named sections to define the `html` structure
-of different Responses to a Request to a website.
+Layouts define uniquely named positions to structure the `html`
+rendered in Responses to a Request to a website.
 
 Layouts do not define styles, just structure. Styles should be defined
 by a Module.
@@ -200,7 +200,7 @@ If a Request does not have a `layout` defined for it, and the
 default to an internally defined layout.
 
 
-The following section name is provided by Roady, and can be targeted
+The following position name is provided by Roady, and can be targeted
 by Route's that define a Named Position that matches the name of a
 Request that the Route responds to.
 
@@ -230,16 +230,16 @@ and also targets the Named Position `foo`:
 If a Request named `foo` is made then the Route in the previous
 example will have it's output rendered in the layout's
 `<request-specific-content></request-specific-content>`
-section if the `<request-specific-content></request-specific-content>`
+position if the `<request-specific-content></request-specific-content>`
 is defined by the `layout`.
 
 Layouts may also define additional
-sections that are unique to the Layout.
+positions that are unique to the Layout.
 
 For example, the following layout defines a
-custom section named `foo` in addition to the
+custom position named `foo` in addition to the
 `<request-specific-content></request-specific-content>`
-section:
+position:
 
 ```html
 <foo></foo>
@@ -247,18 +247,18 @@ section:
 ```
 
 Layouts may also define additional `html` files which are named after
-specific Requests to order Roady's UI sections differently for
+specific Requests to order Roady's UI positions differently for
 different Requests.
 
 For example, to define a custom layout for a Request named `hompeage`,
 a layout file named `homepage.html` would be defined.
 
 
-If are not any modules that define output for a section then the
-section will excluded from Roady's UI output.
+If are not any modules that define output for a position then the
+position will excluded from Roady's UI output.
 
-Roady's UI also defines the following additional sections internally,
-these sections are reserved and must not be present in a layout:
+Roady's UI also defines the following additional positions internally,
+these positions are reserved and must not be present in a layout:
 
 ```html
 <roady-page-title-placeholder></roady-page-title-placeholder>
