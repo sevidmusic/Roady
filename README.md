@@ -55,18 +55,20 @@ making use of one or more installed Roady Modules.
 | Directory                         | Description                    |
 | ----------------------------------| ------------------------------ |
 | `css`                             | This is where CSS stylesheets  |
-|                                     should be located.             |
+|                                   | should be located.             |
 |                                   |                                |
 | `js`                              | This is where JavaScript files |
-|                                     should be located.             |
+|                                   | should be located.             |
 |                                   |                                |
 | `output`                          | This is where PHP and html     |
-|                                     files should be located.       |
+|                                   | files should be located.       |
 |                                   |                                |
-| `APPROPRIATE.SITE.AUTHORITY.json` | This file defines routes for a |
-|                                     specific website.              |
+| `APPROPRIATE.SITE.AUTHORITY.json` | This file defines hard-coded   |
+|                                   | routes for a specific website. |
 
 # How a Module Works
+
+Modules should be located in Roady's `modules` directory.
 
 Modules may define `output` to be displayed via Roady's UI in the form
 of `html` or `php` files.
@@ -101,14 +103,17 @@ allows Modules to define unique Routes for each website.
 A Route defines the following:
 
  - The Name of the Module the Route is configured for.
+   Note: It is possible for a Module to define a Route
+   for another Module by setting the Route's Module name
+   to the name of the relevant Module.
 
  - A collection of Names that correspond to the Names of the Requests
    that a Route should be served in response to.
 
  - A collection of Named Positions that correspond to the Named
-   Positions provided by Roady's UI which are used to structure
-   the collective output of all of the Route's that respond to
-   the same Request.
+   Positions provided by a layout. These Named Positions are used
+   to structure the collective output of all of the Route's that
+   respond to the same Request.
 
  - A Relative Path to a `php` file, `html` file, `css` file, or
    `javascript` file.
@@ -141,15 +146,16 @@ To structure the rendered `html`, Roady's UI uses a layout.
 
 ### Layouts
 
-Layouts define uniquely named sections to define the `html` structure
-of different Responses to a Request to a website.
-
-Layouts do not define styles, just structure.
+Layouts should be located in Roady's `layouts` directory.
 
 Layouts are not required, if none exist Roady will use it's own
 internally defined layout.
 
-Layouts should be located in Roady's `layouts` directory.
+Layouts define uniquely named sections to define the `html` structure
+of different Responses to a Request to a website.
+
+Layouts do not define styles, just structure. Styles should be defined
+by a Module.
 
 Available layouts may be used by any website running on Roady, but
 each website may only use one layout.
@@ -171,63 +177,75 @@ For example:
 
 ```
 
-The `layouts.json` file should be located in the directory where all
-layouts are located.
+The `layouts.json` file should be located in Roady's `layouts`
+directory.
 
-For example, if the directory of all layouts was located in Roady's
-root directory then the path to the `layouts.json` configuration file
-would be:
+For example, if the path to Roady's root directory was:
 
 ```
-/path/to/Roady/locations/layouts.json
+/path/to/Roady
 ```
 
-Layouts must define at least one `html` file named `default.html`
-which defines the layout's default ordering of Roady's UI sections.
+Then the path to the `layouts.json` configuration file would be:
 
-Layout files must define the following sections. They do not need to
-be in a particular order, but they must be defined:
+```
+/path/to/Roady/layouts/layouts.json
+```
+
+Layout's may provided a `default.html` which will be used for
+Requests that do not have a `layout` defined for them.
+
+If a Request does not have a `layout` defined for it, and the
+`layout` does not define a `default.html`, then Roady will
+default to an internally defined layout.
+
+
+The following section name is provided by Roady, and can be targeted
+by Route's that define a Named Position that matches the name of a
+Request that the Route responds to.
 
 ```html
-<section-a></section-a>
-
-<section-b></section-b>
-
-<section-c></section-c>
-
-<section-d></section-d>
-
-<section-e></section-e>
-
-<section-f></section-f>
-
-<section-g></section-g>
-
+<request-specific-content></request-specific-content>
 ```
 
-Layouts may also define additional sections that are unique to
-the Layout. For example, the following layout defines a custom
-section named `foo`, also, notice the required sections are in
-a different order.
+For example, the following Route responds to a request named `foo`,
+and also targets the Named Position `foo`:
+
+```json
+{
+    "module-name": "module-name",
+    "responds-to": [
+        "foo"
+    ],
+    "named-positions": [
+        {
+            "position-name": "foo",
+            "position": 0
+        }
+    ],
+    "relative-path": "output/foo.html"
+}
+
+```
+If a Request named `foo` is made then the Route in the previous
+example will have it's output rendered in the layout's
+`<request-specific-content></request-specific-content>`
+section if the `<request-specific-content></request-specific-content>`
+is defined by the `layout`.
+
+Layouts may also define additional
+sections that are unique to the Layout.
+
+For example, the following layout defines a
+custom section named `foo` in addition to the
+`<request-specific-content></request-specific-content>`
+section:
 
 ```html
 <foo></foo>
-
-<section-e></section-e>
-
-<section-c></section-c>
-
-<section-d></section-d>
-
-<section-b></section-b>
-
-<section-f></section-f>
-
-<section-g></section-g>
-
-<section-a></section-a>
-
+<request-specific-content></request-specific-content>
 ```
+
 Layouts may also define additional `html` files which are named after
 specific Requests to order Roady's UI sections differently for
 different Requests.
