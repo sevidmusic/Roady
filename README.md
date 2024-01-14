@@ -7,7 +7,7 @@
                         /____/
 ```
 
-![roady logo](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
+![Roady logo](https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png)
 
 # Development of Roady v2.0
 
@@ -21,7 +21,7 @@ found here:
 [https://github.com/sevidmusic/roady/releases/tag/v1.1.2](https://github.com/sevidmusic/roady/releases/tag/v1.1.2)
 
 Roady v2.0 is a complete re-write of Roady that will be influenced by
-roady's original design, but will not be compatible with previous
+Roady's original design, but will not be compatible with previous
 versions of roady.
 
 NOTE: At the moment I am using this file to plan the rest of
@@ -162,7 +162,7 @@ website.
 
 For example:
 
-```
+```json
 {
     "localhost": "layout-1",
     "sub.example.com": "layout-2",
