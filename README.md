@@ -54,9 +54,9 @@ making use of one or more installed Roady Modules.
 
 | Directory                         | Description                   |
 |-----------------------------------|--------------------------------------------------------------|
-| `css`                             | This is where CSS stylesheets should be located.             |
-| `js`                              | This is where JavaScript filesshould be located.             |
-| `output`                          | This is where PHP and html files should be located.          |
+| `css`                             | This is where `css` stylesheets should be located.             |
+| `js`                              | This is where `javascript` filesshould be located.             |
+| `output`                          | This is where `php` and `html` files should be located.          |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines hard-coded routes for a specific website.  |
 
 # How a Module Works
