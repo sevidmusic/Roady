@@ -65,6 +65,7 @@ making use of one or more installed Roady Modules.
 |                                   |                               |
 | `APPROPRIATE.SITE.AUTHORITY.json` | This file defines hard-coded  |
 |                                   | routes for a specific website.|
+|-----------------------------------|-------------------------------|
 
 # How a Module Works
 
