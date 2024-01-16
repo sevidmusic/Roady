@@ -142,20 +142,20 @@ For example, the following `json` defines a single Route:
 Roady's UI uses the Routes defined by installed Modules to determine
 the `html` that should be rendered in Response to a Request.
 
-Roady's UI uses a layout to structure the rendered `html`.
+Roady's UI uses layouts to structure the rendered `html`.
 
 ### Layouts
+
+Layouts define uniquely Named Positions to structure the `html`
+rendered in Responses to a Request to a website.
+
+Layouts do not define styles, just structure. Styles should be
+defined by a Module.
 
 Layouts should be located in Roady's `layouts` directory.
 
 Layouts are not required, if none exist Roady will use it's own
 internally defined layout.
-
-Layouts define uniquely named positions to structure the `html`
-rendered in Responses to a Request to a website.
-
-Layouts do not define styles, just structure. Styles should be defined
-by a Module.
 
 Available layouts may be used by any website running on Roady, but
 each website may only use one layout.
@@ -192,8 +192,9 @@ Then the path to the `layouts.json` configuration file would be:
 /path/to/Roady/layouts/layouts.json
 ```
 
-Layout's may provided a `default.html` which will be used for
-Requests that do not have a `layout` defined for them.
+Layout's may provided an `html` file named `default.html` which will
+be used as the layout for Requests that do not have a specific
+`layout` defined for them.
 
 If a Request does not have a `layout` defined for it, and the
 `layout` does not define a `default.html`, then Roady will
@@ -227,6 +228,7 @@ and also targets the Named Position `foo`:
 }
 
 ```
+
 If a Request named `foo` is made then the Route in the previous
 example will have it's output rendered in the layout's
 `<request-specific-content></request-specific-content>`
