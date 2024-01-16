@@ -63,6 +63,10 @@ making use of one or more installed Roady Modules.
 
 Modules should be located in Roady's `modules` directory.
 
+```
+/path/to/Roady/modules
+```
+
 Modules may define `output` to be displayed via Roady's UI in the form
 of `html` or `php` files.
 
