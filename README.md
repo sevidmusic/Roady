@@ -141,6 +141,28 @@ the `html` that should be rendered in Response to a Request.
 
 Roady's UI uses layouts to structure the rendered `html`.
 
+For example, the following table shows how two hypothetical Routes
+would be rendered by Roady's UI based on a layout:
+
+| Module Routes                                | Layout      | Output
+|                                              |             | rendered by
+|                                              |             | Roady's UI
+|                                              |             | in Response
+|                                              |             | to Request
+|                                              |             | to `homepage`
+|----------------------------------------------|-------------|-----------------------|
+| Module Name: `Hello World`                   | <bar></bar> | <p>Hello Universe</p> |
+| Responds To: `homepage`                      | <foo></foo> | <p>Hello World</p>    |
+| Named Position: `foo`                        |             |                       |
+| Relative Path: `output/helloWorld.html`      |             |                       |
+| File Contents: `<p>Hello World</p>`          |             |                       |
+|                                              |             |                       |
+| Module Name: `Hello Universe`                |             |                       |
+| Responds To: `homepage`                      |             |                       |
+| Named Position: `bar`                        |             |                       |
+| Relative Path: `output/helloUniverse.html`   |             |                       |
+| File Contents: `<p>Hello Universe</p>`       |             |                       |
+
 ### Layouts
 
 Layouts define uniquely Named Positions to structure the `html`
