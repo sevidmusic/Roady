@@ -197,17 +197,17 @@ to the same Request.
 The following table is an overview of the purpose of each of the Named
 Positions provided by Roady's UI's internally defined layout:
 
-| Named Position                          | Purpose                                                                              |
-|-----------------------------------------|--------------------------------------------------------------------------------------|
-| <roady-ui-css-stylesheet-link-tags>     | For Routes to css stylesheets                                                        |
-| <roady-ui-js-script-tags-for-html-head> | For Routes to javascript files that should be loaded in the `<head>`                 |
-| <roady-ui-named-position-a>             | For Routes to `php` or `html` files           .                                      |
-| <roady-ui-named-position-b>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-c>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-d>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-e>             | For Routes to `php` or `html` files                                                  |
-| <roady-ui-named-position-f>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-g>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-js-script-tags-for-end-of-html> | For Routes to javascript files that should be loaded after the closing `<body>` tag |
+| Named Position                            | Purpose                                                                               |
+|-------------------------------------------|---------------------------------------------------------------------------------------|
+| `<roady-ui-css-stylesheet-link-tags>`       | For Routes to css stylesheets                                                         |
+| `<roady-ui-js-script-tags-for-html-head>`   | For Routes to javascript files that should be loaded in the `<head>`                  |
+| `<roady-ui-named-position-a>`               | For Routes to `php` or `html` files           .                                       |
+| `<roady-ui-named-position-b>`               | For Routes to `php` or `html` files.                                                  |
+| `<roady-ui-named-position-c>`               | For Routes to `php` or `html` files.                                                  |
+| `<roady-ui-named-position-d>`               | For Routes to `php` or `html` files.                                                  |
+| `<roady-ui-named-position-e>`               | For Routes to `php` or `html` files                                                   |
+| `<roady-ui-named-position-f>`               | For Routes to `php` or `html` files.                                                  |
+| `<roady-ui-named-position-g>`               | For Routes to `php` or `html` files.                                                  |
+| `<roady-ui-js-script-tags-for-end-of-html>` | For Routes to javascript files that should be loaded after the closing `<body>` tag |
 
 
