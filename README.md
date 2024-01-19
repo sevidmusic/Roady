@@ -125,7 +125,7 @@ For example, the following `json` defines a single Route:
     ],
     "named-positions": [
         {
-            "position-name": "name-of-position-in-layout",
+            "position-name": "roady-ui-named-position-c",
             "position": 1.7
         }
     ],
@@ -139,219 +139,75 @@ For example, the following `json` defines a single Route:
 Roady's UI uses the Routes defined by installed Modules to determine
 the `html` that should be rendered in Response to a Request.
 
-Roady's UI uses layouts to structure the rendered `html`.
-
-For example, the following table shows how two hypothetical Routes
-would be rendered by Roady's UI based on a layout:
-
-| Module Routes                                | Layout      | Output
-|                                              |             | rendered by
-|                                              |             | Roady's UI
-|                                              |             | in Response
-|                                              |             | to Request
-|                                              |             | to `homepage`
-|----------------------------------------------|-------------|-----------------------|
-| Module Name: `Hello World`                   | <bar></bar> | <p>Hello Universe</p> |
-| Responds To: `homepage`                      | <foo></foo> | <p>Hello World</p>    |
-| Named Position: `foo`                        |             |                       |
-| Relative Path: `output/helloWorld.html`      |             |                       |
-| File Contents: `<p>Hello World</p>`          |             |                       |
-|                                              |             |                       |
-| Module Name: `Hello Universe`                |             |                       |
-| Responds To: `homepage`                      |             |                       |
-| Named Position: `bar`                        |             |                       |
-| Relative Path: `output/helloUniverse.html`   |             |                       |
-| File Contents: `<p>Hello Universe</p>`       |             |                       |
-
-### Layouts
-
-Layouts define uniquely Named Positions to structure the `html`
-rendered in Responses to a Request to a website.
-
-Layouts do not define styles, just structure. Styles should be
-defined by a Module.
-
-Layouts should be located in Roady's `layouts` directory.
-
-Layouts are not required, if none exist Roady will use it's own
-internally defined layout.
-
-Available layouts may be used by any website running on Roady, but
-each website may only use one layout.
-
-To configure layouts for specific websites, a file named
-`layouts.json` must exist that contains json that defines an array
-of `key => value` pairs where the `key` is the website's Domain's
-Authority and the value is the name of the layout to use for the
-website.
-
-For example:
-
-```json
-{
-    "localhost": "layout-1",
-    "sub.example.com": "layout-2",
-    "localhost:8080": "layout-1"
-}
-
-```
-
-The `layouts.json` file should be located in Roady's `layouts`
-directory.
-
-For example, if the path to Roady's root directory was:
-
-```
-/path/to/Roady
-```
-
-Then the path to the `layouts.json` configuration file would be:
-
-```
-/path/to/Roady/layouts/layouts.json
-```
-
-Layout's may provided an `html` file named `default.html` which will
-be used as the layout for Requests that do not have a specific
-`layout` defined for them.
-
-If a Request does not have a `layout` defined for it, and the
-`layout` does not define a `default.html`, then Roady will
-default to an internally defined layout.
-
-
-The following position name is provided by Roady, and can be targeted
-by Route's that define a Named Position that matches the name of a
-Request that the Route responds to.
+Roady's UI uses the Named Positions provided by an internally defined
+layout to structure the collective output of the Routes that respond
+to the same Request.
 
 ```html
-<request-specific-content></request-specific-content>
-```
+<!DOCTYPE html>
 
-For example, the following Route responds to a request named `foo`,
-and also targets the Named Position `foo`:
+<html>
 
-```json
-{
-    "module-name": "module-name",
-    "responds-to": [
-        "foo"
-    ],
-    "named-positions": [
-        {
-            "position-name": "foo",
-            "position": 0
-        }
-    ],
-    "relative-path": "output/foo.html"
-}
+    <head>
 
-```
+        <roady-ui-css-stylesheet-link-tags></roady-ui-css-stylesheet-link-tags>
 
-If a Request named `foo` is made then the Route in the previous
-example will have it's output rendered in the layout's
-`<request-specific-content></request-specific-content>`
-position if the `<request-specific-content></request-specific-content>`
-is defined by the `layout`.
+        <roady-ui-js-script-tags-for-html-head></roady-ui-js-script-tags-for-html-head>
 
-Layouts may also define additional
-positions that are unique to the Layout.
+    </head>
 
-For example, the following layout defines a
-custom position named `foo` in addition to the
-`<request-specific-content></request-specific-content>`
-position:
+    <body>
 
-```html
-<foo></foo>
-<request-specific-content></request-specific-content>
-```
+        <div class="roady-ui-named-position-a">
+            <roady-ui-named-position-a></roady-ui-named-position-a>
+        </div>
 
-Layouts may also define additional `html` files which are named after
-specific Requests to order Roady's UI positions differently for
-different Requests.
+        <div class="roady-ui-named-position-b">
+            <roady-ui-named-position-b></roady-ui-named-position-b>
+        </div>
 
-For example, to define a custom layout for a Request named `hompeage`,
-a layout file named `homepage.html` would be defined.
+        <div class="roady-ui-named-position-c">
+            <roady-ui-named-position-c></roady-ui-named-position-c>
+        </div>
 
+        <div class="roady-ui-named-position-d">
+            <roady-ui-named-position-d></roady-ui-named-position-d>
+        </div>
 
-If are not any modules that define output for a position then the
-position will excluded from Roady's UI output.
+        <div class="roady-ui-named-position-e">
+            <roady-ui-named-position-e></roady-ui-named-position-e>
+        </div>
 
-Roady's UI also defines the following additional positions internally,
-these positions are reserved and must not be present in a layout:
+        <div class="roady-ui-named-position-f">
+            <roady-ui-named-position-f></roady-ui-named-position-f>
+        </div>
 
-```html
-<roady-page-title-placeholder></roady-page-title-placeholder>
+        <div class="roady-ui-named-position-g">
+            <roady-ui-named-position-g></roady-ui-named-position-g>
+        </div>
 
-<roady-stylesheet-link-tags></roady-stylesheet-link-tags>
+    </body>
 
-<roady-head-javascript-tags></roady-head-javascript-tags>
+    <roady-ui-js-script-tags-for-end-of-html>
 
-<roady-footer-javascript-tags></roady-footer-javascript-tags>
+</html>
 
 ```
 
-The Named Position `roady-page-title-placeholder` is reserved and
-cannot be used by Modules.
+The following table is an overview of the purpose of each of the Named
+Positions provided by Roady's UI's internally defined layout:
 
-The Named Position `roady-stylesheet-link-tags` can be targeted by
-Routes that define a Relative Path to a `css` stylesheet.
+| Named Position                          | Purpose                                                                              |
+|-----------------------------------------|--------------------------------------------------------------------------------------|
+| <roady-ui-css-stylesheet-link-tags>     | For Routes to css stylesheets                                                        |
+| <roady-ui-js-script-tags-for-html-head> | For Routes to javascript files that should be loaded in the `<head>`                 |
+| <roady-ui-named-position-a>             | For Routes to `php` or `html` files           .                                      |
+| <roady-ui-named-position-b>             | For Routes to `php` or `html` files.                                                 |
+| <roady-ui-named-position-c>             | For Routes to `php` or `html` files.                                                 |
+| <roady-ui-named-position-d>             | For Routes to `php` or `html` files.                                                 |
+| <roady-ui-named-position-e>             | For Routes to `php` or `html` files                                                  |
+| <roady-ui-named-position-f>             | For Routes to `php` or `html` files.                                                 |
+| <roady-ui-named-position-g>             | For Routes to `php` or `html` files.                                                 |
+| <roady-ui-js-script-tags-for-end-of-html> | For Routes to javascript files that should be loaded after the closing `<body>` tag |
 
-Routes to stylesheets that are assigned the
-`roady-stylesheet-link-tags` Named Position will
-have `<link>` tags automatically generated for
-them at the `roady-stylesheet-link-tags` position
-in Roady's UI's `output`.
-
-For example if a Route defined by a module named `Foo` for the
-Authority `localhost:8080` was assigned the following Relative Path:
-
-    css/homepage.css
-
-And was also assign to the Named Position:
-
-    roady-stylesheet-link-tags
-
-Then the following `<link>` tag would be generated for the `Foo`
-module's `homepage.css` stylesheet in Roady's UI's output at the
-`roady-stylesheet-link-tags` position when the appropriate Request
-was made.
-
-```html
-<link rel="stylesheet" href="http://localhost:8080/Foo/css/homepage.css">
-```
-
-The Named Positions `roady-head-javascript-tags` and
-`roady-footer-javascript-tags` can be targeted by
-Routes that define a Relative Path to a `javascript`
-file.
-
-Routes to `javascript` files that are assigned to the
-`roady-head-javascript-tags` Named Position will have `<script>`
-tags automatically generated for them at the
-`roady-head-javascript-tags` position in Roady's UI's output.
-
-Routes to `javascript` files that are assigned to the
-`roady-footer-javascript-tags` Named Position will have `<script>`
-tags automatically generated for them at the
-`roady-footer-javascript-tags` position in Roady's UI's output.
-
-For example if a Route defined by a module named Foo for the
-Authority `localhost:8080` was assigned the Relative Path:
-
-    js/homepage.js
-
-And was also assigned to the Named Position:
-
-    roady-head-javascript-tags
-
-Then the following `<script>` tag would be generated for the `Foo`
-module's `homepage.js` javascript file in Roady's UI's output at the
-`roady-head-javascript-tags` position when the appropriate Request
-was made.
-
-```html
-<script rel="stylesheet" href="http://localhost:8080/Foo/js/homepage.js"></script>
-```
 
