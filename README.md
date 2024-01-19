@@ -196,7 +196,7 @@ respond to the same Request:
 ```
 
 The following table is an overview of the purpose of each of the Named
-Positions provided by Roady's UI's internally defined layout:
+Positions provided by Roady's UI's internally defined `html` layout:
 
 | Named Position                              | Purpose                                                                              |
 |---------------------------------------------|--------------------------------------------------------------------------------------|
