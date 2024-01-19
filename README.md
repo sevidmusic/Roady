@@ -22,7 +22,7 @@ found here:
 
 Roady v2.0 is a complete re-write of Roady that will be influenced by
 Roady's original design, but will not be compatible with previous
-versions of roady.
+versions of Roady.
 
 Note: At the moment I am using this file to plan the rest of
 the re-write of `Roady2.0`. This file will be revised to document
@@ -108,14 +108,15 @@ A Route defines the following:
    that a Route should be served in response to.
 
  - A collection of Named Positions that correspond to the Named
-   Positions provided by a layout. These Named Positions are used
+   Positions provided by Roady's UI. These Named Positions are used
    to structure the collective output of all of the Route's that
    respond to the same Request.
 
  - A Relative Path to a `php` file, `html` file, `css` file, or
    `javascript` file.
 
-For example, the following `json` defines a single Route:
+For example, the following `json` defines a single Route to a `html`
+file named `output-file.html`:
 
 ```json
 {
@@ -140,8 +141,8 @@ Roady's UI uses the Routes defined by installed Modules to determine
 the `html` that should be rendered in Response to a Request.
 
 Roady's UI uses the Named Positions provided by an internally defined
-layout to structure the collective output of the Routes that respond
-to the same Request.
+`html` layout to structure the collective output of Routes that
+respond to the same Request:
 
 ```html
 <!DOCTYPE html>
@@ -195,19 +196,19 @@ to the same Request.
 ```
 
 The following table is an overview of the purpose of each of the Named
-Positions provided by Roady's UI's internally defined layout:
+Positions provided by Roady's UI's internally defined `html` layout:
 
-| Named Position                          | Purpose                                                                              |
-|-----------------------------------------|--------------------------------------------------------------------------------------|
-| <roady-ui-css-stylesheet-link-tags>     | For Routes to css stylesheets                                                        |
-| <roady-ui-js-script-tags-for-html-head> | For Routes to javascript files that should be loaded in the `<head>`                 |
-| <roady-ui-named-position-a>             | For Routes to `php` or `html` files           .                                      |
-| <roady-ui-named-position-b>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-c>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-d>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-e>             | For Routes to `php` or `html` files                                                  |
-| <roady-ui-named-position-f>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-named-position-g>             | For Routes to `php` or `html` files.                                                 |
-| <roady-ui-js-script-tags-for-end-of-html> | For Routes to javascript files that should be loaded after the closing `<body>` tag |
+| Named Position                              | Purpose                                                                              |
+|---------------------------------------------|--------------------------------------------------------------------------------------|
+| `<roady-ui-css-stylesheet-link-tags>`       | For `<link>` tags rendered for Routes to css stylesheets.                            |
+| `<roady-ui-js-script-tags-for-html-head>`   | For `<script>` tags rendered for Routes to javascropt files.                         |
+| `<roady-ui-named-position-a>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-b>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-c>`               | For Routes to `php` or `html` files.                                                 |
+| `<roady-ui-named-position-d>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-e>`               | For Routes to `php` or `html` files.                                                 |
+| `<roady-ui-named-position-f>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-g>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-js-script-tags-for-end-of-html>` | For Routes to javascript files that should be loaded after the closing `<body>` tag. |
 
 
