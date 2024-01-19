@@ -1,0 +1,13 @@
+{
+    "module-name": "hello-universe",
+    "responds-to": [
+        "homepage"
+    ],
+    "named-positions": [
+        {
+            "position-name": "roady-ui-named-position-a",
+            "position": 0
+        }
+    ],
+    "relative-path": "output/hello-universe.html"
+}
