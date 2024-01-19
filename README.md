@@ -22,7 +22,7 @@ found here:
 
 Roady v2.0 is a complete re-write of Roady that will be influenced by
 Roady's original design, but will not be compatible with previous
-versions of roady.
+versions of Roady.
 
 Note: At the moment I am using this file to plan the rest of
 the re-write of `Roady2.0`. This file will be revised to document
@@ -108,14 +108,15 @@ A Route defines the following:
    that a Route should be served in response to.
 
  - A collection of Named Positions that correspond to the Named
-   Positions provided by a layout. These Named Positions are used
+   Positions provided by Roady's UI. These Named Positions are used
    to structure the collective output of all of the Route's that
    respond to the same Request.
 
  - A Relative Path to a `php` file, `html` file, `css` file, or
    `javascript` file.
 
-For example, the following `json` defines a single Route:
+For example, the following `json` defines a single Route to a `html`
+file named `output-file.html`:
 
 ```json
 {
