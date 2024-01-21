@@ -5,7 +5,8 @@ use Darling\PHPTextTypes\classes\strings\Text as TextInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
 use Darling\PHPTextTypes\interfaces\strings\Name;
 use Darling\PHPWebPaths\classes\paths\Domain as DomainInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
+# Fragment is ignored for now because it is not available in $_SERVER, until a workaround is found the Fragment of the current Request's url will be ignored
+# use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Path as PathInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Query as QueryInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\SubDomainName as SubDomainNameInstance;
@@ -22,101 +23,87 @@ use Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-class Request
+class CurrentRequest
 {
-    public function respondsTo(): Name
+    public function name(): Name
     {
         return new NameInstance(new TextInstance('homepage'));
     }
 
-    public function url(): Url
+    private function defaultUrl(): Url
     {
         return new UrlInstance(
             domain: new DomainInstance(
-                (!empty($_SERVER['HTTPS']) ? Scheme::HTTPS : Scheme::HTTP),
+                Scheme::HTTP,
                 new AuthorityInstance(
                     new HostInstance(
-                        topLevelDomainName: new TopLevelDomainNameInstance(
-                            new NameInstance(
-                                new TextInstance('topLevelDomainName')
-                            )
-                        ),
                         domainName: new DomainNameInstance(
                             new NameInstance(
-                                new TextInstance(
-                                    (
-                                        isset($_SERVER['SERVER_NAME'])
-                                        ? new PortInstance($_SERVER['SERVER_NAME'])
-                                        : 'localhost'
-                                    )
-                                )
+                                new TextInstance('localhost')
                             )
                         ),
-                        subDomainName: new SubDomainNameInstance(
-                            new NameInstance(
-                                new TextInstance('subDomainName')
-                            )
-                        ),
-                    ),
-                    (
-                        isset($_SERVER['SERVER_PORT'])
-                        ? new PortInstance($_SERVER['SERVER_PORT'])
-                        : null
                     ),
                 ),
             ),
-            path: new PathInstance(
-                new SafeTextCollectionInstance(),
-            ),
-            query: new QueryInstance(new TextInstance('query')),
-            fragment: new FragmentInstance(new TextInstance('fragment')),
         );
     }
-}
 
-class Response
-{
-    public function routes(): RouteCollection
+    public function url(): Url
     {
-        return new RouteCollectionInstance();
+        $scheme = (
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'
+            ? Scheme::HTTPS
+            : Scheme::HTTP
+        );
+        $host = ($_SERVER['HTTP_HOST'] ?? 'localhost');
+        $uri = ($_SERVER['REQUEST_URI'] ?? '');
+        #$currentRequestsUrl = $scheme->value . '://' . $host . $uri;
+        $requestsUrls = [
+            $scheme->value . '://' . $host . $uri,
+            'https://foo.bar.baz:2343/some/path/bin.html?q=a&b=c#frag',
+#            'https://foo.bar:43/some/path/bin.html?q=a&b=c#frag',
+#            'https://foo:17/some/path/bin.html?q=a&b=c#frag',
+#            'http://foo.bar.baz:2343/some/path/bin.html?q=a&b=c#frag',
+#            'http://foo.bar:43/some/path/bin.html?q=a&b=c#frag',
+#            'http://foo:17/some/path/bin.html?q=a&b=c#frag',
+#            'https://foo.bar.baz:2343/some/path/bin.html?q=a&b=c',
+#            'https://foo.bar:43/some/path/bin.html?q=a&b=c',
+#            'https://foo:17/some/path/bin.html?q=a&b=c',
+#            'http://foo.bar.baz:2343/some/path/bin.html?q=a&b=c',
+#            'http://foo.bar:43/some/path/bin.html?q=a&b=c',
+#            'http://foo:17/some/path/bin.html?q=a&b=c',
+#            'https://foo.bar.baz:2343/some/path/bin.html',
+#            'https://foo.bar:43/some/path/bin.html',
+#            'https://foo:17/some/path/bin.html',
+#            'http://foo.bar.baz:2343/some/path/bin.html',
+#            'http://foo.bar:43/some/path/bin.html',
+#            'http://foo:17/some/path/bin.html',
+#            'https://foo.bar.baz:2343/',
+#            'https://foo.bar:43/',
+#            'https://foo:17/',
+#            'http://foo.bar.baz:2343/',
+#            'http://foo.bar:43/',
+#            'http://foo:17/',
+#            'https://',
+#            'http://',
+#            '',
+        ];
+        $currentRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
+        $currentRequestsUrlParts = parse_url($currentRequestsUrl);
+        if(is_array($currentRequestsUrlParts)) {
+            var_dump($currentRequestsUrlParts);
+        }
+        /**
+         * If current Request's url cannot be determined default to:
+         *
+         * http://localhost
+         *
+         */
+        return $this->defaultUrl();
     }
 }
 
-class Router
-{
-    public function response(): Response
-    {
-        return new Response();
-    }
-}
+$currentRequest = new CurrentRequest();
 
-$request = new Request();
-
-var_dump($_SERVER, $request->url()->__toString());
-
-# Define mock modules
-
-# Hello World Module (Just an output file and an empty Routes config)
-
-# Hello Universe module (output file, and non-empty Routes config)
-
-# Hello Universe module (output files, css files, javascript files, and 1 empty config and one non-empty config)
-
-# In index.php, instantiate the following:
-
-# ListingOfDirectoryOfRoadyModules
-
-# The Determinators
-
-# Route Config Reader
-
-# Implement mocks of the following:
-
-# Router
-
-# Response
-
-# Request
-
-# RoadyUI
+$currentRequestsUrl = $currentRequest->url();
 
