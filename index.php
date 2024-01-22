@@ -117,20 +117,7 @@ class Request
 
     private function defaultUrl(): Url
     {
-        return new UrlInstance(
-            domain: new DomainInstance(
-                Scheme::HTTP,
-                new AuthorityInstance(
-                    new HostInstance(
-                        domainName: new DomainNameInstance(
-                            new NameInstance(
-                                new TextInstance(self::DEFAULT_HOST)
-                            )
-                        ),
-                    ),
-                ),
-            ),
-        );
+        return $this->newUrl(domainName: self::DEFAULT_HOST);
     }
 
     private function determineCurrentRequestUrlString(): string
@@ -163,7 +150,7 @@ class Request
                 1 => $this->newUrl(domainName: $domains[0]),
                 2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1]),
                 3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2]),
-                default => $this->newUrl(domainName: self::DEFAULT_HOST),
+                default => $this->defaultUrl(),
             };
         }
         return $this->defaultUrl();
