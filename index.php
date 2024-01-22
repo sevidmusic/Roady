@@ -155,15 +155,16 @@ class Request
             )
         );
         if(is_array($currentRequestsUrlParts)) {
-            # var_dump($currentRequestsUrlParts);
             $domains = explode(
                 self::DOMAIN_SEPARATOR,
                 $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
             );
-            var_dump($domains);
-            return $this->newUrl(
-                domainName: $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
-            );
+            return match(count($domains)) {
+                1 => $this->newUrl(domainName: $domains[0]),
+                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1]),
+                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2]),
+                default => $this->newUrl(domainName: self::DEFAULT_HOST),
+            };
         }
         return $this->defaultUrl();
     }
