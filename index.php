@@ -1,10 +1,13 @@
 <?php
 
+
+
 # Fragment is ignored for now because it is not available in $_SERVER, until a workaround is found the Fragment of the current Request's url will be ignored
 # use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
 use Darling\PHPTextTypes\classes\strings\Name as NameInstance;
 use Darling\PHPTextTypes\classes\strings\Text as TextInstance;
+use Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use Darling\PHPTextTypes\interfaces\strings\Name;
 use Darling\PHPWebPaths\classes\paths\Domain as DomainInstance;
 use Darling\PHPWebPaths\classes\paths\Url as UrlInstance;
@@ -12,6 +15,7 @@ use Darling\PHPWebPaths\classes\paths\parts\url\Authority as AuthorityInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\DomainName as DomainNameInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Host as HostInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Path as PathInstance;
+use Darling\PHPWebPaths\interfaces\paths\parts\url\Path;
 use Darling\PHPWebPaths\classes\paths\parts\url\Port as PortInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Query as QueryInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\SubDomainName as SubDomainNameInstance;
@@ -26,6 +30,11 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autolo
 class Request
 {
 
+    private const DEFAULT_HOST = 'localhost';
+    private const REQUEST_PARAMETER_NAME = 'request';
+    private const HTTPS_ON_VALUE = 'on';
+    private const DOMAIN_SEPARATOR = '.';
+
     public function __construct(private string|null $testUrl = null) {}
 
     public function name(): Name
@@ -35,18 +44,63 @@ class Request
             if(isset($urlParts['query'])) {
                 $query = [];
                 parse_str($urlParts['query'], $query);
-                if(isset($query['request']) && is_string($query['request'])) {
-                    return new NameInstance(new TextInstance($query['request']));
+                if(isset($query[self::REQUEST_PARAMETER_NAME]) && is_string($query[self::REQUEST_PARAMETER_NAME])) {
+                    return new NameInstance(new TextInstance($query[self::REQUEST_PARAMETER_NAME]));
                 }
             }
         }
-        if(isset($_POST['request']) && is_string($_POST['request'])) {
-            return new NameInstance(new TextInstance($_POST['request']));
+        if(isset($_POST[self::REQUEST_PARAMETER_NAME]) && is_string($_POST[self::REQUEST_PARAMETER_NAME])) {
+            return new NameInstance(new TextInstance($_POST[self::REQUEST_PARAMETER_NAME]));
         }
-        if(isset($_GET['request']) && is_string($_GET['request'])) {
-            return new NameInstance(new TextInstance($_GET['request']));
+        if(isset($_GET[self::REQUEST_PARAMETER_NAME]) && is_string($_GET[self::REQUEST_PARAMETER_NAME])) {
+            return new NameInstance(new TextInstance($_GET[self::REQUEST_PARAMETER_NAME]));
         }
         return new NameInstance(new TextInstance('homepage'));
+    }
+
+
+    private function newUrl(
+        string $subDomainName,
+        string $domainName,
+        string $topLevelDomainName,
+        string $path,
+    ): Url
+    {
+        return new UrlInstance(
+            domain: new DomainInstance(
+                Scheme::HTTP,
+                new AuthorityInstance(
+                    new HostInstance(
+                        subDomainName: new SubDomainNameInstance(
+                            new NameInstance(
+                                new TextInstance($subDomainName)
+                            )
+                        ),
+                        domainName: new DomainNameInstance(
+                            new NameInstance(
+                                new TextInstance($domainName)
+                            )
+                        ),
+                        topLevelDomainName: new TopLevelDomainNameInstance(
+                            new NameInstance(
+                                new TextInstance($topLevelDomainName)
+                            )
+                        ),
+                    ),
+                ),
+            ),
+            path: new PathInstance($this->deriveSafeTextCollectionFromPathString($path)),
+            # query
+            # fragment
+        );
+    }
+
+
+    private function deriveSafeTextCollectionFromPathString(string $path): SafeTextCollection
+    {
+        $pathParts = explode(DIRECTORY_SEPARATOR, $path);
+        # var_dump($pathParts);
+        return new SafeTextCollectionInstance();
     }
 
     private function defaultUrl(): Url
@@ -58,7 +112,7 @@ class Request
                     new HostInstance(
                         domainName: new DomainNameInstance(
                             new NameInstance(
-                                new TextInstance('localhost')
+                                new TextInstance(self::DEFAULT_HOST)
                             )
                         ),
                     ),
@@ -70,11 +124,11 @@ class Request
     private function determineCurrentRequestUrlString(): string
     {
         $scheme = (
-            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === self::HTTPS_ON_VALUE
             ? Scheme::HTTPS
             : Scheme::HTTP
         );
-        $host = ($_SERVER['HTTP_HOST'] ?? 'localhost');
+        $host = ($_SERVER['HTTP_HOST'] ?? self::DEFAULT_HOST);
         $uri = ($_SERVER['REQUEST_URI'] ?? '');
         return $scheme->value . '://' . $host . $uri;
     }
@@ -89,7 +143,10 @@ class Request
             )
         );
         if(is_array($currentRequestsUrlParts)) {
-            var_dump($currentRequestsUrlParts);
+            # var_dump($currentRequestsUrlParts);
+            $domains = explode(self::DOMAIN_SEPARATOR, $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST);
+            var_dump($domains);
+            return $this->newUrl('subDomainName', 'domainName', 'topLevelDomainName', 'path');
         }
         return $this->defaultUrl();
     }
