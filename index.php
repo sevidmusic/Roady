@@ -30,6 +30,7 @@ class Request
     private const REQUEST_PARAMETER_NAME = 'request';
     private const HTTPS_ON_VALUE = 'on';
     private const DOMAIN_SEPARATOR = '.';
+    private const QUERY_PARAMETER_NAME = 'query';
 
     public function __construct(private string|null $testUrl = null) {}
 
@@ -37,9 +38,12 @@ class Request
     {
         if(isset($this->testUrl) && !empty($this->testUrl)) {
             $urlParts = parse_url($this->testUrl);
-            if(isset($urlParts['query'])) {
+            if(isset($urlParts[self::QUERY_PARAMETER_NAME])) {
                 $query = [];
-                parse_str($urlParts['query'], $query);
+                parse_str(
+                    $urlParts[self::QUERY_PARAMETER_NAME],
+                    $query
+                );
                 if(
                     isset($query[self::REQUEST_PARAMETER_NAME])
                     &&
@@ -90,7 +94,11 @@ class Request
             );
             $port = intval($currentRequestsUrlParts['port'] ?? null);
             $path = ($currentRequestsUrlParts['path'] ?? null);
-            $query = ($currentRequestsUrlParts['query'] ?? null);
+            $query = (
+                $currentRequestsUrlParts[self::QUERY_PARAMETER_NAME]
+                ??
+                null
+            );
             $fragment = ($currentRequestsUrlParts['fragment'] ?? null);
             return match(count($domains)) {
                 1 => $this->newUrl(
