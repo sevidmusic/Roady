@@ -31,6 +31,7 @@ class Request
     private const HTTPS_ON_VALUE = 'on';
     private const DOMAIN_SEPARATOR = '.';
     private const QUERY_PARAMETER_NAME = 'query';
+    private const FRAGMENT_PARAMETER_NAME = 'fragment';
 
     public function __construct(private string|null $testUrl = null) {}
 
@@ -99,7 +100,11 @@ class Request
                 ??
                 null
             );
-            $fragment = ($currentRequestsUrlParts['fragment'] ?? null);
+            $fragment = (
+                $currentRequestsUrlParts[self::FRAGMENT_PARAMETER_NAME]
+                ??
+                null
+            );
             return match(count($domains)) {
                 1 => $this->newUrl(
                     domainName: $domains[0],
@@ -125,7 +130,13 @@ class Request
                     subDomainName: $domains[0],
                     topLevelDomainName: $domains[2],
                 ),
-                default => $this->newUrl(domainName: self::DEFAULT_HOST, port: $port, path: $path, query: $query, fragment: $fragment),
+                default => $this->newUrl(
+                    domainName: self::DEFAULT_HOST,
+                    port: $port,
+                    path: $path,
+                    query: $query,
+                    fragment: $fragment
+                ),
             };
         }
         return $this->defaultUrl();
