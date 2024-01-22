@@ -67,6 +67,7 @@ class Request
         string $subDomainName = null,
         string $topLevelDomainName = null,
         string $path = null,
+        string $query = null,
     ): Url
     {
         return new UrlInstance(
@@ -105,7 +106,11 @@ class Request
                 ? new PathInstance($this->deriveSafeTextCollectionFromPathString($path))
                 : null
             ),
-            # query
+            query: (
+                isset($query)
+                ? new QueryInstance(new TextInstance($query))
+                : null
+            ),
             # fragment
         );
     }
@@ -157,10 +162,10 @@ class Request
             );
             var_dump($currentRequestsUrlParts);
             return match(count($domains)) {
-                1 => $this->newUrl(domainName: $domains[0], path: ($currentRequestsUrlParts['path'] ?? null)),
-                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], path: ($currentRequestsUrlParts['path'] ?? null)),
-                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], path: ($currentRequestsUrlParts['path'] ?? null)),
-                default => $this->defaultUrl(),
+                1 => $this->newUrl(domainName: $domains[0], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null)),
+                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null)),
+                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null)),
+                default => $this->defaultUrl(), #todo Should be same as case 1 but with DEFAULT_HOST
             };
         }
         return $this->defaultUrl();
