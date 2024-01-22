@@ -26,10 +26,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autolo
 class Request
 {
 
-
-    public function __construct(private string|null $testUrl = null)
-    {
-    }
+    public function __construct(private string|null $testUrl = null) {}
 
     public function name(): Name
     {
@@ -42,7 +39,6 @@ class Request
                     return new NameInstance(new TextInstance($query['request']));
                 }
             }
-            return new NameInstance(new TextInstance(''));
         }
         if(isset($_POST['request']) && is_string($_POST['request'])) {
             return new NameInstance(new TextInstance($_POST['request']));
@@ -71,7 +67,7 @@ class Request
         );
     }
 
-    public function url(): Url
+    private function determineCurrentRequestUrlString(): string
     {
         $scheme = (
             isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on'
@@ -80,10 +76,20 @@ class Request
         );
         $host = ($_SERVER['HTTP_HOST'] ?? 'localhost');
         $uri = ($_SERVER['REQUEST_URI'] ?? '');
-        $currentRequestsUrl = (isset($this->testUrl) ? $this->testUrl : $scheme->value . '://' . $host . $uri);
-        $currentRequestsUrlParts = parse_url($currentRequestsUrl);
+        return $scheme->value . '://' . $host . $uri;
+    }
+
+    public function url(): Url
+    {
+        $currentRequestsUrlParts = parse_url(
+            (
+                isset($this->testUrl)
+                ? $this->testUrl
+                : $this->determineCurrentRequestUrlString()
+            )
+        );
         if(is_array($currentRequestsUrlParts)) {
-            #var_dump($currentRequestsUrlParts);
+            var_dump($currentRequestsUrlParts);
         }
         return $this->defaultUrl();
     }
@@ -120,30 +126,25 @@ $requestsUrls = [
 ];
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
-$currentRequest = new Request($testRequestsUrl);
+$currentRequest = new Request((rand(0, 1) ? $testRequestsUrl : null));
 
 var_dump(
     [
-        'test request url string' => $testRequestsUrl,
-        'request name' => $currentRequest->name()->__toString(),
-        'request url' => $currentRequest->url()->__toString(),
+        'test url' => $testRequestsUrl,
+        'determined request name' => $currentRequest->name()->__toString(),
+        'determined request url' => $currentRequest->url()->__toString(),
     ]
 );
 
 
+?>
+<form action="index.php" method="get">
+    <input type="hidden" id="request" name="request" value="get-request"><br><br>
+    <input type="submit" value="Submit">
+</form>
 
+<form action="index.php" method="post">
+    <input type="hidden" id="request" name="request" value="post-request"><br><br>
+    <input type="submit" value="Submit">
+</form>
 
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-*/
