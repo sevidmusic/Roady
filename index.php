@@ -35,7 +35,7 @@ class Request
 
     public function name(): Name
     {
-        if(isset($this->testUrl)) {
+        if(isset($this->testUrl) && !empty($this->testUrl)) {
             $urlParts = parse_url($this->testUrl);
             if(isset($urlParts['query'])) {
                 $query = [];
@@ -78,7 +78,7 @@ class Request
     {
         $currentRequestsUrlParts = parse_url(
             (
-                isset($this->testUrl)
+                isset($this->testUrl) && !empty($this->testUrl)
                 ? $this->testUrl
                 : $this->determineCurrentRequestUrlString()
             )
@@ -93,9 +93,30 @@ class Request
             $query = ($currentRequestsUrlParts['query'] ?? null);
             $fragment = ($currentRequestsUrlParts['fragment'] ?? null);
             return match(count($domains)) {
-                1 => $this->newUrl(domainName: $domains[0], port: $port, path: $path, query: $query, fragment: $fragment),
-                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], port: $port, path: $path, query: $query, fragment: $fragment),
-                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], port: $port, path: $path, query: $query, fragment: $fragment),
+                1 => $this->newUrl(
+                    domainName: $domains[0],
+                    fragment: $fragment,
+                    path: $path,
+                    port: $port,
+                    query: $query,
+                ),
+                2 => $this->newUrl(
+                    domainName: $domains[1],
+                    fragment: $fragment,
+                    path: $path,
+                    port: $port,
+                    query: $query,
+                    subDomainName: $domains[0],
+                ),
+                3 => $this->newUrl(
+                    domainName: $domains[1],
+                    fragment: $fragment,
+                    path: $path,
+                    port: $port,
+                    query: $query,
+                    subDomainName: $domains[0],
+                    topLevelDomainName: $domains[2],
+                ),
                 default => $this->newUrl(domainName: self::DEFAULT_HOST, port: $port, path: $path, query: $query, fragment: $fragment),
             };
         }
@@ -221,10 +242,11 @@ $requestsUrls = [
     'https://',
     'http://',
     '',
+    null,
 ];
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
-$currentRequest = new Request((rand(0, 1) ? $testRequestsUrl : null));
+$currentRequest = new Request($testRequestsUrl);
 
 var_dump(
     [
