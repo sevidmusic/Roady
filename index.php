@@ -60,10 +60,10 @@ class Request
 
 
     private function newUrl(
-        string $subDomainName,
         string $domainName,
-        string $topLevelDomainName,
-        string $path,
+        string $subDomainName = null,
+        string $topLevelDomainName = null,
+        string $path = null,
     ): Url
     {
         return new UrlInstance(
@@ -71,25 +71,37 @@ class Request
                 Scheme::HTTP,
                 new AuthorityInstance(
                     new HostInstance(
-                        subDomainName: new SubDomainNameInstance(
-                            new NameInstance(
-                                new TextInstance($subDomainName)
+                        subDomainName: (
+                            isset($subDomainName)
+                            ? new SubDomainNameInstance(
+                                new NameInstance(
+                                    new TextInstance($subDomainName)
+                                )
                             )
+                            : null
                         ),
                         domainName: new DomainNameInstance(
                             new NameInstance(
                                 new TextInstance($domainName)
                             )
                         ),
-                        topLevelDomainName: new TopLevelDomainNameInstance(
-                            new NameInstance(
-                                new TextInstance($topLevelDomainName)
+                        topLevelDomainName: (
+                            isset($topLevelDomainName)
+                            ? new TopLevelDomainNameInstance(
+                                new NameInstance(
+                                    new TextInstance($topLevelDomainName)
+                                )
                             )
+                            : null
                         ),
                     ),
                 ),
             ),
-            path: new PathInstance($this->deriveSafeTextCollectionFromPathString($path)),
+            path: (
+                isset($path)
+                ? new PathInstance($this->deriveSafeTextCollectionFromPathString($path))
+                : null
+            ),
             # query
             # fragment
         );
@@ -144,9 +156,14 @@ class Request
         );
         if(is_array($currentRequestsUrlParts)) {
             # var_dump($currentRequestsUrlParts);
-            $domains = explode(self::DOMAIN_SEPARATOR, $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST);
+            $domains = explode(
+                self::DOMAIN_SEPARATOR,
+                $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
+            );
             var_dump($domains);
-            return $this->newUrl('subDomainName', 'domainName', 'topLevelDomainName', 'path');
+            return $this->newUrl(
+                domainName: $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
+            );
         }
         return $this->defaultUrl();
     }
