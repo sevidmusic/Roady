@@ -2,10 +2,13 @@
 
 
 
+
+
 # Fragment is ignored for now because it is not available in $_SERVER, until a workaround is found the Fragment of the current Request's url will be ignored
 # use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
 use Darling\PHPTextTypes\classes\strings\Name as NameInstance;
+use Darling\PHPTextTypes\classes\strings\SafeText as SafeTextInstance;
 use Darling\PHPTextTypes\classes\strings\Text as TextInstance;
 use Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
 use Darling\PHPTextTypes\interfaces\strings\Name;
@@ -111,8 +114,14 @@ class Request
     private function deriveSafeTextCollectionFromPathString(string $path): SafeTextCollection
     {
         $pathParts = explode(DIRECTORY_SEPARATOR, $path);
-        # var_dump($pathParts);
-        return new SafeTextCollectionInstance();
+        $safeText = [];
+        foreach ($pathParts as $pathPart) {
+            if (!empty($pathPart)) {
+                # code...
+                $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
+            }
+        }
+        return new SafeTextCollectionInstance(...$safeText);
     }
 
     private function defaultUrl(): Url
@@ -146,10 +155,11 @@ class Request
                 self::DOMAIN_SEPARATOR,
                 $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
             );
+            var_dump($currentRequestsUrlParts);
             return match(count($domains)) {
-                1 => $this->newUrl(domainName: $domains[0]),
-                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1]),
-                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2]),
+                1 => $this->newUrl(domainName: $domains[0], path: ($currentRequestsUrlParts['path'] ?? null)),
+                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], path: ($currentRequestsUrlParts['path'] ?? null)),
+                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], path: ($currentRequestsUrlParts['path'] ?? null)),
                 default => $this->defaultUrl(),
             };
         }
