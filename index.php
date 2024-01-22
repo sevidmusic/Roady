@@ -1,13 +1,6 @@
 <?php
 
 
-
-
-
-
-
-# Fragment is ignored for now because it is not available in $_SERVER, until a workaround is found the Fragment of the current Request's url will be ignored
-# use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
 use Darling\PHPTextTypes\classes\strings\Name as NameInstance;
 use Darling\PHPTextTypes\classes\strings\SafeText as SafeTextInstance;
@@ -21,15 +14,12 @@ use Darling\PHPWebPaths\classes\paths\parts\url\DomainName as DomainNameInstance
 use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Host as HostInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Path as PathInstance;
-use Darling\PHPWebPaths\interfaces\paths\parts\url\Path;
 use Darling\PHPWebPaths\classes\paths\parts\url\Port as PortInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Query as QueryInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\SubDomainName as SubDomainNameInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\TopLevelDomainName as TopLevelDomainNameInstance;
 use Darling\PHPWebPaths\enumerations\paths\parts\url\Scheme;
 use Darling\PHPWebPaths\interfaces\paths\Url;
-use Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
-use Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
@@ -50,25 +40,74 @@ class Request
             if(isset($urlParts['query'])) {
                 $query = [];
                 parse_str($urlParts['query'], $query);
-                if(isset($query[self::REQUEST_PARAMETER_NAME]) && is_string($query[self::REQUEST_PARAMETER_NAME])) {
-                    return new NameInstance(new TextInstance($query[self::REQUEST_PARAMETER_NAME]));
+                if(
+                    isset($query[self::REQUEST_PARAMETER_NAME])
+                    &&
+                    is_string($query[self::REQUEST_PARAMETER_NAME])
+                ) {
+                    return new NameInstance(
+                        new TextInstance(
+                            $query[self::REQUEST_PARAMETER_NAME]
+                        )
+                    );
                 }
             }
         }
-        if(isset($_POST[self::REQUEST_PARAMETER_NAME]) && is_string($_POST[self::REQUEST_PARAMETER_NAME])) {
-            return new NameInstance(new TextInstance($_POST[self::REQUEST_PARAMETER_NAME]));
+        if(
+            isset($_POST[self::REQUEST_PARAMETER_NAME])
+            &&
+            is_string($_POST[self::REQUEST_PARAMETER_NAME])
+        ) {
+            return new NameInstance(
+                new TextInstance($_POST[self::REQUEST_PARAMETER_NAME])
+            );
         }
-        if(isset($_GET[self::REQUEST_PARAMETER_NAME]) && is_string($_GET[self::REQUEST_PARAMETER_NAME])) {
-            return new NameInstance(new TextInstance($_GET[self::REQUEST_PARAMETER_NAME]));
+        if(
+            isset($_GET[self::REQUEST_PARAMETER_NAME])
+            &&
+            is_string($_GET[self::REQUEST_PARAMETER_NAME])
+        ) {
+            return new NameInstance(
+                new TextInstance($_GET[self::REQUEST_PARAMETER_NAME])
+            );
         }
         return new NameInstance(new TextInstance('homepage'));
     }
 
+    public function url(): Url
+    {
+        $currentRequestsUrlParts = parse_url(
+            (
+                isset($this->testUrl)
+                ? $this->testUrl
+                : $this->determineCurrentRequestUrlString()
+            )
+        );
+        if(is_array($currentRequestsUrlParts)) {
+            $domains = explode(
+                self::DOMAIN_SEPARATOR,
+                $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
+            );
+            $port = intval($currentRequestsUrlParts['port'] ?? null);
+            $path = ($currentRequestsUrlParts['path'] ?? null);
+            $query = ($currentRequestsUrlParts['query'] ?? null);
+            $fragment = ($currentRequestsUrlParts['fragment'] ?? null);
+            var_dump($currentRequestsUrlParts);
+            return match(count($domains)) {
+                1 => $this->newUrl(domainName: $domains[0], port: $port, path: $path, query: $query, fragment: $fragment),
+                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], port: $port, path: $path, query: $query, fragment: $fragment),
+                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], port: $port, path: $path, query: $query, fragment: $fragment),
+                default => $this->newUrl(domainName: self::DEFAULT_HOST, port: $port, path: $path, query: $query, fragment: $fragment),
+            };
+        }
+        return $this->defaultUrl();
+    }
 
     private function newUrl(
         string $domainName,
         string $subDomainName = null,
         string $topLevelDomainName = null,
+        int $port = null,
         string $path = null,
         string $query = null,
         string $fragment = null,
@@ -78,7 +117,7 @@ class Request
             domain: new DomainInstance(
                 Scheme::HTTP,
                 new AuthorityInstance(
-                    new HostInstance(
+                    host: new HostInstance(
                         subDomainName: (
                             isset($subDomainName)
                             ? new SubDomainNameInstance(
@@ -103,6 +142,7 @@ class Request
                             : null
                         ),
                     ),
+                    port: (isset($port) ? new PortInstance($port) : null),
                 ),
             ),
             path: (
@@ -123,14 +163,12 @@ class Request
         );
     }
 
-
     private function deriveSafeTextCollectionFromPathString(string $path): SafeTextCollection
     {
         $pathParts = explode(DIRECTORY_SEPARATOR, $path);
         $safeText = [];
         foreach ($pathParts as $pathPart) {
             if (!empty($pathPart)) {
-                # code...
                 $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
             }
         }
@@ -154,30 +192,6 @@ class Request
         return $scheme->value . '://' . $host . $uri;
     }
 
-    public function url(): Url
-    {
-        $currentRequestsUrlParts = parse_url(
-            (
-                isset($this->testUrl)
-                ? $this->testUrl
-                : $this->determineCurrentRequestUrlString()
-            )
-        );
-        if(is_array($currentRequestsUrlParts)) {
-            $domains = explode(
-                self::DOMAIN_SEPARATOR,
-                $currentRequestsUrlParts['host'] ?? self::DEFAULT_HOST
-            );
-            var_dump($currentRequestsUrlParts);
-            return match(count($domains)) {
-                1 => $this->newUrl(domainName: $domains[0], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null), fragment: ($currentRequestsUrlParts['fragment'] ?? null)),
-                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null), fragment: ($currentRequestsUrlParts['fragment'] ?? null)),
-                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null), fragment: ($currentRequestsUrlParts['fragment'] ?? null)),
-                default => $this->defaultUrl(), #todo Should be same as case 1 but with DEFAULT_HOST
-            };
-        }
-        return $this->defaultUrl();
-    }
 }
 
 $requestsUrls = [
