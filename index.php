@@ -92,7 +92,6 @@ class Request
             $path = ($currentRequestsUrlParts['path'] ?? null);
             $query = ($currentRequestsUrlParts['query'] ?? null);
             $fragment = ($currentRequestsUrlParts['fragment'] ?? null);
-            var_dump($currentRequestsUrlParts);
             return match(count($domains)) {
                 1 => $this->newUrl(domainName: $domains[0], port: $port, path: $path, query: $query, fragment: $fragment),
                 2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], port: $port, path: $path, query: $query, fragment: $fragment),
