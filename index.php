@@ -4,6 +4,8 @@
 
 
 
+
+
 # Fragment is ignored for now because it is not available in $_SERVER, until a workaround is found the Fragment of the current Request's url will be ignored
 # use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
@@ -16,6 +18,7 @@ use Darling\PHPWebPaths\classes\paths\Domain as DomainInstance;
 use Darling\PHPWebPaths\classes\paths\Url as UrlInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Authority as AuthorityInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\DomainName as DomainNameInstance;
+use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Host as HostInstance;
 use Darling\PHPWebPaths\classes\paths\parts\url\Path as PathInstance;
 use Darling\PHPWebPaths\interfaces\paths\parts\url\Path;
@@ -68,6 +71,7 @@ class Request
         string $topLevelDomainName = null,
         string $path = null,
         string $query = null,
+        string $fragment = null,
     ): Url
     {
         return new UrlInstance(
@@ -111,7 +115,11 @@ class Request
                 ? new QueryInstance(new TextInstance($query))
                 : null
             ),
-            # fragment
+            fragment: (
+                isset($fragment)
+                ? new FragmentInstance(new TextInstance($fragment))
+                : null
+            ),
         );
     }
 
@@ -162,9 +170,9 @@ class Request
             );
             var_dump($currentRequestsUrlParts);
             return match(count($domains)) {
-                1 => $this->newUrl(domainName: $domains[0], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null)),
-                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null)),
-                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null)),
+                1 => $this->newUrl(domainName: $domains[0], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null), fragment: ($currentRequestsUrlParts['fragment'] ?? null)),
+                2 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null), fragment: ($currentRequestsUrlParts['fragment'] ?? null)),
+                3 => $this->newUrl(subDomainName: $domains[0], domainName: $domains[1], topLevelDomainName: $domains[2], path: ($currentRequestsUrlParts['path'] ?? null), query: ($currentRequestsUrlParts['query'] ?? null), fragment: ($currentRequestsUrlParts['fragment'] ?? null)),
                 default => $this->defaultUrl(), #todo Should be same as case 1 but with DEFAULT_HOST
             };
         }
