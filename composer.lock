@@ -387,16 +387,16 @@
         },
         {
             "name": "darling/php-web-paths",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPWebPaths.git",
-                "reference": "63cc7204254d3969eaef9e8576a8a8cefe01bf65"
+                "reference": "517156d644ea48e33000eb542e90c292d9260721"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPWebPaths/zipball/63cc7204254d3969eaef9e8576a8a8cefe01bf65",
-                "reference": "63cc7204254d3969eaef9e8576a8a8cefe01bf65",
+                "url": "https://api.github.com/repos/sevidmusic/PHPWebPaths/zipball/517156d644ea48e33000eb542e90c292d9260721",
+                "reference": "517156d644ea48e33000eb542e90c292d9260721",
                 "shasum": ""
             },
             "require": {
@@ -429,9 +429,9 @@
             "description": "The PHPWebPaths library provides classes for working with web paths such as a Url.",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPWebPaths/issues",
-                "source": "https://github.com/sevidmusic/PHPWebPaths/tree/v1.0.2"
+                "source": "https://github.com/sevidmusic/PHPWebPaths/tree/v1.0.3"
             },
-            "time": "2024-01-22T23:37:42+00:00"
+            "time": "2024-01-23T02:51:17+00:00"
         },
         {
             "name": "darling/roady-routes",
