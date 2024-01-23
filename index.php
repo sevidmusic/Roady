@@ -1,6 +1,7 @@
 <?php
 
-
+use Darling\RoadyRoutes\interfaces\collections\RouteCollection;
+use Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
 use Darling\PHPTextTypes\classes\strings\Name as NameInstance;
 use Darling\PHPTextTypes\classes\strings\SafeText as SafeTextInstance;
@@ -34,12 +35,12 @@ class Request
     private const FRAGMENT_PARAMETER_NAME = 'fragment';
     private const SCHEME_PARAMETER_NAME = 'scheme';
 
-    public function __construct(private string|null $testUrl = null) {}
+    public function __construct(private string|null $urlString = null) {}
 
     public function name(): Name
     {
-        if(isset($this->testUrl) && !empty($this->testUrl)) {
-            $urlParts = parse_url($this->testUrl);
+        if(isset($this->urlString) && !empty($this->urlString)) {
+            $urlParts = parse_url($this->urlString);
             if(isset($urlParts[self::QUERY_PARAMETER_NAME])) {
                 $query = [];
                 parse_str(
@@ -84,8 +85,8 @@ class Request
     {
         $currentRequestsUrlParts = parse_url(
             (
-                isset($this->testUrl) && !empty($this->testUrl)
-                ? $this->testUrl
+                isset($this->urlString) && !empty($this->urlString)
+                ? $this->urlString
                 : $this->determineCurrentRequestUrlString()
             )
         );
@@ -264,6 +265,26 @@ class Request
 
 }
 
+class Response
+{
+
+    public function __construct(
+        private Request $request,
+        private RouteCollection $routeCollection
+    ) {}
+
+    public function request(): Request
+    {
+        return $this->request;
+    }
+
+    public function routeCollection(): RouteCollection
+    {
+        return $this->routeCollection;
+    }
+
+}
+
 $requestsUrls = [
     'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
     'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
@@ -298,13 +319,15 @@ $requestsUrls = [
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
+$response = new Response($currentRequest, new RouteCollectionInstance());
 
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
         'url1' => $testRequestsUrl,
         'url2' => $currentRequest->url()->__toString(),
-    ]
+    ],
+    $response,
 );
 
 
