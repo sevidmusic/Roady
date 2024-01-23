@@ -285,6 +285,17 @@ class Response
 
 }
 
+class Router
+{
+
+    public function __construct() {}
+
+    public function handleRequest(Request $request): Response
+    {
+        return new Response($request, new RouteCollectionInstance());
+    }
+}
+
 $requestsUrls = [
     'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
     'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
@@ -319,15 +330,15 @@ $requestsUrls = [
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
-$response = new Response($currentRequest, new RouteCollectionInstance());
+$router = new Router();
 
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
         'url1' => $testRequestsUrl,
         'url2' => $currentRequest->url()->__toString(),
+        'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
     ],
-    $response,
 );
 
 
