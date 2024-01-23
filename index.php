@@ -32,6 +32,7 @@ class Request
     private const DOMAIN_SEPARATOR = '.';
     private const QUERY_PARAMETER_NAME = 'query';
     private const FRAGMENT_PARAMETER_NAME = 'fragment';
+    private const SCHEME_PARAMETER_NAME = 'scheme';
 
     public function __construct(private string|null $testUrl = null) {}
 
@@ -105,6 +106,11 @@ class Request
                 ??
                 null
             );
+            $scheme = match($currentRequestsUrlParts[self::SCHEME_PARAMETER_NAME] ?? null) {
+                Scheme::HTTPS->value => Scheme::HTTPS,
+                default => Scheme::HTTP,
+            };
+
             return match(count($domains)) {
                 1 => $this->newUrl(
                     domainName: $domains[0],
@@ -112,6 +118,7 @@ class Request
                     path: $path,
                     port: $port,
                     query: $query,
+                    scheme: $scheme,
                 ),
                 2 => $this->newUrl(
                     domainName: $domains[1],
@@ -119,6 +126,7 @@ class Request
                     path: $path,
                     port: $port,
                     query: $query,
+                    scheme: $scheme,
                     subDomainName: $domains[0],
                 ),
                 3 => $this->newUrl(
@@ -126,6 +134,7 @@ class Request
                     fragment: $fragment,
                     path: $path,
                     port: $port,
+                    scheme: $scheme,
                     query: $query,
                     subDomainName: $domains[0],
                     topLevelDomainName: $domains[2],
@@ -133,6 +142,7 @@ class Request
                 default => $this->newUrl(
                     domainName: self::DEFAULT_HOST,
                     port: $port,
+                    scheme: $scheme,
                     path: $path,
                     query: $query,
                     fragment: $fragment
@@ -150,12 +160,13 @@ class Request
         string $path = null,
         string $query = null,
         string $fragment = null,
+        Scheme $scheme = null,
     ): Url
     {
         return new UrlInstance(
             domain: new DomainInstance(
-                Scheme::HTTP,
-                new AuthorityInstance(
+                scheme: (isset($scheme) ? $scheme : Scheme::HTTP),
+                authority: new AuthorityInstance(
                     host: new HostInstance(
                         subDomainName: (
                             isset($subDomainName)
@@ -246,6 +257,7 @@ $requestsUrls = [
     'http://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c',
     'http://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c',
     'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=c',
+    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=Kathooks%20Music',
     'https://foo.bar.baz:2343/some/path/bin.html',
     'https://foo.bar:43/some/path/bin.html',
     'https://foo:17/some/path/bin.html',
@@ -269,9 +281,9 @@ $currentRequest = new Request($testRequestsUrl);
 
 var_dump(
     [
-        'test url' => $testRequestsUrl,
         'determined request name' => $currentRequest->name()->__toString(),
-        'determined request url' => $currentRequest->url()->__toString(),
+        'url1' => $testRequestsUrl,
+        'url2' => $currentRequest->url()->__toString(),
     ]
 );
 

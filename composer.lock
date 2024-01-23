@@ -387,16 +387,16 @@
         },
         {
             "name": "darling/php-web-paths",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPWebPaths.git",
-                "reference": "ccb5f8223ea85786720efbf4d88290a04fb6b783"
+                "reference": "63cc7204254d3969eaef9e8576a8a8cefe01bf65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPWebPaths/zipball/ccb5f8223ea85786720efbf4d88290a04fb6b783",
-                "reference": "ccb5f8223ea85786720efbf4d88290a04fb6b783",
+                "url": "https://api.github.com/repos/sevidmusic/PHPWebPaths/zipball/63cc7204254d3969eaef9e8576a8a8cefe01bf65",
+                "reference": "63cc7204254d3969eaef9e8576a8a8cefe01bf65",
                 "shasum": ""
             },
             "require": {
@@ -429,9 +429,9 @@
             "description": "The PHPWebPaths library provides classes for working with web paths such as a Url.",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPWebPaths/issues",
-                "source": "https://github.com/sevidmusic/PHPWebPaths/tree/v1.0.1"
+                "source": "https://github.com/sevidmusic/PHPWebPaths/tree/v1.0.2"
             },
-            "time": "2023-12-24T22:53:29+00:00"
+            "time": "2024-01-22T23:37:42+00:00"
         },
         {
             "name": "darling/roady-routes",
@@ -1098,16 +1098,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.8",
+            "version": "10.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "08f4fa74d5fbfff1ef22abffee47aaedcaea227e"
+                "reference": "0bd663704f0165c9e76fe4f06ffa6a1ca727fdbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/08f4fa74d5fbfff1ef22abffee47aaedcaea227e",
-                "reference": "08f4fa74d5fbfff1ef22abffee47aaedcaea227e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0bd663704f0165c9e76fe4f06ffa6a1ca727fdbe",
+                "reference": "0bd663704f0165c9e76fe4f06ffa6a1ca727fdbe",
                 "shasum": ""
             },
             "require": {
@@ -1179,7 +1179,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.8"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.9"
             },
             "funding": [
                 {
@@ -1195,7 +1195,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-19T07:07:27+00:00"
+            "time": "2024-01-22T14:35:40+00:00"
         },
         {
             "name": "sebastian/cli-parser",
