@@ -1,5 +1,21 @@
 <?php
 
+
+
+
+
+use Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
+use Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
+use Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
+use Darling\RoadyModuleUtilities\classes\determinators\ModuleCSSRouteDeterminator as ModuleCSSRouteDeterminatorInstance;
+use Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
+use Darling\RoadyModuleUtilities\classes\determinators\ModuleJSRouteDeterminator as ModuleJSRouteDeterminatorInstance;
+use Darling\RoadyModuleUtilities\interfaces\determinators\ModuleOutputRouteDeterminator;
+use Darling\RoadyModuleUtilities\classes\determinators\ModuleOutputRouteDeterminator as ModuleOutputRouteDeterminatorInstance;
+use Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
+use Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules as ListingOfDirectoryOfRoadyModulesInstance;
+use Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
+use Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
 use Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 use Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
 use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
@@ -288,13 +304,43 @@ class Response
 class Router
 {
 
-    public function __construct() {}
+    public function __construct(
+        private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
+        private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
+        private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
+        private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
+        private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
+    ) {}
 
     public function handleRequest(Request $request): Response
     {
         return new Response($request, new RouteCollectionInstance());
     }
 }
+
+class RoadyAPI
+{
+
+    public static function pathToDirectoryOfRoadyModules(): PathToDirectoryOfRoadyModules
+    {
+        $roadysRootDirectory = __DIR__;
+        $roadysRootDirectoryParts = explode(DIRECTORY_SEPARATOR, $roadysRootDirectory);
+        $safeText = [];
+        foreach ($roadysRootDirectoryParts as $pathPart) {
+            if(!empty($pathPart)) {
+                $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
+            }
+        }
+        $safeText[] = new SafeTextInstance(new TextInstance('modules'));
+        return new PathToDirectoryOfRoadyModulesInstance(
+            new PathToExistingDirectory(
+                new SafeTextCollectionInstance(...$safeText),
+            ),
+        );
+    }
+}
+
+var_dump(RoadyAPI::pathToDirectoryOfRoadyModules()->__toString());
 
 $requestsUrls = [
     'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
@@ -330,14 +376,22 @@ $requestsUrls = [
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
-$router = new Router();
+/*
+$router = new Router(
+        new ListingOfDirectoryOfRoadyModulesInstance(),
+        new ModuleRoutesJsonConfigurationReaderInstance(),
+        new ModuleCSSRouteDeterminatorInstance(),
+        new ModuleJSRouteDeterminatorInstance(),
+        new ModuleOutputRouteDeterminatorInstance(),
+);
+*/
 
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
         'url1' => $testRequestsUrl,
         'url2' => $currentRequest->url()->__toString(),
-        'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
+        #'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
     ],
 );
 
