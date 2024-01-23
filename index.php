@@ -138,18 +138,18 @@ class Request
                     fragment: $fragment,
                     path: $path,
                     port: $port,
-                    scheme: $scheme,
                     query: $query,
+                    scheme: $scheme,
                     subDomainName: $domains[0],
                     topLevelDomainName: $domains[2],
                 ),
                 default => $this->newUrl(
                     domainName: self::DEFAULT_HOST,
-                    port: $port,
-                    scheme: $scheme,
+                    fragment: $fragment,
                     path: $path,
+                    port: $port,
                     query: $query,
-                    fragment: $fragment
+                    scheme: $scheme,
                 ),
             };
         }
