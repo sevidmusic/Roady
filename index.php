@@ -106,7 +106,11 @@ class Request
                 ??
                 null
             );
-            $scheme = match($currentRequestsUrlParts[self::SCHEME_PARAMETER_NAME] ?? null) {
+            $scheme = match(
+                $currentRequestsUrlParts[self::SCHEME_PARAMETER_NAME]
+                ??
+                null
+            ) {
                 Scheme::HTTPS->value => Scheme::HTTPS,
                 default => Scheme::HTTP,
             };
@@ -186,18 +190,28 @@ class Request
                             isset($topLevelDomainName)
                             ? new TopLevelDomainNameInstance(
                                 new NameInstance(
-                                    new TextInstance($topLevelDomainName)
+                                    new TextInstance(
+                                        $topLevelDomainName
+                                    )
                                 )
                             )
                             : null
                         ),
                     ),
-                    port: (isset($port) ? new PortInstance($port) : null),
+                    port: (
+                        isset($port)
+                        ? new PortInstance($port)
+                        : null
+                    ),
                 ),
             ),
             path: (
                 isset($path)
-                ? new PathInstance($this->deriveSafeTextCollectionFromPathString($path))
+                ? new PathInstance(
+                    $this->deriveSafeTextCollectionFromPathString(
+                        $path
+                    )
+                )
                 : null
             ),
             query: (
@@ -213,13 +227,17 @@ class Request
         );
     }
 
-    private function deriveSafeTextCollectionFromPathString(string $path): SafeTextCollection
+    private function deriveSafeTextCollectionFromPathString(
+        string $path
+    ): SafeTextCollection
     {
         $pathParts = explode(DIRECTORY_SEPARATOR, $path);
         $safeText = [];
         foreach ($pathParts as $pathPart) {
             if (!empty($pathPart)) {
-                $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
+                $safeText[] = new SafeTextInstance(
+                    new TextInstance($pathPart)
+                );
             }
         }
         return new SafeTextCollectionInstance(...$safeText);
@@ -233,7 +251,9 @@ class Request
     private function determineCurrentRequestUrlString(): string
     {
         $scheme = (
-            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === self::HTTPS_ON_VALUE
+            isset($_SERVER['HTTPS'])
+            &&
+            $_SERVER['HTTPS'] === self::HTTPS_ON_VALUE
             ? Scheme::HTTPS
             : Scheme::HTTP
         );
