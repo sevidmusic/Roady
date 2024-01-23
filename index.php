@@ -6,6 +6,7 @@
 
 use Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
 use Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
+use Darling\RoadyModuleUtilities\classes\configuration\ModuleRoutesJsonConfigurationReader as ModuleRoutesJsonConfigurationReaderInstance;
 use Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
 use Darling\RoadyModuleUtilities\classes\determinators\ModuleCSSRouteDeterminator as ModuleCSSRouteDeterminatorInstance;
 use Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
@@ -306,7 +307,6 @@ class Router
 
     public function __construct(
         private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
-        private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
         private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
@@ -314,6 +314,13 @@ class Router
 
     public function handleRequest(Request $request): Response
     {
+        foreach (
+            $this->listingOfDirectoryOfRoadyModules->pathToRoadyModuleDirectoryCollection()->collection()
+            as
+            $pathToRoadyModuleDirectory
+        ) {
+            var_dump($pathToRoadyModuleDirectory->__toString());
+        }
         return new Response($request, new RouteCollectionInstance());
     }
 }
@@ -339,8 +346,6 @@ class RoadyAPI
         );
     }
 }
-
-var_dump(RoadyAPI::pathToDirectoryOfRoadyModules()->__toString());
 
 $requestsUrls = [
     'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
@@ -376,22 +381,22 @@ $requestsUrls = [
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
-/*
+
 $router = new Router(
-        new ListingOfDirectoryOfRoadyModulesInstance(),
-        new ModuleRoutesJsonConfigurationReaderInstance(),
+    new ListingOfDirectoryOfRoadyModulesInstance(
+            RoadyAPI::pathToDirectoryOfRoadyModules()
+        ),
         new ModuleCSSRouteDeterminatorInstance(),
         new ModuleJSRouteDeterminatorInstance(),
         new ModuleOutputRouteDeterminatorInstance(),
 );
-*/
 
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
         'url1' => $testRequestsUrl,
         'url2' => $currentRequest->url()->__toString(),
-        #'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
+        'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
     ],
 );
 
