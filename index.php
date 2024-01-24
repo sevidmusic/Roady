@@ -354,6 +354,12 @@ class Router
                 $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator->determineCSSRoutes($pathToRoadyModuleDirectory);
                 $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator->determineJSRoutes($pathToRoadyModuleDirectory);
                 $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator->determineOutputRoutes($pathToRoadyModuleDirectory);
+                $foo = array_merge(
+                    $manuallyConfiguredRoutes->collection(),
+                    $dynamicallyDeterminedCssRoutes->collection(),
+                    $dynamicallyDeterminedJsRoutes->collection(),
+                    $dynamicallyDeterminedOutputRoutes->collection(),
+                );
                 var_dump(
                     [
                         'module' => $pathToRoadyModuleDirectory->name()->__toString(),
@@ -362,6 +368,7 @@ class Router
                         'number of dynamically determined css routes' => count($dynamicallyDeterminedCssRoutes->collection()),
                         'number of dynamically determined js routes' => count($dynamicallyDeterminedJsRoutes->collection()),
                         'number of dynamically determined output routes' => count($dynamicallyDeterminedOutputRoutes->collection()),
+                        'total number of routes determined' => count($foo),
                     ]
                 );
             }
