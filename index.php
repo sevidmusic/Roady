@@ -329,6 +329,7 @@ class Router
 
     public function handleRequest(Request $request): Response
     {
+        $determinedRoutes = [];
         foreach (
         $this->listingOfDirectoryOfRoadyModules
              ->pathToRoadyModuleDirectoryCollection()
@@ -350,6 +351,9 @@ class Router
                                                      $pathToRoadyModuleDirectory,
                                                      $this->roadyModuleFileSystemPathDeterminator
                                                  );
+                $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator->determineCSSRoutes($pathToRoadyModuleDirectory);
+                $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator->determineJSRoutes($pathToRoadyModuleDirectory);
+                $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator->determineOutputRoutes($pathToRoadyModuleDirectory);
                 var_dump(
                     [
                         'module' => $pathToRoadyModuleDirectory->name()->__toString(),
