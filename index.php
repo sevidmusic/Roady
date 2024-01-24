@@ -446,13 +446,21 @@ class RoadyUI
     public function render(Response $response): string
     {
         $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition($response->routeCollection());
-        foreach($sortedRoutes as $namedPosition) {
-            foreach($namedPosition as $route) {
+        $renderedOutput = [];
+        foreach($sortedRoutes as $namedPosition => $routes) {
+            foreach($routes as $route) {
                 $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectoryInstance($this->pathToDirectoryOfRoadyModules, $route->moduleName());
                 $pathToFile = $this->roadyModuleFileSystemPathDeterminator->determinePathToFileInModuleDirectory($pathToRoadyModuleDirectory, $route->relativePath());
-                echo file_get_contents($pathToFile->__toString());
+                $fileExtension = pathinfo($pathToFile,  PATHINFO_EXTENSION);
+                $webPathToFile = $response->request()->url()->domain()->__toString() . DIRECTORY_SEPARATOR . basename($this->pathToDirectoryOfRoadyModules->__toString()) . DIRECTORY_SEPARATOR . $pathToRoadyModuleDirectory->name()->__toString();
+                $renderedOutput[$namedPosition][] = match($fileExtension) {
+                    'css' => '<link rel="stylesheet" href="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'">',
+                    'js' => '',
+                    default => file_get_contents($pathToFile->__toString()),
+                };
             }
         }
+        var_dump($renderedOutput);
         return '';
     }
 }
