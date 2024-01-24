@@ -317,7 +317,6 @@ class Router
         private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
-        # I may decide that output should have to be manually configured, still debating this
         private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
         private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
@@ -357,6 +356,17 @@ class Router
                     $dynamicallyDeterminedOutputRoutes->collection(),
                 );
                 foreach($determinedRoutes as $route) {
+                    foreach ($route->nameCollection()->collection() as $name) {
+                        /*
+                        var_dump(
+                            [
+                                'relativePath' => $route->relativePath()->__toString(),
+                                'route responds to name' => $name->__toString(),
+                                'matches request' => $name->__toString() === $request->name()->__toString()
+                            ]
+                        );
+                        */
+                    }
                     if(in_array($request->name(), $route->nameCollection()->collection())) {
                         $respondingRoutes[] = $route;
                     }
@@ -459,7 +469,8 @@ $requestsUrls = [
 ];
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
-$currentRequest = new Request($testRequestsUrl);
+# $currentRequest = new Request($testRequestsUrl);
+$currentRequest = new Request();
 
 $router = new Router(
     new ListingOfDirectoryOfRoadyModulesInstance(
@@ -478,9 +489,13 @@ var_dump(
         'test url' => $testRequestsUrl,
         'current request url' => $currentRequest->url()->__toString(),
         'response\'s request url' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
-        $router->handleRequest($currentRequest),
     ],
 );
+
+foreach ($router->handleRequest($currentRequest)->routeCollection()->collection() as $route) {
+    var_dump($route->moduleName()->__toString(), $route->relativePath()->__toString());
+}
+
 
 ?>
 <form action="index.php" method="get">
