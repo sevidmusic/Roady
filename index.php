@@ -356,18 +356,13 @@ class Router
                     $dynamicallyDeterminedOutputRoutes->collection(),
                 );
                 foreach($determinedRoutes as $route) {
-                    foreach ($route->nameCollection()->collection() as $name) {
-                        /*
+                    if(in_array($request->name(), $route->nameCollection()->collection())) {
                         var_dump(
                             [
                                 'relativePath' => $route->relativePath()->__toString(),
-                                'route responds to name' => $name->__toString(),
-                                'matches request' => $name->__toString() === $request->name()->__toString()
+                                'matches request' =>  in_array($request->name(), $route->nameCollection()->collection()),
                             ]
                         );
-                        */
-                    }
-                    if(in_array($request->name(), $route->nameCollection()->collection())) {
                         $respondingRoutes[] = $route;
                     }
                 }
@@ -496,8 +491,8 @@ foreach ($router->handleRequest($currentRequest)->routeCollection()->collection(
     var_dump([$route->moduleName()->__toString(), $route->relativePath()->__toString()]);
 }
 
-
 ?>
+
 <form action="index.php" method="get">
     <input type="hidden" id="request" name="request" value="get-request"><br><br>
     <input type="submit" value="Submit">
