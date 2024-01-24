@@ -435,16 +435,16 @@
         },
         {
             "name": "darling/roady-module-utilities",
-            "version": "1.0.1",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/RoadyModuleUtilities.git",
-                "reference": "eabda12c70da37e07f713edb2ed6b54f2204b16d"
+                "reference": "6775c0ff5869e7591b536e48542a371b64e08bad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/RoadyModuleUtilities/zipball/eabda12c70da37e07f713edb2ed6b54f2204b16d",
-                "reference": "eabda12c70da37e07f713edb2ed6b54f2204b16d",
+                "url": "https://api.github.com/repos/sevidmusic/RoadyModuleUtilities/zipball/6775c0ff5869e7591b536e48542a371b64e08bad",
+                "reference": "6775c0ff5869e7591b536e48542a371b64e08bad",
                 "shasum": ""
             },
             "require": {
@@ -479,9 +479,9 @@
             "description": "Provides classes for working with Roady modules.",
             "support": {
                 "issues": "https://github.com/sevidmusic/RoadyModuleUtilities/issues",
-                "source": "https://github.com/sevidmusic/RoadyModuleUtilities/tree/1.0.1"
+                "source": "https://github.com/sevidmusic/RoadyModuleUtilities/tree/v1.0.4"
             },
-            "time": "2024-01-24T03:18:39+00:00"
+            "time": "2024-01-24T18:17:28+00:00"
         },
         {
             "name": "darling/roady-routes",
@@ -928,16 +928,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.56",
+            "version": "1.10.57",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "27816a01aea996191ee14d010f325434c0ee76fa"
+                "reference": "1627b1d03446904aaa77593f370c5201d2ecc34e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/27816a01aea996191ee14d010f325434c0ee76fa",
-                "reference": "27816a01aea996191ee14d010f325434c0ee76fa",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1627b1d03446904aaa77593f370c5201d2ecc34e",
+                "reference": "1627b1d03446904aaa77593f370c5201d2ecc34e",
                 "shasum": ""
             },
             "require": {
@@ -986,7 +986,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-15T10:43:00+00:00"
+            "time": "2024-01-24T11:51:34+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
