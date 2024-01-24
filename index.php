@@ -314,6 +314,7 @@ class Router
         private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
         private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
         private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
+        # I may decide that output should have to be manually configured, still debating this
         private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
         private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
         private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
@@ -328,7 +329,7 @@ class Router
             as
             $pathToRoadyModuleDirectory
         ) {
-            $routes = $this->moduleRoutesJsonConfigurationReader
+            $manuallyConfiguredRoutes = $this->moduleRoutesJsonConfigurationReader
                             ->determineConfiguredRoutes(
                                 $request->url()->domain()->authority(),
                                 $pathToRoadyModuleDirectory,
@@ -338,11 +339,11 @@ class Router
                 [
                     'module' => $pathToRoadyModuleDirectory->name()->__toString(),
                     'authority' => $request->url()->domain()->authority()->__toString(),
-                    'number of manually defined routes' => count($routes->collection()),
+                    'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
                 ]
             );
         }
-        return new Response($request, (isset($routes) ? $routes : new RouteCollectionInstance()));
+        return new Response($request, (isset($manuallyConfiguredRoutes) ? $manuallyConfiguredRoutes : new RouteCollectionInstance()));
     }
 }
 
