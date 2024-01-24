@@ -1,25 +1,48 @@
 <?php
 
+/**
+ * This is a mock of the actual implementation of Roady's index.php.
+ *
+ * This file will change drastically before the release of Roady 2.0.
+ *
+ */
 
-use Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
-use Darling\PHPTextTypes\classes\strings\Name as NameInstance;
-use Darling\PHPTextTypes\classes\strings\SafeText as SafeTextInstance;
-use Darling\PHPTextTypes\classes\strings\Text as TextInstance;
-use Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
-use Darling\PHPTextTypes\interfaces\strings\Name;
-use Darling\PHPWebPaths\classes\paths\Domain as DomainInstance;
-use Darling\PHPWebPaths\classes\paths\Url as UrlInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Authority as AuthorityInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\DomainName as DomainNameInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Host as HostInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Path as PathInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Port as PortInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\Query as QueryInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\SubDomainName as SubDomainNameInstance;
-use Darling\PHPWebPaths\classes\paths\parts\url\TopLevelDomainName as TopLevelDomainNameInstance;
-use Darling\PHPWebPaths\enumerations\paths\parts\url\Scheme;
-use Darling\PHPWebPaths\interfaces\paths\Url;
+use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
+use \Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\classes\configuration\ModuleRoutesJsonConfigurationReader as ModuleRoutesJsonConfigurationReaderInstance;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\determinators\ModuleCSSRouteDeterminator as ModuleCSSRouteDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\determinators\ModuleJSRouteDeterminator as ModuleJSRouteDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\classes\determinators\ModuleOutputRouteDeterminator as ModuleOutputRouteDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\RoadyModuleFileSystemPathDeterminator;
+use \Darling\RoadyModuleUtilities\classes\determinators\RoadyModuleFileSystemPathDeterminator as RoadyModuleFileSystemPathDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
+use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules as ListingOfDirectoryOfRoadyModulesInstance;
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
+use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
+use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
+use \Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
+use \Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
+use \Darling\PHPTextTypes\classes\strings\Name as NameInstance;
+use \Darling\PHPTextTypes\classes\strings\SafeText as SafeTextInstance;
+use \Darling\PHPTextTypes\classes\strings\Text as TextInstance;
+use \Darling\PHPTextTypes\interfaces\collections\SafeTextCollection;
+use \Darling\PHPTextTypes\interfaces\strings\Name;
+use \Darling\PHPWebPaths\classes\paths\Domain as DomainInstance;
+use \Darling\PHPWebPaths\classes\paths\Url as UrlInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\Authority as AuthorityInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\DomainName as DomainNameInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\Fragment as FragmentInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\Host as HostInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\Path as PathInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\Port as PortInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\Query as QueryInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\SubDomainName as SubDomainNameInstance;
+use \Darling\PHPWebPaths\classes\paths\parts\url\TopLevelDomainName as TopLevelDomainNameInstance;
+use \Darling\PHPWebPaths\enumerations\paths\parts\url\Scheme;
+use \Darling\PHPWebPaths\interfaces\paths\Url;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
@@ -32,13 +55,14 @@ class Request
     private const DOMAIN_SEPARATOR = '.';
     private const QUERY_PARAMETER_NAME = 'query';
     private const FRAGMENT_PARAMETER_NAME = 'fragment';
+    private const SCHEME_PARAMETER_NAME = 'scheme';
 
-    public function __construct(private string|null $testUrl = null) {}
+    public function __construct(private string|null $urlString = null) {}
 
     public function name(): Name
     {
-        if(isset($this->testUrl) && !empty($this->testUrl)) {
-            $urlParts = parse_url($this->testUrl);
+        if(isset($this->urlString) && !empty($this->urlString)) {
+            $urlParts = parse_url($this->urlString);
             if(isset($urlParts[self::QUERY_PARAMETER_NAME])) {
                 $query = [];
                 parse_str(
@@ -83,8 +107,8 @@ class Request
     {
         $currentRequestsUrlParts = parse_url(
             (
-                isset($this->testUrl) && !empty($this->testUrl)
-                ? $this->testUrl
+                isset($this->urlString) && !empty($this->urlString)
+                ? $this->urlString
                 : $this->determineCurrentRequestUrlString()
             )
         );
@@ -105,6 +129,15 @@ class Request
                 ??
                 null
             );
+            $scheme = match(
+                $currentRequestsUrlParts[self::SCHEME_PARAMETER_NAME]
+                ??
+                null
+            ) {
+                Scheme::HTTPS->value => Scheme::HTTPS,
+                default => Scheme::HTTP,
+            };
+
             return match(count($domains)) {
                 1 => $this->newUrl(
                     domainName: $domains[0],
@@ -112,6 +145,7 @@ class Request
                     path: $path,
                     port: $port,
                     query: $query,
+                    scheme: $scheme,
                 ),
                 2 => $this->newUrl(
                     domainName: $domains[1],
@@ -119,6 +153,7 @@ class Request
                     path: $path,
                     port: $port,
                     query: $query,
+                    scheme: $scheme,
                     subDomainName: $domains[0],
                 ),
                 3 => $this->newUrl(
@@ -127,15 +162,17 @@ class Request
                     path: $path,
                     port: $port,
                     query: $query,
+                    scheme: $scheme,
                     subDomainName: $domains[0],
                     topLevelDomainName: $domains[2],
                 ),
                 default => $this->newUrl(
                     domainName: self::DEFAULT_HOST,
-                    port: $port,
+                    fragment: $fragment,
                     path: $path,
+                    port: $port,
                     query: $query,
-                    fragment: $fragment
+                    scheme: $scheme,
                 ),
             };
         }
@@ -150,12 +187,13 @@ class Request
         string $path = null,
         string $query = null,
         string $fragment = null,
+        Scheme $scheme = null,
     ): Url
     {
         return new UrlInstance(
             domain: new DomainInstance(
-                Scheme::HTTP,
-                new AuthorityInstance(
+                scheme: (isset($scheme) ? $scheme : Scheme::HTTP),
+                authority: new AuthorityInstance(
                     host: new HostInstance(
                         subDomainName: (
                             isset($subDomainName)
@@ -175,18 +213,28 @@ class Request
                             isset($topLevelDomainName)
                             ? new TopLevelDomainNameInstance(
                                 new NameInstance(
-                                    new TextInstance($topLevelDomainName)
+                                    new TextInstance(
+                                        $topLevelDomainName
+                                    )
                                 )
                             )
                             : null
                         ),
                     ),
-                    port: (isset($port) ? new PortInstance($port) : null),
+                    port: (
+                        isset($port)
+                        ? new PortInstance($port)
+                        : null
+                    ),
                 ),
             ),
             path: (
                 isset($path)
-                ? new PathInstance($this->deriveSafeTextCollectionFromPathString($path))
+                ? new PathInstance(
+                    $this->deriveSafeTextCollectionFromPathString(
+                        $path
+                    )
+                )
                 : null
             ),
             query: (
@@ -202,13 +250,17 @@ class Request
         );
     }
 
-    private function deriveSafeTextCollectionFromPathString(string $path): SafeTextCollection
+    private function deriveSafeTextCollectionFromPathString(
+        string $path
+    ): SafeTextCollection
     {
         $pathParts = explode(DIRECTORY_SEPARATOR, $path);
         $safeText = [];
         foreach ($pathParts as $pathPart) {
             if (!empty($pathPart)) {
-                $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
+                $safeText[] = new SafeTextInstance(
+                    new TextInstance($pathPart)
+                );
             }
         }
         return new SafeTextCollectionInstance(...$safeText);
@@ -222,7 +274,9 @@ class Request
     private function determineCurrentRequestUrlString(): string
     {
         $scheme = (
-            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === self::HTTPS_ON_VALUE
+            isset($_SERVER['HTTPS'])
+            &&
+            $_SERVER['HTTPS'] === self::HTTPS_ON_VALUE
             ? Scheme::HTTPS
             : Scheme::HTTP
         );
@@ -231,6 +285,88 @@ class Request
         return $scheme->value . '://' . $host . $uri;
     }
 
+}
+
+class Response
+{
+
+    public function __construct(
+        private Request $request,
+        private RouteCollection $routeCollection
+    ) {}
+
+    public function request(): Request
+    {
+        return $this->request;
+    }
+
+    public function routeCollection(): RouteCollection
+    {
+        return $this->routeCollection;
+    }
+
+}
+
+class Router
+{
+
+    public function __construct(
+        private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
+        private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
+        private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
+        # I may decide that output should have to be manually configured, still debating this
+        private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
+        private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
+        private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
+    ) {}
+
+    public function handleRequest(Request $request): Response
+    {
+        foreach (
+        $this->listingOfDirectoryOfRoadyModules
+             ->pathToRoadyModuleDirectoryCollection()
+             ->collection()
+            as
+            $pathToRoadyModuleDirectory
+        ) {
+            $manuallyConfiguredRoutes = $this->moduleRoutesJsonConfigurationReader
+                            ->determineConfiguredRoutes(
+                                $request->url()->domain()->authority(),
+                                $pathToRoadyModuleDirectory,
+                                $this->roadyModuleFileSystemPathDeterminator
+                            );
+            var_dump(
+                [
+                    'module' => $pathToRoadyModuleDirectory->name()->__toString(),
+                    'authority' => $request->url()->domain()->authority()->__toString(),
+                    'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
+                ]
+            );
+        }
+        return new Response($request, (isset($manuallyConfiguredRoutes) ? $manuallyConfiguredRoutes : new RouteCollectionInstance()));
+    }
+}
+
+class RoadyAPI
+{
+
+    public static function pathToDirectoryOfRoadyModules(): PathToDirectoryOfRoadyModules
+    {
+        $roadysRootDirectory = __DIR__;
+        $roadysRootDirectoryParts = explode(DIRECTORY_SEPARATOR, $roadysRootDirectory);
+        $safeText = [];
+        foreach ($roadysRootDirectoryParts as $pathPart) {
+            if(!empty($pathPart)) {
+                $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
+            }
+        }
+        $safeText[] = new SafeTextInstance(new TextInstance('modules'));
+        return new PathToDirectoryOfRoadyModulesInstance(
+            new PathToExistingDirectory(
+                new SafeTextCollectionInstance(...$safeText),
+            ),
+        );
+    }
 }
 
 $requestsUrls = [
@@ -246,6 +382,7 @@ $requestsUrls = [
     'http://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c',
     'http://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c',
     'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=c',
+    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=Kathooks%20Music',
     'https://foo.bar.baz:2343/some/path/bin.html',
     'https://foo.bar:43/some/path/bin.html',
     'https://foo:17/some/path/bin.html',
@@ -267,14 +404,26 @@ $requestsUrls = [
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
 
-var_dump(
-    [
-        'test url' => $testRequestsUrl,
-        'determined request name' => $currentRequest->name()->__toString(),
-        'determined request url' => $currentRequest->url()->__toString(),
-    ]
+$router = new Router(
+    new ListingOfDirectoryOfRoadyModulesInstance(
+        RoadyAPI::pathToDirectoryOfRoadyModules()
+    ),
+    new ModuleCSSRouteDeterminatorInstance(),
+    new ModuleJSRouteDeterminatorInstance(),
+    new ModuleOutputRouteDeterminatorInstance(),
+    new RoadyModuleFileSystemPathDeterminatorInstance(),
+    new ModuleRoutesJsonConfigurationReaderInstance(),
 );
 
+$router->handleRequest($currentRequest);
+var_dump(
+    [
+        'determined request name' => $currentRequest->name()->__toString(),
+        'url1' => $testRequestsUrl,
+        'url2' => $currentRequest->url()->__toString(),
+        'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
+    ],
+);
 
 ?>
 <form action="index.php" method="get">
