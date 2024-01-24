@@ -362,18 +362,20 @@ class Router
                 );
                 foreach ($determinedRoutes as $route) {
                     var_dump($route->relativePath()->__toString());
+                    if (in_array($request->name(), $route->nameCollection()->collection())) {
+                        var_dump(
+                            [
+                                'module' => $pathToRoadyModuleDirectory->name()->__toString(),
+                                'authority' => $request->url()->domain()->authority()->__toString(),
+                                'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
+                                'number of dynamically determined css routes' => count($dynamicallyDeterminedCssRoutes->collection()),
+                                'number of dynamically determined js routes' => count($dynamicallyDeterminedJsRoutes->collection()),
+                                'number of dynamically determined output routes' => count($dynamicallyDeterminedOutputRoutes->collection()),
+                                'total number of routes determined' => count($determinedRoutes),
+                            ]
+                        );
+                    }
                 }
-                var_dump(
-                    [
-                        'module' => $pathToRoadyModuleDirectory->name()->__toString(),
-                        'authority' => $request->url()->domain()->authority()->__toString(),
-                        'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
-                        'number of dynamically determined css routes' => count($dynamicallyDeterminedCssRoutes->collection()),
-                        'number of dynamically determined js routes' => count($dynamicallyDeterminedJsRoutes->collection()),
-                        'number of dynamically determined output routes' => count($dynamicallyDeterminedOutputRoutes->collection()),
-                        'total number of routes determined' => count($determinedRoutes),
-                    ]
-                );
             }
         }
         return new Response($request, (isset($manuallyConfiguredRoutes) ? $manuallyConfiguredRoutes : new RouteCollectionInstance()));
