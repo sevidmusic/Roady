@@ -1,1 +1,24 @@
-
+[
+    {
+        "module-name": "hello-multiverse",
+        "responds-to": [
+            "homepage",
+            "hello-multiverse"
+        ],
+        "named-positions": [
+            {
+                "position-name": "section-a",
+                "position": 61.0
+            },
+            {
+                "position-name": "section-b",
+                "position": 1.0
+            },
+            {
+                "position-name": "section-g",
+                "position": 99.51
+            }
+        ],
+        "relative-path": "output\/hello-multiverse.html"
+    }
+]
