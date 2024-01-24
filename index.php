@@ -338,11 +338,11 @@ class Router
                 [
                     'module' => $pathToRoadyModuleDirectory->name()->__toString(),
                     'authority' => $request->url()->domain()->authority()->__toString(),
-                    'routes' => $routes,
+                    'number of manually defined routes' => count($routes->collection()),
                 ]
             );
         }
-        return new Response($request, new RouteCollectionInstance());
+        return new Response($request, (isset($routes) ? $routes : new RouteCollectionInstance()));
     }
 }
 
@@ -369,34 +369,34 @@ class RoadyAPI
 }
 
 $requestsUrls = [
-#    'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
-#    'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
-#    'https://foo:17/some/path/bin.html?request=specific-request&q=a&b=c#frag',
-#    'http://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
-#    'http://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
-#    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=c#frag',
-#    'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c',
-#    'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c',
-#    'https://foo:17/some/path/bin.html?request=specific-request&q=a&b=c',
-#    'http://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c',
-#    'http://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c',
-#    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=c',
-#    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=Kathooks%20Music',
-#    'https://foo.bar.baz:2343/some/path/bin.html',
-#    'https://foo.bar:43/some/path/bin.html',
-#    'https://foo:17/some/path/bin.html',
-#    'http://foo.bar.baz:2343/some/path/bin.html',
-#    'http://foo.bar:43/some/path/bin.html',
-#    'http://foo:17/some/path/bin.html',
-#    'https://foo.bar.baz:2343/',
-#    'https://foo.bar:43/',
-#    'https://foo:17/',
-#    'http://foo.bar.baz:2343/',
-#    'http://foo.bar:43/',
-#    'http://foo:17/',
-#    'https://',
-#    'http://',
-#    '',
+    'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
+    'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
+    'https://foo:17/some/path/bin.html?request=specific-request&q=a&b=c#frag',
+    'http://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
+    'http://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
+    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=c#frag',
+    'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c',
+    'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c',
+    'https://foo:17/some/path/bin.html?request=specific-request&q=a&b=c',
+    'http://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c',
+    'http://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c',
+    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=c',
+    'http://foo:17/some/path/bin.html?request=specific-request&q=a&b=Kathooks%20Music',
+    'https://foo.bar.baz:2343/some/path/bin.html',
+    'https://foo.bar:43/some/path/bin.html',
+    'https://foo:17/some/path/bin.html',
+    'http://foo.bar.baz:2343/some/path/bin.html',
+    'http://foo.bar:43/some/path/bin.html',
+    'http://foo:17/some/path/bin.html',
+    'https://foo.bar.baz:2343/',
+    'https://foo.bar:43/',
+    'https://foo:17/',
+    'http://foo.bar.baz:2343/',
+    'http://foo.bar:43/',
+    'http://foo:17/',
+    'https://',
+    'http://',
+    '',
     null,
 ];
 
@@ -415,7 +415,6 @@ $router = new Router(
 );
 
 $router->handleRequest($currentRequest);
-/*
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
@@ -424,7 +423,6 @@ var_dump(
         'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
     ],
 );
-*/
 
 ?>
 <form action="index.php" method="get">
