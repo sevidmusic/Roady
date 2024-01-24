@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /**
  * This is a mock of the actual implementation of Roady's index.php.
  *
@@ -10,27 +7,8 @@
  *
  */
 
-use Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
-use Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
-use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
-use \Darling\RoadyRoutes\classes\paths\RelativePath as RelativePathInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
-use \Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
-use \Darling\RoadyModuleUtilities\classes\configuration\ModuleRoutesJsonConfigurationReader as ModuleRoutesJsonConfigurationReaderInstance;
-use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\determinators\ModuleCSSRouteDeterminator as ModuleCSSRouteDeterminatorInstance;
-use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\determinators\ModuleJSRouteDeterminator as ModuleJSRouteDeterminatorInstance;
-use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleOutputRouteDeterminator;
-use \Darling\RoadyModuleUtilities\classes\determinators\ModuleOutputRouteDeterminator as ModuleOutputRouteDeterminatorInstance;
-use \Darling\RoadyModuleUtilities\interfaces\determinators\RoadyModuleFileSystemPathDeterminator;
-use \Darling\RoadyModuleUtilities\classes\determinators\RoadyModuleFileSystemPathDeterminator as RoadyModuleFileSystemPathDeterminatorInstance;
-use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules as ListingOfDirectoryOfRoadyModulesInstance;
-use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
-use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
-use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
-use \Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
+use \Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
 use \Darling\PHPTextTypes\classes\strings\Name as NameInstance;
 use \Darling\PHPTextTypes\classes\strings\SafeText as SafeTextInstance;
@@ -50,6 +28,24 @@ use \Darling\PHPWebPaths\classes\paths\parts\url\SubDomainName as SubDomainNameI
 use \Darling\PHPWebPaths\classes\paths\parts\url\TopLevelDomainName as TopLevelDomainNameInstance;
 use \Darling\PHPWebPaths\enumerations\paths\parts\url\Scheme;
 use \Darling\PHPWebPaths\interfaces\paths\Url;
+use \Darling\RoadyModuleUtilities\classes\configuration\ModuleRoutesJsonConfigurationReader as ModuleRoutesJsonConfigurationReaderInstance;
+use \Darling\RoadyModuleUtilities\classes\determinators\ModuleCSSRouteDeterminator as ModuleCSSRouteDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\classes\determinators\ModuleJSRouteDeterminator as ModuleJSRouteDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\classes\determinators\ModuleOutputRouteDeterminator as ModuleOutputRouteDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\classes\determinators\RoadyModuleFileSystemPathDeterminator as RoadyModuleFileSystemPathDeterminatorInstance;
+use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules as ListingOfDirectoryOfRoadyModulesInstance;
+use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
+use \Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleOutputRouteDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\determinators\RoadyModuleFileSystemPathDeterminator;
+use \Darling\RoadyModuleUtilities\interfaces\directory\listings\ListingOfDirectoryOfRoadyModules;
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
+use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
+use \Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
+use \Darling\RoadyRoutes\classes\paths\RelativePath as RelativePathInstance;
+use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
@@ -360,25 +356,14 @@ class Router
                     $dynamicallyDeterminedJsRoutes->collection(),
                     $dynamicallyDeterminedOutputRoutes->collection(),
                 );
-                foreach ($determinedRoutes as $route) {
-                    var_dump($route->relativePath()->__toString());
-                    if (in_array($request->name(), $route->nameCollection()->collection())) {
-                        var_dump(
-                            [
-                                'module' => $pathToRoadyModuleDirectory->name()->__toString(),
-                                'authority' => $request->url()->domain()->authority()->__toString(),
-                                'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
-                                'number of dynamically determined css routes' => count($dynamicallyDeterminedCssRoutes->collection()),
-                                'number of dynamically determined js routes' => count($dynamicallyDeterminedJsRoutes->collection()),
-                                'number of dynamically determined output routes' => count($dynamicallyDeterminedOutputRoutes->collection()),
-                                'total number of routes determined' => count($determinedRoutes),
-                            ]
-                        );
+                foreach($determinedRoutes as $route) {
+                    if(in_array($request->name(), $route->nameCollection()->collection())) {
+                        $respondingRoutes[] = $route;
                     }
                 }
             }
         }
-        return new Response($request, (isset($manuallyConfiguredRoutes) ? $manuallyConfiguredRoutes : new RouteCollectionInstance()));
+        return new Response($request, new RouteCollectionInstance(...$respondingRoutes));
     }
 
     private function configurationFileExistsForCurrentRequestsAuthority(PathToRoadyModuleDirectory $pathToRoadyModuleDirectory, Request $request): bool
@@ -487,13 +472,13 @@ $router = new Router(
     new ModuleRoutesJsonConfigurationReaderInstance(),
 );
 
-$router->handleRequest($currentRequest);
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
-        'url1' => $testRequestsUrl,
-        'url2' => $currentRequest->url()->__toString(),
-        'url3' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
+        'test url' => $testRequestsUrl,
+        'current request url' => $currentRequest->url()->__toString(),
+        'response\'s request url' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
+        $router->handleRequest($currentRequest),
     ],
 );
 
