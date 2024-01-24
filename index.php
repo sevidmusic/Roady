@@ -493,7 +493,7 @@ var_dump(
 );
 
 foreach ($router->handleRequest($currentRequest)->routeCollection()->collection() as $route) {
-    var_dump($route->moduleName()->__toString(), $route->relativePath()->__toString());
+    var_dump([$route->moduleName()->__toString(), $route->relativePath()->__toString()]);
 }
 
 
