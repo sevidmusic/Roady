@@ -359,6 +359,9 @@ class Router
                         'module' => $pathToRoadyModuleDirectory->name()->__toString(),
                         'authority' => $request->url()->domain()->authority()->__toString(),
                         'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
+                        'number of dynamically determined css routes' => count($dynamicallyDeterminedCssRoutes->collection()),
+                        'number of dynamically determined js routes' => count($dynamicallyDeterminedJsRoutes->collection()),
+                        'number of dynamically determined output routes' => count($dynamicallyDeterminedOutputRoutes->collection()),
                     ]
                 );
             }
