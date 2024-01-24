@@ -449,8 +449,8 @@ class RoadyUI
         foreach($sortedRoutes as $namedPosition) {
             foreach($namedPosition as $route) {
                 $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectoryInstance($this->pathToDirectoryOfRoadyModules, $route->moduleName());
-                var_dump($pathToRoadyModuleDirectory->__toString());
                 $pathToFile = $this->roadyModuleFileSystemPathDeterminator->determinePathToFileInModuleDirectory($pathToRoadyModuleDirectory, $route->relativePath());
+                echo file_get_contents($pathToFile->__toString());
             }
         }
         return '';
