@@ -357,12 +357,6 @@ class Router
                 );
                 foreach($determinedRoutes as $route) {
                     if(in_array($request->name(), $route->nameCollection()->collection())) {
-                        var_dump(
-                            [
-                                'relativePath' => $route->relativePath()->__toString(),
-                                'matches request' =>  in_array($request->name(), $route->nameCollection()->collection()),
-                            ]
-                        );
                         $respondingRoutes[] = $route;
                     }
                 }
@@ -484,6 +478,7 @@ var_dump(
         'test url' => $testRequestsUrl,
         'current request url' => $currentRequest->url()->__toString(),
         'response\'s request url' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
+        'response\'s routes' => $router->handleRequest($currentRequest)->routeCollection()->collection(),
     ],
 );
 
