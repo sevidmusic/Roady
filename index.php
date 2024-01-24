@@ -508,3 +508,5 @@ foreach ($router->handleRequest($currentRequest)->routeCollection()->collection(
     <input type="submit" value="Submit">
 </form>
 
+<a href="http://localhost:8080?request=hello-multiverse">Hello Multiverse</a>
+
