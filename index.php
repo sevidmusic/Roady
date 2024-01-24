@@ -469,8 +469,8 @@ $requestsUrls = [
 ];
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
-# $currentRequest = new Request($testRequestsUrl);
-$currentRequest = new Request();
+$currentRequest = new Request($testRequestsUrl);
+#$currentRequest = new Request();
 
 $router = new Router(
     new ListingOfDirectoryOfRoadyModulesInstance(
