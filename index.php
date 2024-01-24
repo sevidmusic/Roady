@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * This is a mock of the actual implementation of Roady's index.php.
  *
@@ -7,6 +8,8 @@
  *
  */
 
+use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
+use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter as RouteCollectionSorterInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
 use \Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
@@ -35,6 +38,7 @@ use \Darling\RoadyModuleUtilities\classes\determinators\ModuleOutputRouteDetermi
 use \Darling\RoadyModuleUtilities\classes\determinators\RoadyModuleFileSystemPathDeterminator as RoadyModuleFileSystemPathDeterminatorInstance;
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules as ListingOfDirectoryOfRoadyModulesInstance;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
+use \Darling\RoadyModuleUtilities\classes\paths\PathToRoadyModuleDirectory as PathToRoadyModuleDirectoryInstance;
 use \Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
@@ -346,9 +350,18 @@ class Router
                                                      $pathToRoadyModuleDirectory,
                                                      $this->roadyModuleFileSystemPathDeterminator
                                                  );
-                $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator->determineCSSRoutes($pathToRoadyModuleDirectory);
-                $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator->determineJSRoutes($pathToRoadyModuleDirectory);
-                $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator->determineOutputRoutes($pathToRoadyModuleDirectory);
+                $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator
+                                                       ->determineCSSRoutes(
+                                                           $pathToRoadyModuleDirectory
+                                                       );
+                $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator
+                                                      ->determineJSRoutes(
+                                                          $pathToRoadyModuleDirectory
+                                                      );
+                $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator
+                                                          ->determineOutputRoutes(
+                                                              $pathToRoadyModuleDirectory
+                                                          );
                 $determinedRoutes = array_merge(
                     $manuallyConfiguredRoutes->collection(),
                     $dynamicallyDeterminedCssRoutes->collection(),
@@ -425,6 +438,25 @@ class RoadyAPI
     }
 }
 
+class RoadyUI
+{
+
+    public function __construct(private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules, private RouteCollectionSorter $routeCollectionSorter, private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator) {}
+
+    public function render(Response $response): string
+    {
+        $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition($response->routeCollection());
+        foreach($sortedRoutes as $namedPosition) {
+            foreach($namedPosition as $route) {
+                $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectoryInstance($this->pathToDirectoryOfRoadyModules, $route->moduleName());
+                var_dump($pathToRoadyModuleDirectory->__toString());
+                $pathToFile = $this->roadyModuleFileSystemPathDeterminator->determinePathToFileInModuleDirectory($pathToRoadyModuleDirectory, $route->relativePath());
+            }
+        }
+        return '';
+    }
+}
+
 $requestsUrls = [
     'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
     'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
@@ -459,7 +491,7 @@ $requestsUrls = [
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
-#$currentRequest = new Request();
+$currentRequest = new Request();
 
 $router = new Router(
     new ListingOfDirectoryOfRoadyModulesInstance(
@@ -472,19 +504,29 @@ $router = new Router(
     new ModuleRoutesJsonConfigurationReaderInstance(),
 );
 
+$response = $router->handleRequest($currentRequest);
+
+$roadyUI = new RoadyUI(RoadyAPI::pathToDirectoryOfRoadyModules(), new RouteCollectionSorterInstance(), new RoadyModuleFileSystemPathDeterminatorInstance());
+
+echo $roadyUI->render($response);
+
+/*
 var_dump(
     [
         'determined request name' => $currentRequest->name()->__toString(),
         'test url' => $testRequestsUrl,
         'current request url' => $currentRequest->url()->__toString(),
         'response\'s request url' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
-        'response\'s routes' => $router->handleRequest($currentRequest)->routeCollection()->collection(),
+        'response\'s routes' => $response->routeCollection()->collection(),
     ],
 );
+*/
 
-foreach ($router->handleRequest($currentRequest)->routeCollection()->collection() as $route) {
+/*
+foreach ($response->routeCollection()->collection() as $route) {
     var_dump([$route->moduleName()->__toString(), $route->relativePath()->__toString()]);
 }
+*/
 
 ?>
 
