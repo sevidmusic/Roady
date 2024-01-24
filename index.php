@@ -329,7 +329,7 @@ class Router
 
     public function handleRequest(Request $request): Response
     {
-        $determinedRoutes = [];
+        $respondingRoutes = [];
         foreach (
         $this->listingOfDirectoryOfRoadyModules
              ->pathToRoadyModuleDirectoryCollection()
@@ -354,12 +354,15 @@ class Router
                 $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator->determineCSSRoutes($pathToRoadyModuleDirectory);
                 $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator->determineJSRoutes($pathToRoadyModuleDirectory);
                 $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator->determineOutputRoutes($pathToRoadyModuleDirectory);
-                $foo = array_merge(
+                $determinedRoutes = array_merge(
                     $manuallyConfiguredRoutes->collection(),
                     $dynamicallyDeterminedCssRoutes->collection(),
                     $dynamicallyDeterminedJsRoutes->collection(),
                     $dynamicallyDeterminedOutputRoutes->collection(),
                 );
+                foreach ($determinedRoutes as $route) {
+                    var_dump($route->relativePath()->__toString());
+                }
                 var_dump(
                     [
                         'module' => $pathToRoadyModuleDirectory->name()->__toString(),
@@ -368,7 +371,7 @@ class Router
                         'number of dynamically determined css routes' => count($dynamicallyDeterminedCssRoutes->collection()),
                         'number of dynamically determined js routes' => count($dynamicallyDeterminedJsRoutes->collection()),
                         'number of dynamically determined output routes' => count($dynamicallyDeterminedOutputRoutes->collection()),
-                        'total number of routes determined' => count($foo),
+                        'total number of routes determined' => count($determinedRoutes),
                     ]
                 );
             }
