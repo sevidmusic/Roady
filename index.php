@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 /**
  * This is a mock of the actual implementation of Roady's index.php.
  *
@@ -7,6 +10,10 @@
  *
  */
 
+use Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
+use Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
+use \Darling\RoadyRoutes\interfaces\paths\RelativePath;
+use \Darling\RoadyRoutes\classes\paths\RelativePath as RelativePathInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
 use \Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\classes\configuration\ModuleRoutesJsonConfigurationReader as ModuleRoutesJsonConfigurationReaderInstance;
@@ -329,22 +336,68 @@ class Router
             as
             $pathToRoadyModuleDirectory
         ) {
-            $manuallyConfiguredRoutes = $this->moduleRoutesJsonConfigurationReader
-                            ->determineConfiguredRoutes(
-                                $request->url()->domain()->authority(),
-                                $pathToRoadyModuleDirectory,
-                                $this->roadyModuleFileSystemPathDeterminator
-                            );
-            var_dump(
-                [
-                    'module' => $pathToRoadyModuleDirectory->name()->__toString(),
-                    'authority' => $request->url()->domain()->authority()->__toString(),
-                    'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
-                ]
-            );
+            if(
+                $this->configurationFileExistsForCurrentRequestsAuthority(
+                    $pathToRoadyModuleDirectory,
+                    $request
+                )
+            ) {
+                $manuallyConfiguredRoutes = $this->moduleRoutesJsonConfigurationReader
+                                                 ->determineConfiguredRoutes(
+                                                     $request->url()
+                                                             ->domain()
+                                                             ->authority(),
+                                                     $pathToRoadyModuleDirectory,
+                                                     $this->roadyModuleFileSystemPathDeterminator
+                                                 );
+                var_dump(
+                    [
+                        'module' => $pathToRoadyModuleDirectory->name()->__toString(),
+                        'authority' => $request->url()->domain()->authority()->__toString(),
+                        'number of manually defined routes' => count($manuallyConfiguredRoutes->collection()),
+                    ]
+                );
+            }
         }
         return new Response($request, (isset($manuallyConfiguredRoutes) ? $manuallyConfiguredRoutes : new RouteCollectionInstance()));
     }
+
+    private function configurationFileExistsForCurrentRequestsAuthority(PathToRoadyModuleDirectory $pathToRoadyModuleDirectory, Request $request): bool
+    {
+        return str_replace(
+            ':',
+            '.',
+            $request->url()->domain()->authority()->__toString()
+        ) . '.json'
+        ===
+        $this->determinePathToConfigurationFile(
+            $pathToRoadyModuleDirectory,
+            $request
+        )->name()->__toString();
+    }
+
+    private function determinePathToConfigurationFile(PathToRoadyModuleDirectory $pathToRoadyModuleDirectory, Request $request): PathToExistingFile
+    {
+        return $this->roadyModuleFileSystemPathDeterminator
+                    ->determinePathToFileInModuleDirectory(
+                        $pathToRoadyModuleDirectory,
+                        new RelativePathInstance(
+                            new SafeTextCollectionInstance(
+                                new SafeTextInstance(
+                                    new TextInstance(
+                                        str_replace(
+                                            ':',
+                                            '.',
+                                            $request->url()->domain()->authority()->__toString()
+                                        ) . '.json'
+                                    )
+                                )
+                            )
+                        ),
+                    );
+    }
+
+
 }
 
 class RoadyAPI
