@@ -520,8 +520,18 @@ EOT;
                 &&
                 isset($renderedOutput[$availableNamedPosition])
             ) {
-                $uiLayoutString = str_replace('<' . $availableNamedPosition . '></' . $availableNamedPosition . '>', '<div class="' . $availableNamedPosition . '">' . implode(PHP_EOL, $renderedOutput[$availableNamedPosition]) . '</div>', $uiLayoutString);
+                $uiLayoutString = match(
+                    $availableNamedPosition === 'roady-ui-css-stylesheet-link-tags'
+                    ||
+                    $availableNamedPosition === 'roady-ui-js-script-tags-for-html-head'
+                    ||
+                    $availableNamedPosition === 'roady-ui-js-script-tags-for-end-of-html'
+                ) {
+                    true => str_replace('<' . $availableNamedPosition . '></' . $availableNamedPosition . '>', implode(PHP_EOL, $renderedOutput[$availableNamedPosition]), $uiLayoutString),
+                    default => str_replace('<' . $availableNamedPosition . '></' . $availableNamedPosition . '>', '<div class="' . $availableNamedPosition . '">' . implode(PHP_EOL, $renderedOutput[$availableNamedPosition]) . '</div>', $uiLayoutString),
+                };
             }
+            $uiLayoutString = str_replace('<' . $availableNamedPosition . '></' . $availableNamedPosition . '>', '', $uiLayoutString);
         }
         return $uiLayoutString;
     }
@@ -579,18 +589,4 @@ $response = $router->handleRequest($currentRequest);
 $roadyUI = new RoadyUI(RoadyAPI::pathToDirectoryOfRoadyModules(), new RouteCollectionSorterInstance(), new RoadyModuleFileSystemPathDeterminatorInstance());
 
 echo $roadyUI->render($response);
-
-?>
-
-<form action="index.php" method="get">
-    <input type="hidden" id="request" name="request" value="get-request"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-<form action="index.php" method="post">
-    <input type="hidden" id="request" name="request" value="post-request"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-<a href="http://localhost:8080?request=hello-multiverse">Hello Multiverse</a>
 
