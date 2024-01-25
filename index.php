@@ -369,7 +369,11 @@ class Router
                     $dynamicallyDeterminedOutputRoutes->collection(),
                 );
                 foreach($determinedRoutes as $route) {
-                    if(in_array($request->name(), $route->nameCollection()->collection())) {
+                    if(
+                        in_array($request->name(), $route->nameCollection()->collection())
+                        ||
+                        in_array(new NameInstance(new TextInstance('global')), $route->nameCollection()->collection())
+                    ) {
                         $respondingRoutes[] = $route;
                     }
                 }
