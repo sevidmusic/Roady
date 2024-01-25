@@ -445,7 +445,10 @@ class RoadyAPI
 class RoadyUI
 {
 
-    private $availableNamedPositions = [
+    /**
+     * @var array<int, string> $availableNamedPositions
+     */
+    private array $availableNamedPositions = [
         'roady-ui-page-title-placeholder',
         'roady-ui-css-stylesheet-link-tags',
         'roady-ui-js-script-tags-for-html-head',
