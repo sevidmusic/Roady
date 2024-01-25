@@ -441,6 +441,59 @@ class RoadyAPI
 class RoadyUI
 {
 
+    private $availableNamedPositions = [
+        'roady-ui-page-title-placeholder',
+        'roady-ui-css-stylesheet-link-tags',
+        'roady-ui-js-script-tags-for-html-head',
+        'roady-ui-named-position-a',
+        'roady-ui-named-position-b',
+        'roady-ui-named-position-c',
+        'roady-ui-named-position-d',
+        'roady-ui-named-position-e',
+        'roady-ui-named-position-f',
+        'roady-ui-named-position-g',
+        'roady-ui-js-script-tags-for-end-of-html',
+    ];
+
+    private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-ui-page-title-placeholder></roady-ui-page-title-placeholder></title>
+
+        <roady-ui-css-stylesheet-link-tags></roady-ui-css-stylesheet-link-tags>
+
+        <roady-ui-js-script-tags-for-html-head></roady-ui-js-script-tags-for-html-head>
+
+    </head>
+
+    <body>
+
+        <roady-ui-named-position-a></roady-ui-named-position-a>
+
+        <roady-ui-named-position-b></roady-ui-named-position-b>
+
+        <roady-ui-named-position-c></roady-ui-named-position-c>
+
+        <roady-ui-named-position-d></roady-ui-named-position-d>
+
+        <roady-ui-named-position-e></roady-ui-named-position-e>
+
+        <roady-ui-named-position-f></roady-ui-named-position-f>
+
+        <roady-ui-named-position-g></roady-ui-named-position-g>
+
+    </body>
+
+</html>
+
+<roady-ui-js-script-tags-for-end-of-html></roady-ui-js-script-tags-for-end-of-html>
+
+EOT;
     public function __construct(private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules, private RouteCollectionSorter $routeCollectionSorter, private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator) {}
 
     public function render(Response $response): string
@@ -517,24 +570,6 @@ $response = $router->handleRequest($currentRequest);
 $roadyUI = new RoadyUI(RoadyAPI::pathToDirectoryOfRoadyModules(), new RouteCollectionSorterInstance(), new RoadyModuleFileSystemPathDeterminatorInstance());
 
 echo $roadyUI->render($response);
-
-/*
-var_dump(
-    [
-        'determined request name' => $currentRequest->name()->__toString(),
-        'test url' => $testRequestsUrl,
-        'current request url' => $currentRequest->url()->__toString(),
-        'response\'s request url' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
-        'response\'s routes' => $response->routeCollection()->collection(),
-    ],
-);
-*/
-
-/*
-foreach ($response->routeCollection()->collection() as $route) {
-    var_dump([$route->moduleName()->__toString(), $route->relativePath()->__toString()]);
-}
-*/
 
 ?>
 
