@@ -518,7 +518,6 @@ EOT;
                 };
             }
         }
-        var_dump($renderedOutput);
         foreach($this->availableNamedPositions as $availableNamedPosition) {
             if(
                 $availableNamedPosition !== 'roady-ui-page-title-placeholder'
