@@ -1,13 +1,21 @@
-{
-    "module-name": "hello-universe",
-    "responds-to": [
-        "homepage"
-    ],
-    "named-positions": [
-        {
-            "position-name": "roady-ui-named-position-a",
-            "position": 0
-        }
-    ],
-    "relative-path": "output/hello-universe.html"
-}
+[
+    {
+        "module-name": "hello-universe",
+        "responds-to": [
+            "homepage",
+            "foo"
+        ],
+        "named-positions": [
+            {
+                "position-name": "roady-ui-named-position-a",
+                "position": -1234.34
+            },
+            {
+                "position-name": "roady-ui-named-position-b",
+                "position": -1.0
+            }
+        ],
+        "relative-path": "output\/hello-universe.html"
+    }
+]
+
