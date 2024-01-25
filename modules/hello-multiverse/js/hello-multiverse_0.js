@@ -1,3 +1,4 @@
 
-alert('hello multiverse 0');
+alert('Hello Multiverse modules/hello-multiverse/js/hello-multiverse_0.js');
+
 

@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .roady-ui-named-position-c > * {
     padding: 1rem;
-    border: 1px solid #a44918;
+    background: black;
 }
 
 .roady-ui-named-position-d {
