@@ -455,7 +455,7 @@ class RoadyUI
                 $webPathToFile = $response->request()->url()->domain()->__toString() . DIRECTORY_SEPARATOR . basename($this->pathToDirectoryOfRoadyModules->__toString()) . DIRECTORY_SEPARATOR . $pathToRoadyModuleDirectory->name()->__toString();
                 $renderedOutput[$namedPosition][] = match($fileExtension) {
                     'css' => '<link rel="stylesheet" href="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'">',
-                    'js' => '',
+                    'js' => '<script src="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'"></script>',
                     default => file_get_contents($pathToFile->__toString()),
                 };
             }
