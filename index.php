@@ -8,8 +8,6 @@
  *
  */
 
-use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
-use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter as RouteCollectionSorterInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
 use \Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
@@ -49,7 +47,9 @@ use \Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules
 use \Darling\RoadyModuleUtilities\interfaces\paths\PathToRoadyModuleDirectory;
 use \Darling\RoadyRoutes\classes\collections\RouteCollection as RouteCollectionInstance;
 use \Darling\RoadyRoutes\classes\paths\RelativePath as RelativePathInstance;
+use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter as RouteCollectionSorterInstance;
 use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
+use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
@@ -64,7 +64,9 @@ class Request
     private const FRAGMENT_PARAMETER_NAME = 'fragment';
     private const SCHEME_PARAMETER_NAME = 'scheme';
 
-    public function __construct(private string|null $urlString = null) {}
+    public function __construct(
+        private string|null $urlString = null
+    ) {}
 
     public function name(): Name
     {
@@ -342,26 +344,30 @@ class Router
                     $request
                 )
             ) {
-                $manuallyConfiguredRoutes = $this->moduleRoutesJsonConfigurationReader
-                                                 ->determineConfiguredRoutes(
-                                                     $request->url()
-                                                             ->domain()
-                                                             ->authority(),
-                                                     $pathToRoadyModuleDirectory,
-                                                     $this->roadyModuleFileSystemPathDeterminator
-                                                 );
-                $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator
-                                                       ->determineCSSRoutes(
-                                                           $pathToRoadyModuleDirectory
-                                                       );
-                $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator
-                                                      ->determineJSRoutes(
-                                                          $pathToRoadyModuleDirectory
-                                                      );
-                $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator
-                                                          ->determineOutputRoutes(
-                                                              $pathToRoadyModuleDirectory
-                                                          );
+                $manuallyConfiguredRoutes =
+                    $this->moduleRoutesJsonConfigurationReader
+                         ->determineConfiguredRoutes(
+                             $request->url()
+                                     ->domain()
+                                     ->authority(),
+                             $pathToRoadyModuleDirectory,
+                             $this->roadyModuleFileSystemPathDeterminator
+                         );
+                $dynamicallyDeterminedCssRoutes =
+                    $this->moduleCSSRouteDeterminator
+                          ->determineCSSRoutes(
+                              $pathToRoadyModuleDirectory
+                          );
+                $dynamicallyDeterminedJsRoutes =
+                    $this->moduleJSRouteDeterminator
+                         ->determineJSRoutes(
+                             $pathToRoadyModuleDirectory
+                         );
+                $dynamicallyDeterminedOutputRoutes =
+                    $this->moduleOutputRouteDeterminator
+                         ->determineOutputRoutes(
+                             $pathToRoadyModuleDirectory
+                         );
                 $determinedRoutes = array_merge(
                     $manuallyConfiguredRoutes->collection(),
                     $dynamicallyDeterminedCssRoutes->collection(),
@@ -370,19 +376,31 @@ class Router
                 );
                 foreach($determinedRoutes as $route) {
                     if(
-                        in_array($request->name(), $route->nameCollection()->collection())
+                        in_array(
+                            $request->name(),
+                            $route->nameCollection()->collection()
+                        )
                         ||
-                        in_array(new NameInstance(new TextInstance('global')), $route->nameCollection()->collection())
+                        in_array(
+                            new NameInstance(new TextInstance('global')),
+                            $route->nameCollection()->collection()
+                        )
                     ) {
                         $respondingRoutes[] = $route;
                     }
                 }
             }
         }
-        return new Response($request, new RouteCollectionInstance(...$respondingRoutes));
+        return new Response(
+            $request,
+            new RouteCollectionInstance(...$respondingRoutes)
+        );
     }
 
-    private function configurationFileExistsForCurrentRequestsAuthority(PathToRoadyModuleDirectory $pathToRoadyModuleDirectory, Request $request): bool
+    private function configurationFileExistsForCurrentRequestsAuthority(
+        PathToRoadyModuleDirectory $pathToRoadyModuleDirectory,
+        Request $request
+    ): bool
     {
         return str_replace(
             ':',
@@ -396,7 +414,10 @@ class Router
         )->name()->__toString();
     }
 
-    private function determinePathToConfigurationFile(PathToRoadyModuleDirectory $pathToRoadyModuleDirectory, Request $request): PathToExistingFile
+    private function determinePathToConfigurationFile(
+        PathToRoadyModuleDirectory $pathToRoadyModuleDirectory,
+        Request $request
+    ): PathToExistingFile
     {
         return $this->roadyModuleFileSystemPathDeterminator
                     ->determinePathToFileInModuleDirectory(
@@ -408,7 +429,10 @@ class Router
                                         str_replace(
                                             ':',
                                             '.',
-                                            $request->url()->domain()->authority()->__toString()
+                                            $request->url()
+                                                    ->domain()
+                                                    ->authority()
+                                                    ->__toString()
                                         ) . '.json'
                                     )
                                 )
@@ -426,14 +450,21 @@ class RoadyAPI
     public static function pathToDirectoryOfRoadyModules(): PathToDirectoryOfRoadyModules
     {
         $roadysRootDirectory = __DIR__;
-        $roadysRootDirectoryParts = explode(DIRECTORY_SEPARATOR, $roadysRootDirectory);
+        $roadysRootDirectoryParts = explode(
+            DIRECTORY_SEPARATOR,
+            $roadysRootDirectory
+        );
         $safeText = [];
         foreach ($roadysRootDirectoryParts as $pathPart) {
             if(!empty($pathPart)) {
-                $safeText[] = new SafeTextInstance(new TextInstance($pathPart));
+                $safeText[] = new SafeTextInstance(
+                    new TextInstance($pathPart)
+                );
             }
         }
-        $safeText[] = new SafeTextInstance(new TextInstance('modules'));
+        $safeText[] = new SafeTextInstance(
+            new TextInstance('modules')
+        );
         return new PathToDirectoryOfRoadyModulesInstance(
             new PathToExistingDirectory(
                 new SafeTextCollectionInstance(...$safeText),
@@ -505,22 +536,59 @@ EOT;
     public function render(Response $response): string
     {
         $uiLayoutString = self::ROADY_UI_LAYOUT_STRING;
-        $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition($response->routeCollection());
+        $sortedRoutes = $this->routeCollectionSorter
+                             ->sortByNamedPosition(
+                                 $response->routeCollection()
+                             );
         $renderedOutput = [];
         foreach($sortedRoutes as $namedPosition => $routes) {
             foreach($routes as $route) {
-                $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectoryInstance($this->pathToDirectoryOfRoadyModules, $route->moduleName());
-                $pathToFile = $this->roadyModuleFileSystemPathDeterminator->determinePathToFileInModuleDirectory($pathToRoadyModuleDirectory, $route->relativePath());
-                $fileExtension = pathinfo($pathToFile,  PATHINFO_EXTENSION);
-                $webPathToFile = $response->request()->url()->domain()->__toString() . DIRECTORY_SEPARATOR . basename($this->pathToDirectoryOfRoadyModules->__toString()) . DIRECTORY_SEPARATOR . $pathToRoadyModuleDirectory->name()->__toString();
+                $pathToRoadyModuleDirectory =
+                    new PathToRoadyModuleDirectoryInstance(
+                        $this->pathToDirectoryOfRoadyModules,
+                        $route->moduleName()
+                    );
+                $pathToFile = $this->roadyModuleFileSystemPathDeterminator
+                                   ->determinePathToFileInModuleDirectory(
+                                       $pathToRoadyModuleDirectory,
+                                       $route->relativePath()
+                                   );
+                $fileExtension = pathinfo(
+                    $pathToFile,
+                    PATHINFO_EXTENSION
+                );
+                $webPathToFile = $response->request()
+                                          ->url()
+                                          ->domain()
+                                          ->__toString() .
+                                          DIRECTORY_SEPARATOR .
+                                          basename(
+                                              $this->pathToDirectoryOfRoadyModules
+                                              ->__toString()
+                                          ) .
+                                          DIRECTORY_SEPARATOR .
+                                          $pathToRoadyModuleDirectory->name()
+                                                                     ->__toString();
                 $renderedOutput[$namedPosition][] = match($fileExtension) {
-                    'css' => '<link rel="stylesheet" href="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'">',
-                    'js' => '<script src="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'"></script>',
-                    default => file_get_contents($pathToFile->__toString()),
+                    'css' => '<link rel="stylesheet" href="'.
+                        $webPathToFile .
+                        DIRECTORY_SEPARATOR .
+                        $route->relativePath()->__toString()  .
+                        '">',
+                    'js' => '<script src="'.
+                        $webPathToFile .
+                        DIRECTORY_SEPARATOR .
+                        $route->relativePath()->__toString()  .
+                        '"></script>',
+                    default => file_get_contents(
+                        $pathToFile->__toString()
+                    ),
                 };
             }
         }
-        foreach($this->availableNamedPositions as $availableNamedPosition) {
+        foreach(
+            $this->availableNamedPositions as $availableNamedPosition
+        ) {
             if(
                 $availableNamedPosition !== 'roady-ui-page-title-placeholder'
                 &&
@@ -651,7 +719,11 @@ $router = new Router(
 
 $response = $router->handleRequest($currentRequest);
 
-$roadyUI = new RoadyUI(RoadyAPI::pathToDirectoryOfRoadyModules(), new RouteCollectionSorterInstance(), new RoadyModuleFileSystemPathDeterminatorInstance());
+$roadyUI = new RoadyUI(
+    RoadyAPI::pathToDirectoryOfRoadyModules(),
+    new RouteCollectionSorterInstance(),
+    new RoadyModuleFileSystemPathDeterminatorInstance()
+);
 
 echo $roadyUI->render($response);
 
