@@ -1,159 +1,109 @@
+
 # Modules
 
-This directory is where Roady modules should be located.
+### Anatomy of a Module
 
-# Anatomy of a Module:
+| Directory                         | Description                                                  |
+|-----------------------------------|--------------------------------------------------------------|
+| `css`                             | This is where `css` stylesheets should be located.           |
+| `js`                              | This is where `javascript` files should be located.          |
+| `output`                          | This is where `php` and `html` files should be located.      |
+| `APPROPRIATE.SITE.AUTHORITY.json` | This file defines hard-coded Routes for a specific website.  |
 
-```
-css                              This is where css stylesheets should
-                                 be located.
+# How a Module Works
 
-js                               This is where javascript files should
-                                 be located.
-
-output                           This is where php and html files
-                                 should be located.
-
-APPROPRIATE.SITE.AUTHORITY.json  This file defines Routes for a
-                                 specific website.
-
-Note: Modules may also define custom files and directories if needed.
+Modules should be located in Roady's `modules` directory.
 
 ```
+/path/to/Roady/modules
+```
 
-# Typical Module Files and Directories:
+Modules may define `output` to be displayed via Roady's UI in the form
+of `html` or `php` files.
 
-### APPROPRIATE.SITE.AUTHORITY.json
+Modules may define `css` stylesheets and `javascript` files to define
+styles and implement additional functionality for a website.
 
-Manually configured Routes must be defined for a specific website in a
-`json` file named after the website's Domain's Authority.
+Modules may serve `php`, `html`, `css`, and `javascript`, in Response
+to a Request to a website via the Routes defined in a `json`
+file which is named after the website's Domain's Authority.
 
-For example, the following `json` defines two Routes for a
-website whose Authority is 'localhost:8080' in a file named
-`localhost.8080.json`:
+For example, `sub.example.com.8080.json` would be the name of the
+`json` file used to define Routes for a website with the following
+Domain:
+
+```
+ https://sub.example.com:8080/
+ |       \__________________/|
+ |               |           |
+ |           AUTHORITY       |
+  \_________________________/
+               |
+            Domain
+
+```
+
+Using a website's Domain's Authority to name Route configuration files
+allows Modules to define unique Routes for each website.
+
+### Routes
+
+A Route defines the following:
+
+ - The Name of the Module the Route is configured for.
+   Note: It is possible for a Module to define a Route
+   for another Module by setting the Route's Module name
+   to the name of the relevant Module.
+
+ - A collection of Names that correspond to the Names of the Requests
+   that a Route should be served in response to.
+
+ - A collection of Named Positions that correspond to the Named
+   Positions provided by Roady's UI. These Named Positions are used
+   to structure the collective output of all of the Route's that
+   respond to the same Request.
+
+ - A Relative Path to a `php` file, `html` file, `css` file, or
+   `javascript` file.
+
+For example, the following `json` defines a single Route to a `html`
+file named `output-file.html`:
 
 ```json
-[
-    {
-        "module-name": "module-name",
-        "responds-to": [
-            "name-of-a-request-this-route-responds-to",
-            "name-of-another-request-this-route-responds-to"
-        ],
-        "named-positions": [
-            {
-                "position-name": "section-a",
-                "position": 0.0
-            },
-            {
-                "position-name": "section-d",
-                "position": -72.26
-            },
-            {
-                "position-name": "section-f",
-                "position": 0.0
-            }
-        ],
-        "relative-path": "path\/to\/output-file.html"
-    },
-    {
-        "module-name": "module-name",
-        "responds-to": [
-            "name-of-a-request-this-route-responds-to",
-            "name-of-another-request-this-route-responds-to"
-        ],
-        "named-positions": [
-            {
-                "position-name": "section-g",
-                "position": 0.002
-            },
-            {
-                "position-name": "section-a",
-                "position": 2.6
-            },
-            {
-                "position-name": "section-c",
-                "position": 0.001
-            }
-        ],
-        "relative-path": "path\/to\/output-file.php"
-    }
-]
+{
+    "module-name": "module-name",
+    "responds-to": [
+        "name-of-a-request-this-route-responds-to"
+    ],
+    "named-positions": [
+        {
+            "position-name": "roady-ui-named-position-c",
+            "position": 1.7
+        }
+    ],
+    "relative-path": "path\/to\/output-file.html"
+}
 
 ```
 
-### CSS:
+# Roady UI's Named Positions
 
-The `css` directory is where a module's `css` stylesheets should be
-located.
+Modules may target the Named Positions provided by Roady's UI to
+determine where a Route's output will be rendered relative the
+the output of other Routes.
 
-The `css` directory is not required, but if it exists a Route will be
-dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the `css` stylesheet excluding
-the `.css` extension. Any additional Routes will have to be configured
-manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
+The following table is an overview of the the Named Positions provided
+by Roady's UI's:
 
-For example, a file named:
-
-    homepage.css
-
-would be served in response to a Request named:
-
-    homepage
-
-Files whose name contains the string:
-
-    global
-
-will be served in response to all Requests.
-
-### JS:
-
-The `js` directory is where a module's javascript files should be
-located.
-
-The `js` directory is not required, but if it exists a Route will be
-dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the javascript file excluding
-the `.js` extension. Any additional Routes will have to be configured
-manually in a `APPROPRIATE.SITE.AUTHORITY.json` file.
-
-For example, a file named:
-
-    homepage.js
-
-would be served in response to a Request named:
-
-    homepage
-
-Files whose name contains the string:
-
-    global
-
-will be served in response to all Requests.
-
-### OUTPUT:
-
-The `output` directory is where a module's `php` and `html` files
-should be located.
-
-The `output` directory is not required, but if it exists a Route will
-be dynamically defined for each file it contains that responds to a
-Request whose name matches the name of the `php` or `html` file
-excluding the `.php` or `.html` extension. Any additional Routes will
-have to be configured manually in a `APPROPRIATE.SITE.AUTHORITY.json`
-file.
-
-For example, a file named:
-
-    homepage.php
-
-would be served in response to a Request named:
-
-    homepage
-
-Files whose name contains the string:
-
-    global
-
-will be served in response to all Requests.
+| Named Position                              | Purpose                                                                              |
+|---------------------------------------------|--------------------------------------------------------------------------------------|
+| `<roady-ui-css-stylesheet-link-tags>`       | For `<link>` tags rendered for Routes to css stylesheets.                            |
+| `<roady-ui-js-script-tags-for-html-head>`   | For `<script>` tags rendered for Routes to javascropt files.                         |
+| `<roady-ui-named-position-a>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-b>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-c>`               | For Routes to `php` or `html` files.                                                 |
+| `<roady-ui-named-position-d>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-e>`               | For Routes to `php` or `html` files.                                                 |
+| `<roady-ui-named-position-f>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-named-position-g>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
+| `<roady-ui-js-script-tags-for-end-of-html>` | For Routes to javascript files that should be loaded after the closing `<body>` tag. |
