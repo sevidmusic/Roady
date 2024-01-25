@@ -498,6 +498,7 @@ EOT;
 
     public function render(Response $response): string
     {
+        $uiLayoutString = self::ROADY_UI_LAYOUT_STRING;
         $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition($response->routeCollection());
         $renderedOutput = [];
         foreach($sortedRoutes as $namedPosition => $routes) {
@@ -513,7 +514,15 @@ EOT;
                 };
             }
         }
-        var_dump($renderedOutput);
+        foreach($this->availableNamedPositions as $availableNamedPosition) {
+            if(
+                $availableNamedPosition !== 'roady-ui-page-title-placeholder'
+                &&
+                isset($renderedOutput[$availableNamedPosition])
+            ) {
+                var_dump($renderedOutput[$availableNamedPosition]);
+            }
+        }
         return '';
     }
 }
