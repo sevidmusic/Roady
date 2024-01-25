@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * This is a mock of the actual implementation of Roady's index.php.
  *
@@ -7,6 +8,8 @@
  *
  */
 
+use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
+use \Darling\RoadyRoutes\classes\sorters\RouteCollectionSorter as RouteCollectionSorterInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
 use \Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
@@ -35,6 +38,7 @@ use \Darling\RoadyModuleUtilities\classes\determinators\ModuleOutputRouteDetermi
 use \Darling\RoadyModuleUtilities\classes\determinators\RoadyModuleFileSystemPathDeterminator as RoadyModuleFileSystemPathDeterminatorInstance;
 use \Darling\RoadyModuleUtilities\classes\directory\listings\ListingOfDirectoryOfRoadyModules as ListingOfDirectoryOfRoadyModulesInstance;
 use \Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
+use \Darling\RoadyModuleUtilities\classes\paths\PathToRoadyModuleDirectory as PathToRoadyModuleDirectoryInstance;
 use \Darling\RoadyModuleUtilities\interfaces\configuration\ModuleRoutesJsonConfigurationReader;
 use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleCSSRouteDeterminator;
 use \Darling\RoadyModuleUtilities\interfaces\determinators\ModuleJSRouteDeterminator;
@@ -346,9 +350,18 @@ class Router
                                                      $pathToRoadyModuleDirectory,
                                                      $this->roadyModuleFileSystemPathDeterminator
                                                  );
-                $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator->determineCSSRoutes($pathToRoadyModuleDirectory);
-                $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator->determineJSRoutes($pathToRoadyModuleDirectory);
-                $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator->determineOutputRoutes($pathToRoadyModuleDirectory);
+                $dynamicallyDeterminedCssRoutes = $this->moduleCSSRouteDeterminator
+                                                       ->determineCSSRoutes(
+                                                           $pathToRoadyModuleDirectory
+                                                       );
+                $dynamicallyDeterminedJsRoutes = $this->moduleJSRouteDeterminator
+                                                      ->determineJSRoutes(
+                                                          $pathToRoadyModuleDirectory
+                                                      );
+                $dynamicallyDeterminedOutputRoutes = $this->moduleOutputRouteDeterminator
+                                                          ->determineOutputRoutes(
+                                                              $pathToRoadyModuleDirectory
+                                                          );
                 $determinedRoutes = array_merge(
                     $manuallyConfiguredRoutes->collection(),
                     $dynamicallyDeterminedCssRoutes->collection(),
@@ -356,18 +369,11 @@ class Router
                     $dynamicallyDeterminedOutputRoutes->collection(),
                 );
                 foreach($determinedRoutes as $route) {
-                    foreach ($route->nameCollection()->collection() as $name) {
-                        /*
-                        var_dump(
-                            [
-                                'relativePath' => $route->relativePath()->__toString(),
-                                'route responds to name' => $name->__toString(),
-                                'matches request' => $name->__toString() === $request->name()->__toString()
-                            ]
-                        );
-                        */
-                    }
-                    if(in_array($request->name(), $route->nameCollection()->collection())) {
+                    if(
+                        in_array($request->name(), $route->nameCollection()->collection())
+                        ||
+                        in_array(new NameInstance(new TextInstance('global')), $route->nameCollection()->collection())
+                    ) {
                         $respondingRoutes[] = $route;
                     }
                 }
@@ -436,6 +442,166 @@ class RoadyAPI
     }
 }
 
+class RoadyUI
+{
+
+    /**
+     * @var array<int, string> $availableNamedPositions
+     */
+    private array $availableNamedPositions = [
+        'roady-ui-page-title-placeholder',
+        'roady-ui-css-stylesheet-link-tags',
+        'roady-ui-js-script-tags-for-html-head',
+        'roady-ui-named-position-a',
+        'roady-ui-named-position-b',
+        'roady-ui-named-position-c',
+        'roady-ui-named-position-d',
+        'roady-ui-named-position-e',
+        'roady-ui-named-position-f',
+        'roady-ui-named-position-g',
+        'roady-ui-js-script-tags-for-end-of-html',
+    ];
+
+    private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title><roady-ui-page-title-placeholder></roady-ui-page-title-placeholder></title>
+
+        <roady-ui-css-stylesheet-link-tags></roady-ui-css-stylesheet-link-tags>
+
+        <roady-ui-js-script-tags-for-html-head></roady-ui-js-script-tags-for-html-head>
+
+    </head>
+
+    <body>
+
+        <roady-ui-named-position-a></roady-ui-named-position-a>
+
+        <roady-ui-named-position-b></roady-ui-named-position-b>
+
+        <roady-ui-named-position-c></roady-ui-named-position-c>
+
+        <roady-ui-named-position-d></roady-ui-named-position-d>
+
+        <roady-ui-named-position-e></roady-ui-named-position-e>
+
+        <roady-ui-named-position-f></roady-ui-named-position-f>
+
+        <roady-ui-named-position-g></roady-ui-named-position-g>
+
+    </body>
+
+</html>
+
+<roady-ui-js-script-tags-for-end-of-html></roady-ui-js-script-tags-for-end-of-html>
+
+EOT;
+    public function __construct(private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules, private RouteCollectionSorter $routeCollectionSorter, private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator) {}
+
+    public function render(Response $response): string
+    {
+        $uiLayoutString = self::ROADY_UI_LAYOUT_STRING;
+        $sortedRoutes = $this->routeCollectionSorter->sortByNamedPosition($response->routeCollection());
+        $renderedOutput = [];
+        foreach($sortedRoutes as $namedPosition => $routes) {
+            foreach($routes as $route) {
+                $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectoryInstance($this->pathToDirectoryOfRoadyModules, $route->moduleName());
+                $pathToFile = $this->roadyModuleFileSystemPathDeterminator->determinePathToFileInModuleDirectory($pathToRoadyModuleDirectory, $route->relativePath());
+                $fileExtension = pathinfo($pathToFile,  PATHINFO_EXTENSION);
+                $webPathToFile = $response->request()->url()->domain()->__toString() . DIRECTORY_SEPARATOR . basename($this->pathToDirectoryOfRoadyModules->__toString()) . DIRECTORY_SEPARATOR . $pathToRoadyModuleDirectory->name()->__toString();
+                $renderedOutput[$namedPosition][] = match($fileExtension) {
+                    'css' => '<link rel="stylesheet" href="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'">',
+                    'js' => '<script src="'. $webPathToFile . DIRECTORY_SEPARATOR . $route->relativePath()->__toString()  .'"></script>',
+                    default => file_get_contents($pathToFile->__toString()),
+                };
+            }
+        }
+        foreach($this->availableNamedPositions as $availableNamedPosition) {
+            if(
+                $availableNamedPosition !== 'roady-ui-page-title-placeholder'
+                &&
+                isset($renderedOutput[$availableNamedPosition])
+            ) {
+                $uiLayoutString = match(
+                    $availableNamedPosition === 'roady-ui-css-stylesheet-link-tags'
+                    ||
+                    $availableNamedPosition === 'roady-ui-js-script-tags-for-html-head'
+                    ||
+                    $availableNamedPosition === 'roady-ui-js-script-tags-for-end-of-html'
+                ) {
+                    true => str_replace(
+                        '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
+                        implode(PHP_EOL, $renderedOutput[$availableNamedPosition]),
+                        $uiLayoutString
+                    ),
+                    default => str_replace(
+                        '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
+                        PHP_EOL .
+                        '<!-- begin ' . $availableNamedPosition . ' -->' .
+                        PHP_EOL .
+                        '<div class="' . $availableNamedPosition . '">' .
+                            PHP_EOL .
+                            PHP_EOL .
+                            implode(
+                                PHP_EOL,
+                                $renderedOutput[$availableNamedPosition]
+                            ) .
+                            PHP_EOL .
+                        '</div>' .
+                        PHP_EOL .
+                        '<!-- end ' . $availableNamedPosition . ' -->',
+                        $uiLayoutString
+                    ),
+                };
+            }
+            // Clean up unused/empty positions.
+            // css, js, and title should be removed if not used
+            // named positions a-g should be replaced with an empty div whose class attribute is assigned the postions's name
+            $uiLayoutString = match(
+                $availableNamedPosition === 'roady-ui-css-stylesheet-link-tags'
+                ||
+                $availableNamedPosition === 'roady-ui-js-script-tags-for-html-head'
+                ||
+                $availableNamedPosition === 'roady-ui-js-script-tags-for-end-of-html'
+                ||
+                $availableNamedPosition === 'roady-ui-page-title-placeholder'
+            ) {
+                true => str_replace(
+                    '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
+                    '',
+                    $uiLayoutString
+                ),
+                default => str_replace(
+                    '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
+                     PHP_EOL .
+                     '<!-- begin ' . $availableNamedPosition . ' -->' .
+                     PHP_EOL .
+                     '<div class="' . $availableNamedPosition . '"></div>' .
+                     PHP_EOL .
+                    '<!-- end ' . $availableNamedPosition . ' -->',
+                    $uiLayoutString
+                ),
+
+            };
+            $uiLayoutString = str_replace(
+                '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
+                 PHP_EOL .
+                 '<!-- begin ' . $availableNamedPosition . ' -->' .
+                 PHP_EOL .
+                 '<div class="' . $availableNamedPosition . '"></div>' .
+                 PHP_EOL .
+                '<!-- end ' . $availableNamedPosition . ' -->',
+                $uiLayoutString
+            );
+        }
+        return $uiLayoutString;
+    }
+}
+
 $requestsUrls = [
     'https://foo.bar.baz:2343/some/path/bin.html?request=specific-request&q=a&b=c#frag',
     'https://foo.bar:43/some/path/bin.html?request=specific-request&q=a&b=c#frag',
@@ -470,7 +636,7 @@ $requestsUrls = [
 
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest = new Request($testRequestsUrl);
-#$currentRequest = new Request();
+$currentRequest = new Request();
 
 $router = new Router(
     new ListingOfDirectoryOfRoadyModulesInstance(
@@ -483,30 +649,9 @@ $router = new Router(
     new ModuleRoutesJsonConfigurationReaderInstance(),
 );
 
-var_dump(
-    [
-        'determined request name' => $currentRequest->name()->__toString(),
-        'test url' => $testRequestsUrl,
-        'current request url' => $currentRequest->url()->__toString(),
-        'response\'s request url' => $router->handleRequest($currentRequest)->request()->url()->__toString(),
-    ],
-);
+$response = $router->handleRequest($currentRequest);
 
-foreach ($router->handleRequest($currentRequest)->routeCollection()->collection() as $route) {
-    var_dump([$route->moduleName()->__toString(), $route->relativePath()->__toString()]);
-}
+$roadyUI = new RoadyUI(RoadyAPI::pathToDirectoryOfRoadyModules(), new RouteCollectionSorterInstance(), new RoadyModuleFileSystemPathDeterminatorInstance());
 
-
-?>
-<form action="index.php" method="get">
-    <input type="hidden" id="request" name="request" value="get-request"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-<form action="index.php" method="post">
-    <input type="hidden" id="request" name="request" value="post-request"><br><br>
-    <input type="submit" value="Submit">
-</form>
-
-<a href="http://localhost:8080?request=hello-multiverse">Hello Multiverse</a>
+echo $roadyUI->render($response);
 

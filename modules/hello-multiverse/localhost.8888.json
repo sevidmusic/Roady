@@ -1,13 +1,25 @@
-{
-    "module-name": "hello-multiverse",
-    "responds-to": [
-        "homepage"
-    ],
-    "named-positions": [
-        {
-            "position-name": "roady-ui-named-position-a",
-            "position": 0
-        }
-    ],
-    "relative-path": "output/hello-multiverse.html"
-}
+[
+    {
+        "module-name": "hello-multiverse",
+        "responds-to": [
+            "homepage",
+            "hello-multiverse"
+        ],
+        "named-positions": [
+            {
+                "position-name": "roady-ui-named-position-a",
+                "position": 61.0
+            },
+            {
+                "position-name": "roady-ui-named-position-b",
+                "position": 1.0
+            },
+            {
+                "position-name": "roady-ui-named-position-g",
+                "position": 99.51
+            }
+        ],
+        "relative-path": "output\/hello-multiverse.html"
+    }
+]
+

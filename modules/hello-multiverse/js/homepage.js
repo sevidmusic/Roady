@@ -1,2 +1,3 @@
 
-alert('homepage.js from hello-multiverse');
+alert('Hello Multiverse modules/hello-multiverse/js/homepage.js');
+

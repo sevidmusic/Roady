@@ -1,2 +1,3 @@
 
-alert('hello multiverse global');
+alert('Hello Multiverse modules/hello-multiverse/js/global.js');
+

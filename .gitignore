@@ -6,3 +6,4 @@ vendor/
 .phpunit.cache/
 *.swp
 *.todos
+vimfilelist

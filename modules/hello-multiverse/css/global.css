@@ -1,6 +1,57 @@
 
 body {
-    background: darkgrey;
-    padding: 3rem;
+    background: #1c1b1f;
+    color: #35a7e5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #a44918
+}
+
+.roady-ui-named-position-a {
+    border: 1rem solid #2865b6;
+    border-radius: 0.5rem;
+    background: #122620;
+    padding: 2rem;
+}
+
+.roady-ui-named-position-b {
+    padding: 2rem;
+}
+
+.roady-ui-named-position-c {
+    border: 1rem solid #2865b6;
+    border-radius: 0.5rem;
+    background: #122620;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.roady-ui-named-position-c > * {
+    padding: 1rem;
+    background: black;
+}
+
+.roady-ui-named-position-d {
+    padding: 2rem;
+}
+
+.roady-ui-named-position-e {
+    border: 1rem solid #2865b6;
+    border-radius: 0.5rem;
+    background: #122620;
+    padding: 2rem;
+}
+
+.roady-ui-named-position-f {
+    padding: 2rem;
+}
+
+.roady-ui-named-position-g {
+    border: 1rem solid #2865b6;
+    border-radius: 0.5rem;
+    background: #122620;
+    padding: 2rem;
 }
 
