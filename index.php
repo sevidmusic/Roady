@@ -520,10 +520,10 @@ EOT;
                 &&
                 isset($renderedOutput[$availableNamedPosition])
             ) {
-                var_dump($renderedOutput[$availableNamedPosition]);
+                $uiLayoutString = str_replace('<' . $availableNamedPosition . '></' . $availableNamedPosition . '>', implode(PHP_EOL, $renderedOutput[$availableNamedPosition]), $uiLayoutString);
             }
         }
-        return '';
+        return $uiLayoutString;
     }
 }
 
