@@ -42,11 +42,14 @@ h1, h2, h3, h4, h5, h6 {
 
 img {
     margin-top: 2rem;
+    border: 2px solid white;
+    border-radius: 0.5rem;
 }
 
 .demo-image {
-    width: 30%;
-    aspect-ratio: 1/1;
+    width: 31.5%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 @media (min-width: 80rem) {
