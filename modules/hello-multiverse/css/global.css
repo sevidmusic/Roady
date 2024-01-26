@@ -38,20 +38,25 @@ h1, h2, h3, h4, h5, h6 {
     grid-auto-flow: row;
     gap: 1rem;
     font-family: var(--ff-secondary);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
-@media (min-width: 80rem) {
+img {
+    margin-top: 2rem;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+}
 
-    .roady-ui-named-position-c {
-        grid-auto-flow: column;
-        background: rgb(8,8,8);
-        background: linear-gradient(172deg, rgba(8,8,8,1) 0%, rgba(10,16,23,1) 87%);
-    }
+.demo-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .roady-ui-named-position-c > * {
-    background: #0c0c0e;
+    background: #020202;
     padding: 3rem;
+    border: 1px solid orange;
 }
 
 .roady-ui-named-position-d {
