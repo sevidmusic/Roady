@@ -82,6 +82,8 @@ class Request
                     isset($query[self::REQUEST_PARAMETER_NAME])
                     &&
                     is_string($query[self::REQUEST_PARAMETER_NAME])
+                    &&
+                    !empty($query[self::REQUEST_PARAMETER_NAME])
                 ) {
                     return new NameInstance(
                         new TextInstance(
@@ -95,6 +97,8 @@ class Request
             isset($_POST[self::REQUEST_PARAMETER_NAME])
             &&
             is_string($_POST[self::REQUEST_PARAMETER_NAME])
+            &&
+            !empty($_POST[self::REQUEST_PARAMETER_NAME])
         ) {
             return new NameInstance(
                 new TextInstance($_POST[self::REQUEST_PARAMETER_NAME])
@@ -104,6 +108,8 @@ class Request
             isset($_GET[self::REQUEST_PARAMETER_NAME])
             &&
             is_string($_GET[self::REQUEST_PARAMETER_NAME])
+            &&
+            !empty($_GET[self::REQUEST_PARAMETER_NAME])
         ) {
             return new NameInstance(
                 new TextInstance($_GET[self::REQUEST_PARAMETER_NAME])
@@ -483,13 +489,9 @@ class RoadyUI
         'roady-ui-page-title-placeholder',
         'roady-ui-css-stylesheet-link-tags',
         'roady-ui-js-script-tags-for-html-head',
-        'roady-ui-named-position-a',
-        'roady-ui-named-position-b',
-        'roady-ui-named-position-c',
-        'roady-ui-named-position-d',
-        'roady-ui-named-position-e',
-        'roady-ui-named-position-f',
-        'roady-ui-named-position-g',
+        'roady-ui-header',
+        'roady-ui-main-content',
+        'roady-ui-footer',
         'roady-ui-js-script-tags-for-end-of-html',
     ];
 
@@ -510,22 +512,22 @@ class RoadyUI
 
     <body>
 
-        <header class="roady-ui-named-position-a">
+        <header class="roady-ui-header">
 
-            <roady-ui-named-position-a></roady-ui-named-position-a>
+            <roady-ui-header></roady-ui-header>
 
         </header>
 
 
-        <main class="roady-ui-named-position-b">
+        <main class="roady-ui-main-content">
 
-            <roady-ui-named-position-b></roady-ui-named-position-b>
+            <roady-ui-main-content></roady-ui-main-content>
 
         </main>
 
-        <footer class="roady-ui-named-position-c">
+        <footer class="roady-ui-footer">
 
-            <roady-ui-named-position-c></roady-ui-named-position-c>
+            <roady-ui-footer></roady-ui-footer>
 
         </footer>
 
