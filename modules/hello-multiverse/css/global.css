@@ -10,6 +10,9 @@
 
     :root {
       --background-color-primary: white;
+      --background-color-secondary: blue;
+      --background-color-alt-1: red;
+      --background-color-alt-2: green;
       --font-color-primary: black;
     }
 
@@ -18,7 +21,10 @@
 @media (prefers-color-scheme: dark) {
 
     :root {
-      --background-color-primary: black;
+      --background-color-primary: #171818;
+      --background-color-secondary: #187796;
+      --background-color-alt-1: #29cde2;
+      --background-color-alt-2: #ec5b17;
       --font-color-primary: white;
     }
 
@@ -34,3 +40,25 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-accent);
 }
 
+header,
+main,
+footer {
+    margin: 0 5rem;
+}
+
+header {
+    background-color: var(--background-color-secondary);
+}
+
+main {
+    background-color: var(--background-color-alt-2);
+    display: grid;
+    grid-auto-flow: row;
+    gap: 1rem;
+    font-family: var(--ff-secondary);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+footer {
+    background-color: var(--background-color-alt-1);
+}
