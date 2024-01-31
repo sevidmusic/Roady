@@ -1,74 +1,36 @@
+
 :root {
-  --ff-primary: monospace;
-  --ff-secondary: arial;
-  --ff-accent: georgia;
+  --font-family-primary: monospace;
+  --font-family-secondary: arial;
+  --font-family-accent: georgia;
+}
+
+
+@media (prefers-color-scheme: light) {
+
+    :root {
+      --background-color-primary: white;
+      --font-color-primary: black;
+    }
+
+}
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+      --background-color-primary: black;
+      --font-color-primary: white;
+    }
+
 }
 
 body {
-    background: url('http://localhost:8080/modules/hello-multiverse/assets/images/HelloModuleBg.webp');
-    color: #35a7e5;
-    padding: 3rem;
-    font-family: var(--ff-primary);
-}
-
-.roady-ui-named-position-a,
-.roady-ui-named-position-b,
-.roady-ui-named-position-c,
-.roady-ui-named-position-d,
-.roady-ui-named-position-e,
-.roady-ui-named-position-f,
-.roady-ui-named-position-g {
-    background: #080808;
-    padding: 2rem;
+    font-family: var(--font-family-primary);
+    color: var(--font-color-primary);
+    background-color: var(--background-color-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #a44918;
-    font-family: var(--ff-accent);
+    font-family: var(--font-family-accent);
 }
-
-.roady-ui-named-position-a {
-}
-
-.roady-ui-named-position-b {
-}
-
-.roady-ui-named-position-c {
-    display: grid;
-    grid-auto-flow: row;
-    gap: 1rem;
-    font-family: var(--ff-secondary);
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-}
-
-img {
-    margin-top: 2rem;
-    border: 2px solid white;
-    border-radius: 0.5rem;
-}
-
-.demo-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-}
-
-.roady-ui-named-position-c > * {
-    background: #020202;
-    padding: 3rem;
-    border: 1px solid orange;
-}
-
-.roady-ui-named-position-d {
-}
-
-.roady-ui-named-position-e {
-}
-
-.roady-ui-named-position-f {
-}
-
-.roady-ui-named-position-g {
-}
-
 

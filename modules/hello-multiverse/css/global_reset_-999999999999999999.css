@@ -1,3 +1,10 @@
+/**
+* Andy Bell's Modern Css Reset:
+*
+* @see https://andy-bell.co.uk/a-modern-css-reset/
+*
+*/
+
 /* Box sizing rules */
 *,
 *::before,
@@ -43,10 +50,28 @@ a:not([class]) {
 }
 
 /* Make images easier to work with */
+/* Andy Bells img reset
 img,
 picture {
   max-width: 100%;
   display: block;
+}
+*/
+
+/**
+ * Reset recomended by Kevin Powell
+ * (https://www.youtube.com/@KevinPowell)
+ */
+
+img,
+picture {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 1rem;
 }
 
 /* Inherit fonts for inputs and buttons */
@@ -72,3 +97,4 @@ select {
     scroll-behavior: auto !important;
   }
 }
+/* End Andy Bell's Modern Css Reset */

@@ -510,19 +510,25 @@ class RoadyUI
 
     <body>
 
-        <roady-ui-named-position-a></roady-ui-named-position-a>
+        <header class="roady-ui-named-position-a">
 
-        <roady-ui-named-position-b></roady-ui-named-position-b>
+            <roady-ui-named-position-a></roady-ui-named-position-a>
 
-        <roady-ui-named-position-c></roady-ui-named-position-c>
+        </header>
 
-        <roady-ui-named-position-d></roady-ui-named-position-d>
 
-        <roady-ui-named-position-e></roady-ui-named-position-e>
+        <main class="roady-ui-named-position-b">
 
-        <roady-ui-named-position-f></roady-ui-named-position-f>
+            <roady-ui-named-position-b></roady-ui-named-position-b>
 
-        <roady-ui-named-position-g></roady-ui-named-position-g>
+        </main>
+
+        <footer class="roady-ui-named-position-c">
+
+            <roady-ui-named-position-c></roady-ui-named-position-c>
+
+        </footer>
+
 
     </body>
 
@@ -611,15 +617,13 @@ EOT;
                         PHP_EOL .
                         '<!-- begin ' . $availableNamedPosition . ' -->' .
                         PHP_EOL .
-                        '<div class="' . $availableNamedPosition . '">' .
-                            PHP_EOL .
-                            PHP_EOL .
-                            implode(
-                                PHP_EOL,
-                                $renderedOutput[$availableNamedPosition]
-                            ) .
-                            PHP_EOL .
-                        '</div>' .
+                        PHP_EOL .
+                        PHP_EOL .
+                        implode(
+                            PHP_EOL,
+                            $renderedOutput[$availableNamedPosition]
+                        ) .
+                        PHP_EOL .
                         PHP_EOL .
                         '<!-- end ' . $availableNamedPosition . ' -->',
                         $uiLayoutString
@@ -627,43 +631,10 @@ EOT;
                 };
             }
             // Clean up unused/empty positions.
-            // css, js, and title should be removed if not used
-            // named positions a-g should be replaced with an empty div whose class attribute is assigned the postions's name
-            $uiLayoutString = match(
-                $availableNamedPosition === 'roady-ui-css-stylesheet-link-tags'
-                ||
-                $availableNamedPosition === 'roady-ui-js-script-tags-for-html-head'
-                ||
-                $availableNamedPosition === 'roady-ui-js-script-tags-for-end-of-html'
-                ||
-                $availableNamedPosition === 'roady-ui-page-title-placeholder'
-            ) {
-                true => str_replace(
-                    '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
-                    '',
-                    $uiLayoutString
-                ),
-                default => str_replace(
-                    '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
-                     PHP_EOL .
-                     '<!-- begin ' . $availableNamedPosition . ' -->' .
-                     PHP_EOL .
-                     '<div class="' . $availableNamedPosition . '"></div>' .
-                     PHP_EOL .
-                    '<!-- end ' . $availableNamedPosition . ' -->',
-                    $uiLayoutString
-                ),
-
-            };
             $uiLayoutString = str_replace(
                 '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
-                 PHP_EOL .
-                 '<!-- begin ' . $availableNamedPosition . ' -->' .
-                 PHP_EOL .
-                 '<div class="' . $availableNamedPosition . '"></div>' .
-                 PHP_EOL .
-                '<!-- end ' . $availableNamedPosition . ' -->',
-                $uiLayoutString
+                 '',
+                $uiLayoutString,
             );
         }
         return $uiLayoutString;
