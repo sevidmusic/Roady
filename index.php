@@ -489,6 +489,7 @@ class RoadyUI
         'roady-ui-page-title-placeholder',
         'roady-ui-css-stylesheet-link-tags',
         'roady-ui-js-script-tags-for-html-head',
+        'roady-ui-pre-header',
         'roady-ui-header',
         'roady-ui-main-content',
         'roady-ui-footer',
@@ -504,6 +505,16 @@ class RoadyUI
 
         <title><roady-ui-page-title-placeholder></roady-ui-page-title-placeholder></title>
 
+        <meta charset="UTF-8">
+
+        <meta name="description" content="">
+
+        <meta name="keywords" content="">
+
+        <meta name="author" content="">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <roady-ui-css-stylesheet-link-tags></roady-ui-css-stylesheet-link-tags>
 
         <roady-ui-js-script-tags-for-html-head></roady-ui-js-script-tags-for-html-head>
@@ -511,6 +522,8 @@ class RoadyUI
     </head>
 
     <body>
+
+        <roady-ui-pre-header></roady-ui-pre-header>
 
         <header class="roady-ui-header">
 
@@ -632,6 +645,12 @@ EOT;
                     ),
                 };
             }
+            // Set title
+            $uiLayoutString = str_replace(
+                '<roady-ui-page-title-placeholder></roady-ui-page-title-placeholder>',
+                $response->request()->url()->domain()->__toString() . ' | ' . ucwords(str_replace('-', ' ', $response->request()->name()->__toString())),
+                $uiLayoutString,
+            );
             // Clean up unused/empty positions.
             $uiLayoutString = str_replace(
                 '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',

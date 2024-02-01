@@ -25,6 +25,7 @@
       --background-color-secondary: #187796;
       --background-color-alt-1: #29cde2;
       --background-color-alt-2: #ec5b17;
+      --background-color-alt-3: #303232;
       --font-color-primary: white;
     }
 
@@ -34,17 +35,11 @@ body {
     font-family: var(--font-family-primary);
     color: var(--font-color-primary);
     background-color: var(--background-color-primary);
+    margin: 1.7rem 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-family-accent);
-}
-
-header,
-main,
-footer {
-    margin: 0 5rem;
-    padding: 1.7rem;
 }
 
 header {
@@ -58,8 +53,18 @@ main {
     gap: 1rem;
     font-family: var(--ff-secondary);
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    padding: 2rem 1rem;
 }
 
 footer {
     background-color: var(--background-color-alt-1);
 }
+
+.demo-image {
+    padding: 1rem;
+}
+
+main .demo-image {
+    border-radius: 50%;
+}
+
