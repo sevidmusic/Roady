@@ -635,7 +635,7 @@ EOT;
             // Set title
             $uiLayoutString = str_replace(
                 '<roady-ui-page-title-placeholder></roady-ui-page-title-placeholder>',
-                $response->request()->url()->domain()->__toString() . ' | ' . ucfirst($response->request()->name()->__toString()),
+                $response->request()->url()->domain()->__toString() . ' | ' . ucwords(str_replace('-', ' ', $response->request()->name()->__toString())),
                 $uiLayoutString,
             );
             // Clean up unused/empty positions.
