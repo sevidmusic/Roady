@@ -1,9 +1,27 @@
 /**
-* Andy Bell's Modern Css Reset:
+* This css reset file is based on a combination of Andy Bell's Modern
+* Css Reset:
 *
 * @see https://andy-bell.co.uk/a-modern-css-reset/
 *
+* And also from suggestions made by Kevin Powell in various videos
+* on his youtube channell:
+*
+* https://www.youtube.com/@KevinPowell
+*
 */
+
+html {
+ /**
+  * Prevent punctuation from disturbing text alignment.
+  *
+  * Recomended by Kevin Powell in:
+  *
+  * https://www.youtube.com/watch?v=cCAtD_BAHNw
+  *
+  */
+  hanging-punctuation: first last;
+}
 
 /* Box sizing rules */
 *,
@@ -59,8 +77,8 @@ picture {
 */
 
 /**
- * Reset recomended by Kevin Powell
- * (https://www.youtube.com/@KevinPowell)
+ * `img` reset recomended by Kevin Powell
+ * https://www.youtube.com/watch?v=345V2MU3E_w
  */
 
 img,
@@ -97,4 +115,45 @@ select {
     scroll-behavior: auto !important;
   }
 }
-/* End Andy Bell's Modern Css Reset */
+
+/*
+ * Respect user prefernces in regards to scrolling
+ * Recomended by Kevin Powell in:
+ *
+ * https://www.youtube.com/watch?v=cCAtD_BAHNw
+ *
+ */
+@media (prefers-reduced-motion: no-preference) {
+    /* Preserve smooth scrolling for #anchor links */
+    :has(:target) {
+        scroll-behavior: smooth;
+        /* Add a bit of padding when scrolling to an #anchor */
+        scroll-padding-top: 3rem;
+    }
+}
+/**
+ * Wrap headings more sensibly.
+*
+ * Recommended by Kevin Powell in the following video:
+*
+ * https://www.youtube.com/watch?v=cCAtD_BAHNw
+*
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/** Sensible styles for paragraphs */
+
+p {
+    /* Disallow orphan text, meaning, all lines will have at least 2 words */
+    text-wrap: pretty;
+    max-width: 75ch;
+}
+
