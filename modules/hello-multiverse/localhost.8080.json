@@ -7,15 +7,15 @@
         ],
         "named-positions": [
             {
-                "position-name": "roady-ui-named-position-a",
+                "position-name": "roady-ui-header",
                 "position": 61.0
             },
             {
-                "position-name": "roady-ui-named-position-b",
+                "position-name": "roady-ui-main-content",
                 "position": 1.0
             },
             {
-                "position-name": "roady-ui-named-position-g",
+                "position-name": "roady-ui-footer",
                 "position": 99.51
             }
         ],
