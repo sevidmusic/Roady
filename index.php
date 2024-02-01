@@ -632,6 +632,12 @@ EOT;
                     ),
                 };
             }
+            // Set title
+            $uiLayoutString = str_replace(
+                '<roady-ui-page-title-placeholder></roady-ui-page-title-placeholder>',
+                $response->request()->url()->domain()->__toString() . ' | ' . ucfirst($response->request()->name()->__toString()),
+                $uiLayoutString,
+            );
             // Clean up unused/empty positions.
             $uiLayoutString = str_replace(
                 '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
