@@ -435,16 +435,16 @@
         },
         {
             "name": "darling/roady-module-utilities",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/RoadyModuleUtilities.git",
-                "reference": "6c922e8aec032963e09f742ad337560868196ba6"
+                "reference": "b47cb64af42994c16186a81043df6f4c1990a373"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/RoadyModuleUtilities/zipball/6c922e8aec032963e09f742ad337560868196ba6",
-                "reference": "6c922e8aec032963e09f742ad337560868196ba6",
+                "url": "https://api.github.com/repos/sevidmusic/RoadyModuleUtilities/zipball/b47cb64af42994c16186a81043df6f4c1990a373",
+                "reference": "b47cb64af42994c16186a81043df6f4c1990a373",
                 "shasum": ""
             },
             "require": {
@@ -479,9 +479,9 @@
             "description": "Provides classes for working with Roady modules.",
             "support": {
                 "issues": "https://github.com/sevidmusic/RoadyModuleUtilities/issues",
-                "source": "https://github.com/sevidmusic/RoadyModuleUtilities/tree/v1.0.5"
+                "source": "https://github.com/sevidmusic/RoadyModuleUtilities/tree/v1.0.6"
             },
-            "time": "2024-01-24T22:56:30+00:00"
+            "time": "2024-02-01T03:26:37+00:00"
         },
         {
             "name": "darling/roady-routes",
