@@ -504,6 +504,16 @@ class RoadyUI
 
         <title><roady-ui-page-title-placeholder></roady-ui-page-title-placeholder></title>
 
+        <meta charset="UTF-8">
+
+        <meta name="description" content="">
+
+        <meta name="keywords" content="">
+
+        <meta name="author" content="">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <roady-ui-css-stylesheet-link-tags></roady-ui-css-stylesheet-link-tags>
 
         <roady-ui-js-script-tags-for-html-head></roady-ui-js-script-tags-for-html-head>
