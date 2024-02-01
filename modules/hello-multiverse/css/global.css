@@ -35,7 +35,7 @@ body {
     font-family: var(--font-family-primary);
     color: var(--font-color-primary);
     background-color: var(--background-color-primary);
-    margin: 0.7rem 5rem;
+    margin: 1.7rem 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -61,7 +61,7 @@ footer {
 }
 
 .demo-image {
-    margin: 1rem;
+    padding: 1rem;
 }
 
 main .demo-image {

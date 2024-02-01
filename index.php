@@ -489,6 +489,7 @@ class RoadyUI
         'roady-ui-page-title-placeholder',
         'roady-ui-css-stylesheet-link-tags',
         'roady-ui-js-script-tags-for-html-head',
+        'roady-ui-pre-header',
         'roady-ui-header',
         'roady-ui-main-content',
         'roady-ui-footer',
@@ -521,6 +522,8 @@ class RoadyUI
     </head>
 
     <body>
+
+        <roady-ui-pre-header></roady-ui-pre-header>
 
         <header class="roady-ui-header">
 
