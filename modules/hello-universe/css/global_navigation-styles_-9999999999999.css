@@ -1,8 +1,39 @@
 
+@media (prefers-color-scheme: light) {
+
+    :root {
+        /**
+         * If a --background-color-primary is set, use it, otherwise
+         * default to black
+         */
+        --background-color-default: var(--background-color-primary, white);
+    }
+
+}
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        /**
+         * If a --background-color-primary is set, use it, otherwise
+         * default to black
+         */
+        --background-color-default: var(--background-color-primary, black);
+    }
+
+}
+
 .hello-universe-global-navigation {
     margin: 2rem;
     font-size: 1.7rem;
-    background: black;
+    /*
+     * This stylesheet relies on the --background-color-primary
+     * variable being set by another css file, if
+     * --background-color-primary is not set then background-color
+     * will default to `--background-color-default` which is set
+     * by this stylesheet.
+     */
+    background: var(--background-color-default);
     padding: 1rem;
     border-radius: 3rem;
 }
