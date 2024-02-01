@@ -59,6 +59,7 @@ html:focus-within {
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
+  /* When a css unit is not specified, line-height is multiplied by font-size */
   line-height: 1.5;
 }
 
@@ -147,6 +148,8 @@ h4,
 h5,
 h6 {
   text-wrap: balance;
+  /* This is my own preference, heading line height should === font size */
+  line-height: 1;
 }
 
 /** Sensible styles for paragraphs */
