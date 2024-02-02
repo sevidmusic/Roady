@@ -620,16 +620,16 @@ EOT;
             $this->availableNamedPositions as $availableNamedPosition
         ) {
             if(
-                $availableNamedPosition !== 'roady-ui-page-title-placeholder'
+                $availableNamedPosition !== self::ROADY_UI_PAGE_TITLE_PLACEHOLDER
                 &&
                 isset($renderedOutput[$availableNamedPosition])
             ) {
                 $uiLayoutString = match(
-                    $availableNamedPosition === 'roady-ui-css-stylesheet-link-tags'
+                    $availableNamedPosition === self::ROADY_UI_CSS_STYLESHEET_LINK_TAGS
                     ||
-                    $availableNamedPosition === 'roady-ui-js-script-tags-for-html-head'
+                    $availableNamedPosition === self::ROADY_UI_JS_SCRIPT_TAGS_FOR_HTML_HEAD
                     ||
-                    $availableNamedPosition === 'roady-ui-js-script-tags-for-end-of-html'
+                    $availableNamedPosition === self::ROADY_UI_JS_SCRIPT_TAGS_FOR_END_OF_HTML
                 ) {
                     true => str_replace(
                         '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
@@ -656,7 +656,7 @@ EOT;
             }
             // Set title
             $uiLayoutString = str_replace(
-                '<roady-ui-page-title-placeholder></roady-ui-page-title-placeholder>',
+                '<' . self::ROADY_UI_PAGE_TITLE_PLACEHOLDER  . '></' . self::ROADY_UI_PAGE_TITLE_PLACEHOLDER . '>',
                 $response->request()->url()->domain()->__toString() . ' | ' . ucwords(str_replace('-', ' ', $response->request()->name()->__toString())),
                 $uiLayoutString,
             );
