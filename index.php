@@ -482,18 +482,27 @@ class RoadyAPI
 class RoadyUI
 {
 
+    private const ROADY_UI_CSS_STYLESHEET_LINK_TAGS = 'roady-ui-css-stylesheet-link-tags';
+    private const ROADY_UI_FOOTER = 'roady-ui-footer';
+    private const ROADY_UI_HEADER = 'roady-ui-header';
+    private const ROADY_UI_JS_SCRIPT_TAGS_FOR_END_OF_HTML = 'roady-ui-js-script-tags-for-end-of-html';
+    private const ROADY_UI_JS_SCRIPT_TAGS_FOR_HTML_HEAD = 'roady-ui-js-script-tags-for-html-head';
+    private const ROADY_UI_MAIN_CONTENT = 'roady-ui-main-content';
+    private const ROADY_UI_PAGE_TITLE_PLACEHOLDER = 'roady-ui-page-title-placeholder';
+    private const ROADY_UI_PRE_HEADER = 'roady-ui-pre-header';
+
     /**
      * @var array<int, string> $availableNamedPositions
      */
     private array $availableNamedPositions = [
-        'roady-ui-page-title-placeholder',
-        'roady-ui-css-stylesheet-link-tags',
-        'roady-ui-js-script-tags-for-html-head',
-        'roady-ui-pre-header',
-        'roady-ui-header',
-        'roady-ui-main-content',
-        'roady-ui-footer',
-        'roady-ui-js-script-tags-for-end-of-html',
+        self::ROADY_UI_CSS_STYLESHEET_LINK_TAGS,
+        self::ROADY_UI_FOOTER,
+        self::ROADY_UI_HEADER,
+        self::ROADY_UI_JS_SCRIPT_TAGS_FOR_END_OF_HTML,
+        self::ROADY_UI_JS_SCRIPT_TAGS_FOR_HTML_HEAD,
+        self::ROADY_UI_MAIN_CONTENT,
+        self::ROADY_UI_PAGE_TITLE_PLACEHOLDER,
+        self::ROADY_UI_PRE_HEADER,
     ];
 
     private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
