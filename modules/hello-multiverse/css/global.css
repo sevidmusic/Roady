@@ -68,3 +68,7 @@ main .demo-image {
     border-radius: 50%;
 }
 
+
+img, picture {
+    max-width: 32svh;
+}
