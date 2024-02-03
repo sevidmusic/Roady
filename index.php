@@ -572,7 +572,7 @@ EOT;
                              );
         $renderedOutput = [];
         foreach($sortedRoutes as $namedPosition => $routes) {
-            foreach($routes as $route) {
+            foreach($routes as $position => $route) {
             #var_dump([$namedPosition, $route->relativePath()->__toString()]);
                 $pathToRoadyModuleDirectory =
                     new PathToRoadyModuleDirectoryInstance(
@@ -601,19 +601,38 @@ EOT;
                                           $pathToRoadyModuleDirectory->name()
                                                                      ->__toString();
                 $renderedOutput[$namedPosition][] = match($fileExtension) {
-                    'css' => '<link rel="stylesheet" href="'.
+                    'css' =>
+                    '        <!-- ' .
+                        $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    '        <link rel="stylesheet" href="'.
                         $webPathToFile .
                         DIRECTORY_SEPARATOR .
                         $route->relativePath()->__toString()  .
                         '">',
-                    'js' => '<script src="'.
+                    'js' =>
+                    '        <!-- ' .
+                        $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    '        <script src="'.
                         $webPathToFile .
                         DIRECTORY_SEPARATOR .
                         $route->relativePath()->__toString()  .
                         '"></script>',
-                    default => file_get_contents(
+                    default =>
+                    '<!-- begin ' .
+                        $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    file_get_contents(
                         $pathToFile->__toString()
-                    ),
+                    ) .
+                    '<!-- end ' .
+                        $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL,
                 };
             }
         }
