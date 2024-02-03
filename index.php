@@ -573,6 +573,7 @@ EOT;
         $renderedOutput = [];
         foreach($sortedRoutes as $namedPosition => $routes) {
             foreach($routes as $route) {
+            #var_dump([$namedPosition, $route->relativePath()->__toString()]);
                 $pathToRoadyModuleDirectory =
                     new PathToRoadyModuleDirectoryInstance(
                         $this->pathToDirectoryOfRoadyModules,
