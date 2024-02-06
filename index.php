@@ -482,19 +482,39 @@ class RoadyAPI
 class RoadyUI
 {
 
+    private const ROADY_UI_META_DESCRIPTION = 'roady-ui-meta-description';
+    private const ROADY_UI_META_AUTHOR = 'roady-ui-meta-author';
+    private const ROADY_UI_META_KEYWORDS = 'roady-ui-meta-keywords';
+    private const ROADY_UI_CSS_STYLESHEET_LINK_TAGS = 'roady-ui-css-stylesheet-link-tags';
+    private const ROADY_UI_FOOTER = 'roady-ui-footer';
+    private const ROADY_UI_HEADER = 'roady-ui-header';
+    private const ROADY_UI_JS_SCRIPT_TAGS_FOR_END_OF_HTML = 'roady-ui-js-script-tags-for-end-of-html';
+    private const ROADY_UI_JS_SCRIPT_TAGS_FOR_HTML_HEAD = 'roady-ui-js-script-tags-for-html-head';
+    private const ROADY_UI_MAIN_CONTENT = 'roady-ui-main-content';
+    private const ROADY_UI_PAGE_TITLE_PLACEHOLDER = 'roady-ui-page-title-placeholder';
+    private const ROADY_UI_PRE_HEADER = 'roady-ui-pre-header';
+
     /**
      * @var array<int, string> $availableNamedPositions
      */
     private array $availableNamedPositions = [
-        'roady-ui-page-title-placeholder',
-        'roady-ui-css-stylesheet-link-tags',
-        'roady-ui-js-script-tags-for-html-head',
-        'roady-ui-pre-header',
-        'roady-ui-header',
-        'roady-ui-main-content',
-        'roady-ui-footer',
-        'roady-ui-js-script-tags-for-end-of-html',
+        self::ROADY_UI_META_DESCRIPTION,
+        self::ROADY_UI_META_AUTHOR,
+        self::ROADY_UI_META_KEYWORDS,
+        self::ROADY_UI_CSS_STYLESHEET_LINK_TAGS,
+        self::ROADY_UI_FOOTER,
+        self::ROADY_UI_HEADER,
+        self::ROADY_UI_JS_SCRIPT_TAGS_FOR_END_OF_HTML,
+        self::ROADY_UI_JS_SCRIPT_TAGS_FOR_HTML_HEAD,
+        self::ROADY_UI_MAIN_CONTENT,
+        self::ROADY_UI_PAGE_TITLE_PLACEHOLDER,
+        self::ROADY_UI_PRE_HEADER,
     ];
+
+    /**
+     * @var array<string, string> $renderedOutput
+     */
+    private array $renderedOutput = [];
 
     private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
 <!DOCTYPE html>
@@ -507,11 +527,11 @@ class RoadyUI
 
         <meta charset="UTF-8">
 
-        <meta name="description" content="">
+        <meta name="description" content="<roady-ui-meta-description></roady-ui-meta-description>">
 
-        <meta name="keywords" content="">
+        <meta name="keywords" content="<roady-ui-meta-keywords></roady-ui-meta-keywords>">
 
-        <meta name="author" content="">
+        <meta name="author" content="<roady-ui-meta-author></roady-ui-meta-author>">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -551,6 +571,8 @@ class RoadyUI
 
 <roady-ui-js-script-tags-for-end-of-html></roady-ui-js-script-tags-for-end-of-html>
 
+<!-- Powered by Roady (https://github.com/sevidmusic/roady) -->
+
 EOT;
     public function __construct(private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules, private RouteCollectionSorter $routeCollectionSorter, private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator) {}
 
@@ -563,7 +585,8 @@ EOT;
                              );
         $renderedOutput = [];
         foreach($sortedRoutes as $namedPosition => $routes) {
-            foreach($routes as $route) {
+            foreach($routes as $position => $route) {
+            #var_dump([$namedPosition, $route->relativePath()->__toString()]);
                 $pathToRoadyModuleDirectory =
                     new PathToRoadyModuleDirectoryInstance(
                         $this->pathToDirectoryOfRoadyModules,
@@ -591,19 +614,27 @@ EOT;
                                           $pathToRoadyModuleDirectory->name()
                                                                      ->__toString();
                 $renderedOutput[$namedPosition][] = match($fileExtension) {
-                    'css' => '<link rel="stylesheet" href="'.
+                    'css' =>
+                    '        <!-- ' .
+                        $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    '        <link rel="stylesheet" href="'.
                         $webPathToFile .
                         DIRECTORY_SEPARATOR .
                         $route->relativePath()->__toString()  .
                         '">',
-                    'js' => '<script src="'.
+                    'js' =>
+                    '        <!-- ' .
+                        $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    '        <script src="'.
                         $webPathToFile .
                         DIRECTORY_SEPARATOR .
                         $route->relativePath()->__toString()  .
                         '"></script>',
-                    default => file_get_contents(
-                        $pathToFile->__toString()
-                    ),
+                    default => $this->determineOutput($pathToFile, $namedPosition, $position),
                 };
             }
         }
@@ -611,16 +642,16 @@ EOT;
             $this->availableNamedPositions as $availableNamedPosition
         ) {
             if(
-                $availableNamedPosition !== 'roady-ui-page-title-placeholder'
+                $availableNamedPosition !== self::ROADY_UI_PAGE_TITLE_PLACEHOLDER
                 &&
                 isset($renderedOutput[$availableNamedPosition])
             ) {
                 $uiLayoutString = match(
-                    $availableNamedPosition === 'roady-ui-css-stylesheet-link-tags'
+                    $availableNamedPosition === self::ROADY_UI_CSS_STYLESHEET_LINK_TAGS
                     ||
-                    $availableNamedPosition === 'roady-ui-js-script-tags-for-html-head'
+                    $availableNamedPosition === self::ROADY_UI_JS_SCRIPT_TAGS_FOR_HTML_HEAD
                     ||
-                    $availableNamedPosition === 'roady-ui-js-script-tags-for-end-of-html'
+                    $availableNamedPosition === self::ROADY_UI_JS_SCRIPT_TAGS_FOR_END_OF_HTML
                 ) {
                     true => str_replace(
                         '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
@@ -629,25 +660,17 @@ EOT;
                     ),
                     default => str_replace(
                         '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
-                        PHP_EOL .
-                        '<!-- begin ' . $availableNamedPosition . ' -->' .
-                        PHP_EOL .
-                        PHP_EOL .
-                        PHP_EOL .
                         implode(
                             PHP_EOL,
                             $renderedOutput[$availableNamedPosition]
-                        ) .
-                        PHP_EOL .
-                        PHP_EOL .
-                        '<!-- end ' . $availableNamedPosition . ' -->',
+                        ),
                         $uiLayoutString
                     ),
                 };
             }
             // Set title
             $uiLayoutString = str_replace(
-                '<roady-ui-page-title-placeholder></roady-ui-page-title-placeholder>',
+                '<' . self::ROADY_UI_PAGE_TITLE_PLACEHOLDER  . '></' . self::ROADY_UI_PAGE_TITLE_PLACEHOLDER . '>',
                 $response->request()->url()->domain()->__toString() . ' | ' . ucwords(str_replace('-', ' ', $response->request()->name()->__toString())),
                 $uiLayoutString,
             );
@@ -659,6 +682,53 @@ EOT;
             );
         }
         return $uiLayoutString;
+    }
+
+    private function determineOutput(PathToExistingFile $pathToFile, string $namedPosition, string $position): string
+    {
+        $renderedOutputKey = sha1($pathToFile->__toString());
+        if(!isset($this->renderedOutput[$renderedOutputKey])) {
+            $this->renderedOutput[$renderedOutputKey] =
+                match($namedPosition) {
+                self::ROADY_UI_META_AUTHOR,
+                self::ROADY_UI_META_DESCRIPTION,
+                self::ROADY_UI_META_KEYWORDS => str_replace(
+                    ["\r\n", "\r", "\n", PHP_EOL],
+                    '',
+                    trim(
+                        match(str_contains($pathToFile->name()->__toString(), '.php')) {
+                            true => $this->includePHPFile($pathToFile),
+                            default => strval(file_get_contents( $pathToFile->__toString())),
+                        }
+                    )
+                ),
+                default => PHP_EOL .
+                    '<!-- begin ' .
+                    $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    match(str_contains($pathToFile->name()->__toString(), '.php')) {
+                        true => $this->includePHPFile($pathToFile),
+                        default => strval(file_get_contents( $pathToFile->__toString())),
+                    } .
+                    PHP_EOL .
+                    '<!-- end ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL
+                };
+        }
+        return $this->renderedOutput[$renderedOutputKey];
+    }
+
+    private function includePHPFile(PathToExistingFile $pathToFile): string
+    {
+        $output = '<div class="roady-ui-error"><h2>Error</h2><p>Failed to load content for: ' . $pathToFile->__toString() . '</p></div>';
+        ob_start();
+        require_once($pathToFile->__toString());
+        $renderedOutput = ob_get_contents();
+        if(is_string($renderedOutput)) {
+            $output = $renderedOutput;
+        }
+        ob_end_clean();
+        return $output;
     }
 }
 
