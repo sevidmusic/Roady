@@ -482,6 +482,9 @@ class RoadyAPI
 class RoadyUI
 {
 
+    private const ROADY_UI_META_DESCRIPTION = 'roady-ui-meta-description';
+    private const ROADY_UI_META_AUTHOR = 'roady-ui-meta-author';
+    private const ROADY_UI_META_KEYWORDS = 'roady-ui-meta-keywords';
     private const ROADY_UI_CSS_STYLESHEET_LINK_TAGS = 'roady-ui-css-stylesheet-link-tags';
     private const ROADY_UI_FOOTER = 'roady-ui-footer';
     private const ROADY_UI_HEADER = 'roady-ui-header';
@@ -495,6 +498,9 @@ class RoadyUI
      * @var array<int, string> $availableNamedPositions
      */
     private array $availableNamedPositions = [
+        self::ROADY_UI_META_DESCRIPTION,
+        self::ROADY_UI_META_AUTHOR,
+        self::ROADY_UI_META_KEYWORDS,
         self::ROADY_UI_CSS_STYLESHEET_LINK_TAGS,
         self::ROADY_UI_FOOTER,
         self::ROADY_UI_HEADER,
@@ -521,11 +527,11 @@ class RoadyUI
 
         <meta charset="UTF-8">
 
-        <meta name="description" content="">
+        <meta name="description" content="<roady-ui-meta-description></roady-ui-meta-description>">
 
-        <meta name="keywords" content="">
+        <meta name="keywords" content="<roady-ui-meta-keywords></roady-ui-meta-keywords>">
 
-        <meta name="author" content="">
+        <meta name="author" content="<roady-ui-meta-author></roady-ui-meta-author>">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -652,18 +658,10 @@ EOT;
                     ),
                     default => str_replace(
                         '<' . $availableNamedPosition . '></' . $availableNamedPosition . '>',
-                        PHP_EOL .
-                        '<!-- begin ' . $availableNamedPosition . ' -->' .
-                        PHP_EOL .
-                        PHP_EOL .
-                        PHP_EOL .
                         implode(
                             PHP_EOL,
                             $renderedOutput[$availableNamedPosition]
-                        ) .
-                        PHP_EOL .
-                        PHP_EOL .
-                        '<!-- end ' . $availableNamedPosition . ' -->',
+                        ),
                         $uiLayoutString
                     ),
                 };
@@ -689,15 +687,31 @@ EOT;
         $renderedOutputKey = sha1($pathToFile->__toString());
         if(!isset($this->renderedOutput[$renderedOutputKey])) {
             $this->renderedOutput[$renderedOutputKey] =
-                '<!-- begin ' .
-                $namedPosition . ' position ' . $position  .
-                ' -->' .
-                PHP_EOL .
-                match(str_contains($pathToFile->name()->__toString(), '.php')) {
-                    true => $this->includePHPFile($pathToFile),
-                    default => file_get_contents( $pathToFile->__toString()),
-                } .
-                '<!-- end ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL;
+                match($namedPosition) {
+                self::ROADY_UI_META_AUTHOR,
+                self::ROADY_UI_META_DESCRIPTION,
+                self::ROADY_UI_META_KEYWORDS => str_replace(
+                    ["\r\n", "\r", "\n", PHP_EOL],
+                    '',
+                    trim(
+                        match(str_contains($pathToFile->name()->__toString(), '.php')) {
+                            true => $this->includePHPFile($pathToFile),
+                            default => strval(file_get_contents( $pathToFile->__toString())),
+                        }
+                    )
+                ),
+                default => PHP_EOL .
+                    '<!-- begin ' .
+                    $namedPosition . ' position ' . $position  .
+                    ' -->' .
+                    PHP_EOL .
+                    match(str_contains($pathToFile->name()->__toString(), '.php')) {
+                        true => $this->includePHPFile($pathToFile),
+                        default => strval(file_get_contents( $pathToFile->__toString())),
+                    } .
+                    PHP_EOL .
+                    '<!-- end ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL
+                };
         }
         return $this->renderedOutput[$renderedOutputKey];
     }
