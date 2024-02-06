@@ -571,6 +571,8 @@ class RoadyUI
 
 <roady-ui-js-script-tags-for-end-of-html></roady-ui-js-script-tags-for-end-of-html>
 
+<!-- Powered by Roady (https://github.com/sevidmusic/roady) -->
+
 EOT;
     public function __construct(private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules, private RouteCollectionSorter $routeCollectionSorter, private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator) {}
 
