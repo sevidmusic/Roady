@@ -686,20 +686,25 @@ EOT;
 
     private function determineOutput(PathToExistingFile $pathToFile, string $namedPosition, string $position): string
     {
-        return match(str_contains($pathToFile->name()->__toString(), '.php')) {
-            true => $this->includePHPFile($pathToFile),
-            default => '<!-- begin ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL . file_get_contents( $pathToFile->__toString()) . '<!-- end ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL,
-
-        };
+        $renderedOutputKey = sha1($pathToFile->__toString());
+        if(!isset($this->renderedOutput[$renderedOutputKey])) {
+            $this->renderedOutput[$renderedOutputKey] =
+                '<!-- begin ' .
+                $namedPosition . ' position ' . $position  .
+                ' -->' .
+                PHP_EOL .
+                match(str_contains($pathToFile->name()->__toString(), '.php')) {
+                    true => $this->includePHPFile($pathToFile),
+                    default => file_get_contents( $pathToFile->__toString()),
+                } .
+                '<!-- end ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL;
+        }
+        return $this->renderedOutput[$renderedOutputKey];
     }
 
     private function includePHPFile(PathToExistingFile $pathToFile): string
     {
         $output = '<div class="roady-ui-error"><h2>Error</h2><p>Failed to load content for: ' . $pathToFile->__toString() . '</p></div>';
-        $renderedOutputKey = sha1($pathToFile->__toString());
-        if(isset($this->renderedOutput[$renderedOutputKey])) {
-            return $this->renderedOutput[$renderedOutputKey];
-        }
         try {
             ob_start();
             require_once($pathToFile->__toString());
@@ -711,7 +716,6 @@ EOT;
         } catch (\Throwable $th) {
             $output .= '<div class="roady-ui-error"><h2>Error</h2><p>Internal Error: ' . $th->getMessage() . '</p></div>';
         }
-        $this->renderedOutput[$renderedOutputKey] = $output;
         return $output;
     }
 }
