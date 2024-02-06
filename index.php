@@ -719,17 +719,13 @@ EOT;
     private function includePHPFile(PathToExistingFile $pathToFile): string
     {
         $output = '<div class="roady-ui-error"><h2>Error</h2><p>Failed to load content for: ' . $pathToFile->__toString() . '</p></div>';
-        try {
-            ob_start();
-            require_once($pathToFile->__toString());
-            $renderedOutput = ob_get_contents();
-            if(is_string($renderedOutput)) {
-                $output = $renderedOutput;
-            }
-            ob_end_clean();
-        } catch (\Throwable $th) {
-            $output .= '<div class="roady-ui-error"><h2>Error</h2><p>Internal Error: ' . $th->getMessage() . '</p></div>';
+        ob_start();
+        require_once($pathToFile->__toString());
+        $renderedOutput = ob_get_contents();
+        if(is_string($renderedOutput)) {
+            $output = $renderedOutput;
         }
+        ob_end_clean();
         return $output;
     }
 }
