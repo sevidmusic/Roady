@@ -26,8 +26,8 @@
     },
     "autoload": {
         "psr-4": {
-            "roady\\": "src/",
-            "tests\\": "tests/"
+            "Darling\\Roady\\": "src/",
+            "Darling\\Roady\\tests\\": "tests/"
         }
     },
     "require-dev": {
