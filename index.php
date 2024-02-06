@@ -505,6 +505,11 @@ class RoadyUI
         self::ROADY_UI_PRE_HEADER,
     ];
 
+    /**
+     * @var array<string, string> $renderedOutput
+     */
+    private array $renderedOutput = [];
+
     private const ROADY_UI_LAYOUT_STRING = <<<'EOT'
 <!DOCTYPE html>
 
@@ -621,18 +626,7 @@ EOT;
                         DIRECTORY_SEPARATOR .
                         $route->relativePath()->__toString()  .
                         '"></script>',
-                    default =>
-                    '<!-- begin ' .
-                        $namedPosition . ' position ' . $position  .
-                    ' -->' .
-                    PHP_EOL .
-                    file_get_contents(
-                        $pathToFile->__toString()
-                    ) .
-                    '<!-- end ' .
-                        $namedPosition . ' position ' . $position  .
-                    ' -->' .
-                    PHP_EOL,
+                    default => $this->determineOutput($pathToFile, $namedPosition, $position),
                 };
             }
         }
@@ -688,6 +682,37 @@ EOT;
             );
         }
         return $uiLayoutString;
+    }
+
+    private function determineOutput(PathToExistingFile $pathToFile, string $namedPosition, string $position): string
+    {
+        return match(str_contains($pathToFile->name()->__toString(), '.php')) {
+            true => $this->includePHPFile($pathToFile),
+            default => '<!-- begin ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL . file_get_contents( $pathToFile->__toString()) . '<!-- end ' . $namedPosition . ' position ' . $position  . ' -->' . PHP_EOL,
+
+        };
+    }
+
+    private function includePHPFile(PathToExistingFile $pathToFile): string
+    {
+        $output = '<div class="roady-ui-error"><h2>Error</h2><p>Failed to load content for: ' . $pathToFile->__toString() . '</p></div>';
+        $renderedOutputKey = sha1($pathToFile->__toString());
+        if(isset($this->renderedOutput[$renderedOutputKey])) {
+            return $this->renderedOutput[$renderedOutputKey];
+        }
+        try {
+            ob_start();
+            require_once($pathToFile->__toString());
+            $renderedOutput = ob_get_contents();
+            if(is_string($renderedOutput)) {
+                $output = $renderedOutput;
+            }
+            ob_end_clean();
+        } catch (\Throwable $th) {
+            $output .= '<div class="roady-ui-error"><h2>Error</h2><p>Internal Error: ' . $th->getMessage() . '</p></div>';
+        }
+        $this->renderedOutput[$renderedOutputKey] = $output;
+        return $output;
     }
 }
 
