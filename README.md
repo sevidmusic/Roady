@@ -208,7 +208,7 @@ Positions provided by Roady's UI's internally defined `html` layout:
 
 | Named Position                                      | Purpose                                                                                                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<roady-ui-page-title-placeholder>`                 | This position name is reserved for internal use, Roady's UI determine the page title based on the Request that was made.                                       |
+| `<roady-ui-page-title-placeholder>`                 | This position name is reserved for internal use, Roady's UI determines the page title based on the Request that was made.                                      |
 | `<roady-ui-meta-description>`                       | For `description` meta data that should be rendered in the value attribute of a `<meta> ` tag in the `<head>` section of the output Rendered by Roady's UI.    |
 | `<roady-ui-meta-keywords>`                          | For `keyword` meta data that should be rendered in the value attribute of a `<meta> ` tag in the `<head>` section of the output Rendered by Roady's UI.        |
 | `<roady-ui-meta-author>`                            | For `author` meta data that should be rendered in the value attribute of a `<meta> ` tag in the `<head>` section of the output Rendered by Roady's UI.         |
