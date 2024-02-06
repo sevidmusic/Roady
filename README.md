@@ -151,6 +151,18 @@ respond to the same Request:
 
     <head>
 
+        <title><roady-ui-page-title-placeholder></roady-ui-page-title-placeholder></title>
+
+        <meta charset="UTF-8">
+
+        <meta name="description" content="<roady-ui-meta-description></roady-ui-meta-description>">
+
+        <meta name="keywords" content="<roady-ui-meta-keywords></roady-ui-meta-keywords>">
+
+        <meta name="author" content="<roady-ui-meta-author></roady-ui-meta-author>">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <roady-ui-css-stylesheet-link-tags></roady-ui-css-stylesheet-link-tags>
 
         <roady-ui-js-script-tags-for-html-head></roady-ui-js-script-tags-for-html-head>
@@ -159,56 +171,52 @@ respond to the same Request:
 
     <body>
 
-        <div class="roady-ui-named-position-a">
-            <roady-ui-named-position-a></roady-ui-named-position-a>
-        </div>
+        <roady-ui-pre-header></roady-ui-pre-header>
 
-        <div class="roady-ui-named-position-b">
-            <roady-ui-named-position-b></roady-ui-named-position-b>
-        </div>
+        <header class="roady-ui-header">
 
-        <div class="roady-ui-named-position-c">
-            <roady-ui-named-position-c></roady-ui-named-position-c>
-        </div>
+            <roady-ui-header></roady-ui-header>
 
-        <div class="roady-ui-named-position-d">
-            <roady-ui-named-position-d></roady-ui-named-position-d>
-        </div>
+        </header>
 
-        <div class="roady-ui-named-position-e">
-            <roady-ui-named-position-e></roady-ui-named-position-e>
-        </div>
 
-        <div class="roady-ui-named-position-f">
-            <roady-ui-named-position-f></roady-ui-named-position-f>
-        </div>
+        <main class="roady-ui-main-content">
 
-        <div class="roady-ui-named-position-g">
-            <roady-ui-named-position-g></roady-ui-named-position-g>
-        </div>
+            <roady-ui-main-content></roady-ui-main-content>
+
+        </main>
+
+        <footer class="roady-ui-footer">
+
+            <roady-ui-footer></roady-ui-footer>
+
+        </footer>
+
 
     </body>
 
-    <roady-ui-js-script-tags-for-end-of-html>
-
 </html>
+
+<roady-ui-js-script-tags-for-end-of-html></roady-ui-js-script-tags-for-end-of-html>
+
+<!-- Powered by Roady (https://github.com/sevidmusic/roady) -->
 
 ```
 
 The following table is an overview of the purpose of each of the Named
 Positions provided by Roady's UI's internally defined `html` layout:
 
-| Named Position                              | Purpose                                                                              |
-|---------------------------------------------|--------------------------------------------------------------------------------------|
-| `<roady-ui-css-stylesheet-link-tags>`       | For `<link>` tags rendered for Routes to css stylesheets.                            |
-| `<roady-ui-js-script-tags-for-html-head>`   | For `<script>` tags rendered for Routes to javascropt files.                         |
-| `<roady-ui-named-position-a>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
-| `<roady-ui-named-position-b>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
-| `<roady-ui-named-position-c>`               | For Routes to `php` or `html` files.                                                 |
-| `<roady-ui-named-position-d>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
-| `<roady-ui-named-position-e>`               | For Routes to `php` or `html` files.                                                 |
-| `<roady-ui-named-position-f>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
-| `<roady-ui-named-position-g>`               | For `html` output rendered for Routes to `php` or `html` files.                      |
-| `<roady-ui-js-script-tags-for-end-of-html>` | For Routes to javascript files that should be loaded after the closing `<body>` tag. |
-
+| Named Position                                      | Purpose                                                                                                                                                        |
+|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<roady-ui-page-title-placeholder>`                 | This position name is reserved for internal use, Roady's UI determine the page title based on the Request that was made.                                       |
+| `<roady-ui-meta-description>`                       | For `description` meta data that should be rendered in the value attribute of a `<meta> ` tag in the `<head>` section of the output Rendered by Roady's UI.    |
+| `<roady-ui-meta-keywords>`                          | For `keyword` meta data that should be rendered in the value attribute of a `<meta> ` tag in the `<head>` section of the output Rendered by Roady's UI.        |
+| `<roady-ui-meta-author>`                            | For `author` meta data that should be rendered in the value attribute of a `<meta> ` tag in the `<head>` section of the output Rendered by Roady's UI.         |
+| `<roady-ui-css-stylesheet-link-tags>`               | For `<link>` tags rendered for Routes to css stylesheets.                                                                                                      |
+| `<roady-ui-js-script-tags-for-html-head>`           | For `<script>` tags rendered for Routes to javascropt files.                                                                                                   |
+| `<roady-ui-pre-header>`                             | For output that shoud be rendered before the `<header>`.                                                                                                       |
+| `<roady-ui-header>`                                 | For output that should be rendered within the `<header>`.                                                                                                      |
+| `<roady-ui-main-content>`                           | For output that should be rendered within `<main>`.                                                                                                            |
+| `<roady-ui-footer>`                                 | For output that should be rendered within the `<footer>`.                                                                                                      |
+| `<roady-ui-js-script-tags-for-end-of-html>`         | For Routes to javascript files that should be loaded after the closing `<body>` tag.                                                                           |
 
