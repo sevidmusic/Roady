@@ -22,12 +22,13 @@
         "darling/php-json-utilities": "^1.2",
         "darling/php-json-storage-utilities": "^1.0",
         "darling/php-darling-dev-tools": "^1.0",
-        "darling/roady-module-utilities": "^1.0"
+        "darling/roady-module-utilities": "^1.0",
+        "darling/roady-routing-utilities": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "roady\\": "src/",
-            "tests\\": "tests/"
+            "Darling\\Roady\\": "src/",
+            "Darling\\Roady\\tests\\": "tests/"
         }
     },
     "require-dev": {
