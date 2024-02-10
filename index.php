@@ -10,6 +10,8 @@
 
 use Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use Darling\RoadyRoutingUtilities\classes\requests\Request as RequestInstance;
+use Darling\RoadyRoutingUtilities\interfaces\responses\Response;
+use Darling\RoadyRoutingUtilities\classes\responses\Response as ResponseInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
 use \Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingFile;
 use \Darling\PHPTextTypes\classes\collections\SafeTextCollection as SafeTextCollectionInstance;
@@ -39,26 +41,6 @@ use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-
-class Response
-{
-
-    public function __construct(
-        private Request $request,
-        private RouteCollection $routeCollection
-    ) {}
-
-    public function request(): Request
-    {
-        return $this->request;
-    }
-
-    public function routeCollection(): RouteCollection
-    {
-        return $this->routeCollection;
-    }
-
-}
 
 class Router
 {
@@ -135,7 +117,7 @@ class Router
                 }
             }
         }
-        return new Response(
+        return new ResponseInstance(
             $request,
             new RouteCollectionInstance(...$respondingRoutes)
         );
