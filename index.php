@@ -10,6 +10,8 @@
 
 use Darling\RoadyRoutingUtilities\interfaces\requests\Request;
 use Darling\RoadyRoutingUtilities\classes\requests\Request as RequestInstance;
+use Darling\RoadyRoutingUtilities\interfaces\routers\Router;
+use Darling\RoadyRoutingUtilities\classes\routers\Router as RouterInstance;
 use Darling\RoadyRoutingUtilities\interfaces\responses\Response;
 use Darling\RoadyRoutingUtilities\classes\responses\Response as ResponseInstance;
 use \Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory;
@@ -41,134 +43,6 @@ use \Darling\RoadyRoutes\interfaces\collections\RouteCollection;
 use \Darling\RoadyRoutes\interfaces\sorters\RouteCollectionSorter;
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-
-class Router
-{
-
-    public function __construct(
-        private ListingOfDirectoryOfRoadyModules $listingOfDirectoryOfRoadyModules,
-        private ModuleCSSRouteDeterminator $moduleCSSRouteDeterminator,
-        private ModuleJSRouteDeterminator $moduleJSRouteDeterminator,
-        private ModuleOutputRouteDeterminator $moduleOutputRouteDeterminator,
-        private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator,
-        private ModuleRoutesJsonConfigurationReader $moduleRoutesJsonConfigurationReader,
-    ) {}
-
-    public function handleRequest(Request $request): Response
-    {
-        $respondingRoutes = [];
-        foreach (
-        $this->listingOfDirectoryOfRoadyModules
-             ->pathToRoadyModuleDirectoryCollection()
-             ->collection()
-            as
-            $pathToRoadyModuleDirectory
-        ) {
-            if(
-                $this->configurationFileExistsForCurrentRequestsAuthority(
-                    $pathToRoadyModuleDirectory,
-                    $request
-                )
-            ) {
-                $manuallyConfiguredRoutes =
-                    $this->moduleRoutesJsonConfigurationReader
-                         ->determineConfiguredRoutes(
-                             $request->url()
-                                     ->domain()
-                                     ->authority(),
-                             $pathToRoadyModuleDirectory,
-                             $this->roadyModuleFileSystemPathDeterminator
-                         );
-                $dynamicallyDeterminedCssRoutes =
-                    $this->moduleCSSRouteDeterminator
-                          ->determineCSSRoutes(
-                              $pathToRoadyModuleDirectory
-                          );
-                $dynamicallyDeterminedJsRoutes =
-                    $this->moduleJSRouteDeterminator
-                         ->determineJSRoutes(
-                             $pathToRoadyModuleDirectory
-                         );
-                $dynamicallyDeterminedOutputRoutes =
-                    $this->moduleOutputRouteDeterminator
-                         ->determineOutputRoutes(
-                             $pathToRoadyModuleDirectory
-                         );
-                $determinedRoutes = array_merge(
-                    $manuallyConfiguredRoutes->collection(),
-                    $dynamicallyDeterminedCssRoutes->collection(),
-                    $dynamicallyDeterminedJsRoutes->collection(),
-                    $dynamicallyDeterminedOutputRoutes->collection(),
-                );
-                foreach($determinedRoutes as $route) {
-                    if(
-                        in_array(
-                            $request->name(),
-                            $route->nameCollection()->collection()
-                        )
-                        ||
-                        in_array(
-                            new NameInstance(new TextInstance('global')),
-                            $route->nameCollection()->collection()
-                        )
-                    ) {
-                        $respondingRoutes[] = $route;
-                    }
-                }
-            }
-        }
-        return new ResponseInstance(
-            $request,
-            new RouteCollectionInstance(...$respondingRoutes)
-        );
-    }
-
-    private function configurationFileExistsForCurrentRequestsAuthority(
-        PathToRoadyModuleDirectory $pathToRoadyModuleDirectory,
-        Request $request
-    ): bool
-    {
-        return str_replace(
-            ':',
-            '.',
-            $request->url()->domain()->authority()->__toString()
-        ) . '.json'
-        ===
-        $this->determinePathToConfigurationFile(
-            $pathToRoadyModuleDirectory,
-            $request
-        )->name()->__toString();
-    }
-
-    private function determinePathToConfigurationFile(
-        PathToRoadyModuleDirectory $pathToRoadyModuleDirectory,
-        Request $request
-    ): PathToExistingFile
-    {
-        return $this->roadyModuleFileSystemPathDeterminator
-                    ->determinePathToFileInModuleDirectory(
-                        $pathToRoadyModuleDirectory,
-                        new RelativePathInstance(
-                            new SafeTextCollectionInstance(
-                                new SafeTextInstance(
-                                    new TextInstance(
-                                        str_replace(
-                                            ':',
-                                            '.',
-                                            $request->url()
-                                                    ->domain()
-                                                    ->authority()
-                                                    ->__toString()
-                                        ) . '.json'
-                                    )
-                                )
-                            )
-                        ),
-                    );
-    }
-
-
-}
 
 class RoadyAPI
 {
@@ -494,7 +368,7 @@ $currentRequest = new RequestInstance();
 $roadyModuleFileSystemPathDeterminator =
     new RoadyModuleFileSystemPathDeterminatorInstance();
 
-$router = new Router(
+$router = new RouterInstance(
     new ListingOfDirectoryOfRoadyModulesInstance(
         RoadyAPI::pathToDirectoryOfRoadyModules()
     ),
