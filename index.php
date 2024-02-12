@@ -294,7 +294,11 @@ class RoadyUI
 <!-- Powered by Roady (https://github.com/sevidmusic/roady) -->
 
 EOT;
-    public function __construct(private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules, private RouteCollectionSorter $routeCollectionSorter, private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator) {}
+    public function __construct(
+        private PathToDirectoryOfRoadyModules $pathToDirectoryOfRoadyModules,
+        private RouteCollectionSorter $routeCollectionSorter,
+        private RoadyModuleFileSystemPathDeterminator $roadyModuleFileSystemPathDeterminator
+    ) {}
 
     public function render(Response $response): string
     {
@@ -487,6 +491,8 @@ $requestsUrls = [
 $testRequestsUrl = $requestsUrls[array_rand($requestsUrls)];
 $currentRequest =  new RequestInstance($testRequestsUrl);
 $currentRequest = new RequestInstance();
+$roadyModuleFileSystemPathDeterminator =
+    new RoadyModuleFileSystemPathDeterminatorInstance();
 
 $router = new Router(
     new ListingOfDirectoryOfRoadyModulesInstance(
@@ -495,7 +501,7 @@ $router = new Router(
     new ModuleCSSRouteDeterminatorInstance(),
     new ModuleJSRouteDeterminatorInstance(),
     new ModuleOutputRouteDeterminatorInstance(),
-    new RoadyModuleFileSystemPathDeterminatorInstance(),
+    $roadyModuleFileSystemPathDeterminator,
     new ModuleRoutesJsonConfigurationReaderInstance(),
 );
 
@@ -504,7 +510,7 @@ $response = $router->handleRequest($currentRequest);
 $roadyUI = new RoadyUI(
     RoadyAPI::pathToDirectoryOfRoadyModules(),
     new RouteCollectionSorterInstance(),
-    new RoadyModuleFileSystemPathDeterminatorInstance()
+    $roadyModuleFileSystemPathDeterminator,
 );
 
 echo $roadyUI->render($response);

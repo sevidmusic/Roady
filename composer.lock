@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "darling/php-darling-dev-tools",
-            "version": "v1.0.8",
+            "version": "v1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/PHPDarlingDevTools.git",
-                "reference": "36a8ee0417735a776d7f38efe9f3b9d13ccf5cfa"
+                "reference": "88754ca7965255e20d61ac62e5bd54af7de96303"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/PHPDarlingDevTools/zipball/36a8ee0417735a776d7f38efe9f3b9d13ccf5cfa",
-                "reference": "36a8ee0417735a776d7f38efe9f3b9d13ccf5cfa",
+                "url": "https://api.github.com/repos/sevidmusic/PHPDarlingDevTools/zipball/88754ca7965255e20d61ac62e5bd54af7de96303",
+                "reference": "88754ca7965255e20d61ac62e5bd54af7de96303",
                 "shasum": ""
             },
             "require": {
@@ -46,9 +46,9 @@
             "description": "Development tools for development of Darling PHP libraries and projects. ",
             "support": {
                 "issues": "https://github.com/sevidmusic/PHPDarlingDevTools/issues",
-                "source": "https://github.com/sevidmusic/PHPDarlingDevTools/tree/v1.0.8"
+                "source": "https://github.com/sevidmusic/PHPDarlingDevTools/tree/v1.0.9"
             },
-            "time": "2023-10-25T23:39:53+00:00"
+            "time": "2024-02-10T02:41:19+00:00"
         },
         {
             "name": "darling/php-file-system-paths",
@@ -535,16 +535,16 @@
         },
         {
             "name": "darling/roady-routing-utilities",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sevidmusic/RoadyRoutingUtilities.git",
-                "reference": "52f7b61924ba75bb31c6785a1f8b68f1251223c4"
+                "reference": "9f475e93a25a25ebcfb6de625743df0009a9de95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sevidmusic/RoadyRoutingUtilities/zipball/52f7b61924ba75bb31c6785a1f8b68f1251223c4",
-                "reference": "52f7b61924ba75bb31c6785a1f8b68f1251223c4",
+                "url": "https://api.github.com/repos/sevidmusic/RoadyRoutingUtilities/zipball/9f475e93a25a25ebcfb6de625743df0009a9de95",
+                "reference": "9f475e93a25a25ebcfb6de625743df0009a9de95",
                 "shasum": ""
             },
             "require": {
@@ -581,9 +581,9 @@
             "description": "Routing utilities for the Roady php framework.",
             "support": {
                 "issues": "https://github.com/sevidmusic/RoadyRoutingUtilities/issues",
-                "source": "https://github.com/sevidmusic/RoadyRoutingUtilities/tree/v1.0.1"
+                "source": "https://github.com/sevidmusic/RoadyRoutingUtilities/tree/v1.0.2"
             },
-            "time": "2024-02-10T01:46:56+00:00"
+            "time": "2024-02-12T04:33:04+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -1359,16 +1359,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.0.2",
+            "version": "11.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2f281e7e6776aea920cab5fc5a48d0fefbe1f39e"
+                "reference": "de24e7e7c67fbf437f7b6cd7bc919f2dc6fd89d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2f281e7e6776aea920cab5fc5a48d0fefbe1f39e",
-                "reference": "2f281e7e6776aea920cab5fc5a48d0fefbe1f39e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/de24e7e7c67fbf437f7b6cd7bc919f2dc6fd89d4",
+                "reference": "de24e7e7c67fbf437f7b6cd7bc919f2dc6fd89d4",
                 "shasum": ""
             },
             "require": {
@@ -1439,7 +1439,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.0.3"
             },
             "funding": [
                 {
@@ -1455,7 +1455,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-04T09:09:14+00:00"
+            "time": "2024-02-10T06:31:16+00:00"
         },
         {
             "name": "sebastian/cli-parser",
