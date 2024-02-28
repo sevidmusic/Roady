@@ -1,13 +1,5 @@
 <?php
 
-
-/**
- * This is a mock of the actual implementation of Roady's index.php.
- *
- * This file will change drastically before the release of Roady 2.0.
- *
- */
-
 use \Darling\RoadyModuleUtilities\classes\configuration\ModuleRoutesJsonConfigurationReader as ModuleRoutesJsonConfigurationReaderInstance;
 use \Darling\RoadyModuleUtilities\classes\determinators\ModuleCSSRouteDeterminator as ModuleCSSRouteDeterminatorInstance;
 use \Darling\RoadyModuleUtilities\classes\determinators\ModuleJSRouteDeterminator as ModuleJSRouteDeterminatorInstance;
