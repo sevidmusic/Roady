@@ -3,7 +3,7 @@ parameters:
     paths:
         - src
         - tests
-        - devTools
+        - index.php
     excludePaths:
         - devTools/templates
 
