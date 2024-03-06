@@ -1,0 +1,24 @@
+
+.roady-ui-pre-header {
+    border-radius: 0.5rem;
+}
+
+.roady-ui-main-content {
+    img,
+    picture {
+        border-radius: 0.5rem;
+    }
+
+    p {
+        border-radius: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 1425px) {
+    .roady-ui-pre-header{
+        border: none;
+        li {
+            border-bottom: 0.1rem solid white;
+        }
+    }
+}

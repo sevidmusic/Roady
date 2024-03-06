@@ -1,0 +1,123 @@
+
+body {
+    padding: 1vw;
+    margin: 0 27vw;
+}
+
+p {
+    padding: 3.3rem;
+}
+
+p,
+.roady-ui-pre-header {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.roady-ui-pre-header {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    z-index: 2000;
+    overflow: auto;
+    position: sticky;
+    top: 0;
+
+    /**
+     * Evenly space horizontal menu inspired by solution found on stackoverflow:
+     *
+     * @see https://stackoverflow.com/questions/23226888/horizontal-list-items-fit-to-100-with-even-spacing
+     *
+     */
+    menu {
+        align-items: stretch;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    li {
+        padding: 1rem;
+    }
+}
+
+.roady-ui-main-content {
+    img,
+    picture {
+        margin-bottom: 3rem;
+    }
+}
+
+.circles{
+    position: absolute;
+    top: 0;
+    z-index: -2000;
+    left: 0;
+}
+
+.circles li {
+    bottom: -150px;
+    display: block;
+    list-style: none;
+    opacity: 0;
+    padding: 2rem;
+    position: absolute;
+}
+
+.circles li:nth-child(1){
+    left: 25%;
+}
+
+.circles li:nth-child(2){
+    left: 10%;
+}
+
+.circles li:nth-child(3){
+    left: 70%;
+}
+
+.circles li:nth-child(4){
+    left: 40%;
+}
+
+.circles li:nth-child(5){
+    left: 65%;
+}
+
+.circles li:nth-child(6){
+    left: 75%;
+}
+
+.circles li:nth-child(7){
+    left: 35%;
+}
+
+.circles li:nth-child(8){
+    left: 50%;
+}
+
+.circles li:nth-child(9){
+    left: 20%;
+}
+
+.circles li:nth-child(10){
+    left: 85%;
+}
+
+.roady-ui-pre-header,
+.roady-ui-main-content {
+    opacity: 87%;
+}
+
+
+@media only screen and (max-width: 1425px) {
+
+    body {
+        margin: 0 7vw;
+    }
+
+    .roady-ui-pre-header{
+        position: static;
+        menu {
+            flex-direction: column;
+        }
+    }
+
+}
+
