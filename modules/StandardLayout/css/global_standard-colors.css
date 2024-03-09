@@ -61,6 +61,7 @@ html {
 
 .circles li{
     background: rgba(255, 255, 255, 0.2);
+    color: black;
 }
 
 .roady-ui-pre-header {
@@ -74,3 +75,4 @@ html {
         background: none;
     }
 }
+

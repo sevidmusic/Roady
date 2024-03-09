@@ -1,27 +1,4 @@
 
-@media (prefers-color-scheme: light) {
-
-    :root {
-        /**
-         * If a --background-color-primary is set, use it, otherwise
-         * default to black
-         */
-        --background-color-default: var(--background-color-primary, white);
-    }
-
-}
-
-@media (prefers-color-scheme: dark) {
-
-    :root {
-        /**
-         * If a --background-color-primary is set, use it, otherwise
-         * default to black
-         */
-        --background-color-default: var(--background-color-primary, black);
-    }
-
-}
 
 .hello-universe-global-navigation {
     font-size: 1.7rem;
@@ -32,7 +9,6 @@
      * will default to `--background-color-default` which is set
      * by this stylesheet.
      */
-    background: var(--background-color-default);
     display: grid;
     grid-auto-flow: column;
     text-align: center;
@@ -43,7 +19,6 @@
 
 .hello-universe-global-navigation a {
     text-decoration: none;
-    font-size: calc(var(--primary-font-size, 1rem) * 0.87);
 }
 
  /* unvisited link */
@@ -55,7 +30,7 @@
 /* mouse over link */
 .hello-universe-global-navigation a:hover {
     color: #d5d7d7;
-    border-bottom: 0.4rem solid var(--background-color-default);
+    border-bottom: 0.4rem solid red;
     margin-bottom: -0.4rem;
     border-radius: 0.5rem;
 }

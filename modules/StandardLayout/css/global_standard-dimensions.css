@@ -71,3 +71,7 @@
     width: 150px;
 }
 
+.circles li{
+    animation: animate 37s linear infinite;
+    img, picture { max-width: 100%; height: auto; }
+}

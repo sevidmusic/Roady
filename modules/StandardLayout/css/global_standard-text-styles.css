@@ -36,7 +36,16 @@ h1, h2, h3, h4 {
 
 .circles li {
     font-family: monospace;
-    font-size: 2.17rem;
+    font-size: 1.7rem;
+    text-align: center;
+
+  font-weight: bold;
+  text-shadow: 0 0 8px #ffffff,
+               0 0 10px #fafafa,
+               0 0 12px #fcfcfc,
+               0 0 14px #fefefe,
+               0 0 16px #eaeaea,
+               0 0 18px #ececec;
 }
 
 .roady-ui-main-content {
