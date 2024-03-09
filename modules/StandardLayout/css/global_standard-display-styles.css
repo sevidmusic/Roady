@@ -4,11 +4,6 @@ body {
     margin: 0 27vw;
 }
 
-p {
-    padding: 3.3rem;
-}
-
-p,
 .roady-ui-pre-header {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
@@ -34,6 +29,10 @@ p,
     picture {
         margin-bottom: 3rem;
     }
+}
+
+.roady-ui-content-wrapper {
+    padding: 3.5rem;
 }
 
 .circles{

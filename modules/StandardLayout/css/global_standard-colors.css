@@ -26,10 +26,8 @@ html {
         background: #161518;
     }
 
-    .roady-ui-main-content {
-        p {
-            background: #161518;
-        }
+    .roady-ui-content-wrapper {
+        background: #161518;
     }
 
 }

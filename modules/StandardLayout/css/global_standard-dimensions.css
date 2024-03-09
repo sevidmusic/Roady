@@ -5,10 +5,6 @@
 
 .roady-ui-main-content {
     min-width: 315px;
-
-    p {
-        min-width: 100%;
-    }
 }
 
 .roady-ui-header {
@@ -16,15 +12,14 @@
 }
 
 .circles{
-    height: 100%;
-    width: 100%;
+    height: 87%;
+    width: 87%;
 }
 
 .circles li:nth-child(1){
     height: 80px;
     width: 80px;
 }
-
 
 .circles li:nth-child(2){
     height: 20px;
@@ -75,3 +70,4 @@
     animation: animate 37s linear infinite;
     img, picture { max-width: 100%; height: auto; }
 }
+

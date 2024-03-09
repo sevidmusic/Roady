@@ -9,9 +9,6 @@
         border-radius: 0.5rem;
     }
 
-    p {
-        border-radius: 0.5rem;
-    }
 }
 
 @media only screen and (max-width: 1425px) {
