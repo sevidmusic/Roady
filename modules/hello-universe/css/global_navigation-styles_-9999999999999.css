@@ -2,13 +2,6 @@
 
 .hello-universe-global-navigation {
     font-size: 1.7rem;
-    /*
-     * This stylesheet relies on the --background-color-primary
-     * variable being set by another css file, if
-     * --background-color-primary is not set then background-color
-     * will default to `--background-color-default` which is set
-     * by this stylesheet.
-     */
     display: grid;
     grid-auto-flow: column;
     text-align: center;

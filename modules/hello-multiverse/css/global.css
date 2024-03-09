@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 main {
     background-color: var(--background-color-alt-2);
     display: grid;
@@ -30,3 +24,4 @@ main .demo-image {
 img, picture {
     max-width: 32svh;
 }
+
