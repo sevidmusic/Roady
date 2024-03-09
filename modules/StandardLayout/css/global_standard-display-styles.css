@@ -27,7 +27,7 @@ body {
 .roady-ui-main-content {
     img,
     picture {
-        margin-bottom: 3rem;
+        margin: 2rem 0;
     }
 }
 
