@@ -17,8 +17,8 @@ p,
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     overflow: auto;
     position: sticky;
-    top: 2.5rem;
-
+    top: 1.7svh;
+    z-index: 5000;
     menu {
         display: grid;
         grid-auto-flow: column;
@@ -97,19 +97,15 @@ p,
     opacity: 87%;
 }
 
-
 @media only screen and (max-width: 1425px) {
 
-    body {
-        margin: 0 7vw;
-    }
-
-    .roady-ui-pre-header{
-        position: static;
+    .roady-ui-pre-header {
+        max-height: 10svh;
         menu {
-            flex-direction: column;
+            display: grid;
+            grid-auto-flow: row;
         }
+
     }
 
 }
-

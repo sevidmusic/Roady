@@ -2,7 +2,7 @@
     {
         "module-name": "StandardLayout",
         "responds-to": [
-            "global"
+            "disabled-g-l-o-b-a-l"
         ],
         "named-positions": [
             {

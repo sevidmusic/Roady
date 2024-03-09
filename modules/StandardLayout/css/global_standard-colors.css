@@ -70,9 +70,3 @@ html {
     }
 }
 
-@media only screen and (max-width: 1425px) {
-    .roady-ui-pre-header{
-        background: none;
-    }
-}
-
