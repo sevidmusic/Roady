@@ -62,9 +62,11 @@ html {
     color: black;
 }
 
-.roady-ui-pre-header {
-    a:hover {
-        text-decoration-color: var(--primary-color-loud, orange);
-    }
+a {
+    color: #0892d0;
+}
+
+a:hover {
+    text-decoration-color: var(--primary-color-loud, orange);
 }
 

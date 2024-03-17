@@ -4,6 +4,7 @@
 }
 
 .roady-ui-main-content {
+
     img,
     picture {
         border-radius: 0.5rem;
@@ -11,11 +12,3 @@
 
 }
 
-@media only screen and (max-width: 1425px) {
-    .roady-ui-pre-header{
-        border: none;
-        li {
-            border-bottom: 0.17rem solid white;
-        }
-    }
-}

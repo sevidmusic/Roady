@@ -1,16 +1,4 @@
 
-.roady-ui-pre-header {
-    min-width: 315px;
-}
-
-.roady-ui-main-content {
-    min-width: 315px;
-}
-
-.roady-ui-header {
-    min-width: 315px;
-}
-
 .circles{
     height: 87%;
     width: 87%;
@@ -69,5 +57,14 @@
 .circles li{
     animation: animate 37s linear infinite;
     img, picture { max-width: 100%; height: auto; }
+}
+
+@media only screen and (max-width: 1425px) {
+
+    .roady-ui-pre-header {
+        max-height: 10svh;
+        scroll-snap-type: both mandatory;
+    }
+
 }
 
