@@ -5,5 +5,5 @@ parameters:
         - tests
         - index.php
     excludePaths:
-        - devTools/templates
+        - devTools/templates (?)
 
