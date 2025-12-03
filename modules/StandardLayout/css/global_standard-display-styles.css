@@ -120,3 +120,16 @@ body {
         margin: 0 7vw;
     }
 }
+
+table, .sourceCode {
+  background: black;
+  overflow: auto;
+  padding: 0.5rem;
+}
+
+td {
+  border: 0.179rem dotted darkgray;
+  border-radius: 0.427rem;
+  padding: 1rem;
+}
+
