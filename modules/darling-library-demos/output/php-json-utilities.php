@@ -1,182 +1,73 @@
 <?php
 
-use Darling\PHPTextTypes\classes\strings\SafeText as SafeText;
-use Darling\PHPTextTypes\classes\strings\Text as Text;
-use Darling\PHPTextTypes\classes\strings\Id as Id;
+use Darling\PHPJsonUtilities\classes\encoded\data\Json as Json;
 use Darling\PHPTextTypes\classes\strings\ClassString as ClassString;
-use Darling\PHPTextTypes\classes\strings\UnknownClass as UnknownClass;
-use Darling\PHPTextTypes\classes\strings\AlphanumericText as AlphanumericText;
-use Darling\PHPTextTypes\classes\strings\Name as Name;
 use Darling\RoadyRoutingUtilities\classes\requests\Request as Request;
 
-function highlgihtText(string $text): string {
-    return '<span style="background: #050505; color: lightblue;">' . $text . '</span>';
-}
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$currentRequest = new \Darling\RoadyRoutingUtilities\classes\requests\Request();
-$defaultText = ', . / ; \' [ ] \ = - 0 9 8 7 6 5 4 3 2 1 รักเท่านั้น  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z! @ # $ % ^ & * รักเท่านั้น ( ) _ + | } { " : ? > < ~ ` a b c d e f g h i j k l m n o p q r s t u v w x y z ';
-$rawText = ($currentRequest->postArray()['php-text-types-raw-text'] ?? $defaultText);
-$text = new Text($rawText);
-$alphanumericText = new AlphanumericText($text);
-$nameText = new Name($text);
-$safeText = new SafeText($text);
-$idText = new Id();
-$classString = new ClassString($currentRequest);
-$unknownClass = new UnknownClass();
+$currentRequest = new Request();
+$providedData = ($currentRequest->postArray()['php-json-utilities-raw-data'] ?? '');
+$dataType = gettype($providedData);
+$jsonForProvidedData = new Json($providedData);
+$arrayOfInternallyDefinedData = [
+  'Request' => $currentRequest->url()->__toString(), 
+  'Request Data' => $currentRequest->postArray(), 
+  'Provided Data' => $providedData
+];
+$jsonForInternalData = new Json($arrayOfInternallyDefinedData);
+
 ?>
 
 <div class="roady-ui-content-wrapper">
 
-<form action="?request=php-text-types" method="post">
-  <label for="fname">Enter some text to test how it is output by the Basic Text types:</label><br>
-  <textarea id="w3review" name="php-text-types-raw-text" rows="5" cols="50">
-      <?php echo $text->__toString(); ?>
-  </textarea><br>
-  <input type="submit" value="Test Text">
-  <input type="hidden" name="request" value="php-text-types">
+<form action="?request=php-json-utilities" method="post">
+  <label for="fname">Enter some text or some josn to see how it is encoded by the Json class:</label><br>
+  <textarea id="w3review" name="php-json-utilities-raw-data" rows="5" cols="50"></textarea><br>
+  <input type="submit" value="Test Data">
+  <input type="hidden" name="request" value="php-json-utilities">
 </form> 
 </div>
 <div class="roady-ui-content-wrapper">
-<h2>Basic Text Types</h2>
+<h2>Json For Provided Data:</h2>
 <table>
     <tr>
-        <th>Text Type</th>
-        <th>Output</th>
+        <th>Data Type</th>
+        <th>Resulting Json</th>
         <th>Length</th>
     </tr>
-    <!-- Text -->
+    <!-- Json -->
     <tr>
-        <td>
-            <?php echo $text::class; ?>
-            <br>
-            <?php echo highlgihtText('Text represents a string, can be cast to the string it represents, and can provide information about the string it represents.'); ?>
-        </td>
-        <td>
-            <?php echo $text; ?>
-        </td>
-        <td>
-            <?php echo $text->length(); ?>
-        </td>
-    </tr>
-    <!-- SafeText -->
-    <tr>
-        <td>
-            <?php echo $safeText::class; ?>
-            <br>
-            <?php echo highlgihtText('SafeText is used to provide a safe form of Text that may contain unsafe characters.') ?>
-            <br>
-            <?php echo highlgihtText('The following characters are considered safe:'); ?> 
-            <br>
-            <?php echo highlgihtText('- Alphanumeric characters: A-Z, a-z, and 0-9'); ?>
-            <br>
-            <?php echo highlgihtText('- Underscores: _'); ?>
-            <br>
-            <?php echo highlgihtText('- Hyphens: -'); ?>
-            <br>
-            <?php echo highlgihtText('- Periods: .'); ?>
-            <br>
-            <?php echo highlgihtText('Unsafe characters will be replaced with underscores.'); ?>
-            <br>
-            <?php echo highlgihtText('A consecutive sequence of 2 or more unsafe characters will be replaced by a single underscore.'); ?>
-            <br>
-            <?php echo highlgihtText('A consecutive sequence of 2 or more underscores will be replaced by a single underscore.'); ?>
-            <br>
-            <?php echo highlgihtText('A consecutive sequence of 2 or more hyphens will be replaced by a single hyphen.'); ?>
-            <br>
-            <?php echo highlgihtText('A consecutive sequence of 2 or more periods will be replaced by a single period.'); ?>
-            <br>
-            <?php echo highlgihtText('SafeText will never be empty, if the original Text is empty, then the SafeText will be the numeric character 0.'); ?>
-        </td>
-        <td>
-            <?php echo $safeText; ?>
-        </td>
-        <td>
-            <?php echo $safeText->length(); ?>
-        </td>
-    </tr>
-    <!-- AlphanumericText -->
-    <tr>
-        <td>
-            <?php echo $alphanumericText::class; ?>
-            <br>
-            <?php echo highlgihtText('AlphanumericText is SafeText that only contains alphanumeric characters: a-z, A-Z, and 0-9'); ?>
-        </td>
-        <td>
-            <?php echo $alphanumericText; ?>
-        </td>
-        <td>
-            <?php echo $alphanumericText->length(); ?>
-        </td>
-    </tr>
-    <!-- Name -->
-    <tr>
-        <td>
-            <?php echo $nameText::class; ?>
-            <br>
-            <?php echo highlgihtText('A Name is SafeText that begins with an alphanumeric character,  is at least 1 character in length, is no more than 170 characters in length, and only contains the following characters:'); ?>
-        </td>
-        <td>
-            <?php echo $nameText; ?>
-        </td>
-        <td>
-            <?php echo $nameText->length(); ?>
-        </td>
+        <td><?php echo $dataType; ?></td>
+        <td><?php echo $jsonForProvidedData->__toString(); ?></td>
+        <td><?php echo $jsonForProvidedData->length(); ?></td>
     </tr>
 </table>
 </div>
+
+
 <div class="roady-ui-content-wrapper">
-<h2>Other Text types</h2>
+<h2>Json For Internally Defined Array of Data:</h2>
+    <div class="sourceCode">
+    <p>[</p>
+    <p style="padding-left: 1rem;">'Request' => $currentRequest->url()->__toString()</p>
+    <p style="padding-left: 1rem;">'Request Data' => $currentRequest->postArray()</p>
+    <p style="padding-left: 1rem;">'Provided Data' => $providedData</p>
+    <p>]</p>
+</div>
 <table>
     <tr>
-        <th>Text Type</th>
-        <th>Output</th>
+        <th>Data Type</th>
+        <th>Resulting Json</th>
         <th>Length</th>
     </tr>
-    <!-- Id -->
+    <!-- Json -->
     <tr>
-        <td>
-            <?php echo $idText::class; ?>
-            <br>
-            <?php echo highlgihtText('An Id is AlphanumericText whose length is between 60 and 80 characters.'); ?>
-        </td>
-        <td>
-            <?php echo $idText; ?>
-        </td>
-        <td>
-            <?php echo $idText->length(); ?>
-        </td>
-    </tr>
-    <!-- ClassString -->
-    <tr>
-        <td>
-            <?php echo $classString::class; ?>
-            <br>
-            <?php echo highlgihtText('A ClassString is the fully qualified namespace and class name of an existing Class that is not abstract.'); ?>
-            <br>
-            <?php echo highlgihtText('If type is not found, then the fully qualified class name of the UnknownClass type will be output'); ?>
-        </td>
-        <td>
-            <?php echo $classString ?>
-        </td>
-        <td>
-            <?php echo $classString->length(); ?>
-        </td>
-    </tr>
-    <!-- UnknownClass -->
-    <tr>
-        <td>
-            <?php echo $unknownClass::class; ?>
-            <br>
-            <?php echo highlgihtText('An UnknownClass is a ClassString that represents an unknown class.'); ?>
-        </td>
-        <td>
-            <?php echo $unknownClass; ?>
-        </td>
-        <td>
-            <?php echo $unknownClass->length(); ?>
-        </td>
+        <td><?php echo gettype($arrayOfInternallyDefinedData); ?></td>
+        <td><?php echo $jsonForInternalData->__toString(); ?></td>
+        <td><?php echo $jsonForInternalData->length(); ?></td>
     </tr>
 </table>
 </div>
-
-
