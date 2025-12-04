@@ -1,7 +1,7 @@
 
 body {
     padding: 1vw;
-    margin: 0 27vw;
+    margin: 0 7vw;
 }
 .roady-ui-content-wrapper,
 .roady-ui-pre-header {
@@ -125,8 +125,8 @@ body {
 form, table, .sourceCode {
   background: black;
   overflow: auto;
-  padding: 0.5rem;
-  margin: 0.5rem auto;
+  padding: 2rem;
+  margin: 2rem;
 }
 
 td {
@@ -143,5 +143,6 @@ input {
 
 textarea {
   padding: 0.2rem;
+  width: 100%;
 }
 
