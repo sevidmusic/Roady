@@ -13,9 +13,8 @@ $providedData = ($currentRequest->postArray()['php-json-utilities-raw-data'] ?? 
 $dataType = gettype($providedData);
 $jsonForProvidedData = new Json($providedData);
 $arrayOfInternallyDefinedData = [
-  'Request' => $currentRequest->url()->__toString(), 
-  'Request Data' => $currentRequest->postArray(), 
-  'Provided Data' => $providedData
+  'Request Url' => $currentRequest->url()->__toString(), 
+  'Request Data' => ['post' => $currentRequest->postArray(), 'get' => $currentRequest->getArray()], 
 ];
 $jsonForInternalData = new Json($arrayOfInternallyDefinedData);
 
@@ -54,7 +53,6 @@ $jsonForInternalData = new Json($arrayOfInternallyDefinedData);
     <p>[</p>
     <p style="padding-left: 1rem;">'Request' => $currentRequest->url()->__toString()</p>
     <p style="padding-left: 1rem;">'Request Data' => $currentRequest->postArray()</p>
-    <p style="padding-left: 1rem;">'Provided Data' => $providedData</p>
     <p>]</p>
 </div>
 <table>
