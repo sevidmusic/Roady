@@ -6,5 +6,8 @@ vendor/
 .phpunit.cache/
 *.swp
 *.todos
+.vimfilelist
 vimfilelist
 composer.lock
+.php-cs-fixer.cache
+.php-cs-fixer.dist.php

@@ -1,211 +1,235 @@
 <div class="roady-ui-content-wrapper">
-<pre><code>    ____                  __
-   / __ \____  ____ _____/ /_  __
-  / /_/ / __ \/ __ `/ __  / / / /
- / _, _/ /_/ / /_/ / /_/ / /_/ /
-/_/ |_|\____/\__,_/\__,_/\__, /
-                        /____/</code></pre>
-<figure>
-<img src="https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png" alt="" /><figcaption>Roady logo</figcaption>
-</figure>
-<h1 id="development-of-roady-v2.0">Development of Roady v2.0</h1>
-<p>Roady is a <code>php</code> framework I have been developing for a long time. At this point it is a passion project. I love coding, working on Roady makes me happy.</p>
-<p>Roady <code>v1.1.2</code> is the current stable version of Roady, and can be found here:</p>
-<p><a href="https://github.com/sevidmusic/roady/releases/tag/v1.1.2">https://github.com/sevidmusic/roady/releases/tag/v1.1.2</a></p>
-<p>Roady v2.0 is a complete re-write of Roady that will be influenced by Roady’s original design, but will not be compatible with previous versions of Roady.</p>
-<p>Note: At the moment I am using this file to plan the rest of the re-write of <code>Roady2.0</code>. This file will be revised to document <code>Roady2.0</code> before <code>Roady2.0</code> is released.</p>
-<p>Note: This document is still being drafted, and will continue to evolve over time.</p>
-<h1 id="about">About</h1>
-<p>Roady is a modular <code>php</code> framework.</p>
-<p>With Roady the features and functionality of a website are implemented by individual Modules.</p>
-<p>For example, say my band used Roady to build our website, and we needed a music player, that music player would be implemented by a Module.</p>
-<p>If we needed a calender to show upcoming gigs, it would be implemented by a different Module.</p>
-<p>Multiple websites can run on a single installation of Roady, each making use of one or more installed Roady Modules.</p>
-<h1 id="modules">Modules</h1>
-<h3 id="anatomy-of-a-module">Anatomy of a Module</h3>
-<table>
-<colgroup>
-<col style="width: 36%" />
-<col style="width: 63%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Directory</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>css</code></td>
-<td>This is where <code>css</code> stylesheets should be located.</td>
-</tr>
-<tr class="even">
-<td><code>js</code></td>
-<td>This is where <code>javascript</code> files should be located.</td>
-</tr>
-<tr class="odd">
-<td><code>output</code></td>
-<td>This is where <code>php</code> and <code>html</code> files should be located.</td>
-</tr>
-<tr class="even">
-<td><code>APPROPRIATE.SITE.AUTHORITY.json</code></td>
-<td>This file defines hard-coded Routes for a specific website.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="how-a-module-works">How a Module Works</h1>
-<p>Modules should be located in Roady’s <code>modules</code> directory.</p>
-<pre><code>/path/to/Roady/modules</code></pre>
-<p>Modules may define <code>output</code> to be displayed via Roady’s UI in the form of <code>html</code> or <code>php</code> files.</p>
-<p>Modules may define <code>css</code> stylesheets and <code>javascript</code> files to define styles and implement additional functionality for a website.</p>
-<p>Modules may serve <code>php</code>, <code>html</code>, <code>css</code>, and <code>javascript</code>, in Response to a Request to a website via the Routes defined in a <code>json</code> file which is named after the website’s Domain’s Authority.</p>
-<p>For example, <code>sub.example.com.8080.json</code> would be the name of the <code>json</code> file used to define Routes for a website with the following Domain:</p>
-<pre><code> https://sub.example.com:8080/
- |       \__________________/|
- |               |           |
- |           AUTHORITY       |
-  \_________________________/
-               |
-            Domain
-</code></pre>
-<p>Using a website’s Domain’s Authority to name Route configuration files allows Modules to define unique Routes for each website.</p>
-<h3 id="routes">Routes</h3>
-<p>A Route defines the following:</p>
-<ul>
-<li><p>The Name of the Module the Route is configured for. Note: It is possible for a Module to define a Route for another Module by setting the Route’s Module name to the name of the relevant Module.</p></li>
-<li><p>A collection of Names that correspond to the Names of the Requests that a Route should be served in response to.</p></li>
-<li><p>A collection of Named Positions that correspond to the Named Positions provided by Roady’s UI. These Named Positions are used to structure the collective output of all of the Route’s that respond to the same Request.</p></li>
-<li><p>A Relative Path to a <code>php</code> file, <code>html</code> file, <code>css</code> file, or <code>javascript</code> file.</p></li>
-</ul>
-<p>For example, the following <code>json</code> defines a single Route to a <code>html</code> file named <code>output-file.html</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="dt">&quot;module-name&quot;</span><span class="fu">:</span> <span class="st">&quot;module-name&quot;</span><span class="fu">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="dt">&quot;responds-to&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        <span class="st">&quot;name-of-a-request-this-route-responds-to&quot;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="dt">&quot;named-positions&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>        <span class="fu">{</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>            <span class="dt">&quot;position-name&quot;</span><span class="fu">:</span> <span class="st">&quot;roady-ui-named-position-c&quot;</span><span class="fu">,</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>            <span class="dt">&quot;position&quot;</span><span class="fu">:</span> <span class="fl">1.7</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>        <span class="fu">}</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>    <span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>    <span class="dt">&quot;relative-path&quot;</span><span class="fu">:</span> <span class="st">&quot;path</span><span class="ch">\/</span><span class="st">to</span><span class="ch">\/</span><span class="st">output-file.html&quot;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="fu">}</span></span></code></pre></div>
-<h1 id="roadys-user-interface-ui">Roady’s User Interface (UI)</h1>
-<p>Roady’s UI uses the Routes defined by installed Modules to determine the <code>html</code> that should be rendered in Response to a Request.</p>
-<p>Roady’s UI uses the Named Positions provided by an internally defined <code>html</code> layout to structure the collective output of Routes that respond to the same Request:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    <span class="kw">&lt;head&gt;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>        <span class="kw">&lt;title&gt;&lt;roady-ui-page-title-placeholder&gt;&lt;/roady-ui-page-title-placeholder&gt;&lt;/title&gt;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> content=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">roady-ui-meta-description&gt;</span><span class="er">&lt;</span><span class="st">/roady-ui-meta-description&gt;&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;keywords&quot;</span><span class="ot"> content=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">roady-ui-meta-keywords&gt;</span><span class="er">&lt;</span><span class="st">/roady-ui-meta-keywords&gt;&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;author&quot;</span><span class="ot"> content=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">roady-ui-meta-author&gt;</span><span class="er">&lt;</span><span class="st">/roady-ui-meta-author&gt;&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a>        <span class="kw">&lt;roady-ui-css-stylesheet-link-tags&gt;&lt;/roady-ui-css-stylesheet-link-tags&gt;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a>        <span class="kw">&lt;roady-ui-js-script-tags-for-html-head&gt;&lt;/roady-ui-js-script-tags-for-html-head&gt;</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a>    <span class="kw">&lt;/head&gt;</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true"></a>    <span class="kw">&lt;body&gt;</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true"></a>        <span class="kw">&lt;roady-ui-pre-header&gt;&lt;/roady-ui-pre-header&gt;</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true"></a>        <span class="kw">&lt;header</span><span class="ot"> class=</span><span class="st">&quot;roady-ui-header&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true"></a>            <span class="kw">&lt;roady-ui-header&gt;&lt;/roady-ui-header&gt;</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true"></a>        <span class="kw">&lt;/header&gt;</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true"></a></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true"></a>        <span class="kw">&lt;main</span><span class="ot"> class=</span><span class="st">&quot;roady-ui-main-content&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true"></a></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true"></a>            <span class="kw">&lt;roady-ui-main-content&gt;&lt;/roady-ui-main-content&gt;</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true"></a>        <span class="kw">&lt;/main&gt;</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true"></a></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true"></a>        <span class="kw">&lt;footer</span><span class="ot"> class=</span><span class="st">&quot;roady-ui-footer&quot;</span><span class="kw">&gt;</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true"></a></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true"></a>            <span class="kw">&lt;roady-ui-footer&gt;&lt;/roady-ui-footer&gt;</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true"></a></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true"></a>        <span class="kw">&lt;/footer&gt;</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true"></a>    <span class="kw">&lt;/body&gt;</span></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true"></a></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true"></a><span class="kw">&lt;/html&gt;</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true"></a><span class="kw">&lt;roady-ui-js-script-tags-for-end-of-html&gt;&lt;/roady-ui-js-script-tags-for-end-of-html&gt;</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true"></a><span class="co">&lt;!-- Powered by Roady (https://github.com/sevidmusic/roady) --&gt;</span></span></code></pre></div>
-<p>The following table is an overview of the purpose of each of the Named Positions provided by Roady’s UI’s internally defined <code>html</code> layout:</p>
-<table>
-<colgroup>
-<col style="width: 24%" />
-<col style="width: 75%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Named Position</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>&lt;roady-ui-page-title-placeholder&gt;</code></td>
-<td>This position name is reserved for internal use, Roady’s UI determines the page title based on the Request that was made.</td>
-</tr>
-<tr class="even">
-<td><code>&lt;roady-ui-meta-description&gt;</code></td>
-<td>For <code>description</code> meta data that should be rendered in the value attribute of a <code>&lt;meta&gt;</code> tag in the <code>&lt;head&gt;</code> section of the output Rendered by Roady’s UI.</td>
-</tr>
-<tr class="odd">
-<td><code>&lt;roady-ui-meta-keywords&gt;</code></td>
-<td>For <code>keyword</code> meta data that should be rendered in the value attribute of a <code>&lt;meta&gt;</code> tag in the <code>&lt;head&gt;</code> section of the output Rendered by Roady’s UI.</td>
-</tr>
-<tr class="even">
-<td><code>&lt;roady-ui-meta-author&gt;</code></td>
-<td>For <code>author</code> meta data that should be rendered in the value attribute of a <code>&lt;meta&gt;</code> tag in the <code>&lt;head&gt;</code> section of the output Rendered by Roady’s UI.</td>
-</tr>
-<tr class="odd">
-<td><code>&lt;roady-ui-css-stylesheet-link-tags&gt;</code></td>
-<td>For <code>&lt;link&gt;</code> tags rendered for Routes to css stylesheets.</td>
-</tr>
-<tr class="even">
-<td><code>&lt;roady-ui-js-script-tags-for-html-head&gt;</code></td>
-<td>For <code>&lt;script&gt;</code> tags rendered for Routes to javascropt files.</td>
-</tr>
-<tr class="odd">
-<td><code>&lt;roady-ui-pre-header&gt;</code></td>
-<td>For output that shoud be rendered before the <code>&lt;header&gt;</code>.</td>
-</tr>
-<tr class="even">
-<td><code>&lt;roady-ui-header&gt;</code></td>
-<td>For output that should be rendered within the <code>&lt;header&gt;</code>.</td>
-</tr>
-<tr class="odd">
-<td><code>&lt;roady-ui-main-content&gt;</code></td>
-<td>For output that should be rendered within <code>&lt;main&gt;</code>.</td>
-</tr>
-<tr class="even">
-<td><code>&lt;roady-ui-footer&gt;</code></td>
-<td>For output that should be rendered within the <code>&lt;footer&gt;</code>.</td>
-</tr>
-<tr class="odd">
-<td><code>&lt;roady-ui-js-script-tags-for-end-of-html&gt;</code></td>
-<td>For Routes to javascript files that should be loaded after the closing <code>&lt;body&gt;</code> tag.</td>
-</tr>
-</tbody>
-</table>
+    <pre><code>       ____                  __
+       / __ \____  ____ _____/ /_  __
+      / /_/ / __ \/ __ `/ __  / / / /
+     / _, _/ /_/ / /_/ / /_/ / /_/ /
+    /_/ |_|\____/\__,_/\__,_/\__, /
+                            /____/
+    </code>
+    </pre>
+    <figure>
+       <img src="https://raw.githubusercontent.com/sevidmusic/roady/roady/roadyLogo.png" alt="" />
+       <figcaption>Roady logo</figcaption>
+    </figure>
+    <h1 id="development-of-roady-v2.0">Development of Roady v2.0</h1>
+    <p>Roady is a <code>php</code> framework I have been developing for a long time. At this point it is a passion project. I love coding, working on Roady makes me happy.</p>
+    <p>Roady <code>v1.1.2</code> is the current stable version of Roady, and can be found here:</p>
+    <p><a href="https://github.com/sevidmusic/roady/releases/tag/v1.1.2">https://github.com/sevidmusic/roady/releases/tag/v1.1.2</a></p>
+    <p>Roady v2.0 is a complete re-write of Roady that will be influenced by Roady’s original design, but will not be compatible with previous versions of Roady.</p>
+    <p>Note: At the moment I am using this file to plan the rest of the re-write of <code>Roady2.0</code>. This file will be revised to document <code>Roady2.0</code> before <code>Roady2.0</code> is released.</p>
+    <p>Note: This document is still being drafted, and will continue to evolve over time.</p>
+    <h1 id="about">About</h1>
+    <p>Roady is a modular <code>php</code> framework.</p>
+    <p>With Roady the features and functionality of a website are implemented by individual Modules.</p>
+    <p>For example, say my band used Roady to build our website, and we needed a music player, that music player would be implemented by a Module.</p>
+    <p>If we needed a calender to show upcoming gigs, it would be implemented by a different Module.</p>
+    <p>Multiple websites can run on a single installation of Roady, each making use of one or more installed Roady Modules.</p>
+    <h1 id="modules">Modules</h1>
+    <h3 id="anatomy-of-a-module">Anatomy of a Module</h3>
+    <table>
+       <colgroup>
+          <col style="width: 36%" />
+          <col style="width: 63%" />
+       </colgroup>
+       <thead>
+          <tr class="header">
+             <th>Directory</th>
+             <th>Description</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr class="odd">
+             <td><code>css</code></td>
+             <td>This is where <code>css</code> stylesheets should be located.</td>
+          </tr>
+          <tr class="even">
+             <td><code>js</code></td>
+             <td>This is where <code>javascript</code> files should be located.</td>
+          </tr>
+          <tr class="odd">
+             <td><code>output</code></td>
+             <td>This is where <code>php</code> and <code>html</code> files should be located.</td>
+          </tr>
+          <tr class="even">
+             <td><code>APPROPRIATE.SITE.AUTHORITY.json</code></td>
+             <td>This file defines hard-coded Routes for a specific website.</td>
+          </tr>
+       </tbody>
+    </table>
+    <h1 id="how-a-module-works">How a Module Works</h1>
+    <p>Modules should be located in Roady’s <code>modules</code> directory.</p>
+    <pre><code>/path/to/Roady/modules</code></pre>
+    <p>Modules may define <code>output</code> to be displayed via Roady’s UI in the form of <code>html</code> or <code>php</code> files.</p>
+    <p>Modules may define <code>css</code> stylesheets and <code>javascript</code> files to define styles and implement additional functionality for a website.</p>
+    <p>Modules may serve <code>php</code>, <code>html</code>, <code>css</code>, and <code>javascript</code>, in Response to a Request to a website via the Routes defined in a <code>json</code> file which is named after the website’s Domain’s Authority.</p>
+    <p>For example, <code>sub.example.com.8080.json</code> would be the name of the <code>json</code> file used to define Routes for a website with the following Domain:</p>
+    <pre><code> https://sub.example.com:8080/
+     |       \__________________/|
+     |               |           |
+     |           AUTHORITY       |
+      \_________________________/
+                   |
+                Domain
+    </code></pre>
+    <p>Using a website’s Domain’s Authority to name Route configuration files allows Modules to define unique Routes for each website.</p>
+    <h3 id="routes">Routes</h3>
+    <p>A Route defines the following:</p>
+    <ul>
+       <li>
+          <p>The Name of the Module the Route is configured for. Note: It is possible for a Module to define a Route for another Module by setting the Route’s Module name to the name of the relevant Module.</p>
+       </li>
+       <li>
+          <p>A collection of Names that correspond to the Names of the Requests that a Route should be served in response to.</p>
+       </li>
+       <li>
+          <p>A collection of Named Positions that correspond to the Named Positions provided by Roady’s UI. These Named Positions are used to structure the collective output of all of the Route’s that respond to the same Request.</p>
+       </li>
+       <li>
+          <p>A Relative Path to a <code>php</code> file, <code>html</code> file, <code>css</code> file, or <code>javascript</code> file.</p>
+       </li>
+    </ul>
+    <p>For example, the following <code>json</code> defines a single Route to a <code>html</code> file named <code>output-file.html</code>:</p>
+    <div class="sourceCode" id="cb4">
+        <pre class="sourceCode json" style="padding: 0; margin: 0;">
+            <div class="sourceCode json" style="padding: 0; margin: 0;">
+                <span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="fu">{</span></span>
+                <span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="dt">&quot;module-name&quot;</span><span class="fu">:</span> <span class="st">&quot;module-name&quot;</span><span class="fu">,</span></span>
+                <span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    <span class="dt">&quot;responds-to&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+                <span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>        <span class="st">&quot;name-of-a-request-this-route-responds-to&quot;</span></span>
+                <span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+                <span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a>    <span class="dt">&quot;named-positions&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+                <span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a>        <span class="fu">{</span></span>
+                <span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>            <span class="dt">&quot;position-name&quot;</span><span class="fu">:</span> <span class="st">&quot;roady-ui-named-position-c&quot;</span><span class="fu">,</span></span>
+                <span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a>            <span class="dt">&quot;position&quot;</span><span class="fu">:</span> <span class="fl">1.7</span></span>
+                <span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>        <span class="fu">}</span></span>
+                <span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>    <span class="ot">]</span><span class="fu">,</span></span>
+                <span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a>    <span class="dt">&quot;relative-path&quot;</span><span class="fu">:</span> <span class="st">&quot;path</span><span class="ch">\/</span><span class="st">to</span><span class="ch">\/</span><span class="st">output-file.html&quot;</span></span>
+                <span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="fu">}</span></span>
+            </div>
+        </pre>
+    </div>
+    <h1 id="roadys-user-interface-ui">Roady’s User Interface (UI)</h1>
+    <p>Roady’s UI uses the Routes defined by installed Modules to determine the <code>html</code> that should be rendered in Response to a Request.</p>
+    <p>Roady’s UI uses the Named Positions provided by an internally defined <code>html</code> layout to structure the collective output of Routes that respond to the same Request:</p>
+    <div class="sourceCode" id="cb5">
+        <pre class="sourceCode html" style="padding: 0; margin: 0;">
+            <div class="sourceCode json" style="padding: 0; margin: 0;">
+                <code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></span>
+                <span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
+                <span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="kw">&lt;html&gt;</span></span>
+                <span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a></span>
+                <span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    <span class="kw">&lt;head&gt;</span></span>
+                <span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a></span>
+                <span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>        <span class="kw">&lt;title&gt;&lt;roady-ui-page-title-placeholder&gt;&lt;/roady-ui-page-title-placeholder&gt;&lt;/title&gt;</span></span>
+                <span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a></span>
+                <span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a></span>
+                <span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> content=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">roady-ui-meta-description&gt;</span><span class="er">&lt;</span><span class="st">/roady-ui-meta-description&gt;&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a></span>
+                <span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;keywords&quot;</span><span class="ot"> content=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">roady-ui-meta-keywords&gt;</span><span class="er">&lt;</span><span class="st">/roady-ui-meta-keywords&gt;&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a></span>
+                <span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;author&quot;</span><span class="ot"> content=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">roady-ui-meta-author&gt;</span><span class="er">&lt;</span><span class="st">/roady-ui-meta-author&gt;&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a></span>
+                <span id="cb5-17"><a href="#cb5-17" aria-hidden="true"></a>        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-18"><a href="#cb5-18" aria-hidden="true"></a></span>
+                <span id="cb5-19"><a href="#cb5-19" aria-hidden="true"></a>        <span class="kw">&lt;roady-ui-css-stylesheet-link-tags&gt;&lt;/roady-ui-css-stylesheet-link-tags&gt;</span></span>
+                <span id="cb5-20"><a href="#cb5-20" aria-hidden="true"></a></span>
+                <span id="cb5-21"><a href="#cb5-21" aria-hidden="true"></a>        <span class="kw">&lt;roady-ui-js-script-tags-for-html-head&gt;&lt;/roady-ui-js-script-tags-for-html-head&gt;</span></span>
+                <span id="cb5-22"><a href="#cb5-22" aria-hidden="true"></a></span>
+                <span id="cb5-23"><a href="#cb5-23" aria-hidden="true"></a>    <span class="kw">&lt;/head&gt;</span></span>
+                <span id="cb5-24"><a href="#cb5-24" aria-hidden="true"></a></span>
+                <span id="cb5-25"><a href="#cb5-25" aria-hidden="true"></a>    <span class="kw">&lt;body&gt;</span></span>
+                <span id="cb5-26"><a href="#cb5-26" aria-hidden="true"></a></span>
+                <span id="cb5-27"><a href="#cb5-27" aria-hidden="true"></a>        <span class="kw">&lt;roady-ui-pre-header&gt;&lt;/roady-ui-pre-header&gt;</span></span>
+                <span id="cb5-28"><a href="#cb5-28" aria-hidden="true"></a></span>
+                <span id="cb5-29"><a href="#cb5-29" aria-hidden="true"></a>        <span class="kw">&lt;header</span><span class="ot"> class=</span><span class="st">&quot;roady-ui-header&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-30"><a href="#cb5-30" aria-hidden="true"></a></span>
+                <span id="cb5-31"><a href="#cb5-31" aria-hidden="true"></a>            <span class="kw">&lt;roady-ui-header&gt;&lt;/roady-ui-header&gt;</span></span>
+                <span id="cb5-32"><a href="#cb5-32" aria-hidden="true"></a></span>
+                <span id="cb5-33"><a href="#cb5-33" aria-hidden="true"></a>        <span class="kw">&lt;/header&gt;</span></span>
+                <span id="cb5-34"><a href="#cb5-34" aria-hidden="true"></a></span>
+                <span id="cb5-35"><a href="#cb5-35" aria-hidden="true"></a></span>
+                <span id="cb5-36"><a href="#cb5-36" aria-hidden="true"></a>        <span class="kw">&lt;main</span><span class="ot"> class=</span><span class="st">&quot;roady-ui-main-content&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-37"><a href="#cb5-37" aria-hidden="true"></a></span>
+                <span id="cb5-38"><a href="#cb5-38" aria-hidden="true"></a>            <span class="kw">&lt;roady-ui-main-content&gt;&lt;/roady-ui-main-content&gt;</span></span>
+                <span id="cb5-39"><a href="#cb5-39" aria-hidden="true"></a></span>
+                <span id="cb5-40"><a href="#cb5-40" aria-hidden="true"></a>        <span class="kw">&lt;/main&gt;</span></span>
+                <span id="cb5-41"><a href="#cb5-41" aria-hidden="true"></a></span>
+                <span id="cb5-42"><a href="#cb5-42" aria-hidden="true"></a>        <span class="kw">&lt;footer</span><span class="ot"> class=</span><span class="st">&quot;roady-ui-footer&quot;</span><span class="kw">&gt;</span></span>
+                <span id="cb5-43"><a href="#cb5-43" aria-hidden="true"></a></span>
+                <span id="cb5-44"><a href="#cb5-44" aria-hidden="true"></a>            <span class="kw">&lt;roady-ui-footer&gt;&lt;/roady-ui-footer&gt;</span></span>
+                <span id="cb5-45"><a href="#cb5-45" aria-hidden="true"></a></span>
+                <span id="cb5-46"><a href="#cb5-46" aria-hidden="true"></a>        <span class="kw">&lt;/footer&gt;</span></span>
+                <span id="cb5-47"><a href="#cb5-47" aria-hidden="true"></a></span>
+                <span id="cb5-48"><a href="#cb5-48" aria-hidden="true"></a></span>
+                <span id="cb5-49"><a href="#cb5-49" aria-hidden="true"></a>    <span class="kw">&lt;/body&gt;</span></span>
+                <span id="cb5-50"><a href="#cb5-50" aria-hidden="true"></a></span>
+                <span id="cb5-51"><a href="#cb5-51" aria-hidden="true"></a><span class="kw">&lt;/html&gt;</span></span>
+                <span id="cb5-52"><a href="#cb5-52" aria-hidden="true"></a></span>
+                <span id="cb5-53"><a href="#cb5-53" aria-hidden="true"></a><span class="kw">&lt;roady-ui-js-script-tags-for-end-of-html&gt;&lt;/roady-ui-js-script-tags-for-end-of-html&gt;</span></span>
+                <span id="cb5-54"><a href="#cb5-54" aria-hidden="true"></a></span>
+                <span id="cb5-55"><a href="#cb5-55" aria-hidden="true"></a><span class="co">&lt;!-- Powered by Roady (https://github.com/sevidmusic/roady) --&gt;</span></span>
+            </div>
+        </pre>
+    </div>
+    <p>The following table is an overview of the purpose of each of the Named Positions provided by Roady’s UI’s internally defined <code>html</code> layout:</p>
+    <table>
+       <colgroup>
+          <col style="width: 24%" />
+          <col style="width: 75%" />
+       </colgroup>
+       <thead>
+          <tr class="header">
+             <th>Named Position</th>
+             <th>Purpose</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr class="odd">
+             <td><code>&lt;roady-ui-page-title-placeholder&gt;</code></td>
+             <td>This position name is reserved for internal use, Roady’s UI determines the page title based on the Request that was made.</td>
+          </tr>
+          <tr class="even">
+             <td><code>&lt;roady-ui-meta-description&gt;</code></td>
+             <td>For <code>description</code> meta data that should be rendered in the value attribute of a <code>&lt;meta&gt;</code> tag in the <code>&lt;head&gt;</code> section of the output Rendered by Roady’s UI.</td>
+          </tr>
+          <tr class="odd">
+             <td><code>&lt;roady-ui-meta-keywords&gt;</code></td>
+             <td>For <code>keyword</code> meta data that should be rendered in the value attribute of a <code>&lt;meta&gt;</code> tag in the <code>&lt;head&gt;</code> section of the output Rendered by Roady’s UI.</td>
+          </tr>
+          <tr class="even">
+             <td><code>&lt;roady-ui-meta-author&gt;</code></td>
+             <td>For <code>author</code> meta data that should be rendered in the value attribute of a <code>&lt;meta&gt;</code> tag in the <code>&lt;head&gt;</code> section of the output Rendered by Roady’s UI.</td>
+          </tr>
+          <tr class="odd">
+             <td><code>&lt;roady-ui-css-stylesheet-link-tags&gt;</code></td>
+             <td>For <code>&lt;link&gt;</code> tags rendered for Routes to css stylesheets.</td>
+          </tr>
+          <tr class="even">
+             <td><code>&lt;roady-ui-js-script-tags-for-html-head&gt;</code></td>
+             <td>For <code>&lt;script&gt;</code> tags rendered for Routes to javascropt files.</td>
+          </tr>
+          <tr class="odd">
+             <td><code>&lt;roady-ui-pre-header&gt;</code></td>
+             <td>For output that shoud be rendered before the <code>&lt;header&gt;</code>.</td>
+          </tr>
+          <tr class="even">
+             <td><code>&lt;roady-ui-header&gt;</code></td>
+             <td>For output that should be rendered within the <code>&lt;header&gt;</code>.</td>
+          </tr>
+          <tr class="odd">
+             <td><code>&lt;roady-ui-main-content&gt;</code></td>
+             <td>For output that should be rendered within <code>&lt;main&gt;</code>.</td>
+          </tr>
+          <tr class="even">
+             <td><code>&lt;roady-ui-footer&gt;</code></td>
+             <td>For output that should be rendered within the <code>&lt;footer&gt;</code>.</td>
+          </tr>
+          <tr class="odd">
+             <td><code>&lt;roady-ui-js-script-tags-for-end-of-html&gt;</code></td>
+             <td>For Routes to javascript files that should be loaded after the closing <code>&lt;body&gt;</code> tag.</td>
+          </tr>
+       </tbody>
+    </table>
+    <p>Output from file <code>modules/hello-world/output/about_-10000.html</code></p>
 </div>

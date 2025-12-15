@@ -2,25 +2,25 @@
 @keyframes animate {
 
     0%{
-        background: gray;
+        background: black;
         border: 0rem groove gray;
         transform: translateY(0) rotate(0deg);
     }
 
     12%{
-        opacity: 0.5;
+        opacity: 0.3;
+        border-radius: 100%;
     }
 
     50%{
-        border-radius: 50%;
-        border: 5rem groove black;
-        opacity: 0.000017;
+        border: 1rem solid black;
+        opacity: 0.17;
+        border-radius: 129%;
         transform: translateY(-1000px) rotate(720deg);
     }
 
     100%{
-        background: black;
-        border-radius: 100%;
+        background: none;
         border: none;
         font-size: 0;
         margin: 0;
@@ -31,7 +31,7 @@
 }
 
 .circles li:nth-child(10){
-    animation-delay: 0s;
+    animation-delay: 1s;
     animation-duration: 20s;
 }
 

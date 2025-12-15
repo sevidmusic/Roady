@@ -3,9 +3,10 @@ body {
     padding: 1vw;
     margin: 0 7vw;
 }
+
 .roady-ui-content-wrapper,
 .roady-ui-pre-header {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 1rem 1rem 1rem, rgba(0, 0, 0, 0.22) 1rem 1rem 1rem;
 }
 
 .roady-ui-pre-header {
@@ -31,7 +32,7 @@ body {
 }
 
 .roady-ui-content-wrapper {
-    padding: 3.5rem;
+    padding: 2.5rem;
     margin: 2.7rem 0;
     overflow: auto;
 }
@@ -91,10 +92,27 @@ body {
 .circles li:nth-child(10){
     left: 85%;
 }
+.roady-ui-content-wrapper,
+.roady-ui-pre-header {
+    opacity: 0.77;
+}
 
-.roady-ui-pre-header,
-.roady-ui-main-content {
-    opacity: 87%;
+form, table, .sourceCode {
+  background: black;
+  overflow: auto;
+  padding: 2rem;
+  margin: 2rem;
+}
+
+td {
+  border: 0.179rem solid #161518;
+  border-radius: 0.427rem;
+  padding: 1rem;
+}
+
+textarea, input {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem auto;
 }
 
 @media only screen and (max-width: 744px) {
@@ -122,27 +140,4 @@ body {
     }
 }
 
-form, table, .sourceCode {
-  background: black;
-  overflow: auto;
-  padding: 2rem;
-  margin: 2rem;
-}
-
-td {
-  border: 0.179rem dotted darkgray;
-  border-radius: 0.427rem;
-  padding: 1rem;
-}
-
-input {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem auto;
-  font-size: 0.7rem;
-}
-
-textarea {
-  padding: 0.2rem;
-  width: 100%;
-}
 
