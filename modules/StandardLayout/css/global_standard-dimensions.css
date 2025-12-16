@@ -62,7 +62,6 @@
 @media only screen and (max-width: 900rem) {
 
     .roady-ui-pre-header {
-        max-height: 10svh;
         scroll-snap-type: both mandatory;
     }
 
