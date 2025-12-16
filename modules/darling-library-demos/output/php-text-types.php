@@ -50,7 +50,7 @@ $unknownClass = new UnknownClass();
     <form action="?request=php-text-types" method="post">
       <label for="fname">Enter some text to test how it is output by the Basic Text types:</label><br>
       <textarea id="w3review" name="php-text-types-raw-text" rows="5" cols="50">
-          <?php echo $text->__toString(); ?>
+          <?php echo htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false); ?>
       </textarea><br>
       <input type="submit" value="Test Text">
       <input type="hidden" name="request" value="php-text-types">
@@ -77,7 +77,7 @@ echo highlgihtText($msg);
 ?>
             </td>
             <td>
-                <?php echo $text; ?>
+                <?php echo htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false); ?>
             </td>
             <td>
                 <?php echo $text->length(); ?>
