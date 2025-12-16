@@ -19,7 +19,7 @@ $currentRequest = new Request();
             <td>
 <?php
 $json = new Json($currentRequest->getArray());
-echo str_replace(['DOCTYPE', 'html'], ["--replaced--"], htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false))
+echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false);
 ?>
             </td>
             <td>

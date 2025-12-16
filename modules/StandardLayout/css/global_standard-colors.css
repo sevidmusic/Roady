@@ -4,69 +4,93 @@ html {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --primary-color-loud: red;
-        --primary-color-normal: white;
-        --primary-color-quiet: gray;
+        /** colors **/
+        --primary-color-default: #57b2ff;
+        --primary-color-complementary: #FFA457;
+        --primary-color-monochromatic: #249AFF;
+        --primary-color-analagous-1: #575EFF;
+        --primary-color-analagous-2: #57FFF8;
+        --primary-color-triadic-1: #FF57B2;
+        --primary-color-triadic-2: #B2FF57;
+        --primary-color-tetradic-1: #F857FF;
+        --primary-color-tetradic-2: #FFA457;
+        --primary-color-tetradic-3: #5EFF57;
+        --primary-color-plain: white;
+
+        /** background colors **/
+        --primary-bg-color-default: #000102;
+        --primary-bg-color-complementary: #020100;
+        --primary-bg-color-monochromatic: #001C35;
+        --primary-bg-color-analagous-1: #000002;
+        --primary-bg-color-analagous-2: #000202;
+        --primary-bg-color-triadic-1: #020001;
+        --primary-bg-color-triadic-2: #010200;
+        --primary-bg-color-tetradic-1: #020002;
+        --primary-bg-color-tetradic-2: #020100;
+        --primary-bg-color-tetradic-3: #000200;
+        --primary-bg-color-body: #000810;
+        --primary-bg-color-body-complementary: #100800;
+        --primary-bg-color-body-monochromatic: #002243;
+        --primary-bg-color-body-analagous-1: #000010;
+        --primary-bg-color-body-analagous-2: #001010;
+        --primary-bg-color-body-triadic-1: #100008;
+        --primary-bg-color-body-triadic-2: #081000;
+        --primary-bg-color-body-tetradic-1: #100010;
+        --primary-bg-color-body-tetradic-2: #100800;
+        --primary-bg-color-body-tetradic-3: #001000;
     }
 
     h1, h2, h3, h4 {
-        text-shadow: -6px -6px #161518,
-                     -5px -5px #161518,
-                     -4px -4px #161518,
-                     -3px -3px #161518,
-                     -2px -2px #161518,
-                     -1px -1px #161518,
-                     1px 1px #161518,
-                     2px 2px #161518,
-                     3px 3px #161518,
-                     4px 4px;
+        text-shadow: -6px -6px var(--primary-bg-color-complementary, gray),
+                     -5px -5px var(--primary-bg-color-complementary, gray),
+                     -4px -4px var(--primary-bg-color-complementary, gray),
+                     -3px -3px var(--primary-bg-color-complementary, gray),
+                     -2px -2px var(--primary-bg-color-complementary, gray),
+                     -1px -1px var(--primary-bg-color-complementary, gray),
+                     1px 1px var(--primary-bg-color-complementary, gray),
+                     2px 2px var(--primary-bg-color-complementary, gray),
+                     3px 3px var(--primary-bg-color-complementary, gray),
+                     4px 4px var(--primary-bg-color-monochromatic, white);
     }
 
-    .roady-ui-pre-header {
-        background: #161518;
+    body {
+        /* Using primary-bg-color-body, monochromatic, and analagous-1 */
+        background: linear-gradient(
+          135deg,
+          var(--primary-bg-color-body), /* - Start */
+          var(--primary-bg-color-body-analagous-2), /* - Midpoint */
+          var(--primary-bg-color-body-monochromatic) /* - End */
+        );
     }
 
-    .roady-ui-content-wrapper {
-        background: #161518;
+    .roady-ui-pre-header,
+    .roady-ui-content-wrapper:nth-child(even) {
+        background: var(--primary-bg-color-default);
+    }
+
+    .roady-ui-content-wrapper:nth-child(odd) {
+        background: var(--primary-bg-color-complementary);
+    }
+
+    form, table, .sourceCode {
+        background: var(--primary-bg-color-analagous-1);
+    }
+
+    .circles li{
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--primary-color-default);
+    }
+
+    a {
+        color: var(--primary-color-default);
+    }
+
+    a:hover {
+        text-decoration-color: var(--primary-color-complementary, orange);
     }
 
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --primary-color-loud: blue;
-        --primary-color-normal: black;
-        --primary-color-quiet: gray;
-    }
+@media (prefers-color-scheme: light) { /** Todo: Once dark is figured out, do opposite for light **/ }
 
-    h1, h2, h3, h4 {
-        text-shadow: -6px -6px #ffffff,
-                     -5px -5px #ffffff,
-                     -4px -4px #ffffff,
-                     -3px -3px #ffffff,
-                     -2px -2px #ffffff,
-                     -1px -1px #ffffff,
-                     1px 1px #ffffff,
-                     2px 2px #ffffff,
-                     3px 3px #ffffff,
-                     4px 4px;
-    }
-
-    .roady-ui-pre-header {
-        background: #ffffff;
-    }
-}
-
-.circles li{
-    background: rgba(255, 255, 255, 0.2);
-    color: black;
-}
-
-a {
-    color: #0892d0;
-}
-
-a:hover {
-    text-decoration-color: var(--primary-color-loud, orange);
-}
 

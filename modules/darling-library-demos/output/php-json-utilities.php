@@ -3,11 +3,6 @@
 use Darling\PHPJsonUtilities\classes\encoded\data\Json as Json;
 use Darling\RoadyRoutingUtilities\classes\requests\Request as Request;
 
-# Uncomment to enable error error reporting
-# ini_set('display_errors', 1);
-# ini_set('display_startup_errors', 1);
-# error_reporting(E_ALL);
-
 $currentRequest = new Request();
 $providedData = ($currentRequest->postArray()['php-json-utilities-raw-data'] ?? '');
 $jsonForProvidedData = new Json($providedData);
@@ -39,7 +34,6 @@ $jsonForCurrentRequest = new Json($currentRequest);
         </tr>
     </table>
 </div>
-
 
 <div class="roady-ui-content-wrapper">
     <p>

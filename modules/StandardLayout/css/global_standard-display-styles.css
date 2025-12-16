@@ -98,15 +98,12 @@ body {
 }
 
 form, table, .sourceCode {
-  background: black;
   overflow: auto;
   padding: 2rem;
   margin: 2rem;
 }
 
 td {
-  border: 0.179rem solid #161518;
-  border-radius: 0.427rem;
   padding: 1rem;
 }
 

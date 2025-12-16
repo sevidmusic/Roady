@@ -1,6 +1,6 @@
 
 .roady-ui-pre-header {
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
 }
 
 .roady-ui-main-content {
@@ -12,3 +12,7 @@
 
 }
 
+td {
+  border: 0.179rem solid #161518;
+  border-radius: 0.427rem;
+}
