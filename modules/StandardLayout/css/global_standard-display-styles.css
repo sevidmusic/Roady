@@ -1,11 +1,36 @@
-
 body {
     padding: 1vw;
     margin: 0 7vw;
 }
 
+td, textarea, input {
+  padding: 1rem;
+}
+
+textarea,
+input,
+form,
+table,
+.sourceCode {
+  margin-top: 0.87rem;
+  margin-bottom: 0.87rem;
+}
+
+textarea,
+table,
+form,
+.sourceCode,
+.roady-ui-content-wrapper {
+  padding: 2rem;
+}
+
+table, .sourceCode {
+  overflow: auto;
+}
+
 .roady-ui-content-wrapper,
 .roady-ui-pre-header {
+    opacity: 0.77;
     box-shadow: rgba(0, 0, 0, 0.3) 1rem 1rem 1rem, rgba(0, 0, 0, 0.22) 1rem 1rem 1rem;
 }
 
@@ -14,6 +39,7 @@ body {
     position: sticky;
     top: 1.7svh;
     z-index: 5000;
+
     menu {
         display: grid;
         grid-auto-flow: column;
@@ -22,6 +48,7 @@ body {
     li {
         padding: 1rem;
     }
+
 }
 
 .roady-ui-main-content {
@@ -32,9 +59,33 @@ body {
 }
 
 .roady-ui-content-wrapper {
-    padding: 2.5rem;
-    margin: 2.7rem 0;
+    margin: 2rem 0;
     overflow: auto;
+}
+
+@media only screen and (max-width: 744px) {
+
+    .roady-ui-pre-header {
+        menu {
+            display: grid;
+            grid-auto-flow: row;
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: 140ch) {
+    body {
+        margin: 0 17vw;
+    }
+}
+
+
+@media only screen and (max-width: 100ch) {
+    body {
+        margin: 0 7vw;
+    }
 }
 
 .circles{
@@ -91,50 +142,6 @@ body {
 
 .circles li:nth-child(10){
     left: 85%;
-}
-.roady-ui-content-wrapper,
-.roady-ui-pre-header {
-    opacity: 0.77;
-}
-
-form, table, .sourceCode {
-  overflow: auto;
-  padding: 2rem;
-  margin: 2rem;
-}
-
-td {
-  padding: 1rem;
-}
-
-textarea, input {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem auto;
-}
-
-@media only screen and (max-width: 744px) {
-
-    .roady-ui-pre-header {
-        menu {
-            display: grid;
-            grid-auto-flow: row;
-        }
-
-    }
-
-}
-
-@media only screen and (max-width: 140ch) {
-    body {
-        margin: 0 17vw;
-    }
-}
-
-
-@media only screen and (max-width: 100ch) {
-    body {
-        margin: 0 7vw;
-    }
 }
 
 

@@ -6,6 +6,64 @@
         will look like if wrapped in a container that is assigned
         the roady-ui-content-wrapper class.
     </p>
+    <table>
+        <tr>
+            <th>Heading 1</th>
+            <th>Heading 2</th>
+            <th>Heading 3</th>
+        </tr>
+        <tr>
+            <td>Lorem ipsum dolor sit ametconsectetur adipiscing elitduis</td>
+            <td>Neque sed accumsan pretiumaenean ipsum ipsumvenenatis in</td>
+            <td>Vel lectus sit amet quam consectetur lobortisin</td>
+        </tr>
+        <tr>
+            <td>Vel lectus sit amet quam consectetur lobortisin</td>
+            <td>Neque sed accumsan pretiumaenean ipsum ipsumvenenatis in</td>
+            <td>Lorem ipsum dolor sit ametconsectetur adipiscing elitduis</td>
+        </tr>
+        <tr>
+            <td>Neque sed accumsan pretiumaenean ipsum ipsumvenenatis in</td>
+            <td>Lorem ipsum dolor sit ametconsectetur adipiscing elitduis</td>
+            <td>Vel lectus sit amet quam consectetur lobortisin</td>
+        </tr>
+    </table>
+    <h2>Form Style:</h2>
+    <p>Below shows how a form will look using the Standard Layout module's styles:</p>
+    <form action="/action_page.php">
+        <!-- text input -->
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" value="John"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" value="Doe"><br><br>
+        <!-- radio -->
+        <input type="radio" id="html" name="fav_language" value="HTML">
+        <label for="html">HTML</label><br>
+        <input type="radio" id="css" name="fav_language" value="CSS">
+        <label for="css">CSS</label><br>
+        <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+        <label for="javascript">JavaScript</label>
+        <!-- checkbox -->
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1"> I have a bike</label><br>
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2"> I have a car</label><br>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <label for="vehicle3"> I have a boat</label>
+        <!-- textarea -->
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Source Code:</h2>
+    <p>
+        Below shows how a elements assigned the `.sourceCode` class
+        will look using the Standard Layout module's styles:
+    </p>
+    <div class="sourceCode">
+        echo "Hello World";
+    </div>
 </div>
 <?php
 $words = 'lorem ipsum dolor sit ametconsectetur adipiscing elitduis '
@@ -29,7 +87,7 @@ $words = 'lorem ipsum dolor sit ametconsectetur adipiscing elitduis '
 $wordCollection = explode(' ', $words);
 shuffle($wordCollection);
 $date = date('h:i:s A \o\n m/d/Y');
-for ($i = 0; $i < rand(1, rand(5, 50)); $i++) { ?>
+for ($i = 0; $i < rand(1, rand(15, 50)); $i++) { ?>
 <div class="roady-ui-content-wrapper">
     <h2><?php echo ucfirst($wordCollection[array_rand($wordCollection)]); ?></h2>
     <!-- <img src="roadyLogo.png" width="315" height="307" alt="Roady Logo"> -->

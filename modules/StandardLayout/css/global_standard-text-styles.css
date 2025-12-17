@@ -1,15 +1,57 @@
 
+:root {
+    --monospace-font: "JetBrains Mono", monospace;
+    --sans-serif-font: "Roboto", sans-serif;
+    --serif-font: "IBM Plex Serif", serif;
+}
+
+.roboto-text {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.jetbrains-mono-text {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ibm-plex-serif {
+  font-family: "IBM Plex Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
     font-size: 1rem;
-    letter-spacing: 0.1rem;
-    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0;
+    font-family: var(--monospace-font);
     font-optical-sizing: auto;
     font-style: normal;
     font-weight: 400;
 }
 
+input[type="radio"],
+input[type="checkbox"] {
+  font-weight: bold;
+  line-height: 1.1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--sans-serif-font);
+}
+
+p {
+    font-family: var(--serif-font);
+}
+
 .circles li {
-    font-family: monospace;
+    font-family: "Roboto", monospace;
     text-align: center;
     font-weight: bold;
     text-shadow: 0 0 1.8rem #fbfbfb,
@@ -20,10 +62,12 @@ body {
                  0 0 1.18rem #ececec;
 }
 
+/**
 .roady-ui-main-content {
     text-align: justify;
     text-justify: inter-word;
 }
+*/
 
 a {
     text-decoration: none;

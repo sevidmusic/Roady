@@ -61,6 +61,7 @@ html {
           var(--primary-bg-color-body-analagous-2), /* - Midpoint */
           var(--primary-bg-color-body-monochromatic) /* - End */
         );
+        accent-color: var(--primary-color-complementary);
     }
 
     .roady-ui-pre-header,
@@ -72,8 +73,12 @@ html {
         background: var(--primary-bg-color-complementary);
     }
 
-    form, table, .sourceCode {
+    form, table {
         background: var(--primary-bg-color-analagous-1);
+    }
+
+    .sourceCode {
+        background: var(--primary-bg-color-body-tetradic-3);
     }
 
     .circles li{
@@ -89,6 +94,11 @@ html {
         text-decoration-color: var(--primary-color-complementary, orange);
     }
 
+    label:hover,
+    input:hover,
+    textarea:hover {
+        border-color: var(--primary-color-complementary);
+    }
 }
 
 @media (prefers-color-scheme: light) { /** Todo: Once dark is figured out, do opposite for light **/ }

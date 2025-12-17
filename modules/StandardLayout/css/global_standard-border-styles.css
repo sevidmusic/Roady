@@ -16,3 +16,18 @@ td {
   border: 0.179rem solid #161518;
   border-radius: 0.427rem;
 }
+
+form {
+    border: 0.17rem dotted white;
+    border-radius: 0.427rem;
+}
+
+input,
+textarea {
+    border: 0.2rem solid transparent;
+}
+
+input:hover,
+textarea:hover {
+    border-radius: 0.27rem;
+}

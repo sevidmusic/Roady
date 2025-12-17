@@ -6,8 +6,8 @@ use Darling\PHPJsonUtilities\classes\encoded\data\Json as Json;
 $currentRequest = new Request();
 
 ?>
-
-<div class="roady-ui-content-wrapper">
+<button type="button" class="collapse-content-trigger">Show Current Request Data</button>
+<div class="roady-ui-content-wrapper collapsible-content">
     <table>
         <tr>
             <th>Request Url</th>
@@ -31,3 +31,19 @@ echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", f
         </tr>
     </table>
 </div>
+<script>
+var coll = document.getElementsByClassName("collapse-content-trigger");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
