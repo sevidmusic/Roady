@@ -24,7 +24,10 @@ form,
   padding: 2rem;
 }
 
-table, .sourceCode {
+.roady-ui-pre-header,
+.roady-ui-content-wrapper,
+table,
+.sourceCode {
   overflow: auto;
 }
 
@@ -35,7 +38,6 @@ table, .sourceCode {
 }
 
 .roady-ui-pre-header {
-    overflow: auto;
     position: sticky;
     top: 1.7svh;
     z-index: 5000;
@@ -60,7 +62,6 @@ table, .sourceCode {
 
 .roady-ui-content-wrapper {
     margin: 2rem 0;
-    overflow: auto;
 }
 
 @media only screen and (max-width: 744px) {
