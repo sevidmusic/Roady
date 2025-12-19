@@ -1,14 +1,48 @@
 
 .roady-ui-pre-header {
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
 }
 
 .roady-ui-main-content {
 
     img,
     picture {
-        border-radius: 0.5rem;
+        border-radius: 1rem;
     }
 
 }
 
+td {
+  border: 0.179rem solid;
+  border-radius: 0.427rem;
+}
+
+form {
+    border: 0.17rem dotted;
+    border-radius: 0.427rem;
+}
+
+input,
+textarea {
+    border: 0.2rem solid;
+}
+
+input:hover,
+textarea:hover {
+    border-radius: 0.27rem;
+}
+
+.darling-collapse-content-trigger {
+  border: none;
+  border: 0.17rem solid;
+}
+
+.active, .darling-collapse-content-trigger:hover {
+    border: 0.17rem solid;
+    border-radius: 0.17rem;
+}
+
+
+li:hover {
+    border-bottom: 0.07rem solid;
+}

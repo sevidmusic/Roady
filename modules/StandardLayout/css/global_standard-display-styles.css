@@ -1,26 +1,55 @@
-
 body {
     padding: 1vw;
-    margin: 0 27vw;
+    margin: 0 7vw;
 }
+
+td, textarea, input {
+  padding: 1rem;
+}
+
+textarea,
+input,
+form,
+table,
+.sourceCode {
+  margin-top: 0.87rem;
+  margin-bottom: 0.87rem;
+}
+
+textarea,
+table,
+form,
+.sourceCode,
+.roady-ui-content-wrapper {
+  padding: 2rem;
+}
+
+.roady-ui-pre-header,
+.roady-ui-content-wrapper,
+table,
+.sourceCode {
+  overflow: auto;
+}
+
 .roady-ui-content-wrapper,
 .roady-ui-pre-header {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    opacity: 0.77;
+    box-shadow: rgba(0, 0, 0, 0.3) 1rem 1rem 1rem, rgba(0, 0, 0, 0.22) 1rem 1rem 1rem;
 }
 
 .roady-ui-pre-header {
-    overflow: auto;
     position: sticky;
     top: 1.7svh;
     z-index: 5000;
+
     menu {
-        display: grid;
-        grid-auto-flow: column;
+        display: hidden;
     }
 
     li {
         padding: 1rem;
     }
+
 }
 
 .roady-ui-main-content {
@@ -31,8 +60,21 @@ body {
 }
 
 .roady-ui-content-wrapper {
-    padding: 3.5rem;
-    margin: 2.7rem 0;
+    margin: 2rem 0;
+}
+
+
+@media only screen and (max-width: 140ch) {
+    body {
+        margin: 0 17vw;
+    }
+}
+
+
+@media only screen and (max-width: 100ch) {
+    body {
+        margin: 0 7vw;
+    }
 }
 
 .circles{
@@ -91,32 +133,15 @@ body {
     left: 85%;
 }
 
-.roady-ui-pre-header,
-.roady-ui-main-content {
-    opacity: 87%;
+.darling-collapse-content-trigger {
+  cursor: pointer;
+  padding: 18px;
+  outline: none;
 }
 
-@media only screen and (max-width: 744px) {
-
-    .roady-ui-pre-header {
-        menu {
-            display: grid;
-            grid-auto-flow: row;
-        }
-
-    }
-
+.darling-collapsible-content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
 }
 
-@media only screen and (max-width: 140ch) {
-    body {
-        margin: 0 17vw;
-    }
-}
-
-
-@media only screen and (max-width: 100ch) {
-    body {
-        margin: 0 7vw;
-    }
-}
