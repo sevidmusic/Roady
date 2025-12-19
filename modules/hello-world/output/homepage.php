@@ -19,16 +19,16 @@ $words = 'lorem ipsum dolor sit ametconsectetur adipiscing elitduis '
 $wordCollection = explode(' ', $words);
 shuffle($wordCollection);
 $date = date('h:i:s A \o\n m/d/Y');
-for ($i = 0; $i < rand(1, rand(5, 50)); $i++) {
+for ($i = 0; $i < random_int(1, random_int(5, 50)); $i++) {
     ?>
 
 <div class="roady-ui-content-wrapper">
 
 <h2><?php echo ucfirst($wordCollection[array_rand($wordCollection)]); ?></h2>
-    <img src="https://picsum.photos/1280/<?php echo rand(768, 1080); ?>" width="300" height="300" alt="picsum.photos">
+    <img src="https://picsum.photos/1280/<?php echo random_int(768, 1080); ?>" width="300" height="300" alt="picsum.photos">
 
     <?php
-    $wordLimit = rand(100, count($wordCollection));
+    $wordLimit = random_int(100, count($wordCollection));
     $wordsToUse = array_slice($wordCollection, 0, $wordLimit);
     echo '<p>' . ucfirst(implode(' ', $wordsToUse) . '.') . '</p>';
     ?>
