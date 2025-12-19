@@ -145,4 +145,15 @@ table,
     left: 85%;
 }
 
+.darling-collapse-content-trigger {
+  cursor: pointer;
+  padding: 18px;
+  outline: none;
+}
+
+.darling-collapsible-content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
 

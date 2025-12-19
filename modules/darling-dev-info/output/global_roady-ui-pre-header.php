@@ -6,8 +6,8 @@ use Darling\PHPJsonUtilities\classes\encoded\data\Json as Json;
 $currentRequest = new Request();
 
 ?>
-<button type="button" class="collapse-content-trigger">Show Current Request Data</button>
-<div class="roady-ui-content-wrapper collapsible-content">
+<button type="button" class="darling-collapse-content-trigger">Show Current Request Data</button>
+<div class="roady-ui-content-wrapper darling-collapsible-content">
     <table>
         <tr>
             <th>Request Url</th>
@@ -32,7 +32,7 @@ echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", f
     </table>
 </div>
 <script>
-var coll = document.getElementsByClassName("collapse-content-trigger");
+var coll = document.getElementsByClassName("darling-collapse-content-trigger");
 var i;
 
 for (i = 0; i < coll.length; i++) {

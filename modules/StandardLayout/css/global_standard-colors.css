@@ -99,6 +99,15 @@ html {
     textarea:hover {
         border-color: var(--primary-color-complementary);
     }
+
+    .darling-collapse-content-trigger {
+      background-color: var(--primary-bg-color-complementary);
+      color: var(--primary-color-complementary);
+    }
+
+    .darling-collapsible-content {
+      background-color: #f1f1f1;
+    }
 }
 
 @media (prefers-color-scheme: light) { /** Todo: Once dark is figured out, do opposite for light **/ }

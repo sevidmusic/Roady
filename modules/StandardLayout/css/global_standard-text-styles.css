@@ -80,3 +80,8 @@ a:hover {
     text-underline-offset: 0.5rem;
 }
 
+.darling-collapse-content-trigger {
+  text-align: center;
+  font-size: 15px;
+}
+
