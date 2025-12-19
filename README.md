@@ -24,9 +24,11 @@ Roady v2.0 is a complete re-write of Roady that will be influenced by
 Roady's original design, but will not be compatible with previous
 versions of Roady.
 
-Note: At the moment I am using this file to plan the rest of
-the re-write of `Roady2.0`. This file will be revised to document
-`Roady2.0` before `Roady2.0` is released.
+For over a year I have had to put development of Roady on pause,
+life can get busy.
+
+I am very happy to be able to resume development of Roady, and hope
+to make a lot of progress over the next year.
 
 Note: This document is still being drafted, and will continue to
 evolve over time.
