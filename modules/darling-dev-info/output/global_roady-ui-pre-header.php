@@ -1,7 +1,7 @@
 <?php
 
-use Darling\RoadyRoutingUtilities\classes\requests\Request as Request;
-use Darling\PHPJsonUtilities\classes\encoded\data\Json as Json;
+use Darling\PHPJsonUtilities\classes\encoded\data\Json;
+use Darling\RoadyRoutingUtilities\classes\requests\Request;
 
 $currentRequest = new Request();
 
@@ -19,13 +19,13 @@ $currentRequest = new Request();
             <td>
 <?php
 $json = new Json($currentRequest->getArray());
-echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false);
+echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8', false);
 ?>
             </td>
             <td>
 <?php
 $json = new Json($currentRequest->postArray());
-echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false);
+echo htmlspecialchars($json, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8', false);
 ?>
             </td>
         </tr>

@@ -1,7 +1,7 @@
 <?php
 
-use Darling\PHPJsonUtilities\classes\encoded\data\Json as Json;
-use Darling\RoadyRoutingUtilities\classes\requests\Request as Request;
+use Darling\PHPJsonUtilities\classes\encoded\data\Json;
+use Darling\RoadyRoutingUtilities\classes\requests\Request;
 
 $currentRequest = new Request();
 $providedData = ($currentRequest->postArray()['php-json-utilities-raw-data'] ?? '');
@@ -32,7 +32,7 @@ $jsonForCurrentRequest = new Json($currentRequest);
 echo htmlspecialchars(
     $jsonForProvidedData,
     ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5,
-    "UTF-8",
+    'UTF-8',
     false
 );
 ?>
