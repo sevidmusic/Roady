@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Darling\Roady\tests\interfaces\api;
 
 use Darling\PHPFileSystemPaths\interfaces\paths\PathToExistingDirectory;
@@ -12,8 +14,8 @@ use Darling\PHPTextTypes\interfaces\strings\Text;
 use Darling\PHPTextTypes\classes\strings\Text as TextInstance;
 use Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
 use Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
-use \Darling\Roady\interfaces\api\RoadyAPI;
-use \PHPUnit\Framework\Attributes\CoversClass;
+use Darling\Roady\interfaces\api\RoadyAPI;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * The RoadyAPITestTrait defines common tests for implementations of
@@ -25,7 +27,6 @@ use \PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(RoadyAPI::class)]
 trait RoadyAPITestTrait
 {
-
     private PathToDirectoryOfRoadyModules $expectedPathToDirectoryOfRoadyModules;
 
     /**
@@ -85,8 +86,7 @@ trait RoadyAPITestTrait
      */
     protected function setRoadyAPITestInstance(
         RoadyAPI $roadyAPITestInstance
-    ): void
-    {
+    ): void {
         $this->roadyAPI = $roadyAPITestInstance;
     }
 
@@ -107,7 +107,7 @@ trait RoadyAPITestTrait
         );
         $safeText = [];
         foreach ($roadysRootDirectoryParts as $pathPart) {
-            if(!empty($pathPart)) {
+            if (!empty($pathPart)) {
                 $safeText[] = new SafeTextInstance(
                     new TextInstance($pathPart)
                 );
@@ -140,4 +140,3 @@ trait RoadyAPITestTrait
     abstract protected function testFailedMessage(object $testedInstance, string $testedMethod, string $expectation): string;
 
 }
-

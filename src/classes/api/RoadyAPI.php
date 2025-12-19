@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Darling\Roady\classes\api;
 
 use Darling\PHPFileSystemPaths\classes\paths\PathToExistingDirectory as PathToExistingDirectoryInstance;
@@ -12,11 +14,10 @@ use Darling\PHPTextTypes\interfaces\strings\SafeText;
 use Darling\PHPTextTypes\interfaces\strings\Text;
 use Darling\RoadyModuleUtilities\classes\paths\PathToDirectoryOfRoadyModules as PathToDirectoryOfRoadyModulesInstance;
 use Darling\RoadyModuleUtilities\interfaces\paths\PathToDirectoryOfRoadyModules;
-use \Darling\Roady\interfaces\api\RoadyAPI as RoadyAPIInterface;
+use Darling\Roady\interfaces\api\RoadyAPI as RoadyAPIInterface;
 
 class RoadyAPI implements RoadyAPIInterface
 {
-
     public static function pathToDirectoryOfRoadyModules(): PathToDirectoryOfRoadyModules
     {
         $roadysRootDirectory = str_replace('src' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'api', '', __DIR__);
@@ -26,7 +27,7 @@ class RoadyAPI implements RoadyAPIInterface
         );
         $safeText = [];
         foreach ($roadysRootDirectoryParts as $pathPart) {
-            if(!empty($pathPart)) {
+            if (!empty($pathPart)) {
                 $safeText[] = new SafeTextInstance(
                     new TextInstance($pathPart)
                 );
@@ -43,4 +44,3 @@ class RoadyAPI implements RoadyAPIInterface
     }
 
 }
-

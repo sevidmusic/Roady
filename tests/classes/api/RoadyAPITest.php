@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Darling\Roady\tests\classes\api;
 
-use \Darling\Roady\classes\api\RoadyAPI;
-use \Darling\Roady\tests\RoadyTest;
-use \Darling\Roady\tests\interfaces\api\RoadyAPITestTrait;
-use \PHPUnit\Framework\Attributes\CoversClass;
+use Darling\Roady\classes\api\RoadyAPI;
+use Darling\Roady\tests\RoadyTest;
+use Darling\Roady\tests\interfaces\api\RoadyAPITestTrait;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(RoadyAPI::class)]
 class RoadyAPITest extends RoadyTest
 {
-
     /**
      * The RoadyAPITestTrait defines
      * common tests for implementations of the
@@ -29,4 +30,3 @@ class RoadyAPITest extends RoadyTest
         );
     }
 }
-
