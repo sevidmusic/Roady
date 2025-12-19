@@ -1,0 +1,28 @@
+<!--
+
+This script defines the "collapsibale content" logic used by various
+darling modules.
+
+The `darling-collapse-content-trigger` class and
+`darling-collapsible-content` styles are defined
+in the css files in the StandardLayout module's
+css directory.
+
+-->
+<script>
+var coll = document.getElementsByClassName("darling-collapse-content-trigger");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+      content.style.overflow = "auto";
+    }
+  });
+}
+</script>
