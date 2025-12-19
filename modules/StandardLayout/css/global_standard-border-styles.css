@@ -13,18 +13,18 @@
 }
 
 td {
-  border: 0.179rem solid #161518;
+  border: 0.179rem solid;
   border-radius: 0.427rem;
 }
 
 form {
-    border: 0.17rem dotted white;
+    border: 0.17rem dotted;
     border-radius: 0.427rem;
 }
 
 input,
 textarea {
-    border: 0.2rem solid transparent;
+    border: 0.2rem solid;
 }
 
 input:hover,
@@ -34,11 +34,15 @@ textarea:hover {
 
 .darling-collapse-content-trigger {
   border: none;
-  border: 0.27rem solid transparent;
+  border: 0.17rem solid;
 }
 
 .active, .darling-collapse-content-trigger:hover {
-    border: 0.27rem solid gray;
-    border-radius: 0.27rem;
+    border: 0.17rem solid;
+    border-radius: 0.17rem;
 }
 
+
+li:hover {
+    border-bottom: 0.07rem solid;
+}
