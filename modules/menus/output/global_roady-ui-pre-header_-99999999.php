@@ -26,7 +26,7 @@ $moduleOutputDeterminator = new ModuleOutputRouteDeterminator();
 $requestNames = [];
 
 foreach (scandir($pathToDirectoryOfRoadyModules->__toString()) as $listing) {
-    if (!in_array($listing, ['.', '..'], true) && is_dir($pathToDirectoryOfRoadyModules . DIRECTORY_SEPARATOR . $listing)) {
+    if (!in_array($listing, ['.', '..'], true) && is_dir($pathToDirectoryOfRoadyModules.DIRECTORY_SEPARATOR.$listing)) {
         $pathToRoadyModuleDirectory = new PathToRoadyModuleDirectory(
             $pathToDirectoryOfRoadyModules,
             new Name(new Text($listing))
@@ -37,7 +37,7 @@ foreach (scandir($pathToDirectoryOfRoadyModules->__toString()) as $listing) {
                 ->collection() as $route
         ) {
             $requestName = $route->nameCollection()->collection()[0];
-            if ($requestName->__toString() !== 'global') {
+            if ('global' !== $requestName->__toString()) {
                 $requestNames[] = $requestName;
             }
         }
@@ -47,7 +47,7 @@ foreach (scandir($pathToDirectoryOfRoadyModules->__toString()) as $listing) {
 $uniqueRequests = array_unique($requestNames);
 sort($uniqueRequests);
 foreach ($uniqueRequests as $key => $requestName) {
-    if ($requestName->__toString() === 'homepage') {
+    if ('homepage' === $requestName->__toString()) {
         unset($uniqueRequests[$key]);
         array_unshift($uniqueRequests, 'homepage');
     }
@@ -61,8 +61,8 @@ foreach ($uniqueRequests as $key => $requestName) {
 
 foreach ($uniqueRequests as $requestName) {
     $displayName = ucwords(str_replace(['_', '-'], ' ', $requestName));
-    # https://www.w3schools.com/charsets/tryit.asp?deci=9205
-    $rightTriangleIconHtmlCode = "&#9205;";
+    // https://www.w3schools.com/charsets/tryit.asp?deci=9205
+    $rightTriangleIconHtmlCode = '&#9205;';
     echo "<li><a href=\"?request={$requestName}\">{$rightTriangleIconHtmlCode} {$displayName}</a></li>";
 }
 ?>

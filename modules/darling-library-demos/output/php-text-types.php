@@ -1,28 +1,29 @@
 <?php
 
-use Darling\PHPTextTypes\classes\strings\SafeText as SafeText;
-use Darling\PHPTextTypes\classes\strings\Text as Text;
-use Darling\PHPTextTypes\classes\strings\Id as Id;
-use Darling\PHPTextTypes\classes\strings\ClassString as ClassString;
-use Darling\PHPTextTypes\classes\strings\UnknownClass as UnknownClass;
-use Darling\PHPTextTypes\classes\strings\AlphanumericText as AlphanumericText;
-use Darling\PHPTextTypes\classes\strings\Name as Name;
+use Darling\PHPTextTypes\classes\strings\AlphanumericText;
+use Darling\PHPTextTypes\classes\strings\ClassString;
+use Darling\PHPTextTypes\classes\strings\Id;
+use Darling\PHPTextTypes\classes\strings\Name;
+use Darling\PHPTextTypes\classes\strings\SafeText;
+use Darling\PHPTextTypes\classes\strings\Text;
+use Darling\PHPTextTypes\classes\strings\UnknownClass;
+use Darling\RoadyRoutingUtilities\classes\requests\Request;
 
-# Uncomment to enable error error reporting
-# ini_set('display_errors', 1);
-# ini_set('display_startup_errors', 1);
-# error_reporting(E_ALL);
+// Uncomment to enable error error reporting
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 function highlgihtText(string $text): string
 {
-    return '<span style="background: #050505; color: lightblue;">' . $text . '</span>';
+    return '<span style="background: #050505; color: lightblue;">'.$text.'</span>';
 }
 
-$currentRequest = new \Darling\RoadyRoutingUtilities\classes\requests\Request();
+$currentRequest = new Request();
 
 $defaultText = ', . / ; \' [ ] \ = - 0 9 8 7 6 5 4 3 2 1 รักเท่านั้น  '
-    . 'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z! @ # $ '
-    . '% ^ & * รักเท่านั้น ( ) _ + | } { " : ? > < ~ ` a b c d e f g h'
-    . 'i j k l m n o p q r s t u v w x y z ';
+    .'A B C D E F G H I J K L M N O P Q R S T U V W X Y Z! @ # $ '
+    .'% ^ & * รักเท่านั้น ( ) _ + | } { " : ? > < ~ ` a b c d e f g h'
+    .'i j k l m n o p q r s t u v w x y z ';
 
 $rawText = (
     is_string($currentRequest->postArray()['php-text-types-raw-text'])
@@ -50,7 +51,7 @@ $unknownClass = new UnknownClass();
     <form action="?request=php-text-types" method="post">
       <label for="fname">Enter some text to test how it is output by the Basic Text types:</label><br>
       <textarea id="w3review" name="php-text-types-raw-text" rows="5" cols="50">
-          <?php echo htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false); ?>
+          <?php echo htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8', false); ?>
       </textarea><br>
       <input type="submit" value="Test Text">
       <input type="hidden" name="request" value="php-text-types">
@@ -71,13 +72,13 @@ $unknownClass = new UnknownClass();
                 <br>
 <?php
 $msg = 'Text represents a string, can be cast to the string it'
-       . 'represents, and can provide information about the string it'
-       . 'represents.';
+       .'represents, and can provide information about the string it'
+       .'represents.';
 echo highlgihtText($msg);
 ?>
             </td>
             <td>
-                <?php echo htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, "UTF-8", false); ?>
+                <?php echo htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8', false); ?>
             </td>
             <td>
                 <?php echo $text->length(); ?>
@@ -90,7 +91,7 @@ echo highlgihtText($msg);
                 <br>
 <?php
 $msg = 'SafeText is used to provide a safe form of Text that may '
-. 'contain unsafe characters.';
+.'contain unsafe characters.';
 echo highlgihtText($msg);
 ?>
             <br>
@@ -126,31 +127,31 @@ echo highlgihtText($msg);
             <br>
 <?php
 $msg = 'A consecutive sequence of 2 or more unsafe characters will '
-. 'be replaced by a single underscore.';
+.'be replaced by a single underscore.';
 echo highlgihtText($msg);
 ?>
             <br>
 <?php
 $msg = 'A consecutive sequence of 2 or more underscores will be '
-. 'replaced by a single underscore.';
+.'replaced by a single underscore.';
 echo highlgihtText($msg);
 ?>
             <br>
 <?php
 $msg = 'A consecutive sequence of 2 or more hyphens will be replaced '
-. 'by a single hyphen.';
+.'by a single hyphen.';
 echo highlgihtText($msg);
 ?>
             <br>
 <?php
 $msg = 'A consecutive sequence of 2 or more periods will be replaced '
-. 'by a single period.';
+.'by a single period.';
 echo highlgihtText($msg);
 ?>
             <br>
 <?php
 $msg = 'SafeText will never be empty, if the original Text is empty, '
-       . 'then the SafeText will be the numeric character 0.';
+       .'then the SafeText will be the numeric character 0.';
 echo highlgihtText($msg);
 ?>
             </td>
@@ -168,7 +169,7 @@ echo highlgihtText($msg);
                 <br>
 <?php
 $msg = 'AlphanumericText is SafeText that only contains '
-       . 'alphanumeric characters: a-z, A-Z, and 0-9';
+       .'alphanumeric characters: a-z, A-Z, and 0-9';
 echo highlgihtText($msg);
 ?>
             </td>
@@ -186,9 +187,9 @@ echo highlgihtText($msg);
                 <br>
 <?php
 $msg = 'A Name is SafeText that begins with an alphanumeric '
-       . 'character,  is at least 1 character in length, is no '
-       . 'more than 170 characters in length, and only contains '
-       . 'the following characters:';
+       .'character,  is at least 1 character in length, is no '
+       .'more than 170 characters in length, and only contains '
+       .'the following characters:';
 
 echo highlgihtText($msg);
 ?>
@@ -217,7 +218,7 @@ echo highlgihtText($msg);
                 <br>
 <?php
 $msg = 'An Id is AlphanumericText whose length is between 60 and 80 '
-       . 'characters.';
+       .'characters.';
 echo highlgihtText($msg);
 ?>
             </td>
@@ -235,18 +236,18 @@ echo highlgihtText($msg);
                 <br>
 <?php
 $msg = 'A ClassString is the fully qualified namespace and class '
-       . 'name of an existing Class that is not abstract.';
+       .'name of an existing Class that is not abstract.';
 echo highlgihtText($msg);
 ?>
             <br>
 <?php
 $msg = 'If type is not found, then the fully qualified class name of '
-       . 'the UnknownClass type will be output';
+       .'the UnknownClass type will be output';
 echo highlgihtText($msg);
 ?>
             </td>
             <td>
-                <?php echo $classString ?>
+                <?php echo $classString; ?>
             </td>
             <td>
                 <?php echo $classString->length(); ?>
@@ -259,7 +260,7 @@ echo highlgihtText($msg);
                 <br>
 <?php
 $msg = 'An UnknownClass is a ClassString that represents an unknown '
-       . 'class.';
+       .'class.';
 echo highlgihtText($msg);
 ?>
             </td>

@@ -8,3 +8,4 @@ vendor/
 *.todos
 vimfilelist
 composer.lock
+.php-cs-fixer.cache

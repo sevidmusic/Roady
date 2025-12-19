@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Darling\Roady\tests;
 
 use Darling\PHPUnitTestUtilities\traits\PHPUnitConfigurationTests;
@@ -14,6 +16,7 @@ use PHPUnit\Framework\TestCase;
  *
  * All roady test classes must extend from this class.
  *
+ * @internal
  */
 #[CoversNothing]
 class RoadyTest extends TestCase
@@ -22,4 +25,3 @@ class RoadyTest extends TestCase
     use PHPUnitRandomValues;
     use PHPUnitTestMessages;
 }
-
