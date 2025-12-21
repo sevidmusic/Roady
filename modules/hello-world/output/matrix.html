@@ -1,0 +1,198 @@
+<div>
+    <svg viewBox="0 0 800 900" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="background: transparent; width: 100%; height: auto; display: block;">
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <style>
+        .matrix-column {
+          font-family: monospace;
+          font-size: 0.42rem;
+        }
+        .code-trail {
+          fill: orange;
+          filter: url(#glow);
+        }
+        .code-head {
+          fill: lightblue;
+          filter: url(#glow);
+        }
+      </style>
+
+      <g class="matrix-column">
+        <text x="50" y="0">
+          <tspan class="code-trail" x="50" dy="1.2em">r</tspan>
+          <tspan class="code-trail" x="50" dy="1.2em">o</tspan>
+          <tspan class="code-trail" x="50" dy="1.2em">a</tspan>
+          <tspan class="code-head" x="50" dy="1.2em">d</tspan>
+          <tspan class="code-trail" x="50" dy="1.2em">y</tspan>
+          <tspan class="code-trail" x="50" dy="1.2em">3</tspan>
+          <tspan class="code-trail" x="50" dy="1.2em">?</tspan>
+          <tspan class="code-head" x="50" dy="1.2em">*</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-200"
+            to="0,800"
+            dur="2s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="150" y="0">
+          <tspan class="code-trail" x="150" dy="1.2em">y</tspan>
+          <tspan class="code-trail" x="150" dy="1.2em">0</tspan>
+          <tspan class="code-trail" x="150" dy="1.2em">1</tspan>
+          <tspan class="code-trail" x="150" dy="1.2em">y</tspan>
+          <tspan class="code-trail" x="50" dy="1.2em">?</tspan>
+          <tspan class="code-head" x="50" dy="1.2em">(</tspan>
+          <tspan class="code-trail" x="150" dy="1.2em">0</tspan>
+          <tspan class="code-head" x="150" dy="1.2em">2</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-300"
+            to="0,800"
+            dur="3.5s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="250" y="0">
+          <tspan class="code-trail" x="250" dy="1.2em">3</tspan>
+          <tspan class="code-trail" x="250" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="250" dy="1.2em">5</tspan>
+          <tspan class="code-trail" x="250" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="250" dy="1.2em">5</tspan>
+          <tspan class="code-head" x="250" dy="1.2em">6</tspan>
+          <tspan class="code-trail" x="250" dy="1.2em">5</tspan>
+          <tspan class="code-head" x="250" dy="1.2em">6</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-150"
+            to="0,800"
+            dur="2.8s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="350" y="0">
+          <tspan class="code-trail" x="350" dy="1.2em">r</tspan>
+          <tspan class="code-trail" x="350" dy="1.2em">o</tspan>
+          <tspan class="code-trail" x="350" dy="1.2em">a</tspan>
+          <tspan class="code-head" x="350" dy="1.2em">d</tspan>
+          <tspan class="code-head" x="350" dy="1.2em">y</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-200"
+            to="0,800"
+            dur="2s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="450" y="0">
+          <tspan class="code-trail" x="450" dy="1.2em">y</tspan>
+          <tspan class="code-trail" x="450" dy="1.2em">0</tspan>
+          <tspan class="code-trail" x="450" dy="1.2em">0</tspan>
+          <tspan class="code-trail" x="450" dy="1.2em">1</tspan>
+          <tspan class="code-trail" x="450" dy="1.2em">1</tspan>
+          <tspan class="code-head" x="450" dy="1.2em">2</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-300"
+            to="0,800"
+            dur="5.5s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="550" y="0">
+          <tspan class="code-trail" x="550" dy="1.2em">3</tspan>
+          <tspan class="code-trail" x="650" dy="1.2em">o</tspan>
+          <tspan class="code-trail" x="650" dy="1.2em">a</tspan>
+          <tspan class="code-trail" x="550" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="550" dy="1.2em">5</tspan>
+          <tspan class="code-head" x="550" dy="1.2em">6</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-150"
+            to="0,800"
+            dur="3.8s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="650" y="0">
+          <tspan class="code-trail" x="650" dy="1.2em">r</tspan>
+          <tspan class="code-trail" x="650" dy="1.2em">o</tspan>
+          <tspan class="code-trail" x="650" dy="1.2em">a</tspan>
+          <tspan class="code-head" x="650" dy="1.2em">d</tspan>
+          <tspan class="code-head" x="650" dy="1.2em">y</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-200"
+            to="0,800"
+            dur="3s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="750" y="0">
+          <tspan class="code-trail" x="750" dy="1.2em">y</tspan>
+          <tspan class="code-trail" x="750" dy="1.2em">0</tspan>
+          <tspan class="code-trail" x="750" dy="1.2em">y</tspan>
+          <tspan class="code-trail" x="750" dy="1.2em">0</tspan>
+          <tspan class="code-trail" x="750" dy="1.2em">1</tspan>
+          <tspan class="code-head" x="750" dy="1.2em">2</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-300"
+            to="0,800"
+            dur="2.5s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+
+      <g class="matrix-column">
+        <text x="850" y="0">
+          <tspan class="code-trail" x="850" dy="1.2em">3</tspan>
+          <tspan class="code-trail" x="850" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="850" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="1050" dy="1.2em">1</tspan>
+          <tspan class="code-trail" x="850" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="850" dy="1.2em">4</tspan>
+          <tspan class="code-trail" x="1050" dy="1.2em">0</tspan>
+          <tspan class="code-trail" x="850" dy="1.2em">5</tspan>
+          <tspan class="code-trail" x="850" dy="1.2em">5</tspan>
+          <tspan class="code-head" x="850" dy="1.2em">6</tspan>
+          <animateTransform
+            attributeName="transform"
+            type="translate"
+            from="0,-150"
+            to="0,800"
+            dur="1.8s"
+            repeatCount="indefinite" />
+        </text>
+      </g>
+    </svg>
+</div>
