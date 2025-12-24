@@ -130,6 +130,10 @@ html {
     form {
         border-color: var(--primary-color-plain);
     }
+
+    .darling-link-prefix-icon {
+        color: var(--primary-color-complementary);
+    }
 }
 
 @media (prefers-color-scheme: light) { /** Todo: Once dark is figured out, do opposite for light **/ }
